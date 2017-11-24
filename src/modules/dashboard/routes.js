@@ -1,16 +1,16 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Rfq from './containers'
+import Dashboard from './containers'
 import { MainLayout } from '../layout/containers';
 
 const routes = () => [
   <Route
-    key="/rfq"
+    key="/"
     exact
-    path="/rfq"
-    component={({location}) => {
+    path="/"
+    component={() => {
       return (
-        <MainLayout content={<Rfq />} />
+        <MainLayout content={<Dashboard />} />
       );
     }}
   />

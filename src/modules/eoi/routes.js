@@ -1,16 +1,16 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Rfq from './containers'
+import Eoi from './containers'
 import { MainLayout } from '../layout/containers';
 
 const routes = () => [
   <Route
-    key="/rfq"
+    key="/eoi"
     exact
-    path="/rfq"
-    component={({location}) => {
+    path="/eoi"
+    component={() => {
       return (
-        <MainLayout content={<Rfq />} />
+        <MainLayout content={<Eoi />} />
       );
     }}
   />

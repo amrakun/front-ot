@@ -64,7 +64,7 @@ const columns = [
   }
 ];
 
-class Rfq extends React.Component {
+class Eoi extends React.Component {
   state = {
     data: [],
     pagination: {},
@@ -88,8 +88,8 @@ class Rfq extends React.Component {
     console.log('params:', params);
     this.setState({ loading: true });
     reqwest({
-      // url: 'https://randomuser.me/api',
-      url: 'https://randomapi.com/api/4883c5396815ac927ac8c8f21f440c7b',
+      url: 'https://randomuser.me/api',
+      // url: 'https://randomapi.com/api/4883c5396815ac927ac8c8f21f440c7b',
       method: 'get',
       data: {
         results: 10,
@@ -113,7 +113,7 @@ class Rfq extends React.Component {
   }
   render() {
     return (
-      <Card title='Request for quotation (RFQ)'>
+      <Card title='Expression of interest (EOI)'>
         <Table columns={columns}
           rowKey={record => record.registered}
           dataSource={this.state.data}
@@ -126,4 +126,4 @@ class Rfq extends React.Component {
   }
 }
 
-export default Rfq
+export default Eoi
