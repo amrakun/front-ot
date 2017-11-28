@@ -1,0 +1,29 @@
+{
+  "name": "ot-tenders",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "add-graphql-subscriptions": "^1.0.1",
+    "antd": "^2.13.10",
+    "apollo-client-preset": "^1.0.3",
+    "graphql": "^0.11.7",
+    "graphql-tag": "^2.5.0",
+    "react": "^16.1.1",
+    "react-apollo": "^2.0.1",
+    "react-country-region-selector": "^1.2.3",
+    "react-dom": "^16.1.1",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.17",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "reqwest": "^2.0.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
