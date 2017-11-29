@@ -1,10 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import {withRouter} from 'react-router'
-import {
-  Table,
-  Card
-} from 'antd';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
+import { Table, Card } from 'antd';
 
 const columns = [
   {
@@ -14,43 +11,55 @@ const columns = [
       {
         text: 'Open',
         value: 'open'
-      }, {
+      },
+      {
         text: 'Draft',
         value: 'draft'
-      }, {
+      },
+      {
         text: 'Closed',
         value: 'closed'
       }
-    ],
-  }, {
+    ]
+  },
+  {
     title: 'Tender #',
     dataIndex: 'tender_number',
-    sorter: true,
-  }, {
+    sorter: true
+  },
+  {
     title: 'Tender name',
-    dataIndex: 'tender_name',
-  }, {
+    dataIndex: 'tender_name'
+  },
+  {
     title: 'Publish date',
-    dataIndex: 'publish_date',
-  }, {
+    dataIndex: 'publish_date'
+  },
+  {
     title: 'Close date',
-    dataIndex: 'close_date',
-  },  {
+    dataIndex: 'close_date'
+  },
+  {
     title: 'Suppliers',
-    dataIndex: 'suppliers',
-  },  {
+    dataIndex: 'suppliers'
+  },
+  {
     title: 'Sumbitted',
-    dataIndex: 'submitted',
-  },  {
+    dataIndex: 'submitted'
+  },
+  {
     title: 'Not interested',
-    dataIndex: 'not_interested',
-  },  {
+    dataIndex: 'not_interested'
+  },
+  {
     title: 'Not responded',
-    dataIndex: 'not_responded',
-  },  {
+    dataIndex: 'not_responded'
+  },
+  {
     title: 'Regret letter',
-    dataIndex: 'regret_letter',
-  }, {
+    dataIndex: 'regret_letter'
+  },
+  {
     title: 'Operation',
     key: 'operation',
     fixed: 'right',
@@ -66,20 +75,18 @@ const propTypes = {
   onChange: PropTypes.func.isRequired
 };
 
-function RfqList({
-  data,
-  pagination,
-  loading,
-  onChange
-}) {
+function RfqList({ data, pagination, loading, onChange }) {
   return (
-    <Card title='Request for quotation (RFQ)'>
-      <Table columns={columns}
+    <Card title="Request for quotation (RFQ)">
+      <Table
+        columns={columns}
         rowKey={record => record.registered}
         dataSource={data}
         pagination={pagination}
         loading={loading}
-        onChange={(pagination, filters, sorter) => onChange(pagination, filters, sorter)}
+        onChange={(pagination, filters, sorter) =>
+          onChange(pagination, filters, sorter)
+        }
       />
     </Card>
   );
@@ -87,4 +94,4 @@ function RfqList({
 
 RfqList.propTypes = propTypes;
 
-export default withRouter(RfqList)
+export default withRouter(RfqList);

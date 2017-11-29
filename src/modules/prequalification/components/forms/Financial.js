@@ -1,7 +1,7 @@
-import React from 'react'
-import {withRouter} from 'react-router'
+import React from 'react';
+import { withRouter } from 'react-router';
 import { Form, Select, Button, Row, Col, DatePicker, Input } from 'antd';
-import { yearData } from '../../constants'
+import { yearData } from '../../constants';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -14,40 +14,40 @@ const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
     sm: { span: 8 },
-    lg: { span: 8 },
+    lg: { span: 8 }
   },
   wrapperCol: {
     xs: { span: 24 },
     sm: { span: 14 },
-    lg: { span: 8 },
-  },
+    lg: { span: 8 }
+  }
 };
 const tailFormItemLayout = {
   wrapperCol: {
     xs: {
       span: 24,
-      offset: 0,
+      offset: 0
     },
     sm: {
       span: 14,
-      offset: 8,
+      offset: 8
     },
     lg: {
       span: 14,
-      offset: 8,
-    },
-  },
+      offset: 8
+    }
+  }
 };
 
 class PrequalificationForm extends React.Component {
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
       }
     });
-  }
+  };
 
   componentDidMount() {
     this.props.form.setFieldsValue(this.props.data);
@@ -59,15 +59,10 @@ class PrequalificationForm extends React.Component {
 
     return (
       <Form onSubmit={this.handleSubmit} className="preq-form">
-        <FormItem
-          label="Pre-tax profit"
-          {...formItemLayout}
-        >
+        <FormItem label="Pre-tax profit" {...formItemLayout}>
           <Col span={12}>
             <FormItem>
-              <Select>
-                {yearOptions}
-              </Select>
+              <Select>{yearOptions}</Select>
             </FormItem>
           </Col>
           <Col span={12}>
@@ -77,7 +72,9 @@ class PrequalificationForm extends React.Component {
           </Col>
         </FormItem>
         <FormItem {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">Save & continue</Button>
+          <Button type="primary" htmlType="submit">
+            Save & continue
+          </Button>
         </FormItem>
       </Form>
     );

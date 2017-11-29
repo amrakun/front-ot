@@ -1,18 +1,18 @@
-import React from 'react'
-import { Select } from 'antd'
+import React from 'react';
+import { Select } from 'antd';
 
 const Option = Select.Option;
 
 const json = {
-   "mn":{
-      "label":"Mongolia",
-      "value":"0"
-   },
-   "cn":{
-      "label":"China",
-      "value":"1"
-   }
-}
+  mn: {
+    label: 'Mongolia',
+    value: '0'
+  },
+  cn: {
+    label: 'China',
+    value: '1'
+  }
+};
 
 class Countries extends React.Component {
   render() {
@@ -21,8 +21,14 @@ class Countries extends React.Component {
       arr.push(json[key]);
     });
     return (
-      <Select>{arr.map(item => <Option key={item.value} value={item.value}>{item.label}</Option>)}</Select>
-    )
+      <Select>
+        {arr.map(item => (
+          <Option key={item.value} value={item.value}>
+            {item.label}
+          </Option>
+        ))}
+      </Select>
+    );
   }
 }
 

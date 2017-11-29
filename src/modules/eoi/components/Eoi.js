@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Table, Card } from 'antd';
 
 import reqwest from 'reqwest';
@@ -11,43 +11,55 @@ const columns = [
       {
         text: 'Open',
         value: 'open'
-      }, {
+      },
+      {
         text: 'Draft',
         value: 'draft'
-      }, {
+      },
+      {
         text: 'Closed',
         value: 'closed'
       }
-    ],
-  }, {
+    ]
+  },
+  {
     title: 'Tender #',
     dataIndex: 'tender_number',
-    sorter: true,
-  }, {
+    sorter: true
+  },
+  {
     title: 'Tender name',
-    dataIndex: 'tender_name',
-  }, {
+    dataIndex: 'tender_name'
+  },
+  {
     title: 'Publish date',
-    dataIndex: 'publish_date',
-  }, {
+    dataIndex: 'publish_date'
+  },
+  {
     title: 'Close date',
-    dataIndex: 'close_date',
-  },  {
+    dataIndex: 'close_date'
+  },
+  {
     title: 'Suppliers',
-    dataIndex: 'suppliers',
-  },  {
+    dataIndex: 'suppliers'
+  },
+  {
     title: 'Sumbitted',
-    dataIndex: 'submitted',
-  },  {
+    dataIndex: 'submitted'
+  },
+  {
     title: 'Not interested',
-    dataIndex: 'not_interested',
-  },  {
+    dataIndex: 'not_interested'
+  },
+  {
     title: 'Not responded',
-    dataIndex: 'not_responded',
-  },  {
+    dataIndex: 'not_responded'
+  },
+  {
     title: 'Regret letter',
-    dataIndex: 'regret_letter',
-  }, {
+    dataIndex: 'regret_letter'
+  },
+  {
     title: 'Operation',
     key: 'operation',
     fixed: 'right',
@@ -60,22 +72,22 @@ class Eoi extends React.Component {
   state = {
     data: [],
     pagination: {},
-    loading: false,
+    loading: false
   };
   handleTableChange = (pagination, filters, sorter) => {
     const pager = { ...this.state.pagination };
     pager.current = pagination.current;
     this.setState({
-      pagination: pager,
+      pagination: pager
     });
     this.fetch({
       results: pagination.pageSize,
       page: pagination.current,
       sortField: sorter.field,
       sortOrder: sorter.order,
-      ...filters,
+      ...filters
     });
-  }
+  };
   fetch = (params = {}) => {
     console.log('params:', params);
     this.setState({ loading: true });
@@ -85,10 +97,10 @@ class Eoi extends React.Component {
       method: 'get',
       data: {
         results: 10,
-        ...params,
+        ...params
       },
-      type: 'json',
-    }).then((data) => {
+      type: 'json'
+    }).then(data => {
       const pagination = { ...this.state.pagination };
       // Read total count from server
       // pagination.total = data.totalCount;
@@ -96,17 +108,18 @@ class Eoi extends React.Component {
       this.setState({
         loading: false,
         data: data.results,
-        pagination,
+        pagination
       });
     });
-  }
+  };
   componentDidMount() {
     this.fetch();
   }
   render() {
     return (
-      <Card title='Expression of interest (EOI)'>
-        <Table columns={columns}
+      <Card title="Expression of interest (EOI)">
+        <Table
+          columns={columns}
           rowKey={record => record.registered}
           dataSource={this.state.data}
           pagination={this.state.pagination}
@@ -118,4 +131,4 @@ class Eoi extends React.Component {
   }
 }
 
-export default Eoi
+export default Eoi;

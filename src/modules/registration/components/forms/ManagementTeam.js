@@ -1,6 +1,6 @@
-import React from 'react'
-import {withRouter} from 'react-router'
-import { Form, Input, Row, Col,  Button } from 'antd';
+import React from 'react';
+import { withRouter } from 'react-router';
+import { Form, Input, Row, Col, Button } from 'antd';
 
 const FormItem = Form.Item;
 
@@ -8,40 +8,40 @@ const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
     sm: { span: 10 },
-    lg: { span: 8 },
+    lg: { span: 8 }
   },
   wrapperCol: {
     xs: { span: 24 },
     sm: { span: 14 },
-    lg: { span: 14 },
-  },
+    lg: { span: 14 }
+  }
 };
 const tailFormItemLayout = {
   wrapperCol: {
     xs: {
       span: 24,
-      offset: 0,
+      offset: 0
     },
     sm: {
       span: 14,
-      offset: 5,
+      offset: 5
     },
     lg: {
       span: 16,
-      offset: 4,
-    },
-  },
+      offset: 4
+    }
+  }
 };
 
 class RegistrationForm extends React.Component {
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
       }
     });
-  }
+  };
 
   componentDidMount() {
     this.props.form.setFieldsValue(this.props.data);
@@ -51,63 +51,52 @@ class RegistrationForm extends React.Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <div>
-        <FormItem
-          {...formItemLayout}
-          label='Name'
-          hasFeedback
-        >
+        <FormItem {...formItemLayout} label="Name" hasFeedback>
           {getFieldDecorator(`${name}Name`, {
-            rules: [{
-              required: isRequired, message: 'Please enter your name!',
-            }],
-          })(
-            <Input placeholder="Title. First name + Last name" />
-          )}
+            rules: [
+              {
+                required: isRequired,
+                message: 'Please enter your name!'
+              }
+            ]
+          })(<Input placeholder="Title. First name + Last name" />)}
         </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Job title"
-          hasFeedback
-        >
+        <FormItem {...formItemLayout} label="Job title" hasFeedback>
           {getFieldDecorator(`${name}Job`, {
-            rules: [{
-              required: isRequired, message: 'Please enter your job title!',
-            }],
-          })(
-            <Input />
-          )}
+            rules: [
+              {
+                required: isRequired,
+                message: 'Please enter your job title!'
+              }
+            ]
+          })(<Input />)}
         </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Phone"
-          hasFeedback
-        >
+        <FormItem {...formItemLayout} label="Phone" hasFeedback>
           {getFieldDecorator(`${name}Phone`, {
-            rules: [{
-              required: isRequired,
-              message: 'Please enter your phone number!',
-            }],
-          })(
-            <Input />
-          )}
+            rules: [
+              {
+                required: isRequired,
+                message: 'Please enter your phone number!'
+              }
+            ]
+          })(<Input />)}
         </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="E-mail"
-          hasFeedback
-        >
+        <FormItem {...formItemLayout} label="E-mail" hasFeedback>
           {getFieldDecorator(`${name}Email`, {
-            rules: [{
-              type: 'email', message: 'The input is not valid E-mail!',
-            }, {
-              required: isRequired, message: 'Please input your company e-mail!',
-            }],
-          })(
-            <Input />
-          )}
+            rules: [
+              {
+                type: 'email',
+                message: 'The input is not valid E-mail!'
+              },
+              {
+                required: isRequired,
+                message: 'Please input your company e-mail!'
+              }
+            ]
+          })(<Input />)}
         </FormItem>
       </div>
-    )
+    );
   }
 
   render() {
@@ -134,7 +123,9 @@ class RegistrationForm extends React.Component {
           </Col>
         </Row>
         <FormItem {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">Save & continue</Button>
+          <Button type="primary" htmlType="submit">
+            Save & continue
+          </Button>
         </FormItem>
       </Form>
     );

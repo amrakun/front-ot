@@ -1,3 +1,3 @@
-import Countries from './Countries'
+import Countries from './Countries';
 
-export { Countries }
+export { Countries };

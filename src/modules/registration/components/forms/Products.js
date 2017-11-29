@@ -1,5 +1,5 @@
-import React from 'react'
-import {withRouter} from 'react-router'
+import React from 'react';
+import { withRouter } from 'react-router';
 import { Form, Select, Button } from 'antd';
 
 const FormItem = Form.Item;
@@ -19,34 +19,34 @@ const formItemLayout = {
   wrapperCol: {
     xs: { span: 24 },
     sm: { span: 14 }
-  },
+  }
 };
 const tailFormItemLayout = {
   wrapperCol: {
     xs: {
       span: 24,
-      offset: 0,
+      offset: 0
     },
     sm: {
       span: 14,
-      offset: 8,
+      offset: 8
     },
     lg: {
       span: 14,
-      offset: 5,
-    },
-  },
+      offset: 5
+    }
+  }
 };
 
 class RegistrationForm extends React.Component {
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
       }
     });
-  }
+  };
 
   componentDidMount() {
     this.props.form.setFieldsValue(this.props.data);
@@ -57,26 +57,19 @@ class RegistrationForm extends React.Component {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        <FormItem
-          {...formItemLayout}
-          label="Product code"
-          hasFeedback
-        >
+        <FormItem {...formItemLayout} label="Product code" hasFeedback>
           {getFieldDecorator('products', {
-            rules: [
-              { required: true, message: 'Please select an option!' },
-            ],
+            rules: [{ required: true, message: 'Please select an option!' }]
           })(
-            <Select
-              mode="multiple"
-              placeholder="Please select products"
-            >
+            <Select mode="multiple" placeholder="Please select products">
               {children}
             </Select>
           )}
         </FormItem>
         <FormItem {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">Save & continue</Button>
+          <Button type="primary" htmlType="submit">
+            Save & continue
+          </Button>
         </FormItem>
       </Form>
     );

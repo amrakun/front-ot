@@ -8,8 +8,9 @@ import enUS from 'antd/lib/locale-provider/en_US';
 import 'antd/dist/antd.css';
 import './css/main.min.css';
 
-render((
+render(
   <LocaleProvider locale={enUS}>
     <Routes />
-  </LocaleProvider>
-), document.getElementById('root'));
+  </LocaleProvider>,
+  document.getElementById('root')
+);

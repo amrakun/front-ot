@@ -1,18 +1,10 @@
-import React from 'react'
+import React from 'react';
 import { PrequalificationForms } from '../components';
 
-const financial = {
-
-}
-const business = {
-
-}
-const environmental = {
-
-}
-const health = {
-
-}
+const financial = {};
+const business = {};
+const environmental = {};
+const health = {};
 
 class Prequalification extends React.Component {
   render() {
@@ -23,7 +15,7 @@ class Prequalification extends React.Component {
         environmentalData={environmental}
         healthData={health}
       />
-    )
+    );
   }
 }
 

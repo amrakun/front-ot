@@ -15,7 +15,13 @@ const Routes = () => (
     <Layout>
       <Sidenav />
       <Layout>
-        <Header style={{ background: '#fff', padding: 0, boxShadow: '4px 4px 40px 0 rgba(0, 0, 0, 0.05)' }} />
+        <Header
+          style={{
+            background: '#fff',
+            padding: 0,
+            boxShadow: '4px 4px 40px 0 rgba(0, 0, 0, 0.05)'
+          }}
+        />
 
         <Content style={{ margin: '0 16px' }}>
           <Breadcrumb style={{ margin: '16px 0' }}>
@@ -32,7 +38,6 @@ const Routes = () => (
             {RegistrationRoutes()}
             {PrequalificationRoutes()}
           </Switch>
-
         </Content>
 
         <Footer style={{ textAlign: 'center' }}>

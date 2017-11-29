@@ -1,5 +1,5 @@
-import React from 'react'
-import {withRouter} from 'react-router'
+import React from 'react';
+import { withRouter } from 'react-router';
 import { Form, Input, Icon, Button, Upload, InputNumber } from 'antd';
 
 const FormItem = Form.Item;
@@ -7,33 +7,33 @@ const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
     sm: { span: 8 },
-    lg: { span: 8 },
+    lg: { span: 8 }
   },
   wrapperCol: {
     xs: { span: 24 },
     sm: { span: 14 },
-    lg: { span: 8 },
-  },
+    lg: { span: 8 }
+  }
 };
 const formItemLayoutWithOutLabel = {
   wrapperCol: {
     xs: { span: 24, offset: 0 },
     sm: { span: 14, offset: 8 },
     lg: { span: 8, offset: 8 }
-  },
+  }
 };
 
 let uuid = 0;
 class DynamicFieldSet extends React.Component {
-  normFile = (e) => {
+  normFile = e => {
     console.log('Upload event:', e);
     if (Array.isArray(e)) {
       return e;
     }
     return e && e.fileList;
-  }
+  };
 
-  remove = (k) => {
+  remove = k => {
     const { form } = this.props;
     // can use data-binding to get
     const keys = form.getFieldValue('keys');
@@ -44,9 +44,9 @@ class DynamicFieldSet extends React.Component {
 
     // can use data-binding to set
     form.setFieldsValue({
-      keys: keys.filter(key => key !== k),
+      keys: keys.filter(key => key !== k)
     });
-  }
+  };
 
   add = () => {
     uuid++;
@@ -57,18 +57,18 @@ class DynamicFieldSet extends React.Component {
     // can use data-binding to set
     // important! notify form to detect changes
     form.setFieldsValue({
-      keys: nextKeys,
+      keys: nextKeys
     });
-  }
+  };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
       }
     });
-  }
+  };
 
   componentDidMount() {
     this.add();
@@ -97,53 +97,53 @@ class DynamicFieldSet extends React.Component {
           </FormItem>
           <FormItem
             {...formItemLayout}
-            label='Name'
+            label="Name"
             required={false}
             hasFeedback
           >
             {getFieldDecorator(`name${k}`, {
               validateTrigger: ['onChange', 'onBlur'],
-              rules: [{
-                required: true,
-                whitespace: true,
-                message: "Please enter a name.",
-              }],
-            })(
-              <Input />
-            )}
+              rules: [
+                {
+                  required: true,
+                  whitespace: true,
+                  message: 'Please enter a name.'
+                }
+              ]
+            })(<Input />)}
           </FormItem>
           <FormItem
             {...formItemLayout}
-            label='Job title'
+            label="Job title"
             required={false}
             hasFeedback
           >
             {getFieldDecorator(`title${k}`, {
               validateTrigger: ['onChange', 'onBlur'],
-              rules: [{
-                required: true,
-                whitespace: true,
-                message: "Please enter a title.",
-              }],
-            })(
-              <Input />
-            )}
+              rules: [
+                {
+                  required: true,
+                  whitespace: true,
+                  message: 'Please enter a title.'
+                }
+              ]
+            })(<Input />)}
           </FormItem>
           <FormItem
             {...formItemLayout}
-            label='Share percentage'
+            label="Share percentage"
             required={false}
             hasFeedback
           >
             {getFieldDecorator(`share${k}`, {
               validateTrigger: ['onChange', 'onBlur'],
-              rules: [{
-                required: true,
-                message: "Please enter share",
-              }],
-            })(
-              <InputNumber placeholder="%" />
-            )}
+              rules: [
+                {
+                  required: true,
+                  message: 'Please enter share'
+                }
+              ]
+            })(<InputNumber placeholder="%" />)}
           </FormItem>
         </div>
       );
@@ -151,27 +151,29 @@ class DynamicFieldSet extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormItem
-         {...formItemLayout}
-         label="20. Please provide key shareholders information"
-         extra='You may upload "jpg,jpeg,png,rtf,pdf" files, or simple Adobe
+          {...formItemLayout}
+          label="20. Please provide key shareholders information"
+          extra="You may upload &quot;jpg,jpeg,png,rtf,pdf&quot; files, or simple Adobe
                PDF files. Files that have the ability to contain macros or other
                types of active code are not acceptable. Maximum file size is
-               30mb.'
+               30mb."
         >
-         {getFieldDecorator('upload', {
-           valuePropName: 'fileList',
-           getValueFromEvent: this.normFile,
-           rules: [{
-             required: true,
-             message: 'Please upload your key shareholders information!'
-           }],
-         })(
-           <Upload name="logo" action="/upload.do" listType="picture">
-             <Button>
-               <Icon type="upload" /> Click to upload
-             </Button>
-           </Upload>
-         )}
+          {getFieldDecorator('upload', {
+            valuePropName: 'fileList',
+            getValueFromEvent: this.normFile,
+            rules: [
+              {
+                required: true,
+                message: 'Please upload your key shareholders information!'
+              }
+            ]
+          })(
+            <Upload name="logo" action="/upload.do" listType="picture">
+              <Button>
+                <Icon type="upload" /> Click to upload
+              </Button>
+            </Upload>
+          )}
         </FormItem>
         {formItems}
         <FormItem {...formItemLayoutWithOutLabel}>
@@ -180,7 +182,9 @@ class DynamicFieldSet extends React.Component {
           </Button>
         </FormItem>
         <FormItem {...formItemLayoutWithOutLabel}>
-          <Button type="primary" htmlType="submit">Save & continue</Button>
+          <Button type="primary" htmlType="submit">
+            Save & continue
+          </Button>
         </FormItem>
       </Form>
     );
