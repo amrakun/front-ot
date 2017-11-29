@@ -60,3 +60,9 @@
 i.success {
   color: green;
 }
+
+.preq-form {
+  .ant-calendar-picker {
+    width: calc(100% - 16px);
+  }
+}
