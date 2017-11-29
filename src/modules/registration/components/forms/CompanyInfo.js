@@ -161,7 +161,7 @@ class RegistrationForm extends React.Component {
           label="2. Address"
           hasFeedback
         >
-          {getFieldDecorator('address', {
+          {getFieldDecorator('address1', {
             rules: [{
               required: true, message: 'Please enter your address!',
             }],

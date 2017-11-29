@@ -1,3 +1,3 @@
-import RegistrationForms from './Registration';
+import PrequalificationForms from './Prequalification';
 
-export { RegistrationForms };
+export { PrequalificationForms };

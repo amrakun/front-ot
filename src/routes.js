@@ -6,6 +6,7 @@ import RfqRoutes from './modules/rfq/routes';
 import EoiRoutes from './modules/eoi/routes';
 import DashboardRoutes from './modules/dashboard/routes';
 import RegistrationRoutes from './modules/registration/routes';
+import PrequalificationRoutes from './modules/prequalification/routes';
 
 const { Header, Content, Footer } = Layout;
 
@@ -23,10 +24,13 @@ const Routes = () => (
           </Breadcrumb>
 
           <Switch>
-            {RfqRoutes()}
-            {RegistrationRoutes()}
             {DashboardRoutes()}
+            {RfqRoutes()}
             {EoiRoutes()}
+
+            {/* supplier routes below */}
+            {RegistrationRoutes()}
+            {PrequalificationRoutes()}
           </Switch>
 
         </Content>

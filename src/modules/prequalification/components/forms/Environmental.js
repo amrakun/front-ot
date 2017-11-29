@@ -1,21 +1,21 @@
 import React from 'react'
 import {withRouter} from 'react-router'
-import { Form, Input, Select, Button } from 'antd';
-import { countryData } from '../../constants';
+import { Form, Select, Button } from 'antd';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-
+const children = [];
+for (let i = 10; i < 36; i++) {
+  children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
+}
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
-    sm: { span: 8 },
-    lg: { span: 8 },
+    sm: { span: 5 }
   },
   wrapperCol: {
     xs: { span: 24 },
-    sm: { span: 14 },
-    lg: { span: 8 },
+    sm: { span: 14 }
   },
 };
 const tailFormItemLayout = {
@@ -30,12 +30,12 @@ const tailFormItemLayout = {
     },
     lg: {
       span: 14,
-      offset: 8,
+      offset: 5,
     },
   },
 };
 
-class RegistrationForm extends React.Component {
+class PrequalificationForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
@@ -51,155 +51,25 @@ class RegistrationForm extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const countryOptions = countryData.map((el, i) => <Option key={i}>{el}</Option>);
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        <label>14. Primary business contact</label>
         <FormItem
           {...formItemLayout}
-          label="Name"
+          label="Product code"
           hasFeedback
         >
-          {getFieldDecorator('name', {
-            rules: [{
-              required: true, message: 'Please enter your name!',
-            }],
-          })(
-            <Input placeholder="Title. First name + Last name" />
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Job title"
-          hasFeedback
-        >
-          {getFieldDecorator('jobTitle', {
-            rules: [{
-              required: true, message: 'Please enter your job title!',
-            }],
-          })(
-            <Input />
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Address"
-          hasFeedback
-        >
-          {getFieldDecorator('address', {
-            rules: [{
-              required: true, message: 'Please enter your address!',
-            }],
-          })(
-            <Input />
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Address 2"
-          hasFeedback
-        >
-          {getFieldDecorator('address2')(
-            <Input />
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Address 3"
-          hasFeedback
-        >
-          {getFieldDecorator('address3')(
-            <Input />
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Town or city"
-          hasFeedback
-        >
-          {getFieldDecorator('city', {
-            rules: [{
-              required: true, message: 'Please enter your town/city!',
-            }],
-          })(
-            <Input />
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="County/state/province"
-          hasFeedback
-        >
-          {getFieldDecorator('state', {
-            rules: [{
-              required: true,
-              message: 'Please enter your country/state/province!',
-            }],
-          })(
-            <Input />
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Postcode or zipcode"
-          hasFeedback
-        >
-          {getFieldDecorator('zipcode')(
-            <Input />
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Country"
-          hasFeedback
-        >
-          {getFieldDecorator('country', {
+          {getFieldDecorator('products', {
             rules: [
-              { required: true, message: 'Please select your country!' },
+              { required: true, message: 'Please select an option!' },
             ],
           })(
-            <Select placeholder="Please select a country">
-              {countryOptions}
+            <Select
+              mode="multiple"
+              placeholder="Please select products"
+            >
+              {children}
             </Select>
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Phone"
-          hasFeedback
-        >
-          {getFieldDecorator('phone', {
-            rules: [{
-              required: true,
-              message: 'Please enter your phone number!',
-            }],
-          })(
-            <Input />
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Phone 2"
-          hasFeedback
-        >
-          {getFieldDecorator('phone2')(
-            <Input />
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="E-mail"
-          hasFeedback
-        >
-          {getFieldDecorator('email', {
-            rules: [{
-              type: 'email', message: 'The input is not valid E-mail!',
-            }, {
-              required: true, message: 'Please input your company e-mail!',
-            }],
-          })(
-            <Input />
           )}
         </FormItem>
         <FormItem {...tailFormItemLayout}>
@@ -210,6 +80,6 @@ class RegistrationForm extends React.Component {
   }
 }
 
-const ContactForm = Form.create()(RegistrationForm);
+const EnvironmentalForm = Form.create()(PrequalificationForm);
 
-export default withRouter(ContactForm);
+export default withRouter(EnvironmentalForm);

@@ -37,3 +37,6 @@ export const groupTypeData = [
   'Stockist',
   'Distrubor'
 ]
+export const productsData = [
+  // TODO: products with categories, product code
+]

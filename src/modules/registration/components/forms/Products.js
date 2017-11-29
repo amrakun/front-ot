@@ -5,9 +5,12 @@ import { Form, Select, Button } from 'antd';
 const FormItem = Form.Item;
 const Option = Select.Option;
 const children = [];
+
+// TODO: mock data below
 for (let i = 10; i < 36; i++) {
   children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
 }
+
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },

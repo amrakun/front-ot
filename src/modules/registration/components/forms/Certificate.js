@@ -73,7 +73,7 @@ class RegistrationForm extends React.Component {
 
   componentDidMount() {
     const data = this.props.data;
-    this.handleExistingChange(data.isReceived);
+    this.handleReceivedChange(data.isReceived);
     this.handleExistingChange(data.isExisting);
     this.props.form.setFieldsValue(data);
   }
