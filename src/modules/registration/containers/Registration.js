@@ -4,7 +4,7 @@ import { RegistrationForms } from '../components';
 const company = {
   "isExisting": "1",
   "companyName": "NMMA",
-  "address": "BGD, 7-r Khoroo",
+  "address1": "BGD, 7-r Khoroo",
   "city": "Ulaanbaatar",
   "state": "Ulaanbaatar",
   "zipcode": "97678",
@@ -16,6 +16,7 @@ const company = {
   "sactionsCountry": "0",
   "structure": "1",
   "registrationNumber": "8989898",
+  // TODO: has error on setFieldsValue
   // "upload": [
   //   {
   //     "name": "gerege_58_4.sql",
@@ -71,6 +72,7 @@ const shareholder = {
   "keys": [
     1
   ],
+  // TODO: has error on setFieldsValue
   // "upload": [
   //   {
   //     "name": "gerege_58_4.sql",
@@ -85,7 +87,7 @@ const shareholder = {
 }
 
 const group = {
-
+  // TODO: Oyutolgoi-s todruulah
 }
 
 const product = {
