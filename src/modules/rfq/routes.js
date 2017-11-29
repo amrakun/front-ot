@@ -1,19 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import Rfq from './containers'
-import { MainLayout } from '../layout/containers';
 
-const routes = () => [
-  <Route
-    key="/rfq"
-    exact
-    path="/rfq"
-    component={({location}) => {
-      return (
-        <MainLayout content={<Rfq />} />
-      );
-    }}
-  />
-];
-
-export default routes;
+export default function(){
+ return <Route key="/rfq" exact path="/rfq" component={Rfq} />
+}

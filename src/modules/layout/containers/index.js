@@ -1,3 +1,3 @@
-import MainLayout from './MainLayout';
+import Sidenav from './Sidenav';
 
-export { MainLayout };
+export { Sidenav };

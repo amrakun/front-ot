@@ -15,13 +15,7 @@ const Main = () => (
         <Breadcrumb.Item>User</Breadcrumb.Item>
         <Breadcrumb.Item>Bill</Breadcrumb.Item>
       </Breadcrumb>
-      <div>
-        <Switch>
-          <Route exact path='/' component={Home}/>
-          <Route path='/roster' component={Roster}/>
-          <Route path='/rfq' component={Rfq}/>
-        </Switch>
-      </div>
+
     </Content>
     <Footer style={{ textAlign: 'center' }}>
       Ant Design ©2016 Created by Ant UED

@@ -1,7 +1,31 @@
 import React from 'react'
-import PropTypes from 'prop-types';
-import reqwest from 'reqwest';
 import { RfqList } from '../components';
+
+const mockData = [
+  {
+     "status":"open",
+     "tender_number":197,
+     "tender_name":"Allen Ward",
+     "publish_date":"2017-11-25",
+     "close_date":"2017-11-25",
+     "suppliers":77,
+     "submitted":8,
+     "not_interested":2,
+     "not_responded":1,
+     "regret_letter":true
+  }, {
+     "status":"closed",
+     "tender_number":945,
+     "tender_name":"Devon McCullough",
+     "publish_date":"2017-11-25",
+     "close_date":"2017-11-25",
+     "suppliers":59,
+     "submitted":14,
+     "not_interested":8,
+     "not_responded":9,
+     "regret_letter":false
+  },
+]
 
 class Rfq extends React.Component {
   state = {
@@ -25,25 +49,12 @@ class Rfq extends React.Component {
   }
   fetch = (params = {}) => {
     this.setState({ loading: true });
-    reqwest({
-      url: 'https://randomuser.me/api',
-      // url: 'https://randomapi.com/api/4883c5396815ac927ac8c8f21f440c7b',
-      method: 'get',
-      data: {
-        results: 10,
-        ...params,
-      },
-      type: 'json',
-    }).then((data) => {
-      const pagination = { ...this.state.pagination };
-      // Read total count from server
-      // pagination.total = data.totalCount;
-      pagination.total = 200;
-      this.setState({
-        loading: false,
-        data: data.results,
-        pagination,
-      });
+    const pagination = { ...this.state.pagination };
+    pagination.total = 200;
+    this.setState({
+      loading: false,
+      data: mockData,
+      pagination,
     });
   }
   componentDidMount() {

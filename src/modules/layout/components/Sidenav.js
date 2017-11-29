@@ -1,8 +1,8 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
-const { Header, Content, Footer, Sider } = Layout;
+import { Layout, Menu, Icon } from 'antd';
+const { Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
 class Sidenav extends React.Component {
@@ -11,7 +11,8 @@ class Sidenav extends React.Component {
   };
   onCollapse = (collapsed) => {
     this.setState({ collapsed });
-  }
+  };
+
   render() {
     return (
       <Sider
@@ -21,7 +22,7 @@ class Sidenav extends React.Component {
         style={{background: '#fff', boxShadow: '4px 4px 20px 0 rgba(0, 0, 0, 0.01)'}}
       >
         <div className="logo">
-          <img src={process.env.PUBLIC_URL + '/images/logo_mn.png'} />
+          <img src={process.env.PUBLIC_URL + '/images/logo_mn.png'} alt='logo' />
         </div>
         <Menu defaultSelectedKeys={['1']} mode="inline">
           <Menu.Item key="1">
@@ -64,6 +65,18 @@ class Sidenav extends React.Component {
           <Menu.Item key="10">
             <Icon type="file" />
             <NavLink to='/report'>Report</NavLink>
+          </Menu.Item>
+          <Menu.Item key="0">
+            <Icon type="" />
+            <NavLink to='/'></NavLink>
+          </Menu.Item>
+          <Menu.Item key="21">
+            <Icon type="user" />
+            <NavLink to='/registration'>Registration</NavLink>
+          </Menu.Item>
+          <Menu.Item key="22">
+            <Icon type="solution" />
+            <NavLink to='/prequalification'>Prequalification</NavLink>
           </Menu.Item>
         </Menu>
       </Sider>

@@ -1,13 +1,5 @@
 import React from 'react'
-import {
-  Table,
-  Button,
-  Row,
-  Col,
-  Card,
-  LocaleProvider
-} from 'antd';
-import enUS from 'antd/lib/locale-provider/en_US';
+import { Table, Card } from 'antd';
 
 import reqwest from 'reqwest';
 
@@ -60,7 +52,7 @@ const columns = [
     key: 'operation',
     fixed: 'right',
     width: 100,
-    render: () => <a href="#">More</a>
+    render: () => <a href="">More</a>
   }
 ];
 
