@@ -35,7 +35,7 @@ const tailFormItemLayout = {
   },
 };
 
-class RegistrationForm extends React.Component {
+class PrequalificationForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
@@ -80,6 +80,6 @@ class RegistrationForm extends React.Component {
   }
 }
 
-const ProductsForm = Form.create()(RegistrationForm);
+const BusinessForm = Form.create()(PrequalificationForm);
 
-export default withRouter(ProductsForm);
+export default withRouter(BusinessForm);

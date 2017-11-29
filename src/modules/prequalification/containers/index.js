@@ -1,3 +1,3 @@
-import Registration from './Registration';
+import Prequalification from './Prequalification';
 
-export default Registration;
+export default Prequalification;
