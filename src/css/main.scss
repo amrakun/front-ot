@@ -1,3 +1,7 @@
+.hidden {
+  display: none;
+}
+
 .ant-menu-item > a {
   display: inline-block;
 }
@@ -65,4 +69,11 @@ i.success {
   .ant-calendar-picker {
     width: calc(100% - 16px);
   }
+  .ant-row.ant-form-item {
+    margin-bottom: 10px;
+  }
+}
+
+.multiple-wrapper {
+  padding: 8px 0;
 }
