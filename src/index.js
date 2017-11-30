@@ -1,5 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { ApolloProvider } from 'react-apollo';
+import store from './store';
+import apolloClient from './apolloClient';
 
 import Routes from './routes';
 
@@ -9,8 +12,10 @@ import 'antd/dist/antd.css';
 import './css/main.min.css';
 
 render(
-  <LocaleProvider locale={enUS}>
-    <Routes />
-  </LocaleProvider>,
+  <ApolloProvider store={store} client={apolloClient}>
+    <LocaleProvider locale={enUS}>
+      <Routes />
+    </LocaleProvider>
+  </ApolloProvider>,
   document.getElementById('root')
 );
