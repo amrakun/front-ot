@@ -17,8 +17,8 @@ const Routes = () => (
       <Layout style={{ marginLeft: 200, minHeight: '100vh' }}>
         <Header />
 
-        <Content style={{ margin: '0 16px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
+        <Content>
+          <Breadcrumb>
             <Breadcrumb.Item>User</Breadcrumb.Item>
             <Breadcrumb.Item>Bill</Breadcrumb.Item>
           </Breadcrumb>

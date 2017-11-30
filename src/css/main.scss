@@ -5,11 +5,11 @@ $link-color: rgb(0,153,168);
 @function tint($color, $percentage) {
   @return mix(white, $color, $percentage);
 }
-
-// Darken a colour
 @function shade($color, $percentage) {
   @return mix(black, $color, $percentage);
 }
+
+@import "override";
 
 .hidden {
   display: none;
@@ -32,66 +32,6 @@ $link-color: rgb(0,153,168);
   }
 }
 
-.ant-layout-sider-trigger {
-  background: transparent;
-  i {
-    color: #333;
-  }
-}
-
-.ant-layout, .ant-layout-footer {
-  background: #f9f9f9;
-}
-
-.ant-menu-inline, .ant-menu-vertical {
-  border: none;
-}
-
-.card-container > .ant-tabs-card > .ant-tabs-content {
-  margin-top: -16px;
-}
-
-.card-container > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
-  background: #fff;
-  padding: 16px;
-}
-
-.card-container > .ant-tabs-card > .ant-tabs-bar {
-  border-color: #fff;
-}
-
-.card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
-  border-color: transparent;
-  background: transparent;
-}
-
-.card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
-  border-color: #fff;
-  background: #fff;
-}
-
-i.success {
-  color: green;
-}
-
-.preq-form {
-  .ant-calendar-picker {
-    width: calc(100% - 16px);
-  }
-  .ant-row.ant-form-item {
-    margin-bottom: 10px;
-  }
-}
-
-.multiple-wrapper {
-  padding: 8px 0;
-}
-
-.ant-card:not(.ant-card-no-hovering):hover {
-  box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.05);
-  border-color: transparent;
-}
-
 //layout
 .ant-layout-header {
   background: #fff;
@@ -109,58 +49,58 @@ i.success {
   position: fixed;
   left: 0
 }
-
-.ant-menu-item-selected > a, .ant-menu-item-selected, .ant-menu-item-selected > a:hover,
-.ant-menu-item:hover, .ant-menu-item-active, .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open,
-.ant-menu-item > a:hover, .ant-menu-submenu-active, .ant-menu-submenu-title:hover,
-.ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active, .ant-tabs-nav .ant-tabs-tab:hover {
-  color: $primary-color;
-}
-.ant-menu-inline .ant-menu-item:after, .ant-menu-vertical .ant-menu-item:after,
-.ant-input:hover, .ant-input:focus, .ant-select-selection:hover, .ant-select-selection:focus {
-  border-color: $primary-color;
-}
-.ant-input:focus, .ant-select-selection:focus {
-  box-shadow: 0 0 0 2px tint($primary-color, 80%);
-
-}
-.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected,
-.ant-table-thead > tr.ant-table-row-hover > td, .ant-table-tbody > tr.ant-table-row-hover > td,
-.ant-table-thead > tr:hover > td, .ant-table-tbody > tr:hover > td {
-  background-color: $primary-color-shade;
-}
-a {
-  color: $link-color;
-  &:hover {
-    color: $primary-color;
+.ant-layout-sider-trigger {
+  background: transparent;
+  i {
+    color: #333;
   }
 }
-.ant-pagination-item-active, .ant-btn-primary {
-  border-color: $primary-color;
-  background-color: $primary-color;
-  transition: all 0.3s ease;
-  &:hover, &:focus {
-    background-color: tint($primary-color, 20%);
-    border-color: tint($primary-color, 20%);
-    a {
-      color: #fff;
-    }
-  }
+.ant-layout, .ant-layout-footer {
+  background: #f9f9f9;
 }
-.ant-btn:hover, .ant-btn:focus {
-  border-color: tint($primary-color, 20%);
-  color: $primary-color;
+.ant-menu-inline, .ant-menu-vertical {
+  border: none;
+}
+.ant-layout-content {
+  margin: 0 24px;
+}
+.ant-breadcrumb {
+  margin: 16px 0;
 }
 
-.ant-pagination-item, .ant-pagination-prev .ant-pagination-item-link, .ant-pagination-next .ant-pagination-item-link {
-  transition: all 0.3s ease;
-  a {
-    transition: color 0.3s ease;
+.card-container > .ant-tabs-card > .ant-tabs-content {
+  margin-top: -16px;
+}
+.card-container > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
+  background: #fff;
+  padding: 16px;
+}
+.card-container > .ant-tabs-card > .ant-tabs-bar {
+  border-color: #fff;
+}
+.card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+  border-color: transparent;
+  background: transparent;
+}
+.card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
+  border-color: #fff;
+  background: #fff;
+}
+i.success {
+  color: green;
+}
+.preq-form {
+  .ant-calendar-picker {
+    width: calc(100% - 16px);
   }
-  &:hover, &:focus {
-    border-color: $primary-color;
-    a {
-      color: $primary-color;
-    }
+  .ant-row.ant-form-item {
+    margin-bottom: 10px;
   }
+}
+.multiple-wrapper {
+  padding: 8px 0;
+}
+.ant-card:not(.ant-card-no-hovering):hover {
+  box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.05);
+  border-color: transparent;
 }
