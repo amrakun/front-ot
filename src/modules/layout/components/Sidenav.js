@@ -15,15 +15,7 @@ class Sidenav extends React.Component {
 
   render() {
     return (
-      <Sider
-        collapsible
-        collapsed={this.state.collapsed}
-        onCollapse={this.onCollapse}
-        style={{
-          background: '#fff',
-          boxShadow: '4px 4px 20px 0 rgba(0, 0, 0, 0.01)'
-        }}
-      >
+      <Sider collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
         <div className="logo">
           <img
             src={process.env.PUBLIC_URL + '/images/logo_mn.png'}
