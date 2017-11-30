@@ -130,9 +130,13 @@ RegistrationContainer.propTypes = {
 export default graphql(
   gql`
     query companyDetail {
-      companyDetail(_id: "5a1f9e2496123f0b089c1a2d") {
+      companyDetail(_id: "5a1fc129c2e8aa7c0f2752dd") {
         basicInfo {
           enName
+        }
+
+        contactInfo {
+          
         }
       }
     }
