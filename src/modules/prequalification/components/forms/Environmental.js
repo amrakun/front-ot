@@ -87,7 +87,7 @@ class PrequalificationForm extends React.Component {
 
   componentDidMount() {
     const data = this.props.data;
-    data.dateInvestigated ? data.dateInvestigated = moment(data.dateInvestigated) : '';
+    if (data.dateInvestigated) data.dateInvestigated = moment(data.dateInvestigated);
     this.handleInvestigatedChange(data.investigated);
     this.handleConvictedChange(data.convicted);
     this.props.form.setFieldsValue(data);

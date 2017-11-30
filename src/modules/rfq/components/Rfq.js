@@ -77,10 +77,10 @@ const propTypes = {
 
 function RfqList({ data, pagination, loading, onChange }) {
   return (
-    <Card title="Request for quotation (RFQ)">
+    <Card bordered={false} title="Request for quotation (RFQ)">
       <Table
         columns={columns}
-        rowKey={record => record.registered}
+        rowKey={record => record.tender_number}
         dataSource={data}
         pagination={pagination}
         loading={loading}

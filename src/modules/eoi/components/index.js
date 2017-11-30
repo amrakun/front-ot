@@ -1,3 +1,3 @@
-import Eoi from './Eoi';
+import EoiList from './Eoi';
 
-export { Eoi };
+export { EoiList };

@@ -72,8 +72,8 @@ class PrequalificationForm extends React.Component {
 
   componentDidMount() {
     const data = this.props.data;
-    data.invStartDate1 ? data.invStartDate1 = moment(data.invStartDate1) : '';
-    data.invCloseDate1 ? data.invCloseDate1 = moment(data.invCloseDate1) : '';
+    if (data.invStartDate1) data.invStartDate1 = moment(data.invStartDate1);
+    if (data.invCloseDate1) data.invCloseDate1 = moment(data.invCloseDate1);
     this.props.form.setFieldsValue(data);
   }
 

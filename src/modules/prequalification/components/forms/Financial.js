@@ -72,9 +72,9 @@ class PrequalificationForm extends React.Component {
   componentDidMount() {
     const data = this.props.data;
     this.handleProvideSelect(data.canProvide)
-    data.recordDate1 ? data.recordDate1 = moment(data.recordDate1) : '';
-    data.recordDate1 ? data.recordDate2 = moment(data.recordDate2) : '';
-    data.recordDate1 ? data.recordDate3 = moment(data.recordDate3) : '';
+    if (data.recordDate1) data.recordDate1 = moment(data.recordDate1);
+    if (data.recordDate1) data.recordDate2 = moment(data.recordDate2);
+    if (data.recordDate1) data.recordDate3 = moment(data.recordDate3);
     this.props.form.setFieldsValue(data);
   }
 

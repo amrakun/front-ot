@@ -1,11 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Select, Button, Input } from 'antd';
+import { Form, Select, Button } from 'antd';
 import { booleanData } from '../../constants'
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-const { TextArea } = Input;
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -74,8 +73,6 @@ class PrequalificationForm extends React.Component {
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form;
-
     return (
       <Form onSubmit={this.handleSubmit}>
         {this.renderBooleanItem('system', 'Does the organisation have a Health Safety & Environment management system?', '')}

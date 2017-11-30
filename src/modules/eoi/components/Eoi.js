@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 import { Table, Card } from 'antd';
-
-import reqwest from 'reqwest';
 
 const columns = [
   {
@@ -68,67 +68,30 @@ const columns = [
   }
 ];
 
-class Eoi extends React.Component {
-  state = {
-    data: [],
-    pagination: {},
-    loading: false
-  };
-  handleTableChange = (pagination, filters, sorter) => {
-    const pager = { ...this.state.pagination };
-    pager.current = pagination.current;
-    this.setState({
-      pagination: pager
-    });
-    this.fetch({
-      results: pagination.pageSize,
-      page: pagination.current,
-      sortField: sorter.field,
-      sortOrder: sorter.order,
-      ...filters
-    });
-  };
-  fetch = (params = {}) => {
-    console.log('params:', params);
-    this.setState({ loading: true });
-    reqwest({
-      url: 'https://randomuser.me/api',
-      // url: 'https://randomapi.com/api/4883c5396815ac927ac8c8f21f440c7b',
-      method: 'get',
-      data: {
-        results: 10,
-        ...params
-      },
-      type: 'json'
-    }).then(data => {
-      const pagination = { ...this.state.pagination };
-      // Read total count from server
-      // pagination.total = data.totalCount;
-      pagination.total = 200;
-      this.setState({
-        loading: false,
-        data: data.results,
-        pagination
-      });
-    });
-  };
-  componentDidMount() {
-    this.fetch();
-  }
-  render() {
-    return (
-      <Card title="Expression of interest (EOI)">
-        <Table
-          columns={columns}
-          rowKey={record => record.registered}
-          dataSource={this.state.data}
-          pagination={this.state.pagination}
-          loading={this.state.loading}
-          onChange={this.handleTableChange}
-        />
-      </Card>
-    );
-  }
+const propTypes = {
+  data: PropTypes.array.isRequired,
+  pagination: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired
+};
+
+function EoiList({ data, pagination, loading, onChange }) {
+  return (
+    <Card bordered={false} title="Expression of interest (EOI)">
+      <Table
+        columns={columns}
+        rowKey={record => record.tender_number}
+        dataSource={data}
+        pagination={pagination}
+        loading={loading}
+        onChange={(pagination, filters, sorter) =>
+          onChange(pagination, filters, sorter)
+        }
+      />
+    </Card>
+  );
 }
 
-export default Eoi;
+EoiList.propTypes = propTypes;
+
+export default withRouter(EoiList);

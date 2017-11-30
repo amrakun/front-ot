@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
-import { Sidenav } from './modules/layout/containers';
+import { Sidenav, Header } from './modules/layout/containers';
 import { Layout, Breadcrumb } from 'antd';
 import RfqRoutes from './modules/rfq/routes';
 import EoiRoutes from './modules/eoi/routes';
@@ -8,20 +8,14 @@ import DashboardRoutes from './modules/dashboard/routes';
 import RegistrationRoutes from './modules/registration/routes';
 import PrequalificationRoutes from './modules/prequalification/routes';
 
-const { Header, Content, Footer } = Layout;
+const { Content, Footer } = Layout;
 
 const Routes = () => (
   <BrowserRouter>
     <Layout>
       <Sidenav />
-      <Layout>
-        <Header
-          style={{
-            background: '#fff',
-            padding: 0,
-            boxShadow: '4px 4px 40px 0 rgba(0, 0, 0, 0.05)'
-          }}
-        />
+      <Layout style={{ marginLeft: 200, minHeight: '100vh' }}>
+        <Header />
 
         <Content style={{ margin: '0 16px' }}>
           <Breadcrumb style={{ margin: '16px 0' }}>
