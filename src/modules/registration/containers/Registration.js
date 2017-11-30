@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { gql, graphql } from 'react-apollo';
 import { RegistrationForms } from '../components';
 
 const company = {
@@ -61,8 +63,9 @@ const management = {
   salesPhone: '+996-74-5801572',
   salesEmail: 'jizal@hotmail.com',
   financialName: 'Brian Sutton',
-  financialJob:
-    'Reprehenderit rerum enim amet soluta sint maxime asperiores sit necessitatibus exercitationem fugit fuga Autem aute enim',
+  financialJob: `Reprehenderit rerum enim amet soluta sint maxime asperiores sit
+    necessitatibus exercitationem fugit
+  fuga Autem aute enim`,
   financialPhone: '+255-69-5198329',
   financialEmail: 'tawydog@yahoo.com',
   member1Name: 'Justin Bates',
@@ -102,20 +105,37 @@ const certificate = {
   cwNumber: 'CW49108'
 };
 
-class Registration extends React.Component {
-  render() {
-    return (
-      <RegistrationForms
-        companyData={company}
-        contactData={contact}
-        managementData={management}
-        shareholderData={shareholder}
-        groupData={group}
-        productData={product}
-        certificateData={certificate}
-      />
-    );
-  }
-}
+const RegistrationContainer = props => {
+  const { companyDetailQuery } = props;
 
-export default Registration;
+  console.log(companyDetailQuery); // eslint-disable-line
+
+  return (
+    <RegistrationForms
+      companyData={company}
+      contactData={contact}
+      managementData={management}
+      shareholderData={shareholder}
+      groupData={group}
+      productData={product}
+      certificateData={certificate}
+    />
+  );
+};
+
+RegistrationContainer.propTypes = {
+  companyDetailQuery: PropTypes.object
+};
+
+export default graphql(
+  gql`
+    query companyDetail {
+      companyDetail(_id: "5a1f9e2496123f0b089c1a2d") {
+        basicInfo {
+          enName
+        }
+      }
+    }
+  `,
+  { name: 'companyDetailQuery' }
+)(RegistrationContainer);

@@ -16,6 +16,6 @@ export const currencyData = [
   'Dram (AMD)',
   'Escudo (CVE)',
   'Euro (EUR)'
-]
-export const actionStatusData = ['In Progress', 'Completed']
-export const dateFormat = 'YYYY/MM/DD'
+];
+export const actionStatusData = ['In Progress', 'Completed'];
+export const dateFormat = 'YYYY/MM/DD';

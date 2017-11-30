@@ -5,9 +5,7 @@ const { Header } = Layout;
 
 class HeaderBar extends React.Component {
   render() {
-    return (
-      <Header />
-    );
+    return <Header />;
   }
 }
 
