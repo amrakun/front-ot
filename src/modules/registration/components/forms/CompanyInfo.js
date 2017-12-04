@@ -196,6 +196,17 @@ class RegistrationForm extends React.Component {
               ]
             })(<Select>{booleanOptions}</Select>)}
           </FormItem>
+          <FormItem {...formItemLayout} label="SAP number" hasFeedback>
+            {getFieldDecorator('sapNumber', {
+              initialValue: data.sapNumber ? data.sapNumber : '',
+              rules: [
+                {
+                  required: true,
+                  message: 'Please enter your company name!'
+                }
+              ]
+            })(<Input />)}
+          </FormItem>
           <FormItem
             {...formItemLayout}
             label="1. Company name (in English)"
