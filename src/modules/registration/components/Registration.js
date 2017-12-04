@@ -13,93 +13,51 @@ import { Tabs, Icon } from 'antd';
 const propTypes = {
   company: PropTypes.object.isRequired
 };
-const TabPane = Tabs.TabPane;
-
-function isEmpty(data) {
-  try {
-    return Object.keys(data).length === 0 && data.constructor === Object;
-  } catch (e) {
-    return false;
-  }
-}
 
 function RegistrationForms({ company }) {
+  const isEmpty = data => {
+    try {
+      return Object.keys(data).length === 0 && data.constructor === Object;
+    } catch (e) {
+      return false;
+    }
+  };
+
+  const renderPane = (key, title, name, Compnent) => {
+    return (
+      <Tabs.TabPane
+        tab={
+          <span>
+            {title} {isEmpty(company[name]) ? '' : <Icon type="check" />}
+          </span>
+        }
+        key={key}
+      >
+        <Compnent data={company[name] || {}} />
+      </Tabs.TabPane>
+    );
+  };
+
   return (
     <div className="card-container">
       <Tabs type="card">
-        <TabPane
-          tab={
-            <span>
-              Company info{' '}
-              {isEmpty(company.basicInfo) ? '' : <Icon type="check" />}
-            </span>
-          }
-          key="1"
-        >
-          <CompanyInfoForm data={company.basicInfo} />
-        </TabPane>
-        <TabPane
-          tab={
-            <span>
-              Contact details {isEmpty({}) ? '' : <Icon type="check" />}
-            </span>
-          }
-          key="2"
-        >
-          <ContactForm data={{}} />
-        </TabPane>
-        <TabPane
-          tab={
-            <span>
-              Management Team {isEmpty({}) ? '' : <Icon type="check" />}
-            </span>
-          }
-          key="3"
-        >
-          <ManagementForm data={{}} />
-        </TabPane>
-        <TabPane
-          tab={
-            <span>
-              Company shareholder information{' '}
-              {isEmpty({}) ? '' : <Icon type="check" />}
-            </span>
-          }
-          key="4"
-        >
-          <ShareholderForm data={{}} />
-        </TabPane>
-        <TabPane
-          tab={
-            <span>
-              Group information {isEmpty({}) ? '' : <Icon type="check" />}
-            </span>
-          }
-          key="5"
-        >
-          <GroupForm data={{}} />
-        </TabPane>
-        <TabPane
-          tab={
-            <span>
-              Products & services {isEmpty({}) ? '' : <Icon type="check" />}
-            </span>
-          }
-          key="6"
-        >
-          <ProductsForm data={{}} />
-        </TabPane>
-        <TabPane
-          tab={
-            <span>
-              Capacity building certificate{' '}
-              {isEmpty({}) ? '' : <Icon type="check" />}
-            </span>
-          }
-          key="7"
-        >
-          <CertificateForm data={{}} />
-        </TabPane>
+        {renderPane('1', 'Company info', 'basicInfo', CompanyInfoForm)}
+        {renderPane('2', 'Contact details', 'contactInfo', ContactForm)}
+        {renderPane('3', 'Management Team', 'managementTeam', ManagementForm)}
+        {renderPane(
+          '4',
+          'Company shareholder information',
+          'shareholderInfo',
+          ShareholderForm
+        )}
+        {renderPane('5', 'Group information', 'groupInfo', GroupForm)}
+        {renderPane('6', 'Products & services', 'productsInfo', ProductsForm)}
+        {renderPane(
+          '7',
+          'Capacity building certificate',
+          'certificateInfo',
+          CertificateForm
+        )}
       </Tabs>
     </div>
   );
