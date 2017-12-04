@@ -56,9 +56,11 @@ a:hover {
   color: #fff;
 }
 .ant-btn:hover,
-.ant-btn:focus {
+.ant-btn:focus,
+.ant-btn:active {
   border-color: #f6924d;
-  color: #f47721;
+  background-color: #f6924d;
+  color: #fff;
 }
 .ant-pagination-item,
 .ant-pagination-prev .ant-pagination-item-link,
@@ -173,4 +175,24 @@ i.success {
 .ant-card:not(.ant-card-no-hovering):hover {
   box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.05);
   border-color: transparent;
+}
+.ant-checkbox-group.horizontal .ant-checkbox-group-item {
+  display: block;
+  padding: 5px 0;
+}
+.margin {
+  margin-top: 16px;
+}
+.table-operations {
+  padding-bottom: 16px;
+  text-align: right;
+}
+.table-operations .ant-btn {
+  margin-right: 8px;
+}
+.table-operations a.ant-btn {
+  line-height: 24px;
+}
+.rdw-editor-wrapper {
+  padding-top: 16px;
 }

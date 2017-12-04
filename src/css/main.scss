@@ -104,3 +104,27 @@ i.success {
   box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.05);
   border-color: transparent;
 }
+
+.ant-checkbox-group.horizontal .ant-checkbox-group-item {
+  display: block;
+  padding: 5px 0;
+}
+
+.margin {
+  margin-top: 16px;
+}
+
+.table-operations {
+  padding-bottom: 16px;
+  text-align: right;
+  .ant-btn {
+    margin-right: 8px;
+  }
+  a.ant-btn {
+    line-height: 24px;
+  }
+}
+
+.rdw-editor-wrapper {
+  padding-top: 16px;
+}
