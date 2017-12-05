@@ -11,10 +11,11 @@ import PropTypes from 'prop-types';
 import { Tabs, Icon } from 'antd';
 
 const propTypes = {
-  company: PropTypes.object.isRequired
+  company: PropTypes.object,
+  save: PropTypes.func.isRequired
 };
 
-function RegistrationForms({ company }) {
+function RegistrationForms({ save, company }) {
   const isEmpty = data => {
     try {
       return Object.keys(data).length === 0 && data.constructor === Object;
@@ -23,7 +24,11 @@ function RegistrationForms({ company }) {
     }
   };
 
-  const renderPane = (key, title, name, Compnent) => {
+  const renderPane = (key, title, name, Component) => {
+    const saveAction = doc => {
+      save(name, doc);
+    };
+
     return (
       <Tabs.TabPane
         tab={
@@ -33,7 +38,7 @@ function RegistrationForms({ company }) {
         }
         key={key}
       >
-        <Compnent data={company[name] || {}} />
+        <Component data={company[name] || {}} save={saveAction} />
       </Tabs.TabPane>
     );
   };
