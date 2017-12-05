@@ -22,7 +22,7 @@ const basicInfoFields = `
   # totalIntOfMongolianEmployees,
 `;
 
-export const companyDetail = `
+const companyDetail = `
   query companyDetail {
     companyDetail(_id: "5a1fc129c2e8aa7c0f2752dd") {
       basicInfo {
@@ -32,6 +32,27 @@ export const companyDetail = `
   }
 `;
 
+const listParamsDef = `
+  $page: Int,
+  $perPage: Int
+`;
+
+const listParamsValue = `
+  page: $page,
+  perPage: $perPage
+`;
+
+const suppliers = `
+  query customers(${listParamsDef}) {
+    companies(${listParamsValue}) {
+      basicInfo {
+        ${basicInfoFields}
+      }
+    }
+  }
+`;
+
 export default {
-  companyDetail
+  companyDetail,
+  suppliers
 };
