@@ -7,6 +7,7 @@ import EoiRoutes from './modules/eoi/routes';
 import DashboardRoutes from './modules/dashboard/routes';
 import RegistrationRoutes from './modules/registration/routes';
 import PrequalificationRoutes from './modules/prequalification/routes';
+import { SuppliersRoute, SendRfqRoute } from './modules/suppliers/routes';
 
 const { Content, Footer } = Layout;
 
@@ -25,6 +26,8 @@ const Routes = () => (
 
           <Switch>
             {DashboardRoutes()}
+            {SuppliersRoute()}
+            {SendRfqRoute()}
             {RfqRoutes()}
             {EoiRoutes()}
 

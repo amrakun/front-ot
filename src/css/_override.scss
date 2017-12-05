@@ -35,9 +35,10 @@ a {
     }
   }
 }
-.ant-btn:hover, .ant-btn:focus {
+.ant-btn:hover, .ant-btn:focus, .ant-btn:active {
   border-color: tint($primary-color, 20%);
-  color: $primary-color;
+  background-color: tint($primary-color, 20%);
+  color: #fff;
 }
 
 .ant-pagination-item, .ant-pagination-prev .ant-pagination-item-link, .ant-pagination-next .ant-pagination-item-link {
