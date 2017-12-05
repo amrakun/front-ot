@@ -17,11 +17,11 @@ export const statusOptions = [
 export const columns = [
   {
     title: 'Supplier name',
-    dataIndex: 'enName'
+    dataIndex: 'basicInfo.enName'
   },
   {
     title: 'SAP #',
-    dataIndex: 'sapNumber'
+    dataIndex: 'basicInfo.sapNumber'
   },
   {
     title: 'Registration',
@@ -57,7 +57,7 @@ export const columns = [
   },
   {
     title: 'Email',
-    dataIndex: 'email'
+    dataIndex: 'basicInfo.email'
   },
   {
     title: 'Phone',

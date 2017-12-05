@@ -32,21 +32,32 @@ const companyDetail = `
   }
 `;
 
-const listParamsDef = `
-  $page: Int,
-  $perPage: Int
-`;
+// const listParamsDef = `
+//   $page: Int,
+//   $perPage: Int
+// `;
+//
+// const listParamsValue = `
+//   page: $page,
+//   perPage: $perPage
+// `;
 
-const listParamsValue = `
-  page: $page,
-  perPage: $perPage
-`;
+// const companies = `
+//   query companies(${listParamsDef}) {
+//     companies(${listParamsValue}) {
+//       basicInfo {
+//         ${basicInfoFields}
+//       }
+//     }
+//   }
+// `;
 
-const suppliers = `
-  query customers(${listParamsDef}) {
-    companies(${listParamsValue}) {
+const companies = `
+  query companies {
+    companies {
       basicInfo {
-        ${basicInfoFields}
+        enName,
+        email
       }
     }
   }
@@ -54,5 +65,5 @@ const suppliers = `
 
 export default {
   companyDetail,
-  suppliers
+  companies
 };

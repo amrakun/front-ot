@@ -14,10 +14,10 @@ import AddMore from './AddMore';
 const SHOW_PARENT = TreeSelect.SHOW_PARENT;
 const CheckboxGroup = Checkbox.Group;
 const propTypes = {
-  data: PropTypes.array.isRequired,
-  pagination: PropTypes.object.isRequired,
+  data: PropTypes.array,
+  pagination: PropTypes.object,
   loading: PropTypes.bool.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func
 };
 
 class SuppliersList extends React.Component {
@@ -25,17 +25,29 @@ class SuppliersList extends React.Component {
     super(props);
     this.state = {
       treeValue: ['0-0-0'],
-      selectedSuppliers: ['Supplier 1', 'Supplier 2']
+      selectedRowKeys: []
     };
   }
   onTreeChange = value => {
     console.log('onTreeChange ', value, arguments);
     this.setState({ treeValue: value });
   };
+  onSelectChange = selectedRowKeys => {
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
+    this.setState({ selectedRowKeys });
+  };
 
   render() {
     const { data, pagination, loading, onChange } = this.props;
-    const { selectedSuppliers } = this.state;
+    const { selectedRowKeys } = this.state;
+    const rowSelection = {
+      selectedRowKeys,
+      onChange: this.onSelectChange
+    };
+    // const selectedSuppliers = selectedRowKeys.map((el) => (
+    //   data[el]
+    // ));
+    const selectedSuppliers = selectedRowKeys;
 
     const tProps = {
       treeData,
@@ -50,7 +62,7 @@ class SuppliersList extends React.Component {
     };
     return (
       <Row gutter={16}>
-        <Col span={5}>
+        <Col span={4}>
           <Card bordered={false} title="Products & services">
             <TreeSelect {...tProps} />
           </Card>
@@ -69,7 +81,7 @@ class SuppliersList extends React.Component {
             />
           </Card>
         </Col>
-        <Col span={19}>
+        <Col span={20}>
           <Card bordered={false} title="Suppliers">
             <div className="table-operations">
               <Button onClick={this.showModal}>Export to Excel</Button>
@@ -86,8 +98,9 @@ class SuppliersList extends React.Component {
               <AddMore />
             </div>
             <Table
+              rowSelection={rowSelection}
               columns={columns}
-              rowKey={record => record.tender_number}
+              rowKey={record => record}
               dataSource={data}
               pagination={pagination}
               loading={loading}
