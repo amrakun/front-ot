@@ -1,5 +1,6 @@
 const basicInfoFields = `
   isRegisteredOnSup,
+  sapNumber,
   enName,
   mnName,
   address,
@@ -12,19 +13,21 @@ const basicInfoFields = `
   registeredInCountry,
   registeredInAimag,
   registeredInSum,
+  isChinese,
   isSubContractor,
   corporateStructure,
   registrationNumber,
   email,
+  website,
   foreignOwnershipPercentage,
-  # totalIntOfEmployees,
-  # totalIntOfUmnugoviEmployees,
-  # totalIntOfMongolianEmployees,
+  totalNumberOfEmployees,
+  totalNumberOfUmnugoviEmployees,
+  totalNumberOfMongolianEmployees,
 `;
 
 export const companyDetail = `
   query companyDetail {
-    companyDetail(_id: "5a1fc129c2e8aa7c0f2752dd") {
+    companyDetail(_id: "5a1f9e2496123f0b089c1a2d") {
       basicInfo {
         ${basicInfoFields}
       }

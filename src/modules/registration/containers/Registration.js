@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { gql, graphql } from 'react-apollo';
+import { gql, compose, graphql } from 'react-apollo';
 import { queries, mutations } from '../graphql';
 import { RegistrationForms } from '../components';
 
@@ -11,11 +11,23 @@ const RegistrationContainer = props => {
     return <div />;
   }
 
+  const save = (name, doc) => {
+    const mutation = props[`${name}Edit`];
+
+    mutation({ variables: { [name]: doc } })
+      .then(() => {
+        console.log('Saved');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
   const updatedProps = {
     ...props,
+    save,
     company: {
-      ...companyDetailQuery.companyDetail,
-      refetch: companyDetailQuery.refetch
+      ...companyDetailQuery.companyDetail
     }
   };
 
@@ -26,6 +38,13 @@ RegistrationContainer.propTypes = {
   companyDetailQuery: PropTypes.object
 };
 
-export default graphql(gql(queries.companyDetail), {
-  name: 'companyDetailQuery'
-})(RegistrationContainer);
+export default compose(
+  graphql(gql(queries.companyDetail), {
+    name: 'companyDetailQuery'
+  }),
+
+  // mutations
+  graphql(gql(mutations.basicInfo), {
+    name: 'basicInfoEdit'
+  })
+)(RegistrationContainer);
