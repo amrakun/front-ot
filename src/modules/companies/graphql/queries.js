@@ -25,11 +25,29 @@ const basicInfoFields = `
   totalNumberOfMongolianEmployees,
 `;
 
+const contactInfoFields = `
+  name,
+  jobTitle,
+  address,
+  address2,
+  address3,
+  townOrCity,
+  province,
+  zipCode,
+  country,
+  phone,
+  phone2,
+  email,
+`;
+
 export const companyDetail = `
   query companyDetail {
-    companyDetail(_id: "5a1fc129c2e8aa7c0f2752dd") {
+    companyDetail(_id: "5a1ff5eae3fc5b3adf2ac7e8") {
       basicInfo {
         ${basicInfoFields}
+      }
+      contactInfo {
+        ${contactInfoFields}
       }
     }
   }
