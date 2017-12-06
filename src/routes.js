@@ -2,12 +2,13 @@ import React from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import { Sidenav, Header } from './modules/layout/containers';
 import { Layout, Breadcrumb } from 'antd';
-import RfqRoutes from './modules/rfq/routes';
-import EoiRoutes from './modules/eoi/routes';
-import DashboardRoutes from './modules/dashboard/routes';
-import RegistrationRoutes from './modules/registration/routes';
-import PrequalificationRoutes from './modules/prequalification/routes';
-import { SuppliersRoute, SendRfqRoute } from './modules/suppliers/routes';
+import DashboardRoute from './modules/dashboard/routes';
+import {
+  CompaniesRoute,
+  RegistrationRoute,
+  PrequalificationRoute
+} from './modules/companies/routes';
+import { RfqRoute, SendRfqRoute, EoiRoute } from './modules/tenders/routes';
 
 const { Content, Footer } = Layout;
 
@@ -25,15 +26,16 @@ const Routes = () => (
           </Breadcrumb>
 
           <Switch>
-            {DashboardRoutes()}
-            {SuppliersRoute()}
+            {/*  buyer routes */}
+            {DashboardRoute()}
+            {CompaniesRoute()}
+            {RfqRoute()}
             {SendRfqRoute()}
-            {RfqRoutes()}
-            {EoiRoutes()}
+            {EoiRoute()}
 
-            {/* supplier routes below */}
-            {RegistrationRoutes()}
-            {PrequalificationRoutes()}
+            {/* supplier routes */}
+            {RegistrationRoute()}
+            {PrequalificationRoute()}
           </Switch>
         </Content>
 

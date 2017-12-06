@@ -1,6 +1,5 @@
 import React from 'react';
-import Eoi from '../../eoi/containers';
-import Rfq from '../../rfq/containers';
+import { Eoi, Rfq } from '../../tenders/containers';
 
 const Dashboard = () => (
   <div>

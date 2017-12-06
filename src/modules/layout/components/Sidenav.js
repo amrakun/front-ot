@@ -29,7 +29,7 @@ class Sidenav extends React.Component {
           </Menu.Item>
           <Menu.Item key="2">
             <Icon type="user" />
-            <NavLink to="/suppliers">Suppliers</NavLink>
+            <NavLink to="/companies">Suppliers</NavLink>
           </Menu.Item>
           <Menu.Item key="3">
             <Icon type="bars" />

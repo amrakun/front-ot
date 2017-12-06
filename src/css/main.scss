@@ -128,3 +128,22 @@ i.success {
 .rdw-editor-wrapper {
   padding-top: 16px;
 }
+
+.send-rfq .ant-select-lg {
+  width: 164px;
+}
+
+.rfq-form-row {
+  display: flex;
+  overflow: scroll;
+  .ant-input {
+    width: 164px;
+  }
+}
+
+.form-table {
+  .ant-row.ant-form-item {
+    margin: 0;
+    display: block;
+  }
+}
