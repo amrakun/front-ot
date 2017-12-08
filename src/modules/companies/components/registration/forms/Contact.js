@@ -1,163 +1,93 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Input, Select, Button } from 'antd';
+import { Form, Input, Select } from 'antd';
 import { countryData } from '../constants';
+import BaseForm from '../../../../common/components/BaseForm';
 
-const FormItem = Form.Item;
-const Option = Select.Option;
-
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 8 },
-    lg: { span: 8 }
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 14 },
-    lg: { span: 8 }
-  }
-};
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0
-    },
-    sm: {
-      span: 14,
-      offset: 8
-    },
-    lg: {
-      span: 14,
-      offset: 8
-    }
-  }
-};
-
-class RegistrationForm extends React.Component {
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-      }
-    });
-  };
-
-  componentDidMount() {
-    this.props.form.setFieldsValue(this.props.data);
-  }
-
+class RegistrationForm extends BaseForm {
   render() {
-    const { getFieldDecorator } = this.props.form;
-    const countryOptions = countryData.map((el, i) => (
-      <Option key={i}>{el}</Option>
-    ));
+    const countryOptions = this.renderOptions(countryData);
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        <label>14. Primary business contact</label>
-        <FormItem {...formItemLayout} label="Name" hasFeedback>
-          {getFieldDecorator('name', {
-            rules: [
-              {
-                required: true,
-                message: 'Please enter your name!'
-              }
-            ]
-          })(<Input placeholder="Title. First name + Last name" />)}
-        </FormItem>
-        <FormItem {...formItemLayout} label="Job title" hasFeedback>
-          {getFieldDecorator('jobTitle', {
-            rules: [
-              {
-                required: true,
-                message: 'Please enter your job title!'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem {...formItemLayout} label="Address" hasFeedback>
-          {getFieldDecorator('address', {
-            rules: [
-              {
-                required: true,
-                message: 'Please enter your address!'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem {...formItemLayout} label="Address 2" hasFeedback>
-          {getFieldDecorator('address2')(<Input />)}
-        </FormItem>
-        <FormItem {...formItemLayout} label="Address 3" hasFeedback>
-          {getFieldDecorator('address3')(<Input />)}
-        </FormItem>
-        <FormItem {...formItemLayout} label="Town or city" hasFeedback>
-          {getFieldDecorator('city', {
-            rules: [
-              {
-                required: true,
-                message: 'Please enter your town/city!'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem {...formItemLayout} label="County/state/province" hasFeedback>
-          {getFieldDecorator('state', {
-            rules: [
-              {
-                required: true,
-                message: 'Please enter your country/state/province!'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem {...formItemLayout} label="Postcode or zipcode" hasFeedback>
-          {getFieldDecorator('zipcode')(<Input />)}
-        </FormItem>
-        <FormItem {...formItemLayout} label="Country" hasFeedback>
-          {getFieldDecorator('country', {
-            rules: [{ required: true, message: 'Please select your country!' }]
-          })(
+        {this.renderField({
+          label: 'Name',
+          name: 'name',
+          control: <Input placeholder="Title. First name + Last name" />
+        })}
+
+        {this.renderField({
+          label: 'Job title',
+          name: 'jobTitle',
+          control: <Input />
+        })}
+
+        {this.renderField({
+          label: 'Address',
+          name: 'address',
+          control: <Input />
+        })}
+
+        {this.renderField({
+          label: 'Address 2',
+          name: 'address2',
+          control: <Input />
+        })}
+
+        {this.renderField({
+          label: 'Town or city',
+          name: 'townOrCity',
+          control: <Input />
+        })}
+
+        {this.renderField({
+          label: 'Address 3',
+          name: 'address3',
+          control: <Input />
+        })}
+
+        {this.renderField({
+          label: 'County/state/province',
+          name: 'province',
+          control: <Input />
+        })}
+
+        {this.renderField({
+          label: 'Postcode or zipcode',
+          name: 'zipCode',
+          control: <Input />
+        })}
+
+        {this.renderField({
+          label: 'Country',
+          name: 'country',
+          control: (
             <Select placeholder="Please select a country">
               {countryOptions}
             </Select>
-          )}
-        </FormItem>
-        <FormItem {...formItemLayout} label="Phone" hasFeedback>
-          {getFieldDecorator('phone', {
-            rules: [
-              {
-                required: true,
-                message: 'Please enter your phone number!'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem {...formItemLayout} label="Phone 2" hasFeedback>
-          {getFieldDecorator('phone2')(<Input />)}
-        </FormItem>
-        <FormItem {...formItemLayout} label="E-mail" hasFeedback>
-          {getFieldDecorator('email', {
-            rules: [
-              {
-                type: 'email',
-                message: 'The input is not valid E-mail!'
-              },
-              {
-                required: true,
-                message: 'Please input your company e-mail!'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            Save & continue
-          </Button>
-        </FormItem>
+          )
+        })}
+
+        {this.renderField({
+          label: 'Phone',
+          name: 'phone',
+          control: <Input />
+        })}
+
+        {this.renderField({
+          label: 'Phone 2',
+          name: 'phone2',
+          control: <Input />
+        })}
+
+        {this.renderField({
+          label: 'E-mail',
+          name: 'email',
+          validation: 'email',
+          control: <Input />
+        })}
+
+        {this.renderSubmit()}
       </Form>
     );
   }
