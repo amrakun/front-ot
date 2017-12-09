@@ -10,8 +10,16 @@ import {
 } from '../constants';
 import { newRfqPath, newEoiPath } from '../../common/constants';
 
+const propTypes = {
+  location: PropTypes.object,
+  companyDetailQuery: PropTypes.object,
+  match: PropTypes.object
+};
+
 const PublishContainer = props => {
   let { companyDetailQuery, location, match } = props;
+
+  console.log('tenders/containers/Publish.js', match.params.id);
 
   let tender = {};
   switch (location.pathname) {
@@ -44,10 +52,7 @@ const PublishContainer = props => {
   return <Publish {...updatedProps} />;
 };
 
-PublishContainer.propTypes = {
-  location: PropTypes.object,
-  companyDetailQuery: PropTypes.object
-};
+PublishContainer.propTypes = propTypes;
 
 export default compose(
   graphql(gql(queries.companyDetail), {

@@ -1,5 +1,69 @@
 export const days = [{ text: '1 day', value: '1' }];
 
+export const tenderColumns = [
+  {
+    title: 'Status',
+    dataIndex: 'status',
+    filters: [
+      {
+        text: 'Open',
+        value: 'open'
+      },
+      {
+        text: 'Draft',
+        value: 'draft'
+      },
+      {
+        text: 'Closed',
+        value: 'closed'
+      }
+    ]
+  },
+  {
+    title: 'Tender #',
+    dataIndex: 'number',
+    sorter: true
+  },
+  {
+    title: 'Tender name',
+    dataIndex: 'name'
+  },
+  {
+    title: 'Publish date',
+    dataIndex: 'publishDate'
+  },
+  {
+    title: 'Close date',
+    dataIndex: 'closeDate'
+  },
+  {
+    title: 'Suppliers',
+    dataIndex: 'suppliers'
+  },
+  {
+    title: 'Sumbitted',
+    dataIndex: 'submitted'
+  },
+  {
+    title: 'Not interested',
+    dataIndex: 'notInterested'
+  },
+  {
+    title: 'Not responded',
+    dataIndex: 'notResponded'
+  },
+  {
+    title: 'Regret letter',
+    dataIndex: 'regretLetterSent'
+  },
+  {
+    title: 'Operation',
+    key: 'operation',
+    fixed: 'right',
+    width: 100
+  }
+];
+
 export const eoiColumns = [
   { title: 'Document', dataIndex: 'document', key: '1' },
   { title: 'Submitted', dataIndex: 'submitted', key: '2' },

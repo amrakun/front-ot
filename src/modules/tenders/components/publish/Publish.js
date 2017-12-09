@@ -5,7 +5,7 @@ import { Tabs, Input, Form, Table, Button, Select } from 'antd';
 import BaseForm from '../../../common/components/BaseForm';
 import Email from './Email';
 import { rfqColumns, eoiColumns, booleanData } from '../../constants';
-import { newRfqPath, editTenderPath } from '../../../common/constants';
+import { newRfqPath } from '../../../common/constants';
 
 const propTypes = {
   location: PropTypes.object,
@@ -22,48 +22,20 @@ class Publish extends BaseForm {
     if (props.location.pathname === newRfqPath || tender.tableRows[0].UOM) {
       //RFQ
       let columns = rfqColumns;
-      columns.map(
+      columns.forEach(
         el =>
-          (el.render = (text, record) => (
-            <Input
-              value={
-                tender.tableRows[record.key]
-                  ? tender.tableRows[record.key][el.dataIndex]
-                  : ''
-              }
-              placeholder={el.title}
-              id={el.dataIndex}
-              onChange={e => this.onChange(e, record)}
-            />
-          ))
+          (el.render = (text, record) => this.renderInput(el, record, tender))
       );
       this.columns = columns;
     } else {
       //EOI
       let columns = eoiColumns;
-      columns[1].render = (text, record) => (
-        <Select
-          placeholder="Choose one"
-          id={columns[1].dataIndex}
-          onSelect={e => this.onChange(e, record)}
-        >
-          {this.renderOptions(booleanData)}
-        </Select>
-      );
-      columns[2].render = (text, record) => (
-        <Input
-          placeholder={columns[2].title}
-          id={columns[2].dataIndex}
-          onChange={e => this.onChange(e, record)}
-        />
-      );
-      columns[3].render = (text, record) => (
-        <Input
-          placeholder={columns[3].title}
-          id={columns[3].dataIndex}
-          onChange={e => this.onChange(e, record)}
-        />
-      );
+      columns[1].render = (text, record) =>
+        this.renderSelect(columns[1], record);
+      columns[2].render = (text, record) =>
+        this.renderInput(columns[2], record);
+      columns[3].render = (text, record) =>
+        this.renderInput(columns[3], record);
       this.columns = columns;
     }
 
@@ -106,6 +78,33 @@ class Publish extends BaseForm {
     let { tableRows } = this.state;
     tableRows.push({ key: tableRows.length });
     this.setState({ tableRows });
+  }
+
+  renderInput(el, record, tender) {
+    return (
+      <Input
+        value={
+          tender && tender.tableRows[record.key]
+            ? tender.tableRows[record.key][el.dataIndex]
+            : ''
+        }
+        placeholder={el.title}
+        id={el.dataIndex}
+        onChange={e => this.onChange(e, record)}
+      />
+    );
+  }
+
+  renderSelect(el, record) {
+    return (
+      <Select
+        placeholder="Choose one"
+        id={el.dataIndex}
+        onSelect={e => this.onChange(e, record)}
+      >
+        {this.renderOptions(booleanData)}
+      </Select>
+    );
   }
 
   render() {

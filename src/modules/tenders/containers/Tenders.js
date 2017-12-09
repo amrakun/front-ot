@@ -1,32 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Tenders } from '../components';
 
 const mockData = [
   {
     status: 'open',
-    tender_number: 197,
-    tender_name: 'Allen Ward',
-    publish_date: '2017-11-25',
-    close_date: '2017-11-25',
+    number: 197,
+    name: 'Allen Ward',
+    publishDate: '2017-11-25',
+    closeDate: '2017-11-25',
     suppliers: 77,
     submitted: 8,
-    not_interested: 2,
-    not_responded: 1,
-    regret_letter: true
-  },
-  {
-    status: 'closed',
-    tender_number: 945,
-    tender_name: 'Devon McCullough',
-    publish_date: '2017-11-25',
-    close_date: '2017-11-25',
-    suppliers: 59,
-    submitted: 14,
-    not_interested: 8,
-    not_responded: 9,
-    regret_letter: false
+    notInterested: 2,
+    notResponded: 1,
+    regretLetterSent: true
   }
 ];
+
+const propTypes = {
+  type: PropTypes.string
+};
 
 class TendersContainer extends React.Component {
   constructor(props) {
@@ -42,9 +35,12 @@ class TendersContainer extends React.Component {
       pagination: {},
       loading: false
     };
+
+    this.handleTableChange = this.handleTableChange.bind(this);
+    this.fetch = this.fetch.bind(this);
   }
 
-  handleTableChange = (pagination, filters, sorter) => {
+  handleTableChange(pagination, filters, sorter) {
     const pager = { ...this.state.pagination };
     pager.current = pagination.current;
     this.setState({
@@ -57,8 +53,9 @@ class TendersContainer extends React.Component {
       sortOrder: sorter.order,
       ...filters
     });
-  };
-  fetch = (params = {}) => {
+  }
+  fetch(params = {}) {
+    console.log(params);
     this.setState({ loading: true });
     const pagination = { ...this.state.pagination };
     pagination.total = 200;
@@ -67,7 +64,7 @@ class TendersContainer extends React.Component {
       data: mockData,
       pagination
     });
-  };
+  }
   componentDidMount() {
     this.fetch();
   }
@@ -85,5 +82,7 @@ class TendersContainer extends React.Component {
     );
   }
 }
+
+TendersContainer.propTypes = propTypes;
 
 export default TendersContainer;
