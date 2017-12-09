@@ -21,22 +21,20 @@ class Publish extends BaseForm {
 
     if (props.location.pathname === newRfqPath || tender.tableRows[0].UOM) {
       //RFQ
-      let columns = rfqColumns;
-      columns.forEach(
+      rfqColumns.forEach(
         el =>
           (el.render = (text, record) => this.renderInput(el, record, tender))
       );
-      this.columns = columns;
+      this.columns = rfqColumns;
     } else {
       //EOI
-      let columns = eoiColumns;
-      columns[1].render = (text, record) =>
-        this.renderSelect(columns[1], record);
-      columns[2].render = (text, record) =>
-        this.renderInput(columns[2], record);
-      columns[3].render = (text, record) =>
-        this.renderInput(columns[3], record);
-      this.columns = columns;
+      eoiColumns[1].render = (text, record) =>
+        this.renderSelect(eoiColumns[1], record);
+      eoiColumns[2].render = (text, record) =>
+        this.renderInput(eoiColumns[2], record);
+      eoiColumns[3].render = (text, record) =>
+        this.renderInput(eoiColumns[3], record);
+      this.columns = eoiColumns;
     }
 
     this.emailHtml = tender.emailHtml;

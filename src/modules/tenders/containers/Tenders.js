@@ -18,17 +18,18 @@ const mockData = [
 ];
 
 const propTypes = {
-  type: PropTypes.string
+  type: PropTypes.string,
+  location: PropTypes.object
 };
 
 class TendersContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    const { type } = props;
+    const { type, location } = props;
 
     this.title = '(RFQ)';
-    if (type === 'eoi') this.title = '(EOI)';
+    if (type === 'eoi' || location.pathname === '/eoi') this.title = '(EOI)';
 
     this.state = {
       data: [],
@@ -54,8 +55,8 @@ class TendersContainer extends React.Component {
       ...filters
     });
   }
-  fetch(params = {}) {
-    console.log(params);
+  //params = {}
+  fetch() {
     this.setState({ loading: true });
     const pagination = { ...this.state.pagination };
     pagination.total = 200;
