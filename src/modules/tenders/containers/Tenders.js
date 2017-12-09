@@ -1,5 +1,5 @@
 import React from 'react';
-import { RfqList } from '../../components';
+import { Tenders } from '../components';
 
 const mockData = [
   {
@@ -28,12 +28,22 @@ const mockData = [
   }
 ];
 
-class Rfq extends React.Component {
-  state = {
-    data: [],
-    pagination: {},
-    loading: false
-  };
+class TendersContainer extends React.Component {
+  constructor(props) {
+    super(props);
+
+    const { type } = props;
+
+    this.title = '(RFQ)';
+    if (type === 'eoi') this.title = '(EOI)';
+
+    this.state = {
+      data: [],
+      pagination: {},
+      loading: false
+    };
+  }
+
   handleTableChange = (pagination, filters, sorter) => {
     const pager = { ...this.state.pagination };
     pager.current = pagination.current;
@@ -62,12 +72,9 @@ class Rfq extends React.Component {
     this.fetch();
   }
   render() {
-    // const {
-    //   this.state.data,
-    //   this.state.pagination,
-    // } = this.props;
     return (
-      <RfqList
+      <Tenders
+        title={this.title}
         data={this.state.data}
         pagination={this.state.pagination}
         loading={this.state.loading}
@@ -79,4 +86,4 @@ class Rfq extends React.Component {
   }
 }
 
-export default Rfq;
+export default TendersContainer;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Table, Card, Row, Col, TreeSelect, Checkbox, Button } from 'antd';
+import { Table, Card, Row, Col, TreeSelect, Checkbox } from 'antd';
 import {
   columns,
   treeData,
@@ -10,6 +10,7 @@ import {
   statusOptions
 } from '../../constants';
 import AddMore from './AddMore';
+import { newRfqPath, newEoiPath } from '../../../common/constants';
 
 const SHOW_PARENT = TreeSelect.SHOW_PARENT;
 const CheckboxGroup = Checkbox.Group;
@@ -86,11 +87,18 @@ class CompaniesList extends React.Component {
         <Col span={20}>
           <Card bordered={false} title="Companies">
             <div className="table-operations">
-              <Button onClick={this.showModal}>Export to Excel</Button>
-              <Button onClick={this.showModal}>Send EOI</Button>
               <Link
                 to={{
-                  pathname: '/sendrfq',
+                  pathname: newEoiPath,
+                  state: { companies: selectedCompanies }
+                }}
+                className="ant-btn"
+              >
+                Send EOI
+              </Link>
+              <Link
+                to={{
+                  pathname: newRfqPath,
                   state: { companies: selectedCompanies }
                 }}
                 className="ant-btn"
@@ -106,6 +114,7 @@ class CompaniesList extends React.Component {
               dataSource={data}
               pagination={pagination}
               loading={loading}
+              scroll={{ x: 1600 }}
               onChange={(pagination, filters, sorter) =>
                 onChange(pagination, filters, sorter)
               }

@@ -1,13 +1,33 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { Rfq, Eoi, SendRfq } from './containers';
+import { Tenders, Publish } from './containers';
+import {
+  rfqPath,
+  eoiPath,
+  newRfqPath,
+  newEoiPath,
+  editTenderPath
+} from '../common/constants';
 
 export function RfqRoute() {
-  return <Route key="/rfq" exact path="/rfq" component={Rfq} />;
+  return <Route key={rfqPath} exact path={rfqPath} component={Tenders} />;
 }
-export function SendRfqRoute() {
-  return <Route key="/sendrfq" exact path="/sendrfq" component={SendRfq} />;
+export function PublishRfqRoute() {
+  return <Route key={newRfqPath} exact path={newRfqPath} component={Publish} />;
+}
+export function EditTenderRoute() {
+  return (
+    <Route
+      key={editTenderPath}
+      exact
+      path={`${editTenderPath}/:id`}
+      component={Publish}
+    />
+  );
 }
 export function EoiRoute() {
-  return <Route key="/eoi" exact path="/eoi" component={Eoi} />;
+  return <Route key={eoiPath} exact path={eoiPath} component={Tenders} />;
+}
+export function PublishEoiRoute() {
+  return <Route key={newEoiPath} exact path={newEoiPath} component={Publish} />;
 }

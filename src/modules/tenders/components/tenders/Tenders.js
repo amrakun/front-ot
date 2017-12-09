@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Table, Card } from 'antd';
+import { editTenderPath } from '../../../common/constants';
 
 const columns = [
   {
@@ -64,20 +66,21 @@ const columns = [
     key: 'operation',
     fixed: 'right',
     width: 100,
-    render: () => <a href="">More</a>
+    render: record => <Link to={`${editTenderPath}/1`}>Edit</Link>
   }
 ];
 
 const propTypes = {
+  title: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   pagination: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired
 };
 
-function EoiList({ data, pagination, loading, onChange }) {
+function Tenders({ title, data, pagination, loading, onChange }) {
   return (
-    <Card bordered={false} title="Expression of interest (EOI)">
+    <Card bordered={false} title={title}>
       <Table
         columns={columns}
         rowKey={record => record.tender_number}
@@ -92,6 +95,6 @@ function EoiList({ data, pagination, loading, onChange }) {
   );
 }
 
-EoiList.propTypes = propTypes;
+Tenders.propTypes = propTypes;
 
-export default withRouter(EoiList);
+export default withRouter(Tenders);

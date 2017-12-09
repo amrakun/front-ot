@@ -8,7 +8,13 @@ import {
   RegistrationRoute,
   PrequalificationRoute
 } from './modules/companies/routes';
-import { RfqRoute, SendRfqRoute, EoiRoute } from './modules/tenders/routes';
+import {
+  RfqRoute,
+  PublishRfqRoute,
+  EoiRoute,
+  PublishEoiRoute,
+  EditTenderRoute
+} from './modules/tenders/routes';
 
 const { Content, Footer } = Layout;
 
@@ -30,8 +36,10 @@ const Routes = () => (
             {DashboardRoute()}
             {CompaniesRoute()}
             {RfqRoute()}
-            {SendRfqRoute()}
+            {PublishRfqRoute()}
             {EoiRoute()}
+            {PublishEoiRoute()}
+            {EditTenderRoute()}
 
             {/* supplier routes */}
             {RegistrationRoute()}

@@ -1,5 +1,4 @@
-import Eoi from './eoi/Eoi';
-import Rfq from './rfq/Rfq';
-import SendRfq from './rfq/SendRfq';
+import Tenders from './Tenders';
+import Publish from './Publish';
 
-export { Eoi, Rfq, SendRfq };
+export { Publish, Tenders };
