@@ -1,10 +1,10 @@
 import React from 'react';
-import { Eoi, Rfq } from '../../tenders/containers';
+import { Tenders } from '../../tenders/containers';
 
 const Dashboard = () => (
   <div>
-    <Rfq />
-    <Eoi />
+    <Tenders type="rfq" />
+    <Tenders type="eoi" />
   </div>
 );
 

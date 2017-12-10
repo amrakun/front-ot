@@ -1,5 +1,3 @@
-import EoiList from './eoi/Eoi';
-import RfqList from './rfq/Rfq';
-import SendRfq from './rfq/SendRfq';
-
-export { EoiList, RfqList, SendRfq };
+import Tenders from './tenders/Tenders';
+import Publish from './publish/Publish';
+export { Tenders, Publish };

@@ -1,40 +1,47 @@
 import React from 'react';
-import { RfqList } from '../../components';
+import PropTypes from 'prop-types';
+import { Tenders } from '../components';
 
 const mockData = [
   {
     status: 'open',
-    tender_number: 197,
-    tender_name: 'Allen Ward',
-    publish_date: '2017-11-25',
-    close_date: '2017-11-25',
+    number: 197,
+    name: 'Allen Ward',
+    publishDate: '2017-11-25',
+    closeDate: '2017-11-25',
     suppliers: 77,
     submitted: 8,
-    not_interested: 2,
-    not_responded: 1,
-    regret_letter: true
-  },
-  {
-    status: 'closed',
-    tender_number: 945,
-    tender_name: 'Devon McCullough',
-    publish_date: '2017-11-25',
-    close_date: '2017-11-25',
-    suppliers: 59,
-    submitted: 14,
-    not_interested: 8,
-    not_responded: 9,
-    regret_letter: false
+    notInterested: 2,
+    notResponded: 1,
+    regretLetterSent: true
   }
 ];
 
-class Rfq extends React.Component {
-  state = {
-    data: [],
-    pagination: {},
-    loading: false
-  };
-  handleTableChange = (pagination, filters, sorter) => {
+const propTypes = {
+  type: PropTypes.string,
+  location: PropTypes.object
+};
+
+class TendersContainer extends React.Component {
+  constructor(props) {
+    super(props);
+
+    const { type, location } = props;
+
+    this.title = '(RFQ)';
+    if (type === 'eoi' || location.pathname === '/eoi') this.title = '(EOI)';
+
+    this.state = {
+      data: [],
+      pagination: {},
+      loading: false
+    };
+
+    this.handleTableChange = this.handleTableChange.bind(this);
+    this.fetch = this.fetch.bind(this);
+  }
+
+  handleTableChange(pagination, filters, sorter) {
     const pager = { ...this.state.pagination };
     pager.current = pagination.current;
     this.setState({
@@ -47,8 +54,9 @@ class Rfq extends React.Component {
       sortOrder: sorter.order,
       ...filters
     });
-  };
-  fetch = (params = {}) => {
+  }
+  //params = {}
+  fetch() {
     this.setState({ loading: true });
     const pagination = { ...this.state.pagination };
     pagination.total = 200;
@@ -57,17 +65,14 @@ class Rfq extends React.Component {
       data: mockData,
       pagination
     });
-  };
+  }
   componentDidMount() {
     this.fetch();
   }
   render() {
-    // const {
-    //   this.state.data,
-    //   this.state.pagination,
-    // } = this.props;
     return (
-      <RfqList
+      <Tenders
+        title={this.title}
         data={this.state.data}
         pagination={this.state.pagination}
         loading={this.state.loading}
@@ -79,4 +84,6 @@ class Rfq extends React.Component {
   }
 }
 
-export default Rfq;
+TendersContainer.propTypes = propTypes;
+
+export default TendersContainer;
