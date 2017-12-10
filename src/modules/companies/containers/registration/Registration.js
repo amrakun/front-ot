@@ -51,5 +51,8 @@ export default compose(
   }),
   graphql(gql(mutations.managementTeam), {
     name: 'managementTeamEdit'
+  }),
+  graphql(gql(mutations.shareholderInfo), {
+    name: 'shareholderInfoEdit'
   })
 )(RegistrationContainer);

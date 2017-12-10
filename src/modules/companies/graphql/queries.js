@@ -77,6 +77,12 @@ const managementTeamFields = `
   },
 `;
 
+const shareholderItemFields = `
+  name,
+  jobTitle,
+  percentage,
+`;
+
 export const companyDetail = `
   query companyDetail {
     companyDetail(_id: "5a1f9e2496123f0b089c1a2d") {
@@ -88,6 +94,24 @@ export const companyDetail = `
       }
       managementTeam {
         ${managementTeamFields}
+      }
+      shareholderInfo {
+        attachments,
+        shareholder1 {
+          ${shareholderItemFields}
+        }
+        shareholder2 {
+          ${shareholderItemFields}
+        }
+        shareholder3 {
+          ${shareholderItemFields}
+        }
+        shareholder4 {
+          ${shareholderItemFields}
+        }
+        shareholder5 {
+          ${shareholderItemFields}
+        }
       }
     }
   }
