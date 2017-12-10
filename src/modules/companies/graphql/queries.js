@@ -129,7 +129,45 @@ const companies = `
   }
 `;
 
+export const companyPrequalificationDetail = `
+  query companyDetail {
+    companyDetail(_id: "5a1f9e2496123f0b089c1a2d") {
+      financialInfo {
+        canProvideAccountsInfo
+        currency
+        isUpToDateSSP
+        isUpToDateCTP
+        annualTurnover {
+          year
+          amount
+        }
+        preTaxProfit {
+          year
+          amount
+        }
+        totalAssets {
+          year
+          amount
+        }
+        totalCurrentAssets {
+          year
+          amount
+        }
+        totalShareholderEquity {
+          year
+          amount
+        }
+        recordsInfo {
+          date
+          path
+        }
+      }
+    }
+  }
+`;
+
 export default {
   companyDetail,
+  companyPrequalificationDetail,
   companies
 };

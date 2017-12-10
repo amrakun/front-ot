@@ -101,8 +101,7 @@ export default class BaseForm extends React.Component {
 
     const { data } = this.props;
 
-    definations.initialValue =
-      data && typeof data[name] !== 'undefined' ? data[name] : '';
+    definations.initialValue = data[name];
 
     return <Field {...definations} />;
   }

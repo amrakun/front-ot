@@ -38,10 +38,19 @@ const productsInfo = `
   }
 `;
 
+const financialInfo = `
+  mutation companiesEditFinancialInfo($financialInfo: CompanyFinancialInfoInput) {
+    companiesEditFinancialInfo(_id: "5a1f9e2496123f0b089c1a2d", financialInfo: $financialInfo) {
+      _id
+    }
+  }
+`;
+
 export default {
   basicInfo,
   contactInfo,
   managementTeam,
   shareholderInfo,
-  productsInfo
+  productsInfo,
+  financialInfo
 };

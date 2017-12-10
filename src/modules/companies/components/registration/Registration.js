@@ -7,65 +7,51 @@ import ShareholderForm from './forms/Shareholder';
 import CertificateForm from './forms/Certificate';
 import ProductsForm from './forms/Products';
 import GroupForm from './forms/Group';
+import Panes from '../Panes';
 import PropTypes from 'prop-types';
-import { Tabs, Icon } from 'antd';
+import { Tabs } from 'antd';
 
 const propTypes = {
   company: PropTypes.object,
   save: PropTypes.func.isRequired
 };
 
-function RegistrationForms({ save, company }) {
-  const isEmpty = data => {
-    try {
-      return Object.keys(data).length === 0 && data.constructor === Object;
-    } catch (e) {
-      return false;
-    }
-  };
-
-  const renderPane = (key, title, name, Component) => {
-    const saveAction = doc => {
-      save(name, doc);
-    };
-
+class RegistrationForms extends Panes {
+  render() {
     return (
-      <Tabs.TabPane
-        tab={
-          <span>
-            {title} {isEmpty(company[name]) ? '' : <Icon type="check" />}
-          </span>
-        }
-        key={key}
-      >
-        <Component data={company[name] || {}} save={saveAction} />
-      </Tabs.TabPane>
+      <div className="card-container">
+        <Tabs type="card">
+          {this.renderPane('1', 'Company info', 'basicInfo', CompanyInfoForm)}
+          {this.renderPane('2', 'Contact details', 'contactInfo', ContactForm)}
+          {this.renderPane(
+            '3',
+            'Management Team',
+            'managementTeam',
+            ManagementForm
+          )}
+          {this.renderPane(
+            '4',
+            'Company shareholder information',
+            'shareholderInfo',
+            ShareholderForm
+          )}
+          {this.renderPane('5', 'Group information', 'groupInfo', GroupForm)}
+          {this.renderPane(
+            '6',
+            'Products & services',
+            'productsInfo',
+            ProductsForm
+          )}
+          {this.renderPane(
+            '7',
+            'Capacity building certificate',
+            'certificateInfo',
+            CertificateForm
+          )}
+        </Tabs>
+      </div>
     );
-  };
-
-  return (
-    <div className="card-container">
-      <Tabs type="card">
-        {renderPane('1', 'Company info', 'basicInfo', CompanyInfoForm)}
-        {renderPane('2', 'Contact details', 'contactInfo', ContactForm)}
-        {renderPane('3', 'Management Team', 'managementTeam', ManagementForm)}
-        {renderPane(
-          '4',
-          'Company shareholder information',
-          'shareholderInfo',
-          ShareholderForm
-        )}
-        {renderPane('5', 'Group information', 'groupInfo', GroupForm)}
-        {renderPane('6', 'Products & services', 'productsInfo', ProductsForm)}
-        {renderPane(
-          '7',
-          'Capacity building certificate',
-          'certificateInfo',
-          CertificateForm
-        )}
-      </Tabs>
-    </div>
-  );
+  }
 }
 
 RegistrationForms.propTypes = propTypes;

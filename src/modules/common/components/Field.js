@@ -37,6 +37,30 @@ export default class Field extends React.Component {
     };
   }
 
+  /*
+   * For example: Select is accepting only string value, So we are
+   * converting boolean, number to string
+   */
+  cleanInitialValue() {
+    const { control, initialValue } = this.props;
+
+    const controlType = control.type.name;
+
+    if (controlType !== 'Select') {
+      return initialValue;
+    }
+
+    if (control.props.mode === 'multiple') {
+      return initialValue || [];
+    }
+
+    if (typeof initialValue !== 'undefined' && initialValue !== null) {
+      return initialValue.toString();
+    }
+
+    return '';
+  }
+
   render() {
     const {
       label,
@@ -51,20 +75,7 @@ export default class Field extends React.Component {
     } = this.props;
 
     const { form } = this.context;
-
-    let { initialValue } = this.props;
-
-    const controlType = control.type.name;
-
     const { getFieldDecorator } = form;
-
-    if (controlType === 'Select') {
-      if (control.props.mode === 'multiple') {
-        initialValue = initialValue || [];
-      } else {
-        initialValue = initialValue.toString();
-      }
-    }
 
     let rules = [];
 
@@ -91,7 +102,10 @@ export default class Field extends React.Component {
         style={isVisible ? {} : { display: 'none' }}
         hasFeedback={hasFeedback}
       >
-        {getFieldDecorator(name, { initialValue, rules })(control)}
+        {getFieldDecorator(name, {
+          initialValue: this.cleanInitialValue(),
+          rules
+        })(control)}
       </Form.Item>
     );
   }
