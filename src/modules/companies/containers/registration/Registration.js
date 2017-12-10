@@ -48,5 +48,8 @@ export default compose(
   }),
   graphql(gql(mutations.contactInfo), {
     name: 'contactInfoEdit'
+  }),
+  graphql(gql(mutations.managementTeam), {
+    name: 'managementTeamEdit'
   })
 )(RegistrationContainer);

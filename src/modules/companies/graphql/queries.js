@@ -40,14 +40,54 @@ const contactInfoFields = `
   email,
 `;
 
+const managementTeamItemFields = `
+  name,
+  jobTitle,
+  phone,
+  email,
+`;
+
+const managementTeamFields = `
+  managingDirector {
+    ${managementTeamItemFields}
+  },
+
+  executiveOfficer {
+    ${managementTeamItemFields}
+  },
+
+  salesDirector {
+    ${managementTeamItemFields}
+  },
+
+  financialDirector {
+    ${managementTeamItemFields}
+  },
+
+  otherMember1 {
+    ${managementTeamItemFields}
+  },
+
+  otherMember2 {
+    ${managementTeamItemFields}
+  },
+
+  otherMember3 {
+    ${managementTeamItemFields}
+  },
+`;
+
 export const companyDetail = `
   query companyDetail {
-    companyDetail(_id: "5a1ff5eae3fc5b3adf2ac7e8") {
+    companyDetail(_id: "5a1f9e2496123f0b089c1a2d") {
       basicInfo {
         ${basicInfoFields}
       }
       contactInfo {
         ${contactInfoFields}
+      }
+      managementTeam {
+        ${managementTeamFields}
       }
     }
   }

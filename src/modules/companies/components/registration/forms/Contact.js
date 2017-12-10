@@ -4,7 +4,7 @@ import { Form, Input, Select } from 'antd';
 import { countryData } from '../constants';
 import BaseForm from '../../../../common/components/BaseForm';
 
-class RegistrationForm extends BaseForm {
+class ContactInfo extends BaseForm {
   render() {
     const countryOptions = this.renderOptions(countryData);
 
@@ -93,6 +93,6 @@ class RegistrationForm extends BaseForm {
   }
 }
 
-const ContactForm = Form.create()(RegistrationForm);
+const ContactForm = Form.create()(ContactInfo);
 
 export default withRouter(ContactForm);
