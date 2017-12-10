@@ -124,6 +124,6 @@ BaseForm.childContextTypes = {
 
 BaseForm.propTypes = {
   form: PropTypes.object,
-  data: PropTypes.object,
+  data: PropTypes.any,
   save: PropTypes.func
 };

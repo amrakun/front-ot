@@ -1,76 +1,28 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Select, Button } from 'antd';
+import { Form, Select } from 'antd';
+import { Field, BaseForm } from 'modules/common/components';
+import { productsData } from '../constants';
 
-const FormItem = Form.Item;
-const Option = Select.Option;
-const children = [];
-
-// TODO: mock data below
-for (let i = 10; i < 36; i++) {
-  children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
-}
-
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 5 }
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 14 }
-  }
-};
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0
-    },
-    sm: {
-      span: 14,
-      offset: 8
-    },
-    lg: {
-      span: 14,
-      offset: 5
-    }
-  }
-};
-
-class RegistrationForm extends React.Component {
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-      }
-    });
-  };
-
-  componentDidMount() {
-    this.props.form.setFieldsValue(this.props.data);
+class RegistrationForm extends BaseForm {
+  save() {
+    return this.props.save(this.getFieldValue('productsInfo'));
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form;
-
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <FormItem {...formItemLayout} label="Product code" hasFeedback>
-          {getFieldDecorator('products', {
-            rules: [{ required: true, message: 'Please select an option!' }]
-          })(
+      <Form>
+        <Field
+          label="Product code"
+          initialValue={this.props.data}
+          name="productsInfo"
+          control={
             <Select mode="multiple" placeholder="Please select products">
-              {children}
+              {this.renderOptions(productsData)}
             </Select>
-          )}
-        </FormItem>
-        <FormItem {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            Save & continue
-          </Button>
-        </FormItem>
+          }
+        />
+        {this.renderSubmit()}
       </Form>
     );
   }

@@ -113,6 +113,7 @@ export const companyDetail = `
           ${shareholderItemFields}
         }
       }
+      productsInfo
     }
   }
 `;

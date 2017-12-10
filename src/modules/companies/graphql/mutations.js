@@ -30,9 +30,18 @@ const shareholderInfo = `
   }
 `;
 
+const productsInfo = `
+  mutation companiesEditProductsInfo($productsInfo: [String]) {
+    companiesEditProductsInfo(_id: "5a1f9e2496123f0b089c1a2d", productsInfo: $productsInfo) {
+      _id
+    }
+  }
+`;
+
 export default {
   basicInfo,
   contactInfo,
   managementTeam,
-  shareholderInfo
+  shareholderInfo,
+  productsInfo
 };

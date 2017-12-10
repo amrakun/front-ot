@@ -59,7 +59,11 @@ export default class Field extends React.Component {
     const { getFieldDecorator } = form;
 
     if (controlType === 'Select') {
-      initialValue = initialValue.toString();
+      if (control.props.mode === 'multiple') {
+        initialValue = initialValue || [];
+      } else {
+        initialValue = initialValue.toString();
+      }
     }
 
     let rules = [];
