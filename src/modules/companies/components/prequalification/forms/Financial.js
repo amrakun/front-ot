@@ -102,6 +102,7 @@ class PrequalificationForm extends BaseForm {
             name={`${prefix}${index}Year`}
             dataType="number"
             initialValue={year}
+            hasFeedback={false}
             control={
               <Select placeholder="Select an year">
                 {this.renderOptions(yearData)}
@@ -114,6 +115,7 @@ class PrequalificationForm extends BaseForm {
             name={`${prefix}${index}Amount`}
             initialValue={amount}
             dataType="number"
+            hasFeedback={false}
             control={<InputNumber htmlType="number" />}
           />
         </Col>
@@ -126,7 +128,7 @@ class PrequalificationForm extends BaseForm {
       <Form.Item
         className="multiple-wrapper"
         label={label}
-        {...this.formItemLayout}
+        {...this.formItemLayout()}
       >
         {this.renderYearAmount(prefix, 0)}
         {this.renderYearAmount(prefix, 1)}
@@ -153,6 +155,8 @@ class PrequalificationForm extends BaseForm {
           <Field
             name={`recordsInfo${index}Date`}
             initialValue={initialDate}
+            hasFeedback={false}
+            optional={true}
             control={<DatePicker format={dateFormat} placeholder="Start" />}
           />
         </Col>
@@ -160,6 +164,8 @@ class PrequalificationForm extends BaseForm {
           <Field
             name={`recordsInfo${index}Path`}
             initialValue={initialPath}
+            hasFeedback={false}
+            optional={true}
             control={
               <Upload action="/upload.do" listType="picture">
                 <Button>
@@ -213,7 +219,7 @@ class PrequalificationForm extends BaseForm {
           className="multiple-wrapper"
           label="Please provide financial records for your last 3 years"
           extra="The most recent years worth of accounts will always appear on top."
-          {...this.formItemLayout}
+          {...this.formItemLayout()}
         >
           {this.renderDatePath(0)}
           {this.renderDatePath(1)}
