@@ -94,14 +94,14 @@ export default class BaseForm extends React.Component {
   }
 
   renderField(definations) {
-    const { name, dataType = 'string' } = definations;
+    const { initialValue, name, dataType = 'string' } = definations;
 
     // collect field definations to use in save
     this.fieldDefs.push({ name, dataType });
 
     const { data } = this.props;
 
-    definations.initialValue = data[name];
+    definations.initialValue = initialValue || data[name];
 
     return <Field {...definations} />;
   }

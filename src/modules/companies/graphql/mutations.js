@@ -15,8 +15,8 @@ const contactInfo = `
 `;
 
 const managementTeam = `
-  mutation companiesEditManagementTeam($managementTeam: CompanyManagementTeamInput) {
-    companiesEditManagementTeam(_id: "5a1f9e2496123f0b089c1a2d", managementTeam: $managementTeam) {
+  mutation companiesEditManagementTeamInfo($managementTeamInfo: CompanyManagementTeamInfoInput) {
+    companiesEditManagementTeamInfo(_id: "5a1f9e2496123f0b089c1a2d", managementTeamInfo: $managementTeamInfo) {
       _id
     }
   }

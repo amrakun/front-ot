@@ -50,7 +50,7 @@ export default compose(
     name: 'contactInfoEdit'
   }),
   graphql(gql(mutations.managementTeam), {
-    name: 'managementTeamEdit'
+    name: 'managementTeamInfoEdit'
   }),
   graphql(gql(mutations.shareholderInfo), {
     name: 'shareholderInfoEdit'

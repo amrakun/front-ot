@@ -26,7 +26,7 @@ class RegistrationForms extends Panes {
           {this.renderPane(
             '3',
             'Management Team',
-            'managementTeam',
+            'managementTeamInfo',
             ManagementForm
           )}
           {this.renderPane(

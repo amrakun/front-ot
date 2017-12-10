@@ -15,17 +15,20 @@ class ShareHolders extends BaseForm {
     e.preventDefault();
 
     const doc = {
-      attachments: []
+      attachments: [],
+      shareholders: []
     };
 
     const items = [1, 2, 3, 4, 5];
 
     items.forEach(i => {
-      doc[`shareholder${i}`] = {
-        name: this.getFieldValue(`name${i}`),
-        jobTitle: this.getFieldValue(`jobTitle${i}`),
-        percentage: this.getFieldValue(`percentage${i}`)
-      };
+      const name = this.getFieldValue(`name${i}`);
+      const jobTitle = this.getFieldValue(`jobTitle${i}`);
+      const percentage = this.getFieldValue(`percentage${i}`);
+
+      if (name && jobTitle && percentage) {
+        doc.shareholders.push({ name, jobTitle, percentage });
+      }
     });
 
     this.props.save(doc);
@@ -33,7 +36,8 @@ class ShareHolders extends BaseForm {
 
   renderShareholder(k, optional) {
     const shareholderInfo = this.props.data || {};
-    const data = shareholderInfo[`shareholder${k}`] || {};
+    const shareholders = shareholderInfo.shareholders || [];
+    const shareholder = shareholders[k - 1] || {};
 
     return (
       <div>
@@ -43,7 +47,7 @@ class ShareHolders extends BaseForm {
           label="Name"
           name={`name${k}`}
           control={<Input />}
-          initialValue={data.name}
+          initialValue={shareholder.name}
           optional={optional}
         />
 
@@ -51,14 +55,14 @@ class ShareHolders extends BaseForm {
           label="Job title"
           name={`jobTitle${k}`}
           control={<Input />}
-          initialValue={data.jobTitle}
+          initialValue={shareholder.jobTitle}
           optional={optional}
         />
 
         <Field
           label="Share percentage %"
           name={`percentage${k}`}
-          initialValue={data.percentage}
+          initialValue={shareholder.percentage}
           control={<InputNumber htmlType="number" />}
           optional={optional}
         />

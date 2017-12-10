@@ -92,24 +92,12 @@ export const companyDetail = `
       contactInfo {
         ${contactInfoFields}
       }
-      managementTeam {
+      managementTeamInfo {
         ${managementTeamFields}
       }
       shareholderInfo {
         attachments,
-        shareholder1 {
-          ${shareholderItemFields}
-        }
-        shareholder2 {
-          ${shareholderItemFields}
-        }
-        shareholder3 {
-          ${shareholderItemFields}
-        }
-        shareholder4 {
-          ${shareholderItemFields}
-        }
-        shareholder5 {
+        shareholders {
           ${shareholderItemFields}
         }
       }
