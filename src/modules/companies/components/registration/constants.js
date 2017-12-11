@@ -99,3 +99,7 @@ export const labels = {
 };
 
 export const productsData = [];
+
+for (let i = 10; i < 36; i++) {
+  productsData.push({ value: i.toString(36) + i, text: i.toString(36) + i });
+}

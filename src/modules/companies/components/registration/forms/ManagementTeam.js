@@ -1,100 +1,78 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Input, Row, Col, Button } from 'antd';
+import { Form, Input, Row, Col } from 'antd';
+import Field from 'modules/common/components/Field';
+import BaseForm from 'modules/common/components/BaseForm';
 
-const FormItem = Form.Item;
+class ManagementTeam extends BaseForm {
+  constructor(props) {
+    super(props);
 
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 10 },
-    lg: { span: 8 }
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 14 },
-    lg: { span: 14 }
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-};
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0
-    },
-    sm: {
-      span: 14,
-      offset: 5
-    },
-    lg: {
-      span: 16,
-      offset: 4
-    }
-  }
-};
 
-class RegistrationForm extends React.Component {
-  handleSubmit = e => {
+  handleSubmit(e) {
     e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-      }
-    });
-  };
 
-  componentDidMount() {
-    this.props.form.setFieldsValue(this.props.data);
+    const groups = [
+      'managingDirector',
+      'executiveOfficer',
+      'salesDirector',
+      'financialDirector',
+      'otherMember1',
+      'otherMember2',
+      'otherMember3'
+    ];
+
+    const doc = {};
+
+    const { getFieldValue } = this.props.form;
+
+    groups.forEach(group => {
+      doc[group] = {};
+
+      doc[group].name = getFieldValue(`${group}Name`);
+      doc[group].jobTitle = getFieldValue(`${group}JobTitle`);
+      doc[group].phone = getFieldValue(`${group}Phone`);
+      doc[group].email = getFieldValue(`${group}Email`);
+    });
+
+    return this.props.save(doc);
   }
 
-  renderMember(name, isRequired) {
-    const { getFieldDecorator } = this.props.form;
+  renderItem(prefix) {
+    const data = this.props.data[prefix] || {};
+
     return (
       <div>
-        <FormItem {...formItemLayout} label="Name" hasFeedback>
-          {getFieldDecorator(`${name}Name`, {
-            rules: [
-              {
-                required: isRequired,
-                message: 'Please enter your name!'
-              }
-            ]
-          })(<Input placeholder="Title. First name + Last name" />)}
-        </FormItem>
-        <FormItem {...formItemLayout} label="Job title" hasFeedback>
-          {getFieldDecorator(`${name}Job`, {
-            rules: [
-              {
-                required: isRequired,
-                message: 'Please enter your job title!'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem {...formItemLayout} label="Phone" hasFeedback>
-          {getFieldDecorator(`${name}Phone`, {
-            rules: [
-              {
-                required: isRequired,
-                message: 'Please enter your phone number!'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem {...formItemLayout} label="E-mail" hasFeedback>
-          {getFieldDecorator(`${name}Email`, {
-            rules: [
-              {
-                type: 'email',
-                message: 'The input is not valid E-mail!'
-              },
-              {
-                required: isRequired,
-                message: 'Please input your company e-mail!'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
+        <Field
+          label="Name"
+          name={`${prefix}Name`}
+          initialValue={data.name}
+          control={<Input placeholder="Title. First name + Last name" />}
+        />
+
+        <Field
+          label="Job title"
+          name={`${prefix}JobTitle`}
+          initialValue={data.jobTitle}
+          control={<Input />}
+        />
+
+        <Field
+          label="Phone"
+          name={`${prefix}Phone`}
+          initialValue={data.phone}
+          control={<Input />}
+        />
+
+        <Field
+          label="E-mail"
+          name={`${prefix}Email`}
+          validation="email"
+          initialValue={data.email}
+          control={<Input />}
+        />
       </div>
     );
   }
@@ -105,33 +83,30 @@ class RegistrationForm extends React.Component {
         <Row>
           <Col xs={24} sm={12}>
             <label>15. Managing director</label>
-            {this.renderMember('managing', true)}
+            {this.renderItem('managingDirector')}
             <label>16. Executive officer</label>
-            {this.renderMember('executive', true)}
+            {this.renderItem('executiveOfficer')}
             <label>17. Sales director</label>
-            {this.renderMember('sales', true)}
+            {this.renderItem('salesDirector')}
             <label>18. Financial director</label>
-            {this.renderMember('financial', true)}
+            {this.renderItem('financialDirector')}
           </Col>
           <Col xs={24} sm={12}>
             <label>19. Other management team member</label>
-            {this.renderMember('member1', true)}
+            {this.renderItem('otherMember1')}
             <label>Other management team member 2</label>
-            {this.renderMember('member2', false)}
+            {this.renderItem('otherMember2')}
             <label>Other management team member 3</label>
-            {this.renderMember('member3', false)}
+            {this.renderItem('otherMember3')}
           </Col>
         </Row>
-        <FormItem {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            Save & continue
-          </Button>
-        </FormItem>
+
+        {this.renderSubmit()}
       </Form>
     );
   }
 }
 
-const ManagementForm = Form.create()(RegistrationForm);
+const ManagementTeamForm = Form.create()(ManagementTeam);
 
-export default withRouter(ManagementForm);
+export default withRouter(ManagementTeamForm);

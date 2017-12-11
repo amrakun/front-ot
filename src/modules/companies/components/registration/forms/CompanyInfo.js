@@ -191,6 +191,7 @@ class CompanyInfo extends BaseForm {
             label: '7. Certificate of registration',
             description: descriptions.certificateOfRegistration,
             name: 'certificateOfRegistration',
+            initialValue: '/path',
             control: (
               <Upload
                 name="certificateOfRegistration"

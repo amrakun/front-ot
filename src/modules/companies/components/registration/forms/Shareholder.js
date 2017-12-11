@@ -1,142 +1,107 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Form, Input, Icon, InputNumber, Upload, Button } from 'antd';
+import BaseForm from 'modules/common/components/BaseForm';
+import Field from 'modules/common/components/Field';
 
-const FormItem = Form.Item;
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 8 },
-    lg: { span: 8 }
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 14 },
-    lg: { span: 8 }
+class ShareHolders extends BaseForm {
+  constructor(props) {
+    super(props);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-};
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: { span: 24, offset: 0 },
-    sm: { span: 14, offset: 8 },
-    lg: { span: 8, offset: 8 }
-  }
-};
 
-class RegistrationForm extends React.Component {
-  normFile = e => {
-    console.log('Upload event:', e);
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e && e.fileList;
-  };
-
-  handleSubmit = e => {
+  handleSubmit(e) {
     e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
+
+    const doc = {
+      attachments: [],
+      shareholders: []
+    };
+
+    const items = [1, 2, 3, 4, 5];
+
+    items.forEach(i => {
+      const name = this.getFieldValue(`name${i}`);
+      const jobTitle = this.getFieldValue(`jobTitle${i}`);
+      const percentage = this.getFieldValue(`percentage${i}`);
+
+      if (name && jobTitle && percentage) {
+        doc.shareholders.push({ name, jobTitle, percentage });
       }
     });
-  };
 
-  componentDidMount() {
-    this.props.form.setFieldsValue(this.props.data);
+    this.props.save(doc);
   }
 
-  renderShareholder(k, isRequired) {
-    const { getFieldDecorator } = this.props.form;
+  renderShareholder(k, optional) {
+    const shareholderInfo = this.props.data || {};
+    const shareholders = shareholderInfo.shareholders || [];
+    const shareholder = shareholders[k - 1] || {};
+
     return (
       <div>
-        <FormItem
-          {...formItemLayout}
-          label={<strong>Shareholder {k}</strong>}
-          colon={false}
+        <Form.Item label={<strong>Shareholder {k}</strong>} colon={false} />
+
+        <Field
+          label="Name"
+          name={`name${k}`}
+          control={<Input />}
+          initialValue={shareholder.name}
+          optional={optional}
         />
-        <FormItem {...formItemLayout} label="Name" hasFeedback>
-          {getFieldDecorator(`name${k}`, {
-            validateTrigger: ['onChange', 'onBlur'],
-            rules: [
-              {
-                required: isRequired,
-                whitespace: true,
-                message: 'Please enter a name.'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem {...formItemLayout} label="Job title" hasFeedback>
-          {getFieldDecorator(`title${k}`, {
-            validateTrigger: ['onChange', 'onBlur'],
-            rules: [
-              {
-                required: isRequired,
-                whitespace: true,
-                message: 'Please enter a title.'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem {...formItemLayout} label="Share percentage %" hasFeedback>
-          {getFieldDecorator(`share${k}`, {
-            validateTrigger: ['onChange', 'onBlur'],
-            rules: [
-              {
-                required: isRequired,
-                message: 'Please enter share'
-              }
-            ]
-          })(<InputNumber htmlType="number" />)}
-        </FormItem>
+
+        <Field
+          label="Job title"
+          name={`jobTitle${k}`}
+          control={<Input />}
+          initialValue={shareholder.jobTitle}
+          optional={optional}
+        />
+
+        <Field
+          label="Share percentage %"
+          name={`percentage${k}`}
+          initialValue={shareholder.percentage}
+          control={<InputNumber htmlType="number" />}
+          optional={optional}
+        />
       </div>
     );
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form;
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <FormItem
-          {...formItemLayout}
+      <Form>
+        <Field
           label="20. Please provide key shareholders information"
-          extra="You may upload &quot;jpg,jpeg,png,rtf,pdf&quot; files, or simple Adobe
-               PDF files. Files that have the ability to contain macros or other
-               types of active code are not acceptable. Maximum file size is
-               30mb."
-        >
-          {getFieldDecorator('upload', {
-            valuePropName: 'fileList',
-            getValueFromEvent: this.normFile,
-            rules: [
-              {
-                required: true,
-                message: 'Please upload your key shareholders information!'
-              }
-            ]
-          })(
+          name="attachments"
+          description="You may upload &quot;jpg,jpeg,png,rtf,pdf&quot; files,
+            or simple Adobe PDF files. Files that have the ability to contain
+            macros or other types of active code are not acceptable.
+            Maximum file size is 30mb."
+          optional={true}
+          control={
             <Upload name="logo" action="/upload.do" listType="picture">
               <Button>
                 <Icon type="upload" /> Click to upload
               </Button>
             </Upload>
-          )}
-        </FormItem>
-        {this.renderShareholder('1', true)}
-        {this.renderShareholder('2', false)}
-        {this.renderShareholder('3', false)}
-        {this.renderShareholder('4', false)}
-        {this.renderShareholder('5', false)}
-        <FormItem {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            Save & continue
-          </Button>
-        </FormItem>
+          }
+        />
+
+        {this.renderShareholder('1', false)}
+        {this.renderShareholder('2', true)}
+        {this.renderShareholder('3', true)}
+        {this.renderShareholder('4', true)}
+        {this.renderShareholder('5', true)}
+
+        {this.renderSubmit('Save', this.handleSubmit)}
       </Form>
     );
   }
 }
 
-const ShareholderForm = Form.create()(RegistrationForm);
+const ShareHoldersForm = Form.create()(ShareHolders);
 
-export default withRouter(ShareholderForm);
+export default withRouter(ShareHoldersForm);

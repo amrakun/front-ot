@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router';
 import {
   Form,
   Select,
@@ -8,318 +7,241 @@ import {
   Col,
   DatePicker,
   Input,
+  InputNumber,
   Upload,
   Icon
 } from 'antd';
-import { yearData, booleanData, currencyData } from '../constants';
-import { dateFormat } from '../../../../common/constants';
 import moment from 'moment';
+import { yearData, booleanData, currencyData } from '../constants';
+import { BaseForm, Field } from 'modules/common/components';
+import { dateFormat } from 'modules/common/constants';
 
-const FormItem = Form.Item;
-const Option = Select.Option;
-const { TextArea } = Input;
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 8 },
-    lg: { span: 8 }
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 14 },
-    lg: { span: 8 }
+class PrequalificationForm extends BaseForm {
+  constructor(props) {
+    super(props);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-};
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0
-    },
-    sm: {
-      span: 14,
-      offset: 8
-    },
-    lg: {
-      span: 14,
-      offset: 8
+
+  collectYearAmountValue(prefix, values) {
+    const year = this.getFieldValue(`${prefix}Year`);
+    const amount = this.getFieldValue(`${prefix}Amount`);
+
+    if (year && amount) {
+      values.push({ year, amount });
     }
   }
-};
-const yearOptions = yearData.map((el, i) => <Option key={i}>{el}</Option>);
 
-class PrequalificationForm extends React.Component {
-  state = {
-    canProvide: false,
-    initialRender: true
-  };
+  collectYearAmountValues(prefix) {
+    const values = [];
 
-  handleSubmit = e => {
+    this.collectYearAmountValue(`${prefix}0`, values);
+    this.collectYearAmountValue(`${prefix}1`, values);
+    this.collectYearAmountValue(`${prefix}2`, values);
+
+    return values;
+  }
+
+  collectRecordsInfoValue(index, values) {
+    const date = this.getFieldValue(`recordsInfo${index}Date`);
+    const path = this.getFieldValue(`recordsInfo${index}Path`) || '/path';
+
+    if (date && path) {
+      values.push({ date, path });
+    }
+  }
+
+  collectRecordsInfoValues() {
+    const values = [];
+
+    this.collectRecordsInfoValue(0, values);
+    this.collectRecordsInfoValue(1, values);
+    this.collectRecordsInfoValue(2, values);
+
+    return values;
+  }
+
+  handleSubmit(e) {
     e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-      }
+
+    this.props.save({
+      canProvideAccountsInfo: this.getFieldValue(
+        'canProvideAccountsInfo',
+        'boolean'
+      ),
+      currency: this.getFieldValue('currency'),
+      annualTurnover: this.collectYearAmountValues('annualTurnover'),
+      preTaxProfit: this.collectYearAmountValues('preTaxProfit'),
+      totalAssets: this.collectYearAmountValues('totalAssets'),
+      totalCurrentAssets: this.collectYearAmountValues('totalCurrentAssets'),
+      totalShareholderEquity: this.collectYearAmountValues(
+        'totalShareholderEquity'
+      ),
+      recordsInfo: this.collectRecordsInfoValues(),
+      isUpToDateSSP: this.getFieldValue('isUpToDateSSP', 'boolean'),
+      isUpToDateCTP: this.getFieldValue('isUpToDateCTP', 'boolean')
     });
-  };
+  }
 
-  normFile = e => {
-    console.log('Upload event:', e);
-    if (Array.isArray(e)) {
-      return e;
+  renderYearAmount(prefix, index) {
+    const data = this.props.data || {};
+    const yearAmountArray = data[prefix] || [];
+
+    let year = '';
+    let amount = 0;
+
+    if (yearAmountArray[index]) {
+      year = yearAmountArray[index].year;
+      amount = yearAmountArray[index].amount;
     }
-    return e && e.fileList;
-  };
-
-  handleProvideSelect(value) {
-    let newState;
-    value === '0'
-      ? (newState = { canProvide: true, initialRender: false })
-      : (newState = { canProvide: false, initialRender: false });
-    this.setState(newState);
-  }
-
-  componentDidMount() {
-    const data = this.props.data;
-    this.handleProvideSelect(data.canProvide);
-    if (data.recordDate1) data.recordDate1 = moment(data.recordDate1);
-    if (data.recordDate1) data.recordDate2 = moment(data.recordDate2);
-    if (data.recordDate1) data.recordDate3 = moment(data.recordDate3);
-    this.props.form.setFieldsValue(data);
-  }
-
-  renderItem(label, id) {
-    const { getFieldDecorator } = this.props.form;
-    const { canProvide } = this.state;
-
-    return (
-      <FormItem
-        className="multiple-wrapper"
-        label={label}
-        extra={
-          id === 'turnover'
-            ? 'Turnover may be used by buyers as a search criteria. Currency conversions based on exchange rates on the day of the search will be applied to your answer for buyers searching in a different currency'
-            : ''
-        }
-        {...formItemLayout}
-      >
-        <Row gutter={16}>
-          <Col span={12}>
-            <FormItem>
-              {getFieldDecorator(`${id}Year1`, {
-                rules: [
-                  { required: canProvide, message: 'Please select an year!' }
-                ]
-              })(<Select placeholder="Select an year">{yearOptions}</Select>)}
-            </FormItem>
-          </Col>
-          <Col span={12}>
-            <FormItem>
-              {getFieldDecorator(`${id}Data1`, {
-                rules: [
-                  { required: canProvide, message: 'Please enter an input!' }
-                ]
-              })(<Input />)}
-            </FormItem>
-          </Col>
-        </Row>
-        <Row gutter={16}>
-          <Col span={12}>
-            <FormItem>
-              {getFieldDecorator(`${id}Year2`, {
-                rules: [{ required: false, message: 'Please select an year!' }]
-              })(<Select placeholder="Select an year">{yearOptions}</Select>)}
-            </FormItem>
-          </Col>
-          <Col span={12}>
-            <FormItem>
-              {getFieldDecorator(`${id}Data2`, {
-                rules: [{ required: false, message: 'Please enter an input!' }]
-              })(<Input />)}
-            </FormItem>
-          </Col>
-        </Row>
-        <Row gutter={16}>
-          <Col span={12}>
-            <FormItem>
-              {getFieldDecorator(`${id}Year3`, {
-                rules: [{ required: false, message: 'Please select an year!' }]
-              })(<Select placeholder="Select an year">{yearOptions}</Select>)}
-            </FormItem>
-          </Col>
-          <Col span={12}>
-            <FormItem>
-              {getFieldDecorator(`${id}Data3`, {
-                rules: [{ required: false, message: 'Please enter an input!' }]
-              })(<Input />)}
-            </FormItem>
-          </Col>
-        </Row>
-      </FormItem>
-    );
-  }
-
-  renderRecord(i) {
-    const { getFieldDecorator } = this.props.form;
 
     return (
       <Row gutter={16}>
         <Col span={12}>
-          <FormItem>
-            {getFieldDecorator(`recordDate${i}`, {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please select date'
-                }
-              ]
-            })(<DatePicker format={dateFormat} placeholder="Start" />)}
-          </FormItem>
+          <Field
+            name={`${prefix}${index}Year`}
+            dataType="number"
+            initialValue={year}
+            hasFeedback={false}
+            control={
+              <Select placeholder="Select an year">
+                {this.renderOptions(yearData)}
+              </Select>
+            }
+          />
         </Col>
         <Col span={12}>
-          <FormItem>
-            {getFieldDecorator(`recordUpload${i}`, {
-              valuePropName: 'fileList',
-              getValueFromEvent: this.normFile,
-              rules: [
-                {
-                  required: false,
-                  message: 'Please upload your file'
-                }
-              ]
-            })(
-              <Upload
-                name={`recordUpload${i}`}
-                action="/upload.do"
-                listType="picture"
-              >
+          <Field
+            name={`${prefix}${index}Amount`}
+            initialValue={amount}
+            dataType="number"
+            hasFeedback={false}
+            control={<InputNumber htmlType="number" />}
+          />
+        </Col>
+      </Row>
+    );
+  }
+
+  renderYearAmountGroup(label, prefix) {
+    return (
+      <Form.Item
+        className="multiple-wrapper"
+        label={label}
+        {...this.formItemLayout()}
+      >
+        {this.renderYearAmount(prefix, 0)}
+        {this.renderYearAmount(prefix, 1)}
+        {this.renderYearAmount(prefix, 2)}
+      </Form.Item>
+    );
+  }
+
+  renderDatePath(index) {
+    const data = this.props.data || {};
+    const recordsInfo = data.recordsInfo || [];
+
+    let initialDate = null;
+    let initialPath = '';
+
+    if (recordsInfo[index]) {
+      initialDate = moment(recordsInfo[index].date);
+      initialPath = recordsInfo[index].path;
+    }
+
+    return (
+      <Row gutter={16}>
+        <Col span={12}>
+          <Field
+            name={`recordsInfo${index}Date`}
+            initialValue={initialDate}
+            hasFeedback={false}
+            optional={true}
+            control={<DatePicker format={dateFormat} placeholder="Start" />}
+          />
+        </Col>
+        <Col span={12}>
+          <Field
+            name={`recordsInfo${index}Path`}
+            initialValue={initialPath}
+            hasFeedback={false}
+            optional={true}
+            control={
+              <Upload action="/upload.do" listType="picture">
                 <Button>
                   <Icon type="upload" /> Click to upload
                 </Button>
               </Upload>
-            )}
-          </FormItem>
+            }
+          />
         </Col>
       </Row>
     );
   }
 
   render() {
-    const { canProvide, initialRender } = this.state;
-    const { getFieldDecorator } = this.props.form;
-    const booleanOptions = booleanData.map((el, i) => (
-      <Option key={i}>{el}</Option>
-    ));
-    const currencyOptions = currencyData.map((el, i) => (
-      <Option key={i}>{el}</Option>
-    ));
+    const currencyOptions = this.renderOptions(currencyData);
+    const booleanOptions = this.renderOptions(booleanData);
 
     return (
-      <Form onSubmit={this.handleSubmit} className="preq-form">
-        <FormItem
-          {...formItemLayout}
-          label="Can you provide accounts for the last 3 financial year?"
-          hasFeedback
-        >
-          {getFieldDecorator('canProvide', {
-            rules: [
-              {
-                required: true,
-                message: 'Please select one'
-              }
-            ]
-          })(
-            <Select
-              placeholder="Select one"
-              onChange={value => this.handleProvideSelect(value)}
-            >
-              {booleanOptions}
-            </Select>
-          )}
-        </FormItem>
+      <Form className="preq-form">
+        {this.renderField({
+          label: 'Can you provide accounts for the last 3 financial year?',
+          name: 'canProvideAccountsInfo',
+          control: <Select placeholder="Select one">{booleanOptions}</Select>
+        })}
 
-        <div className={canProvide ? '' : 'hidden'}>
-          <FormItem {...formItemLayout} label="Currency" hasFeedback>
-            {getFieldDecorator('currency', {
-              rules: [
-                {
-                  required: canProvide,
-                  message: 'Please select one'
-                }
-              ]
-            })(
-              <Select placeholder="Select a currency">{currencyOptions}</Select>
-            )}
-          </FormItem>
-          {this.renderItem('Annual turnover', 'turnover')}
-          {this.renderItem('Pre-tax profit', 'pretax')}
-          {this.renderItem('Total assets', 'assets')}
-          {this.renderItem('Total current assets', 'currentAssets')}
-          {this.renderItem('Total shareholders equity ', 'shareholders')}
-        </div>
-        <FormItem
-          {...formItemLayout}
+        {this.renderField({
+          label: 'Currency',
+          name: 'currency',
+          control: (
+            <Select placeholder="Select a currency">{currencyOptions}</Select>
+          )
+        })}
+
+        {this.renderYearAmountGroup('Annual turnover', 'annualTurnover')}
+        {this.renderYearAmountGroup('Pre-tax profit', 'preTaxProfit')}
+        {this.renderYearAmountGroup('Total assets', 'totalAssets')}
+        {this.renderYearAmountGroup(
+          'Total current assets',
+          'totalCurrentAssets'
+        )}
+        {this.renderYearAmountGroup(
+          'Total shareholders equity ',
+          'totalShareholderEquity'
+        )}
+        <Field
           label="If not, explain the reasons"
-          hasFeedback
-          className={canProvide || initialRender ? 'hidden' : ''}
-        >
-          {getFieldDecorator('reasons', {
-            rules: [
-              {
-                required: !canProvide,
-                message: 'Please provide the reasons!'
-              }
-            ]
-          })(<TextArea style={{ minHeight: '80px' }} />)}
-        </FormItem>
-        <FormItem
+          name="reasons"
+          control={<Input.TextArea style={{ minHeight: '80px' }} />}
+        />
+        <Form.Item
           className="multiple-wrapper"
           label="Please provide financial records for your last 3 years"
           extra="The most recent years worth of accounts will always appear on top."
-          {...formItemLayout}
+          {...this.formItemLayout()}
         >
-          {this.renderRecord(1)}
-          {this.renderRecord(2)}
-          {this.renderRecord(3)}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Is your company up to date with Social Security payments?"
-          hasFeedback
-        >
-          {getFieldDecorator('toDateSSp', {
-            rules: [
-              {
-                required: true,
-                message: 'Please select one'
-              }
-            ]
-          })(<Select placeholder="Select one">{booleanOptions}</Select>)}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Is your company up to date with Corporation Tax payments?"
-          hasFeedback
-        >
-          {getFieldDecorator('toDateCTp', {
-            rules: [
-              {
-                required: true,
-                message: 'Please select one'
-              }
-            ]
-          })(<Select placeholder="Select one">{booleanOptions}</Select>)}
-        </FormItem>
-        <FormItem {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            Save & continue
-          </Button>
-        </FormItem>
+          {this.renderDatePath(0)}
+          {this.renderDatePath(1)}
+          {this.renderDatePath(2)}
+        </Form.Item>
+
+        {this.renderField({
+          label: 'Is your company up to date with Social Security payments?',
+          name: 'isUpToDateSSP',
+          control: <Select placeholder="Select one">{booleanOptions}</Select>
+        })}
+
+        {this.renderField({
+          label: 'Is your company up to date with Corporation Tax payments?',
+          name: 'isUpToDateCTP',
+          control: <Select placeholder="Select one">{booleanOptions}</Select>
+        })}
+
+        {this.renderSubmit('Save & continue', this.handleSubmit)}
       </Form>
     );
   }
 }
 
-const FinancialForm = Form.create()(PrequalificationForm);
-
-export default withRouter(FinancialForm);
+export default Form.create()(PrequalificationForm);

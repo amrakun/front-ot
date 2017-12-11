@@ -30,7 +30,6 @@ const RegistrationContainer = props => {
       ...companyDetailQuery.companyDetail
     }
   };
-
   return <RegistrationForms {...updatedProps} />;
 };
 
@@ -46,5 +45,17 @@ export default compose(
   // mutations
   graphql(gql(mutations.basicInfo), {
     name: 'basicInfoEdit'
+  }),
+  graphql(gql(mutations.contactInfo), {
+    name: 'contactInfoEdit'
+  }),
+  graphql(gql(mutations.managementTeam), {
+    name: 'managementTeamInfoEdit'
+  }),
+  graphql(gql(mutations.shareholderInfo), {
+    name: 'shareholderInfoEdit'
+  }),
+  graphql(gql(mutations.productsInfo), {
+    name: 'productsInfoEdit'
   })
 )(RegistrationContainer);
