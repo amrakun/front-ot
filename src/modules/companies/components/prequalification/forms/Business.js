@@ -35,15 +35,11 @@ class PrequalificationForm extends BaseForm {
   }
 
   onHasConvictedChange(value) {
-    value === 'true'
-      ? this.setState({ hasConvictedForBusinessIntegrity: true })
-      : this.setState({ hasConvictedForBusinessIntegrity: false });
+    this.setState({ hasConvictedForBusinessIntegrity: value === 'true' });
   }
 
   onLeaderConvictedChange(value) {
-    value === 'true'
-      ? this.setState({ hasLeadersConvicted: true })
-      : this.setState({ hasLeadersConvicted: false });
+    this.setState({ hasLeadersConvicted: value === 'true' });
   }
 
   render() {
