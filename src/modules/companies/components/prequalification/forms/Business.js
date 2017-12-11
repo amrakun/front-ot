@@ -1,12 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Select, Button, Input, DatePicker, Row, Col } from 'antd';
-import { booleanData } from '../constants';
-import { dateFormat } from '../../../../common/constants';
-import moment from 'moment';
+import { Form, Select, Input, DatePicker, Row, Col } from 'antd';
+import { booleanData, labels, descriptions } from '../constants';
+import { dateFormat } from 'modules/common/constants';
+import { BaseForm } from 'modules/common/components';
+// import moment from 'moment';
 
 const FormItem = Form.Item;
-const Option = Select.Option;
 const { TextArea } = Input;
 const formItemLayout = {
   labelCol: {
@@ -20,211 +20,195 @@ const formItemLayout = {
     lg: { span: 8 }
   }
 };
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0
-    },
-    sm: {
-      span: 14,
-      offset: 12
-    },
-    lg: {
-      span: 14,
-      offset: 10
-    }
-  }
-};
-const booleanOptions = booleanData.map((el, i) => (
-  <Option key={i}>{el}</Option>
-));
 
-class PrequalificationForm extends React.Component {
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-      }
-    });
-  };
+class PrequalificationForm extends BaseForm {
+  constructor(props) {
+    super(props);
 
-  renderBooleanItem(id, label, extra) {
-    const { getFieldDecorator } = this.props.form;
-    return (
-      <FormItem {...formItemLayout} label={label} hasFeedback extra={extra}>
-        {getFieldDecorator(`${id}`, {
-          rules: [
-            {
-              required: true,
-              message: 'Please select one'
-            }
-          ]
-        })(<Select placeholder="Select one">{booleanOptions}</Select>)}
-      </FormItem>
-    );
+    this.state = {
+      hasConvictedForBusinessIntegrity: false,
+      hasLeadersConvicted: false
+    };
+
+    this.onHasConvictedChange = this.onHasConvictedChange.bind(this);
+    this.onLeaderConvictedChange = this.onLeaderConvictedChange.bind(this);
   }
 
-  componentDidMount() {
-    const data = this.props.data;
-    if (data.invStartDate1) data.invStartDate1 = moment(data.invStartDate1);
-    if (data.invCloseDate1) data.invCloseDate1 = moment(data.invCloseDate1);
-    this.props.form.setFieldsValue(data);
+  onHasConvictedChange(value) {
+    value === 'true'
+      ? this.setState({ hasConvictedForBusinessIntegrity: true })
+      : this.setState({ hasConvictedForBusinessIntegrity: false });
+  }
+
+  onLeaderConvictedChange(value) {
+    value === 'true'
+      ? this.setState({ hasLeadersConvicted: true })
+      : this.setState({ hasLeadersConvicted: false });
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const booleanOptions = this.renderOptions(booleanData);
+    const {
+      hasConvictedForBusinessIntegrity,
+      hasLeadersConvicted
+    } = this.state;
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        {this.renderBooleanItem(
-          'minimumStandards',
-          'Does your company meet minimum standards of fair employment practice required by Mongolian labor laws and regulations',
-          'Fair employment practice includes disabled ethnic groups, anti-discrimination etc.'
-        )}
-        {this.renderBooleanItem(
-          'inPlace',
-          'Does the Company have a job description procedure in place?'
-        )}
-        {this.renderBooleanItem(
-          'validContracts',
-          'Does the company conclude valid contracts with all employees. (include skilled/unskilled, temporary and permanent, and underage workers, etc)',
-          'Include skilled/unskilled manufacturing employees, temporary employees, underage workers etc.'
-        )}
-        <FormItem
-          {...formItemLayout}
-          label="Please provide the employee turnover rate within your company in the last 12 months"
-          hasFeedback
-        >
-          {getFieldDecorator('canProvide', {
-            rules: [
-              {
-                required: true,
-                message: 'Please enter a number'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        {this.renderBooleanItem(
-          'liability',
-          'Does the organisation have Liability insurance which meets Oyu Tolgoi’s minimum requirements and valid worker compensation insurance or enrolment in an applicable occupational injury/illness insurance programme?'
-        )}
+        {this.renderField({
+          name: 'doesMeetMinimumStandarts',
+          label: labels.doesMeetMinimumStandarts,
+          description: descriptions.doesMeetMinimumStandarts,
+          dataType: 'boolean',
+          control: <Select>{booleanOptions}</Select>
+        })}
 
-        {this.renderBooleanItem(
-          'ethics',
-          'Does your company have a documented code of ethics/conduct?'
-        )}
-        {this.renderBooleanItem(
-          'socialResp',
-          'Does your company have a documented Corporate Social Responsibility policy?'
-        )}
-        {this.renderBooleanItem(
-          'labourLaws',
-          'Has your company ever been convicted for a breach of any labour laws in the countries you operate within the last five years?',
-          'The five years is based on the date of your declaration and submission of your questionnaire compared to the date of conviction. You may remove any breaches older than five years.'
-        )}
-        {this.renderBooleanItem(
-          'humanRights',
-          'Has your company ever been convicted for a breach of any human rights in the countries you operate within the last five years?',
-          'The five years is based on the date of your declaration and submission of your questionnaire compared to the date of conviction. You may remove any breaches older than five years.'
-        )}
-        {this.renderBooleanItem(
-          'businessInteg',
-          'Has your company ever been convicted for a breach of any business integrity in the countries you operate within the last five years?',
-          'The five years is based on the date of your declaration and submission of your questionnaire compared to the date of conviction. You may remove any breaches older than five years.'
-        )}
-        <FormItem
-          {...formItemLayout}
-          label="If Yes, what steps have you taken to ensure this does not happen again? "
-          hasFeedback
-        >
-          {getFieldDecorator('stepsTaken', {
-            rules: [
-              {
-                required: false,
-                message: 'Please enter an input'
-              }
-            ]
-          })(<TextArea />)}
-        </FormItem>
-        {this.renderBooleanItem(
-          'isInvestigated',
-          'Has your company or any of its directors been investigated or convicted of any other legal infringement not described above within the last five years?',
-          'The five years is based on the date of your declaration and submission of your questionnaire compared to the date of conviction. You may remove any breaches older than five years.'
-        )}
+        {this.renderField({
+          name: 'doesHaveJobDescription',
+          label: labels.doesHaveJobDescription,
+          dataType: 'boolean',
+          control: <Select>{booleanOptions}</Select>
+        })}
+
+        {this.renderField({
+          name: 'doesConcludeValidContracts',
+          label: labels.doesConcludeValidContracts,
+          description: descriptions.doesConcludeValidContracts,
+          dataType: 'boolean',
+          control: <Select>{booleanOptions}</Select>
+        })}
+
+        {this.renderField({
+          name: 'employeeTurnoverRate',
+          label: labels.employeeTurnoverRate,
+          description: descriptions.employeeTurnoverRate,
+          control: <Input />
+        })}
+
+        {this.renderField({
+          name: 'doesHaveLiabilityInsurance',
+          label: labels.doesHaveLiabilityInsurance,
+          dataType: 'boolean',
+          control: <Select>{booleanOptions}</Select>
+        })}
+
+        {this.renderField({
+          name: 'doesHaveCodeEthics',
+          label: labels.doesHaveCodeEthics,
+          dataType: 'boolean',
+          control: <Select>{booleanOptions}</Select>
+        })}
+
+        {this.renderField({
+          name: 'doesHaveResponsiblityPolicy',
+          label: labels.doesHaveResponsiblityPolicy,
+          dataType: 'boolean',
+          control: <Select>{booleanOptions}</Select>
+        })}
+
+        {this.renderField({
+          name: 'hasConvictedLabourLaws',
+          label: labels.hasConvictedLabourLaws,
+          description: descriptions.hasConvictedLabourLaws,
+          dataType: 'boolean',
+          control: <Select>{booleanOptions}</Select>
+        })}
+
+        {this.renderField({
+          name: 'hasConvictedForHumanRights',
+          label: labels.hasConvictedForHumanRights,
+          description: descriptions.hasConvictedForHumanRights,
+          dataType: 'boolean',
+          control: <Select>{booleanOptions}</Select>
+        })}
+
+        {this.renderField({
+          name: 'hasConvictedForBusinessIntegrity',
+          label: labels.hasConvictedForBusinessIntegrity,
+          description: descriptions.hasConvictedForBusinessIntegrity,
+          dataType: 'boolean',
+          control: (
+            <Select onChange={this.onHasConvictedChange}>
+              {booleanOptions}
+            </Select>
+          )
+        })}
+
+        {this.renderField({
+          name: 'proveHasNotConvicted',
+          label: labels.proveHasNotConvicted,
+          optional: hasConvictedForBusinessIntegrity,
+          isVisible: hasConvictedForBusinessIntegrity,
+          control: <TextArea />
+        })}
+
+        {this.renderField({
+          name: 'hasLeadersConvicted',
+          label: labels.hasLeadersConvicted,
+          description: descriptions.hasLeadersConvicted,
+          dataType: 'boolean',
+          control: (
+            <Select onChange={this.onLeaderConvictedChange}>
+              {booleanOptions}
+            </Select>
+          )
+        })}
 
         <FormItem
           className="multiple-wrapper"
           {...formItemLayout}
           label="Investigation 1"
           hasFeedback
+          style={!hasLeadersConvicted ? { display: 'none' } : {}}
         >
           <Row gutter={16}>
             <Col span={6}>
-              <FormItem>
-                {getFieldDecorator('inv1', {
-                  rules: [
-                    { required: false, message: 'Please enter an input!' }
-                  ]
-                })(<Input />)}
-              </FormItem>
+              {this.renderField({
+                name: 'name',
+                control: <Input />
+              })}
             </Col>
             <Col span={6}>
-              <FormItem>
-                {getFieldDecorator('invStartDate1', {
-                  rules: [
-                    { required: false, message: 'Please select an year!' }
-                  ]
-                })(<DatePicker format={dateFormat} placeholder="Start date" />)}
-              </FormItem>
+              {this.renderField({
+                name: 'date',
+                control: (
+                  <DatePicker format={dateFormat} placeholder="Start date" />
+                )
+              })}
             </Col>
             <Col span={6}>
-              <FormItem>
-                {getFieldDecorator('invStatus1', {
-                  rules: [
-                    { required: false, message: 'Please enter an input!' }
-                  ]
-                })(<Input />)}
-              </FormItem>
+              {this.renderField({
+                name: 'status',
+                control: <Input />
+              })}
             </Col>
             <Col span={6}>
-              <FormItem>
-                {getFieldDecorator('invCloseDate1', {
-                  rules: [
-                    { required: false, message: 'Please select an year!' }
-                  ]
-                })(<DatePicker format={dateFormat} placeholder="Close date" />)}
-              </FormItem>
+              {this.renderField({
+                name: 'statusDate',
+                control: (
+                  <DatePicker format={dateFormat} placeholder="Close date" />
+                )
+              })}
             </Col>
           </Row>
         </FormItem>
 
-        {this.renderBooleanItem(
-          'PEP',
-          'Does your company employ any politically exposed person? If yes, provide list of PEP name',
-          'PEP - Individuals who are or have been entrusted with prominent public functions either domestically or by a foreign country, for example Heads of state or Heads of government, senior politicians, senior government, judicial or military officials, senior executives of state owned corporations, important political party officials'
-        )}
-        <FormItem
-          {...formItemLayout}
-          label="Additional Information"
-          extra="Please use this space to provide additional information regarding your Corporate Social Responsibility"
-          hasFeedback
-        >
-          {getFieldDecorator('additional', {
-            rules: [
-              {
-                required: true,
-                message: 'Please enter an input'
-              }
-            ]
-          })(<TextArea />)}
-        </FormItem>
-        <FormItem {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            Save & continue
-          </Button>
-        </FormItem>
+        {this.renderField({
+          name: 'doesEmployeePoliticallyExposed',
+          label: labels.doesEmployeePoliticallyExposed,
+          description: descriptions.doesEmployeePoliticallyExposed,
+          dataType: 'boolean',
+          control: <Select>{booleanOptions}</Select>
+        })}
+
+        {this.renderField({
+          name: 'additionalInformation',
+          label: labels.additionalInformation,
+          description: descriptions.additionalInformation,
+          control: <TextArea />
+        })}
+
+        {this.renderSubmit('Save & continue', this.handleSubmit)}
       </Form>
     );
   }

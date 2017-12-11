@@ -21,7 +21,7 @@ class PrequalificationForms extends Panes {
           {this.renderPane(
             '2',
             'Business integrity & human resource',
-            'businessAndHumanResource',
+            'businessInfo',
             BusinessForm
           )}
           {this.renderPane(

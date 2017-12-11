@@ -45,5 +45,9 @@ export default compose(
   // mutations
   graphql(gql(mutations.financialInfo), {
     name: 'financialInfoEdit'
+  }),
+
+  graphql(gql(mutations.businessInfo), {
+    name: 'businessInfoEdit'
   })
 )(PrequalificationContainer);

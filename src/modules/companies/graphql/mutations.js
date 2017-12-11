@@ -46,11 +46,20 @@ const financialInfo = `
   }
 `;
 
+const businessInfo = `
+  mutation companiesEditBusinessInfo($businessInfo: CompanyBusinessInfoInput) {
+    companiesEditBusinessInfo(_id: "5a1f9e2496123f0b089c1a2d", businessInfo: $businessInfo) {
+      _id
+    }
+  }
+`;
+
 export default {
   basicInfo,
   contactInfo,
   managementTeam,
   shareholderInfo,
   productsInfo,
-  financialInfo
+  financialInfo,
+  businessInfo
 };

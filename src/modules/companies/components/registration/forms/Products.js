@@ -14,7 +14,7 @@ class RegistrationForm extends BaseForm {
       <Form>
         <Field
           label="Product code"
-          initialValue={this.props.data}
+          // initialValue={this.props.data}
           name="productsInfo"
           control={
             <Select mode="multiple" placeholder="Please select products">
