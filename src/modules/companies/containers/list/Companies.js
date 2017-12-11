@@ -4,6 +4,10 @@ import { gql, graphql } from 'react-apollo';
 import { queries } from '../../graphql';
 import { CompaniesList } from '../../components';
 
+function filter(v) {
+  console.log(v);
+}
+
 const CompaniesContainer = props => {
   const { companiesQuery } = props;
 
@@ -11,20 +15,21 @@ const CompaniesContainer = props => {
     return <CompaniesList loading={true} />;
   }
 
-  return (
-    <CompaniesList
-      data={companiesQuery.companies}
-      pagination={{
-        total: companiesQuery.companies.length,
-        pageSize: companiesQuery.companies.length,
-        current: 1
-      }}
-      loading={false}
-      onChange={(pagination, filters, sorter) =>
-        this.handleTableChange(pagination, filters, sorter)
-      }
-    />
-  );
+  const updatedProps = {
+    ...props,
+    data: companiesQuery.companies,
+    pagination: {
+      total: companiesQuery.companies.length,
+      pageSize: companiesQuery.companies.length,
+      current: 1
+    },
+    loading: false,
+    filter: filter,
+    onChange: (pagination, filters, sorter) =>
+      this.handleTableChange(pagination, filters, sorter)
+  };
+
+  return <CompaniesList {...updatedProps} />;
 };
 
 CompaniesContainer.propTypes = {

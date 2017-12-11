@@ -32,12 +32,24 @@ $link-color: rgb(0,153,168);
   }
 }
 
+.bordered {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 3px
+}
+
 //layout
-.ant-layout-header {
+.ant-menu-horizontal.ant-menu-root {
+  border: none;
   background: #fff;
   padding: 0;
   box-shadow: 4px 4px 40px 0 rgba(0, 0, 0, 0.05);
   margin-bottom: 20px;
+  padding-right: 16px;
+  z-index: 1;
+  > .ant-menu-item, > .ant-menu-submenu {
+    float: right;
+  }
 }
 .ant-layout-sider {
   position: relative;
