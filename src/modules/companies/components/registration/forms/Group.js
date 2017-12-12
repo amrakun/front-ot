@@ -1,29 +1,71 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Input, Icon, Button, Upload, Select } from 'antd';
-import {
-  booleanData,
-  groupTypeData,
-  countryData,
-  groupLabels
-} from '../constants';
-import { BaseForm } from 'modules/common/components';
+import { Form, Input, Icon, Button, Upload, Select, Row, Col } from 'antd';
+import { booleanData, roleData, countryData, groupLabels } from '../constants';
+import { BaseForm, Field } from 'modules/common/components';
 
-class DynamicFieldSet extends BaseForm {
+class RegistrationForm extends BaseForm {
   constructor(props) {
     super(props);
 
     this.state = {
-      hasParent: false
+      hasParent: false,
+      role: '',
+      isExclusiveDistributor: false
     };
+
+    this.onHasParentChange = this.onHasParentChange.bind(this);
+    this.onRoleChange = this.onRoleChange.bind(this);
+    this.onIsExcChange = this.onIsExcChange.bind(this);
+  }
+
+  onHasParentChange(value) {
+    this.setState({ hasParent: value === 'true' });
+  }
+
+  onRoleChange(value) {
+    this.setState({ role: value });
+  }
+
+  onIsExcChange(value) {
+    this.setState({ isExclusiveDistributor: value === 'true' });
+  }
+
+  renderUpload(index) {
+    const { isExclusiveDistributor } = this.state;
+
+    return (
+      <Row className={isExclusiveDistributor ? '' : 'hidden'}>
+        <Col span={12}>
+          <Field name={`distributionRightName${index}`} control={<Input />} />
+        </Col>
+        <Col span={12}>
+          <Field
+            name={`distributionRight${index}`}
+            initialValue="/path"
+            control={
+              <Upload
+                name="certificateOfRegistration"
+                action="/upload.do"
+                listType="picture"
+              >
+                <Button>
+                  <Icon type="upload" /> Click to upload
+                </Button>
+              </Upload>
+            }
+          />
+        </Col>
+      </Row>
+    );
   }
 
   render() {
     const booleanOptions = this.renderOptions(booleanData);
-    const roleOptions = this.renderOptions(groupTypeData);
+    const roleOptions = this.renderOptions(roleData);
     const countryOptions = this.renderOptions(countryData);
 
-    const { hasParent } = this.state;
+    const { hasParent, role } = this.state;
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -32,7 +74,9 @@ class DynamicFieldSet extends BaseForm {
           name: 'hasParent',
           label: groupLabels.hasParent,
           dataType: 'boolean',
-          control: <Select>{booleanOptions}</Select>
+          control: (
+            <Select onChange={this.onHasParentChange}>{booleanOptions}</Select>
+          )
         })}
 
         {this.renderField({
@@ -54,15 +98,22 @@ class DynamicFieldSet extends BaseForm {
         {this.renderField({
           name: 'role',
           label: groupLabels.role,
-          control: <Select>{roleOptions}</Select>
+          control: <Select onChange={this.onRoleChange}>{roleOptions}</Select>
         })}
 
         {this.renderField({
           name: 'isExclusiveDistributor',
           label: groupLabels.isExclusiveDistributor,
           dataType: 'boolean',
-          control: <Select>{booleanOptions}</Select>
+          isVisible: role === 'Stockist' || role === 'Distrubotor',
+          control: (
+            <Select onChange={this.onIsExcChange}>{booleanOptions}</Select>
+          )
         })}
+
+        {this.renderUpload(0)}
+        {this.renderUpload(1)}
+        {this.renderUpload(2)}
 
         {this.renderField({
           name: 'primaryManufacturerName',
@@ -80,6 +131,6 @@ class DynamicFieldSet extends BaseForm {
   }
 }
 
-const GroupForm = Form.create()(DynamicFieldSet);
+const GroupForm = Form.create()(RegistrationForm);
 
 export default withRouter(GroupForm);

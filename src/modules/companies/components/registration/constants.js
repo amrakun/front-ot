@@ -41,10 +41,10 @@ export const countryData = [
   { text: 'Russia', value: 'Russia' }
 ];
 
-export const groupTypeData = [
-  { text: 'Original Equipment Manufacturer (EOM)', value: '' },
+export const roleData = [
+  { text: 'Original Equipment Manufacturer (EOM)', value: 'EOM' },
   { text: 'Stockist', value: 'Stockist' },
-  { text: 'Distrubor', value: 'Distrubor' }
+  { text: 'Distrubotor', value: 'Distrubotor' }
 ];
 
 export const descriptions = {
