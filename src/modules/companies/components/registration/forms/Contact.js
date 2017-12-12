@@ -31,18 +31,20 @@ class ContactInfo extends BaseForm {
         {this.renderField({
           label: 'Address 2',
           name: 'address2',
-          control: <Input />
-        })}
-
-        {this.renderField({
-          label: 'Town or city',
-          name: 'townOrCity',
+          optional: true,
           control: <Input />
         })}
 
         {this.renderField({
           label: 'Address 3',
           name: 'address3',
+          optional: true,
+          control: <Input />
+        })}
+
+        {this.renderField({
+          label: 'Town or city',
+          name: 'townOrCity',
           control: <Input />
         })}
 

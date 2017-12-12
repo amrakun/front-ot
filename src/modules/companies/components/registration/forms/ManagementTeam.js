@@ -40,7 +40,7 @@ class ManagementTeam extends BaseForm {
     return this.props.save(doc);
   }
 
-  renderItem(prefix) {
+  renderItem(prefix, optional = false) {
     const data = this.props.data[prefix] || {};
 
     return (
@@ -49,6 +49,7 @@ class ManagementTeam extends BaseForm {
           label="Name"
           name={`${prefix}Name`}
           initialValue={data.name}
+          optional={optional}
           control={<Input placeholder="Title. First name + Last name" />}
         />
 
@@ -56,6 +57,7 @@ class ManagementTeam extends BaseForm {
           label="Job title"
           name={`${prefix}JobTitle`}
           initialValue={data.jobTitle}
+          optional={optional}
           control={<Input />}
         />
 
@@ -63,6 +65,7 @@ class ManagementTeam extends BaseForm {
           label="Phone"
           name={`${prefix}Phone`}
           initialValue={data.phone}
+          optional={optional}
           control={<Input />}
         />
 
@@ -71,6 +74,7 @@ class ManagementTeam extends BaseForm {
           name={`${prefix}Email`}
           validation="email"
           initialValue={data.email}
+          optional={optional}
           control={<Input />}
         />
       </div>
@@ -93,11 +97,11 @@ class ManagementTeam extends BaseForm {
           </Col>
           <Col xs={24} sm={12}>
             <label>19. Other management team member</label>
-            {this.renderItem('otherMember1')}
+            {this.renderItem('otherMember1', true)}
             <label>Other management team member 2</label>
-            {this.renderItem('otherMember2')}
+            {this.renderItem('otherMember2', true)}
             <label>Other management team member 3</label>
-            {this.renderItem('otherMember3')}
+            {this.renderItem('otherMember3', true)}
           </Col>
         </Row>
 

@@ -1,12 +1,11 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Select, Input, DatePicker, Upload } from 'antd';
+import { Form, Select, Input, DatePicker } from 'antd';
 import { booleanData, actionStatusData } from '../constants';
 import { dateFormat } from 'modules/common/constants';
 import { envLabels, envDescriptions } from '../constants';
 import { BaseForm } from 'modules/common/components';
 
-const Option = Select.Option;
 const { TextArea } = Input;
 
 class PrequalificationForm extends BaseForm {
@@ -18,14 +17,8 @@ class PrequalificationForm extends BaseForm {
       hasConvictedForEnvironmentalLaws: false
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.onInvestigatedChange = this.onInvestigatedChange.bind(this);
     this.onConvictedChange = this.onConvictedChange.bind(this);
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    this.save();
   }
 
   onInvestigatedChange(value) {

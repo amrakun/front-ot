@@ -30,9 +30,25 @@ const shareholderInfo = `
   }
 `;
 
+const groupInfo = `
+  mutation groupEditShareholderInfo($groupInfo: CompanyGroupInfoInput) {
+    companiesEditGroupInfo(_id: "5a1fc129c2e8aa7c0f2752dd", groupInfo: $groupInfo) {
+      _id
+    }
+  }
+`;
+
 const productsInfo = `
   mutation companiesEditProductsInfo($productsInfo: [String]) {
     companiesEditProductsInfo(_id: "5a1fc129c2e8aa7c0f2752dd", productsInfo: $productsInfo) {
+      _id
+    }
+  }
+`;
+
+const certificateInfo = `
+  mutation companiesEditCertificateInfo($certificateInfo: CompanyCertificateInfoInput) {
+    companiesEditCertificateInfo(_id: "5a1fc129c2e8aa7c0f2752dd", certificateInfo: $certificateInfo) {
       _id
     }
   }
@@ -75,7 +91,9 @@ export default {
   contactInfo,
   managementTeam,
   shareholderInfo,
+  groupInfo,
   productsInfo,
+  certificateInfo,
   financialInfo,
   businessInfo,
   environmentalInfo,

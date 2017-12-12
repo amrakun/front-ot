@@ -83,6 +83,12 @@ const shareholderItemFields = `
   percentage,
 `;
 
+const certificateInfoFields = `
+  isReceived,
+  isOTSupplier,
+  cwpo,
+`;
+
 export const companyDetail = `
   query companyDetail {
     companyDetail(_id: "5a1fc129c2e8aa7c0f2752dd") {
@@ -100,6 +106,9 @@ export const companyDetail = `
         shareholders {
           ${shareholderItemFields}
         }
+      }
+      certificateInfo {
+        ${certificateInfoFields}
       }
       productsInfo
     }
