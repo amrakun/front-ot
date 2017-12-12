@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Upload, message, Button, Icon } from 'antd';
 
-class UploadField extends React.Component {
+class Uploader extends React.Component {
   constructor(props) {
     super(props);
 
@@ -13,11 +13,11 @@ class UploadField extends React.Component {
     if (info.file.status === 'done') {
       message.success(`${info.file.name} file uploaded successfully`);
 
-      return this.props.onReceiveFile(info.file);
+      return this.props.onReceiveFile(info.file, info.fileList);
     }
 
     if (info.file.status === 'removed') {
-      return this.props.onReceiveFile(info.file);
+      return this.props.onReceiveFile(info.file, info.fileList);
     }
 
     if (info.file.status === 'error') {
@@ -57,10 +57,10 @@ class UploadField extends React.Component {
   }
 }
 
-UploadField.propTypes = {
+Uploader.propTypes = {
   onReceiveFile: PropTypes.func,
   initialFile: PropTypes.object,
   initialFiles: PropTypes.array
 };
 
-export default UploadField;
+export default Uploader;
