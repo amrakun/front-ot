@@ -39,8 +39,8 @@ export const labels = {
   doesMeetMinimumStandarts: `Does your company meet minimum standards of fair employment
     practice required by Mongolian labor laws and regulations`,
 
-  doesHaveJobDescription:
-    'Does the Company have a job description procedure in place?',
+  doesHaveJobDescription: `Does the Company have a job description procedure in
+    place?`,
 
   doesConcludeValidContracts: `Does the company conclude valid contracts with all employees.
     (include skilled/unskilled, temporary and permanent, and underage workers,
@@ -113,4 +113,70 @@ export const descriptions = {
 
   additionalInformation: `Please use this space to provide additional information regarding
     your Corporate Social Responsibility`
+};
+
+export const envLabels = {
+  doesHavePlan: `Does the organisation have environmental management plans or
+    procedures (including air quality, greenhouse gases emissions, water and
+    contamination prevention, noise and vibration, Waste Management)?`,
+
+  hasEnvironmentalRegulatorInvestigated: `Has any environmental regulator
+    inspected / investigated your company within the last 5 years?`,
+
+  dateOfInvestigation: `Date of Inspection / Investigation`,
+
+  reasonForInvestigation: `Reasons for investigation/inspection`,
+
+  actionStatus: `Action status`,
+
+  investigationDocumentation: `Upload Inspection / Investigation Documentation`,
+
+  hasConvictedForEnvironmentalLaws: `Has your company ever been convicted for a
+    breach of any Environmental laws in the countries you operate?`,
+
+  proveHasNotConvicted: `If Yes, what steps have you taken to ensure this does
+    not happen again?`,
+
+  additionalInformation: `Additional Information`
+};
+
+export const envDescriptions = {
+  additionalInformation: `Please use this space to provide additional
+    information regarding your Corporate Social Responsibility`
+};
+
+export const healthLabels = {
+  doesHaveHealthSafety: `Does the organisation have a Health Safety &
+    Environment management system?`,
+
+  areHSEResourcesClearlyIdentified: `Are HSE resources, roles, responsibilities
+    and authority levels clearly identified and defined within your
+    Organisation?`,
+
+  doesHaveDocumentedProcessToEnsure: `Does your company have a documented \
+    process to ensure all staff receive health and safety training and
+    induction?`,
+
+  areEmployeesUnderYourControl: `Are all employees under your control required
+    to utilise appropriate Personal Protective Equipment (PPE) at all times?`,
+
+  doesHaveDocumentForRiskAssesment: `Does the company have a documented process
+    or guidelines for risk assessment (including CRM)?`,
+
+  doesHaveDocumentForIncidentInvestigation: `Does the company have a documented
+    process for incident investigation?`,
+
+  doesHaveDocumentedFitness: `Does your company have a documented Fitness for
+    Work (FFW) policy?`,
+
+  isWillingToComply: `Is your company willing to comply with Oyu Tolgoi/RT HSE
+    management system?`
+};
+
+export const healthDescriptions = {
+  areHSEResourcesClearlyIdentified: `Staff includes all employees and
+    sub-contractors.`,
+
+  doesHaveDocumentedFitness: `The Fitness for Work (FFW) policy should
+    incorporate alcohol, fatigue and general fitness for work.`
 };

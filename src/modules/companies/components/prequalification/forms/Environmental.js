@@ -1,278 +1,118 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Select, Button, Input, DatePicker, Upload, Icon } from 'antd';
+import { Form, Select, Input, DatePicker, Upload } from 'antd';
 import { booleanData, actionStatusData } from '../constants';
-import { dateFormat } from '../../../../common/constants';
-import moment from 'moment';
+import { dateFormat } from 'modules/common/constants';
+import { envLabels, envDescriptions } from '../constants';
+import { BaseForm } from 'modules/common/components';
 
-const FormItem = Form.Item;
 const Option = Select.Option;
 const { TextArea } = Input;
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 12 },
-    lg: { span: 10 }
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 8 },
-    lg: { span: 8 }
-  }
-};
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0
-    },
-    sm: {
-      span: 14,
-      offset: 12
-    },
-    lg: {
-      span: 14,
-      offset: 10
-    }
-  }
-};
 
-class PrequalificationForm extends React.Component {
-  state = {
-    isInvestigated: false,
-    isConvicted: false
-  };
+class PrequalificationForm extends BaseForm {
+  constructor(props) {
+    super(props);
 
-  handleSubmit = e => {
+    this.state = {
+      hasEnvironmentalRegulatorInvestigated: false,
+      hasConvictedForEnvironmentalLaws: false
+    };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.onInvestigatedChange = this.onInvestigatedChange.bind(this);
+    this.onConvictedChange = this.onConvictedChange.bind(this);
+  }
+
+  handleSubmit(e) {
     e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-      }
-    });
-  };
-
-  normFile = e => {
-    console.log('Upload event:', e);
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e && e.fileList;
-  };
-
-  handleInvestigatedChange(value) {
-    let newState;
-    if (value === '0') {
-      //yes
-      newState = { isInvestigated: true };
-    } else {
-      newState = { isInvestigated: false };
-      this.props.form.setFieldsValue({
-        dateInvestigated: '',
-        reasons: '',
-        actionStatus: '',
-        upload: ''
-      });
-    }
-    this.setState(newState);
+    this.save();
   }
 
-  handleConvictedChange(value) {
-    let newState;
-    if (value === '0') {
-      //yes
-      newState = { isConvicted: true };
-    } else {
-      newState = { isConvicted: false };
-      this.props.form.setFieldsValue({
-        stepsTaken: ''
-      });
-    }
-    this.setState(newState);
+  onInvestigatedChange(value) {
+    this.setState({ hasEnvironmentalRegulatorInvestigated: value === 'true' });
   }
 
-  componentDidMount() {
-    const data = this.props.data;
-    if (data.dateInvestigated)
-      data.dateInvestigated = moment(data.dateInvestigated);
-    this.handleInvestigatedChange(data.investigated);
-    this.handleConvictedChange(data.convicted);
-    this.props.form.setFieldsValue(data);
+  onConvictedChange(value) {
+    this.setState({ hasConvictedForEnvironmentalLaws: value === 'true' });
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form;
-    const booleanOptions = booleanData.map((el, i) => (
-      <Option key={i}>{el}</Option>
-    ));
-    const statusOptions = actionStatusData.map((el, i) => (
-      <Option key={i}>{el}</Option>
-    ));
-    const { isInvestigated, isConvicted } = this.state;
+    const booleanOptions = this.renderOptions(booleanData);
+    const statusOptions = this.renderOptions(actionStatusData);
+    const {
+      hasEnvironmentalRegulatorInvestigated,
+      hasConvictedForEnvironmentalLaws
+    } = this.state;
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        <FormItem
-          {...formItemLayout}
-          label="Does the organisation have environmental management plans or procedures (including air quality, greenhouse gases emissions, water and contamination prevention, noise and vibration, Waste Management)?"
-          hasFeedback
-        >
-          {getFieldDecorator('plans', {
-            rules: [
-              {
-                required: true,
-                message: 'Please select one'
-              }
-            ]
-          })(<Select placeholder="Select one">{booleanOptions}</Select>)}
-        </FormItem>
+        {this.renderField({
+          name: 'doesHavePlan',
+          label: envLabels.doesHavePlan,
+          dataType: 'boolean',
+          control: <Select>{booleanOptions}</Select>
+        })}
 
-        <FormItem
-          {...formItemLayout}
-          label="Has any environmental regulator inspected / investigated your company within the last 5 years?"
-          hasFeedback
-        >
-          {getFieldDecorator('investigated', {
-            rules: [
-              {
-                required: true,
-                message: 'Please select one'
-              }
-            ]
-          })(
-            <Select
-              placeholder="Select one"
-              onChange={value => this.handleInvestigatedChange(value)}
-            >
+        {this.renderField({
+          name: 'hasEnvironmentalRegulatorInvestigated',
+          label: envLabels.hasEnvironmentalRegulatorInvestigated,
+          dataType: 'boolean',
+          control: (
+            <Select onChange={this.onInvestigatedChange}>
               {booleanOptions}
             </Select>
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Date of Inspection / Investigation"
-          hasFeedback
-          className={isInvestigated ? '' : 'hidden'}
-        >
-          {getFieldDecorator(`dateInvestigated`, {
-            rules: [
-              {
-                required: false,
-                message: 'Please select date'
-              }
-            ]
-          })(<DatePicker format={dateFormat} placeholder="Select a date" />)}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Reasons for investigation/inspection"
-          hasFeedback
-          className={isInvestigated ? '' : 'hidden'}
-        >
-          {getFieldDecorator('reasons', {
-            rules: [
-              {
-                required: false,
-                message: 'Please enter an input'
-              }
-            ]
-          })(<TextArea />)}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Action status"
-          hasFeedback
-          className={isInvestigated ? '' : 'hidden'}
-        >
-          {getFieldDecorator('actionStatus', {
-            rules: [
-              {
-                required: false,
-                message: 'Please select one'
-              }
-            ]
-          })(<Select placeholder="Select one">{statusOptions}</Select>)}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Upload Inspection / Investigation Documentation"
-          hasFeedback
-          className={isInvestigated ? '' : 'hidden'}
-        >
-          {getFieldDecorator(`upload`, {
-            valuePropName: 'fileList',
-            getValueFromEvent: this.normFile,
-            rules: [
-              {
-                required: false,
-                message: 'Please upload your file'
-              }
-            ]
-          })(
-            <Upload name="upload" action="/upload.do" listType="picture">
-              <Button>
-                <Icon type="upload" /> Click to upload
-              </Button>
-            </Upload>
-          )}
-        </FormItem>
+          )
+        })}
 
-        <FormItem
-          {...formItemLayout}
-          label="Has your company ever been convicted for a breach of any Environmental laws in the countries you operate?"
-          hasFeedback
-        >
-          {getFieldDecorator('convicted', {
-            rules: [
-              {
-                required: true,
-                message: 'Please select one'
-              }
-            ]
-          })(
-            <Select
-              placeholder="Select one"
-              onChange={value => this.handleConvictedChange(value)}
-            >
-              {booleanOptions}
-            </Select>
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="If Yes, what steps have you taken to ensure this does not happen again? "
-          hasFeedback
-          className={isConvicted ? '' : 'hidden'}
-        >
-          {getFieldDecorator('stepsTaken', {
-            rules: [
-              {
-                required: isConvicted,
-                message: 'Please enter an input'
-              }
-            ]
-          })(<TextArea />)}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Additional Information"
-          extra="Please use this space to provide additional information regarding your Corporate Social Responsibility"
-          hasFeedback
-        >
-          {getFieldDecorator('additional', {
-            rules: [
-              {
-                required: true,
-                message: 'Please enter an input'
-              }
-            ]
-          })(<TextArea />)}
-        </FormItem>
-        <FormItem {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            Save & continue
-          </Button>
-        </FormItem>
+        {this.renderField({
+          name: 'dateOfInvestigation',
+          label: envLabels.dateOfInvestigation,
+          isVisible: hasEnvironmentalRegulatorInvestigated,
+          optional: !hasEnvironmentalRegulatorInvestigated,
+          control: <DatePicker format={dateFormat} placeholder="Date" />
+        })}
+
+        {this.renderField({
+          name: 'reasonForInvestigation',
+          label: envLabels.reasonForInvestigation,
+          isVisible: hasEnvironmentalRegulatorInvestigated,
+          optional: !hasEnvironmentalRegulatorInvestigated,
+          control: <TextArea />
+        })}
+
+        {this.renderField({
+          name: 'actionStatus',
+          label: envLabels.actionStatus,
+          isVisible: hasEnvironmentalRegulatorInvestigated,
+          optional: !hasEnvironmentalRegulatorInvestigated,
+          control: <Select>{statusOptions}</Select>
+        })}
+
+        {this.renderField({
+          name: 'hasConvictedForEnvironmentalLaws',
+          label: envLabels.hasConvictedForEnvironmentalLaws,
+          dataType: 'boolean',
+          control: (
+            <Select onChange={this.onConvictedChange}>{booleanOptions}</Select>
+          )
+        })}
+
+        {this.renderField({
+          name: 'proveHasNotConvicted',
+          label: envLabels.proveHasNotConvicted,
+          isVisible: hasConvictedForEnvironmentalLaws,
+          optional: !hasConvictedForEnvironmentalLaws,
+          control: <TextArea />
+        })}
+
+        {this.renderField({
+          name: 'additionalInformation',
+          label: envLabels.additionalInformation,
+          description: envDescriptions.additionalInformation,
+          control: <TextArea />
+        })}
+
+        {this.renderSubmit('Save & continue', this.handleSubmit)}
       </Form>
     );
   }

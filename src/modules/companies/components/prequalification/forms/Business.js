@@ -1,10 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Select, Input, DatePicker, Row, Col } from 'antd';
+import { Form, Select, Input, DatePicker, Row, Col, Button, Icon } from 'antd';
 import { booleanData, labels, descriptions } from '../constants';
 import { dateFormat } from 'modules/common/constants';
-import { BaseForm } from 'modules/common/components';
-// import moment from 'moment';
+import { BaseForm, Field } from 'modules/common/components';
+import moment from 'moment';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -25,13 +25,22 @@ class PrequalificationForm extends BaseForm {
   constructor(props) {
     super(props);
 
+    const { data } = this.props;
+
     this.state = {
-      hasConvictedForBusinessIntegrity: false,
-      hasLeadersConvicted: false
+      hasConvictedForBusinessIntegrity:
+        data.hasConvictedForBusinessIntegrity || false,
+      hasLeadersConvicted: data.hasLeadersConvicted || false,
+      investigations: (data.investigations || []).map(i => ({
+        _id: Math.random(),
+        ...i
+      }))
     };
 
     this.onHasConvictedChange = this.onHasConvictedChange.bind(this);
     this.onLeaderConvictedChange = this.onLeaderConvictedChange.bind(this);
+    this.addInvestigation = this.addInvestigation.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   onHasConvictedChange(value) {
@@ -42,12 +51,103 @@ class PrequalificationForm extends BaseForm {
     this.setState({ hasLeadersConvicted: value === 'true' });
   }
 
+  addInvestigation() {
+    const { investigations } = this.state;
+
+    investigations.push({
+      _id: Math.random(),
+      name: '',
+      date: moment(),
+      status: '',
+      statusDate: moment()
+    });
+
+    this.setState({ investigations });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    const investigations = [];
+
+    this.state.investigations.forEach(investigation => {
+      const _id = investigation._id;
+
+      investigations.push({
+        name: this.getFieldValue(`name${_id}`),
+        date: this.getFieldValue(`date${_id}`),
+        status: this.getFieldValue(`status${_id}`),
+        statusDate: this.getFieldValue(`statusDate${_id}`)
+      });
+    });
+
+    this.save({ investigations });
+  }
+
+  renderInvestigation(investigation, index) {
+    const _id = investigation._id;
+
+    return (
+      <FormItem
+        {...formItemLayout}
+        className="multiple-wrapper"
+        label={`Investigation ${index}`}
+        key={_id}
+        hasFeedback
+      >
+        <Row gutter={16}>
+          <Col span={6}>
+            <Field
+              name={`name${_id}`}
+              initialValue={investigation.name}
+              hasFeedback={false}
+              optional={true}
+              control={<Input placeholder="Name" />}
+            />
+          </Col>
+          <Col span={6}>
+            <Field
+              name={`date${_id}`}
+              initialValue={moment(investigation.date)}
+              hasFeedback={false}
+              optional={true}
+              control={<DatePicker format={dateFormat} placeholder="Start" />}
+            />
+          </Col>
+          <Col span={6}>
+            <Field
+              name={`status${_id}`}
+              initialValue={investigation.status}
+              hasFeedback={false}
+              optional={true}
+              control={<Input placeholder="Status" />}
+            />
+          </Col>
+          <Col span={6}>
+            <Field
+              name={`statusDate${_id}`}
+              initialValue={moment(investigation.statusDate)}
+              optional={true}
+              control={<DatePicker format={dateFormat} placeholder="Close" />}
+            />
+          </Col>
+        </Row>
+      </FormItem>
+    );
+  }
+
   render() {
     const booleanOptions = this.renderOptions(booleanData);
+
     const {
       hasConvictedForBusinessIntegrity,
-      hasLeadersConvicted
+      hasLeadersConvicted,
+      investigations
     } = this.state;
+
+    const investigationItems = investigations.map((investigation, index) =>
+      this.renderInvestigation(investigation, index)
+    );
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -78,6 +178,7 @@ class PrequalificationForm extends BaseForm {
           name: 'employeeTurnoverRate',
           label: labels.employeeTurnoverRate,
           description: descriptions.employeeTurnoverRate,
+          dataType: 'number',
           control: <Input />
         })}
 
@@ -150,44 +251,18 @@ class PrequalificationForm extends BaseForm {
           )
         })}
 
-        <FormItem
-          className="multiple-wrapper"
-          {...formItemLayout}
-          label="Investigation 1"
-          hasFeedback
-          style={!hasLeadersConvicted ? { display: 'none' } : {}}
-        >
-          <Row gutter={16}>
-            <Col span={6}>
-              {this.renderField({
-                name: 'name',
-                control: <Input />
-              })}
-            </Col>
-            <Col span={6}>
-              {this.renderField({
-                name: 'date',
-                control: (
-                  <DatePicker format={dateFormat} placeholder="Start date" />
-                )
-              })}
-            </Col>
-            <Col span={6}>
-              {this.renderField({
-                name: 'status',
-                control: <Input />
-              })}
-            </Col>
-            <Col span={6}>
-              {this.renderField({
-                name: 'statusDate',
-                control: (
-                  <DatePicker format={dateFormat} placeholder="Close date" />
-                )
-              })}
-            </Col>
-          </Row>
-        </FormItem>
+        <div style={!hasLeadersConvicted ? { display: 'none' } : {}}>
+          {investigationItems}
+          <FormItem {...formItemLayout}>
+            <Button
+              type="dashed"
+              onClick={this.addInvestigation}
+              style={{ width: '60%' }}
+            >
+              <Icon type="plus" /> Add investigation
+            </Button>
+          </FormItem>
+        </div>
 
         {this.renderField({
           name: 'doesEmployeePoliticallyExposed',

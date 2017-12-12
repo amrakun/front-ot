@@ -53,12 +53,19 @@ export default class BaseForm extends React.Component {
     };
   }
 
-  save() {
-    const doc = {};
+  save(extra) {
+    let doc = {};
 
     this.fieldDefs.forEach(({ name, dataType }) => {
       doc[name] = this.getFieldValue(name, dataType);
     });
+
+    if (extra) {
+      doc = {
+        ...doc,
+        ...extra
+      };
+    }
 
     return this.props.save(doc);
   }

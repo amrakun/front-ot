@@ -85,7 +85,7 @@ const shareholderItemFields = `
 
 export const companyDetail = `
   query companyDetail {
-    companyDetail(_id: "5a1f9e2496123f0b089c1a2d") {
+    companyDetail(_id: "5a1fc129c2e8aa7c0f2752dd") {
       basicInfo {
         ${basicInfoFields}
       }
@@ -119,7 +119,7 @@ const companies = `
 
 export const companyPrequalificationDetail = `
   query companyDetail {
-    companyDetail(_id: "5a1f9e2496123f0b089c1a2d") {
+    companyDetail(_id: "5a1fc129c2e8aa7c0f2752dd") {
       financialInfo {
         canProvideAccountsInfo
         currency
@@ -148,6 +148,28 @@ export const companyPrequalificationDetail = `
         recordsInfo {
           date
           path
+        }
+      }
+      businessInfo {
+        doesMeetMinimumStandarts
+        doesHaveJobDescription
+        doesConcludeValidContracts
+        employeeTurnoverRate
+        doesHaveLiabilityInsurance
+        doesHaveCodeEthics
+        doesHaveResponsiblityPolicy
+        hasConvictedLabourLaws
+        hasConvictedForHumanRights
+        hasConvictedForBusinessIntegrity
+        proveHasNotConvicted
+        hasLeadersConvicted
+        doesEmployeePoliticallyExposed
+        additionalInformation
+        investigations {
+          name
+          date
+          status
+          statusDate
         }
       }
     }
