@@ -103,3 +103,32 @@ export const productsData = [];
 for (let i = 10; i < 36; i++) {
   productsData.push({ value: i.toString(36) + i, text: i.toString(36) + i });
 }
+
+export const certLabels = {
+  isReceived: `Have you received capacity building certificate?`,
+
+  isOTSupplier: `Are you an existing supplier to OT?`,
+
+  cwpo: `Please provide CW and PO number`
+};
+
+export const groupLabels = {
+  head: `Please provide details of your Ultimate Parent Company or any
+    associated companies if applicable.`,
+
+  hasParent: `22. Do you have an Ultimate Parent Company?`,
+
+  parentAddress: `Ultimate Parent Company address`,
+
+  parentRegistrationNumber: `Registration number of Ultimate Parent Company`,
+
+  role: `23. Are you a Manufacturer, Distributor or Stockist?`,
+
+  isExclusiveDistributor: `Are you an exclusive distributor?`,
+
+  attachments: `Please list names of authorized distribution rights /EOM/`,
+
+  primaryManufacturerName: `Primary manufacturer name`,
+
+  countryOfPrimaryManufacturer: `Country of primary manufacture`
+};

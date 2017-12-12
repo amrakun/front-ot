@@ -27,13 +27,13 @@ class PrequalificationForms extends Panes {
           {this.renderPane(
             '3',
             'Environmental management',
-            'environmentalManagement',
+            'environmentalInfo',
             EnvironmentalForm
           )}
           {this.renderPane(
             '4',
             'Health & safety management system',
-            'healthAndSafetyManagement',
+            'healthInfo',
             HealthForm
           )}
         </Tabs>

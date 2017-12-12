@@ -8,6 +8,7 @@ export default class BaseForm extends React.Component {
     super(props);
 
     this.save = this.save.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
     // field names
     this.fieldDefs = [];
@@ -53,14 +54,27 @@ export default class BaseForm extends React.Component {
     };
   }
 
-  save() {
-    const doc = {};
+  save(extra = {}) {
+    let doc = {};
 
     this.fieldDefs.forEach(({ name, dataType }) => {
       doc[name] = this.getFieldValue(name, dataType);
     });
 
+    if (extra) {
+      doc = {
+        ...doc,
+        ...extra
+      };
+    }
+
     return this.props.save(doc);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    this.save();
   }
 
   getFieldValue(name, dataType) {
@@ -106,7 +120,7 @@ export default class BaseForm extends React.Component {
     return <Field {...definations} />;
   }
 
-  renderSubmit(text = 'Save & continue', onClick = this.save) {
+  renderSubmit(text = 'Save & continue', onClick = this.handleSubmit) {
     return (
       <Form.Item {...this.tailFormItemLayout()}>
         <Button type="primary" htmlType="submit" onClick={onClick}>

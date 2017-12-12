@@ -108,11 +108,13 @@ class CompanyInfo extends BaseForm {
           {this.renderField({
             label: '2. Address',
             name: 'address',
+            optional: true,
             control: <Input />
           })}
           {this.renderField({
             label: 'Address 2',
             name: 'address2',
+            optional: true,
             control: <Input />
           })}
           {this.renderField({

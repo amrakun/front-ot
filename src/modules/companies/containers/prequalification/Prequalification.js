@@ -14,6 +14,8 @@ const PrequalificationContainer = props => {
   const save = (name, doc) => {
     const mutation = props[`${name}Edit`];
 
+    console.log(doc);
+
     mutation({ variables: { [name]: doc } })
       .then(() => {
         console.log('Saved');
@@ -49,5 +51,13 @@ export default compose(
 
   graphql(gql(mutations.businessInfo), {
     name: 'businessInfoEdit'
+  }),
+
+  graphql(gql(mutations.environmentalInfo), {
+    name: 'environmentalInfoEdit'
+  }),
+
+  graphql(gql(mutations.healthInfo), {
+    name: 'healthInfoEdit'
   })
 )(PrequalificationContainer);

@@ -1,195 +1,55 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Input, Select, Button, Upload, Icon } from 'antd';
-import { booleanData } from '../constants';
+import { Form, Input, Select } from 'antd';
+import { booleanData, certLabels } from '../constants';
+import { BaseForm } from 'modules/common/components';
 
-const FormItem = Form.Item;
-const Option = Select.Option;
+class RegistrationForm extends BaseForm {
+  constructor(props) {
+    super(props);
 
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 8 },
-    lg: { span: 8 }
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 14 },
-    lg: { span: 8 }
-  }
-};
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0
-    },
-    sm: {
-      span: 14,
-      offset: 8
-    },
-    lg: {
-      span: 14,
-      offset: 8
-    }
-  }
-};
-
-class RegistrationForm extends React.Component {
-  state = {
-    isReceived: false,
-    isExisting: false,
-    isVisibleExisting: false
-  };
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-      }
-    });
-  };
-
-  handleReceivedChange(value) {
-    const form = this.props.form;
-    let newState = {
-      isReceived: false,
-      isVisibleExisting: true,
-      isExisting: false
+    this.state = {
+      isOTSupplier: props.data.isOTSupplier || false
     };
-    if (value === '0')
-      //Yes
-      newState = {
-        isReceived: true,
-        isVisibleExisting: false,
-        isExisting: false
-      };
 
-    form.setFieldsValue({ upload: '' });
-    form.setFieldsValue({ isExisting: '' });
-    form.setFieldsValue({ cwNumber: '' });
-    this.setState(newState);
+    this.onIsSupplierChange = this.onIsSupplierChange.bind(this);
   }
 
-  handleExistingChange(value) {
-    let isExisting = false;
-    if (value === '0')
-      //Yes
-      isExisting = true;
-
-    this.props.form.setFieldsValue({ cwNumber: '' });
-    this.setState({ isExisting });
-  }
-
-  componentDidMount() {
-    const data = this.props.data;
-    this.handleReceivedChange(data.isReceived);
-    this.handleExistingChange(data.isExisting);
-    this.props.form.setFieldsValue(data);
+  onIsSupplierChange(value) {
+    this.setState({ isOTSupplier: value === 'true' });
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form;
-    const booleanOptions = booleanData.map((el, i) => (
-      <Option key={i}>{el}</Option>
-    ));
-    const { isReceived, isExisting, isVisibleExisting } = this.state;
+    const booleanOptions = this.renderOptions(booleanData);
+    const { isOTSupplier } = this.state;
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        <FormItem
-          {...formItemLayout}
-          label="Have you received capacity building certificate?"
-          hasFeedback
-        >
-          {getFieldDecorator('isReceived', {
-            rules: [{ required: true, message: 'Please select an option!' }]
-          })(
-            <Select
-              placeholder="Please select an option"
-              onChange={value => this.handleReceivedChange(value)}
-            >
-              {booleanOptions}
-            </Select>
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Please upload your certificate"
-          extra="You may upload &quot;jpg,jpeg,png,rtf,pdf&quot; files, or simple Adobe
-               PDF files. Files that have the ability to contain macros or other
-               types of active code are not acceptable. Maximum file size is
-               30mb."
-          style={isReceived ? {} : { display: 'none' }}
-        >
-          {getFieldDecorator('upload', {
-            valuePropName: 'fileList',
-            getValueFromEvent: this.normFile,
-            rules: [
-              {
-                required: isReceived,
-                message: 'Please input your company registration sertificate!'
-              }
-            ]
-          })(
-            <Upload name="logo" action="/upload.do" listType="picture">
-              <Button>
-                <Icon type="upload" /> Click to upload
-              </Button>
-            </Upload>
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Are you an existing supplier to OT?"
-          hasFeedback
-          style={isVisibleExisting ? {} : { display: 'none' }}
-          extra={
-            !isReceived && !isExisting
-              ? 'You must receive Capacity building certificate in order to complete your registration'
-              : ''
-          }
-        >
-          {getFieldDecorator('isExisting', {
-            rules: [
-              {
-                required: isVisibleExisting,
-                message: 'Please select an option!'
-              }
-            ]
-          })(
-            <Select
-              placeholder="Please select an option"
-              onChange={value => this.handleExistingChange(value)}
-            >
-              {booleanOptions}
-            </Select>
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Please provide CW and PO number"
-          hasFeedback
-          style={isExisting ? {} : { display: 'none' }}
-        >
-          {getFieldDecorator('cwNumber', {
-            rules: [
-              {
-                required: !isReceived,
-                message: 'Please enter CW and PO number!'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem {...tailFormItemLayout}>
-          <Button
-            type="primary"
-            disabled={!isReceived && !isExisting ? true : false}
-            htmlType="submit"
-          >
-            Save & continue
-          </Button>
-        </FormItem>
+        {this.renderField({
+          name: 'isReceived',
+          label: certLabels.isReceived,
+          dataType: 'boolean',
+          control: <Select>{booleanOptions}</Select>
+        })}
+
+        {this.renderField({
+          name: 'isOTSupplier',
+          label: certLabels.isOTSupplier,
+          dataType: 'boolean',
+          control: (
+            <Select onChange={this.onIsSupplierChange}>{booleanOptions}</Select>
+          )
+        })}
+
+        {this.renderField({
+          name: 'cwpo',
+          label: certLabels.cwpo,
+          dataType: 'boolean',
+          isVisible: isOTSupplier,
+          control: <Input />
+        })}
+
+        {this.renderSubmit('Save & continue', this.handleSubmit)}
       </Form>
     );
   }
