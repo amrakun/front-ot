@@ -7,9 +7,7 @@ import {
   Tooltip,
   Icon,
   Select,
-  Button,
   AutoComplete,
-  Upload,
   InputNumber,
   Spin
 } from 'antd';
@@ -24,22 +22,37 @@ import {
   labels
 } from '../constants';
 
-import BaseForm from '../../../../common/components/BaseForm';
+import { BaseForm, Field, UploadField } from 'modules/common/components';
 
 class CompanyInfo extends BaseForm {
   constructor(props) {
     super(props);
 
+    const { data } = props;
+
     this.state = {
       confirmDirty: false,
       autoCompleteResult: [],
-      selectedCountry: props.data.registeredInCountry,
-      selectedAimag: props.data.registeredInAimag,
+      selectedCountry: data.registeredInCountry,
+      selectedAimag: data.registeredInAimag,
+      certificateOfRegistration: data.certificateOfRegistration,
       loading: false
     };
 
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCountryChange = this.handleCountryChange.bind(this);
     this.handleAimagChange = this.handleAimagChange.bind(this);
+    this.onUploadCertificateOfRegistration = this.onUploadCertificateOfRegistration.bind(
+      this
+    );
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    this.save({
+      certificateOfRegistration: this.state.certificateOfRegistration
+    });
   }
 
   handleCountryChange(value) {
@@ -50,7 +63,18 @@ class CompanyInfo extends BaseForm {
     this.setState({ selectedAimag: value });
   }
 
+  onUploadCertificateOfRegistration(file) {
+    let certificateOfRegistration = { name: file.name, url: file.response };
+
+    if (file.status === 'removed') {
+      certificateOfRegistration = null;
+    }
+
+    this.setState({ certificateOfRegistration });
+  }
+
   render() {
+    const { data } = this.props;
     const { autoCompleteResult, selectedCountry, selectedAimag } = this.state;
 
     const websiteOptions = this.renderAutoCompleteOptions(autoCompleteResult);
@@ -59,7 +83,7 @@ class CompanyInfo extends BaseForm {
 
     return (
       <Spin spinning={this.state.loading} delay={500}>
-        <Form onSubmit={this.handleSubmit}>
+        <Form>
           {this.renderField({
             label: 'Are you an existing supplier?',
             name: 'isRegisteredOnSup',
@@ -189,23 +213,17 @@ class CompanyInfo extends BaseForm {
             name: 'registrationNumber',
             control: <Input />
           })}
-          {this.renderField({
-            label: '7. Certificate of registration',
-            description: descriptions.certificateOfRegistration,
-            name: 'certificateOfRegistration',
-            initialValue: '/path',
-            control: (
-              <Upload
-                name="certificateOfRegistration"
-                action="/upload.do"
-                listType="picture"
-              >
-                <Button>
-                  <Icon type="upload" /> Click to upload
-                </Button>
-              </Upload>
-            )
-          })}
+          <Field
+            label="7. Certificate of registration"
+            description={descriptions.certificateOfRegistration}
+            name="certificateOfRegistration"
+            control={
+              <UploadField
+                initialFile={data.certificateOfRegistration}
+                onReceiveFile={this.onUploadCertificateOfRegistration}
+              />
+            }
+          />
           {this.renderField({
             label: '8. Company website',
             name: 'website',

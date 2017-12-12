@@ -17,6 +17,7 @@ const basicInfoFields = `
   isSubContractor,
   corporateStructure,
   registrationNumber,
+  certificateOfRegistration,
   email,
   website,
   foreignOwnershipPercentage,

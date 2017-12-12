@@ -1,5 +1,6 @@
 import Countries from './Countries';
 import Field from './Field';
+import UploadField from './UploadField';
 import BaseForm from './BaseForm';
 
-export { Countries, Field, BaseForm };
+export { UploadField, Countries, Field, BaseForm };
