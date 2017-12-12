@@ -9,7 +9,7 @@ import { newRfqPath } from '../../../common/constants';
 
 const propTypes = {
   location: PropTypes.object,
-  tender: PropTypes.object
+  data: PropTypes.object
 };
 const TabPane = Tabs.TabPane;
 
@@ -17,13 +17,12 @@ class Publish extends BaseForm {
   constructor(props) {
     super(props);
 
-    const { tender } = props;
+    const { data } = props;
 
-    if (props.location.pathname === newRfqPath || tender.tableRows[0].UOM) {
+    if (props.location.pathname === newRfqPath || data.tableRows[0].UOM) {
       //RFQ
       rfqColumns.forEach(
-        el =>
-          (el.render = (text, record) => this.renderInput(el, record, tender))
+        el => (el.render = (text, record) => this.renderInput(el, record, data))
       );
       this.columns = rfqColumns;
     } else {
@@ -37,10 +36,10 @@ class Publish extends BaseForm {
       this.columns = eoiColumns;
     }
 
-    this.emailHtml = tender.emailHtml;
+    this.emailHtml = data.emailHtml;
 
     this.state = {
-      tableRows: tender.tableRows
+      tableRows: data.tableRows
     };
 
     this.addRow = this.addRow.bind(this);
@@ -78,12 +77,12 @@ class Publish extends BaseForm {
     this.setState({ tableRows });
   }
 
-  renderInput(el, record, tender) {
+  renderInput(el, record, data) {
     return (
       <Input
         value={
-          tender && tender.tableRows[record.key]
-            ? tender.tableRows[record.key][el.dataIndex]
+          data && data.tableRows[record.key]
+            ? data.tableRows[record.key][el.dataIndex]
             : ''
         }
         placeholder={el.title}
@@ -108,7 +107,7 @@ class Publish extends BaseForm {
   render() {
     const { companies } = this.props.location.state || {};
     const { tableRows } = this.state;
-    const { tender } = this.props;
+    const { data } = this.props;
 
     return (
       <Form layout="inline" onSubmit={this.handleSubmit}>
@@ -116,7 +115,7 @@ class Publish extends BaseForm {
           <Tabs type="card" className="send-rfq">
             <TabPane tab="Publish RFQ" key="1">
               <Email
-                companies={tender.companies ? tender.companies : companies}
+                companies={data.companies ? data.companies : companies}
                 renderField={props => this.renderField(props)}
                 renderOptions={props => this.renderOptions(props)}
                 onEmailHtmlEdit={props => (this.emailHtml = props)}

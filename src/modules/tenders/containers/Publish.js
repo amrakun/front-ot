@@ -46,7 +46,7 @@ const PublishContainer = props => {
   const updatedProps = {
     ...props,
     save,
-    tender: tender
+    data: tender
   };
 
   return <Publish {...updatedProps} />;

@@ -202,6 +202,27 @@ export const companyPrequalificationDetail = `
           statusDate
         }
       }
+      environmentalInfo {
+        doesHavePlan
+        hasEnvironmentalRegulatorInvestigated
+        dateOfInvestigation
+        reasonForInvestigation
+        actionStatus
+        investigationDocumentation
+        hasConvictedForEnvironmentalLaws
+        proveHasNotConvicted
+        additionalInformation
+      }
+      healthInfo {
+        doesHaveHealthSafety
+        areHSEResourcesClearlyIdentified
+        doesHaveDocumentedProcessToEnsure
+        areEmployeesUnderYourControl
+        doesHaveDocumentForRiskAssesment
+        doesHaveDocumentForIncidentInvestigation
+        doesHaveDocumentedFitness
+        isWillingToComply
+      }
     }
   }
 `;
