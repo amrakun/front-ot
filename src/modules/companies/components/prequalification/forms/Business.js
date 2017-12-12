@@ -279,7 +279,7 @@ class PrequalificationForm extends BaseForm {
           control: <TextArea />
         })}
 
-        {this.renderSubmit('Save & continue', this.handleSubmit)}
+        {this.renderSubmit()}
       </Form>
     );
   }
