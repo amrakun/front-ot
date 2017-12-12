@@ -21,6 +21,7 @@ function createEditLink(record) {
 function Tenders({ title, data, pagination, loading, onChange }) {
   tenderColumns[tenderColumns.length - 1].render = record =>
     createEditLink(record);
+
   return (
     <Card bordered={false} title={title}>
       <Table

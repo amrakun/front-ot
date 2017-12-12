@@ -141,7 +141,11 @@ const companies = `
     companies {
       basicInfo {
         enName,
-        email
+        email,
+        sapNumber
+      }
+      contactInfo {
+        phone
       }
     }
   }

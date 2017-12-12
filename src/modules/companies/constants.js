@@ -17,35 +17,35 @@ export const statusOptions = [
 export const treeData = [
   {
     label: 'Node1',
-    value: '0-0',
-    key: '0-0',
+    value: 'node1',
+    key: 'node1',
     children: [
       {
         label: 'Child Node1',
-        value: '0-0-0',
-        key: '0-0-0'
+        value: 'childNode1',
+        key: 'childeNode1'
       }
     ]
   },
   {
     label: 'Node2',
-    value: '0-1',
-    key: '0-1',
+    value: 'node2',
+    key: 'node2',
     children: [
       {
         label: 'Child Node3',
-        value: '0-1-0',
-        key: '0-1-0'
+        value: 'childNode3',
+        key: 'childNode3'
       },
       {
         label: 'Child Node4',
-        value: '0-1-1',
-        key: '0-1-1'
+        value: 'childNode4',
+        key: 'childNode4'
       },
       {
         label: 'Child Node5',
-        value: '0-1-2',
-        key: '0-1-2'
+        value: 'childNode5',
+        key: 'childNode5'
       }
     ]
   }
@@ -63,6 +63,6 @@ export const columns = [
   { title: 'Blocking', dataIndex: 'isBlocked' },
   { title: 'Company adminstrators', dataIndex: 'adminstrators' },
   { title: 'Email', dataIndex: 'basicInfo.email' },
-  { title: 'Phone', dataIndex: 'phone' },
+  { title: 'Phone', dataIndex: 'contactInfo.phone' },
   { title: 'Profile export to PDF', key: 'export' }
 ];
