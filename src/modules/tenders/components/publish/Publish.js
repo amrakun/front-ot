@@ -49,19 +49,17 @@ class Publish extends BaseForm {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        const { companies } = this.props.location.state;
-        const { tableRows } = this.state;
-        const updatedValues = {
-          ...values,
-          tableRows: tableRows,
-          companies: companies,
-          emailHtml: this.emailHtml
-        };
-        this.props.save('Publish', updatedValues);
-      }
-    });
+
+    const { companies } = this.props.location.state || {};
+    const { tableRows } = this.state;
+    const { data } = this.props;
+
+    const extra = {
+      tableRows: tableRows,
+      companies: data.companies ? data.companies : companies,
+      emailHtml: this.emailHtml
+    };
+    this.save(extra);
   }
 
   onChange(e, record) {
@@ -80,7 +78,7 @@ class Publish extends BaseForm {
   renderInput(el, record, data) {
     return (
       <Input
-        value={
+        defaultValue={
           data && data.tableRows[record.key]
             ? data.tableRows[record.key][el.dataIndex]
             : ''
@@ -108,7 +106,7 @@ class Publish extends BaseForm {
     const { companies } = this.props.location.state || {};
     const { tableRows } = this.state;
     const { data } = this.props;
-
+    console.log(data);
     return (
       <Form layout="inline" onSubmit={this.handleSubmit}>
         <div className="card-container">
@@ -120,6 +118,8 @@ class Publish extends BaseForm {
                 renderOptions={props => this.renderOptions(props)}
                 onEmailHtmlEdit={props => (this.emailHtml = props)}
                 emailHtml={this.emailHtml}
+                startDate={data.startDate}
+                endDate={data.endDate}
               />
             </TabPane>
 

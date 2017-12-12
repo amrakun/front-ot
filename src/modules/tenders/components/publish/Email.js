@@ -5,6 +5,7 @@ import { Editor } from 'react-draft-wysiwyg';
 import htmlToDraft from 'html-to-draftjs';
 import draftToHtml from 'draftjs-to-html';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { dateTimeFormat } from '../../../common/constants';
 import AddMore from '../../../companies/components/list/AddMore';
 import { days } from '../../constants';
@@ -60,7 +61,7 @@ class Email extends React.Component {
 
   render() {
     const { editorState } = this.state;
-    const { renderField, renderOptions } = this.props;
+    const { renderField, renderOptions, startDate, endDate } = this.props;
 
     const companiesTags = this.props.companies.map((el, i) => (
       <Tag key={i}>{el.basicInfo.enName}</Tag>
@@ -90,6 +91,7 @@ class Email extends React.Component {
           layout: layout,
           name: 'date',
           optional: true,
+          initialValue: [moment(startDate), moment(endDate)],
           control: (
             <RangePicker
               showTime={{ format: 'HH:mm' }}

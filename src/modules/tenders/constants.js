@@ -111,7 +111,8 @@ export const booleanData = [
 export const mockTender = {
   tenderNumber: 'nm123',
   tenderName: 'hakuna',
-  date: '',
+  startDate: '2017-12-12T11:25:44.524Z',
+  endDate: '2017-12-19T11:25:44.524Z',
   reminderDay: '1 day',
   tableRows: [
     {

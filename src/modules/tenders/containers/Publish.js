@@ -19,7 +19,7 @@ const propTypes = {
 const PublishContainer = props => {
   let { companyDetailQuery, location, match } = props;
 
-  console.log('tenders/containers/Publish.js', match.params.id);
+  console.log('tenders/containers/Publish', match.params.id);
 
   let tender = {};
   switch (location.pathname) {
@@ -39,8 +39,8 @@ const PublishContainer = props => {
     return <div />;
   }
 
-  const save = (name, doc) => {
-    console.log('', name, doc);
+  const save = doc => {
+    console.log('tedners/containers/Publish', doc);
   };
 
   const updatedProps = {
