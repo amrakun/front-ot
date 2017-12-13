@@ -4,7 +4,7 @@ import { Form, Select, Input, DatePicker } from 'antd';
 import { booleanData, actionStatusData } from '../constants';
 import { dateFormat } from 'modules/common/constants';
 import { envLabels, envDescriptions } from '../constants';
-import { BaseForm, Field, UploadField } from 'modules/common/components';
+import { BaseForm, Field, Uploader } from 'modules/common/components';
 import moment from 'moment';
 
 const { TextArea } = Input;
@@ -111,7 +111,7 @@ class PrequalificationForm extends BaseForm {
           label={envLabels.investigationDocumentation}
           name="investigationDocumentation"
           control={
-            <UploadField
+            <Uploader
               initialFile={{}}
               onReceiveFile={this.onUploadInvestigationDocumentation}
             />

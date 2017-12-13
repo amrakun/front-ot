@@ -13,9 +13,8 @@ import {
   Icon,
   Input
 } from 'antd';
-import { columns, statusOptions } from '../../constants';
-import AddMore from './AddMore';
-import { newRfqPath, newEoiPath } from '../../../common/constants';
+import { tenderColumns } from '../../constants';
+import { newRfqPath, newEoiPath } from 'modules/common/constants';
 
 const Search = Input.Search;
 
@@ -32,10 +31,7 @@ class CompaniesList extends React.Component {
     super(props);
 
     this.state = {
-      selectedCompanies: [],
-      productCodes: [],
-      region: ['Umnugovi'],
-      status: statusOptions
+      selectedCompanies: []
     };
 
     this.onProductCodesChange = this.onProductCodesChange.bind(this);
@@ -100,7 +96,6 @@ class CompaniesList extends React.Component {
           >
             Send RFQ
           </Link>
-          <AddMore />
         </div>
 
         <Table
@@ -108,7 +103,7 @@ class CompaniesList extends React.Component {
             selectedCompanies,
             onChange: this.onSelectedCompaniesChange
           }}
-          columns={columns}
+          columns={tenderColumns}
           rowKey={record => record}
           dataSource={data}
           pagination={pagination}
