@@ -4,7 +4,8 @@ import { Form, Select, Input, DatePicker } from 'antd';
 import { booleanData, actionStatusData } from '../constants';
 import { dateFormat } from 'modules/common/constants';
 import { envLabels, envDescriptions } from '../constants';
-import { BaseForm } from 'modules/common/components';
+import { BaseForm, Field, UploadField } from 'modules/common/components';
+import moment from 'moment';
 
 const { TextArea } = Input;
 
@@ -12,9 +13,14 @@ class PrequalificationForm extends BaseForm {
   constructor(props) {
     super(props);
 
+    const { data } = this.props;
+
     this.state = {
-      hasEnvironmentalRegulatorInvestigated: false,
-      hasConvictedForEnvironmentalLaws: false
+      hasEnvironmentalRegulatorInvestigated:
+        data.hasEnvironmentalRegulatorInvestigated || false,
+      hasConvictedForEnvironmentalLaws:
+        data.hasConvictedForEnvironmentalLaws || false,
+      investigationDocumentation: data.investigationDocumentation
     };
 
     this.onInvestigatedChange = this.onInvestigatedChange.bind(this);
@@ -29,9 +35,28 @@ class PrequalificationForm extends BaseForm {
     this.setState({ hasConvictedForEnvironmentalLaws: value === 'true' });
   }
 
+  onUploadInvestigationDocumentation(file) {
+    let investigationDocumentation = { name: file.name, url: file.response };
+
+    if (file.status === 'removed') {
+      investigationDocumentation = null;
+    }
+
+    this.setState({ investigationDocumentation });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    this.save({
+      investigationDocumentation: this.state.investigationDocumentation || {}
+    });
+  }
+
   render() {
     const booleanOptions = this.renderOptions(booleanData);
     const statusOptions = this.renderOptions(actionStatusData);
+    const { data } = this.props;
     const {
       hasEnvironmentalRegulatorInvestigated,
       hasConvictedForEnvironmentalLaws
@@ -62,6 +87,7 @@ class PrequalificationForm extends BaseForm {
           label: envLabels.dateOfInvestigation,
           isVisible: hasEnvironmentalRegulatorInvestigated,
           optional: !hasEnvironmentalRegulatorInvestigated,
+          initialValue: moment(data.dateOfInvestigation),
           control: <DatePicker format={dateFormat} placeholder="Date" />
         })}
 
@@ -81,6 +107,17 @@ class PrequalificationForm extends BaseForm {
           control: <Select>{statusOptions}</Select>
         })}
 
+        <Field
+          label={envLabels.investigationDocumentation}
+          name="investigationDocumentation"
+          control={
+            <UploadField
+              initialFile={{}}
+              onReceiveFile={this.onUploadInvestigationDocumentation}
+            />
+          }
+        />
+
         {this.renderField({
           name: 'hasConvictedForEnvironmentalLaws',
           label: envLabels.hasConvictedForEnvironmentalLaws,
@@ -90,6 +127,7 @@ class PrequalificationForm extends BaseForm {
           )
         })}
 
+        {/* TODO remove required from DB */}
         {this.renderField({
           name: 'proveHasNotConvicted',
           label: envLabels.proveHasNotConvicted,

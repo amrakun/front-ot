@@ -23,8 +23,8 @@ import AddMore from './AddMore';
 import { newRfqPath, newEoiPath } from '../../../common/constants';
 
 const Search = Input.Search;
-const SHOW_PARENT = TreeSelect.SHOW_PARENT;
 const CheckboxGroup = Checkbox.Group;
+
 const propTypes = {
   data: PropTypes.array,
   pagination: PropTypes.object,
@@ -37,87 +37,82 @@ class CompaniesList extends React.Component {
   constructor(props) {
     super(props);
 
-    this.regionValues = ['Umnugovi'];
-    this.statusValues = statusOptions;
-
     this.state = {
-      treeValue: ['0-0-0'],
-      selectedRowKeys: []
+      selectedCompanies: [],
+      productCodes: [],
+      region: ['Umnugovi'],
+      status: statusOptions
     };
 
-    this.onTreeChange = this.onTreeChange.bind(this);
-    this.onSelectChange = this.onSelectChange.bind(this);
-    this.onRegionCheck = this.onRegionCheck.bind(this);
-    this.onStatusCheck = this.onStatusCheck.bind(this);
+    this.onProductCodesChange = this.onProductCodesChange.bind(this);
+    this.onSelectedCompaniesChange = this.onSelectedCompaniesChange.bind(this);
+    this.onRegionChange = this.onRegionChange.bind(this);
+    this.onStatusChange = this.onStatusChange.bind(this);
     this.filter = this.filter.bind(this);
   }
 
-  onTreeChange(value) {
-    this.setState({ treeValue: value });
+  onProductCodesChange(value) {
+    this.setState({ productCodes: value });
   }
 
-  onSelectChange(selectedRowKeys) {
+  onSelectedCompaniesChange(selectedRowKeys) {
     this.setState({ selectedRowKeys });
   }
 
-  onRegionCheck(checkedValues) {
-    this.regionValues = checkedValues;
+  onRegionChange(values) {
+    this.region = values;
   }
 
-  onStatusCheck(checkedValues) {
-    this.statusValues = checkedValues;
+  onStatusChange(values) {
+    this.status = values;
   }
 
   filter() {
-    const { filter } = this.props;
-    filter({
-      region: this.regionValues,
-      status: this.statusValues
+    const { region, status, productCodes } = this.state;
+    this.props.filter({
+      region,
+      status,
+      productCodes
     });
   }
 
   render() {
     const { data, pagination, loading, onChange } = this.props;
-    const { selectedRowKeys } = this.state;
-    const rowSelection = {
-      selectedRowKeys,
-      onChange: this.onSelectChange
-    };
-    const selectedCompanies = selectedRowKeys;
-    const tProps = {
-      treeData,
-      value: this.state.treeValue,
-      onChange: this.onTreeChange,
-      treeCheckable: true,
-      showCheckedStrategy: SHOW_PARENT,
-      searchPlaceholder: 'Please select',
-      style: {
-        width: '100%'
-      }
-    };
+    const { selectedCompanies, productCodes, status, region } = this.state;
 
     return (
       <Row gutter={16}>
         <Col span={4}>
           <Card bordered={false} title="Products & services">
-            <TreeSelect {...tProps} />
+            <TreeSelect
+              treeData={treeData}
+              value={productCodes}
+              onChange={this.onProductCodesChange}
+              treeCheckable={true}
+              searchPlaceholder="Please select"
+              showCheckedStrategy={TreeSelect.SHOW_PARENT}
+              style={{ width: '100%' }}
+            />
           </Card>
+
           <Card bordered={false} title="Region" className="margin">
             <CheckboxGroup
               options={regionOptions}
-              defaultValue={this.regionValues}
+              defaultValue={region}
               className="horizontal"
-              onChange={this.onRegionCheck}
+              onChange={this.onRegionChange}
             />
           </Card>
+
           <Card bordered={false} title="Status" className="margin">
             <CheckboxGroup
               options={statusOptions}
-              defaultValue={this.statusValues}
+              defaultValue={status}
               className="horizontal"
-              onChange={this.onStatusCheck}
+              onChange={this.onStatusChange}
             />
           </Card>
+
           <Button
             style={{ width: '100%', marginTop: '16px' }}
             onClick={this.filter}
@@ -153,8 +148,12 @@ class CompaniesList extends React.Component {
               </Link>
               <AddMore />
             </div>
+
             <Table
-              rowSelection={rowSelection}
+              rowSelection={{
+                selectedCompanies,
+                onChange: this.onSelectedCompaniesChange
+              }}
               columns={columns}
               rowKey={record => record}
               dataSource={data}
