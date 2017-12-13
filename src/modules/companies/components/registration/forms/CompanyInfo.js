@@ -22,7 +22,7 @@ import {
   labels
 } from '../constants';
 
-import { BaseForm, Field, UploadField } from 'modules/common/components';
+import { BaseForm, Uploader } from 'modules/common/components';
 
 class CompanyInfo extends BaseForm {
   constructor(props) {
@@ -35,24 +35,11 @@ class CompanyInfo extends BaseForm {
       autoCompleteResult: [],
       selectedCountry: data.registeredInCountry,
       selectedAimag: data.registeredInAimag,
-      certificateOfRegistration: data.certificateOfRegistration,
       loading: false
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCountryChange = this.handleCountryChange.bind(this);
     this.handleAimagChange = this.handleAimagChange.bind(this);
-    this.onUploadCertificateOfRegistration = this.onUploadCertificateOfRegistration.bind(
-      this
-    );
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-
-    this.save({
-      certificateOfRegistration: this.state.certificateOfRegistration
-    });
   }
 
   handleCountryChange(value) {
@@ -61,16 +48,6 @@ class CompanyInfo extends BaseForm {
 
   handleAimagChange(value) {
     this.setState({ selectedAimag: value });
-  }
-
-  onUploadCertificateOfRegistration(file) {
-    let certificateOfRegistration = { name: file.name, url: file.response };
-
-    if (file.status === 'removed') {
-      certificateOfRegistration = null;
-    }
-
-    this.setState({ certificateOfRegistration });
   }
 
   render() {
@@ -213,17 +190,20 @@ class CompanyInfo extends BaseForm {
             name: 'registrationNumber',
             control: <Input />
           })}
-          <Field
-            label="7. Certificate of registration"
-            description={descriptions.certificateOfRegistration}
-            name="certificateOfRegistration"
-            control={
-              <UploadField
+          {this.renderField({
+            label: '7. Certificate of registration',
+            description: descriptions.certificateOfRegistration,
+            name: 'certificateOfRegistration',
+            dataType: 'file',
+            control: (
+              <Uploader
                 initialFile={data.certificateOfRegistration}
-                onReceiveFile={this.onUploadCertificateOfRegistration}
+                onReceiveFile={(...args) =>
+                  this.certificateOfRegistrationUpload(...args)
+                }
               />
-            }
-          />
+            )
+          })}
           {this.renderField({
             label: '8. Company website',
             name: 'website',

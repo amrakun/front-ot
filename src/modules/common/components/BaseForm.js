@@ -90,6 +90,12 @@ export default class BaseForm extends React.Component {
       value = Number(value);
     }
 
+    // we are saving file uploader's result to this class directly in
+    // renderField
+    if (dataType === 'file') {
+      value = this[`file_${name}`];
+    }
+
     return value;
   }
 
@@ -108,12 +114,42 @@ export default class BaseForm extends React.Component {
   }
 
   renderField(definations) {
-    const { initialValue, name, dataType = 'string' } = definations;
+    const { initialValue, name, control, dataType = 'string' } = definations;
 
     // collect field definations to use in save
     this.fieldDefs.push({ name, dataType });
 
     const { data } = this.props;
+
+    // file upload field
+    if (control.type.name === 'Uploader') {
+      const fileKey = `file_${name}`;
+
+      // receive files event ==============
+      let handler = file => {
+        let value = { name: file.name, url: file.response };
+
+        if (file.status === 'removed') {
+          value = null;
+        }
+
+        this[fileKey] = value;
+      };
+
+      // receive files with multiple option
+      if (control.props.multiple) {
+        handler = (file, files) => {
+          this[fileKey] = files.map(f => ({ name: f.name, url: f.response }));
+        };
+      }
+
+      // event binding
+      this[`${name}Upload`] = handler.bind(this);
+
+      // set initial value. for file fields we will get it's value from
+      // class directly later in getFieldValue
+      this[fileKey] = data[name];
+    }
 
     definations.initialValue = initialValue || data[name];
 
