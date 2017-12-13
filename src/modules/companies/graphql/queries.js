@@ -181,7 +181,7 @@ export const companyPrequalificationDetail = `
         }
         recordsInfo {
           date
-          path
+          file
         }
       }
       businessInfo {
@@ -225,7 +225,7 @@ export const companyPrequalificationDetail = `
         doesHaveDocumentForRiskAssesment
         doesHaveDocumentForIncidentInvestigation
         doesHaveDocumentedFitness
-        isWillingToComply
+        isWillingToCommit
       }
     }
   }
