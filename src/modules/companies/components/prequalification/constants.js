@@ -170,7 +170,37 @@ export const healthLabels = {
     Work (FFW) policy?`,
 
   isWillingToComply: `Is your company willing to comply with Oyu Tolgoi/RT HSE
-    management system?`
+    management system?`,
+
+  hasIndustrialAccident: `Has there been any industrial accident in the last 5
+    financial years?`,
+
+  ltifr: `Provide Lost Time Injury Frequency Rate (LTIFR) as defined for the
+    previous five calendar years for all onsite personnel on Contractor managed
+    projects. Additionally, provide as an attachment, the guidance note
+    (or similar) for how the Tenderer defines a Lost Time Injury.`,
+
+  injuryExplanation: `Provide a summary explaining the  fatality or injury
+    event(s) that contributed to the above:`,
+
+  seniorManagement: `Provide details of how senior management demonstrates its
+    commitment to the Oyu Tolgoi HSE policy and management system. `,
+
+  isWillingToCommit: `Is your company willing to commit itself, its employees
+    and all Sub-contractors, to implementing and being held to KPIs relating
+    to critical risk management (CRM)?`,
+
+  isPerparedToCompile: `Is your company prepared to compile weekly and monthly
+    safety statistics for the work performed on Site?`,
+
+  hasWorkedOnWorldBank: `Has your company previously worked on World Bank or
+    International Finance Corporation projects? If so provide details.`,
+
+  hasWorkedOnLargeProjects: `Has your company previously worked on large scale
+    mining construction projects? If so provide details.`,
+
+  doesHaveLicense: `Does the organisation have valid industry certifications
+    and/or licenses if required by the type of services provided?`
 };
 
 export const healthDescriptions = {

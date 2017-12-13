@@ -4,7 +4,7 @@ import { Form, Select, Input, DatePicker } from 'antd';
 import { booleanData, actionStatusData } from '../constants';
 import { dateFormat } from 'modules/common/constants';
 import { envLabels, envDescriptions } from '../constants';
-import { BaseForm, Field, Uploader } from 'modules/common/components';
+import { BaseForm, Uploader } from 'modules/common/components';
 import moment from 'moment';
 
 const { TextArea } = Input;
@@ -45,18 +45,12 @@ class PrequalificationForm extends BaseForm {
     this.setState({ investigationDocumentation });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-
-    this.save({
-      investigationDocumentation: this.state.investigationDocumentation || {}
-    });
-  }
-
   render() {
     const booleanOptions = this.renderOptions(booleanData);
     const statusOptions = this.renderOptions(actionStatusData);
+
     const { data } = this.props;
+
     const {
       hasEnvironmentalRegulatorInvestigated,
       hasConvictedForEnvironmentalLaws
@@ -107,16 +101,21 @@ class PrequalificationForm extends BaseForm {
           control: <Select>{statusOptions}</Select>
         })}
 
-        <Field
-          label={envLabels.investigationDocumentation}
-          name="investigationDocumentation"
-          control={
+        {this.renderField({
+          label: envLabels.investigationDocumentation,
+          name: 'investigationDocumentation',
+          dataType: 'file',
+          isVisible: hasEnvironmentalRegulatorInvestigated,
+          optional: !hasEnvironmentalRegulatorInvestigated,
+          control: (
             <Uploader
-              initialFile={{}}
-              onReceiveFile={this.onUploadInvestigationDocumentation}
+              initialFile={data.investigationDocumentation}
+              onReceiveFile={(...args) =>
+                this.investigationDocumentationUpload(...args)
+              }
             />
-          }
-        />
+          )
+        })}
 
         {this.renderField({
           name: 'hasConvictedForEnvironmentalLaws',
@@ -127,7 +126,6 @@ class PrequalificationForm extends BaseForm {
           )
         })}
 
-        {/* TODO remove required from DB */}
         {this.renderField({
           name: 'proveHasNotConvicted',
           label: envLabels.proveHasNotConvicted,

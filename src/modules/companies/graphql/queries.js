@@ -225,7 +225,6 @@ export const companyPrequalificationDetail = `
         doesHaveDocumentForRiskAssesment
         doesHaveDocumentForIncidentInvestigation
         doesHaveDocumentedFitness
-        isWillingToComply
       }
     }
   }

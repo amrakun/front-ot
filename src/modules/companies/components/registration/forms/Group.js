@@ -1,8 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Input, Icon, Button, Upload, Select, Row, Col } from 'antd';
+import { Form, Input, Icon, Button, Select, Row, Col } from 'antd';
 import { booleanData, roleData, countryData, groupLabels } from '../constants';
-import { BaseForm, Field } from 'modules/common/components';
+import { BaseForm, Field, Uploader } from 'modules/common/components';
 
 const FormItem = Form.Item;
 const formItemLayout = {
@@ -51,35 +51,6 @@ class RegistrationForm extends BaseForm {
 
   onIsExcChange(value) {
     this.setState({ isExclusiveDistributor: value === 'true' });
-  }
-
-  renderUpload(index) {
-    const { isExclusiveDistributor } = this.state;
-
-    return (
-      <Row className={isExclusiveDistributor ? '' : 'hidden'}>
-        <Col span={12}>
-          <Field name={`distributionRightName${index}`} control={<Input />} />
-        </Col>
-        <Col span={12}>
-          <Field
-            name={`distributionRight${index}`}
-            initialValue="/path"
-            control={
-              <Upload
-                name="certificateOfRegistration"
-                action="/upload.do"
-                listType="picture"
-              >
-                <Button>
-                  <Icon type="upload" /> Click to upload
-                </Button>
-              </Upload>
-            }
-          />
-        </Col>
-      </Row>
-    );
   }
 
   addFactory() {
@@ -163,6 +134,30 @@ class RegistrationForm extends BaseForm {
           </Col>
         </Row>
       </FormItem>
+    );
+  }
+
+  renderUpload(index) {
+    const { isExclusiveDistributor } = this.state;
+
+    return (
+      <Row className={isExclusiveDistributor ? '' : 'hidden'}>
+        <Col span={12}>
+          <Field name={`distributionRightName${index}`} control={<Input />} />
+        </Col>
+        <Col span={12}>
+          <Field
+            name={`distributionRight${index}`}
+            initialValue="/path"
+            control={
+              <Uploader
+                initialFile={{}}
+                onReceiveFile={this.onUploadInvestigationDocumentation}
+              />
+            }
+          />
+        </Col>
+      </Row>
     );
   }
 
