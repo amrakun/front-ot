@@ -2,17 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import {
-  Table,
-  Card,
-  Row,
-  Col,
-  TreeSelect,
-  Checkbox,
-  Button,
-  Icon,
-  Input
-} from 'antd';
+import { Table, Card, Input } from 'antd';
 import { tenderColumns } from '../../constants';
 import { newRfqPath, newEoiPath } from 'modules/common/constants';
 
