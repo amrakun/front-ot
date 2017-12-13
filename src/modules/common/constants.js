@@ -6,6 +6,7 @@ export const newEoiPath = '/eoi/publish';
 export const editTenderPath = '/tender/edit';
 export const rfqPath = '/rfq';
 export const eoiPath = '/eoi';
+export const viewTenderPath = '/tender';
 
 export const uploadDisclaimer = `You may upload &quot;jpg,jpeg,png,rtf,pdf&quot;
   files, or simple Adobe PDF files. Files that have the ability to contain

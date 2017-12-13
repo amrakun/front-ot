@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Table, Card } from 'antd';
-import { editTenderPath } from '../../../common/constants';
+import { editTenderPath, viewTenderPath } from '../../../common/constants';
 import { tenderColumns } from '../../constants';
 
 const propTypes = {
@@ -15,7 +15,12 @@ const propTypes = {
 };
 
 function createEditLink(record) {
-  return <Link to={`${editTenderPath}/${record.number}`}>Edit</Link>;
+  return (
+    <div>
+      <Link to={`${viewTenderPath}/${record.number}`}>View</Link> |
+      <Link to={`${editTenderPath}/${record.number}`}>Edit</Link>
+    </div>
+  );
 }
 
 function Tenders({ title, data, pagination, loading, onChange }) {

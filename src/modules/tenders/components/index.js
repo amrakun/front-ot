@@ -1,3 +1,4 @@
-import Tenders from './tenders/Tenders';
+import Tenders from './list/Tenders';
 import Publish from './publish/Publish';
-export { Tenders, Publish };
+import Tender from './list/Tender';
+export { Tenders, Publish, Tender };

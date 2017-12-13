@@ -1,12 +1,13 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { Tenders, Publish } from './containers';
+import { Tenders, Publish, Tender } from './containers';
 import {
   rfqPath,
   eoiPath,
   newRfqPath,
   newEoiPath,
-  editTenderPath
+  editTenderPath,
+  viewTenderPath
 } from '../common/constants';
 
 export function RfqRoute() {
@@ -22,6 +23,16 @@ export function EditTenderRoute() {
       exact
       path={`${editTenderPath}/:id`}
       component={Publish}
+    />
+  );
+}
+export function ViewTenderRoute() {
+  return (
+    <Route
+      key={viewTenderPath}
+      exact
+      path={`${viewTenderPath}/:id`}
+      component={Tender}
     />
   );
 }
