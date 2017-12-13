@@ -71,7 +71,7 @@ class RegistrationForm extends BaseForm {
     e.preventDefault();
 
     const factories = [];
-    const distributionRightNames = [];
+    const authorizedDistributions = [];
 
     this.state.factories.forEach(factory => {
       const _id = factory._id;
@@ -84,11 +84,11 @@ class RegistrationForm extends BaseForm {
       });
     });
 
-    distributionRightNames.push(this.getFieldValue('distributionRightName1'));
-    distributionRightNames.push(this.getFieldValue('distributionRightName2'));
-    distributionRightNames.push(this.getFieldValue('distributionRightName3'));
+    authorizedDistributions.push(this.getFieldValue('distributionRightName1'));
+    authorizedDistributions.push(this.getFieldValue('distributionRightName2'));
+    authorizedDistributions.push(this.getFieldValue('distributionRightName3'));
 
-    this.save({ factories });
+    this.save({ factories, authorizedDistributions });
   }
 
   renderFactory(factory, index) {
@@ -149,7 +149,7 @@ class RegistrationForm extends BaseForm {
     return (
       <Field
         name={`distributionRightName${index}`}
-        // initialValue={}
+        initialValue={data.authorizedDistributions[index - 1]}
         label={`Distribution right name ${index}`}
         hasFeedback={false}
         isVisible={isExclusiveDistributor}

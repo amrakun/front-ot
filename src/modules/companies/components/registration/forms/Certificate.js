@@ -43,14 +43,14 @@ class RegistrationForm extends BaseForm {
 
         {this.renderField({
           label: 'Please upload your certificate',
-          name: 'certificateOfRegistration',
+          name: 'file',
           dataType: 'file',
           isVisible: isReceived,
           optional: !isReceived,
           control: (
             <Uploader
-              initialFile={data.certificate}
-              onReceiveFile={(...args) => this.certificateUpload(...args)}
+              initialFile={data.file}
+              onReceiveFile={(...args) => this.fileUpload(...args)}
             />
           )
         })}

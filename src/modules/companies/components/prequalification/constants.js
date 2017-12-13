@@ -175,6 +175,9 @@ export const healthLabels = {
   hasIndustrialAccident: `Has there been any industrial accident in the last 5
     financial years?`,
 
+  tmha: `Provide total man hours accrued for the previous five calendar years
+    for all onsite personnel on Contractor managed projects`,
+
   ltifr: `Provide Lost Time Injury Frequency Rate (LTIFR) as defined for the
     previous five calendar years for all onsite personnel on Contractor managed
     projects. Additionally, provide as an attachment, the guidance note

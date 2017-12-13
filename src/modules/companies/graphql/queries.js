@@ -86,6 +86,7 @@ const shareholderItemFields = `
 
 const certificateInfoFields = `
   isReceived,
+  file,
   isOTSupplier,
   cwpo,
 `;
@@ -99,6 +100,7 @@ const groupInfoFields = `
   attachments,
   primaryManufacturerName,
   countryOfPrimaryManufacturer,
+  authorizedDistributions,
   factories {
     name,
     townOrCity,
@@ -225,7 +227,20 @@ export const companyPrequalificationDetail = `
         doesHaveDocumentForRiskAssesment
         doesHaveDocumentForIncidentInvestigation
         doesHaveDocumentedFitness
+        isWillingToComply
+        hasIndustrialAccident
+        tmha
+        ltifr
+        injuryExplanation
+        seniorManagement
         isWillingToCommit
+        isPerparedToCompile
+        hasWorkedOnWorldBank
+        hasWorkedOnWorldBankDescription
+        hasWorkedOnLargeProjects
+        hasWorkedOnLargeProjectsDescription
+        doesHaveLicense
+        doesHaveLicenseDescription
       }
     }
   }

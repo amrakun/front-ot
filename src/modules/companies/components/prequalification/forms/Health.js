@@ -1,15 +1,15 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Select } from 'antd';
+import { Form, Select, Input } from 'antd';
 import { healthLabels, healthDescriptions } from '../constants';
 import { booleanData } from '../constants';
 import { BaseForm } from 'modules/common/components';
 
+const TextArea = Input.TextArea;
+
 class PrequalificationForm extends BaseForm {
   constructor(props) {
     super(props);
-
-    console.log(props.data);
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -81,6 +81,93 @@ class PrequalificationForm extends BaseForm {
           label: healthLabels.isWillingToComply,
           dataType: 'boolean',
           control: <Select>{booleanOptions}</Select>
+        })}
+
+        {this.renderField({
+          name: 'hasIndustrialAccident',
+          label: healthLabels.hasIndustrialAccident,
+          dataType: 'boolean',
+          control: <Select>{booleanOptions}</Select>
+        })}
+
+        {this.renderField({
+          name: 'tmha',
+          label: healthLabels.tmha,
+          control: <TextArea />
+        })}
+
+        {this.renderField({
+          name: 'ltifr',
+          label: healthLabels.ltifr,
+          control: <TextArea />
+        })}
+
+        {this.renderField({
+          name: 'injuryExplanation',
+          label: healthLabels.injuryExplanation,
+          control: <TextArea />
+        })}
+
+        {this.renderField({
+          name: 'seniorManagement',
+          label: healthLabels.seniorManagement,
+          control: <TextArea />
+        })}
+
+        {this.renderField({
+          name: 'isWillingToCommit',
+          label: healthLabels.isWillingToCommit,
+          dataType: 'boolean',
+          control: <Select>{booleanOptions}</Select>
+        })}
+
+        {this.renderField({
+          name: 'isPerparedToCompile',
+          label: healthLabels.isPerparedToCompile,
+          dataType: 'boolean',
+          control: <Select>{booleanOptions}</Select>
+        })}
+
+        {this.renderField({
+          name: 'hasWorkedOnWorldBank',
+          label: healthLabels.hasWorkedOnWorldBank,
+          dataType: 'boolean',
+          control: <Select>{booleanOptions}</Select>
+        })}
+
+        {this.renderField({
+          name: 'hasWorkedOnWorldBankDescription',
+          label: ' ',
+          optional: true,
+          control: <TextArea />
+        })}
+
+        {this.renderField({
+          name: 'hasWorkedOnLargeProjects',
+          label: healthLabels.hasWorkedOnLargeProjects,
+          dataType: 'boolean',
+          control: <Select>{booleanOptions}</Select>
+        })}
+
+        {this.renderField({
+          name: 'hasWorkedOnLargeProjectsDescription',
+          label: ' ',
+          optional: true,
+          control: <TextArea />
+        })}
+
+        {this.renderField({
+          name: 'doesHaveLicense',
+          label: healthLabels.doesHaveLicense,
+          dataType: 'boolean',
+          control: <Select>{booleanOptions}</Select>
+        })}
+
+        {this.renderField({
+          name: 'doesHaveLicenseDescription',
+          label: ' ',
+          optional: true,
+          control: <TextArea />
         })}
         {/* TODO: multiple project-specific inputs */}
         {this.renderSubmit()}
