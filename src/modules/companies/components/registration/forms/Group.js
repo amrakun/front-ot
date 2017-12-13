@@ -71,6 +71,7 @@ class RegistrationForm extends BaseForm {
     e.preventDefault();
 
     const factories = [];
+    const distributionRightNames = [];
 
     this.state.factories.forEach(factory => {
       const _id = factory._id;
@@ -82,6 +83,10 @@ class RegistrationForm extends BaseForm {
         productCodes: this.getFieldValue(`productCodes${_id}`)
       });
     });
+
+    distributionRightNames.push(this.getFieldValue('distributionRightName1'));
+    distributionRightNames.push(this.getFieldValue('distributionRightName2'));
+    distributionRightNames.push(this.getFieldValue('distributionRightName3'));
 
     this.save({ factories });
   }
@@ -137,27 +142,20 @@ class RegistrationForm extends BaseForm {
     );
   }
 
-  renderUpload(index) {
+  renderDistrubutionRightInput(index) {
+    const { data } = this.props;
     const { isExclusiveDistributor } = this.state;
 
     return (
-      <Row className={isExclusiveDistributor ? '' : 'hidden'}>
-        <Col span={12}>
-          <Field name={`distributionRightName${index}`} control={<Input />} />
-        </Col>
-        <Col span={12}>
-          <Field
-            name={`distributionRight${index}`}
-            initialValue="/path"
-            control={
-              <Uploader
-                initialFile={{}}
-                onReceiveFile={this.onUploadInvestigationDocumentation}
-              />
-            }
-          />
-        </Col>
-      </Row>
+      <Field
+        name={`distributionRightName${index}`}
+        // initialValue={}
+        label={`Distribution right name ${index}`}
+        hasFeedback={false}
+        isVisible={isExclusiveDistributor}
+        optional={true}
+        control={<Input />}
+      />
     );
   }
 
@@ -166,7 +164,7 @@ class RegistrationForm extends BaseForm {
     const roleOptions = this.renderOptions(roleData);
     const countryOptions = this.renderOptions(countryData);
 
-    const { hasParent, role, factories } = this.state;
+    const { hasParent, role, factories, isExclusiveDistributor } = this.state;
 
     const factoryItems = factories.map((factory, index) =>
       this.renderFactory(factory, index)
@@ -229,9 +227,25 @@ class RegistrationForm extends BaseForm {
           )
         })}
 
-        {this.renderUpload(0)}
-        {this.renderUpload(1)}
-        {this.renderUpload(2)}
+        {this.renderDistrubutionRightInput(1)}
+        {this.renderDistrubutionRightInput(2)}
+        {this.renderDistrubutionRightInput(3)}
+
+        {this.renderField({
+          label: groupLabels.attachments,
+          name: 'attachments',
+          description: `Please upload your authorized distribution rights files`,
+          isVisible: isExclusiveDistributor,
+          optional: !isExclusiveDistributor,
+          dataType: 'file',
+          control: (
+            <Uploader
+              initialFiles={this.props.data.attachments}
+              multiple={true}
+              onReceiveFile={(...args) => this.attachmentsUpload(...args)}
+            />
+          )
+        })}
 
         {this.renderField({
           name: 'primaryManufacturerName',
