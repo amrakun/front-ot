@@ -1,19 +1,8 @@
 import React from 'react';
-import {
-  Form,
-  Select,
-  Button,
-  Row,
-  Col,
-  DatePicker,
-  Input,
-  InputNumber,
-  Upload,
-  Icon
-} from 'antd';
+import { Form, Select, Row, Col, DatePicker, Input, InputNumber } from 'antd';
 import moment from 'moment';
 import { yearData, booleanData, currencyData } from '../constants';
-import { BaseForm, Field } from 'modules/common/components';
+import { BaseForm, Uploader } from 'modules/common/components';
 import { dateFormat } from 'modules/common/constants';
 
 class PrequalificationForm extends BaseForm {
@@ -44,10 +33,10 @@ class PrequalificationForm extends BaseForm {
 
   collectRecordsInfoValue(index, values) {
     const date = this.getFieldValue(`recordsInfo${index}Date`);
-    const path = this.getFieldValue(`recordsInfo${index}Path`) || '/path';
+    const file = this.getFieldValue(`recordsInfo${index}File`, 'file');
 
-    if (date && path) {
-      values.push({ date, path });
+    if (date && file) {
+      values.push({ date, file });
     }
   }
 
@@ -98,26 +87,26 @@ class PrequalificationForm extends BaseForm {
     return (
       <Row gutter={16}>
         <Col span={12}>
-          <Field
-            name={`${prefix}${index}Year`}
-            dataType="number"
-            initialValue={year}
-            hasFeedback={false}
-            control={
+          {this.renderField({
+            name: `${prefix}${index}Year`,
+            dataType: 'number',
+            initialValue: year,
+            hasFeedback: false,
+            control: (
               <Select placeholder="Select an year">
                 {this.renderOptions(yearData)}
               </Select>
-            }
-          />
+            )
+          })}
         </Col>
         <Col span={12}>
-          <Field
-            name={`${prefix}${index}Amount`}
-            initialValue={amount}
-            dataType="number"
-            hasFeedback={false}
-            control={<InputNumber htmlType="number" />}
-          />
+          {this.renderField({
+            name: `${prefix}${index}Amount`,
+            initialValue: amount,
+            dataType: 'number',
+            hasFeedback: false,
+            control: <InputNumber htmlType="number" />
+          })}
         </Col>
       </Row>
     );
@@ -137,43 +126,45 @@ class PrequalificationForm extends BaseForm {
     );
   }
 
-  renderDatePath(index) {
+  renderDateFile(index) {
     const data = this.props.data || {};
     const recordsInfo = data.recordsInfo || [];
 
     let initialDate = null;
-    let initialPath = '';
+    let initialFile = null;
 
     if (recordsInfo[index]) {
       initialDate = moment(recordsInfo[index].date);
-      initialPath = recordsInfo[index].path;
+      initialFile = recordsInfo[index].file;
     }
 
     return (
       <Row gutter={16}>
         <Col span={12}>
-          <Field
-            name={`recordsInfo${index}Date`}
-            initialValue={initialDate}
-            hasFeedback={false}
-            optional={true}
-            control={<DatePicker format={dateFormat} placeholder="Start" />}
-          />
+          {this.renderField({
+            name: `recordsInfo${index}Date`,
+            initialValue: initialDate,
+            hasFeedback: false,
+            optional: true,
+            control: <DatePicker format={dateFormat} placeholder="Start" />
+          })}
         </Col>
         <Col span={12}>
-          <Field
-            name={`recordsInfo${index}Path`}
-            initialValue={initialPath}
-            hasFeedback={false}
-            optional={true}
-            control={
-              <Upload action="/upload.do" listType="picture">
-                <Button>
-                  <Icon type="upload" /> Click to upload
-                </Button>
-              </Upload>
-            }
-          />
+          {this.renderField({
+            name: `recordsInfo${index}File`,
+            initialValue: initialFile,
+            hasFeedback: false,
+            optional: true,
+            dataType: 'file',
+            control: (
+              <Uploader
+                initialFile={initialFile}
+                onReceiveFile={(...args) =>
+                  this[`recordsInfo${index}FileUpload`](...args)
+                }
+              />
+            )
+          })}
         </Col>
       </Row>
     );
@@ -210,20 +201,20 @@ class PrequalificationForm extends BaseForm {
           'Total shareholders equity ',
           'totalShareholderEquity'
         )}
-        <Field
-          label="If not, explain the reasons"
-          name="reasons"
-          control={<Input.TextArea style={{ minHeight: '80px' }} />}
-        />
+        {this.renderField({
+          label: 'If not, explain the reasons',
+          name: 'reasons',
+          control: <Input.TextArea style={{ minHeight: '80px' }} />
+        })}
         <Form.Item
           className="multiple-wrapper"
           label="Please provide financial records for your last 3 years"
           extra="The most recent years worth of accounts will always appear on top."
           {...this.formItemLayout()}
         >
-          {this.renderDatePath(0)}
-          {this.renderDatePath(1)}
-          {this.renderDatePath(2)}
+          {this.renderDateFile(0)}
+          {this.renderDateFile(1)}
+          {this.renderDateFile(2)}
         </Form.Item>
 
         {this.renderField({
