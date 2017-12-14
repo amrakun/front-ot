@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 const Home = () => {
   return (
@@ -17,4 +18,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default withRouter(Home);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
-import { Sidenav, Header } from './modules/layout/containers';
-import { Layout, Breadcrumb } from 'antd';
+import { Sidenav, Header, Breadcrumb } from './modules/layout/containers';
+import { Layout } from 'antd';
 import DashboardRoute from './modules/dashboard/routes';
 import {
   CompaniesRoute,
@@ -33,10 +33,7 @@ const Routes = () => (
         <Header />
 
         <Content>
-          <Breadcrumb>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb>
+          <Breadcrumb />
 
           <Switch>
             {HomeRoute()}

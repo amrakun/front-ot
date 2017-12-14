@@ -49,16 +49,6 @@ class Sidenav extends React.Component {
     });
 
     return (
-      <Menu defaultSelectedKeys={['/dashboard']} mode="inline">
-        {menuItems}
-      </Menu>
-    );
-  }
-
-  render() {
-    const currentUser = this.props.currentUser || {};
-
-    return (
       <Sider>
         <NavLink to="/" className="logo">
           <img
@@ -66,12 +56,24 @@ class Sidenav extends React.Component {
             alt="logo"
           />
         </NavLink>
-
-        {currentUser.isSupplier
-          ? this.renderMenu(supplierSideMenu)
-          : this.renderMenu(buyerSideMenu)}
+        <Menu defaultSelectedKeys={['/dashboard']} mode="inline">
+          {menuItems}
+        </Menu>
       </Sider>
     );
+  }
+
+  render() {
+    const { currentUser } = this.props;
+
+    let el = <div />;
+    if (currentUser) {
+      currentUser.isSupplier
+        ? (el = this.renderMenu(supplierSideMenu))
+        : (el = this.renderMenu(buyerSideMenu));
+    }
+
+    return el;
   }
 }
 
