@@ -1,3 +1,4 @@
 import { Sidenav } from '../components';
+import { withCurrentUser } from 'modules/auth/containers';
 
-export default Sidenav;
+export default withCurrentUser(Sidenav);

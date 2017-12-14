@@ -71,13 +71,12 @@ export default class Field extends React.Component {
       validation,
       isVisible = true,
       hasFeedback = true,
-      layout
+      layout,
+      rules = []
     } = this.props;
 
     const { form } = this.context;
     const { getFieldDecorator } = form;
-
-    let rules = [];
 
     if (!optional) {
       rules.push({
@@ -121,7 +120,8 @@ Field.propTypes = {
   isVisible: PropTypes.bool,
   hasFeedback: PropTypes.bool,
   initialValue: PropTypes.any,
-  layout: PropTypes.object
+  layout: PropTypes.object,
+  rules: PropTypes.array
 };
 
 Field.contextTypes = {

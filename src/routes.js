@@ -15,6 +15,13 @@ import {
   PublishEoiRoute,
   EditTenderRoute
 } from './modules/tenders/routes';
+import {
+  ForgotPasswordRoute,
+  ResetPasswordRoute,
+  SignInRoute,
+  HomeRoute,
+  RegisterRoute
+} from './modules/auth/routes';
 
 const { Content, Footer } = Layout;
 
@@ -32,6 +39,8 @@ const Routes = () => (
           </Breadcrumb>
 
           <Switch>
+            {HomeRoute()}
+
             {/*  buyer routes */}
             {DashboardRoute()}
             {CompaniesRoute()}
@@ -44,6 +53,12 @@ const Routes = () => (
             {/* supplier routes */}
             {RegistrationRoute()}
             {PrequalificationRoute()}
+
+            {/* Auth routes */}
+            {SignInRoute()}
+            {RegisterRoute()}
+            {ResetPasswordRoute()}
+            {ForgotPasswordRoute()}
           </Switch>
         </Content>
 
