@@ -26,7 +26,7 @@ class Sidenav extends React.Component {
         <Menu defaultSelectedKeys={['1']} mode="inline">
           <Menu.Item key="1">
             <Icon type="desktop" />
-            <NavLink to="/">Dashboard</NavLink>
+            <NavLink to="/dashboard">Dashboard</NavLink>
           </Menu.Item>
           <Menu.Item key="2">
             <Icon type="user" />

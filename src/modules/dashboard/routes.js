@@ -3,5 +3,7 @@ import { Route } from 'react-router-dom';
 import Dashboard from './containers';
 
 export default function() {
-  return <Route key="/" exact path="/" component={Dashboard} />;
+  return (
+    <Route key="/dashboard" exact path="/dashboard" component={Dashboard} />
+  );
 }
