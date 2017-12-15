@@ -1,5 +1,3 @@
-import Sidenav from './Sidenav';
-import Header from './Header';
-import Breadcrumb from './Breadcrumb';
+import MainLayout from './MainLayout';
 
-export { Sidenav, Header, Breadcrumb };
+export { MainLayout };

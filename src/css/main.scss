@@ -39,6 +39,9 @@ $link-color: rgb(0,153,168);
 }
 
 //layout
+.ant-layout-footer {
+  text-align: center;
+}
 .ant-menu-horizontal.ant-menu-root {
   border: none;
   background: #fff;
@@ -47,19 +50,17 @@ $link-color: rgb(0,153,168);
   margin-bottom: 20px;
   padding-right: 16px;
   z-index: 1;
-  > .ant-menu-item, > .ant-menu-submenu {
-    float: right;
-  }
 }
 .ant-layout-sider {
   position: relative;
   background: #fff;
-  box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.01);
+  box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.02);
   overflow-y: auto;
   overflow-x: hidden;
   height: 100vh;
   position: fixed;
-  left: 0
+  left: 0;
+  z-index: 2;
 }
 .ant-layout-sider-trigger {
   background: transparent;
@@ -161,22 +162,79 @@ i.success {
 }
 
 .right {
-  float: right;
+  float: right !important;
 }
 
 .center-content {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 231px);
+  height: calc(100vh - 164px);
 }
 
 .login-card {
   width: 350px;
+  padding: 26px 15px 15px 15px;
   button {
     width: 100%;
   }
   form .ant-form-item:last-child {
     margin-bottom: 0;
+  }
+}
+
+.main.ant-layout {
+  min-height: 100vh;
+}
+
+.ant-menu.landing {
+  line-height: 64px;
+  margin-bottom: 30px;
+}
+
+.logo.landing {
+  height: auto;
+  margin-left: 16px;
+  img {
+    position: relative;
+    top: 12px;
+  }
+}
+
+.home-landing {
+  text-align: center;
+
+  h1 {
+    font-weight: 600;
+    font-size: 50px;
+    margin-bottom: 26px;
+    line-height: 60px;
+    color: $link-color;
+  }
+  p {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+  [class^=home-btn] {
+    line-height: 38px;
+    padding: 0 15px;
+    display: inline-block;
+    font-size: 20px;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+  }
+  .home-btn {
+    background-color: $primary-color;
+    color: #fff;
+    margin-right: 16px;
+    &:hover {
+      background-color: tint($primary-color, 15)
+    }
+  }
+  .home-btn-transparent {
+    color: $link-color;
+    &:hover {
+      color: $primary-color;
+    }
   }
 }

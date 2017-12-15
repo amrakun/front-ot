@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
-import { Sidenav, Header, Breadcrumb } from './modules/layout/containers';
-import { Layout } from 'antd';
+import { MainLayout } from './modules/layout/containers';
 import DashboardRoute from './modules/dashboard/routes';
 import {
   CompaniesRoute,
@@ -23,47 +22,32 @@ import {
   RegisterRoute
 } from './modules/auth/routes';
 
-const { Content, Footer } = Layout;
-
 const Routes = () => (
   <BrowserRouter>
-    <Layout>
-      <Sidenav />
-      <Layout style={{ marginLeft: 200, minHeight: '100vh' }}>
-        <Header />
+    <MainLayout>
+      <Switch>
+        {HomeRoute()}
 
-        <Content>
-          <Breadcrumb />
+        {/*  buyer routes */}
+        {DashboardRoute()}
+        {CompaniesRoute()}
+        {RfqRoute()}
+        {PublishRfqRoute()}
+        {EoiRoute()}
+        {PublishEoiRoute()}
+        {EditTenderRoute()}
 
-          <Switch>
-            {HomeRoute()}
+        {/* supplier routes */}
+        {RegistrationRoute()}
+        {PrequalificationRoute()}
 
-            {/*  buyer routes */}
-            {DashboardRoute()}
-            {CompaniesRoute()}
-            {RfqRoute()}
-            {PublishRfqRoute()}
-            {EoiRoute()}
-            {PublishEoiRoute()}
-            {EditTenderRoute()}
-
-            {/* supplier routes */}
-            {RegistrationRoute()}
-            {PrequalificationRoute()}
-
-            {/* Auth routes */}
-            {SignInRoute()}
-            {RegisterRoute()}
-            {ResetPasswordRoute()}
-            {ForgotPasswordRoute()}
-          </Switch>
-        </Content>
-
-        <Footer style={{ textAlign: 'center' }}>
-          Oyu Tolgoi ©2018 All Rights Reserved
-        </Footer>
-      </Layout>
-    </Layout>
+        {/* Auth routes */}
+        {SignInRoute()}
+        {RegisterRoute()}
+        {ResetPasswordRoute()}
+        {ForgotPasswordRoute()}
+      </Switch>
+    </MainLayout>
   </BrowserRouter>
 );
 

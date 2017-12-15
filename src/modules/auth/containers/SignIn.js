@@ -17,7 +17,6 @@ const SignInContainer = props => {
     loginMutation({ variables })
       .then(({ data }) => {
         const { token, refreshToken } = data.login;
-        console.log(token, refreshToken);
         // save tokens
         localStorage.setItem(LOGIN_TOKEN_KEY, token);
         localStorage.setItem(LOGIN_REFRESH_TOKEN_KEY, refreshToken);

@@ -84,6 +84,7 @@ class Register extends BaseForm {
             <Button
               type="primary"
               htmlType="submit"
+              size="large"
               style={{ marginBottom: '5px' }}
             >
               Register
