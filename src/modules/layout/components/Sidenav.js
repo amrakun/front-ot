@@ -10,13 +10,19 @@ const MenuItem = Menu.Item;
 
 const Sidenav = (props, context) => {
   const { currentUser } = context;
-  let el = null;
 
-  currentUser.isSupplier
-    ? (el = renderMenu(supplierSideMenu))
-    : (el = renderMenu(buyerSideMenu));
-
-  return el;
+  return (
+    <Sider>
+      <NavLink to="/" className="logo">
+        <img src={process.env.PUBLIC_URL + '/images/logo_mn.png'} alt="logo" />
+      </NavLink>
+      <Menu defaultSelectedKeys={['/dashboard']} mode="inline">
+        {currentUser.isSupplier
+          ? renderMenu(supplierSideMenu)
+          : renderMenu(buyerSideMenu)}
+      </Menu>
+    </Sider>
+  );
 };
 
 Sidenav.contextTypes = {
@@ -50,16 +56,7 @@ function renderMenu(sideMenu) {
     }
   });
 
-  return (
-    <Sider>
-      <NavLink to="/" className="logo">
-        <img src={process.env.PUBLIC_URL + '/images/logo_mn.png'} alt="logo" />
-      </NavLink>
-      <Menu defaultSelectedKeys={['/dashboard']} mode="inline">
-        {menuItems}
-      </Menu>
-    </Sider>
-  );
+  return menuItems;
 }
 
 export default Sidenav;
