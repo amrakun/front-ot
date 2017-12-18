@@ -9,7 +9,16 @@ class PrequalificationForm extends BaseForm {
   constructor(props) {
     super(props);
 
+    this.state = {
+      canProvideAccountsInfo: props.data.canProvideAccountsInfo || false
+    };
+
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onCanProvide = this.onCanProvide.bind(this);
+  }
+
+  onCanProvide(value) {
+    this.setState({ canProvideAccountsInfo: value === 'true' });
   }
 
   collectYearAmountValue(prefix, values) {
@@ -173,39 +182,49 @@ class PrequalificationForm extends BaseForm {
   render() {
     const currencyOptions = this.renderOptions(currencyData);
     const booleanOptions = this.renderOptions(booleanData);
+    const { canProvideAccountsInfo } = this.state;
 
     return (
       <Form className="preq-form">
         {this.renderField({
           label: 'Can you provide accounts for the last 3 financial year?',
           name: 'canProvideAccountsInfo',
-          control: <Select placeholder="Select one">{booleanOptions}</Select>
-        })}
-
-        {this.renderField({
-          label: 'Currency',
-          name: 'currency',
           control: (
-            <Select placeholder="Select a currency">{currencyOptions}</Select>
+            <Select onChange={this.onCanProvide}>{booleanOptions}</Select>
           )
         })}
 
-        {this.renderYearAmountGroup('Annual turnover', 'annualTurnover')}
-        {this.renderYearAmountGroup('Pre-tax profit', 'preTaxProfit')}
-        {this.renderYearAmountGroup('Total assets', 'totalAssets')}
-        {this.renderYearAmountGroup(
-          'Total current assets',
-          'totalCurrentAssets'
-        )}
-        {this.renderYearAmountGroup(
-          'Total shareholders equity ',
-          'totalShareholderEquity'
-        )}
+        <div style={canProvideAccountsInfo ? {} : { display: 'none' }}>
+          {this.renderField({
+            label: 'Currency',
+            name: 'currency',
+            optional: !canProvideAccountsInfo,
+            control: (
+              <Select placeholder="Select a currency">{currencyOptions}</Select>
+            )
+          })}
+
+          {this.renderYearAmountGroup('Annual turnover', 'annualTurnover')}
+          {this.renderYearAmountGroup('Pre-tax profit', 'preTaxProfit')}
+          {this.renderYearAmountGroup('Total assets', 'totalAssets')}
+          {this.renderYearAmountGroup(
+            'Total current assets',
+            'totalCurrentAssets'
+          )}
+          {this.renderYearAmountGroup(
+            'Total shareholders equity ',
+            'totalShareholderEquity'
+          )}
+        </div>
+
         {this.renderField({
           label: 'If not, explain the reasons',
           name: 'reasons',
+          isVisible: !canProvideAccountsInfo,
+          optional: canProvideAccountsInfo,
           control: <Input.TextArea style={{ minHeight: '80px' }} />
         })}
+
         <Form.Item
           className="multiple-wrapper"
           label="Please provide financial records for your last 3 years"

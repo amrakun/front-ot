@@ -79,7 +79,7 @@ export const labels = {
   doesEmployeePoliticallyExposed: `Does your company employ any politically exposed person? If yes,
     provide list of PEP name`,
 
-  additionalInformation: `Additional Information`
+  PEPName: `PEP Name`
 };
 
 export const descriptions = {

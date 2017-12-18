@@ -35,11 +35,13 @@ class CompanyInfo extends BaseForm {
       autoCompleteResult: [],
       selectedCountry: data.registeredInCountry,
       selectedAimag: data.registeredInAimag,
+      isRegisteredOnSup: data.isRegisteredOnSup,
       loading: false
     };
 
     this.handleCountryChange = this.handleCountryChange.bind(this);
     this.handleAimagChange = this.handleAimagChange.bind(this);
+    this.handleIsRegisteredChange = this.handleIsRegisteredChange.bind(this);
   }
 
   handleCountryChange(value) {
@@ -50,9 +52,18 @@ class CompanyInfo extends BaseForm {
     this.setState({ selectedAimag: value });
   }
 
+  handleIsRegisteredChange(value) {
+    this.setState({ isRegisteredOnSup: value === 'true' });
+  }
+
   render() {
     const { data } = this.props;
-    const { autoCompleteResult, selectedCountry, selectedAimag } = this.state;
+    const {
+      autoCompleteResult,
+      selectedCountry,
+      selectedAimag,
+      isRegisteredOnSup
+    } = this.state;
 
     const websiteOptions = this.renderAutoCompleteOptions(autoCompleteResult);
     const booleanOptions = this.renderOptions(booleanData);
@@ -65,11 +76,17 @@ class CompanyInfo extends BaseForm {
             label: 'Are you an existing supplier?',
             name: 'isRegisteredOnSup',
             dataType: 'boolean',
-            control: <Select>{booleanOptions}</Select>
+            control: (
+              <Select onChange={this.handleIsRegisteredChange}>
+                {booleanOptions}
+              </Select>
+            )
           })}
           {this.renderField({
             label: 'SAP number',
             name: 'sapNumber',
+            isVisible: isRegisteredOnSup,
+            optional: !isRegisteredOnSup,
             control: <Input />
           })}
           {this.renderField({
@@ -97,6 +114,7 @@ class CompanyInfo extends BaseForm {
           {this.renderField({
             label: 'Address 3',
             name: 'address3',
+            optional: true,
             control: <Input />
           })}
           {this.renderField({
@@ -125,28 +143,28 @@ class CompanyInfo extends BaseForm {
             control: (
               <Select
                 placeholder="Please select a country"
-                onChange={value => this.handleCountryChange(value)}
+                onChange={this.handleCountryChange}
               >
                 {countryOptions}
               </Select>
             )
           })}
           {this.renderField({
-            label: '3. Aimag you are registered in',
+            label: 'Aimag you are registered in',
             name: 'registeredInAimag',
             isVisible: selectedCountry === 'Mongolia',
             optional: selectedCountry !== 'Mongolia',
             control: (
               <Select
                 placeholder="Please select an aimag"
-                onChange={value => this.handleAimagChange(value)}
+                onChange={this.handleAimagChange}
               >
                 {this.renderOptions(aimagData)}
               </Select>
             )
           })}
           {this.renderField({
-            label: '3. Soum you are registered in',
+            label: 'Soum you are registered in',
             name: 'registeredInSum',
             isVisible:
               selectedCountry === 'Mongolia' && selectedAimag === 'Umnugovi',

@@ -28,6 +28,7 @@ class RegistrationForm extends BaseForm {
       hasParent: data.hasParent || false,
       role: data.role || '',
       isExclusiveDistributor: data.isExclusiveDistributor || false,
+      isParentExistingSup: data.isParentExistingSup || false,
       factories: (data.factories || []).map(f => ({
         _id: Math.random(),
         ...f
@@ -39,6 +40,7 @@ class RegistrationForm extends BaseForm {
     this.onIsExcChange = this.onIsExcChange.bind(this);
     this.addFactory = this.addFactory.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onParentExists = this.onParentExists.bind(this);
   }
 
   onHasParentChange(value) {
@@ -51,6 +53,10 @@ class RegistrationForm extends BaseForm {
 
   onIsExcChange(value) {
     this.setState({ isExclusiveDistributor: value === 'true' });
+  }
+
+  onParentExists(value) {
+    this.setState({ isParentExistingSup: value === 'true' });
   }
 
   addFactory() {
@@ -164,7 +170,13 @@ class RegistrationForm extends BaseForm {
     const roleOptions = this.renderOptions(roleData);
     const countryOptions = this.renderOptions(countryData);
 
-    const { hasParent, role, factories, isExclusiveDistributor } = this.state;
+    const {
+      hasParent,
+      role,
+      factories,
+      isExclusiveDistributor,
+      isParentExistingSup
+    } = this.state;
 
     const factoryItems = factories.map((factory, index) =>
       this.renderFactory(factory, index)
@@ -181,7 +193,30 @@ class RegistrationForm extends BaseForm {
             <Select onChange={this.onHasParentChange}>{booleanOptions}</Select>
           )
         })}
-
+        {this.renderField({
+          name: 'isParentExistingSup',
+          label: groupLabels.isParentExistingSup,
+          isVisible: hasParent,
+          optional: !hasParent,
+          control: (
+            <Select onChange={this.onParentExists}>{booleanOptions}</Select>
+          )
+        })}
+        {this.renderField({
+          name: 'parentName',
+          label: groupLabels.parentName,
+          isVisible: hasParent && isParentExistingSup,
+          optional: !hasParent && !isParentExistingSup,
+          control: <Select>{booleanOptions}</Select>
+          // TODO: companyOptions fetch from db
+        })}
+        {this.renderField({
+          name: 'parentName',
+          label: groupLabels.parentName,
+          isVisible: hasParent && !isParentExistingSup,
+          optional: !hasParent && !isParentExistingSup,
+          control: <Input />
+        })}
         {this.renderField({
           name: 'parentAddress',
           label: groupLabels.parentAddress,
@@ -221,7 +256,7 @@ class RegistrationForm extends BaseForm {
           name: 'isExclusiveDistributor',
           label: groupLabels.isExclusiveDistributor,
           dataType: 'boolean',
-          isVisible: role === 'Stockist' || role === 'Distrubotor',
+          isVisible: role === 'Distrubotor',
           control: (
             <Select onChange={this.onIsExcChange}>{booleanOptions}</Select>
           )

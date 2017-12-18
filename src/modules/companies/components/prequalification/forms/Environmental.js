@@ -134,13 +134,6 @@ class PrequalificationForm extends BaseForm {
           control: <TextArea />
         })}
 
-        {this.renderField({
-          name: 'additionalInformation',
-          label: envLabels.additionalInformation,
-          description: envDescriptions.additionalInformation,
-          control: <TextArea />
-        })}
-
         {this.renderSubmit('Save & continue', this.handleSubmit)}
       </Form>
     );

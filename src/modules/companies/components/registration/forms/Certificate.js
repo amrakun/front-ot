@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Input, Select } from 'antd';
+import { Form, Select } from 'antd';
 import { booleanData, certLabels } from '../constants';
 import { BaseForm, Uploader } from 'modules/common/components';
 
@@ -9,16 +9,10 @@ class RegistrationForm extends BaseForm {
     super(props);
 
     this.state = {
-      isOTSupplier: props.data.isOTSupplier || false,
       isReceived: props.data.isReceived || false
     };
 
-    this.onIsSupplierChange = this.onIsSupplierChange.bind(this);
     this.onIsReceivedChange = this.onIsReceivedChange.bind(this);
-  }
-
-  onIsSupplierChange(value) {
-    this.setState({ isOTSupplier: value === 'true' });
   }
 
   onIsReceivedChange(value) {
@@ -27,7 +21,7 @@ class RegistrationForm extends BaseForm {
 
   render() {
     const booleanOptions = this.renderOptions(booleanData);
-    const { isOTSupplier, isReceived } = this.state;
+    const { isReceived } = this.state;
     const { data } = this.props;
 
     return (
@@ -53,23 +47,6 @@ class RegistrationForm extends BaseForm {
               onReceiveFile={(...args) => this.fileUpload(...args)}
             />
           )
-        })}
-
-        {this.renderField({
-          name: 'isOTSupplier',
-          label: certLabels.isOTSupplier,
-          dataType: 'boolean',
-          control: (
-            <Select onChange={this.onIsSupplierChange}>{booleanOptions}</Select>
-          )
-        })}
-
-        {this.renderField({
-          name: 'cwpo',
-          label: certLabels.cwpo,
-          dataType: 'boolean',
-          isVisible: isOTSupplier,
-          control: <Input />
         })}
 
         {this.renderSubmit('Save & continue', this.handleSubmit)}

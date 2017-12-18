@@ -31,6 +31,8 @@ class PrequalificationForm extends BaseForm {
       hasConvictedForBusinessIntegrity:
         data.hasConvictedForBusinessIntegrity || false,
       hasLeadersConvicted: data.hasLeadersConvicted || false,
+      doesEmployeePoliticallyExposed:
+        data.doesEmployeePoliticallyExposed || false,
       investigations: (data.investigations || []).map(i => ({
         _id: Math.random(),
         ...i
@@ -41,6 +43,7 @@ class PrequalificationForm extends BaseForm {
     this.onLeaderConvictedChange = this.onLeaderConvictedChange.bind(this);
     this.addInvestigation = this.addInvestigation.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onHasPEPCHange = this.onHasPEPCHange.bind(this);
   }
 
   onHasConvictedChange(value) {
@@ -49,6 +52,10 @@ class PrequalificationForm extends BaseForm {
 
   onLeaderConvictedChange(value) {
     this.setState({ hasLeadersConvicted: value === 'true' });
+  }
+
+  onHasPEPCHange(value) {
+    this.setState({ doesEmployeePoliticallyExposed: value == 'true' });
   }
 
   addInvestigation() {
@@ -142,7 +149,8 @@ class PrequalificationForm extends BaseForm {
     const {
       hasConvictedForBusinessIntegrity,
       hasLeadersConvicted,
-      investigations
+      investigations,
+      doesEmployeePoliticallyExposed
     } = this.state;
 
     const investigationItems = investigations.map((investigation, index) =>
@@ -269,14 +277,17 @@ class PrequalificationForm extends BaseForm {
           label: labels.doesEmployeePoliticallyExposed,
           description: descriptions.doesEmployeePoliticallyExposed,
           dataType: 'boolean',
-          control: <Select>{booleanOptions}</Select>
+          control: (
+            <Select onChange={this.onHasPEPCHange}>{booleanOptions}</Select>
+          )
         })}
 
         {this.renderField({
-          name: 'additionalInformation',
-          label: labels.additionalInformation,
-          description: descriptions.additionalInformation,
-          control: <TextArea />
+          name: 'PEPName',
+          label: labels.PEPName,
+          isVisible: doesEmployeePoliticallyExposed,
+          optional: !doesEmployeePoliticallyExposed,
+          control: <Input />
         })}
 
         {this.renderSubmit()}

@@ -42,9 +42,10 @@ export const countryData = [
 ];
 
 export const roleData = [
-  { text: 'Original Equipment Manufacturer (EOM)', value: 'EOM' },
+  { text: 'Original Equipment Manufacturer (OEM)', value: 'EOM' },
   { text: 'Stockist', value: 'Stockist' },
-  { text: 'Distrubotor', value: 'Distrubotor' }
+  { text: 'Distrubotor', value: 'Distrubotor' },
+  { text: 'None of above', value: 'None' }
 ];
 
 export const descriptions = {
@@ -116,7 +117,11 @@ export const groupLabels = {
   head: `Please provide details of your Ultimate Parent Company or any
     associated companies if applicable.`,
 
+  isParentExistingSup: `Is your parent company existing supplier in OT`,
+
   hasParent: `22. Do you have an Ultimate Parent Company?`,
+
+  parentName: `Ultimate parent company`,
 
   parentAddress: `Ultimate Parent Company address`,
 
