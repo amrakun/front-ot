@@ -88,9 +88,9 @@ class Publish extends BaseForm {
     const { data } = this.props;
     const { currentUser } = this.context;
     let disabled = false;
-    if (currentUser.isSupplier && index < 7) {
+    if (currentUser.isSupplier && index < 8) {
       disabled = true;
-    } else if (!currentUser.isSupplier && index > 6) {
+    } else if (!currentUser.isSupplier && index > 7) {
       disabled = true;
     }
     return (
