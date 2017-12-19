@@ -106,7 +106,7 @@ class Publish extends BaseForm {
     const { companies } = this.props.location.state || {};
     const { tableRows } = this.state;
     const { data } = this.props;
-    console.log(data);
+
     return (
       <Form layout="inline" onSubmit={this.handleSubmit}>
         <div className="card-container">
@@ -120,6 +120,8 @@ class Publish extends BaseForm {
                 emailHtml={this.emailHtml}
                 startDate={data.startDate}
                 endDate={data.endDate}
+                file={data.file}
+                fileUpload={(...args) => this.fileUpload(...args)}
               />
             </TabPane>
 

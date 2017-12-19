@@ -10,6 +10,7 @@ import { dateTimeFormat } from '../../../common/constants';
 import AddMore from '../../../companies/components/list/AddMore';
 import { days } from '../../constants';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { Uploader } from 'modules/common/components';
 
 const { RangePicker } = DatePicker;
 
@@ -61,7 +62,14 @@ class Email extends React.Component {
 
   render() {
     const { editorState } = this.state;
-    const { renderField, renderOptions, startDate, endDate } = this.props;
+    const {
+      renderField,
+      renderOptions,
+      startDate,
+      endDate,
+      file,
+      fileUpload
+    } = this.props;
 
     const companiesTags = this.props.companies.map((el, i) => (
       <Tag key={i}>{el.basicInfo.enName}</Tag>
@@ -108,6 +116,17 @@ class Email extends React.Component {
             <Select placeholder="Expired day reminder">
               {renderOptions(days)}
             </Select>
+          )
+        })}
+        {renderField({
+          layout: layout,
+          name: 'file',
+          dataType: 'file',
+          control: (
+            <Uploader
+              initialFile={file}
+              onReceiveFile={(...args) => fileUpload(...args)}
+            />
           )
         })}
         <Editor
