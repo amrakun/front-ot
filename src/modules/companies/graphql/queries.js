@@ -109,9 +109,9 @@ const groupInfoFields = `
   }
 `;
 
-export const companyDetail = `
-  query companyDetail {
-    companyDetail(_id: "5a1fc129c2e8aa7c0f2752dd") {
+export const companyByUser = `
+  query companyByUser {
+    companyByUser {
       basicInfo {
         ${basicInfoFields}
       }
@@ -154,8 +154,8 @@ const companies = `
 `;
 
 export const companyPrequalificationDetail = `
-  query companyDetail {
-    companyDetail(_id: "5a1fc129c2e8aa7c0f2752dd") {
+  query companyByUser {
+    companyByUser {
       financialInfo {
         canProvideAccountsInfo
         currency
@@ -247,7 +247,7 @@ export const companyPrequalificationDetail = `
 `;
 
 export default {
-  companyDetail,
+  companyByUser,
   companyPrequalificationDetail,
   companies
 };

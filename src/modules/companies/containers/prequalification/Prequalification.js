@@ -5,9 +5,9 @@ import { queries, mutations } from '../../graphql';
 import { PrequalificationForms } from '../../components';
 
 const PrequalificationContainer = props => {
-  let { companyDetailQuery } = props;
+  let { companyByUserQuery } = props;
 
-  if (companyDetailQuery.loading) {
+  if (companyByUserQuery.loading) {
     return <div />;
   }
 
@@ -29,19 +29,19 @@ const PrequalificationContainer = props => {
     ...props,
     save,
     company: {
-      ...companyDetailQuery.companyDetail
+      ...companyByUserQuery.companyByUser
     }
   };
   return <PrequalificationForms {...updatedProps} />;
 };
 
 PrequalificationContainer.propTypes = {
-  companyDetailQuery: PropTypes.object
+  companyByUserQuery: PropTypes.object
 };
 
 export default compose(
   graphql(gql(queries.companyPrequalificationDetail), {
-    name: 'companyDetailQuery'
+    name: 'companyByUserQuery'
   }),
 
   // mutations
