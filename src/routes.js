@@ -1,7 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import { MainLayout } from './modules/layout/containers';
-import DashboardRoute from './modules/dashboard/routes';
+import {
+  DashboardRoute,
+  SupplierDashboardRoute
+} from './modules/dashboard/routes';
 import {
   CompaniesRoute,
   RegistrationRoute,
@@ -12,7 +15,8 @@ import {
   PublishRfqRoute,
   EoiRoute,
   PublishEoiRoute,
-  EditTenderRoute
+  EditTenderRoute,
+  SubmitTenderRoute
 } from './modules/tenders/routes';
 import {
   ForgotPasswordRoute,
@@ -38,6 +42,8 @@ const Routes = () => (
         {EditTenderRoute()}
 
         {/* supplier routes */}
+        {SupplierDashboardRoute()}
+        {SubmitTenderRoute()}
         {RegistrationRoute()}
         {PrequalificationRoute()}
 

@@ -7,6 +7,7 @@ import {
   newRfqPath,
   newEoiPath,
   editTenderPath,
+  submitTenderPath,
   viewTenderPath
 } from '../common/constants';
 
@@ -22,6 +23,16 @@ export function EditTenderRoute() {
       key={editTenderPath}
       exact
       path={`${editTenderPath}/:id`}
+      component={Publish}
+    />
+  );
+}
+export function SubmitTenderRoute() {
+  return (
+    <Route
+      key={submitTenderPath}
+      exact
+      path={`${submitTenderPath}/:id`}
       component={Publish}
     />
   );

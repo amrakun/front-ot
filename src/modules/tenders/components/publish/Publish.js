@@ -24,9 +24,9 @@ class Publish extends BaseForm {
       rfqColumns.forEach(
         (el, index) =>
           index === rfqColumns.length - 1
-            ? (el.render = (text, record) =>
-                this.renderUpload(el, record, data))
-            : (el.render = (text, record) => this.renderInput(el, record, data))
+            ? (el.render = (text, record) => this.renderUpload(el, record))
+            : (el.render = (text, record) =>
+                this.renderInput(el, record, index))
       );
       this.columns = rfqColumns;
     } else {
@@ -84,7 +84,15 @@ class Publish extends BaseForm {
     this.setState({ tableRows });
   }
 
-  renderInput(el, record, data) {
+  renderInput(el, record, index) {
+    const { data } = this.props;
+    const { currentUser } = this.context;
+    let disabled = false;
+    if (currentUser.isSupplier && index < 7) {
+      disabled = true;
+    } else if (!currentUser.isSupplier && index > 6) {
+      disabled = true;
+    }
     return (
       <Input
         defaultValue={
@@ -92,6 +100,7 @@ class Publish extends BaseForm {
             ? data.tableRows[record.key][el.dataIndex]
             : ''
         }
+        disabled={disabled}
         placeholder={el.title}
         id={el.dataIndex}
         onChange={e => this.onChange(e, record)}
@@ -99,7 +108,8 @@ class Publish extends BaseForm {
     );
   }
 
-  renderUpload(el, record, data) {
+  renderUpload(el, record) {
+    const { data } = this.props;
     return (
       <Uploader
         initialFile={
@@ -127,6 +137,7 @@ class Publish extends BaseForm {
   render() {
     const { companies } = this.props.location.state || {};
     const { tableRows } = this.state;
+    const { currentUser } = this.context;
     const { data } = this.props;
 
     return (
@@ -134,21 +145,50 @@ class Publish extends BaseForm {
         <div className="card-container">
           <Tabs type="card" className="send-rfq">
             <TabPane tab="Publish RFQ" key="1">
-              <Email
-                companies={data.companies ? data.companies : companies}
-                renderField={props => this.renderField(props)}
-                renderOptions={props => this.renderOptions(props)}
-                onEmailHtmlEdit={props => (this.emailHtml = props)}
-                emailHtml={this.emailHtml}
-                startDate={data.startDate}
-                endDate={data.endDate}
-                file={data.file}
-                fileUpload={(...args) => this.fileUpload(...args)}
-              />
+              {!currentUser.isSupplier ? (
+                <Email
+                  companies={data.companies ? data.companies : companies}
+                  renderField={props => this.renderField(props)}
+                  renderOptions={props => this.renderOptions(props)}
+                  onEmailHtmlEdit={props => (this.emailHtml = props)}
+                  emailHtml={this.emailHtml}
+                  startDate={data.startDate}
+                  endDate={data.endDate}
+                  file={data.file}
+                  fileUpload={(...args) => this.fileUpload(...args)}
+                />
+              ) : (
+                <div>
+                  <div>
+                    <strong>Tender name: </strong>
+                    {data.tenderName}
+                  </div>
+                  <div>
+                    <strong>Tender number: </strong>
+                    {data.tenderNumber}
+                  </div>
+                  <div>
+                    <strong>Start date: </strong>
+                    {data.startDate}
+                  </div>
+                  <div>
+                    <strong>End date: </strong>
+                    {data.endDate}
+                  </div>
+                  <div>
+                    <strong>Document: </strong>
+                    {data.file}
+                  </div>
+                  <br />
+                  <div dangerouslySetInnerHTML={{ __html: this.emailHtml }} />
+                </div>
+              )}
             </TabPane>
 
             <TabPane tab="Form" key="2">
-              <Button onClick={this.addRow}>Add row</Button>
+              {!currentUser.isSupplier && (
+                <Button onClick={this.addRow}>Add row</Button>
+              )}
               <Table
                 className="margin form-table"
                 columns={this.columns}
@@ -169,6 +209,9 @@ class Publish extends BaseForm {
 }
 
 Publish.propTypes = propTypes;
+Publish.contextTypes = {
+  currentUser: PropTypes.object
+};
 
 const PublishForm = Form.create()(Publish);
 

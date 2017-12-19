@@ -1,5 +1,10 @@
 export const supplierSideMenu = [
   {
+    url: '/rfq-and-eoi',
+    title: 'Tenders & EOI',
+    icon: 'desktop'
+  },
+  {
     url: '/registration',
     title: 'Registration',
     icon: 'user'

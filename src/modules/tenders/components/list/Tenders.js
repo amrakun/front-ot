@@ -3,18 +3,23 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Table, Card } from 'antd';
-import { editTenderPath, viewTenderPath } from '../../../common/constants';
-import { tenderColumns } from '../../constants';
+import {
+  editTenderPath,
+  viewTenderPath,
+  submitTenderPath
+} from '../../../common/constants';
+import { tenderColumns, supplierTenderColumns } from '../../constants';
 
 const propTypes = {
-  title: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   pagination: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  supplier: PropTypes.bool
 };
 
-function createEditLink(record) {
+function createBuyerLinks(record) {
   return (
     <div>
       <Link to={`${viewTenderPath}/${record.number}`}>View</Link> |
@@ -23,14 +28,26 @@ function createEditLink(record) {
   );
 }
 
-function Tenders({ title, data, pagination, loading, onChange }) {
-  tenderColumns[tenderColumns.length - 1].render = record =>
-    createEditLink(record);
+function createSupplierLinks(record) {
+  return (
+    <div style={{ width: '160px' }}>
+      <Link to={`${submitTenderPath}/${record.number}`}>More</Link> |
+      <Link to="/rfq-and-eoi">Not intereseted</Link>
+    </div>
+  );
+}
+
+function Tenders({ type, data, pagination, loading, onChange, supplier }) {
+  let columns = tenderColumns;
+  if (supplier) columns = supplierTenderColumns;
+
+  columns[columns.length - 1].render = record =>
+    supplier ? createSupplierLinks(record) : createBuyerLinks(record);
 
   return (
-    <Card bordered={false} title={title}>
+    <Card bordered={false} title={type}>
       <Table
-        columns={tenderColumns}
+        columns={columns}
         rowKey={record => record.number}
         dataSource={data}
         pagination={pagination}

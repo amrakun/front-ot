@@ -6,7 +6,9 @@ const Home = (props, context) => {
   const { currentUser } = context;
 
   if (currentUser) {
-    props.history.push('/dashboard');
+    currentUser.isSupplier
+      ? props.history.push('/rfq-and-eoi')
+      : props.history.push('/dashboard');
   }
 
   return (

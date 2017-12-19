@@ -19,7 +19,8 @@ const mockData = [
 
 const propTypes = {
   type: PropTypes.string,
-  location: PropTypes.object
+  location: PropTypes.object,
+  supplier: PropTypes.bool
 };
 
 class TendersContainer extends React.Component {
@@ -28,9 +29,9 @@ class TendersContainer extends React.Component {
 
     const { type, location = '' } = props;
 
-    this.title = '(RFQ)';
+    this.type = 'rfq';
     if (type === 'eoi' || (location && location.pathname === '/eoi'))
-      this.title = '(EOI)';
+      this.type = 'eoi';
 
     this.state = {
       data: [],
@@ -73,7 +74,8 @@ class TendersContainer extends React.Component {
   render() {
     return (
       <Tenders
-        title={this.title}
+        supplier={this.props.supplier}
+        type={this.type}
         data={this.state.data}
         pagination={this.state.pagination}
         loading={this.state.loading}

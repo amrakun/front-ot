@@ -1,3 +1,4 @@
 import Dashboard from './Dashboard';
+import SupplierDashboard from './SupplierDashboard';
 
-export { Dashboard };
+export { Dashboard, SupplierDashboard };

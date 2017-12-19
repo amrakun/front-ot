@@ -64,6 +64,54 @@ export const tenderColumns = [
   }
 ];
 
+export const supplierTenderColumns = [
+  {
+    title: 'Status',
+    dataIndex: 'status',
+    filters: [
+      {
+        text: 'Open',
+        value: 'open'
+      },
+      {
+        text: 'Draft',
+        value: 'draft'
+      },
+      {
+        text: 'Closed',
+        value: 'closed'
+      }
+    ]
+  },
+  {
+    title: 'Tender #',
+    dataIndex: 'number',
+    sorter: true
+  },
+  {
+    title: 'Tender name',
+    dataIndex: 'name'
+  },
+  {
+    title: 'Publish date',
+    dataIndex: 'publishDate'
+  },
+  {
+    title: 'Close date',
+    dataIndex: 'closeDate'
+  },
+  {
+    title: 'File',
+    dataIndex: 'file'
+  },
+  {
+    title: 'Operation',
+    key: 'operation',
+    fixed: 'right',
+    width: 100
+  }
+];
+
 export const eoiColumns = [
   { title: 'Document', dataIndex: 'document', key: '1' },
   { title: 'Submitted', dataIndex: 'submitted', key: '2' },
