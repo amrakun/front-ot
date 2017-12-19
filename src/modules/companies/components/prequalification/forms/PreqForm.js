@@ -1,0 +1,65 @@
+import React from 'react';
+import { Select, Input } from 'antd';
+import { labels, descriptions, booleanData } from '../constants';
+import { BaseForm, Uploader } from 'modules/common/components';
+
+const TextArea = Input.TextArea;
+
+class PreqForm extends BaseForm {
+  renderConditionalField(name, isTextarea) {
+    const isVisible = this.state[name];
+
+    return (
+      <div>
+        {this.renderBoolean(name)}
+        {isTextarea
+          ? this.renderTextArea(`${name}Description`, isVisible)
+          : this.renderUpload(`${name}File`, isVisible)}
+      </div>
+    );
+  }
+
+  renderUpload(name, isVisible = true) {
+    return this.renderField({
+      label: labels.documentLabel,
+      name: name,
+      dataType: 'file',
+      isVisible: isVisible,
+      optional: !isVisible,
+      control: (
+        <Uploader
+          initialFile={this.props.data[`name`]}
+          onReceiveFile={(...args) => this[`${name}Upload`](...args)}
+        />
+      )
+    });
+  }
+
+  renderTextArea(name, isVisible) {
+    return this.renderField({
+      name: name,
+      label: labels[name] || 'Provide details',
+      isVisible: isVisible,
+      ooptional: labels[name] ? false : true,
+      control: <TextArea />
+    });
+  }
+
+  renderBoolean(name) {
+    const booleanOptions = this.renderOptions(booleanData);
+
+    return this.renderField({
+      name: name,
+      label: labels[name],
+      dataType: 'boolean',
+      description: descriptions[name] && descriptions[name],
+      control: (
+        <Select onChange={value => this.onConditionalChange(value, name)}>
+          {booleanOptions}
+        </Select>
+      )
+    });
+  }
+}
+
+export default PreqForm;

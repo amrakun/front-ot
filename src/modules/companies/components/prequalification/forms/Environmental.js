@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import { Form, Select, Input, DatePicker } from 'antd';
 import { booleanData, actionStatusData } from '../constants';
 import { dateFormat } from 'modules/common/constants';
-import { envLabels, documentLabel } from '../constants';
+import { labels } from '../constants';
 import { BaseForm, Uploader } from 'modules/common/components';
 import moment from 'moment';
 
@@ -56,12 +56,12 @@ class PrequalificationForm extends BaseForm {
       <Form onSubmit={this.handleSubmit}>
         {this.renderField({
           name: 'doesHavePlan',
-          label: envLabels.doesHavePlan,
+          label: labels.doesHavePlan,
           dataType: 'boolean',
           control: <Select onChange={this.onHasPlan}>{booleanOptions}</Select>
         })}
         {this.renderField({
-          label: documentLabel,
+          label: labels.documentLabel,
           name: 'doesHavePlanFile',
           dataType: 'file',
           isVisible: doesHavePlan,
@@ -76,7 +76,7 @@ class PrequalificationForm extends BaseForm {
 
         {this.renderField({
           name: 'hasEnvironmentalRegulatorInvestigated',
-          label: envLabels.hasEnvironmentalRegulatorInvestigated,
+          label: labels.hasEnvironmentalRegulatorInvestigated,
           dataType: 'boolean',
           control: (
             <Select onChange={this.onInvestigatedChange}>
@@ -87,7 +87,7 @@ class PrequalificationForm extends BaseForm {
 
         {this.renderField({
           name: 'dateOfInvestigation',
-          label: envLabels.dateOfInvestigation,
+          label: labels.dateOfInvestigation,
           isVisible: hasEnvironmentalRegulatorInvestigated,
           optional: !hasEnvironmentalRegulatorInvestigated,
           initialValue: moment(data.dateOfInvestigation),
@@ -96,7 +96,7 @@ class PrequalificationForm extends BaseForm {
 
         {this.renderField({
           name: 'reasonForInvestigation',
-          label: envLabels.reasonForInvestigation,
+          label: labels.reasonForInvestigation,
           isVisible: hasEnvironmentalRegulatorInvestigated,
           optional: !hasEnvironmentalRegulatorInvestigated,
           control: <TextArea />
@@ -104,14 +104,14 @@ class PrequalificationForm extends BaseForm {
 
         {this.renderField({
           name: 'actionStatus',
-          label: envLabels.actionStatus,
+          label: labels.actionStatus,
           isVisible: hasEnvironmentalRegulatorInvestigated,
           optional: !hasEnvironmentalRegulatorInvestigated,
           control: <Select>{statusOptions}</Select>
         })}
 
         {this.renderField({
-          label: envLabels.investigationDocumentation,
+          label: labels.investigationDocumentation,
           name: 'investigationDocumentation',
           dataType: 'file',
           isVisible: hasEnvironmentalRegulatorInvestigated,
@@ -128,7 +128,7 @@ class PrequalificationForm extends BaseForm {
 
         {this.renderField({
           name: 'hasConvictedForEnvironmentalLaws',
-          label: envLabels.hasConvictedForEnvironmentalLaws,
+          label: labels.hasConvictedForEnvironmentalLaws,
           dataType: 'boolean',
           control: (
             <Select onChange={this.onConvictedChange}>{booleanOptions}</Select>
@@ -137,7 +137,7 @@ class PrequalificationForm extends BaseForm {
 
         {this.renderField({
           name: 'proveHasNotConvicted',
-          label: envLabels.proveHasNotConvicted,
+          label: labels.proveHasNotConvicted,
           isVisible: hasConvictedForEnvironmentalLaws,
           optional: !hasConvictedForEnvironmentalLaws,
           control: <TextArea />

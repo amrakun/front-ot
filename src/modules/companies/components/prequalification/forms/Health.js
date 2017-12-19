@@ -1,17 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Select, Input } from 'antd';
-import {
-  healthLabels,
-  healthDescriptions,
-  booleanData,
-  documentLabel
-} from '../constants';
-import { BaseForm, Uploader } from 'modules/common/components';
+import { Form } from 'antd';
+import PreqForm from './PreqForm';
 
-const TextArea = Input.TextArea;
-
-class PrequalificationForm extends BaseForm {
+class PrequalificationForm extends PreqForm {
   constructor(props) {
     super(props);
 
@@ -25,7 +17,10 @@ class PrequalificationForm extends BaseForm {
         data.doesHaveDocumentForRiskAssesment || false,
       doesHaveDocumentForIncidentInvestigation:
         data.doesHaveDocumentForIncidentInvestigation || false,
-      doesHaveDocumentedFitness: data.doesHaveDocumentedFitness || false
+      doesHaveDocumentedFitness: data.doesHaveDocumentedFitness || false,
+      hasWorkedOnWorldBank: data.hasWorkedOnWorldBank || false,
+      hasWorkedOnLargeProjects: data.hasWorkedOnLargeProjects || false,
+      doesHaveLicense: data.doesHaveLicense || false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,58 +34,6 @@ class PrequalificationForm extends BaseForm {
 
   onConditionalChange(value, name) {
     this.state[name] = value === 'true';
-  }
-
-  renderConditionalField(name, isTextarea) {
-    const isVisible = this.state[name];
-
-    return (
-      <div>
-        {this.renderBoolean(name)}
-        {isTextarea
-          ? this.renderTextArea(`${name}Description`)
-          : this.renderField({
-              label: documentLabel,
-              name: `${name}File`,
-              dataType: 'file',
-              isVisible: isVisible,
-              optional: !isVisible,
-              control: (
-                <Uploader
-                  initialFile={this.props.data[`name`]}
-                  onReceiveFile={(...args) =>
-                    this[`${name}FileUpload`](...args)
-                  }
-                />
-              )
-            })}
-      </div>
-    );
-  }
-
-  renderTextArea(name, label) {
-    return this.renderField({
-      name: name,
-      label: label || 'Provide details',
-      optional: label ? false : true,
-      control: <TextArea />
-    });
-  }
-
-  renderBoolean(name) {
-    const booleanOptions = this.renderOptions(booleanData);
-
-    return this.renderField({
-      name: name,
-      label: healthLabels[name],
-      dataType: 'boolean',
-      description: healthDescriptions[name] && healthDescriptions[name],
-      control: (
-        <Select onChange={value => this.onConditionalChange(value, name)}>
-          {booleanOptions}
-        </Select>
-      )
-    });
   }
 
   render() {

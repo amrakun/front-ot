@@ -3,8 +3,9 @@ import { withRouter } from 'react-router';
 import { Form, Select, Input, DatePicker, Row, Col, Button, Icon } from 'antd';
 import { booleanData, labels, descriptions } from '../constants';
 import { dateFormat } from 'modules/common/constants';
-import { BaseForm, Field } from 'modules/common/components';
+import { Field } from 'modules/common/components';
 import moment from 'moment';
+import PreqForm from './PreqForm';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -21,7 +22,7 @@ const formItemLayout = {
   }
 };
 
-class PrequalificationForm extends BaseForm {
+class PrequalificationForm extends PreqForm {
   constructor(props) {
     super(props);
 
@@ -33,6 +34,11 @@ class PrequalificationForm extends BaseForm {
       hasLeadersConvicted: data.hasLeadersConvicted || false,
       doesEmployeePoliticallyExposed:
         data.doesEmployeePoliticallyExposed || false,
+      doesMeetMinimumStandarts: data.doesMeetMinimumStandarts || false,
+      doesHaveJobDescription: data.doesHaveJobDescription || false,
+      doesHaveLiabilityInsurance: data.doesHaveLiabilityInsurance || false,
+      doesHaveCodeEthics: data.doesHaveCodeEthics || false,
+      doesHaveResponsiblityPolicy: data.doesHaveResponsiblityPolicy || false,
       investigations: (data.investigations || []).map(i => ({
         _id: Math.random(),
         ...i
@@ -44,6 +50,7 @@ class PrequalificationForm extends BaseForm {
     this.addInvestigation = this.addInvestigation.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onHasPEPCHange = this.onHasPEPCHange.bind(this);
+    this.onConditionalChange = this.onConditionalChange.bind(this);
   }
 
   onHasConvictedChange(value) {
@@ -70,6 +77,10 @@ class PrequalificationForm extends BaseForm {
     });
 
     this.setState({ investigations });
+  }
+
+  onConditionalChange(value, name) {
+    this.state[name] = value === 'true';
   }
 
   handleSubmit(e) {
@@ -159,57 +170,15 @@ class PrequalificationForm extends BaseForm {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        {this.renderField({
-          name: 'doesMeetMinimumStandarts',
-          label: labels.doesMeetMinimumStandarts,
-          description: descriptions.doesMeetMinimumStandarts,
-          dataType: 'boolean',
-          control: <Select>{booleanOptions}</Select>
-        })}
+        {this.renderUpload('organisationChart')}
+        {this.renderConditionalField('doesMeetMinimumStandarts')}
+        {this.renderConditionalField('doesHaveJobDescription')}
+        {this.renderBoolean('doesConcludeValidContracts')}
+        {this.renderTextArea('employeeTurnoverRate')}
 
-        {this.renderField({
-          name: 'doesHaveJobDescription',
-          label: labels.doesHaveJobDescription,
-          dataType: 'boolean',
-          control: <Select>{booleanOptions}</Select>
-        })}
-
-        {this.renderField({
-          name: 'doesConcludeValidContracts',
-          label: labels.doesConcludeValidContracts,
-          description: descriptions.doesConcludeValidContracts,
-          dataType: 'boolean',
-          control: <Select>{booleanOptions}</Select>
-        })}
-
-        {this.renderField({
-          name: 'employeeTurnoverRate',
-          label: labels.employeeTurnoverRate,
-          description: descriptions.employeeTurnoverRate,
-          dataType: 'number',
-          control: <Input />
-        })}
-
-        {this.renderField({
-          name: 'doesHaveLiabilityInsurance',
-          label: labels.doesHaveLiabilityInsurance,
-          dataType: 'boolean',
-          control: <Select>{booleanOptions}</Select>
-        })}
-
-        {this.renderField({
-          name: 'doesHaveCodeEthics',
-          label: labels.doesHaveCodeEthics,
-          dataType: 'boolean',
-          control: <Select>{booleanOptions}</Select>
-        })}
-
-        {this.renderField({
-          name: 'doesHaveResponsiblityPolicy',
-          label: labels.doesHaveResponsiblityPolicy,
-          dataType: 'boolean',
-          control: <Select>{booleanOptions}</Select>
-        })}
+        {this.renderConditionalField('doesHaveLiabilityInsurance')}
+        {this.renderConditionalField('doesHaveCodeEthics')}
+        {this.renderConditionalField('doesHaveResponsiblityPolicy')}
 
         {this.renderField({
           name: 'hasConvictedLabourLaws',

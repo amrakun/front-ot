@@ -36,6 +36,10 @@ export const actionStatusData = [
 
 //texts
 export const labels = {
+  organisationChart: 'Please upload copy of your organisation chart',
+
+  documentLabel: 'Please upload supporting document',
+
   doesMeetMinimumStandarts: `Does your company meet minimum standards of fair employment
     practice required by Mongolian labor laws and regulations`,
 
@@ -79,43 +83,9 @@ export const labels = {
   doesEmployeePoliticallyExposed: `Does your company employ any politically exposed person? If yes,
     provide list of PEP name`,
 
-  PEPName: `PEP Name`
-};
+  PEPName: `PEP Name`,
 
-export const descriptions = {
-  doesMeetMinimumStandarts: `Fair employment practice includes disabled ethnic groups,
-    anti-discrimination etc.`,
-
-  doesConcludeValidContracts: `Include skilled/unskilled manufacturing employees, temporary
-    employees, underage workers etc.`,
-
-  hasConvictedLabourLaws: `The five years is based on the date of your declaration and
-    submission of your questionnaire compared to the date of conviction. You
-    may remove any breaches older than five years.`,
-
-  hasConvictedForHumanRights: `The five years is based on the date of your declaration and
-    submission of your questionnaire compared to the date of conviction. You
-    may remove any breaches older than five years.`,
-
-  hasConvictedForBusinessIntegrity: `The five years is based on the date of your declaration and
-    submission of your questionnaire compared to the date of conviction. You
-    may remove any breaches older than five years.`,
-
-  hasLeadersConvicted: `The five years is based on the date of your declaration and
-    submission of your questionnaire compared to the date of conviction. You
-    may remove any breaches older than five years.`,
-
-  doesEmployeePoliticallyExposed: `PEP - Individuals who are or have been entrusted with prominent public
-    functions either domestically or by a foreign country, for example Heads
-    of state or Heads of government, senior politicians, senior government,
-    judicial or military officials, senior executives of state owned
-    corporations, important political party officials`,
-
-  additionalInformation: `Please use this space to provide additional information regarding
-    your Corporate Social Responsibility`
-};
-
-export const envLabels = {
+  //envLabels
   doesHavePlan: `Does the organisation have environmental management plans or
     procedures (including air quality, greenhouse gases emissions, water and
     contamination prevention, noise and vibration, Waste Management)?`,
@@ -134,18 +104,12 @@ export const envLabels = {
   hasConvictedForEnvironmentalLaws: `Has your company ever been convicted for a
     breach of any Environmental laws in the countries you operate?`,
 
-  proveHasNotConvicted: `If Yes, what steps have you taken to ensure this does
-    not happen again?`,
+  // proveHasNotConvicted: `If Yes, what steps have you taken to ensure this does
+  //   not happen again?`,
 
-  additionalInformation: `Additional Information`
-};
+  additionalInformation: `Additional Information`,
 
-export const envDescriptions = {
-  additionalInformation: `Please use this space to provide additional
-    information regarding your Corporate Social Responsibility`
-};
-
-export const healthLabels = {
+  //healthLabels
   doesHaveHealthSafety: `Does the organisation have a Health Safety &
     Environment management system?`,
 
@@ -206,12 +170,41 @@ export const healthLabels = {
     and/or licenses if required by the type of services provided?`
 };
 
-export const healthDescriptions = {
+export const descriptions = {
+  doesMeetMinimumStandarts: `Fair employment practice includes disabled ethnic groups,
+    anti-discrimination etc.`,
+
+  doesConcludeValidContracts: `Include skilled/unskilled manufacturing employees, temporary
+    employees, underage workers etc.`,
+
+  hasConvictedLabourLaws: `The five years is based on the date of your declaration and
+    submission of your questionnaire compared to the date of conviction. You
+    may remove any breaches older than five years.`,
+
+  hasConvictedForHumanRights: `The five years is based on the date of your declaration and
+    submission of your questionnaire compared to the date of conviction. You
+    may remove any breaches older than five years.`,
+
+  hasConvictedForBusinessIntegrity: `The five years is based on the date of your declaration and
+    submission of your questionnaire compared to the date of conviction. You
+    may remove any breaches older than five years.`,
+
+  hasLeadersConvicted: `The five years is based on the date of your declaration and
+    submission of your questionnaire compared to the date of conviction. You
+    may remove any breaches older than five years.`,
+
+  doesEmployeePoliticallyExposed: `PEP - Individuals who are or have been entrusted with prominent public
+    functions either domestically or by a foreign country, for example Heads
+    of state or Heads of government, senior politicians, senior government,
+    judicial or military officials, senior executives of state owned
+    corporations, important political party officials`,
+
+  additionalInformation: `Please use this space to provide additional information regarding
+    your Corporate Social Responsibility`,
+
   areHSEResourcesClearlyIdentified: `Staff includes all employees and
     sub-contractors.`,
 
   doesHaveDocumentedFitness: `The Fitness for Work (FFW) policy should
     incorporate alcohol, fatigue and general fitness for work.`
 };
-
-export const documentLabel = 'Please upload supporting document';
