@@ -149,13 +149,13 @@ class RegistrationForm extends BaseForm {
   }
 
   renderDistrubutionRightInput(index) {
-    const { data } = this.props;
+    const initValues = this.props.authorizedDistributions || {};
     const { isExclusiveDistributor } = this.state;
 
     return (
       <Field
         name={`distributionRightName${index}`}
-        initialValue={data.authorizedDistributions[index - 1]}
+        initialValue={initValues[index]}
         label={`Distribution right name ${index}`}
         hasFeedback={false}
         isVisible={isExclusiveDistributor}
@@ -262,9 +262,9 @@ class RegistrationForm extends BaseForm {
           )
         })}
 
+        {this.renderDistrubutionRightInput(0)}
         {this.renderDistrubutionRightInput(1)}
         {this.renderDistrubutionRightInput(2)}
-        {this.renderDistrubutionRightInput(3)}
 
         {this.renderField({
           label: groupLabels.attachments,

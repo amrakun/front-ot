@@ -36,7 +36,7 @@ const PublishContainer = props => {
   }
 
   if (companyDetailQuery.loading) {
-    return <div />;
+    return <div>Loading</div>;
   }
 
   const save = doc => {

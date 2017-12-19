@@ -14,7 +14,7 @@ const Home = (props, context) => {
   return (
     <div className="center-content">
       <div className="home-landing">
-        <h1>Oyu Tolgoi Procurement</h1>
+        <h1>Oyu Tolgoi - Supplier database</h1>
         <p>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry.

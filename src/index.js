@@ -7,8 +7,6 @@ import apolloClient from './apolloClient';
 import Routes from './routes';
 import { LocaleProvider } from 'antd';
 import enUS from 'antd/lib/locale-provider/en_US';
-import 'antd/dist/antd.css';
-import 'antd/dist/antd.less';
 import './css/main.min.css';
 
 render(

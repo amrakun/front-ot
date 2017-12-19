@@ -9,8 +9,6 @@ $link-color: rgb(0,153,168);
   @return mix(black, $color, $percentage);
 }
 
-@import "override";
-
 .hidden {
   display: none;
 }

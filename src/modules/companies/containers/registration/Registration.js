@@ -8,7 +8,7 @@ const RegistrationContainer = props => {
   let { companyByUserQuery } = props;
 
   if (companyByUserQuery.loading) {
-    return <div />;
+    return <div>Loading</div>;
   }
 
   const save = (name, doc) => {
