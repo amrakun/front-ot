@@ -55,7 +55,7 @@ class PrequalificationForm extends BaseForm {
   }
 
   onHasPEPCHange(value) {
-    this.setState({ doesEmployeePoliticallyExposed: value == 'true' });
+    this.setState({ doesEmployeePoliticallyExposed: value === 'true' });
   }
 
   addInvestigation() {

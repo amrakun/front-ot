@@ -213,3 +213,5 @@ export const healthDescriptions = {
   doesHaveDocumentedFitness: `The Fitness for Work (FFW) policy should
     incorporate alcohol, fatigue and general fitness for work.`
 };
+
+export const documentLabel = 'Please upload supporting document';

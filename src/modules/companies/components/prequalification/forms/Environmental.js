@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import { Form, Select, Input, DatePicker } from 'antd';
 import { booleanData, actionStatusData } from '../constants';
 import { dateFormat } from 'modules/common/constants';
-import { envLabels, envDescriptions } from '../constants';
+import { envLabels, documentLabel } from '../constants';
 import { BaseForm, Uploader } from 'modules/common/components';
 import moment from 'moment';
 
@@ -20,11 +20,12 @@ class PrequalificationForm extends BaseForm {
         data.hasEnvironmentalRegulatorInvestigated || false,
       hasConvictedForEnvironmentalLaws:
         data.hasConvictedForEnvironmentalLaws || false,
-      investigationDocumentation: data.investigationDocumentation
+      doesHavePlan: data.doesHavePlan || false
     };
 
     this.onInvestigatedChange = this.onInvestigatedChange.bind(this);
     this.onConvictedChange = this.onConvictedChange.bind(this);
+    this.onHasPlan = this.onHasPlan.bind(this);
   }
 
   onInvestigatedChange(value) {
@@ -35,14 +36,8 @@ class PrequalificationForm extends BaseForm {
     this.setState({ hasConvictedForEnvironmentalLaws: value === 'true' });
   }
 
-  onUploadInvestigationDocumentation(file) {
-    let investigationDocumentation = { name: file.name, url: file.response };
-
-    if (file.status === 'removed') {
-      investigationDocumentation = null;
-    }
-
-    this.setState({ investigationDocumentation });
+  onHasPlan(value) {
+    this.setState({ doesHavePlan: value === 'true' });
   }
 
   render() {
@@ -53,7 +48,8 @@ class PrequalificationForm extends BaseForm {
 
     const {
       hasEnvironmentalRegulatorInvestigated,
-      hasConvictedForEnvironmentalLaws
+      hasConvictedForEnvironmentalLaws,
+      doesHavePlan
     } = this.state;
 
     return (
@@ -62,7 +58,20 @@ class PrequalificationForm extends BaseForm {
           name: 'doesHavePlan',
           label: envLabels.doesHavePlan,
           dataType: 'boolean',
-          control: <Select>{booleanOptions}</Select>
+          control: <Select onChange={this.onHasPlan}>{booleanOptions}</Select>
+        })}
+        {this.renderField({
+          label: documentLabel,
+          name: 'doesHavePlanFile',
+          dataType: 'file',
+          isVisible: doesHavePlan,
+          optional: !doesHavePlan,
+          control: (
+            <Uploader
+              initialFile={data.doesHavePlanFile}
+              onReceiveFile={(...args) => this.doesHavePlanFileUpload(...args)}
+            />
+          )
         })}
 
         {this.renderField({
