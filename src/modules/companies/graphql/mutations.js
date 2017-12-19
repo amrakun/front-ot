@@ -1,6 +1,6 @@
 const basicInfo = `
   mutation companiesEditBasicInfo($basicInfo: CompanyBasicInfoInput) {
-    companiesEditBasicInfo(_id: "5a1fc129c2e8aa7c0f2752dd", basicInfo: $basicInfo) {
+    companiesEditBasicInfo(basicInfo: $basicInfo) {
       _id
     }
   }
@@ -8,7 +8,7 @@ const basicInfo = `
 
 const contactInfo = `
   mutation companiesEditContactInfo($contactInfo: CompanyContactInfoInput) {
-    companiesEditContactInfo(_id: "5a1fc129c2e8aa7c0f2752dd", contactInfo: $contactInfo) {
+    companiesEditContactInfo(contactInfo: $contactInfo) {
       _id
     }
   }
@@ -16,7 +16,7 @@ const contactInfo = `
 
 const managementTeam = `
   mutation companiesEditManagementTeamInfo($managementTeamInfo: CompanyManagementTeamInfoInput) {
-    companiesEditManagementTeamInfo(_id: "5a1fc129c2e8aa7c0f2752dd", managementTeamInfo: $managementTeamInfo) {
+    companiesEditManagementTeamInfo(managementTeamInfo: $managementTeamInfo) {
       _id
     }
   }
@@ -24,7 +24,7 @@ const managementTeam = `
 
 const shareholderInfo = `
   mutation companiesEditShareholderInfo($shareholderInfo: CompanyShareholderInfoInput) {
-    companiesEditShareholderInfo(_id: "5a1fc129c2e8aa7c0f2752dd", shareholderInfo: $shareholderInfo) {
+    companiesEditShareholderInfo(shareholderInfo: $shareholderInfo) {
       _id
     }
   }
@@ -32,7 +32,7 @@ const shareholderInfo = `
 
 const groupInfo = `
   mutation groupEditShareholderInfo($groupInfo: CompanyGroupInfoInput) {
-    companiesEditGroupInfo(_id: "5a1fc129c2e8aa7c0f2752dd", groupInfo: $groupInfo) {
+    companiesEditGroupInfo(groupInfo: $groupInfo) {
       _id
     }
   }
@@ -40,7 +40,7 @@ const groupInfo = `
 
 const productsInfo = `
   mutation companiesEditProductsInfo($productsInfo: [String]) {
-    companiesEditProductsInfo(_id: "5a1fc129c2e8aa7c0f2752dd", productsInfo: $productsInfo) {
+    companiesEditProductsInfo(productsInfo: $productsInfo) {
       _id
     }
   }
@@ -48,7 +48,7 @@ const productsInfo = `
 
 const certificateInfo = `
   mutation companiesEditCertificateInfo($certificateInfo: CompanyCertificateInfoInput) {
-    companiesEditCertificateInfo(_id: "5a1fc129c2e8aa7c0f2752dd", certificateInfo: $certificateInfo) {
+    companiesEditCertificateInfo(certificateInfo: $certificateInfo) {
       _id
     }
   }
@@ -56,7 +56,7 @@ const certificateInfo = `
 
 const financialInfo = `
   mutation companiesEditFinancialInfo($financialInfo: CompanyFinancialInfoInput) {
-    companiesEditFinancialInfo(_id: "5a1fc129c2e8aa7c0f2752dd", financialInfo: $financialInfo) {
+    companiesEditFinancialInfo(financialInfo: $financialInfo) {
       _id
     }
   }
@@ -64,7 +64,7 @@ const financialInfo = `
 
 const businessInfo = `
   mutation companiesEditBusinessInfo($businessInfo: CompanyBusinessInfoInput) {
-    companiesEditBusinessInfo(_id: "5a1fc129c2e8aa7c0f2752dd", businessInfo: $businessInfo) {
+    companiesEditBusinessInfo(businessInfo: $businessInfo) {
       _id
     }
   }
@@ -72,7 +72,7 @@ const businessInfo = `
 
 const environmentalInfo = `
   mutation companiesEditEnvironmentalInfo($environmentalInfo: CompanyEnvironmentalInfoInput) {
-    companiesEditEnvironmentalInfo(_id: "5a1fc129c2e8aa7c0f2752dd", environmentalInfo: $environmentalInfo) {
+    companiesEditEnvironmentalInfo(environmentalInfo: $environmentalInfo) {
       _id
     }
   }
@@ -80,7 +80,7 @@ const environmentalInfo = `
 
 const healthInfo = `
   mutation companiesEditHealthInfoInfo($healthInfo: CompanyHealthInfoInput) {
-    companiesEditHealthInfo(_id: "5a1fc129c2e8aa7c0f2752dd", healthInfo: $healthInfo) {
+    companiesEditHealthInfo(healthInfo: $healthInfo) {
       _id
     }
   }

@@ -5,9 +5,9 @@ import { queries, mutations } from '../../graphql';
 import { RegistrationForms } from '../../components';
 
 const RegistrationContainer = props => {
-  let { companyDetailQuery } = props;
+  let { companyByUserQuery } = props;
 
-  if (companyDetailQuery.loading) {
+  if (companyByUserQuery.loading) {
     return <div />;
   }
 
@@ -27,19 +27,19 @@ const RegistrationContainer = props => {
     ...props,
     save,
     company: {
-      ...companyDetailQuery.companyDetail
+      ...companyByUserQuery.companyByUser
     }
   };
   return <RegistrationForms {...updatedProps} />;
 };
 
 RegistrationContainer.propTypes = {
-  companyDetailQuery: PropTypes.object
+  companyByUserQuery: PropTypes.object
 };
 
 export default compose(
-  graphql(gql(queries.companyDetail), {
-    name: 'companyDetailQuery'
+  graphql(gql(queries.companyByUser), {
+    name: 'companyByUserQuery'
   }),
 
   // mutations
