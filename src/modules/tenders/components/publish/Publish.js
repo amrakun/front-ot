@@ -197,6 +197,21 @@ class Publish extends BaseForm {
                 size="middle"
                 scroll={this.columns.length > 6 ? { x: 3000 } : {}}
               />
+              <br />
+              {this.renderField({
+                label: 'Documents',
+                name: 'file',
+                dataType: 'file',
+                isVisible: this.columns.length < 6,
+                optional: this.columns.length > 6,
+                control: (
+                  <Uploader
+                    initialFile={{}}
+                    onReceiveFile={(...args) => this.fileUpload(...args)}
+                  />
+                )
+              })}
+              <br />
               <Button type="primary" htmlType="submit" className="margin">
                 Save & continue
               </Button>
