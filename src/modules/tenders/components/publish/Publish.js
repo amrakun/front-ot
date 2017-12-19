@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { Tabs, Input, Form, Table, Button, Select } from 'antd';
-import BaseForm from '../../../common/components/BaseForm';
+import { BaseForm, Uploader } from 'modules/common/components';
 import Email from './Email';
 import { rfqColumns, eoiColumns, booleanData } from '../../constants';
 import { newRfqPath } from '../../../common/constants';
@@ -22,7 +22,11 @@ class Publish extends BaseForm {
     if (props.location.pathname === newRfqPath || data.tableRows[0].UOM) {
       //RFQ
       rfqColumns.forEach(
-        el => (el.render = (text, record) => this.renderInput(el, record, data))
+        (el, index) =>
+          index === rfqColumns.length - 1
+            ? (el.render = (text, record) =>
+                this.renderUpload(el, record, data))
+            : (el.render = (text, record) => this.renderInput(el, record, data))
       );
       this.columns = rfqColumns;
     } else {
@@ -69,6 +73,11 @@ class Publish extends BaseForm {
     tableRows[record.key][id] = value;
   }
 
+  onFileUpload(args, record, id) {
+    const { tableRows } = this.state;
+    tableRows[record.key][id] = args;
+  }
+
   addRow() {
     let { tableRows } = this.state;
     tableRows.push({ key: tableRows.length });
@@ -86,6 +95,19 @@ class Publish extends BaseForm {
         placeholder={el.title}
         id={el.dataIndex}
         onChange={e => this.onChange(e, record)}
+      />
+    );
+  }
+
+  renderUpload(el, record, data) {
+    return (
+      <Uploader
+        initialFile={
+          data && data.tableRows[record.key]
+            ? data.tableRows[record.key][el.dataIndex]
+            : {}
+        }
+        onReceiveFile={args => this.onFileUpload(args, record, el.dataIndex)}
       />
     );
   }

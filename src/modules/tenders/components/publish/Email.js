@@ -32,7 +32,11 @@ const propTypes = {
   renderField: PropTypes.func,
   renderOptions: PropTypes.func,
   onEmailHtmlEdit: PropTypes.func,
-  emailHtml: PropTypes.string
+  emailHtml: PropTypes.string,
+  startDate: PropTypes.string,
+  endDate: PropTypes.string,
+  file: PropTypes.object,
+  fileUpload: PropTypes.func
 };
 
 class Email extends React.Component {
