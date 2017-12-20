@@ -19,4 +19,6 @@ const noLabelLayout = {
   }
 };
 
-export { dateFormat, dateTimeFormat, uploadDisclaimer, noLabelLayout };
+const days = [{ text: '1 day', value: '1' }];
+
+export { dateFormat, dateTimeFormat, uploadDisclaimer, noLabelLayout, days };

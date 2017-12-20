@@ -1,61 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { gql, compose, graphql } from 'react-apollo';
-import { queries } from '../graphql';
+import { compose, gql, graphql } from 'react-apollo';
 import { Publish } from '../components';
-import {
-  eoiTemplate, //fetch from DB
-  rfqTemplate, //fetch from DB
-  mockTender //fetch from DB
-} from '../constants';
-import { newRfqPath, newEoiPath } from '../../common/constants';
+import { queries, mutations } from '../graphql';
 
-const propTypes = {
-  location: PropTypes.object,
-  companyDetailQuery: PropTypes.object,
-  match: PropTypes.object
-};
-
-const PublishContainer = props => {
-  let { companyDetailQuery, location, match } = props;
-
-  console.log('tenders/containers/Publish', match.params.id);
-
-  let tender = {};
-  switch (location.pathname) {
-    case newEoiPath:
-      tender = eoiTemplate;
-      break;
-    case newRfqPath:
-      tender = rfqTemplate;
-      break;
-    default:
-      //edit path
-      tender = mockTender;
-      break;
-  }
-
-  if (companyDetailQuery.loading) {
-    return <div>Loading</div>;
+const PublishContainer = ({ tenderDetailQuery, tendersAdd, location }) => {
+  if (tenderDetailQuery.loading) {
+    return null;
   }
 
   const save = doc => {
-    console.log('tedners/containers/Publish', doc);
+    const [publishDate, closeDate] = doc.dateRange;
+
+    tendersAdd({ variables: { ...doc, publishDate, closeDate } })
+      .then(() => {
+        console.log('Saved');
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   const updatedProps = {
-    ...props,
     save,
-    data: tender
+    location,
+    data: tenderDetailQuery.tenderDetail
   };
 
   return <Publish {...updatedProps} />;
 };
 
-PublishContainer.propTypes = propTypes;
+PublishContainer.propTypes = {
+  location: PropTypes.object,
+  tenderDetailQuery: PropTypes.object,
+  tendersAdd: PropTypes.func
+};
 
 export default compose(
-  graphql(gql(queries.companyDetail), {
-    name: 'companyDetailQuery'
+  graphql(gql(queries.tenderDetail), {
+    name: 'tenderDetailQuery',
+    options: ({ match }) => {
+      return {
+        variables: { _id: match.params.id }
+      };
+    }
+  }),
+
+  graphql(gql(mutations.tendersAdd), {
+    name: 'tendersAdd'
   })
 )(PublishContainer);
