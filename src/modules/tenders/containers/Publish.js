@@ -24,7 +24,7 @@ const PublishContainer = ({ tenderDetailQuery, tendersAdd, location }) => {
   const updatedProps = {
     save,
     location,
-    data: tenderDetailQuery.tenderDetail
+    data: tenderDetailQuery.tenderDetail || {}
   };
 
   return <Publish {...updatedProps} />;
