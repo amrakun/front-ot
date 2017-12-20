@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tag, Form, Input, Select, DatePicker } from 'antd';
+import { Input, InputNumber, Select, DatePicker } from 'antd';
 import moment from 'moment';
 import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
-import { Uploader, BaseForm } from 'modules/common/components';
+import { Uploader } from 'modules/common/components';
 import { days, dateTimeFormat } from 'modules/common/constants';
 import AddMore from 'modules/companies/components/list/AddMore';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
-class MainInfo extends BaseForm {
+class MainInfo extends React.Component {
   constructor(props) {
     super(props);
 
@@ -22,12 +22,13 @@ class MainInfo extends BaseForm {
 
   onEditorStateChange(editorState) {
     this.setState({ editorState });
+
+    this.props.onEmailContentChange('content');
   }
 
   render() {
     const { editorState } = this.state;
-    const { data, location } = this.props;
-    const { companies } = location.state || {};
+    const { renderField, renderOptions, onReceiveFile, data } = this.props;
 
     const layout = {
       labelCol: {
@@ -42,33 +43,28 @@ class MainInfo extends BaseForm {
       }
     };
 
-    const companiesTags = companies.map((el, i) => (
-      <Tag key={i}>{el.basicInfo.enName}</Tag>
-    ));
-
     return (
       <div>
         <label>Sending RFQ to: </label>
-        {companiesTags}
 
         <AddMore withTag={true} />
         <p style={{ paddingBottom: '16px' }} />
 
-        {this.renderField({
+        {renderField({
           layout: layout,
-          name: 'tenderNumber',
+          name: 'number',
           optional: true,
-          control: <Input placeholder="Tender number" />
+          control: <InputNumber placeholder="Tender number" htmlType="number" />
         })}
-        {this.renderField({
+        {renderField({
           layout: layout,
-          name: 'tenderName',
+          name: 'name',
           optional: true,
           control: <Input placeholder="Tender name" />
         })}
-        {this.renderField({
+        {renderField({
           layout: layout,
-          name: 'date',
+          name: 'dateRange',
           optional: true,
           initialValue: [moment(data.startDate), moment(data.endDate)],
           control: (
@@ -79,25 +75,22 @@ class MainInfo extends BaseForm {
             />
           )
         })}
-        {this.renderField({
+        {renderField({
           layout: layout,
           name: 'reminderDay',
           optional: true,
           control: (
             <Select placeholder="Expired day reminder">
-              {this.renderOptions(days)}
+              {renderOptions(days)}
             </Select>
           )
         })}
-        {this.renderField({
+        {renderField({
           layout: layout,
           name: 'file',
           dataType: 'file',
           control: (
-            <Uploader
-              initialFile={data.file}
-              onReceiveFile={(...args) => this.fileUpload(...args)}
-            />
+            <Uploader initialFile={data.file} onReceiveFile={onReceiveFile} />
           )
         })}
         <Editor
@@ -110,10 +103,12 @@ class MainInfo extends BaseForm {
 }
 
 MainInfo.propTypes = {
+  renderField: PropTypes.func,
+  renderOptions: PropTypes.func,
+  onEmailContentChange: PropTypes.func,
+  onReceiveFile: PropTypes.func,
   location: PropTypes.object,
   data: PropTypes.object
 };
 
-const MainInfoForm = Form.create()(MainInfo);
-
-export default MainInfoForm;
+export default MainInfo;
