@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Table, Card, Input } from 'antd';
 import { tenderColumns } from '../../constants';
-import { newRfqPath, newEoiPath } from 'modules/common/constants';
+import { newRfq, newEoi } from 'modules/common/paths';
 
 const Search = Input.Search;
 
@@ -70,7 +70,7 @@ class CompaniesList extends React.Component {
           />
           <Link
             to={{
-              pathname: newEoiPath,
+              pathname: newEoi.path,
               state: { companies: selectedCompanies }
             }}
             className="ant-btn"
@@ -79,7 +79,7 @@ class CompaniesList extends React.Component {
           </Link>
           <Link
             to={{
-              pathname: newRfqPath,
+              pathname: newRfq.path,
               state: { companies: selectedCompanies }
             }}
             className="ant-btn"

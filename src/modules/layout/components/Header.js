@@ -1,8 +1,9 @@
 import React from 'react';
-import { Menu, Icon } from 'antd';
+import { Menu, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 import consts from 'consts';
 import PropTypes from 'prop-types';
+import { colors } from 'modules/common/colors';
 
 const SubMenu = Menu.SubMenu;
 
@@ -14,8 +15,15 @@ function logout() {
   window.location.href = '/';
 }
 
+function getColor(username) {
+  let length = username.length;
+  if (length > 10) length = length - 10;
+  return colors[length];
+}
+
 const HeaderBar = (props, context) => {
-  const { currentUser } = context;
+  const { currentUser } = context || {};
+  const username = currentUser && currentUser.username;
 
   return (
     <Menu
@@ -39,8 +47,10 @@ const HeaderBar = (props, context) => {
           className="right"
           title={
             <span>
-              <Icon type="user" />
-              {currentUser.username}
+              <Avatar style={{ backgroundColor: getColor(username) }}>
+                {username.charAt(0)}
+              </Avatar>
+              {username}
             </span>
           }
         >

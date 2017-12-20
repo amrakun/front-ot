@@ -4,12 +4,28 @@ import Header from './Header';
 import Breadcrumb from './Breadcrumb';
 import { Layout } from 'antd';
 import { PropTypes } from 'prop-types';
-import { buyerPaths } from 'modules/common/constants';
+import { buyerPaths } from 'modules/common/paths';
 
 const { Content, Footer } = Layout;
 const withSidebar = { marginLeft: 200 };
+const withSidebarCollapsed = { marginLeft: 64 };
 
 class MainLayout extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      collapsed: localStorage.getItem('collapsed') === 'true' ? true : false
+    };
+
+    this.onCollapse = this.onCollapse.bind(this);
+  }
+
+  onCollapse(collapsed) {
+    localStorage.setItem('collapsed', collapsed);
+    this.setState({ collapsed });
+  }
+
   getChildContext() {
     return { currentUser: this.props.currentUser };
   }
@@ -28,15 +44,28 @@ class MainLayout extends React.Component {
   }
 
   render() {
-    const { currentUser, children } = this.props;
+    const { currentUser, children, location } = this.props;
+    const { collapsed } = this.state;
+
+    const navProps = {
+      collapsed: collapsed ? true : false,
+      onCollapse: this.onCollapse
+    };
+
+    let layoutStyle = {};
+    if (currentUser) {
+      collapsed
+        ? (layoutStyle = withSidebarCollapsed)
+        : (layoutStyle = withSidebar);
+    }
 
     return (
       <Layout>
-        {currentUser && <Sidenav />}
-        <Layout className="main" style={currentUser && withSidebar}>
+        {currentUser && <Sidenav {...navProps} />}
+        <Layout className="main" style={layoutStyle}>
           <Header />
           <Content>
-            {currentUser && <Breadcrumb />}
+            {currentUser && <Breadcrumb {...location} />}
             {children}
           </Content>
           <Footer>Oyu Tolgoi ©2018 All Rights Reserved</Footer>

@@ -1,6 +1,7 @@
 $primary-color: rgb(244,119,33);
 $primary-color-shade: rgba(244,119,33,0.06);
 $link-color: rgb(0,153,168);
+$bg-color: #f9f9f9;
 
 $padding-lg    : 24px; // containers
 $padding-md    : 16px; // small containers and buttons
@@ -27,7 +28,7 @@ $padding-xs    : 8px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 5px;
+  padding: 0 10px;
   img {
     height: auto;
     width: 60px;
@@ -50,20 +51,37 @@ $padding-xs    : 8px;
   background: #fff;
   padding: 0;
   box-shadow: 4px 4px 40px 0 rgba(0, 0, 0, 0.05);
-  margin-bottom: 20px;
   padding-right: 16px;
   z-index: 1;
+  .ant-avatar {
+    width: 27px;
+    height: 27px;
+    line-height: 27px;
+    font-size: 16px;
+    top: 9px;
+    margin-right: 8px;
+    * {
+      line-height: 26px;
+    }
+  }
 }
 .ant-layout-sider {
   position: relative;
   background: #fff;
   box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.02);
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: 100vh;
   position: fixed;
+  height: 100vh;
   left: 0;
   z-index: 2;
+  ul li a {
+    opacity: 1;
+    transition: all 0.2s ease;
+  }
+  &.ant-layout-sider-collapsed {
+    ul li a {
+      opacity: 0;
+    }
+  }
 }
 .ant-layout-sider-trigger {
   background: transparent;
@@ -72,7 +90,7 @@ $padding-xs    : 8px;
   }
 }
 .ant-layout, .ant-layout-footer {
-  background: #f9f9f9;
+  background: $bg-color;
 }
 .ant-menu-inline, .ant-menu-vertical {
   border: none;
@@ -188,6 +206,7 @@ i.success {
 
 .main.ant-layout {
   min-height: 100vh;
+  transition: margin-left 0.2s ease;
 }
 
 .ant-menu.landing {
@@ -240,4 +259,21 @@ i.success {
       color: $primary-color;
     }
   }
+}
+
+*::-webkit-scrollbar-track
+{
+	background-color: transparent;
+}
+
+*::-webkit-scrollbar
+{
+	width: 8px;
+  height: 7px;
+	background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb
+{
+	background-color: #e3e3e3;
 }

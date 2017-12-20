@@ -10,13 +10,18 @@ const MenuItem = Menu.Item;
 
 const Sidenav = (props, context) => {
   const { currentUser } = context;
+  const { collapsed, onCollapse } = props;
 
   return (
-    <Sider>
+    <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
       <NavLink to="/" className="logo">
         <img src={process.env.PUBLIC_URL + '/images/logo_mn.png'} alt="logo" />
       </NavLink>
-      <Menu defaultSelectedKeys={['/dashboard']} mode="inline">
+      <Menu
+        defaultSelectedKeys={['/dashboard', '/rfq-and-eoi']}
+        mode="inline"
+        inlineCollapsed={collapsed}
+      >
         {currentUser.isSupplier
           ? renderMenu(supplierSideMenu)
           : renderMenu(buyerSideMenu)}
@@ -25,6 +30,10 @@ const Sidenav = (props, context) => {
   );
 };
 
+Sidenav.propTypes = {
+  collapsed: PropTypes.bool,
+  onCollapse: PropTypes.func
+};
 Sidenav.contextTypes = {
   currentUser: PropTypes.object
 };

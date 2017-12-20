@@ -20,7 +20,7 @@ import {
   statusOptions
 } from '../../constants';
 import AddMore from './AddMore';
-import { newRfqPath, newEoiPath } from '../../../common/constants';
+import { newRfq, newEoi } from 'modules/common/paths';
 
 const Search = Input.Search;
 const CheckboxGroup = Checkbox.Group;
@@ -130,7 +130,7 @@ class CompaniesList extends React.Component {
               />
               <Link
                 to={{
-                  pathname: newEoiPath,
+                  pathname: newEoi.path,
                   state: { companies: selectedCompanies }
                 }}
                 className="ant-btn"
@@ -139,7 +139,7 @@ class CompaniesList extends React.Component {
               </Link>
               <Link
                 to={{
-                  pathname: newRfqPath,
+                  pathname: newRfq.path,
                   state: { companies: selectedCompanies }
                 }}
                 className="ant-btn"

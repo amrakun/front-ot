@@ -2,27 +2,29 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { Tenders, Publish, Tender } from './containers';
 import {
-  rfqPath,
-  eoiPath,
-  newRfqPath,
-  newEoiPath,
-  editTenderPath,
-  submitTenderPath,
-  viewTenderPath
-} from '../common/constants';
+  rfq,
+  eoi,
+  newRfq,
+  newEoi,
+  editTender,
+  submitTender,
+  viewTender
+} from '../common/paths';
 
 export function RfqRoute() {
-  return <Route key={rfqPath} exact path={rfqPath} component={Tenders} />;
+  return <Route key={rfq.path} exact path={rfq.path} component={Tenders} />;
 }
 export function PublishRfqRoute() {
-  return <Route key={newRfqPath} exact path={newRfqPath} component={Publish} />;
+  return (
+    <Route key={newRfq.path} exact path={newRfq.path} component={Publish} />
+  );
 }
 export function EditTenderRoute() {
   return (
     <Route
-      key={editTenderPath}
+      key={editTender.path}
       exact
-      path={`${editTenderPath}/:id`}
+      path={`${editTender.path}/:id`}
       component={Publish}
     />
   );
@@ -30,9 +32,9 @@ export function EditTenderRoute() {
 export function SubmitTenderRoute() {
   return (
     <Route
-      key={submitTenderPath}
+      key={submitTender.path}
       exact
-      path={`${submitTenderPath}/:id`}
+      path={`${submitTender.path}/:id`}
       component={Publish}
     />
   );
@@ -40,16 +42,18 @@ export function SubmitTenderRoute() {
 export function ViewTenderRoute() {
   return (
     <Route
-      key={viewTenderPath}
+      key={viewTender.path}
       exact
-      path={`${viewTenderPath}/:id`}
+      path={`${viewTender.path}/:id`}
       component={Tender}
     />
   );
 }
 export function EoiRoute() {
-  return <Route key={eoiPath} exact path={eoiPath} component={Tenders} />;
+  return <Route key={eoi.path} exact path={eoi.path} component={Tenders} />;
 }
 export function PublishEoiRoute() {
-  return <Route key={newEoiPath} exact path={newEoiPath} component={Publish} />;
+  return (
+    <Route key={newEoi.path} exact path={newEoi.path} component={Publish} />
+  );
 }
