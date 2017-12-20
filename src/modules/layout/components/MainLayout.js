@@ -18,12 +18,12 @@ class MainLayout extends React.Component {
     const { history, currentUser, location } = this.props;
 
     if (!currentUser) {
-      history.push('/sign-in');
+      history.push('/');
     } else if (
       currentUser.isSupplier &&
       buyerPaths.includes(location.pathname)
     ) {
-      history.push('/');
+      history.push('/sign-in');
     }
   }
 
