@@ -35,3 +35,5 @@ export const noLabelLayout = {
     lg: { span: 24 }
   }
 };
+
+export const days = [{ text: '1 day', value: '1' }];

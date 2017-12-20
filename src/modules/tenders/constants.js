@@ -1,5 +1,3 @@
-export const days = [{ text: '1 day', value: '1' }];
-
 export const tenderColumns = [
   {
     title: 'Status',

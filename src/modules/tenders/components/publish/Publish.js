@@ -3,14 +3,10 @@ import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { Tabs, Input, Form, Table, Button, Select } from 'antd';
 import { BaseForm, Uploader } from 'modules/common/components';
-import Email from './Email';
 import { rfqColumns, eoiColumns, booleanData } from '../../constants';
 import { newRfqPath } from '../../../common/constants';
+import MainInfo from './MainInfo';
 
-const propTypes = {
-  location: PropTypes.object,
-  data: PropTypes.object
-};
 const TabPane = Tabs.TabPane;
 
 class Publish extends BaseForm {
@@ -63,6 +59,7 @@ class Publish extends BaseForm {
       companies: data.companies ? data.companies : companies,
       emailHtml: this.emailHtml
     };
+
     this.save(extra);
   }
 
@@ -135,55 +132,16 @@ class Publish extends BaseForm {
   }
 
   render() {
-    const { companies } = this.props.location.state || {};
     const { tableRows } = this.state;
     const { currentUser } = this.context;
-    const { data } = this.props;
 
     return (
       <Form layout="inline" onSubmit={this.handleSubmit}>
         <div className="card-container">
           <Tabs type="card" className="send-rfq">
-            <TabPane tab="Publish RFQ" key="1">
-              {!currentUser.isSupplier ? (
-                <Email
-                  companies={data.companies ? data.companies : companies}
-                  renderField={props => this.renderField(props)}
-                  renderOptions={props => this.renderOptions(props)}
-                  onEmailHtmlEdit={props => (this.emailHtml = props)}
-                  emailHtml={this.emailHtml}
-                  startDate={data.startDate}
-                  endDate={data.endDate}
-                  file={data.file}
-                  fileUpload={(...args) => this.fileUpload(...args)}
-                />
-              ) : (
-                <div>
-                  <div>
-                    <strong>Tender name: </strong>
-                    {data.tenderName}
-                  </div>
-                  <div>
-                    <strong>Tender number: </strong>
-                    {data.tenderNumber}
-                  </div>
-                  <div>
-                    <strong>Start date: </strong>
-                    {data.startDate}
-                  </div>
-                  <div>
-                    <strong>End date: </strong>
-                    {data.endDate}
-                  </div>
-                  <div>
-                    <strong>Document: </strong>
-                    {data.file}
-                  </div>
-                  <br />
-                  <div dangerouslySetInnerHTML={{ __html: this.emailHtml }} />
-                </div>
-              )}
-            </TabPane>
+            <Tabs.TabPane tab="Publish RFQ" key="1">
+              <MainInfo {...this.props} />
+            </Tabs.TabPane>
 
             <TabPane tab="Form" key="2">
               {!currentUser.isSupplier && (
@@ -223,7 +181,11 @@ class Publish extends BaseForm {
   }
 }
 
-Publish.propTypes = propTypes;
+Publish.propTypes = {
+  location: PropTypes.object,
+  data: PropTypes.object
+};
+
 Publish.contextTypes = {
   currentUser: PropTypes.object
 };

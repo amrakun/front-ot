@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { gql, compose, graphql } from 'react-apollo';
-import { queries } from '../graphql';
 import { Publish } from '../components';
 import {
   eoiTemplate, //fetch from DB
@@ -17,11 +15,9 @@ const propTypes = {
 };
 
 const PublishContainer = props => {
-  let { companyDetailQuery, location, match } = props;
-
-  console.log('tenders/containers/Publish', match.params.id);
-
+  let { location } = props;
   let tender = {};
+
   switch (location.pathname) {
     case newEoiPath:
       tender = eoiTemplate;
@@ -32,11 +28,6 @@ const PublishContainer = props => {
     default:
       //edit path
       tender = mockTender;
-      break;
-  }
-
-  if (companyDetailQuery.loading) {
-    return <div>Loading</div>;
   }
 
   const save = doc => {
@@ -54,8 +45,4 @@ const PublishContainer = props => {
 
 PublishContainer.propTypes = propTypes;
 
-export default compose(
-  graphql(gql(queries.companyDetail), {
-    name: 'companyDetailQuery'
-  })
-)(PublishContainer);
+export default PublishContainer;
