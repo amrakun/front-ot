@@ -11,7 +11,8 @@ const tenderDetail = `
       reminderDay,
       supplierIds,
       requestedProducts {
-        code
+        code,
+        purchaseRequestNumber
       },
     }
   }

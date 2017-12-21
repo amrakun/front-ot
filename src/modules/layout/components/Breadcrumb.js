@@ -6,17 +6,22 @@ import { paths } from 'modules/common/paths';
 const Breadcrumbs = location => {
   const breadcrumbItems = [];
   breadcrumbItems.push(
-    <Breadcrumb.Item>
+    <Breadcrumb.Item key={0}>
       <Icon type="home" />
     </Breadcrumb.Item>
   );
-  paths.some(path => {
+  paths.every(path => {
     if (location.pathname.includes(path.path)) {
-      path.breadcrumb.forEach(i => {
-        breadcrumbItems.push(<Breadcrumb.Item>{i}</Breadcrumb.Item>);
-      });
-      return true;
+      try {
+        path.breadcrumb.forEach(i => {
+          breadcrumbItems.push(<Breadcrumb.Item key={i}>{i}</Breadcrumb.Item>);
+        });
+      } catch (e) {
+        return true;
+      }
+      return false;
     }
+    return true;
   });
   return <Breadcrumb>{breadcrumbItems}</Breadcrumb>;
 };

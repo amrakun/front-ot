@@ -73,13 +73,16 @@ $padding-xs    : 8px;
   height: 100vh;
   left: 0;
   z-index: 2;
-  ul li a {
+  ul li > a {
     opacity: 1;
     transition: all 0.2s ease;
   }
   &.ant-layout-sider-collapsed {
-    ul li a {
+    ul li > a {
       opacity: 0;
+    }
+    ul li ul li a {
+      opacity: 1;
     }
   }
 }

@@ -8,6 +8,9 @@ const { Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 const MenuItem = Menu.Item;
 
+const supplier = renderMenu(supplierSideMenu);
+const buyer = renderMenu(buyerSideMenu);
+
 const Sidenav = (props, context) => {
   const { currentUser } = context;
   const { collapsed, onCollapse } = props;
@@ -22,9 +25,7 @@ const Sidenav = (props, context) => {
         mode="inline"
         inlineCollapsed={collapsed}
       >
-        {currentUser.isSupplier
-          ? renderMenu(supplierSideMenu)
-          : renderMenu(buyerSideMenu)}
+        {currentUser.isSupplier ? supplier : buyer}
       </Menu>
     </Sider>
   );
