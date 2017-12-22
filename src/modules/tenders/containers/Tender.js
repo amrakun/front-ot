@@ -42,7 +42,7 @@ class TenderContainer extends React.Component {
     }
 
     const { pagination } = this.state;
-    console.log(tenderDetailQuery.tenderDetail);
+
     const updatedProps = {
       ...this.props,
       award: this.award,
@@ -50,12 +50,12 @@ class TenderContainer extends React.Component {
       sendRegretLetter: this.sendRegretLetter,
       data: companiesQuery.companies,
       tenderDetail: tenderDetailQuery.tenderDetail,
+      loading: false,
       pagination: {
         total: companiesQuery.companies.length,
         pageSize: pagination.pageSize,
         current: pagination.current
       },
-      loading: false,
       onChange: (pagination, filters, sorter) =>
         this.handleTableChange(pagination, filters, sorter)
     };

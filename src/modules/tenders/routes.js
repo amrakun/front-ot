@@ -50,7 +50,7 @@ export function SubmitTenderRoute() {
       key={submitTender.path}
       exact
       path={`${submitTender.path}/:id`}
-      component={CreateTender}
+      component={EditTender}
     />
   );
 }

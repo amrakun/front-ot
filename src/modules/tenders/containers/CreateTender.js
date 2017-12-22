@@ -4,7 +4,7 @@ import { compose, gql, graphql } from 'react-apollo';
 import { RfqForm, EoiForm } from '../components';
 import { mutations } from '../graphql';
 
-const CreateTebderContainer = ({ tendersAdd, location }) => {
+const CreateTenderContainer = ({ tendersAdd, location }) => {
   const save = doc => {
     const [publishDate, closeDate] = doc.dateRange;
     tendersAdd({ variables: { ...doc, publishDate, closeDate } })
@@ -28,7 +28,7 @@ const CreateTebderContainer = ({ tendersAdd, location }) => {
   return form;
 };
 
-CreateTebderContainer.propTypes = {
+CreateTenderContainer.propTypes = {
   location: PropTypes.object,
   tendersAdd: PropTypes.func
 };
@@ -37,4 +37,4 @@ export default compose(
   graphql(gql(mutations.tendersAdd), {
     name: 'tendersAdd'
   })
-)(CreateTebderContainer);
+)(CreateTenderContainer);
