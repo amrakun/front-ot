@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input, InputNumber, Select, DatePicker } from 'antd';
+import { Input, InputNumber, Select, DatePicker, Tag } from 'antd';
 import moment from 'moment';
-import { EditorState } from 'draft-js';
+import { EditorState, ContentState, convertToRaw } from 'draft-js';
+import htmlToDraft from 'html-to-draftjs';
+import draftToHtml from 'draftjs-to-html';
 import { Editor } from 'react-draft-wysiwyg';
 import { Uploader } from 'modules/common/components';
 import { days, dateTimeFormat } from 'modules/common/constants';
@@ -13,8 +15,14 @@ class MainInfo extends React.Component {
   constructor(props) {
     super(props);
 
+    const { contentBlocks, entityMap } = htmlToDraft(props.content);
+    const contentState = ContentState.createFromBlockArray(
+      contentBlocks,
+      entityMap
+    );
+
     this.state = {
-      editorState: EditorState.createEmpty()
+      editorState: EditorState.createWithContent(contentState)
     };
 
     this.onEditorStateChange = this.onEditorStateChange.bind(this);
@@ -22,13 +30,23 @@ class MainInfo extends React.Component {
 
   onEditorStateChange(editorState) {
     this.setState({ editorState });
-
-    this.props.onEmailContentChange('content');
+    this.props.onEmailContentChange(
+      draftToHtml(convertToRaw(editorState.getCurrentContent()))
+    );
   }
 
   render() {
     const { editorState } = this.state;
-    const { renderField, renderOptions, onReceiveFile, data } = this.props;
+    const {
+      renderField,
+      renderOptions,
+      onReceiveFile,
+      data,
+      supplierIds
+    } = this.props;
+    const dateRange = data.startDate
+      ? [moment(data.startDate), moment(data.endDate)]
+      : null;
 
     const layout = {
       labelCol: {
@@ -43,10 +61,12 @@ class MainInfo extends React.Component {
       }
     };
 
+    const supplierTags = supplierIds.map(el => <Tag key={el}>{el}</Tag>);
+
     return (
       <div>
         <label>Sending RFQ to: </label>
-
+        {supplierTags}
         <AddMore withTag={true} />
         <p style={{ paddingBottom: '16px' }} />
 
@@ -66,7 +86,7 @@ class MainInfo extends React.Component {
           layout: layout,
           name: 'dateRange',
           optional: true,
-          initialValue: [moment(data.startDate), moment(data.endDate)],
+          initialValue: dateRange,
           control: (
             <DatePicker.RangePicker
               showTime={{ format: 'HH:mm' }}
@@ -108,7 +128,9 @@ MainInfo.propTypes = {
   onEmailContentChange: PropTypes.func,
   onReceiveFile: PropTypes.func,
   location: PropTypes.object,
-  data: PropTypes.object
+  data: PropTypes.object,
+  content: PropTypes.string,
+  supplierIds: PropTypes.array
 };
 
 export default MainInfo;

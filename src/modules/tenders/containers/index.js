@@ -1,5 +1,6 @@
 import Tenders from './Tenders';
-import Publish from './Publish';
+import CreateTender from './CreateTender';
 import Tender from './Tender';
+import EditTender from './EditTender';
 
-export { Publish, Tenders, Tender };
+export { CreateTender, Tenders, Tender, EditTender };

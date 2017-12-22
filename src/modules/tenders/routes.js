@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { Tenders, Publish, Tender } from './containers';
+import { Tenders, CreateTender, Tender, EditTender } from './containers';
 import {
   rfq,
   eoi,
@@ -16,7 +16,22 @@ export function RfqRoute() {
 }
 export function PublishRfqRoute() {
   return (
-    <Route key={newRfq.path} exact path={newRfq.path} component={Publish} />
+    <Route
+      key={newRfq.path}
+      exact
+      path={newRfq.path}
+      component={CreateTender}
+    />
+  );
+}
+export function PublishEoiRoute() {
+  return (
+    <Route
+      key={newEoi.path}
+      exact
+      path={newEoi.path}
+      component={CreateTender}
+    />
   );
 }
 export function EditTenderRoute() {
@@ -25,7 +40,7 @@ export function EditTenderRoute() {
       key={editTender.path}
       exact
       path={`${editTender.path}/:id`}
-      component={Publish}
+      component={EditTender}
     />
   );
 }
@@ -35,7 +50,7 @@ export function SubmitTenderRoute() {
       key={submitTender.path}
       exact
       path={`${submitTender.path}/:id`}
-      component={Publish}
+      component={CreateTender}
     />
   );
 }
@@ -51,9 +66,4 @@ export function ViewTenderRoute() {
 }
 export function EoiRoute() {
   return <Route key={eoi.path} exact path={eoi.path} component={Tenders} />;
-}
-export function PublishEoiRoute() {
-  return (
-    <Route key={newEoi.path} exact path={newEoi.path} component={Publish} />
-  );
 }

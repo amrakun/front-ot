@@ -8,29 +8,49 @@ function filter(v) {
   console.log(v);
 }
 
-const CompaniesContainer = props => {
-  const { companiesQuery } = props;
+class CompaniesContainer extends React.Component {
+  constructor(props) {
+    super(props);
 
-  if (companiesQuery.loading) {
-    return <CompaniesList loading={true} />;
+    this.state = {
+      pagination: {
+        current: 1,
+        pageSize: 10
+      }
+    };
+
+    this.handleTableChange = this.handleTableChange.bind(this);
   }
 
-  const updatedProps = {
-    ...props,
-    data: companiesQuery.companies,
-    pagination: {
-      total: companiesQuery.companies.length,
-      pageSize: companiesQuery.companies.length,
-      current: 1
-    },
-    loading: false,
-    filter: filter,
-    onChange: (pagination, filters, sorter) =>
-      this.handleTableChange(pagination, filters, sorter)
-  };
+  handleTableChange(pagination, filters, sorter) {
+    console.log(pagination, filters, sorter);
+    this.setState({ pagination });
+  }
 
-  return <CompaniesList {...updatedProps} />;
-};
+  render() {
+    const { companiesQuery } = this.props;
+
+    if (companiesQuery.loading) {
+      return <CompaniesList loading={true} />;
+    }
+
+    const updatedProps = {
+      ...this.props,
+      data: companiesQuery.companies,
+      pagination: {
+        total: companiesQuery.companies.length,
+        pageSize: companiesQuery.companies.length,
+        current: 1
+      },
+      loading: false,
+      filter: filter,
+      onChange: (pagination, filters, sorter) =>
+        this.handleTableChange(pagination, filters, sorter)
+    };
+
+    return <CompaniesList {...updatedProps} />;
+  }
+}
 
 CompaniesContainer.propTypes = {
   companiesQuery: PropTypes.object

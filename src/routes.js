@@ -16,7 +16,8 @@ import {
   EoiRoute,
   PublishEoiRoute,
   EditTenderRoute,
-  SubmitTenderRoute
+  SubmitTenderRoute,
+  ViewTenderRoute
 } from './modules/tenders/routes';
 import {
   ForgotPasswordRoute,
@@ -40,6 +41,7 @@ const Routes = () => (
         {EoiRoute()}
         {PublishEoiRoute()}
         {EditTenderRoute()}
+        {ViewTenderRoute()}
 
         {/* supplier routes */}
         {SupplierDashboardRoute()}

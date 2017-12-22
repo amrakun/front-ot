@@ -141,6 +141,7 @@ export const companyByUser = `
 const companies = `
   query companies {
     companies {
+      _id
       basicInfo {
         enName,
         email,

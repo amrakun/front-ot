@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, gql, graphql } from 'react-apollo';
-import { Publish } from '../components';
+import { RfqForm } from '../components';
 import { queries, mutations } from '../graphql';
 
 const PublishContainer = ({ tenderDetailQuery, tendersAdd, location }) => {
@@ -27,7 +27,7 @@ const PublishContainer = ({ tenderDetailQuery, tendersAdd, location }) => {
     data: tenderDetailQuery.tenderDetail || {}
   };
 
-  return <Publish {...updatedProps} />;
+  return <RfqForm {...updatedProps} />;
 };
 
 PublishContainer.propTypes = {

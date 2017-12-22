@@ -18,6 +18,56 @@ const tenderDetail = `
   }
 `;
 
+const tenders = `
+  query tenders {
+    tenders {
+      _id
+      number
+      name
+      content
+      publishDate
+      closeDate
+      file
+      reminderDay
+      supplierIds
+      requestedProducts {
+        code
+        purchaseRequestNumber
+        shortText
+        quantity
+        uom
+        manufacturer
+        manufacturerPart
+        suggestedManufacturer
+        suggestedManufacturerPart
+        unitPrice
+        totalPrice
+        leadTime
+        comment
+        picture
+      }
+    }
+  }
+`;
+
+const companies = `
+  query companies {
+    companies {
+      _id
+      basicInfo {
+        enName,
+        email,
+        sapNumber
+      }
+      contactInfo {
+        phone
+      }
+    }
+  }
+`;
+
 export default {
-  tenderDetail
+  tenderDetail,
+  tenders,
+  companies
 };

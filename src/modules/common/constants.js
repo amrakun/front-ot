@@ -19,6 +19,18 @@ const noLabelLayout = {
   }
 };
 
+const booleanData = [
+  { text: 'Yes', value: 'true' },
+  { text: 'No', value: 'false' }
+];
+
 const days = [{ text: '1 day', value: '1' }];
 
-export { dateFormat, dateTimeFormat, uploadDisclaimer, noLabelLayout, days };
+export {
+  dateFormat,
+  dateTimeFormat,
+  uploadDisclaimer,
+  noLabelLayout,
+  days,
+  booleanData
+};

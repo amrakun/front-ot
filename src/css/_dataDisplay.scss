@@ -1,0 +1,67 @@
+
+.numberCard {
+  padding: 24px;
+  //font-family: monospace;
+  margin-bottom: 24px;
+
+  .iconWarp {
+    font-size: 54px;
+    float: left;
+  }
+
+  .content {
+    width: 100%;
+    padding-left: 78px;
+
+    .title {
+      line-height: 16px;
+      font-size: 16px;
+      margin-bottom: 8px;
+      height: 16px;
+
+    }
+
+    .number {
+      line-height: 32px;
+      font-size: 24px;
+      height: 32px;
+
+    }
+  }
+}
+
+
+.numberCardLines {
+  margin-bottom: 24px;
+
+  .flexBox {
+    display: flex;
+  }
+
+  .iconWarp {
+    color: #fff;
+    font-size: 56px;
+    padding: 25px;
+  }
+
+  .content {
+    flex: 1;
+    padding: 16px;
+
+
+    .title {
+      line-height: 16px;
+      font-size: 16px;
+      margin-bottom: 8px;
+      height: 16px;
+
+    }
+
+    .number {
+      line-height: 32px;
+      font-size: 24px;
+      height: 32px;
+
+    }
+  }
+}

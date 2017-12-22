@@ -55,8 +55,8 @@ class CompaniesList extends React.Component {
     this.setState({ productCodes: value });
   }
 
-  onSelectedCompaniesChange(selectedRowKeys) {
-    this.setState({ selectedRowKeys });
+  onSelectedCompaniesChange(selectedCompanies) {
+    this.setState({ selectedCompanies });
   }
 
   onRegionChange(values) {
@@ -131,7 +131,7 @@ class CompaniesList extends React.Component {
               <Link
                 to={{
                   pathname: newEoi.path,
-                  state: { companies: selectedCompanies }
+                  state: { supplierIds: selectedCompanies }
                 }}
                 className="ant-btn"
               >
@@ -140,7 +140,7 @@ class CompaniesList extends React.Component {
               <Link
                 to={{
                   pathname: newRfq.path,
-                  state: { companies: selectedCompanies }
+                  state: { supplierIds: selectedCompanies }
                 }}
                 className="ant-btn"
               >
@@ -155,7 +155,7 @@ class CompaniesList extends React.Component {
                 onChange: this.onSelectedCompaniesChange
               }}
               columns={columns}
-              rowKey={record => record}
+              rowKey={record => record._id}
               dataSource={data}
               pagination={pagination}
               loading={loading}

@@ -1,3 +1,52 @@
+.numberCard {
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.numberCard .iconWarp {
+  font-size: 54px;
+  float: left;
+}
+.numberCard .content {
+  width: 100%;
+  padding-left: 78px;
+}
+.numberCard .content .title {
+  line-height: 16px;
+  font-size: 16px;
+  margin-bottom: 8px;
+  height: 16px;
+}
+.numberCard .content .number {
+  line-height: 32px;
+  font-size: 24px;
+  height: 32px;
+}
+.numberCardLines {
+  margin-bottom: 24px;
+}
+.numberCardLines .flexBox {
+  display: flex;
+}
+.numberCardLines .iconWarp {
+  color: #fff;
+  font-size: 56px;
+  padding: 25px;
+}
+.numberCardLines .content {
+  flex: 1;
+  padding: 16px;
+}
+.numberCardLines .content .title {
+  line-height: 16px;
+  font-size: 16px;
+  margin-bottom: 8px;
+  height: 16px;
+}
+.numberCardLines .content .number {
+  line-height: 32px;
+  font-size: 24px;
+  height: 32px;
+}
 .hidden {
   display: none;
 }
@@ -131,7 +180,10 @@ i.success {
   margin-right: 8px;
 }
 .table-operations a.ant-btn {
-  line-height: 24px;
+  line-height: 26px;
+}
+.table-operations a.ant-btn .anticon {
+  margin-right: 8px;
 }
 .rdw-editor-wrapper {
   padding-top: 16px;
@@ -231,4 +283,11 @@ i.success {
 }
 *::-webkit-scrollbar-thumb {
   background-color: #e3e3e3;
+}
+.ant-table-pagination {
+  margin: 0 auto;
+  display: table;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  float: none;
 }

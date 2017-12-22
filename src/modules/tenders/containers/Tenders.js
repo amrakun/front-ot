@@ -1,92 +1,77 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Tenders } from '../components';
-
-const mockData = [
-  {
-    status: 'open',
-    number: 197,
-    name: 'Allen Ward',
-    publishDate: '2017-11-25',
-    closeDate: '2017-11-25',
-    suppliers: 77,
-    submitted: 8,
-    notInterested: 2,
-    notResponded: 1,
-    regretLetterSent: true
-  }
-];
-
-const propTypes = {
-  type: PropTypes.string,
-  location: PropTypes.object,
-  supplier: PropTypes.bool
-};
+import { gql, graphql } from 'react-apollo';
+import { queries } from '../graphql';
 
 class TendersContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    const { type, location = '' } = props;
+    const { location } = props;
 
-    this.type = 'rfq';
+    let type = 'rfq';
     if (type === 'eoi' || (location && location.pathname === '/eoi'))
-      this.type = 'eoi';
+      type = 'eoi';
 
     this.state = {
-      data: [],
-      pagination: {},
-      loading: false
+      pagination: {
+        current: 1,
+        pageSize: 10
+      },
+      type: type
     };
 
     this.handleTableChange = this.handleTableChange.bind(this);
-    this.fetch = this.fetch.bind(this);
   }
 
   handleTableChange(pagination, filters, sorter) {
-    const pager = { ...this.state.pagination };
-    pager.current = pagination.current;
-    this.setState({
-      pagination: pager
-    });
-    this.fetch({
-      results: pagination.pageSize,
-      page: pagination.current,
-      sortField: sorter.field,
-      sortOrder: sorter.order,
-      ...filters
-    });
+    console.log(pagination, filters, sorter);
+    this.setState({ pagination });
   }
-  //params = {}
-  fetch() {
-    this.setState({ loading: true });
-    const pagination = { ...this.state.pagination };
-    pagination.total = 200;
-    this.setState({
-      loading: false,
-      data: mockData,
-      pagination
-    });
-  }
-  componentDidMount() {
-    this.fetch();
-  }
+
   render() {
-    return (
-      <Tenders
-        supplier={this.props.supplier}
-        type={this.type}
-        data={this.state.data}
-        pagination={this.state.pagination}
-        loading={this.state.loading}
-        onChange={(pagination, filters, sorter) =>
-          this.handleTableChange(pagination, filters, sorter)
-        }
-      />
-    );
+    const { tendersQuery } = this.props;
+    if (tendersQuery.loading) {
+      return <Tenders loading={true} />;
+    }
+
+    const { pagination } = this.state;
+
+    const updatedProps = {
+      ...this.props,
+      data: tendersQuery.tenders,
+      pagination: {
+        total: tendersQuery.tenders.length,
+        pageSize: pagination.pageSize,
+        current: pagination.current
+      },
+      type: this.state.type,
+      loading: false,
+      onChange: (pagination, filters, sorter) =>
+        this.handleTableChange(pagination, filters, sorter)
+    };
+
+    return <Tenders {...updatedProps} />;
   }
 }
 
-TendersContainer.propTypes = propTypes;
+TendersContainer.propTypes = {
+  type: PropTypes.string,
+  location: PropTypes.object,
+  supplier: PropTypes.bool,
+  tendersQuery: PropTypes.object
+};
 
-export default TendersContainer;
+export default graphql(gql(queries.tenders), {
+  name: 'tendersQuery',
+  options: ({ queryParams }) => {
+    return {
+      variables: {
+        page: 200,
+        perPage: 20
+      },
+      notifyOnNetworkStatusChange: true
+    };
+  }
+})(TendersContainer);
