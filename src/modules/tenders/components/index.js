@@ -1,5 +1,7 @@
 import Tenders from './view/Tenders';
-import RfqForm from './forms/RfqForm';
-import EoiForm from './forms/EoiForm';
+import CreateRfq from './CreateRfq';
+import CreateEoi from './CreateEoi';
 import Tender from './view/Tender';
-export { Tenders, RfqForm, EoiForm, Tender };
+import SubmitTender from './SubmitTender';
+
+export { Tenders, CreateRfq, CreateEoi, Tender, SubmitTender };

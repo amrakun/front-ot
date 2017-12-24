@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, gql, graphql } from 'react-apollo';
-import { RfqForm, EoiForm } from '../components';
+import { CreateRfq, CreateEoi } from '../components';
 import { mutations } from '../graphql';
 
 const CreateTenderContainer = ({ tendersAdd, location }) => {
@@ -21,9 +21,9 @@ const CreateTenderContainer = ({ tendersAdd, location }) => {
     data: { supplierIds: location.state.supplierIds }
   };
 
-  let form = <RfqForm {...updatedProps} />;
+  let form = <CreateRfq {...updatedProps} />;
 
-  if (location.pathname.includes('eoi')) form = <EoiForm {...updatedProps} />;
+  if (location.pathname.includes('eoi')) form = <CreateEoi {...updatedProps} />;
 
   return form;
 };

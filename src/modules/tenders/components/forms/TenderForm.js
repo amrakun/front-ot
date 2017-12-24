@@ -38,6 +38,7 @@ class TenderForm extends BaseForm {
     this.onEmailContentChange = this.onEmailContentChange.bind(this);
     this.onProductInputChange = this.onProductInputChange.bind(this);
     this.addProductRow = this.addProductRow.bind(this);
+    this.renderProductColumn = this.renderProductColumn.bind(this);
   }
 
   handleSubmit(e) {
@@ -83,24 +84,27 @@ class TenderForm extends BaseForm {
     this.state[stateKey] = product;
   }
 
-  renderProductColumn(name, title, type) {
+  renderProductColumn(props) {
+    const { name, title, type, isSupplier } = props;
     const render = (text, record) => {
-      const props = {
+      const inputProps = {
         defaultValue: record[name],
+        disabled: isSupplier,
         onChange: e => this.onProductInputChange(e, name, record.key)
       };
 
-      let control = <Input {...props} />;
+      let control = <Input {...inputProps} />;
 
       if (type === 'number') {
         props.htmlType = 'number';
-        control = <InputNumber {...props} />;
+        control = <InputNumber {...inputProps} />;
       }
 
       if (type === 'uploader') {
         control = (
           <Uploader
             initialFile={record[name]}
+            disabled={isSupplier}
             onReceiveFile={args =>
               this.onProductInputChange(args, name, record.key)
             }
@@ -111,6 +115,7 @@ class TenderForm extends BaseForm {
       if (type === 'select') {
         control = (
           <Select
+            disabled={isSupplier}
             onSelect={e => this.onProductInputChange(e, name, record.key)}
           >
             {this.renderOptions(booleanData)}

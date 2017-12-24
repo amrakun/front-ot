@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, gql, graphql } from 'react-apollo';
-import { CreateRfq, CreateEoi } from '../components';
+import { SubmitTender } from '../components';
 import { queries, mutations } from '../graphql';
 
 const PublishContainer = ({ tenderDetailQuery, tendersAdd, location }) => {
@@ -26,11 +26,7 @@ const PublishContainer = ({ tenderDetailQuery, tendersAdd, location }) => {
     data: tenderDetailQuery.tenderDetail || {}
   };
 
-  let form = <CreateRfq {...updatedProps} />;
-
-  if (location.pathname.includes('eoi')) form = <CreateEoi {...updatedProps} />;
-
-  return form;
+  return <SubmitTender {...updatedProps} />;
 };
 
 PublishContainer.propTypes = {

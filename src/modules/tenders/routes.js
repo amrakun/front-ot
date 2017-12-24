@@ -1,6 +1,12 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { Tenders, CreateTender, Tender, EditTender } from './containers';
+import {
+  Tenders,
+  CreateTender,
+  Tender,
+  EditTender,
+  SubmitTender
+} from './containers';
 import {
   rfq,
   eoi,
@@ -50,7 +56,7 @@ export function SubmitTenderRoute() {
       key={submitTender.path}
       exact
       path={`${submitTender.path}/:id`}
-      component={EditTender}
+      component={SubmitTender}
     />
   );
 }
