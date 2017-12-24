@@ -4,7 +4,7 @@ import { compose, gql, graphql } from 'react-apollo';
 import { CreateRfq, CreateEoi } from '../components';
 import { queries, mutations } from '../graphql';
 
-const PublishContainer = ({ tenderDetailQuery, tendersAdd, location }) => {
+const PublishContainer = ({ tenderDetailQuery, tendersEdit, location }) => {
   if (tenderDetailQuery.loading) {
     return null;
   }
@@ -12,7 +12,14 @@ const PublishContainer = ({ tenderDetailQuery, tendersAdd, location }) => {
   const save = doc => {
     const [publishDate, closeDate] = doc.dateRange;
 
-    tendersAdd({ variables: { ...doc, publishDate, closeDate } })
+    tendersEdit({
+      variables: {
+        ...doc,
+        _id: tenderDetailQuery.tenderDetail._id,
+        publishDate,
+        closeDate
+      }
+    })
       .then(() => {
         console.log('Saved');
       })
@@ -36,7 +43,7 @@ const PublishContainer = ({ tenderDetailQuery, tendersAdd, location }) => {
 PublishContainer.propTypes = {
   location: PropTypes.object,
   tenderDetailQuery: PropTypes.object,
-  tendersAdd: PropTypes.func
+  tendersEdit: PropTypes.func
 };
 
 export default compose(
@@ -49,7 +56,7 @@ export default compose(
     }
   }),
 
-  graphql(gql(mutations.tendersAdd), {
-    name: 'tendersAdd'
+  graphql(gql(mutations.tendersEdit), {
+    name: 'tendersEdit'
   })
 )(PublishContainer);

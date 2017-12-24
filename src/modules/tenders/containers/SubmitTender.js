@@ -4,15 +4,15 @@ import { compose, gql, graphql } from 'react-apollo';
 import { SubmitTender } from '../components';
 import { queries, mutations } from '../graphql';
 
-const PublishContainer = ({ tenderDetailQuery, tendersAdd, location }) => {
+const PublishContainer = ({ tenderDetailQuery, tendersResponsesAdd }) => {
   if (tenderDetailQuery.loading) {
     return null;
   }
 
   const save = doc => {
-    const [publishDate, closeDate] = doc.dateRange;
-
-    tendersAdd({ variables: { ...doc, publishDate, closeDate } })
+    tendersResponsesAdd({
+      variables: { ...doc, _id: tenderDetailQuery.tenderDetail._id }
+    })
       .then(() => {
         console.log('Saved');
       })
@@ -32,7 +32,7 @@ const PublishContainer = ({ tenderDetailQuery, tendersAdd, location }) => {
 PublishContainer.propTypes = {
   location: PropTypes.object,
   tenderDetailQuery: PropTypes.object,
-  tendersAdd: PropTypes.func
+  tendersResponsesAdd: PropTypes.func
 };
 
 export default compose(
@@ -45,7 +45,7 @@ export default compose(
     }
   }),
 
-  graphql(gql(mutations.tendersAdd), {
-    name: 'tendersAdd'
+  graphql(gql(mutations.tendersResponsesAdd), {
+    name: 'tendersResponsesAdd'
   })
 )(PublishContainer);

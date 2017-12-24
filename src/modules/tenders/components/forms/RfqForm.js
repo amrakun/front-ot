@@ -49,12 +49,12 @@ const RfqForm = props => {
       {renderProductColumn({
         name: 'suggestedManufacturer',
         title: rpc.suggestedManufacturer,
-        isSupplier
+        isSupplier: !isSupplier
       })}
       {renderProductColumn({
         name: 'suggestedManufacturerPart',
         title: rpc.suggestedManufacturerPart,
-        isSupplier
+        isSupplier: !isSupplier
       })}
       {renderProductColumn({
         name: 'unitPrice',
@@ -81,7 +81,7 @@ const RfqForm = props => {
         isSupplier: !isSupplier
       })}
       {renderProductColumn({
-        name: 'picture',
+        name: 'file',
         title: rpc.picture,
         type: 'uploader',
         isSupplier: !isSupplier

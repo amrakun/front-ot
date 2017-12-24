@@ -37,6 +37,7 @@ class MainInfo extends React.Component {
 
   render() {
     const { editorState } = this.state;
+
     const {
       renderField,
       renderOptions,
@@ -44,8 +45,9 @@ class MainInfo extends React.Component {
       data,
       supplierIds
     } = this.props;
-    const dateRange = data.startDate
-      ? [moment(data.startDate), moment(data.endDate)]
+
+    const dateRange = data.publishDate
+      ? [moment(data.publishDate), moment(data.closeDate)]
       : null;
 
     const layout = {

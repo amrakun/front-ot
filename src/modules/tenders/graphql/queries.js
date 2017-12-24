@@ -1,19 +1,28 @@
+const tenderFields = `
+  _id,
+  number,
+  name,
+  content,
+  publishDate,
+  closeDate,
+  file,
+  reminderDay,
+  supplierIds,
+  requestedProducts {
+    code
+    purchaseRequestNumber
+    shortText
+    quantity
+    uom
+    manufacturer
+    manufacturerPart
+  },
+`;
+
 const tenderDetail = `
   query tenderDetail($_id: String!) {
     tenderDetail(_id: $_id) {
-      _id,
-      number,
-      name,
-      content,
-      publishDate,
-      closeDate,
-      file,
-      reminderDay,
-      supplierIds,
-      requestedProducts {
-        code,
-        purchaseRequestNumber
-      },
+      ${tenderFields}
     }
   }
 `;
@@ -21,31 +30,7 @@ const tenderDetail = `
 const tenders = `
   query tenders {
     tenders {
-      _id
-      number
-      name
-      content
-      publishDate
-      closeDate
-      file
-      reminderDay
-      supplierIds
-      requestedProducts {
-        code
-        purchaseRequestNumber
-        shortText
-        quantity
-        uom
-        manufacturer
-        manufacturerPart
-        suggestedManufacturer
-        suggestedManufacturerPart
-        unitPrice
-        totalPrice
-        leadTime
-        comment
-        picture
-      }
+      ${tenderFields}
     }
   }
 `;
