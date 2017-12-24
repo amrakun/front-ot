@@ -4,7 +4,6 @@ import Header from './Header';
 import Breadcrumb from './Breadcrumb';
 import { Layout } from 'antd';
 import { PropTypes } from 'prop-types';
-import { buyerPaths } from 'modules/common/paths';
 
 const { Content, Footer } = Layout;
 const withSidebar = { marginLeft: 200 };
@@ -31,15 +30,14 @@ class MainLayout extends React.Component {
   }
 
   componentDidMount() {
-    const { history, currentUser, location } = this.props;
+    const { history, currentUser } = this.props;
 
     if (!currentUser) {
       history.push('/');
-    } else if (
-      currentUser.isSupplier &&
-      buyerPaths.includes(location.pathname)
-    ) {
-      history.push('/sign-in');
+    } else if (currentUser.isSupplier) {
+      history.push('/rfq-and-eoi');
+    } else {
+      history.push('/dashboard');
     }
   }
 

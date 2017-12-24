@@ -3,12 +3,6 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Table, Card } from 'antd';
-import {
-  editTender,
-  viewTender,
-  submitTender,
-  supDash
-} from 'modules/common/paths';
 import { tenderColumns, supplierTenderColumns, labels } from '../../constants';
 
 const propTypes = {
@@ -23,9 +17,9 @@ const propTypes = {
 function createBuyerLinks(_id) {
   return (
     <div>
-      <Link to={`${viewTender.path}/${_id}`}>View</Link>
+      <Link to={`/tender/${_id}`}>View</Link>
       <span className="ant-divider" />
-      <Link to={`${editTender.path}/${_id}`}>Edit</Link>
+      <Link to={`/tender/edit/${_id}`}>Edit</Link>
     </div>
   );
 }
@@ -33,9 +27,9 @@ function createBuyerLinks(_id) {
 function createSupplierLinks(_id) {
   return (
     <div style={{ width: '160px' }}>
-      <Link to={`${submitTender.path}/${_id}`}>More</Link>
+      <Link to={`/tender/submit/${_id}`}>More</Link>
       <span className="ant-divider" />
-      <Link to={supDash.path}>Not intereseted</Link>
+      <Link to={'/rfq-and-eoi'}>Not intereseted</Link>
     </div>
   );
 }

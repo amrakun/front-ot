@@ -7,37 +7,33 @@ import {
   EditTender,
   SubmitTender
 } from './containers';
-import {
-  rfq,
-  eoi,
-  newRfq,
-  newEoi,
-  editTender,
-  submitTender,
-  viewTender
-} from '../common/paths';
 
 export default [
-  <Route key={rfq.path} exact path={rfq.path} component={Tenders} />,
-  <Route key={newRfq.path} exact path={newRfq.path} component={CreateTender} />,
-  <Route key={eoi.path} exact path={eoi.path} component={Tenders} />,
+  <Route key={'/rfq'} exact path={'/rfq'} component={Tenders} />,
   <Route
-    key={viewTender.path}
+    key={'/rfq/publish'}
     exact
-    path={`${viewTender.path}/:id`}
-    component={Tender}
+    path={'/rfq/publish'}
+    component={CreateTender}
   />,
+  <Route key={'/eoi'} exact path={'/eoi'} component={Tenders} />,
+  <Route key={'/tender'} exact path={`${'/tender'}/:id`} component={Tender} />,
   <Route
-    key={submitTender.path}
+    key={'/tender/submit'}
     exact
-    path={`${submitTender.path}/:id`}
+    path={`${'/tender/submit'}/:id`}
     component={SubmitTender}
   />,
   <Route
-    key={editTender.path}
+    key={'/tender/edit'}
     exact
-    path={`${editTender.path}/:id`}
+    path={`${'/tender/edit'}/:id`}
     component={EditTender}
   />,
-  <Route key={newEoi.path} exact path={newEoi.path} component={CreateTender} />
+  <Route
+    key={'/eoi/publish'}
+    exact
+    path={'/eoi/publish'}
+    component={CreateTender}
+  />
 ];

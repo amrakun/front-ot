@@ -1,28 +1,32 @@
 import React from 'react';
 import { Breadcrumb, Icon } from 'antd';
 import { PropTypes } from 'prop-types';
-import { paths } from 'modules/common/paths';
+
+const BreadcrumbItem = Breadcrumb.Item;
+
+const routes = {
+  companies: 'Suppliers',
+  rfq: 'RFQ Responses',
+  eoi: 'EOI Responses',
+  tender: 'Tenders and EOI',
+  publish: 'Publish',
+  prequalification: 'Prequalification',
+  registration: 'Registration'
+};
 
 const Breadcrumbs = location => {
-  const breadcrumbItems = [];
-  breadcrumbItems.push(
-    <Breadcrumb.Item key={0}>
-      <Icon type="home" />
-    </Breadcrumb.Item>
-  );
-  paths.every(path => {
-    if (location.pathname.includes(path.path)) {
-      try {
-        path.breadcrumb.forEach(i => {
-          breadcrumbItems.push(<Breadcrumb.Item key={i}>{i}</Breadcrumb.Item>);
-        });
-      } catch (e) {
-        return true;
-      }
-      return false;
-    }
-    return true;
+  const breadcrumbItems = [
+    <BreadcrumbItem key={0}>
+      <Icon type="home" /> Home
+    </BreadcrumbItem>
+  ];
+
+  location.pathname.split('/').forEach((path, index) => {
+    breadcrumbItems.push(
+      <BreadcrumbItem key={index}>{routes[path]}</BreadcrumbItem>
+    );
   });
+
   return <Breadcrumb>{breadcrumbItems}</Breadcrumb>;
 };
 
