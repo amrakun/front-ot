@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { Table } from 'antd';
 import { rfqProductsColumns } from '../../constants';
 
-const initialProducts = [{ key: Math.random() }];
-
 const RfqForm = props => {
   const rpc = rfqProductsColumns;
   const { products, renderProductColumn, isSupplier = true } = props;
@@ -12,7 +10,7 @@ const RfqForm = props => {
   return (
     <Table
       className="margin form-table"
-      dataSource={products.length > 0 ? products : initialProducts}
+      dataSource={products}
       pagination={false}
       size="middle"
       scroll={{ x: 3000 }}

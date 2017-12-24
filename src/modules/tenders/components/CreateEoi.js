@@ -8,10 +8,19 @@ import EoiForm from './forms/EoiForm';
 
 const TabPane = Tabs.TabPane;
 
+const initialProducts = [
+  { key: Math.random(), document: 'Scope specific experience' },
+  { key: Math.random(), document: 'Customer reference /atleast 2/' },
+  { key: Math.random(), document: 'Special licences if applicable (copy)' }
+];
+
 class CreateEoi extends TenderForm {
   componentDidMount() {
     if (!this.state.content) {
-      this.setState({ content: eoiEmailTemplate });
+      this.setState({
+        content: eoiEmailTemplate,
+        products: initialProducts
+      });
     }
   }
   render() {

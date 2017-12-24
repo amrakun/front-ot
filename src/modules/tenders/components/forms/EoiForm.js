@@ -3,12 +3,6 @@ import PropTypes from 'prop-types';
 import { Table } from 'antd';
 import { eoiProductsColumns } from '../../constants';
 
-const initialProducts = [
-  { key: Math.random(), document: 'Scope specific experience' },
-  { key: Math.random(), document: 'Customer reference /atleast 2/' },
-  { key: Math.random(), document: 'Special licences if applicable (copy)' }
-];
-
 const EoiForm = props => {
   const rpc = eoiProductsColumns;
   const { products, renderProductColumn, isSupplier = true } = props;
@@ -16,7 +10,7 @@ const EoiForm = props => {
   return (
     <Table
       className="margin form-table"
-      dataSource={products.length > 0 ? products : initialProducts}
+      dataSource={products}
       pagination={false}
       size="middle"
     >

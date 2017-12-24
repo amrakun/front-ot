@@ -7,11 +7,15 @@ import TenderForm from './forms/TenderForm';
 import RfqForm from './forms/RfqForm';
 
 const TabPane = Tabs.TabPane;
+const initialProducts = [{ key: Math.random() }];
 
 class CreateRfq extends TenderForm {
   componentDidMount() {
     if (!this.state.content) {
-      this.setState({ content: rfqEmailTemplate });
+      this.setState({
+        content: rfqEmailTemplate,
+        products: initialProducts
+      });
     }
   }
   render() {

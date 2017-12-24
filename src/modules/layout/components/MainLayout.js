@@ -34,10 +34,6 @@ class MainLayout extends React.Component {
 
     if (!currentUser) {
       history.push('/');
-    } else if (currentUser.isSupplier) {
-      history.push('/rfq-and-eoi');
-    } else {
-      history.push('/dashboard');
     }
   }
 
