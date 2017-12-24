@@ -1,59 +1,19 @@
 import React from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import { MainLayout } from './modules/layout/containers';
-import {
-  DashboardRoute,
-  SupplierDashboardRoute
-} from './modules/dashboard/routes';
-import {
-  CompaniesRoute,
-  RegistrationRoute,
-  PrequalificationRoute
-} from './modules/companies/routes';
-import {
-  RfqRoute,
-  PublishRfqRoute,
-  EoiRoute,
-  PublishEoiRoute,
-  EditTenderRoute,
-  SubmitTenderRoute,
-  ViewTenderRoute
-} from './modules/tenders/routes';
-import {
-  ForgotPasswordRoute,
-  ResetPasswordRoute,
-  SignInRoute,
-  HomeRoute,
-  RegisterRoute
-} from './modules/auth/routes';
+import DashboardRoutes from './modules/dashboard/routes';
+import CompaniesRoutes from './modules/companies/routes';
+import TendersRoutes from './modules/tenders/routes';
+import AuthRoutes from './modules/auth/routes';
 
 const Routes = () => (
   <BrowserRouter>
     <MainLayout>
       <Switch>
-        {HomeRoute()}
-
-        {/*  buyer routes */}
-        {DashboardRoute()}
-        {CompaniesRoute()}
-        {RfqRoute()}
-        {PublishRfqRoute()}
-        {EoiRoute()}
-        {PublishEoiRoute()}
-        {EditTenderRoute()}
-        {ViewTenderRoute()}
-
-        {/* supplier routes */}
-        {SupplierDashboardRoute()}
-        {SubmitTenderRoute()}
-        {RegistrationRoute()}
-        {PrequalificationRoute()}
-
-        {/* Auth routes */}
-        {SignInRoute()}
-        {RegisterRoute()}
-        {ResetPasswordRoute()}
-        {ForgotPasswordRoute()}
+        {DashboardRoutes}
+        {AuthRoutes}
+        {CompaniesRoutes}
+        {TendersRoutes}
       </Switch>
     </MainLayout>
   </BrowserRouter>
