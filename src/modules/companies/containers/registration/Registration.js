@@ -22,7 +22,6 @@ const RegistrationContainer = props => {
         console.log(error);
       });
   };
-  console.log(companyByUserQuery.companyByUser);
   const updatedProps = {
     ...props,
     save,

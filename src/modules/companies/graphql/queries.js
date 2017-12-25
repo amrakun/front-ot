@@ -91,6 +91,8 @@ const certificateInfoFields = `
 
 const groupInfoFields = `
   hasParent,
+  isParentExistingSup,
+  parentName,
   parentAddress,
   parentRegistrationNumber,
   role,

@@ -80,13 +80,13 @@ class RegistrationForm extends BaseForm {
 
     if (this.state.isExclusiveDistributor) {
       authorizedDistributions.push(
+        this.getFieldValue('distributionRightName0')
+      );
+      authorizedDistributions.push(
         this.getFieldValue('distributionRightName1')
       );
       authorizedDistributions.push(
         this.getFieldValue('distributionRightName2')
-      );
-      authorizedDistributions.push(
-        this.getFieldValue('distributionRightName3')
       );
     }
 
@@ -144,14 +144,14 @@ class RegistrationForm extends BaseForm {
   }
 
   renderDistrubutionRightInput(index) {
-    const initValues = this.props.authorizedDistributions || {};
+    const initValues = this.props.data.authorizedDistributions || {};
     const { isExclusiveDistributor } = this.state;
 
     return (
       <Field
         name={`distributionRightName${index}`}
         initialValue={initValues[index]}
-        label={`Distribution right name ${index}`}
+        label={`Distribution right name ${index + 1}`}
         hasFeedback={false}
         isVisible={isExclusiveDistributor}
         optional={true}

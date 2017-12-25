@@ -69,7 +69,8 @@ export default graphql(gql(queries.tenders), {
     return {
       variables: {
         page: 200,
-        perPage: 20
+        perPage: 20,
+        type: 'rfq'
       },
       notifyOnNetworkStatusChange: true
     };

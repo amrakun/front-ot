@@ -7,74 +7,72 @@ import { days, dateTimeFormat } from 'modules/common/constants';
 import AddMore from 'modules/companies/components/list/AddMore';
 import { Editor } from 'modules/common/components';
 
-class MainInfo extends React.Component {
-  render() {
-    const {
-      renderField,
-      renderOptions,
-      onReceiveFile,
-      data,
-      supplierIds,
-      content,
-      onEmailContentChange
-    } = this.props;
+const MainInfo = props => {
+  const {
+    renderField,
+    renderOptions,
+    onReceiveFile,
+    data,
+    supplierIds,
+    content,
+    onEmailContentChange
+  } = props;
 
-    const dateRange = data.publishDate
-      ? [moment(data.publishDate), moment(data.closeDate)]
-      : null;
+  const dateRange = data.publishDate
+    ? [moment(data.publishDate), moment(data.closeDate)]
+    : null;
 
-    const supplierTags = supplierIds.map(el => <Tag key={el}>{el}</Tag>);
+  const supplierTags = supplierIds.map(el => <Tag key={el}>{el}</Tag>);
 
-    return (
-      <div>
-        <label>Sending RFQ to: </label>
-        {supplierTags}
-        <AddMore withTag={true} />
-        <p style={{ paddingBottom: '16px' }} />
+  return (
+    <div>
+      <label>Sending RFQ to: </label>
+      {supplierTags}
+      <AddMore withTag={true} />
+      <p style={{ paddingBottom: '16px' }} />
 
-        {renderField({
-          name: 'number',
-          optional: true,
-          control: <InputNumber placeholder="Tender number" htmlType="number" />
-        })}
-        {renderField({
-          name: 'name',
-          optional: true,
-          control: <Input placeholder="Tender name" />
-        })}
-        {renderField({
-          name: 'dateRange',
-          optional: true,
-          initialValue: dateRange,
-          control: (
-            <DatePicker.RangePicker
-              showTime={{ format: 'HH:mm' }}
-              format={dateTimeFormat}
-              placeholder={['Start date', 'End date']}
-            />
-          )
-        })}
-        {renderField({
-          name: 'reminderDay',
-          optional: true,
-          control: (
-            <Select placeholder="Expired day reminder">
-              {renderOptions(days)}
-            </Select>
-          )
-        })}
-        {renderField({
-          name: 'file',
-          dataType: 'file',
-          control: (
-            <Uploader initialFile={data.file} onReceiveFile={onReceiveFile} />
-          )
-        })}
-        <Editor onEmailContentChange={onEmailContentChange} content={content} />
-      </div>
-    );
-  }
-}
+      {renderField({
+        name: 'number',
+        optional: true,
+        control: <InputNumber placeholder="Tender number" htmlType="number" />
+      })}
+      {renderField({
+        name: 'name',
+        optional: true,
+        control: <Input placeholder="Tender name" />
+      })}
+      {renderField({
+        name: 'dateRange',
+        optional: true,
+        initialValue: dateRange,
+        control: (
+          <DatePicker.RangePicker
+            showTime={{ format: 'HH:mm' }}
+            format={dateTimeFormat}
+            placeholder={['Start date', 'End date']}
+          />
+        )
+      })}
+      {renderField({
+        name: 'reminderDay',
+        optional: true,
+        control: (
+          <Select placeholder="Expired day reminder">
+            {renderOptions(days)}
+          </Select>
+        )
+      })}
+      {renderField({
+        name: 'file',
+        dataType: 'file',
+        control: (
+          <Uploader initialFile={data.file} onReceiveFile={onReceiveFile} />
+        )
+      })}
+      <Editor onEmailContentChange={onEmailContentChange} content={content} />
+    </div>
+  );
+};
 
 MainInfo.propTypes = {
   renderField: PropTypes.func,

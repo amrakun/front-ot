@@ -1,5 +1,6 @@
 const tenderFields = `
   _id,
+  type,
   number,
   name,
   content,
@@ -28,8 +29,8 @@ const tenderDetail = `
 `;
 
 const tenders = `
-  query tenders {
-    tenders {
+  query tenders($type: String!) {
+    tenders(type: $type) {
       ${tenderFields}
     }
   }
