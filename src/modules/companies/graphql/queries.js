@@ -110,6 +110,7 @@ const groupInfoFields = `
 export const companyByUser = `
   query companyByUser {
     companyByUser {
+      _id
       basicInfo {
         ${basicInfoFields}
       }
