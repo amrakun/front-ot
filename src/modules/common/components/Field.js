@@ -3,40 +3,6 @@ import PropTypes from 'prop-types';
 import { Form } from 'antd';
 
 export default class Field extends React.Component {
-  formItemLayout() {
-    return {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 },
-        lg: { span: 8 }
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 14 },
-        lg: { span: 8 }
-      }
-    };
-  }
-
-  tailFormItemLayout() {
-    return {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0
-        },
-        sm: {
-          span: 14,
-          offset: 8
-        },
-        lg: {
-          span: 14,
-          offset: 8
-        }
-      }
-    };
-  }
-
   /*
    * For example: Select is accepting only string value, So we are
    * converting boolean, number to string
@@ -94,7 +60,6 @@ export default class Field extends React.Component {
 
     return (
       <Form.Item
-        {...this.formItemLayout()}
         {...layout}
         label={label}
         extra={description}

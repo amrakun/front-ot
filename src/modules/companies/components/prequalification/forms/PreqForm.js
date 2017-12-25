@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select, Input } from 'antd';
+import { Select, Input, Card } from 'antd';
 import { labels, descriptions, booleanData } from '../constants';
 import { BaseForm, Uploader } from 'modules/common/components';
 
@@ -10,12 +10,12 @@ class PreqForm extends BaseForm {
     const isVisible = this.state[name];
 
     return (
-      <div>
+      <Card>
         {this.renderBoolean(name)}
         {isTextarea
           ? this.renderTextArea(`${name}Description`, isVisible)
           : this.renderUpload(`${name}File`, isVisible)}
-      </div>
+      </Card>
     );
   }
 
@@ -28,7 +28,7 @@ class PreqForm extends BaseForm {
       optional: !isVisible,
       control: (
         <Uploader
-          initialFile={this.props.data[`name`]}
+          initialFile={this.props.data[name]}
           onReceiveFile={(...args) => this[`${name}Upload`](...args)}
         />
       )

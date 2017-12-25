@@ -1,9 +1,19 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Select, Input, DatePicker, Row, Col, Button, Icon } from 'antd';
+import {
+  Form,
+  Select,
+  Input,
+  DatePicker,
+  Row,
+  Col,
+  Button,
+  Icon,
+  Card
+} from 'antd';
 import { booleanData, labels, descriptions } from '../constants';
 import { dateFormat } from 'modules/common/constants';
-import { Field } from 'modules/common/components';
+import { Field, Uploader } from 'modules/common/components';
 import moment from 'moment';
 import PreqForm from './PreqForm';
 
@@ -170,94 +180,123 @@ class PrequalificationForm extends PreqForm {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        {this.renderUpload('organisationChart')}
+        <h2>Human resource management</h2>
+        <Card>
+          {this.renderField({
+            label: labels.organisationChart,
+            name: 'organisationChart',
+            dataType: 'file',
+            control: (
+              <Uploader
+                initialFile={this.props.data.organisationChart}
+                onReceiveFile={(...args) =>
+                  this[`organisationChartUpload`](...args)
+                }
+              />
+            )
+          })}
+        </Card>
+
         {this.renderConditionalField('doesMeetMinimumStandarts')}
         {this.renderConditionalField('doesHaveJobDescription')}
-        {this.renderBoolean('doesConcludeValidContracts')}
-        {this.renderTextArea('employeeTurnoverRate')}
+
+        <Card>
+          {this.renderBoolean('doesConcludeValidContracts')}
+          {this.renderTextArea('employeeTurnoverRate')}
+        </Card>
 
         {this.renderConditionalField('doesHaveLiabilityInsurance')}
+
+        <h2>Company business integrity</h2>
         {this.renderConditionalField('doesHaveCodeEthics')}
         {this.renderConditionalField('doesHaveResponsiblityPolicy')}
 
-        {this.renderField({
-          name: 'hasConvictedLabourLaws',
-          label: labels.hasConvictedLabourLaws,
-          description: descriptions.hasConvictedLabourLaws,
-          dataType: 'boolean',
-          control: <Select>{booleanOptions}</Select>
-        })}
+        <Card>
+          {this.renderField({
+            name: 'hasConvictedLabourLaws',
+            label: labels.hasConvictedLabourLaws,
+            description: descriptions.hasConvictedLabourLaws,
+            dataType: 'boolean',
+            control: <Select>{booleanOptions}</Select>
+          })}
 
-        {this.renderField({
-          name: 'hasConvictedForHumanRights',
-          label: labels.hasConvictedForHumanRights,
-          description: descriptions.hasConvictedForHumanRights,
-          dataType: 'boolean',
-          control: <Select>{booleanOptions}</Select>
-        })}
+          {this.renderField({
+            name: 'hasConvictedForHumanRights',
+            label: labels.hasConvictedForHumanRights,
+            description: descriptions.hasConvictedForHumanRights,
+            dataType: 'boolean',
+            control: <Select>{booleanOptions}</Select>
+          })}
+        </Card>
 
-        {this.renderField({
-          name: 'hasConvictedForBusinessIntegrity',
-          label: labels.hasConvictedForBusinessIntegrity,
-          description: descriptions.hasConvictedForBusinessIntegrity,
-          dataType: 'boolean',
-          control: (
-            <Select onChange={this.onHasConvictedChange}>
-              {booleanOptions}
-            </Select>
-          )
-        })}
+        <Card>
+          {this.renderField({
+            name: 'hasConvictedForBusinessIntegrity',
+            label: labels.hasConvictedForBusinessIntegrity,
+            description: descriptions.hasConvictedForBusinessIntegrity,
+            dataType: 'boolean',
+            control: (
+              <Select onChange={this.onHasConvictedChange}>
+                {booleanOptions}
+              </Select>
+            )
+          })}
 
-        {this.renderField({
-          name: 'proveHasNotConvicted',
-          label: labels.proveHasNotConvicted,
-          optional: hasConvictedForBusinessIntegrity,
-          isVisible: hasConvictedForBusinessIntegrity,
-          control: <TextArea />
-        })}
+          {this.renderField({
+            name: 'proveHasNotConvicted',
+            label: labels.proveHasNotConvicted,
+            optional: hasConvictedForBusinessIntegrity,
+            isVisible: hasConvictedForBusinessIntegrity,
+            control: <TextArea />
+          })}
+        </Card>
 
-        {this.renderField({
-          name: 'hasLeadersConvicted',
-          label: labels.hasLeadersConvicted,
-          description: descriptions.hasLeadersConvicted,
-          dataType: 'boolean',
-          control: (
-            <Select onChange={this.onLeaderConvictedChange}>
-              {booleanOptions}
-            </Select>
-          )
-        })}
+        <Card>
+          {this.renderField({
+            name: 'hasLeadersConvicted',
+            label: labels.hasLeadersConvicted,
+            description: descriptions.hasLeadersConvicted,
+            dataType: 'boolean',
+            control: (
+              <Select onChange={this.onLeaderConvictedChange}>
+                {booleanOptions}
+              </Select>
+            )
+          })}
 
-        <div style={!hasLeadersConvicted ? { display: 'none' } : {}}>
-          {investigationItems}
-          <FormItem {...formItemLayout}>
-            <Button
-              type="dashed"
-              onClick={this.addInvestigation}
-              style={{ width: '60%' }}
-            >
-              <Icon type="plus" /> Add investigation
-            </Button>
-          </FormItem>
-        </div>
+          <div style={!hasLeadersConvicted ? { display: 'none' } : {}}>
+            {investigationItems}
+            <FormItem {...formItemLayout}>
+              <Button
+                type="dashed"
+                onClick={this.addInvestigation}
+                style={{ width: '60%' }}
+              >
+                <Icon type="plus" /> Add investigation
+              </Button>
+            </FormItem>
+          </div>
+        </Card>
 
-        {this.renderField({
-          name: 'doesEmployeePoliticallyExposed',
-          label: labels.doesEmployeePoliticallyExposed,
-          description: descriptions.doesEmployeePoliticallyExposed,
-          dataType: 'boolean',
-          control: (
-            <Select onChange={this.onHasPEPCHange}>{booleanOptions}</Select>
-          )
-        })}
+        <Card>
+          {this.renderField({
+            name: 'doesEmployeePoliticallyExposed',
+            label: labels.doesEmployeePoliticallyExposed,
+            description: descriptions.doesEmployeePoliticallyExposed,
+            dataType: 'boolean',
+            control: (
+              <Select onChange={this.onHasPEPCHange}>{booleanOptions}</Select>
+            )
+          })}
 
-        {this.renderField({
-          name: 'PEPName',
-          label: labels.PEPName,
-          isVisible: doesEmployeePoliticallyExposed,
-          optional: !doesEmployeePoliticallyExposed,
-          control: <Input />
-        })}
+          {this.renderField({
+            name: 'PEPName',
+            label: labels.PEPName,
+            isVisible: doesEmployeePoliticallyExposed,
+            optional: !doesEmployeePoliticallyExposed,
+            control: <Input />
+          })}
+        </Card>
 
         {this.renderSubmit()}
       </Form>

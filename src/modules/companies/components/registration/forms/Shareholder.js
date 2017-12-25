@@ -1,7 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Input, InputNumber } from 'antd';
+import { Form, Input, InputNumber, Card } from 'antd';
 import { BaseForm, Field, Uploader } from 'modules/common/components';
+import { uploadDisclaimer } from 'modules/common/constants';
 
 class ShareHolders extends BaseForm {
   handleSubmit(e) {
@@ -32,9 +33,7 @@ class ShareHolders extends BaseForm {
     const shareholder = shareholders[k - 1] || {};
 
     return (
-      <div>
-        <Form.Item label={<strong>Shareholder {k}</strong>} colon={false} />
-
+      <Card title={`Shareholder ${k}`}>
         <Field
           label="Name"
           name={`name${k}`}
@@ -58,30 +57,29 @@ class ShareHolders extends BaseForm {
           control={<InputNumber htmlType="number" />}
           optional={optional}
         />
-      </div>
+      </Card>
     );
   }
 
   render() {
     return (
       <Form>
-        {this.renderField({
-          label: '20. Please provide key shareholders information',
-          name: 'attachments',
-          description: `You may upload &quot;jpg,jpeg,png,rtf,pdf&quot; files,
-              or simple Adobe PDF files. Files that have the ability to contain
-              macros or other types of active code are not acceptable.
-            Maximum file size is 30mb.`,
-          optional: true,
-          dataType: 'file',
-          control: (
-            <Uploader
-              initialFiles={this.props.data.attachments}
-              multiple={true}
-              onReceiveFile={(...args) => this.attachmentsUpload(...args)}
-            />
-          )
-        })}
+        <Card>
+          {this.renderField({
+            label: '20. Please provide key shareholders information',
+            name: 'attachments',
+            description: uploadDisclaimer,
+            optional: true,
+            dataType: 'file',
+            control: (
+              <Uploader
+                initialFiles={this.props.data.attachments}
+                multiple={true}
+                onReceiveFile={(...args) => this.attachmentsUpload(...args)}
+              />
+            )
+          })}
+        </Card>
 
         {this.renderShareholder('1', false)}
         {this.renderShareholder('2', true)}

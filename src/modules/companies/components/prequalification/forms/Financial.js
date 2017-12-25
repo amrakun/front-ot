@@ -1,5 +1,14 @@
 import React from 'react';
-import { Form, Select, Row, Col, DatePicker, Input, InputNumber } from 'antd';
+import {
+  Form,
+  Select,
+  Row,
+  Col,
+  DatePicker,
+  Input,
+  InputNumber,
+  Card
+} from 'antd';
 import moment from 'moment';
 import { yearData, booleanData, currencyData } from '../constants';
 import { BaseForm, Uploader } from 'modules/common/components';
@@ -123,11 +132,7 @@ class PrequalificationForm extends BaseForm {
 
   renderYearAmountGroup(label, prefix) {
     return (
-      <Form.Item
-        className="multiple-wrapper"
-        label={label}
-        {...this.formItemLayout()}
-      >
+      <Form.Item className="multiple-wrapper" required={true} label={label}>
         {this.renderYearAmount(prefix, 0)}
         {this.renderYearAmount(prefix, 1)}
         {this.renderYearAmount(prefix, 2)}
@@ -186,67 +191,73 @@ class PrequalificationForm extends BaseForm {
 
     return (
       <Form className="preq-form">
-        {this.renderField({
-          label: 'Can you provide accounts for the last 3 financial year?',
-          name: 'canProvideAccountsInfo',
-          control: (
-            <Select onChange={this.onCanProvide}>{booleanOptions}</Select>
-          )
-        })}
-
-        <div style={canProvideAccountsInfo ? {} : { display: 'none' }}>
+        <Card>
           {this.renderField({
-            label: 'Currency',
-            name: 'currency',
-            optional: !canProvideAccountsInfo,
+            label: 'Can you provide accounts for the last 3 financial year?',
+            name: 'canProvideAccountsInfo',
             control: (
-              <Select placeholder="Select a currency">{currencyOptions}</Select>
+              <Select onChange={this.onCanProvide}>{booleanOptions}</Select>
             )
           })}
 
-          {this.renderYearAmountGroup('Annual turnover', 'annualTurnover')}
-          {this.renderYearAmountGroup('Pre-tax profit', 'preTaxProfit')}
-          {this.renderYearAmountGroup('Total assets', 'totalAssets')}
-          {this.renderYearAmountGroup(
-            'Total current assets',
-            'totalCurrentAssets'
-          )}
-          {this.renderYearAmountGroup(
-            'Total shareholders equity ',
-            'totalShareholderEquity'
-          )}
-        </div>
+          <div style={canProvideAccountsInfo ? {} : { display: 'none' }}>
+            {this.renderField({
+              label: 'Currency',
+              name: 'currency',
+              optional: !canProvideAccountsInfo,
+              control: (
+                <Select placeholder="Select a currency">
+                  {currencyOptions}
+                </Select>
+              )
+            })}
 
-        {this.renderField({
-          label: 'If not, explain the reasons',
-          name: 'reasons',
-          isVisible: !canProvideAccountsInfo,
-          optional: canProvideAccountsInfo,
-          control: <Input.TextArea style={{ minHeight: '80px' }} />
-        })}
+            {this.renderYearAmountGroup('Annual turnover', 'annualTurnover')}
+            {this.renderYearAmountGroup('Pre-tax profit', 'preTaxProfit')}
+            {this.renderYearAmountGroup('Total assets', 'totalAssets')}
+            {this.renderYearAmountGroup(
+              'Total current assets',
+              'totalCurrentAssets'
+            )}
+            {this.renderYearAmountGroup(
+              'Total shareholders equity ',
+              'totalShareholderEquity'
+            )}
+          </div>
 
-        <Form.Item
-          className="multiple-wrapper"
-          label="Please provide financial records for your last 3 years"
-          extra="The most recent years worth of accounts will always appear on top."
-          {...this.formItemLayout()}
-        >
-          {this.renderDateFile(0)}
-          {this.renderDateFile(1)}
-          {this.renderDateFile(2)}
-        </Form.Item>
+          {this.renderField({
+            label: 'If not, explain the reasons',
+            name: 'reasonToCannotNotProvide',
+            isVisible: !canProvideAccountsInfo,
+            optional: canProvideAccountsInfo,
+            control: <Input.TextArea style={{ minHeight: '80px' }} />
+          })}
+        </Card>
 
-        {this.renderField({
-          label: 'Is your company up to date with Social Security payments?',
-          name: 'isUpToDateSSP',
-          control: <Select placeholder="Select one">{booleanOptions}</Select>
-        })}
+        <Card>
+          <Form.Item
+            className="multiple-wrapper"
+            label="Please provide financial records for your last 3 years"
+            extra="The most recent years worth of accounts will always appear on top."
+          >
+            {this.renderDateFile(0)}
+            {this.renderDateFile(1)}
+            {this.renderDateFile(2)}
+          </Form.Item>
+        </Card>
+        <Card>
+          {this.renderField({
+            label: 'Is your company up to date with Social Security payments?',
+            name: 'isUpToDateSSP',
+            control: <Select placeholder="Select one">{booleanOptions}</Select>
+          })}
 
-        {this.renderField({
-          label: 'Is your company up to date with Corporation Tax payments?',
-          name: 'isUpToDateCTP',
-          control: <Select placeholder="Select one">{booleanOptions}</Select>
-        })}
+          {this.renderField({
+            label: 'Is your company up to date with Corporation Tax payments?',
+            name: 'isUpToDateCTP',
+            control: <Select placeholder="Select one">{booleanOptions}</Select>
+          })}
+        </Card>
 
         {this.renderSubmit('Save & continue', this.handleSubmit)}
       </Form>

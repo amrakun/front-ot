@@ -8,18 +8,17 @@ class TendersContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    const { location } = props;
+    const { location, type } = props;
 
-    let type = 'rfq';
+    this.type = 'rfq';
     if (type === 'eoi' || (location && location.pathname === '/eoi'))
-      type = 'eoi';
+      this.type = 'eoi';
 
     this.state = {
       pagination: {
         current: 1,
         pageSize: 10
-      },
-      type: type
+      }
     };
 
     this.handleTableChange = this.handleTableChange.bind(this);
@@ -32,6 +31,7 @@ class TendersContainer extends React.Component {
 
   render() {
     const { tendersQuery } = this.props;
+
     if (tendersQuery.loading) {
       return <Tenders loading={true} />;
     }
@@ -46,7 +46,7 @@ class TendersContainer extends React.Component {
         pageSize: pagination.pageSize,
         current: pagination.current
       },
-      type: this.state.type,
+      type: this.type,
       loading: false,
       onChange: (pagination, filters, sorter) =>
         this.handleTableChange(pagination, filters, sorter)

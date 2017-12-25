@@ -1,6 +1,11 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { Companies, Registration, Prequalification } from './containers';
+import {
+  Companies,
+  Registration,
+  Prequalification,
+  CapacityBuilding
+} from './containers';
 
 export default [
   <Route
@@ -14,6 +19,12 @@ export default [
     exact
     path="/registration"
     component={Registration}
+  />,
+  <Route
+    key="/capacity-building"
+    exact
+    path="/capacity-building"
+    component={CapacityBuilding}
   />,
   <Route key="/companies" exact path="/companies" component={Companies} />
 ];

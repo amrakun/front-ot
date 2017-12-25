@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Input, Select } from 'antd';
+import { Form, Input, Select, Card } from 'antd';
 import { countryData } from '../constants';
 import BaseForm from '../../../../common/components/BaseForm';
 
@@ -10,85 +10,87 @@ class ContactInfo extends BaseForm {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        {this.renderField({
-          label: 'Name',
-          name: 'name',
-          control: <Input placeholder="Title. First name + Last name" />
-        })}
+        <Card title="14. Primary business contact">
+          {this.renderField({
+            label: 'Name',
+            name: 'name',
+            control: <Input placeholder="Title. First name + Last name" />
+          })}
 
-        {this.renderField({
-          label: 'Job title',
-          name: 'jobTitle',
-          control: <Input />
-        })}
+          {this.renderField({
+            label: 'Job title',
+            name: 'jobTitle',
+            control: <Input />
+          })}
 
-        {this.renderField({
-          label: 'Address',
-          name: 'address',
-          control: <Input />
-        })}
+          {this.renderField({
+            label: 'Address line',
+            name: 'address',
+            control: <Input />
+          })}
 
-        {this.renderField({
-          label: 'Address 2',
-          name: 'address2',
-          optional: true,
-          control: <Input />
-        })}
+          {this.renderField({
+            label: 'Address line 2 / Soum',
+            name: 'address2',
+            optional: true,
+            control: <Input />
+          })}
 
-        {this.renderField({
-          label: 'Address 3',
-          name: 'address3',
-          optional: true,
-          control: <Input />
-        })}
+          {this.renderField({
+            label: 'Address line 3',
+            name: 'address3',
+            optional: true,
+            control: <Input />
+          })}
 
-        {this.renderField({
-          label: 'Town or city',
-          name: 'townOrCity',
-          control: <Input />
-        })}
+          {this.renderField({
+            label: 'Postcode or zipcode',
+            name: 'zipCode',
+            optional: true,
+            control: <Input />
+          })}
 
-        {this.renderField({
-          label: 'County/state/province',
-          name: 'province',
-          control: <Input />
-        })}
+          {this.renderField({
+            label: 'Town/City/Aimag',
+            name: 'townOrCity',
+            control: <Input />
+          })}
 
-        {this.renderField({
-          label: 'Postcode or zipcode',
-          name: 'zipCode',
-          control: <Input />
-        })}
+          {this.renderField({
+            label: 'County/state/province',
+            name: 'province',
+            control: <Input />
+          })}
 
-        {this.renderField({
-          label: 'Country',
-          name: 'country',
-          control: (
-            <Select placeholder="Please select a country">
-              {countryOptions}
-            </Select>
-          )
-        })}
+          {this.renderField({
+            label: 'Country',
+            name: 'country',
+            control: (
+              <Select placeholder="Please select a country">
+                {countryOptions}
+              </Select>
+            )
+          })}
 
-        {this.renderField({
-          label: 'Phone',
-          name: 'phone',
-          control: <Input />
-        })}
+          {this.renderField({
+            label: 'Phone',
+            name: 'phone',
+            control: <Input />
+          })}
 
-        {this.renderField({
-          label: 'Phone 2',
-          name: 'phone2',
-          control: <Input />
-        })}
+          {this.renderField({
+            label: 'Phone 2',
+            name: 'phone2',
+            control: <Input />
+          })}
 
-        {this.renderField({
-          label: 'E-mail',
-          name: 'email',
-          validation: 'email',
-          control: <Input />
-        })}
-
+          {this.renderField({
+            label: 'E-mail',
+            name: 'email',
+            validation: 'email',
+            control: <Input />
+          })}
+        </Card>
         {this.renderSubmit()}
       </Form>
     );

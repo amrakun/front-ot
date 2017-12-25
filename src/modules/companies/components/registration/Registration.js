@@ -4,12 +4,11 @@ import CompanyInfoForm from './forms/CompanyInfo';
 import ContactForm from './forms/Contact';
 import ManagementForm from './forms/ManagementTeam';
 import ShareholderForm from './forms/Shareholder';
-import CertificateForm from './forms/Certificate';
 import ProductsForm from './forms/Products';
 import GroupForm from './forms/Group';
 import Panes from '../Panes';
 import PropTypes from 'prop-types';
-import { Tabs } from 'antd';
+import { Tabs, Col } from 'antd';
 
 const propTypes = {
   company: PropTypes.object,
@@ -19,8 +18,8 @@ const propTypes = {
 class RegistrationForms extends Panes {
   render() {
     return (
-      <div className="card-container">
-        <Tabs type="card">
+      <Col md={24} lg={20} xl={{ span: 14, offset: 1 }}>
+        <Tabs tabPosition="left" className="supplier-forms">
           {this.renderPane('1', 'Company info', 'basicInfo', CompanyInfoForm)}
           {this.renderPane('2', 'Contact details', 'contactInfo', ContactForm)}
           {this.renderPane(
@@ -42,14 +41,8 @@ class RegistrationForms extends Panes {
             'productsInfo',
             ProductsForm
           )}
-          {this.renderPane(
-            '7',
-            'Capacity building certificate',
-            'certificateInfo',
-            CertificateForm
-          )}
         </Tabs>
-      </div>
+      </Col>
     );
   }
 }

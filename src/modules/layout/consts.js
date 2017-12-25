@@ -7,12 +7,17 @@ export const supplierSideMenu = [
   {
     url: '/registration',
     title: 'Registration',
-    icon: 'user'
+    icon: 'contacts'
   },
   {
     url: '/prequalification',
     title: 'Prequalification',
     icon: 'solution'
+  },
+  {
+    url: '/capacity-building',
+    title: 'Capacity building',
+    icon: 'file-text'
   }
 ];
 

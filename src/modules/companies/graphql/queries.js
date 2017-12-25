@@ -87,8 +87,6 @@ const shareholderItemFields = `
 const certificateInfoFields = `
   isReceived,
   file,
-  isOTSupplier,
-  cwpo,
 `;
 
 const groupInfoFields = `
@@ -138,6 +136,35 @@ export const companyByUser = `
   }
 `;
 
+export const certificateByUser = `
+  query companyByUser {
+    companyByUser {
+      basicInfo {
+        ${basicInfoFields}
+      }
+      contactInfo {
+        ${contactInfoFields}
+      }
+      managementTeamInfo {
+        ${managementTeamFields}
+      }
+      groupInfo {
+        ${groupInfoFields}
+      }
+      shareholderInfo {
+        attachments,
+        shareholders {
+          ${shareholderItemFields}
+        }
+      }
+      certificateInfo {
+        ${certificateInfoFields}
+      }
+      productsInfo
+    }
+  }
+`;
+
 const companies = `
   query companies {
     companies {
@@ -159,6 +186,7 @@ export const companyPrequalificationDetail = `
     companyByUser {
       financialInfo {
         canProvideAccountsInfo
+        reasonToCannotNotProvide
         currency
         isUpToDateSSP
         isUpToDateCTP
@@ -201,7 +229,6 @@ export const companyPrequalificationDetail = `
         proveHasNotConvicted
         hasLeadersConvicted
         doesEmployeePoliticallyExposed
-        additionalInformation
         investigations {
           name
           date
@@ -211,6 +238,7 @@ export const companyPrequalificationDetail = `
       }
       environmentalInfo {
         doesHavePlan
+        doesHavePlanFile
         hasEnvironmentalRegulatorInvestigated
         dateOfInvestigation
         reasonForInvestigation
@@ -218,7 +246,6 @@ export const companyPrequalificationDetail = `
         investigationDocumentation
         hasConvictedForEnvironmentalLaws
         proveHasNotConvicted
-        additionalInformation
       }
       healthInfo {
         doesHaveHealthSafety

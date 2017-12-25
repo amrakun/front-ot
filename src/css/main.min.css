@@ -131,24 +131,6 @@
 .ant-breadcrumb {
   margin: 16px 0;
 }
-.card-container > .ant-tabs-card > .ant-tabs-content {
-  margin-top: -16px;
-}
-.card-container > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
-  background: #fff;
-  padding: 16px;
-}
-.card-container > .ant-tabs-card > .ant-tabs-bar {
-  border-color: #fff;
-}
-.card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
-  border-color: transparent;
-  background: transparent;
-}
-.card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
-  border-color: #fff;
-  background: #fff;
-}
 i.success {
   color: green;
 }
@@ -290,4 +272,46 @@ i.success {
   margin-top: 16px;
   margin-bottom: 16px;
   float: none;
+}
+.card-container > .ant-tabs-card > .ant-tabs-content {
+  height: 120px;
+  margin-top: -16px;
+}
+.card-container > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
+  background: #fff;
+  padding: 16px;
+}
+.card-container > .ant-tabs-card > .ant-tabs-bar {
+  border-color: #fff;
+}
+.card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+  border-color: transparent;
+  background: transparent;
+}
+.card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
+  border-color: #fff;
+  background: #fff;
+}
+.ant-form-item-label {
+  white-space: normal;
+  line-height: 18px;
+  margin-bottom: 6px;
+  text-align: left;
+}
+form .ant-input-number {
+  width: 100%;
+}
+.supplier-forms .ant-card {
+  margin-bottom: 16px;
+}
+.supplier-forms .ant-card .ant-card-body {
+  padding-bottom: 0;
+}
+.supplier-forms .ant-btn-dashed {
+  width: 100%;
+  display: block;
+  margin-top: 12px;
+}
+.supplier-forms h2 {
+  margin: 24px 0 8px 0;
 }

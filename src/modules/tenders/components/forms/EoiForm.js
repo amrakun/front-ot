@@ -19,14 +19,18 @@ const EoiForm = props => {
         name: 'isSubmitted',
         title: rpc.isSubmitted,
         type: 'select',
-        isSupplier
+        isSupplier: !isSupplier
       })}
       {renderProductColumn({
         name: 'documentFileName',
         title: rpc.documentFileName,
-        isSupplier
+        isSupplier: !isSupplier
       })}
-      {renderProductColumn({ name: 'notes', title: rpc.notes, isSupplier })}
+      {renderProductColumn({
+        name: 'notes',
+        title: rpc.notes,
+        isSupplier: !isSupplier
+      })}
     </Table>
   );
 };

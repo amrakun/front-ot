@@ -158,7 +158,7 @@ export default class BaseForm extends React.Component {
 
   renderSubmit(text = 'Save & continue', onClick = this.handleSubmit) {
     return (
-      <Form.Item {...this.tailFormItemLayout()}>
+      <Form.Item>
         <Button type="primary" htmlType="submit" onClick={onClick}>
           {text}
         </Button>

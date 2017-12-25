@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form } from 'antd';
+import { Form, Card } from 'antd';
 import PreqForm from './PreqForm';
 
 class PrequalificationForm extends PreqForm {
@@ -40,27 +40,31 @@ class PrequalificationForm extends PreqForm {
     return (
       <Form onSubmit={this.save}>
         {this.renderConditionalField('doesHaveHealthSafety')}
-        {this.renderBoolean('areHSEResourcesClearlyIdentified')}
+        <Card>{this.renderBoolean('areHSEResourcesClearlyIdentified')}</Card>
         {this.renderConditionalField('doesHaveDocumentedProcessToEnsure')}
-        {this.renderBoolean('areEmployeesUnderYourControl')}
+        <Card>{this.renderBoolean('areEmployeesUnderYourControl')}</Card>
         {this.renderConditionalField('doesHaveDocumentForRiskAssesment')}
         {this.renderConditionalField(
           'doesHaveDocumentForIncidentInvestigation'
         )}
         {this.renderConditionalField('doesHaveDocumentedFitness')}
-        {this.renderBoolean('isWillingToComply')}
+        <Card>{this.renderBoolean('isWillingToComply')}</Card>
 
         {/* TODO: Project specific fields start */}
-        {this.renderBoolean('hasIndustrialAccident')}
-        {this.renderTextArea('tmha')}
-        {this.renderTextArea('ltifr')}
-        {this.renderTextArea('injuryExplanation')}
-        {this.renderTextArea('seniorManagement')}
-        {this.renderBoolean('isWillingToCommit')}
-        {this.renderBoolean('isPerparedToCompile')}
+        <Card>
+          {this.renderBoolean('hasIndustrialAccident')}
+          {this.renderTextArea('tmha')}
+          {this.renderTextArea('ltifr')}
+          {this.renderTextArea('injuryExplanation')}
+          {this.renderTextArea('seniorManagement')}
+          {this.renderBoolean('isWillingToCommit')}
+          {this.renderBoolean('isPerparedToCompile')}
+        </Card>
         {this.renderConditionalField('hasWorkedOnWorldBank', true)}
         {this.renderConditionalField('hasWorkedOnLargeProjects', true)}
         {this.renderConditionalField('doesHaveLicense', true)}
+
+        {this.renderSubmit('Save & continue', this.handleSubmit)}
       </Form>
     );
   }

@@ -1,8 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Select } from 'antd';
+import { Form, TreeSelect, Card } from 'antd';
 import { Field, BaseForm } from 'modules/common/components';
-import { productsData } from '../constants';
+import { productDescription } from '../constants';
+import { treeData } from '../../../constants';
 
 class RegistrationForm extends BaseForm {
   save() {
@@ -12,16 +13,23 @@ class RegistrationForm extends BaseForm {
   render() {
     return (
       <Form>
-        <Field
-          label="Product code"
-          initialValue={this.props.data}
-          name="productsInfo"
-          control={
-            <Select mode="multiple" placeholder="Please select products">
-              {this.renderOptions(productsData)}
-            </Select>
-          }
-        />
+        <Card>
+          <Field
+            label="Product codes"
+            initialValue={this.props.data}
+            name="productsInfo"
+            description={productDescription}
+            control={
+              <TreeSelect
+                treeData={treeData}
+                treeCheckable={true}
+                searchPlaceholder="Please select products"
+                showCheckedStrategy={TreeSelect.SHOW_PARENT}
+                style={{ width: '100%' }}
+              />
+            }
+          />
+        </Card>
         {this.renderSubmit()}
       </Form>
     );

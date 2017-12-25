@@ -44,7 +44,7 @@ export const countryData = [
 export const roleData = [
   { text: 'Original Equipment Manufacturer (OEM)', value: 'EOM' },
   { text: 'Stockist', value: 'Stockist' },
-  { text: 'Distrubotor', value: 'Distrubotor' },
+  { text: 'Distributor', value: 'Distributor' },
   { text: 'None of above', value: 'None' }
 ];
 
@@ -77,11 +77,10 @@ export const descriptions = {
   `,
 
   email: `
-    generic shared email zaaval oruulah buguud, OT hudaldan
-    avaltiin gazraas zarlagdaj baigaa Oroltsoh sonirhol huleen avah
-    bolon busad megdel zuvhun ug email hayagaar yavuulah bolohiig
-    anhaarna uu.Huviin email oruulsnaas uuden Eoi huleen avaagui
-    hariutslagiig OT huleehgui bolohiig anhaarna uu
+    Please fill in generic shared email. Receive an interest in the announcement
+    of the OT Procurement Depertment and other notices only by e-mail. Please
+    note that OT will not be responsible for non-EOI receipts due to the
+    personal e-mail entry.
   `
 };
 
@@ -96,7 +95,15 @@ export const labels = {
 
   isSubContractor: `4. Does your company, parent company or any sub-contractor is
         registered in any of the following countries to which
-        international trade sanctions apply`
+        international trade sanctions apply`,
+
+  managingDirector: `15. Managing director`,
+  executiveOfficer: `16. Executive officer`,
+  salesDirector: `17. Sales director`,
+  financialDirector: `18. Financial director`,
+  otherMember1: `19. Other management team member`,
+  otherMember2: `Other management team member 2`,
+  otherMember3: `Other management team member 3`
 };
 
 export const productsData = [];
@@ -137,3 +144,14 @@ export const groupLabels = {
 
   countryOfPrimaryManufacturer: `Country of primary manufacture`
 };
+
+export const productDescription = `
+  1. Using the product picker
+  The product codes have been structured in a 3 level hierarchy: Family Sect Code > Macro Sect Code > Sect Code.  Clicking on the check boxes will expand the category.  You can only select at Sect Code level.
+  2. Search
+  Alternatively you can use the search by free text to find potential matches.  Clicking View All will return you to the full list of product codes.
+  3.  Adding and Removing product codes
+  To add a Product / Service click on the check box.  Selected product codes are displayed in the right pane.  To remove simply click on the cross.
+  4. Keywords
+  Clicking the magnifying glass icon provides more detail about the types of activity included by the Product / Service.
+`;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Select, Input, DatePicker } from 'antd';
+import { Form, Select, Input, DatePicker, Card } from 'antd';
 import { booleanData, actionStatusData } from '../constants';
 import { dateFormat } from 'modules/common/constants';
 import { labels } from '../constants';
@@ -54,94 +54,104 @@ class PrequalificationForm extends BaseForm {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        {this.renderField({
-          name: 'doesHavePlan',
-          label: labels.doesHavePlan,
-          dataType: 'boolean',
-          control: <Select onChange={this.onHasPlan}>{booleanOptions}</Select>
-        })}
-        {this.renderField({
-          label: labels.documentLabel,
-          name: 'doesHavePlanFile',
-          dataType: 'file',
-          isVisible: doesHavePlan,
-          optional: !doesHavePlan,
-          control: (
-            <Uploader
-              initialFile={data.doesHavePlanFile}
-              onReceiveFile={(...args) => this.doesHavePlanFileUpload(...args)}
-            />
-          )
-        })}
+        <Card>
+          {this.renderField({
+            name: 'doesHavePlan',
+            label: labels.doesHavePlan,
+            dataType: 'boolean',
+            control: <Select onChange={this.onHasPlan}>{booleanOptions}</Select>
+          })}
+          {this.renderField({
+            label: labels.documentLabel,
+            name: 'doesHavePlanFile',
+            dataType: 'file',
+            isVisible: doesHavePlan,
+            optional: !doesHavePlan,
+            control: (
+              <Uploader
+                initialFile={data.doesHavePlanFile}
+                onReceiveFile={(...args) =>
+                  this.doesHavePlanFileUpload(...args)
+                }
+              />
+            )
+          })}
+        </Card>
 
-        {this.renderField({
-          name: 'hasEnvironmentalRegulatorInvestigated',
-          label: labels.hasEnvironmentalRegulatorInvestigated,
-          dataType: 'boolean',
-          control: (
-            <Select onChange={this.onInvestigatedChange}>
-              {booleanOptions}
-            </Select>
-          )
-        })}
+        <Card>
+          {this.renderField({
+            name: 'hasEnvironmentalRegulatorInvestigated',
+            label: labels.hasEnvironmentalRegulatorInvestigated,
+            dataType: 'boolean',
+            control: (
+              <Select onChange={this.onInvestigatedChange}>
+                {booleanOptions}
+              </Select>
+            )
+          })}
 
-        {this.renderField({
-          name: 'dateOfInvestigation',
-          label: labels.dateOfInvestigation,
-          isVisible: hasEnvironmentalRegulatorInvestigated,
-          optional: !hasEnvironmentalRegulatorInvestigated,
-          initialValue: moment(data.dateOfInvestigation),
-          control: <DatePicker format={dateFormat} placeholder="Date" />
-        })}
+          {this.renderField({
+            name: 'dateOfInvestigation',
+            label: labels.dateOfInvestigation,
+            isVisible: hasEnvironmentalRegulatorInvestigated,
+            optional: !hasEnvironmentalRegulatorInvestigated,
+            initialValue: moment(data.dateOfInvestigation),
+            control: <DatePicker format={dateFormat} placeholder="Date" />
+          })}
 
-        {this.renderField({
-          name: 'reasonForInvestigation',
-          label: labels.reasonForInvestigation,
-          isVisible: hasEnvironmentalRegulatorInvestigated,
-          optional: !hasEnvironmentalRegulatorInvestigated,
-          control: <TextArea />
-        })}
+          {this.renderField({
+            name: 'reasonForInvestigation',
+            label: labels.reasonForInvestigation,
+            isVisible: hasEnvironmentalRegulatorInvestigated,
+            optional: !hasEnvironmentalRegulatorInvestigated,
+            control: <TextArea />
+          })}
 
-        {this.renderField({
-          name: 'actionStatus',
-          label: labels.actionStatus,
-          isVisible: hasEnvironmentalRegulatorInvestigated,
-          optional: !hasEnvironmentalRegulatorInvestigated,
-          control: <Select>{statusOptions}</Select>
-        })}
+          {this.renderField({
+            name: 'actionStatus',
+            label: labels.actionStatus,
+            isVisible: hasEnvironmentalRegulatorInvestigated,
+            optional: !hasEnvironmentalRegulatorInvestigated,
+            control: <Select>{statusOptions}</Select>
+          })}
 
-        {this.renderField({
-          label: labels.investigationDocumentation,
-          name: 'investigationDocumentation',
-          dataType: 'file',
-          isVisible: hasEnvironmentalRegulatorInvestigated,
-          optional: !hasEnvironmentalRegulatorInvestigated,
-          control: (
-            <Uploader
-              initialFile={data.investigationDocumentation}
-              onReceiveFile={(...args) =>
-                this.investigationDocumentationUpload(...args)
-              }
-            />
-          )
-        })}
+          {this.renderField({
+            label: labels.investigationDocumentation,
+            name: 'investigationDocumentation',
+            dataType: 'file',
+            isVisible: hasEnvironmentalRegulatorInvestigated,
+            optional: !hasEnvironmentalRegulatorInvestigated,
+            control: (
+              <Uploader
+                initialFile={data.investigationDocumentation}
+                onReceiveFile={(...args) =>
+                  this.investigationDocumentationUpload(...args)
+                }
+              />
+            )
+          })}
+        </Card>
 
-        {this.renderField({
-          name: 'hasConvictedForEnvironmentalLaws',
-          label: labels.hasConvictedForEnvironmentalLaws,
-          dataType: 'boolean',
-          control: (
-            <Select onChange={this.onConvictedChange}>{booleanOptions}</Select>
-          )
-        })}
+        <Card>
+          {this.renderField({
+            name: 'hasConvictedForEnvironmentalLaws',
+            label: labels.hasConvictedForEnvironmentalLaws,
+            dataType: 'boolean',
+            control: (
+              <Select onChange={this.onConvictedChange}>
+                {booleanOptions}
+              </Select>
+            )
+          })}
 
-        {this.renderField({
-          name: 'proveHasNotConvicted',
-          label: labels.proveHasNotConvicted,
-          isVisible: hasConvictedForEnvironmentalLaws,
-          optional: !hasConvictedForEnvironmentalLaws,
-          control: <TextArea />
-        })}
+          {this.renderField({
+            name: 'proveHasNotConvicted',
+            label: labels.proveHasNotConvicted,
+            isVisible: hasConvictedForEnvironmentalLaws,
+            optional: !hasConvictedForEnvironmentalLaws,
+            control: <TextArea />
+          })}
+        </Card>
 
         {this.renderSubmit('Save & continue', this.handleSubmit)}
       </Form>

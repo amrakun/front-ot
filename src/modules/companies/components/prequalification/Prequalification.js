@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs } from 'antd';
+import { Tabs, Col } from 'antd';
 
 import FinancialForm from './forms/Financial';
 import EnvironmentalForm from './forms/Environmental';
@@ -10,8 +10,8 @@ import Panes from '../Panes';
 class PrequalificationForms extends Panes {
   render() {
     return (
-      <div className="card-container">
-        <Tabs type="card">
+      <Col md={24} lg={20} xl={{ span: 14, offset: 1 }}>
+        <Tabs tabPosition="left" className="supplier-forms">
           {this.renderPane(
             '1',
             'Financial Information',
@@ -37,7 +37,7 @@ class PrequalificationForms extends Panes {
             HealthForm
           )}
         </Tabs>
-      </div>
+      </Col>
     );
   }
 }

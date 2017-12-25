@@ -1,22 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Input, Icon, Button, Select, Row, Col } from 'antd';
+import { Form, Input, Icon, Button, Select, Row, Col, Card } from 'antd';
 import { booleanData, roleData, countryData, groupLabels } from '../constants';
 import { BaseForm, Field, Uploader } from 'modules/common/components';
 
 const FormItem = Form.Item;
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 12 },
-    lg: { span: 10 }
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 8 },
-    lg: { span: 8 }
-  }
-};
 
 class RegistrationForm extends BaseForm {
   constructor(props) {
@@ -90,9 +78,17 @@ class RegistrationForm extends BaseForm {
       });
     });
 
-    authorizedDistributions.push(this.getFieldValue('distributionRightName1'));
-    authorizedDistributions.push(this.getFieldValue('distributionRightName2'));
-    authorizedDistributions.push(this.getFieldValue('distributionRightName3'));
+    if (this.state.isExclusiveDistributor) {
+      authorizedDistributions.push(
+        this.getFieldValue('distributionRightName1')
+      );
+      authorizedDistributions.push(
+        this.getFieldValue('distributionRightName2')
+      );
+      authorizedDistributions.push(
+        this.getFieldValue('distributionRightName3')
+      );
+    }
 
     this.save({ factories, authorizedDistributions });
   }
@@ -102,7 +98,6 @@ class RegistrationForm extends BaseForm {
 
     return (
       <FormItem
-        {...formItemLayout}
         className="multiple-wrapper"
         label={`Factory ${index}`}
         key={_id}
@@ -184,115 +179,118 @@ class RegistrationForm extends BaseForm {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        <label>{groupLabels.head}</label>
-        {this.renderField({
-          name: 'hasParent',
-          label: groupLabels.hasParent,
-          dataType: 'boolean',
-          control: (
-            <Select onChange={this.onHasParentChange}>{booleanOptions}</Select>
-          )
-        })}
-        {this.renderField({
-          name: 'isParentExistingSup',
-          label: groupLabels.isParentExistingSup,
-          isVisible: hasParent,
-          optional: !hasParent,
-          control: (
-            <Select onChange={this.onParentExists}>{booleanOptions}</Select>
-          )
-        })}
-        {this.renderField({
-          name: 'parentName',
-          label: groupLabels.parentName,
-          isVisible: hasParent && isParentExistingSup,
-          optional: !hasParent && !isParentExistingSup,
-          control: <Select>{booleanOptions}</Select>
-          // TODO: companyOptions fetch from db
-        })}
-        {this.renderField({
-          name: 'parentName',
-          label: groupLabels.parentName,
-          isVisible: hasParent && !isParentExistingSup,
-          optional: !hasParent && !isParentExistingSup,
-          control: <Input />
-        })}
-        {this.renderField({
-          name: 'parentAddress',
-          label: groupLabels.parentAddress,
-          isVisible: hasParent,
-          optional: !hasParent,
-          control: <Input />
-        })}
+        <Card title={groupLabels.head}>
+          {this.renderField({
+            name: 'hasParent',
+            label: groupLabels.hasParent,
+            dataType: 'boolean',
+            control: (
+              <Select onChange={this.onHasParentChange}>
+                {booleanOptions}
+              </Select>
+            )
+          })}
+          {this.renderField({
+            name: 'isParentExistingSup',
+            label: groupLabels.isParentExistingSup,
+            isVisible: hasParent,
+            optional: !hasParent,
+            control: (
+              <Select onChange={this.onParentExists}>{booleanOptions}</Select>
+            )
+          })}
+          {this.renderField({
+            name: 'parentName',
+            label: groupLabels.parentName,
+            isVisible: hasParent && isParentExistingSup,
+            optional: !hasParent && !isParentExistingSup,
+            control: <Select>{booleanOptions}</Select>
+            // TODO: companyOptions fetch from db
+          })}
+          {this.renderField({
+            name: 'parentName',
+            label: groupLabels.parentName,
+            isVisible: hasParent && !isParentExistingSup,
+            optional: !hasParent && !isParentExistingSup,
+            control: <Input />
+          })}
+          {this.renderField({
+            name: 'parentAddress',
+            label: groupLabels.parentAddress,
+            isVisible: hasParent,
+            optional: !hasParent,
+            control: <Input />
+          })}
 
-        {this.renderField({
-          name: 'parentRegistrationNumber',
-          label: groupLabels.parentRegistrationNumber,
-          isVisible: hasParent,
-          optional: !hasParent,
-          control: <Input />
-        })}
+          {this.renderField({
+            name: 'parentRegistrationNumber',
+            label: groupLabels.parentRegistrationNumber,
+            isVisible: hasParent,
+            optional: !hasParent,
+            control: <Input />
+          })}
+        </Card>
 
-        {this.renderField({
-          name: 'role',
-          label: groupLabels.role,
-          control: <Select onChange={this.onRoleChange}>{roleOptions}</Select>
-        })}
+        <Card>
+          {this.renderField({
+            name: 'role',
+            label: groupLabels.role,
+            control: <Select onChange={this.onRoleChange}>{roleOptions}</Select>
+          })}
 
-        <div className={role === 'EOM' ? '' : 'hidden'}>
-          {factoryItems}
-          <FormItem {...formItemLayout}>
-            <Button
-              type="dashed"
-              onClick={this.addFactory}
-              style={{ width: '60%' }}
-            >
-              <Icon type="plus" /> Add factory
-            </Button>
-          </FormItem>
-        </div>
+          <div className={role === 'EOM' ? '' : 'hidden'}>
+            {factoryItems}
+            <FormItem>
+              <Button type="dashed" onClick={this.addFactory}>
+                <Icon type="plus" /> Add factory
+              </Button>
+            </FormItem>
+          </div>
 
-        {this.renderField({
-          name: 'isExclusiveDistributor',
-          label: groupLabels.isExclusiveDistributor,
-          dataType: 'boolean',
-          isVisible: role === 'Distrubotor',
-          control: (
-            <Select onChange={this.onIsExcChange}>{booleanOptions}</Select>
-          )
-        })}
+          {this.renderField({
+            name: 'isExclusiveDistributor',
+            label: groupLabels.isExclusiveDistributor,
+            dataType: 'boolean',
+            isVisible: role === 'Distributor',
+            control: (
+              <Select onChange={this.onIsExcChange}>{booleanOptions}</Select>
+            )
+          })}
 
-        {this.renderDistrubutionRightInput(0)}
-        {this.renderDistrubutionRightInput(1)}
-        {this.renderDistrubutionRightInput(2)}
+          {this.renderDistrubutionRightInput(0)}
+          {this.renderDistrubutionRightInput(1)}
+          {this.renderDistrubutionRightInput(2)}
 
-        {this.renderField({
-          label: groupLabels.attachments,
-          name: 'attachments',
-          description: `Please upload your authorized distribution rights files`,
-          isVisible: isExclusiveDistributor,
-          optional: !isExclusiveDistributor,
-          dataType: 'file',
-          control: (
-            <Uploader
-              initialFiles={this.props.data.attachments}
-              multiple={true}
-              onReceiveFile={(...args) => this.attachmentsUpload(...args)}
-            />
-          )
-        })}
+          {this.renderField({
+            label: groupLabels.attachments,
+            name: 'attachments',
+            description: `Please upload your authorized distribution rights files`,
+            isVisible: isExclusiveDistributor,
+            optional: !isExclusiveDistributor,
+            dataType: 'file',
+            control: (
+              <Uploader
+                initialFiles={this.props.data.attachments}
+                multiple={true}
+                onReceiveFile={(...args) => this.attachmentsUpload(...args)}
+              />
+            )
+          })}
+        </Card>
 
-        {this.renderField({
-          name: 'primaryManufacturerName',
-          label: groupLabels.primaryManufacturerName,
-          control: <Input />
-        })}
+        <Card>
+          {this.renderField({
+            name: 'primaryManufacturerName',
+            label: groupLabels.primaryManufacturerName,
+            control: <Input />
+          })}
 
-        {this.renderField({
-          name: 'countryOfPrimaryManufacturer',
-          label: groupLabels.countryOfPrimaryManufacturer,
-          control: <Select>{countryOptions}</Select>
-        })}
+          {this.renderField({
+            name: 'countryOfPrimaryManufacturer',
+            label: groupLabels.countryOfPrimaryManufacturer,
+            control: <Select>{countryOptions}</Select>
+          })}
+        </Card>
 
         {this.renderSubmit()}
       </Form>

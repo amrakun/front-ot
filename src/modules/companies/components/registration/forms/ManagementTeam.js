@@ -1,14 +1,16 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Input, Row, Col } from 'antd';
+import { Form, Input, Card, Button, Icon } from 'antd';
 import Field from 'modules/common/components/Field';
 import BaseForm from 'modules/common/components/BaseForm';
+import { labels } from '../constants';
 
 class ManagementTeam extends BaseForm {
   constructor(props) {
     super(props);
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.copyAbove = this.copyAbove.bind(this);
   }
 
   handleSubmit(e) {
@@ -40,11 +42,24 @@ class ManagementTeam extends BaseForm {
     return this.props.save(doc);
   }
 
+  copyAbove() {
+    const { getFieldValue } = this.props.form;
+
+    console.log(getFieldValue('managingDirectorName'));
+  }
+
   renderItem(prefix, optional = false) {
     const data = this.props.data[prefix] || {};
 
     return (
-      <div>
+      <Card
+        title={labels[prefix]}
+        extra={
+          <Button onClick={this.copyAbove}>
+            <Icon type="copy" />Copy above
+          </Button>
+        }
+      >
         <Field
           label="Name"
           name={`${prefix}Name`}
@@ -77,34 +92,21 @@ class ManagementTeam extends BaseForm {
           optional={optional}
           control={<Input />}
         />
-      </div>
+      </Card>
     );
   }
 
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
-        <Row>
-          <Col xs={24} sm={12}>
-            <label>15. Managing director</label>
-            {this.renderItem('managingDirector')}
-            <label>16. Executive officer</label>
-            {this.renderItem('executiveOfficer')}
-            <label>17. Sales director</label>
-            {this.renderItem('salesDirector')}
-            <label>18. Financial director</label>
-            {this.renderItem('financialDirector')}
-          </Col>
-          <Col xs={24} sm={12}>
-            <label>19. Other management team member</label>
-            {this.renderItem('otherMember1', true)}
-            <label>Other management team member 2</label>
-            {this.renderItem('otherMember2', true)}
-            <label>Other management team member 3</label>
-            {this.renderItem('otherMember3', true)}
-          </Col>
-        </Row>
+        {this.renderItem('managingDirector')}
+        {this.renderItem('executiveOfficer')}
+        {this.renderItem('salesDirector')}
+        {this.renderItem('financialDirector')}
 
+        {this.renderItem('otherMember1', true)}
+        {this.renderItem('otherMember2', true)}
+        {this.renderItem('otherMember3', true)}
         {this.renderSubmit()}
       </Form>
     );
