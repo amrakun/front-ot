@@ -274,7 +274,6 @@ i.success {
   float: none;
 }
 .card-container > .ant-tabs-card > .ant-tabs-content {
-  height: 120px;
   margin-top: -16px;
 }
 .card-container > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {

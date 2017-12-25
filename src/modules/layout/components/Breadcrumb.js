@@ -11,7 +11,8 @@ const routes = {
   tender: 'Tenders and EOI',
   publish: 'Publish',
   prequalification: 'Prequalification',
-  registration: 'Registration'
+  registration: 'Registration',
+  'capacity-building': 'Capacity building'
 };
 
 const Breadcrumbs = location => {
