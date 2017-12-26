@@ -9,14 +9,24 @@ import {
 } from './containers';
 
 export default [
-  <Route key={'/rfq'} exact path={'/rfq'} component={Tenders} />,
+  <Route
+    key={'/rfq'}
+    exact
+    path={'/rfq'}
+    component={() => <Tenders type="rfq" />}
+  />,
   <Route
     key={'/rfq/publish'}
     exact
     path={'/rfq/publish'}
     component={CreateTender}
   />,
-  <Route key={'/eoi'} exact path={'/eoi'} component={Tenders} />,
+  <Route
+    key={'/eoi'}
+    exact
+    path={'/eoi'}
+    component={() => <Tenders type="eoi" />}
+  />,
   <Route key={'/tender'} exact path={`${'/tender'}/:id`} component={Tender} />,
   <Route
     key={'/tender/submit'}

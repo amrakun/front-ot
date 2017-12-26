@@ -81,7 +81,7 @@ export default compose(
 
   graphql(gql(queries.companies), {
     name: 'companiesQuery',
-    options: ({ queryParams }) => {
+    options: () => {
       return {
         variables: {
           page: 200,

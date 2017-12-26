@@ -9,7 +9,7 @@ class TendersContainer extends React.Component {
     super(props);
 
     const { location, type } = props;
-
+    console.log(props);
     this.type = 'rfq';
     if (type === 'eoi' || (location && location.pathname === '/eoi'))
       this.type = 'eoi';
@@ -57,6 +57,7 @@ class TendersContainer extends React.Component {
 }
 
 TendersContainer.propTypes = {
+  queryParams: PropTypes.object,
   type: PropTypes.string,
   location: PropTypes.object,
   supplier: PropTypes.bool,
@@ -65,12 +66,12 @@ TendersContainer.propTypes = {
 
 export default graphql(gql(queries.tenders), {
   name: 'tendersQuery',
-  options: ({ queryParams }) => {
+  options: ({ type }) => {
     return {
       variables: {
         page: 200,
         perPage: 20,
-        type: 'rfq'
+        type: type
       },
       notifyOnNetworkStatusChange: true
     };
