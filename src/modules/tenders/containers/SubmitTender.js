@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, gql, graphql } from 'react-apollo';
-import { SubmitTender } from '../components';
+import { SubmitRfq, SubmitEoi } from '../components';
 import { queries, mutations } from '../graphql';
 
 const PublishContainer = ({ tenderDetailQuery, tendersResponsesAdd }) => {
   if (tenderDetailQuery.loading) {
     return null;
   }
-  console.log(tenderDetailQuery);
 
   const save = doc => {
     tendersResponsesAdd({
@@ -27,7 +26,12 @@ const PublishContainer = ({ tenderDetailQuery, tendersResponsesAdd }) => {
     data: tenderDetailQuery.tenderDetail || {}
   };
 
-  return <SubmitTender {...updatedProps} />;
+  let form = <SubmitRfq {...updatedProps} />;
+
+  if (tenderDetailQuery.tenderDetail.type === 'eoi')
+    form = <SubmitEoi {...updatedProps} />;
+
+  return form;
 };
 
 PublishContainer.propTypes = {
@@ -40,7 +44,6 @@ export default compose(
   graphql(gql(queries.tenderDetail), {
     name: 'tenderDetailQuery',
     options: ({ match }) => {
-      console.log(match.params.id);
       return {
         variables: { _id: match.params.id }
       };

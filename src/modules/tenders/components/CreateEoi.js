@@ -9,20 +9,47 @@ import EoiForm from './forms/EoiForm';
 const TabPane = Tabs.TabPane;
 
 const initialProducts = [
-  { key: Math.random(), document: 'Scope specific experience' },
-  { key: Math.random(), document: 'Customer reference /atleast 2/' },
-  { key: Math.random(), document: 'Special licences if applicable (copy)' }
+  { key: 1, document: 'Scope specific experience' },
+  { key: 2, document: 'Customer reference /atleast 2/' },
+  { key: 3, document: 'Special licences if applicable (copy)' }
 ];
+const initialPerProducts = {
+  product__1: { document: 'Scope specific experience' },
+  product__2: { document: 'Customer reference /atleast 2/' },
+  product__3: { document: 'Special licences if applicable (copy)' }
+};
 
 class CreateEoi extends TenderForm {
+  constructor(props) {
+    super(props);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    let inputs = this.collectInputs();
+    const requestedDocuments = inputs.requestedProducts.map(
+      doc => doc.document
+    );
+    delete inputs.requestedProducts;
+    inputs.type = 'eoi';
+    inputs.requestedDocuments = requestedDocuments;
+
+    this.save(inputs);
+  }
+
   componentDidMount() {
     if (!this.state.content) {
       this.setState({
         content: eoiEmailTemplate,
-        products: initialProducts
+        products: initialProducts,
+        ...initialPerProducts
       });
     }
   }
+
   render() {
     const { products } = this.state;
 

@@ -27,6 +27,17 @@ class TenderForm extends BaseForm {
       });
     }
 
+    if (data.requestedDocuments) {
+      data.requestedDocuments.forEach(doc => {
+        const key = Math.random();
+        const product = { key, document: doc };
+
+        products.push(product);
+
+        perProductStates[`product__${key}`] = product;
+      });
+    }
+
     this.state = {
       products,
       ...perProductStates,
@@ -41,9 +52,7 @@ class TenderForm extends BaseForm {
     this.renderProductColumn = this.renderProductColumn.bind(this);
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-
+  collectInputs() {
     const products = [];
 
     // collect products table values
@@ -56,11 +65,11 @@ class TenderForm extends BaseForm {
       }
     });
 
-    this.save({
+    return {
       content: this.state.content,
       supplierIds: this.state.supplierIds || [],
       requestedProducts: products
-    });
+    };
   }
 
   onEmailContentChange(content) {

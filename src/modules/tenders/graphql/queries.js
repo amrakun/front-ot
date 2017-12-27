@@ -57,6 +57,7 @@ const tenderDetail = `
         manufacturer
         manufacturerPartNumber
       },
+      requestedDocuments
     }
   }
 `;

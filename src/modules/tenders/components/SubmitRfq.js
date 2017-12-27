@@ -83,7 +83,7 @@ class SubmitTender extends TenderForm {
             </TabPane>
 
             <TabPane tab="Form" key="2">
-              {data.type.eoi ? (
+              {data.type === 'eoi' ? (
                 <EoiForm {...formProps} />
               ) : (
                 <RfqForm {...formProps} />

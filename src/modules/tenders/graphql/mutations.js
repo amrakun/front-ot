@@ -17,7 +17,8 @@ const tendersAdd = `
     $file: JSON!,
     $reminderDay: Float!,
     $supplierIds: [String]!,
-    $requestedProducts: [TenderRequestedProductInput]!
+    $requestedProducts: [TenderRequestedProductInput]
+    $requestedDocuments: [String]
   ) {
     tendersAdd(
       type: $type,
@@ -30,6 +31,7 @@ const tendersAdd = `
       reminderDay: $reminderDay,
       supplierIds: $supplierIds,
       requestedProducts: $requestedProducts
+      requestedDocuments: $requestedDocuments
     ) {
       _id
     }
@@ -47,7 +49,8 @@ const tendersEdit = `
     $file: JSON!,
     $reminderDay: Float!,
     $supplierIds: [String]!,
-    $requestedProducts: [TenderRequestedProductInput]!
+    $requestedProducts: [TenderRequestedProductInput]
+    $requestedDocuments: [String]
   ) {
     tendersEdit(
       _id: $_id,
@@ -60,6 +63,7 @@ const tendersEdit = `
       reminderDay: $reminderDay,
       supplierIds: $supplierIds,
       requestedProducts: $requestedProducts
+      requestedDocuments: $requestedDocuments
     ) {
       _id
     }

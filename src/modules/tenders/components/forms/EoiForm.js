@@ -14,7 +14,11 @@ const EoiForm = props => {
       pagination={false}
       size="middle"
     >
-      {renderProductColumn({ name: 'document', title: rpc.document })}
+      {renderProductColumn({
+        name: 'document',
+        title: rpc.document,
+        isSupplier
+      })}
       {renderProductColumn({
         name: 'isSubmitted',
         title: rpc.isSubmitted,
@@ -22,13 +26,14 @@ const EoiForm = props => {
         isSupplier: !isSupplier
       })}
       {renderProductColumn({
-        name: 'documentFileName',
-        title: rpc.documentFileName,
+        name: 'notes',
+        title: rpc.notes,
         isSupplier: !isSupplier
       })}
       {renderProductColumn({
-        name: 'notes',
-        title: rpc.notes,
+        name: 'file',
+        title: 'Upload',
+        type: 'uploader',
         isSupplier: !isSupplier
       })}
     </Table>

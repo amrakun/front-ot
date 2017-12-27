@@ -10,6 +10,11 @@ const TabPane = Tabs.TabPane;
 const initialProducts = [{ key: Math.random() }];
 
 class CreateRfq extends TenderForm {
+  constructor(props) {
+    super(props);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
   componentDidMount() {
     if (!this.state.content) {
       this.setState({
@@ -17,6 +22,14 @@ class CreateRfq extends TenderForm {
         products: initialProducts
       });
     }
+  }
+  handleSubmit(e) {
+    e.preventDefault();
+
+    let inputs = this.collectInputs();
+    inputs.type = 'rfq';
+
+    this.save(inputs);
   }
   render() {
     const { products } = this.state;

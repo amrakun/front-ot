@@ -4,14 +4,14 @@ import { compose, gql, graphql } from 'react-apollo';
 import { CreateRfq, CreateEoi } from '../components';
 import { queries, mutations } from '../graphql';
 
-const PublishContainer = ({ tenderDetailQuery, tendersEdit, location }) => {
+const PublishContainer = ({ tenderDetailQuery, tendersEdit }) => {
   if (tenderDetailQuery.loading) {
     return null;
   }
 
   const save = doc => {
     const [publishDate, closeDate] = doc.dateRange;
-    console.log(doc);
+
     tendersEdit({
       variables: {
         ...doc,
@@ -35,13 +35,13 @@ const PublishContainer = ({ tenderDetailQuery, tendersEdit, location }) => {
 
   let form = <CreateRfq {...updatedProps} />;
 
-  if (location.pathname.includes('eoi')) form = <CreateEoi {...updatedProps} />;
+  if (tenderDetailQuery.tenderDetail.type === 'eoi')
+    form = <CreateEoi {...updatedProps} />;
 
   return form;
 };
 
 PublishContainer.propTypes = {
-  location: PropTypes.object,
   tenderDetailQuery: PropTypes.object,
   tendersEdit: PropTypes.func
 };
