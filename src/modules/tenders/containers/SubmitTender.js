@@ -8,6 +8,7 @@ const PublishContainer = ({ tenderDetailQuery, tendersResponsesAdd }) => {
   if (tenderDetailQuery.loading) {
     return null;
   }
+  console.log(tenderDetailQuery);
 
   const save = doc => {
     tendersResponsesAdd({
@@ -39,6 +40,7 @@ export default compose(
   graphql(gql(queries.tenderDetail), {
     name: 'tenderDetailQuery',
     options: ({ match }) => {
+      console.log(match.params.id);
       return {
         variables: { _id: match.params.id }
       };

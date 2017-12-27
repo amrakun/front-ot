@@ -29,6 +29,7 @@ class NumberCard extends Component {
 
   componentDidMount() {
     const { percent } = this.props;
+    clearInterval(this.countdown);
     this.countdown = setInterval(() => this.increase(percent), 25);
   }
 
@@ -39,6 +40,7 @@ class NumberCard extends Component {
   render() {
     const { icon, color, title, number, countUp } = this.props;
     const { percent } = this.state;
+    this.componentDidMount();
     return (
       <Card
         className="numberCardLines"

@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Tenders } from '../components';
-import { gql, graphql } from 'react-apollo';
-import { queries } from '../graphql';
+import { gql, graphql, compose } from 'react-apollo';
+import { queries, mutations } from '../graphql';
 
 class TendersContainer extends React.Component {
   constructor(props) {
     super(props);
 
     const { location, type } = props;
-    console.log(props);
+
     this.type = 'rfq';
     if (type === 'eoi' || (location && location.pathname === '/eoi'))
       this.type = 'eoi';
@@ -18,7 +18,8 @@ class TendersContainer extends React.Component {
       pagination: {
         current: 1,
         pageSize: 10
-      }
+      },
+      tenders: []
     };
 
     this.handleTableChange = this.handleTableChange.bind(this);
@@ -30,24 +31,45 @@ class TendersContainer extends React.Component {
   }
 
   render() {
-    const { tendersQuery } = this.props;
+    const { tendersQuery, tendersResponsesAdd } = this.props;
+    const { currentUser } = this.context;
 
     if (tendersQuery.loading) {
       return <Tenders loading={true} />;
     }
 
+    const notInterested = tenderId => {
+      tendersResponsesAdd({
+        variables: {
+          tenderId: tenderId,
+          supplierId: currentUser._id,
+          isNotInterested: true
+        }
+      })
+        .then(() => {
+          console.log('Saved');
+          tendersQuery.refetch();
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    };
+
     const { pagination } = this.state;
+    const tenders = tendersQuery.tenders || [];
 
     const updatedProps = {
       ...this.props,
-      data: tendersQuery.tenders,
+      data: tenders,
       pagination: {
-        total: tendersQuery.tenders.length,
+        total: tenders.length,
         pageSize: pagination.pageSize,
         current: pagination.current
       },
       type: this.type,
       loading: false,
+      notInterested: notInterested,
+      supplier: currentUser.isSupplier,
       onChange: (pagination, filters, sorter) =>
         this.handleTableChange(pagination, filters, sorter)
     };
@@ -57,23 +79,33 @@ class TendersContainer extends React.Component {
 }
 
 TendersContainer.propTypes = {
-  queryParams: PropTypes.object,
   type: PropTypes.string,
   location: PropTypes.object,
-  supplier: PropTypes.bool,
-  tendersQuery: PropTypes.object
+  tendersQuery: PropTypes.object,
+  tendersResponsesAdd: PropTypes.func
 };
 
-export default graphql(gql(queries.tenders), {
-  name: 'tendersQuery',
-  options: ({ type }) => {
-    return {
-      variables: {
-        page: 200,
-        perPage: 20,
-        type: type
-      },
-      notifyOnNetworkStatusChange: true
-    };
-  }
-})(TendersContainer);
+TendersContainer.contextTypes = {
+  currentUser: PropTypes.object
+};
+
+export default compose(
+  graphql(gql(queries.tenders), {
+    name: 'tendersQuery',
+    options: ({ type, supplierId }) => {
+      return {
+        variables: {
+          page: 200,
+          perPage: 20,
+          type: type,
+          supplierId: supplierId
+        },
+        notifyOnNetworkStatusChange: true
+      };
+    }
+  }),
+
+  graphql(gql(mutations.tendersResponsesAdd), {
+    name: 'tendersResponsesAdd'
+  })
+)(TendersContainer);

@@ -11,7 +11,7 @@ const PublishContainer = ({ tenderDetailQuery, tendersEdit, location }) => {
 
   const save = doc => {
     const [publishDate, closeDate] = doc.dateRange;
-
+    console.log(doc);
     tendersEdit({
       variables: {
         ...doc,

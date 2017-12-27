@@ -40,7 +40,7 @@ const RfqForm = props => {
         isSupplier
       })}
       {renderProductColumn({
-        name: 'manufacturerPart',
+        name: 'manufacturerPartNumber',
         title: rpc.manufacturerPart,
         isSupplier
       })}
@@ -50,7 +50,7 @@ const RfqForm = props => {
         isSupplier: !isSupplier
       })}
       {renderProductColumn({
-        name: 'suggestedManufacturerPart',
+        name: 'suggestedManufacturerPartNumber',
         title: rpc.suggestedManufacturerPart,
         isSupplier: !isSupplier
       })}

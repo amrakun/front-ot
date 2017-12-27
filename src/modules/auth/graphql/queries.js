@@ -5,6 +5,7 @@ const currentUser = `
       username
       email
       isSupplier
+      companyId
       details {
         avatar
         fullName

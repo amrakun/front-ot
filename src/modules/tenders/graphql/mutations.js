@@ -8,6 +8,7 @@ const tendersInput = `
 
 const tendersAdd = `
   mutation tendersAdd(
+    $type: String!,
     $number: Float!,
     $name: String!,
     $content: String!,
@@ -19,7 +20,7 @@ const tendersAdd = `
     $requestedProducts: [TenderRequestedProductInput]!
   ) {
     tendersAdd(
-      type: "rfq",
+      type: $type,
       number: $number,
       name: $name,
       content: $content,
@@ -69,12 +70,16 @@ const tendersResponsesAdd = `
   mutation tenderResponsesAdd(
     $tenderId: String!
     $supplierId: String!
-    $respondedProducts: [TenderRespondedProductInput]!
+    $isNotInterested: Boolean
+    $respondedProducts: [TenderRespondedProductInput]
+    $respondedDocuments: [TenderRespondedDocumentInput]
   ) {
     tenderResponsesAdd(
       tenderId: $tenderId,
       supplierId: $supplierId
+      isNotInterested: $isNotInterested
       respondedProducts: $respondedProducts
+      respondedDocuments: $respondedDocuments
     ) {
       _id
     }

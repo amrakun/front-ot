@@ -2,39 +2,47 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Table, Card } from 'antd';
+import { Table, Card, Popconfirm } from 'antd';
 import { tenderColumns, supplierTenderColumns, labels } from '../../constants';
 
-const propTypes = {
-  type: PropTypes.string,
-  data: PropTypes.array,
-  pagination: PropTypes.object,
-  loading: PropTypes.bool.isRequired,
-  onChange: PropTypes.func,
-  supplier: PropTypes.bool
-};
+const Tenders = props => {
+  const {
+    type,
+    data,
+    pagination,
+    loading,
+    onChange,
+    supplier,
+    notInterested
+  } = props;
+  const createBuyerLinks = _id => {
+    return (
+      <div>
+        <Link to={`/tender/${_id}`}>View</Link>
+        <span className="ant-divider" />
+        <Link to={`/tender/edit/${_id}`}>Edit</Link>
+      </div>
+    );
+  };
 
-function createBuyerLinks(_id) {
-  return (
-    <div>
-      <Link to={`/tender/${_id}`}>View</Link>
-      <span className="ant-divider" />
-      <Link to={`/tender/edit/${_id}`}>Edit</Link>
-    </div>
-  );
-}
+  const createSupplierLinks = _id => {
+    return (
+      <div style={{ width: '160px' }}>
+        <Link to={`/tender/submit/${_id}`}>More</Link>
+        <span className="ant-divider" />
+        <Popconfirm
+          title="Are you sure you are not interested？"
+          placement="bottomRight"
+          okText="Yes"
+          cancelText="No"
+          onConfirm={() => notInterested(_id)}
+        >
+          <a>Not interested</a>
+        </Popconfirm>
+      </div>
+    );
+  };
 
-function createSupplierLinks(_id) {
-  return (
-    <div style={{ width: '160px' }}>
-      <Link to={`/tender/submit/${_id}`}>More</Link>
-      <span className="ant-divider" />
-      <Link to={'/rfq-and-eoi'}>Not intereseted</Link>
-    </div>
-  );
-}
-
-function Tenders({ type, data, pagination, loading, onChange, supplier }) {
   let columns = tenderColumns;
   if (supplier) columns = supplierTenderColumns;
 
@@ -59,8 +67,16 @@ function Tenders({ type, data, pagination, loading, onChange, supplier }) {
       />
     </Card>
   );
-}
+};
 
-Tenders.propTypes = propTypes;
+Tenders.propTypes = {
+  type: PropTypes.string,
+  data: PropTypes.array,
+  pagination: PropTypes.object,
+  loading: PropTypes.bool.isRequired,
+  onChange: PropTypes.func,
+  supplier: PropTypes.bool,
+  notInterested: PropTypes.func
+};
 
 export default withRouter(Tenders);

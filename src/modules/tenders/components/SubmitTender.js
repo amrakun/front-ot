@@ -32,7 +32,7 @@ class SubmitTender extends TenderForm {
         delete product.quantity;
         delete product.uom;
         delete product.manufacturer;
-        delete product.manufacturerPart;
+        delete product.manufacturerPartNumber;
         products.push(product);
       }
     });
@@ -60,7 +60,7 @@ class SubmitTender extends TenderForm {
             <TabPane tab="Main info" key="1">
               <div>
                 <strong>Tender name: </strong>
-                {data.tenderName}
+                {data.name}
               </div>
               <div>
                 <strong>Tender number: </strong>
@@ -76,7 +76,7 @@ class SubmitTender extends TenderForm {
               </div>
               <div>
                 <strong>Document: </strong>
-                {data.file.url}
+                {data.file ? data.file.url : ''}
               </div>
               <br />
               <div dangerouslySetInnerHTML={{ __html: data.content }} />

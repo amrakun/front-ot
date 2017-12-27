@@ -9,8 +9,7 @@ import { colors } from 'modules/common/colors';
 const Search = Input.Search;
 
 const propTypes = {
-  data: PropTypes.array,
-  tenderDetail: PropTypes.object,
+  data: PropTypes.object,
   pagination: PropTypes.object,
   loading: PropTypes.bool.isRequired,
   onChange: PropTypes.func,
@@ -66,19 +65,31 @@ class Tender extends React.Component {
     }
   }
 
+  getPercent(requestedCount, count) {
+    if (count) return count / requestedCount * 100;
+    else return 0;
+  }
+
   render() {
-    const { data, pagination, loading, onChange, tenderDetail } = this.props;
+    const { pagination, loading, onChange } = this.props;
     const { selectedCompanies } = this.state;
+    const data = this.props.data || {};
+    const {
+      submittedCount,
+      requestedCount,
+      notInterestedCount,
+      notRespondedCount
+    } = data;
 
     return (
       <div>
         <Row gutter={24}>
-          <Col key={2} lg={6} sm={12}>
+          <Col key={1} lg={6} sm={12}>
             <NumberCard
               icon="message"
               title="Requested"
               color={colors[3]}
-              number={30}
+              number={requestedCount}
             />
           </Col>
           <Col key={2} lg={6} sm={12}>
@@ -86,35 +97,30 @@ class Tender extends React.Component {
               icon="like-o"
               title="Submitted"
               color={colors[2]}
-              number={15}
-              percent={50}
+              number={submittedCount}
+              percent={this.getPercent(requestedCount, submittedCount)}
             />
           </Col>
-          <Col key={2} lg={6} sm={12}>
+          <Col key={3} lg={6} sm={12}>
             <NumberCardLines
               icon="dislike-o"
               title="Not intereseted"
               color={colors[4]}
-              number={7}
-              percent={24}
+              number={notInterestedCount}
+              percent={this.getPercent(requestedCount, notInterestedCount)}
             />
           </Col>
-          <Col key={2} lg={6} sm={12}>
+          <Col key={4} lg={6} sm={12}>
             <NumberCardLines
               icon="question"
               title="Not responded"
               color={colors[5]}
-              number={8}
-              percent={26}
+              number={notRespondedCount}
+              percent={this.getPercent(requestedCount, notRespondedCount)}
             />
           </Col>
         </Row>
-        <Card
-          bordered={true}
-          title={`Submitted companies for "${
-            tenderDetail ? tenderDetail.name : ''
-          }"`}
-        >
+        <Card bordered={true} title={`Submitted companies for "${data.name}"`}>
           <div className="table-operations">
             <Search
               placeholder="Supplier name or SAP number"
@@ -142,7 +148,7 @@ class Tender extends React.Component {
             }}
             columns={columns}
             rowKey={record => record._id}
-            dataSource={data}
+            dataSource={data.suppliers}
             pagination={pagination}
             loading={loading}
             scroll={{ x: 1600 }}

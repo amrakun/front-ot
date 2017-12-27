@@ -36,8 +36,8 @@ class TenderContainer extends React.Component {
   }
 
   render() {
-    const { tenderDetailQuery, companiesQuery } = this.props;
-    if (tenderDetailQuery.loading || companiesQuery.loading) {
+    const { tenderDetailQuery } = this.props;
+    if (tenderDetailQuery.loading) {
       return <Tender loading={true} />;
     }
 
@@ -48,11 +48,10 @@ class TenderContainer extends React.Component {
       award: this.award,
       bidSummaryReport: this.bidSummaryReport,
       sendRegretLetter: this.sendRegretLetter,
-      data: companiesQuery.companies,
-      tenderDetail: tenderDetailQuery.tenderDetail,
+      data: tenderDetailQuery.tenderDetail,
       loading: false,
       pagination: {
-        total: companiesQuery.companies.length,
+        // total: tenderDetailQuery.tenderDetail.suppliersIds.length,
         pageSize: pagination.pageSize,
         current: pagination.current
       },
@@ -65,8 +64,7 @@ class TenderContainer extends React.Component {
 }
 
 TenderContainer.propTypes = {
-  tenderDetailQuery: PropTypes.object,
-  companiesQuery: PropTypes.object
+  tenderDetailQuery: PropTypes.object
 };
 
 export default compose(
@@ -75,19 +73,6 @@ export default compose(
     options: ({ match }) => {
       return {
         variables: { _id: match.params.id }
-      };
-    }
-  }),
-
-  graphql(gql(queries.companies), {
-    name: 'companiesQuery',
-    options: () => {
-      return {
-        variables: {
-          page: 200,
-          perPage: 20
-        },
-        notifyOnNetworkStatusChange: true
       };
     }
   })
