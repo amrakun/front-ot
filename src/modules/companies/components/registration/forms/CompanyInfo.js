@@ -88,7 +88,6 @@ class CompanyInfo extends BaseForm {
               name: 'sapNumber',
               isVisible: isRegisteredOnSup,
               optional: !isRegisteredOnSup,
-              validation: 'number',
               control: <Input type="number" />
             })}
             {this.renderField({

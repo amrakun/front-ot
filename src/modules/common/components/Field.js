@@ -58,13 +58,6 @@ export default class Field extends React.Component {
       });
     }
 
-    if (validation === 'number') {
-      rules.push({
-        type: 'email',
-        message: 'The input must be a number!'
-      });
-    }
-
     return (
       <Form.Item
         {...layout}

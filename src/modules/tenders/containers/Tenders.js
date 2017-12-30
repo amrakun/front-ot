@@ -69,7 +69,7 @@ class TendersContainer extends React.Component {
       type: this.type,
       loading: false,
       notInterested: notInterested,
-      supplier: currentUser.isSupplier,
+      currentUser: currentUser,
       onChange: (pagination, filters, sorter) =>
         this.handleTableChange(pagination, filters, sorter)
     };

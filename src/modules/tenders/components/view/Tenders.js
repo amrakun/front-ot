@@ -12,43 +12,50 @@ const Tenders = props => {
     pagination,
     loading,
     onChange,
-    supplier,
+    currentUser,
     notInterested
   } = props;
 
-  const createBuyerLinks = _id => {
-    return (
-      <div>
-        <Link to={`/tender/${_id}`}>View</Link>
-        <span className="ant-divider" />
-        <Link to={`/tender/edit/${_id}`}>Edit</Link>
-      </div>
-    );
-  };
-
-  const createSupplierLinks = _id => {
-    return (
-      <div style={{ width: '160px' }}>
-        <Link to={`/tender/submit/${_id}`}>More</Link>
-        <span className="ant-divider" />
-        <Popconfirm
-          title="Are you sure you are not interested？"
-          placement="bottomRight"
-          okText="Yes"
-          cancelText="No"
-          onConfirm={() => notInterested(_id)}
-        >
-          <a>Not interested</a>
-        </Popconfirm>
-      </div>
-    );
+  const renderOperation = _id => {
+    if (currentUser) {
+      if (currentUser.isSupplier) {
+        return (
+          <div>
+            <Link to={`/tender/${_id}`}>View</Link>
+            <span className="ant-divider" />
+            <Link to={`/tender/edit/${_id}`}>Edit</Link>
+          </div>
+        );
+      } else {
+        return (
+          <div style={{ width: '160px' }}>
+            <Link to={`/tender/submit/${_id}`}>More</Link>
+            <span className="ant-divider" />
+            <Popconfirm
+              title="Are you sure you are not interested？"
+              placement="bottomRight"
+              okText="Yes"
+              cancelText="No"
+              onConfirm={() => notInterested(_id)}
+            >
+              <a>Not interested</a>
+            </Popconfirm>
+          </div>
+        );
+      }
+    } else {
+      return (
+        <div style={{ width: '160px' }}>
+          <Link to={`/sign-in`}>More</Link>
+        </div>
+      );
+    }
   };
 
   let columns = tenderColumns;
-  if (supplier) columns = supplierTenderColumns;
+  if (currentUser && currentUser.supplier) columns = supplierTenderColumns;
 
-  columns[columns.length - 1].render = record =>
-    supplier ? createSupplierLinks(record._id) : createBuyerLinks(record._id);
+  columns[columns.length - 1].render = record => renderOperation(record._id);
 
   return (
     <Card
@@ -79,7 +86,7 @@ Tenders.propTypes = {
   pagination: PropTypes.object,
   loading: PropTypes.bool.isRequired,
   onChange: PropTypes.func,
-  supplier: PropTypes.bool,
+  currentUser: PropTypes.object,
   notInterested: PropTypes.func
 };
 

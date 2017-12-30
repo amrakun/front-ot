@@ -5,6 +5,16 @@ import Field from 'modules/common/components/Field';
 import BaseForm from 'modules/common/components/BaseForm';
 import { labels } from '../constants';
 
+const groups = [
+  'managingDirector',
+  'executiveOfficer',
+  'salesDirector',
+  'financialDirector',
+  'otherMember1',
+  'otherMember2',
+  'otherMember3'
+];
+
 class ManagementTeam extends BaseForm {
   constructor(props) {
     super(props);
@@ -15,16 +25,6 @@ class ManagementTeam extends BaseForm {
 
   handleSubmit(e) {
     e.preventDefault();
-
-    const groups = [
-      'managingDirector',
-      'executiveOfficer',
-      'salesDirector',
-      'financialDirector',
-      'otherMember1',
-      'otherMember2',
-      'otherMember3'
-    ];
 
     const doc = {};
 
@@ -42,10 +42,18 @@ class ManagementTeam extends BaseForm {
     return this.props.save(doc);
   }
 
-  copyAbove() {
-    const { getFieldValue } = this.props.form;
+  copyAbove(prefix) {
+    const { getFieldValue, setFieldsValue } = this.props.form;
 
-    console.log(getFieldValue('managingDirectorName'));
+    const group = groups[groups.indexOf(prefix) - 1];
+    let values = {};
+
+    values[`${prefix}Name`] = getFieldValue(`${group}Name`);
+    values[`${prefix}JobTitle`] = getFieldValue(`${group}JobTitle`);
+    values[`${prefix}Phone`] = getFieldValue(`${group}Phone`);
+    values[`${prefix}Email`] = getFieldValue(`${group}Email`);
+
+    setFieldsValue(values);
   }
 
   renderItem(prefix, optional = false) {
@@ -55,9 +63,13 @@ class ManagementTeam extends BaseForm {
       <Card
         title={labels[prefix]}
         extra={
-          <Button onClick={this.copyAbove}>
-            <Icon type="copy" />Copy above
-          </Button>
+          prefix !== 'managingDirector' ? (
+            <Button onClick={() => this.copyAbove(prefix)}>
+              <Icon type="copy" />Copy above
+            </Button>
+          ) : (
+            ''
+          )
         }
       >
         <Field
