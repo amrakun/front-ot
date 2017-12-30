@@ -12,7 +12,8 @@ export default class Panes extends React.Component {
   }
 
   renderPane(key, title, name, Component) {
-    const { company, save } = this.props;
+    const company = this.props.company || {};
+    const save = this.props.save || {};
 
     const saveAction = doc => {
       save(name, doc);
@@ -35,5 +36,5 @@ export default class Panes extends React.Component {
 
 Panes.propTypes = {
   company: PropTypes.object,
-  save: PropTypes.func.isRequired
+  save: PropTypes.func
 };

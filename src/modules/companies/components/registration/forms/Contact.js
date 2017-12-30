@@ -47,7 +47,7 @@ class ContactInfo extends BaseForm {
             label: 'Postcode or zipcode',
             name: 'zipCode',
             optional: true,
-            control: <Input />
+            control: <Input type="number" />
           })}
 
           {this.renderField({

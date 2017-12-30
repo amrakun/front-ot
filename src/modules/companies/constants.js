@@ -1,17 +1,17 @@
 export const regionOptions = [
-  'National',
-  'Umnugovi',
-  'Tier 1',
-  'Tier 2',
-  'Tier 3'
+  { label: 'National', value: 'national' },
+  { label: 'Umnugovi', value: 'umnugovi' },
+  { label: 'Tier 1', value: 'tier1' },
+  { label: 'Tier 2', value: 'tier2' },
+  { label: 'Tier 3', value: 'tier3' }
 ];
 
 export const statusOptions = [
-  'Pre-qualified',
-  'Qaulified/audited',
-  'Validated',
-  'By DIFOT score',
-  'Include blocked companies'
+  { label: 'Pre-qualified', value: 'preQualified' },
+  { label: 'Qaulified/audited', value: 'qualifiedAndAudited' },
+  { label: 'Validated', value: 'validated' },
+  { label: 'By DIFOT score', value: 'byDifotScore' },
+  { label: 'Include blocked companies', value: 'includeBlockedCompanies' }
 ];
 
 export const treeData = [

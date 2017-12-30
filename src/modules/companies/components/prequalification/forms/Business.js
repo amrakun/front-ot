@@ -202,7 +202,11 @@ class PrequalificationForm extends PreqForm {
 
         <Card>
           {this.renderBoolean('doesConcludeValidContracts')}
-          {this.renderTextArea('employeeTurnoverRate')}
+          {this.renderField({
+            name: 'employeeTurnoverRate',
+            label: labels.employeeTurnoverRate,
+            control: <Input type="number" />
+          })}
         </Card>
 
         {this.renderConditionalField('doesHaveLiabilityInsurance')}

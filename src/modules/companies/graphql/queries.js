@@ -142,28 +142,9 @@ export const companyByUser = `
 export const certificateByUser = `
   query companyByUser {
     companyByUser {
-      basicInfo {
-        ${basicInfoFields}
-      }
-      contactInfo {
-        ${contactInfoFields}
-      }
-      managementTeamInfo {
-        ${managementTeamFields}
-      }
-      groupInfo {
-        ${groupInfoFields}
-      }
-      shareholderInfo {
-        attachments,
-        shareholders {
-          ${shareholderItemFields}
-        }
-      }
       certificateInfo {
         ${certificateInfoFields}
       }
-      productsInfo
     }
   }
 `;
@@ -187,6 +168,7 @@ const companies = `
 export const companyPrequalificationDetail = `
   query companyByUser {
     companyByUser {
+      _id
       financialInfo {
         canProvideAccountsInfo
         reasonToCannotNotProvide

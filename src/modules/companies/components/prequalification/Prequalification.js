@@ -1,6 +1,5 @@
 import React from 'react';
 import { Tabs, Col } from 'antd';
-
 import FinancialForm from './forms/Financial';
 import EnvironmentalForm from './forms/Environmental';
 import BusinessForm from './forms/Business';

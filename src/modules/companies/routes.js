@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import queryString from 'query-string';
 import {
   Companies,
   Registration,
@@ -26,5 +27,13 @@ export default [
     path="/capacity-building"
     component={CapacityBuilding}
   />,
-  <Route key="/companies" exact path="/companies" component={Companies} />
+  <Route
+    key="/companies"
+    exact
+    path="/companies"
+    component={({ location }) => {
+      const queryParams = queryString.parse(location.search);
+      return <Companies queryParams={queryParams} />;
+    }}
+  />
 ];

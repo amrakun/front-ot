@@ -2,11 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Table, Card, Input, Icon, Row, Col, Button, message } from 'antd';
-import { columns } from 'modules/companies/constants';
+// import { columns } from 'modules/companies/constants';
 import { NumberCard, NumberCardLines } from 'modules/common/components';
 import { colors } from 'modules/common/colors';
 
 const Search = Input.Search;
+
+const columns = [
+  { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
+  { title: 'SAP #', dataIndex: 'basicInfo.sapNumber' },
+  { title: 'Registration', dataIndex: 'registration' },
+  { title: 'Pre-qualification', dataIndex: 'prequalification' },
+  { title: 'Qualification/audit status', dataIndex: 'audit' },
+  { title: 'Validation status', dataIndex: 'validation' },
+  { title: 'Due dilligence', dataIndex: 'dilligence' },
+  { title: 'DIFOT score', dataIndex: 'dipotScore' },
+  { title: 'Blocking', dataIndex: 'isBlocked' },
+  { title: 'Company adminstrators', dataIndex: 'adminstrators' },
+  { title: 'Email', dataIndex: 'basicInfo.email' },
+  { title: 'Phone', dataIndex: 'contactInfo.phone' },
+  { title: 'Profile export to PDF', key: 'export' }
+];
 
 const propTypes = {
   data: PropTypes.object,
@@ -59,7 +75,7 @@ class Tender extends React.Component {
     if (selectedCompanies.length > 1) {
       message.error('Please select only one supplier to award!');
     } else if (selectedCompanies.length < 1) {
-      message.error('Please select atleast one supplier!');
+      message.error('Please select a supplier!');
     } else {
       this.props.award(selectedCompanies[0]);
     }
@@ -78,7 +94,9 @@ class Tender extends React.Component {
       submittedCount,
       requestedCount,
       notInterestedCount,
-      notRespondedCount
+      notRespondedCount,
+      isAwarded,
+      winnerId
     } = data;
 
     return (
@@ -135,7 +153,7 @@ class Tender extends React.Component {
               <Icon type="mail" />
               Send regret letter
             </Button>
-            <Button type="primary" onClick={this.award}>
+            <Button type="primary" onClick={this.award} disabled={isAwarded}>
               <Icon type="trophy" />
               Award
             </Button>
@@ -145,6 +163,9 @@ class Tender extends React.Component {
             rowSelection={{
               selectedCompanies,
               onChange: this.onSelectedCompaniesChange
+            }}
+            rowClassName={record => {
+              if (record._id === winnerId) return 'highlight';
             }}
             columns={columns}
             rowKey={record => record._id}

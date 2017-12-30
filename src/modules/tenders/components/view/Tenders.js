@@ -15,6 +15,7 @@ const Tenders = props => {
     supplier,
     notInterested
   } = props;
+
   const createBuyerLinks = _id => {
     return (
       <div>
@@ -58,6 +59,9 @@ const Tenders = props => {
       <Table
         columns={columns}
         rowKey={record => record._id}
+        rowClassName={record => {
+          if (record.isAwarded) return 'highlight';
+        }}
         dataSource={data}
         pagination={pagination}
         loading={loading}

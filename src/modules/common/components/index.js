@@ -5,6 +5,7 @@ import BaseForm from './BaseForm';
 import NumberCard from './dataDisplay/numberCard';
 import NumberCardLines from './dataDisplay/numberCard_lines';
 import Editor from './Editor';
+import Loading from './Loading';
 
 export {
   Uploader,
@@ -13,5 +14,6 @@ export {
   BaseForm,
   NumberCard,
   NumberCardLines,
-  Editor
+  Editor,
+  Loading
 };

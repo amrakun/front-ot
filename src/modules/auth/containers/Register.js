@@ -7,12 +7,13 @@ import { mutations } from '../graphql';
 import { message } from 'antd';
 
 const RegisterContainer = props => {
-  const { registerMutation } = props;
+  const { registerMutation, history } = props;
 
   const register = variables => {
     registerMutation({ variables })
       .then(({ data }) => {
-        message.success(`Successful ${data.register.email}`);
+        message.success(`Welcome, ${data.register.email}`);
+        history.push('/sign-in');
       })
       .catch(error => {
         message.error(error.message);

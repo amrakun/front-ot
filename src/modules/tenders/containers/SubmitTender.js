@@ -3,8 +3,13 @@ import PropTypes from 'prop-types';
 import { compose, gql, graphql } from 'react-apollo';
 import { SubmitRfq, SubmitEoi } from '../components';
 import { queries, mutations } from '../graphql';
+import { message } from 'antd';
 
-const PublishContainer = ({ tenderDetailQuery, tendersResponsesAdd }) => {
+const PublishContainer = ({
+  tenderDetailQuery,
+  tendersResponsesAdd,
+  history
+}) => {
   if (tenderDetailQuery.loading) {
     return null;
   }
@@ -14,7 +19,8 @@ const PublishContainer = ({ tenderDetailQuery, tendersResponsesAdd }) => {
       variables: { ...doc, _id: tenderDetailQuery.tenderDetail._id }
     })
       .then(() => {
-        console.log('Saved');
+        message.success('Successfully submitted a tender!');
+        history.push('/');
       })
       .catch(error => {
         console.log(error);

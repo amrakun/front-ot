@@ -3,22 +3,24 @@ import PropTypes from 'prop-types';
 import { gql, compose, graphql } from 'react-apollo';
 import { queries, mutations } from '../../graphql';
 import { Certificate } from '../../components';
+import { message } from 'antd';
 
 const RegistrationContainer = props => {
-  let { companyByUserQuery } = props;
+  const { companyByUserQuery } = props;
 
   if (companyByUserQuery.loading) {
     return <div>Loading</div>;
   }
 
   const save = (name, doc) => {
-    const mutation = props[`${name}Edit`];
+    const { certificateInfoEdit } = props;
 
-    mutation({ variables: { [name]: doc } })
+    certificateInfoEdit({ variables: { [name]: doc } })
       .then(() => {
-        console.log('Saved');
+        message.success('Succesfully saved');
       })
       .catch(error => {
+        message.error('Error occured');
         console.log(error);
       });
   };

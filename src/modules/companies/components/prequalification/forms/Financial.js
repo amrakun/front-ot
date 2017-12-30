@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  Form,
-  Select,
-  Row,
-  Col,
-  DatePicker,
-  Input,
-  InputNumber,
-  Card
-} from 'antd';
+import { Form, Select, Row, Col, DatePicker, Input, Card } from 'antd';
 import moment from 'moment';
 import { yearData, booleanData, currencyData } from '../constants';
 import { BaseForm, Uploader } from 'modules/common/components';
@@ -19,7 +10,7 @@ class PrequalificationForm extends BaseForm {
     super(props);
 
     this.state = {
-      canProvideAccountsInfo: props.data.canProvideAccountsInfo || false
+      canProvideAccountsInfo: props.data.canProvideAccountsInfo
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -123,7 +114,7 @@ class PrequalificationForm extends BaseForm {
             initialValue: amount,
             dataType: 'number',
             hasFeedback: false,
-            control: <InputNumber htmlType="number" />
+            control: <Input type="number" />
           })}
         </Col>
       </Row>
@@ -160,7 +151,9 @@ class PrequalificationForm extends BaseForm {
             initialValue: initialDate,
             hasFeedback: false,
             optional: true,
-            control: <DatePicker format={dateFormat} placeholder="Start" />
+            control: (
+              <DatePicker format={dateFormat} placeholder="Choose date" />
+            )
           })}
         </Col>
         <Col span={12}>

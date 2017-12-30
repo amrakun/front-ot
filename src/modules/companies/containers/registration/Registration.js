@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { gql, compose, graphql } from 'react-apollo';
 import { queries, mutations } from '../../graphql';
 import { RegistrationForms } from '../../components';
+import { Loading } from 'modules/common/components';
 
 const RegistrationContainer = props => {
   let { companyByUserQuery } = props;
 
   if (companyByUserQuery.loading) {
-    return <div>Loading</div>;
+    return <Loading />;
   }
 
   const save = (name, doc) => {
@@ -22,6 +23,7 @@ const RegistrationContainer = props => {
         console.log(error);
       });
   };
+
   const updatedProps = {
     ...props,
     save,

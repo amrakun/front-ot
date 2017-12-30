@@ -42,7 +42,7 @@ class TendersContainer extends React.Component {
       tendersResponsesAdd({
         variables: {
           tenderId: tenderId,
-          supplierId: currentUser._id,
+          supplierId: currentUser.companyId,
           isNotInterested: true
         }
       })

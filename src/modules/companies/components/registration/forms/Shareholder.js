@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Input, InputNumber, Card } from 'antd';
+import { Form, Input, Card } from 'antd';
 import { BaseForm, Field, Uploader } from 'modules/common/components';
 import { uploadDisclaimer } from 'modules/common/constants';
 
@@ -54,7 +54,7 @@ class ShareHolders extends BaseForm {
           label="Share percentage %"
           name={`percentage${k}`}
           initialValue={shareholder.percentage}
-          control={<InputNumber htmlType="number" />}
+          control={<Input type="number" />}
           optional={optional}
         />
       </Card>

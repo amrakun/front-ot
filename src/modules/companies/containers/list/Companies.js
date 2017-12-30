@@ -4,10 +4,6 @@ import { gql, graphql } from 'react-apollo';
 import { queries } from '../../graphql';
 import { CompaniesList } from '../../components';
 
-function filter(v) {
-  console.log(v);
-}
-
 class CompaniesContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -43,7 +39,6 @@ class CompaniesContainer extends React.Component {
         current: 1
       },
       loading: false,
-      filter: filter,
       onChange: (pagination, filters, sorter) =>
         this.handleTableChange(pagination, filters, sorter)
     };
@@ -59,6 +54,7 @@ CompaniesContainer.propTypes = {
 export default graphql(gql(queries.companies), {
   name: 'companiesQuery',
   options: ({ queryParams }) => {
+    console.log(queryParams);
     return {
       variables: {
         page: 200,

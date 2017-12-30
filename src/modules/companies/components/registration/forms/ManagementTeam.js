@@ -81,7 +81,7 @@ class ManagementTeam extends BaseForm {
           name={`${prefix}Phone`}
           initialValue={data.phone}
           optional={optional}
-          control={<Input />}
+          control={<Input type="number" />}
         />
 
         <Field

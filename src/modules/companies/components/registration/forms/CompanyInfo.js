@@ -8,7 +8,6 @@ import {
   Icon,
   Select,
   AutoComplete,
-  InputNumber,
   Spin,
   Card
 } from 'antd';
@@ -36,7 +35,7 @@ class CompanyInfo extends BaseForm {
       autoCompleteResult: [],
       selectedCountry: data.registeredInCountry,
       selectedAimag: data.registeredInAimag,
-      isRegisteredOnSup: data.isRegisteredOnSup || false,
+      isRegisteredOnSup: data.isRegisteredOnSup,
       loading: false
     };
 
@@ -89,19 +88,20 @@ class CompanyInfo extends BaseForm {
               name: 'sapNumber',
               isVisible: isRegisteredOnSup,
               optional: !isRegisteredOnSup,
-              control: <Input />
+              validation: 'number',
+              control: <Input type="number" />
             })}
             {this.renderField({
               label: '1. Company name (in English)',
               name: 'enName',
               control: <Input />
             })}
-            {this.renderField({
+            {/* {this.renderField({
               label: 'Company name (in Mongolian)',
               name: 'mnName',
               optional: true,
               control: <Input />
-            })}
+            })} */}
             {this.renderField({
               label: '2. Address',
               name: 'address',
@@ -132,7 +132,7 @@ class CompanyInfo extends BaseForm {
             {this.renderField({
               label: 'Postcode or zipcode',
               name: 'zipCode',
-              control: <Input />
+              control: <Input type="number" />
             })}
             {this.renderField({
               label: 'Country',
@@ -208,7 +208,7 @@ class CompanyInfo extends BaseForm {
             {this.renderField({
               label: '6. Company registration number',
               name: 'registrationNumber',
-              control: <Input />
+              control: <Input type="number" />
             })}
             {this.renderField({
               label: '7. Certificate of registration',
@@ -263,17 +263,17 @@ class CompanyInfo extends BaseForm {
             {this.renderField({
               label: `11. Total number of employees`,
               name: 'totalNumberOfEmployees',
-              control: <InputNumber htmlType="number" />
+              control: <Input type="number" />
             })}
             {this.renderField({
               label: `12. Total number of Mongolian employees`,
               name: 'totalNumberOfMongolianEmployees',
-              control: <InputNumber htmlType="number" />
+              control: <Input type="number" />
             })}
             {this.renderField({
               label: `13. Total number of Umnugovi employees`,
               name: 'totalNumberOfUmnugoviEmployees',
-              control: <InputNumber htmlType="number" />
+              control: <Input type="number" />
             })}
           </Card>
           {this.renderSubmit()}

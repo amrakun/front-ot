@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import { compose, gql, graphql } from 'react-apollo';
 import { CreateRfq, CreateEoi } from '../components';
 import { mutations } from '../graphql';
+import { message } from 'antd';
 
-const CreateTenderContainer = ({ tendersAdd, location }) => {
+const CreateTenderContainer = ({ tendersAdd, location, history }) => {
   const save = doc => {
     const [publishDate, closeDate] = doc.dateRange;
     tendersAdd({ variables: { ...doc, publishDate, closeDate } })
       .then(() => {
-        console.log('Saved');
+        message.success('Successfully sent a tender!');
+        history.push('/');
       })
       .catch(error => {
         console.log(error);

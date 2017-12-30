@@ -1,11 +1,3 @@
-const tendersInputType = `
-
-`;
-
-const tendersInput = `
-
-`;
-
 const tendersAdd = `
   mutation tendersAdd(
     $type: String!,
@@ -90,12 +82,14 @@ const tendersResponsesAdd = `
   }
 `;
 
-const tendersSubmit = `
-  mutation tendersEdit(
-    ${tendersInputType}
+const tendersAward = `
+  mutation tendersAward(
+    $_id: String!
+    $supplierId: String!
   ) {
-    tendersEdit(
-      ${tendersInput}
+    tendersAward(
+      _id: $_id
+      supplierId: $supplierId
     ) {
       _id
     }
@@ -105,6 +99,6 @@ const tendersSubmit = `
 export default {
   tendersAdd,
   tendersEdit,
-  tendersSubmit,
-  tendersResponsesAdd
+  tendersResponsesAdd,
+  tendersAward
 };

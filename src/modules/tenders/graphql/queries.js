@@ -9,6 +9,10 @@ const tenderFields = `
   file,
   reminderDay,
   supplierIds,
+  requestedCount,
+  submittedCount,
+  notInterestedCount,
+  notRespondedCount,
   requestedProducts {
     code
     purchaseRequestNumber
@@ -18,21 +22,15 @@ const tenderFields = `
     manufacturer
     manufacturerPartNumber
   },
+  requestedDocuments
+  winnerId
+  isAwarded
 `;
 
 const tenderDetail = `
   query tenderDetail($_id: String!) {
     tenderDetail(_id: $_id) {
-      _id,
-      type,
-      number,
-      name,
-      content,
-      publishDate,
-      closeDate,
-      file,
-      reminderDay,
-      supplierIds,
+      ${tenderFields}
       suppliers {
         _id
         basicInfo {
@@ -44,20 +42,6 @@ const tenderDetail = `
           phone
         }
       },
-      requestedCount,
-      submittedCount,
-      notInterestedCount,
-      notRespondedCount,
-      requestedProducts {
-        code
-        purchaseRequestNumber
-        shortText
-        quantity
-        uom
-        manufacturer
-        manufacturerPartNumber
-      },
-      requestedDocuments
     }
   }
 `;

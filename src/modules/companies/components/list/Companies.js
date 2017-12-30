@@ -29,7 +29,8 @@ const propTypes = {
   pagination: PropTypes.object,
   loading: PropTypes.bool.isRequired,
   onChange: PropTypes.func,
-  filter: PropTypes.func
+  filter: PropTypes.func,
+  history: PropTypes.object
 };
 
 class CompaniesList extends React.Component {
@@ -39,8 +40,14 @@ class CompaniesList extends React.Component {
     this.state = {
       selectedCompanies: [],
       productCodes: [],
-      region: ['Umnugovi'],
-      status: statusOptions
+      region: ['umnugovi'],
+      status: [
+        'preQualified',
+        'qualifiedAndAudited',
+        'validated',
+        'byDifotScore',
+        'includeBlockedCompanies'
+      ]
     };
 
     this.onProductCodesChange = this.onProductCodesChange.bind(this);
@@ -48,6 +55,7 @@ class CompaniesList extends React.Component {
     this.onRegionChange = this.onRegionChange.bind(this);
     this.onStatusChange = this.onStatusChange.bind(this);
     this.filter = this.filter.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   onProductCodesChange(value) {
@@ -66,12 +74,46 @@ class CompaniesList extends React.Component {
     this.status = values;
   }
 
+  handleSearch(value) {
+    const { history } = this.props;
+
+    const searchValue = 'search=' + value;
+    let search = history.location.search;
+
+    search.length > 0
+      ? (search = search + '&' + searchValue)
+      : (search = search + '?' + searchValue);
+
+    history.push({
+      pathname: '/companies',
+      search: search
+    });
+  }
+
   filter() {
+    const { history } = this.props;
     const { region, status, productCodes } = this.state;
-    this.props.filter({
-      region,
-      status,
-      productCodes
+
+    let regionString = '?region=';
+    let statusString = '&status=';
+    let productCodesString = '&productCodes=';
+
+    region.forEach(i => {
+      regionString += i + ',';
+    });
+    status.forEach(i => {
+      statusString += i + ',';
+    });
+    productCodes.forEach(i => {
+      productCodesString += i + ',';
+    });
+
+    history.push({
+      pathname: '/companies',
+      search:
+        regionString.replace(/.$/, '') +
+        statusString.replace(/.$/, '') +
+        productCodesString.replace(/.$/, '')
     });
   }
 
@@ -125,7 +167,7 @@ class CompaniesList extends React.Component {
               <Search
                 placeholder="Supplier name or SAP number"
                 style={{ width: 200, float: 'left' }}
-                onSearch={value => console.log(value)}
+                onSearch={value => this.handleSearch(value)}
               />
               <Link
                 to={{

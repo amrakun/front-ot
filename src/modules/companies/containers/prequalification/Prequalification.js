@@ -3,18 +3,17 @@ import PropTypes from 'prop-types';
 import { gql, compose, graphql } from 'react-apollo';
 import { queries, mutations } from '../../graphql';
 import { PrequalificationForms } from '../../components';
+import { Loading } from 'modules/common/components';
 
 const PrequalificationContainer = props => {
   let { companyByUserQuery } = props;
 
   if (companyByUserQuery.loading) {
-    return <div />;
+    return <Loading />;
   }
 
   const save = (name, doc) => {
     const mutation = props[`${name}Edit`];
-
-    console.log(doc);
 
     mutation({ variables: { [name]: doc } })
       .then(() => {

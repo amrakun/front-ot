@@ -7,13 +7,7 @@ import ShareholderForm from './forms/Shareholder';
 import ProductsForm from './forms/Products';
 import GroupForm from './forms/Group';
 import Panes from '../Panes';
-import PropTypes from 'prop-types';
 import { Tabs, Col } from 'antd';
-
-const propTypes = {
-  company: PropTypes.object,
-  save: PropTypes.func.isRequired
-};
 
 class RegistrationForms extends Panes {
   render() {
@@ -46,7 +40,5 @@ class RegistrationForms extends Panes {
     );
   }
 }
-
-RegistrationForms.propTypes = propTypes;
 
 export default withRouter(RegistrationForms);

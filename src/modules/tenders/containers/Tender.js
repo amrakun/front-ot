@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Tender } from '../components';
 import { gql, graphql, compose } from 'react-apollo';
-import { queries } from '../graphql';
+import { queries, mutations } from '../graphql';
 
 class TenderContainer extends React.Component {
   constructor(props) {
@@ -16,6 +16,7 @@ class TenderContainer extends React.Component {
     };
 
     this.handleTableChange = this.handleTableChange.bind(this);
+    this.award = this.award.bind(this);
   }
 
   handleTableChange(pagination, filters, sorter) {
@@ -23,8 +24,20 @@ class TenderContainer extends React.Component {
     this.setState({ pagination });
   }
 
-  award(company) {
-    console.log(company);
+  award(companyId) {
+    const { tendersAward, tenderDetailQuery } = this.props;
+    tendersAward({
+      variables: {
+        _id: tenderDetailQuery.tenderDetail._id,
+        supplierId: companyId
+      }
+    })
+      .then(() => {
+        console.log('Saved');
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   bidSummaryReport(companies) {
@@ -64,7 +77,8 @@ class TenderContainer extends React.Component {
 }
 
 TenderContainer.propTypes = {
-  tenderDetailQuery: PropTypes.object
+  tenderDetailQuery: PropTypes.object,
+  tendersAward: PropTypes.func
 };
 
 export default compose(
@@ -75,5 +89,9 @@ export default compose(
         variables: { _id: match.params.id }
       };
     }
+  }),
+
+  graphql(gql(mutations.tendersAward), {
+    name: 'tendersAward'
   })
 )(TenderContainer);

@@ -66,19 +66,19 @@ export const tenderColumns = [
   },
   {
     title: 'Suppliers',
-    dataIndex: 'suppliers'
+    dataIndex: 'requestedCount'
   },
   {
     title: 'Sumbitted',
-    dataIndex: 'submitted'
+    dataIndex: 'submittedCount'
   },
   {
     title: 'Not interested',
-    dataIndex: 'notInterested'
+    dataIndex: 'notInterestedCount'
   },
   {
     title: 'Not responded',
-    dataIndex: 'notResponded'
+    dataIndex: 'notRespondedCount'
   },
   {
     title: 'Regret letter',

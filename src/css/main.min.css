@@ -311,6 +311,20 @@ form .ant-input-number {
   display: block;
   margin-top: 12px;
 }
-.supplier-forms h2 {
+.supplier-forms .ant-form h2 {
   margin: 24px 0 8px 0;
+}
+.supplier-forms .ant-form h2:first-child {
+  margin-top: 0;
+}
+.ant-table-row.highlight {
+  background-color: rgba(244, 119, 33, 0.06);
+}
+.loading {
+  min-height: 50vh;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
