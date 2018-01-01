@@ -7,6 +7,7 @@ import { message } from 'antd';
 
 const CreateTenderContainer = ({ tendersAdd, location, history }) => {
   const save = doc => {
+    console.log(doc);
     const [publishDate, closeDate] = doc.dateRange;
     tendersAdd({ variables: { ...doc, publishDate, closeDate } })
       .then(() => {

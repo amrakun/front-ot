@@ -1,7 +1,13 @@
 import React from 'react';
 import queryString from 'query-string';
 import { Route } from 'react-router-dom';
-import { SignIn, ForgotPassword, ResetPassword, Register } from './containers';
+import {
+  SignIn,
+  ForgotPassword,
+  ResetPassword,
+  Register,
+  RegisterConfirmation
+} from './containers';
 import { Home } from './components';
 
 export default [
@@ -21,6 +27,15 @@ export default [
     component={({ location }) => {
       const parsed = queryString.parse(location.search);
       return <ResetPassword token={parsed.token} />;
+    }}
+  />,
+  <Route
+    key="/confirm-registration"
+    exact
+    path="/confirm-registration"
+    component={({ location }) => {
+      const parsed = queryString.parse(location.search);
+      return <RegisterConfirmation token={parsed.token} />;
     }}
   />
 ];

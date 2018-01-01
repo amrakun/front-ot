@@ -1,12 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import { Tabs, Form, Button } from 'antd';
+import { Card, Form, Button, Icon } from 'antd';
 import { eoiEmailTemplate } from '../constants';
 import TenderForm from './forms/TenderForm';
 import EoiForm from './forms/EoiForm';
-
-const TabPane = Tabs.TabPane;
 
 const initialProducts = [
   { key: 1, document: 'Scope specific experience' },
@@ -54,27 +52,33 @@ class CreateEoi extends TenderForm {
     const { products } = this.state;
 
     return (
-      <Form layout="inline" onSubmit={this.handleSubmit}>
-        <div className="card-container">
-          <Tabs type="card" className="send-rfq">
-            <Tabs.TabPane tab="Main info" key="1">
-              {this.renderMainInfo(eoiEmailTemplate)}
-            </Tabs.TabPane>
+      <Form onSubmit={this.handleSubmit}>
+        {this.renderMainInfo(eoiEmailTemplate)}
 
-            <TabPane tab="Form" key="2">
-              <Button onClick={this.addProductRow}>Add row</Button>
-              <EoiForm
-                products={products}
-                renderProductColumn={this.renderProductColumn}
-                isSupplier={false}
-              />
-              <br />
-              <Button type="primary" htmlType="submit" className="margin">
-                Save & continue
-              </Button>
-            </TabPane>
-          </Tabs>
-        </div>
+        <Card title="Form" className="margin">
+          <EoiForm
+            products={products}
+            renderProductColumn={this.renderProductColumn}
+            isSupplier={false}
+          />
+
+          <Button
+            className="dashed-button-big"
+            size="large"
+            onClick={this.addProductRow}
+          >
+            <Icon type="plus" /> Add row
+          </Button>
+        </Card>
+
+        <Button
+          type="primary"
+          htmlType="submit"
+          size="large"
+          className="margin"
+        >
+          Save
+        </Button>
       </Form>
     );
   }

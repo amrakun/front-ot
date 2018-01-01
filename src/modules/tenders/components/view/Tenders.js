@@ -20,14 +20,6 @@ const Tenders = props => {
     if (currentUser) {
       if (currentUser.isSupplier) {
         return (
-          <div>
-            <Link to={`/tender/${_id}`}>View</Link>
-            <span className="ant-divider" />
-            <Link to={`/tender/edit/${_id}`}>Edit</Link>
-          </div>
-        );
-      } else {
-        return (
           <div style={{ width: '160px' }}>
             <Link to={`/tender/submit/${_id}`}>More</Link>
             <span className="ant-divider" />
@@ -42,27 +34,31 @@ const Tenders = props => {
             </Popconfirm>
           </div>
         );
+      } else {
+        return (
+          <div>
+            <Link to={`/tender/${_id}`}>View</Link>
+            <span className="ant-divider" />
+            <Link to={`/tender/edit/${_id}`}>Edit</Link>
+          </div>
+        );
       }
     } else {
       return (
         <div style={{ width: '160px' }}>
-          <Link to={`/sign-in`}>More</Link>
+          <Link to={`/sign-in?required`}>More</Link>
         </div>
       );
     }
   };
 
-  let columns = tenderColumns;
-  if (currentUser && currentUser.supplier) columns = supplierTenderColumns;
+  let columns = supplierTenderColumns;
+  if (currentUser && !currentUser.isSupplier) columns = tenderColumns;
 
   columns[columns.length - 1].render = record => renderOperation(record._id);
 
   return (
-    <Card
-      bordered={false}
-      style={{ marginBottom: '16px' }}
-      title={labels[type]}
-    >
+    <Card style={{ marginBottom: '16px' }} title={labels[type]}>
       <Table
         columns={columns}
         rowKey={record => record._id}

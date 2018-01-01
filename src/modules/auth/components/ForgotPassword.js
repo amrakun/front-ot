@@ -33,27 +33,7 @@ class ForgotPassword extends Component {
   }
 
   render() {
-    return (
-      <div>reset</div>
-      // <AuthBox>
-      //   <h2>Reset your password</h2>
-      //   <form onSubmit={this.handleSubmit}>
-      //     <FormGroup>
-      //       <FormControl
-      //         type="email"
-      //         placeholder="registered@email.com"
-      //         value={this.state.email}
-      //         required
-      //         onChange={this.handleEmailChange}
-      //       />
-      //     </FormGroup>
-      //     <Button type="submit" block>
-      //       Email me the instruction
-      //     </Button>
-      //   </form>
-      //   <Link to="/sign-in">Sign in</Link>
-      // </AuthBox>
-    );
+    return <div>reset</div>;
   }
 }
 

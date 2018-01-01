@@ -38,7 +38,7 @@ class NumberCard extends Component {
   }
 
   render() {
-    const { icon, color, title, number, countUp } = this.props;
+    const { icon, color, title, number, countUp, withPercent } = this.props;
     const { percent } = this.state;
     this.componentDidMount();
     return (
@@ -66,6 +66,7 @@ class NumberCard extends Component {
                 separator=","
                 {...countUp || {}}
               />
+              {withPercent ? '%' : ''}
             </p>
           </div>
         </div>
@@ -80,7 +81,8 @@ NumberCard.propTypes = {
   title: PropTypes.string,
   number: PropTypes.number,
   countUp: PropTypes.object,
-  percent: PropTypes.number
+  percent: PropTypes.number,
+  withPercent: PropTypes.bool
 };
 
 export default NumberCard;

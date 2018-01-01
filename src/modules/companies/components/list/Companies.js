@@ -13,16 +13,22 @@ import {
   Icon,
   Input
 } from 'antd';
-import {
-  columns,
-  treeData,
-  regionOptions,
-  statusOptions
-} from '../../constants';
+import { columns, regionOptions, statusOptions } from '../../constants';
+import productsTree from '../../productsTree';
 import AddMore from './AddMore';
+import queryString from 'query-string';
 
 const Search = Input.Search;
 const CheckboxGroup = Checkbox.Group;
+
+const initialRegion = ['umnugovi'];
+const initialStatus = [
+  'preQualified',
+  'qualifiedAndAudited',
+  'validated',
+  'byDifotScore',
+  'includeBlockedCompanies'
+];
 
 const propTypes = {
   data: PropTypes.array,
@@ -37,17 +43,23 @@ class CompaniesList extends React.Component {
   constructor(props) {
     super(props);
 
+    const { history } = props;
+
+    const query = queryString.parse(history.location.search);
+
+    const regionQuery = query.region ? query.region.split(',') : null;
+    const statusQuery = query.status ? query.status.split(',') : null;
+    const productCodesQuery = query.productCodes
+      ? query.productCodes.split(',')
+      : null;
+    const searchQuery = query.search;
+
     this.state = {
       selectedCompanies: [],
-      productCodes: [],
-      region: ['umnugovi'],
-      status: [
-        'preQualified',
-        'qualifiedAndAudited',
-        'validated',
-        'byDifotScore',
-        'includeBlockedCompanies'
-      ]
+      productCodes: productCodesQuery || [],
+      region: regionQuery || initialRegion,
+      status: statusQuery || initialStatus,
+      search: searchQuery || ''
     };
 
     this.onProductCodesChange = this.onProductCodesChange.bind(this);
@@ -59,6 +71,7 @@ class CompaniesList extends React.Component {
   }
 
   onProductCodesChange(value) {
+    console.log(value);
     this.setState({ productCodes: value });
   }
 
@@ -67,26 +80,23 @@ class CompaniesList extends React.Component {
   }
 
   onRegionChange(values) {
-    this.region = values;
+    this.setState({ region: values });
   }
 
   onStatusChange(values) {
-    this.status = values;
+    this.setState({ status: values });
   }
 
   handleSearch(value) {
     const { history } = this.props;
 
-    const searchValue = 'search=' + value;
-    let search = history.location.search;
+    let query = queryString.parse(history.location.search);
 
-    search.length > 0
-      ? (search = search + '&' + searchValue)
-      : (search = search + '?' + searchValue);
+    query.search = value;
 
     history.push({
       pathname: '/companies',
-      search: search
+      search: queryString.stringify(query)
     });
   }
 
@@ -94,9 +104,9 @@ class CompaniesList extends React.Component {
     const { history } = this.props;
     const { region, status, productCodes } = this.state;
 
-    let regionString = '?region=';
-    let statusString = '&status=';
-    let productCodesString = '&productCodes=';
+    let regionString = '';
+    let statusString = '';
+    let productCodesString = '';
 
     region.forEach(i => {
       regionString += i + ',';
@@ -108,35 +118,47 @@ class CompaniesList extends React.Component {
       productCodesString += i + ',';
     });
 
+    const stringified = queryString.stringify({
+      region: regionString.replace(/.$/, ''),
+      status: statusString.replace(/.$/, ''),
+      productCodes: productCodesString.replace(/.$/, '')
+    });
+
     history.push({
       pathname: '/companies',
-      search:
-        regionString.replace(/.$/, '') +
-        statusString.replace(/.$/, '') +
-        productCodesString.replace(/.$/, '')
+      search: stringified
     });
   }
 
   render() {
     const { data, pagination, loading, onChange } = this.props;
-    const { selectedCompanies, productCodes, status, region } = this.state;
+    const {
+      selectedCompanies,
+      productCodes,
+      status,
+      region,
+      search
+    } = this.state;
 
     return (
       <Row gutter={16}>
-        <Col span={4}>
+        <Col span={6}>
           <Card bordered={false} title="Products & services">
             <TreeSelect
-              treeData={treeData}
+              treeData={productsTree}
               value={productCodes}
               onChange={this.onProductCodesChange}
               treeCheckable={true}
               searchPlaceholder="Please select"
-              showCheckedStrategy={TreeSelect.SHOW_PARENT}
               style={{ width: '100%' }}
             />
           </Card>
 
-          <Card bordered={false} title="Region" className="margin">
+          <Card
+            bordered={false}
+            title="Select supplier tier type"
+            className="margin"
+          >
             <CheckboxGroup
               options={regionOptions}
               defaultValue={region}
@@ -161,10 +183,11 @@ class CompaniesList extends React.Component {
             Apply filters<Icon type="right" />
           </Button>
         </Col>
-        <Col span={20}>
+        <Col span={18}>
           <Card bordered={false} title="Companies">
             <div className="table-operations">
               <Search
+                defaultValue={search}
                 placeholder="Supplier name or SAP number"
                 style={{ width: 200, float: 'left' }}
                 onSearch={value => this.handleSearch(value)}

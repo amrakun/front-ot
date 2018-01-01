@@ -106,12 +106,6 @@ export const labels = {
   otherMember3: `Other management team member 3`
 };
 
-export const productsData = [];
-
-for (let i = 10; i < 36; i++) {
-  productsData.push({ value: i.toString(36) + i, text: i.toString(36) + i });
-}
-
 export const certLabels = {
   isReceived: `Have you received capacity building certificate?`,
 

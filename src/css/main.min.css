@@ -167,9 +167,6 @@ i.success {
 .table-operations a.ant-btn .anticon {
   margin-right: 8px;
 }
-.rdw-editor-wrapper {
-  padding-top: 16px;
-}
 .send-rfq .ant-select-lg {
   width: 164px;
 }
@@ -191,10 +188,10 @@ i.success {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 164px);
+  height: calc(100vh - 264px);
 }
 .login-card {
-  width: 350px;
+  width: 400px;
   padding: 26px 15px 15px 15px;
 }
 .login-card button {
@@ -327,4 +324,28 @@ form .ant-input-number {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.no-pad-bottom .ant-card-body {
+  padding-bottom: 0;
+}
+.rdw-editor-main {
+  height: 372px;
+}
+[class*='dashed-button'] {
+  background: #fff;
+  border-style: dashed;
+}
+.dashed-button-big {
+  width: 100%;
+  margin-top: 16px;
+}
+.ant-select-tree {
+  max-height: 600px;
+  overflow-y: auto;
+}
+.dashboard-notif {
+  font-size: 16px;
+}
+.ant-tag {
+  margin-bottom: 8px;
 }

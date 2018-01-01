@@ -9,7 +9,7 @@ const RfqForm = props => {
 
   return (
     <Table
-      className="margin form-table"
+      className="form-table"
       dataSource={products}
       pagination={false}
       size="middle"

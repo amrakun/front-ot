@@ -54,11 +54,14 @@ CompaniesContainer.propTypes = {
 export default graphql(gql(queries.companies), {
   name: 'companiesQuery',
   options: ({ queryParams }) => {
-    console.log(queryParams);
     return {
       variables: {
         page: 200,
-        perPage: 20
+        perPage: 20,
+        search: queryParams.search,
+        region: queryParams.region,
+        status: queryParams.status,
+        productCodes: queryParams.productCodes
       },
       notifyOnNetworkStatusChange: true
     };

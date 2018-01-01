@@ -7,7 +7,7 @@ export default class Panes extends React.Component {
     try {
       return Object.keys(data).length === 0 && data.constructor === Object;
     } catch (e) {
-      return false;
+      return true;
     }
   }
 
@@ -28,7 +28,11 @@ export default class Panes extends React.Component {
         }
         key={key}
       >
-        <Component data={company[name] || {}} save={saveAction} />
+        <Component
+          data={company[name] || {}}
+          save={saveAction}
+          productsInfo={name === 'healthInfo' ? company.productsInfo : {}}
+        />
       </Tabs.TabPane>
     );
   }

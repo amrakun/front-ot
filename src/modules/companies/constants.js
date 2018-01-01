@@ -14,43 +14,6 @@ export const statusOptions = [
   { label: 'Include blocked companies', value: 'includeBlockedCompanies' }
 ];
 
-export const treeData = [
-  {
-    label: 'Node1',
-    value: 'node1',
-    key: 'node1',
-    children: [
-      {
-        label: 'Child Node1',
-        value: 'childNode1',
-        key: 'childeNode1'
-      }
-    ]
-  },
-  {
-    label: 'Node2',
-    value: 'node2',
-    key: 'node2',
-    children: [
-      {
-        label: 'Child Node3',
-        value: 'childNode3',
-        key: 'childNode3'
-      },
-      {
-        label: 'Child Node4',
-        value: 'childNode4',
-        key: 'childNode4'
-      },
-      {
-        label: 'Child Node5',
-        value: 'childNode5',
-        key: 'childNode5'
-      }
-    ]
-  }
-];
-
 export const columns = [
   { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
   { title: 'SAP #', dataIndex: 'basicInfo.sapNumber' },

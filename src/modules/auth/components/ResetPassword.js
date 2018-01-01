@@ -27,25 +27,7 @@ class ResetPassword extends Component {
   }
 
   render() {
-    return (
-      <div>reset password</div>
-      // <AuthBox>
-      //   <h2>Set your new password</h2>
-      //   <form onSubmit={this.handleSubmit}>
-      //     <FormGroup>
-      //       <FormControl
-      //         type="password"
-      //         placeholder="new password"
-      //         required
-      //         onChange={this.handlePasswordChange}
-      //       />
-      //     </FormGroup>
-      //     <Button type="submit" block>
-      //       Change password
-      //     </Button>
-      //   </form>
-      // </AuthBox>
-    );
+    return <div>reset password</div>;
   }
 }
 

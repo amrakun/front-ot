@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import { Form, TreeSelect, Card } from 'antd';
 import { Field, BaseForm } from 'modules/common/components';
 import { productDescription } from '../constants';
-import { treeData } from '../../../constants';
+import productsTree from '../../../productsTree';
 
 class RegistrationForm extends BaseForm {
   save() {
@@ -21,10 +21,9 @@ class RegistrationForm extends BaseForm {
             description={productDescription}
             control={
               <TreeSelect
-                treeData={treeData}
+                treeData={productsTree}
                 treeCheckable={true}
                 searchPlaceholder="Please select products"
-                showCheckedStrategy={TreeSelect.SHOW_PARENT}
                 style={{ width: '100%' }}
               />
             }

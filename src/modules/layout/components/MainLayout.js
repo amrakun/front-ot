@@ -2,7 +2,7 @@ import React from 'react';
 import Sidenav from './Sidenav';
 import Header from './Header';
 import Breadcrumb from './Breadcrumb';
-import { Layout } from 'antd';
+import { Layout, BackTop } from 'antd';
 import { PropTypes } from 'prop-types';
 
 const { Content, Footer } = Layout;
@@ -29,13 +29,13 @@ class MainLayout extends React.Component {
     return { currentUser: this.props.currentUser };
   }
 
-  componentDidMount() {
-    const { history, currentUser } = this.props;
-
-    if (!currentUser) {
-      history.push('/');
-    }
-  }
+  // componentDidMount() {
+  //   const { history, currentUser } = this.props;
+  //
+  //   if (!currentUser) {
+  //     history.push('/');
+  //   }
+  // }
 
   render() {
     const { currentUser, children, location } = this.props;
@@ -43,7 +43,8 @@ class MainLayout extends React.Component {
 
     const navProps = {
       collapsed: collapsed ? true : false,
-      onCollapse: this.onCollapse
+      onCollapse: this.onCollapse,
+      pathname: location.pathname
     };
 
     let layoutStyle = {};
@@ -61,6 +62,7 @@ class MainLayout extends React.Component {
           <Content>
             {currentUser && <Breadcrumb {...location} />}
             {children}
+            <BackTop />
           </Content>
           <Footer>Oyu Tolgoi ©2018 All Rights Reserved</Footer>
         </Layout>

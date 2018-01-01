@@ -2,12 +2,13 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { Form, Card } from 'antd';
 import PreqForm from './PreqForm';
+import PropTypes from 'prop-types';
 
 class PrequalificationForm extends PreqForm {
   constructor(props) {
     super(props);
 
-    const { data } = this.props;
+    const { data } = props;
 
     this.state = {
       doesHaveHealthSafety: data.doesHaveHealthSafety || false,
@@ -37,6 +38,8 @@ class PrequalificationForm extends PreqForm {
   }
 
   render() {
+    const { productsInfo } = this.props;
+
     return (
       <Form onSubmit={this.save}>
         {this.renderConditionalField('doesHaveHealthSafety')}
@@ -50,25 +53,34 @@ class PrequalificationForm extends PreqForm {
         {this.renderConditionalField('doesHaveDocumentedFitness')}
         <Card>{this.renderBoolean('isWillingToComply')}</Card>
 
-        {/* TODO: Project specific fields start */}
-        <Card>
-          {this.renderBoolean('hasIndustrialAccident')}
-          {this.renderTextArea('tmha')}
-          {this.renderTextArea('ltifr')}
-          {this.renderTextArea('injuryExplanation')}
-          {this.renderTextArea('seniorManagement')}
-          {this.renderBoolean('isWillingToCommit')}
-          {this.renderBoolean('isPerparedToCompile')}
-        </Card>
-        {this.renderConditionalField('hasWorkedOnWorldBank', true)}
-        {this.renderConditionalField('hasWorkedOnLargeProjects', true)}
-        {this.renderConditionalField('doesHaveLicense', true)}
+        {productsInfo.includes('A01001') || productsInfo.includes('A01002') ? (
+          <div>
+            <Card>
+              {this.renderBoolean('hasIndustrialAccident')}
+              {this.renderTextArea('tmha')}
+              {this.renderTextArea('ltifr')}
+              {this.renderTextArea('injuryExplanation')}
+              {this.renderTextArea('seniorManagement')}
+              {this.renderBoolean('isWillingToCommit')}
+              {this.renderBoolean('isPerparedToCompile')}
+            </Card>
+            {this.renderConditionalField('hasWorkedOnWorldBank', true)}
+            {this.renderConditionalField('hasWorkedOnLargeProjects', true)}
+            {this.renderConditionalField('doesHaveLicense', true)}
+          </div>
+        ) : (
+          ''
+        )}
 
         {this.renderSubmit('Save & continue', this.handleSubmit)}
       </Form>
     );
   }
 }
+
+PrequalificationForm.propTypes = {
+  productsInfo: PropTypes.array
+};
 
 const BusinessForm = Form.create()(PrequalificationForm);
 

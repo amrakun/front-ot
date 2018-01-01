@@ -150,8 +150,8 @@ export const certificateByUser = `
 `;
 
 const companies = `
-  query companies {
-    companies {
+  query companies($search: String, $region: String, $status: String, $productCodes: String) {
+    companies(search: $search, region: $region, status: $status, productCodes: $productCodes) {
       _id
       basicInfo {
         enName,
@@ -255,6 +255,7 @@ export const companyPrequalificationDetail = `
         doesHaveLicense
         doesHaveLicenseDescription
       }
+      productsInfo
     }
   }
 `;

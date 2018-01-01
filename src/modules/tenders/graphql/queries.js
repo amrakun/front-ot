@@ -35,11 +35,13 @@ const tenderDetail = `
         _id
         basicInfo {
           enName,
-          email,
-          sapNumber
+          sapNumber,
+          totalNumberOfEmployees
         }
         contactInfo {
-          phone
+          name,
+          phone,
+          email
         }
       },
     }
@@ -47,8 +49,8 @@ const tenderDetail = `
 `;
 
 const tenders = `
-  query tenders($type: String!, $supplierId: String) {
-    tenders(type: $type, supplierId: $supplierId) {
+  query tenders($type: String!, $supplierId: String, $ignoreSubmitted: Boolean) {
+    tenders(type: $type, supplierId: $supplierId, ignoreSubmitted: $ignoreSubmitted) {
       ${tenderFields}
     }
   }

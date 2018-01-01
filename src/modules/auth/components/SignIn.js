@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Form, Button, Input, Icon, Checkbox, Card } from 'antd';
+import { Form, Button, Input, Icon, Checkbox, Card, Alert } from 'antd';
 
 const FormItem = Form.Item;
 
 const propTypes = {
   login: PropTypes.func.isRequired,
-  form: PropTypes.object
+  form: PropTypes.object,
+  location: PropTypes.object
 };
 
 class SignIn extends Component {
@@ -30,11 +31,26 @@ class SignIn extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { location } = this.props;
 
     return (
       <div className="center-content">
         <Card className="login-card" bordered={false}>
-          <Form onSubmit={this.handleSubmit}>
+          {location.search === '?confirmation' ? (
+            <Alert
+              description="Confirmation link has been sent to your email!"
+              type="success"
+            />
+          ) : (
+            ''
+          )}
+          {location.search === '?required' ? (
+            <Alert description="Please sign in to continue!" type="info" />
+          ) : (
+            ''
+          )}
+
+          <Form onSubmit={this.handleSubmit} className="margin">
             <FormItem>
               {getFieldDecorator('email', {
                 rules: [

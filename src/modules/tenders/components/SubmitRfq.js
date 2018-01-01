@@ -1,12 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import { Tabs, Form, Button } from 'antd';
+import { Form, Button, Card } from 'antd';
 import TenderForm from './forms/TenderForm';
 import EoiForm from './forms/EoiForm';
 import RfqForm from './forms/RfqForm';
-
-const TabPane = Tabs.TabPane;
 
 class SubmitTender extends TenderForm {
   constructor(props) {
@@ -55,46 +53,42 @@ class SubmitTender extends TenderForm {
 
     return (
       <Form layout="inline" onSubmit={this.handleSubmit}>
-        <div className="card-container">
-          <Tabs type="card" className="send-rfq">
-            <TabPane tab="Main info" key="1">
-              <div>
-                <strong>Tender name: </strong>
-                {data.name}
-              </div>
-              <div>
-                <strong>Tender number: </strong>
-                {data.number}
-              </div>
-              <div>
-                <strong>Start date: </strong>
-                {data.publishDate}
-              </div>
-              <div>
-                <strong>End date: </strong>
-                {data.closeDate}
-              </div>
-              <div>
-                <strong>Document: </strong>
-                {data.file ? data.file.url : ''}
-              </div>
-              <br />
-              <div dangerouslySetInnerHTML={{ __html: data.content }} />
-            </TabPane>
+        <Card title="Main info">
+          <div>
+            <strong>Tender name: </strong>
+            {data.name}
+          </div>
+          <div>
+            <strong>Tender number: </strong>
+            {data.number}
+          </div>
+          <div>
+            <strong>Publish date: </strong>
+            {data.publishDate}
+          </div>
+          <div>
+            <strong>Close date: </strong>
+            {data.closeDate}
+          </div>
+          <div>
+            <strong>Document: </strong>
+            {data.file ? data.file.url : ''}
+          </div>
+          <br />
+          <div dangerouslySetInnerHTML={{ __html: data.content }} />
+        </Card>
 
-            <TabPane tab="Form" key="2">
-              {data.type === 'eoi' ? (
-                <EoiForm {...formProps} />
-              ) : (
-                <RfqForm {...formProps} />
-              )}
-              <br />
-              <Button type="primary" htmlType="submit" className="margin">
-                Save & continue
-              </Button>
-            </TabPane>
-          </Tabs>
-        </div>
+        <Card title="Form" className="margin">
+          {data.type === 'eoi' ? (
+            <EoiForm {...formProps} />
+          ) : (
+            <RfqForm {...formProps} />
+          )}
+          <br />
+          <Button type="primary" htmlType="submit" className="margin">
+            Save & continue
+          </Button>
+        </Card>
       </Form>
     );
   }

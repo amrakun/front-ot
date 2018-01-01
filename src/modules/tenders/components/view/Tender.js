@@ -2,26 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Table, Card, Input, Icon, Row, Col, Button, message } from 'antd';
-// import { columns } from 'modules/companies/constants';
 import { NumberCard, NumberCardLines } from 'modules/common/components';
 import { colors } from 'modules/common/colors';
 
 const Search = Input.Search;
 
 const columns = [
+  { title: 'Status', dataIndex: 'status' },
   { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
   { title: 'SAP #', dataIndex: 'basicInfo.sapNumber' },
+  { title: 'Company size', dataIndex: 'size' },
+  {
+    title: 'Number of employees',
+    dataIndex: 'basicInfo.totalNumberOfEmployees'
+  },
+  { title: 'Work experience', dataIndex: 'status' },
+  { title: 'Supplier tier type', dataIndex: 'status' },
+  { title: 'Response information', dataIndex: 'status' },
+  { title: 'Uploaded file', dataIndex: 'status' },
+  { title: 'Contact person', dataIndex: 'contactInfo.name' },
+  { title: 'Email', dataIndex: 'contactInfo.email' },
+  { title: 'Phone', dataIndex: 'contactInfo.phone' },
   { title: 'Registration', dataIndex: 'registration' },
   { title: 'Pre-qualification', dataIndex: 'prequalification' },
   { title: 'Qualification/audit status', dataIndex: 'audit' },
   { title: 'Validation status', dataIndex: 'validation' },
   { title: 'Due dilligence', dataIndex: 'dilligence' },
-  { title: 'DIFOT score', dataIndex: 'dipotScore' },
-  { title: 'Blocking', dataIndex: 'isBlocked' },
-  { title: 'Company adminstrators', dataIndex: 'adminstrators' },
-  { title: 'Email', dataIndex: 'basicInfo.email' },
-  { title: 'Phone', dataIndex: 'contactInfo.phone' },
-  { title: 'Profile export to PDF', key: 'export' }
+  { title: 'DIFOT score', dataIndex: 'dipotScore' }
 ];
 
 const propTypes = {
@@ -172,7 +179,7 @@ class Tender extends React.Component {
             dataSource={data.suppliers}
             pagination={pagination}
             loading={loading}
-            scroll={{ x: 1600 }}
+            scroll={{ x: 2000 }}
             onChange={(pagination, filters, sorter) =>
               onChange(pagination, filters, sorter)
             }

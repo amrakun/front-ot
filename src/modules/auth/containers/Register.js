@@ -13,7 +13,7 @@ const RegisterContainer = props => {
     registerMutation({ variables })
       .then(() => {
         message.success(`Confirmation link has been sent to your email`);
-        history.push('/sign-in');
+        history.push('/sign-in?confirmation');
       })
       .catch(error => {
         message.error(error.message);

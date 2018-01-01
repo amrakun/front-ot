@@ -98,7 +98,8 @@ export default compose(
           page: 200,
           perPage: 20,
           type: type,
-          supplierId: supplierId
+          supplierId: supplierId,
+          ignoreSubmitted: supplierId ? true : false
         },
         notifyOnNetworkStatusChange: true
       };

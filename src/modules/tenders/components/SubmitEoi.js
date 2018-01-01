@@ -1,16 +1,13 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import { Tabs, Form, Button, Modal, Checkbox } from 'antd';
+import { Card, Form, Button, Modal, Checkbox } from 'antd';
 import TenderForm from './forms/TenderForm';
 import EoiForm from './forms/EoiForm';
 import RfqForm from './forms/RfqForm';
+import { agreementOptions } from './constants';
 
-const TabPane = Tabs.TabPane;
 const CheckboxGroup = Checkbox.Group;
-const agreementOptions = [
-  { label: 'We have read and agreed to Oyu Tolgoi', value: 0 }
-];
 
 class SubmitTender extends TenderForm {
   constructor(props) {
@@ -86,81 +83,79 @@ class SubmitTender extends TenderForm {
 
     return (
       <Form layout="inline" onSubmit={this.handleSubmit}>
-        <div className="card-container">
-          <Tabs type="card" className="send-rfq">
-            <TabPane tab="Main info" key="1">
-              <div>
-                <strong>Tender name: </strong>
-                {data.name}
-              </div>
-              <div>
-                <strong>Tender number: </strong>
-                {data.number}
-              </div>
-              <div>
-                <strong>Start date: </strong>
-                {data.publishDate}
-              </div>
-              <div>
-                <strong>End date: </strong>
-                {data.closeDate}
-              </div>
-              <div>
-                <strong>Document: </strong>
-                {data.file ? data.file.url : ''}
-              </div>
-              <br />
-              <div dangerouslySetInnerHTML={{ __html: data.content }} />
-            </TabPane>
+        <Card title={data.name}>
+          <div>
+            <strong>EOI name: </strong>
+            {data.name}
+          </div>
+          <div>
+            <strong>EOI number: </strong>
+            {data.number}
+          </div>
+          <div>
+            <strong>Publish date: </strong>
+            {data.publishDate}
+          </div>
+          <div>
+            <strong>Close date: </strong>
+            {data.closeDate}
+          </div>
+          <div>
+            <strong>Document: </strong>
+            <a href={data.file ? data.file.url : ''} target="_blank">
+              Download
+            </a>
+          </div>
+          <br />
+          <div dangerouslySetInnerHTML={{ __html: data.content }} />
+        </Card>
 
-            <TabPane tab="Form" key="2">
-              {data.type === 'eoi' ? (
-                <EoiForm {...formProps} />
-              ) : (
-                <RfqForm {...formProps} />
-              )}
-              <br />
-              <Button type="primary" htmlType="submit" className="margin">
-                Save & continue
-              </Button>
+        <Card title="Apply to EOI" className="margin">
+          {data.type === 'eoi' ? (
+            <EoiForm {...formProps} />
+          ) : (
+            <RfqForm {...formProps} />
+          )}
+          <br />
+          <Button type="primary" htmlType="submit" className="margin">
+            Save
+          </Button>
 
-              <Modal
-                title="Confirmation"
-                visible={agreementModalVisible}
-                onCancel={this.toggleAgreementModal}
-                footer={[
-                  <Button
-                    key="back"
-                    size="large"
-                    onClick={this.toggleAgreementModal}
-                  >
-                    Return
-                  </Button>,
-                  <Button
-                    key="submit"
-                    type="primary"
-                    size="large"
-                    disabled={submitDisabled}
-                    loading={submitLoading}
-                    onClick={this.handleOk}
-                  >
-                    Submit
-                  </Button>
-                ]}
+          <Modal
+            title="Confirmation"
+            visible={agreementModalVisible}
+            onCancel={this.toggleAgreementModal}
+            footer={[
+              <Button
+                key="back"
+                size="large"
+                onClick={this.toggleAgreementModal}
               >
-                <p>
-                  Please tick the boxes to confirm that you have agree with the
-                  statements
-                </p>
-                <CheckboxGroup
-                  options={agreementOptions}
-                  className="horizontal"
-                  onChange={this.handleAgreementChange}
-                />
-              </Modal>
-            </TabPane>
-          </Tabs>
-        </div>
+                Return
+              </Button>,
+              <Button
+                key="submit"
+                type="primary"
+                size="large"
+                disabled={submitDisabled}
+                loading={submitLoading}
+                onClick={this.handleOk}
+              >
+                Submit
+              </Button>
+            ]}
+          >
+            <strong>
+              Please tick the boxes to confirm that you have agree with the
+              statements
+            </strong>
+            <CheckboxGroup
+              options={agreementOptions}
+              className="horizontal"
+              onChange={this.handleAgreementChange}
+            />
+          </Modal>
+        </Card>
       </Form>
     );
   }

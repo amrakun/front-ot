@@ -9,7 +9,13 @@ const login = `
 
 const register = `
   mutation register($email: String!) {
-    register(email: $email) 
+    register(email: $email)
+  }
+`;
+
+const confirmRegistration = `
+  mutation confirmRegistration($token: String!, $password: String!, $passwordConfirmation: String!) {
+    confirmRegistration(token: $token, password: password, passwordConfirmation: passwordConfirmation)
   }
 `;
 
@@ -29,5 +35,6 @@ export default {
   login,
   register,
   forgotPassword,
-  resetPassword
+  resetPassword,
+  confirmRegistration
 };

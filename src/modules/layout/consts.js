@@ -6,12 +6,12 @@ export const supplierSideMenu = [
   },
   {
     url: '/registration',
-    title: 'Registration',
+    title: 'Supplier registration',
     icon: 'contacts'
   },
   {
     url: '/prequalification',
-    title: 'Prequalification',
+    title: 'Pre-qualification',
     icon: 'solution'
   },
   {

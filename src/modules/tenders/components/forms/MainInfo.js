@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input, InputNumber, Select, DatePicker, Tag } from 'antd';
+import { Input, Select, DatePicker, Tag, Card, Row, Col } from 'antd';
 import moment from 'moment';
 import { Uploader } from 'modules/common/components';
 import { days, dateTimeFormat } from 'modules/common/constants';
@@ -23,54 +23,74 @@ const MainInfo = props => {
     : null;
 
   const supplierTags = supplierIds.map(el => <Tag key={el}>{el}</Tag>);
+  const fieldProps = {
+    hasFeedback: false
+  };
 
   return (
-    <div>
-      <label>Sending RFQ to: </label>
-      {supplierTags}
-      <AddMore withTag={true} />
-      <p style={{ paddingBottom: '16px' }} />
+    <Row gutter={24}>
+      <Col span={10}>
+        <Card title="Main info" className="no-pad-bottom">
+          <label>Sending RFQ to: </label>
+          <br />
 
-      {renderField({
-        name: 'number',
-        optional: true,
-        control: <InputNumber placeholder="Tender number" htmlType="number" />
-      })}
-      {renderField({
-        name: 'name',
-        optional: true,
-        control: <Input placeholder="Tender name" />
-      })}
-      {renderField({
-        name: 'dateRange',
-        optional: true,
-        initialValue: dateRange,
-        control: (
-          <DatePicker.RangePicker
-            showTime={{ format: 'HH:mm' }}
-            format={dateTimeFormat}
-            placeholder={['Start date', 'End date']}
+          <div style={{ margin: '6px 0 16px 0' }}>
+            {supplierTags}
+            <AddMore withTag={true} />
+          </div>
+
+          {renderField({
+            ...fieldProps,
+            label: 'Tender number',
+            name: 'number',
+            control: <Input type="number" />
+          })}
+          {renderField({
+            ...fieldProps,
+            label: 'Tender name',
+            name: 'name',
+            control: <Input />
+          })}
+          {renderField({
+            ...fieldProps,
+            label: 'Date range',
+            name: 'dateRange',
+            initialValue: dateRange,
+            control: (
+              <DatePicker.RangePicker
+                showTime={{ format: 'HH:mm' }}
+                format={dateTimeFormat}
+                placeholder={['Publish date', 'Close date']}
+              />
+            )
+          })}
+          {renderField({
+            ...fieldProps,
+            label: 'Expired day reminder',
+            name: 'reminderDay',
+            control: <Select>{renderOptions(days)}</Select>
+          })}
+          {renderField({
+            optional: true,
+            hasFeedback: false,
+            label: 'File',
+            name: 'file',
+            dataType: 'file',
+            control: (
+              <Uploader initialFile={data.file} onReceiveFile={onReceiveFile} />
+            )
+          })}
+        </Card>
+      </Col>
+      <Col span={14}>
+        <Card title="Email content">
+          <Editor
+            onEmailContentChange={onEmailContentChange}
+            content={content}
           />
-        )
-      })}
-      {renderField({
-        name: 'reminderDay',
-        optional: true,
-        control: (
-          <Select placeholder="Expired day reminder">
-            {renderOptions(days)}
-          </Select>
-        )
-      })}
-      {renderField({
-        name: 'file',
-        dataType: 'file',
-        control: (
-          <Uploader initialFile={data.file} onReceiveFile={onReceiveFile} />
-        )
-      })}
-      <Editor onEmailContentChange={onEmailContentChange} content={content} />
-    </div>
+        </Card>
+      </Col>
+    </Row>
   );
 };
 

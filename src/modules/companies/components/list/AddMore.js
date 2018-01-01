@@ -36,10 +36,7 @@ class AddNew extends React.Component {
       <span>
         {!withTag && <Button onClick={this.showModal}>Add supplier</Button>}
         {withTag && (
-          <Tag
-            onClick={this.showModal}
-            style={{ background: '#fff', borderStyle: 'dashed' }}
-          >
+          <Tag onClick={this.showModal} className="dashed-button">
             <Icon type="plus" /> Add supplier
           </Tag>
         )}
