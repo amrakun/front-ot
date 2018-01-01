@@ -8,17 +8,8 @@ const login = `
 `;
 
 const register = `
-  mutation register($email: String!, $password: String!, $passwordConfirmation: String!) {
-    register(email: $email, password: $password, passwordConfirmation: $passwordConfirmation) {
-      username
-      email
-      role
-      isSupplier
-      details {
-        avatar
-        fullName
-      }
-    }
+  mutation register($email: String!) {
+    register(email: $email) 
   }
 `;
 

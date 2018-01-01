@@ -11,8 +11,8 @@ const RegisterContainer = props => {
 
   const register = variables => {
     registerMutation({ variables })
-      .then(({ data }) => {
-        message.success(`Welcome, ${data.register.email}`);
+      .then(() => {
+        message.success(`Confirmation link has been sent to your email`);
         history.push('/sign-in');
       })
       .catch(error => {

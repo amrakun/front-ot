@@ -57,7 +57,7 @@ class Register extends BaseForm {
                 <Input prefix={<Icon type="user" />} placeholder="Email" />
               }
             />
-            <Field
+            {/* <Field
               name="password"
               layout={noLabelLayout}
               rules={[{ validator: this.checkConfirm }]}
@@ -80,7 +80,7 @@ class Register extends BaseForm {
                   placeholder="Confirm password"
                 />
               }
-            />
+            /> */}
             <Button
               type="primary"
               htmlType="submit"
