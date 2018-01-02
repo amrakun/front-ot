@@ -46,8 +46,6 @@ class CreateEoi extends TenderForm {
         ...initialPerProducts
       });
     }
-
-    this.save();
   }
 
   render() {

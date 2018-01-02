@@ -38,8 +38,7 @@ class TenderContainer extends React.Component {
         history.push('/rfq');
       })
       .catch(error => {
-        message.error('Error occurred');
-        console.log(error);
+        message.error(error.message);
       });
   }
 

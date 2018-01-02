@@ -30,8 +30,7 @@ const PublishContainer = props => {
         message.success('Saved');
       })
       .catch(error => {
-        console.log(error);
-        // message.error('Error occured: EditTender' + error);
+        message.error(error.message);
       });
   };
 

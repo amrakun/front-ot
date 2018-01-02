@@ -21,8 +21,7 @@ const CreateTenderContainer = props => {
         history.push(`/tender/${tender.data.tendersAdd._id}`);
       })
       .catch(error => {
-        message.error('Error occured: CreateTender');
-        console.log(error);
+        message.error(error.message);
       });
   };
 

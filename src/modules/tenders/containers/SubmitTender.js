@@ -17,14 +17,14 @@ const PublishContainer = ({
 
   const save = doc => {
     tendersResponsesAdd({
-      variables: { ...doc, _id: tenderDetailQuery.tenderDetail._id }
+      variables: { ...doc }
     })
       .then(() => {
         message.success('Successfully submitted a tender!');
         history.push('/');
       })
       .catch(error => {
-        message.error('Error occurred: SubmitTender', error);
+        message.error('Error occurred: SubmitTender' + error);
       });
   };
 

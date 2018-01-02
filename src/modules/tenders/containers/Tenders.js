@@ -52,8 +52,7 @@ class TendersContainer extends React.Component {
           tendersQuery.refetch();
         })
         .catch(error => {
-          message.error('Error occurred');
-          console.log(error);
+          message.error('Error occurred' + error);
         });
     };
 

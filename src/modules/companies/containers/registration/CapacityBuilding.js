@@ -20,8 +20,7 @@ const RegistrationContainer = props => {
         message.success('Succesfully saved');
       })
       .catch(error => {
-        message.error('Error occured');
-        console.log(error);
+        message.error(error.message);
       });
   };
 

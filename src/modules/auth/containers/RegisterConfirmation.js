@@ -18,11 +18,10 @@ const RegisterContainer = props => {
     confirmRegistrationMutation({ variables: updatedVariables })
       .then(() => {
         message.success(`Welcome!`);
-        history.push('/sign-in');
+        history.push('/sign-in?confirmed');
       })
       .catch(error => {
         message.error(error.message);
-        console.log(error);
       });
   };
 

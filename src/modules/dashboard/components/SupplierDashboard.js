@@ -7,7 +7,7 @@ import { Row, Col, Alert } from 'antd';
 import { Link } from 'react-router-dom';
 
 const Dashboard = (props, context) => {
-  const { currentUser } = context;
+  const currentUser = context.currentUser || {};
 
   return (
     <div>

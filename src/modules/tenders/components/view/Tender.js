@@ -114,7 +114,8 @@ class Tender extends React.Component {
       notInterestedCount,
       notRespondedCount,
       isAwarded,
-      winnerId
+      winnerId,
+      responses
     } = data;
 
     return (
@@ -203,7 +204,7 @@ class Tender extends React.Component {
             rowKey={record => {
               return record._id + Math.random();
             }}
-            dataSource={data.responses}
+            dataSource={responses}
             pagination={pagination}
             loading={loading}
             scroll={{ x: 2000 }}

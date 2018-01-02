@@ -21,7 +21,6 @@ class CreateRfq extends TenderForm {
         products: initialProducts
       });
     }
-    this.save();
   }
   handleSubmit(e) {
     e.preventDefault();

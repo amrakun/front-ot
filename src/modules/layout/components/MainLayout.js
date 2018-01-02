@@ -29,13 +29,13 @@ class MainLayout extends React.Component {
     return { currentUser: this.props.currentUser };
   }
 
-  // componentDidMount() {
-  //   const { history, currentUser } = this.props;
-  //
-  //   if (!currentUser) {
-  //     history.push('/');
-  //   }
-  // }
+  componentDidMount() {
+    const { history, currentUser } = this.props;
+    const path = history.location.pathname;
+    if (!currentUser && !['/sign-in', '/register', '/eoi'].includes(path)) {
+      history.push('/sign-in?required');
+    }
+  }
 
   render() {
     const { currentUser, children, location } = this.props;
