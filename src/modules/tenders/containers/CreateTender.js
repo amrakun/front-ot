@@ -6,9 +6,9 @@ import { mutations, queries } from '../graphql';
 import { message } from 'antd';
 
 const CreateTenderContainer = props => {
-  const { tendersAdd, companiesQuery, location, history } = props;
+  const { tendersAdd, companiesByIdsQuery, location, history } = props;
 
-  if (companiesQuery.loading) {
+  if (companiesByIdsQuery.loading) {
     return <div>loading</div>;
   }
 
@@ -25,11 +25,11 @@ const CreateTenderContainer = props => {
       });
   };
 
-  const requestingSuppliers = companiesQuery;
+  const requestingSuppliers = companiesByIdsQuery.companies;
 
   const updatedProps = {
     save,
-    data: { requestingSuppliers: requestingSuppliers }
+    data: { suppliers: requestingSuppliers }
   };
 
   let form = <CreateRfq {...updatedProps} />;
@@ -42,7 +42,7 @@ const CreateTenderContainer = props => {
 CreateTenderContainer.propTypes = {
   location: PropTypes.object,
   tendersAdd: PropTypes.func,
-  companiesQuery: PropTypes.object,
+  companiesByIdsQuery: PropTypes.object,
   history: PropTypes.object
 };
 
@@ -52,13 +52,11 @@ export default compose(
   }),
 
   graphql(gql(queries.companiesByIds), {
-    name: 'companiesQuery',
+    name: 'companiesByIdsQuery',
     options: ({ location }) => {
-      console.log(location.state.supplierIds);
       return {
         variables: {
-          page: 200,
-          perPage: 20
+          _ids: location.state.supplierIds
         },
         notifyOnNetworkStatusChange: true
       };

@@ -22,9 +22,9 @@ const MainInfo = props => {
     ? [moment(data.publishDate), moment(data.closeDate)]
     : null;
 
-  const supplierTags = requestingSuppliers.map(el => (
-    <Tag key={el.id}>{el.name}</Tag>
-  ));
+  const supplierTags = requestingSuppliers.map(el => {
+    return <Tag key={el._id}>{el.basicInfo.enName}</Tag>;
+  });
 
   const fieldProps = {
     hasFeedback: false

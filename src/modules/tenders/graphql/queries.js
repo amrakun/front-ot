@@ -31,6 +31,12 @@ const tenderDetail = `
   query tenderDetail($_id: String!) {
     tenderDetail(_id: $_id) {
       ${tenderFields}
+      suppliers {
+        _id
+        basicInfo {
+          enName
+        }
+      }
       responses {
         supplier {
           _id
@@ -68,17 +74,26 @@ const tenderDetail = `
   }
 `;
 
+const tenderUpdateDetail = `
+query tenderDetail($_id: String!) {
+  tenderDetail(_id: $_id) {
+    ${tenderFields}
+    suppliers {
+      _id
+      basicInfo {
+        enName
+      }
+    }
+  }
+}
+`;
+
 const companiesByIds = `
-  query companies($region: String) {
-    companies(region: $region) {
+  query companies($_ids: [String]) {
+    companies(_ids: $_ids) {
       _id
       basicInfo {
         enName,
-        email,
-        sapNumber
-      }
-      contactInfo {
-        phone
       }
     }
   }
@@ -95,5 +110,6 @@ const tenders = `
 export default {
   tenderDetail,
   tenders,
-  companiesByIds
+  companiesByIds,
+  tenderUpdateDetail
 };

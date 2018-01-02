@@ -5,10 +5,14 @@ import { CreateRfq, CreateEoi } from '../components';
 import { queries, mutations } from '../graphql';
 import { message } from 'antd';
 
-const PublishContainer = ({ tenderDetailQuery, tendersEdit }) => {
+const PublishContainer = props => {
+  const { tenderDetailQuery, tendersEdit } = props;
+
   if (tenderDetailQuery.loading) {
     return null;
   }
+
+  const tenderDetail = tenderDetailQuery.tenderDetail || {};
 
   const save = doc => {
     const [publishDate, closeDate] = doc.dateRange;
@@ -16,7 +20,7 @@ const PublishContainer = ({ tenderDetailQuery, tendersEdit }) => {
     tendersEdit({
       variables: {
         ...doc,
-        _id: tenderDetailQuery.tenderDetail._id,
+        _id: tenderDetail._id,
         publishDate,
         closeDate
       }
@@ -25,20 +29,18 @@ const PublishContainer = ({ tenderDetailQuery, tendersEdit }) => {
         message.success('Saved');
       })
       .catch(error => {
-        message.error('Error occured: EditTender');
-        console.log(error);
+        message.error('Error occured: EditTender', error);
       });
   };
 
   const updatedProps = {
     save,
-    data: tenderDetailQuery.tenderDetail || {}
+    data: tenderDetail
   };
 
   let form = <CreateRfq {...updatedProps} />;
 
-  if (tenderDetailQuery.tenderDetail.type === 'eoi')
-    form = <CreateEoi {...updatedProps} />;
+  if (tenderDetail.type === 'eoi') form = <CreateEoi {...updatedProps} />;
 
   return form;
 };
@@ -49,7 +51,7 @@ PublishContainer.propTypes = {
 };
 
 export default compose(
-  graphql(gql(queries.tenderDetail), {
+  graphql(gql(queries.tenderUpdateDetail), {
     name: 'tenderDetailQuery',
     options: ({ match }) => {
       return {

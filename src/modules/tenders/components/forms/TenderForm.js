@@ -42,7 +42,7 @@ class TenderForm extends BaseForm {
       products,
       ...perProductStates,
       content: data.content && data.content,
-      requestingSuppliers: data.requestingSuppliers
+      requestingSuppliers: data.suppliers
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -67,7 +67,7 @@ class TenderForm extends BaseForm {
 
     const supplierIds = [];
     this.state.requestingSuppliers.forEach(i => {
-      supplierIds.push(i.id);
+      supplierIds.push(i._id);
     });
 
     return {
