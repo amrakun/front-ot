@@ -69,8 +69,6 @@ export default class BaseForm extends React.Component {
         };
       }
 
-      console.log(err, doc);
-
       if (!err) {
         return this.props.save(doc);
       }

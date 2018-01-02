@@ -219,10 +219,7 @@ class CompaniesList extends React.Component {
                 onChange: this.onSelectedCompaniesChange
               }}
               columns={columns}
-              rowKey={record => {
-                const name = record.basicInfo ? record.basicInfo.enName : '';
-                return record._id + '-' + name;
-              }}
+              rowKey={record => record._id}
               dataSource={data}
               pagination={pagination}
               loading={loading}

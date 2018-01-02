@@ -42,7 +42,7 @@ class TenderForm extends BaseForm {
       products,
       ...perProductStates,
       content: data.content && data.content,
-      supplierIds: data.supplierIds
+      requestingSuppliers: data.requestingSuppliers
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -65,9 +65,14 @@ class TenderForm extends BaseForm {
       }
     });
 
+    const supplierIds = [];
+    this.state.requestingSuppliers.forEach(i => {
+      supplierIds.push(i.id);
+    });
+
     return {
       content: this.state.content,
-      supplierIds: this.state.supplierIds || [],
+      supplierIds: supplierIds || [],
       requestedProducts: products
     };
   }
@@ -139,11 +144,11 @@ class TenderForm extends BaseForm {
   }
 
   renderMainInfo(template) {
-    const { supplierIds, content } = this.state;
+    const { requestingSuppliers, content } = this.state;
 
     return (
       <MainInfo
-        supplierIds={supplierIds}
+        requestingSuppliers={requestingSuppliers}
         data={this.props.data}
         content={content || template}
         renderField={this.renderField.bind(this)}

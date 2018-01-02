@@ -13,7 +13,7 @@ const MainInfo = props => {
     renderOptions,
     onReceiveFile,
     data,
-    supplierIds,
+    requestingSuppliers,
     content,
     onEmailContentChange
   } = props;
@@ -22,9 +22,10 @@ const MainInfo = props => {
     ? [moment(data.publishDate), moment(data.closeDate)]
     : null;
 
-  const supplierTags = supplierIds.map(el => (
-    <Tag key={el.split('-')[0]}>{el.split('-')[1]}</Tag>
+  const supplierTags = requestingSuppliers.map(el => (
+    <Tag key={el.id}>{el.name}</Tag>
   ));
+
   const fieldProps = {
     hasFeedback: false
   };
@@ -104,7 +105,7 @@ MainInfo.propTypes = {
   location: PropTypes.object,
   data: PropTypes.object,
   content: PropTypes.string,
-  supplierIds: PropTypes.array
+  requestingSuppliers: PropTypes.array
 };
 
 export default MainInfo;

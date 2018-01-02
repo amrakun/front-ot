@@ -68,6 +68,22 @@ const tenderDetail = `
   }
 `;
 
+const companiesByIds = `
+  query companies($region: String) {
+    companies(region: $region) {
+      _id
+      basicInfo {
+        enName,
+        email,
+        sapNumber
+      }
+      contactInfo {
+        phone
+      }
+    }
+  }
+`;
+
 const tenders = `
   query tenders($type: String!, $supplierId: String, $ignoreSubmitted: Boolean) {
     tenders(type: $type, supplierId: $supplierId, ignoreSubmitted: $ignoreSubmitted) {
@@ -78,5 +94,6 @@ const tenders = `
 
 export default {
   tenderDetail,
-  tenders
+  tenders,
+  companiesByIds
 };

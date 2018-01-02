@@ -49,8 +49,7 @@ export const tenderColumns = [
   },
   {
     title: 'Tender #',
-    dataIndex: 'number',
-    sorter: true
+    dataIndex: 'number'
   },
   {
     title: 'Tender name',
