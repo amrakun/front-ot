@@ -31,17 +31,37 @@ const tenderDetail = `
   query tenderDetail($_id: String!) {
     tenderDetail(_id: $_id) {
       ${tenderFields}
-      suppliers {
-        _id
-        basicInfo {
-          enName,
-          sapNumber,
-          totalNumberOfEmployees
+      responses {
+        supplier {
+          _id
+          basicInfo {
+            enName,
+            sapNumber,
+            totalNumberOfEmployees
+          }
+          contactInfo {
+            name,
+            phone,
+            email
+          }
         }
-        contactInfo {
-          name,
-          phone,
-          email
+        response {
+          respondedProducts {
+            code
+            suggestedManufacturer
+            suggestedManufacturerPartNumber
+            unitPrice
+            totalPrice
+            leadTime
+            comment
+            file
+          }
+          respondedDocuments {
+            name
+            isSubmitted
+            notes
+            file
+          }
         }
       },
     }

@@ -8,27 +8,32 @@ import { colors } from 'modules/common/colors';
 const Search = Input.Search;
 
 const columns = [
-  { title: 'Status', dataIndex: 'status' },
-  { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
-  { title: 'SAP #', dataIndex: 'basicInfo.sapNumber' },
-  { title: 'Company size', dataIndex: 'size' },
+  { title: 'Status', dataIndex: 'status', key: 0 },
+  { title: 'Supplier name', dataIndex: 'supplier.basicInfo.enName', key: 1 },
+  { title: 'SAP #', dataIndex: 'supplier.basicInfo.sapNumber', key: 2 },
+  { title: 'Company size', dataIndex: 'size', key: 3 },
   {
     title: 'Number of employees',
-    dataIndex: 'basicInfo.totalNumberOfEmployees'
+    dataIndex: 'supplier.basicInfo.totalNumberOfEmployees',
+    key: 4
   },
-  { title: 'Work experience', dataIndex: 'status' },
-  { title: 'Supplier tier type', dataIndex: 'status' },
-  { title: 'Response information', dataIndex: 'status' },
-  { title: 'Uploaded file', dataIndex: 'status' },
-  { title: 'Contact person', dataIndex: 'contactInfo.name' },
-  { title: 'Email', dataIndex: 'contactInfo.email' },
-  { title: 'Phone', dataIndex: 'contactInfo.phone' },
-  { title: 'Registration', dataIndex: 'registration' },
-  { title: 'Pre-qualification', dataIndex: 'prequalification' },
-  { title: 'Qualification/audit status', dataIndex: 'audit' },
-  { title: 'Validation status', dataIndex: 'validation' },
-  { title: 'Due dilligence', dataIndex: 'dilligence' },
-  { title: 'DIFOT score', dataIndex: 'dipotScore' }
+  { title: 'Work experience', dataIndex: 'status', key: 5 },
+  { title: 'Supplier tier type', dataIndex: 'status', key: 6 },
+  {
+    title: 'Response information',
+    key: 17,
+    render: render
+  },
+  { title: 'Uploaded file', dataIndex: 'status', key: 7 },
+  { title: 'Contact person', dataIndex: 'supplier.contactInfo.name', key: 8 },
+  { title: 'Email', dataIndex: 'supplier.contactInfo.email', key: 9 },
+  { title: 'Phone', dataIndex: 'supplier.contactInfo.phone', key: 10 },
+  { title: 'Registration', dataIndex: 'registration', key: 11 },
+  { title: 'Pre-qualification', dataIndex: 'prequalification', key: 12 },
+  { title: 'Qualification/audit status', dataIndex: 'audit', key: 13 },
+  { title: 'Validation status', dataIndex: 'validation', key: 14 },
+  { title: 'Due dilligence', dataIndex: 'dilligence', key: 15 },
+  { title: 'DIFOT score', dataIndex: 'dipotScore', key: 16 }
 ];
 
 const propTypes = {
@@ -41,6 +46,11 @@ const propTypes = {
   bidSummaryReport: PropTypes.func,
   sendRegretLetter: PropTypes.func
 };
+
+function render(text, record) {
+  console.log(record);
+  return <a>View</a>;
+}
 
 class Tender extends React.Component {
   constructor(props) {
@@ -106,7 +116,7 @@ class Tender extends React.Component {
       isAwarded,
       winnerId
     } = data;
-
+    console.log(data);
     return (
       <div>
         <Row gutter={24}>
@@ -146,7 +156,14 @@ class Tender extends React.Component {
             />
           </Col>
         </Row>
-        <Card bordered={true} title={`Submitted companies for "${data.name}"`}>
+        <Card
+          bordered={true}
+          title={
+            <div>
+              Submitted companies for <strong>{data.name}</strong>
+            </div>
+          }
+        >
           <div className="table-operations">
             <Search
               placeholder="Supplier name or SAP number"
@@ -186,7 +203,7 @@ class Tender extends React.Component {
             rowKey={record => {
               return record._id + Math.random();
             }}
-            dataSource={data.suppliers}
+            dataSource={data.responses}
             pagination={pagination}
             loading={loading}
             scroll={{ x: 2000 }}

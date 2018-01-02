@@ -56,20 +56,22 @@ export default class BaseForm extends React.Component {
 
   save(extra = {}) {
     this.props.form.validateFieldsAndScroll(err => {
+      let doc = {};
+
+      this.fieldDefs.forEach(({ name, dataType }) => {
+        doc[name] = this.getFieldValue(name, dataType);
+      });
+
+      if (extra) {
+        doc = {
+          ...doc,
+          ...extra
+        };
+      }
+
+      console.log(err, doc);
+
       if (!err) {
-        let doc = {};
-
-        this.fieldDefs.forEach(({ name, dataType }) => {
-          doc[name] = this.getFieldValue(name, dataType);
-        });
-
-        if (extra) {
-          doc = {
-            ...doc,
-            ...extra
-          };
-        }
-
         return this.props.save(doc);
       }
     });

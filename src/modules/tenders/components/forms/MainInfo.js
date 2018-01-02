@@ -23,7 +23,7 @@ const MainInfo = props => {
     : null;
 
   const supplierTags = supplierIds.map(el => (
-    <Tag key={el}>{el.split('-')[1]}</Tag>
+    <Tag key={el.split('-')[0]}>{el.split('-')[1]}</Tag>
   ));
   const fieldProps = {
     hasFeedback: false
@@ -74,6 +74,7 @@ const MainInfo = props => {
           })}
           {renderField({
             hasFeedback: false,
+            optional: true,
             label: 'File',
             name: 'file',
             dataType: 'file',
