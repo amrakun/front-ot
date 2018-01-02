@@ -75,17 +75,17 @@ const tenderDetail = `
 `;
 
 const tenderUpdateDetail = `
-query tenderDetail($_id: String!) {
-  tenderDetail(_id: $_id) {
-    ${tenderFields}
-    suppliers {
-      _id
-      basicInfo {
-        enName
+  query tenderDetail($_id: String!) {
+    tenderDetail(_id: $_id) {
+      ${tenderFields}
+      suppliers {
+        _id
+        basicInfo {
+          enName
+        }
       }
     }
   }
-}
 `;
 
 const companiesByIds = `

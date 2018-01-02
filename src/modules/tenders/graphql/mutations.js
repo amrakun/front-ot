@@ -78,6 +78,7 @@ const tendersResponsesAdd = `
       respondedDocuments: $respondedDocuments
     ) {
       _id
+      type
     }
   }
 `;

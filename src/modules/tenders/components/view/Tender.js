@@ -116,7 +116,7 @@ class Tender extends React.Component {
       isAwarded,
       winnerId
     } = data;
-    console.log(data);
+
     return (
       <div>
         <Row gutter={24}>
