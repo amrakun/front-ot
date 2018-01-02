@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { compose, gql, graphql } from 'react-apollo';
 import { CreateRfq, CreateEoi } from '../components';
 import { queries, mutations } from '../graphql';
+import { message } from 'antd';
 
 const PublishContainer = ({ tenderDetailQuery, tendersEdit }) => {
   if (tenderDetailQuery.loading) {
@@ -21,9 +22,10 @@ const PublishContainer = ({ tenderDetailQuery, tendersEdit }) => {
       }
     })
       .then(() => {
-        console.log('Saved');
+        message.success('Saved');
       })
       .catch(error => {
+        message.error('Error occured: EditTender');
         console.log(error);
       });
   };

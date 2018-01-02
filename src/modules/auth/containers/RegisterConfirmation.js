@@ -14,14 +14,15 @@ const RegisterContainer = props => {
       ...variables,
       token
     };
-    console.log(updatedVariables);
-    confirmRegistrationMutation({ updatedVariables })
+
+    confirmRegistrationMutation({ variables: updatedVariables })
       .then(() => {
         message.success(`Welcome!`);
-        history.push('/');
+        history.push('/sign-in');
       })
       .catch(error => {
         message.error(error.message);
+        console.log(error);
       });
   };
 

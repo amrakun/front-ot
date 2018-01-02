@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Tenders } from '../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries, mutations } from '../graphql';
+import { message } from 'antd';
 
 class TendersContainer extends React.Component {
   constructor(props) {
@@ -47,10 +48,11 @@ class TendersContainer extends React.Component {
         }
       })
         .then(() => {
-          console.log('Saved');
+          message.success('Not interested tender has been removed');
           tendersQuery.refetch();
         })
         .catch(error => {
+          message.error('Error occurred');
           console.log(error);
         });
     };

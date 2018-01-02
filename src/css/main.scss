@@ -326,7 +326,7 @@ form .ant-input-number {
 }
 
 .ant-table-row.highlight {
-  background-color: $primary-color-shade;
+  background-color: tint($link-color, 95);
 }
 
 .loading {

@@ -34,7 +34,11 @@ class AddNew extends React.Component {
     const { withTag } = this.props;
     return (
       <span>
-        {!withTag && <Button onClick={this.showModal}>Add supplier</Button>}
+        {!withTag && (
+          <Button disabled onClick={this.showModal}>
+            Add supplier
+          </Button>
+        )}
         {withTag && (
           <Tag onClick={this.showModal} className="dashed-button">
             <Icon type="plus" /> Add supplier

@@ -71,7 +71,6 @@ class CompaniesList extends React.Component {
   }
 
   onProductCodesChange(value) {
-    console.log(value);
     this.setState({ productCodes: value });
   }
 
@@ -132,6 +131,7 @@ class CompaniesList extends React.Component {
 
   render() {
     const { data, pagination, loading, onChange } = this.props;
+
     const {
       selectedCompanies,
       productCodes,
@@ -219,7 +219,10 @@ class CompaniesList extends React.Component {
                 onChange: this.onSelectedCompaniesChange
               }}
               columns={columns}
-              rowKey={record => record._id}
+              rowKey={record => {
+                const name = record.basicInfo ? record.basicInfo.enName : '';
+                return record._id + '-' + name;
+              }}
               dataSource={data}
               pagination={pagination}
               loading={loading}

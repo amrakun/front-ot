@@ -22,7 +22,9 @@ const MainInfo = props => {
     ? [moment(data.publishDate), moment(data.closeDate)]
     : null;
 
-  const supplierTags = supplierIds.map(el => <Tag key={el}>{el}</Tag>);
+  const supplierTags = supplierIds.map(el => (
+    <Tag key={el}>{el.split('-')[1]}</Tag>
+  ));
   const fieldProps = {
     hasFeedback: false
   };
@@ -31,7 +33,7 @@ const MainInfo = props => {
     <Row gutter={24}>
       <Col span={10}>
         <Card title="Main info" className="no-pad-bottom">
-          <label>Sending RFQ to: </label>
+          <label>Requesting suppliers: </label>
           <br />
 
           <div style={{ margin: '6px 0 16px 0' }}>
@@ -71,7 +73,6 @@ const MainInfo = props => {
             control: <Select>{renderOptions(days)}</Select>
           })}
           {renderField({
-            optional: true,
             hasFeedback: false,
             label: 'File',
             name: 'file',

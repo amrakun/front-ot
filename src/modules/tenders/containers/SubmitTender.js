@@ -23,7 +23,7 @@ const PublishContainer = ({
         history.push('/');
       })
       .catch(error => {
-        console.log(error);
+        message.error('Error occurred: SubmitTender');
       });
   };
 

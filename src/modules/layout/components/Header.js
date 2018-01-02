@@ -54,8 +54,12 @@ const HeaderBar = (props, context) => {
             </span>
           }
         >
-          <Menu.Item key="profile">My profile</Menu.Item>
-          <Menu.Item key="delegate">Delegation</Menu.Item>
+          <Menu.Item disabled key="profile">
+            My profile
+          </Menu.Item>
+          <Menu.Item disabled key="delegate">
+            Delegation
+          </Menu.Item>
           <Menu.Item key="logout">
             <a onClick={logout}>Sign out</a>
           </Menu.Item>
@@ -66,7 +70,7 @@ const HeaderBar = (props, context) => {
         </Menu.Item>
       )}
 
-      <Menu.Item className="right" key="lang">
+      <Menu.Item className="right" disabled key="lang">
         <span className="bordered">EN</span>
       </Menu.Item>
     </Menu>

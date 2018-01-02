@@ -4,6 +4,7 @@ import { gql, compose, graphql } from 'react-apollo';
 import { queries, mutations } from '../../graphql';
 import { RegistrationForms } from '../../components';
 import { Loading } from 'modules/common/components';
+import { message } from 'antd';
 
 const RegistrationContainer = props => {
   let { companyByUserQuery } = props;
@@ -17,9 +18,10 @@ const RegistrationContainer = props => {
 
     mutation({ variables: { [name]: doc } })
       .then(() => {
-        console.log('Saved');
+        message.success('Saved');
       })
       .catch(error => {
+        message.error('Error occured');
         console.log(error);
       });
   };

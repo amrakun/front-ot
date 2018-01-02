@@ -315,7 +315,7 @@ form .ant-input-number {
   margin-top: 0;
 }
 .ant-table-row.highlight {
-  background-color: rgba(244, 119, 33, 0.06);
+  background-color: #f2fafb;
 }
 .loading {
   min-height: 50vh;

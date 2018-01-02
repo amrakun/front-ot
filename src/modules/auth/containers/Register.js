@@ -11,7 +11,8 @@ const RegisterContainer = props => {
 
   const register = variables => {
     registerMutation({ variables })
-      .then(() => {
+      .then(token => {
+        console.log(token);
         message.success(`Confirmation link has been sent to your email`);
         history.push('/sign-in?confirmation');
       })

@@ -15,7 +15,9 @@ const register = `
 
 const confirmRegistration = `
   mutation confirmRegistration($token: String!, $password: String!, $passwordConfirmation: String!) {
-    confirmRegistration(token: $token, password: password, passwordConfirmation: passwordConfirmation)
+    confirmRegistration(token: $token, password: $password, passwordConfirmation: $passwordConfirmation) {
+      _id
+    }
   }
 `;
 

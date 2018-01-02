@@ -7,7 +7,6 @@ import { message } from 'antd';
 
 const CreateTenderContainer = ({ tendersAdd, location, history }) => {
   const save = doc => {
-    console.log(doc);
     const [publishDate, closeDate] = doc.dateRange;
     tendersAdd({ variables: { ...doc, publishDate, closeDate } })
       .then(() => {
@@ -15,6 +14,7 @@ const CreateTenderContainer = ({ tendersAdd, location, history }) => {
         history.push('/');
       })
       .catch(error => {
+        message.error('Error occured: CreateTender');
         console.log(error);
       });
   };

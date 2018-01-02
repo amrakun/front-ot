@@ -4,6 +4,7 @@ import { gql, compose, graphql } from 'react-apollo';
 import { queries, mutations } from '../../graphql';
 import { PrequalificationForms } from '../../components';
 import { Loading } from 'modules/common/components';
+import { message } from 'antd';
 
 const PrequalificationContainer = props => {
   let { companyByUserQuery } = props;
@@ -17,10 +18,10 @@ const PrequalificationContainer = props => {
 
     mutation({ variables: { [name]: doc } })
       .then(() => {
-        console.log('Saved');
+        message.success('Saved');
       })
       .catch(error => {
-        console.log(error);
+        message.error(error);
       });
   };
 

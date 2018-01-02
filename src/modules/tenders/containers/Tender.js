@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Tender } from '../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries, mutations } from '../graphql';
+import { message } from 'antd';
 
 class TenderContainer extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class TenderContainer extends React.Component {
   }
 
   award(companyId) {
-    const { tendersAward, tenderDetailQuery } = this.props;
+    const { tendersAward, tenderDetailQuery, history } = this.props;
     tendersAward({
       variables: {
         _id: tenderDetailQuery.tenderDetail._id,
@@ -33,9 +34,11 @@ class TenderContainer extends React.Component {
       }
     })
       .then(() => {
-        console.log('Saved');
+        message.success('Awarded!');
+        history.push('/rfq');
       })
       .catch(error => {
+        message.error('Error occurred');
         console.log(error);
       });
   }
@@ -78,7 +81,8 @@ class TenderContainer extends React.Component {
 
 TenderContainer.propTypes = {
   tenderDetailQuery: PropTypes.object,
-  tendersAward: PropTypes.func
+  tendersAward: PropTypes.func,
+  history: PropTypes.object
 };
 
 export default compose(

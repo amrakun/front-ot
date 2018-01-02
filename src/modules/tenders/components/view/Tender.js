@@ -98,6 +98,7 @@ class Tender extends React.Component {
     const { selectedCompanies } = this.state;
     const data = this.props.data || {};
     const {
+      type,
       submittedCount,
       requestedCount,
       notInterestedCount,
@@ -152,18 +153,25 @@ class Tender extends React.Component {
               style={{ width: 200, float: 'left' }}
               onSearch={value => console.log(value)}
             />
-            <Button onClick={this.bidSummaryReport}>
+            <Button disabled onClick={this.bidSummaryReport}>
               <Icon type="file-excel" />
               Bid summary report
             </Button>
-            <Button onClick={this.sendRegretLetter}>
+            <Button disabled onClick={this.sendRegretLetter}>
               <Icon type="mail" />
               Send regret letter
             </Button>
-            <Button type="primary" onClick={this.award} disabled={isAwarded}>
-              <Icon type="trophy" />
-              Award
-            </Button>
+            {type === 'rfq' ? (
+              <Button type="primary" onClick={this.award} disabled={isAwarded}>
+                <Icon type="trophy" />
+                Award
+              </Button>
+            ) : (
+              <Button type="primary" onClick={this.award} disabled>
+                <Icon type="file-excel" />
+                EOI short list
+              </Button>
+            )}
           </div>
 
           <Table
@@ -175,7 +183,9 @@ class Tender extends React.Component {
               if (record._id === winnerId) return 'highlight';
             }}
             columns={columns}
-            rowKey={record => record._id}
+            rowKey={record => {
+              return record._id + Math.random();
+            }}
             dataSource={data.suppliers}
             pagination={pagination}
             loading={loading}

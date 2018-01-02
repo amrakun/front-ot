@@ -91,7 +91,7 @@ const tendersAward = `
       _id: $_id
       supplierId: $supplierId
     ) {
-      _id
+      type
     }
   }
 `;
