@@ -70,6 +70,8 @@ export default class BaseForm extends React.Component {
       }
 
       if (!err) {
+        if (this.props.nextTab) this.props.nextTab();
+
         return this.props.save(doc);
       }
     });
@@ -79,6 +81,16 @@ export default class BaseForm extends React.Component {
     e.preventDefault();
 
     this.save();
+  }
+
+  saveDirect(doc) {
+    this.props.form.validateFieldsAndScroll(err => {
+      if (!err) {
+        this.props.nextTab();
+
+        return this.props.save(doc);
+      }
+    });
   }
 
   getFieldValue(name, dataType) {
@@ -178,5 +190,6 @@ BaseForm.childContextTypes = {
 BaseForm.propTypes = {
   form: PropTypes.object,
   data: PropTypes.any,
-  save: PropTypes.func
+  save: PropTypes.func,
+  nextTab: PropTypes.func
 };

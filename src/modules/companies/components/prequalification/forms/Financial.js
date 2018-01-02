@@ -62,7 +62,7 @@ class PrequalificationForm extends BaseForm {
   handleSubmit(e) {
     e.preventDefault();
 
-    this.props.save({
+    this.saveDirect({
       canProvideAccountsInfo: this.getFieldValue(
         'canProvideAccountsInfo',
         'boolean'
@@ -101,6 +101,7 @@ class PrequalificationForm extends BaseForm {
             dataType: 'number',
             initialValue: year,
             hasFeedback: false,
+            optional: true,
             control: (
               <Select placeholder="Select an year">
                 {this.renderOptions(yearData)}
@@ -113,6 +114,7 @@ class PrequalificationForm extends BaseForm {
             name: `${prefix}${index}Amount`,
             initialValue: amount,
             dataType: 'number',
+            optional: true,
             hasFeedback: false,
             control: <Input type="number" />
           })}

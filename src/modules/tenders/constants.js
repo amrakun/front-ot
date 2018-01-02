@@ -129,7 +129,7 @@ export const supplierTenderColumns = [
   },
   {
     title: 'File',
-    dataIndex: 'file'
+    dataIndex: 'file.url'
   },
   {
     title: 'Operation',

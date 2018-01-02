@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import { compose, gql, graphql } from 'react-apollo';
 import { CreateRfq, CreateEoi } from '../components';
 import { queries, mutations } from '../graphql';
+import { Loading } from 'modules/common/components';
 import { message } from 'antd';
 
 const PublishContainer = props => {
   const { tenderDetailQuery, tendersEdit } = props;
 
   if (tenderDetailQuery.loading) {
-    return null;
+    return <Loading />;
   }
 
   const tenderDetail = tenderDetailQuery.tenderDetail || {};

@@ -249,8 +249,8 @@ class PrequalificationForm extends PreqForm {
           {this.renderField({
             name: 'proveHasNotConvicted',
             label: labels.proveHasNotConvicted,
-            optional: hasConvictedForBusinessIntegrity,
             isVisible: hasConvictedForBusinessIntegrity,
+            optional: !hasConvictedForBusinessIntegrity,
             control: <TextArea />
           })}
         </Card>

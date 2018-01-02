@@ -8,9 +8,16 @@ import Panes from '../Panes';
 
 class PrequalificationForms extends Panes {
   render() {
+    const { currentTabKey } = this.state;
+
     return (
       <Col md={24} lg={20} xl={{ span: 14, offset: 1 }}>
-        <Tabs tabPosition="left" className="supplier-forms">
+        <Tabs
+          activeKey={currentTabKey}
+          onTabClick={this.moveToTab}
+          tabPosition="left"
+          className="supplier-forms"
+        >
           {this.renderPane(
             '1',
             'Financial Information',

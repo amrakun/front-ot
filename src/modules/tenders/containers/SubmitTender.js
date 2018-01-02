@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { compose, gql, graphql } from 'react-apollo';
 import { SubmitRfq, SubmitEoi } from '../components';
 import { queries, mutations } from '../graphql';
+import { Loading } from 'modules/common/components';
 import { message } from 'antd';
 
 const PublishContainer = ({
@@ -11,7 +12,7 @@ const PublishContainer = ({
   history
 }) => {
   if (tenderDetailQuery.loading) {
-    return null;
+    return <Loading />;
   }
 
   const save = doc => {
@@ -23,7 +24,7 @@ const PublishContainer = ({
         history.push('/');
       })
       .catch(error => {
-        message.error('Error occurred: SubmitTender');
+        message.error('Error occurred: SubmitTender', error);
       });
   };
 
@@ -43,7 +44,8 @@ const PublishContainer = ({
 PublishContainer.propTypes = {
   location: PropTypes.object,
   tenderDetailQuery: PropTypes.object,
-  tendersResponsesAdd: PropTypes.func
+  tendersResponsesAdd: PropTypes.func,
+  history: PropTypes.object
 };
 
 export default compose(

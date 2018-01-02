@@ -27,12 +27,6 @@ class PrequalificationForm extends PreqForm {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-
-    this.save();
-  }
-
   onConditionalChange(value, name) {
     this.state[name] = value === 'true';
   }
@@ -72,7 +66,7 @@ class PrequalificationForm extends PreqForm {
           ''
         )}
 
-        {this.renderSubmit('Save & continue', this.handleSubmit)}
+        {this.renderSubmit('Save', this.handleSubmit)}
       </Form>
     );
   }

@@ -4,12 +4,13 @@ import { compose, gql, graphql } from 'react-apollo';
 import { CreateRfq, CreateEoi } from '../components';
 import { mutations, queries } from '../graphql';
 import { message } from 'antd';
+import { Loading } from 'modules/common/components';
 
 const CreateTenderContainer = props => {
   const { tendersAdd, companiesByIdsQuery, location, history } = props;
 
   if (companiesByIdsQuery.loading) {
-    return <div>loading</div>;
+    return <Loading />;
   }
 
   const save = doc => {

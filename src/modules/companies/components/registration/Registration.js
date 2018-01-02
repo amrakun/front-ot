@@ -11,9 +11,16 @@ import { Tabs, Col } from 'antd';
 
 class RegistrationForms extends Panes {
   render() {
+    const { currentTabKey } = this.state;
+
     return (
       <Col md={24} lg={20} xl={{ span: 14, offset: 1 }}>
-        <Tabs tabPosition="left" className="supplier-forms">
+        <Tabs
+          activeKey={currentTabKey}
+          onTabClick={this.moveToTab}
+          tabPosition="left"
+          className="supplier-forms"
+        >
           {this.renderPane('1', 'Company info', 'basicInfo', CompanyInfoForm)}
           {this.renderPane('2', 'Contact details', 'contactInfo', ContactForm)}
           {this.renderPane(

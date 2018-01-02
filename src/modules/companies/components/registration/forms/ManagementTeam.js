@@ -39,7 +39,7 @@ class ManagementTeam extends BaseForm {
       doc[group].email = getFieldValue(`${group}Email`);
     });
 
-    return this.props.save(doc);
+    return this.saveDirect(doc);
   }
 
   copyAbove(prefix) {

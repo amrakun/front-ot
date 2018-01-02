@@ -7,7 +7,7 @@ import productsTree from '../../../productsTree';
 
 class RegistrationForm extends BaseForm {
   save() {
-    return this.props.save(this.getFieldValue('productsInfo'));
+    this.saveDirect(this.getFieldValue('productsInfo'));
   }
 
   render() {
@@ -29,7 +29,7 @@ class RegistrationForm extends BaseForm {
             }
           />
         </Card>
-        {this.renderSubmit()}
+        {this.renderSubmit('Save')}
       </Form>
     );
   }
