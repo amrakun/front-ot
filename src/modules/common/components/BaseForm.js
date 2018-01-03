@@ -138,7 +138,7 @@ export default class BaseForm extends React.Component {
     const { data } = this.props;
 
     // file upload field
-    if (control.type.name === 'Uploader') {
+    if (dataType === 'file') {
       const fileKey = `file_${name}`;
 
       // receive files event ==============

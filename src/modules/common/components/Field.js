@@ -10,9 +10,9 @@ export default class Field extends React.Component {
   cleanInitialValue() {
     const { control, initialValue } = this.props;
 
-    const controlType = control.type.name;
+    const controlType = control.props.prefixCls;
 
-    if (controlType !== 'Select') {
+    if (controlType !== 'ant-select') {
       return initialValue;
     }
 
