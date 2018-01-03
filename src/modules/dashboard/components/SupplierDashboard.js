@@ -14,7 +14,7 @@ const Dashboard = (props, context) => {
       <Alert
         message="Welcome!"
         description={
-          <div className="dashboard-notif">
+          <div>
             Please fill in <Link to="/registration">Supplier registration</Link>{' '}
             and <Link to="prequalification">Pre-qualification</Link> forms to be
             able to participate in tenders and EOI
@@ -45,7 +45,7 @@ const Dashboard = (props, context) => {
         <Col key={3} lg={6} sm={12}>
           <NumberCardLines
             icon="solution"
-            title="Pre-qualification"
+            title="Pre-qualification status"
             color={colors[5]}
             number={0}
             percent={0}

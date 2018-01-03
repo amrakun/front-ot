@@ -34,7 +34,7 @@ class RegistrationForm extends BaseForm {
             style={{ marginBottom: '24px' }}
           />
         </Card>
-        {this.renderSubmit('Save')}
+        {this.renderSubmit('Save and submit')}
       </Form>
     );
   }

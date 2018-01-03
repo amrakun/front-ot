@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Icon } from 'antd';
 
+const preqPath = '/prequalification';
+
 export default class Panes extends React.Component {
   constructor(props) {
     super(props);
@@ -16,12 +18,23 @@ export default class Panes extends React.Component {
 
   nextTab() {
     const { currentTabKey } = this.state;
+    const { history } = this.props;
+    const pathname = history.location.pathname;
 
-    const incerementedKeyInt = parseInt(currentTabKey, 10) + 1;
+    let lastTabKey = '6';
+    if (history.location.pathname === preqPath) lastTabKey = '4';
 
-    this.moveToTab(incerementedKeyInt.toString());
+    if (lastTabKey === currentTabKey) {
+      pathname === preqPath
+        ? history.push('/rfq-and-eoi')
+        : history.push(preqPath);
+    } else {
+      const incerementedKeyInt = parseInt(currentTabKey, 10) + 1;
 
-    window.scrollTo(0, 0);
+      this.moveToTab(incerementedKeyInt.toString());
+
+      window.scrollTo(0, 0);
+    }
   }
 
   moveToTab(currentTabKey) {
@@ -66,5 +79,6 @@ export default class Panes extends React.Component {
 
 Panes.propTypes = {
   company: PropTypes.object,
-  save: PropTypes.func
+  save: PropTypes.func,
+  history: PropTypes.object
 };

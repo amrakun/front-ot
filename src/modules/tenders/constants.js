@@ -101,12 +101,12 @@ export const supplierTenderColumns = [
         value: 'open'
       },
       {
-        text: 'Draft',
-        value: 'draft'
-      },
-      {
         text: 'Closed',
         value: 'closed'
+      },
+      {
+        text: 'Participated',
+        value: 'participated'
       }
     ]
   },

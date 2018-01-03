@@ -47,7 +47,9 @@ class PrequalificationForm extends PreqForm {
         {this.renderConditionalField('doesHaveDocumentedFitness')}
         <Card>{this.renderBoolean('isWillingToComply')}</Card>
 
-        {productsInfo.includes('A01001') || productsInfo.includes('A01002') ? (
+        {productsInfo.includes(
+          "A01001 - Large EPCM's >$100M/greenfield projects"
+        ) || productsInfo.includes("A01002 - Small EPCM's (<$100M)") ? (
           <div>
             <Card>
               {this.renderBoolean('hasIndustrialAccident')}

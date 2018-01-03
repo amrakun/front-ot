@@ -206,15 +206,15 @@ export const descriptions = {
     incorporate alcohol, fatigue and general fitness for work.`,
 
   doesHaveCodeEthics: `
-    -Prevention of Bribery & Corruption
-    -Conflict of interest
-    -Fair Labor Standards
-    -Business Ethics
-    -Human Rights
-    -Equality and Diversity
-    -Dealing with government intermediaries
-    -Charitable contributions
-    -Travels and hospitality
-    -Gifts and entertainment
-    -Money laundry`
+    Prevention of Bribery & Corruption,
+    Conflict of interest,
+    Fair Labor Standards,
+    Business Ethics,
+    Human Rights,
+    Equality and Diversity,
+    Dealing with government intermediaries,
+    Charitable contributions,
+    Travels and hospitality,
+    Gifts and entertainment,
+    Money laundry`
 };
