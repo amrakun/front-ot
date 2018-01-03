@@ -12,10 +12,10 @@ const RegistrationContainer = props => {
     return <div>Loading</div>;
   }
 
-  const save = (name, doc) => {
+  const save = doc => {
     const { certificateInfoEdit } = props;
 
-    certificateInfoEdit({ variables: { [name]: doc } })
+    certificateInfoEdit({ variables: { ['certificateInfo']: doc } })
       .then(() => {
         message.success('Succesfully saved');
       })

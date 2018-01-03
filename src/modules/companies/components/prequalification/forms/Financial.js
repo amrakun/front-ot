@@ -67,6 +67,7 @@ class PrequalificationForm extends BaseForm {
         'canProvideAccountsInfo',
         'boolean'
       ),
+      reasonToCannotNotProvide: this.getFieldValue('reasonToCannotNotProvide'),
       currency: this.getFieldValue('currency'),
       annualTurnover: this.collectYearAmountValues('annualTurnover'),
       preTaxProfit: this.collectYearAmountValues('preTaxProfit'),

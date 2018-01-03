@@ -99,7 +99,7 @@ class RegistrationForm extends BaseForm {
     return (
       <FormItem
         className="multiple-wrapper"
-        label={`Factory ${index}`}
+        label={`Factory ${index + 1}`}
         key={_id}
       >
         <Row gutter={16}>
@@ -118,7 +118,7 @@ class RegistrationForm extends BaseForm {
               initialValue={factory.townOrCity}
               hasFeedback={false}
               optional={true}
-              control={<Input />}
+              control={<Input placeholder="Town or city" />}
             />
           </Col>
           <Col span={6}>
@@ -127,15 +127,16 @@ class RegistrationForm extends BaseForm {
               initialValue={factory.country}
               hasFeedback={false}
               optional={true}
-              control={<Input />}
+              control={<Input placeholder="Country" />}
             />
           </Col>
           <Col span={6}>
             <Field
               name={`productCodes${_id}`}
+              hasFeedback={false}
               initialValue={factory.productCodes}
               optional={true}
-              control={<Input />}
+              control={<Input placeholder="Product codes" />}
             />
           </Col>
         </Row>
@@ -227,7 +228,7 @@ class RegistrationForm extends BaseForm {
             label: groupLabels.parentRegistrationNumber,
             isVisible: hasParent,
             optional: !hasParent,
-            control: <Input />
+            control: <Input type="number" />
           })}
         </Card>
 
@@ -252,6 +253,7 @@ class RegistrationForm extends BaseForm {
             label: groupLabels.isExclusiveDistributor,
             dataType: 'boolean',
             isVisible: role === 'Distributor',
+            optional: role !== 'Distributor',
             control: (
               <Select onChange={this.onIsExcChange}>{booleanOptions}</Select>
             )

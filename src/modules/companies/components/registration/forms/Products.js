@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, TreeSelect, Card } from 'antd';
+import { Form, TreeSelect, Card, Alert } from 'antd';
 import { Field, BaseForm } from 'modules/common/components';
 import { productDescription } from '../constants';
 import productsTree from '../../../productsTree';
@@ -18,7 +18,6 @@ class RegistrationForm extends BaseForm {
             label="Product codes"
             initialValue={this.props.data}
             name="productsInfo"
-            description={productDescription}
             control={
               <TreeSelect
                 treeData={productsTree}
@@ -27,6 +26,12 @@ class RegistrationForm extends BaseForm {
                 style={{ width: '100%' }}
               />
             }
+          />
+          <Alert
+            message="Help"
+            description={productDescription}
+            type="info"
+            style={{ marginBottom: '24px' }}
           />
         </Card>
         {this.renderSubmit('Save')}

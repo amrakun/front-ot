@@ -142,6 +142,7 @@ export const companyByUser = `
 export const certificateByUser = `
   query companyByUser {
     companyByUser {
+      _id
       certificateInfo {
         ${certificateInfoFields}
       }
@@ -202,18 +203,25 @@ export const companyPrequalificationDetail = `
       }
       businessInfo {
         doesMeetMinimumStandarts
+        doesMeetMinimumStandartsFile
         doesHaveJobDescription
+        doesHaveJobDescriptionFile
         doesConcludeValidContracts
         employeeTurnoverRate
         doesHaveLiabilityInsurance
+        doesHaveLiabilityInsuranceFile
         doesHaveCodeEthics
+        doesHaveCodeEthicsFile
         doesHaveResponsiblityPolicy
+        doesHaveResponsiblityPolicyFile
         hasConvictedLabourLaws
         hasConvictedForHumanRights
         hasConvictedForBusinessIntegrity
         proveHasNotConvicted
         hasLeadersConvicted
         doesEmployeePoliticallyExposed
+        pepName
+        organizationChartFile
         investigations {
           name
           date
@@ -234,12 +242,17 @@ export const companyPrequalificationDetail = `
       }
       healthInfo {
         doesHaveHealthSafety
+        doesHaveHealthSafetyFile
         areHSEResourcesClearlyIdentified
         doesHaveDocumentedProcessToEnsure
+        doesHaveDocumentedProcessToEnsureFile
         areEmployeesUnderYourControl
         doesHaveDocumentForRiskAssesment
+        doesHaveDocumentForRiskAssesmentFile
         doesHaveDocumentForIncidentInvestigation
+        doesHaveDocumentForIncidentInvestigationFile
         doesHaveDocumentedFitness
+        doesHaveDocumentedFitnessFile
         isWillingToComply
         hasIndustrialAccident
         tmha

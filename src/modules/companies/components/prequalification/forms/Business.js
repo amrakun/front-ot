@@ -19,18 +19,6 @@ import PreqForm from './PreqForm';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 12 },
-    lg: { span: 10 }
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 8 },
-    lg: { span: 8 }
-  }
-};
 
 class PrequalificationForm extends PreqForm {
   constructor(props) {
@@ -117,9 +105,8 @@ class PrequalificationForm extends PreqForm {
 
     return (
       <FormItem
-        {...formItemLayout}
         className="multiple-wrapper"
-        label={`Investigation ${index}`}
+        label={`Investigation ${index + 1}`}
         key={_id}
         hasFeedback
       >
@@ -155,6 +142,7 @@ class PrequalificationForm extends PreqForm {
             <Field
               name={`statusDate${_id}`}
               initialValue={moment(investigation.statusDate)}
+              hasFeedback={false}
               optional={true}
               control={<DatePicker format={dateFormat} placeholder="Close" />}
             />
@@ -270,11 +258,11 @@ class PrequalificationForm extends PreqForm {
 
           <div style={!hasLeadersConvicted ? { display: 'none' } : {}}>
             {investigationItems}
-            <FormItem {...formItemLayout}>
+            <FormItem>
               <Button
                 type="dashed"
                 onClick={this.addInvestigation}
-                style={{ width: '60%' }}
+                style={{ width: '100%' }}
               >
                 <Icon type="plus" /> Add investigation
               </Button>
@@ -294,7 +282,7 @@ class PrequalificationForm extends PreqForm {
           })}
 
           {this.renderField({
-            name: 'PEPName',
+            name: 'pepName',
             label: labels.PEPName,
             isVisible: doesEmployeePoliticallyExposed,
             optional: !doesEmployeePoliticallyExposed,
