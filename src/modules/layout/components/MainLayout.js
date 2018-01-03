@@ -6,6 +6,13 @@ import { Layout, BackTop } from 'antd';
 import { PropTypes } from 'prop-types';
 
 const { Content, Footer } = Layout;
+const visitorPaths = [
+  '/sign-in',
+  '/register',
+  '/eoi',
+  '/confirm-registration',
+  '/'
+];
 const withSidebar = { marginLeft: 200 };
 const withSidebarCollapsed = { marginLeft: 64 };
 
@@ -32,7 +39,8 @@ class MainLayout extends React.Component {
   componentDidMount() {
     const { history, currentUser } = this.props;
     const path = history.location.pathname;
-    if (!currentUser && !['/sign-in', '/register', '/eoi'].includes(path)) {
+    console.log(path);
+    if (!currentUser && !visitorPaths.includes(path)) {
       history.push('/sign-in?required');
     }
   }
