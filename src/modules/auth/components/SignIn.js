@@ -55,12 +55,8 @@ class SignIn extends Component {
           <Form onSubmit={this.handleSubmit} className="margin">
             <FormItem>
               {getFieldDecorator('email', {
-                rules: [
-                  { required: true, message: 'Please enter your username!' }
-                ]
-              })(
-                <Input prefix={<Icon type="user" />} placeholder="Username" />
-              )}
+                rules: [{ required: true, message: 'Please enter your email!' }]
+              })(<Input prefix={<Icon type="user" />} placeholder="Email" />)}
             </FormItem>
             <FormItem>
               {getFieldDecorator('password', {

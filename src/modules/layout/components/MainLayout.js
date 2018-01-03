@@ -39,7 +39,7 @@ class MainLayout extends React.Component {
   componentDidMount() {
     const { history, currentUser } = this.props;
     const path = history.location.pathname;
-    console.log(path);
+
     if (!currentUser && !visitorPaths.includes(path)) {
       history.push('/sign-in?required');
     }

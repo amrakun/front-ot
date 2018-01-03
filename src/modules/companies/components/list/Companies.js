@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';
 import {
   Table,
   Card,
@@ -11,7 +10,8 @@ import {
   Checkbox,
   Button,
   Icon,
-  Input
+  Input,
+  message
 } from 'antd';
 import { columns, regionOptions, statusOptions } from '../../constants';
 import productsTree from '../../productsTree';
@@ -68,6 +68,7 @@ class CompaniesList extends React.Component {
     this.onStatusChange = this.onStatusChange.bind(this);
     this.filter = this.filter.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleSend = this.handleSend.bind(this);
   }
 
   onProductCodesChange(value) {
@@ -84,6 +85,14 @@ class CompaniesList extends React.Component {
 
   onStatusChange(values) {
     this.setState({ status: values });
+  }
+
+  handleSend(path) {
+    const { selectedCompanies } = this.state;
+
+    selectedCompanies.length < 1
+      ? message.error('Please select atleast one supplier to continue!')
+      : this.props.history.push(path, { supplierIds: selectedCompanies });
   }
 
   handleSearch(value) {
@@ -143,7 +152,7 @@ class CompaniesList extends React.Component {
     return (
       <Row gutter={16}>
         <Col span={6}>
-          <Card bordered={false} title="Products & services">
+          <Card title="Products & services">
             <TreeSelect
               treeData={productsTree}
               value={productCodes}
@@ -154,11 +163,7 @@ class CompaniesList extends React.Component {
             />
           </Card>
 
-          <Card
-            bordered={false}
-            title="Select supplier tier type"
-            className="margin"
-          >
+          <Card title="Select supplier tier type" className="margin">
             <CheckboxGroup
               options={regionOptions}
               defaultValue={region}
@@ -167,7 +172,7 @@ class CompaniesList extends React.Component {
             />
           </Card>
 
-          <Card bordered={false} title="Status" className="margin">
+          <Card title="Status" className="margin">
             <CheckboxGroup
               options={statusOptions}
               defaultValue={status}
@@ -184,7 +189,7 @@ class CompaniesList extends React.Component {
           </Button>
         </Col>
         <Col span={18}>
-          <Card bordered={false} title="Companies">
+          <Card title="Companies">
             <div className="table-operations">
               <Search
                 defaultValue={search}
@@ -192,24 +197,12 @@ class CompaniesList extends React.Component {
                 style={{ width: 200, float: 'left' }}
                 onSearch={value => this.handleSearch(value)}
               />
-              <Link
-                to={{
-                  pathname: '/eoi/publish',
-                  state: { supplierIds: selectedCompanies }
-                }}
-                className="ant-btn"
-              >
+              <Button onClick={() => this.handleSendClick('/eoi/publish')}>
                 Send EOI
-              </Link>
-              <Link
-                to={{
-                  pathname: '/rfq/publish',
-                  state: { supplierIds: selectedCompanies }
-                }}
-                className="ant-btn"
-              >
+              </Button>
+              <Button onClick={() => this.handleSend('/rfq/publish')}>
                 Send RFQ
-              </Link>
+              </Button>
               <AddMore />
             </div>
 
