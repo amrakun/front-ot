@@ -15,7 +15,7 @@ const PrequalificationContainer = props => {
 
   const save = (name, doc) => {
     const mutation = props[`${name}Edit`];
-    console.log(doc);
+
     mutation({ variables: { [name]: doc } })
       .then(() => {
         message.success('Saved');

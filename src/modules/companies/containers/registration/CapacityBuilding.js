@@ -15,7 +15,7 @@ const RegistrationContainer = props => {
   const save = doc => {
     const { certificateInfoEdit } = props;
 
-    certificateInfoEdit({ variables: { ['certificateInfo']: doc } })
+    certificateInfoEdit({ variables: { certificateInfo: doc } })
       .then(() => {
         message.success('Succesfully saved');
       })
