@@ -95,12 +95,6 @@ class CompanyInfo extends BaseForm {
               name: 'enName',
               control: <Input />
             })}
-            {/* {this.renderField({
-              label: 'Company name (in Mongolian)',
-              name: 'mnName',
-              optional: true,
-              control: <Input />
-            })} */}
             {this.renderField({
               label: '2. Address',
               name: 'address',

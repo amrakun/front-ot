@@ -104,9 +104,6 @@ export const labels = {
   hasConvictedForEnvironmentalLaws: `Has your company ever been convicted for a
     breach of any Environmental laws in the countries you operate?`,
 
-  // proveHasNotConvicted: `If Yes, what steps have you taken to ensure this does
-  //   not happen again?`,
-
   additionalInformation: `Additional Information`,
 
   //healthLabels

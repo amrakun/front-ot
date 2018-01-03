@@ -72,7 +72,6 @@ const RfqForm = props => {
         type: 'number',
         isSupplier: !isSupplier
       })}
-      {/* {renderProductColumn('shippingTerms', rpc.shippingTerms)} */}
       {renderProductColumn({
         name: 'comment',
         title: rpc.comment,

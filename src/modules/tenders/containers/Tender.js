@@ -66,7 +66,6 @@ class TenderContainer extends React.Component {
       data: tenderDetailQuery.tenderDetail,
       loading: false,
       pagination: {
-        // total: tenderDetailQuery.tenderDetail.suppliersIds.length,
         pageSize: pagination.pageSize,
         current: pagination.current
       },
