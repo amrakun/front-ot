@@ -99,7 +99,7 @@ export default class BaseForm extends React.Component {
     let value = getFieldValue(name);
 
     if (dataType === 'boolean') {
-      value = value === 'true' ? true : false;
+      value = value === 'true';
     }
 
     if (dataType === 'number') {
