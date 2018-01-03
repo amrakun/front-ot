@@ -23,7 +23,7 @@ class RegistrationForm extends BaseForm {
                 treeData={productsTree}
                 treeCheckable={true}
                 searchPlaceholder="Please select products"
-                style={{ width: '100%' }}
+                allowClear
               />
             }
           />
@@ -34,7 +34,7 @@ class RegistrationForm extends BaseForm {
             style={{ marginBottom: '24px' }}
           />
         </Card>
-        {this.renderSubmit('Save and submit')}
+        {this.renderSubmit('Save & submit')}
       </Form>
     );
   }

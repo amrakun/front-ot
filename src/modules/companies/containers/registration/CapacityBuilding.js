@@ -4,20 +4,22 @@ import { gql, compose, graphql } from 'react-apollo';
 import { queries, mutations } from '../../graphql';
 import { Certificate } from '../../components';
 import { message } from 'antd';
+import { Loading } from 'modules/common/components';
 
 const RegistrationContainer = props => {
   const { companyByUserQuery } = props;
 
   if (companyByUserQuery.loading) {
-    return <div>Loading</div>;
+    return <Loading />;
   }
 
   const save = doc => {
-    const { certificateInfoEdit } = props;
+    const { certificateInfoEdit, history } = props;
 
     certificateInfoEdit({ variables: { certificateInfo: doc } })
       .then(() => {
         message.success('Succesfully saved');
+        history.push('/');
       })
       .catch(error => {
         message.error(error.message);

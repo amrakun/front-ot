@@ -83,6 +83,7 @@ class PrequalificationForm extends BaseForm {
   }
 
   renderYearAmount(prefix, index) {
+    const { canProvideAccountsInfo } = this.state;
     const data = this.props.data || {};
     const yearAmountArray = data[prefix] || [];
 
@@ -102,7 +103,7 @@ class PrequalificationForm extends BaseForm {
             dataType: 'number',
             initialValue: year,
             hasFeedback: false,
-            optional: true,
+            optional: !canProvideAccountsInfo,
             control: (
               <Select placeholder="Select an year">
                 {this.renderOptions(yearData)}
@@ -115,7 +116,7 @@ class PrequalificationForm extends BaseForm {
             name: `${prefix}${index}Amount`,
             initialValue: amount,
             dataType: 'number',
-            optional: true,
+            optional: !canProvideAccountsInfo,
             hasFeedback: false,
             control: <Input type="number" />
           })}
@@ -196,18 +197,17 @@ class PrequalificationForm extends BaseForm {
             )
           })}
 
-          <div style={canProvideAccountsInfo ? {} : { display: 'none' }}>
-            {this.renderField({
-              label: 'Currency',
-              name: 'currency',
-              optional: !canProvideAccountsInfo,
-              control: (
-                <Select placeholder="Select a currency">
-                  {currencyOptions}
-                </Select>
-              )
-            })}
+          {this.renderField({
+            label: 'Currency',
+            name: 'currency',
+            isVisible: canProvideAccountsInfo,
+            optional: !canProvideAccountsInfo,
+            control: (
+              <Select placeholder="Select a currency">{currencyOptions}</Select>
+            )
+          })}
 
+          <div className={!canProvideAccountsInfo ? 'hidden' : ''}>
             {this.renderYearAmountGroup('Annual turnover', 'annualTurnover')}
             {this.renderYearAmountGroup('Pre-tax profit', 'preTaxProfit')}
             {this.renderYearAmountGroup('Total assets', 'totalAssets')}

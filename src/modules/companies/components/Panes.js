@@ -26,7 +26,7 @@ export default class Panes extends React.Component {
 
     if (lastTabKey === currentTabKey) {
       pathname === preqPath
-        ? history.push('/rfq-and-eoi')
+        ? history.push('/capacity-building')
         : history.push(preqPath);
     } else {
       const incerementedKeyInt = parseInt(currentTabKey, 10) + 1;
