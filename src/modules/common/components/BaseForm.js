@@ -169,6 +169,8 @@ export default class BaseForm extends React.Component {
 
     definations.initialValue = initialValue || data[name];
 
+    if (dataType === 'file') definations.optional = true;
+
     return <Field {...definations} />;
   }
 

@@ -44,13 +44,7 @@ export default class Field extends React.Component {
     const { form } = this.context;
     const { getFieldDecorator } = form;
 
-    let _optional = optional;
-
-    if (control.type.name === 'Uploader') {
-      _optional = true;
-    }
-
-    if (!_optional) {
+    if (!optional) {
       rules.push({
         required: true,
         message: 'This field is required!'
