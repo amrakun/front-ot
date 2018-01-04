@@ -21,7 +21,7 @@ const Sidenav = (props, context) => {
         <img src={process.env.PUBLIC_URL + '/images/logo_mn.png'} alt="logo" />
       </NavLink>
       <Menu
-        defaultSelectedKeys={
+        selectedKeys={
           pathname === '/' ? ['/dashboard', 'rfq-and-eoi'] : [pathname]
         }
         mode="inline"

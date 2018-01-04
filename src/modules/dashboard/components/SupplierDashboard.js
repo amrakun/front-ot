@@ -8,21 +8,52 @@ import { Link } from 'react-router-dom';
 
 const Dashboard = (props, context) => {
   const currentUser = context.currentUser || {};
+  const { data } = props;
+
+  let registrationComplete = true;
+  let prequalificationComplete = true;
+
+  delete data.__typename;
+  delete data._id;
+  Object.keys(data).forEach(function(key, index) {
+    index < 8
+      ? data[key] === null ? (registrationComplete = false) : ''
+      : data[key] === null ? (prequalificationComplete = false) : '';
+  });
 
   return (
     <div>
-      <Alert
-        message="Welcome!"
-        description={
-          <div>
-            Please fill in <Link to="/registration">Supplier registration</Link>{' '}
-            and <Link to="prequalification">Pre-qualification</Link> forms to be
-            able to participate in tenders and EOI
-          </div>
-        }
-        type="success"
-        showIcon
-      />
+      {!registrationComplete && !prequalificationComplete ? (
+        <Alert
+          message="Welcome!"
+          description={
+            <div>
+              Please fill in &#34;
+              <Link
+                className={registrationComplete ? 'hidden' : ''}
+                to="/registration"
+              >
+                Supplier registration
+              </Link>
+              &#34; and &#34;
+              <Link
+                className={prequalificationComplete ? 'hidden' : ''}
+                to="prequalification"
+              >
+                Pre-qualification
+              </Link>
+              &#34; forms to be able to participate in tenders and EOI
+            </div>
+          }
+          type="success"
+          showIcon
+          className={
+            registrationComplete && prequalificationComplete ? 'hidden' : ''
+          }
+        />
+      ) : (
+        ''
+      )}
 
       <div className="margin" />
       <Row gutter={24}>
@@ -67,6 +98,10 @@ const Dashboard = (props, context) => {
       <Tenders type="eoi" supplierId={currentUser.companyId} />
     </div>
   );
+};
+
+Dashboard.propTypes = {
+  data: PropTypes.object
 };
 
 Dashboard.contextTypes = {

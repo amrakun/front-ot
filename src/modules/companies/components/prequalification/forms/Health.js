@@ -48,8 +48,8 @@ class PrequalificationForm extends PreqForm {
         <Card>{this.renderBoolean('isWillingToComply')}</Card>
 
         {productsInfo.includes(
-          "A01001 - Large EPCM's >$100M/greenfield projects"
-        ) || productsInfo.includes("A01002 - Small EPCM's (<$100M)") ? (
+          "a01001 - large epcm's >$100m/greenfield projects"
+        ) || productsInfo.includes("a01002 - small epcm's (<$100m)") ? (
           <div>
             <Card>
               {this.renderBoolean('hasIndustrialAccident')}

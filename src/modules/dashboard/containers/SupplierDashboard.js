@@ -1,3 +1,33 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { gql, compose, graphql } from 'react-apollo';
+import { queries } from '../graphql';
+import { Loading } from 'modules/common/components';
 import { SupplierDashboard } from '../components';
 
-export default SupplierDashboard;
+const SupplierDashboardContainer = props => {
+  const { companyByUserQuery } = props;
+
+  if (companyByUserQuery.loading) {
+    return <Loading />;
+  }
+
+  const updatedProps = {
+    ...props,
+    data: {
+      ...companyByUserQuery.companyByUser
+    }
+  };
+
+  return <SupplierDashboard {...updatedProps} />;
+};
+
+SupplierDashboardContainer.propTypes = {
+  companyByUserQuery: PropTypes.object
+};
+
+export default compose(
+  graphql(gql(queries.companyByUser), {
+    name: 'companyByUserQuery'
+  })
+)(SupplierDashboardContainer);
