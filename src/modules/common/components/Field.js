@@ -10,13 +10,16 @@ export default class Field extends React.Component {
   cleanInitialValue() {
     const { control, initialValue } = this.props;
 
-    const controlType = control.props.prefixCls;
+    const controlProps = control.props;
 
-    if (controlType !== 'ant-select') {
+    if (
+      controlProps.prefixCls !== 'ant-select' ||
+      controlProps.dropdownClassName === 'ant-select-tree-dropdown'
+    ) {
       return initialValue;
     }
 
-    if (control.props.mode === 'multiple') {
+    if (controlProps.mode === 'multiple') {
       return initialValue || [];
     }
 

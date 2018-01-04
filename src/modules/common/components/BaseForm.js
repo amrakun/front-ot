@@ -164,7 +164,9 @@ export default class BaseForm extends React.Component {
 
       // set initial value. for file fields we will get it's value from
       // class directly later in getFieldValue
-      this[fileKey] = initialValue || data[name];
+      if (!this[fileKey]) {
+        this[fileKey] = initialValue || data[name];
+      }
     }
 
     definations.initialValue = initialValue || data[name];

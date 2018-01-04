@@ -6,11 +6,14 @@ import { productDescription } from '../constants';
 import productsTree from '../../../productsTree';
 
 class RegistrationForm extends BaseForm {
-  save() {
+  handleSubmit(e) {
+    e.preventDefault();
+
     this.saveDirect(this.getFieldValue('productsInfo'));
   }
 
   render() {
+    console.log(this.props.data);
     return (
       <Form>
         <Card>
@@ -23,7 +26,6 @@ class RegistrationForm extends BaseForm {
                 treeData={productsTree}
                 treeCheckable={true}
                 searchPlaceholder="Please select products"
-                allowClear
               />
             }
           />

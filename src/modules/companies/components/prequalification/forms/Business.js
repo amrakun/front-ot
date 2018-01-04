@@ -172,13 +172,13 @@ class PrequalificationForm extends PreqForm {
         <Card>
           {this.renderField({
             label: labels.organisationChart,
-            name: 'rganizationChartFile',
+            name: 'organizationChartFile',
             dataType: 'file',
             control: (
               <Uploader
-                initialFile={this.props.data.rganizationChartFile}
+                initialFile={this.props.data.organizationChartFile}
                 onReceiveFile={(...args) =>
-                  this[`rganizationChartFileUpload`](...args)
+                  this.organizationChartFileUpload(...args)
                 }
               />
             )
