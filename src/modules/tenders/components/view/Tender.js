@@ -26,6 +26,7 @@ const propTypes = {
   filter: PropTypes.func,
   award: PropTypes.func,
   bidSummaryReport: PropTypes.func,
+  bidSummaryReportLoading: PropTypes.bool,
   sendRegretLetter: PropTypes.func
 };
 
@@ -146,7 +147,12 @@ class Tender extends React.Component {
   }
 
   render() {
-    const { pagination, loading, onChange } = this.props;
+    const {
+      pagination,
+      loading,
+      onChange,
+      bidSummaryReportLoading
+    } = this.props;
     const { selectedCompanies, responseModalData } = this.state;
     const data = this.props.data || {};
     const {
@@ -214,23 +220,26 @@ class Tender extends React.Component {
               style={{ width: 200, float: 'left' }}
               onSearch={value => console.log(value)}
             />
-            <Button disabled onClick={this.bidSummaryReport}>
-              <Icon type="file-excel" />
+            <Button
+              onClick={this.bidSummaryReport}
+              loading={bidSummaryReportLoading}
+            >
               Bid summary report
+              {!bidSummaryReportLoading ? <Icon type="file-excel" /> : ''}
             </Button>
             <Button disabled onClick={this.sendRegretLetter}>
-              <Icon type="mail" />
               Send regret letter
+              <Icon type="mail" />
             </Button>
             {type === 'rfq' ? (
               <Button type="primary" onClick={this.award} disabled={isAwarded}>
-                <Icon type="trophy" />
                 Award
+                <Icon type="trophy" />
               </Button>
             ) : (
               <Button type="primary" onClick={this.award} disabled>
-                <Icon type="file-excel" />
                 EOI short list
+                <Icon type="file-excel" />
               </Button>
             )}
           </div>

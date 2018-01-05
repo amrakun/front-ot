@@ -36,7 +36,7 @@ class SubmitTender extends TenderForm {
     });
 
     this.save({
-      supplierId: currentUser._id,
+      supplierId: currentUser.companyId,
       tenderId: this.props.data._id,
       respondedProducts: products
     });

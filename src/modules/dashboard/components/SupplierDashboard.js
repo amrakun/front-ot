@@ -16,9 +16,9 @@ const Dashboard = (props, context) => {
   delete data.__typename;
   delete data._id;
   Object.keys(data).forEach(function(key, index) {
-    index < 8
-      ? data[key] === null ? (registrationComplete = false) : ''
-      : data[key] === null ? (prequalificationComplete = false) : '';
+    if (index < 8)
+      if (data[key] === null) registrationComplete = false;
+      else if (data[key] === null) prequalificationComplete = false;
   });
 
   return (

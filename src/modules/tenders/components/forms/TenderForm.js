@@ -93,7 +93,11 @@ class TenderForm extends BaseForm {
     const stateKey = `product__${recordKey}`;
     const product = this.state[stateKey] || {};
 
-    product[name] = e.target ? e.target.value : e;
+    let value = e.target ? e.target.value : e;
+
+    if (name === 'isSubmitted') value = value === 'true';
+
+    product[name] = value;
 
     this.state[stateKey] = product;
   }

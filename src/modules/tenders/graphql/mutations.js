@@ -96,9 +96,17 @@ const tendersAward = `
   }
 `;
 
+const tenderResponsesBidSummaryReport = `
+  mutation tenderResponsesBidSummaryReport($tenderId: String!, $supplierIds: [String!]!) {
+    tenderResponsesBidSummaryReport(tenderId: $tenderId, supplierIds: $supplierIds)
+  }
+
+`;
+
 export default {
   tendersAdd,
   tendersEdit,
   tendersResponsesAdd,
-  tendersAward
+  tendersAward,
+  tenderResponsesBidSummaryReport
 };
