@@ -197,7 +197,7 @@ class CompaniesList extends React.Component {
                 style={{ width: 200, float: 'left' }}
                 onSearch={value => this.handleSearch(value)}
               />
-              <Button onClick={() => this.handleSendClick('/eoi/publish')}>
+              <Button onClick={() => this.handleSend('/eoi/publish')}>
                 Send EOI
               </Button>
               <Button onClick={() => this.handleSend('/rfq/publish')}>

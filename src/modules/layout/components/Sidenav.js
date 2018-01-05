@@ -49,7 +49,6 @@ function renderMenu(sideMenu) {
       menuItems.push(
         <SubMenu
           key={m.url}
-          disabled
           title={
             <span>
               <Icon type={m.icon} />

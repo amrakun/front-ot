@@ -16,7 +16,7 @@ export const statusOptions = [
 
 export const columns = [
   { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
-  { title: 'SAP #', dataIndex: 'basicInfo.sapNumber' },
+  { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
   { title: 'Registration', dataIndex: 'registration' },
   { title: 'Pre-qualification', dataIndex: 'prequalification' },
   { title: 'Qualification/audit status', dataIndex: 'audit' },

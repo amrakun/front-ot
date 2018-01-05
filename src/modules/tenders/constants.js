@@ -34,21 +34,25 @@ export const tenderColumns = [
     dataIndex: 'status',
     filters: [
       {
-        text: 'Open',
-        value: 'open'
-      },
-      {
         text: 'Draft',
         value: 'draft'
       },
       {
+        text: 'Open',
+        value: 'open'
+      },
+      {
         text: 'Closed',
         value: 'closed'
+      },
+      {
+        text: 'Awarded',
+        value: 'awarded'
       }
     ]
   },
   {
-    title: 'Tender #',
+    title: 'Tender number',
     dataIndex: 'number'
   },
   {
@@ -68,7 +72,7 @@ export const tenderColumns = [
     dataIndex: 'requestedCount'
   },
   {
-    title: 'Sumbitted',
+    title: 'Submitted',
     dataIndex: 'submittedCount'
   },
   {
@@ -80,12 +84,16 @@ export const tenderColumns = [
     dataIndex: 'notRespondedCount'
   },
   {
+    title: 'Sourcing officer',
+    dataIndex: 'sourcingOfficer'
+  },
+  {
     title: 'Regret letter',
     dataIndex: 'regretLetterSent'
   },
   {
-    title: 'Operation',
-    key: 'operation',
+    title: 'Actions',
+    key: 'actions',
     fixed: 'right',
     width: 100
   }
@@ -111,7 +119,7 @@ export const supplierTenderColumns = [
     ]
   },
   {
-    title: 'Tender #',
+    title: 'Tender number',
     dataIndex: 'number',
     sorter: true
   },
@@ -132,8 +140,8 @@ export const supplierTenderColumns = [
     dataIndex: 'file.url'
   },
   {
-    title: 'Operation',
-    key: 'operation',
+    title: 'Actions',
+    key: 'actions',
     fixed: 'right',
     width: 100
   }

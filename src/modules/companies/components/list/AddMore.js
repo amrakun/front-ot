@@ -36,18 +36,18 @@ class AddNew extends React.Component {
       <span>
         {!withTag && (
           <Button disabled onClick={this.showModal}>
-            Add supplier
+            Invite a new supplier
           </Button>
         )}
         {withTag && (
           <Tag onClick={this.showModal} className="dashed-button">
-            <Icon type="plus" /> Add supplier
+            <Icon type="plus" /> Invite a new supplier
           </Tag>
         )}
         <Modal
-          okText="Add"
+          okText="Invite"
           cancelText="Cancel"
-          title="Add new supplier"
+          title="Invite a new supplier"
           visible={this.state.visible}
           onOk={this.handleInsert}
           confirmLoading={this.state.confirmLoading}
