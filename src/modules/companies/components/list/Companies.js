@@ -15,7 +15,7 @@ import {
 } from 'antd';
 import { columns, regionOptions, statusOptions } from '../../constants';
 import productsTree from '../../productsTree';
-import AddMore from './AddMore';
+import { AddMore } from 'modules/companies/containers';
 import queryString from 'query-string';
 
 const Search = Input.Search;

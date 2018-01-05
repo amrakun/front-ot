@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import queryString from 'query-string';
 import {
   Tenders,
   CreateTender,
@@ -13,7 +14,10 @@ export default [
     key={'/rfq'}
     exact
     path={'/rfq'}
-    component={() => <Tenders type="rfq" />}
+    component={({ location }) => {
+      const queryParams = queryString.parse(location.search);
+      return <Tenders type="rfq" queryParams={queryParams} />;
+    }}
   />,
   <Route
     key={'/rfq/publish'}
@@ -25,7 +29,10 @@ export default [
     key={'/eoi'}
     exact
     path={'/eoi'}
-    component={() => <Tenders type="eoi" />}
+    component={({ location }) => {
+      const queryParams = queryString.parse(location.search);
+      return <Tenders type="eoi" queryParams={queryParams} />;
+    }}
   />,
   <Route key={'/tender'} exact path={`${'/tender'}/:id`} component={Tender} />,
   <Route
