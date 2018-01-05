@@ -8,24 +8,24 @@ export const regionOptions = [
 
 export const statusOptions = [
   { label: 'Pre-qualified', value: 'preQualified' },
-  { label: 'Qaulified/audited', value: 'qualifiedAndAudited' },
+  { label: 'Qaulified', value: 'qualifiedAndAudited' },
   { label: 'Validated', value: 'validated' },
   { label: 'By DIFOT score', value: 'byDifotScore' },
-  { label: 'Include blocked companies', value: 'includeBlockedCompanies' }
+  { label: 'Include blocked suppliers', value: 'includeBlockedCompanies' }
 ];
 
 export const columns = [
   { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
   { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
   { title: 'Registration', dataIndex: 'registration' },
-  { title: 'Pre-qualification', dataIndex: 'prequalification' },
-  { title: 'Qualification/audit status', dataIndex: 'audit' },
+  { title: 'Pre-qualification status', dataIndex: 'prequalification' },
+  { title: 'Qualification status', dataIndex: 'audit' },
   { title: 'Validation status', dataIndex: 'validation' },
   { title: 'Due dilligence', dataIndex: 'dilligence' },
   { title: 'DIFOT score', dataIndex: 'dipotScore' },
   { title: 'Blocking', dataIndex: 'isBlocked' },
-  { title: 'Company adminstrators', dataIndex: 'adminstrators' },
-  { title: 'Email', dataIndex: 'basicInfo.email' },
-  { title: 'Phone', dataIndex: 'contactInfo.phone' },
-  { title: 'Profile export to PDF', key: 'export' }
+  { title: 'Contact person', dataIndex: 'contactInfo.name' },
+  { title: 'Email address', dataIndex: 'contactInfo.email' },
+  { title: 'Phone number', dataIndex: 'contactInfo.phone' },
+  { title: 'Export profile', key: 'export' }
 ];

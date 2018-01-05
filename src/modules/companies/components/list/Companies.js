@@ -163,7 +163,7 @@ class CompaniesList extends React.Component {
             />
           </Card>
 
-          <Card title="Select supplier tier type" className="margin">
+          <Card title="Select supplier by tier type" className="margin">
             <CheckboxGroup
               options={regionOptions}
               defaultValue={region}
@@ -204,6 +204,10 @@ class CompaniesList extends React.Component {
                 Send RFQ
               </Button>
               <AddMore />
+              <Button disabled>
+                Export to excel
+                <Icon type="file-excel" />
+              </Button>
             </div>
 
             <Table

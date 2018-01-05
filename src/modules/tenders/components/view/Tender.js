@@ -250,7 +250,7 @@ class Tender extends React.Component {
               onChange: this.onSelectedCompaniesChange
             }}
             rowClassName={record => {
-              if (record._id === winnerId) return 'highlight';
+              if (record.supplier._id === winnerId) return 'highlight';
             }}
             columns={this.columns()}
             rowKey={record => (record.supplier ? record.supplier._id : '')}

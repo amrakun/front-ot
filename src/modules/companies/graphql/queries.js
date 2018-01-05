@@ -160,6 +160,8 @@ const companies = `
         sapNumber
       }
       contactInfo {
+        name,
+        email,
         phone
       }
     }

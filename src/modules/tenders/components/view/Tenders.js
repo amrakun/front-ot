@@ -2,8 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Table, Card, Popconfirm } from 'antd';
+import { Table, Card, Popconfirm, Input, DatePicker } from 'antd';
 import { tenderColumns, supplierTenderColumns, labels } from '../../constants';
+import { dateTimeFormat } from 'modules/common/constants';
+
+const RangePicker = DatePicker.RangePicker;
+const Search = Input.Search;
 
 const Tenders = props => {
   const {
@@ -59,6 +63,19 @@ const Tenders = props => {
 
   return (
     <Card style={{ marginBottom: '16px' }} title={labels[type]}>
+      <div className="table-operations">
+        <Search
+          placeholder="Name or number"
+          style={{ width: 200, float: 'left' }}
+          onSearch={value => this.handleSearch(value)}
+        />
+
+        <RangePicker
+          showTime={{ format: 'HH:mm' }}
+          format={dateTimeFormat}
+          placeholder={['From', 'To']}
+        />
+      </div>
       <Table
         columns={columns}
         rowKey={record => record._id}
