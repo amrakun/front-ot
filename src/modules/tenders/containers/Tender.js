@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Tender } from '../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries, mutations } from '../graphql';
-import { message, notification, Icon } from 'antd';
+import { message, notification, Icon, Button } from 'antd';
 import { colors } from 'modules/common/colors';
 
 class TenderContainer extends React.Component {
@@ -66,14 +66,17 @@ class TenderContainer extends React.Component {
 
         notification.open({
           message: 'Your report is ready to download',
-          description: (
-            <a
-              href={'/' + response.data.tenderResponsesBidSummaryReport}
-              rel="external"
-              target="blank"
+          btn: (
+            <Button
+              type="primary"
+              onClick={() =>
+                this.downloadReport(
+                  response.data.tenderResponsesBidSummaryReport
+                )
+              }
             >
               <Icon type="download" /> Download
-            </a>
+            </Button>
           ),
           icon: <Icon type="file-excel" style={{ color: colors[0] }} />,
           duration: 0
@@ -82,6 +85,10 @@ class TenderContainer extends React.Component {
       .catch(error => {
         message.error(error.message);
       });
+  }
+
+  downloadReport(url) {
+    window.open(url);
   }
 
   sendRegretLetter(companies) {
