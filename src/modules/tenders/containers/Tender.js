@@ -46,16 +46,17 @@ class TenderContainer extends React.Component {
   }
 
   bidSummaryReport(companies) {
-    const { tenderResponsesBidSummaryReport, tenderDetailQuery } = this.props;
+    const { rfqBidSummaryReport, tenderDetailQuery } = this.props;
 
     this.setState({ bidSummaryReportLoading: true });
+
     notification.open({
       message: 'Building an excel...',
       description: 'You will get notified when your report is ready!',
       icon: <Icon type="loading" />
     });
 
-    tenderResponsesBidSummaryReport({
+    rfqBidSummaryReport({
       variables: {
         tenderId: tenderDetailQuery.tenderDetail._id,
         supplierIds: companies
@@ -71,7 +72,7 @@ class TenderContainer extends React.Component {
               type="primary"
               onClick={() =>
                 this.downloadReport(
-                  response.data.tenderResponsesBidSummaryReport
+                  response.data.tenderResponsesRfqBidSummaryReport
                 )
               }
             >
@@ -127,7 +128,7 @@ class TenderContainer extends React.Component {
 TenderContainer.propTypes = {
   tenderDetailQuery: PropTypes.object,
   tendersAward: PropTypes.func,
-  tenderResponsesBidSummaryReport: PropTypes.func,
+  rfqBidSummaryReport: PropTypes.func,
   history: PropTypes.object
 };
 
@@ -145,7 +146,7 @@ export default compose(
     name: 'tendersAward'
   }),
 
-  graphql(gql(mutations.tenderResponsesBidSummaryReport), {
-    name: 'tenderResponsesBidSummaryReport'
+  graphql(gql(mutations.rfqBidSummaryReport), {
+    name: 'rfqBidSummaryReport'
   })
 )(TenderContainer);
