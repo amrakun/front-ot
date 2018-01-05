@@ -104,15 +104,11 @@ class TenderForm extends BaseForm {
       const inputProps = {
         defaultValue: record[name],
         disabled: isSupplier,
+        type: type,
         onChange: e => this.onProductInputChange(e, name, record.key)
       };
 
       let control = <Input {...inputProps} />;
-
-      if (type === 'number') {
-        props.htmlType = 'number';
-        control = <InputNumber {...inputProps} />;
-      }
 
       if (type === 'uploader') {
         control = (
