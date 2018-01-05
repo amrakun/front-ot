@@ -13,6 +13,9 @@ const tenderFields = `
   submittedCount,
   notInterestedCount,
   notRespondedCount,
+  createdUser {
+    email
+  },
   requestedProducts {
     code
     purchaseRequestNumber

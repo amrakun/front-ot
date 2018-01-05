@@ -57,30 +57,6 @@ class Register extends BaseForm {
                 <Input prefix={<Icon type="user" />} placeholder="Email" />
               }
             />
-            {/* <Field
-              name="password"
-              layout={noLabelLayout}
-              rules={[{ validator: this.checkConfirm }]}
-              control={
-                <Input
-                  type="password"
-                  prefix={<Icon type="lock" />}
-                  placeholder="Password"
-                />
-              }
-            />
-            <Field
-              name="passwordConfirmation"
-              layout={noLabelLayout}
-              rules={[{ validator: this.checkPassword }]}
-              control={
-                <Input
-                  type="password"
-                  prefix={<Icon type="lock" />}
-                  placeholder="Confirm password"
-                />
-              }
-            /> */}
             <Button
               type="primary"
               htmlType="submit"

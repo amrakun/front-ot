@@ -1,40 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
-import { Table, Card, Input, Icon, Row, Col, Button, message } from 'antd';
+import {
+  Table,
+  Card,
+  Input,
+  Icon,
+  Row,
+  Col,
+  Button,
+  message,
+  Modal
+} from 'antd';
 import { NumberCard, NumberCardLines } from 'modules/common/components';
 import { colors } from 'modules/common/colors';
+import { rfqRequestColumns, rfqResponseColumns } from '../../constants';
 
 const Search = Input.Search;
-
-const columns = [
-  { title: 'Status', dataIndex: 'status', key: 0 },
-  { title: 'Supplier name', dataIndex: 'supplier.basicInfo.enName', key: 1 },
-  { title: 'SAP #', dataIndex: 'supplier.basicInfo.sapNumber', key: 2 },
-  { title: 'Company size', dataIndex: 'size', key: 3 },
-  {
-    title: 'Number of employees',
-    dataIndex: 'supplier.basicInfo.totalNumberOfEmployees',
-    key: 4
-  },
-  { title: 'Work experience', dataIndex: 'status', key: 5 },
-  { title: 'Supplier tier type', dataIndex: 'status', key: 6 },
-  {
-    title: 'Response information',
-    key: 17,
-    render: render
-  },
-  { title: 'Uploaded file', dataIndex: 'status', key: 7 },
-  { title: 'Contact person', dataIndex: 'supplier.contactInfo.name', key: 8 },
-  { title: 'Email', dataIndex: 'supplier.contactInfo.email', key: 9 },
-  { title: 'Phone', dataIndex: 'supplier.contactInfo.phone', key: 10 },
-  { title: 'Registration', dataIndex: 'registration', key: 11 },
-  { title: 'Pre-qualification', dataIndex: 'prequalification', key: 12 },
-  { title: 'Qualification/audit status', dataIndex: 'audit', key: 13 },
-  { title: 'Validation status', dataIndex: 'validation', key: 14 },
-  { title: 'Due dilligence', dataIndex: 'dilligence', key: 15 },
-  { title: 'DIFOT score', dataIndex: 'dipotScore', key: 16 }
-];
 
 const propTypes = {
   data: PropTypes.object,
@@ -47,23 +29,22 @@ const propTypes = {
   sendRegretLetter: PropTypes.func
 };
 
-function render(text, record) {
-  console.log(record);
-  return <a>View</a>;
-}
-
 class Tender extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      selectedCompanies: []
+      selectedCompanies: [],
+      responseModalData: { visible: false }
     };
 
     this.onSelectedCompaniesChange = this.onSelectedCompaniesChange.bind(this);
     this.bidSummaryReport = this.bidSummaryReport.bind(this);
     this.sendRegretLetter = this.sendRegretLetter.bind(this);
     this.award = this.award.bind(this);
+    this.showResponsesModal = this.showResponsesModal.bind(this);
+    this.hideResponsesModal = this.hideResponsesModal.bind(this);
+    this.renderViewResponse = this.renderViewResponse.bind(this);
   }
 
   onSelectedCompaniesChange(selectedCompanies) {
@@ -103,9 +84,70 @@ class Tender extends React.Component {
     else return 0;
   }
 
+  showResponsesModal(record) {
+    const { supplier, response } = record;
+
+    this.setState({
+      responseModalData: {
+        visible: true,
+        title: supplier ? supplier.basicInfo.enName : '',
+        data:
+          response.respondedDocuments.length > 0
+            ? response.respondedDocuments
+            : response.respondedProducts
+      }
+    });
+  }
+
+  hideResponsesModal() {
+    this.setState({ responseModalData: { visible: false } });
+  }
+
+  columns() {
+    return [
+      {
+        title: 'Supplier name',
+        dataIndex: 'supplier.basicInfo.enName',
+        key: 1
+      },
+      { title: 'SAP #', dataIndex: 'supplier.basicInfo.sapNumber', key: 2 },
+      { title: 'Company size', dataIndex: 'size', key: 3 },
+      {
+        title: 'Number of employees',
+        dataIndex: 'supplier.basicInfo.totalNumberOfEmployees',
+        key: 4
+      },
+      { title: 'Work experience', dataIndex: 'status', key: 5 },
+      { title: 'Supplier tier type', dataIndex: 'status', key: 6 },
+      {
+        title: 'Response information',
+        key: 17,
+        render: this.renderViewResponse
+      },
+      { title: 'Uploaded file', dataIndex: 'status', key: 7 },
+      {
+        title: 'Contact person',
+        dataIndex: 'supplier.contactInfo.name',
+        key: 8
+      },
+      { title: 'Email', dataIndex: 'supplier.contactInfo.email', key: 9 },
+      { title: 'Phone', dataIndex: 'supplier.contactInfo.phone', key: 10 },
+      { title: 'Registration', dataIndex: 'registration', key: 11 },
+      { title: 'Pre-qualification', dataIndex: 'prequalification', key: 12 },
+      { title: 'Qualification/audit status', dataIndex: 'audit', key: 13 },
+      { title: 'Validation status', dataIndex: 'validation', key: 14 },
+      { title: 'Due dilligence', dataIndex: 'dilligence', key: 15 },
+      { title: 'DIFOT score', dataIndex: 'dipotScore', key: 16 }
+    ];
+  }
+
+  renderViewResponse(text, record) {
+    return <a onClick={() => this.showResponsesModal(record)}>View</a>;
+  }
+
   render() {
     const { pagination, loading, onChange } = this.props;
-    const { selectedCompanies } = this.state;
+    const { selectedCompanies, responseModalData } = this.state;
     const data = this.props.data || {};
     const {
       type,
@@ -115,7 +157,8 @@ class Tender extends React.Component {
       notRespondedCount,
       isAwarded,
       winnerId,
-      responses
+      responses,
+      requestedProducts
     } = data;
 
     return (
@@ -200,10 +243,8 @@ class Tender extends React.Component {
             rowClassName={record => {
               if (record._id === winnerId) return 'highlight';
             }}
-            columns={columns}
-            rowKey={record => {
-              return record._id + Math.random();
-            }}
+            columns={this.columns()}
+            rowKey={record => (record.supplier ? record.supplier._id : '')}
             dataSource={responses}
             pagination={pagination}
             loading={loading}
@@ -213,6 +254,43 @@ class Tender extends React.Component {
             }
           />
         </Card>
+        <Modal
+          title={`${responseModalData.title}'s response`}
+          visible={responseModalData.visible}
+          onCancel={this.hideResponsesModal}
+          footer={null}
+          width="100%"
+          style={{ top: 16 }}
+        >
+          <Row gutter={16}>
+            <Col span={8}>
+              <Table
+                columns={rfqRequestColumns}
+                rowKey={record => record}
+                dataSource={requestedProducts}
+                pagination={pagination}
+                loading={loading}
+                scroll={{ x: 1100 }}
+                onChange={(pagination, filters, sorter) =>
+                  onChange(pagination, filters, sorter)
+                }
+              />
+            </Col>
+            <Col span={16}>
+              <Table
+                columns={rfqResponseColumns}
+                rowKey={record => record}
+                dataSource={responseModalData.data}
+                pagination={pagination}
+                loading={loading}
+                scroll={{ x: 1300 }}
+                onChange={(pagination, filters, sorter) =>
+                  onChange(pagination, filters, sorter)
+                }
+              />
+            </Col>
+          </Row>
+        </Modal>
       </div>
     );
   }

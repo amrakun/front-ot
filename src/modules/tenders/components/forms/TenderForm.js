@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input, InputNumber, Table, Select } from 'antd';
+import { Input, Table, Select } from 'antd';
 import { BaseForm, Uploader } from 'modules/common/components';
 import { booleanData } from 'modules/common/constants';
 import MainInfo from './MainInfo';
