@@ -96,17 +96,9 @@ const tendersAward = `
   }
 `;
 
-const rfqBidSummaryReport = `
-  mutation tenderResponsesRfqBidSummaryReport($tenderId: String!, $supplierIds: [String!]!) {
-    tenderResponsesRfqBidSummaryReport(tenderId: $tenderId, supplierIds: $supplierIds)
-  }
-
-`;
-
 export default {
   tendersAdd,
   tendersEdit,
   tendersResponsesAdd,
-  tendersAward,
-  rfqBidSummaryReport
+  tendersAward
 };

@@ -110,9 +110,16 @@ const tenders = `
   }
 `;
 
+const rfqBidSummaryReport = `
+  query tenderResponsesRfqBidSummaryReport($tenderId: String!, $supplierIds: [String!]!) {
+    tenderResponsesRfqBidSummaryReport(tenderId: $tenderId, supplierIds: $supplierIds)
+  }
+`;
+
 export default {
   tenderDetail,
   tenders,
   companiesByIds,
-  tenderUpdateDetail
+  tenderUpdateDetail,
+  rfqBidSummaryReport
 };

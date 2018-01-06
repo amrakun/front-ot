@@ -18,9 +18,10 @@ class Tenders extends React.Component {
     const { history } = props;
 
     const query = queryString.parse(history.location.search);
-
     const searchQuery = query.search;
+
     let dateRange = [];
+
     if (query.from) dateRange = [moment(query.from), moment(query.to)];
 
     this.state = {
@@ -106,9 +107,11 @@ class Tenders extends React.Component {
       onChange,
       history
     } = this.props;
+
     const { search, dateRange } = this.state;
 
     let columns = supplierTenderColumns;
+
     if (currentUser && !currentUser.isSupplier) columns = tenderColumns;
 
     columns[columns.length - 1].render = record =>

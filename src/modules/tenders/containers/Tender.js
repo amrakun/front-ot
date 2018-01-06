@@ -5,6 +5,7 @@ import { gql, graphql, compose } from 'react-apollo';
 import { queries, mutations } from '../graphql';
 import { message, notification, Icon, Button } from 'antd';
 import { colors } from 'modules/common/colors';
+import client from 'apolloClient';
 
 class TenderContainer extends React.Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class TenderContainer extends React.Component {
 
   award(companyId) {
     const { tendersAward, tenderDetailQuery, history } = this.props;
+
     tendersAward({
       variables: {
         _id: tenderDetailQuery.tenderDetail._id,
@@ -46,7 +48,7 @@ class TenderContainer extends React.Component {
   }
 
   bidSummaryReport(companies) {
-    const { rfqBidSummaryReport, tenderDetailQuery } = this.props;
+    const { tenderDetailQuery } = this.props;
 
     this.setState({ bidSummaryReportLoading: true });
 
@@ -56,12 +58,16 @@ class TenderContainer extends React.Component {
       icon: <Icon type="loading" />
     });
 
-    rfqBidSummaryReport({
-      variables: {
-        tenderId: tenderDetailQuery.tenderDetail._id,
-        supplierIds: companies
-      }
-    })
+    client
+      .query({
+        query: gql(queries.rfqBidSummaryReport),
+        name: 'rfqBidSummaryReport',
+
+        variables: {
+          tenderId: tenderDetailQuery.tenderDetail._id,
+          supplierIds: companies
+        }
+      })
       .then(response => {
         this.setState({ bidSummaryReportLoading: false });
 
@@ -128,7 +134,6 @@ class TenderContainer extends React.Component {
 TenderContainer.propTypes = {
   tenderDetailQuery: PropTypes.object,
   tendersAward: PropTypes.func,
-  rfqBidSummaryReport: PropTypes.func,
   history: PropTypes.object
 };
 
@@ -144,9 +149,5 @@ export default compose(
 
   graphql(gql(mutations.tendersAward), {
     name: 'tendersAward'
-  }),
-
-  graphql(gql(mutations.rfqBidSummaryReport), {
-    name: 'rfqBidSummaryReport'
   })
 )(TenderContainer);

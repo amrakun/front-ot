@@ -12,6 +12,7 @@ class TendersContainer extends React.Component {
     const { location, type } = props;
 
     this.type = 'rfq';
+
     if (type === 'eoi' || (location && location.pathname === '/eoi'))
       this.type = 'eoi';
 
