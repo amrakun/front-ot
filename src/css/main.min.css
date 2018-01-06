@@ -260,7 +260,7 @@ i.success {
 *::-webkit-scrollbar-thumb {
   background-color: #e3e3e3;
 }
-.ant-table-pagination {
+.ant-pagination.ant-table-pagination {
   margin: 0 auto;
   display: table;
   margin-top: 16px;

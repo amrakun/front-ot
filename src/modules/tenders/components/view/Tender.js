@@ -14,7 +14,12 @@ import {
 } from 'antd';
 import { NumberCard, NumberCardLines } from 'modules/common/components';
 import { colors } from 'modules/common/colors';
-import { rfqRequestColumns, rfqResponseColumns } from '../../constants';
+import {
+  rfqRequestColumns,
+  rfqResponseColumns,
+  eoiRequestColumns,
+  eoiResponseColumns
+} from '../../constants';
 
 const Search = Input.Search;
 
@@ -46,6 +51,8 @@ class Tender extends React.Component {
     this.showResponsesModal = this.showResponsesModal.bind(this);
     this.hideResponsesModal = this.hideResponsesModal.bind(this);
     this.renderViewResponse = this.renderViewResponse.bind(this);
+    this.handleEoiShortList = this.handleEoiShortList.bind(this);
+    this.handleEoiBidderList = this.handleEoiBidderList.bind(this);
   }
 
   onSelectedCompaniesChange(selectedCompanies) {
@@ -78,6 +85,22 @@ class Tender extends React.Component {
     } else {
       this.props.award(selectedCompanies[0]);
     }
+  }
+
+  handleEoiShortList() {
+    const { selectedCompanies } = this.state;
+
+    selectedCompanies.length < 1
+      ? message.error('Please select atleast one supplier!')
+      : this.props.eoiShortList(this.state.selectedCompanies);
+  }
+
+  handleEoiBidderList() {
+    const { selectedCompanies } = this.state;
+
+    selectedCompanies.length < 1
+      ? message.error('Please select atleast one supplier!')
+      : this.props.eoiBidderList(this.state.selectedCompanies);
   }
 
   getPercent(requestedCount, count) {
@@ -164,7 +187,8 @@ class Tender extends React.Component {
       isAwarded,
       winnerId,
       responses,
-      requestedProducts
+      requestedProducts,
+      requestedDocuments
     } = data;
 
     return (
@@ -220,28 +244,40 @@ class Tender extends React.Component {
               style={{ width: 200, float: 'left' }}
               onSearch={value => console.log(value)}
             />
-            <Button
-              onClick={this.bidSummaryReport}
-              loading={bidSummaryReportLoading}
-            >
-              Bid summary report
-              {!bidSummaryReportLoading ? <Icon type="file-excel" /> : ''}
-            </Button>
             <Button disabled onClick={this.sendRegretLetter}>
               Send regret letter
               <Icon type="mail" />
             </Button>
-            {type === 'rfq' ? (
-              <Button type="primary" onClick={this.award} disabled={isAwarded}>
-                Award
-                <Icon type="trophy" />
-              </Button>
-            ) : (
-              <Button type="primary" onClick={this.award} disabled>
-                EOI short list
-                <Icon type="file-excel" />
-              </Button>
-            )}
+            {type === 'rfq'
+              ? [
+                  <Button
+                    onClick={this.bidSummaryReport}
+                    loading={bidSummaryReportLoading}
+                    key={0}
+                  >
+                    Bid summary report
+                    {!bidSummaryReportLoading ? <Icon type="file-excel" /> : ''}
+                  </Button>,
+                  <Button
+                    type="primary"
+                    onClick={this.award}
+                    disabled={isAwarded}
+                    key={1}
+                  >
+                    Award
+                    <Icon type="trophy" />
+                  </Button>
+                ]
+              : [
+                  <Button onClick={this.award} key={0}>
+                    EOI bidder list
+                    <Icon type="file-excel" />
+                  </Button>,
+                  <Button onClick={this.award} key={1}>
+                    EOI short list
+                    <Icon type="file-excel" />
+                  </Button>
+                ]}
           </div>
 
           <Table
@@ -263,6 +299,7 @@ class Tender extends React.Component {
             }
           />
         </Card>
+
         <Modal
           title={`${responseModalData.title}'s response`}
           visible={responseModalData.visible}
@@ -274,9 +311,11 @@ class Tender extends React.Component {
           <Row gutter={16}>
             <Col span={8}>
               <Table
-                columns={rfqRequestColumns}
+                columns={type === 'eoi' ? eoiRequestColumns : rfqRequestColumns}
                 rowKey={record => record}
-                dataSource={requestedProducts}
+                dataSource={
+                  type === 'eoi' ? requestedDocuments : requestedProducts
+                }
                 pagination={pagination}
                 loading={loading}
                 scroll={{ x: 1100 }}
@@ -287,7 +326,9 @@ class Tender extends React.Component {
             </Col>
             <Col span={16}>
               <Table
-                columns={rfqResponseColumns}
+                columns={
+                  type === 'eoi' ? eoiResponseColumns : rfqResponseColumns
+                }
                 rowKey={record => record}
                 dataSource={responseModalData.data}
                 pagination={pagination}
