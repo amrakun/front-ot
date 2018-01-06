@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Card, Form, Button, Icon } from 'antd';
 import { eoiEmailTemplate } from '../constants';
 import TenderForm from './forms/TenderForm';
-import EoiForm from './forms/EoiForm';
+import EoiTable from './forms/EoiTable';
 
 const initialProducts = [
   { key: 1, document: 'Scope specific experience' },
@@ -17,7 +17,7 @@ const initialPerProducts = {
   product__3: { document: 'Special licences if applicable (copy)' }
 };
 
-class CreateEoi extends TenderForm {
+class EoiForm extends TenderForm {
   constructor(props) {
     super(props);
 
@@ -58,7 +58,7 @@ class CreateEoi extends TenderForm {
         {this.renderMainInfo(eoiEmailTemplate)}
 
         <Card title="Form" className="margin">
-          <EoiForm
+          <EoiTable
             products={products}
             renderProductColumn={this.renderProductColumn}
             isSupplier={false}
@@ -86,10 +86,10 @@ class CreateEoi extends TenderForm {
   }
 }
 
-CreateEoi.propTypes = {
+EoiForm.propTypes = {
   data: PropTypes.object
 };
 
-const form = Form.create()(CreateEoi);
+const form = Form.create()(EoiForm);
 
 export default withRouter(form);

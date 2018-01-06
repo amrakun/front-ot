@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { Form, Button, Card, Icon } from 'antd';
 import { rfqEmailTemplate } from '../constants';
 import TenderForm from './forms/TenderForm';
-import RfqForm from './forms/RfqForm';
+import RfqTable from './forms/RfqTable';
 
 const initialProducts = [{ key: Math.random() }];
 
-class CreateRfq extends TenderForm {
+class RfqForm extends TenderForm {
   constructor(props) {
     super(props);
 
@@ -41,7 +41,7 @@ class CreateRfq extends TenderForm {
         {this.renderMainInfo(rfqEmailTemplate)}
 
         <Card title="Form" className="margin">
-          <RfqForm
+          <RfqTable
             products={products}
             renderProductColumn={this.renderProductColumn}
             isSupplier={false}
@@ -69,10 +69,10 @@ class CreateRfq extends TenderForm {
   }
 }
 
-CreateRfq.propTypes = {
+RfqForm.propTypes = {
   data: PropTypes.object
 };
 
-const form = Form.create()(CreateRfq);
+const form = Form.create()(RfqForm);
 
 export default withRouter(form);

@@ -3,8 +3,7 @@ import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { Card, Form, Button, Modal, Checkbox } from 'antd';
 import TenderForm from './forms/TenderForm';
-import EoiForm from './forms/EoiForm';
-import RfqForm from './forms/RfqForm';
+import EoiTable from './forms/EoiTable';
 import { agreementOptions } from './constants';
 
 const CheckboxGroup = Checkbox.Group;
@@ -111,11 +110,7 @@ class SubmitTender extends TenderForm {
         </Card>
 
         <Card title="Apply to EOI" className="margin">
-          {data.type === 'eoi' ? (
-            <EoiForm {...formProps} />
-          ) : (
-            <RfqForm {...formProps} />
-          )}
+          <EoiTable {...formProps} />
           <br />
           <Button type="primary" htmlType="submit" className="margin">
             Save

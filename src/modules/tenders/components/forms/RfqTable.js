@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Table, Button, Icon, Alert, Col, Row } from 'antd';
 import { rfqProductsColumns, rfqDisclaimer } from '../../constants';
 
-const RfqForm = props => {
+const RfqTable = props => {
   const rpc = rfqProductsColumns;
   const { products, renderProductColumn, isSupplier = true } = props;
 
@@ -117,10 +117,10 @@ const RfqForm = props => {
   );
 };
 
-RfqForm.propTypes = {
+RfqTable.propTypes = {
   products: PropTypes.array,
   renderProductColumn: PropTypes.func,
   isSupplier: PropTypes.bool
 };
 
-export default RfqForm;
+export default RfqTable;

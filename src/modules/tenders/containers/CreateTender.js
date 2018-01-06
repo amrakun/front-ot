@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, gql, graphql } from 'react-apollo';
-import { CreateRfq, CreateEoi } from '../components';
+import { RfqForm, EoiForm } from '../components';
 import { mutations, queries } from '../graphql';
 import { message } from 'antd';
 import { Loading } from 'modules/common/components';
@@ -32,9 +32,9 @@ const CreateTenderContainer = props => {
     data: { suppliers: requestingSuppliers }
   };
 
-  let form = <CreateRfq {...updatedProps} />;
+  let form = <RfqForm {...updatedProps} />;
 
-  if (location.pathname.includes('eoi')) form = <CreateEoi {...updatedProps} />;
+  if (location.pathname.includes('eoi')) form = <EoiForm {...updatedProps} />;
 
   return form;
 };

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Table } from 'antd';
 import { eoiProductsColumns } from '../../constants';
 
-const EoiForm = props => {
+const EoiTable = props => {
   const rpc = eoiProductsColumns;
   const { products, renderProductColumn, isSupplier = true } = props;
 
@@ -40,10 +40,10 @@ const EoiForm = props => {
   );
 };
 
-EoiForm.propTypes = {
+EoiTable.propTypes = {
   products: PropTypes.array,
   renderProductColumn: PropTypes.func,
   isSupplier: PropTypes.bool
 };
 
-export default EoiForm;
+export default EoiTable;

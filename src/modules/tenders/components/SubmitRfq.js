@@ -3,8 +3,7 @@ import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { Form, Button, Card } from 'antd';
 import TenderForm from './forms/TenderForm';
-import EoiForm from './forms/EoiForm';
-import RfqForm from './forms/RfqForm';
+import RfqTable from './forms/RfqTable';
 
 class SubmitTender extends TenderForm {
   constructor(props) {
@@ -79,11 +78,7 @@ class SubmitTender extends TenderForm {
         </Card>
 
         <Card title="Form" className="margin">
-          {data.type === 'eoi' ? (
-            <EoiForm {...formProps} />
-          ) : (
-            <RfqForm {...formProps} />
-          )}
+          <RfqTable {...formProps} />
           <br />
           <Button type="primary" htmlType="submit" className="margin">
             Save & continue

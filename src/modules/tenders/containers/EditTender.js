@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, gql, graphql } from 'react-apollo';
-import { CreateRfq, CreateEoi } from '../components';
+import { RfqForm, EoiForm } from '../components';
 import { queries, mutations } from '../graphql';
 import { Loading } from 'modules/common/components';
 import { message } from 'antd';
@@ -39,9 +39,9 @@ const PublishContainer = props => {
     data: tenderDetail
   };
 
-  let form = <CreateRfq {...updatedProps} />;
+  let form = <RfqForm {...updatedProps} />;
 
-  if (tenderDetail.type === 'eoi') form = <CreateEoi {...updatedProps} />;
+  if (tenderDetail.type === 'eoi') form = <EoiForm {...updatedProps} />;
 
   return form;
 };
