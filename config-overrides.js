@@ -8,7 +8,10 @@ module.exports = function override(config, env) {
       "@primary-color": "#f47721",
       "@success-color": "#0099A8",
       "@error-color": "#f15a24",
-      "@highlight-color": "#f15a24"
+      "@highlight-color": "#f15a24",
+      "@font-size-base": "12px",
+      "@font-size-lg": "14px",
+      "@font-size-sm": "11px",
     },
   })(config, env);
   return config;

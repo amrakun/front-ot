@@ -49,7 +49,7 @@ class Uploader extends React.Component {
 
     return (
       <Upload {...extendedProps}>
-        <Button size="large">
+        <Button>
           <Icon type="upload" /> Click to upload
         </Button>
       </Upload>

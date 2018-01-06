@@ -46,6 +46,7 @@
   line-height: 32px;
   font-size: 24px;
   height: 32px;
+  margin-bottom: 0;
 }
 .hidden {
   display: none;
@@ -212,10 +213,6 @@ i.success {
   height: auto;
   margin-left: 16px;
 }
-.logo.landing img {
-  position: relative;
-  top: 12px;
-}
 .home-landing {
   text-align: center;
 }
@@ -345,4 +342,11 @@ form .ant-input-number {
 }
 .ant-tag {
   margin-bottom: 8px;
+}
+.ant-divider {
+  margin: 0 6px;
+  display: inline-block;
+  height: 8px;
+  width: 1px;
+  background: #ccc;
 }
