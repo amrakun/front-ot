@@ -14,6 +14,7 @@ class CreateRfq extends TenderForm {
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   componentDidMount() {
     if (!this.state.content) {
       this.setState({
@@ -22,6 +23,7 @@ class CreateRfq extends TenderForm {
       });
     }
   }
+
   handleSubmit(e) {
     e.preventDefault();
 
@@ -30,6 +32,7 @@ class CreateRfq extends TenderForm {
 
     this.save(inputs);
   }
+
   render() {
     const { products } = this.state;
 

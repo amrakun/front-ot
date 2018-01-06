@@ -28,9 +28,11 @@ class CreateEoi extends TenderForm {
     e.preventDefault();
 
     let inputs = this.collectInputs();
+
     const requestedDocuments = inputs.requestedProducts.map(
       doc => doc.document
     );
+
     delete inputs.requestedProducts;
     inputs.type = 'eoi';
     inputs.requestedDocuments = requestedDocuments;
