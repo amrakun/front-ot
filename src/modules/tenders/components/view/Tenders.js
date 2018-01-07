@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Table, Card, Popconfirm, Input, DatePicker } from 'antd';
-import { tenderColumns, supplierTenderColumns, labels } from '../../constants';
+import { supplierTenderColumns, labels } from '../../constants';
 import { dateFormat } from 'modules/common/constants';
 import queryString from 'query-string';
 import moment from 'moment';
@@ -59,6 +59,84 @@ class Tenders extends React.Component {
     });
   }
 
+  buyerColumns() {
+    return [
+      {
+        title: 'Status',
+        dataIndex: 'status',
+        filters: [
+          {
+            text: 'Draft',
+            value: 'draft'
+          },
+          {
+            text: 'Open',
+            value: 'open'
+          },
+          {
+            text: 'Closed',
+            value: 'closed'
+          },
+          {
+            text: 'Awarded',
+            value: 'awarded'
+          }
+        ]
+      },
+      {
+        title: 'Tender number',
+        dataIndex: 'number'
+      },
+      {
+        title: 'Tender name',
+        dataIndex: 'name'
+      },
+      {
+        title: 'Publish date',
+        dataIndex: 'publishDate'
+      },
+      {
+        title: 'Close date',
+        dataIndex: 'closeDate'
+      },
+      {
+        title: 'Suppliers',
+        dataIndex: 'requestedCount'
+      },
+      {
+        title: 'Submitted',
+        dataIndex: 'submittedCount'
+      },
+      {
+        title: 'Not interested',
+        dataIndex: 'notInterestedCount'
+      },
+      {
+        title: 'Not responded',
+        dataIndex: 'notRespondedCount'
+      },
+      {
+        title: 'Sourcing officer',
+        dataIndex: 'createdUser.email'
+      },
+      {
+        title: 'Regret letter',
+        render: this.renderBoolean
+      },
+      {
+        title: 'Actions',
+        key: 'actions',
+        fixed: 'right',
+        width: 100
+      }
+    ];
+  }
+
+  renderBoolean(text, record) {
+    if (record.sentRegretLetter) return 'Yes';
+    else return '-';
+  }
+
   renderOperation(_id) {
     const { currentUser, notInterested } = this.props;
 
@@ -112,7 +190,7 @@ class Tenders extends React.Component {
 
     let columns = supplierTenderColumns;
 
-    if (currentUser && !currentUser.isSupplier) columns = tenderColumns;
+    if (currentUser && !currentUser.isSupplier) columns = this.buyerColumns();
 
     columns[columns.length - 1].render = record =>
       this.renderOperation(record._id);
@@ -146,6 +224,7 @@ class Tenders extends React.Component {
           dataSource={data}
           pagination={pagination}
           loading={loading}
+          scroll={{ x: 1500 }}
           onChange={(pagination, filters, sorter) =>
             onChange(pagination, filters, sorter)
           }

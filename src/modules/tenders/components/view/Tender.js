@@ -116,7 +116,8 @@ class Tender extends React.Component {
       notInterestedCount,
       notRespondedCount,
       winnerId,
-      responses
+      responses,
+      sentRegretLetter
     } = data;
 
     return (
@@ -173,6 +174,7 @@ class Tender extends React.Component {
               onSearch={value => console.log(value)}
             />
             <Button
+              disabled={sentRegretLetter}
               onClick={() =>
                 this.props.sendRegretLetter(this.state.selectedCompanies)
               }

@@ -28,6 +28,7 @@ const tenderFields = `
   requestedDocuments
   winnerId
   isAwarded
+  sentRegretLetter
 `;
 
 const tenderDetail = `
