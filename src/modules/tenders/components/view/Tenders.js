@@ -125,9 +125,9 @@ class Tenders extends React.Component {
       },
       {
         title: 'Actions',
-        key: 'actions',
         fixed: 'right',
-        width: 100
+        width: 100,
+        render: (text, record) => this.renderOperation(record)
       }
     ];
   }
@@ -175,9 +175,9 @@ class Tenders extends React.Component {
       },
       {
         title: 'Actions',
-        key: 'actions',
         fixed: 'right',
-        width: 100
+        width: 100,
+        render: (text, record) => this.renderOperation(record)
       }
     ];
   }
@@ -199,8 +199,9 @@ class Tenders extends React.Component {
     );
   }
 
-  renderOperation(_id) {
+  renderOperation(record) {
     const { currentUser, notInterested } = this.props;
+    const { status, _id } = record;
 
     if (currentUser) {
       if (currentUser.isSupplier) {
@@ -223,8 +224,12 @@ class Tenders extends React.Component {
         return (
           <div>
             <Link to={`/tender/${_id}`}>View</Link>
-            <span className="ant-divider" />
-            <Link to={`/tender/edit/${_id}`}>Edit</Link>
+            {status === 'draft' && [
+              <span className="ant-divider" key={0} />,
+              <Link key={1} to={`/tender/edit/${_id}`}>
+                Edit
+              </Link>
+            ]}
           </div>
         );
       }
@@ -252,9 +257,6 @@ class Tenders extends React.Component {
 
     let columns = this.supplierColumns();
     if (currentUser && !currentUser.isSupplier) columns = this.buyerColumns();
-
-    columns[columns.length - 1].render = record =>
-      this.renderOperation(record._id);
 
     return (
       <Card style={{ marginBottom: '16px' }} title={labels[type]}>

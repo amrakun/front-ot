@@ -70,13 +70,13 @@ class Tender extends React.Component {
         title: 'Number of employees',
         dataIndex: 'supplier.basicInfo.totalNumberOfEmployees'
       },
-      { title: 'Work experience', dataIndex: 'status' },
-      { title: 'Supplier tier type', dataIndex: 'status' },
+      { title: 'Work experience', dataIndex: 'workExperience' },
+      { title: 'Supplier tier type', dataIndex: 'tierType' },
       {
         title: 'Response information',
         render: this.renderViewResponse
       },
-      { title: 'Uploaded file', dataIndex: 'status' },
+      { title: 'Uploaded file', dataIndex: 'file' },
       {
         title: 'Contact person',
         dataIndex: 'supplier.contactInfo.name'
