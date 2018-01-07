@@ -2,9 +2,9 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { Card, Form, Button, Icon } from 'antd';
-import { eoiEmailTemplate } from '../constants';
-import TenderForm from './forms/TenderForm';
-import EoiTable from './forms/EoiTable';
+import { eoiEmailTemplate } from '../../constants';
+import TenderForm from '../TenderForm';
+import EoiTable from '../EoiTable';
 
 const initialProducts = [
   { key: 1, document: 'Scope specific experience' },

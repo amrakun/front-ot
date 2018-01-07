@@ -2,9 +2,9 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { Form, Button, Card, Icon } from 'antd';
-import { rfqEmailTemplate } from '../constants';
-import TenderForm from './forms/TenderForm';
-import RfqTable from './forms/RfqTable';
+import { rfqEmailTemplate } from '../../constants';
+import TenderForm from '../TenderForm';
+import RfqTable from '../RfqTable';
 
 const initialProducts = [{ key: Math.random() }];
 

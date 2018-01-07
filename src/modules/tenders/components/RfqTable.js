@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Table, Button, Icon, Alert, Col, Row } from 'antd';
-import { rfqProductsColumns, rfqDisclaimer } from '../../constants';
+import { rfqProductsColumns, rfqDisclaimer } from '../constants';
 
 const RfqTable = props => {
   const rpc = rfqProductsColumns;

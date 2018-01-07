@@ -2,9 +2,10 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { Card, Form, Button, Modal, Checkbox } from 'antd';
-import TenderForm from './forms/TenderForm';
-import EoiTable from './forms/EoiTable';
+import TenderForm from '../TenderForm';
+import EoiTable from '../EoiTable';
 import { agreementOptions } from './constants';
+import MainInfo from './MainInfo';
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -82,32 +83,7 @@ class SubmitTender extends TenderForm {
 
     return (
       <Form layout="inline" onSubmit={this.handleSubmit}>
-        <Card title={data.name}>
-          <div>
-            <strong>EOI name: </strong>
-            {data.name}
-          </div>
-          <div>
-            <strong>EOI number: </strong>
-            {data.number}
-          </div>
-          <div>
-            <strong>Publish date: </strong>
-            {data.publishDate}
-          </div>
-          <div>
-            <strong>Close date: </strong>
-            {data.closeDate}
-          </div>
-          <div>
-            <strong>Document: </strong>
-            <a href={data.file ? data.file.url : ''} target="_blank">
-              Download
-            </a>
-          </div>
-          <br />
-          <div dangerouslySetInnerHTML={{ __html: data.content }} />
-        </Card>
+        <MainInfo {...data} />
 
         <Card title="Apply to EOI" className="margin">
           <EoiTable {...formProps} />

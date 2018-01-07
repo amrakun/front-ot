@@ -4,7 +4,7 @@ import { Input, Table, Select } from 'antd';
 import { BaseForm, Uploader } from 'modules/common/components';
 import { xlsxHandler } from 'modules/common/utils';
 import { booleanData } from 'modules/common/constants';
-import MainInfo from './MainInfo';
+import MainInfo from './forms/MainInfo';
 
 const { Column } = Table;
 

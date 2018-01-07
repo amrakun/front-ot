@@ -1,11 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tender } from '../components';
+import { Rfq, Eoi } from '../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries, mutations } from '../graphql';
 import { message, notification, Icon, Button } from 'antd';
 import { colors } from 'modules/common/colors';
 import client from 'apolloClient';
+import { Loading } from 'modules/common/components';
+
+const notifyLoading = {
+  message: 'Building an excel...',
+  description: 'You will get notified when your report is ready!',
+  icon: <Icon type="loading" />
+};
+
+const notifyReady = {
+  message: 'Your report is ready to download',
+  icon: <Icon type="file-excel" style={{ color: colors[0] }} />,
+  duration: 0
+};
 
 class TenderContainer extends React.Component {
   constructor(props) {
@@ -52,11 +65,7 @@ class TenderContainer extends React.Component {
 
     this.setState({ bidSummaryReportLoading: true });
 
-    notification.open({
-      message: 'Building an excel...',
-      description: 'You will get notified when your report is ready!',
-      icon: <Icon type="loading" />
-    });
+    notification.open(notifyLoading);
 
     client
       .query({
@@ -72,7 +81,7 @@ class TenderContainer extends React.Component {
         this.setState({ bidSummaryReportLoading: false });
 
         notification.open({
-          message: 'Your report is ready to download',
+          ...notifyReady,
           btn: (
             <Button
               type="primary"
@@ -84,9 +93,7 @@ class TenderContainer extends React.Component {
             >
               <Icon type="download" /> Download
             </Button>
-          ),
-          icon: <Icon type="file-excel" style={{ color: colors[0] }} />,
-          duration: 0
+          )
         });
       })
       .catch(error => {
@@ -106,9 +113,10 @@ class TenderContainer extends React.Component {
     const { tenderDetailQuery } = this.props;
 
     if (tenderDetailQuery.loading) {
-      return <Tender loading={true} />;
+      return <Loading />;
     }
 
+    const tenderDetail = tenderDetailQuery.tenderDetail;
     const { pagination, bidSummaryReportLoading } = this.state;
 
     const updatedProps = {
@@ -117,7 +125,7 @@ class TenderContainer extends React.Component {
       award: this.award,
       bidSummaryReport: this.bidSummaryReport,
       sendRegretLetter: this.sendRegretLetter,
-      data: tenderDetailQuery.tenderDetail,
+      data: tenderDetail,
       loading: false,
       pagination: {
         pageSize: pagination.pageSize,
@@ -127,7 +135,8 @@ class TenderContainer extends React.Component {
         this.handleTableChange(pagination, filters, sorter)
     };
 
-    return <Tender {...updatedProps} />;
+    if (tenderDetail.type === 'rfq') return <Rfq {...updatedProps} />;
+    else return <Eoi {...updatedProps} />;
   }
 }
 

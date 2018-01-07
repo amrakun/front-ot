@@ -2,8 +2,9 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { Form, Button, Card } from 'antd';
-import TenderForm from './forms/TenderForm';
-import RfqTable from './forms/RfqTable';
+import TenderForm from '../TenderForm';
+import RfqTable from '../RfqTable';
+import MainInfo from './MainInfo';
 
 class SubmitTender extends TenderForm {
   constructor(props) {
@@ -52,30 +53,7 @@ class SubmitTender extends TenderForm {
 
     return (
       <Form layout="inline" onSubmit={this.handleSubmit}>
-        <Card title="Main info">
-          <div>
-            <strong>Tender name: </strong>
-            {data.name}
-          </div>
-          <div>
-            <strong>Tender number: </strong>
-            {data.number}
-          </div>
-          <div>
-            <strong>Publish date: </strong>
-            {data.publishDate}
-          </div>
-          <div>
-            <strong>Close date: </strong>
-            {data.closeDate}
-          </div>
-          <div>
-            <strong>Document: </strong>
-            {data.file ? data.file.url : ''}
-          </div>
-          <br />
-          <div dangerouslySetInnerHTML={{ __html: data.content }} />
-        </Card>
+        <MainInfo {...data} />
 
         <Card title="Form" className="margin">
           <RfqTable {...formProps} />
