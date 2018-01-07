@@ -96,9 +96,24 @@ const tendersAward = `
   }
 `;
 
+const sendRegretLetter = `
+  mutation tendersSendRegretLetter(
+    $_id: String!
+    $subject: String!
+    $content: String!
+  ) {
+    tendersSendRegretLetter(
+      _id: $_id
+      subject: $subject
+      content: $content
+    )
+  }
+`;
+
 export default {
   tendersAdd,
   tendersEdit,
   tendersResponsesAdd,
-  tendersAward
+  tendersAward,
+  sendRegretLetter
 };

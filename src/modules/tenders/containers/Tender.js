@@ -21,6 +21,13 @@ const notifyReady = {
   duration: 0
 };
 
+const notifyIfWantToSend = {
+  message: 'Succesfully awarded',
+  description: 'Do you want to send regret letters to remaining suppliers now?',
+  icon: <Icon type="mail" style={{ color: colors[0] }} />,
+  duration: 0
+};
+
 class TenderContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -33,8 +40,9 @@ class TenderContainer extends React.Component {
     };
 
     this.handleTableChange = this.handleTableChange.bind(this);
-    this.award = this.award.bind(this);
     this.downloadReport = this.downloadReport.bind(this);
+    this.award = this.award.bind(this);
+    this.sendRegretLetter = this.sendRegretLetter.bind(this);
   }
 
   handleTableChange(pagination, filters, sorter) {
@@ -43,7 +51,7 @@ class TenderContainer extends React.Component {
   }
 
   award(companyId) {
-    const { tendersAward, tenderDetailQuery, history } = this.props;
+    const { tendersAward, tenderDetailQuery } = this.props;
 
     tendersAward({
       variables: {
@@ -52,8 +60,32 @@ class TenderContainer extends React.Component {
       }
     })
       .then(() => {
-        message.success('Awarded!');
-        history.push('/rfq');
+        notification.open({
+          ...notifyIfWantToSend,
+          btn: (
+            <Button type="primary" onClick={() => this.sendRegretLetter()}>
+              Send
+            </Button>
+          )
+        });
+      })
+      .catch(error => {
+        message.error(error.message);
+      });
+  }
+
+  sendRegretLetter() {
+    const { sendRegretLetter, tenderDetailQuery } = this.props;
+
+    sendRegretLetter({
+      variables: {
+        _id: tenderDetailQuery.tenderDetail._id,
+        subject: 'test',
+        content: 'test'
+      }
+    })
+      .then(() => {
+        message.success('Succesfully sent regret letters!');
       })
       .catch(error => {
         message.error(error.message);
@@ -107,10 +139,6 @@ class TenderContainer extends React.Component {
     window.open(url);
   }
 
-  sendRegretLetter(companies) {
-    console.log(companies);
-  }
-
   render() {
     const { tenderDetailQuery } = this.props;
 
@@ -145,6 +173,7 @@ class TenderContainer extends React.Component {
 TenderContainer.propTypes = {
   tenderDetailQuery: PropTypes.object,
   tendersAward: PropTypes.func,
+  sendRegretLetter: PropTypes.func,
   history: PropTypes.object
 };
 
@@ -160,5 +189,9 @@ export default compose(
 
   graphql(gql(mutations.tendersAward), {
     name: 'tendersAward'
+  }),
+
+  graphql(gql(mutations.sendRegretLetter), {
+    name: 'sendRegretLetter'
   })
 )(TenderContainer);

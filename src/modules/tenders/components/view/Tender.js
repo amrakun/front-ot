@@ -1,16 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Table,
-  Card,
-  Input,
-  Icon,
-  Row,
-  Col,
-  Button,
-  message,
-  Modal
-} from 'antd';
+import { Table, Card, Input, Icon, Row, Col, Button, Modal } from 'antd';
 import { NumberCard, NumberCardLines } from 'modules/common/components';
 import { colors } from 'modules/common/colors';
 
@@ -35,7 +25,6 @@ class Tender extends React.Component {
     };
 
     this.onSelectedCompaniesChange = this.onSelectedCompaniesChange.bind(this);
-    this.sendRegretLetter = this.sendRegretLetter.bind(this);
     this.showResponsesModal = this.showResponsesModal.bind(this);
     this.hideResponsesModal = this.hideResponsesModal.bind(this);
     this.renderViewResponse = this.renderViewResponse.bind(this);
@@ -43,14 +32,6 @@ class Tender extends React.Component {
 
   onSelectedCompaniesChange(selectedCompanies) {
     this.setState({ selectedCompanies });
-  }
-
-  sendRegretLetter() {
-    const { selectedCompanies } = this.state;
-
-    selectedCompanies.length < 1
-      ? message.error('Please select atleast one supplier!')
-      : this.props.sendRegretLetter(this.state.selectedCompanies);
   }
 
   getPercent(requestedCount, count) {
@@ -191,7 +172,11 @@ class Tender extends React.Component {
               style={{ width: 200, float: 'left' }}
               onSearch={value => console.log(value)}
             />
-            <Button disabled onClick={this.sendRegretLetter}>
+            <Button
+              onClick={() =>
+                this.props.sendRegretLetter(this.state.selectedCompanies)
+              }
+            >
               Send regret letter
               <Icon type="mail" />
             </Button>
