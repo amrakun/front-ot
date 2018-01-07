@@ -14,9 +14,9 @@ export default [
     key={'/rfq'}
     exact
     path={'/rfq'}
-    component={({ location }) => {
-      const queryParams = queryString.parse(location.search);
-      return <Tenders type="rfq" queryParams={queryParams} />;
+    component={props => {
+      const queryParams = queryString.parse(props.location.search);
+      return <Tenders type="rfq" {...props} queryParams={queryParams} />;
     }}
   />,
   <Route
@@ -29,9 +29,9 @@ export default [
     key={'/eoi'}
     exact
     path={'/eoi'}
-    component={({ location }) => {
-      const queryParams = queryString.parse(location.search);
-      return <Tenders type="eoi" queryParams={queryParams} />;
+    component={props => {
+      const queryParams = queryString.parse(props.location.search);
+      return <Tenders type="eoi" {...props} queryParams={queryParams} />;
     }}
   />,
   <Route key={'/tender'} exact path={`${'/tender'}/:id`} component={Tender} />,

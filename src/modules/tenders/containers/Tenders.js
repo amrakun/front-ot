@@ -4,6 +4,7 @@ import { Tenders } from '../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries, mutations } from '../graphql';
 import { message } from 'antd';
+import queryString from 'query-string';
 
 class TendersContainer extends React.Component {
   constructor(props) {
@@ -27,8 +28,25 @@ class TendersContainer extends React.Component {
     this.handleTableChange = this.handleTableChange.bind(this);
   }
 
-  handleTableChange(pagination, filters, sorter) {
-    console.log(pagination, filters, sorter);
+  handleTableChange(pagination, filters) {
+    const { history } = this.props;
+
+    let statusString = '';
+    filters.status.forEach(i => {
+      statusString += i + ',';
+    });
+
+    const query = queryString.parse(history.location.search);
+
+    const stringified = queryString.stringify({
+      ...query,
+      status: statusString.replace(/.$/, '')
+    });
+
+    history.push({
+      search: stringified
+    });
+
     this.setState({ pagination });
   }
 
@@ -83,6 +101,7 @@ class TendersContainer extends React.Component {
 TendersContainer.propTypes = {
   type: PropTypes.string,
   location: PropTypes.object,
+  history: PropTypes.object,
   tendersQuery: PropTypes.object,
   tendersResponsesAdd: PropTypes.func
 };
@@ -94,14 +113,15 @@ TendersContainer.contextTypes = {
 export default compose(
   graphql(gql(queries.tenders), {
     name: 'tendersQuery',
-    options: ({ type, supplierId }) => {
+    options: ({ type, supplierId, queryParams }) => {
       return {
         variables: {
           page: 200,
           perPage: 20,
+          search: queryParams ? queryParams.search : '',
+          status: queryParams ? queryParams.status : '',
           type: type,
-          supplierId: supplierId,
-          ignoreSubmitted: supplierId ? true : false
+          supplierId: supplierId
         },
         notifyOnNetworkStatusChange: true
       };

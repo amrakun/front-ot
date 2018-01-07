@@ -1,5 +1,6 @@
 const tenderFields = `
   _id,
+  status,
   type,
   number,
   name,
@@ -104,8 +105,8 @@ const companiesByIds = `
 `;
 
 const tenders = `
-  query tenders($type: String!, $supplierId: String, $ignoreSubmitted: Boolean) {
-    tenders(type: $type, supplierId: $supplierId, ignoreSubmitted: $ignoreSubmitted) {
+  query tenders($type: String!, $supplierId: String, $ignoreSubmitted: Boolean, $search: String, $status: String) {
+    tenders(type: $type, supplierId: $supplierId, ignoreSubmitted: $ignoreSubmitted, search: $search, status: $status) {
       ${tenderFields}
     }
   }

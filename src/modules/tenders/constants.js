@@ -28,54 +28,6 @@ export const eoiProductsColumns = {
   notes: 'Notes'
 };
 
-export const supplierTenderColumns = [
-  {
-    title: 'Status',
-    dataIndex: 'status',
-    filters: [
-      {
-        text: 'Open',
-        value: 'open'
-      },
-      {
-        text: 'Closed',
-        value: 'closed'
-      },
-      {
-        text: 'Participated',
-        value: 'participated'
-      }
-    ]
-  },
-  {
-    title: 'Tender number',
-    dataIndex: 'number',
-    sorter: true
-  },
-  {
-    title: 'Tender name',
-    dataIndex: 'name'
-  },
-  {
-    title: 'Publish date',
-    dataIndex: 'publishDate'
-  },
-  {
-    title: 'Close date',
-    dataIndex: 'closeDate'
-  },
-  {
-    title: 'File',
-    dataIndex: 'file.url'
-  },
-  {
-    title: 'Actions',
-    key: 'actions',
-    fixed: 'right',
-    width: 100
-  }
-];
-
 export const eoiRequestColumns = [
   { title: 'Document', dataIndex: 'document', key: '1' }
 ];

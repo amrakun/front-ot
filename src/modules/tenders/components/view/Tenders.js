@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Table, Card, Popconfirm, Input, DatePicker } from 'antd';
-import { supplierTenderColumns, labels } from '../../constants';
-import { dateFormat } from 'modules/common/constants';
+import { labels } from '../../constants';
+import { dateFormat, dateTimeFormat } from 'modules/common/constants';
 import queryString from 'query-string';
 import moment from 'moment';
 
@@ -93,11 +93,11 @@ class Tenders extends React.Component {
       },
       {
         title: 'Publish date',
-        dataIndex: 'publishDate'
+        render: (text, record) => this.renderDate(record.publishDate)
       },
       {
         title: 'Close date',
-        dataIndex: 'closeDate'
+        render: (text, record) => this.renderDate(record.closeDate)
       },
       {
         title: 'Suppliers',
@@ -132,9 +132,71 @@ class Tenders extends React.Component {
     ];
   }
 
+  supplierColumns() {
+    return [
+      {
+        title: 'Status',
+        dataIndex: 'status',
+        filters: [
+          {
+            text: 'Open',
+            value: 'open'
+          },
+          {
+            text: 'Closed',
+            value: 'closed'
+          },
+          {
+            text: 'Participated',
+            value: 'participated'
+          }
+        ]
+      },
+      {
+        title: 'Tender number',
+        dataIndex: 'number',
+        sorter: true
+      },
+      {
+        title: 'Tender name',
+        dataIndex: 'name'
+      },
+      {
+        title: 'Publish date',
+        render: (text, record) => this.renderDate(record.publishDate)
+      },
+      {
+        title: 'Close date',
+        render: (text, record) => this.renderDate(record.closeDate)
+      },
+      {
+        title: 'File',
+        render: (text, record) => this.renderFileDownload(record.file.url)
+      },
+      {
+        title: 'Actions',
+        key: 'actions',
+        fixed: 'right',
+        width: 100
+      }
+    ];
+  }
+
   renderBoolean(text, record) {
     if (record.sentRegretLetter) return 'Yes';
     else return '-';
+  }
+
+  renderDate(date) {
+    return moment(date).format(dateTimeFormat);
+  }
+
+  renderFileDownload(url) {
+    return (
+      <a href={url} target="_blank">
+        View
+      </a>
+    );
   }
 
   renderOperation(_id) {
@@ -188,8 +250,7 @@ class Tenders extends React.Component {
 
     const { search, dateRange } = this.state;
 
-    let columns = supplierTenderColumns;
-
+    let columns = this.supplierColumns();
     if (currentUser && !currentUser.isSupplier) columns = this.buyerColumns();
 
     columns[columns.length - 1].render = record =>
@@ -197,7 +258,9 @@ class Tenders extends React.Component {
 
     return (
       <Card style={{ marginBottom: '16px' }} title={labels[type]}>
-        {history.location.pathname !== '/dashboard' && (
+        {!['/dashboard', '/rfq-and-eoi'].includes(
+          history.location.pathname
+        ) && (
           <div className="table-operations">
             <Search
               defaultValue={search}

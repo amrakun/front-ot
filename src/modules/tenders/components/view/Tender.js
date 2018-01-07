@@ -62,37 +62,33 @@ class Tender extends React.Component {
     return [
       {
         title: 'Supplier name',
-        dataIndex: 'supplier.basicInfo.enName',
-        key: 1
+        dataIndex: 'supplier.basicInfo.enName'
       },
-      { title: 'SAP #', dataIndex: 'supplier.basicInfo.sapNumber', key: 2 },
-      { title: 'Company size', dataIndex: 'size', key: 3 },
+      { title: 'SAP #', dataIndex: 'supplier.basicInfo.sapNumber' },
+      { title: 'Company size', dataIndex: 'size' },
       {
         title: 'Number of employees',
-        dataIndex: 'supplier.basicInfo.totalNumberOfEmployees',
-        key: 4
+        dataIndex: 'supplier.basicInfo.totalNumberOfEmployees'
       },
-      { title: 'Work experience', dataIndex: 'status', key: 5 },
-      { title: 'Supplier tier type', dataIndex: 'status', key: 6 },
+      { title: 'Work experience', dataIndex: 'status' },
+      { title: 'Supplier tier type', dataIndex: 'status' },
       {
         title: 'Response information',
-        key: 17,
         render: this.renderViewResponse
       },
-      { title: 'Uploaded file', dataIndex: 'status', key: 7 },
+      { title: 'Uploaded file', dataIndex: 'status' },
       {
         title: 'Contact person',
-        dataIndex: 'supplier.contactInfo.name',
-        key: 8
+        dataIndex: 'supplier.contactInfo.name'
       },
-      { title: 'Email', dataIndex: 'supplier.contactInfo.email', key: 9 },
-      { title: 'Phone', dataIndex: 'supplier.contactInfo.phone', key: 10 },
-      { title: 'Registration', dataIndex: 'registration', key: 11 },
-      { title: 'Pre-qualification', dataIndex: 'prequalification', key: 12 },
-      { title: 'Qualification/audit status', dataIndex: 'audit', key: 13 },
-      { title: 'Validation status', dataIndex: 'validation', key: 14 },
-      { title: 'Due dilligence', dataIndex: 'dilligence', key: 15 },
-      { title: 'DIFOT score', dataIndex: 'dipotScore', key: 16 }
+      { title: 'Email', dataIndex: 'supplier.contactInfo.email' },
+      { title: 'Phone', dataIndex: 'supplier.contactInfo.phone' },
+      { title: 'Registration', dataIndex: 'registration' },
+      { title: 'Pre-qualification', dataIndex: 'prequalification' },
+      { title: 'Qualification/audit status', dataIndex: 'audit' },
+      { title: 'Validation status', dataIndex: 'validation' },
+      { title: 'Due dilligence', dataIndex: 'dilligence' },
+      { title: 'DIFOT score', dataIndex: 'dipotScore' }
     ];
   }
 
