@@ -18,7 +18,10 @@ class Rfq extends Tender {
 
     selectedCompanies.length < 1
       ? message.error('Please select atleast one supplier!')
-      : this.props.bidSummaryReport(this.state.selectedCompanies);
+      : this.props.downloadReport(
+          this.state.selectedCompanies,
+          'rfqBidSummaryReport'
+        );
   }
 
   award() {
@@ -34,18 +37,18 @@ class Rfq extends Tender {
   }
 
   render() {
-    const { bidSummaryReportLoading } = this.props;
+    const { rfqBidSummaryReportLoading } = this.props;
     const data = this.props.data || {};
     const { requestedProducts, isAwarded } = data;
 
     const tableOperations = [
       <Button
         onClick={this.bidSummaryReport}
-        loading={bidSummaryReportLoading}
+        loading={rfqBidSummaryReportLoading}
         key={0}
       >
         Bid summary report
-        {!bidSummaryReportLoading ? <Icon type="file-excel" /> : ''}
+        {!rfqBidSummaryReportLoading ? <Icon type="file-excel" /> : ''}
       </Button>,
       <Button type="primary" onClick={this.award} disabled={isAwarded} key={1}>
         Award
@@ -64,7 +67,7 @@ class Rfq extends Tender {
 
 Rfq.propTypes = {
   award: PropTypes.func,
-  bidSummaryReport: PropTypes.func,
+  downloadReport: PropTypes.func,
   bidSummaryReportLoading: PropTypes.bool,
   data: PropTypes.object
 };

@@ -18,7 +18,7 @@ class Eoi extends Tender {
 
     selectedCompanies.length < 1
       ? message.error('Please select atleast one supplier!')
-      : this.props.eoiShortList(this.state.selectedCompanies);
+      : this.props.downloadReport(this.state.selectedCompanies, 'eoiShortList');
   }
 
   handleEoiBidderList() {
@@ -26,7 +26,10 @@ class Eoi extends Tender {
 
     selectedCompanies.length < 1
       ? message.error('Please select atleast one supplier!')
-      : this.props.eoiBidderList(this.state.selectedCompanies);
+      : this.props.downloadReport(
+          this.state.selectedCompanies,
+          'eoiBidderList'
+        );
   }
 
   render() {

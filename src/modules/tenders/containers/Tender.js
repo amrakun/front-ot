@@ -11,7 +11,8 @@ import { Loading } from 'modules/common/components';
 const notifyLoading = {
   message: 'Building an excel...',
   description: 'You will get notified when your report is ready!',
-  icon: <Icon type="loading" />
+  icon: <Icon type="loading" />,
+  duration: 1
 };
 
 const notifyReady = {
@@ -28,13 +29,12 @@ class TenderContainer extends React.Component {
       pagination: {
         current: 1,
         pageSize: 10
-      },
-      bidSummaryReportLoading: false
+      }
     };
 
     this.handleTableChange = this.handleTableChange.bind(this);
     this.award = this.award.bind(this);
-    this.bidSummaryReport = this.bidSummaryReport.bind(this);
+    this.downloadReport = this.downloadReport.bind(this);
   }
 
   handleTableChange(pagination, filters, sorter) {
@@ -60,17 +60,20 @@ class TenderContainer extends React.Component {
       });
   }
 
-  bidSummaryReport(companies) {
+  downloadReport(companies, name) {
     const { tenderDetailQuery } = this.props;
 
-    this.setState({ bidSummaryReportLoading: true });
+    const loadingReportName = `${name}Loading`;
+    let loading = {};
+    loading[loadingReportName] = true;
+    this.setState(loading);
 
     notification.open(notifyLoading);
 
     client
       .query({
-        query: gql(queries.rfqBidSummaryReport),
-        name: 'rfqBidSummaryReport',
+        query: gql(queries[name]),
+        name: name,
 
         variables: {
           tenderId: tenderDetailQuery.tenderDetail._id,
@@ -78,7 +81,8 @@ class TenderContainer extends React.Component {
         }
       })
       .then(response => {
-        this.setState({ bidSummaryReportLoading: false });
+        loading[loadingReportName] = false;
+        this.setState(loading);
 
         notification.open({
           ...notifyReady,
@@ -86,9 +90,7 @@ class TenderContainer extends React.Component {
             <Button
               type="primary"
               onClick={() =>
-                this.downloadReport(
-                  response.data.tenderResponsesRfqBidSummaryReport
-                )
+                this.downloadUrl(response.data[Object.keys(response.data)[0]])
               }
             >
               <Icon type="download" /> Download
@@ -101,7 +103,7 @@ class TenderContainer extends React.Component {
       });
   }
 
-  downloadReport(url) {
+  downloadUrl(url) {
     window.open(url);
   }
 
@@ -117,13 +119,13 @@ class TenderContainer extends React.Component {
     }
 
     const tenderDetail = tenderDetailQuery.tenderDetail;
-    const { pagination, bidSummaryReportLoading } = this.state;
+    const { pagination, rfqBidSummaryReportLoading } = this.state;
 
     const updatedProps = {
       ...this.props,
-      bidSummaryReportLoading,
+      rfqBidSummaryReportLoading,
       award: this.award,
-      bidSummaryReport: this.bidSummaryReport,
+      downloadReport: this.downloadReport,
       sendRegretLetter: this.sendRegretLetter,
       data: tenderDetail,
       loading: false,

@@ -116,10 +116,24 @@ const rfqBidSummaryReport = `
   }
 `;
 
+const eoiShortList = `
+  query tenderResponsesEoiShortList($tenderId: String!, $supplierIds: [String!]!) {
+    tenderResponsesEoiShortList(tenderId: $tenderId, supplierIds: $supplierIds)
+  }
+`;
+
+const eoiBidderList = `
+  query tenderResponsesEoiBidderList($tenderId: String!, $supplierIds: [String!]!) {
+    tenderResponsesEoiBidderList(tenderId: $tenderId, supplierIds: $supplierIds)
+  }
+`;
+
 export default {
   tenderDetail,
   tenders,
   companiesByIds,
   tenderUpdateDetail,
-  rfqBidSummaryReport
+  rfqBidSummaryReport,
+  eoiShortList,
+  eoiBidderList
 };
