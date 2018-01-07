@@ -13,7 +13,6 @@ class RegistrationForm extends BaseForm {
   }
 
   render() {
-    console.log(this.props.data);
     return (
       <Form>
         <Card>

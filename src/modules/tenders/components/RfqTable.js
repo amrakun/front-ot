@@ -2,10 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Table, Button, Icon, Alert, Col, Row } from 'antd';
 import { rfqProductsColumns, rfqDisclaimer } from '../constants';
+import { Uploader } from 'modules/common/components';
+
+const templateUrl =
+  'https://s3.amazonaws.com/erxes/0.8259047605671563rfq_requested_products.xlsx';
 
 const RfqTable = props => {
   const rpc = rfqProductsColumns;
-  const { products, renderProductColumn, isSupplier = true } = props;
+  const {
+    products,
+    renderProductColumn,
+    isSupplier = true,
+    handleFile
+  } = props;
 
   return (
     <div>
@@ -21,14 +30,12 @@ const RfqTable = props => {
         </Col>
       </Row>
       <div className="table-operations margin">
-        <Button disabled>
-          Download template
+        <Button onClick={() => window.open(templateUrl)}>
           <Icon type="download" />
+          Download template
         </Button>
-        <Button disabled>
-          Import materials
-          <Icon type="file-excel" />
-        </Button>
+        {/* <input type="file" onChange={handleFile} /> */}
+        <Uploader onReceiveFile={handleFile} label="Import materials" />
       </div>
       <Table
         className="form-table"
@@ -120,7 +127,8 @@ const RfqTable = props => {
 RfqTable.propTypes = {
   products: PropTypes.array,
   renderProductColumn: PropTypes.func,
-  isSupplier: PropTypes.bool
+  isSupplier: PropTypes.bool,
+  handleFile: PropTypes.func
 };
 
 export default RfqTable;

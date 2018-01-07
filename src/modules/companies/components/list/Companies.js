@@ -220,7 +220,7 @@ class CompaniesList extends React.Component {
               dataSource={data}
               pagination={pagination}
               loading={loading}
-              scroll={{ x: 1600 }}
+              scroll={{ x: 2000 }}
               onChange={(pagination, filters, sorter) =>
                 onChange(pagination, filters, sorter)
               }

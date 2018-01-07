@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Input, Table, Select } from 'antd';
 import { BaseForm, Uploader } from 'modules/common/components';
-import { xlsxHandler } from 'modules/common/utils';
 import { booleanData } from 'modules/common/constants';
 import MainInfo from './forms/MainInfo';
 
@@ -147,28 +146,8 @@ class TenderForm extends BaseForm {
   renderMainInfo(template) {
     const { requestingSuppliers, content } = this.state;
 
-    const handleFile = e => {
-      xlsxHandler({
-        e,
-        success: data => {
-          const products = [];
-
-          data.forEach(record => {
-            products.push({
-              key: Math.random(),
-              ...record
-            });
-          });
-
-          this.setState({ products });
-        }
-      });
-    };
-
     return (
       <div>
-        <input type="file" onChange={handleFile} />
-
         <MainInfo
           requestingSuppliers={requestingSuppliers}
           data={this.props.data}

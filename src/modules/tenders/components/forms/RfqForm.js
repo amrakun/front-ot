@@ -5,6 +5,7 @@ import { Form, Button, Card, Icon } from 'antd';
 import { rfqEmailTemplate } from '../../constants';
 import TenderForm from '../TenderForm';
 import RfqTable from '../RfqTable';
+import { xlsxHandler } from 'modules/common/utils';
 
 const initialProducts = [{ key: Math.random() }];
 
@@ -13,6 +14,7 @@ class RfqForm extends TenderForm {
     super(props);
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFile = this.handleFile.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +35,24 @@ class RfqForm extends TenderForm {
     this.save(inputs);
   }
 
+  handleFile(e) {
+    xlsxHandler({
+      e,
+      success: data => {
+        const products = [];
+
+        data.forEach(record => {
+          products.push({
+            key: Math.random(),
+            ...record
+          });
+        });
+
+        this.setState({ products });
+      }
+    });
+  }
+
   render() {
     const { products } = this.state;
 
@@ -45,6 +65,7 @@ class RfqForm extends TenderForm {
             products={products}
             renderProductColumn={this.renderProductColumn}
             isSupplier={false}
+            handleFile={this.handleFile}
           />
 
           <Button

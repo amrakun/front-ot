@@ -154,8 +154,7 @@ class Tenders extends React.Component {
       },
       {
         title: 'Tender number',
-        dataIndex: 'number',
-        sorter: true
+        dataIndex: 'number'
       },
       {
         title: 'Tender name',

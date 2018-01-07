@@ -29,7 +29,7 @@ class Uploader extends React.Component {
     const { REACT_APP_API_URL } = process.env;
     const uploadUrl = `${REACT_APP_API_URL}/upload-file`;
 
-    const { initialFile, initialFiles } = this.props;
+    const { initialFile, initialFiles, label = 'Click to upload' } = this.props;
 
     const defaultFileList = (initialFiles || []).map((file, index) => ({
       uid: index,
@@ -50,7 +50,7 @@ class Uploader extends React.Component {
     return (
       <Upload {...extendedProps}>
         <Button>
-          <Icon type="upload" /> Click to upload
+          <Icon type="upload" /> {label}
         </Button>
       </Upload>
     );
@@ -60,7 +60,8 @@ class Uploader extends React.Component {
 Uploader.propTypes = {
   onReceiveFile: PropTypes.func,
   initialFile: PropTypes.object,
-  initialFiles: PropTypes.array
+  initialFiles: PropTypes.array,
+  label: PropTypes.string
 };
 
 export default Uploader;
