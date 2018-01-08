@@ -7,7 +7,7 @@ const requestUrl =
   'https://s3.amazonaws.com/erxes/0.8259047605671563rfq_requested_products.xlsx';
 
 const respondUrl =
-  'https://s3.amazonaws.com/erxes/0.8259047605671563rfq_requested_products.xlsx';
+  'https://s3.amazonaws.com/erxes/0.19468482709246993rfq_responded_products.xlsx';
 
 const RfqTable = props => {
   const rpc = rfqProductsColumns;

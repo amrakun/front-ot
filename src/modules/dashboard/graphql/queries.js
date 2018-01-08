@@ -2,6 +2,7 @@ export const companyByUser = `
   query companyByUser {
     companyByUser {
       _id
+      lastDifotScore
       basicInfo {
         enName
       }

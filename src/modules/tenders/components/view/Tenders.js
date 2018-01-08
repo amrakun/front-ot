@@ -206,8 +206,12 @@ class Tenders extends React.Component {
       if (currentUser.isSupplier) {
         return (
           <div style={{ width: '160px' }}>
-            <Link to={`/tender/submit/${_id}`}>More</Link>
-            <span className="ant-divider" />
+            {status === 'open' && [
+              <Link to={`/tender/submit/${_id}`} key={0}>
+                More
+              </Link>,
+              <span className="ant-divider" key={1} />
+            ]}
             <Popconfirm
               title="Are you sure you are not interested？"
               placement="bottomRight"

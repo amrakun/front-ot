@@ -8,6 +8,9 @@ import Common from './Common';
 import Sidebar from './Sidebar';
 import Search from './Search';
 
+const template =
+  'https://s3.amazonaws.com/erxes/0.7311866785499372difot_score.xlsx';
+
 class Difot extends Common {
   constructor(props) {
     super(props);
@@ -61,9 +64,13 @@ class Difot extends Common {
           <Card title="Companies">
             <div className="table-operations">
               <Search />
+              <Button onClick={() => window.open(template)}>
+                Download template
+                <Icon type="download" />
+              </Button>
               <div className="upload-btn-wrapper">
                 <Button>
-                  Import materials <Icon type="file-excel" />
+                  Import <Icon type="file-excel" />
                 </Button>
                 <input type="file" onChange={this.handleImport} />
               </div>
