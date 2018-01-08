@@ -150,24 +150,6 @@ export const certificateByUser = `
   }
 `;
 
-const companies = `
-  query companies($search: String, $region: String, $status: String, $productCodes: String) {
-    companies(search: $search, region: $region, status: $status, productCodes: $productCodes) {
-      _id
-      basicInfo {
-        enName,
-        email,
-        sapNumber
-      }
-      contactInfo {
-        name,
-        email,
-        phone
-      }
-    }
-  }
-`;
-
 export const companyPrequalificationDetail = `
   query companyByUser {
     companyByUser {
@@ -275,8 +257,50 @@ export const companyPrequalificationDetail = `
   }
 `;
 
+const commonParams = `$search: String, $region: String, $status: String, $productCodes: String`;
+const commonValues = `search: $search, region: $region, status: $status, productCodes: $productCodes`;
+
+const companies = `
+  query companies(${commonParams}) {
+    companies(${commonValues}) {
+      _id
+      basicInfo {
+        enName,
+        email,
+        sapNumber
+      }
+      contactInfo {
+        name,
+        email,
+        phone
+      }
+    }
+  }
+`;
+
+const difot = `
+  query companies(${commonParams}) {
+    companies(${commonValues}) {
+      _id
+      basicInfo {
+        enName,
+        email,
+        sapNumber
+      }
+      contactInfo {
+        name,
+        email,
+        phone
+      }
+      lastDifotScore
+      averageDifotScore
+    }
+  }
+`;
+
 export default {
   companyByUser,
   companyPrequalificationDetail,
-  companies
+  companies,
+  difot
 };

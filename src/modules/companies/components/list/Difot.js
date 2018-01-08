@@ -1,23 +1,27 @@
+/* eslint-disable react/display-name */
+
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Table, Card, Row, Col, Button, Icon, message } from 'antd';
+import { Table, Card, Row, Col } from 'antd';
+import { xlsxHandler } from 'modules/common/utils';
 import Common from './Common';
 import Sidebar from './Sidebar';
 import Search from './Search';
 
-class Base extends Common {
+class Difot extends Common {
   constructor(props) {
     super(props);
 
-    this.handleSend = this.handleSend.bind(this);
+    this.handleImport = this.handleImport.bind(this);
   }
 
-  handleSend(path) {
-    const { selectedCompanies } = this.state;
-
-    selectedCompanies.length < 1
-      ? message.error('Please select atleast one supplier to continue!')
-      : this.props.history.push(path, { supplierIds: selectedCompanies });
+  handleImport(e) {
+    xlsxHandler({
+      e,
+      success: data => {
+        this.props.addDifotScores(data);
+      }
+    });
   }
 
   render() {
@@ -27,17 +31,26 @@ class Base extends Common {
     const columns = [
       { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
       { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
-      { title: 'Registration', dataIndex: 'registration' },
-      { title: 'Pre-qualification status', dataIndex: 'prequalification' },
-      { title: 'Qualification status', dataIndex: 'audit' },
-      { title: 'Validation status', dataIndex: 'validation' },
-      { title: 'Due dilligence', dataIndex: 'dilligence' },
-      { title: 'DIFOT score', dataIndex: 'dipotScore' },
-      { title: 'Blocking', dataIndex: 'isBlocked' },
-      { title: 'Contact person', dataIndex: 'contactInfo.name' },
+      {
+        title: 'DIFOT score',
+        render: record => {
+          if (record.lastDifotScore) {
+            return <span>{record.lastDifotScore.amount}%</span>;
+          }
+
+          return <span>0%</span>;
+        }
+      },
+      { title: 'Last DIFOT date', dataIndex: 'lastDifotScore.date' },
+      {
+        title: 'Average DIFOT score',
+        render: record => <span>{record.averageDifotScore || 0}%</span>
+      },
+      { title: 'Company administrators', dataIndex: '' },
       { title: 'Email address', dataIndex: 'contactInfo.email' },
       { title: 'Phone number', dataIndex: 'contactInfo.phone' },
-      { title: 'Export profile', key: 'export' }
+      { title: 'Registration', render: () => <span>Yes</span> },
+      { title: 'Pre-qualification status', render: () => <span>Yes</span> }
     ];
 
     return (
@@ -48,17 +61,7 @@ class Base extends Common {
           <Card title="Companies">
             <div className="table-operations">
               <Search />
-
-              <Button onClick={() => this.handleSend('/eoi/publish')}>
-                Send EOI
-              </Button>
-              <Button onClick={() => this.handleSend('/rfq/publish')}>
-                Send RFQ
-              </Button>
-              <Button disabled>
-                Export to excel
-                <Icon type="file-excel" />
-              </Button>
+              <input type="file" onChange={this.handleImport} />
             </div>
 
             <Table
@@ -83,4 +86,4 @@ class Base extends Common {
   }
 }
 
-export default withRouter(Base);
+export default withRouter(Difot);

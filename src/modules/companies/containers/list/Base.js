@@ -1,4 +1,4 @@
 import { BaseList } from '../../components';
 import generator from './generator';
 
-export default generator(BaseList);
+export default generator(BaseList, 'companies');

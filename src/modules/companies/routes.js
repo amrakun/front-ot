@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import queryString from 'query-string';
 import {
   BaseList,
+  Difot,
   Registration,
   Prequalification,
   CapacityBuilding
@@ -34,6 +35,15 @@ export default [
     component={({ location }) => {
       const queryParams = queryString.parse(location.search);
       return <BaseList queryParams={queryParams} />;
+    }}
+  />,
+  <Route
+    key="/difot"
+    exact
+    path="/difot"
+    component={({ location }) => {
+      const queryParams = queryString.parse(location.search);
+      return <Difot queryParams={queryParams} />;
     }}
   />
 ];

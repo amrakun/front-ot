@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { gql, graphql } from 'react-apollo';
 import { queries } from '../../graphql';
 
-const generator = Component => {
+const generator = (Component, query) => {
   class Container extends React.Component {
     constructor(props) {
       super(props);
@@ -50,7 +50,7 @@ const generator = Component => {
     companiesQuery: PropTypes.object
   };
 
-  return graphql(gql(queries.companies), {
+  return graphql(gql(queries[query]), {
     name: 'companiesQuery',
     options: ({ queryParams }) => {
       return {
