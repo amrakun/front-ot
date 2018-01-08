@@ -257,8 +257,21 @@ export const companyPrequalificationDetail = `
   }
 `;
 
-const commonParams = `$search: String, $region: String, $status: String, $productCodes: String`;
-const commonValues = `search: $search, region: $region, status: $status, productCodes: $productCodes`;
+const commonParams = `
+  $search: String
+  $region: String
+  $status: String
+  $productCodes: String
+  $_ids: [String]
+`;
+
+const commonValues = `
+  search: $search,
+  region: $region,
+  status: $status,
+  productCodes: $productCodes
+  _ids: $_ids
+`;
 
 const companies = `
   query companies(${commonParams}) {
@@ -317,10 +330,23 @@ const dueDiligence = `
   }
 `;
 
+const simpleCompanies = `
+  query companies(${commonParams}) {
+    companies(${commonValues}) {
+      _id
+      basicInfo {
+        mnName
+        enName,
+      }
+    }
+  }
+`;
+
 export default {
   companyByUser,
   companyPrequalificationDetail,
   companies,
+  simpleCompanies,
   dueDiligence,
   difot
 };

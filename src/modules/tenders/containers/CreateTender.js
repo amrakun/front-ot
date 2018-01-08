@@ -1,20 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, gql, graphql } from 'react-apollo';
-import { RfqForm, EoiForm } from '../components';
-import { mutations, queries } from '../graphql';
-import { message } from 'antd';
+import { queries as companyQueries } from 'modules/companies/graphql';
 import { Loading } from 'modules/common/components';
+import { RfqForm, EoiForm } from '../components';
+import { mutations } from '../graphql';
+import { message } from 'antd';
 
 const CreateTenderContainer = props => {
-  const { tendersAdd, companiesByIdsQuery, location, history } = props;
+  const { tendersAdd, simpleCompaniesQuery, location, history } = props;
 
-  if (companiesByIdsQuery.loading) {
+  if (simpleCompaniesQuery.loading) {
     return <Loading />;
   }
 
   const save = doc => {
     const [publishDate, closeDate] = doc.dateRange;
+
     tendersAdd({ variables: { ...doc, publishDate, closeDate } })
       .then(tender => {
         message.success('Successfully created a tender!');
@@ -25,11 +27,9 @@ const CreateTenderContainer = props => {
       });
   };
 
-  const requestingSuppliers = companiesByIdsQuery.companies;
-
   const updatedProps = {
     save,
-    data: { suppliers: requestingSuppliers }
+    data: { suppliers: simpleCompaniesQuery.companies }
   };
 
   let form = <RfqForm {...updatedProps} />;
@@ -42,7 +42,7 @@ const CreateTenderContainer = props => {
 CreateTenderContainer.propTypes = {
   location: PropTypes.object,
   tendersAdd: PropTypes.func,
-  companiesByIdsQuery: PropTypes.object,
+  simpleCompaniesQuery: PropTypes.object,
   history: PropTypes.object
 };
 
@@ -51,8 +51,8 @@ export default compose(
     name: 'tendersAdd'
   }),
 
-  graphql(gql(queries.companiesByIds), {
-    name: 'companiesByIdsQuery',
+  graphql(gql(companyQueries.simpleCompanies), {
+    name: 'simpleCompaniesQuery',
     options: ({ location }) => {
       return {
         variables: {

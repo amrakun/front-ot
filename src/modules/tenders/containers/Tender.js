@@ -45,8 +45,7 @@ class TenderContainer extends React.Component {
     this.sendRegretLetter = this.sendRegretLetter.bind(this);
   }
 
-  handleTableChange(pagination, filters, sorter) {
-    console.log(pagination, filters, sorter);
+  handleTableChange(pagination) {
     this.setState({ pagination });
   }
 

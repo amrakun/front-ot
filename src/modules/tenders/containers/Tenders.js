@@ -32,6 +32,7 @@ class TendersContainer extends React.Component {
     const { history } = this.props;
 
     let statusString = '';
+
     filters.status.forEach(i => {
       statusString += i + ',';
     });

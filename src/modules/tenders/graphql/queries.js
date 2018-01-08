@@ -94,17 +94,6 @@ const tenderUpdateDetail = `
   }
 `;
 
-const companiesByIds = `
-  query companies($_ids: [String]) {
-    companies(_ids: $_ids) {
-      _id
-      basicInfo {
-        enName,
-      }
-    }
-  }
-`;
-
 const tenders = `
   query tenders($type: String!, $supplierId: String, $ignoreSubmitted: Boolean, $search: String, $status: String) {
     tenders(type: $type, supplierId: $supplierId, ignoreSubmitted: $ignoreSubmitted, search: $search, status: $status) {
@@ -134,7 +123,6 @@ const eoiBidderList = `
 export default {
   tenderDetail,
   tenders,
-  companiesByIds,
   tenderUpdateDetail,
   rfqBidSummaryReport,
   eoiShortList,

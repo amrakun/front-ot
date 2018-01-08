@@ -2,26 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Input, Select, DatePicker, Tag, Card, Row, Col } from 'antd';
 import moment from 'moment';
-import { Uploader } from 'modules/common/components';
+import { Editor, Uploader } from 'modules/common/components';
 import { days, dateTimeFormat } from 'modules/common/constants';
-import { Editor } from 'modules/common/components';
+import { SupplierSearcher } from 'modules/companies/components';
 
 const MainInfo = props => {
   const {
     renderField,
     renderOptions,
-    onReceiveFile,
     data,
-    requestingSuppliers,
+    suppliers,
     content,
-    onEmailContentChange
+    onEmailContentChange,
+    onReceiveFile,
+    onAddSuppliers
   } = props;
 
   const dateRange = data.publishDate
     ? [moment(data.publishDate), moment(data.closeDate)]
     : null;
 
-  const supplierTags = requestingSuppliers.map(el => {
+  const supplierTags = suppliers.map(el => {
     return <Tag key={el._id}>{el.basicInfo.enName}</Tag>;
   });
 
@@ -36,7 +37,10 @@ const MainInfo = props => {
           <label>Requesting suppliers: </label>
           <br />
 
-          <div style={{ margin: '6px 0 16px 0' }}>{supplierTags}</div>
+          <div style={{ margin: '6px 0 16px 0' }}>
+            {supplierTags}
+            <SupplierSearcher withTag={true} onSelect={onAddSuppliers} />
+          </div>
 
           {renderField({
             ...fieldProps,
@@ -96,12 +100,13 @@ const MainInfo = props => {
 MainInfo.propTypes = {
   renderField: PropTypes.func,
   renderOptions: PropTypes.func,
-  onEmailContentChange: PropTypes.func,
-  onReceiveFile: PropTypes.func,
   location: PropTypes.object,
   data: PropTypes.object,
   content: PropTypes.string,
-  requestingSuppliers: PropTypes.array
+  suppliers: PropTypes.array,
+  onEmailContentChange: PropTypes.func,
+  onReceiveFile: PropTypes.func,
+  onAddSuppliers: PropTypes.func
 };
 
 export default MainInfo;
