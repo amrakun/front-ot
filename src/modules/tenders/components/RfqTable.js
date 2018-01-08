@@ -3,12 +3,6 @@ import PropTypes from 'prop-types';
 import { Table, Button, Icon, Alert, Col, Row } from 'antd';
 import { rfqProductsColumns, rfqDisclaimer } from '../constants';
 
-const requestUrl =
-  'https://s3.amazonaws.com/erxes/0.8259047605671563rfq_requested_products.xlsx';
-
-const respondUrl =
-  'https://s3.amazonaws.com/erxes/0.19468482709246993rfq_responded_products.xlsx';
-
 const RfqTable = props => {
   const rpc = rfqProductsColumns;
   const {
@@ -17,6 +11,15 @@ const RfqTable = props => {
     isSupplier = true,
     handleFile
   } = props;
+
+  const { REACT_APP_API_URL } = process.env;
+  const requestUrl = `${
+    REACT_APP_API_URL
+  }/static/templates/rfq_requested_products.xlsx`;
+
+  const respondUrl = `${
+    REACT_APP_API_URL
+  }/static/templates/rfq_responded_products.xlsx`;
 
   return (
     <div>

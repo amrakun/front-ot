@@ -100,8 +100,8 @@ class Dashboard extends React.Component {
               icon="calculator"
               title="DIFOT score"
               color={lastDifotScore ? colors[6] : colors[5]}
-              number={lastDifotScore.amount}
-              percent={lastDifotScore.amount}
+              number={lastDifotScore ? lastDifotScore.amount : 0}
+              percent={lastDifotScore ? lastDifotScore.amount : 0}
               withPercent={true}
             />
           </Col>
