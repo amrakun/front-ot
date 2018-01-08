@@ -63,7 +63,7 @@ class TenderContainer extends React.Component {
         notification.open({
           ...notifyIfWantToSend,
           btn: (
-            <Button type="primary" onClick={() => this.sendRegretLetter()}>
+            <Button type="primary" onClick={() => this.showRegretLetter()}>
               Send
             </Button>
           )
@@ -74,18 +74,26 @@ class TenderContainer extends React.Component {
       });
   }
 
-  sendRegretLetter() {
+  showRegretLetter() {
+    this.setState({ regretLetterModalVisible: true });
+  }
+
+  sendRegretLetter(content) {
     const { sendRegretLetter, tenderDetailQuery } = this.props;
+    const { tenderDetail } = tenderDetailQuery;
 
     sendRegretLetter({
       variables: {
-        _id: tenderDetailQuery.tenderDetail._id,
-        subject: 'test',
-        content: 'test'
+        _id: tenderDetail._id,
+        subject: `Regret notice for ${tenderDetail.name}`,
+        content: content
       }
     })
       .then(() => {
-        this.setState({ sentRegretLetter: true });
+        this.setState({
+          sentRegretLetter: true,
+          regretLetterModalVisible: false
+        });
         message.success('Succesfully sent regret letters!');
       })
       .catch(error => {
@@ -151,12 +159,14 @@ class TenderContainer extends React.Component {
     const {
       pagination,
       rfqBidSummaryReportLoading,
-      sentRegretLetter
+      sentRegretLetter,
+      regretLetterModalVisible
     } = this.state;
-    console.log(sentRegretLetter);
+
     const updatedProps = {
       ...this.props,
       rfqBidSummaryReportLoading,
+      regretLetterModalVisible,
       sentRegretLetter: sentRegretLetter || tenderDetail.sentRegretLetter,
       award: this.award,
       downloadReport: this.downloadReport,

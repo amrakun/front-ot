@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Table, Card, Input, Icon, Row, Col, Button, Modal } from 'antd';
 import { NumberCard, NumberCardLines } from 'modules/common/components';
 import { colors } from 'modules/common/colors';
+import { Editor } from 'modules/common/components';
+import { regretLetterTemplate } from './constants';
 
 const Search = Input.Search;
 
@@ -12,7 +14,9 @@ const propTypes = {
   loading: PropTypes.bool.isRequired,
   onChange: PropTypes.func,
   filter: PropTypes.func,
-  sendRegretLetter: PropTypes.func
+  sendRegretLetter: PropTypes.func,
+  sentRegretLetter: PropTypes.boolean,
+  regretLetterModalVisible: PropTypes.boolean
 };
 
 class Tender extends React.Component {
@@ -21,13 +25,18 @@ class Tender extends React.Component {
 
     this.state = {
       selectedCompanies: [],
-      responseModalData: { visible: false }
+      responseModal: { visible: false },
+      regretLetterModal: { visible: false },
+      regretLetterContent: regretLetterTemplate
     };
 
     this.onSelectedCompaniesChange = this.onSelectedCompaniesChange.bind(this);
     this.showResponsesModal = this.showResponsesModal.bind(this);
     this.hideResponsesModal = this.hideResponsesModal.bind(this);
     this.renderViewResponse = this.renderViewResponse.bind(this);
+    this.toggleRegretLetterModal = this.toggleRegretLetterModal.bind(this);
+    this.handleRegretLetterChange = this.handleRegretLetterChange.bind(this);
+    this.handleSendRegretLetters = this.handleSendRegretLetters.bind(this);
   }
 
   onSelectedCompaniesChange(selectedCompanies) {
@@ -43,7 +52,7 @@ class Tender extends React.Component {
     const { supplier, response } = record;
 
     this.setState({
-      responseModalData: {
+      responseModal: {
         visible: true,
         title: supplier ? supplier.basicInfo.enName : '',
         data:
@@ -55,7 +64,22 @@ class Tender extends React.Component {
   }
 
   hideResponsesModal() {
-    this.setState({ responseModalData: { visible: false } });
+    this.setState({ responseModal: { visible: false } });
+  }
+
+  toggleRegretLetterModal() {
+    const { regretLetterModal } = this.state;
+    this.setState({
+      regretLetterModal: { visible: !regretLetterModal.visible }
+    });
+  }
+
+  handleSendRegretLetters() {
+    this.props.sendRegretLetter(this.state.regretLetterContent);
+  }
+
+  handleRegretLetterChange(content) {
+    this.setState({ regretLetterContent: content });
   }
 
   columns() {
@@ -97,14 +121,26 @@ class Tender extends React.Component {
   }
 
   renderTender(args) {
+    //args passed from Rfq.js and Eoi.js
     const {
       requestColumns,
       responseColumns,
       requestedData,
       tableOperations
     } = args;
-    const { pagination, loading, onChange, sentRegretLetter } = this.props;
-    const { selectedCompanies, responseModalData } = this.state;
+    const {
+      pagination,
+      loading,
+      onChange,
+      sentRegretLetter,
+      regretLetterModalVisible
+    } = this.props;
+    const {
+      selectedCompanies,
+      responseModal,
+      regretLetterModal,
+      regretLetterContent
+    } = this.state;
     const data = this.props.data || {};
     const {
       submittedCount,
@@ -169,9 +205,7 @@ class Tender extends React.Component {
             />
             <Button
               disabled={sentRegretLetter}
-              onClick={() =>
-                this.props.sendRegretLetter(this.state.selectedCompanies)
-              }
+              onClick={this.toggleRegretLetterModal}
             >
               Send regret letter
               <Icon type="mail" />
@@ -200,8 +234,8 @@ class Tender extends React.Component {
         </Card>
 
         <Modal
-          title={`${responseModalData.title}'s response`}
-          visible={responseModalData.visible}
+          title={`${responseModal.title}'s response`}
+          visible={responseModal.visible}
           onCancel={this.hideResponsesModal}
           footer={null}
           width="100%"
@@ -223,11 +257,24 @@ class Tender extends React.Component {
               <Table
                 columns={responseColumns}
                 rowKey={() => Math.random()}
-                dataSource={responseModalData.data}
+                dataSource={responseModal.data}
                 scroll={{ x: 1300 }}
               />
             </Col>
           </Row>
+        </Modal>
+
+        <Modal
+          title="Send regret letters"
+          visible={regretLetterModalVisible || regretLetterModal.visible}
+          onCancel={this.toggleRegretLetterModal}
+          onOk={this.handleSendRegretLetters}
+          width="50%"
+        >
+          <Editor
+            content={regretLetterContent}
+            onEmailContentChange={this.handleRegretLetterChange}
+          />
         </Modal>
       </div>
     );
