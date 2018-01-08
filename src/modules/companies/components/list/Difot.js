@@ -46,7 +46,7 @@ class Difot extends Common {
         title: 'Average DIFOT score',
         render: record => <span>{record.averageDifotScore || 0}%</span>
       },
-      { title: 'Company administrators', dataIndex: '' },
+      { title: 'Contact person', dataIndex: 'contactInfo.name' },
       { title: 'Email address', dataIndex: 'contactInfo.email' },
       { title: 'Phone number', dataIndex: 'contactInfo.phone' },
       { title: 'Registration', render: () => <span>Yes</span> },
