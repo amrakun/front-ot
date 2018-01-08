@@ -85,6 +85,7 @@ class TenderContainer extends React.Component {
       }
     })
       .then(() => {
+        this.setState({ sentRegretLetter: true });
         message.success('Succesfully sent regret letters!');
       })
       .catch(error => {
@@ -147,11 +148,16 @@ class TenderContainer extends React.Component {
     }
 
     const tenderDetail = tenderDetailQuery.tenderDetail;
-    const { pagination, rfqBidSummaryReportLoading } = this.state;
-
+    const {
+      pagination,
+      rfqBidSummaryReportLoading,
+      sentRegretLetter
+    } = this.state;
+    console.log(sentRegretLetter);
     const updatedProps = {
       ...this.props,
       rfqBidSummaryReportLoading,
+      sentRegretLetter: sentRegretLetter || tenderDetail.sentRegretLetter,
       award: this.award,
       downloadReport: this.downloadReport,
       sendRegretLetter: this.sendRegretLetter,

@@ -103,7 +103,7 @@ class Tender extends React.Component {
       requestedData,
       tableOperations
     } = args;
-    const { pagination, loading, onChange } = this.props;
+    const { pagination, loading, onChange, sentRegretLetter } = this.props;
     const { selectedCompanies, responseModalData } = this.state;
     const data = this.props.data || {};
     const {
@@ -112,8 +112,7 @@ class Tender extends React.Component {
       notInterestedCount,
       notRespondedCount,
       winnerId,
-      responses,
-      sentRegretLetter
+      responses
     } = data;
 
     return (
@@ -167,7 +166,6 @@ class Tender extends React.Component {
             <Search
               placeholder="Supplier name or SAP number"
               style={{ width: 200, float: 'left' }}
-              onSearch={value => console.log(value)}
             />
             <Button
               disabled={sentRegretLetter}

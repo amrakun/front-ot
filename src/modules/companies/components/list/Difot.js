@@ -74,7 +74,7 @@ class Difot extends Common {
 
               <div className="upload-btn-wrapper">
                 <Button>
-                  Import difot score <Icon type="file-excel" />
+                  Import DIFOT score <Icon type="file-excel" />
                 </Button>
                 <input type="file" onChange={this.handleImport} />
               </div>
