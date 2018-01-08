@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Table, Card, Row, Col } from 'antd';
+import { Table, Card, Row, Col, Button, Icon } from 'antd';
 import { xlsxHandler } from 'modules/common/utils';
 import Common from './Common';
 import Sidebar from './Sidebar';
@@ -61,7 +61,12 @@ class Difot extends Common {
           <Card title="Companies">
             <div className="table-operations">
               <Search />
-              <input type="file" onChange={this.handleImport} />
+              <div className="upload-btn-wrapper">
+                <Button>
+                  Import materials <Icon type="file-excel" />
+                </Button>
+                <input type="file" onChange={this.handleImport} />
+              </div>
             </div>
 
             <Table

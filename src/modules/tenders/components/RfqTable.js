@@ -37,13 +37,16 @@ const RfqTable = props => {
             isSupplier ? window.open(respondUrl) : window.open(requestUrl)
           }
         >
-          <Icon type="download" />
           Download template
+          <Icon type="download" />
         </Button>
-        <Upload onChange={handleFile}>
-          <Button>Import materials</Button>
-        </Upload>
-        <input type="file" className="ant-btn" onChange={handleFile} />
+
+        <div className="upload-btn-wrapper">
+          <Button>
+            Import materials <Icon type="file-excel" />
+          </Button>
+          <input type="file" className="ant-btn" onChange={handleFile} />
+        </div>
       </div>
       <Table
         className="form-table"
