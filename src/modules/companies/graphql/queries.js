@@ -298,9 +298,29 @@ const difot = `
   }
 `;
 
+const dueDiligence = `
+  query companies(${commonParams}) {
+    companies(${commonValues}) {
+      _id
+      basicInfo {
+        enName,
+        email,
+        sapNumber
+      }
+      contactInfo {
+        name,
+        email,
+        phone
+      }
+      lastDueDiligence
+    }
+  }
+`;
+
 export default {
   companyByUser,
   companyPrequalificationDetail,
   companies,
+  dueDiligence,
   difot
 };

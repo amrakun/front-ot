@@ -50,8 +50,8 @@ export const buyerSideMenu = [
         title: 'DIFOT'
       },
       {
-        url: '/due-dillegence',
-        title: 'Due dillegence'
+        url: '/due-diligence',
+        title: 'Due diligence'
       },
       {
         url: '/feedback',

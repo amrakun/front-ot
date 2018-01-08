@@ -94,6 +94,14 @@ const addDifotScores = `
   }
 `;
 
+const addDueDiligence = `
+  mutation companiesAddDueDiligences($dueDiligences: [CompanyDueDiligenceInput]!) {
+    companiesAddDueDiligences(dueDiligences: $dueDiligences) {
+      _id
+    }
+  }
+`;
+
 export default {
   basicInfo,
   contactInfo,
@@ -106,5 +114,6 @@ export default {
   businessInfo,
   environmentalInfo,
   healthInfo,
-  addDifotScores
+  addDifotScores,
+  addDueDiligence
 };
