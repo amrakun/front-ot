@@ -8,9 +8,6 @@ import Common from './Common';
 import Sidebar from './Sidebar';
 import Search from './Search';
 
-const template =
-  'https://s3.amazonaws.com/erxes/0.7311866785499372difot_score.xlsx';
-
 class Difot extends Common {
   constructor(props) {
     super(props);
@@ -56,6 +53,11 @@ class Difot extends Common {
       { title: 'Pre-qualification status', render: () => <span>Yes</span> }
     ];
 
+    const { REACT_APP_API_URL } = process.env;
+    const templateUrl = `${
+      REACT_APP_API_URL
+    }/static/templates/difot_score.xlsx`;
+
     return (
       <Row gutter={16}>
         <Sidebar />
@@ -64,13 +66,15 @@ class Difot extends Common {
           <Card title="Companies">
             <div className="table-operations">
               <Search />
-              <Button onClick={() => window.open(template)}>
+
+              <Button onClick={() => window.open(templateUrl)}>
                 Download template
                 <Icon type="download" />
               </Button>
+
               <div className="upload-btn-wrapper">
                 <Button>
-                  Import <Icon type="file-excel" />
+                  Import difot score <Icon type="file-excel" />
                 </Button>
                 <input type="file" onChange={this.handleImport} />
               </div>
