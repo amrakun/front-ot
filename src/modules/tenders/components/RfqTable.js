@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Table, Button, Icon, Alert, Col, Row, Upload } from 'antd';
+import { Table, Button, Icon, Alert, Col, Row } from 'antd';
 import { rfqProductsColumns, rfqDisclaimer } from '../constants';
 
 const requestUrl =

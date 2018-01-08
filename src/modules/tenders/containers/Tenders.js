@@ -121,7 +121,8 @@ export default compose(
           search: queryParams ? queryParams.search : '',
           status: queryParams ? queryParams.status : '',
           type: type,
-          supplierId: supplierId
+          supplierId: supplierId,
+          ignoreSubmitted: queryParams.ignoreSubmitted
         },
         notifyOnNetworkStatusChange: true
       };

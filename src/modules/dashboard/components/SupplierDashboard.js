@@ -26,10 +26,6 @@ class Dashboard extends React.Component {
     this.prequalificationComplete = prequalificationComplete;
   }
 
-  componentDidMount() {
-    console.log(this._child);
-  }
-
   render() {
     const currentUser = this.context.currentUser || {};
     const { data } = this.props;
@@ -111,20 +107,7 @@ class Dashboard extends React.Component {
           </Col>
         </Row>
         <Tenders
-          ref={child => {
-            console.log(child);
-            this._child = child;
-          }}
           type="rfq"
-          supplierId={currentUser.companyId}
-          queryParams={queryParams}
-        />
-        <Tenders
-          ref={child => {
-            console.log(child);
-            this._child = child;
-          }}
-          type="eoi"
           supplierId={currentUser.companyId}
           queryParams={queryParams}
         />

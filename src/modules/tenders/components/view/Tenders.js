@@ -136,6 +136,7 @@ class Tenders extends React.Component {
     return [
       {
         title: 'Status',
+        render: this.renderStatus,
         dataIndex: 'status',
         filters: [
           {
@@ -181,6 +182,10 @@ class Tenders extends React.Component {
     ];
   }
 
+  renderStatus(text, record) {
+    return record.isParticipated ? 'participated' : record.status;
+  }
+
   renderBoolean(text, record) {
     if (record.sentRegretLetter) return 'Yes';
     else return '-';
@@ -200,13 +205,14 @@ class Tenders extends React.Component {
 
   renderOperation(record) {
     const { currentUser, notInterested } = this.props;
-    const { status, _id } = record;
+    const { status, _id, isParticipated } = record;
+    const canParticipate = status === 'open' && !isParticipated;
 
     if (currentUser) {
       if (currentUser.isSupplier) {
         return (
           <div style={{ width: '160px' }}>
-            {status === 'open' && [
+            {canParticipate && [
               <Link to={`/tender/submit/${_id}`} key={0}>
                 More
               </Link>,

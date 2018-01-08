@@ -30,6 +30,7 @@ const tenderFields = `
   winnerId
   isAwarded
   sentRegretLetter
+  isParticipated
 `;
 
 const tenderDetail = `
