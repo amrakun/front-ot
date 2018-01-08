@@ -7,6 +7,7 @@ import DueDiligence from './list/DueDiligence';
 import PrequalificationForms from './prequalification/Prequalification';
 import RegistrationForms from './registration/Registration';
 import Certificate from './registration/Certificate';
+import SupplierSearcher from './searcher';
 
 export {
   RegistrationForms,
@@ -17,5 +18,6 @@ export {
   DueDiligence,
   Feedback,
   SubmitFeedback,
-  FeedbackResponses
+  FeedbackResponses,
+  SupplierSearcher
 };

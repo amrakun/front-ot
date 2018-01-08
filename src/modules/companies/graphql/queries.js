@@ -257,8 +257,21 @@ export const companyPrequalificationDetail = `
   }
 `;
 
-const commonParams = `$search: String, $region: String, $status: String, $productCodes: String`;
-const commonValues = `search: $search, region: $region, status: $status, productCodes: $productCodes`;
+const commonParams = `
+  $search: String
+  $region: String
+  $status: String
+  $productCodes: String
+  $_ids: [String]
+`;
+
+const commonValues = `
+  search: $search,
+  region: $region,
+  status: $status,
+  productCodes: $productCodes
+  _ids: $_ids
+`;
 
 const companies = `
   query companies(${commonParams}) {
@@ -335,6 +348,25 @@ const feedback = `
   }
 `;
 
+const simpleCompanies = `
+  query companies(${commonParams}) {
+    companies(${commonValues}) {
+      _id
+      basicInfo {
+        mnName,
+        enName,
+        email,
+        sapNumber
+      }
+      contactInfo {
+        name,
+        email,
+        phone
+      }
+    }
+  }
+`;
+
 const feedbackFields = `
   _id
   status
@@ -351,6 +383,7 @@ const feedbackDetail = `
     }
   }
 `;
+
 const feedbacks = `
   query feedbacks {
     feedbacks {
@@ -380,6 +413,7 @@ export default {
   companyByUser,
   companyPrequalificationDetail,
   companies,
+  simpleCompanies,
   dueDiligence,
   difot,
   feedback,

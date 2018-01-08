@@ -42,11 +42,12 @@ class TenderForm extends BaseForm {
       products,
       ...perProductStates,
       content: data.content && data.content,
-      requestingSuppliers: data.suppliers
+      suppliers: data.suppliers
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onEmailContentChange = this.onEmailContentChange.bind(this);
+    this.onAddSuppliers = this.onAddSuppliers.bind(this);
     this.onProductInputChange = this.onProductInputChange.bind(this);
     this.addProductRow = this.addProductRow.bind(this);
     this.renderProductColumn = this.renderProductColumn.bind(this);
@@ -66,7 +67,8 @@ class TenderForm extends BaseForm {
     });
 
     const supplierIds = [];
-    this.state.requestingSuppliers.forEach(i => {
+
+    this.state.suppliers.forEach(i => {
       supplierIds.push(i._id);
     });
 
@@ -79,6 +81,20 @@ class TenderForm extends BaseForm {
 
   onEmailContentChange(content) {
     this.setState({ content });
+  }
+
+  onAddSuppliers(values) {
+    const suppliers = [...this.state.suppliers];
+    const supplierIds = suppliers.map(s => s._id);
+
+    values.forEach(value => {
+      // Only add new suppliers
+      if (!supplierIds.includes(value._id)) {
+        suppliers.push(value);
+      }
+    });
+
+    this.setState({ suppliers });
   }
 
   addProductRow() {
@@ -144,16 +160,17 @@ class TenderForm extends BaseForm {
   }
 
   renderMainInfo(template) {
-    const { requestingSuppliers, content } = this.state;
+    const { suppliers, content } = this.state;
 
     return (
       <div>
         <MainInfo
-          requestingSuppliers={requestingSuppliers}
+          suppliers={suppliers}
           data={this.props.data}
           content={content || template}
           renderField={this.renderField.bind(this)}
           renderOptions={this.renderOptions.bind(this)}
+          onAddSuppliers={this.onAddSuppliers}
           onEmailContentChange={this.onEmailContentChange}
           onReceiveFile={(...args) => this.fileUpload(...args)}
         />
