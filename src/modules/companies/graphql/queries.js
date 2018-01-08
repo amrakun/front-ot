@@ -354,14 +354,7 @@ const simpleCompanies = `
       _id
       basicInfo {
         mnName,
-        enName,
-        email,
-        sapNumber
-      }
-      contactInfo {
-        name,
-        email,
-        phone
+        enName
       }
     }
   }
