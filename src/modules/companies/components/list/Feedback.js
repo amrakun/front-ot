@@ -126,6 +126,7 @@ class Feedback extends Common {
             onOk={this.addFeedback}
             width="50%"
           >
+            <label>Close date: </label>
             <DatePicker
               defaultValue={feedbackCloseDate}
               showTime={{ format: 'HH:mm' }}
