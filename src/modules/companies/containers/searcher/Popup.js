@@ -2,20 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { gql, compose, graphql } from 'react-apollo';
 import { queries } from '../../graphql';
-import Modal from '../../components/searcher/Modal';
+import Popup from '../../components/searcher/Popup';
 
-const ModalContainer = props => {
+const PopupContainer = props => {
   const suppliers = props.companiesQuery.companies || [];
 
-  return <Modal {...{ ...props, suppliers }} />;
+  return <Popup {...{ ...props, suppliers }} />;
 };
 
-ModalContainer.propTypes = {
+PopupContainer.propTypes = {
   companiesQuery: PropTypes.object
 };
 
 export default compose(
   graphql(gql(queries.simpleCompanies), {
-    name: 'companiesQuery'
+    name: 'companiesQuery',
+    options: ({ searchValue }) => {
+      return {
+        variables: { search: searchValue }
+      };
+    }
   })
-)(ModalContainer);
+)(PopupContainer);

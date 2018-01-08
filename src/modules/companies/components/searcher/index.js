@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Tag, Icon } from 'antd';
-import { Modal } from '../../containers/searcher';
+import { Popup } from '../../containers/searcher';
 
 const propTypes = {
   withTag: PropTypes.bool,
@@ -14,16 +14,18 @@ class SupplierSearcher extends React.Component {
 
     this.state = {
       visible: false,
+      searchValue: '',
       selectedValues: []
     };
 
-    this.showModal = this.showModal.bind(this);
+    this.showPopup = this.showPopup.bind(this);
+    this.onSearch = this.onSearch.bind(this);
     this.onCancel = this.onCancel.bind(this);
     this.onOk = this.onOk.bind(this);
     this.onSelect = this.onSelect.bind(this);
   }
 
-  showModal() {
+  showPopup() {
     this.setState({ visible: true });
   }
 
@@ -33,6 +35,10 @@ class SupplierSearcher extends React.Component {
     this.setState({ visible: false });
 
     this.props.onSelect(selectedValues);
+  }
+
+  onSearch(value) {
+    this.setState({ searchValue: value });
   }
 
   onCancel() {
@@ -49,14 +55,15 @@ class SupplierSearcher extends React.Component {
     }
   }
 
-  renderModal() {
-    const { selectedValues, visible } = this.state;
+  renderPopup() {
+    const { searchValue, visible } = this.state;
 
     if (visible) {
       return (
-        <Modal
-          selectedValues={selectedValues}
+        <Popup
+          searchValue={searchValue}
           visible={visible}
+          onSearch={this.onSearch}
           onOk={this.onOk}
           onCancel={this.onCancel}
           onSelect={this.onSelect}
@@ -71,18 +78,18 @@ class SupplierSearcher extends React.Component {
     return (
       <span>
         {!withTag && (
-          <Button disabled onClick={this.showModal}>
+          <Button disabled onClick={this.showPopup}>
             Invite a new supplier
           </Button>
         )}
 
         {withTag && (
-          <Tag onClick={this.showModal} className="dashed-button">
+          <Tag onClick={this.showPopup} className="dashed-button">
             <Icon type="plus" /> Invite a new supplier
           </Tag>
         )}
 
-        {this.renderModal()}
+        {this.renderPopup()}
       </span>
     );
   }

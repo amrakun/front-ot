@@ -6,13 +6,21 @@ const propTypes = {
   suppliers: PropTypes.array,
   visible: PropTypes.bool,
   onOk: PropTypes.func,
+  onSearch: PropTypes.func,
   onCancel: PropTypes.func,
   onSelect: PropTypes.func
 };
 
 class Popup extends React.Component {
   render() {
-    const { visible, onOk, onCancel, onSelect, suppliers } = this.props;
+    const {
+      visible,
+      onSearch,
+      onOk,
+      onCancel,
+      onSelect,
+      suppliers
+    } = this.props;
 
     return (
       <Modal
@@ -23,7 +31,12 @@ class Popup extends React.Component {
         onOk={onOk}
         onCancel={onCancel}
       >
-        <Select mode="multiple" style={{ width: '100%' }} onSelect={onSelect}>
+        <Select
+          mode="multiple"
+          style={{ width: '100%' }}
+          onSelect={onSelect}
+          onSearch={onSearch}
+        >
           {suppliers.map(supplier => (
             <Select.Option key={JSON.stringify(supplier)}>
               {supplier.basicInfo.enName}

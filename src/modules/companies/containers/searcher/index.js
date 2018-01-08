@@ -1,3 +1,3 @@
-import Modal from './Modal';
+import Popup from './Popup';
 
-export { Modal };
+export { Popup };
