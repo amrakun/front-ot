@@ -1,13 +1,6 @@
-import CompaniesList from './list/Companies';
-import AddMore from './list/AddMore';
+import BaseList from './list/Base';
 import PrequalificationForms from './prequalification/Prequalification';
 import RegistrationForms from './registration/Registration';
 import Certificate from './registration/Certificate';
 
-export {
-  CompaniesList,
-  RegistrationForms,
-  PrequalificationForms,
-  Certificate,
-  AddMore
-};
+export { RegistrationForms, PrequalificationForms, Certificate, BaseList };

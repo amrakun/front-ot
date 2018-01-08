@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import queryString from 'query-string';
 import {
-  Companies,
+  BaseList,
   Registration,
   Prequalification,
   CapacityBuilding
@@ -33,7 +33,7 @@ export default [
     path="/companies"
     component={({ location }) => {
       const queryParams = queryString.parse(location.search);
-      return <Companies queryParams={queryParams} />;
+      return <BaseList queryParams={queryParams} />;
     }}
   />
 ];

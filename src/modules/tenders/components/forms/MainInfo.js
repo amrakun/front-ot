@@ -4,7 +4,6 @@ import { Input, Select, DatePicker, Tag, Card, Row, Col } from 'antd';
 import moment from 'moment';
 import { Uploader } from 'modules/common/components';
 import { days, dateTimeFormat } from 'modules/common/constants';
-import AddMore from 'modules/companies/components/list/AddMore';
 import { Editor } from 'modules/common/components';
 
 const MainInfo = props => {
@@ -37,10 +36,7 @@ const MainInfo = props => {
           <label>Requesting suppliers: </label>
           <br />
 
-          <div style={{ margin: '6px 0 16px 0' }}>
-            {supplierTags}
-            <AddMore withTag={true} />
-          </div>
+          <div style={{ margin: '6px 0 16px 0' }}>{supplierTags}</div>
 
           {renderField({
             ...fieldProps,
