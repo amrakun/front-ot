@@ -4,6 +4,7 @@ import queryString from 'query-string';
 import {
   BaseList,
   Difot,
+  DueDiligence,
   Registration,
   Prequalification,
   CapacityBuilding
@@ -44,6 +45,15 @@ export default [
     component={({ location }) => {
       const queryParams = queryString.parse(location.search);
       return <Difot queryParams={queryParams} />;
+    }}
+  />,
+  <Route
+    key="/due-diligence"
+    exact
+    path="/due-diligence"
+    component={({ location }) => {
+      const queryParams = queryString.parse(location.search);
+      return <DueDiligence queryParams={queryParams} />;
     }}
   />
 ];
