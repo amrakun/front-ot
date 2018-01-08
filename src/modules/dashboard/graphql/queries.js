@@ -3,6 +3,13 @@ export const companyByUser = `
     companyByUser {
       _id
       lastDifotScore
+      feedbacks {
+        _id
+        status
+        closeDate
+        content
+        createdDate
+      }
       basicInfo {
         enName
       }

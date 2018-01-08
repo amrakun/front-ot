@@ -5,6 +5,9 @@ import {
   BaseList,
   Difot,
   DueDiligence,
+  Feedback,
+  SubmitFeedback,
+  FeedbackResponses,
   Registration,
   Prequalification,
   CapacityBuilding
@@ -55,5 +58,26 @@ export default [
       const queryParams = queryString.parse(location.search);
       return <DueDiligence queryParams={queryParams} />;
     }}
+  />,
+  <Route
+    key="/feedback"
+    exact
+    path="/feedback"
+    component={({ location }) => {
+      const queryParams = queryString.parse(location.search);
+      return <Feedback queryParams={queryParams} />;
+    }}
+  />,
+  <Route
+    key={'/feedback/submit'}
+    exact
+    path={`${'/feedback/submit'}/:id`}
+    component={SubmitFeedback}
+  />,
+  <Route
+    key={'/feedback/responses'}
+    exact
+    path={'/feedback/responses'}
+    component={FeedbackResponses}
   />
 ];

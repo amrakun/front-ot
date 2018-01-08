@@ -1,15 +1,17 @@
 import React from 'react';
-import { Icon, Card } from 'antd';
+import { Icon, Card, Badge } from 'antd';
 import PropTypes from 'prop-types';
 
 function NumberCard(props) {
-  const { icon, color, title, text } = props;
+  const { icon, color, title, text, badge } = props;
   return (
     <Card className="numberCard" bodyStyle={{ padding: 0 }}>
-      <Icon className="iconWarp" style={{ color }} type={icon} />
+      <Badge count={badge ? 1 : 0} className="iconWarp">
+        <Icon style={{ color }} type={icon} />
+      </Badge>
       <div className="content">
         <p className="title">{title || 'No Title'}</p>
-        <p className="number">{text}</p>
+        <p className="text">{text}</p>
       </div>
     </Card>
   );

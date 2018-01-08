@@ -54,8 +54,18 @@ export const buyerSideMenu = [
         title: 'Due diligence'
       },
       {
-        url: '/feedback',
-        title: 'Success feedback'
+        url: 'feedback',
+        title: 'Success feedback',
+        subMenu: [
+          {
+            url: '/feedback',
+            title: 'Send'
+          },
+          {
+            url: '/feedback/responses',
+            title: 'Responses'
+          }
+        ]
       },
       {
         url: '/blocking',

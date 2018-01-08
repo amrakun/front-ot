@@ -1,5 +1,8 @@
 import BaseList from './list/Base';
 import Difot from './list/Difot';
+import Feedback from './list/Feedback';
+import SubmitFeedback from './feedback/SubmitFeedback';
+import FeedbackResponses from './feedback/FeedbackResponses';
 import DueDiligence from './list/DueDiligence';
 import PrequalificationForms from './prequalification/Prequalification';
 import RegistrationForms from './registration/Registration';
@@ -11,5 +14,8 @@ export {
   Certificate,
   BaseList,
   Difot,
-  DueDiligence
+  DueDiligence,
+  Feedback,
+  SubmitFeedback,
+  FeedbackResponses
 };

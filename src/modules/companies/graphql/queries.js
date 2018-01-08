@@ -317,10 +317,72 @@ const dueDiligence = `
   }
 `;
 
+const feedback = `
+  query companies(${commonParams}) {
+    companies(${commonValues}) {
+      _id
+      basicInfo {
+        enName,
+        email,
+        sapNumber
+      }
+      contactInfo {
+        name,
+        email,
+        phone
+      }
+    }
+  }
+`;
+
+const feedbackFields = `
+  _id
+  status
+  closeDate
+  supplierIds
+  content
+  createdDate
+`;
+
+const feedbackDetail = `
+  query feedbackDetail($_id: String!) {
+    feedbackDetail(_id: $_id) {
+      ${feedbackFields}
+    }
+  }
+`;
+const feedbacks = `
+  query feedbacks {
+    feedbacks {
+      ${feedbackFields}
+      createdUserId
+      responses {
+        _id
+        status
+        feedbackId
+        supplierId
+        employmentNumberBefore
+        employmentNumberNow
+        nationalSpendBefore
+        nationalSpendAfter
+        umnugobiSpendBefore
+        umnugobiSpendAfter
+        investment
+        trainings
+        corporateSocial
+        technologyImprovement
+      }
+    }
+  }
+`;
+
 export default {
   companyByUser,
   companyPrequalificationDetail,
   companies,
   dueDiligence,
-  difot
+  difot,
+  feedback,
+  feedbackDetail,
+  feedbacks
 };

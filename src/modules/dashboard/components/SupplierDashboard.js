@@ -1,7 +1,11 @@
 import React from 'react';
 import { Tenders } from '../../tenders/containers';
 import { PropTypes } from 'prop-types';
-import { NumberCard, NumberCardLines } from 'modules/common/components';
+import {
+  NumberCard,
+  NumberCardLines,
+  TextCard
+} from 'modules/common/components';
 import { colors } from 'modules/common/colors';
 import { Row, Col, Alert } from 'antd';
 import { Link } from 'react-router-dom';
@@ -29,8 +33,8 @@ class Dashboard extends React.Component {
   render() {
     const currentUser = this.context.currentUser || {};
     const { data } = this.props;
-    const { lastDifotScore } = data;
-
+    const { lastDifotScore, feedbacks } = data;
+    console.log(feedbacks);
     return (
       <div>
         {!this.registrationComplete && !this.prequalificationComplete ? (
@@ -69,7 +73,7 @@ class Dashboard extends React.Component {
 
         <div className="margin" />
         <Row gutter={24}>
-          <Col key={1} lg={6} sm={12}>
+          <Col key={1} lg={8} sm={12}>
             <NumberCard
               icon="message"
               title="Open EOI/RFQ"
@@ -77,7 +81,36 @@ class Dashboard extends React.Component {
               number={0}
             />
           </Col>
-          <Col key={2} lg={6} sm={12}>
+          <Col key={4} lg={8} sm={12}>
+            <NumberCardLines
+              icon="calculator"
+              title="DIFOT score"
+              color={lastDifotScore ? colors[6] : colors[5]}
+              number={lastDifotScore ? lastDifotScore.amount : 0}
+              percent={lastDifotScore ? lastDifotScore.amount : 0}
+              withPercent={true}
+            />
+          </Col>
+          <Col key={5} lg={8} sm={12}>
+            <TextCard
+              icon="mail"
+              title="Success feedback"
+              color={colors[7]}
+              text={
+                feedbacks ? (
+                  <span>
+                    You have new success feedback. Click &#34;
+                    <Link to={`feedback/submit/${feedbacks[0]._id}`}>here</Link>
+                    &#34;to submit
+                  </span>
+                ) : (
+                  'Nothing new'
+                )
+              }
+              badge={feedbacks !== undefined}
+            />
+          </Col>
+          <Col key={2} lg={8} sm={12}>
             <NumberCard
               icon="clock-circle-o"
               title="Reminder"
@@ -85,7 +118,7 @@ class Dashboard extends React.Component {
               number={0}
             />
           </Col>
-          <Col key={3} lg={6} sm={12}>
+          <Col key={3} lg={8} sm={12}>
             <NumberCardLines
               icon="solution"
               title="Pre-qualification status"
@@ -95,14 +128,13 @@ class Dashboard extends React.Component {
               withPercent={true}
             />
           </Col>
-          <Col key={4} lg={6} sm={12}>
-            <NumberCardLines
-              icon="calculator"
-              title="DIFOT score"
-              color={lastDifotScore ? colors[6] : colors[5]}
-              number={lastDifotScore ? lastDifotScore.amount : 0}
-              percent={lastDifotScore ? lastDifotScore.amount : 0}
-              withPercent={true}
+          <Col key={6} lg={8} sm={12}>
+            <TextCard
+              icon="notification"
+              title="Qualification/audit"
+              color={colors[5]}
+              text="You have no new notification"
+              badge={false}
             />
           </Col>
         </Row>

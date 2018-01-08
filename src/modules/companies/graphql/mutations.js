@@ -102,6 +102,56 @@ const addDueDiligence = `
   }
 `;
 
+const addFeedback = `
+  mutation feedbacksAdd(
+    $closeDate: Date!
+    $supplierIds: [String]!
+    $content: String!
+  ) {
+    feedbacksAdd(
+      closeDate: $closeDate
+      supplierIds: $supplierIds
+      content: $content
+    ) {
+      _id
+    }
+  }
+`;
+
+const addFeedbackResponse = `
+  mutation feedbackResponsesAdd(
+    $feedbackId: String!
+    $supplierId: String!
+    $employmentNumberBefore: Float!
+    $employmentNumberNow: Float!
+    $nationalSpendBefore: Float!
+    $nationalSpendAfter: Float!
+    $umnugobiSpendBefore: Float!
+    $umnugobiSpendAfter: Float!
+    $investment: String!
+    $trainings: String!
+    $corporateSocial: String!
+    $technologyImprovement: String!
+  ) {
+    feedbackResponsesAdd(
+      feedbackId: $feedbackId
+      supplierId: $supplierId
+      employmentNumberBefore: $employmentNumberBefore
+      employmentNumberNow: $employmentNumberNow
+      nationalSpendBefore: $nationalSpendBefore
+      nationalSpendAfter: $nationalSpendAfter
+      umnugobiSpendBefore: $umnugobiSpendBefore
+      umnugobiSpendAfter: $umnugobiSpendAfter
+      investment: $investment
+      trainings: $trainings
+      corporateSocial: $corporateSocial
+      technologyImprovement: $technologyImprovement
+    ) {
+      _id
+    }
+  }
+`;
+
 export default {
   basicInfo,
   contactInfo,
@@ -115,5 +165,7 @@ export default {
   environmentalInfo,
   healthInfo,
   addDifotScores,
-  addDueDiligence
+  addDueDiligence,
+  addFeedback,
+  addFeedbackResponse
 };

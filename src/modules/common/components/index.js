@@ -2,7 +2,7 @@ import Countries from './Countries';
 import Field from './Field';
 import Uploader from './Uploader';
 import BaseForm from './BaseForm';
-import textCard from './dataDisplay/textCard';
+import TextCard from './dataDisplay/textCard';
 import NumberCard from './dataDisplay/numberCard';
 import NumberCardLines from './dataDisplay/numberCard_lines';
 import Editor from './Editor';
@@ -15,7 +15,7 @@ export {
   BaseForm,
   NumberCard,
   NumberCardLines,
-  textCard,
+  TextCard,
   Editor,
   Loading
 };

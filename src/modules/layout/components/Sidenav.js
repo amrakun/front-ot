@@ -51,7 +51,7 @@ function renderMenu(sideMenu) {
           key={m.url}
           title={
             <span>
-              <Icon type={m.icon} />
+              {m.icon ? <Icon type={m.icon} /> : ''}
               <span>{m.title}</span>
             </span>
           }
