@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Table, Button, Icon, Alert, Col, Row } from 'antd';
+import { Table, Button, Icon, Alert, Col, Row, Upload } from 'antd';
 import { rfqProductsColumns, rfqDisclaimer } from '../constants';
-import { Uploader } from 'modules/common/components';
 
-const templateUrl =
+const requestUrl =
+  'https://s3.amazonaws.com/erxes/0.8259047605671563rfq_requested_products.xlsx';
+
+const respondUrl =
   'https://s3.amazonaws.com/erxes/0.8259047605671563rfq_requested_products.xlsx';
 
 const RfqTable = props => {
@@ -30,12 +32,18 @@ const RfqTable = props => {
         </Col>
       </Row>
       <div className="table-operations margin">
-        <Button onClick={() => window.open(templateUrl)}>
+        <Button
+          onClick={() =>
+            isSupplier ? window.open(respondUrl) : window.open(requestUrl)
+          }
+        >
           <Icon type="download" />
           Download template
         </Button>
-        {/* <input type="file" onChange={handleFile} /> */}
-        <Uploader onReceiveFile={handleFile} label="Import materials" />
+        <Upload onChange={handleFile}>
+          <Button>Import materials</Button>
+        </Upload>
+        <input type="file" className="ant-btn" onChange={handleFile} />
       </div>
       <Table
         className="form-table"
