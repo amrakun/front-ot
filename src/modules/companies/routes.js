@@ -8,6 +8,7 @@ import {
   Feedback,
   SubmitFeedback,
   FeedbackResponses,
+  FeedbackDetail,
   Registration,
   Prequalification,
   CapacityBuilding
@@ -79,5 +80,11 @@ export default [
     exact
     path={'/feedback/responses'}
     component={FeedbackResponses}
+  />,
+  <Route
+    key="/feedback/response"
+    exact
+    path="/feedback/response/:id"
+    component={FeedbackDetail}
   />
 ];

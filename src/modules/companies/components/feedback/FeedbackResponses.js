@@ -26,8 +26,8 @@ class FeedbackResponses extends React.Component {
         render: record => moment(record.closeDate).format(dateFormat)
       },
       {
-        title: 'Suppliers',
-        render: record => (record.supplierIds ? record.supplierIds.length : '-')
+        title: 'Responses',
+        render: record => (record.responses ? record.responses.length : '-')
       },
       {
         title: 'Action',
@@ -40,8 +40,6 @@ class FeedbackResponses extends React.Component {
 
   render() {
     const { data, pagination, loading, onChange } = this.props;
-
-    console.log(data);
 
     return (
       <Card title="Success feedback responses">

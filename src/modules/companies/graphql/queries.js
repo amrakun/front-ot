@@ -372,7 +372,12 @@ const feedbackFields = `
 const feedbackDetail = `
   query feedbackDetail($_id: String!) {
     feedbackDetail(_id: $_id) {
-      ${feedbackFields}
+      _id
+      status
+      closeDate
+      supplierIds
+      content
+      createdDate
     }
   }
 `;
@@ -381,25 +386,41 @@ const feedbacks = `
   query feedbacks {
     feedbacks {
       ${feedbackFields}
-      createdUserId
       responses {
         _id
-        status
-        feedbackId
-        supplierId
-        employmentNumberBefore
-        employmentNumberNow
-        nationalSpendBefore
-        nationalSpendAfter
-        umnugobiSpendBefore
-        umnugobiSpendAfter
-        investment
-        trainings
-        corporateSocial
-        technologyImprovement
       }
     }
   }
+`;
+
+const feedbackResponseDetail = `
+query feedbackDetail($_id: String!) {
+  feedbackDetail(_id: $_id) {
+    _id
+    status
+    closeDate
+    supplierIds
+    content
+    createdDate
+    createdUserId
+    responses {
+      _id
+      status
+      feedbackId
+      supplierId
+      employmentNumberBefore
+      employmentNumberNow
+      nationalSpendBefore
+      nationalSpendAfter
+      umnugobiSpendBefore
+      umnugobiSpendAfter
+      investment
+      trainings
+      corporateSocial
+      technologyImprovement
+    }
+  }
+}
 `;
 
 export default {
@@ -411,5 +432,6 @@ export default {
   difot,
   feedback,
   feedbackDetail,
-  feedbacks
+  feedbacks,
+  feedbackResponseDetail
 };
