@@ -86,6 +86,14 @@ const healthInfo = `
   }
 `;
 
+const addDifotScores = `
+  mutation companiesAddDifotScores($difotScores: [CompanyDifotScoreInput]!) {
+    companiesAddDifotScores(difotScores: $difotScores) {
+      _id
+    }
+  }
+`;
+
 export default {
   basicInfo,
   contactInfo,
@@ -97,5 +105,6 @@ export default {
   financialInfo,
   businessInfo,
   environmentalInfo,
-  healthInfo
+  healthInfo,
+  addDifotScores
 };

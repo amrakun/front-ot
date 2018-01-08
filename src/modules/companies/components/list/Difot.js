@@ -1,0 +1,89 @@
+/* eslint-disable react/display-name */
+
+import React from 'react';
+import { withRouter } from 'react-router';
+import { Table, Card, Row, Col } from 'antd';
+import { xlsxHandler } from 'modules/common/utils';
+import Common from './Common';
+import Sidebar from './Sidebar';
+import Search from './Search';
+
+class Difot extends Common {
+  constructor(props) {
+    super(props);
+
+    this.handleImport = this.handleImport.bind(this);
+  }
+
+  handleImport(e) {
+    xlsxHandler({
+      e,
+      success: data => {
+        this.props.addDifotScores(data);
+      }
+    });
+  }
+
+  render() {
+    const { data, pagination, loading, onChange } = this.props;
+    const { selectedCompanies } = this.state;
+
+    const columns = [
+      { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
+      { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
+      {
+        title: 'DIFOT score',
+        render: record => {
+          if (record.lastDifotScore) {
+            return <span>{record.lastDifotScore.amount}%</span>;
+          }
+
+          return <span>0%</span>;
+        }
+      },
+      { title: 'Last DIFOT date', dataIndex: 'lastDifotScore.date' },
+      {
+        title: 'Average DIFOT score',
+        render: record => <span>{record.averageDifotScore || 0}%</span>
+      },
+      { title: 'Company administrators', dataIndex: '' },
+      { title: 'Email address', dataIndex: 'contactInfo.email' },
+      { title: 'Phone number', dataIndex: 'contactInfo.phone' },
+      { title: 'Registration', render: () => <span>Yes</span> },
+      { title: 'Pre-qualification status', render: () => <span>Yes</span> }
+    ];
+
+    return (
+      <Row gutter={16}>
+        <Sidebar />
+
+        <Col span={18}>
+          <Card title="Companies">
+            <div className="table-operations">
+              <Search />
+              <input type="file" onChange={this.handleImport} />
+            </div>
+
+            <Table
+              rowSelection={{
+                selectedCompanies,
+                onChange: this.onSelectedCompaniesChange
+              }}
+              columns={columns}
+              rowKey={record => record._id}
+              dataSource={data}
+              pagination={pagination}
+              loading={loading}
+              scroll={{ x: 1600 }}
+              onChange={(pagination, filters, sorter) =>
+                onChange(pagination, filters, sorter)
+              }
+            />
+          </Card>
+        </Col>
+      </Row>
+    );
+  }
+}
+
+export default withRouter(Difot);
