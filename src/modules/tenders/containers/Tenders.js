@@ -122,7 +122,7 @@ export default compose(
           status: queryParams ? queryParams.status : '',
           type: type,
           supplierId: supplierId,
-          ignoreSubmitted: queryParams.ignoreSubmitted
+          ignoreSubmitted: queryParams ? queryParams.ignoreSubmitted : ''
         },
         notifyOnNetworkStatusChange: true
       };
