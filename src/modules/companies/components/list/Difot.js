@@ -7,6 +7,8 @@ import { xlsxHandler } from 'modules/common/utils';
 import Common from './Common';
 import Sidebar from './Sidebar';
 import Search from './Search';
+import moment from 'moment';
+import { dateFormat } from 'modules/common/constants';
 
 class Difot extends Common {
   constructor(props) {
@@ -41,7 +43,13 @@ class Difot extends Common {
           return <span>0%</span>;
         }
       },
-      { title: 'Last DIFOT date', dataIndex: 'lastDifotScore.date' },
+      {
+        title: 'Last DIFOT date',
+        render: record =>
+          record.lastDifotScore
+            ? moment(record.lastDifotScore.date).format(dateFormat)
+            : '-'
+      },
       {
         title: 'Average DIFOT score',
         render: record => <span>{record.averageDifotScore || 0}%</span>
