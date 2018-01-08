@@ -356,10 +356,26 @@ form .ant-input-number {
   display: inline-block;
   cursor: pointer;
 }
+.upload-btn-wrapper:hover .ant-btn {
+  cursor: pointer;
+  color: #ff9a4d;
+  border-color: #ff9a4d;
+}
+.upload-btn-wrapper:hover .ant-btn span {
+  z-index: 0;
+  cursor: pointer;
+}
+.upload-btn-wrapper .ant-btn {
+  z-index: 0;
+}
 .upload-btn-wrapper input[type='file'] {
-  font-size: 100px;
+  z-index: 1;
   position: absolute;
   left: 0;
   top: 0;
   opacity: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
 }
