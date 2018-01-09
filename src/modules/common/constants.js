@@ -24,7 +24,11 @@ const booleanData = [
   { text: 'No', value: 'false' }
 ];
 
-const days = [{ text: '1 day', value: '1' }];
+const days = [
+  { text: '1 day before', value: '1' },
+  { text: '3 days before', value: '3' },
+  { text: '7 days before', value: '7' }
+];
 
 export {
   dateFormat,

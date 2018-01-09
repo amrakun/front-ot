@@ -15,15 +15,26 @@ const Sidenav = (props, context) => {
   const { currentUser } = context;
   const { collapsed, onCollapse, pathname } = props;
 
+  let defaultOpenKeys = [];
+  if (
+    ['/validation', '/due-diligence', '/audit', '/difot', '/blocking'].includes(
+      pathname
+    )
+  ) {
+    defaultOpenKeys.push('action');
+  }
+  if (['/feedback', '/feedback/responses'].includes(pathname)) {
+    defaultOpenKeys.push('action', 'feedback');
+  }
+
   return (
     <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
       <NavLink to="/" className="logo">
         <img src={process.env.PUBLIC_URL + '/images/logo_mn.png'} alt="logo" />
       </NavLink>
       <Menu
-        selectedKeys={
-          pathname === '/' ? ['/dashboard', 'rfq-and-eoi'] : [pathname]
-        }
+        selectedKeys={[pathname]}
+        defaultOpenKeys={defaultOpenKeys}
         mode="inline"
         inlineCollapsed={collapsed}
       >

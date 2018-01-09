@@ -21,8 +21,9 @@ NumberCard.propTypes = {
   icon: PropTypes.string,
   color: PropTypes.string,
   title: PropTypes.string,
-  text: PropTypes.string,
-  countUp: PropTypes.object
+  text: PropTypes.object,
+  countUp: PropTypes.object,
+  badge: PropTypes.bool
 };
 
 export default NumberCard;

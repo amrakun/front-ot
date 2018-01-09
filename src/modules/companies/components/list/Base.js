@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Table, Card, Row, Col, Button, Icon, message } from 'antd';
@@ -31,8 +33,22 @@ class Base extends Common {
       { title: 'Pre-qualification status', dataIndex: 'prequalification' },
       { title: 'Qualification status', dataIndex: 'audit' },
       { title: 'Validation status', dataIndex: 'validation' },
-      { title: 'Due dilligence', dataIndex: 'dilligence' },
-      { title: 'DIFOT score', dataIndex: 'dipotScore' },
+      {
+        title: 'Due dilligence',
+        render: record =>
+          record.lastDueDiligence ? (
+            <a href={record.lastDueDiligence.file.url} target="_blank">
+              Yes
+            </a>
+          ) : (
+            '-'
+          )
+      },
+      {
+        title: 'DIFOT score',
+        render: record =>
+          record.averageDifotScore ? `${record.averageDifotScore}%` : '-'
+      },
       { title: 'Blocking', dataIndex: 'isBlocked' },
       { title: 'Contact person', dataIndex: 'contactInfo.name' },
       { title: 'Email address', dataIndex: 'contactInfo.email' },

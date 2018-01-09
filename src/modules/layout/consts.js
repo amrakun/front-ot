@@ -38,6 +38,10 @@ export const buyerSideMenu = [
     icon: 'swap',
     subMenu: [
       {
+        url: '/prequalification-status',
+        title: 'Pre-qualification status'
+      },
+      {
         url: '/audit',
         title: 'Qualification/audit status'
       },

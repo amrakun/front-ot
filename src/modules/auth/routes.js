@@ -8,10 +8,16 @@ import {
   Register,
   RegisterConfirmation
 } from './containers';
-import { Home } from './components';
+import { Home, PublicEoi } from './components';
 
 export default [
   <Route key="home" exact path="/" component={Home} />,
+  <Route
+    key="peoi"
+    exact
+    path="/expression-of-interest"
+    component={PublicEoi}
+  />,
   <Route key="/sign-in" exact path="/sign-in" component={SignIn} />,
   <Route key="/register" exact path="/register" component={Register} />,
   <Route

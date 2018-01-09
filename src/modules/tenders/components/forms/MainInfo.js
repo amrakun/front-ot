@@ -44,13 +44,13 @@ const MainInfo = props => {
 
           {renderField({
             ...fieldProps,
-            label: 'Tender number',
+            label: 'Number',
             name: 'number',
             control: <Input type="number" />
           })}
           {renderField({
             ...fieldProps,
-            label: 'Tender name',
+            label: 'Name',
             name: 'name',
             control: <Input />
           })}
@@ -69,7 +69,7 @@ const MainInfo = props => {
           })}
           {renderField({
             ...fieldProps,
-            label: 'Expired day reminder',
+            label: 'Reminder',
             name: 'reminderDay',
             control: <Select>{renderOptions(days)}</Select>
           })}

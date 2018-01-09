@@ -7,10 +7,6 @@ import { dateFormat } from 'modules/common/constants';
 import moment from 'moment';
 
 class FeedbackResponses extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   columns() {
     return [
       {

@@ -84,11 +84,11 @@ class Tenders extends React.Component {
         ]
       },
       {
-        title: 'Tender number',
+        title: 'Number',
         dataIndex: 'number'
       },
       {
-        title: 'Tender name',
+        title: 'Name',
         dataIndex: 'name'
       },
       {
@@ -124,7 +124,7 @@ class Tenders extends React.Component {
         render: this.renderBoolean
       },
       {
-        title: 'Actions',
+        title: 'More',
         fixed: 'right',
         width: 100,
         render: (text, record) => this.renderOperation(record)
@@ -264,6 +264,8 @@ class Tenders extends React.Component {
 
     const { search, dateRange } = this.state;
 
+    const highlightedId = queryString.parse(history.location.search).new;
+
     let columns = this.supplierColumns();
     if (currentUser && !currentUser.isSupplier) columns = this.buyerColumns();
 
@@ -293,7 +295,7 @@ class Tenders extends React.Component {
           columns={columns}
           rowKey={record => record._id}
           rowClassName={record => {
-            if (record.isAwarded) return 'highlight';
+            if (record._id === highlightedId) return 'highlight';
           }}
           dataSource={data}
           pagination={pagination}

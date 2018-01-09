@@ -9,7 +9,7 @@ const { Content, Footer } = Layout;
 const visitorPaths = [
   '/sign-in',
   '/register',
-  '/eoi',
+  '/expression-of-interest',
   '/confirm-registration',
   '/'
 ];

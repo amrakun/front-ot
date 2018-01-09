@@ -287,6 +287,8 @@ const companies = `
         email,
         phone
       }
+      averageDifotScore
+      lastDueDiligence
     }
   }
 `;

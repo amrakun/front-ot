@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
+import { withRouter } from 'react-router';
 
 const Home = (props, context) => {
   const { currentUser } = context;
@@ -19,7 +20,7 @@ const Home = (props, context) => {
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry.
         </p>
-        <Link to="/eoi" className="home-btn">
+        <Link to="/expression-of-interest" className="home-btn">
           Expression Of Interest
         </Link>
         <Link to="/register" className="home-btn-transparent">
@@ -38,4 +39,4 @@ Home.contextTypes = {
   currentUser: PropTypes.object
 };
 
-export default Home;
+export default withRouter(Home);

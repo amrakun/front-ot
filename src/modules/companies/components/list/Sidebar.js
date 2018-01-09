@@ -114,7 +114,7 @@ class Sidebar extends React.Component {
           />
         </Card>
 
-        <Card title="Status" className="margin">
+        <Card title="Select supplier by status" className="margin">
           <CheckboxGroup
             options={statusOptions}
             defaultValue={status}

@@ -31,22 +31,24 @@ class TendersContainer extends React.Component {
   handleTableChange(pagination, filters) {
     const { history } = this.props;
 
-    let statusString = '';
+    if (filters.status) {
+      let statusString = '';
 
-    filters.status.forEach(i => {
-      statusString += i + ',';
-    });
+      filters.status.forEach(i => {
+        statusString += i + ',';
+      });
 
-    const query = queryString.parse(history.location.search);
+      const query = queryString.parse(history.location.search);
 
-    const stringified = queryString.stringify({
-      ...query,
-      status: statusString.replace(/.$/, '')
-    });
+      const stringified = queryString.stringify({
+        ...query,
+        status: statusString.replace(/.$/, '')
+      });
 
-    history.push({
-      search: stringified
-    });
+      history.push({
+        search: stringified
+      });
+    }
 
     this.setState({ pagination });
   }

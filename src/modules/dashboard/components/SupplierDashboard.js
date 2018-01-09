@@ -34,7 +34,7 @@ class Dashboard extends React.Component {
     const currentUser = this.context.currentUser || {};
     const { data } = this.props;
     const { lastDifotScore, feedbacks } = data;
-    console.log(feedbacks);
+
     return (
       <div>
         {!this.registrationComplete && !this.prequalificationComplete ? (
@@ -133,7 +133,7 @@ class Dashboard extends React.Component {
               icon="notification"
               title="Qualification/audit"
               color={colors[5]}
-              text="You have no new notification"
+              text={<span>You have no new notification</span>}
               badge={false}
             />
           </Col>

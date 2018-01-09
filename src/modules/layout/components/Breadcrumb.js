@@ -5,6 +5,8 @@ import { PropTypes } from 'prop-types';
 const BreadcrumbItem = Breadcrumb.Item;
 
 const routes = {
+  'rfq-and-eoi': 'RFQ and EOI',
+  dashboard: 'Dashboard',
   companies: 'Suppliers',
   rfq: 'RFQ Responses',
   eoi: 'EOI Responses',
@@ -12,7 +14,14 @@ const routes = {
   publish: 'Publish',
   prequalification: 'Prequalification',
   registration: 'Registration',
-  'capacity-building': 'Capacity building'
+  'capacity-building': 'Capacity building',
+  audit: 'Qualification/audit status',
+  validation: 'Validation',
+  difot: 'DIFOT',
+  'due-diligence': 'Due diligence',
+  feedback: 'Feedback',
+  responses: 'Responses',
+  blocking: 'Blocking'
 };
 
 const Breadcrumbs = location => {
