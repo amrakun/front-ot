@@ -12,20 +12,23 @@ const notifyLoading = {
   message: 'Building an excel...',
   description: 'You will get notified when your report is ready!',
   icon: <Icon type="loading" />,
-  duration: 1
+  duration: 5,
+  key: 'loadingNotification'
 };
 
 const notifyReady = {
   message: 'Your report is ready to download',
   icon: <Icon type="file-excel" style={{ color: colors[0] }} />,
-  duration: 0
+  duration: 0,
+  key: 'downloadNotification'
 };
 
 const notifyIfWantToSend = {
   message: 'Succesfully awarded',
   description: 'Do you want to send regret letters to remaining suppliers now?',
   icon: <Icon type="mail" style={{ color: colors[0] }} />,
-  duration: 0
+  duration: 0,
+  key: 'awardedNotification'
 };
 
 class TenderContainer extends React.Component {
@@ -59,10 +62,17 @@ class TenderContainer extends React.Component {
       }
     })
       .then(() => {
+        tenderDetailQuery.refetch();
         notification.open({
           ...notifyIfWantToSend,
           btn: (
-            <Button type="primary" onClick={() => this.showRegretLetter()}>
+            <Button
+              type="primary"
+              onClick={() => {
+                this.showRegretLetter();
+                notification.close('awardedNotification');
+              }}
+            >
               Send
             </Button>
           )
@@ -89,11 +99,9 @@ class TenderContainer extends React.Component {
       }
     })
       .then(() => {
-        this.setState({
-          sentRegretLetter: true,
-          regretLetterModalVisible: false
-        });
         message.success('Succesfully sent regret letters!');
+        tenderDetailQuery.refetch();
+        this.setState({ regretLetterModalVisible: false });
       })
       .catch(error => {
         message.error(error.message);
@@ -124,14 +132,16 @@ class TenderContainer extends React.Component {
         loading[loadingReportName] = false;
         this.setState(loading);
 
+        notification.close('loadingNotification');
         notification.open({
           ...notifyReady,
           btn: (
             <Button
               type="primary"
-              onClick={() =>
-                this.downloadUrl(response.data[Object.keys(response.data)[0]])
-              }
+              onClick={() => {
+                notification.close('downloadNotification');
+                window.open(response.data[Object.keys(response.data)[0]]);
+              }}
             >
               <Icon type="download" /> Download
             </Button>
@@ -141,10 +151,6 @@ class TenderContainer extends React.Component {
       .catch(error => {
         message.error(error.message);
       });
-  }
-
-  downloadUrl(url) {
-    window.open(url);
   }
 
   render() {
@@ -158,7 +164,6 @@ class TenderContainer extends React.Component {
     const {
       pagination,
       rfqBidSummaryReportLoading,
-      sentRegretLetter,
       regretLetterModalVisible
     } = this.state;
 
@@ -166,7 +171,6 @@ class TenderContainer extends React.Component {
       ...this.props,
       rfqBidSummaryReportLoading,
       regretLetterModalVisible,
-      sentRegretLetter: sentRegretLetter || tenderDetail.sentRegretLetter,
       award: this.award,
       downloadReport: this.downloadReport,
       sendRegretLetter: this.sendRegretLetter,

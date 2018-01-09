@@ -213,23 +213,21 @@ class Tenders extends React.Component {
     if (currentUser) {
       if (currentUser.isSupplier) {
         return (
-          <div style={{ width: '160px' }}>
-            {canParticipate && [
-              <Link to={`/tender/submit/${_id}`} key={0}>
-                More
-              </Link>,
-              <span className="ant-divider" key={1} />
-            ]}
-            <Popconfirm
-              title="Are you sure you are not interested？"
-              placement="bottomRight"
-              okText="Yes"
-              cancelText="No"
-              onConfirm={() => notInterested(_id)}
-            >
-              <a>Not interested</a>
-            </Popconfirm>
-          </div>
+          canParticipate && (
+            <div style={{ width: '160px' }}>
+              <Link to={`/tender/submit/${_id}`}>More</Link>
+              <span className="ant-divider" />
+              <Popconfirm
+                title="Are you sure you are not interested？"
+                placement="bottomRight"
+                okText="Yes"
+                cancelText="No"
+                onConfirm={() => notInterested(_id)}
+              >
+                <a>Not interested</a>
+              </Popconfirm>
+            </div>
+          )
         );
       } else {
         return (

@@ -21,7 +21,10 @@ const PublishContainer = ({
     })
       .then(() => {
         message.success('Successfully submitted a tender!');
-        history.push('/');
+        history.push('/rfq-and-eoi', {
+          newTenderId: doc.tenderId,
+          refetch: true
+        });
       })
       .catch(error => {
         message.error('Error occurred: SubmitTender' + error);

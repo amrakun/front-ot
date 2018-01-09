@@ -132,7 +132,6 @@ class Tender extends React.Component {
       pagination,
       loading,
       onChange,
-      sentRegretLetter,
       regretLetterModalVisible
     } = this.props;
     const {
@@ -148,7 +147,8 @@ class Tender extends React.Component {
       notInterestedCount,
       notRespondedCount,
       winnerId,
-      responses
+      responses,
+      sentRegretLetter
     } = data;
 
     return (
@@ -266,7 +266,11 @@ class Tender extends React.Component {
 
         <Modal
           title="Send regret letters"
-          visible={regretLetterModalVisible || regretLetterModal.visible}
+          visible={
+            regretLetterModalVisible !== undefined
+              ? regretLetterModalVisible
+              : regretLetterModal.visible
+          }
           onCancel={this.toggleRegretLetterModal}
           onOk={this.handleSendRegretLetters}
           width="50%"
