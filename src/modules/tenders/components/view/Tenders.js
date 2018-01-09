@@ -267,33 +267,30 @@ class Tenders extends React.Component {
     const { search, dateRange } = this.state;
     const { location } = history;
 
-    const highlightedId = location.state && location.state.new.id;
+    const highlightedId = location.state && location.state.newTenderId;
 
     let columns = this.supplierColumns();
     if (currentUser && !currentUser.isSupplier) columns = this.buyerColumns();
 
     return (
       <Card style={{ marginBottom: '16px' }} title={labels[type]}>
-        {!['/dashboard', '/rfq-and-eoi'].includes(
-          history.location.pathname
-        ) && (
-          <div className="table-operations">
-            <Search
-              defaultValue={search}
-              placeholder="Name or number"
-              style={{ width: 200, float: 'left' }}
-              onSearch={this.handleSearch}
-            />
+        <div className="table-operations">
+          <Search
+            defaultValue={search}
+            placeholder="Name or number"
+            style={{ width: 200, float: 'left' }}
+            onSearch={this.handleSearch}
+          />
 
-            <RangePicker
-              defaultValue={dateRange}
-              format={dateFormat}
-              placeholder={['From', 'To']}
-              onChange={this.handleDateRangeChange}
-              allowClear
-            />
-          </div>
-        )}
+          <RangePicker
+            defaultValue={dateRange}
+            format={dateFormat}
+            placeholder={['From', 'To']}
+            onChange={this.handleDateRangeChange}
+            allowClear
+          />
+        </div>
+
         <Table
           columns={columns}
           rowKey={record => record._id}

@@ -32,7 +32,7 @@ class Dashboard extends React.Component {
 
   render() {
     const currentUser = this.context.currentUser || {};
-    const { data } = this.props;
+    const { data, history, location } = this.props;
     const { lastDifotScore, feedbacks } = data;
 
     return (
@@ -139,11 +139,15 @@ class Dashboard extends React.Component {
           </Col>
         </Row>
         <Tenders
+          history={history}
+          location={location}
           type="rfq"
           supplierId={currentUser.companyId}
           queryParams={queryParams}
         />
         <Tenders
+          history={history}
+          location={location}
           type="eoi"
           supplierId={currentUser.companyId}
           queryParams={queryParams}
@@ -154,7 +158,9 @@ class Dashboard extends React.Component {
 }
 
 Dashboard.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.object,
+  history: PropTypes.object,
+  location: PropTypes.object
 };
 
 Dashboard.contextTypes = {

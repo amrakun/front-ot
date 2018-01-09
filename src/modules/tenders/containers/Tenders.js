@@ -54,11 +54,12 @@ class TendersContainer extends React.Component {
   }
 
   componentWillMount() {
-    const { tendersQuery, location } = this.props;
+    const { tendersQuery } = this.props;
+    const location = this.props.location || {};
 
-    if (location.state && location.state.new.refetch) {
+    if (location.state && location.state.refetch) {
       tendersQuery.refetch();
-      location.state.new.refetch = false;
+      location.state.refetch = false;
     }
   }
 
