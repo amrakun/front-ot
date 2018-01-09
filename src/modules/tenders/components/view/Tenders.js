@@ -265,8 +265,9 @@ class Tenders extends React.Component {
     } = this.props;
 
     const { search, dateRange } = this.state;
+    const { location } = history;
 
-    const highlightedId = queryString.parse(history.location.search).new;
+    const highlightedId = location.state && location.state.new.id;
 
     let columns = this.supplierColumns();
     if (currentUser && !currentUser.isSupplier) columns = this.buyerColumns();

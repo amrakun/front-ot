@@ -31,7 +31,6 @@ class Search extends React.Component {
     query.search = value;
 
     history.push({
-      pathname: '/companies',
       search: queryString.stringify(query)
     });
   }

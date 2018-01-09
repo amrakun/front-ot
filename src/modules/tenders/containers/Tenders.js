@@ -53,6 +53,15 @@ class TendersContainer extends React.Component {
     this.setState({ pagination });
   }
 
+  componentWillMount() {
+    const { tendersQuery, location } = this.props;
+
+    if (location.state && location.state.new.refetch) {
+      tendersQuery.refetch();
+      location.state.new.refetch = false;
+    }
+  }
+
   render() {
     const { tendersQuery, tendersResponsesAdd } = this.props;
     const { currentUser } = this.context;

@@ -20,7 +20,9 @@ const CreateTenderContainer = props => {
     tendersAdd({ variables: { ...doc, publishDate, closeDate } })
       .then(tender => {
         message.success('Successfully created a tender!');
-        history.push(`/${doc.type}?new=${tender.data.tendersAdd._id}`);
+        history.push(`/${doc.type}`, {
+          new: { id: tender.data.tendersAdd._id, refetch: true }
+        });
       })
       .catch(error => {
         message.error(error.message);
