@@ -20,8 +20,9 @@ class Tenders extends React.Component {
     const query = queryString.parse(history.location.search);
     const searchQuery = query.search;
 
-    let dateRange = [];
+    this.status = query.status && query.status.split(',');
 
+    let dateRange = [];
     if (query.from) dateRange = [moment(query.from), moment(query.to)];
 
     this.state = {
@@ -81,7 +82,8 @@ class Tenders extends React.Component {
             text: 'Awarded',
             value: 'awarded'
           }
-        ]
+        ],
+        filteredValue: this.status
       },
       {
         title: 'Number',
@@ -154,11 +156,11 @@ class Tenders extends React.Component {
         ]
       },
       {
-        title: 'Tender number',
+        title: 'Number',
         dataIndex: 'number'
       },
       {
-        title: 'Tender name',
+        title: 'Name',
         dataIndex: 'name'
       },
       {
