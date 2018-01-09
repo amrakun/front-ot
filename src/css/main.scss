@@ -115,7 +115,7 @@ i.success {
     width: calc(100% - 16px);
   }
   .ant-row.ant-form-item {
-    margin-bottom: 10px;
+    margin-bottom: 10px !important;
   }
 }
 .multiple-wrapper {
