@@ -108,7 +108,7 @@ class Dashboard extends React.Component {
                   <span>Nothing new</span>
                 )
               }
-              badge={lastFeedback !== undefined}
+              badge={lastFeedback !== null}
             />
           </Col>
           <Col key={2} lg={8} sm={12}>

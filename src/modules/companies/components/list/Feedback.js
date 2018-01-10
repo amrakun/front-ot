@@ -105,14 +105,16 @@ class Feedback extends Common {
       },
       {
         title: 'Last feedback information',
-        render: record =>
-          record.lastFeedback.supplierResponse ? (
-            <a onClick={() => this.viewFeedbackInfo(record.lastFeedback)}>
-              View
-            </a>
-          ) : (
-            '-'
-          )
+        render: record => {
+          const lfd = record.lastFeedback;
+          if (lfd && lfd.supplierResponse) {
+            return (
+              <a onClick={() => this.viewFeedbackInfo(record.lastFeedback)}>
+                View
+              </a>
+            );
+          } else return '-';
+        }
       },
       { title: 'Contact person', dataIndex: 'contactInfo.name' },
       { title: 'Email address', dataIndex: 'contactInfo.email' },
