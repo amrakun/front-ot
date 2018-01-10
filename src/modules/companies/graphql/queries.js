@@ -389,6 +389,25 @@ const validation = `
   }
 `;
 
+const blockedCompanies = `
+  query blockedCompanies {
+    blockedCompanies {
+      _id
+      startDate
+      endDate
+      note
+      createdUser {
+        email
+      }
+      supplier {
+        basicInfo {
+          enName
+        }
+      }
+    }
+  }
+`;
+
 const simpleCompanies = `
   query companies(${commonParams}) {
     companies(${commonValues}) {
@@ -472,6 +491,7 @@ export default {
   dueDiligence,
   difot,
   validation,
+  blockedCompanies,
   feedback,
   feedbackDetail,
   feedbacks,

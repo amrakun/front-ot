@@ -5,7 +5,8 @@ import { Popup } from '../../containers/searcher';
 
 const propTypes = {
   withTag: PropTypes.bool,
-  onSelect: PropTypes.func
+  onSelect: PropTypes.func,
+  slogan: PropTypes.string
 };
 
 class SupplierSearcher extends React.Component {
@@ -67,25 +68,26 @@ class SupplierSearcher extends React.Component {
           onOk={this.onOk}
           onCancel={this.onCancel}
           onSelect={this.onSelect}
+          slogan={this.props.slogan}
         />
       );
     }
   }
 
   render() {
-    const { withTag } = this.props;
+    const { withTag, slogan } = this.props;
 
     return (
       <span>
         {!withTag && (
           <Button disabled onClick={this.showPopup}>
-            Invite a new supplier
+            {`${slogan || 'Invite'} a new supplier`}
           </Button>
         )}
 
         {withTag && (
           <Tag onClick={this.showPopup} className="dashed-button">
-            <Icon type="plus" /> Invite a new supplier
+            <Icon type="plus" /> {`${slogan || 'Invite'} a new supplier`}
           </Tag>
         )}
 

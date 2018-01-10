@@ -6,6 +6,7 @@ import {
   Difot,
   DueDiligence,
   Validation,
+  Blocking,
   Feedback,
   SubmitFeedback,
   FeedbackResponses,
@@ -68,6 +69,15 @@ export default [
     component={({ location }) => {
       const queryParams = queryString.parse(location.search);
       return <Validation queryParams={queryParams} />;
+    }}
+  />,
+  <Route
+    key="/blocking"
+    exact
+    path="/blocking"
+    component={({ location }) => {
+      const queryParams = queryString.parse(location.search);
+      return <Blocking queryParams={queryParams} />;
     }}
   />,
   <Route

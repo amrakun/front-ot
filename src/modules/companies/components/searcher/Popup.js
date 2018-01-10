@@ -8,7 +8,8 @@ const propTypes = {
   onOk: PropTypes.func,
   onSearch: PropTypes.func,
   onCancel: PropTypes.func,
-  onSelect: PropTypes.func
+  onSelect: PropTypes.func,
+  slogan: PropTypes.string
 };
 
 class Popup extends React.Component {
@@ -19,14 +20,15 @@ class Popup extends React.Component {
       onOk,
       onCancel,
       onSelect,
-      suppliers
+      suppliers,
+      slogan
     } = this.props;
 
     return (
       <Modal
-        okText="Invite"
+        okText={slogan || 'Invite'}
         cancelText="Cancel"
-        title="Invite a new supplier"
+        title={`${slogan || 'Invite'} a new supplier`}
         visible={visible}
         onOk={onOk}
         onCancel={onCancel}

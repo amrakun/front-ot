@@ -160,6 +160,29 @@ const addValidation = `
   }
 `;
 
+const blockCompanies = `
+  mutation blockedCompaniesBlock(
+    $supplierIds: [String!]!
+    $startDate: Date!
+    $endDate: Date!
+    $note: String
+  ) {
+    blockedCompaniesBlock(
+      supplierIds: $supplierIds
+      startDate: $startDate
+      endDate: $endDate
+      note: $note
+    )
+  }
+`;
+
+const unblockCompanies = `
+  mutation blockedCompaniesUnblock($supplierIds: [String!]!) {
+    blockedCompaniesUnblock(supplierIds: $supplierIds)
+  }
+
+`;
+
 export default {
   basicInfo,
   contactInfo,
@@ -176,5 +199,7 @@ export default {
   addDueDiligence,
   addFeedback,
   addFeedbackResponse,
-  addValidation
+  addValidation,
+  blockCompanies,
+  unblockCompanies
 };

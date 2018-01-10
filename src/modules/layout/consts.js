@@ -75,8 +75,7 @@ export const buyerSideMenu = [
       },
       {
         url: '/blocking',
-        title: 'Blocking',
-        disabled: true
+        title: 'Blocking'
       }
     ]
   },
