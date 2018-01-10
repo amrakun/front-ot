@@ -4,7 +4,6 @@ import { Tenders } from '../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries, mutations } from '../graphql';
 import { message } from 'antd';
-import queryString from 'query-string';
 
 class TendersContainer extends React.Component {
   constructor(props) {
@@ -28,28 +27,7 @@ class TendersContainer extends React.Component {
     this.handleTableChange = this.handleTableChange.bind(this);
   }
 
-  handleTableChange(pagination, filters) {
-    const { history } = this.props;
-
-    if (filters.status) {
-      let statusString = '';
-
-      filters.status.forEach(i => {
-        statusString += i + ',';
-      });
-
-      const query = queryString.parse(history.location.search);
-
-      const stringified = queryString.stringify({
-        ...query,
-        status: statusString.replace(/.$/, '')
-      });
-
-      history.push({
-        search: stringified
-      });
-    }
-
+  handleTableChange(pagination) {
     this.setState({ pagination });
   }
 
@@ -103,8 +81,7 @@ class TendersContainer extends React.Component {
       loading: false,
       notInterested: notInterested,
       currentUser: currentUser,
-      onChange: (pagination, filters, sorter) =>
-        this.handleTableChange(pagination, filters, sorter)
+      handleTableChange: this.handleTableChange
     };
 
     return <Tenders {...updatedProps} />;

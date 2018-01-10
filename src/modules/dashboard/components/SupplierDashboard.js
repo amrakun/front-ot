@@ -1,6 +1,7 @@
 import React from 'react';
 import { Tenders } from '../../tenders/containers';
 import { PropTypes } from 'prop-types';
+import queryString from 'query-string';
 import {
   NumberCard,
   NumberCardLines,
@@ -9,8 +10,6 @@ import {
 import { colors } from 'modules/common/colors';
 import { Row, Col, Alert } from 'antd';
 import { Link } from 'react-router-dom';
-
-const queryParams = { status: ['open', 'closed', 'participated'] };
 
 class Dashboard extends React.Component {
   constructor(props, context) {
@@ -33,6 +32,7 @@ class Dashboard extends React.Component {
   render() {
     const currentUser = this.context.currentUser || {};
     const { data, history, location } = this.props;
+    const queryParams = queryString.parse(location.search);
     const { lastDifotScore, feedbacks } = data;
 
     return (
