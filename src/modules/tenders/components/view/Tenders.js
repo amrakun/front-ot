@@ -20,12 +20,12 @@ class Tenders extends React.Component {
     const query = queryString.parse(history.location.search);
     const searchQuery = query.search;
 
-    this.status = query.status && query.status.split(',');
-
     let dateRange = [];
+
     if (query.from) dateRange = [moment(query.from), moment(query.to)];
 
     this.state = {
+      statuses: query.status && query.status.split(','),
       search: searchQuery || '',
       dateRange: dateRange
     };
@@ -33,31 +33,45 @@ class Tenders extends React.Component {
     this.renderOperation = this.renderOperation.bind(this);
     this.handleDateRangeChange = this.handleDateRangeChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleTableChange = this.handleTableChange.bind(this);
   }
 
-  handleSearch(value) {
+  updateQueryString(updateder) {
     const { history } = this.props;
 
     let query = queryString.parse(history.location.search);
 
-    query.search = value;
+    updateder(query);
 
     history.push({
       search: queryString.stringify(query)
+    });
+  }
+
+  handleSearch(value) {
+    this.updateQueryString(query => {
+      query.search = value;
     });
   }
 
   handleDateRangeChange(value) {
-    const { history } = this.props;
-
-    let query = queryString.parse(history.location.search);
-
-    query.from = value[0]._d;
-    query.to = value[1]._d;
-
-    history.push({
-      search: queryString.stringify(query)
+    this.updateQueryString(query => {
+      query.from = value[0]._d;
+      query.to = value[1]._d;
     });
+  }
+
+  handleTableChange(pagination, filters) {
+    const statuses = filters.status;
+
+    if (statuses) {
+      this.updateQueryString(query => {
+        this.setState({ statuses });
+        query.status = statuses.join(',');
+      });
+    }
+
+    this.props.handleTableChange(pagination);
   }
 
   buyerColumns() {
@@ -83,7 +97,7 @@ class Tenders extends React.Component {
             value: 'awarded'
           }
         ],
-        filteredValue: this.status
+        filteredValue: this.state.statuses
       },
       {
         title: 'Number',
@@ -153,7 +167,8 @@ class Tenders extends React.Component {
             text: 'Participated',
             value: 'participated'
           }
-        ]
+        ],
+        filteredValue: this.state.statuses
       },
       {
         title: 'Number',
@@ -258,7 +273,6 @@ class Tenders extends React.Component {
       data,
       pagination,
       loading,
-      onChange,
       history
     } = this.props;
 
@@ -299,9 +313,7 @@ class Tenders extends React.Component {
           pagination={pagination}
           loading={loading}
           scroll={{ x: 1500 }}
-          onChange={(pagination, filters, sorter) =>
-            onChange(pagination, filters, sorter)
-          }
+          onChange={this.handleTableChange}
         />
       </Card>
     );
@@ -313,7 +325,7 @@ Tenders.propTypes = {
   data: PropTypes.array,
   pagination: PropTypes.object,
   loading: PropTypes.bool.isRequired,
-  onChange: PropTypes.func,
+  handleTableChange: PropTypes.func,
   currentUser: PropTypes.object,
   notInterested: PropTypes.func,
   history: PropTypes.object
