@@ -1,6 +1,7 @@
 import BaseList from './list/Base';
 import Difot from './list/Difot';
 import DueDiligence from './list/DueDiligence';
+import Validation from './list/Validation';
 import Feedback from './list/Feedback';
 import SubmitFeedback from './feedback/SubmitFeedback';
 import FeedbackResponses from './feedback/FeedbackResponses';
@@ -13,6 +14,7 @@ export {
   BaseList,
   Difot,
   DueDiligence,
+  Validation,
   Registration,
   Prequalification,
   CapacityBuilding,

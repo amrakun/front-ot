@@ -49,8 +49,7 @@ export const buyerSideMenu = [
       },
       {
         url: '/validation',
-        title: 'Validation status',
-        disabled: true
+        title: 'Validation status'
       },
       {
         url: '/difot',

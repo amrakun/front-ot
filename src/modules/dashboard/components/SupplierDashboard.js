@@ -98,7 +98,7 @@ class Dashboard extends React.Component {
               title="Success feedback"
               color={colors[7]}
               text={
-                lastFeedback ? (
+                lastFeedback && !lastFeedback.supplierResponse ? (
                   <span>
                     You have new success feedback. Click &#34;
                     <Link to={`feedback/submit/${lastFeedback._id}`}>here</Link>
@@ -108,7 +108,7 @@ class Dashboard extends React.Component {
                   <span>Nothing new</span>
                 )
               }
-              badge={lastFeedback !== null}
+              badge={lastFeedback !== null && !lastFeedback.supplierResponse}
             />
           </Col>
           <Col key={2} lg={8} sm={12}>

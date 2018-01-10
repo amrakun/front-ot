@@ -5,6 +5,7 @@ import {
   BaseList,
   Difot,
   DueDiligence,
+  Validation,
   Feedback,
   SubmitFeedback,
   FeedbackResponses,
@@ -58,6 +59,15 @@ export default [
     component={({ location }) => {
       const queryParams = queryString.parse(location.search);
       return <DueDiligence queryParams={queryParams} />;
+    }}
+  />,
+  <Route
+    key="/validation"
+    exact
+    path="/validation"
+    component={({ location }) => {
+      const queryParams = queryString.parse(location.search);
+      return <Validation queryParams={queryParams} />;
     }}
   />,
   <Route

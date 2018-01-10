@@ -5,6 +5,9 @@ export const companyByUser = `
       lastDifotScore
       lastFeedback {
         _id
+        supplierResponse {
+          status
+        }
       }
       basicInfo {
         enName
