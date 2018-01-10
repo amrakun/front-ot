@@ -10,17 +10,12 @@ class ValidationContainer extends React.Component {
   render() {
     const { companiesQuery, addValidationMutation } = this.props;
 
-    const addValidation = reports => {
-      const Validations = Object.keys(reports).map(supplierId => ({
-        supplierId,
-        file: reports[supplierId]
-      }));
-
+    const addValidation = validation => {
       addValidationMutation({
-        variables: { Validations }
+        variables: validation
       })
         .then(() => {
-          message.success('Successfully imported');
+          message.success('Successfully validated');
           companiesQuery.refetch();
         })
 
@@ -43,7 +38,7 @@ ValidationContainer.propTypes = {
   addValidationMutation: PropTypes.func
 };
 
-const WithData = graphql(gql(mutations.addDueDiligence), {
+const WithData = graphql(gql(mutations.addValidation), {
   name: 'addValidationMutation'
 })(ValidationContainer);
 

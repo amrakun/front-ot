@@ -2,12 +2,14 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Table, Card, Row, Col, Button, Modal } from 'antd';
+import { Table, Card, Row, Col, Button, Modal, Checkbox } from 'antd';
 import Common from './Common';
 import Sidebar from './Sidebar';
 import Search from './Search';
 import moment from 'moment';
 import { dateFormat } from 'modules/common/constants';
+
+const CheckboxGroup = Checkbox.Group;
 
 class Validation extends Common {
   constructor(props) {
@@ -15,18 +17,39 @@ class Validation extends Common {
 
     this.state = {
       modalVisible: false,
-      modalData: []
+      modalData: {},
+      validatedValues: []
     };
 
     this.showValidationModal = this.showValidationModal.bind(this);
     this.hideValidationModal = this.hideValidationModal.bind(this);
     this.handleOk = this.handleOk.bind(this);
+    this.handleValidationCheck = this.handleValidationCheck.bind(this);
   }
 
-  handleOk() {}
+  handleOk() {
+    const { modalData, validatedValues } = this.state;
+    this.props.addValidation({
+      _id: modalData.companyId,
+      codes: validatedValues
+    });
+    this.hideValidationModal();
+  }
 
-  showValidationModal(data) {
-    this.setState({ modalVisible: true, modalData: data });
+  handleValidationCheck(checkedValues) {
+    this.setState({ validatedValues: checkedValues });
+  }
+
+  showValidationModal(record) {
+    this.setState({
+      modalVisible: true,
+      modalData: {
+        productCodes: record.productsInfo,
+        companyId: record._id,
+        companyName: record.basicInfo.enName
+      },
+      validatedValues: record.validatedProductsInfo
+    });
   }
 
   hideValidationModal() {
@@ -35,8 +58,22 @@ class Validation extends Common {
 
   render() {
     const { data, pagination, loading, onChange, addValidation } = this.props;
-    const { selectedCompanies, modalVisible, modalData } = this.state;
-    console.log(modalData);
+    const {
+      selectedCompanies,
+      modalVisible,
+      modalData,
+      validatedValues
+    } = this.state;
+
+    let validationOptions = [];
+    modalData.productCodes &&
+      modalData.productCodes.forEach(i => {
+        validationOptions.push({
+          label: i,
+          value: i
+        });
+      });
+
     const columns = [
       { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
       { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
@@ -48,10 +85,16 @@ class Validation extends Common {
       {
         title: 'Product/Service code',
         render: record => {
-          const pI = record.productsInfo ? record.productsInfo : [];
-          return (
-            <a onClick={() => this.showValidationModal(pI)}>{pI.length}</a>
-          );
+          const productsInfo = record.productsInfo;
+          if (productsInfo) {
+            return (
+              <a onClick={() => this.showValidationModal(record)}>
+                {productsInfo.length}
+              </a>
+            );
+          } else {
+            return '-';
+          }
         }
       },
       {
@@ -60,7 +103,7 @@ class Validation extends Common {
       },
       {
         title: 'Last validation result',
-        dataIndex: 'result'
+        render: record => (record.isProductsInfoValidated ? 'Yes' : '-')
       },
       { title: 'Contact person', dataIndex: 'contactInfo.name' },
       { title: 'Email address', dataIndex: 'contactInfo.email' },
@@ -97,14 +140,22 @@ class Validation extends Common {
           </Card>
 
           <Modal
-            title="Validation"
+            title={modalData.companyName}
             visible={modalVisible}
             onOk={this.handleOk}
-            onCancel={() => this.toggleValidationModal(false)}
+            onCancel={this.hideValidationModal}
+            bodyStyle={{ maxHeight: '60vh', overflow: 'scroll' }}
           >
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+            <p>
+              <strong>Check validated</strong>
+            </p>
+
+            <CheckboxGroup
+              options={validationOptions}
+              value={validatedValues}
+              onChange={this.handleValidationCheck}
+              className="horizontal"
+            />
           </Modal>
         </Col>
       </Row>

@@ -382,6 +382,8 @@ const validation = `
         phone
       }
       productsInfo
+      validatedProductsInfo
+      isProductsInfoValidated
     }
   }
 `;

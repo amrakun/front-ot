@@ -152,6 +152,14 @@ const addFeedbackResponse = `
   }
 `;
 
+const addValidation = `
+  mutation companiesValidateProductsInfo($_id: String,! $codes: [String]!) {
+    companiesValidateProductsInfo(_id: $_id, codes: $codes) {
+      _id
+    }
+  }
+`;
+
 export default {
   basicInfo,
   contactInfo,
@@ -167,5 +175,6 @@ export default {
   addDifotScores,
   addDueDiligence,
   addFeedback,
-  addFeedbackResponse
+  addFeedbackResponse,
+  addValidation
 };
