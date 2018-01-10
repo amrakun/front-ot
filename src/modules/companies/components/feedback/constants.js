@@ -1,4 +1,5 @@
 const labels = {
+  status: 'Status',
   employmentNumberBefore: 'Employment number before',
   employmentNumberNow: 'Employment number now',
   nationalSpendBefore: 'National spend before engaging with OT',

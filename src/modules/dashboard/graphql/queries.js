@@ -5,11 +5,6 @@ export const companyByUser = `
       lastDifotScore
       lastFeedback {
         _id
-        closeDate
-        status
-        closeDate
-        content
-        createdDate
       }
       basicInfo {
         enName

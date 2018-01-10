@@ -29,12 +29,14 @@ const generator = (Component, query) => {
         return <Component loading={true} />;
       }
 
+      const companies = companiesQuery.companies || [];
+
       const updatedProps = {
         ...this.props,
-        data: companiesQuery.companies,
+        data: companies,
         pagination: {
-          total: companiesQuery.companies.length,
-          pageSize: companiesQuery.companies.length,
+          total: companies.length,
+          pageSize: companies.length,
           current: 1
         },
         loading: false,

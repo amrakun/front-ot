@@ -338,8 +338,19 @@ const feedback = `
       _id
       lastFeedback {
         closeDate
-        responses {
+        supplierResponse {
           _id
+          status
+          employmentNumberBefore
+          employmentNumberNow
+          nationalSpendBefore
+          nationalSpendAfter
+          umnugobiSpendBefore
+          umnugobiSpendAfter
+          investment
+          trainings
+          corporateSocial
+          technologyImprovement
         }
       }
       basicInfo {

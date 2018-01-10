@@ -11,7 +11,8 @@ import {
   Icon,
   Modal,
   DatePicker,
-  message
+  message,
+  List
 } from 'antd';
 import Common from './Common';
 import Sidebar from './Sidebar';
@@ -19,6 +20,7 @@ import Search from './Search';
 import { Editor } from 'modules/common/components';
 import moment from 'moment';
 import { dateFormat } from 'modules/common/constants';
+import { labels } from 'modules/companies/components/feedback/constants';
 
 class Feedback extends Common {
   constructor(props) {
@@ -28,7 +30,9 @@ class Feedback extends Common {
       ...this.state,
       feedbackModalVisible: false,
       feedbackContent: 'asf',
-      feedbackCloseDate: moment()
+      feedbackCloseDate: moment(),
+      viewModalVisible: false,
+      viewModalData: {}
     };
 
     this.addFeedback = this.addFeedback.bind(this);
@@ -37,6 +41,8 @@ class Feedback extends Common {
     );
     this.toggleFeedbackModal = this.toggleFeedbackModal.bind(this);
     this.handleCloseDateChange = this.handleCloseDateChange.bind(this);
+    this.toggleViewModal = this.toggleViewModal.bind(this);
+    this.viewFeedbackInfo = this.viewFeedbackInfo.bind(this);
   }
 
   addFeedback() {
@@ -65,13 +71,26 @@ class Feedback extends Common {
     this.setState({ feedbackCloseDate: value });
   }
 
+  viewFeedbackInfo(feedback) {
+    this.setState({
+      viewModalData: feedback.supplierResponse,
+      viewModalVisible: true
+    });
+  }
+
+  toggleViewModal(value) {
+    this.setState({ viewModalVisible: value });
+  }
+
   render() {
     const { data, pagination, loading, onChange } = this.props;
     const {
       selectedCompanies,
       feedbackModalVisible,
       feedbackContent,
-      feedbackCloseDate
+      feedbackCloseDate,
+      viewModalVisible,
+      viewModalData
     } = this.state;
 
     const columns = [
@@ -84,13 +103,33 @@ class Feedback extends Common {
             ? moment(record.lastFeedback.closeDate).format(dateFormat)
             : '-'
       },
-      { title: 'Last feedback information', dataIndex: 'lfinfo' },
+      {
+        title: 'Last feedback information',
+        render: record =>
+          record.lastFeedback.supplierResponse ? (
+            <a onClick={() => this.viewFeedbackInfo(record.lastFeedback)}>
+              View
+            </a>
+          ) : (
+            '-'
+          )
+      },
       { title: 'Contact person', dataIndex: 'contactInfo.name' },
       { title: 'Email address', dataIndex: 'contactInfo.email' },
       { title: 'Phone number', dataIndex: 'contactInfo.phone' },
       { title: 'Registration', render: () => <span>Yes</span> },
       { title: 'Pre-qualification status', render: () => <span>Yes</span> }
     ];
+
+    let responseItemList = [];
+    Object.keys(viewModalData).forEach(key => {
+      if (!['_id', '__typename'].includes(key)) {
+        responseItemList.push({
+          title: key,
+          description: viewModalData[key]
+        });
+      }
+    });
 
     return (
       <Row gutter={16}>
@@ -143,6 +182,27 @@ class Feedback extends Common {
             <Editor
               content={feedbackContent}
               onEmailContentChange={this.handleFeedbackContentChange}
+            />
+          </Modal>
+
+          <Modal
+            title="Last feedback"
+            visible={viewModalVisible}
+            onCancel={() => this.toggleViewModal(false)}
+            footer={null}
+            bodyStyle={{ height: '70vh', overflow: 'scroll' }}
+          >
+            <List
+              itemLayout="horizontal"
+              dataSource={responseItemList}
+              renderItem={item => (
+                <List.Item>
+                  <List.Item.Meta
+                    title={labels[item.title]}
+                    description={item.description}
+                  />
+                </List.Item>
+              )}
             />
           </Modal>
         </Col>
