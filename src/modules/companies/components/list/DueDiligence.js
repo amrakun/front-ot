@@ -16,19 +16,17 @@ class DueDiligence extends Common {
   }
 
   componentWillUpdate(nextProps) {
-    if (!this.props.data && nextProps.data) {
-      nextProps.data.forEach(record => {
-        this[`${record._id}Upload`] = file => {
-          let value = { name: file.name, url: file.response };
+    (nextProps.data || []).forEach(record => {
+      this[`${record._id}Upload`] = file => {
+        let value = { name: file.name, url: file.response };
 
-          if (file.status === 'removed') {
-            value = null;
-          }
+        if (file.status === 'removed') {
+          value = null;
+        }
 
-          this.reports[record._id] = value;
-        };
-      });
-    }
+        this.reports[record._id] = value;
+      };
+    });
   }
 
   render() {
