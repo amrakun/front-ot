@@ -383,3 +383,6 @@ form .ant-input-number {
   height: 100%;
   cursor: pointer;
 }
+.capitalize {
+  text-transform: capitalize;
+}

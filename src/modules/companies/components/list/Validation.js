@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Table, Card, Row, Col, Button, Modal, Checkbox } from 'antd';
+import { Table, Card, Row, Col, Modal, Checkbox } from 'antd';
 import Common from './Common';
 import Sidebar from './Sidebar';
 import Search from './Search';
@@ -57,7 +57,7 @@ class Validation extends Common {
   }
 
   render() {
-    const { data, pagination, loading, onChange, addValidation } = this.props;
+    const { data, pagination, loading, onChange } = this.props;
     const {
       selectedCompanies,
       modalVisible,
@@ -86,10 +86,10 @@ class Validation extends Common {
         title: 'Product/Service code',
         render: record => {
           const productsInfo = record.productsInfo;
-          if (productsInfo) {
+          if (productsInfo.length > 0) {
             return (
               <a onClick={() => this.showValidationModal(record)}>
-                {productsInfo.length}
+                Validate - <strong>{productsInfo.length}</strong>
               </a>
             );
           } else {
@@ -118,10 +118,8 @@ class Validation extends Common {
           <Card title="Companies">
             <div className="table-operations">
               <Search />
-
-              <Button onClick={() => addValidation(this.reports)}>Save</Button>
             </div>
-
+            <br />
             <Table
               rowSelection={{
                 selectedCompanies,
@@ -136,6 +134,7 @@ class Validation extends Common {
               onChange={(pagination, filters, sorter) =>
                 onChange(pagination, filters, sorter)
               }
+              className="margin"
             />
           </Card>
 
@@ -154,7 +153,7 @@ class Validation extends Common {
               options={validationOptions}
               value={validatedValues}
               onChange={this.handleValidationCheck}
-              className="horizontal"
+              className="horizontal capitalize"
             />
           </Modal>
         </Col>
