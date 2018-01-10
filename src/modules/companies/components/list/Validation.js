@@ -2,39 +2,14 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Table, Card, Row, Col, Button, Select } from 'antd';
-import { Uploader } from 'modules/common/components';
+import { Table, Card, Row, Col, Button } from 'antd';
 import Common from './Common';
 import Sidebar from './Sidebar';
 import Search from './Search';
 import moment from 'moment';
 import { dateFormat } from 'modules/common/constants';
 
-const Option = Select.Option;
-
 class Validation extends Common {
-  constructor(props) {
-    super(props);
-
-    this.reports = {};
-  }
-
-  componentWillUpdate(nextProps) {
-    if (!this.props.data && nextProps.data) {
-      nextProps.data.forEach(record => {
-        this[`${record._id}Upload`] = file => {
-          let value = { name: file.name, url: file.response };
-
-          if (file.status === 'removed') {
-            value = null;
-          }
-
-          this.reports[record._id] = value;
-        };
-      });
-    }
-  }
-
   render() {
     const { data, pagination, loading, onChange, addValidation } = this.props;
     const { selectedCompanies } = this.state;
@@ -43,40 +18,19 @@ class Validation extends Common {
       { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
       { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
       {
-        title: 'Validation',
-        render: () => {
-          return (
-            <Select defaultValue="no">
-              <Option value="yes">Yes</Option>
-              <Option value="no">No</Option>
-            </Select>
-          );
-        }
+        title: 'Tier type',
+        render: () => <a>View</a>
       },
-      {
-        title: 'File',
-        render: record => {
-          const lastValidation = record.lastValidation || {};
-          const file = lastValidation.file;
-
-          return (
-            <Uploader
-              initialFile={file}
-              onReceiveFile={(...args) => this[`${record._id}Upload`](...args)}
-            />
-          );
-        }
-      },
+      { title: 'Pre-qualification status', render: () => <span>Yes</span> },
+      { title: 'Product/Service code', render: () => <span>Yes</span> },
       {
         title: 'Last validation date',
         render: () => moment().format(dateFormat)
       },
       {
-        title: 'Last validation file',
-        render: () => <a>View</a>
+        title: 'Last validation result',
+        dataIndex: 'result'
       },
-      { title: 'Registration', render: () => <span>Yes</span> },
-      { title: 'Pre-qualification status', render: () => <span>Yes</span> },
       { title: 'Contact person', dataIndex: 'contactInfo.name' },
       { title: 'Email address', dataIndex: 'contactInfo.email' },
       { title: 'Phone number', dataIndex: 'contactInfo.phone' }
