@@ -32,7 +32,10 @@ class Base extends Common {
       { title: 'Registration', dataIndex: 'registration' },
       { title: 'Pre-qualification status', dataIndex: 'prequalification' },
       { title: 'Qualification status', dataIndex: 'audit' },
-      { title: 'Validation status', dataIndex: 'validation' },
+      {
+        title: 'Validation status',
+        render: record => (record.isProductsInfoValidated ? 'Yes' : '-')
+      },
       {
         title: 'Due dilligence',
         render: record =>

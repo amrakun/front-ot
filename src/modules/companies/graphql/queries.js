@@ -289,6 +289,7 @@ const companies = `
       }
       averageDifotScore
       lastDueDiligence
+      isProductsInfoValidated
     }
   }
 `;
