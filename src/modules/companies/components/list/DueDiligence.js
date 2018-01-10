@@ -42,7 +42,7 @@ class DueDiligence extends Common {
         title: 'Report',
         render: record => {
           const lastDueDiligence = record.lastDueDiligence || {};
-          const file = lastDueDiligence.file || {};
+          const file = lastDueDiligence.file;
 
           return (
             <Uploader
