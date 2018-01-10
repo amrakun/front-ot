@@ -36,7 +36,7 @@ class Base extends Common {
       {
         title: 'Due dilligence',
         render: record =>
-          record.lastDueDiligence ? (
+          record.lastDueDiligence && record.lastDueDiligence.file ? (
             <a href={record.lastDueDiligence.file.url} target="_blank">
               Yes
             </a>
