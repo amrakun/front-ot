@@ -30,10 +30,10 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    const currentUser = this.context.currentUser || {};
     const { data, history, location } = this.props;
+    const { lastDifotScore, lastFeedback } = data;
     const queryParams = queryString.parse(location.search);
-    const { lastDifotScore, feedbacks } = data;
+    const currentUser = this.context.currentUser || {};
 
     return (
       <div>
@@ -97,17 +97,17 @@ class Dashboard extends React.Component {
               title="Success feedback"
               color={colors[7]}
               text={
-                feedbacks ? (
+                lastFeedback ? (
                   <span>
                     You have new success feedback. Click &#34;
-                    <Link to={`feedback/submit/${feedbacks[0]._id}`}>here</Link>
+                    <Link to={`feedback/submit/${lastFeedback._id}`}>here</Link>
                     &#34;to submit
                   </span>
                 ) : (
                   'Nothing new'
                 )
               }
-              badge={feedbacks !== undefined}
+              badge={lastFeedback !== undefined}
             />
           </Col>
           <Col key={2} lg={8} sm={12}>

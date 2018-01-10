@@ -62,7 +62,6 @@ class Feedback extends Common {
   }
 
   handleCloseDateChange(value) {
-    console.log(value);
     this.setState({ feedbackCloseDate: value });
   }
 
@@ -78,7 +77,13 @@ class Feedback extends Common {
     const columns = [
       { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
       { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
-      { title: 'Last feedback date', dataIndex: 'lastfeedbackDate' },
+      {
+        title: 'Last feedback date',
+        render: record =>
+          record.lastFeedback
+            ? moment(record.lastFeedback.closeDate).format(dateFormat)
+            : '-'
+      },
       { title: 'Last feedback information', dataIndex: 'lfinfo' },
       { title: 'Contact person', dataIndex: 'contactInfo.name' },
       { title: 'Email address', dataIndex: 'contactInfo.email' },

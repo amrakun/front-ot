@@ -336,6 +336,12 @@ const feedback = `
   query companies(${commonParams}) {
     companies(${commonValues}) {
       _id
+      lastFeedback {
+        closeDate
+        responses {
+          _id
+        }
+      }
       basicInfo {
         enName,
         email,

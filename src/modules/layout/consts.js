@@ -39,15 +39,18 @@ export const buyerSideMenu = [
     subMenu: [
       {
         url: '/prequalification-status',
-        title: 'Pre-qualification status'
+        title: 'Pre-qualification status',
+        disabled: true
       },
       {
         url: '/audit',
-        title: 'Qualification/audit status'
+        title: 'Qualification/audit status',
+        disabled: true
       },
       {
         url: '/validation',
-        title: 'Validation status'
+        title: 'Validation status',
+        disabled: true
       },
       {
         url: '/difot',
@@ -73,7 +76,8 @@ export const buyerSideMenu = [
       },
       {
         url: '/blocking',
-        title: 'Blocking'
+        title: 'Blocking',
+        disabled: true
       }
     ]
   },
@@ -91,6 +95,7 @@ export const buyerSideMenu = [
     url: 'report',
     title: 'Report',
     icon: 'file',
+    disabled: true,
     subMenu: [
       {
         url: '/supplier-profile',

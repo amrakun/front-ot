@@ -60,6 +60,7 @@ function renderMenu(sideMenu) {
       menuItems.push(
         <SubMenu
           key={m.url}
+          disabled={m.disabled}
           title={
             <span>
               {m.icon ? <Icon type={m.icon} /> : ''}
@@ -72,7 +73,7 @@ function renderMenu(sideMenu) {
       );
     } else {
       menuItems.push(
-        <MenuItem key={m.url}>
+        <MenuItem key={m.url} disabled={m.disabled}>
           {m.icon ? <Icon type={m.icon} /> : ''}
           <NavLink to={m.url}>{m.title}</NavLink>
         </MenuItem>
