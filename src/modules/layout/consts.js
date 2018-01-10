@@ -105,5 +105,11 @@ export const buyerSideMenu = [
         title: 'RFQ/EOI'
       }
     ]
+  },
+  {
+    url: '/settings',
+    title: 'Settings',
+    icon: 'setting',
+    disabled: true
   }
 ];

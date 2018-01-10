@@ -14,7 +14,7 @@ const visitorPaths = [
   '/'
 ];
 const withSidebar = { marginLeft: 200 };
-const withSidebarCollapsed = { marginLeft: 64 };
+const withSidebarCollapsed = { marginLeft: 80 };
 
 class MainLayout extends React.Component {
   constructor(props) {
