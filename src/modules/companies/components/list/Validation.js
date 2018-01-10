@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Table, Card, Row, Col, Button } from 'antd';
+import { Table, Card, Row, Col, Button, Modal } from 'antd';
 import Common from './Common';
 import Sidebar from './Sidebar';
 import Search from './Search';
@@ -10,10 +10,33 @@ import moment from 'moment';
 import { dateFormat } from 'modules/common/constants';
 
 class Validation extends Common {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      modalVisible: false,
+      modalData: []
+    };
+
+    this.showValidationModal = this.showValidationModal.bind(this);
+    this.hideValidationModal = this.hideValidationModal.bind(this);
+    this.handleOk = this.handleOk.bind(this);
+  }
+
+  handleOk() {}
+
+  showValidationModal(data) {
+    this.setState({ modalVisible: true, modalData: data });
+  }
+
+  hideValidationModal() {
+    this.setState({ modalVisible: false });
+  }
+
   render() {
     const { data, pagination, loading, onChange, addValidation } = this.props;
-    const { selectedCompanies } = this.state;
-
+    const { selectedCompanies, modalVisible, modalData } = this.state;
+    console.log(modalData);
     const columns = [
       { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
       { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
@@ -21,8 +44,16 @@ class Validation extends Common {
         title: 'Tier type',
         render: () => <a>View</a>
       },
-      { title: 'Pre-qualification status', render: () => <span>Yes</span> },
-      { title: 'Product/Service code', render: () => <span>Yes</span> },
+      { title: 'Pre-qualification status', render: () => <a>Yes</a> },
+      {
+        title: 'Product/Service code',
+        render: record => {
+          const pI = record.productsInfo ? record.productsInfo : [];
+          return (
+            <a onClick={() => this.showValidationModal(pI)}>{pI.length}</a>
+          );
+        }
+      },
       {
         title: 'Last validation date',
         render: () => moment().format(dateFormat)
@@ -64,6 +95,17 @@ class Validation extends Common {
               }
             />
           </Card>
+
+          <Modal
+            title="Validation"
+            visible={modalVisible}
+            onOk={this.handleOk}
+            onCancel={() => this.toggleValidationModal(false)}
+          >
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+          </Modal>
         </Col>
       </Row>
     );

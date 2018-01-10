@@ -367,6 +367,25 @@ const feedback = `
   }
 `;
 
+const validation = `
+  query companies(${commonParams}) {
+    companies(${commonValues}) {
+      _id
+      basicInfo {
+        enName,
+        email,
+        sapNumber
+      }
+      contactInfo {
+        name,
+        email,
+        phone
+      }
+      productsInfo
+    }
+  }
+`;
+
 const simpleCompanies = `
   query companies(${commonParams}) {
     companies(${commonValues}) {
@@ -449,6 +468,7 @@ export default {
   simpleCompanies,
   dueDiligence,
   difot,
+  validation,
   feedback,
   feedbackDetail,
   feedbacks,

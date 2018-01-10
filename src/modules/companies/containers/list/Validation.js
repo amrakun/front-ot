@@ -47,4 +47,4 @@ const WithData = graphql(gql(mutations.addDueDiligence), {
   name: 'addValidationMutation'
 })(ValidationContainer);
 
-export default generator(WithData, 'dueDiligence');
+export default generator(WithData, 'validation');
