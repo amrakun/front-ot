@@ -3,8 +3,9 @@ export const companyByUser = `
     companyByUser {
       _id
       lastDifotScore
-      feedbacks {
+      lastFeedback {
         _id
+        closeDate
         status
         closeDate
         content

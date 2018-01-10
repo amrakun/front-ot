@@ -11,7 +11,6 @@ class FeedbackContainer extends React.Component {
     const { companiesQuery, addFeedbackMutation } = this.props;
 
     const addFeedback = args => {
-      console.log(args);
       addFeedbackMutation({
         variables: {
           closeDate: args.feedbackCloseDate,

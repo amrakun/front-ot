@@ -84,7 +84,6 @@ class Sidebar extends React.Component {
     });
 
     history.push({
-      pathname: '/companies',
       search: stringified
     });
   }
