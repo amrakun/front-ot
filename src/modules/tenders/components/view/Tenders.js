@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Table, Card, Popconfirm, Input, DatePicker, Button, Icon } from 'antd';
+import { Table, Card, Popconfirm, Input, Button, Icon } from 'antd';
 import { labels } from '../../constants';
-import { dateFormat, dateTimeFormat } from 'modules/common/constants';
+import { dateTimeFormat } from 'modules/common/constants';
 import queryString from 'query-string';
 import moment from 'moment';
 
-const RangePicker = DatePicker.RangePicker;
 const Search = Input.Search;
 
 class Tenders extends React.Component {
@@ -20,18 +19,12 @@ class Tenders extends React.Component {
     const query = queryString.parse(history.location.search);
     const searchQuery = query.search;
 
-    let dateRange = [];
-
-    if (query.from) dateRange = [moment(query.from), moment(query.to)];
-
     this.state = {
       statuses: query.status && query.status.split(','),
-      search: searchQuery || '',
-      dateRange: dateRange
+      search: searchQuery || ''
     };
 
     this.renderOperation = this.renderOperation.bind(this);
-    this.handleDateRangeChange = this.handleDateRangeChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.handleTableChange = this.handleTableChange.bind(this);
   }
@@ -51,13 +44,6 @@ class Tenders extends React.Component {
   handleSearch(value) {
     this.updateQueryString(query => {
       query.search = value;
-    });
-  }
-
-  handleDateRangeChange(value) {
-    this.updateQueryString(query => {
-      query.from = value[0]._d;
-      query.to = value[1]._d;
     });
   }
 
@@ -278,7 +264,7 @@ class Tenders extends React.Component {
       exportLoading
     } = this.props;
 
-    const { search, dateRange } = this.state;
+    const { search } = this.state;
     const { location } = history;
 
     const highlightedId = location.state && location.state.newTenderId;
@@ -294,15 +280,6 @@ class Tenders extends React.Component {
             placeholder="Name or number"
             style={{ width: 200, float: 'left', marginRight: '16px' }}
             onSearch={this.handleSearch}
-          />
-
-          <RangePicker
-            defaultValue={dateRange}
-            format={dateFormat}
-            style={{ width: 200, float: 'left' }}
-            placeholder={['From', 'To']}
-            onChange={this.handleDateRangeChange}
-            allowClear
           />
 
           <Button disabled={exportLoading} onClick={exportTenders}>
