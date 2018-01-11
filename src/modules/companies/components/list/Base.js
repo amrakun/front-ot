@@ -59,7 +59,7 @@ class Base extends Common {
         render: record =>
           record.averageDifotScore ? `${record.averageDifotScore}%` : '-'
       },
-      { title: 'Blocking', dataIndex: 'isBlocked' },
+      { title: 'Blocking', render: record => (record.isBlocked ? 'Yes' : '-') },
       { title: 'Contact person', dataIndex: 'contactInfo.name' },
       { title: 'Email address', dataIndex: 'contactInfo.email' },
       { title: 'Phone number', dataIndex: 'contactInfo.phone' },

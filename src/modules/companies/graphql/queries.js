@@ -262,6 +262,8 @@ const commonParams = `
   $region: String
   $status: String
   $productCodes: String
+  $isProductsInfoValidated: Boolean
+  $includeBlocked: Boolean
   $_ids: [String]
 `;
 
@@ -269,7 +271,9 @@ const commonValues = `
   search: $search,
   region: $region,
   status: $status,
-  productCodes: $productCodes
+  productCodes: $productCodes,
+  isProductsInfoValidated: $isProductsInfoValidated,
+  includeBlocked: $includeBlocked,
   _ids: $_ids
 `;
 
@@ -290,6 +294,7 @@ const companies = `
       averageDifotScore
       lastDueDiligence
       isProductsInfoValidated
+      isBlocked
     }
   }
 `;

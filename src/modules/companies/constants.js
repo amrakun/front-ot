@@ -9,7 +9,7 @@ export const regionOptions = [
 export const statusOptions = [
   { label: 'Pre-qualified', value: 'preQualified' },
   { label: 'Qaulified', value: 'qualifiedAndAudited' },
-  { label: 'Validated', value: 'validated' },
+  { label: 'Validated', value: 'isProductsInfoValidated' },
   { label: 'By DIFOT score', value: 'byDifotScore' },
-  { label: 'Include blocked suppliers', value: 'includeBlockedCompanies' }
+  { label: 'Include blocked suppliers', value: 'includeBlocked' }
 ];

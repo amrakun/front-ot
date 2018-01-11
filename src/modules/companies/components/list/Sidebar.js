@@ -12,9 +12,9 @@ const initialRegion = ['umnugovi'];
 const initialStatus = [
   'preQualified',
   'qualifiedAndAudited',
-  'validated',
+  'isProductsInfoValidated',
   'byDifotScore',
-  'includeBlockedCompanies'
+  'includeBlocked'
 ];
 
 const propTypes = {
