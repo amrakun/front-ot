@@ -260,20 +260,20 @@ export const companyPrequalificationDetail = `
 const commonParams = `
   $search: String
   $region: String
-  $status: String
   $productCodes: String
   $isProductsInfoValidated: Boolean
   $includeBlocked: Boolean
+  $difotScore: String
   $_ids: [String]
 `;
 
 const commonValues = `
   search: $search,
   region: $region,
-  status: $status,
   productCodes: $productCodes,
   isProductsInfoValidated: $isProductsInfoValidated,
   includeBlocked: $includeBlocked,
+  difotScore: $difotScore
   _ids: $_ids
 `;
 

@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import queryString from 'query-string';
-import { Card, Col, TreeSelect, Checkbox, Button, Icon } from 'antd';
+import { Card, Col, TreeSelect, Checkbox, Button, Icon, Select } from 'antd';
 import { regionOptions, statusOptions } from '../../constants';
 import productsTree from '../../productsTree';
 
+const Option = Select.Option;
 const CheckboxGroup = Checkbox.Group;
 
 const initialRegion = ['umnugovi'];
@@ -13,8 +14,8 @@ const initialStatus = [
   'preQualified',
   'qualifiedAndAudited',
   'isProductsInfoValidated',
-  'byDifotScore',
-  'includeBlocked'
+  'includeBlocked',
+  'byDifotScore'
 ];
 
 const propTypes = {
@@ -38,12 +39,14 @@ class Sidebar extends React.Component {
     this.state = {
       productCodes: productCodesQuery || [],
       region: regionQuery || initialRegion,
-      status: statusQuery || initialStatus
+      status: statusQuery || initialStatus,
+      difotRange: '0-25'
     };
 
     this.onProductCodesChange = this.onProductCodesChange.bind(this);
     this.onRegionChange = this.onRegionChange.bind(this);
     this.onStatusChange = this.onStatusChange.bind(this);
+    this.onDifotRangeChange = this.onDifotRangeChange.bind(this);
     this.filter = this.filter.bind(this);
   }
 
@@ -59,9 +62,13 @@ class Sidebar extends React.Component {
     this.setState({ status: values });
   }
 
+  onDifotRangeChange(value) {
+    this.setState({ difotRange: value });
+  }
+
   filter() {
     const { history } = this.props;
-    const { region, status, productCodes } = this.state;
+    const { region, status, productCodes, difotRange } = this.state;
 
     let regionString = '';
     let statusString = '';
@@ -77,19 +84,21 @@ class Sidebar extends React.Component {
       productCodesString += i + ',';
     });
 
-    const stringified = queryString.stringify({
+    const filterValues = {
       region: regionString.replace(/.$/, ''),
       status: statusString.replace(/.$/, ''),
       productCodes: productCodesString.replace(/.$/, '')
-    });
+    };
 
-    history.push({
-      search: stringified
-    });
+    if (status.includes('byDifotScore')) {
+      filterValues.difotRange = difotRange;
+    }
+
+    history.push({ search: queryString.stringify(filterValues) });
   }
 
   render() {
-    const { productCodes, status, region } = this.state;
+    const { productCodes, status, region, difotRange } = this.state;
 
     return (
       <Col span={6}>
@@ -107,7 +116,7 @@ class Sidebar extends React.Component {
         <Card title="Select supplier by tier type" className="margin">
           <CheckboxGroup
             options={regionOptions}
-            defaultValue={region}
+            value={region}
             className="horizontal"
             onChange={this.onRegionChange}
           />
@@ -116,10 +125,20 @@ class Sidebar extends React.Component {
         <Card title="Select supplier by status" className="margin">
           <CheckboxGroup
             options={statusOptions}
-            defaultValue={status}
+            value={status}
             className="horizontal"
             onChange={this.onStatusChange}
           />
+          <Select
+            value={difotRange}
+            disabled={!status.includes('byDifotScore')}
+            onChange={this.onDifotRangeChange}
+          >
+            <Option value="0-25">0% - 25%</Option>
+            <Option value="26-51">26% - 51%</Option>
+            <Option value="51-75">51% - 75%</Option>
+            <Option value="76-100">76% - 100%</Option>
+          </Select>
         </Card>
 
         <Button

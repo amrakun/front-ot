@@ -55,14 +55,15 @@ const generator = (Component, query) => {
   return graphql(gql(queries[query]), {
     name: 'companiesQuery',
     options: ({ queryParams }) => {
-      const status = queryParams.status;
+      const { status, search, region, productCodes, difotRange } = queryParams;
       return {
         variables: {
           page: 200,
           perPage: 20,
-          search: queryParams.search,
-          region: queryParams.region || 'umnugovi',
-          productCodes: queryParams.productCodes,
+          search: search,
+          region: region || 'umnugovi',
+          productCodes: productCodes,
+          difotScore: difotRange,
           includeBlocked: status ? status.includes('includeBlocked') : true,
           isProductsInfoValidated: status
             ? status.includes('isProductsInfoValidated')
