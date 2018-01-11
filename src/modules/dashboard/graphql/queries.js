@@ -42,6 +42,7 @@ export const companyByUser = `
       healthInfo {
         doesHaveHealthSafety
       }
+      openTendersCount
     }
   }
 `;
