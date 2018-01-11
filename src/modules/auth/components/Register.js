@@ -14,6 +14,10 @@ class Register extends BaseForm {
   constructor(props) {
     super(props);
 
+    this.state = {
+      loading: false
+    };
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.checkConfirm = this.checkConfirm.bind(this);
     this.checkPassword = this.checkPassword.bind(this);
@@ -24,6 +28,7 @@ class Register extends BaseForm {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.props.register(values);
+        this.setState({ loading: true });
       }
     });
   }
@@ -45,6 +50,8 @@ class Register extends BaseForm {
   }
 
   render() {
+    const { loading } = this.state;
+
     return (
       <div className="center-content">
         <Card className="login-card" bordered={false}>
@@ -61,6 +68,7 @@ class Register extends BaseForm {
               type="primary"
               htmlType="submit"
               style={{ marginBottom: '12px' }}
+              loading={loading}
             >
               Register
             </Button>
