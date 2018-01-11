@@ -67,9 +67,15 @@ class Tenders extends React.Component {
   }
 
   renderTooltippedIcon(record) {
+    const currentCompanyId = this.props.currentUser.companyId;
+    let { status, isParticipated, winnerId } = record;
+
+    if (isParticipated) status = 'participated';
+    if (currentCompanyId === winnerId) status = 'awarded';
+
     return (
-      <Tooltip title={<span className="capitalize">{record.status}</span>}>
-        {this.renderIcon(record.status, {
+      <Tooltip title={<span className="capitalize">{status}</span>}>
+        {this.renderIcon(status, {
           fontSize: '20px',
           lineHeight: '12px'
         })}
