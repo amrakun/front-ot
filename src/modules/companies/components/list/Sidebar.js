@@ -40,7 +40,7 @@ class Sidebar extends React.Component {
       productCodes: productCodesQuery || [],
       region: regionQuery || initialRegion,
       status: statusQuery || initialStatus,
-      difotRange: query.difotRange || '0-25'
+      difotRange: query.difotRange || '76-100'
     };
 
     this.onProductCodesChange = this.onProductCodesChange.bind(this);

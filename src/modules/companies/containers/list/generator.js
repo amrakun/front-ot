@@ -56,15 +56,23 @@ const generator = (Component, query) => {
     name: 'companiesQuery',
     options: ({ queryParams }) => {
       const { status, search, region, productCodes, difotRange } = queryParams;
+
+      let difotScore = '76-100';
+      if (status && status.includes('byDifotScore')) {
+        difotScore = difotRange;
+      }
+      if (status && !status.includes('byDifotScore')) {
+        difotScore = '';
+      }
+
       return {
         variables: {
           page: 200,
           perPage: 20,
           search: search,
-          region: region || 'umnugovi',
+          region: region,
           productCodes: productCodes,
-          difotScore:
-            status && status.includes('includeBlocked') ? difotRange : '0-25',
+          difotScore: difotScore,
           includeBlocked: status ? status.includes('includeBlocked') : true,
           isProductsInfoValidated: status
             ? status.includes('isProductsInfoValidated')
