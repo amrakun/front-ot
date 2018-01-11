@@ -281,7 +281,11 @@ class RegistrationForm extends BaseForm {
             name: 'countryOfPrimaryManufacturer',
             label: groupLabels.countryOfPrimaryManufacturer,
             optional: role !== 'Distributor',
-            control: <Select>{countryOptions}</Select>
+            control: (
+              <Select showSearch filterOption={this.filterOption}>
+                {countryOptions}
+              </Select>
+            )
           })}
         </Card>
 

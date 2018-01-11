@@ -111,8 +111,9 @@ class CompanyInfo extends BaseForm {
               name: 'registeredInCountry',
               control: (
                 <Select
-                  placeholder="Please select a country"
                   onChange={this.handleCountryChange}
+                  showSearch
+                  filterOption={this.filterOption}
                 >
                   {countryOptions}
                 </Select>
@@ -121,12 +122,13 @@ class CompanyInfo extends BaseForm {
             {this.renderField({
               label: 'Aimag you are registered in',
               name: 'registeredInAimag',
-              isVisible: selectedCountry === 'Mongolia',
-              optional: selectedCountry !== 'Mongolia',
+              isVisible: selectedCountry === 'MN',
+              optional: selectedCountry !== 'MN',
               control: (
                 <Select
-                  placeholder="Please select an aimag"
                   onChange={this.handleAimagChange}
+                  showSearch
+                  filterOption={this.filterOption}
                 >
                   {this.renderOptions(aimagData)}
                 </Select>
@@ -136,12 +138,12 @@ class CompanyInfo extends BaseForm {
               label: 'Soum you are registered in',
               name: 'registeredInSum',
               isVisible:
-                selectedCountry === 'Mongolia' && selectedAimag === 'Umnugovi',
+                selectedCountry === 'MN' && selectedAimag === 'Omnogovi',
               optional: !(
-                selectedCountry === 'Mongolia' && selectedAimag === 'Umnugovi'
+                selectedCountry === 'MN' && selectedAimag === 'Omnogovi'
               ),
               control: (
-                <Select placeholder="Please select a soum">
+                <Select showSearch filterOption={this.filterOption}>
                   {this.renderOptions(soumData)}
                 </Select>
               )
@@ -150,8 +152,8 @@ class CompanyInfo extends BaseForm {
               label: 'Are you Chinese state owned entity?',
               name: 'isChinese',
               control: <Select>{booleanOptions}</Select>,
-              isVisible: selectedCountry === 'China',
-              optional: selectedCountry !== 'China'
+              isVisible: selectedCountry === 'CN',
+              optional: selectedCountry !== 'CN'
             })}
             {this.renderField({
               label: labels.isSubContractor,

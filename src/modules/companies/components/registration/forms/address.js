@@ -50,7 +50,14 @@ const addressCard = (renderField, renderOptions) => {
         label: 'Country',
         name: 'country',
         control: (
-          <Select placeholder="Please select a country">
+          <Select
+            showSearch
+            filterOption={(input, option) =>
+              option.props.children
+                .toLowerCase()
+                .indexOf(input.toLowerCase()) >= 0
+            }
+          >
             {countryOptions}
           </Select>
         )

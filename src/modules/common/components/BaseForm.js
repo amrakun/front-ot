@@ -54,6 +54,12 @@ export default class BaseForm extends React.Component {
     };
   }
 
+  filterOption(input, option) {
+    return (
+      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+    );
+  }
+
   save(extra = {}) {
     this.props.form.validateFieldsAndScroll(err => {
       let doc = {};

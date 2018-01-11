@@ -1,4 +1,3 @@
-import Countries from './Countries';
 import Field from './Field';
 import Uploader from './Uploader';
 import BaseForm from './BaseForm';
@@ -10,7 +9,6 @@ import Loading from './Loading';
 
 export {
   Uploader,
-  Countries,
   Field,
   BaseForm,
   NumberCard,
