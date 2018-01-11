@@ -9,8 +9,8 @@ const Dashboard = props => {
 
   return (
     <div>
-      <Tenders type="rfq" {...extendedProps} />
       <Tenders type="eoi" {...extendedProps} />
+      <Tenders type="rfq" {...extendedProps} />
     </div>
   );
 };

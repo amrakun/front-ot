@@ -146,7 +146,6 @@ class RegistrationForm extends BaseForm {
 
   renderDistrubutionRightInput(index) {
     const initValues = this.props.data.authorizedDistributions || {};
-    const { isExclusiveDistributor } = this.state;
 
     return (
       <Field
@@ -154,7 +153,6 @@ class RegistrationForm extends BaseForm {
         initialValue={initValues[index]}
         label={`Distribution right name ${index + 1}`}
         hasFeedback={false}
-        isVisible={isExclusiveDistributor}
         optional={true}
         control={<Input />}
       />
@@ -166,13 +164,7 @@ class RegistrationForm extends BaseForm {
     const roleOptions = this.renderOptions(roleData);
     const countryOptions = this.renderOptions(countryData);
 
-    const {
-      hasParent,
-      role,
-      factories,
-      isExclusiveDistributor,
-      isParentExistingSup
-    } = this.state;
+    const { hasParent, role, factories, isExclusiveDistributor } = this.state;
 
     const factoryItems = factories.map((factory, index) =>
       this.renderFactory(factory, index)
@@ -203,16 +195,8 @@ class RegistrationForm extends BaseForm {
           {this.renderField({
             name: 'parentName',
             label: groupLabels.parentName,
-            isVisible: hasParent && isParentExistingSup,
-            optional: !hasParent && !isParentExistingSup,
-            control: <Select>{booleanOptions}</Select>
-            // TODO: companyOptions fetch from db
-          })}
-          {this.renderField({
-            name: 'parentName',
-            label: groupLabels.parentName,
-            isVisible: hasParent && !isParentExistingSup,
-            optional: !hasParent && !isParentExistingSup,
+            isVisible: hasParent,
+            optional: !hasParent,
             control: <Input />
           })}
           {this.renderField({
@@ -259,25 +243,30 @@ class RegistrationForm extends BaseForm {
             )
           })}
 
-          {this.renderDistrubutionRightInput(0)}
-          {this.renderDistrubutionRightInput(1)}
-          {this.renderDistrubutionRightInput(2)}
+          <div
+            className={
+              role === 'Distributor' && isExclusiveDistributor ? '' : 'hidden'
+            }
+          >
+            {this.renderDistrubutionRightInput(0)}
+            {this.renderDistrubutionRightInput(1)}
+            {this.renderDistrubutionRightInput(2)}
 
-          {this.renderField({
-            label: groupLabels.attachments,
-            name: 'attachments',
-            description: `Please upload your authorized distribution rights files`,
-            isVisible: isExclusiveDistributor,
-            optional: !isExclusiveDistributor,
-            dataType: 'file',
-            control: (
-              <Uploader
-                initialFiles={this.props.data.attachments}
-                multiple={true}
-                onReceiveFile={(...args) => this.attachmentsUpload(...args)}
-              />
-            )
-          })}
+            {this.renderField({
+              label: groupLabels.attachments,
+              name: 'attachments',
+              description: `Please upload your authorized distribution rights files`,
+              optional: !isExclusiveDistributor,
+              dataType: 'file',
+              control: (
+                <Uploader
+                  initialFiles={this.props.data.attachments}
+                  multiple={true}
+                  onReceiveFile={(...args) => this.attachmentsUpload(...args)}
+                />
+              )
+            })}
+          </div>
         </Card>
 
         <Card>

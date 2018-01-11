@@ -73,11 +73,11 @@ class ManagementTeam extends BaseForm {
         }
       >
         <Field
-          label="Name"
+          label="Full name"
           name={`${prefix}Name`}
           initialValue={data.name}
           optional={optional}
-          control={<Input placeholder="Title. First name + Last name" />}
+          control={<Input placeholder="First name + Last name" />}
         />
 
         <Field
