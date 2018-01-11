@@ -25,7 +25,7 @@ class RegistrationForm extends BaseForm {
     const { data } = this.props;
 
     return (
-      <Form onSubmit={this.handleSubmit} className="supplier-forms">
+      <Form onSubmit={this.handleSubmit} className="">
         <Col lg={{ span: 12, offset: 6 }} xl={{ span: 10, offset: 7 }}>
           <Card>
             {this.renderField({
@@ -52,8 +52,8 @@ class RegistrationForm extends BaseForm {
                 />
               )
             })}
+            {this.renderSubmit('Save', this.handleSubmit)}
           </Card>
-          {this.renderSubmit('Save', this.handleSubmit)}
         </Col>
       </Form>
     );
