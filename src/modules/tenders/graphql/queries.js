@@ -94,11 +94,20 @@ const tenderUpdateDetail = `
   }
 `;
 
+const tenderParams = `$type: String!, $supplierId: String, $ignoreSubmitted: Boolean, $search: String, $status: String`;
+const tenderValues = `type: $type, supplierId: $supplierId, ignoreSubmitted: $ignoreSubmitted, search: $search, status: $status`;
+
 const tenders = `
-  query tenders($type: String!, $supplierId: String, $ignoreSubmitted: Boolean, $search: String, $status: String) {
-    tenders(type: $type, supplierId: $supplierId, ignoreSubmitted: $ignoreSubmitted, search: $search, status: $status) {
+  query tenders(${tenderParams}) {
+    tenders(${tenderValues}) {
       ${tenderFields}
     }
+  }
+`;
+
+const exportTenders = `
+  query tendersExport(${tenderParams}) {
+    tendersExport(${tenderValues})
   }
 `;
 
@@ -126,5 +135,6 @@ export default {
   tenderUpdateDetail,
   rfqBidSummaryReport,
   eoiShortList,
-  eoiBidderList
+  eoiBidderList,
+  exportTenders
 };

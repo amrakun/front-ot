@@ -6,22 +6,7 @@ import { BaseList } from '../../components';
 import { queries } from '../../graphql';
 import generator from './generator';
 import client from 'apolloClient';
-import { colors } from 'modules/common/colors';
-
-const notifyLoading = {
-  message: 'Building an excel...',
-  description: 'You will get notified when your report is ready!',
-  icon: <Icon type="loading" />,
-  duration: 5,
-  key: 'loadingNotification'
-};
-
-const notifyReady = {
-  message: 'Your report is ready to download',
-  icon: <Icon type="file-excel" style={{ color: colors[0] }} />,
-  duration: 0,
-  key: 'downloadNotification'
-};
+import { notifyReady, notifyLoading } from 'modules/common/constants';
 
 class BaseListContainer extends React.Component {
   constructor(props) {

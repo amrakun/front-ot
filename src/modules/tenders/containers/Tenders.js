@@ -4,6 +4,9 @@ import { Tenders } from '../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries, mutations } from '../graphql';
 import { message } from 'antd';
+import client from 'apolloClient';
+import { notification, Icon, Button } from 'antd';
+import { notifyReady, notifyLoading } from 'modules/common/constants';
 
 class TendersContainer extends React.Component {
   constructor(props) {
@@ -25,6 +28,7 @@ class TendersContainer extends React.Component {
     };
 
     this.handleTableChange = this.handleTableChange.bind(this);
+    this.exportTenders = this.exportTenders.bind(this);
   }
 
   handleTableChange(pagination) {
@@ -39,6 +43,48 @@ class TendersContainer extends React.Component {
       tendersQuery.refetch();
       location.state.refetch = false;
     }
+  }
+
+  exportTenders() {
+    const { queryParams, type, supplierId } = this.props;
+
+    notification.open(notifyLoading);
+    this.setState({ exportLoading: true });
+
+    client
+      .query({
+        query: gql(queries.exportTenders),
+        name: 'exportTenders',
+
+        variables: {
+          search: queryParams ? queryParams.search : '',
+          status: queryParams ? queryParams.status : '',
+          type: type,
+          supplierId: supplierId,
+          ignoreSubmitted: queryParams ? queryParams.ignoreSubmitted : ''
+        }
+      })
+      .then(response => {
+        notification.close('loadingNotification');
+        notification.open({
+          ...notifyReady,
+          btn: (
+            <Button
+              type="primary"
+              onClick={() => {
+                notification.close('downloadNotification');
+                window.open(response.data[Object.keys(response.data)[0]]);
+              }}
+            >
+              <Icon type="download" /> Download
+            </Button>
+          )
+        });
+        this.setState({ exportLoading: false });
+      })
+      .catch(error => {
+        message.error(error.message);
+      });
   }
 
   render() {
@@ -66,7 +112,7 @@ class TendersContainer extends React.Component {
         });
     };
 
-    const { pagination } = this.state;
+    const { pagination, exportLoading } = this.state;
     const tenders = tendersQuery.tenders || [];
 
     const updatedProps = {
@@ -81,7 +127,9 @@ class TendersContainer extends React.Component {
       loading: false,
       notInterested: notInterested,
       currentUser: currentUser,
-      handleTableChange: this.handleTableChange
+      handleTableChange: this.handleTableChange,
+      exportTenders: this.exportTenders,
+      exportLoading
     };
 
     return <Tenders {...updatedProps} />;
@@ -93,7 +141,9 @@ TendersContainer.propTypes = {
   location: PropTypes.object,
   history: PropTypes.object,
   tendersQuery: PropTypes.object,
-  tendersResponsesAdd: PropTypes.func
+  tendersResponsesAdd: PropTypes.func,
+  queryParams: PropTypes.object,
+  supplierId: PropTypes.string
 };
 
 TendersContainer.contextTypes = {

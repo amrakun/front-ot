@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Table, Card, Popconfirm, Input, DatePicker } from 'antd';
+import { Table, Card, Popconfirm, Input, DatePicker, Button, Icon } from 'antd';
 import { labels } from '../../constants';
 import { dateFormat, dateTimeFormat } from 'modules/common/constants';
 import queryString from 'query-string';
@@ -273,7 +273,9 @@ class Tenders extends React.Component {
       data,
       pagination,
       loading,
-      history
+      history,
+      exportTenders,
+      exportLoading
     } = this.props;
 
     const { search, dateRange } = this.state;
@@ -290,17 +292,23 @@ class Tenders extends React.Component {
           <Search
             defaultValue={search}
             placeholder="Name or number"
-            style={{ width: 200, float: 'left' }}
+            style={{ width: 200, float: 'left', marginRight: '16px' }}
             onSearch={this.handleSearch}
           />
 
           <RangePicker
             defaultValue={dateRange}
             format={dateFormat}
+            style={{ width: 200, float: 'left' }}
             placeholder={['From', 'To']}
             onChange={this.handleDateRangeChange}
             allowClear
           />
+
+          <Button disabled={exportLoading} onClick={exportTenders}>
+            Export to excel
+            <Icon type="file-excel" />
+          </Button>
         </div>
 
         <Table
@@ -328,7 +336,9 @@ Tenders.propTypes = {
   handleTableChange: PropTypes.func,
   currentUser: PropTypes.object,
   notInterested: PropTypes.func,
-  history: PropTypes.object
+  history: PropTypes.object,
+  exportTenders: PropTypes.func,
+  exportLoading: PropTypes.bool
 };
 
 export default withRouter(Tenders);

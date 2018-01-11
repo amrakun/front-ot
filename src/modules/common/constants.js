@@ -1,3 +1,6 @@
+import React from 'react';
+import { Icon } from 'antd';
+
 const dateFormat = 'YYYY/MM/DD';
 const dateTimeFormat = 'YYYY/MM/DD HH:mm';
 
@@ -30,11 +33,28 @@ const days = [
   { text: '7 days before', value: '7' }
 ];
 
+const notifyLoading = {
+  message: 'Building an excel...',
+  description: 'You will get notified when your report is ready!',
+  icon: <Icon type="loading" />,
+  duration: 5,
+  key: 'loadingNotification'
+};
+
+const notifyReady = {
+  message: 'Your report is ready to download',
+  icon: <Icon type="file-excel" style={{ color: 'rgb(0,153,168)' }} />,
+  duration: 0,
+  key: 'downloadNotification'
+};
+
 export {
   dateFormat,
   dateTimeFormat,
   uploadDisclaimer,
   noLabelLayout,
   days,
-  booleanData
+  booleanData,
+  notifyLoading,
+  notifyReady
 };
