@@ -68,7 +68,8 @@ class PrequalificationForm extends PreqForm {
           ''
         )}
 
-        {this.renderSubmit('Save', this.handleSubmit)}
+        {this.renderGoBack()}
+        {this.renderSubmit()}
       </Form>
     );
   }

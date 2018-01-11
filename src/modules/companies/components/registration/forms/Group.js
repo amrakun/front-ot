@@ -289,6 +289,7 @@ class RegistrationForm extends BaseForm {
           })}
         </Card>
 
+        {this.renderGoBack()}
         {this.renderSubmit()}
       </Form>
     );

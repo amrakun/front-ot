@@ -87,6 +87,7 @@ class ShareHolders extends BaseForm {
         {this.renderShareholder('4', true)}
         {this.renderShareholder('5', true)}
 
+        {this.renderGoBack()}
         {this.renderSubmit()}
       </Form>
     );

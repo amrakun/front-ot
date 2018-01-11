@@ -119,6 +119,8 @@ class ManagementTeam extends BaseForm {
         {this.renderItem('otherMember1', true)}
         {this.renderItem('otherMember2', true)}
         {this.renderItem('otherMember3', true)}
+
+        {this.renderGoBack()}
         {this.renderSubmit()}
       </Form>
     );

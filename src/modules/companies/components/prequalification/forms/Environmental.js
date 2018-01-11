@@ -153,7 +153,8 @@ class PrequalificationForm extends BaseForm {
           })}
         </Card>
 
-        {this.renderSubmit('Save & continue', this.handleSubmit)}
+        {this.renderGoBack()}
+        {this.renderSubmit()}
       </Form>
     );
   }

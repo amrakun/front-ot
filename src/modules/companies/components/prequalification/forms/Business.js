@@ -290,6 +290,7 @@ class PrequalificationForm extends PreqForm {
           })}
         </Card>
 
+        {this.renderGoBack()}
         {this.renderSubmit()}
       </Form>
     );

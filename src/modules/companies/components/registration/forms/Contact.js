@@ -76,6 +76,7 @@ class ContactInfo extends BaseForm {
             control: <Input />
           })}
         </Card>
+        {this.renderGoBack()}
         {this.renderSubmit()}
       </Form>
     );

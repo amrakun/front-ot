@@ -13,6 +13,7 @@ export default class Panes extends React.Component {
     };
 
     this.nextTab = this.nextTab.bind(this);
+    this.previousTab = this.previousTab.bind(this);
     this.moveToTab = this.moveToTab.bind(this);
   }
 
@@ -32,13 +33,19 @@ export default class Panes extends React.Component {
       const incerementedKeyInt = parseInt(currentTabKey, 10) + 1;
 
       this.moveToTab(incerementedKeyInt.toString());
-
-      window.scrollTo(0, 0);
     }
+  }
+
+  previousTab() {
+    const { currentTabKey } = this.state;
+    const decerementedKeyInt = parseInt(currentTabKey, 10) - 1;
+
+    this.moveToTab(decerementedKeyInt.toString());
   }
 
   moveToTab(currentTabKey) {
     this.setState({ currentTabKey });
+    window.scrollTo(0, 0);
   }
 
   isEmpty(data) {
@@ -68,6 +75,7 @@ export default class Panes extends React.Component {
       >
         <Component
           nextTab={this.nextTab}
+          previousTab={this.previousTab}
           data={company[name] || {}}
           save={saveAction}
           productsInfo={name === 'healthInfo' ? company.productsInfo : {}}

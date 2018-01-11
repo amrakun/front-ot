@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Select, AutoComplete, Form, Button } from 'antd';
+import { Select, AutoComplete, Icon, Button } from 'antd';
 import Field from './Field';
 
 export default class BaseForm extends React.Component {
@@ -184,11 +184,23 @@ export default class BaseForm extends React.Component {
 
   renderSubmit(text = 'Save & continue', onClick = this.handleSubmit) {
     return (
-      <Form.Item>
-        <Button type="primary" htmlType="submit" onClick={onClick}>
-          {text}
-        </Button>
-      </Form.Item>
+      <Button
+        style={{ float: 'right' }}
+        type="primary"
+        htmlType="submit"
+        onClick={onClick}
+      >
+        {text}
+        <Icon type="right" />
+      </Button>
+    );
+  }
+
+  renderGoBack() {
+    return (
+      <Button style={{ marginRight: '16px' }} onClick={this.props.previousTab}>
+        <Icon type="left" />Back
+      </Button>
     );
   }
 }
@@ -201,5 +213,6 @@ BaseForm.propTypes = {
   form: PropTypes.object,
   data: PropTypes.any,
   save: PropTypes.func,
-  nextTab: PropTypes.func
+  nextTab: PropTypes.func,
+  previousTab: PropTypes.func
 };
