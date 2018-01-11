@@ -1,11 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Input, Select, Card } from 'antd';
+import { Form, Input, Select, Card, Button, Icon } from 'antd';
 import { countryData } from '../constants';
-import BaseForm from '../../../../common/components/BaseForm';
+import BaseForm from 'modules/common/components/BaseForm';
 
 class ContactInfo extends BaseForm {
   render() {
+    console.log(this.props);
     const countryOptions = this.renderOptions(countryData);
 
     return (
@@ -22,7 +23,15 @@ class ContactInfo extends BaseForm {
             name: 'jobTitle',
             control: <Input />
           })}
+        </Card>
 
+        <Card
+          extra={
+            <Button>
+              <Icon type="copy" />Copy above
+            </Button>
+          }
+        >
           {this.renderField({
             label: 'Address line',
             name: 'address',
@@ -45,6 +54,7 @@ class ContactInfo extends BaseForm {
 
           {this.renderField({
             label: 'Postcode or zipcode',
+            options: true,
             name: 'zipCode',
             control: <Input type="number" />
           })}
@@ -70,7 +80,9 @@ class ContactInfo extends BaseForm {
               </Select>
             )
           })}
+        </Card>
 
+        <Card>
           {this.renderField({
             label: 'Phone',
             name: 'phone',

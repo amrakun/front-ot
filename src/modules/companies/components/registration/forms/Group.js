@@ -269,16 +269,18 @@ class RegistrationForm extends BaseForm {
           </div>
         </Card>
 
-        <Card>
+        <Card className={role !== 'Distributor' && 'hidden'}>
           {this.renderField({
             name: 'primaryManufacturerName',
             label: groupLabels.primaryManufacturerName,
+            optional: role !== 'Distributor',
             control: <Input />
           })}
 
           {this.renderField({
             name: 'countryOfPrimaryManufacturer',
             label: groupLabels.countryOfPrimaryManufacturer,
+            optional: role !== 'Distributor',
             control: <Select>{countryOptions}</Select>
           })}
         </Card>

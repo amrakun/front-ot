@@ -304,6 +304,9 @@ i.success {
 form .ant-input-number {
   width: 100%;
 }
+.supplier-forms {
+  max-width: 1000px;
+}
 .supplier-forms .ant-card {
   margin-bottom: 16px;
 }

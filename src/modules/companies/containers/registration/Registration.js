@@ -18,6 +18,7 @@ const RegistrationContainer = props => {
 
     mutation({ variables: { [name]: doc } })
       .then(() => {
+        companyByUserQuery.refetch();
         message.success('Saved');
       })
       .catch(error => {
