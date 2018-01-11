@@ -31,7 +31,7 @@ class Dashboard extends React.Component {
 
   render() {
     const { data, history, location } = this.props;
-    const { lastDifotScore, lastFeedback } = data;
+    const { lastDifotScore, lastFeedback, openTendersCount } = data;
 
     const queryParams = queryString.parse(location.search);
     const currentUser = this.context.currentUser || {};
@@ -78,8 +78,8 @@ class Dashboard extends React.Component {
             <NumberCard
               icon="message"
               title="Open EOI/RFQ"
-              color={colors[5]}
-              number={0}
+              color={colors[7]}
+              number={openTendersCount}
             />
           </Col>
           <Col key={4} lg={8} sm={12}>
