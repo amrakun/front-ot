@@ -23,7 +23,14 @@ class Base extends Common {
   }
 
   render() {
-    const { data, pagination, loading, onChange } = this.props;
+    const {
+      data,
+      pagination,
+      loading,
+      onChange,
+      exportCompanies,
+      exportLoading
+    } = this.props;
     const { selectedCompanies } = this.state;
 
     const columns = [
@@ -74,7 +81,10 @@ class Base extends Common {
               <Button onClick={() => this.handleSend('/rfq/publish')}>
                 Send RFQ
               </Button>
-              <Button disabled>
+              <Button
+                loading={exportLoading}
+                onClick={() => exportCompanies(selectedCompanies)}
+              >
                 Export to excel
                 <Icon type="file-excel" />
               </Button>

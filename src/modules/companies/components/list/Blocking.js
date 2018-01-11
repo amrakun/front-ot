@@ -49,6 +49,7 @@ class Blocking extends Common {
           startDate: values.date[0],
           endDate: values.date[1]
         });
+        this.hideModal();
       } else {
         message.error('Please add atleast one supplier!');
       }
@@ -145,7 +146,7 @@ class Blocking extends Common {
             onChange: this.onSelectedCompaniesChange
           }}
           columns={this.columns()}
-          rowKey={record => record._id}
+          rowKey={record => record.supplierId}
           dataSource={data}
           pagination={pagination}
           loading={loading}

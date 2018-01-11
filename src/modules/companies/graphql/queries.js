@@ -294,6 +294,12 @@ const companies = `
   }
 `;
 
+const exportCompanies = `
+  query companiesExport(${commonParams}) {
+    companiesExport(${commonValues})
+  }
+`;
+
 const difot = `
   query companies(${commonParams}) {
     companies(${commonValues}) {
@@ -393,6 +399,7 @@ const blockedCompanies = `
   query blockedCompanies {
     blockedCompanies {
       _id
+      supplierId
       startDate
       endDate
       note
@@ -454,33 +461,33 @@ const feedbacks = `
 `;
 
 const feedbackResponseDetail = `
-query feedbackDetail($_id: String!) {
-  feedbackDetail(_id: $_id) {
-    _id
-    status
-    closeDate
-    supplierIds
-    content
-    createdDate
-    createdUserId
-    responses {
+  query feedbackDetail($_id: String!) {
+    feedbackDetail(_id: $_id) {
       _id
       status
-      feedbackId
-      supplierId
-      employmentNumberBefore
-      employmentNumberNow
-      nationalSpendBefore
-      nationalSpendAfter
-      umnugobiSpendBefore
-      umnugobiSpendAfter
-      investment
-      trainings
-      corporateSocial
-      technologyImprovement
+      closeDate
+      supplierIds
+      content
+      createdDate
+      createdUserId
+      responses {
+        _id
+        status
+        feedbackId
+        supplierId
+        employmentNumberBefore
+        employmentNumberNow
+        nationalSpendBefore
+        nationalSpendAfter
+        umnugobiSpendBefore
+        umnugobiSpendAfter
+        investment
+        trainings
+        corporateSocial
+        technologyImprovement
+      }
     }
   }
-}
 `;
 
 export default {
@@ -495,5 +502,6 @@ export default {
   feedback,
   feedbackDetail,
   feedbacks,
-  feedbackResponseDetail
+  feedbackResponseDetail,
+  exportCompanies
 };
