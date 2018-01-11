@@ -190,7 +190,7 @@ class PrequalificationForm extends BaseForm {
       <Form className="preq-form">
         <Card>
           {this.renderField({
-            label: 'Can you provide accounts for the last 3 financial year?',
+            label: 'Can you provide accounts for the last 3 financial years?',
             name: 'canProvideAccountsInfo',
             control: (
               <Select onChange={this.onCanProvide}>{booleanOptions}</Select>

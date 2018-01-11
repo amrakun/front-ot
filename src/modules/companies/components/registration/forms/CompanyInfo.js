@@ -125,6 +125,7 @@ class CompanyInfo extends BaseForm {
             {this.renderField({
               label: 'Postcode or zipcode',
               name: 'zipCode',
+              optional: true,
               control: <Input type="number" />
             })}
             {this.renderField({

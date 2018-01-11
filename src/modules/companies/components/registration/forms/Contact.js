@@ -12,9 +12,9 @@ class ContactInfo extends BaseForm {
       <Form onSubmit={this.handleSubmit}>
         <Card title="14. Primary business contact">
           {this.renderField({
-            label: 'Name',
+            label: 'Full name',
             name: 'name',
-            control: <Input placeholder="Title. First name + Last name" />
+            control: <Input placeholder="First name + Last name" />
           })}
 
           {this.renderField({
