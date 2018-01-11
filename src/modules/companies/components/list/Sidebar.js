@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import queryString from 'query-string';
 import { Card, Col, TreeSelect, Checkbox, Button, Icon, Select } from 'antd';
-import { regionOptions, statusOptions } from '../../constants';
+import { regionOptions } from '../../constants';
 import productsTree from '../../productsTree';
 
 const Option = Select.Option;
@@ -100,6 +100,33 @@ class Sidebar extends React.Component {
   render() {
     const { productCodes, status, region, difotRange } = this.state;
 
+    const statusOptions = () => {
+      return [
+        { label: 'Pre-qualified', value: 'preQualified', disabled: true },
+        { label: 'Qaulified', value: 'qualifiedAndAudited', disabled: true },
+        { label: 'Validated', value: 'isProductsInfoValidated' },
+        { label: 'Include blocked suppliers', value: 'includeBlocked' },
+        {
+          label: [
+            <span key={0}>By DIFOT score - </span>,
+            <Select
+              key={1}
+              value={difotRange}
+              disabled={!status.includes('byDifotScore')}
+              onChange={this.onDifotRangeChange}
+              size="small"
+            >
+              <Option value="0-25">0% - 25%</Option>
+              <Option value="26-51">26% - 51%</Option>
+              <Option value="51-75">51% - 75%</Option>
+              <Option value="76-100">76% - 100%</Option>
+            </Select>
+          ],
+          value: 'byDifotScore'
+        }
+      ];
+    };
+
     return (
       <Col span={6}>
         <Card title="Products & services">
@@ -125,21 +152,11 @@ class Sidebar extends React.Component {
 
         <Card title="Select supplier by status" className="margin">
           <CheckboxGroup
-            options={statusOptions}
+            options={statusOptions()}
             value={status}
             className="horizontal"
             onChange={this.onStatusChange}
           />
-          <Select
-            value={difotRange}
-            disabled={!status.includes('byDifotScore')}
-            onChange={this.onDifotRangeChange}
-          >
-            <Option value="0-25">0% - 25%</Option>
-            <Option value="26-51">26% - 51%</Option>
-            <Option value="51-75">51% - 75%</Option>
-            <Option value="76-100">76% - 100%</Option>
-          </Select>
         </Card>
 
         <Button
