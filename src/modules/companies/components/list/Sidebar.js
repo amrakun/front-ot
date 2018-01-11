@@ -118,6 +118,7 @@ class Sidebar extends React.Component {
             options={regionOptions}
             value={region}
             className="horizontal"
+            disabled
             onChange={this.onRegionChange}
           />
         </Card>

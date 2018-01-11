@@ -63,7 +63,8 @@ const generator = (Component, query) => {
           search: search,
           region: region || 'umnugovi',
           productCodes: productCodes,
-          difotScore: difotRange,
+          difotScore:
+            status && status.includes('includeBlocked') ? difotRange : '0-25',
           includeBlocked: status ? status.includes('includeBlocked') : true,
           isProductsInfoValidated: status
             ? status.includes('isProductsInfoValidated')

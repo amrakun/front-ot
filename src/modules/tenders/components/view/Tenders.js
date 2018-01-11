@@ -2,8 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Table, Card, Popconfirm, Input, DatePicker, Button, Icon } from 'antd';
-import { labels } from '../../constants';
+import {
+  Table,
+  Card,
+  Popconfirm,
+  Input,
+  DatePicker,
+  Button,
+  Icon,
+  Tooltip
+} from 'antd';
+import { labels, statusIcons } from '../../constants';
 import { dateFormat, dateTimeFormat } from 'modules/common/constants';
 import queryString from 'query-string';
 import moment from 'moment';
@@ -75,29 +84,41 @@ class Tenders extends React.Component {
   }
 
   buyerColumns() {
+    const renderIcon = (name, style) => {
+      const s = statusIcons[name];
+      return <Icon type={s.type} style={{ color: s.color, ...style }} />;
+    };
     return [
       {
         title: 'Status',
-        dataIndex: 'status',
         filters: [
           {
-            text: 'Draft',
+            text: <span>{renderIcon('draft')} Draft</span>,
             value: 'draft'
           },
           {
-            text: 'Open',
+            text: <span>{renderIcon('open')} Open</span>,
             value: 'open'
           },
           {
-            text: 'Closed',
+            text: <span>{renderIcon('closed')} Closed</span>,
             value: 'closed'
           },
           {
-            text: 'Awarded',
+            text: <span>{renderIcon('awarded')} Awarded</span>,
             value: 'awarded'
           }
         ],
-        filteredValue: this.state.statuses
+        filteredValue: this.state.statuses,
+        key: 'status',
+        render: record => (
+          <Tooltip title={<span className="capitalize">{record.status}</span>}>
+            {renderIcon(record.status, {
+              fontSize: '20px',
+              lineHeight: '12px'
+            })}
+          </Tooltip>
+        )
       },
       {
         title: 'Number',

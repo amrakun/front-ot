@@ -7,8 +7,8 @@ export const regionOptions = [
 ];
 
 export const statusOptions = [
-  { label: 'Pre-qualified', value: 'preQualified' },
-  { label: 'Qaulified', value: 'qualifiedAndAudited' },
+  { label: 'Pre-qualified', value: 'preQualified', disabled: true },
+  { label: 'Qaulified', value: 'qualifiedAndAudited', disabled: true },
   { label: 'Validated', value: 'isProductsInfoValidated' },
   { label: 'Include blocked suppliers', value: 'includeBlocked' },
   { label: 'By DIFOT score', value: 'byDifotScore' }
