@@ -2,7 +2,8 @@ export const statusIcons = {
   draft: { type: 'edit', color: 'rgb(161,161,164)' },
   open: { type: 'sync', color: 'rgb(0,153,168)' },
   closed: { type: 'lock', color: 'rgb(188, 90, 58)' },
-  awarded: { type: 'trophy', color: 'rgb(244,119,33)' }
+  awarded: { type: 'trophy', color: 'rgb(244,119,33)' },
+  participated: { type: 'check-circle-o', color: 'rgb(244,119,33)' }
 };
 
 export const labels = {

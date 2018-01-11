@@ -61,11 +61,45 @@ class Tenders extends React.Component {
     this.props.handleTableChange(pagination);
   }
 
+  renderIcon(name, style) {
+    const s = statusIcons[name];
+    return <Icon type={s.type} style={{ color: s.color, ...style }} />;
+  }
+
+  renderTooltippedIcon(record) {
+    return (
+      <Tooltip title={<span className="capitalize">{record.status}</span>}>
+        {this.renderIcon(record.status, {
+          fontSize: '20px',
+          lineHeight: '12px'
+        })}
+      </Tooltip>
+    );
+  }
+
   commonColumns() {
-    const renderIcon = (name, style) => {
-      const s = statusIcons[name];
-      return <Icon type={s.type} style={{ color: s.color, ...style }} />;
-    };
+    return [
+      {
+        title: 'Number',
+        dataIndex: 'number'
+      },
+      {
+        title: 'Name',
+        dataIndex: 'name'
+      },
+      {
+        title: 'Publish date',
+        render: (text, record) => this.renderDate(record.publishDate)
+      },
+      {
+        title: 'Close date',
+        render: (text, record) => this.renderDate(record.closeDate)
+      }
+    ];
+  }
+
+  buyerColumns() {
+    const renderIcon = this.renderIcon;
     return [
       {
         title: 'Status',
@@ -89,36 +123,8 @@ class Tenders extends React.Component {
         ],
         filteredValue: this.state.statuses,
         key: 'status',
-        render: record => (
-          <Tooltip title={<span className="capitalize">{record.status}</span>}>
-            {renderIcon(record.status, {
-              fontSize: '20px',
-              lineHeight: '12px'
-            })}
-          </Tooltip>
-        )
+        render: record => this.renderTooltippedIcon(record)
       },
-      {
-        title: 'Number',
-        dataIndex: 'number'
-      },
-      {
-        title: 'Name',
-        dataIndex: 'name'
-      },
-      {
-        title: 'Publish date',
-        render: (text, record) => this.renderDate(record.publishDate)
-      },
-      {
-        title: 'Close date',
-        render: (text, record) => this.renderDate(record.closeDate)
-      }
-    ];
-  }
-
-  buyerColumns() {
-    return [
       ...this.commonColumns(),
       {
         title: 'Suppliers',
@@ -154,7 +160,28 @@ class Tenders extends React.Component {
   }
 
   supplierColumns() {
+    const renderIcon = this.renderIcon;
     return [
+      {
+        title: 'Status',
+        filters: [
+          {
+            text: <span>{renderIcon('open')} Open</span>,
+            value: 'open'
+          },
+          {
+            text: <span>{renderIcon('closed')} Closed</span>,
+            value: 'draft'
+          },
+          {
+            text: <span>{renderIcon('participated')} Participated</span>,
+            value: 'closed'
+          }
+        ],
+        filteredValue: this.state.statuses,
+        key: 'status',
+        render: record => this.renderTooltippedIcon(record)
+      },
       ...this.commonColumns(),
       {
         title: 'File',

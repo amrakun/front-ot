@@ -15,6 +15,10 @@ class SignIn extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      loading: false
+    };
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -25,30 +29,33 @@ class SignIn extends Component {
         const email = values.email;
         const password = values.password;
         this.props.login({ email, password });
+
+        this.setState({ loading: true });
       }
     });
   }
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { location } = this.props;
+    const search = this.props.location.search || [{}];
+    const { loading } = this.state;
 
     return (
       <div className="center-content">
         <Card className="login-card" bordered={false}>
-          {location.search === '?confirmation' ? (
+          {search === '?confirmation' ? (
             <Alert
               description="Confirmation link has been sent to your email!"
               type="success"
             />
           ) : null}
-          {location.search === '?confirmed' ? (
+          {search === '?confirmed' ? (
             <Alert
               description="Email confirmed succesfully! Please login using your provided details"
               type="success"
             />
           ) : null}
-          {location.search === '?required' ? (
+          {search === '?required' ? (
             <Alert description="Please sign in to continue!" type="info" />
           ) : null}
 
@@ -79,7 +86,7 @@ class SignIn extends Component {
               <Link className="right" to="/forgot-password">
                 Forgot password
               </Link>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" loading={loading} htmlType="submit">
                 Log in
               </Button>
               Or <Link to="/register">register now!</Link>
