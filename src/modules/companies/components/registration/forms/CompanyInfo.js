@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
+import addressFields from './address';
 import {
   Form,
   Input,
@@ -72,7 +73,7 @@ class CompanyInfo extends BaseForm {
     return (
       <Spin spinning={this.state.loading} delay={500}>
         <Form>
-          <Card title="Please provide us with your company details">
+          <Card title="1. Please provide us with your company details">
             {this.renderField({
               label: 'Are you an existing supplier?',
               name: 'isRegisteredOnSup',
@@ -91,48 +92,20 @@ class CompanyInfo extends BaseForm {
               control: <Input type="number" />
             })}
             {this.renderField({
-              label: '1. Company name (in English)',
+              label: 'Company name (in English)',
               name: 'enName',
               control: <Input />
             })}
-            {this.renderField({
-              label: '2. Address',
-              name: 'address',
-              control: <Input />
-            })}
-            {this.renderField({
-              label: 'Address 2',
-              name: 'address2',
-              optional: true,
-              control: <Input />
-            })}
-            {this.renderField({
-              label: 'Address 3',
-              name: 'address3',
-              optional: true,
-              control: <Input />
-            })}
-            {this.renderField({
-              label: 'Town or city',
-              name: 'townOrCity',
-              control: <Input />
-            })}
-            {this.renderField({
-              label: 'County/state/province',
-              name: 'province',
-              control: <Input />
-            })}
-            {this.renderField({
-              label: 'Postcode or zipcode',
-              name: 'zipCode',
-              optional: true,
-              control: <Input type="number" />
-            })}
-            {this.renderField({
-              label: 'Country',
-              name: 'country',
-              control: <Select>{countryOptions}</Select>
-            })}
+          </Card>
+
+          <Card title="2. Address">
+            {addressFields(
+              this.renderField.bind(this),
+              this.renderOptions.bind(this)
+            )}
+          </Card>
+
+          <Card>
             {this.renderField({
               label: '3. Country you are registered in',
               name: 'registeredInCountry',

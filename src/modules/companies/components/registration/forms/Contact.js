@@ -1,13 +1,28 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Input, Select, Card, Button, Icon } from 'antd';
-import { countryData } from '../constants';
+import { Form, Input, Card, Button, Icon } from 'antd';
 import BaseForm from 'modules/common/components/BaseForm';
+import addressFields from './address';
 
 class ContactInfo extends BaseForm {
   render() {
-    console.log(this.props);
-    const countryOptions = this.renderOptions(countryData);
+    const { basicInfo, form } = this.props;
+
+    const copyAddress = () => {
+      const { setFieldsValue } = form;
+
+      let values = {
+        address: basicInfo.address,
+        address2: basicInfo.address2,
+        address3: basicInfo.address3,
+        zipCode: basicInfo.zipCode,
+        townOrCity: basicInfo.townOrCity,
+        province: basicInfo.province,
+        country: basicInfo.country
+      };
+
+      setFieldsValue(values);
+    };
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -26,60 +41,19 @@ class ContactInfo extends BaseForm {
         </Card>
 
         <Card
+          title="Address"
           extra={
-            <Button>
-              <Icon type="copy" />Copy above
-            </Button>
+            basicInfo.address && (
+              <Button onClick={copyAddress}>
+                <Icon type="copy" />Copy from Company information
+              </Button>
+            )
           }
         >
-          {this.renderField({
-            label: 'Address line',
-            name: 'address',
-            control: <Input />
-          })}
-
-          {this.renderField({
-            label: 'Address line 2 / Soum',
-            name: 'address2',
-            optional: true,
-            control: <Input />
-          })}
-
-          {this.renderField({
-            label: 'Address line 3',
-            name: 'address3',
-            optional: true,
-            control: <Input />
-          })}
-
-          {this.renderField({
-            label: 'Postcode or zipcode',
-            options: true,
-            name: 'zipCode',
-            control: <Input type="number" />
-          })}
-
-          {this.renderField({
-            label: 'Town/City/Aimag',
-            name: 'townOrCity',
-            control: <Input />
-          })}
-
-          {this.renderField({
-            label: 'County/state/province',
-            name: 'province',
-            control: <Input />
-          })}
-
-          {this.renderField({
-            label: 'Country',
-            name: 'country',
-            control: (
-              <Select placeholder="Please select a country">
-                {countryOptions}
-              </Select>
-            )
-          })}
+          {addressFields(
+            this.renderField.bind(this),
+            this.renderOptions.bind(this)
+          )}
         </Card>
 
         <Card>

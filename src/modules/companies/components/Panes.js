@@ -71,7 +71,7 @@ export default class Panes extends React.Component {
           data={company[name] || {}}
           save={saveAction}
           productsInfo={name === 'healthInfo' ? company.productsInfo : {}}
-          basicInfo={name === 'contactInfo' && company.basicInfo}
+          basicInfo={name === 'contactInfo' ? company.basicInfo : {}}
         />
       </Tabs.TabPane>
     );

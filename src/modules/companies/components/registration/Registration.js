@@ -20,7 +20,12 @@ class RegistrationForms extends Panes {
         tabPosition="left"
         className="supplier-forms"
       >
-        {this.renderPane('1', 'Company info', 'basicInfo', CompanyInfoForm)}
+        {this.renderPane(
+          '1',
+          'Company information',
+          'basicInfo',
+          CompanyInfoForm
+        )}
         {this.renderPane('2', 'Contact details', 'contactInfo', ContactForm)}
         {this.renderPane(
           '3',

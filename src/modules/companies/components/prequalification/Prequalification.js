@@ -19,7 +19,7 @@ class PrequalificationForms extends Panes {
       >
         {this.renderPane(
           '1',
-          'Financial Information',
+          'Financial information',
           'financialInfo',
           FinancialForm
         )}
