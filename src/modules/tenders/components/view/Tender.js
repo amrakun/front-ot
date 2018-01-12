@@ -148,7 +148,8 @@ class Tender extends React.Component {
       notRespondedCount,
       winnerId,
       responses,
-      sentRegretLetter
+      sentRegretLetter,
+      status
     } = data;
 
     return (
@@ -204,7 +205,7 @@ class Tender extends React.Component {
               style={{ width: 200, float: 'left' }}
             />
             <Button
-              disabled={sentRegretLetter}
+              disabled={sentRegretLetter || ['open', 'draft'].includes(status)}
               onClick={this.toggleRegretLetterModal}
             >
               Send regret letter

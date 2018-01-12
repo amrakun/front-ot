@@ -39,7 +39,7 @@ class Rfq extends Tender {
   render() {
     const { rfqBidSummaryReportLoading } = this.props;
     const data = this.props.data || {};
-    const { requestedProducts, isAwarded } = data;
+    const { requestedProducts, status } = data;
 
     const tableOperations = [
       <Button
@@ -50,7 +50,12 @@ class Rfq extends Tender {
         Bid summary report
         {!rfqBidSummaryReportLoading ? <Icon type="file-excel" /> : ''}
       </Button>,
-      <Button type="primary" onClick={this.award} disabled={isAwarded} key={1}>
+      <Button
+        type="primary"
+        onClick={this.award}
+        disabled={status !== 'closed'}
+        key={1}
+      >
         Award
         <Icon type="trophy" />
       </Button>
