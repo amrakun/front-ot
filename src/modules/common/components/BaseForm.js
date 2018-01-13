@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Select, AutoComplete, Icon, Button } from 'antd';
+import { Select, Icon, Button } from 'antd';
 import Field from './Field';
 
 export default class BaseForm extends React.Component {
@@ -17,40 +17,6 @@ export default class BaseForm extends React.Component {
   getChildContext() {
     return {
       form: this.props.form
-    };
-  }
-
-  formItemLayout() {
-    return {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 },
-        lg: { span: 8 }
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 14 },
-        lg: { span: 8 }
-      }
-    };
-  }
-
-  tailFormItemLayout() {
-    return {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0
-        },
-        sm: {
-          span: 14,
-          offset: 8
-        },
-        lg: {
-          span: 14,
-          offset: 8
-        }
-      }
     };
   }
 
@@ -119,12 +85,6 @@ export default class BaseForm extends React.Component {
     }
 
     return value;
-  }
-
-  renderAutoCompleteOptions(options) {
-    return options.map(website => (
-      <AutoComplete.Option key={website}>{website}</AutoComplete.Option>
-    ));
   }
 
   renderOptions(options) {

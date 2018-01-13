@@ -39,8 +39,7 @@ export const buyerSideMenu = [
     subMenu: [
       {
         url: '/prequalification-status',
-        title: 'Pre-qualification status',
-        disabled: true
+        title: 'Pre-qualification status'
       },
       {
         url: '/audit',

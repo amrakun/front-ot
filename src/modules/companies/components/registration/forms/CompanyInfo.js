@@ -2,16 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import addressFields from './address';
-import {
-  Form,
-  Input,
-  Tooltip,
-  Icon,
-  Select,
-  AutoComplete,
-  Spin,
-  Card
-} from 'antd';
+import { Form, Input, Tooltip, Icon, Select, Spin, Card } from 'antd';
 import {
   structureData,
   foreignPercentageData,
@@ -33,7 +24,6 @@ class CompanyInfo extends BaseForm {
 
     this.state = {
       confirmDirty: false,
-      autoCompleteResult: [],
       selectedCountry: data.registeredInCountry,
       selectedAimag: data.registeredInAimag,
       isRegisteredOnSup: data.isRegisteredOnSup,
@@ -59,14 +49,8 @@ class CompanyInfo extends BaseForm {
 
   render() {
     const { data } = this.props;
-    const {
-      autoCompleteResult,
-      selectedCountry,
-      selectedAimag,
-      isRegisteredOnSup
-    } = this.state;
+    const { selectedCountry, selectedAimag, isRegisteredOnSup } = this.state;
 
-    const websiteOptions = this.renderAutoCompleteOptions(autoCompleteResult);
     const booleanOptions = this.renderOptions(booleanData);
     const countryOptions = this.renderOptions(countryData);
 
@@ -197,15 +181,7 @@ class CompanyInfo extends BaseForm {
               label: '8. Company website',
               name: 'website',
               optional: true,
-              control: (
-                <AutoComplete
-                  dataSource={websiteOptions}
-                  onChange={this.handleWebsiteChange}
-                  placeholder="website"
-                >
-                  <Input />
-                </AutoComplete>
-              )
+              control: <Input />
             })}
             {this.renderField({
               label: (

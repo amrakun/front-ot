@@ -164,7 +164,30 @@ export const labels = {
     mining construction projects? If so provide details.`,
 
   doesHaveLicense: `Does the organisation have valid industry certifications
-    and/or licenses if required by the type of services provided?`
+    and/or licenses if required by the type of services provided?`,
+
+  //financial labels
+  canProvideAccountsInfo: `Can you provide accounts for the last 3 financial years?`,
+
+  currency: `Currency`,
+
+  annualTurnover: 'Annual turnover',
+
+  preTaxProfit: `Pre-tax profit`,
+
+  totalAssets: `Total assets`,
+
+  totalCurrentAssets: `Total current assets`,
+
+  totalShareholderEquity: `Total shareholders equity`,
+
+  reasonToCannotNotProvide: `If not, explain the reasons`,
+
+  isUpToDateSSP: `Is your company up to date with Social Security payments?`,
+
+  isUpToDateCTP: `Is your company up to date with Corporation Tax payments?`,
+
+  recordsInfo: `Please provide financial records for your last 3 years`
 };
 
 export const descriptions = {

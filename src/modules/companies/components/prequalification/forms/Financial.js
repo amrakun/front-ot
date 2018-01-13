@@ -188,7 +188,7 @@ class PrequalificationForm extends BaseForm {
 
     return (
       <Form className="preq-form">
-        <Card>
+        <Card bodyStyle={{ paddingBottom: '16px' }}>
           {this.renderField({
             label: 'Can you provide accounts for the last 3 financial years?',
             name: 'canProvideAccountsInfo',
@@ -241,7 +241,7 @@ class PrequalificationForm extends BaseForm {
             {this.renderDateFile(2)}
           </Form.Item>
         </Card>
-        <Card>
+        <Card bodyStyle={{ paddingBottom: '16px' }}>
           {this.renderField({
             label: 'Is your company up to date with Social Security payments?',
             name: 'isUpToDateSSP',

@@ -161,6 +161,7 @@ class Sidebar extends React.Component {
 
         <Button
           style={{ width: '100%', marginTop: '16px' }}
+          type="primary"
           onClick={this.filter}
         >
           Apply filters<Icon type="right" />

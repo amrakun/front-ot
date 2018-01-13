@@ -13,7 +13,8 @@ import {
   FeedbackDetail,
   Registration,
   Prequalification,
-  CapacityBuilding
+  CapacityBuilding,
+  Status
 } from './containers';
 
 export default [
@@ -34,6 +35,12 @@ export default [
     exact
     path="/capacity-building"
     component={CapacityBuilding}
+  />,
+  <Route
+    key="/prequalification-status"
+    exact
+    path="/prequalification-status"
+    component={Status}
   />,
   <Route
     key="/companies"

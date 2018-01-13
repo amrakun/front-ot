@@ -158,8 +158,6 @@ export const companyPrequalificationDetail = `
         canProvideAccountsInfo
         reasonToCannotNotProvide
         currency
-        isUpToDateSSP
-        isUpToDateCTP
         annualTurnover {
           year
           amount
@@ -184,6 +182,8 @@ export const companyPrequalificationDetail = `
           date
           file
         }
+        isUpToDateSSP
+        isUpToDateCTP
       }
       businessInfo {
         doesMeetMinimumStandarts
