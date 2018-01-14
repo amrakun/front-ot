@@ -14,8 +14,8 @@ import {
 } from 'antd';
 import { dateFormat } from 'modules/common/constants';
 import moment from 'moment';
-import Search from './Search';
-import Common from './Common';
+import { Search } from 'modules/companies/components';
+import { Common } from 'modules/companies/components';
 import { SupplierSearcher } from 'modules/companies/components';
 
 const FormItem = Form.Item;

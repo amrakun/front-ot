@@ -2,9 +2,9 @@ import React from 'react';
 import { message } from 'antd';
 import { gql, graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
-import { DueDiligence } from '../../components';
-import { mutations } from '../../graphql';
-import generator from './generator';
+import { DueDiligence } from '../components';
+import { mutations } from '../graphql';
+import { generator } from 'modules/companies/containers';
 
 class DueDiligenceContainer extends React.Component {
   render() {

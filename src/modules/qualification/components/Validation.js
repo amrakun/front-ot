@@ -3,9 +3,9 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Table, Card, Row, Col, Modal, Checkbox } from 'antd';
-import Common from './Common';
-import Sidebar from './Sidebar';
-import Search from './Search';
+import { Common } from 'modules/companies/components';
+import { Sidebar } from 'modules/companies/components';
+import { Search } from 'modules/companies/components';
 import moment from 'moment';
 import { dateFormat } from 'modules/common/constants';
 

@@ -4,9 +4,9 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { Table, Card, Row, Col, Button } from 'antd';
 import { Uploader } from 'modules/common/components';
-import Common from './Common';
-import Sidebar from './Sidebar';
-import Search from './Search';
+import { Common } from 'modules/companies/components';
+import { Sidebar } from 'modules/companies/components';
+import { Search } from 'modules/companies/components';
 
 class DueDiligence extends Common {
   constructor(props) {

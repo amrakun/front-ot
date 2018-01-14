@@ -4,7 +4,7 @@ import { gql, graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
 import { Feedback } from '../../components';
 import { mutations } from '../../graphql';
-import generator from './generator';
+import { generator } from 'modules/companies/containers';
 
 class FeedbackContainer extends React.Component {
   render() {

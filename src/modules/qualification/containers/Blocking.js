@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Blocking } from '../../components';
+import { Blocking } from '../components';
 import { gql, graphql, compose } from 'react-apollo';
-import { queries, mutations } from '../../graphql';
+import { queries, mutations } from '../graphql';
 import { message } from 'antd';
 
 class BlockingContainer extends React.Component {

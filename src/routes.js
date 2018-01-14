@@ -5,6 +5,7 @@ import DashboardRoutes from './modules/dashboard/routes';
 import CompaniesRoutes from './modules/companies/routes';
 import TendersRoutes from './modules/tenders/routes';
 import AuthRoutes from './modules/auth/routes';
+import QualificationRoutes from './modules/qualification/routes';
 
 const Routes = () => (
   <BrowserRouter>
@@ -14,6 +15,7 @@ const Routes = () => (
         {AuthRoutes}
         {CompaniesRoutes}
         {TendersRoutes}
+        {QualificationRoutes}
       </Switch>
     </MainLayout>
   </BrowserRouter>

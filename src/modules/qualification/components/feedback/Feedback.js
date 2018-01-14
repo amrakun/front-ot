@@ -14,13 +14,13 @@ import {
   message,
   List
 } from 'antd';
-import Common from './Common';
-import Sidebar from './Sidebar';
-import Search from './Search';
+import { Common } from 'modules/companies/components';
+import { Sidebar } from 'modules/companies/components';
+import { Search } from 'modules/companies/components';
 import { Editor } from 'modules/common/components';
 import moment from 'moment';
 import { dateFormat } from 'modules/common/constants';
-import { labels } from 'modules/companies/components/feedback/constants';
+import { labels } from './constants';
 
 class Feedback extends Common {
   constructor(props) {
