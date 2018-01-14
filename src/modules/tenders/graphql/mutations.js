@@ -6,7 +6,7 @@ const tendersAdd = `
     $content: String!,
     $publishDate: Date!,
     $closeDate: Date!,
-    $file: JSON!,
+    $file: JSON,
     $reminderDay: Float!,
     $supplierIds: [String]!,
     $requestedProducts: [TenderRequestedProductInput]

@@ -68,7 +68,7 @@ class Base extends Common {
 
     return (
       <Row gutter={16}>
-        <Sidebar />
+        <Sidebar suppliersCount={data && data.length} />
 
         <Col span={18}>
           <Card title="Suppliers">

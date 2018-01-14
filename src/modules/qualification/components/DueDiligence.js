@@ -58,7 +58,7 @@ class DueDiligence extends Common {
 
     return (
       <Row gutter={16}>
-        <Sidebar />
+        <Sidebar suppliersCount={data && data.length} />
 
         <Col span={18}>
           <Card title="Suppliers">
@@ -76,7 +76,7 @@ class DueDiligence extends Common {
               dataSource={data}
               pagination={pagination}
               loading={loading}
-              scroll={{ x: 1600 }}
+              scroll={{ x: 1200 }}
               onChange={(pagination, filters, sorter) =>
                 onChange(pagination, filters, sorter)
               }

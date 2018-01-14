@@ -10,7 +10,8 @@ const Option = Select.Option;
 const CheckboxGroup = Checkbox.Group;
 
 const propTypes = {
-  history: PropTypes.object
+  history: PropTypes.object,
+  suppliersCount: PropTypes.number
 };
 
 class Sidebar extends React.Component {
@@ -90,6 +91,7 @@ class Sidebar extends React.Component {
 
   render() {
     const { productCodes, status, region, difotRange } = this.state;
+    const { suppliersCount } = this.props;
 
     const statusOptions = () => {
       return [
@@ -119,8 +121,14 @@ class Sidebar extends React.Component {
     };
 
     return (
-      <Col span={6}>
-        <Card title="Select products & services code">
+      <Col span={6} style={{ padding: '0 8px' }}>
+        <Card title="Suppliers">
+          <div style={{ fontSize: '30px', textAlign: 'center' }}>
+            {suppliersCount}
+          </div>
+        </Card>
+
+        <Card title="Select products & services code" className="margin">
           <TreeSelect
             treeData={productsTree}
             value={productCodes}
