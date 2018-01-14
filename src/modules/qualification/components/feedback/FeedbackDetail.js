@@ -41,7 +41,7 @@ class FeedbackResponses extends React.Component {
       },
       {
         title: 'Supplier',
-        dataIndex: 'supplier'
+        dataIndex: 'supplier.basicInfo.enName'
       },
       {
         title: 'Employment before',
@@ -69,15 +69,15 @@ class FeedbackResponses extends React.Component {
       },
       {
         title: 'Contact person',
-        dataIndex: 'contact'
+        dataIndex: 'supplier.contactInfo.name'
       },
       {
         title: 'Email',
-        dataIndex: 'email'
+        dataIndex: 'supplier.contactInfo.email'
       },
       {
         title: 'Phone',
-        dataIndex: 'phone'
+        dataIndex: 'supplier.contactInfo.phone'
       }
     ];
   }

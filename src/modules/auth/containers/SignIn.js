@@ -36,8 +36,6 @@ class SignInContainer extends React.Component {
           apolloClient.resetStore();
 
           history.push('/');
-
-          this.setState({ loading: false });
         })
         .catch(error => {
           message.error(error.message);

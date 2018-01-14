@@ -88,6 +88,16 @@ const feedbackResponseDetail = `
         trainings
         corporateSocial
         technologyImprovement
+        supplier {
+          basicInfo {
+            enName
+          }
+          contactInfo {
+            name
+            email
+            phone
+          }
+        }
       }
     }
   }

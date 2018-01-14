@@ -26,7 +26,6 @@ class RegisterContainer extends React.Component {
         .then(() => {
           message.success(`Confirmation link has been sent to your email`);
           history.push('/sign-in?confirmation');
-          this.setState({ loading: false });
         })
         .catch(error => {
           message.error(error.message);

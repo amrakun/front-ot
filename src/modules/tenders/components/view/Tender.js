@@ -266,7 +266,7 @@ class Tender extends React.Component {
         </Modal>
 
         <Modal
-          title="Send regret letters"
+          title={`Sending regret letters to "${responses.length - 1}" bidders`}
           visible={
             regretLetterModalVisible !== undefined
               ? regretLetterModalVisible
