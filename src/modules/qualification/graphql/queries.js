@@ -9,6 +9,7 @@ const supplierPrequalification = `
       basicInfo {
         enName
       }
+      isPrequalified
     }
   }
 `;

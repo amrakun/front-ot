@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { labels } from 'modules/companies/components/prequalification/constants';
-import { Card, Checkbox, List, Form } from 'antd';
+import { Card, Checkbox, List, Form, Alert } from 'antd';
 import { BaseForm } from 'modules/common/components';
 import moment from 'moment';
 import { dateFormat } from 'modules/common/constants';
@@ -85,15 +85,30 @@ class StatusTab extends BaseForm {
   }
 
   render() {
-    const { title, basicInfo, supplierInputs } = this.props;
+    const { title, statusData } = this.props;
+    const { supplierInputs, enName, isPrequalified } = statusData;
 
     const items = this.createItems(supplierInputs);
 
     return (
       <Form>
-        <h2 style={{ textAlign: 'center', marginBottom: '16px' }}>
-          {basicInfo && basicInfo.enName}
-        </h2>
+        <h2 style={{ textAlign: 'center', marginBottom: '16px' }}>{enName}</h2>
+
+        {isPrequalified ? (
+          <Alert
+            message="This supplier is pre-qualified"
+            type="success"
+            showIcon
+          />
+        ) : (
+          <Alert
+            message="This supplier is not pre-qualified"
+            type="warning"
+            showIcon
+          />
+        )}
+
+        <p style={{ height: '8px' }} />
         <Card title={title} bodyStyle={{ paddingBottom: '24px' }}>
           <List
             itemLayout="horizontal"

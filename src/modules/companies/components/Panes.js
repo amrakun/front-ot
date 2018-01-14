@@ -81,8 +81,12 @@ export default class Panes extends React.Component {
           nextTab={this.nextTab}
           previousTab={this.previousTab}
           productsInfo={name === 'healthInfo' ? company.productsInfo : {}}
-          basicInfo={company.basicInfo || supplierInputs.basicInfo || {}}
-          supplierInputs={supplierInputs[name] || {}}
+          basicInfo={company.basicInfo || {}}
+          statusData={{
+            ...supplierInputs.basicInfo,
+            isPrequalified: supplierInputs.isPrequalified,
+            supplierInputs: supplierInputs[name] || {}
+          }}
         />
       </Tabs.TabPane>
     );
