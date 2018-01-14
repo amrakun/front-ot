@@ -7,7 +7,7 @@ import SubmitFeedback from './feedback/SubmitFeedback';
 import FeedbackResponses from './feedback/FeedbackResponses';
 import FeedbackDetail from './feedback/FeedbackDetail';
 import Status from './status/Status';
-import SupplierStatus from './status/Status';
+import SupplierStatus from './status/SupplierStatus';
 
 export {
   Difot,

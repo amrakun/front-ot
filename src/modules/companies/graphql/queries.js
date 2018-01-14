@@ -444,5 +444,6 @@ export default {
   difot,
   validation,
   feedback,
-  status
+  status,
+  prequalificationFields
 };

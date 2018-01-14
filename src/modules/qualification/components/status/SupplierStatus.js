@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import StatusTab from './StatusTab';
-import Panes from 'modules/companies/components';
+import { Panes } from 'modules/companies/components';
 
 class Status extends Panes {
   render() {
