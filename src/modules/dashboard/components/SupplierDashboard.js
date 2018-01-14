@@ -1,3 +1,5 @@
+/*eslint-disable max-len */
+
 import React from 'react';
 import { Tenders } from '../../tenders/containers';
 import { PropTypes } from 'prop-types';
@@ -31,7 +33,7 @@ class Dashboard extends React.Component {
 
   render() {
     const { data, history, location } = this.props;
-    const { lastDifotScore, lastFeedback, openTendersCount } = data;
+    const { averageDifotScore, lastFeedback, openTendersCount } = data;
 
     const queryParams = queryString.parse(location.search);
     const currentUser = this.context.currentUser || {};
@@ -86,9 +88,13 @@ class Dashboard extends React.Component {
             <NumberCardLines
               icon="calculator"
               title="DIFOT score"
-              color={lastDifotScore ? colors[6] : colors[5]}
-              number={lastDifotScore ? lastDifotScore.amount : 0}
-              percent={lastDifotScore ? lastDifotScore.amount : 0}
+              tooltip={
+                averageDifotScore < 75 &&
+                'Таны бараа хүргэлтийн үнэлгээ бөгөөд хамгийн багадаа 75% -тай байх ёстой.'
+              }
+              color={averageDifotScore ? colors[6] : colors[5]}
+              number={averageDifotScore || 0}
+              percent={averageDifotScore || 0}
               withPercent={true}
             />
           </Col>
@@ -124,6 +130,7 @@ class Dashboard extends React.Component {
               icon="solution"
               title="Pre-qualification status"
               color={colors[5]}
+              tooltip="Таны мэдээлэл бүрэн баталгаажаагүй байна.  Бүртгэл баталгаажаагүй тул тендерийн шалгуур хангахгүй гэдгийг анхаарна уу. Тиймээс OT сургалт хариуцсан багт яаралтай хандан сургалтанд хамрагдана уу."
               number={0}
               percent={0}
               withPercent={true}

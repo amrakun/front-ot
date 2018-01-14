@@ -9,15 +9,6 @@ import productsTree from '../../productsTree';
 const Option = Select.Option;
 const CheckboxGroup = Checkbox.Group;
 
-const initialRegion = ['umnugovi'];
-const initialStatus = [
-  'preQualified',
-  'qualifiedAndAudited',
-  'isProductsInfoValidated',
-  'includeBlocked',
-  'byDifotScore'
-];
-
 const propTypes = {
   history: PropTypes.object
 };
@@ -38,8 +29,8 @@ class Sidebar extends React.Component {
 
     this.state = {
       productCodes: productCodesQuery || [],
-      region: regionQuery || initialRegion,
-      status: statusQuery || initialStatus,
+      region: regionQuery || [],
+      status: statusQuery || [],
       difotRange: query.difotRange || '76-100'
     };
 

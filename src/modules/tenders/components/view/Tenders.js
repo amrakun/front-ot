@@ -231,7 +231,7 @@ class Tenders extends React.Component {
         return (
           canParticipate && (
             <div style={{ width: '160px' }}>
-              <Link to={`/tender/submit/${_id}`}>More</Link>
+              <Link to={`/tender/submit/${_id}`}>Open</Link>
               <span className="ant-divider" />
               <Popconfirm
                 title="Are you sure you are not interested？"

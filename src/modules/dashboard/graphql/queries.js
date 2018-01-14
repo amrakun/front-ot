@@ -2,7 +2,7 @@ export const companyByUser = `
   query companyByUser {
     companyByUser {
       _id
-      lastDifotScore
+      averageDifotScore
       lastFeedback {
         _id
         supplierResponse {

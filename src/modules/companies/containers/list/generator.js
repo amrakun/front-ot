@@ -57,12 +57,9 @@ const generator = (Component, query) => {
     options: ({ queryParams }) => {
       const { status, search, region, productCodes, difotRange } = queryParams;
 
-      let difotScore = '76-100';
+      let difotScore = '';
       if (status && status.includes('byDifotScore')) {
         difotScore = difotRange;
-      }
-      if (status && !status.includes('byDifotScore')) {
-        difotScore = '';
       }
 
       return {
@@ -73,10 +70,10 @@ const generator = (Component, query) => {
           region: region,
           productCodes: productCodes,
           difotScore: difotScore,
-          includeBlocked: status ? status.includes('includeBlocked') : true,
+          includeBlocked: status ? status.includes('includeBlocked') : false,
           isProductsInfoValidated: status
             ? status.includes('isProductsInfoValidated')
-            : true
+            : false
         },
         notifyOnNetworkStatusChange: true
       };

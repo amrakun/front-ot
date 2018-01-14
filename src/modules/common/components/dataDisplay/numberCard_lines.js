@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon, Card, Progress } from 'antd';
+import { Icon, Card, Progress, Tooltip } from 'antd';
 import CountUp from 'react-countup';
 import PropTypes from 'prop-types';
 
@@ -38,7 +38,15 @@ class NumberCard extends Component {
   }
 
   render() {
-    const { icon, color, title, number, countUp, withPercent } = this.props;
+    const {
+      icon,
+      color,
+      title,
+      number,
+      countUp,
+      withPercent,
+      tooltip
+    } = this.props;
     const { percent } = this.state;
     this.componentDidMount();
     return (
@@ -47,29 +55,31 @@ class NumberCard extends Component {
         bordered={false}
         bodyStyle={{ padding: 0 }}
       >
-        <div className="flexBox">
-          <Icon
-            className="iconWarp"
-            style={{ backgroundColor: color }}
-            type={icon}
-          />
-          <div className="content">
-            <p className={title}>{title || 'No Title'}</p>
-            <Progress percent={percent} strokeWidth={3} />
-            <p className="number">
-              <CountUp
-                start={0}
-                end={number}
-                duration={2.75}
-                useEasing
-                useGrouping
-                separator=","
-                {...countUp || {}}
-              />
-              {withPercent ? '%' : ''}
-            </p>
+        <Tooltip title={tooltip} placement="bottom">
+          <div className="flexBox">
+            <Icon
+              className="iconWarp"
+              style={{ backgroundColor: color }}
+              type={icon}
+            />
+            <div className="content">
+              <p>{title || 'No Title'}</p>
+              <Progress percent={percent} strokeWidth={3} />
+              <p className="number">
+                <CountUp
+                  start={0}
+                  end={number}
+                  duration={2.75}
+                  useEasing
+                  useGrouping
+                  separator=","
+                  {...countUp || {}}
+                />
+                {withPercent ? '%' : ''}
+              </p>
+            </div>
           </div>
-        </div>
+        </Tooltip>
       </Card>
     );
   }
@@ -82,7 +92,8 @@ NumberCard.propTypes = {
   number: PropTypes.number,
   countUp: PropTypes.object,
   percent: PropTypes.number,
-  withPercent: PropTypes.bool
+  withPercent: PropTypes.bool,
+  tooltip: PropTypes.string
 };
 
 export default NumberCard;
