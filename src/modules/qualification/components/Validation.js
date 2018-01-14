@@ -79,7 +79,7 @@ class Validation extends Common {
       { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
       {
         title: 'Tier type',
-        render: () => <a>View</a>
+        render: () => '-'
       },
       { title: 'Pre-qualification status', render: () => <a>Yes</a> },
       {

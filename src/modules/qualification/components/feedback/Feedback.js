@@ -96,6 +96,8 @@ class Feedback extends Common {
     const columns = [
       { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
       { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
+      { title: 'Tier type', render: () => <span>Yes</span> },
+      { title: 'Pre-qualification status', render: () => <span>Yes</span> },
       {
         title: 'Last feedback date',
         render: record =>
@@ -118,9 +120,7 @@ class Feedback extends Common {
       },
       { title: 'Contact person', dataIndex: 'contactInfo.name' },
       { title: 'Email address', dataIndex: 'contactInfo.email' },
-      { title: 'Phone number', dataIndex: 'contactInfo.phone' },
-      { title: 'Registration', render: () => <span>Yes</span> },
-      { title: 'Pre-qualification status', render: () => <span>Yes</span> }
+      { title: 'Phone number', dataIndex: 'contactInfo.phone' }
     ];
 
     let responseItemList = [];

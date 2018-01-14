@@ -1,3 +1,37 @@
+/*eslint-disable max-len*/
+
+const qualifyFinancialInfo = `
+  mutation qualificationsSaveFinancialInfo($supplierId: String!, $financialInfo: QualificationFinancialInfoInput) {
+    qualificationsSaveFinancialInfo(supplierId: $supplierId, financialInfo: $financialInfo) {
+      _id
+    }
+  }
+`;
+
+const qualifyBusinessInfo = `
+  mutation qualificationsSaveBusinessInfo($supplierId: String!, $businessInfo: QualificationBusinessInfoInput) {
+    qualificationsSaveBusinessInfo(supplierId: $supplierId, businessInfo: $businessInfo) {
+      _id
+    }
+  }
+`;
+
+const qualifyEnvironmentalInfo = `
+  mutation qualificationsSaveEnvironmentalInfo($supplierId: String!, $environmentalInfo: QualificationEnvironmentalInfoInput) {
+    qualificationsSaveEnvironmentalInfo(supplierId: $supplierId, environmentalInfo: $environmentalInfo) {
+      _id
+    }
+  }
+`;
+
+const qualifyHealthInfo = `
+  mutation qualificationsSaveHealthInfo($supplierId: String!, $healthInfo: QualificationHealthInfoInput) {
+    qualificationsSaveHealthInfo(supplierId: $supplierId, healthInfo: $healthInfo) {
+      _id
+    }
+  }
+`;
+
 const addDifotScores = `
   mutation companiesAddDifotScores($difotScores: [CompanyDifotScoreInput]!) {
     companiesAddDifotScores(difotScores: $difotScores) {
@@ -102,5 +136,9 @@ export default {
   addFeedbackResponse,
   addValidation,
   blockCompanies,
-  unblockCompanies
+  unblockCompanies,
+  qualifyFinancialInfo,
+  qualifyBusinessInfo,
+  qualifyEnvironmentalInfo,
+  qualifyHealthInfo
 };

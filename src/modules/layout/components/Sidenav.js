@@ -17,9 +17,14 @@ const Sidenav = (props, context) => {
 
   let defaultOpenKeys = [];
   if (
-    ['/validation', '/due-diligence', '/audit', '/difot', '/blocking'].includes(
-      pathname
-    )
+    [
+      '/validation',
+      '/due-diligence',
+      '/audit',
+      '/difot',
+      '/blocking',
+      '/prequalification-status'
+    ].includes(pathname)
   ) {
     defaultOpenKeys.push('action');
   }

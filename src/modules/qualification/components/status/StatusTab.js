@@ -60,6 +60,8 @@ class StatusTab extends BaseForm {
 
   renderItem(item) {
     const name = item.name;
+    const checked = this.props.data[name];
+
     return (
       <List.Item>
         <List.Item.Meta
@@ -67,11 +69,13 @@ class StatusTab extends BaseForm {
           description={item.value}
         />
         {this.renderField({
-          name: `${name}Qualified`,
+          name: name,
           hasFeedback: false,
-          optional: true,
           control: (
-            <Checkbox style={{ minWidth: '80px', marginLeft: '24px' }}>
+            <Checkbox
+              style={{ minWidth: '80px', marginLeft: '24px' }}
+              defaultChecked={checked}
+            >
               Qualified
             </Checkbox>
           )
@@ -81,12 +85,15 @@ class StatusTab extends BaseForm {
   }
 
   render() {
-    const { data, title } = this.props;
+    const { title, basicInfo, supplierInputs } = this.props;
 
-    const items = this.createItems(data);
+    const items = this.createItems(supplierInputs);
 
     return (
       <Form>
+        <h2 style={{ textAlign: 'center', marginBottom: '16px' }}>
+          {basicInfo && basicInfo.enName}
+        </h2>
         <Card title={title} bodyStyle={{ paddingBottom: '24px' }}>
           <List
             itemLayout="horizontal"

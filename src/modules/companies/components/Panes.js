@@ -58,6 +58,7 @@ export default class Panes extends React.Component {
 
   renderPane(key, title, name, Component) {
     const company = this.props.company || {};
+    const supplierInputs = this.props.supplierInputs || {};
     const save = this.props.save || {};
 
     const saveAction = doc => {
@@ -74,13 +75,14 @@ export default class Panes extends React.Component {
         key={key}
       >
         <Component
-          nextTab={this.nextTab}
-          previousTab={this.previousTab}
           data={company[name] || {}}
           save={saveAction}
           title={title}
+          nextTab={this.nextTab}
+          previousTab={this.previousTab}
           productsInfo={name === 'healthInfo' ? company.productsInfo : {}}
-          basicInfo={name === 'contactInfo' ? company.basicInfo : {}}
+          basicInfo={company.basicInfo || supplierInputs.basicInfo || {}}
+          supplierInputs={supplierInputs[name] || {}}
         />
       </Tabs.TabPane>
     );
@@ -90,5 +92,6 @@ export default class Panes extends React.Component {
 Panes.propTypes = {
   company: PropTypes.object,
   save: PropTypes.func,
-  history: PropTypes.object
+  history: PropTypes.object,
+  supplierInputs: PropTypes.object
 };
