@@ -8,16 +8,13 @@ const FormItem = Form.Item;
 const propTypes = {
   login: PropTypes.func.isRequired,
   form: PropTypes.object,
-  location: PropTypes.object
+  location: PropTypes.object,
+  loading: PropTypes.bool
 };
 
 class SignIn extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      loading: false
-    };
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -29,8 +26,6 @@ class SignIn extends Component {
         const email = values.email;
         const password = values.password;
         this.props.login({ email, password });
-
-        this.setState({ loading: true });
       }
     });
   }
@@ -38,7 +33,7 @@ class SignIn extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const search = this.props.location.search || [{}];
-    const { loading } = this.state;
+    const { loading } = this.props;
 
     return (
       <div className="center-content">
@@ -51,7 +46,7 @@ class SignIn extends Component {
           ) : null}
           {search === '?confirmed' ? (
             <Alert
-              description="Email confirmed succesfully! Please login using your provided details"
+              description="Account activated succesfully! Please login using your provided details"
               type="success"
             />
           ) : null}

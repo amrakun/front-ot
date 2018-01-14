@@ -19,7 +19,7 @@ import { Sidebar } from 'modules/companies/components';
 import { Search } from 'modules/companies/components';
 import { Editor } from 'modules/common/components';
 import moment from 'moment';
-import { dateFormat } from 'modules/common/constants';
+import { dateFormat, dateTimeFormat } from 'modules/common/constants';
 import { labels } from './constants';
 
 class Feedback extends Common {
@@ -138,7 +138,7 @@ class Feedback extends Common {
         <Sidebar />
 
         <Col span={18}>
-          <Card title="Companies">
+          <Card title="Suppliers">
             <div className="table-operations">
               <Search />
 
@@ -176,7 +176,7 @@ class Feedback extends Common {
             <DatePicker
               defaultValue={feedbackCloseDate}
               showTime={{ format: 'HH:mm' }}
-              format={dateFormat}
+              format={dateTimeFormat}
               placeholder="Choose close date"
               onChange={this.handleCloseDateChange}
             />

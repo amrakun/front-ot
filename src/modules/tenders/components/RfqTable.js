@@ -46,7 +46,7 @@ const RfqTable = props => {
 
         <div className="upload-btn-wrapper">
           <Button>
-            Import materials <Icon type="file-excel" />
+            Import excel file <Icon type="file-excel" />
           </Button>
           <input type="file" className="ant-btn" onChange={handleFile} />
         </div>

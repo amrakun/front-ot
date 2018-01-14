@@ -47,7 +47,7 @@ class Rfq extends Tender {
         loading={rfqBidSummaryReportLoading}
         key={0}
       >
-        Bid summary report
+        Bid summary list
         {!rfqBidSummaryReportLoading ? <Icon type="file-excel" /> : ''}
       </Button>,
       <Button

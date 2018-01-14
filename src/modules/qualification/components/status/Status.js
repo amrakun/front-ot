@@ -35,7 +35,7 @@ class Status extends Common {
         render: () => moment().format(dateFormat)
       },
       {
-        title: 'Expiry date',
+        title: 'Expiration date',
         render: () => moment().format(dateFormat)
       },
       { title: 'Registration', render: () => <span>Yes</span> },
@@ -49,7 +49,7 @@ class Status extends Common {
         <Sidebar />
 
         <Col span={18}>
-          <Card title="Companies">
+          <Card title="Suppliers">
             <div className="table-operations">
               <Search />
             </div>

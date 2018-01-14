@@ -33,6 +33,8 @@ class Difot extends Common {
     const columns = [
       { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
       { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
+      { title: 'Tier type', render: () => <span>-</span> },
+      { title: 'Pre-qualification status', render: () => <span>Yes</span> },
       {
         title: 'DIFOT score',
         render: record => {
@@ -56,9 +58,7 @@ class Difot extends Common {
       },
       { title: 'Contact person', dataIndex: 'contactInfo.name' },
       { title: 'Email address', dataIndex: 'contactInfo.email' },
-      { title: 'Phone number', dataIndex: 'contactInfo.phone' },
-      { title: 'Registration', render: () => <span>Yes</span> },
-      { title: 'Pre-qualification status', render: () => <span>Yes</span> }
+      { title: 'Phone number', dataIndex: 'contactInfo.phone' }
     ];
 
     const { REACT_APP_API_URL } = process.env;
@@ -71,7 +71,7 @@ class Difot extends Common {
         <Sidebar />
 
         <Col span={18}>
-          <Card title="Companies">
+          <Card title="Suppliers">
             <div className="table-operations">
               <Search />
 

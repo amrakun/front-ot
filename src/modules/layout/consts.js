@@ -43,20 +43,20 @@ export const buyerSideMenu = [
       },
       {
         url: '/audit',
-        title: 'Qualification/audit status',
+        title: 'Supplier Qualification',
         disabled: true
       },
       {
         url: '/validation',
-        title: 'Validation status'
+        title: 'Supplier Validation'
       },
       {
         url: '/difot',
-        title: 'DIFOT'
+        title: 'DIFOT score'
       },
       {
         url: '/due-diligence',
-        title: 'Due diligence'
+        title: 'Due Diligence'
       },
       {
         url: 'feedback',
@@ -74,7 +74,7 @@ export const buyerSideMenu = [
       },
       {
         url: '/blocking',
-        title: 'Blocking'
+        title: 'Block a supplier'
       }
     ]
   },

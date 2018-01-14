@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
-import { Table, Card, Row, Col } from 'antd';
+import { Table, Card, Row, Col, Button, Icon } from 'antd';
 import { NumberCard } from 'modules/common/components';
 import { colors } from 'modules/common/colors';
 
@@ -131,6 +131,11 @@ class FeedbackResponses extends React.Component {
         </Row>
 
         <Card title="Success feedback responses">
+          <div className="table-operations">
+            <Button disabled>
+              Export to excel <Icon type="file-excel" />
+            </Button>
+          </div>
           <Table
             columns={this.columns()}
             rowKey={record => record._id}

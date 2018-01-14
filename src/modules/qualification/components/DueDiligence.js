@@ -31,7 +31,6 @@ class DueDiligence extends Common {
 
   render() {
     const { data, pagination, loading, onChange, addDueDiligence } = this.props;
-    const { selectedCompanies } = this.state;
 
     const columns = [
       { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
@@ -62,7 +61,7 @@ class DueDiligence extends Common {
         <Sidebar />
 
         <Col span={18}>
-          <Card title="Companies">
+          <Card title="Suppliers">
             <div className="table-operations">
               <Search />
 
@@ -72,10 +71,6 @@ class DueDiligence extends Common {
             </div>
 
             <Table
-              rowSelection={{
-                selectedCompanies,
-                onChange: this.onSelectedCompaniesChange
-              }}
               columns={columns}
               rowKey={record => record._id}
               dataSource={data}

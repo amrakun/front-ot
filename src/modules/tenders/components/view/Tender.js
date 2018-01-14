@@ -88,7 +88,13 @@ class Tender extends React.Component {
         title: 'Supplier name',
         dataIndex: 'supplier.basicInfo.enName'
       },
-      { title: 'SAP #', dataIndex: 'supplier.basicInfo.sapNumber' },
+      { title: 'Sap number', dataIndex: 'supplier.basicInfo.sapNumber' },
+      { title: 'Registration', dataIndex: 'registration' },
+      { title: 'Pre-qualification', dataIndex: 'prequalification' },
+      { title: 'Qualification/audit status', dataIndex: 'audit' },
+      { title: 'Validation status', dataIndex: 'validation' },
+      { title: 'Due dilligence', dataIndex: 'dilligence' },
+      { title: 'DIFOT score', dataIndex: 'dipotScore' },
       { title: 'Company size', dataIndex: 'size' },
       {
         title: 'Number of employees',
@@ -106,13 +112,7 @@ class Tender extends React.Component {
         dataIndex: 'supplier.contactInfo.name'
       },
       { title: 'Email', dataIndex: 'supplier.contactInfo.email' },
-      { title: 'Phone', dataIndex: 'supplier.contactInfo.phone' },
-      { title: 'Registration', dataIndex: 'registration' },
-      { title: 'Pre-qualification', dataIndex: 'prequalification' },
-      { title: 'Qualification/audit status', dataIndex: 'audit' },
-      { title: 'Validation status', dataIndex: 'validation' },
-      { title: 'Due dilligence', dataIndex: 'dilligence' },
-      { title: 'DIFOT score', dataIndex: 'dipotScore' }
+      { title: 'Phone', dataIndex: 'supplier.contactInfo.phone' }
     ];
   }
 

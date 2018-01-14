@@ -6,27 +6,43 @@ import { Register } from '../components';
 import { mutations } from '../graphql';
 import { message } from 'antd';
 
-const RegisterContainer = props => {
-  const { registerMutation, history } = props;
+class RegisterContainer extends React.Component {
+  constructor(props) {
+    super(props);
 
-  const register = variables => {
-    registerMutation({ variables })
-      .then(() => {
-        message.success(`Confirmation link has been sent to your email`);
-        history.push('/sign-in?confirmation');
-      })
-      .catch(error => {
-        message.error(error.message);
-      });
-  };
+    this.state = {
+      loading: false
+    };
+  }
 
-  const updatedProps = {
-    ...props,
-    register
-  };
+  render() {
+    const { registerMutation, history } = this.props;
+    const { loading } = this.state;
 
-  return <Register {...updatedProps} />;
-};
+    const register = variables => {
+      this.setState({ loading: true });
+
+      registerMutation({ variables })
+        .then(() => {
+          message.success(`Confirmation link has been sent to your email`);
+          history.push('/sign-in?confirmation');
+          this.setState({ loading: false });
+        })
+        .catch(error => {
+          message.error(error.message);
+          this.setState({ loading: false });
+        });
+    };
+
+    const updatedProps = {
+      ...this.props,
+      register,
+      loading
+    };
+
+    return <Register {...updatedProps} />;
+  }
+}
 
 RegisterContainer.propTypes = {
   registerMutation: PropTypes.func,

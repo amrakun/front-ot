@@ -2,14 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-
-import { Table, Card, Popconfirm, Input, Button, Icon, Tooltip } from 'antd';
+import { Search } from 'modules/companies/components';
+import {
+  Table,
+  Card,
+  Popconfirm,
+  Button,
+  Icon,
+  Tooltip,
+  DatePicker
+} from 'antd';
 import { labels, statusIcons } from '../../constants';
 import { dateTimeFormat } from 'modules/common/constants';
 import queryString from 'query-string';
 import moment from 'moment';
 
-const Search = Input.Search;
+const MonthPicker = DatePicker.MonthPicker;
 
 class Tenders extends React.Component {
   constructor(props) {
@@ -18,15 +26,13 @@ class Tenders extends React.Component {
     const { history } = props;
 
     const query = queryString.parse(history.location.search);
-    const searchQuery = query.search;
 
     this.state = {
-      statuses: query.status && query.status.split(','),
-      search: searchQuery || ''
+      statuses: query.status && query.status.split(',')
     };
 
     this.renderOperation = this.renderOperation.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
+    this.handleMonthChange = this.handleMonthChange.bind(this);
     this.handleTableChange = this.handleTableChange.bind(this);
   }
 
@@ -42,9 +48,9 @@ class Tenders extends React.Component {
     });
   }
 
-  handleSearch(value) {
+  handleMonthChange(value) {
     this.updateQueryString(query => {
-      query.search = value;
+      query.month = value;
     });
   }
 
@@ -84,11 +90,11 @@ class Tenders extends React.Component {
   commonColumns() {
     return [
       {
-        title: 'Number',
+        title: 'Tender number',
         dataIndex: 'number'
       },
       {
-        title: 'Name',
+        title: 'Tender name',
         dataIndex: 'name'
       },
       {
@@ -279,7 +285,6 @@ class Tenders extends React.Component {
       exportLoading
     } = this.props;
 
-    const { search } = this.state;
     const { location } = history;
 
     const highlightedId = location.state && location.state.newTenderId;
@@ -290,11 +295,14 @@ class Tenders extends React.Component {
     return (
       <Card style={{ marginBottom: '16px' }} title={labels[type]}>
         <div className="table-operations">
-          <Search
-            defaultValue={search}
-            placeholder="Name or number"
-            style={{ width: 200, float: 'left', marginRight: '16px' }}
-            onSearch={this.handleSearch}
+          <Search />
+
+          <MonthPicker
+            style={{ float: 'left', marginLeft: '16px' }}
+            placeholder="Select year and month"
+            onChange={this.handleMonthChange}
+            allowClear
+            disabled
           />
 
           <Button disabled={exportLoading} onClick={exportTenders}>

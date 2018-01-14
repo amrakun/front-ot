@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import queryString from 'query-string';
-import { Input } from 'antd';
+import { Input, Icon } from 'antd';
 
 const propTypes = {
   history: PropTypes.object
@@ -21,6 +21,8 @@ class Search extends React.Component {
     this.state = { search: searchQuery || '' };
 
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.emitEmpty = this.emitEmpty.bind(this);
   }
 
   handleSearch(value) {
@@ -35,15 +37,32 @@ class Search extends React.Component {
     });
   }
 
+  handleChange(e) {
+    this.setState({ search: e.target.value });
+  }
+
+  emitEmpty() {
+    this.searchInput.focus();
+    this.handleSearch('');
+    this.setState({ search: '' });
+  }
+
   render() {
     const { search } = this.state;
+    const suffix = search ? (
+      <Icon type="close-circle" onClick={this.emitEmpty} />
+    ) : null;
 
     return (
-      <Input.Search
-        defaultValue={search}
+      <Input
+        value={search}
+        prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />}
         placeholder="Supplier name or SAP number"
-        style={{ width: 200, float: 'left' }}
-        onSearch={value => this.handleSearch(value)}
+        onPressEnter={e => this.handleSearch(e.target.value)}
+        onChange={this.handleChange}
+        suffix={suffix}
+        ref={node => (this.searchInput = node)}
+        className="suppliers-search"
       />
     );
   }

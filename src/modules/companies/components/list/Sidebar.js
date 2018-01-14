@@ -120,7 +120,7 @@ class Sidebar extends React.Component {
 
     return (
       <Col span={6}>
-        <Card title="Products & services">
+        <Card title="Select products & services code">
           <TreeSelect
             treeData={productsTree}
             value={productCodes}

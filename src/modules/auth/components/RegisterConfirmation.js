@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Form, Input, Icon, Card, Button } from 'antd';
+import { Form, Input, Icon, Card, Button, Alert } from 'antd';
 import { BaseForm, Field } from 'modules/common/components';
 import { noLabelLayout } from 'modules/common/constants';
 
@@ -48,6 +48,10 @@ class Register extends BaseForm {
     return (
       <div className="center-content">
         <Card className="login-card" bordered={false}>
+          <Alert
+            description="Email confirmed succesfully! Please enter your password."
+            type="success"
+          />
           <Form onSubmit={this.handleSubmit}>
             <Field
               name="password"

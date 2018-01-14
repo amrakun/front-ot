@@ -8,35 +8,53 @@ import consts from 'consts';
 import apolloClient from 'apolloClient';
 import { message } from 'antd';
 
-const SignInContainer = props => {
-  const { loginMutation, history } = props;
+class SignInContainer extends React.Component {
+  constructor(props) {
+    super(props);
 
-  const login = variables => {
-    const { LOGIN_TOKEN_KEY, LOGIN_REFRESH_TOKEN_KEY } = consts;
+    this.state = {
+      loading: false
+    };
+  }
 
-    loginMutation({ variables })
-      .then(({ data }) => {
-        const { token, refreshToken } = data.login;
-        // save tokens
-        localStorage.setItem(LOGIN_TOKEN_KEY, token);
-        localStorage.setItem(LOGIN_REFRESH_TOKEN_KEY, refreshToken);
+  render() {
+    const { loginMutation, history } = this.props;
+    const { loading } = this.state;
 
-        apolloClient.resetStore();
+    const login = variables => {
+      const { LOGIN_TOKEN_KEY, LOGIN_REFRESH_TOKEN_KEY } = consts;
 
-        history.push('/');
-      })
-      .catch(error => {
-        message.error(error.message);
-      });
-  };
+      this.setState({ loading: true });
 
-  const updatedProps = {
-    ...props,
-    login
-  };
+      loginMutation({ variables })
+        .then(({ data }) => {
+          const { token, refreshToken } = data.login;
+          // save tokens
+          localStorage.setItem(LOGIN_TOKEN_KEY, token);
+          localStorage.setItem(LOGIN_REFRESH_TOKEN_KEY, refreshToken);
 
-  return <SignIn {...updatedProps} />;
-};
+          apolloClient.resetStore();
+
+          history.push('/');
+
+          this.setState({ loading: false });
+        })
+        .catch(error => {
+          message.error(error.message);
+
+          this.setState({ loading: false });
+        });
+    };
+
+    const updatedProps = {
+      ...this.props,
+      login,
+      loading
+    };
+
+    return <SignIn {...updatedProps} />;
+  }
+}
 
 SignInContainer.propTypes = {
   loginMutation: PropTypes.func,

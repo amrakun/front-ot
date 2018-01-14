@@ -26,14 +26,14 @@ const EoiTable = props => {
         isSupplier: !isSupplier
       })}
       {renderProductColumn({
-        name: 'notes',
-        title: rpc.notes,
-        isSupplier: !isSupplier
-      })}
-      {renderProductColumn({
         name: 'file',
         title: 'Upload',
         type: 'uploader',
+        isSupplier: !isSupplier
+      })}
+      {renderProductColumn({
+        name: 'notes',
+        title: rpc.notes,
         isSupplier: !isSupplier
       })}
     </Table>

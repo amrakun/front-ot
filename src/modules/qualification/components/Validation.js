@@ -85,7 +85,7 @@ class Validation extends Common {
       {
         title: 'Product/Service code',
         render: record => {
-          const productsInfo = record.productsInfo;
+          const productsInfo = record.validatedProductsInfo;
           if (productsInfo.length > 0) {
             return (
               <a onClick={() => this.showValidationModal(record)}>
@@ -115,7 +115,7 @@ class Validation extends Common {
         <Sidebar />
 
         <Col span={18}>
-          <Card title="Companies">
+          <Card title="Suppliers">
             <div className="table-operations">
               <Search />
             </div>

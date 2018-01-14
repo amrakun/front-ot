@@ -166,10 +166,14 @@ i.success {
     margin: 0;
     display: block;
   }
-  .ant-input.ant-input-disabled {
+  .ant-input.ant-input-disabled, .ant-select-disabled .ant-select-selection, .ant-upload-disabled .ant-btn {
     background: none;
     border: none;
     color: rgba(0, 0, 0, 0.65);
+  }
+  .ant-upload-disabled .ant-btn {
+    color: #fff;
+    cursor: not-allowed;
   }
 }
 
@@ -407,4 +411,21 @@ form .ant-input-number {
 
 .capitalize {
   text-transform: capitalize;
+}
+
+.suppliers-search {
+  .anticon-close-circle {
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.3s;
+    font-size: 12px;
+  }
+  .anticon-close-circle:hover {
+    color: #999;
+  }
+  .anticon-close-circle:active {
+    color: #666;
+  }
+  width: 200px;
+  float: left;
 }

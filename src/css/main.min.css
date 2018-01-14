@@ -187,10 +187,16 @@ i.success {
   margin: 0;
   display: block;
 }
-.form-table .ant-input.ant-input-disabled {
+.form-table .ant-input.ant-input-disabled,
+.form-table .ant-select-disabled .ant-select-selection,
+.form-table .ant-upload-disabled .ant-btn {
   background: none;
   border: none;
   color: rgba(0, 0, 0, 0.65);
+}
+.form-table .ant-upload-disabled .ant-btn {
+  color: #fff;
+  cursor: not-allowed;
 }
 .right {
   float: right !important;
@@ -393,4 +399,20 @@ form .ant-input-number {
 }
 .capitalize {
   text-transform: capitalize;
+}
+.suppliers-search {
+  width: 200px;
+  float: left;
+}
+.suppliers-search .anticon-close-circle {
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.3s;
+  font-size: 12px;
+}
+.suppliers-search .anticon-close-circle:hover {
+  color: #999;
+}
+.suppliers-search .anticon-close-circle:active {
+  color: #666;
 }
