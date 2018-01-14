@@ -10,7 +10,8 @@ import FeedbackDetail from './feedback/FeedbackDetail';
 import Prequalification from './prequalification/Prequalification';
 import Registration from './registration/Registration';
 import CapacityBuilding from './registration/CapacityBuilding';
-import Status from './qualification/Status';
+import SupplierStatus from './qualification/Status';
+import Status from './list/Status';
 
 export {
   BaseList,
@@ -25,5 +26,6 @@ export {
   SubmitFeedback,
   FeedbackResponses,
   FeedbackDetail,
+  SupplierStatus,
   Status
 };

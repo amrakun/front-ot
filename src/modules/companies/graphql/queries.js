@@ -150,109 +150,121 @@ export const certificateByUser = `
   }
 `;
 
+const prequalificationFields = `
+  _id
+  financialInfo {
+    canProvideAccountsInfo
+    reasonToCannotNotProvide
+    currency
+    annualTurnover {
+      year
+      amount
+    }
+    preTaxProfit {
+      year
+      amount
+    }
+    totalAssets {
+      year
+      amount
+    }
+    totalCurrentAssets {
+      year
+      amount
+    }
+    totalShareholderEquity {
+      year
+      amount
+    }
+    recordsInfo {
+      date
+      file
+    }
+    isUpToDateSSP
+    isUpToDateCTP
+  }
+  businessInfo {
+    doesMeetMinimumStandarts
+    doesMeetMinimumStandartsFile
+    doesHaveJobDescription
+    doesHaveJobDescriptionFile
+    doesConcludeValidContracts
+    employeeTurnoverRate
+    doesHaveLiabilityInsurance
+    doesHaveLiabilityInsuranceFile
+    doesHaveCodeEthics
+    doesHaveCodeEthicsFile
+    doesHaveResponsiblityPolicy
+    doesHaveResponsiblityPolicyFile
+    hasConvictedLabourLaws
+    hasConvictedForHumanRights
+    hasConvictedForBusinessIntegrity
+    proveHasNotConvicted
+    hasLeadersConvicted
+    doesEmployeePoliticallyExposed
+    pepName
+    organizationChartFile
+    investigations {
+      name
+      date
+      status
+      statusDate
+    }
+  }
+  environmentalInfo {
+    doesHavePlan
+    doesHavePlanFile
+    hasEnvironmentalRegulatorInvestigated
+    dateOfInvestigation
+    reasonForInvestigation
+    actionStatus
+    investigationDocumentation
+    hasConvictedForEnvironmentalLaws
+    proveHasNotConvicted
+  }
+  healthInfo {
+    doesHaveHealthSafety
+    doesHaveHealthSafetyFile
+    areHSEResourcesClearlyIdentified
+    doesHaveDocumentedProcessToEnsure
+    doesHaveDocumentedProcessToEnsureFile
+    areEmployeesUnderYourControl
+    doesHaveDocumentForRiskAssesment
+    doesHaveDocumentForRiskAssesmentFile
+    doesHaveDocumentForIncidentInvestigation
+    doesHaveDocumentForIncidentInvestigationFile
+    doesHaveDocumentedFitness
+    doesHaveDocumentedFitnessFile
+    isWillingToComply
+    hasIndustrialAccident
+    tmha
+    ltifr
+    injuryExplanation
+    seniorManagement
+    isWillingToCommit
+    isPerparedToCompile
+    hasWorkedOnWorldBank
+    hasWorkedOnWorldBankDescription
+    hasWorkedOnLargeProjects
+    hasWorkedOnLargeProjectsDescription
+    doesHaveLicense
+    doesHaveLicenseDescription
+  }
+`;
+
 export const companyPrequalificationDetail = `
   query companyByUser {
     companyByUser {
-      _id
-      financialInfo {
-        canProvideAccountsInfo
-        reasonToCannotNotProvide
-        currency
-        annualTurnover {
-          year
-          amount
-        }
-        preTaxProfit {
-          year
-          amount
-        }
-        totalAssets {
-          year
-          amount
-        }
-        totalCurrentAssets {
-          year
-          amount
-        }
-        totalShareholderEquity {
-          year
-          amount
-        }
-        recordsInfo {
-          date
-          file
-        }
-        isUpToDateSSP
-        isUpToDateCTP
-      }
-      businessInfo {
-        doesMeetMinimumStandarts
-        doesMeetMinimumStandartsFile
-        doesHaveJobDescription
-        doesHaveJobDescriptionFile
-        doesConcludeValidContracts
-        employeeTurnoverRate
-        doesHaveLiabilityInsurance
-        doesHaveLiabilityInsuranceFile
-        doesHaveCodeEthics
-        doesHaveCodeEthicsFile
-        doesHaveResponsiblityPolicy
-        doesHaveResponsiblityPolicyFile
-        hasConvictedLabourLaws
-        hasConvictedForHumanRights
-        hasConvictedForBusinessIntegrity
-        proveHasNotConvicted
-        hasLeadersConvicted
-        doesEmployeePoliticallyExposed
-        pepName
-        organizationChartFile
-        investigations {
-          name
-          date
-          status
-          statusDate
-        }
-      }
-      environmentalInfo {
-        doesHavePlan
-        doesHavePlanFile
-        hasEnvironmentalRegulatorInvestigated
-        dateOfInvestigation
-        reasonForInvestigation
-        actionStatus
-        investigationDocumentation
-        hasConvictedForEnvironmentalLaws
-        proveHasNotConvicted
-      }
-      healthInfo {
-        doesHaveHealthSafety
-        doesHaveHealthSafetyFile
-        areHSEResourcesClearlyIdentified
-        doesHaveDocumentedProcessToEnsure
-        doesHaveDocumentedProcessToEnsureFile
-        areEmployeesUnderYourControl
-        doesHaveDocumentForRiskAssesment
-        doesHaveDocumentForRiskAssesmentFile
-        doesHaveDocumentForIncidentInvestigation
-        doesHaveDocumentForIncidentInvestigationFile
-        doesHaveDocumentedFitness
-        doesHaveDocumentedFitnessFile
-        isWillingToComply
-        hasIndustrialAccident
-        tmha
-        ltifr
-        injuryExplanation
-        seniorManagement
-        isWillingToCommit
-        isPerparedToCompile
-        hasWorkedOnWorldBank
-        hasWorkedOnWorldBankDescription
-        hasWorkedOnLargeProjects
-        hasWorkedOnLargeProjectsDescription
-        doesHaveLicense
-        doesHaveLicenseDescription
-      }
+      ${prequalificationFields}
       productsInfo
+    }
+  }
+`;
+
+const supplierPrequalification = `
+  query companyDetail($_id: String!) {
+    companyDetail(_id: $_id) {
+      ${prequalificationFields}
     }
   }
 `;
@@ -303,6 +315,24 @@ const exportCompanies = `
   query companiesExport(${commonParams}) {
     companiesExport(${commonValues})
   }
+`;
+
+const status = `
+query companies(${commonParams}) {
+  companies(${commonValues}) {
+    _id
+    basicInfo {
+      enName,
+      email,
+      sapNumber
+    }
+    contactInfo {
+      name,
+      email,
+      phone
+    }
+  }
+}
 `;
 
 const difot = `
@@ -508,5 +538,7 @@ export default {
   feedbackDetail,
   feedbacks,
   feedbackResponseDetail,
-  exportCompanies
+  exportCompanies,
+  status,
+  supplierPrequalification
 };

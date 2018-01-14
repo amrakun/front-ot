@@ -14,6 +14,7 @@ import {
   Registration,
   Prequalification,
   CapacityBuilding,
+  SupplierStatus,
   Status
 } from './containers';
 
@@ -39,8 +40,17 @@ export default [
   <Route
     key="/prequalification-status"
     exact
+    path="/prequalification-status/:id"
+    component={SupplierStatus}
+  />,
+  <Route
+    key="/prequalification-status"
+    exact
     path="/prequalification-status"
-    component={Status}
+    component={({ location }) => {
+      const queryParams = queryString.parse(location.search);
+      return <Status queryParams={queryParams} />;
+    }}
   />,
   <Route
     key="/companies"

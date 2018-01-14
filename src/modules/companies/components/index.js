@@ -11,7 +11,8 @@ import PrequalificationForms from './prequalification/Prequalification';
 import RegistrationForms from './registration/Registration';
 import Certificate from './registration/Certificate';
 import SupplierSearcher from './searcher';
-import Status from './qualification/Status';
+import Status from './list/Status';
+import SupplierStatus from './qualification/Status';
 
 export {
   RegistrationForms,
@@ -22,10 +23,11 @@ export {
   DueDiligence,
   Validation,
   Blocking,
+  Status,
   Feedback,
   SubmitFeedback,
   FeedbackResponses,
   FeedbackDetail,
   SupplierSearcher,
-  Status
+  SupplierStatus
 };

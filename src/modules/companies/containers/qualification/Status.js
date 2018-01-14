@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { gql, compose, graphql } from 'react-apollo';
 import { queries } from '../../graphql';
-import { Status } from '../../components';
+import { SupplierStatus } from '../../components';
 import { Loading } from 'modules/common/components';
 import { message } from 'antd';
 
 const StatusContainer = props => {
-  let { companyByUserQuery } = props;
+  let { supplierPrequalificationQuery } = props;
 
-  if (companyByUserQuery.loading) {
+  if (supplierPrequalificationQuery.loading) {
     return <Loading />;
   }
 
@@ -22,18 +22,26 @@ const StatusContainer = props => {
     ...props,
     save,
     company: {
-      ...companyByUserQuery.companyByUser
+      ...supplierPrequalificationQuery.companyDetail
     }
   };
-  return <Status {...updatedProps} />;
+  return <SupplierStatus {...updatedProps} />;
 };
 
 StatusContainer.propTypes = {
-  companyByUserQuery: PropTypes.object
+  supplierPrequalificationQuery: PropTypes.object
 };
 
 export default compose(
-  graphql(gql(queries.companyPrequalificationDetail), {
-    name: 'companyByUserQuery'
+  graphql(gql(queries.supplierPrequalification), {
+    name: 'supplierPrequalificationQuery',
+    options: ({ match }) => {
+      return {
+        variables: {
+          _id: match.params.id
+        },
+        notifyOnNetworkStatusChange: true
+      };
+    }
   })
 )(StatusContainer);
