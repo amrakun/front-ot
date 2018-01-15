@@ -58,12 +58,7 @@ class Validation extends Common {
 
   render() {
     const { data, pagination, loading, onChange } = this.props;
-    const {
-      selectedCompanies,
-      modalVisible,
-      modalData,
-      validatedValues
-    } = this.state;
+    const { modalVisible, modalData, validatedValues } = this.state;
 
     let validationOptions = [];
     modalData.productCodes &&
@@ -74,14 +69,7 @@ class Validation extends Common {
         });
       });
 
-    const columns = [
-      { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
-      { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
-      {
-        title: 'Tier type',
-        render: () => '-'
-      },
-      { title: 'Pre-qualification status', render: () => <a>Yes</a> },
+    const columns = this.getWrappedColumns([
       {
         title: 'Product/Service code',
         render: record => {
@@ -104,11 +92,8 @@ class Validation extends Common {
       {
         title: 'Last validation result',
         render: record => (record.isProductsInfoValidated ? 'Yes' : '-')
-      },
-      { title: 'Contact person', dataIndex: 'contactInfo.name' },
-      { title: 'Email address', dataIndex: 'contactInfo.email' },
-      { title: 'Phone number', dataIndex: 'contactInfo.phone' }
-    ];
+      }
+    ]);
 
     return (
       <Row gutter={16}>
@@ -121,10 +106,6 @@ class Validation extends Common {
             </div>
             <br />
             <Table
-              rowSelection={{
-                selectedCompanies,
-                onChange: this.onSelectedCompaniesChange
-              }}
               columns={columns}
               rowKey={record => record._id}
               dataSource={data}

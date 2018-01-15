@@ -32,11 +32,7 @@ class DueDiligence extends Common {
   render() {
     const { data, pagination, loading, onChange, addDueDiligence } = this.props;
 
-    const columns = [
-      { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
-      { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
-      { title: 'Tier type', render: () => <span>Yes</span> },
-      { title: 'Pre-qualification status', render: () => <span>Yes</span> },
+    const columns = this.getWrappedColumns([
       {
         title: 'Report',
         render: record => {
@@ -50,11 +46,8 @@ class DueDiligence extends Common {
             />
           );
         }
-      },
-      { title: 'Contact person', dataIndex: 'contactInfo.name' },
-      { title: 'Email address', dataIndex: 'contactInfo.email' },
-      { title: 'Phone number', dataIndex: 'contactInfo.phone' }
-    ];
+      }
+    ]);
 
     return (
       <Row gutter={16}>

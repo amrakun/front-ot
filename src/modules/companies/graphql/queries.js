@@ -267,6 +267,7 @@ const commonParams = `
   $productCodes: String
   $isProductsInfoValidated: Boolean
   $includeBlocked: Boolean
+  $isPrequalified: Boolean
   $difotScore: String
   $_ids: [String]
 `;
@@ -277,28 +278,35 @@ const commonValues = `
   productCodes: $productCodes,
   isProductsInfoValidated: $isProductsInfoValidated,
   includeBlocked: $includeBlocked,
+  isPrequalified: $isPrequalified,
   difotScore: $difotScore
   _ids: $_ids
+`;
+
+const commonFields = `
+  _id
+  basicInfo {
+    enName,
+    email,
+    sapNumber
+  }
+  contactInfo {
+    name,
+    email,
+    phone
+  }
+  isPrequalified
 `;
 
 const companies = `
   query companies(${commonParams}) {
     companies(${commonValues}) {
-      _id
-      basicInfo {
-        enName,
-        email,
-        sapNumber
-      }
-      contactInfo {
-        name,
-        email,
-        phone
-      }
+      ${commonFields}
       averageDifotScore
       lastDueDiligence
       isProductsInfoValidated
       isBlocked
+      isPrequalified
     }
   }
 `;
@@ -310,37 +318,17 @@ const exportCompanies = `
 `;
 
 const status = `
-query companies(${commonParams}) {
-  companies(${commonValues}) {
-    _id
-    basicInfo {
-      enName,
-      email,
-      sapNumber
-    }
-    contactInfo {
-      name,
-      email,
-      phone
+  query companies(${commonParams}) {
+    companies(${commonValues}) {
+      ${commonFields}
     }
   }
-}
 `;
 
 const difot = `
   query companies(${commonParams}) {
     companies(${commonValues}) {
-      _id
-      basicInfo {
-        enName,
-        email,
-        sapNumber
-      }
-      contactInfo {
-        name,
-        email,
-        phone
-      }
+      ${commonFields}
       lastDifotScore
       averageDifotScore
     }
@@ -350,17 +338,7 @@ const difot = `
 const dueDiligence = `
   query companies(${commonParams}) {
     companies(${commonValues}) {
-      _id
-      basicInfo {
-        enName,
-        email,
-        sapNumber
-      }
-      contactInfo {
-        name,
-        email,
-        phone
-      }
+      ${commonFields}
       lastDueDiligence
     }
   }
@@ -369,7 +347,7 @@ const dueDiligence = `
 const feedback = `
   query companies(${commonParams}) {
     companies(${commonValues}) {
-      _id
+      ${commonFields}
       lastFeedback {
         closeDate
         supplierResponse {
@@ -387,16 +365,6 @@ const feedback = `
           technologyImprovement
         }
       }
-      basicInfo {
-        enName,
-        email,
-        sapNumber
-      }
-      contactInfo {
-        name,
-        email,
-        phone
-      }
     }
   }
 `;
@@ -404,17 +372,7 @@ const feedback = `
 const validation = `
   query companies(${commonParams}) {
     companies(${commonValues}) {
-      _id
-      basicInfo {
-        enName,
-        email,
-        sapNumber
-      }
-      contactInfo {
-        name,
-        email,
-        phone
-      }
+      ${commonFields}
       productsInfo
       validatedProductsInfo
       isProductsInfoValidated

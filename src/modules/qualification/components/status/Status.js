@@ -19,13 +19,10 @@ class Status extends Common {
 
   render() {
     const { data, pagination, loading, onChange } = this.props;
-    const { selectedCompanies } = this.state;
 
-    const columns = [
-      { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
-      { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
+    const columns = this.getWrappedColumns([
       {
-        title: 'Pre-qualification status',
+        title: 'Pre-qualification information',
         render: record => (
           <Link to={`/prequalification-status/${record._id}`}>View</Link>
         )
@@ -37,12 +34,8 @@ class Status extends Common {
       {
         title: 'Expiration date',
         render: () => moment().format(dateFormat)
-      },
-      { title: 'Registration', render: () => <span>Yes</span> },
-      { title: 'Contact person', dataIndex: 'contactInfo.name' },
-      { title: 'Email address', dataIndex: 'contactInfo.email' },
-      { title: 'Phone number', dataIndex: 'contactInfo.phone' }
-    ];
+      }
+    ]);
 
     return (
       <Row gutter={16}>
@@ -55,10 +48,6 @@ class Status extends Common {
             </div>
             <div style={{ margin: '32px 0' }} />
             <Table
-              rowSelection={{
-                selectedCompanies,
-                onChange: this.onSelectedCompaniesChange
-              }}
               columns={columns}
               rowKey={record => record._id}
               dataSource={data}

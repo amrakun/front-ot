@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const propTypes = {
   history: PropTypes.object,
@@ -20,6 +21,31 @@ export default class Common extends React.Component {
 
   onSelectedCompaniesChange(selectedCompanies) {
     this.setState({ selectedCompanies });
+  }
+
+  getWrappedColumns(columns) {
+    return [
+      { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
+      { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
+      {
+        title: 'Tier type',
+        render: () => {
+          <span>-</span>;
+        }
+      },
+      {
+        title: 'Pre-qualification status',
+        render: record => (
+          <Link to={`/prequalification-status/${record._id}?view`}>
+            {record.isPrequalified ? 'Yes' : 'No'}
+          </Link>
+        )
+      },
+      ...columns,
+      { title: 'Contact person', dataIndex: 'contactInfo.name' },
+      { title: 'Email address', dataIndex: 'contactInfo.email' },
+      { title: 'Phone number', dataIndex: 'contactInfo.phone' }
+    ];
   }
 }
 

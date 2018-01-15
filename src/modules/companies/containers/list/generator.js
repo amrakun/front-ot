@@ -55,7 +55,8 @@ const generator = (Component, query) => {
   return graphql(gql(queries[query]), {
     name: 'companiesQuery',
     options: ({ queryParams }) => {
-      const { status, search, region, productCodes, difotRange } = queryParams;
+      const { search, region, productCodes, difotRange } = queryParams;
+      const status = queryParams.status || '';
 
       let difotScore = '';
       if (status && status.includes('byDifotScore')) {
@@ -70,10 +71,9 @@ const generator = (Component, query) => {
           region: region,
           productCodes: productCodes,
           difotScore: difotScore,
-          includeBlocked: status ? status.includes('includeBlocked') : false,
-          isProductsInfoValidated: status
-            ? status.includes('isProductsInfoValidated')
-            : false
+          includeBlocked: status.includes('includeBlocked'),
+          isPrequalified: status.includes('isPrequalified'),
+          isProductsInfoValidated: status.includes('isProductsInfoValidated')
         },
         notifyOnNetworkStatusChange: true
       };

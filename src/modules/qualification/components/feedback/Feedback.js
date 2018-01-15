@@ -93,11 +93,7 @@ class Feedback extends Common {
       viewModalData
     } = this.state;
 
-    const columns = [
-      { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
-      { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
-      { title: 'Tier type', render: () => <span>Yes</span> },
-      { title: 'Pre-qualification status', render: () => <span>Yes</span> },
+    const columns = this.getWrappedColumns([
       {
         title: 'Last feedback date',
         render: record =>
@@ -117,11 +113,8 @@ class Feedback extends Common {
             );
           } else return '-';
         }
-      },
-      { title: 'Contact person', dataIndex: 'contactInfo.name' },
-      { title: 'Email address', dataIndex: 'contactInfo.email' },
-      { title: 'Phone number', dataIndex: 'contactInfo.phone' }
-    ];
+      }
+    ]);
 
     let responseItemList = [];
     Object.keys(viewModalData).forEach(key => {

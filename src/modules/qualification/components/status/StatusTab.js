@@ -11,6 +11,8 @@ class StatusTab extends BaseForm {
   constructor(props) {
     super(props);
 
+    this.viewMode = props.location.search === '?view';
+
     this.renderItem = this.renderItem.bind(this);
   }
 
@@ -75,6 +77,7 @@ class StatusTab extends BaseForm {
             <Checkbox
               style={{ minWidth: '80px', marginLeft: '24px' }}
               defaultChecked={checked}
+              disabled={this.viewMode}
             >
               Qualified
             </Checkbox>
@@ -117,8 +120,7 @@ class StatusTab extends BaseForm {
           />
         </Card>
 
-        {this.renderGoBack()}
-        {this.renderSubmit()}
+        {!this.viewMode && [this.renderGoBack(), this.renderSubmit()]}
       </Form>
     );
   }

@@ -30,11 +30,7 @@ class Difot extends Common {
     const { data, pagination, loading, onChange } = this.props;
     const { selectedCompanies } = this.state;
 
-    const columns = [
-      { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
-      { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
-      { title: 'Tier type', render: () => <span>-</span> },
-      { title: 'Pre-qualification status', render: () => <span>Yes</span> },
+    const columns = this.getWrappedColumns([
       {
         title: 'DIFOT score',
         render: record => {
@@ -55,11 +51,8 @@ class Difot extends Common {
       {
         title: 'Average DIFOT score',
         render: record => <span>{record.averageDifotScore || 0}%</span>
-      },
-      { title: 'Contact person', dataIndex: 'contactInfo.name' },
-      { title: 'Email address', dataIndex: 'contactInfo.email' },
-      { title: 'Phone number', dataIndex: 'contactInfo.phone' }
-    ];
+      }
+    ]);
 
     const { REACT_APP_API_URL } = process.env;
     const templateUrl = `${
