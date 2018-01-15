@@ -12,6 +12,7 @@ import { Tabs } from 'antd';
 class RegistrationForms extends Panes {
   render() {
     const { currentTabKey } = this.state;
+    const { basicInfo } = this.props.company || {};
 
     return (
       <Tabs
@@ -26,7 +27,9 @@ class RegistrationForms extends Panes {
           'basicInfo',
           CompanyInfoForm
         )}
-        {this.renderPane('2', 'Contact details', 'contactInfo', ContactForm)}
+        {this.renderPane('2', 'Contact details', 'contactInfo', ContactForm, {
+          basicInfo: basicInfo
+        })}
         {this.renderPane(
           '3',
           'Management Team',

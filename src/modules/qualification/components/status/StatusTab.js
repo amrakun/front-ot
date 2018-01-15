@@ -120,16 +120,18 @@ class StatusTab extends BaseForm {
           />
         </Card>
 
-        {!this.viewMode && [this.renderGoBack(), this.renderSubmit()]}
+        {!this.viewMode && (
+          <div>
+            {this.renderGoBack()} {this.renderSubmit()}
+          </div>
+        )}
       </Form>
     );
   }
 }
 
 StatusTab.propTypes = {
-  data: PropTypes.object,
-  title: PropTypes.string,
-  previousTab: PropTypes.func
+  title: PropTypes.string
 };
 
 const StatusTabForm = Form.create()(StatusTab);

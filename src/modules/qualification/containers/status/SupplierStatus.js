@@ -18,6 +18,10 @@ const StatusContainer = props => {
 
   const { companyDetail } = supplierPrequalificationQuery;
 
+  const saveTierType = value => {
+    console.log(value);
+  };
+
   const save = (name, doc) => {
     const mutation = props[`${name}Edit`];
 
@@ -39,6 +43,7 @@ const StatusContainer = props => {
   const updatedProps = {
     ...props,
     save,
+    saveTierType,
     company: {
       ...qualificationDetailQuery.qualificationDetail
     },

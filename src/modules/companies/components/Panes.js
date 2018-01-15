@@ -56,13 +56,21 @@ export default class Panes extends React.Component {
     }
   }
 
-  renderPane(key, title, name, Component) {
+  renderPane(key, title, name, Component, extraProps) {
     const company = this.props.company || {};
-    const supplierInputs = this.props.supplierInputs || {};
     const save = this.props.save || {};
 
     const saveAction = doc => {
       save(name, doc);
+    };
+
+    const componenetProps = {
+      data: company[name] || {},
+      save: saveAction,
+      title: title,
+      nextTab: this.nextTab,
+      previousTab: this.previousTab,
+      ...extraProps
     };
 
     return (
@@ -74,20 +82,7 @@ export default class Panes extends React.Component {
         }
         key={key}
       >
-        <Component
-          data={company[name] || {}}
-          save={saveAction}
-          title={title}
-          nextTab={this.nextTab}
-          previousTab={this.previousTab}
-          productsInfo={name === 'healthInfo' ? company.productsInfo : {}}
-          basicInfo={company.basicInfo || {}}
-          statusData={{
-            ...supplierInputs.basicInfo,
-            isPrequalified: supplierInputs.isPrequalified,
-            supplierInputs: supplierInputs[name] || {}
-          }}
-        />
+        <Component {...componenetProps} />
       </Tabs.TabPane>
     );
   }
@@ -96,6 +91,5 @@ export default class Panes extends React.Component {
 Panes.propTypes = {
   company: PropTypes.object,
   save: PropTypes.func,
-  history: PropTypes.object,
-  supplierInputs: PropTypes.object
+  history: PropTypes.object
 };

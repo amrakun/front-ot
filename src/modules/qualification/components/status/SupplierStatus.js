@@ -1,11 +1,23 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import StatusTab from './StatusTab';
+import TierTypeTab from './TierTypeTab';
 import { Panes } from 'modules/companies/components';
 
 class Status extends Panes {
   render() {
     const { currentTabKey } = this.state;
+    const supplierInputs = this.props.supplierInputs || {};
+    const saveTierType = this.props.saveTierType || {};
+
+    const extraProps = name => ({
+      statusData: {
+        ...supplierInputs.basicInfo,
+        isPrequalified: supplierInputs.isPrequalified,
+        supplierInputs: supplierInputs[name] || {}
+      },
+      saveTierType: saveTierType
+    });
 
     return (
       <Tabs
@@ -18,25 +30,36 @@ class Status extends Panes {
           '1',
           'Financial information',
           'financialInfo',
-          StatusTab
+          StatusTab,
+          extraProps('financialInfo')
         )}
         {this.renderPane(
           '2',
           'Business integrity & human resource',
           'businessInfo',
-          StatusTab
+          StatusTab,
+          extraProps('businessInfo')
         )}
         {this.renderPane(
           '3',
           'Environmental management',
           'environmentalInfo',
-          StatusTab
+          StatusTab,
+          extraProps('environmentalInfo')
         )}
         {this.renderPane(
           '4',
           'Health & safety management system',
           'healthInfo',
-          StatusTab
+          StatusTab,
+          extraProps('healthInfo')
+        )}
+        {this.renderPane(
+          '5',
+          'Select supplier tier type',
+          'tierType',
+          TierTypeTab,
+          extraProps('tierType')
         )}
       </Tabs>
     );

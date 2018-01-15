@@ -429,3 +429,10 @@ form .ant-input-number {
   width: 200px;
   float: left;
 }
+
+.radio-vertical {
+  .ant-radio-wrapper {
+    display: block;
+    padding: 8px 0;
+  }
+}

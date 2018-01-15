@@ -416,3 +416,7 @@ form .ant-input-number {
 .suppliers-search .anticon-close-circle:active {
   color: #666;
 }
+.radio-vertical .ant-radio-wrapper {
+  display: block;
+  padding: 8px 0;
+}

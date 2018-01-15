@@ -20,7 +20,15 @@ class Status extends Common {
   render() {
     const { data, pagination, loading, onChange } = this.props;
 
-    const columns = this.getWrappedColumns([
+    const columns = [
+      { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
+      { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
+      {
+        title: 'Tier type',
+        render: () => {
+          <span>-</span>;
+        }
+      },
       {
         title: 'Pre-qualification information',
         render: record => (
@@ -34,8 +42,11 @@ class Status extends Common {
       {
         title: 'Expiration date',
         render: () => moment().format(dateFormat)
-      }
-    ]);
+      },
+      { title: 'Contact person', dataIndex: 'contactInfo.name' },
+      { title: 'Email address', dataIndex: 'contactInfo.email' },
+      { title: 'Phone number', dataIndex: 'contactInfo.phone' }
+    ];
 
     return (
       <Row gutter={16}>

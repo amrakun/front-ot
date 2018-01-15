@@ -9,6 +9,7 @@ import Panes from '../Panes';
 class PrequalificationForms extends Panes {
   render() {
     const { currentTabKey } = this.state;
+    const { productsInfo } = this.props.company || {};
 
     return (
       <Tabs
@@ -39,7 +40,8 @@ class PrequalificationForms extends Panes {
           '4',
           'Health & safety management system',
           'healthInfo',
-          HealthForm
+          HealthForm,
+          { productsInfo: productsInfo }
         )}
       </Tabs>
     );
