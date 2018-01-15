@@ -29,9 +29,7 @@ export default class Common extends React.Component {
       { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
       {
         title: 'Tier type',
-        render: () => {
-          <span>-</span>;
-        }
+        render: () => <span>-</span>
       },
       {
         title: 'Pre-qualification status',

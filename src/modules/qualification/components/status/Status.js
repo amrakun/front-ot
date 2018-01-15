@@ -25,9 +25,7 @@ class Status extends Common {
       { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
       {
         title: 'Tier type',
-        render: () => {
-          <span>-</span>;
-        }
+        render: () => <span>-</span>
       },
       {
         title: 'Pre-qualification information',

@@ -30,7 +30,7 @@ class FeedbackContainer extends React.Component {
       })
         .then(() => {
           message.success('Successfully submitted');
-          history.push('/rfq-and-eoi');
+          history.push('/rfq-and-eoi?refetch');
         })
 
         .catch(error => {

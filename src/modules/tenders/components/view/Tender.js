@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Table, Card, Input, Icon, Row, Col, Button, Modal } from 'antd';
@@ -5,42 +7,36 @@ import { NumberCard, NumberCardLines } from 'modules/common/components';
 import { colors } from 'modules/common/colors';
 import { Editor } from 'modules/common/components';
 import { regretLetterTemplate } from './constants';
+import { Common } from 'modules/companies/components/';
+import { Link } from 'react-router-dom';
 
 const Search = Input.Search;
 
 const propTypes = {
   data: PropTypes.object,
-  pagination: PropTypes.object,
-  loading: PropTypes.bool.isRequired,
-  onChange: PropTypes.func,
   filter: PropTypes.func,
   sendRegretLetter: PropTypes.func,
   sentRegretLetter: PropTypes.boolean,
   regretLetterModalVisible: PropTypes.boolean
 };
 
-class Tender extends React.Component {
+class Tender extends Common {
   constructor(props) {
     super(props);
 
     this.state = {
-      selectedCompanies: [],
+      ...this.state,
       responseModal: { visible: false },
       regretLetterModal: { visible: false },
       regretLetterContent: regretLetterTemplate
     };
 
-    this.onSelectedCompaniesChange = this.onSelectedCompaniesChange.bind(this);
     this.showResponsesModal = this.showResponsesModal.bind(this);
     this.hideResponsesModal = this.hideResponsesModal.bind(this);
     this.renderViewResponse = this.renderViewResponse.bind(this);
     this.toggleRegretLetterModal = this.toggleRegretLetterModal.bind(this);
     this.handleRegretLetterChange = this.handleRegretLetterChange.bind(this);
     this.handleSendRegretLetters = this.handleSendRegretLetters.bind(this);
-  }
-
-  onSelectedCompaniesChange(selectedCompanies) {
-    this.setState({ selectedCompanies });
   }
 
   getPercent(requestedCount, count) {
@@ -89,19 +85,51 @@ class Tender extends React.Component {
         dataIndex: 'supplier.basicInfo.enName'
       },
       { title: 'Sap number', dataIndex: 'supplier.basicInfo.sapNumber' },
-      { title: 'Registration', dataIndex: 'registration' },
-      { title: 'Pre-qualification', dataIndex: 'prequalification' },
+      {
+        title: 'Tier type',
+        render: () => <span>-</span>
+      },
+      {
+        title: 'Pre-qualification status',
+        render: record => (
+          <Link to={`/prequalification-status/${record.supplier._id}?view`}>
+            {record.supplier.isPrequalified ? 'Yes' : 'No'}
+          </Link>
+        )
+      },
       { title: 'Qualification/audit status', dataIndex: 'audit' },
-      { title: 'Validation status', dataIndex: 'validation' },
-      { title: 'Due dilligence', dataIndex: 'dilligence' },
-      { title: 'DIFOT score', dataIndex: 'dipotScore' },
+      {
+        title: 'Validation status',
+        render: record =>
+          record.supplier.isProductsInfoValidated ? 'Yes' : '-'
+      },
+      {
+        title: 'Due dilligence',
+        render: record => {
+          const { lastDueDiligence } = record.supplier;
+
+          if (lastDueDiligence && lastDueDiligence.file) {
+            return (
+              <a href={lastDueDiligence.file.url} target="_blank">
+                Yes
+              </a>
+            );
+          } else return '-';
+        }
+      },
+      {
+        title: 'DIFOT score',
+        render: record =>
+          record.supplier.averageDifotScore
+            ? `${record.supplier.averageDifotScore}%`
+            : '-'
+      },
       { title: 'Company size', dataIndex: 'size' },
       {
         title: 'Number of employees',
         dataIndex: 'supplier.basicInfo.totalNumberOfEmployees'
       },
       { title: 'Work experience', dataIndex: 'workExperience' },
-      { title: 'Supplier tier type', dataIndex: 'tierType' },
       {
         title: 'Response information',
         render: this.renderViewResponse

@@ -195,7 +195,8 @@ class Tenders extends React.Component {
       ...this.commonColumns(),
       {
         title: 'File',
-        render: (text, record) => this.renderFileDownload(record.file.url)
+        render: (text, record) =>
+          record.file ? this.renderFileDownload(record.file.url) : '-'
       },
       {
         title: 'Action',

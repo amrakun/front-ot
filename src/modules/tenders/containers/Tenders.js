@@ -41,7 +41,6 @@ class TendersContainer extends React.Component {
 
     if (location.state && location.state.refetch) {
       tendersQuery.refetch();
-      console.log('refetch');
       location.state.refetch = false;
     }
   }

@@ -6,10 +6,14 @@ import { Loading } from 'modules/common/components';
 import { SupplierDashboard } from '../components';
 
 const SupplierDashboardContainer = props => {
-  const { companyByUserQuery } = props;
+  const { companyByUserQuery, location } = props;
 
   if (companyByUserQuery.loading) {
     return <Loading />;
+  }
+
+  if (location.search === '?refetch') {
+    companyByUserQuery.refetch;
   }
 
   const updatedProps = {
@@ -23,7 +27,8 @@ const SupplierDashboardContainer = props => {
 };
 
 SupplierDashboardContainer.propTypes = {
-  companyByUserQuery: PropTypes.object
+  companyByUserQuery: PropTypes.object,
+  location: PropTypes.object
 };
 
 export default compose(
