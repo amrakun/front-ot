@@ -436,3 +436,19 @@ form .ant-input-number {
     padding: 8px 0;
   }
 }
+
+.disabled-inputs {
+  .ant-input, .ant-select-selection {
+    pointer-events: none;
+    border: none;
+  }
+  .ant-btn, .ant-upload, .has-success.has-feedback:after, .ant-select-arrow {
+    display: none;
+  }
+}
+
+.registration-title {
+  max-width: 1000px;
+  text-align: center;
+  margin-bottom: 24px;
+}

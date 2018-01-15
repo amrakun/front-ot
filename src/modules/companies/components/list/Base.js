@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Table, Card, Row, Col, Button, Icon, message } from 'antd';
 import Common from './Common';
 import Sidebar from './Sidebar';
@@ -33,11 +34,13 @@ class Base extends Common {
     } = this.props;
     const { selectedCompanies } = this.state;
 
-    const columns = [
-      { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
-      { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
-      { title: 'Registration', dataIndex: 'registration' },
-      { title: 'Pre-qualification status', dataIndex: 'prequalification' },
+    const columns = this.getWrappedColumns([
+      {
+        title: 'Registration',
+        render: record => (
+          <Link to={`/view-registration/${record._id}`}>View</Link>
+        )
+      },
       { title: 'Qualification status', dataIndex: 'audit' },
       {
         title: 'Validation status',
@@ -60,11 +63,8 @@ class Base extends Common {
           record.averageDifotScore ? `${record.averageDifotScore}%` : '-'
       },
       { title: 'Blocking', render: record => (record.isBlocked ? 'Yes' : '-') },
-      { title: 'Contact person', dataIndex: 'contactInfo.name' },
-      { title: 'Email address', dataIndex: 'contactInfo.email' },
-      { title: 'Phone number', dataIndex: 'contactInfo.phone' },
       { title: 'Export profile', key: 'export' }
-    ];
+    ]);
 
     return (
       <Row gutter={16}>

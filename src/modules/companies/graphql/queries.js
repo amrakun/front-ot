@@ -109,32 +109,36 @@ const groupInfoFields = `
   }
 `;
 
+const registrationFields = `
+  _id
+  basicInfo {
+    ${basicInfoFields}
+  }
+  contactInfo {
+    ${contactInfoFields}
+  }
+  managementTeamInfo {
+    ${managementTeamFields}
+  }
+  groupInfo {
+    ${groupInfoFields}
+  }
+  shareholderInfo {
+    attachments,
+    shareholders {
+      ${shareholderItemFields}
+    }
+  }
+  certificateInfo {
+    ${certificateInfoFields}
+  }
+  productsInfo
+`;
+
 export const companyByUser = `
   query companyByUser {
     companyByUser {
-      _id
-      basicInfo {
-        ${basicInfoFields}
-      }
-      contactInfo {
-        ${contactInfoFields}
-      }
-      managementTeamInfo {
-        ${managementTeamFields}
-      }
-      groupInfo {
-        ${groupInfoFields}
-      }
-      shareholderInfo {
-        attachments,
-        shareholders {
-          ${shareholderItemFields}
-        }
-      }
-      certificateInfo {
-        ${certificateInfoFields}
-      }
-      productsInfo
+      ${registrationFields}
     }
   }
 `;
@@ -392,6 +396,14 @@ const simpleCompanies = `
   }
 `;
 
+const companyDetail = `
+  query companyDetail($_id: String!) {
+    companyDetail(_id: $_id) {
+      ${registrationFields}
+    }
+  }
+`;
+
 export default {
   companyByUser,
   companyPrequalificationDetail,
@@ -403,5 +415,6 @@ export default {
   validation,
   feedback,
   status,
-  prequalificationFields
+  prequalificationFields,
+  companyDetail
 };

@@ -158,7 +158,7 @@ export default class BaseForm extends React.Component {
 
   renderGoBack() {
     return (
-      <Button style={{ marginRight: '16px' }} onClick={this.props.previousTab}>
+      <Button onClick={this.props.previousTab}>
         <Icon type="left" />Back
       </Button>
     );

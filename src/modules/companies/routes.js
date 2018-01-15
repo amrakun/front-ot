@@ -5,7 +5,8 @@ import {
   BaseList,
   Registration,
   Prequalification,
-  CapacityBuilding
+  CapacityBuilding,
+  ViewRegistration
 } from './containers';
 
 export default [
@@ -35,5 +36,11 @@ export default [
       const queryParams = queryString.parse(location.search);
       return <BaseList queryParams={queryParams} />;
     }}
+  />,
+  <Route
+    key="/view-registration"
+    exact
+    path="/view-registration/:id"
+    component={ViewRegistration}
   />
 ];

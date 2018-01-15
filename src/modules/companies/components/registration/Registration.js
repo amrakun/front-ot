@@ -13,43 +13,49 @@ class RegistrationForms extends Panes {
   render() {
     const { currentTabKey } = this.state;
     const { basicInfo } = this.props.company || {};
+    const { location } = this.props;
 
     return (
-      <Tabs
-        activeKey={currentTabKey}
-        onTabClick={this.moveToTab}
-        tabPosition="left"
-        className="supplier-forms"
-      >
-        {this.renderPane(
-          '1',
-          'Company information',
-          'basicInfo',
-          CompanyInfoForm
-        )}
-        {this.renderPane('2', 'Contact details', 'contactInfo', ContactForm, {
-          basicInfo: basicInfo
-        })}
-        {this.renderPane(
-          '3',
-          'Management Team',
-          'managementTeamInfo',
-          ManagementForm
-        )}
-        {this.renderPane(
-          '4',
-          'Company shareholder information',
-          'shareholderInfo',
-          ShareholderForm
-        )}
-        {this.renderPane('5', 'Group information', 'groupInfo', GroupForm)}
-        {this.renderPane(
-          '6',
-          'Products & services',
-          'productsInfo',
-          ProductsForm
-        )}
-      </Tabs>
+      <div>
+        <h2 className="registration-title">{basicInfo.enName}</h2>
+        <Tabs
+          activeKey={currentTabKey}
+          onTabClick={this.moveToTab}
+          tabPosition="left"
+          className={`supplier-forms ${location.pathname.includes(
+            'view-registration'
+          ) && 'disabled-inputs'}`}
+        >
+          {this.renderPane(
+            '1',
+            'Company information',
+            'basicInfo',
+            CompanyInfoForm
+          )}
+          {this.renderPane('2', 'Contact details', 'contactInfo', ContactForm, {
+            basicInfo: basicInfo
+          })}
+          {this.renderPane(
+            '3',
+            'Management Team',
+            'managementTeamInfo',
+            ManagementForm
+          )}
+          {this.renderPane(
+            '4',
+            'Company shareholder information',
+            'shareholderInfo',
+            ShareholderForm
+          )}
+          {this.renderPane('5', 'Group information', 'groupInfo', GroupForm)}
+          {this.renderPane(
+            '6',
+            'Products & services',
+            'productsInfo',
+            ProductsForm
+          )}
+        </Tabs>
+      </div>
     );
   }
 }

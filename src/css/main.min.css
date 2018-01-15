@@ -420,3 +420,19 @@ form .ant-input-number {
   display: block;
   padding: 8px 0;
 }
+.disabled-inputs .ant-input,
+.disabled-inputs .ant-select-selection {
+  pointer-events: none;
+  border: none;
+}
+.disabled-inputs .ant-btn,
+.disabled-inputs .ant-upload,
+.disabled-inputs .has-success.has-feedback:after,
+.disabled-inputs .ant-select-arrow {
+  display: none;
+}
+.registration-title {
+  max-width: 1000px;
+  text-align: center;
+  margin-bottom: 24px;
+}
