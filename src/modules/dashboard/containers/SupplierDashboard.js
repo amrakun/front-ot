@@ -13,7 +13,7 @@ const SupplierDashboardContainer = props => {
   }
 
   if (location.search === '?refetch') {
-    companyByUserQuery.refetch;
+    companyByUserQuery.refetch();
   }
 
   const updatedProps = {

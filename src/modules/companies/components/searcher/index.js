@@ -33,9 +33,8 @@ class SupplierSearcher extends React.Component {
   onOk() {
     const selectedValues = this.state.selectedValues.map(ss => JSON.parse(ss));
 
-    this.setState({ visible: false });
-
     this.props.onSelect(selectedValues);
+    this.setState({ visible: false, selectedValues: [] });
   }
 
   onSearch(value) {
@@ -43,7 +42,7 @@ class SupplierSearcher extends React.Component {
   }
 
   onCancel() {
-    this.setState({ visible: false });
+    this.setState({ visible: false, selectedValues: [] });
   }
 
   onSelect(value) {

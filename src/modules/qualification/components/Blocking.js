@@ -105,7 +105,7 @@ class Blocking extends Common {
   }
 
   showModal() {
-    this.setState({ modalVisible: true });
+    this.setState({ modalVisible: true, suppliers: [] });
   }
 
   render() {

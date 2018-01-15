@@ -14,17 +14,16 @@ class RegistrationForms extends Panes {
     const { currentTabKey } = this.state;
     const { basicInfo } = this.props.company || {};
     const { location } = this.props;
+    const viewMode = location.pathname.includes('view-registration');
 
     return (
       <div>
-        <h2 className="registration-title">{basicInfo.enName}</h2>
+        {viewMode && <h2 className="registration-title">{basicInfo.enName}</h2>}
         <Tabs
           activeKey={currentTabKey}
           onTabClick={this.moveToTab}
           tabPosition="left"
-          className={`supplier-forms ${location.pathname.includes(
-            'view-registration'
-          ) && 'disabled-inputs'}`}
+          className={`supplier-forms ${viewMode && 'disabled-inputs'}`}
         >
           {this.renderPane(
             '1',
