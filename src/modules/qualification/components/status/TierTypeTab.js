@@ -57,9 +57,9 @@ class StatusTab extends BaseForm {
           >
             <Radio value="national">National supplier</Radio>
             <Radio value="umnugobi">Umnugobi supplier</Radio>
-            <Radio value="tier1">Tier 1 supplier</Radio>
-            <Radio value="tier2">Tier 2 supplier</Radio>
-            <Radio value="tier3">Tier 3 supplier</Radio>
+            <Radio value="tier1">International Tier 1 supplier</Radio>
+            <Radio value="tier2">International Tier 2 supplier</Radio>
+            <Radio value="tier3">International Tier 3 supplier</Radio>
           </Radio.Group>
         </Card>
 

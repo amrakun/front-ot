@@ -41,10 +41,10 @@ export const eoiRequestColumns = [
 ];
 
 export const eoiResponseColumns = [
-  { title: 'Submitted', dataIndex: 'isSubmitted', key: '2' },
   { title: 'Document file name', dataIndex: 'name', key: '3' },
-  { title: 'Notes', dataIndex: 'notes', key: '4' },
-  { title: 'Picture', dataIndex: 'file', key: '5' }
+  { title: 'Submitted', dataIndex: 'isSubmitted', key: '2' },
+  { title: 'Picture', dataIndex: 'file', key: '5' },
+  { title: 'Notes', dataIndex: 'notes', key: '4' }
 ];
 
 export const eoiColumns = [...eoiRequestColumns, ...eoiResponseColumns];

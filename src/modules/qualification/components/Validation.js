@@ -73,11 +73,15 @@ class Validation extends Common {
       {
         title: 'Product/Service code',
         render: record => {
-          const productsInfo = record.validatedProductsInfo;
+          const productsInfo = record.productsInfo;
           if (productsInfo.length > 0) {
             return (
               <a onClick={() => this.showValidationModal(record)}>
-                Validate - <strong>{productsInfo.length}</strong>
+                Total: <strong>{productsInfo.length}</strong>
+                <span className="ant-divider" />
+                Validated: (<strong>
+                  {record.validatedProductsInfo.length}
+                </strong>)
               </a>
             );
           } else {

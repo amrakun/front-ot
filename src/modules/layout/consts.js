@@ -43,8 +43,7 @@ export const buyerSideMenu = [
       },
       {
         url: '/audit',
-        title: 'Supplier Qualification',
-        disabled: true
+        title: 'Supplier Qualification'
       },
       {
         url: '/validation',

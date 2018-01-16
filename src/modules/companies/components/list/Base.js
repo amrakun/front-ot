@@ -58,7 +58,7 @@ class Base extends Common {
           )
       },
       {
-        title: 'DIFOT score',
+        title: 'DIFOT score (average)',
         render: record =>
           record.averageDifotScore ? `${record.averageDifotScore}%` : '-'
       },

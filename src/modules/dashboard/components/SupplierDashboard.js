@@ -146,6 +146,7 @@ class Dashboard extends React.Component {
             />
           </Col>
         </Row>
+
         <Tenders
           history={history}
           location={location}
@@ -153,6 +154,7 @@ class Dashboard extends React.Component {
           supplierId={currentUser.companyId}
           queryParams={queryParams}
         />
+
         <Tenders
           history={history}
           location={location}
