@@ -330,6 +330,12 @@ form .ant-input-number {
 .supplier-forms .ant-form h2:first-child {
   margin-top: 0;
 }
+.supplier-forms .audit-question {
+  margin-bottom: 24px;
+}
+.supplier-forms .audit-question .ant-row.ant-form-item {
+  margin-bottom: 0;
+}
 .ant-table-row.highlight {
   background-color: #f2fafb;
 }

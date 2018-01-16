@@ -8,6 +8,9 @@ import FeedbackResponses from './feedback/FeedbackResponses';
 import FeedbackDetail from './feedback/FeedbackDetail';
 import Status from './status/Status';
 import SupplierStatus from './status/SupplierStatus';
+import Audit from './audit/Audit';
+import AuditResponses from './audit/AuditResponses';
+import AuditForms from './audit/AuditForms';
 
 export {
   Difot,
@@ -19,5 +22,8 @@ export {
   FeedbackResponses,
   FeedbackDetail,
   Status,
-  SupplierStatus
+  SupplierStatus,
+  Audit,
+  AuditResponses,
+  AuditForms
 };

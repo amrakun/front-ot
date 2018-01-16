@@ -42,8 +42,22 @@ export const buyerSideMenu = [
         title: 'Pre-qualification status'
       },
       {
-        url: '/audit',
-        title: 'Supplier Qualification'
+        url: 'audit',
+        title: 'Supplier Qualification',
+        subMenu: [
+          {
+            url: '/audit',
+            title: 'Send'
+          },
+          {
+            url: '/audit/responses',
+            title: 'Responses'
+          },
+          {
+            url: '/audit/reports',
+            title: 'Reports & plan'
+          }
+        ]
       },
       {
         url: '/validation',

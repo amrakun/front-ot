@@ -11,8 +11,12 @@ import {
   FeedbackResponses,
   FeedbackDetail,
   SupplierStatus,
-  Status
+  Status,
+  Audit,
+  AuditResponses,
+  AuditForms
 } from './containers';
+// import { AuditForms as AuditFormsTemplate } from './components';
 
 export default [
   <Route
@@ -92,5 +96,26 @@ export default [
     exact
     path="/feedback/response/:id"
     component={FeedbackDetail}
+  />,
+  <Route
+    key="/audit"
+    exact
+    path="/audit"
+    component={({ location }) => {
+      const queryParams = queryString.parse(location.search);
+      return <Audit queryParams={queryParams} />;
+    }}
+  />,
+  <Route
+    key={'/audit/responses'}
+    exact
+    path={'/audit/responses'}
+    component={AuditResponses}
+  />,
+  <Route
+    key={'/audit/template'}
+    exact
+    path={'/audit/template'}
+    component={AuditForms}
   />
 ];

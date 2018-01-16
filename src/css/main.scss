@@ -329,6 +329,12 @@ form .ant-input-number {
       }
     }
   }
+  .audit-question {
+    margin-bottom: 24px;
+    .ant-row.ant-form-item {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .ant-table-row.highlight {

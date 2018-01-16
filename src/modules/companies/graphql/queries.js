@@ -384,6 +384,14 @@ const validation = `
   }
 `;
 
+const audit = `
+  query companies(${commonParams}) {
+    companies(${commonValues}) {
+      ${commonFields}
+    }
+  }
+`;
+
 const simpleCompanies = `
   query companies(${commonParams}) {
     companies(${commonValues}) {
@@ -416,5 +424,6 @@ export default {
   feedback,
   status,
   prequalificationFields,
-  companyDetail
+  companyDetail,
+  audit
 };
