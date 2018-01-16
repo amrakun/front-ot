@@ -73,6 +73,7 @@ class StatusTab extends BaseForm {
         {this.renderField({
           name: name,
           hasFeedback: false,
+          optional: true,
           control: (
             <Checkbox
               style={{ minWidth: '80px', marginLeft: '24px' }}
