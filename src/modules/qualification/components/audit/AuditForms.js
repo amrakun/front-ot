@@ -9,6 +9,7 @@ import { Panes } from 'modules/companies/components';
 class AuditForms extends Panes {
   render() {
     const { currentTabKey } = this.state;
+    const { supplierInfo } = this.props;
 
     return (
       <Tabs
@@ -20,20 +21,21 @@ class AuditForms extends Panes {
         {this.renderPane(
           '1',
           'Supplier profile',
-          'supplierProfile',
-          SupplierProfile
+          'basicInfo',
+          SupplierProfile,
+          { supplierInfo }
         )}
-        {this.renderPane('2', 'Core HSEQ', 'coreHSEQ', CoreHSEQ)}
+        {this.renderPane('2', 'Core HSEQ', 'coreHseqInfo', CoreHSEQ)}
         {this.renderPane(
           '3',
           'Human resource management',
-          'humanResourceManagement',
+          'hrInfo',
           HumanResourceManagement
         )}
         {this.renderPane(
           '4',
           'Business integrity',
-          'businessIntegriy',
+          'businessInfo',
           BusinessIntegriy
         )}
       </Tabs>

@@ -27,7 +27,7 @@ class Audit extends Common {
     const { selectedCompanies } = this.state;
 
     this.setState({ auditModalVisible: false });
-    addAudit({ selectedCompanies });
+    addAudit(selectedCompanies);
   }
 
   toggleAuditModal(value) {

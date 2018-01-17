@@ -33,10 +33,12 @@ class Dashboard extends React.Component {
 
   render() {
     const { data, history, location } = this.props;
-    const { averageDifotScore, lastFeedback, openTendersCount } = data;
+    const { averageDifotScore, lastFeedback, openTendersCount, audits } = data;
 
     const queryParams = queryString.parse(location.search);
     const currentUser = this.context.currentUser || {};
+
+    const lastAudit = audits[0];
 
     return (
       <div>
@@ -92,7 +94,7 @@ class Dashboard extends React.Component {
                 averageDifotScore < 75 &&
                 'Таны бараа хүргэлтийн үнэлгээ бөгөөд хамгийн багадаа 75% -тай байх ёстой.'
               }
-              color={averageDifotScore ? colors[6] : colors[5]}
+              color={averageDifotScore ? colors[7] : colors[5]}
               number={averageDifotScore || 0}
               percent={averageDifotScore || 0}
               withPercent={true}
@@ -108,7 +110,7 @@ class Dashboard extends React.Component {
                   <span>
                     You have new success feedback. Click &#34;
                     <Link to={`feedback/submit/${lastFeedback._id}`}>here</Link>
-                    &#34;to submit
+                    &#34; to submit
                   </span>
                 ) : (
                   <span>Nothing new</span>
@@ -140,9 +142,19 @@ class Dashboard extends React.Component {
             <TextCard
               icon="notification"
               title="Qualification/audit"
-              color={colors[5]}
-              text={<span>Nothing new</span>}
-              badge={false}
+              color={colors[7]}
+              text={
+                lastAudit ? (
+                  <span>
+                    You have new audit invitation. Click &#34;
+                    <Link to={`audit/submit/${lastAudit._id}`}>here</Link>
+                    &#34; to submit
+                  </span>
+                ) : (
+                  <span>Nothing new</span>
+                )
+              }
+              badge={lastAudit !== undefined}
             />
           </Col>
         </Row>

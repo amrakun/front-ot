@@ -190,11 +190,28 @@ const feedbackResponseDetail = `
   }
 `;
 
+const companyByUser = `
+  query companyByUser {
+    companyByUser {
+      _id
+      basicInfo {
+        totalNumberOfEmployees
+      }
+      shareholderInfo {
+        shareholders {
+          name
+        }
+      }
+    }
+  }
+`;
+
 export default {
   blockedCompanies,
   supplierPrequalification,
   feedbackDetail,
   feedbacks,
   feedbackResponseDetail,
-  qualificationDetail
+  qualificationDetail,
+  companyByUser
 };

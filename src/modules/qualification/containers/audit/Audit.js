@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Audit } from '../../components';
 import { mutations } from '../../graphql';
 import { generator } from 'modules/companies/containers';
+import moment from 'moment';
 
 class AuditContainer extends React.Component {
   render() {
@@ -12,7 +13,10 @@ class AuditContainer extends React.Component {
 
     const addAudit = selectedCompanies => {
       addAuditMutation({
-        variables: { supplierIds: selectedCompanies }
+        variables: {
+          date: moment(),
+          supplierIds: selectedCompanies
+        }
       })
         .then(() => {
           message.success('Successfully sent audit');
@@ -38,7 +42,7 @@ AuditContainer.propTypes = {
   addAuditMutation: PropTypes.func
 };
 
-const WithData = graphql(gql(mutations.addFeedback), {
+const WithData = graphql(gql(mutations.addAudit), {
   name: 'addAuditMutation'
 })(AuditContainer);
 

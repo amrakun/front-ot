@@ -14,9 +14,9 @@ import {
   Status,
   Audit,
   AuditResponses,
-  AuditForms
+  SubmitAudit
 } from './containers';
-// import { AuditForms as AuditFormsTemplate } from './components';
+import { AuditForms } from './components';
 
 export default [
   <Route
@@ -117,5 +117,11 @@ export default [
     exact
     path={'/audit/template'}
     component={AuditForms}
+  />,
+  <Route
+    key={'/audit/submit'}
+    exact
+    path={'/audit/submit/:id'}
+    component={SubmitAudit}
   />
 ];

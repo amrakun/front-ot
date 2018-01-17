@@ -1,47 +1,24 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Input, Card, Select } from 'antd';
-import { BaseForm } from 'modules/common/components';
-import { booleanData } from 'modules/common/constants';
-import { labels } from './constants';
+import { Form, Card } from 'antd';
+import AuditFormsBase from './AuditFormsBase';
 
-const TextArea = Input.TextArea;
-
-class SupplierProfile extends BaseForm {
-  constructor(props) {
-    super(props);
-
-    this.booleanOptions = this.renderOptions(booleanData);
-    this.renderQuestion = this.renderQuestion.bind(this);
-  }
-
-  renderQuestion(name) {
-    return (
-      <div className="audit-question">
-        {this.renderField({
-          label: labels[name],
-          name: `${name}Answer`,
-          hasFeedback: false,
-          control: <Select placeholder="Yes/No">{this.booleanOptions}</Select>
-        })}
-        {this.renderField({
-          name: `${name}Comment`,
-          hasFeedback: false,
-          optional: true,
-          control: <TextArea placeholder="Comment" />
-        })}
-      </div>
-    );
-  }
-
+class CoreHSEQ extends AuditFormsBase {
   render() {
     const render = this.renderQuestion;
 
     return (
       <Form onSubmit={this.handleSubmit}>
         <Card title="Core HSEQ">
-          {render('auditHseq1')}
-          {render('auditHseq2')}
+          {render('doesHaveHealthSafety')}
+          {render('doesHaveDocumentedPolicy')}
+          {render('doesPerformPreemployment')}
+          {render('doWorkProceduresConform')}
+          {render('doesHaveTrackingSystem')}
+          {render('doesHaveValidIndustry')}
+          {render('doesHaveFormalProcessForReporting')}
+          {render('doesHaveLiabilityInsurance')}
+          {render('doesHaveFormalProcessForHealth')}
         </Card>
         {this.renderGoBack()}
         {this.renderSubmit()}
@@ -50,6 +27,6 @@ class SupplierProfile extends BaseForm {
   }
 }
 
-const SupplierProfileForm = Form.create()(SupplierProfile);
+const CoreHSEQForm = Form.create()(CoreHSEQ);
 
-export default withRouter(SupplierProfileForm);
+export default withRouter(CoreHSEQForm);

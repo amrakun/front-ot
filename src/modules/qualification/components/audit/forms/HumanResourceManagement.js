@@ -1,18 +1,26 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Input, Card } from 'antd';
-import BaseForm from 'modules/common/components/BaseForm';
+import { Form, Card } from 'antd';
+import AuditFormsBase from './AuditFormsBase';
 
-class SupplierProfile extends BaseForm {
+class HumanResourceManagement extends AuditFormsBase {
   render() {
+    const render = this.renderQuestion;
+
     return (
       <Form onSubmit={this.handleSubmit}>
-        <Card title="14. Primary business contact">
-          {this.renderField({
-            label: 'Job title',
-            name: 'jobTitle',
-            control: <Input />
-          })}
+        <Card title="Human resource management">
+          {render('workContractManagement')}
+          {render('jobDescriptionProcedure')}
+          {render('trainingDevelopment')}
+          {render('employeePerformanceManagement')}
+          {render('timeKeepingManagement')}
+          {render('managementOfPractises')}
+          {render('managementOfWorkforce')}
+          {render('employeeAwareness')}
+          {render('employeeSelection')}
+          {render('employeeExitManagement')}
+          {render('grievanceAndFairTreatment')}
         </Card>
         {this.renderGoBack()}
         {this.renderSubmit()}
@@ -21,6 +29,6 @@ class SupplierProfile extends BaseForm {
   }
 }
 
-const SupplierProfileForm = Form.create()(SupplierProfile);
+const HumanResourceManagementForm = Form.create()(HumanResourceManagement);
 
-export default withRouter(SupplierProfileForm);
+export default withRouter(HumanResourceManagementForm);

@@ -10,7 +10,7 @@ import Status from './status/Status';
 import SupplierStatus from './status/SupplierStatus';
 import Audit from './audit/Audit';
 import AuditResponses from './audit/AuditResponses';
-import AuditForms from './audit/AuditForms';
+import SubmitAudit from './audit/SubmitAudit';
 
 export {
   Difot,
@@ -25,5 +25,5 @@ export {
   SupplierStatus,
   Audit,
   AuditResponses,
-  AuditForms
+  SubmitAudit
 };
