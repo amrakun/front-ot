@@ -15,6 +15,11 @@ export const supplierSideMenu = [
     icon: 'solution'
   },
   {
+    url: '/qualification',
+    title: 'Qualification/audit',
+    icon: 'calendar'
+  },
+  {
     url: '/capacity-building',
     title: 'Capacity building',
     icon: 'file-text'

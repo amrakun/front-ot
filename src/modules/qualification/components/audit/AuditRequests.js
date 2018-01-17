@@ -6,36 +6,20 @@ import { Table, Card } from 'antd';
 import { dateFormat } from 'modules/common/constants';
 import moment from 'moment';
 
-class AuditResponses extends React.Component {
+class AuditRequests extends React.Component {
   columns() {
     return [
       {
+        title: 'Status',
+        dataIndex: 'status'
+      },
+      {
         title: 'Date',
-        render: record => moment(record.date).format(dateFormat),
-        key: 'date'
+        render: record => moment(record.createdDate).format(dateFormat)
       },
       {
-        title: 'Suppliers',
-        render: record =>
-          record.supplierIds ? record.supplierIds.length : '-',
-        key: 'suppliers'
-      },
-      {
-        title: 'Responses',
-        render: record => (record.responses ? record.responses.length : '-'),
-        key: 'responses'
-      },
-      {
-        title: 'Created user',
-        render: record => (record.createdUser ? record.createdUser.email : '-'),
-        key: 'createdUser'
-      },
-      {
-        title: 'Action',
-        render: record => (
-          <Link to={`/audit/response/${record._id}`}>View</Link>
-        ),
-        key: 'action'
+        title: 'Qualified',
+        render: record => <Link to={`audit/submit/${record._id}`}>No</Link>
       }
     ];
   }
@@ -44,7 +28,7 @@ class AuditResponses extends React.Component {
     const { data, pagination, loading, onChange } = this.props;
 
     return (
-      <Card title="Qualification responses">
+      <Card title="Qualification/audit requests">
         <Table
           columns={this.columns()}
           rowKey={record => record._id}
@@ -60,11 +44,11 @@ class AuditResponses extends React.Component {
   }
 }
 
-AuditResponses.propTypes = {
+AuditRequests.propTypes = {
   data: PropTypes.array,
   pagination: PropTypes.object,
   loading: PropTypes.bool.isRequired,
   onChange: PropTypes.func
 };
 
-export default withRouter(AuditResponses);
+export default withRouter(AuditRequests);

@@ -9,8 +9,10 @@ import FeedbackDetail from './feedback/FeedbackDetail';
 import Status from './status/Status';
 import SupplierStatus from './status/SupplierStatus';
 import Audit from './audit/Audit';
+import AuditDetail from './audit/AuditDetail';
 import AuditResponses from './audit/AuditResponses';
 import SubmitAudit from './audit/SubmitAudit';
+import AuditRequests from './audit/AuditRequests';
 
 export {
   Difot,
@@ -24,6 +26,8 @@ export {
   Status,
   SupplierStatus,
   Audit,
+  AuditDetail,
   AuditResponses,
-  SubmitAudit
+  SubmitAudit,
+  AuditRequests
 };

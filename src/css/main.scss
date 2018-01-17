@@ -458,3 +458,15 @@ form .ant-input-number {
   text-align: center;
   margin-bottom: 24px;
 }
+
+.ant-popover-content {
+  max-width: 400px;
+  ul, ol {
+    margin: 8px 0;
+    padding-left: 16px;
+  }
+}
+
+.ant-select-dropdown-menu-item {
+  white-space: normal;
+}

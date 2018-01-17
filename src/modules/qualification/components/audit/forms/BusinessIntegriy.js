@@ -14,7 +14,7 @@ class BusinessIntegriy extends AuditFormsBase {
           {render('ensureThroughoutCompany')}
           {render('ensureThroughoutSupplyChain')}
           {render('haveBeenSubjectToInvestigation')}
-          {render('doesHaveDocumentedPolicy')}
+          {render('doesHaveDocumentedPolicyToCorruption')}
           {render('whoIsResponsibleForPolicy')}
         </Card>
         {this.renderGoBack()}

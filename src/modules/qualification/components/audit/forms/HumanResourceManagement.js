@@ -10,17 +10,17 @@ class HumanResourceManagement extends AuditFormsBase {
     return (
       <Form onSubmit={this.handleSubmit}>
         <Card title="Human resource management">
-          {render('workContractManagement')}
-          {render('jobDescriptionProcedure')}
-          {render('trainingDevelopment')}
-          {render('employeePerformanceManagement')}
-          {render('timeKeepingManagement')}
-          {render('managementOfPractises')}
-          {render('managementOfWorkforce')}
-          {render('employeeAwareness')}
-          {render('employeeSelection')}
-          {render('employeeExitManagement')}
-          {render('grievanceAndFairTreatment')}
+          {render('workContractManagement', 'multiple')}
+          {render('jobDescriptionProcedure', 'multiple')}
+          {render('trainingDevelopment', 'multiple')}
+          {render('employeePerformanceManagement', 'multiple')}
+          {render('timeKeepingManagement', 'multiple')}
+          {render('managementOfPractises', 'multiple')}
+          {render('managementOfWorkforce', 'multiple')}
+          {render('employeeAwareness', 'multiple')}
+          {render('employeeSelection', 'multiple')}
+          {render('employeeExitManagement', 'multiple')}
+          {render('grievanceAndFairTreatment', 'multiple')}
         </Card>
         {this.renderGoBack()}
         {this.renderSubmit()}

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AuditResponses } from '../../components';
+import { AuditDetail } from '../../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries } from '../../graphql';
 
-class AuditResponsesContainer extends React.Component {
+class AuditDetailContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -23,20 +23,20 @@ class AuditResponsesContainer extends React.Component {
   }
 
   render() {
-    const { auditsQuery } = this.props;
+    const { auditDetailQuery } = this.props;
 
-    if (auditsQuery.loading) {
-      return <AuditResponses loading={true} />;
+    if (auditDetailQuery.loading) {
+      return <AuditDetail loading={true} />;
     }
 
     const { pagination } = this.state;
-    const audits = auditsQuery.audits || [];
+    const auditDetail = auditDetailQuery.auditDetail || [];
 
     const updatedProps = {
       ...this.props,
-      data: audits,
+      data: auditDetail.responses,
       pagination: {
-        total: audits.length,
+        total: auditDetail.responses.length,
         pageSize: pagination.pageSize,
         current: pagination.current
       },
@@ -45,16 +45,21 @@ class AuditResponsesContainer extends React.Component {
         this.handleTableChange(pagination, filters, sorter)
     };
 
-    return <AuditResponses {...updatedProps} />;
+    return <AuditDetail {...updatedProps} />;
   }
 }
 
-AuditResponsesContainer.propTypes = {
-  auditsQuery: PropTypes.object
+AuditDetailContainer.propTypes = {
+  auditDetailQuery: PropTypes.object
 };
 
 export default compose(
-  graphql(gql(queries.audits), {
-    name: 'auditsQuery'
+  graphql(gql(queries.auditDetail), {
+    name: 'auditDetailQuery',
+    options: ({ match }) => {
+      return {
+        variables: { _id: match.params.id }
+      };
+    }
   })
-)(AuditResponsesContainer);
+)(AuditDetailContainer);

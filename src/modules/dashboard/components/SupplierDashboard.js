@@ -12,6 +12,7 @@ import {
 import { colors } from 'modules/common/colors';
 import { Row, Col, Alert } from 'antd';
 import { Link } from 'react-router-dom';
+import { labels } from '../constants';
 
 class Dashboard extends React.Component {
   constructor(props, context) {
@@ -90,10 +91,7 @@ class Dashboard extends React.Component {
             <NumberCardLines
               icon="calculator"
               title="DIFOT score"
-              tooltip={
-                averageDifotScore < 75 &&
-                'Таны бараа хүргэлтийн үнэлгээ бөгөөд хамгийн багадаа 75% -тай байх ёстой.'
-              }
+              tooltip={averageDifotScore < 75 && labels.difotSuggestion}
               color={averageDifotScore ? colors[7] : colors[5]}
               number={averageDifotScore || 0}
               percent={averageDifotScore || 0}
@@ -132,7 +130,7 @@ class Dashboard extends React.Component {
               icon="solution"
               title="Pre-qualification status"
               color={colors[5]}
-              tooltip="Таны мэдээлэл бүрэн баталгаажаагүй байна.  Бүртгэл баталгаажаагүй тул тендерийн шалгуур хангахгүй гэдгийг анхаарна уу. Тиймээс OT сургалт хариуцсан багт яаралтай хандан сургалтанд хамрагдана уу."
+              tooltip={labels.preqSuggestion}
               number={0}
               percent={0}
               withPercent={true}
@@ -147,8 +145,8 @@ class Dashboard extends React.Component {
                 lastAudit ? (
                   <span>
                     You have new audit invitation. Click &#34;
-                    <Link to={`audit/submit/${lastAudit._id}`}>here</Link>
-                    &#34; to submit
+                    <Link to="qualification">here</Link>
+                    &#34; view your audit invitations
                   </span>
                 ) : (
                   <span>Nothing new</span>

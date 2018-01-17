@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Select } from 'antd';
+import { Input, Select, Popover, Icon } from 'antd';
 import { BaseForm } from 'modules/common/components';
 import { booleanData } from 'modules/common/constants';
 import { labels } from './constants';
@@ -22,7 +22,7 @@ class AuditFormsBase extends BaseForm {
 
     const doc = {};
 
-    this.fieldNames.map(fieldName => {
+    this.fieldNames.forEach(fieldName => {
       doc[fieldName] = {
         supplierAnswer: this.getFieldValue(`${fieldName}SupplierAnswer`),
         supplierComment: this.getFieldValue(`${fieldName}SupplierComment`)
@@ -32,7 +32,7 @@ class AuditFormsBase extends BaseForm {
     this.saveDirect(doc);
   }
 
-  renderQuestion(name) {
+  renderQuestion(name, type) {
     this.fieldNames.includes(name) || this.fieldNames.push(name);
 
     let initialSupplierAnswer = null;
@@ -41,12 +41,18 @@ class AuditFormsBase extends BaseForm {
     return (
       <div className="audit-question">
         {this.renderField({
-          label: labels[name],
+          label: this.renderTooltipLabel(name),
           name: `${name}SupplierAnswer`,
           initialValue: initialSupplierAnswer,
           hasFeedback: false,
-          dataType: 'boolean',
-          control: <Select placeholder="Yes/No">{this.booleanOptions}</Select>
+          dataType: type !== 'multiple' && 'boolean',
+          control: (
+            <Select>
+              {type !== 'multiple'
+                ? this.booleanOptions
+                : this.renderOptions(labels[name].options)}
+            </Select>
+          )
         })}
 
         {this.renderField({
@@ -57,6 +63,17 @@ class AuditFormsBase extends BaseForm {
           control: <TextArea placeholder="Comment" />
         })}
       </div>
+    );
+  }
+
+  renderTooltipLabel(name, title) {
+    return (
+      <span>
+        {labels[name].title}
+        <Popover content={labels[name].desc} title={title}>
+          &nbsp;<Icon type="question-circle-o" />
+        </Popover>
+      </span>
     );
   }
 }

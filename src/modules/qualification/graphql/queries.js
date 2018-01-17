@@ -206,6 +206,45 @@ const companyByUser = `
   }
 `;
 
+const auditRequests = `
+  query companyByUser {
+    companyByUser {
+      _id
+      audits {
+        _id
+        date
+      }
+    }
+  }
+`;
+
+const audits = `
+  query audits {
+    audits {
+      _id
+      date
+      createdUser {
+        email
+      }
+      responses {
+        _id
+      }
+      supplierIds
+    }
+  }
+`;
+const auditDetail = `
+  query auditDetail($_id: String!) {
+    auditDetail(_id: $_id) {
+      _id
+      supplierIds
+      responses {
+        _id
+      }
+    }
+  }
+`;
+
 export default {
   blockedCompanies,
   supplierPrequalification,
@@ -213,5 +252,8 @@ export default {
   feedbacks,
   feedbackResponseDetail,
   qualificationDetail,
-  companyByUser
+  companyByUser,
+  auditRequests,
+  audits,
+  auditDetail
 };

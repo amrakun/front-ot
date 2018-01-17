@@ -15,7 +15,7 @@ const SupplierDashboardContainer = props => {
   if (location.search === '?refetch') {
     companyByUserQuery.refetch();
   }
-  console.log(companyByUserQuery);
+
   const updatedProps = {
     ...props,
     data: {

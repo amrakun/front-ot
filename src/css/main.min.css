@@ -442,3 +442,14 @@ form .ant-input-number {
   text-align: center;
   margin-bottom: 24px;
 }
+.ant-popover-content {
+  max-width: 400px;
+}
+.ant-popover-content ul,
+.ant-popover-content ol {
+  margin: 8px 0;
+  padding-left: 16px;
+}
+.ant-select-dropdown-menu-item {
+  white-space: normal;
+}

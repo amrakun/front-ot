@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AuditResponses } from '../../components';
+import { AuditRequests } from '../../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries } from '../../graphql';
 
-class AuditResponsesContainer extends React.Component {
+class AuditRequestsContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -23,14 +23,14 @@ class AuditResponsesContainer extends React.Component {
   }
 
   render() {
-    const { auditsQuery } = this.props;
+    const { auditRequestsQuery } = this.props;
 
-    if (auditsQuery.loading) {
-      return <AuditResponses loading={true} />;
+    if (auditRequestsQuery.loading) {
+      return <AuditRequests loading={true} />;
     }
 
     const { pagination } = this.state;
-    const audits = auditsQuery.audits || [];
+    const audits = auditRequestsQuery.companyByUser.audits || [];
 
     const updatedProps = {
       ...this.props,
@@ -45,16 +45,16 @@ class AuditResponsesContainer extends React.Component {
         this.handleTableChange(pagination, filters, sorter)
     };
 
-    return <AuditResponses {...updatedProps} />;
+    return <AuditRequests {...updatedProps} />;
   }
 }
 
-AuditResponsesContainer.propTypes = {
-  auditsQuery: PropTypes.object
+AuditRequestsContainer.propTypes = {
+  auditRequestsQuery: PropTypes.object
 };
 
 export default compose(
-  graphql(gql(queries.audits), {
-    name: 'auditsQuery'
+  graphql(gql(queries.auditRequests), {
+    name: 'auditRequestsQuery'
   })
-)(AuditResponsesContainer);
+)(AuditRequestsContainer);
