@@ -9,7 +9,11 @@ class RegistrationForm extends BaseForm {
   handleSubmit(e) {
     e.preventDefault();
 
-    this.saveDirect(this.getFieldValue('productsInfo'));
+    const { history } = this.props;
+
+    this.saveDirect(this.getFieldValue('productsInfo'), true);
+
+    history.push('/prequalification');
   }
 
   render() {

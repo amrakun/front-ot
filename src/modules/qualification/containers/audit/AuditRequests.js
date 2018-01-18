@@ -23,10 +23,14 @@ class AuditRequestsContainer extends React.Component {
   }
 
   render() {
-    const { auditRequestsQuery } = this.props;
+    const { auditRequestsQuery, location } = this.props;
 
     if (auditRequestsQuery.loading) {
       return <AuditRequests loading={true} />;
+    }
+
+    if (location.search === '?refetch') {
+      auditRequestsQuery.refetch();
     }
 
     const { pagination } = this.state;
@@ -50,7 +54,8 @@ class AuditRequestsContainer extends React.Component {
 }
 
 AuditRequestsContainer.propTypes = {
-  auditRequestsQuery: PropTypes.object
+  auditRequestsQuery: PropTypes.object,
+  location: PropTypes.object
 };
 
 export default compose(

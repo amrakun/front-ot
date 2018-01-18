@@ -14,6 +14,7 @@ class CoreHSEQ extends AuditFormsBase {
           {render('doesHaveDocumentedPolicy')}
           {render('doesPerformPreemployment')}
           {render('doWorkProceduresConform')}
+          {render('doesHaveFormalProcessForHse')}
           {render('doesHaveTrackingSystem')}
           {render('doesHaveValidIndustry')}
           {render('doesHaveFormalProcessForReporting')}

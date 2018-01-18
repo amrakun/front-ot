@@ -7,7 +7,7 @@ import { Loading } from 'modules/common/components';
 import { message } from 'antd';
 
 const AuditFormsContainer = props => {
-  let { companyByUserQuery } = props;
+  let { companyByUserQuery, evidenceInfoEdit } = props;
 
   if (companyByUserQuery.loading) {
     return <Loading />;
@@ -25,9 +25,23 @@ const AuditFormsContainer = props => {
       });
   };
 
+  const saveEvidenceChecks = doc => {
+    const { history } = this.props;
+
+    evidenceInfoEdit({ variables: { evidenceInfo: doc } })
+      .then(() => {
+        message.success('Successfully sent your response!');
+        history.push('/qualification?refetch');
+      })
+      .catch(error => {
+        message.error(error.message);
+      });
+  };
+
   const updatedProps = {
     ...props,
     save,
+    saveEvidenceChecks,
     company: {
       ...companyByUserQuery.companyByUser
     },
@@ -37,7 +51,8 @@ const AuditFormsContainer = props => {
 };
 
 AuditFormsContainer.propTypes = {
-  companyByUserQuery: PropTypes.object
+  companyByUserQuery: PropTypes.object,
+  evidenceInfoEdit: PropTypes.func
 };
 
 export default compose(
@@ -55,7 +70,7 @@ export default compose(
   }),
   // mutations
   graphql(gql(mutations.auditsSupplierSaveHrInfo), {
-    name: 'hrEdit'
+    name: 'hrInfoEdit'
   }),
   // mutations
   graphql(gql(mutations.auditsSupplierSaveBusinessInfo), {

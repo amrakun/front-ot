@@ -15,11 +15,16 @@ class AuditFormsBase extends BaseForm {
 
     this.renderQuestion = this.renderQuestion.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.collectAndSave = this.collectAndSave.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
+    this.collectAndSave();
+  }
+
+  collectAndSave(lastTab = false) {
     const doc = {};
 
     this.fieldNames.forEach(fieldName => {
@@ -29,7 +34,7 @@ class AuditFormsBase extends BaseForm {
       };
     });
 
-    this.saveDirect(doc);
+    this.saveDirect(doc, lastTab);
   }
 
   renderQuestion(name, type) {
@@ -44,6 +49,7 @@ class AuditFormsBase extends BaseForm {
           label: this.renderTooltipLabel(name),
           name: `${name}SupplierAnswer`,
           initialValue: initialSupplierAnswer,
+          optional: true,
           hasFeedback: false,
           dataType: type !== 'multiple' && 'boolean',
           control: (

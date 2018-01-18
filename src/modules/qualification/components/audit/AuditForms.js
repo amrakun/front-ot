@@ -9,7 +9,7 @@ import { Panes } from 'modules/companies/components';
 class AuditForms extends Panes {
   render() {
     const { currentTabKey } = this.state;
-    const { supplierInfo } = this.props;
+    const { supplierInfo, saveEvidenceChecks } = this.props;
 
     return (
       <Tabs
@@ -36,7 +36,8 @@ class AuditForms extends Panes {
           '4',
           'Business integrity',
           'businessInfo',
-          BusinessIntegriy
+          BusinessIntegriy,
+          { saveEvidenceChecks }
         )}
       </Tabs>
     );

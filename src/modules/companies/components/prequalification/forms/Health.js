@@ -31,6 +31,16 @@ class PrequalificationForm extends PreqForm {
     this.state[name] = value === 'true';
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+
+    const { history } = this.props;
+
+    this.save({}, true);
+
+    history.push('/capacity-building');
+  }
+
   render() {
     const { productsInfo } = this.props;
 
