@@ -31,6 +31,13 @@ class BusinessIntegriy extends AuditFormsBase {
     this.hideEvidenceModal = this.hideEvidenceModal.bind(this);
     this.handleEvidenceChange = this.handleEvidenceChange.bind(this);
     this.handleOk = this.handleOk.bind(this);
+    this.save = this.save.bind(this);
+  }
+
+  save(e) {
+    e.preventDefault();
+
+    this.collectAndSave(true);
   }
 
   saveAndShowModal(e) {
@@ -60,6 +67,7 @@ class BusinessIntegriy extends AuditFormsBase {
   render() {
     const render = this.renderQuestion;
     const { evidenceModalVisible, submitLoading } = this.state;
+    const { response } = this.props;
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -72,7 +80,10 @@ class BusinessIntegriy extends AuditFormsBase {
           {render('whoIsResponsibleForPolicy')}
         </Card>
         {this.renderGoBack()}
-        {this.renderSubmit('Save & submit', this.saveAndShowModal)}
+        {this.renderSubmit(
+          'Save & submit',
+          response ? this.save : this.saveAndShowModal
+        )}
 
         <Modal
           title="Confirmation"

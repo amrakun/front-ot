@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { gql, compose, graphql } from 'react-apollo';
 import { queries, mutations } from '../../graphql';
-import { AuditForms } from '../../components';
+import { SubmitAudit } from '../../components';
 import { Loading } from 'modules/common/components';
 import { message } from 'antd';
 
-const AuditFormsContainer = (props, context) => {
+const SubmitAuditContainer = (props, context) => {
   let {
     auditResponseByUserQuery,
     companyByUserQuery,
@@ -60,17 +60,17 @@ const AuditFormsContainer = (props, context) => {
     },
     supplierInfo: companyByUserQuery.companyByUser
   };
-  return <AuditForms {...updatedProps} />;
+  return <SubmitAudit {...updatedProps} />;
 };
 
-AuditFormsContainer.propTypes = {
+SubmitAuditContainer.propTypes = {
   auditResponseByUserQuery: PropTypes.object,
   evidenceInfoEdit: PropTypes.func,
   companyByUserQuery: PropTypes.object,
   match: PropTypes.object
 };
 
-AuditFormsContainer.contextTypes = {
+SubmitAuditContainer.contextTypes = {
   currentUser: PropTypes.object
 };
 
@@ -108,4 +108,4 @@ export default compose(
   graphql(gql(mutations.auditsSupplierSaveEvidenceInfo), {
     name: 'evidenceInfoEdit'
   })
-)(AuditFormsContainer);
+)(SubmitAuditContainer);

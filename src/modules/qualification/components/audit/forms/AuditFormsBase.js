@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Select, Popover, Icon } from 'antd';
+import { Input, Select, Popover, Icon, Divider } from 'antd';
 import { BaseForm } from 'modules/common/components';
 import { booleanData } from 'modules/common/constants';
 import { labels } from './constants';
@@ -9,6 +9,13 @@ const TextArea = Input.TextArea;
 class AuditFormsBase extends BaseForm {
   constructor(props) {
     super(props);
+
+    const { response } = props;
+
+    this.renderMethod = response ? this.renderForBuyer : this.renderForSupplier;
+    this.collectMethod = response
+      ? this.collectForBuyer
+      : this.collectForSupplier;
 
     this.booleanOptions = this.renderOptions(booleanData);
     this.fieldNames = [];
@@ -25,19 +32,41 @@ class AuditFormsBase extends BaseForm {
   }
 
   collectAndSave(lastTab = false) {
+    this.saveDirect(this.collectMethod(), lastTab);
+  }
+
+  collectForSupplier() {
     const doc = {};
 
     this.fieldNames.forEach(fieldName => {
       doc[fieldName] = {
-        supplierAnswer: this.getFieldValue(`${fieldName}SupplierAnswer`),
-        supplierComment: this.getFieldValue(`${fieldName}SupplierComment`)
+        supplierAnswer: this.getFieldValue(`${fieldName}Answer`),
+        supplierComment: this.getFieldValue(`${fieldName}Comment`)
       };
     });
 
-    this.saveDirect(doc, lastTab);
+    return doc;
+  }
+
+  collectForBuyer() {
+    const doc = {};
+
+    this.fieldNames.forEach(fieldName => {
+      doc[fieldName] = {
+        auditorScore: this.getFieldValue(`${fieldName}Score`),
+        auditorComment: this.getFieldValue(`${fieldName}Comment`),
+        auditorRecommendation: this.getFieldValue(`${fieldName}Recommendation`)
+      };
+    });
+
+    return doc;
   }
 
   renderQuestion(name, type) {
+    return this.renderMethod(name, type);
+  }
+
+  renderForSupplier(name, type) {
     this.fieldNames.includes(name) || this.fieldNames.push(name);
 
     const data = this.props.data || {};
@@ -47,7 +76,7 @@ class AuditFormsBase extends BaseForm {
       <div className="audit-question">
         {this.renderField({
           label: this.renderTooltipLabel(name),
-          name: `${name}SupplierAnswer`,
+          name: `${name}Answer`,
           initialValue: answer.supplierAnswer,
           hasFeedback: false,
           dataType: type !== 'multiple' && 'boolean',
@@ -61,12 +90,79 @@ class AuditFormsBase extends BaseForm {
         })}
 
         {this.renderField({
-          name: `${name}SupplierComment`,
+          name: `${name}Comment`,
           hasFeedback: false,
           initialValue: answer.supplierComment,
           optional: true,
           control: <TextArea placeholder="Comment" />
         })}
+      </div>
+    );
+  }
+
+  renderForBuyer(name, type) {
+    this.fieldNames.includes(name) || this.fieldNames.push(name);
+
+    const data = this.props.data || {};
+    const answer = data[name] || {};
+
+    const response = this.props.response || {};
+    const responseAnswer = response[name] ? response[name].supplierAnswer : '';
+
+    return (
+      <div className="audit-question">
+        <div className="ant-form-item-label">
+          <label>{this.renderTooltipLabel(name)}</label>
+        </div>
+
+        <div className="ant-list-item-meta-title">
+          {typeof responseAnswer === 'boolean'
+            ? responseAnswer ? 'Yes' : 'No'
+            : labels[name].options[responseAnswer].text}
+        </div>
+
+        <div
+          className="ant-list-item-meta-description"
+          style={{ marginBottom: '8px' }}
+        >
+          {response[name].supplierComment}
+        </div>
+
+        {this.renderField({
+          name: `${name}Score`,
+          initialValue: answer.auditorScore,
+          hasFeedback: false,
+          dataType: type !== 'multiple' && 'boolean',
+          control: (
+            <Select>
+              {type !== 'multiple'
+                ? this.booleanOptions
+                : this.renderOptions(labels[name].options)}
+            </Select>
+          )
+        })}
+
+        {this.renderField({
+          name: `${name}Comment`,
+          hasFeedback: false,
+          initialValue: answer.auditorComment,
+          optional: true,
+          control: <TextArea placeholder="Comment" />
+        })}
+
+        {this.renderField({
+          name: `${name}Recommendation`,
+          hasFeedback: false,
+          initialValue: answer.auditorRecommendation,
+          optional: true,
+          control: (
+            <TextArea
+              placeholder="Recommendation"
+              style={{ marginTop: '5px' }}
+            />
+          )
+        })}
+        <Divider />
       </div>
     );
   }

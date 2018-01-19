@@ -32,9 +32,12 @@ class SupplierProfile extends AuditFormsBase {
   render() {
     const supplierInfo = this.props.supplierInfo || {};
     const shareholderInfo = supplierInfo.shareholderInfo || {};
-    const shareholder = shareholderInfo[0] || {};
-    const basicInfo = supplierInfo.basicInfo;
+    const shareholders = shareholderInfo.shareholders || {};
+    const shareholder = shareholders[0] || {};
+    const basicInfo = supplierInfo.basicInfo || {};
     const renderListItem = this.renderListItem;
+
+    const { response } = this.props;
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -55,15 +58,17 @@ class SupplierProfile extends AuditFormsBase {
           {this.renderField({
             label: this.renderTooltipLabel('sotri'),
             name: 'sotri',
-            control: <TextArea />
+            initialValue: response && response.sotri,
+            control: <TextArea disabled={response !== undefined} />
           })}
           {this.renderField({
             label: this.renderTooltipLabel('sotie'),
             name: 'sotie',
-            control: <TextArea />
+            initialValue: response && response.sotie,
+            control: <TextArea disabled={response !== undefined} />
           })}
         </Card>
-        {this.renderSubmit()}
+        {!response ? this.renderSubmit() : ''}
       </Form>
     );
   }

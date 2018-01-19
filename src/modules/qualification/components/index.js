@@ -11,7 +11,8 @@ import SupplierStatus from './status/SupplierStatus';
 import Audit from './audit/Audit';
 import AuditDetail from './audit/AuditDetail';
 import AuditResponses from './audit/AuditResponses';
-import AuditForms from './audit/AuditForms';
+import SubmitAudit from './audit/SubmitAudit';
+import QualifyAudit from './audit/QualifyAudit';
 import AuditRequests from './audit/AuditRequests';
 
 export {
@@ -28,6 +29,7 @@ export {
   Audit,
   AuditDetail,
   AuditResponses,
-  AuditForms,
+  SubmitAudit,
+  QualifyAudit,
   AuditRequests
 };

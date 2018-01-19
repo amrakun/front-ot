@@ -184,6 +184,34 @@ const auditsSupplierSaveEvidenceInfo = `
   }
 `;
 
+const auditsBuyerSaveCoreHseqInfo = `
+  mutation auditsBuyerSaveCoreHseqInfo(${
+    commonInputs
+  }, $coreHseqInfo: AuditBuyerCoreHseqInfoInput) {
+    auditsBuyerSaveCoreHseqInfo(${
+      commonFields
+    }, coreHseqInfo: $coreHseqInfo) { _id }
+  }
+`;
+
+const auditsBuyerSaveHrInfo = `
+  mutation auditsBuyerSaveHrInfo(${
+    commonInputs
+  }, $hrInfo: AuditBuyerHrInfoInput) {
+    auditsBuyerSaveHrInfo(${commonFields}, hrInfo: $hrInfo) { _id }
+  }
+`;
+
+const auditsBuyerSaveBusinessInfo = `
+  mutation auditsBuyerSaveBusinessInfo(${
+    commonInputs
+  }, $businessInfo: AuditBuyerBusinessInfoInput) {
+    auditsBuyerSaveBusinessInfo(${
+      commonFields
+    }, businessInfo: $businessInfo) { _id }
+  }
+`;
+
 export default {
   addDifotScores,
   addDueDiligence,
@@ -201,5 +229,8 @@ export default {
   auditsSupplierSaveCoreHseqInfo,
   auditsSupplierSaveHrInfo,
   auditsSupplierSaveBusinessInfo,
-  auditsSupplierSaveEvidenceInfo
+  auditsSupplierSaveEvidenceInfo,
+  auditsBuyerSaveCoreHseqInfo,
+  auditsBuyerSaveHrInfo,
+  auditsBuyerSaveBusinessInfo
 };

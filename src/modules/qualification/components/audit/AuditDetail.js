@@ -6,27 +6,44 @@ import { Table, Card, Row, Col } from 'antd';
 import { NumberCard } from 'modules/common/components';
 import { colors } from 'modules/common/colors';
 import { dateFormat } from 'modules/common/constants';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
 class AuditDetail extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.columns = this.columns.bind(this);
+  }
+
   columns() {
+    const { match } = this.props;
+
     return [
       { title: 'Status by date', dataIndex: 'statusByDate' },
       { title: 'Status by action', dataIndex: 'statusByAction' },
       { title: 'Supplier name', dataIndex: 'supplier.basicInfo.enName' },
       { title: 'SAP number', dataIndex: 'supplier.basicInfo.sapNumber' },
       {
-        title: 'Qualification/audit information',
-        render: () => <a>View</a>
-      },
-      {
         title: 'Submission date',
         render: record => moment(record.createdDate).format(dateFormat)
       },
       {
         title: 'More',
-        render: () => <a>View</a>
+        render: record => (
+          <Link
+            to={{
+              pathname: '/audit/qualify',
+              state: {
+                supplierId: record.supplier._id,
+                auditId: match.params.id
+              }
+            }}
+          >
+            View
+          </Link>
+        )
       },
       {
         title: 'Last auditer report',
@@ -102,7 +119,8 @@ AuditDetail.propTypes = {
   pagination: PropTypes.object,
   data: PropTypes.object,
   loading: PropTypes.bool,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  match: PropTypes.object
 };
 
 export default withRouter(AuditDetail);

@@ -12,6 +12,7 @@ import Audit from './audit/Audit';
 import AuditDetail from './audit/AuditDetail';
 import AuditResponses from './audit/AuditResponses';
 import SubmitAudit from './audit/SubmitAudit';
+import QualifyAudit from './audit/QualifyAudit';
 import AuditRequests from './audit/AuditRequests';
 
 export {
@@ -29,5 +30,6 @@ export {
   AuditDetail,
   AuditResponses,
   SubmitAudit,
+  QualifyAudit,
   AuditRequests
 };
