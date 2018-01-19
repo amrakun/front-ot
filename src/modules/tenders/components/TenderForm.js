@@ -82,7 +82,8 @@ class TenderForm extends BaseForm {
 
   sendTender(inputs) {
     if (inputs.requestedProducts.length > 0) {
-      this.save(inputs);
+      console.log(inputs);
+      // this.save(inputs);
     } else {
       message.error('Please input atleast one row');
     }

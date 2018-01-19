@@ -40,6 +40,12 @@ class RfqForm extends TenderForm {
     xlsxHandler({
       e,
       success: data => {
+        Object.keys(this.state).forEach(key => {
+          if (key.startsWith('product__')) {
+            delete this.state[key];
+          }
+        });
+
         const products = [];
         const perProductStates = {};
 
