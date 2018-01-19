@@ -33,7 +33,7 @@ class RfqForm extends TenderForm {
 
     inputs.type = 'rfq';
 
-    this.save(inputs);
+    this.sendTender(inputs);
   }
 
   handleFile(e) {
