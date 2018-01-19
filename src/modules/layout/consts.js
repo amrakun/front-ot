@@ -110,15 +110,14 @@ export const buyerSideMenu = [
     url: 'report',
     title: 'Report',
     icon: 'file',
-    disabled: true,
     subMenu: [
       {
-        url: '/supplier-profile',
-        title: 'Supplier profile'
+        url: '/supplier-profile-report',
+        title: 'Supplier profile report'
       },
       {
         url: '/report',
-        title: 'RFQ/EOI'
+        title: 'EOI/RFQ report'
       }
     ]
   },
