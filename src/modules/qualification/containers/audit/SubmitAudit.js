@@ -6,17 +6,30 @@ import { AuditForms } from '../../components';
 import { Loading } from 'modules/common/components';
 import { message } from 'antd';
 
-const AuditFormsContainer = props => {
-  let { companyByUserQuery, evidenceInfoEdit } = props;
+const AuditFormsContainer = (props, context) => {
+  let {
+    auditResponseByUserQuery,
+    companyByUserQuery,
+    evidenceInfoEdit
+  } = props;
+  const { currentUser } = context;
 
-  if (companyByUserQuery.loading) {
+  if (auditResponseByUserQuery.loading || companyByUserQuery.loading) {
     return <Loading />;
   }
+
+  const { match } = props;
 
   const save = (name, doc) => {
     const mutation = props[`${name}Edit`];
 
-    mutation({ variables: { [name]: doc } })
+    mutation({
+      variables: {
+        auditId: match.params.id,
+        supplierId: currentUser.companyId,
+        [name]: doc
+      }
+    })
       .then(() => {
         message.success('Saved');
       })
@@ -26,7 +39,7 @@ const AuditFormsContainer = props => {
   };
 
   const saveEvidenceChecks = doc => {
-    const { history } = this.props;
+    const { history } = props;
 
     evidenceInfoEdit({ variables: { evidenceInfo: doc } })
       .then(() => {
@@ -43,7 +56,7 @@ const AuditFormsContainer = props => {
     save,
     saveEvidenceChecks,
     company: {
-      ...companyByUserQuery.companyByUser
+      ...auditResponseByUserQuery.auditResponseByUser
     },
     supplierInfo: companyByUserQuery.companyByUser
   };
@@ -51,11 +64,26 @@ const AuditFormsContainer = props => {
 };
 
 AuditFormsContainer.propTypes = {
+  auditResponseByUserQuery: PropTypes.object,
+  evidenceInfoEdit: PropTypes.func,
   companyByUserQuery: PropTypes.object,
-  evidenceInfoEdit: PropTypes.func
+  match: PropTypes.object
+};
+
+AuditFormsContainer.contextTypes = {
+  currentUser: PropTypes.object
 };
 
 export default compose(
+  graphql(gql(queries.auditResponseByUser), {
+    name: 'auditResponseByUserQuery',
+    options: ({ match }) => {
+      return {
+        variables: { auditId: match.params.id }
+      };
+    }
+  }),
+
   graphql(gql(queries.companyByUser), {
     name: 'companyByUserQuery'
   }),

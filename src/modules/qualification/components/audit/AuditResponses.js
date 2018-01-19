@@ -9,29 +9,45 @@ import moment from 'moment';
 class AuditResponses extends React.Component {
   columns() {
     return [
+      { title: 'Type', dataIndex: 'type' },
       {
-        title: 'Date',
+        title: 'Publish date',
         render: record => moment(record.date).format(dateFormat),
         key: 'date'
       },
       {
-        title: 'Suppliers',
+        title: 'Expiration date',
+        render: record => moment(record.date).format(dateFormat),
+        key: 'expirationDate'
+      },
+      {
+        title: 'Invited suppliers',
         render: record =>
           record.supplierIds ? record.supplierIds.length : '-',
         key: 'suppliers'
       },
       {
-        title: 'Responses',
+        title: 'Participated suppliers',
         render: record => (record.responses ? record.responses.length : '-'),
         key: 'responses'
       },
       {
-        title: 'Created user',
-        render: record => (record.createdUser ? record.createdUser.email : '-'),
-        key: 'createdUser'
+        title: 'Qualified suppliers',
+        render: () => '0',
+        key: 'qualified'
       },
       {
-        title: 'Action',
+        title: 'Sent improvement plan',
+        render: () => '0',
+        key: 'improvementPlanSent'
+      },
+      {
+        title: 'Sent auditer report',
+        render: () => '0',
+        key: 'auditerReportSent'
+      },
+      {
+        title: 'More',
         render: record => (
           <Link to={`/audit/response/${record._id}`}>View</Link>
         ),

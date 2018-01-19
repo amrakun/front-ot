@@ -18,8 +18,16 @@ class AuditRequests extends React.Component {
         render: record => moment(record.createdDate).format(dateFormat)
       },
       {
-        title: 'Qualified',
-        render: record => <Link to={`audit/submit/${record._id}`}>No</Link>
+        title: 'Auditer improvement plan',
+        render: record => <Link to={`audit/submit/${record._id}`}>View</Link>
+      },
+      {
+        title: 'Auditer report',
+        render: record => <Link to={`audit/submit/${record._id}`}>View</Link>
+      },
+      {
+        title: 'More',
+        render: record => <Link to={`audit/submit/${record._id}`}>View</Link>
       }
     ];
   }

@@ -12,6 +12,12 @@ class SupplierProfile extends AuditFormsBase {
     this.renderListItem = this.renderListItem.bind(this);
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+
+    this.save();
+  }
+
   renderListItem(title, description) {
     return (
       <List.Item>
@@ -25,7 +31,9 @@ class SupplierProfile extends AuditFormsBase {
 
   render() {
     const supplierInfo = this.props.supplierInfo || {};
-    const { basicInfo, shareholderInfo } = supplierInfo || {};
+    const shareholderInfo = supplierInfo.shareholderInfo || {};
+    const shareholder = shareholderInfo[0] || {};
+    const basicInfo = supplierInfo.basicInfo;
     const renderListItem = this.renderListItem;
 
     return (
@@ -33,11 +41,8 @@ class SupplierProfile extends AuditFormsBase {
         <Card title="Company information">
           <List style={{ marginBottom: '16px' }}>
             {renderListItem('type', '-')}
-            {renderListItem('ownership', shareholderInfo.shareholders[0].name)}
-            {renderListItem(
-              'shareholder',
-              shareholderInfo.shareholders[0].name
-            )}
+            {renderListItem('ownership', shareholder.name)}
+            {renderListItem('shareholder', shareholder.name)}
             {renderListItem(
               'numberOfEmployees',
               basicInfo.totalNumberOfEmployees

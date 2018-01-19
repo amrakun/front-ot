@@ -30,6 +30,7 @@ class RfqForm extends TenderForm {
     e.preventDefault();
 
     let inputs = this.collectInputs();
+
     inputs.type = 'rfq';
 
     this.save(inputs);
@@ -40,15 +41,18 @@ class RfqForm extends TenderForm {
       e,
       success: data => {
         const products = [];
+        const perProductStates = {};
 
-        data.forEach(record => {
-          products.push({
-            key: Math.random(),
-            ...record
-          });
+        data.forEach(product => {
+          const key = Math.random();
+          const extendedProduct = { key, ...product };
+
+          products.push(extendedProduct);
+
+          perProductStates[`product__${key}`] = extendedProduct;
         });
 
-        this.setState({ products });
+        this.setState({ products, ...perProductStates });
       }
     });
   }

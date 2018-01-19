@@ -240,7 +240,121 @@ const auditDetail = `
       supplierIds
       responses {
         _id
+        supplier {
+          _id
+          basicInfo {
+            enName,
+            email,
+            sapNumber
+          }
+          contactInfo {
+            name,
+            email,
+            phone
+          }
+          isPrequalified
+        }
       }
+    }
+  }
+`;
+
+const AuditBasicInfo = `
+  sotri
+  sotie
+`;
+
+const AnswerRecommendation = `
+  supplierComment
+  supplierAnswer
+  auditorComment
+  auditorRecommendation
+  auditorScore
+`;
+
+const HrAnswerRecommendation = `
+  supplierComment
+  supplierAnswer
+  auditorComment
+  auditorRecommendation
+  auditorScore
+`;
+
+const AuditCoreHseqInfo = `
+  doesHaveHealthSafety { ${AnswerRecommendation} }
+  doesHaveDocumentedPolicy { ${AnswerRecommendation} }
+  doesPerformPreemployment { ${AnswerRecommendation} }
+  doWorkProceduresConform { ${AnswerRecommendation} }
+  doesHaveFormalProcess { ${AnswerRecommendation} }
+  doesHaveTrackingSystem { ${AnswerRecommendation} }
+  doesHaveValidIndustry { ${AnswerRecommendation} }
+  doesHaveFormalProcessForReporting { ${AnswerRecommendation} }
+  doesHaveLiabilityInsurance { ${AnswerRecommendation} }
+  doesHaveFormalProcessForHealth { ${AnswerRecommendation} }
+`;
+
+const AuditHrInfo = `
+  workContractManagement { ${HrAnswerRecommendation} }
+  jobDescriptionProcedure { ${HrAnswerRecommendation} }
+  trainingDevelopment { ${HrAnswerRecommendation} }
+  employeePerformanceManagement { ${HrAnswerRecommendation} }
+  timeKeepingManagement { ${HrAnswerRecommendation} }
+  managementOfPractises { ${HrAnswerRecommendation} }
+  managementOfWorkforce { ${HrAnswerRecommendation} }
+  employeeAwareness { ${HrAnswerRecommendation} }
+  employeeSelection { ${HrAnswerRecommendation} }
+  employeeExitManagement { ${HrAnswerRecommendation} }
+  grievanceAndFairTreatment { ${HrAnswerRecommendation} }
+`;
+
+const AuditBusinessInfo = `
+  doesHavePolicyStatement { ${AnswerRecommendation} }
+  ensureThroughoutCompany { ${AnswerRecommendation} }
+  ensureThroughoutSupplyChain { ${AnswerRecommendation} }
+  haveBeenSubjectToInvestigation { ${AnswerRecommendation} }
+  doesHaveDocumentedPolicyToCorruption { ${AnswerRecommendation} }
+  whoIsResponsibleForPolicy { ${AnswerRecommendation} }
+`;
+
+const AuditEvidenceInfo = `
+  doesHaveHealthSafety
+  doesHaveDrugPolicy
+  doesPerformPreemployment
+  workProceduresConform
+  doesHaveFormalProcessForHSE
+  doesHaveSystemForTracking
+  doesHaveValidCertifications
+  doesHaveSystemForReporting
+  doesHaveLiabilityInsurance
+  doesHaveFormalProcessForHealth
+  isThereCurrentContract
+  doesHaveJobDescription
+  doesHaveTraining
+  doesHaveEmployeeRelatedProcedure
+  doesHaveTimeKeeping
+  doesHavePerformancePolicy
+  doesHaveProcessToSupport
+  employeesAwareOfRights
+  doesHaveSystemToEnsureSafeWork
+  doesHaveEmployeeSelectionProcedure
+  doesHaveEmployeeLaborProcedure
+  doesHaveGrievancePolicy
+  proccessToEnsurePolicesCompany
+  proccessToEnsurePolicesSupplyChain
+  hasBeenSubjectToInvestigation
+  doesHaveCorruptionPolicy
+  whoIsResponsibleForCorruptionPolicy
+`;
+
+const auditResponseByUser = `
+  query auditResponseByUser($auditId: String!) {
+    auditResponseByUser(auditId: $auditId) {
+      _id
+      basicInfo { ${AuditBasicInfo} }
+      coreHseqInfo { ${AuditCoreHseqInfo} }
+      hrInfo { ${AuditHrInfo} }
+      businessInfo { ${AuditBusinessInfo} }
+      evidenceInfo { ${AuditEvidenceInfo} }
     }
   }
 `;
@@ -255,5 +369,6 @@ export default {
   companyByUser,
   auditRequests,
   audits,
-  auditDetail
+  auditDetail,
+  auditResponseByUser
 };

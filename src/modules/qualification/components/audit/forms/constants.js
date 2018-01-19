@@ -130,8 +130,7 @@ const labels = {
       </div>
     )
   },
-  // TODO: add new field
-  doesHaveFormalProcessForHse: {
+  doesHaveFormalProcess: {
     title:
       '5. Does the organisation have a formal process for HSE induction and orientation of new hire employees, contractors and sub-contractors?',
     desc: `The induction is presented to sub-contractors, contractors and employees and includes an overview of the HSE policy, advising of HSE hazards and controls. Induction must be executed prior to the resource commencing active work.`

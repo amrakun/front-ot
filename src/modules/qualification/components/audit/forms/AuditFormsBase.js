@@ -40,16 +40,15 @@ class AuditFormsBase extends BaseForm {
   renderQuestion(name, type) {
     this.fieldNames.includes(name) || this.fieldNames.push(name);
 
-    let initialSupplierAnswer = null;
-    let initialSupplierComment = null;
+    const data = this.props.data || {};
+    const answer = data[name] || {};
 
     return (
       <div className="audit-question">
         {this.renderField({
           label: this.renderTooltipLabel(name),
           name: `${name}SupplierAnswer`,
-          initialValue: initialSupplierAnswer,
-          optional: true,
+          initialValue: answer.supplierAnswer,
           hasFeedback: false,
           dataType: type !== 'multiple' && 'boolean',
           control: (
@@ -64,7 +63,7 @@ class AuditFormsBase extends BaseForm {
         {this.renderField({
           name: `${name}SupplierComment`,
           hasFeedback: false,
-          initialValue: initialSupplierComment,
+          initialValue: answer.supplierComment,
           optional: true,
           control: <TextArea placeholder="Comment" />
         })}

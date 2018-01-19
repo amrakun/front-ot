@@ -5,13 +5,17 @@ import { withRouter } from 'react-router';
 import { Table, Card, Row, Col } from 'antd';
 import { NumberCard } from 'modules/common/components';
 import { colors } from 'modules/common/colors';
-import { Common } from 'modules/companies/components';
 import { dateFormat } from 'modules/common/constants';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 
-class AuditDetail extends Common {
+class AuditDetail extends React.Component {
   columns() {
-    return this.getWrappedColumns([
+    return [
+      { title: 'Status by date', dataIndex: 'statusByDate' },
+      { title: 'Status by action', dataIndex: 'statusByAction' },
+      { title: 'Supplier name', dataIndex: 'supplier.basicInfo.enName' },
+      { title: 'SAP number', dataIndex: 'supplier.basicInfo.sapNumber' },
       {
         title: 'Qualification/audit information',
         render: () => <a>View</a>
@@ -21,8 +25,8 @@ class AuditDetail extends Common {
         render: record => moment(record.createdDate).format(dateFormat)
       },
       {
-        title: 'Expiration date',
-        render: record => moment(record.createdDate).format(dateFormat)
+        title: 'More',
+        render: () => <a>View</a>
       },
       {
         title: 'Last auditer report',
@@ -32,15 +36,10 @@ class AuditDetail extends Common {
         title: 'Last auditer improvement plan',
         render: () => <a>View</a>
       },
-      {
-        title: 'Last auditer report',
-        render: () => <a>View</a>
-      },
-      {
-        title: 'Last auditer report',
-        render: () => <a>View</a>
-      }
-    ]);
+      { title: 'Contact person', dataIndex: 'supplier.contactInfo.name' },
+      { title: 'Email address', dataIndex: 'supplier.contactInfo.email' },
+      { title: 'Phone number', dataIndex: 'supplier.contactInfo.phone' }
+    ];
   }
 
   render() {
@@ -98,5 +97,12 @@ class AuditDetail extends Common {
     );
   }
 }
+
+AuditDetail.propTypes = {
+  pagination: PropTypes.object,
+  data: PropTypes.object,
+  loading: PropTypes.bool,
+  onChange: PropTypes.func
+};
 
 export default withRouter(AuditDetail);

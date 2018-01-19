@@ -10,7 +10,7 @@ class BusinessIntegriy extends AuditFormsBase {
 
     const evidenceCheckList = [];
     Object.keys(labels).forEach((label, i) => {
-      if (i > 5) {
+      if (i > 7) {
         evidenceCheckList.push({
           label: labels[label].title,
           value: label

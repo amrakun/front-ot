@@ -33,8 +33,7 @@ class AuditDetailContainer extends React.Component {
     const auditDetail = auditDetailQuery.auditDetail || [];
 
     const updatedProps = {
-      ...this.props,
-      data: auditDetail.responses,
+      data: auditDetail,
       pagination: {
         total: auditDetail.responses.length,
         pageSize: pagination.pageSize,
