@@ -103,11 +103,15 @@ class AuditFormsBase extends BaseForm {
   renderForBuyer(name, type) {
     this.fieldNames.includes(name) || this.fieldNames.push(name);
 
-    const data = this.props.data || {};
-    const answer = data[name] || {};
-
     const response = this.props.response || {};
-    const responseAnswer = response[name] ? response[name].supplierAnswer : '';
+    const responseData = response[name] || {};
+    const {
+      supplierAnswer,
+      supplierComment,
+      auditorRecommendation,
+      auditorScore,
+      auditorComment
+    } = responseData;
 
     return (
       <div className="audit-question">
@@ -116,21 +120,21 @@ class AuditFormsBase extends BaseForm {
         </div>
 
         <div className="ant-list-item-meta-title">
-          {typeof responseAnswer === 'boolean'
-            ? responseAnswer ? 'Yes' : 'No'
-            : labels[name].options[responseAnswer].text}
+          {typeof supplierAnswer === 'boolean'
+            ? supplierAnswer ? 'Yes' : 'No'
+            : labels[name].options[supplierAnswer].text}
         </div>
 
         <div
           className="ant-list-item-meta-description"
           style={{ marginBottom: '8px' }}
         >
-          {response[name].supplierComment}
+          {supplierComment}
         </div>
 
         {this.renderField({
           name: `${name}Score`,
-          initialValue: answer.auditorScore,
+          initialValue: auditorScore,
           hasFeedback: false,
           dataType: type !== 'multiple' && 'boolean',
           control: (
@@ -145,7 +149,7 @@ class AuditFormsBase extends BaseForm {
         {this.renderField({
           name: `${name}Comment`,
           hasFeedback: false,
-          initialValue: answer.auditorComment,
+          initialValue: auditorComment,
           optional: true,
           control: <TextArea placeholder="Comment" />
         })}
@@ -153,7 +157,7 @@ class AuditFormsBase extends BaseForm {
         {this.renderField({
           name: `${name}Recommendation`,
           hasFeedback: false,
-          initialValue: answer.auditorRecommendation,
+          initialValue: auditorRecommendation,
           optional: true,
           control: (
             <TextArea
