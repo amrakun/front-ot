@@ -15,7 +15,8 @@ const MainInfo = props => {
     content,
     onEmailContentChange,
     onReceiveFile,
-    onAddSuppliers
+    onAddSuppliers,
+    removeSupplier
   } = props;
 
   const dateRange = data.publishDate
@@ -23,7 +24,15 @@ const MainInfo = props => {
     : null;
 
   const supplierTags = suppliers.map(el => {
-    return <Tag key={el._id}>{el.basicInfo.enName}</Tag>;
+    return (
+      <Tag
+        key={el._id}
+        closable={true}
+        afterClose={() => removeSupplier(el._id)}
+      >
+        {el.basicInfo.enName}
+      </Tag>
+    );
   });
 
   const fieldProps = {
@@ -106,7 +115,8 @@ MainInfo.propTypes = {
   suppliers: PropTypes.array,
   onEmailContentChange: PropTypes.func,
   onReceiveFile: PropTypes.func,
-  onAddSuppliers: PropTypes.func
+  onAddSuppliers: PropTypes.func,
+  removeSupplier: PropTypes.func
 };
 
 export default MainInfo;

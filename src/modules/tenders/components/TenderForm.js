@@ -52,6 +52,7 @@ class TenderForm extends BaseForm {
     this.addProductRow = this.addProductRow.bind(this);
     this.renderProductColumn = this.renderProductColumn.bind(this);
     this.sendTender = this.sendTender.bind(this);
+    this.removeSupplier = this.removeSupplier.bind(this);
   }
 
   collectInputs() {
@@ -168,6 +169,17 @@ class TenderForm extends BaseForm {
     return <Column title={title} key={name} dataIndex={name} render={render} />;
   }
 
+  removeSupplier(supplierId) {
+    let { suppliers } = this.state;
+
+    const updatedSuppliers = [];
+    suppliers.forEach(supplier => {
+      if (supplier._id !== supplierId) updatedSuppliers.push(supplier);
+    });
+
+    this.setState({ suppliers: updatedSuppliers });
+  }
+
   renderMainInfo(template) {
     const { suppliers, content } = this.state;
 
@@ -182,6 +194,7 @@ class TenderForm extends BaseForm {
           onAddSuppliers={this.onAddSuppliers}
           onEmailContentChange={this.onEmailContentChange}
           onReceiveFile={(...args) => this.fileUpload(...args)}
+          removeSupplier={this.removeSupplier}
         />
       </div>
     );

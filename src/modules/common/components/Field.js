@@ -61,6 +61,13 @@ export default class Field extends React.Component {
       });
     }
 
+    const args = {
+      initialValue: this.cleanInitialValue(),
+      rules
+    };
+    if (control.props.prefixCls === 'ant-checkbox')
+      args.valuePropName = 'checked';
+
     return (
       <Form.Item
         {...layout}
@@ -69,10 +76,7 @@ export default class Field extends React.Component {
         style={isVisible ? {} : { display: 'none' }}
         hasFeedback={hasFeedback}
       >
-        {getFieldDecorator(name, {
-          initialValue: this.cleanInitialValue(),
-          rules
-        })(control)}
+        {getFieldDecorator(name, args)(control)}
       </Form.Item>
     );
   }

@@ -7,7 +7,10 @@ const supplierPrequalification = `
     companyDetail(_id: $_id) {
       ${prequalificationFields}
       basicInfo {
-        enName
+        enName,
+        registeredInCountry,
+        registeredInAimag,
+        foreignOwnershipPercentage
       }
       isPrequalified
     }

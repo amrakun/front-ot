@@ -13,7 +13,28 @@ class StatusTab extends BaseForm {
 
     this.viewMode = props.location.search === '?view';
 
+    const { supplierInputs } = props.statusData;
+
+    this.items = this.createItems(supplierInputs);
+
+    this.state = {
+      checkAll: false
+    };
+
     this.renderItem = this.renderItem.bind(this);
+    this.handleCheckAll = this.handleCheckAll.bind(this);
+  }
+
+  handleCheckAll(e) {
+    const { setFieldsValue } = this.props.form;
+    const value = e.target.checked;
+    const values = {};
+
+    this.items.forEach(item => (values[item.name] = value));
+
+    this.setState({ checkAll: value });
+
+    setFieldsValue(values);
   }
 
   createItems(data) {
@@ -55,7 +76,8 @@ class StatusTab extends BaseForm {
       });
     }
 
-    if (moment(value).isValid()) return moment(value).format(dateFormat);
+    if (moment(value).isValid() && value.length > 16)
+      return moment(value).format(dateFormat);
 
     return value;
   }
@@ -74,10 +96,10 @@ class StatusTab extends BaseForm {
           name: name,
           hasFeedback: false,
           optional: true,
+          initialValue: checked,
           control: (
             <Checkbox
               style={{ minWidth: '80px', marginLeft: '24px' }}
-              defaultChecked={checked}
               disabled={this.viewMode}
             >
               Qualified
@@ -90,9 +112,8 @@ class StatusTab extends BaseForm {
 
   render() {
     const { title, statusData } = this.props;
-    const { supplierInputs, enName, isPrequalified } = statusData;
-
-    const items = this.createItems(supplierInputs);
+    const { enName, isPrequalified } = statusData;
+    const { checkAll } = this.state;
 
     return (
       <Form>
@@ -113,10 +134,22 @@ class StatusTab extends BaseForm {
         )}
 
         <p style={{ height: '8px' }} />
-        <Card title={title} bodyStyle={{ paddingBottom: '24px' }}>
+        <Card
+          title={title}
+          bodyStyle={{ paddingBottom: '24px' }}
+          extra={
+            <Checkbox
+              checked={checkAll}
+              onChange={this.handleCheckAll}
+              disabled={this.viewMode}
+            >
+              Check all
+            </Checkbox>
+          }
+        >
           <List
             itemLayout="horizontal"
-            dataSource={items}
+            dataSource={this.items}
             renderItem={this.renderItem}
           />
         </Card>
