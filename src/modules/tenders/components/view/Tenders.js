@@ -260,7 +260,6 @@ class Tenders extends React.Component {
               <Link to={`/tender/${_id}`}>View</Link>
             )}
             {status === 'draft' && [
-              <Divider key={0} />,
               <Link key={1} to={`/tender/edit/${_id}`}>
                 Edit
               </Link>

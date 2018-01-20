@@ -112,6 +112,7 @@ class AuditFormsBase extends BaseForm {
       auditorScore,
       auditorComment
     } = responseData;
+    const multipleOptions = labels[name].options;
 
     return (
       <div className="audit-question">
@@ -122,7 +123,7 @@ class AuditFormsBase extends BaseForm {
         <div className="ant-list-item-meta-title">
           {typeof supplierAnswer === 'boolean'
             ? supplierAnswer ? 'Yes' : 'No'
-            : labels[name].options[supplierAnswer].text}
+            : multipleOptions[supplierAnswer].text}
         </div>
 
         <div
@@ -134,7 +135,9 @@ class AuditFormsBase extends BaseForm {
 
         {this.renderField({
           name: `${name}Score`,
-          initialValue: auditorScore,
+          initialValue: multipleOptions
+            ? multipleOptions[auditorScore].text
+            : auditorScore,
           hasFeedback: false,
           dataType: type !== 'multiple' && 'boolean',
           control: (

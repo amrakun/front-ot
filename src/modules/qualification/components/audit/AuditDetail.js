@@ -67,31 +67,45 @@ class AuditDetail extends React.Component {
     const submitted = data.responses ? data.responses.length : 0;
     const notResponded = requested - submitted;
 
+    const colSpan = {
+      xl: 6,
+      lg: 12,
+      sm: 24
+    };
+
     return (
       <div>
         <Row gutter={24}>
-          <Col key={0} lg={8} sm={12}>
+          <Col key={0} {...colSpan}>
             <NumberCard
               icon="message"
-              title="Requested"
+              title="Invite suppliers"
               color={colors[3]}
               number={requested}
             />
           </Col>
-          <Col key={1} lg={8} sm={12}>
-            <NumberCard
-              icon="like"
-              title="Submitted"
-              color={colors[2]}
-              number={submitted}
-            />
-          </Col>
-          <Col key={2} lg={8} sm={12}>
+          <Col key={2} {...colSpan}>
             <NumberCard
               icon="question"
               title="Not responded"
               color={colors[5]}
               number={notResponded}
+            />
+          </Col>
+          <Col key={1} {...colSpan}>
+            <NumberCard
+              icon="like"
+              title="Qualified"
+              color={colors[2]}
+              number={submitted}
+            />
+          </Col>
+          <Col key={1} {...colSpan}>
+            <NumberCard
+              icon="mail"
+              title="Sent improvement plan"
+              color={colors[8]}
+              number={submitted}
             />
           </Col>
         </Row>
