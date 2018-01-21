@@ -142,16 +142,20 @@ export default class BaseForm extends React.Component {
     return <Field {...definations} />;
   }
 
-  renderSubmit(text = 'Save & continue', onClick = this.handleSubmit) {
+  renderSubmit(
+    text = 'Save & continue',
+    onClick = this.handleSubmit,
+    secondary
+  ) {
     return (
       <Button
         style={{ float: 'right' }}
-        type="primary"
+        type={secondary ? '' : 'primary'}
         htmlType="submit"
         onClick={onClick}
       >
         {text}
-        <Icon type="right" />
+        {secondary || <Icon type="right" />}
       </Button>
     );
   }

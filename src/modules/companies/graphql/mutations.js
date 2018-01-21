@@ -86,6 +86,22 @@ const healthInfo = `
   }
 `;
 
+const companiesSendRegistrationInfo = `
+  mutation companiesSendRegistrationInfo($_id: String!) {
+    companiesSendRegistrationInfo(_id: $_id) {
+      _id
+    }
+  }
+`;
+
+const companiesSendPrequalificationInfo = `
+  mutation companiesSendPrequalificationInfo($_id: String!) {
+    companiesSendPrequalificationInfo(_id: $_id) {
+      _id
+    }
+  }
+`;
+
 export default {
   basicInfo,
   contactInfo,
@@ -97,5 +113,7 @@ export default {
   financialInfo,
   businessInfo,
   environmentalInfo,
-  healthInfo
+  healthInfo,
+  companiesSendRegistrationInfo,
+  companiesSendPrequalificationInfo
 };

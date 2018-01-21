@@ -6,7 +6,7 @@ import { RegistrationForms } from '../../components';
 import { Loading } from 'modules/common/components';
 import { message } from 'antd';
 
-const RegistrationContainer = props => {
+const RegistrationContainer = (props, context) => {
   let { companyByUserQuery } = props;
 
   if (companyByUserQuery.loading) {
@@ -26,9 +26,24 @@ const RegistrationContainer = props => {
       });
   };
 
+  const send = () => {
+    const { sendToBuyer, history } = props;
+    const { currentUser } = context;
+
+    sendToBuyer({ variables: { _id: currentUser.companyId } })
+      .then(() => {
+        message.success('Succesfully submitted');
+        history.push('/prequalification');
+      })
+      .catch(error => {
+        message.error(error.message);
+      });
+  };
+
   const updatedProps = {
     ...props,
     save,
+    send,
     company: {
       ...companyByUserQuery.companyByUser
     }
@@ -37,9 +52,13 @@ const RegistrationContainer = props => {
 };
 
 RegistrationContainer.propTypes = {
-  companyByUserQuery: PropTypes.object
+  companyByUserQuery: PropTypes.object,
+  sendToBuyer: PropTypes.func
 };
 
+RegistrationContainer.contextTypes = {
+  currentUser: PropTypes.object
+};
 export default compose(
   graphql(gql(queries.companyByUser), {
     name: 'companyByUserQuery'
@@ -66,5 +85,8 @@ export default compose(
   }),
   graphql(gql(mutations.certificateInfo), {
     name: 'certificateInfoEdit'
+  }),
+  graphql(gql(mutations.companiesSendRegistrationInfo), {
+    name: 'sendToBuyer'
   })
 )(RegistrationContainer);

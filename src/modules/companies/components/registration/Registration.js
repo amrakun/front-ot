@@ -13,7 +13,7 @@ class RegistrationForms extends Panes {
   render() {
     const { currentTabKey } = this.state;
     const { basicInfo } = this.props.company || {};
-    const { location } = this.props;
+    const { location, send } = this.props;
     const viewMode = location.pathname.includes('view-registration');
 
     return (
@@ -51,7 +51,8 @@ class RegistrationForms extends Panes {
             '6',
             'Products & services',
             'productsInfo',
-            ProductsForm
+            ProductsForm,
+            { send }
           )}
         </Tabs>
       </div>

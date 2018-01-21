@@ -6,7 +6,7 @@ import { PrequalificationForms } from '../../components';
 import { Loading } from 'modules/common/components';
 import { message } from 'antd';
 
-const PrequalificationContainer = props => {
+const PrequalificationContainer = (props, context) => {
   let { companyByUserQuery } = props;
 
   if (companyByUserQuery.loading) {
@@ -25,9 +25,24 @@ const PrequalificationContainer = props => {
       });
   };
 
+  const send = () => {
+    const { sendToBuyer, history } = props;
+    const { currentUser } = context;
+
+    sendToBuyer({ variables: { _id: currentUser.companyId } })
+      .then(() => {
+        message.success('Succesfully submitted');
+        history.push('/capacity-building');
+      })
+      .catch(error => {
+        message.error(error.message);
+      });
+  };
+
   const updatedProps = {
     ...props,
     save,
+    send,
     company: {
       ...companyByUserQuery.companyByUser
     }
@@ -36,7 +51,12 @@ const PrequalificationContainer = props => {
 };
 
 PrequalificationContainer.propTypes = {
-  companyByUserQuery: PropTypes.object
+  companyByUserQuery: PropTypes.object,
+  sendToBuyer: PropTypes.func
+};
+
+PrequalificationContainer.contextTypes = {
+  currentUser: PropTypes.object
 };
 
 export default compose(
@@ -59,5 +79,9 @@ export default compose(
 
   graphql(gql(mutations.healthInfo), {
     name: 'healthInfoEdit'
+  }),
+
+  graphql(gql(mutations.companiesSendPrequalificationInfo), {
+    name: 'sendToBuyer'
   })
 )(PrequalificationContainer);

@@ -136,7 +136,7 @@ class Feedback extends Common {
               <Search />
 
               <Button onClick={() => this.toggleFeedbackModal(true)}>
-                Send success feedback
+                Send success feedback request
                 <Icon type="mail" />
               </Button>
             </div>
@@ -159,7 +159,7 @@ class Feedback extends Common {
           </Card>
 
           <Modal
-            title="Send success feedback"
+            title="Send success feedback request"
             visible={feedbackModalVisible}
             onCancel={() => this.toggleFeedbackModal(false)}
             onOk={this.addFeedback}
