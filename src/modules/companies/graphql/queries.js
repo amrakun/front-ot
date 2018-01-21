@@ -306,6 +306,7 @@ const companies = `
   query companies(${commonParams}) {
     companies(${commonValues}) {
       ${commonFields}
+      tierType
       averageDifotScore
       lastDueDiligence
       isProductsInfoValidated
