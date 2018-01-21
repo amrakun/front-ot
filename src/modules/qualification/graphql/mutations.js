@@ -32,6 +32,14 @@ const qualifyHealthInfo = `
   }
 `;
 
+const qualifySaveTierType = `
+  mutation qualificationsSaveTierType($supplierId: String!, $tierType: String!) {
+    qualificationsSaveTierType(supplierId: $supplierId, tierType: $tierType) {
+      _id
+    }
+  }
+`;
+
 const addDifotScores = `
   mutation companiesAddDifotScores($difotScores: [CompanyDifotScoreInput]!) {
     companiesAddDifotScores(difotScores: $difotScores) {
@@ -224,6 +232,7 @@ export default {
   qualifyBusinessInfo,
   qualifyEnvironmentalInfo,
   qualifyHealthInfo,
+  qualifySaveTierType,
   addAudit,
   auditsSupplierSaveBasicInfo,
   auditsSupplierSaveCoreHseqInfo,

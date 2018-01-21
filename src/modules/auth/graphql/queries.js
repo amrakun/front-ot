@@ -6,10 +6,6 @@ const currentUser = `
       email
       isSupplier
       companyId
-      details {
-        avatar
-        fullName
-      }
     }
   }
 `;

@@ -10,25 +10,43 @@ class StatusTab extends BaseForm {
 
     this.viewMode = props.location.search === '?view';
 
-    const { statusData } = this.props;
+    const { statusData, data } = this.props;
+
     const {
       registeredInCountry,
       registeredInAimag,
-      foreignOwnershipPercentage
+      totalNumberOfEmployees,
+      totalNumberOfMongolianEmployees
     } = statusData;
-    const fp = foreignOwnershipPercentage;
 
-    let suggestedType = 'tier2';
-    if (registeredInCountry === 'MN') {
+    // mongolian employee's percentage
+    let mep = 0;
+
+    if (totalNumberOfEmployees && totalNumberOfMongolianEmployees) {
+      mep = totalNumberOfMongolianEmployees * 100 / totalNumberOfEmployees;
+    }
+
+    // calculate tier type ==============
+    let suggestedType = 'tier3';
+
+    if (registeredInCountry === 'Mongolia') {
       suggestedType = 'national';
-      if (registeredInAimag === 'Omnogovi') suggestedType = 'umnugobi';
-      if (fp === '1-24%') suggestedType = 'tier1';
-    } else if (fp === '75-99%') {
-      suggestedType = 'tier3';
+
+      if (registeredInAimag === 'Omnogovi') {
+        suggestedType = 'umnugobi';
+      }
+
+      if (mep >= 75 && mep <= 100) {
+        suggestedType = 'tier1';
+      }
+
+      if (mep < 75) {
+        suggestedType = 'tier2';
+      }
     }
 
     this.state = {
-      value: suggestedType
+      value: data || suggestedType
     };
 
     this.onChange = this.onChange.bind(this);
@@ -92,6 +110,7 @@ class StatusTab extends BaseForm {
         )}
 
         <p style={{ height: '8px' }} />
+
         <Card title={title} bodyStyle={{ paddingBottom: '24px' }}>
           <List
             key={0}
