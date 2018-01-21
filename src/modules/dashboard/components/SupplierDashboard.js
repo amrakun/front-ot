@@ -106,9 +106,9 @@ class Dashboard extends React.Component {
               text={
                 lastFeedback && !lastFeedback.supplierResponse ? (
                   <span>
-                    You have new success feedback. Click &#34;
+                    You have new success feedback request. Click&nbsp;
                     <Link to={`feedback/submit/${lastFeedback._id}`}>here</Link>
-                    &#34; to submit
+                    &nbsp;to submit ypir response.
                   </span>
                 ) : (
                   <span>Nothing new</span>
@@ -144,9 +144,9 @@ class Dashboard extends React.Component {
               text={
                 lastAudit ? (
                   <span>
-                    You have new audit invitation. Click &#34;
+                    You have new audit invitation. Click&nbsp;
                     <Link to="qualification">here</Link>
-                    &#34; view your audit invitations
+                    &nbsp;view your audit invitations
                   </span>
                 ) : (
                   <span>Nothing new</span>

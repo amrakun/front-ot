@@ -82,7 +82,7 @@ export const buyerSideMenu = [
         subMenu: [
           {
             url: '/feedback',
-            title: 'Send'
+            title: 'Request feedback'
           },
           {
             url: '/feedback/responses',
