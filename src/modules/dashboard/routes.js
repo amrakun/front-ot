@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { Dashboard, SupplierDashboard } from './containers';
+import { Dashboard, SupplierDashboard, Report } from './containers';
 
 export default [
   <Route key="/dashboard" exact path="/dashboard" component={Dashboard} />,
@@ -9,5 +9,6 @@ export default [
     exact
     path="/rfq-and-eoi"
     component={SupplierDashboard}
-  />
+  />,
+  <Route key="/report" exact path="/report" component={Report} />
 ];
