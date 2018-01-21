@@ -2,23 +2,12 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { Form, Card, Button, Modal, Checkbox } from 'antd';
 import AuditFormsBase from './AuditFormsBase';
-import { labels } from './constants';
+import { evidenceCheckList } from './constants';
 
 class BusinessIntegriy extends AuditFormsBase {
   constructor(props) {
     super(props);
 
-    const evidenceCheckList = [];
-    Object.keys(labels).forEach((label, i) => {
-      if (i > 7) {
-        evidenceCheckList.push({
-          label: labels[label].title,
-          value: label
-        });
-      }
-    });
-
-    this.evidenceCheckList = evidenceCheckList;
     this.evidenceChecks = [];
 
     this.state = {
@@ -113,7 +102,7 @@ class BusinessIntegriy extends AuditFormsBase {
             evidence.
           </strong>
           <Checkbox.Group
-            options={this.evidenceCheckList}
+            options={evidenceCheckList}
             className="horizontal margin"
             onChange={this.handleEvidenceChange}
           />
