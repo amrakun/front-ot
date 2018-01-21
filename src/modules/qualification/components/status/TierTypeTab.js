@@ -45,8 +45,11 @@ class StatusTab extends BaseForm {
       }
     }
 
+    this.mep = mep;
+    this.suggestedType = suggestedType;
+
     this.state = {
-      value: data || suggestedType
+      value: data.length > 0 ? data : suggestedType
     };
 
     this.onChange = this.onChange.bind(this);
@@ -68,8 +71,7 @@ class StatusTab extends BaseForm {
       enName,
       isPrequalified,
       registeredInCountry,
-      registeredInAimag,
-      foreignOwnershipPercentage
+      registeredInAimag
     } = statusData;
 
     const infoList = [
@@ -82,12 +84,12 @@ class StatusTab extends BaseForm {
         description: registeredInAimag
       },
       {
-        title: 'Foreign ownership percentage',
-        description: foreignOwnershipPercentage
+        title: 'Mongolian employees percentage',
+        description: `${this.mep}%`
       },
       {
         title: 'Suggested tier type',
-        description: <strong>{value}</strong>
+        description: this.suggestedType
       }
     ];
 
@@ -113,7 +115,6 @@ class StatusTab extends BaseForm {
 
         <Card title={title} bodyStyle={{ paddingBottom: '24px' }}>
           <List
-            key={0}
             itemLayout="horizontal"
             dataSource={infoList}
             renderItem={item => (
@@ -128,7 +129,7 @@ class StatusTab extends BaseForm {
 
           <Radio.Group
             onChange={this.onChange}
-            value={this.state.value}
+            value={value}
             className="radio-vertical margin"
           >
             <Radio value="national">National supplier</Radio>
