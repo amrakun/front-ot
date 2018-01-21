@@ -10,7 +10,8 @@ const supplierPrequalification = `
         enName,
         registeredInCountry,
         registeredInAimag,
-        foreignOwnershipPercentage
+        totalNumberOfEmployees,
+        totalNumberOfMongolianEmployees,
       }
       isPrequalified
     }
@@ -96,6 +97,7 @@ const qualificationDetail = `
         doesHaveLicense
         doesHaveLicenseDescription
       }
+      tierType
     }
   }
 `;
