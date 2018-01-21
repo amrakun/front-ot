@@ -44,8 +44,10 @@ class Dashboard extends React.Component {
   exportTenders() {
     this.props.export('reportsTendersExport', {
       type: this.tenderType,
-      publishDate: this.getDateInterval(this.publishDate),
-      closeDate: this.getDateInterval(this.closeDate)
+      publishDate: this.publishDate
+        ? this.getDateInterval(this.publishDate)
+        : null,
+      closeDate: this.closeDate ? this.getDateInterval(this.closeDate) : null
     });
   }
 
@@ -65,10 +67,16 @@ class Dashboard extends React.Component {
   }
 
   render() {
+    const span = {
+      xl: 8,
+      lg: 12,
+      md: 24
+    };
+
     return (
       <Row gutter={24}>
-        <Col span={8}>
-          <Card title="Suppliers">
+        <Col {...span}>
+          <Card title="Suppliers profile">
             <TreeSelect
               treeData={productsTree}
               onChange={value => this.onInputChange('productCodes', value)}
@@ -85,8 +93,8 @@ class Dashboard extends React.Component {
           </Card>
         </Col>
 
-        <Col span={8}>
-          <Card title="Suppliers">
+        <Col {...span}>
+          <Card title="EOI/RFQ">
             <p>
               <label>Publish date: </label>
               <RangePicker
