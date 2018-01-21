@@ -24,10 +24,14 @@ const StatusContainer = props => {
 
   const saveTierType = value => {
     const variables = { supplierId: companyDetail._id, tierType: value };
+    const { history } = props;
 
     tierTypeSave({ variables })
       .then(() => {
         message.success('Saved');
+        supplierPrequalificationQuery.refetch().then(() => {
+          history.push('/prequalification-status');
+        });
       })
       .catch(error => {
         message.error(error.message);

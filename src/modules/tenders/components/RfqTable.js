@@ -56,7 +56,7 @@ const RfqTable = props => {
         dataSource={products}
         pagination={false}
         size="middle"
-        scroll={{ x: 3000, y: '85vh' }}
+        scroll={{ x: 3200, y: '85vh' }}
       >
         {renderProductColumn({ name: 'code', title: rpc.code, isSupplier })}
         {renderProductColumn({

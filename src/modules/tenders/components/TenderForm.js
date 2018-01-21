@@ -166,7 +166,15 @@ class TenderForm extends BaseForm {
       return control;
     };
 
-    return <Column title={title} key={name} dataIndex={name} render={render} />;
+    return (
+      <Column
+        title={title}
+        key={name}
+        dataIndex={name}
+        render={render}
+        width={250}
+      />
+    );
   }
 
   removeSupplier(supplierId) {

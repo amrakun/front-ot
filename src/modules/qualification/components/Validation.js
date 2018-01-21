@@ -79,9 +79,8 @@ class Validation extends Common {
               <a onClick={() => this.showValidationModal(record)}>
                 Total: <strong>{productsInfo.length}</strong>
                 <Divider type="vertical" />
-                Validated: (<strong>
-                  {record.validatedProductsInfo.length}
-                </strong>)
+                Validated:&nbsp;
+                <strong>{record.validatedProductsInfo.length}</strong>
               </a>
             );
           } else {

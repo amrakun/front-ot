@@ -256,10 +256,9 @@ class Tenders extends React.Component {
       } else {
         return (
           <div>
-            {!['open', 'draft'].includes(status) && (
-              <Link to={`/tender/${_id}`}>View</Link>
-            )}
-            {status === 'draft' && [
+            <Link to={`/tender/${_id}`}>View</Link>
+            {!['closed', 'awarded'].includes(status) && [
+              <Divider key={0} type="vertical" />,
               <Link key={1} to={`/tender/edit/${_id}`}>
                 Edit
               </Link>

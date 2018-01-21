@@ -44,7 +44,7 @@ const HeaderBar = (props, context) => {
 
       {currentUser ? (
         <SubMenu
-          className="right"
+          className="right header-submenu"
           title={
             <span>
               <Avatar style={{ backgroundColor: getColor(username) }}>

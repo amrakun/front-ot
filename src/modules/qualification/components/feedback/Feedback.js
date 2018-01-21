@@ -20,7 +20,7 @@ import { Search } from 'modules/companies/components';
 import { Editor } from 'modules/common/components';
 import moment from 'moment';
 import { dateFormat, dateTimeFormat } from 'modules/common/constants';
-import { labels } from './constants';
+import { labels, template } from './constants';
 
 class Feedback extends Common {
   constructor(props) {
@@ -29,7 +29,7 @@ class Feedback extends Common {
     this.state = {
       ...this.state,
       feedbackModalVisible: false,
-      feedbackContent: 'asf',
+      feedbackContent: template,
       feedbackCloseDate: moment(),
       viewModalVisible: false,
       viewModalData: {}
@@ -163,14 +163,15 @@ class Feedback extends Common {
             visible={feedbackModalVisible}
             onCancel={() => this.toggleFeedbackModal(false)}
             onOk={this.addFeedback}
+            okText="Send"
             width="50%"
           >
-            <label>Close date: </label>
+            <label>Request Deadline: </label>
             <DatePicker
               defaultValue={feedbackCloseDate}
               showTime={{ format: 'HH:mm' }}
               format={dateTimeFormat}
-              placeholder="Choose close date"
+              placeholder="Choose date"
               onChange={this.handleCloseDateChange}
             />
             <p />

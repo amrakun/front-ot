@@ -1,29 +1,37 @@
+const commonParams = `
+  $number: Float!,
+  $name: String!,
+  $content: String!,
+  $publishDate: Date!,
+  $closeDate: Date!,
+  $file: JSON,
+  $reminderDay: Float!,
+  $supplierIds: [String]!,
+  $requestedProducts: [TenderRequestedProductInput]
+  $requestedDocuments: [String]
+`;
+
+const commonFields = `
+  number: $number,
+  name: $name,
+  content: $content,
+  publishDate: $publishDate,
+  closeDate: $closeDate,
+  file: $file,
+  reminderDay: $reminderDay,
+  supplierIds: $supplierIds,
+  requestedProducts: $requestedProducts
+  requestedDocuments: $requestedDocuments
+`;
+
 const tendersAdd = `
   mutation tendersAdd(
     $type: String!,
-    $number: Float!,
-    $name: String!,
-    $content: String!,
-    $publishDate: Date!,
-    $closeDate: Date!,
-    $file: JSON,
-    $reminderDay: Float!,
-    $supplierIds: [String]!,
-    $requestedProducts: [TenderRequestedProductInput]
-    $requestedDocuments: [String]
+    ${commonParams}
   ) {
     tendersAdd(
       type: $type,
-      number: $number,
-      name: $name,
-      content: $content,
-      publishDate: $publishDate,
-      closeDate: $closeDate,
-      file: $file,
-      reminderDay: $reminderDay,
-      supplierIds: $supplierIds,
-      requestedProducts: $requestedProducts
-      requestedDocuments: $requestedDocuments
+      ${commonFields}
     ) {
       _id
     }
@@ -33,29 +41,11 @@ const tendersAdd = `
 const tendersEdit = `
   mutation tendersEdit(
     $_id: String!,
-    $number: Float!,
-    $name: String!,
-    $content: String!,
-    $publishDate: Date!,
-    $closeDate: Date!,
-    $file: JSON!,
-    $reminderDay: Float!,
-    $supplierIds: [String]!,
-    $requestedProducts: [TenderRequestedProductInput]
-    $requestedDocuments: [String]
+    ${commonParams}
   ) {
     tendersEdit(
       _id: $_id,
-      number: $number,
-      name: $name,
-      content: $content,
-      publishDate: $publishDate,
-      closeDate: $closeDate,
-      file: $file,
-      reminderDay: $reminderDay,
-      supplierIds: $supplierIds,
-      requestedProducts: $requestedProducts
-      requestedDocuments: $requestedDocuments
+      ${commonFields}
     ) {
       _id
     }

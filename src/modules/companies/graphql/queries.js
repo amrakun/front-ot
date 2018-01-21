@@ -300,6 +300,7 @@ const commonFields = `
     phone
   }
   isPrequalified
+  tierType
 `;
 
 const companies = `

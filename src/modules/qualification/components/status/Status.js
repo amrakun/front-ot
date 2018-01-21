@@ -23,10 +23,7 @@ class Status extends Common {
     const columns = [
       { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
       { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
-      {
-        title: 'Tier type',
-        render: () => <span>-</span>
-      },
+      { title: 'Tier type', dataIndex: 'tierType' },
       {
         title: 'Pre-qualification information',
         render: record => (
