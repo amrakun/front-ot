@@ -30,25 +30,35 @@ class RfqForm extends TenderForm {
     e.preventDefault();
 
     let inputs = this.collectInputs();
+
     inputs.type = 'rfq';
 
-    this.save(inputs);
+    this.sendTender(inputs);
   }
 
   handleFile(e) {
     xlsxHandler({
       e,
       success: data => {
-        const products = [];
-
-        data.forEach(record => {
-          products.push({
-            key: Math.random(),
-            ...record
-          });
+        Object.keys(this.state).forEach(key => {
+          if (key.startsWith('product__')) {
+            delete this.state[key];
+          }
         });
 
-        this.setState({ products });
+        const products = [];
+        const perProductStates = {};
+
+        data.forEach(product => {
+          const key = Math.random();
+          const extendedProduct = { key, ...product };
+
+          products.push(extendedProduct);
+
+          perProductStates[`product__${key}`] = extendedProduct;
+        });
+
+        this.setState({ products, ...perProductStates });
       }
     });
   }

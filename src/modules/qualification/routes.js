@@ -11,8 +11,15 @@ import {
   FeedbackResponses,
   FeedbackDetail,
   SupplierStatus,
-  Status
+  Status,
+  Audit,
+  AuditResponses,
+  SubmitAudit,
+  AuditRequests,
+  AuditDetail,
+  QualifyAudit
 } from './containers';
+import { SubmitAudit as SupplierAuditForm } from './components';
 
 export default [
   <Route
@@ -92,5 +99,50 @@ export default [
     exact
     path="/feedback/response/:id"
     component={FeedbackDetail}
+  />,
+  <Route
+    key="/audit"
+    exact
+    path="/audit"
+    component={({ location }) => {
+      const queryParams = queryString.parse(location.search);
+      return <Audit queryParams={queryParams} />;
+    }}
+  />,
+  <Route
+    key={'/audit/responses'}
+    exact
+    path={'/audit/responses'}
+    component={AuditResponses}
+  />,
+  <Route
+    key={'/audit/template'}
+    exact
+    path={'/audit/template'}
+    component={SupplierAuditForm}
+  />,
+  <Route
+    key={'/audit/submit'}
+    exact
+    path={'/audit/submit/:id'}
+    component={SubmitAudit}
+  />,
+  <Route
+    key={'/audit/qualify'}
+    exact
+    path={'/audit/qualify'}
+    component={QualifyAudit}
+  />,
+  <Route
+    key={'/qualification'}
+    exact
+    path={'/qualification'}
+    component={AuditRequests}
+  />,
+  <Route
+    key="/audit/response"
+    exact
+    path="/audit/response/:id"
+    component={AuditDetail}
   />
 ];

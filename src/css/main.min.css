@@ -330,6 +330,12 @@ form .ant-input-number {
 .supplier-forms .ant-form h2:first-child {
   margin-top: 0;
 }
+.supplier-forms .audit-question {
+  margin-bottom: 24px;
+}
+.supplier-forms .audit-question .ant-row.ant-form-item {
+  margin-bottom: 0;
+}
 .ant-table-row.highlight {
   background-color: #f2fafb;
 }
@@ -361,13 +367,6 @@ form .ant-input-number {
 }
 .ant-tag {
   margin-bottom: 8px;
-}
-.ant-divider {
-  margin: 0 6px;
-  display: inline-block;
-  height: 8px;
-  width: 1px;
-  background: #ccc;
 }
 .upload-btn-wrapper {
   position: relative;
@@ -435,4 +434,15 @@ form .ant-input-number {
   max-width: 1000px;
   text-align: center;
   margin-bottom: 24px;
+}
+.ant-popover-content {
+  max-width: 400px;
+}
+.ant-popover-content ul,
+.ant-popover-content ol {
+  margin: 8px 0;
+  padding-left: 16px;
+}
+.ant-select-dropdown-menu-item {
+  white-space: normal;
 }

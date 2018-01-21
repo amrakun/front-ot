@@ -39,9 +39,8 @@ class TendersContainer extends React.Component {
     const { tendersQuery } = this.props;
     const location = this.props.location || {};
 
-    if (location.state && location.state.refetch) {
+    if (location.search === '?refetch') {
       tendersQuery.refetch();
-      location.state.refetch = false;
     }
   }
 

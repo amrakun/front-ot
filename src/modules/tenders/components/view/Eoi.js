@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { message, Button, Icon } from 'antd';
-import { eoiRequestColumns, eoiResponseColumns } from '../../constants';
+import { eoiResponseColumns } from '../../constants';
 import Tender from './Tender';
 
 class Eoi extends Tender {
@@ -45,7 +45,6 @@ class Eoi extends Tender {
     ];
 
     return this.renderTender({
-      requestColumns: eoiRequestColumns,
       responseColumns: eoiResponseColumns,
       tableOperations: tableOperations
     });

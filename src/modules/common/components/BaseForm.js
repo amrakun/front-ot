@@ -26,7 +26,7 @@ export default class BaseForm extends React.Component {
     );
   }
 
-  save(extra = {}) {
+  save(extra = {}, lastTab = false) {
     this.props.form.validateFieldsAndScroll(err => {
       let doc = {};
 
@@ -42,7 +42,7 @@ export default class BaseForm extends React.Component {
       }
 
       if (!err) {
-        if (this.props.nextTab) this.props.nextTab();
+        if (this.props.nextTab && !lastTab) this.props.nextTab();
 
         return this.props.save(doc);
       }
@@ -55,10 +55,10 @@ export default class BaseForm extends React.Component {
     this.save();
   }
 
-  saveDirect(doc) {
+  saveDirect(doc, lastTab = false) {
     this.props.form.validateFieldsAndScroll(err => {
       if (!err) {
-        this.props.nextTab();
+        if (this.props.nextTab && !lastTab) this.props.nextTab();
 
         return this.props.save(doc);
       }

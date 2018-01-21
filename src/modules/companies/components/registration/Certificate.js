@@ -52,7 +52,7 @@ class RegistrationForm extends BaseForm {
                 />
               )
             })}
-            {this.renderSubmit('Save', this.handleSubmit)}
+            {this.renderSubmit('Save & submit', this.handleSubmit)}
           </Card>
         </Col>
       </Form>

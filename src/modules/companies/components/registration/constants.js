@@ -126,14 +126,9 @@ export const groupLabels = {
 };
 
 export const productDescription = `
-  1. Using the product picker
-  The product codes have been structured in a 3 level hierarchy: Family Sect Code > Macro Sect Code > Sect Code.  Clicking on the check boxes will expand the category.  You can only select at Sect Code level.
-  2. Search
-  Alternatively you can use the search by free text to find potential matches.  Clicking View All will return you to the full list of product codes.
-  3.  Adding and Removing product codes
-  To add a Product / Service click on the check box.  Selected product codes are displayed in the right pane.  To remove simply click on the cross.
-  4. Keywords
-  Clicking the magnifying glass icon provides more detail about the types of activity included by the Product / Service.
+  The product code is structured in a 3 level: Family Sect Code > Macro Sect Code > Sect Code. Clicking on the check boxes will expand the product codes. You can only select at “Sect Code” level.;
+  Alternatively, you can use the search tool by free text to find potential matches of your products and services.;
+  Adding and Removing product codes: To add a Product / Service click on the check box. To remove simply un tick the box, or click the “x”.
 `;
 
 export const aimagData = [

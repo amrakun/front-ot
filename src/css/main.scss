@@ -330,6 +330,12 @@ form .ant-input-number {
       }
     }
   }
+  .audit-question {
+    margin-bottom: 24px;
+    .ant-row.ant-form-item {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .ant-table-row.highlight {
@@ -369,14 +375,6 @@ form .ant-input-number {
 
 .ant-tag {
   margin-bottom: 8px;
-}
-
-.ant-divider {
-  margin: 0 6px;
-  display: inline-block;
-  height: 8px;
-  width: 1px;
-  background: #ccc;
 }
 
 .upload-btn-wrapper {
@@ -462,4 +460,17 @@ form .ant-input-number {
   .ant-form-item {
     margin-bottom: 10px;
   }
+}
+
+.ant-popover-content {
+  max-width: 400px;
+  ul,
+  ol {
+    margin: 8px 0;
+    padding-left: 16px;
+  }
+}
+
+.ant-select-dropdown-menu-item {
+  white-space: normal;
 }

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Table, Card, Row, Col, Modal, Checkbox } from 'antd';
+import { Table, Card, Row, Col, Modal, Checkbox, Divider } from 'antd';
 import { Common } from 'modules/companies/components';
 import { Sidebar } from 'modules/companies/components';
 import { Search } from 'modules/companies/components';
@@ -73,11 +73,15 @@ class Validation extends Common {
       {
         title: 'Product/Service code',
         render: record => {
-          const productsInfo = record.validatedProductsInfo;
+          const productsInfo = record.productsInfo;
           if (productsInfo.length > 0) {
             return (
               <a onClick={() => this.showValidationModal(record)}>
-                Validate - <strong>{productsInfo.length}</strong>
+                Total: <strong>{productsInfo.length}</strong>
+                <Divider type="vertical" />
+                Validated: (<strong>
+                  {record.validatedProductsInfo.length}
+                </strong>)
               </a>
             );
           } else {

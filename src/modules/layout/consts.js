@@ -15,6 +15,11 @@ export const supplierSideMenu = [
     icon: 'solution'
   },
   {
+    url: '/qualification',
+    title: 'Qualification/audit',
+    icon: 'calendar'
+  },
+  {
     url: '/capacity-building',
     title: 'Capacity building',
     icon: 'file-text'
@@ -42,9 +47,22 @@ export const buyerSideMenu = [
         title: 'Pre-qualification status'
       },
       {
-        url: '/audit',
+        url: 'audit',
         title: 'Supplier Qualification',
-        disabled: true
+        subMenu: [
+          {
+            url: '/audit',
+            title: 'Send'
+          },
+          {
+            url: '/audit/responses',
+            title: 'Responses'
+          },
+          {
+            url: '/audit/reports',
+            title: 'Reports & plan'
+          }
+        ]
       },
       {
         url: '/validation',
@@ -92,15 +110,14 @@ export const buyerSideMenu = [
     url: 'report',
     title: 'Report',
     icon: 'file',
-    disabled: true,
     subMenu: [
       {
-        url: '/supplier-profile',
-        title: 'Supplier profile'
+        url: '/supplier-profile-report',
+        title: 'Supplier profile report'
       },
       {
         url: '/report',
-        title: 'RFQ/EOI'
+        title: 'EOI/RFQ report'
       }
     ]
   },

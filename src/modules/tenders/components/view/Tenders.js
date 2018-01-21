@@ -10,7 +10,8 @@ import {
   Button,
   Icon,
   Tooltip,
-  DatePicker
+  DatePicker,
+  Divider
 } from 'antd';
 import { labels, statusIcons } from '../../constants';
 import { dateTimeFormat } from 'modules/common/constants';
@@ -239,7 +240,7 @@ class Tenders extends React.Component {
           canParticipate && (
             <div style={{ width: '160px' }}>
               <Link to={`/tender/submit/${_id}`}>Open</Link>
-              <span className="ant-divider" />
+              <Divider type="vertical" />
               <Popconfirm
                 title="Are you sure you are not interested？"
                 placement="bottomRight"
@@ -255,9 +256,10 @@ class Tenders extends React.Component {
       } else {
         return (
           <div>
-            {status !== 'open' && <Link to={`/tender/${_id}`}>View</Link>}
+            {!['open', 'draft'].includes(status) && (
+              <Link to={`/tender/${_id}`}>View</Link>
+            )}
             {status === 'draft' && [
-              <span className="ant-divider" key={0} />,
               <Link key={1} to={`/tender/edit/${_id}`}>
                 Edit
               </Link>

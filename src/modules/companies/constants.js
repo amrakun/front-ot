@@ -1,9 +1,9 @@
 export const regionOptions = [
   { label: 'National suppliers', value: 'national' },
   { label: 'Umnugobi suppliers', value: 'umnugobi' },
-  { label: 'International Tier 1', value: 'tier1' },
-  { label: 'International Tier 2', value: 'tier2' },
-  { label: 'International Tier 3', value: 'tier3' }
+  { label: 'International Tier 1 suppliers', value: 'tier1' },
+  { label: 'International Tier 2 suppliers', value: 'tier2' },
+  { label: 'International Tier 3 suppliers', value: 'tier3' }
 ];
 
 export const statusOptions = [

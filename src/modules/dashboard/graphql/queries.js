@@ -2,7 +2,12 @@ export const companyByUser = `
   query companyByUser {
     companyByUser {
       _id
+      openTendersCount
       averageDifotScore
+      audits {
+        _id
+        date
+      }
       lastFeedback {
         _id
         supplierResponse {
@@ -42,7 +47,6 @@ export const companyByUser = `
       healthInfo {
         doesHaveHealthSafety
       }
-      openTendersCount
     }
   }
 `;

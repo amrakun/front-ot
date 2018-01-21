@@ -180,6 +180,8 @@ class Tender extends Common {
       status
     } = data;
 
+    console.log(responseModal.data);
+
     return (
       <div>
         <Row gutter={24}>

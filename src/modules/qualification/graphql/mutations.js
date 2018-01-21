@@ -99,7 +99,7 @@ const addFeedbackResponse = `
 `;
 
 const addValidation = `
-  mutation companiesValidateProductsInfo($_id: String,! $codes: [String]!) {
+  mutation companiesValidateProductsInfo($_id: String! $codes: [String]!) {
     companiesValidateProductsInfo(_id: $_id, codes: $codes) {
       _id
     }
@@ -126,7 +126,90 @@ const unblockCompanies = `
   mutation blockedCompaniesUnblock($supplierIds: [String!]!) {
     blockedCompaniesUnblock(supplierIds: $supplierIds)
   }
+`;
 
+const addAudit = `
+  mutation auditsAdd($date: Date! $supplierIds: [String]!) {
+    auditsAdd(date: $date supplierIds: $supplierIds ) {
+      _id
+    }
+  }
+`;
+
+const commonInputs = '$auditId: String, $supplierId: String';
+const commonFields = 'auditId: $auditId, supplierId: $supplierId';
+
+const auditsSupplierSaveBasicInfo = `
+  mutation auditsSupplierSaveBasicInfo(${
+    commonInputs
+  }, $basicInfo: AuditSupplierBasicInfoInput) {
+    auditsSupplierSaveBasicInfo(${commonFields}, basicInfo: $basicInfo) { _id }
+  }
+`;
+
+const auditsSupplierSaveCoreHseqInfo = `
+  mutation auditsSupplierSaveCoreHseqInfo(${
+    commonInputs
+  }, $coreHseqInfo: AuditSupplierCoreHseqInfoInput) {
+    auditsSupplierSaveCoreHseqInfo(${
+      commonFields
+    }, coreHseqInfo: $coreHseqInfo) { _id }
+  }
+`;
+const auditsSupplierSaveHrInfo = `
+  mutation auditsSupplierSaveHrInfo(${
+    commonInputs
+  }, $hrInfo: AuditSupplierHrInfoInput) {
+    auditsSupplierSaveHrInfo(${commonFields}, hrInfo: $hrInfo) { _id }
+  }
+`;
+
+const auditsSupplierSaveBusinessInfo = `
+  mutation auditsSupplierSaveBusinessInfo(${
+    commonInputs
+  }, $businessInfo: AuditSupplierBusinessInfoInput) {
+    auditsSupplierSaveBusinessInfo(${
+      commonFields
+    }, businessInfo: $businessInfo) { _id }
+  }
+`;
+
+const auditsSupplierSaveEvidenceInfo = `
+  mutation auditsSupplierSaveEvidenceInfo(${
+    commonInputs
+  }, $evidenceInfo: AuditSupplierEvidenceInfoInput) {
+    auditsSupplierSaveEvidenceInfo(${
+      commonFields
+    }, evidenceInfo: $evidenceInfo) { _id }
+  }
+`;
+
+const auditsBuyerSaveCoreHseqInfo = `
+  mutation auditsBuyerSaveCoreHseqInfo(${
+    commonInputs
+  }, $coreHseqInfo: AuditBuyerCoreHseqInfoInput) {
+    auditsBuyerSaveCoreHseqInfo(${
+      commonFields
+    }, coreHseqInfo: $coreHseqInfo) { _id }
+  }
+`;
+
+const auditsBuyerSaveHrInfo = `
+  mutation auditsBuyerSaveHrInfo(${
+    commonInputs
+  }, $hrInfo: AuditBuyerHrInfoInput) {
+    auditsBuyerSaveHrInfo(${commonFields}, hrInfo: $hrInfo) { _id }
+  }
+`;
+
+const auditsBuyerSaveBusinessInfo = `
+  mutation auditsBuyerSaveBusinessInfo(${
+    commonInputs
+  }, $businessInfo: AuditBuyerBusinessInfoInput) {
+    auditsBuyerSaveBusinessInfo(${
+      commonFields
+    }, businessInfo: $businessInfo) { _id }
+  }
 `;
 
 export default {
@@ -140,5 +223,14 @@ export default {
   qualifyFinancialInfo,
   qualifyBusinessInfo,
   qualifyEnvironmentalInfo,
-  qualifyHealthInfo
+  qualifyHealthInfo,
+  addAudit,
+  auditsSupplierSaveBasicInfo,
+  auditsSupplierSaveCoreHseqInfo,
+  auditsSupplierSaveHrInfo,
+  auditsSupplierSaveBusinessInfo,
+  auditsSupplierSaveEvidenceInfo,
+  auditsBuyerSaveCoreHseqInfo,
+  auditsBuyerSaveHrInfo,
+  auditsBuyerSaveBusinessInfo
 };

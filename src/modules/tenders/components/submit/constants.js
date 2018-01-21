@@ -1,3 +1,5 @@
+/* eslint-disable max-len, react/no-unescaped-entities*/
+
 import React from 'react';
 
 export const agreementOptions = [

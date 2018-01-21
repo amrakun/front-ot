@@ -7,7 +7,10 @@ const supplierPrequalification = `
     companyDetail(_id: $_id) {
       ${prequalificationFields}
       basicInfo {
-        enName
+        enName,
+        registeredInCountry,
+        registeredInAimag,
+        foreignOwnershipPercentage
       }
       isPrequalified
     }
@@ -190,11 +193,212 @@ const feedbackResponseDetail = `
   }
 `;
 
+const basicInfoCompanyFields = `
+  _id
+  basicInfo {
+    totalNumberOfEmployees
+  }
+  shareholderInfo {
+    shareholders {
+      name
+    }
+  }
+`;
+
+const companyByUser = `
+  query companyByUser {
+    companyByUser {
+      ${basicInfoCompanyFields}
+    }
+  }
+`;
+
+const auditRequests = `
+  query companyByUser {
+    companyByUser {
+      _id
+      audits {
+        _id
+        date
+      }
+    }
+  }
+`;
+
+const audits = `
+  query audits {
+    audits {
+      _id
+      date
+      createdUser {
+        email
+      }
+      responses {
+        _id
+      }
+      supplierIds
+    }
+  }
+`;
+const auditDetail = `
+  query auditDetail($_id: String!) {
+    auditDetail(_id: $_id) {
+      _id
+      supplierIds
+      responses {
+        _id
+        supplier {
+          _id
+          basicInfo {
+            enName,
+            email,
+            sapNumber
+          }
+          contactInfo {
+            name,
+            email,
+            phone
+          }
+          isPrequalified
+        }
+      }
+    }
+  }
+`;
+
+const AuditBasicInfo = `
+  sotri
+  sotie
+`;
+
+const AnswerRecommendation = `
+  supplierComment
+  supplierAnswer
+  auditorComment
+  auditorRecommendation
+  auditorScore
+`;
+
+const HrAnswerRecommendation = `
+  supplierComment
+  supplierAnswer
+  auditorComment
+  auditorRecommendation
+  auditorScore
+`;
+
+const AuditCoreHseqInfo = `
+  doesHaveHealthSafety { ${AnswerRecommendation} }
+  doesHaveDocumentedPolicy { ${AnswerRecommendation} }
+  doesPerformPreemployment { ${AnswerRecommendation} }
+  doWorkProceduresConform { ${AnswerRecommendation} }
+  doesHaveFormalProcess { ${AnswerRecommendation} }
+  doesHaveTrackingSystem { ${AnswerRecommendation} }
+  doesHaveValidIndustry { ${AnswerRecommendation} }
+  doesHaveFormalProcessForReporting { ${AnswerRecommendation} }
+  doesHaveLiabilityInsurance { ${AnswerRecommendation} }
+  doesHaveFormalProcessForHealth { ${AnswerRecommendation} }
+`;
+
+const AuditHrInfo = `
+  workContractManagement { ${HrAnswerRecommendation} }
+  jobDescriptionProcedure { ${HrAnswerRecommendation} }
+  trainingDevelopment { ${HrAnswerRecommendation} }
+  employeePerformanceManagement { ${HrAnswerRecommendation} }
+  timeKeepingManagement { ${HrAnswerRecommendation} }
+  managementOfPractises { ${HrAnswerRecommendation} }
+  managementOfWorkforce { ${HrAnswerRecommendation} }
+  employeeAwareness { ${HrAnswerRecommendation} }
+  employeeSelection { ${HrAnswerRecommendation} }
+  employeeExitManagement { ${HrAnswerRecommendation} }
+  grievanceAndFairTreatment { ${HrAnswerRecommendation} }
+`;
+
+const AuditBusinessInfo = `
+  doesHavePolicyStatement { ${AnswerRecommendation} }
+  ensureThroughoutCompany { ${AnswerRecommendation} }
+  ensureThroughoutSupplyChain { ${AnswerRecommendation} }
+  haveBeenSubjectToInvestigation { ${AnswerRecommendation} }
+  doesHaveDocumentedPolicyToCorruption { ${AnswerRecommendation} }
+  whoIsResponsibleForPolicy { ${AnswerRecommendation} }
+`;
+
+const AuditEvidenceInfo = `
+  doesHaveHealthSafety
+  doesHaveDrugPolicy
+  doesPerformPreemployment
+  workProceduresConform
+  doesHaveFormalProcessForHSE
+  doesHaveSystemForTracking
+  doesHaveValidCertifications
+  doesHaveSystemForReporting
+  doesHaveLiabilityInsurance
+  doesHaveFormalProcessForHealth
+  isThereCurrentContract
+  doesHaveJobDescription
+  doesHaveTraining
+  doesHaveEmployeeRelatedProcedure
+  doesHaveTimeKeeping
+  doesHavePerformancePolicy
+  doesHaveProcessToSupport
+  employeesAwareOfRights
+  doesHaveSystemToEnsureSafeWork
+  doesHaveEmployeeSelectionProcedure
+  doesHaveEmployeeLaborProcedure
+  doesHaveGrievancePolicy
+  proccessToEnsurePolicesCompany
+  proccessToEnsurePolicesSupplyChain
+  hasBeenSubjectToInvestigation
+  doesHaveCorruptionPolicy
+  whoIsResponsibleForCorruptionPolicy
+`;
+
+const auditResponseByUser = `
+  query auditResponseByUser($auditId: String!) {
+    auditResponseByUser(auditId: $auditId) {
+      _id
+      basicInfo { ${AuditBasicInfo} }
+      coreHseqInfo { ${AuditCoreHseqInfo} }
+      hrInfo { ${AuditHrInfo} }
+      businessInfo { ${AuditBusinessInfo} }
+      evidenceInfo { ${AuditEvidenceInfo} }
+    }
+  }
+`;
+
+const auditResponseDetail = `
+  query auditResponseDetail($auditId: String!, $supplierId: String!) {
+    auditResponseDetail(auditId: $auditId, supplierId: $supplierId) {
+      _id
+      basicInfo { ${AuditBasicInfo} }
+      coreHseqInfo { ${AuditCoreHseqInfo} }
+      hrInfo { ${AuditHrInfo} }
+      businessInfo { ${AuditBusinessInfo} }
+      evidenceInfo { ${AuditEvidenceInfo} }
+    }
+  }
+`;
+
+const supplierBasicInfo = `
+  query companyDetail($_id: String!) {
+    companyDetail(_id: $_id) {
+      ${basicInfoCompanyFields}
+    }
+  }
+`;
+
 export default {
   blockedCompanies,
   supplierPrequalification,
   feedbackDetail,
   feedbacks,
   feedbackResponseDetail,
-  qualificationDetail
+  qualificationDetail,
+  companyByUser,
+  auditRequests,
+  audits,
+  auditDetail,
+  auditResponseByUser,
+  auditResponseDetail,
+  supplierBasicInfo
 };

@@ -37,7 +37,7 @@ class EoiForm extends TenderForm {
     inputs.type = 'eoi';
     inputs.requestedDocuments = requestedDocuments;
 
-    this.save(inputs);
+    this.sendTender(inputs);
   }
 
   componentDidMount() {
