@@ -21,7 +21,7 @@ class AuditDetail extends React.Component {
     const { match } = this.props;
 
     return [
-      { title: 'Status by date', dataIndex: 'statusByDate' },
+      { title: 'Status by date', dataIndex: 'status' },
       { title: 'Status by action', dataIndex: 'statusByAction' },
       { title: 'Supplier name', dataIndex: 'supplier.basicInfo.enName' },
       { title: 'SAP number', dataIndex: 'supplier.basicInfo.sapNumber' },
@@ -92,7 +92,7 @@ class AuditDetail extends React.Component {
               number={notResponded}
             />
           </Col>
-          <Col key={1} {...colSpan}>
+          <Col key={3} {...colSpan}>
             <NumberCard
               icon="like"
               title="Qualified"
@@ -100,7 +100,7 @@ class AuditDetail extends React.Component {
               number={submitted}
             />
           </Col>
-          <Col key={1} {...colSpan}>
+          <Col key={4} {...colSpan}>
             <NumberCard
               icon="mail"
               title="Sent improvement plan"

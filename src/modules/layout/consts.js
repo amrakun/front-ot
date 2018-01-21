@@ -107,19 +107,9 @@ export const buyerSideMenu = [
     icon: 'bars'
   },
   {
-    url: 'report',
+    url: '/report',
     title: 'Report',
-    icon: 'file',
-    subMenu: [
-      {
-        url: '/supplier-profile-report',
-        title: 'Supplier profile report'
-      },
-      {
-        url: '/report',
-        title: 'EOI/RFQ report'
-      }
-    ]
+    icon: 'file'
   },
   {
     url: '/settings',

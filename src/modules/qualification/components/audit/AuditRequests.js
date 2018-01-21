@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Table, Card } from 'antd';
-import { dateFormat } from 'modules/common/constants';
+import { dateTimeFormat } from 'modules/common/constants';
 import moment from 'moment';
 
 class AuditRequests extends React.Component {
@@ -14,8 +14,12 @@ class AuditRequests extends React.Component {
         dataIndex: 'status'
       },
       {
-        title: 'Date',
-        render: record => moment(record.createdDate).format(dateFormat)
+        title: 'Publish date',
+        render: record => moment(record.publishDate).format(dateTimeFormat)
+      },
+      {
+        title: 'Expiration date',
+        render: record => moment(record.closeDate).format(dateTimeFormat)
       },
       {
         title: 'Auditer improvement plan',

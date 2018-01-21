@@ -5,19 +5,13 @@ import PropTypes from 'prop-types';
 import { Audit } from '../../components';
 import { mutations } from '../../graphql';
 import { generator } from 'modules/companies/containers';
-import moment from 'moment';
 
 class AuditContainer extends React.Component {
   render() {
     const { companiesQuery, addAuditMutation } = this.props;
 
-    const addAudit = selectedCompanies => {
-      addAuditMutation({
-        variables: {
-          date: moment(),
-          supplierIds: selectedCompanies
-        }
-      })
+    const addAudit = variables => {
+      addAuditMutation({ variables })
         .then(() => {
           message.success('Successfully sent audit');
           companiesQuery.refetch();

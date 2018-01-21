@@ -6,7 +6,7 @@ export const companyByUser = `
       averageDifotScore
       audits {
         _id
-        date
+        publishDate
       }
       lastFeedback {
         _id

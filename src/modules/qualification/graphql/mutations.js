@@ -137,8 +137,8 @@ const unblockCompanies = `
 `;
 
 const addAudit = `
-  mutation auditsAdd($date: Date! $supplierIds: [String]!) {
-    auditsAdd(date: $date supplierIds: $supplierIds ) {
+  mutation auditsAdd($publishDate: Date!, $closeDate: Date!, $supplierIds: [String]!) {
+    auditsAdd(publishDate: $publishDate, closeDate: $closeDate, supplierIds: $supplierIds ) {
       _id
     }
   }
