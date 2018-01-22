@@ -17,6 +17,7 @@ const PublishContainer = props => {
 
   const save = doc => {
     const [publishDate, closeDate] = doc.dateRange;
+    const { history } = props;
 
     tendersEdit({
       variables: {
@@ -28,6 +29,7 @@ const PublishContainer = props => {
     })
       .then(() => {
         message.success('Saved');
+        history.push(`/${doc.type}?refetch`);
       })
       .catch(error => {
         message.error(error.message);

@@ -32,6 +32,14 @@ const qualifyHealthInfo = `
   }
 `;
 
+const qualifySaveTierType = `
+  mutation qualificationsSaveTierType($supplierId: String!, $tierType: String!) {
+    qualificationsSaveTierType(supplierId: $supplierId, tierType: $tierType) {
+      _id
+    }
+  }
+`;
+
 const addDifotScores = `
   mutation companiesAddDifotScores($difotScores: [CompanyDifotScoreInput]!) {
     companiesAddDifotScores(difotScores: $difotScores) {
@@ -129,8 +137,8 @@ const unblockCompanies = `
 `;
 
 const addAudit = `
-  mutation auditsAdd($date: Date! $supplierIds: [String]!) {
-    auditsAdd(date: $date supplierIds: $supplierIds ) {
+  mutation auditsAdd($publishDate: Date!, $closeDate: Date!, $supplierIds: [String]!) {
+    auditsAdd(publishDate: $publishDate, closeDate: $closeDate, supplierIds: $supplierIds ) {
       _id
     }
   }
@@ -224,6 +232,7 @@ export default {
   qualifyBusinessInfo,
   qualifyEnvironmentalInfo,
   qualifyHealthInfo,
+  qualifySaveTierType,
   addAudit,
   auditsSupplierSaveBasicInfo,
   auditsSupplierSaveCoreHseqInfo,

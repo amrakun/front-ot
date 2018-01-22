@@ -22,6 +22,7 @@ class Difot extends Common {
       e,
       success: data => {
         this.props.addDifotScores(data);
+        this.inputDifot.value = '';
       }
     });
   }
@@ -77,7 +78,11 @@ class Difot extends Common {
                 <Button>
                   Import DIFOT score <Icon type="file-excel" />
                 </Button>
-                <input type="file" onChange={this.handleImport} />
+                <input
+                  type="file"
+                  onChange={this.handleImport}
+                  ref={el => (this.inputDifot = el)}
+                />
               </div>
             </div>
 

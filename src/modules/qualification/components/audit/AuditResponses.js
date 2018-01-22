@@ -2,22 +2,53 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Table, Card } from 'antd';
-import { dateFormat } from 'modules/common/constants';
+import { Table, Card, DatePicker } from 'antd';
+import { dateTimeFormat } from 'modules/common/constants';
 import moment from 'moment';
+import { Search } from 'modules/companies/components';
+import queryString from 'query-string';
 
 class AuditResponses extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleDateRangeChange = this.handleDateRangeChange.bind(this);
+  }
+
+  handleDateRangeChange(value) {
+    const { history } = this.props;
+    let query = queryString.parse(history.location.search);
+    query.from = value[0]._d;
+    query.to = value[1]._d;
+    history.push({
+      search: queryString.stringify(query)
+    });
+  }
+
   columns() {
     return [
-      { title: 'Type', dataIndex: 'type' },
+      {
+        title: 'Type',
+        dataIndex: 'status',
+        filters: [
+          {
+            text: 'Open',
+            value: 'open'
+          },
+          {
+            text: 'Closed',
+            value: 'closed'
+          }
+        ]
+      },
       {
         title: 'Publish date',
-        render: record => moment(record.date).format(dateFormat),
+        render: record => moment(record.publishDate).format(dateTimeFormat),
         key: 'date'
       },
       {
         title: 'Expiration date',
-        render: record => moment(record.date).format(dateFormat),
+        render: record => moment(record.expirationDate).format(dateTimeFormat),
         key: 'expirationDate'
       },
       {
@@ -39,7 +70,7 @@ class AuditResponses extends React.Component {
       {
         title: 'Sent improvement plan',
         render: () => '0',
-        key: 'improvementPlanSent'
+        key: 'isSent'
       },
       {
         title: 'Sent auditer report',
@@ -61,12 +92,18 @@ class AuditResponses extends React.Component {
 
     return (
       <Card title="Qualification responses">
+        <div className="table-operations">
+          <Search />
+          <DatePicker.RangePicker onChange={this.handleDateRangeChange} />
+        </div>
+
         <Table
           columns={this.columns()}
           rowKey={record => record._id}
           dataSource={data}
           pagination={pagination}
           loading={loading}
+          scroll={{ x: 1500 }}
           onChange={(pagination, filters, sorter) =>
             onChange(pagination, filters, sorter)
           }
@@ -80,7 +117,8 @@ AuditResponses.propTypes = {
   data: PropTypes.array,
   pagination: PropTypes.object,
   loading: PropTypes.bool.isRequired,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  history: PropTypes.object
 };
 
 export default withRouter(AuditResponses);

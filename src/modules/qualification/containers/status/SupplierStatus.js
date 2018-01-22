@@ -7,7 +7,11 @@ import { Loading } from 'modules/common/components';
 import { message } from 'antd';
 
 const StatusContainer = props => {
-  let { supplierPrequalificationQuery, qualificationDetailQuery } = props;
+  const {
+    supplierPrequalificationQuery,
+    qualificationDetailQuery,
+    tierTypeSave
+  } = props;
 
   if (
     supplierPrequalificationQuery.loading ||
@@ -19,7 +23,19 @@ const StatusContainer = props => {
   const { companyDetail } = supplierPrequalificationQuery;
 
   const saveTierType = value => {
-    console.log(value);
+    const variables = { supplierId: companyDetail._id, tierType: value };
+    const { history } = props;
+
+    tierTypeSave({ variables })
+      .then(() => {
+        message.success('Saved');
+        supplierPrequalificationQuery.refetch().then(() => {
+          history.push('/prequalification-status');
+        });
+      })
+      .catch(error => {
+        message.error(error.message);
+      });
   };
 
   const save = (name, doc) => {
@@ -56,7 +72,8 @@ const StatusContainer = props => {
 
 StatusContainer.propTypes = {
   supplierPrequalificationQuery: PropTypes.object,
-  qualificationDetailQuery: PropTypes.object
+  qualificationDetailQuery: PropTypes.object,
+  tierTypeSave: PropTypes.func
 };
 
 export default compose(
@@ -98,5 +115,9 @@ export default compose(
 
   graphql(gql(mutations.qualifyHealthInfo), {
     name: 'healthInfoEdit'
+  }),
+
+  graphql(gql(mutations.qualifySaveTierType), {
+    name: 'tierTypeSave'
   })
 )(StatusContainer);

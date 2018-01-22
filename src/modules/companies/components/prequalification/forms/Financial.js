@@ -165,16 +165,8 @@ class PrequalificationForm extends BaseForm {
             name: `recordsInfo${index}File`,
             initialValue: initialFile,
             hasFeedback: false,
-            optional: true,
             dataType: 'file',
-            control: (
-              <Uploader
-                initialFile={initialFile}
-                onReceiveFile={(...args) =>
-                  this[`recordsInfo${index}FileUpload`](...args)
-                }
-              />
-            )
+            control: <Uploader />
           })}
         </Col>
       </Row>

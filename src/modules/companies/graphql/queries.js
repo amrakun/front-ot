@@ -300,12 +300,14 @@ const commonFields = `
     phone
   }
   isPrequalified
+  tierType
 `;
 
 const companies = `
   query companies(${commonParams}) {
     companies(${commonValues}) {
       ${commonFields}
+      tierType
       averageDifotScore
       lastDueDiligence
       isProductsInfoValidated

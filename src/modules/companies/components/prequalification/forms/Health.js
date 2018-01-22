@@ -34,11 +34,7 @@ class PrequalificationForm extends PreqForm {
   handleSubmit(e) {
     e.preventDefault();
 
-    const { history } = this.props;
-
     this.save({}, true);
-
-    history.push('/capacity-building');
   }
 
   render() {
@@ -79,7 +75,7 @@ class PrequalificationForm extends PreqForm {
         )}
 
         {this.renderGoBack()}
-        {this.renderSubmit()}
+        {this.renderSubmit('Save & submit')}
       </Form>
     );
   }

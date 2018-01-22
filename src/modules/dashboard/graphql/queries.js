@@ -6,7 +6,7 @@ export const companyByUser = `
       averageDifotScore
       audits {
         _id
-        date
+        publishDate
       }
       lastFeedback {
         _id
@@ -51,6 +51,28 @@ export const companyByUser = `
   }
 `;
 
+const reportsSuppliersExport = `
+  query reportsSuppliersExport($productCodes: [String], $isPrequalified: Boolean) {
+    reportsSuppliersExport(productCodes: $productCodes, isPrequalified: $isPrequalified)
+  }
+`;
+
+const reportsTendersExport = `
+  query reportsTendersExport(
+    $type: ReportsTendersType
+    $publishDate: DateInterval
+    $closeDate: DateInterval
+  ) {
+    reportsTendersExport(
+      type: $type
+      publishDate: $publishDate
+      closeDate: $closeDate
+    )
+  }
+`;
+
 export default {
-  companyByUser
+  companyByUser,
+  reportsSuppliersExport,
+  reportsTendersExport
 };

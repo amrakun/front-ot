@@ -10,7 +10,8 @@ const supplierPrequalification = `
         enName,
         registeredInCountry,
         registeredInAimag,
-        foreignOwnershipPercentage
+        totalNumberOfEmployees,
+        totalNumberOfMongolianEmployees,
       }
       isPrequalified
     }
@@ -96,6 +97,7 @@ const qualificationDetail = `
         doesHaveLicense
         doesHaveLicenseDescription
       }
+      tierType
     }
   }
 `;
@@ -219,7 +221,9 @@ const auditRequests = `
       _id
       audits {
         _id
-        date
+        publishDate
+        closeDate
+        status
       }
     }
   }
@@ -229,14 +233,13 @@ const audits = `
   query audits {
     audits {
       _id
-      date
-      createdUser {
-        email
-      }
+      status
+      publishDate
+      closeDate
+      supplierIds
       responses {
         _id
       }
-      supplierIds
     }
   }
 `;
@@ -247,6 +250,8 @@ const auditDetail = `
       supplierIds
       responses {
         _id
+        status
+        isSent
         supplier {
           _id
           basicInfo {

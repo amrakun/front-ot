@@ -22,7 +22,6 @@ class RegistrationForm extends BaseForm {
   render() {
     const booleanOptions = this.renderOptions(booleanData);
     const { isReceived } = this.state;
-    const { data } = this.props;
 
     return (
       <Form onSubmit={this.handleSubmit} className="">
@@ -42,15 +41,10 @@ class RegistrationForm extends BaseForm {
             {this.renderField({
               label: 'Please upload your certificate',
               name: 'file',
-              dataType: 'file',
               isVisible: isReceived,
               optional: !isReceived,
-              control: (
-                <Uploader
-                  initialFile={data.file}
-                  onReceiveFile={(...args) => this.fileUpload(...args)}
-                />
-              )
+              dataType: 'file',
+              control: <Uploader />
             })}
             {this.renderSubmit('Save & submit', this.handleSubmit)}
           </Card>

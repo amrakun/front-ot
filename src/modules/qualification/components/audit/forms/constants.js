@@ -394,4 +394,131 @@ const labels = {
   }
 };
 
-export { labels };
+const evidenceCheckList = [
+  {
+    label:
+      '1. Does the organisation have a Health Safety & Environment management system? ',
+    value: 'doesHaveHealthSafety'
+  },
+  {
+    label:
+      '2. Does the organisation have a documented drug and alcohol policy?',
+    value: 'doesHaveDrugPolicy'
+  },
+  {
+    label:
+      '3. Does the organisation perform pre-employment medical screening, fitness for work evaluations, background checks and verification of competence for employees, contractors and sub-contractors?',
+    value: 'doesPerformPreemployment'
+  },
+  {
+    label:
+      '4. Do the organisations work procedures conform to local statutory, legislative or regulatory codes and standards?',
+    value: 'workProceduresConform'
+  },
+  {
+    label:
+      '5. Does the organisation have a formal process for HSE induction and orientation of new hire employees, contractors and sub-contractors?',
+    value: 'doesHaveFormalProcessForHSE'
+  },
+  {
+    label:
+      '6. Does the organisation have a system or process for tracking current employee, contractor and sub-contractor qualifications and competencies?',
+    value: 'doesHaveSystemForTracking'
+  },
+  {
+    label:
+      '7. Does the organisation have valid industry certifications and/or licenses if required by the type of services provided?',
+    value: 'doesHaveValidCertifications'
+  },
+  {
+    label:
+      '8. Does the organisation have a formal process for reporting and investigating incidents (including near-hits/near misses)?',
+    value: 'doesHaveSystemForReporting'
+  },
+  {
+    label:
+      '9. Does the organisation have Liability insurance which meets Oyu Tolgoi’s minimum requirements and valid worker compensation insurance or enrolment in an applicable occupational injury/illness insurance programme? ',
+    value: 'doesHaveLiabilityInsurance'
+  },
+  {
+    label:
+      '10. Does the organisation have a formal process for Health Safety and Environmental risk management ',
+    value: 'doesHaveFormalProcessForHealth'
+  },
+  {
+    label: '1. Work Contract Management',
+    value: 'isThereCurrentContract'
+  },
+  {
+    label: '2. Job Description Procedure',
+    value: 'doesHaveJobDescription'
+  },
+  {
+    label: '3. Training and Development Policy',
+    value: 'doesHaveTraining'
+  },
+  {
+    label: '4. Employee Performance Management',
+    value: 'doesHavePerformancePolicy'
+  },
+  {
+    label: '5. Time-Keeping Management',
+    value: 'doesHaveTimeKeeping'
+  },
+  {
+    label: '6. Management of Practices related to conduct',
+    value: 'doesHaveEmployeeRelatedProcedure'
+  },
+  {
+    label: '7. Management of workforce engagement',
+    value: 'doesHaveSystemToEnsureSafeWork'
+  },
+  {
+    label: '8. Employee Awareness of their rights to association',
+    value: 'employeesAwareOfRights'
+  },
+  {
+    label: '9. Employee selection and  recruitment process',
+    value: 'doesHaveEmployeeSelectionProcedure'
+  },
+  {
+    label: '10. Employee exit management',
+    value: 'doesHaveEmployeeLaborProcedure'
+  },
+  {
+    label: '11. Grievance and Fair treatment ',
+    value: 'doesHaveGrievancePolicy'
+  },
+  {
+    label:
+      '1. Does your company have in place a policy statement or code of conduct relating to the Business Integrity and Ethics?',
+    value: 'doesHaveProcessToSupport'
+  },
+  {
+    label:
+      '2. Are there processes and procedures in place to ensure that your policies or codes of conduct are effectively implemented throughout your company?',
+    value: 'proccessToEnsurePolicesCompany'
+  },
+  {
+    label:
+      '3. Are there processes and procedures in place to ensure that your policies or codes of conduct are effectively implemented throughout your Supply Chain?',
+    value: 'proccessToEnsurePolicesSupplyChain'
+  },
+  {
+    label:
+      '4. Has your company been subject to any external investigation regarding corruption within the past five years?',
+    value: 'hasBeenSubjectToInvestigation'
+  },
+  {
+    label:
+      '5. Does your company have a documented policy in place to prevent corruption? ',
+    value: 'doesHaveCorruptionPolicy'
+  },
+  {
+    label:
+      '6. If yes to above question, who is responsible person/function for the compliance/anti-corruption program',
+    value: 'whoIsResponsibleForCorruptionPolicy'
+  }
+];
+
+export { labels, evidenceCheckList };

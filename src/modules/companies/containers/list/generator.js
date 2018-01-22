@@ -59,6 +59,7 @@ const generator = (Component, query) => {
       const status = queryParams.status || '';
 
       let difotScore = '';
+
       if (status && status.includes('byDifotScore')) {
         difotScore = difotRange;
       }

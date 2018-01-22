@@ -9,11 +9,7 @@ class RegistrationForm extends BaseForm {
   handleSubmit(e) {
     e.preventDefault();
 
-    const { history } = this.props;
-
     this.saveDirect(this.getFieldValue('productsInfo'), true);
-
-    history.push('/prequalification');
   }
 
   render() {
@@ -41,7 +37,7 @@ class RegistrationForm extends BaseForm {
         </Card>
 
         {this.renderGoBack()}
-        {this.renderSubmit('Save & submit')}
+        {this.renderSubmit('Save & submit', this.handleSubmit)}
       </Form>
     );
   }

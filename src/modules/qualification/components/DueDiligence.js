@@ -7,6 +7,8 @@ import { Uploader } from 'modules/common/components';
 import { Common } from 'modules/companies/components';
 import { Sidebar } from 'modules/companies/components';
 import { Search } from 'modules/companies/components';
+import { dateFormat } from 'modules/common/constants';
+import moment from 'moment';
 
 class DueDiligence extends Common {
   constructor(props) {
@@ -35,17 +37,30 @@ class DueDiligence extends Common {
     const columns = this.getWrappedColumns([
       {
         title: 'Report',
+        render: record => (
+          <Uploader
+            onReceiveFile={(...args) => this[`${record._id}Upload`](...args)}
+          />
+        )
+      },
+      {
+        title: 'Last report file',
         render: record => {
           const lastDueDiligence = record.lastDueDiligence || {};
           const file = lastDueDiligence.file;
 
-          return (
-            <Uploader
-              initialFile={file}
-              onReceiveFile={(...args) => this[`${record._id}Upload`](...args)}
-            />
+          return file ? (
+            <a href={file.url} target="_blank">
+              View
+            </a>
+          ) : (
+            '-'
           );
         }
+      },
+      {
+        title: 'Expiration date',
+        render: () => moment().format(dateFormat)
       }
     ]);
 
@@ -69,7 +84,7 @@ class DueDiligence extends Common {
               dataSource={data}
               pagination={pagination}
               loading={loading}
-              scroll={{ x: 1200 }}
+              scroll={{ x: 1500 }}
               onChange={(pagination, filters, sorter) =>
                 onChange(pagination, filters, sorter)
               }

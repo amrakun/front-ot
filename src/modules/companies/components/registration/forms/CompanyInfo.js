@@ -13,7 +13,6 @@ import {
   descriptions,
   labels
 } from '../constants';
-
 import { BaseForm, Uploader } from 'modules/common/components';
 
 class CompanyInfo extends BaseForm {
@@ -48,7 +47,6 @@ class CompanyInfo extends BaseForm {
   }
 
   render() {
-    const { data } = this.props;
     const { selectedCountry, selectedAimag, isRegisteredOnSup } = this.state;
 
     const booleanOptions = this.renderOptions(booleanData);
@@ -163,20 +161,15 @@ class CompanyInfo extends BaseForm {
               name: 'registrationNumber',
               control: <Input type="number" />
             })}
+
             {this.renderField({
               label: '7. Certificate of registration',
               description: descriptions.certificateOfRegistration,
               name: 'certificateOfRegistration',
               dataType: 'file',
-              control: (
-                <Uploader
-                  initialFile={data.certificateOfRegistration}
-                  onReceiveFile={(...args) =>
-                    this.certificateOfRegistrationUpload(...args)
-                  }
-                />
-              )
+              control: <Uploader />
             })}
+
             {this.renderField({
               label: '8. Company website',
               name: 'website',

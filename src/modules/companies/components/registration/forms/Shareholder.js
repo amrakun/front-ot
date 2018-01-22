@@ -70,14 +70,8 @@ class ShareHolders extends BaseForm {
             name: 'attachments',
             description: uploadDisclaimer,
             optional: true,
-            dataType: 'file',
-            control: (
-              <Uploader
-                initialFiles={this.props.data.attachments}
-                multiple={true}
-                onReceiveFile={(...args) => this.attachmentsUpload(...args)}
-              />
-            )
+            dataType: 'file-multiple',
+            control: <Uploader multiple={true} />
           })}
         </Card>
 

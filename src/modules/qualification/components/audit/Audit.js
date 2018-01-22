@@ -2,11 +2,21 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Table, Card, Row, Col, Button, Icon, Modal, message } from 'antd';
+import {
+  Table,
+  Card,
+  Row,
+  Col,
+  Button,
+  Icon,
+  Modal,
+  message,
+  DatePicker
+} from 'antd';
 import { Common } from 'modules/companies/components';
 import { Sidebar } from 'modules/companies/components';
 import { Search } from 'modules/companies/components';
-import { dateFormat } from 'modules/common/constants';
+import { dateFormat, dateTimeFormat } from 'modules/common/constants';
 import moment from 'moment';
 
 class Audit extends Common {
@@ -20,14 +30,23 @@ class Audit extends Common {
 
     this.addAudit = this.addAudit.bind(this);
     this.toggleAuditModal = this.toggleAuditModal.bind(this);
+    this.handleDateRangeChange = this.handleDateRangeChange.bind(this);
   }
 
   addAudit() {
-    const { addAudit } = this.props;
-    const { selectedCompanies } = this.state;
+    if (!this.dateRange) {
+      message.error('Please choose publish and close date!');
+    } else {
+      const { addAudit } = this.props;
+      const { selectedCompanies } = this.state;
 
-    this.setState({ auditModalVisible: false });
-    addAudit(selectedCompanies);
+      this.setState({ auditModalVisible: false });
+      addAudit({
+        supplierIds: selectedCompanies,
+        publishDate: this.dateRange[0],
+        closeDate: this.dateRange[1]
+      });
+    }
   }
 
   toggleAuditModal(value) {
@@ -38,6 +57,10 @@ class Audit extends Common {
 
   toggleViewModal(value) {
     this.setState({ viewModalVisible: value });
+  }
+
+  handleDateRangeChange(value) {
+    this.dateRange = value;
   }
 
   render() {
@@ -104,9 +127,15 @@ class Audit extends Common {
             onCancel={() => this.toggleAuditModal(false)}
             onOk={this.addAudit}
           >
-            Sending desktop audit invitation to{' '}
+            Sending desktop audit invitation to&nbsp;
             <strong>{selectedCompanies.length}</strong> suppliers.
             <a onClick={() => window.open('/audit/template')}>View template</a>
+            <DatePicker.RangePicker
+              className="margin"
+              onOk={this.handleDateRangeChange}
+              showTime
+              format={dateTimeFormat}
+            />
           </Modal>
         </Col>
       </Row>

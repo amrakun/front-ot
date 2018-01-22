@@ -48,6 +48,9 @@ const notifyReady = {
   key: 'downloadNotification'
 };
 
+const { REACT_APP_API_URL } = process.env;
+const uploadUrl = `${REACT_APP_API_URL}/upload-file`;
+
 export {
   dateFormat,
   dateTimeFormat,
@@ -56,5 +59,6 @@ export {
   days,
   booleanData,
   notifyLoading,
-  notifyReady
+  notifyReady,
+  uploadUrl
 };

@@ -10,6 +10,7 @@ class PrequalificationForms extends Panes {
   render() {
     const { currentTabKey } = this.state;
     const { productsInfo } = this.props.company || {};
+    const { send } = this.props;
 
     return (
       <Tabs
@@ -41,7 +42,7 @@ class PrequalificationForms extends Panes {
           'Health & safety management system',
           'healthInfo',
           HealthForm,
-          { productsInfo: productsInfo }
+          { productsInfo: productsInfo, send: send }
         )}
       </Tabs>
     );
