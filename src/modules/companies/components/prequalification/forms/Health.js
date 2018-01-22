@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Card, Button } from 'antd';
+import { Form, Card } from 'antd';
 import PreqForm from './PreqForm';
 import PropTypes from 'prop-types';
 
@@ -75,14 +75,7 @@ class PrequalificationForm extends PreqForm {
         )}
 
         {this.renderGoBack()}
-        <Button
-          onClick={() => this.props.send()}
-          type="primary"
-          style={{ float: 'right', marginLeft: '8px' }}
-        >
-          Submit
-        </Button>
-        {this.renderSubmit('Save', this.handleSubmit, true)}
+        {this.renderSubmit('Save & submit')}
       </Form>
     );
   }

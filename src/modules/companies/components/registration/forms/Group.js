@@ -257,14 +257,8 @@ class RegistrationForm extends BaseForm {
               name: 'attachments',
               description: `Please upload your authorized distribution rights files`,
               optional: !isExclusiveDistributor,
-              dataType: 'file',
-              control: (
-                <Uploader
-                  initialFiles={this.props.data.attachments}
-                  multiple={true}
-                  onReceiveFile={(...args) => this.attachmentsUpload(...args)}
-                />
-              )
+              dataType: 'file-multiple',
+              control: <Uploader multiple={true} />
             })}
           </div>
         </Card>

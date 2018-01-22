@@ -15,6 +15,7 @@ const RegistrationContainer = props => {
 
   const save = doc => {
     const { certificateInfoEdit, history } = props;
+    console.log(doc);
 
     certificateInfoEdit({ variables: { certificateInfo: doc } })
       .then(() => {

@@ -15,10 +15,11 @@ const PrequalificationContainer = (props, context) => {
 
   const save = (name, doc) => {
     const mutation = props[`${name}Edit`];
-
+    console.log(doc);
     mutation({ variables: { [name]: doc } })
       .then(() => {
         message.success('Saved');
+        if (name === 'healthInfo') send();
       })
       .catch(error => {
         message.error(error.message);

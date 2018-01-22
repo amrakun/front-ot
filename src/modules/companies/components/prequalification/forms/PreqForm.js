@@ -23,15 +23,10 @@ class PreqForm extends BaseForm {
     return this.renderField({
       label: labels.documentLabel,
       name: name,
-      dataType: 'file',
       isVisible: isVisible,
       optional: !isVisible,
-      control: (
-        <Uploader
-          initialFile={this.props.data[name]}
-          onReceiveFile={(...args) => this[`${name}Upload`](...args)}
-        />
-      )
+      dataType: 'file',
+      control: <Uploader />
     });
   }
 

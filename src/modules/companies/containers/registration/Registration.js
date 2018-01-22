@@ -15,11 +15,12 @@ const RegistrationContainer = (props, context) => {
 
   const save = (name, doc) => {
     const mutation = props[`${name}Edit`];
-
+    console.log(doc);
     mutation({ variables: { [name]: doc } })
       .then(() => {
         companyByUserQuery.refetch();
         message.success('Saved');
+        if (name === 'productsInfo') send();
       })
       .catch(error => {
         message.error(error.message);

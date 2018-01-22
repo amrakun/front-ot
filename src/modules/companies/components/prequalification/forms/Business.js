@@ -174,14 +174,7 @@ class PrequalificationForm extends PreqForm {
             label: labels.organisationChart,
             name: 'organizationChartFile',
             dataType: 'file',
-            control: (
-              <Uploader
-                initialFile={this.props.data.organizationChartFile}
-                onReceiveFile={(...args) =>
-                  this.organizationChartFileUpload(...args)
-                }
-              />
-            )
+            control: <Uploader />
           })}
         </Card>
 

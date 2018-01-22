@@ -64,17 +64,10 @@ class PrequalificationForm extends BaseForm {
           {this.renderField({
             label: labels.documentLabel,
             name: 'doesHavePlanFile',
-            dataType: 'file',
             isVisible: doesHavePlan,
             optional: !doesHavePlan,
-            control: (
-              <Uploader
-                initialFile={data.doesHavePlanFile}
-                onReceiveFile={(...args) =>
-                  this.doesHavePlanFileUpload(...args)
-                }
-              />
-            )
+            dataType: 'file',
+            control: <Uploader />
           })}
         </Card>
 
@@ -118,17 +111,10 @@ class PrequalificationForm extends BaseForm {
           {this.renderField({
             label: labels.investigationDocumentation,
             name: 'investigationDocumentation',
-            dataType: 'file',
             isVisible: hasEnvironmentalRegulatorInvestigated,
             optional: !hasEnvironmentalRegulatorInvestigated,
-            control: (
-              <Uploader
-                initialFile={data.investigationDocumentation}
-                onReceiveFile={(...args) =>
-                  this.investigationDocumentationUpload(...args)
-                }
-              />
-            )
+            dataType: 'file',
+            control: <Uploader />
           })}
         </Card>
 

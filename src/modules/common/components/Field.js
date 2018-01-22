@@ -7,10 +7,32 @@ export default class Field extends React.Component {
    * For example: Select is accepting only string value, So we are
    * converting boolean, number to string
    */
-  cleanInitialValue() {
-    const { control, initialValue } = this.props;
 
+  normFile(e, multiple) {
+    if (e && e.fileList.length > 0) {
+      if (multiple)
+        return e.fileList.map(f => ({ name: f.name, url: f.response }));
+      else return [{ name: e.file.name, url: e.file.response }];
+    }
+  }
+
+  cleanInitialValue() {
+    const { control, initialValue, dataType } = this.props;
     const controlProps = control.props;
+
+    if (initialValue === null) return null;
+
+    if (dataType === 'file' || dataType === 'file-multiple') {
+      //file upload
+      if (Array.isArray(initialValue)) {
+        return initialValue.map((f, i) => ({
+          uid: i,
+          name: f.name,
+          url: f.url
+        }));
+      }
+      return [{ uid: 1, name: initialValue.name, url: initialValue.url }];
+    }
 
     if (
       controlProps.prefixCls !== 'ant-select' ||
@@ -20,6 +42,7 @@ export default class Field extends React.Component {
     }
 
     if (controlProps.mode === 'multiple') {
+      //multiple select
       return initialValue || [];
     }
 
@@ -42,13 +65,13 @@ export default class Field extends React.Component {
       hasFeedback = true,
       layout,
       rules = [],
-      getFieldValue
+      dataType
     } = this.props;
 
     const { form } = this.context;
     const { getFieldDecorator } = form;
 
-    if (!optional && !control.props.onReceiveFile) {
+    if (!optional) {
       rules.push({
         required: true,
         message: 'This field is required!'
@@ -62,23 +85,19 @@ export default class Field extends React.Component {
       });
     }
 
-    if (control.props.onReceiveFile) {
-      rules.push({
-        message: 'pizda',
-        validator: (rule, value, callback) => {
-          if (getFieldValue(rule.field, 'file')) callback();
-          else callback(true);
-        }
-      });
-    }
-
-    const args = {
+    let args = {
       initialValue: this.cleanInitialValue(),
       rules
     };
 
     if (control.props.prefixCls === 'ant-checkbox')
       args.valuePropName = 'checked';
+
+    if (dataType === 'file' || dataType === 'file-multiple') {
+      //file upload
+      args.getValueFromEvent = e => this.normFile(e, dataType !== 'file');
+      args.valuePropName = 'defaultFileList';
+    }
 
     return (
       <Form.Item
@@ -87,7 +106,6 @@ export default class Field extends React.Component {
         extra={description}
         style={isVisible ? {} : { display: 'none' }}
         hasFeedback={hasFeedback}
-        required={!optional}
       >
         {getFieldDecorator(name, args)(control)}
       </Form.Item>
@@ -107,7 +125,8 @@ Field.propTypes = {
   initialValue: PropTypes.any,
   layout: PropTypes.object,
   rules: PropTypes.array,
-  getFieldValue: PropTypes.func
+  getFieldValue: PropTypes.func,
+  dataType: PropTypes.string
 };
 
 Field.contextTypes = {

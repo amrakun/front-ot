@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Upload, message, Button, Icon } from 'antd';
+import { uploadUrl } from 'modules/common/constants';
 
 class Uploader extends React.Component {
   constructor(props) {
@@ -26,28 +27,31 @@ class Uploader extends React.Component {
   }
 
   render() {
-    const { REACT_APP_API_URL } = process.env;
-    const uploadUrl = `${REACT_APP_API_URL}/upload-file`;
-
-    const { initialFile, initialFiles, label = 'Click to upload' } = this.props;
-
-    const defaultFileList = (initialFiles || []).map((file, index) => ({
-      uid: index,
-      ...file
-    }));
-
-    if (initialFile) {
-      defaultFileList.push({ uid: 1, ...initialFile });
-    }
+    const {
+      initialFile,
+      initialFiles,
+      label = 'Click to upload',
+      onReceiveFile
+    } = this.props;
 
     const extendedProps = {
       ...this.props,
-      action: uploadUrl,
-      defaultFileList,
-      onChange: this.onChange
+      action: uploadUrl
     };
 
-    console.log(extendedProps);
+    if (onReceiveFile) {
+      const defaultFileList = (initialFiles || []).map((file, index) => ({
+        uid: index,
+        ...file
+      }));
+
+      if (initialFile) {
+        defaultFileList.push({ uid: 1, ...initialFile });
+      }
+
+      extendedProps.onChange = this.onChange;
+      extendedProps.defaultFileList = defaultFileList;
+    }
 
     return (
       <Upload {...extendedProps}>
