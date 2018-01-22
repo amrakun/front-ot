@@ -135,10 +135,12 @@ class AuditFormsBase extends BaseForm {
         {this.renderField({
           name: `${name}Score`,
           initialValue: multipleOptions
-            ? multipleOptions[auditorScore].text
+            ? multipleOptions[auditorScore]
+              ? multipleOptions[auditorScore].text
+              : ''
             : auditorScore,
           hasFeedback: false,
-          dataType: type !== 'multiple' && 'boolean',
+          dataType: type !== 'multiple' ? 'boolean' : null,
           control: (
             <Select>
               {type !== 'multiple'

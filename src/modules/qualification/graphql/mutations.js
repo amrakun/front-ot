@@ -220,6 +220,14 @@ const auditsBuyerSaveBusinessInfo = `
   }
 `;
 
+const auditsSupplierSendResponse = `
+  mutation auditsSupplierSendResponse($auditId: String, $supplierId: String) {
+    auditsSupplierSendResponse(auditId: $auditId, supplierId: $supplierId) {
+      _id
+    }
+  }
+`;
+
 export default {
   addDifotScores,
   addDueDiligence,
@@ -241,5 +249,6 @@ export default {
   auditsSupplierSaveEvidenceInfo,
   auditsBuyerSaveCoreHseqInfo,
   auditsBuyerSaveHrInfo,
-  auditsBuyerSaveBusinessInfo
+  auditsBuyerSaveBusinessInfo,
+  auditsSupplierSendResponse
 };

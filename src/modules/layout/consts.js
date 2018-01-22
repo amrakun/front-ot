@@ -117,7 +117,7 @@ export const buyerSideMenu = [
     icon: 'setting',
     subMenu: [
       {
-        url: 'user-list',
+        url: '/user-list',
         title: 'Manage Users'
       }
     ]

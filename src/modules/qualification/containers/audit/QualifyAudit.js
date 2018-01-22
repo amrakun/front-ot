@@ -30,7 +30,7 @@ const QualifyAuditContainer = props => {
         message.error(error.message);
       });
   };
-  console.log(auditResponseDetailQuery);
+
   const updatedProps = {
     ...props,
     save,

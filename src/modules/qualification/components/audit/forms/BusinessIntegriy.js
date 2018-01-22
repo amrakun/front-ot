@@ -16,20 +16,15 @@ class BusinessIntegriy extends AuditFormsBase {
       submitLoading: false
     };
 
-    this.saveAndShowModal = this.saveAndShowModal.bind(this);
+    this.saveAndCheckEvidence = this.saveAndCheckEvidence.bind(this);
     this.hideEvidenceModal = this.hideEvidenceModal.bind(this);
     this.handleEvidenceChange = this.handleEvidenceChange.bind(this);
     this.handleOk = this.handleOk.bind(this);
-    this.save = this.save.bind(this);
+    this.saveAndCreatePlan = this.saveAndCreatePlan.bind(this);
+    this.saveAndCreateReport = this.saveAndCreateReport.bind(this);
   }
 
-  save(e) {
-    e.preventDefault();
-
-    this.collectAndSave(true);
-  }
-
-  saveAndShowModal(e) {
+  saveAndCheckEvidence(e) {
     e.preventDefault();
 
     this.collectAndSave(true); //lastTab = true
@@ -42,6 +37,18 @@ class BusinessIntegriy extends AuditFormsBase {
 
   hideEvidenceModal() {
     this.setState({ evidenceModalVisible: false });
+  }
+
+  saveAndCreatePlan(e) {
+    e.preventDefault();
+
+    this.collectAndSave(true);
+  }
+
+  saveAndCreateReport(e) {
+    e.preventDefault();
+
+    this.collectAndSave(true);
   }
 
   handleOk() {
@@ -69,9 +76,19 @@ class BusinessIntegriy extends AuditFormsBase {
           {render('whoIsResponsibleForPolicy')}
         </Card>
         {this.renderGoBack()}
-        {this.renderSubmit(
-          'Save & submit',
-          response ? this.save : this.saveAndShowModal
+        {response ? (
+          <div style={{ float: 'right' }}>
+            {this.renderSubmit(
+              'Save & create improvement plan',
+              this.saveAndCreatePlan
+            )}
+            {this.renderSubmit(
+              'Save & create report',
+              this.saveAndCreateReport
+            )}
+          </div>
+        ) : (
+          this.renderSubmit('Save & submit', this.saveAndCheckEvidence)
         )}
 
         <Modal

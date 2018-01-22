@@ -97,6 +97,7 @@ class UserForm extends React.Component {
           okText="Save"
           onCancel={this.handleCancel}
           onOk={this.handleSubmit}
+          bodyStyle={{ maxHeight: '65vh', overflow: 'scroll' }}
         >
           <p>
             Ensure you complete all the required fields before clicking ‘Save

@@ -10,7 +10,8 @@ const SubmitAuditContainer = (props, context) => {
   let {
     auditResponseByUserQuery,
     companyByUserQuery,
-    evidenceInfoEdit
+    evidenceInfoEdit,
+    sendResponse
   } = props;
   const { currentUser } = context;
 
@@ -39,9 +40,25 @@ const SubmitAuditContainer = (props, context) => {
   };
 
   const saveEvidenceChecks = doc => {
+    evidenceInfoEdit({ variables: { evidenceInfo: doc } })
+      .then(() => {
+        message.success('Saved');
+        send();
+      })
+      .catch(error => {
+        message.error(error.message);
+      });
+  };
+
+  const send = () => {
     const { history } = props;
 
-    evidenceInfoEdit({ variables: { evidenceInfo: doc } })
+    sendResponse({
+      variables: {
+        auditId: match.params.id,
+        supplierId: currentUser.companyId
+      }
+    })
       .then(() => {
         message.success('Successfully sent your response!');
         history.push('/qualification?refetch');
@@ -67,6 +84,7 @@ SubmitAuditContainer.propTypes = {
   auditResponseByUserQuery: PropTypes.object,
   evidenceInfoEdit: PropTypes.func,
   companyByUserQuery: PropTypes.object,
+  sendResponse: PropTypes.func,
   match: PropTypes.object
 };
 
@@ -92,20 +110,19 @@ export default compose(
   graphql(gql(mutations.auditsSupplierSaveBasicInfo), {
     name: 'basicInfoEdit'
   }),
-  // mutations
   graphql(gql(mutations.auditsSupplierSaveCoreHseqInfo), {
     name: 'coreHseqInfoEdit'
   }),
-  // mutations
   graphql(gql(mutations.auditsSupplierSaveHrInfo), {
     name: 'hrInfoEdit'
   }),
-  // mutations
   graphql(gql(mutations.auditsSupplierSaveBusinessInfo), {
     name: 'businessInfoEdit'
   }),
-  // mutations
   graphql(gql(mutations.auditsSupplierSaveEvidenceInfo), {
     name: 'evidenceInfoEdit'
+  }),
+  graphql(gql(mutations.auditsSupplierSendResponse), {
+    name: 'sendResponse'
   })
 )(SubmitAuditContainer);
