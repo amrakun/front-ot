@@ -2,7 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import addressFields from './address';
-import { Form, Input, Tooltip, Icon, Select, Spin, Card } from 'antd';
+import {
+  Form,
+  Input,
+  Tooltip,
+  Icon,
+  Select,
+  Spin,
+  Card,
+  Upload,
+  Button
+} from 'antd';
 import {
   structureData,
   foreignPercentageData,
@@ -45,6 +55,14 @@ class CompanyInfo extends BaseForm {
 
   handleIsRegisteredChange(value) {
     this.setState({ isRegisteredOnSup: value === 'true' });
+  }
+
+  normFile(e) {
+    console.log('Upload event:', e);
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e && e.fileList;
   }
 
   render() {
@@ -163,6 +181,20 @@ class CompanyInfo extends BaseForm {
               name: 'registrationNumber',
               control: <Input type="number" />
             })}
+
+            {/* {this.renderField({
+              label: '7. Certificate of registration',
+              description: descriptions.certificateOfRegistration,
+              name: 'certificateOfRegistration',
+              dataType: 'file2',
+              control: (
+                <Upload name="logo" listType="picture">
+                  <Button>
+                    <Icon type="upload" /> Click to upload
+                  </Button>
+                </Upload>
+              )
+            })} */}
             {this.renderField({
               label: '7. Certificate of registration',
               description: descriptions.certificateOfRegistration,

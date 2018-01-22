@@ -47,6 +47,8 @@ class Uploader extends React.Component {
       onChange: this.onChange
     };
 
+    console.log(extendedProps);
+
     return (
       <Upload {...extendedProps}>
         <Button>

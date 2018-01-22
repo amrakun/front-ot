@@ -41,13 +41,14 @@ export default class Field extends React.Component {
       isVisible = true,
       hasFeedback = true,
       layout,
-      rules = []
+      rules = [],
+      getFieldValue
     } = this.props;
 
     const { form } = this.context;
     const { getFieldDecorator } = form;
 
-    if (!optional) {
+    if (!optional && !control.props.onReceiveFile) {
       rules.push({
         required: true,
         message: 'This field is required!'
@@ -61,10 +62,21 @@ export default class Field extends React.Component {
       });
     }
 
+    if (control.props.onReceiveFile) {
+      rules.push({
+        message: 'pizda',
+        validator: (rule, value, callback) => {
+          if (getFieldValue(rule.field, 'file')) callback();
+          else callback(true);
+        }
+      });
+    }
+
     const args = {
       initialValue: this.cleanInitialValue(),
       rules
     };
+
     if (control.props.prefixCls === 'ant-checkbox')
       args.valuePropName = 'checked';
 
@@ -75,6 +87,7 @@ export default class Field extends React.Component {
         extra={description}
         style={isVisible ? {} : { display: 'none' }}
         hasFeedback={hasFeedback}
+        required={!optional}
       >
         {getFieldDecorator(name, args)(control)}
       </Form.Item>
@@ -93,7 +106,8 @@ Field.propTypes = {
   hasFeedback: PropTypes.bool,
   initialValue: PropTypes.any,
   layout: PropTypes.object,
-  rules: PropTypes.array
+  rules: PropTypes.array,
+  getFieldValue: PropTypes.func
 };
 
 Field.contextTypes = {

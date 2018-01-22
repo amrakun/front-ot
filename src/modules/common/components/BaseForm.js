@@ -9,6 +9,7 @@ export default class BaseForm extends React.Component {
 
     this.save = this.save.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.getFieldValue = this.getFieldValue.bind(this);
 
     // field names
     this.fieldDefs = [];
@@ -133,11 +134,11 @@ export default class BaseForm extends React.Component {
       if (!this[fileKey]) {
         this[fileKey] = initialValue || data[name];
       }
+
+      definations.getFieldValue = this.getFieldValue;
     }
 
     definations.initialValue = initialValue || data[name];
-
-    if (dataType === 'file') definations.optional = true;
 
     return <Field {...definations} />;
   }
