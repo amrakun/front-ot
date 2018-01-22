@@ -1,12 +1,12 @@
-$primary-color: rgb(244,119,33);
-$primary-color-shade: rgba(244,119,33,0.06);
-$link-color: rgb(0,153,168);
+$primary-color: rgb(244, 119, 33);
+$primary-color-shade: rgba(244, 119, 33, 0.06);
+$link-color: rgb(0, 153, 168);
 $bg-color: #f9f9f9;
 
-$padding-lg    : 24px; // containers
-$padding-md    : 16px; // small containers and buttons
-$padding-sm    : 12px; // Form controls and items
-$padding-xs    : 8px;
+$padding-lg: 24px; // containers
+$padding-md: 16px; // small containers and buttons
+$padding-sm: 12px; // Form controls and items
+$padding-xs: 8px;
 
 @function tint($color, $percentage) {
   @return mix(white, $color, $percentage);
@@ -15,7 +15,7 @@ $padding-xs    : 8px;
   @return mix(black, $color, $percentage);
 }
 
-@import "dataDisplay";
+@import 'dataDisplay';
 
 .hidden {
   display: none;
@@ -41,7 +41,7 @@ $padding-xs    : 8px;
 .bordered {
   border: 1px solid #ddd;
   border-radius: 4px;
-  padding: 3px
+  padding: 3px;
 }
 
 //layout
@@ -94,10 +94,12 @@ $padding-xs    : 8px;
     color: #333;
   }
 }
-.ant-layout, .ant-layout-footer {
+.ant-layout,
+.ant-layout-footer {
   background: $bg-color;
 }
-.ant-menu-inline, .ant-menu-vertical {
+.ant-menu-inline,
+.ant-menu-vertical {
   border: none;
 }
 .ant-layout-content {
@@ -166,7 +168,9 @@ i.success {
     margin: 0;
     display: block;
   }
-  .ant-input.ant-input-disabled, .ant-select-disabled .ant-select-selection, .ant-upload-disabled .ant-btn {
+  .ant-input.ant-input-disabled,
+  .ant-select-disabled .ant-select-selection,
+  .ant-upload-disabled .ant-btn {
     background: none;
     border: none;
     color: rgba(0, 0, 0, 0.65);
@@ -228,7 +232,7 @@ i.success {
     font-size: 16px;
     margin-bottom: 32px;
   }
-  [class^=home-btn] {
+  [class^='home-btn'] {
     line-height: 38px;
     padding: 0 15px;
     display: inline-block;
@@ -241,7 +245,7 @@ i.success {
     color: #fff;
     margin-right: 16px;
     &:hover {
-      background-color: tint($primary-color, 15)
+      background-color: tint($primary-color, 15);
     }
   }
   .home-btn-transparent {
@@ -252,21 +256,18 @@ i.success {
   }
 }
 
-*::-webkit-scrollbar-track
-{
-	background-color: transparent;
+*::-webkit-scrollbar-track {
+  background-color: transparent;
 }
 
-*::-webkit-scrollbar
-{
-	width: 8px;
+*::-webkit-scrollbar {
+  width: 8px;
   height: 7px;
-	background-color: transparent;
+  background-color: transparent;
 }
 
-*::-webkit-scrollbar-thumb
-{
-	background-color: #e3e3e3;
+*::-webkit-scrollbar-thumb {
+  background-color: #e3e3e3;
 }
 
 .ant-pagination.ant-table-pagination {
@@ -358,7 +359,7 @@ form .ant-input-number {
   height: 372px;
 }
 
-[class*=dashed-button] {
+[class*='dashed-button'] {
   background: #fff;
   border-style: dashed;
 }
@@ -394,7 +395,7 @@ form .ant-input-number {
   .ant-btn {
     z-index: 0;
   }
-  input[type=file] {
+  input[type='file'] {
     z-index: 1;
     position: absolute;
     left: 0;
@@ -436,11 +437,15 @@ form .ant-input-number {
 }
 
 .disabled-inputs {
-  .ant-input, .ant-select-selection {
+  .ant-input,
+  .ant-select-selection {
     pointer-events: none;
     border: none;
   }
-  .ant-btn, .ant-upload, .has-success.has-feedback:after, .ant-select-arrow {
+  .ant-btn,
+  .ant-upload,
+  .has-success.has-feedback:after,
+  .ant-select-arrow {
     display: none;
   }
 }
@@ -451,11 +456,24 @@ form .ant-input-number {
   margin-bottom: 24px;
 }
 
+.user-register-form {
+  .ant-form-item {
+    margin-bottom: 10px;
+  }
+}
+
 .ant-popover-content {
   max-width: 400px;
-  ul, ol {
+  ul,
+  ol {
     margin: 8px 0;
     padding-left: 16px;
+  }
+}
+
+.users-search {
+  .ant-input-suffix {
+    cursor: pointer;
   }
 }
 
