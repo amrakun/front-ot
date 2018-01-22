@@ -103,6 +103,7 @@ class AuditResponses extends React.Component {
           dataSource={data}
           pagination={pagination}
           loading={loading}
+          scroll={{ x: 1500 }}
           onChange={(pagination, filters, sorter) =>
             onChange(pagination, filters, sorter)
           }

@@ -79,7 +79,7 @@ class AuditFormsBase extends BaseForm {
           name: `${name}Answer`,
           initialValue: answer.supplierAnswer,
           hasFeedback: false,
-          dataType: type !== 'multiple' && 'boolean',
+          dataType: type !== 'multiple' ? 'boolean' : null,
           control: (
             <Select>
               {type !== 'multiple'
@@ -93,7 +93,6 @@ class AuditFormsBase extends BaseForm {
           name: `${name}Comment`,
           hasFeedback: false,
           initialValue: answer.supplierComment,
-          optional: true,
           control: <TextArea placeholder="Comment" />
         })}
       </div>

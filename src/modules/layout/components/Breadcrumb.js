@@ -22,7 +22,8 @@ const routes = {
   'due-diligence': 'Due diligence',
   feedback: 'Feedback',
   responses: 'Responses',
-  blocking: 'Blocking'
+  blocking: 'Blocking',
+  reports: 'Reports & Improvement plans'
 };
 
 const Breadcrumbs = location => {
