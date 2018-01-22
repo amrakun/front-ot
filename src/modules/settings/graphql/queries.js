@@ -1,18 +1,14 @@
-const UserDetailsType = `
-    avatar,
-    fullName
-`;
-
 const User = `
     _id,
     username,
     email,
     role,
     isSupplier,
-    details{
-        ${UserDetailsType}
-    },
-    companyId
+    companyId,
+    firstName
+    lastName
+    jobTitle
+    phone
 `;
 
 export const users = `

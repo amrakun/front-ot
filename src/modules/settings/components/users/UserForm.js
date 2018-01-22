@@ -26,18 +26,22 @@ class UserForm extends React.Component {
     this.handleCancel = this.handleCancel.bind(this);
   }
 
-  handleCancel(e) {
+  handleCancel() {
     this.props.onClose();
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
-    const { form } = this.props;
+    const { user, form } = this.props;
 
     form.validateFieldsAndScroll((err, data) => {
       if (err) {
         return;
+      }
+
+      if (user) {
+        data._id = user._id;
       }
 
       this.props.mainAction(data);
@@ -46,9 +50,43 @@ class UserForm extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const user = this.props || {};
+    const user = this.props.user || {};
 
     const title = user ? 'Edit User' : 'Add New User';
+
+    const passwordRender =
+      Object.keys(user).length === 0 ? (
+        <div>
+          <FormItem label="Password">
+            {getFieldDecorator('password', {
+              rules: [
+                {
+                  required: true,
+                  message: 'Please input your password!'
+                },
+                {
+                  validator: this.checkConfirm
+                }
+              ]
+            })(<Input type="password" />)}
+          </FormItem>
+          <FormItem label="Confirm Password">
+            {getFieldDecorator('passwordConfirmation', {
+              rules: [
+                {
+                  required: true,
+                  message: 'Please confirm your password!'
+                },
+                {
+                  validator: this.checkPassword
+                }
+              ]
+            })(<Input type="password" onBlur={this.handleConfirmBlur} />)}
+          </FormItem>
+        </div>
+      ) : (
+        ''
+      );
 
     return (
       <div>
@@ -64,10 +102,11 @@ class UserForm extends React.Component {
             Ensure you complete all the required fields before clicking ‘Save
             User Details’. After saving you have the option of making the person
           </p>
+
           <Form className="user-register-form">
             <FormItem label="First Name">
-              {getFieldDecorator('firstname', {
-                initialValue: user.firstname || '',
+              {getFieldDecorator('firstName', {
+                initialValue: user.firstName || '',
                 rules: [
                   {
                     required: true,
@@ -77,8 +116,8 @@ class UserForm extends React.Component {
               })(<Input />)}
             </FormItem>
             <FormItem label="Last Name">
-              {getFieldDecorator('lastname', {
-                initialValue: user.lastname || '',
+              {getFieldDecorator('lastName', {
+                initialValue: user.lastName || '',
                 rules: [
                   {
                     required: true,
@@ -89,7 +128,7 @@ class UserForm extends React.Component {
             </FormItem>
             <FormItem label="Role">
               {getFieldDecorator('role', {
-                initialValue: user ? user.role : '',
+                initialValue: user.role || 'contributor',
                 rules: [{ required: true, message: 'Please select role!' }]
               })(
                 <Select placeholder="Select a option">
@@ -99,13 +138,13 @@ class UserForm extends React.Component {
               )}
             </FormItem>
             <FormItem label="Job Title">
-              {getFieldDecorator('job', {
-                initialValue: user ? user.job : ''
+              {getFieldDecorator('jobTitle', {
+                initialValue: user.jobTitle || ''
               })(<Input />)}
             </FormItem>
             <FormItem label="Username">
               {getFieldDecorator('username', {
-                initialValue: user ? user.username : '',
+                initialValue: user.username || '',
                 rules: [
                   {
                     required: true,
@@ -114,41 +153,10 @@ class UserForm extends React.Component {
                 ]
               })(<Input />)}
             </FormItem>
-            {!user ? (
-              <div>
-                <FormItem label="Password">
-                  {getFieldDecorator('password', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please input your password!'
-                      },
-                      {
-                        validator: this.checkConfirm
-                      }
-                    ]
-                  })(<Input type="password" />)}
-                </FormItem>
-                <FormItem label="Confirm Password">
-                  {getFieldDecorator('passwordConfirmation', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please confirm your password!'
-                      },
-                      {
-                        validator: this.checkPassword
-                      }
-                    ]
-                  })(<Input type="password" onBlur={this.handleConfirmBlur} />)}
-                </FormItem>
-              </div>
-            ) : (
-              ''
-            )}
+            {passwordRender}
             <FormItem label="Email address">
               {getFieldDecorator('email', {
-                initialValue: user ? user.email : '',
+                initialValue: user.email || '',
                 rules: [
                   {
                     type: 'email',
@@ -163,11 +171,15 @@ class UserForm extends React.Component {
             </FormItem>
             <FormItem label="Phone Number">
               {getFieldDecorator('phone', {
-                initialValue: user ? user.phone : '',
+                initialValue: user.phone || '',
                 rules: [
                   {
                     required: true,
                     message: 'Please input your phone number!'
+                  },
+                  {
+                    type: 'number',
+                    message: 'Please fill correct only number!'
                   }
                 ]
               })(<Input style={{ width: '100%' }} />)}

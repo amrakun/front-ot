@@ -5,25 +5,33 @@ const register = `
 `;
 
 const commonParams = `
-  $username: String!,
-  $email: String!,
-  $role: String!
-  $details: UserDetails,
-  $password: String!,
-  $passwordConfirmation: String!
+    $username: String!,
+    $email: String!,
+    $role: String!,
+    $firstName: String,
+    $lastName: String,
+    $jobTitle: String,
+    $phone: Float
 `;
 
 const commonValues = `
-  username: $username,
-  email: $email,
-  role: $role,
-  details: $details,
-  password: $password,
-  passwordConfirmation: $passwordConfirmation
+    username: $username,
+    email: $email,
+    role: $role,
+    firstName: $firstName,
+    lastName: $lastName,
+    jobTitle: $jobTitle,
+    phone: $phone,
+    password: $password,
+    passwordConfirmation: $passwordConfirmation
 `;
 
 const usersAdd = `
-    mutation usersAdd(${commonParams}) {
+    mutation usersAdd(
+        ${commonParams},
+        $password: String!,
+        $passwordConfirmation: String!
+    ) {
         usersAdd(${commonValues}) {
             _id
         }
@@ -31,26 +39,37 @@ const usersAdd = `
 `;
 
 const usersEdit = `
-    mutation usersEdit($_id: String, ${commonParams}) {
-        usersEdit(_id: $_id, ${commonValues}) {
+    mutation usersEdit(
+        $_id: String!,
+        ${commonParams},
+        $password: String,
+        $passwordConfirmation: String
+    ) {
+        usersEdit(
+            _id: $_id,
+            ${commonValues}
+        ) {
+            _id
             username
             email
             role
             isSupplier
-            details
             companyId
+            firstName
+            lastName
+            jobTitle
+            phone
         }
     }
 `;
 
 const usersEditProfile = `
-    mutation usersEditProfile($username: String, $email: String, $details: UserDetails, $password: String) {
-        usersEditProfile(username: $username, email: $email, details: $details, password: $password) {
+    mutation usersEditProfile($username: String, $email: String, $password: String) {
+        usersEditProfile(username: $username, email: $email, password: $password) {
             username
             email
             role
             isSupplier
-            details
             companyId
         }
     }

@@ -12,8 +12,11 @@ import {
   Input,
   Divider,
   Button,
+  Modal,
   Form
 } from 'antd';
+
+const confirm = Modal.confirm;
 
 const propTypes = {
   form: PropTypes.object.isRequired,
@@ -21,8 +24,12 @@ const propTypes = {
   history: PropTypes.object,
   user: PropTypes.object,
   addUser: PropTypes.func,
+  usersTotalCountQuery: PropTypes.number,
   removeUser: PropTypes.func,
-  resetPassword: PropTypes.func
+  resetPassword: PropTypes.func,
+  refetchUsers: PropTypes.func,
+  setPaginationParams: PropTypes.func.isRequired,
+  page: PropTypes.number.isRequired
 };
 
 class UserList extends React.Component {
@@ -39,7 +46,15 @@ class UserList extends React.Component {
       users: props.users,
       currentUser: null,
       showPopup: false,
-      showResetPopup: false
+      showResetPopup: false,
+      pagination: {
+        onChange: page => {
+          this.props.setPaginationParams({ page });
+        },
+        pageSize: 10,
+        defaultCurrent: this.props.page,
+        total: this.props.usersTotalCountQuery
+      }
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -48,17 +63,19 @@ class UserList extends React.Component {
     this.checkConfirm = this.checkConfirm.bind(this);
     this.onSuccess = this.onSuccess.bind(this);
     this.onClose = this.onClose.bind(this);
+    this.emitEmpty = this.emitEmpty.bind(this);
+    this.showConfirm = this.showConfirm.bind(this);
 
     this.columns = [
       {
         title: 'First Name',
-        dataIndex: 'firstname',
-        key: 'firstname'
+        dataIndex: 'firstName',
+        key: 'firstName'
       },
       {
         title: 'Last name',
-        dataIndex: 'lastname',
-        key: 'lastname'
+        dataIndex: 'lastName',
+        key: 'lastName'
       },
       {
         title: 'Username',
@@ -82,11 +99,22 @@ class UserList extends React.Component {
           <span>
             <a onClick={this.editUser.bind(this, record)}>Edit</a>
             <Divider type="vertical" />
-            <a onClick={props.removeUser.bind(this, record._id)}>Remove</a>
+            <a onClick={this.showConfirm.bind(this, record._id)}>Remove</a>
           </span>
         )
       }
     ];
+  }
+
+  showConfirm(id) {
+    const self = this;
+
+    confirm({
+      title: 'Do you want to delete these user?',
+      onOk() {
+        self.props.removeUser(id);
+      }
+    });
   }
 
   handleSearch(value) {
@@ -128,15 +156,26 @@ class UserList extends React.Component {
 
   onSuccess() {
     this.setState({ showPopup: false });
+    this.props.refetchUsers();
   }
 
   onClose() {
     this.setState({ showPopup: false });
   }
 
+  emitEmpty() {
+    this.searchInput.focus();
+    this.handleSearch('');
+    this.setState({ search: '' });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ users: nextProps.users });
+  }
+
   render() {
-    const { users } = this.props;
-    const { search } = this.state;
+    const { users, search, pagination } = this.state;
+
     const suffix = search ? (
       <Icon type="close-circle" onClick={this.emitEmpty} />
     ) : null;
@@ -174,6 +213,7 @@ class UserList extends React.Component {
               columns={this.columns}
               rowKey={record => record._id}
               dataSource={users}
+              pagination={pagination}
             />
           </Card>
         </Col>

@@ -9,8 +9,7 @@ const propTypes = {
   user: PropTypes.object,
   usersAddMutation: PropTypes.func,
   usersEditMutation: PropTypes.func,
-  onSuccess: PropTypes.func,
-  userDetailQuery: PropTypes.object
+  onSuccess: PropTypes.func
 };
 
 class UserFormContainer extends React.Component {
@@ -23,7 +22,6 @@ class UserFormContainer extends React.Component {
 
     const mainAction = doc => {
       const mutation = user ? usersEditMutation : usersAddMutation;
-
       mutation({ variables: doc }).then(() => {
         onSuccess();
       });
@@ -33,7 +31,6 @@ class UserFormContainer extends React.Component {
       ...this.props,
       mainAction
     };
-
     return <UserFormComponent {...updatedProps} />;
   }
 }
@@ -43,10 +40,8 @@ UserFormContainer.propTypes = propTypes;
 export default compose(
   graphql(gql(mutations.usersAdd), {
     name: 'usersAddMutation'
-    // refetchQueries: [{ query: gql(queries.users) }],
   }),
   graphql(gql(mutations.usersEdit), {
     name: 'usersEditMutation'
-    // refetchQueries: [{ query: gql(queries.users) }],
   })
 )(UserFormContainer);
