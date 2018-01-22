@@ -17,11 +17,11 @@ class ReportContainer extends React.Component {
   export(name, variables) {
     notification.open(notifyLoading);
     this.setState({ exportLoading: true });
-
+    console.log(variables);
     client
       .query({
         query: gql(queries[name]),
-        name: 'export',
+        name: `${name}Query`,
 
         variables: variables
       })

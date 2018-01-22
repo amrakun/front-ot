@@ -20,6 +20,9 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
 
+    this.tenderType = 'eoi';
+    this.isPrequalified = false;
+
     this.onInputChange = this.onInputChange.bind(this);
     this.onIsPrequalifiedChange = this.onIsPrequalifiedChange.bind(this);
     this.exportSuppliers = this.exportSuppliers.bind(this);
@@ -113,7 +116,7 @@ class Dashboard extends React.Component {
 
             <Radio.Group
               onChange={value => this.onInputChange('tenderType', value)}
-              defaultValue="eoi"
+              value={this.tenderType}
             >
               <Radio value="eoi">EOI</Radio>
               <Radio value="rfq">RFQ</Radio>
