@@ -29,20 +29,20 @@ export default class BaseForm extends React.Component {
 
   save(extra = {}, lastTab = false) {
     this.props.form.validateFieldsAndScroll(err => {
-      let doc = {};
-
-      this.fieldDefs.forEach(({ name, dataType }) => {
-        doc[name] = this.getFieldValue(name, dataType);
-      });
-
-      if (extra) {
-        doc = {
-          ...doc,
-          ...extra
-        };
-      }
-
       if (!err) {
+        let doc = {};
+
+        this.fieldDefs.forEach(({ name, dataType }) => {
+          doc[name] = this.getFieldValue(name, dataType);
+        });
+
+        if (extra) {
+          doc = {
+            ...doc,
+            ...extra
+          };
+        }
+
         if (this.props.nextTab && !lastTab) this.props.nextTab();
 
         return this.props.save(doc);
@@ -80,7 +80,7 @@ export default class BaseForm extends React.Component {
     }
 
     if (dataType === 'file') {
-      value = value[0];
+      value ? (value = value[0]) : (value = null);
     }
 
     return value;

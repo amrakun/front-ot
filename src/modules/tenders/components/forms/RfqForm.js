@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import { Form, Button, Card, Icon } from 'antd';
+import { Form, Button, Card, Icon, message } from 'antd';
 import { rfqEmailTemplate } from '../../constants';
 import TenderForm from '../TenderForm';
 import RfqTable from '../RfqTable';
@@ -33,7 +33,13 @@ class RfqForm extends TenderForm {
 
     inputs.type = 'rfq';
 
-    this.sendTender(inputs);
+    if (inputs.requestedProducts.length > 0) {
+      inputs.type = 'rfq';
+
+      this.save(inputs);
+    } else {
+      message.error('Please input atleast one row');
+    }
   }
 
   handleFile(e) {
@@ -93,7 +99,7 @@ class RfqForm extends TenderForm {
           size="large"
           className="margin"
         >
-          Save
+          Send
         </Button>
       </Form>
     );

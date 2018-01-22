@@ -20,7 +20,7 @@ export default class Field extends React.Component {
     const { control, initialValue, dataType } = this.props;
     const controlProps = control.props;
 
-    if (initialValue === null) return null;
+    if (!initialValue) return null;
 
     if (dataType === 'file' || dataType === 'file-multiple') {
       //file upload

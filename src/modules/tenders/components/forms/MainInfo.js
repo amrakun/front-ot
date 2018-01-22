@@ -14,7 +14,6 @@ const MainInfo = props => {
     suppliers,
     content,
     onEmailContentChange,
-    onReceiveFile,
     onAddSuppliers,
     removeSupplier
   } = props;
@@ -88,9 +87,7 @@ const MainInfo = props => {
             label: 'File',
             name: 'file',
             dataType: 'file',
-            control: (
-              <Uploader initialFile={data.file} onReceiveFile={onReceiveFile} />
-            )
+            control: <Uploader />
           })}
         </Card>
       </Col>

@@ -1,9 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Select, Card, Col, Button, Icon, Upload } from 'antd';
+import { Form, Select, Card, Col } from 'antd';
 import { booleanData, certLabels } from './constants';
-import { BaseForm } from 'modules/common/components';
-import { uploadUrl } from 'modules/common/constants';
+import { BaseForm, Uploader } from 'modules/common/components';
 
 class RegistrationForm extends BaseForm {
   constructor(props) {
@@ -42,16 +41,10 @@ class RegistrationForm extends BaseForm {
             {this.renderField({
               label: 'Please upload your certificate',
               name: 'file',
-
               isVisible: isReceived,
               optional: !isReceived,
-              control: (
-                <Upload action={uploadUrl}>
-                  <Button>
-                    <Icon type="upload" /> Click to upload
-                  </Button>
-                </Upload>
-              )
+              dataType: 'file',
+              control: <Uploader />
             })}
             {this.renderSubmit('Save & submit', this.handleSubmit)}
           </Card>
