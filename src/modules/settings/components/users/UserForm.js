@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Input, Modal, Select } from 'antd';
+import { Form, Input, Modal, Select, InputNumber } from 'antd';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -177,13 +177,11 @@ class UserForm extends React.Component {
                   {
                     required: true,
                     message: 'Please input your phone number!'
-                  },
-                  {
-                    type: 'number',
-                    message: 'Please fill correct only number!'
                   }
                 ]
-              })(<Input style={{ width: '100%' }} />)}
+              })(
+                <InputNumber className="user-phone" style={{ width: '100%' }} />
+              )}
             </FormItem>
           </Form>
         </Modal>
