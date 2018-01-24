@@ -13,7 +13,8 @@ import {
   Divider,
   Button,
   Modal,
-  Form
+  Form,
+  message
 } from 'antd';
 
 const confirm = Modal.confirm;
@@ -43,7 +44,7 @@ class UserList extends React.Component {
 
     this.state = {
       search: searchQuery || '',
-      users: props.users,
+      users: this.props.users,
       currentUser: null,
       showPopup: false,
       showResetPopup: false,
@@ -113,6 +114,7 @@ class UserList extends React.Component {
       title: 'Do you want to delete these user?',
       onOk() {
         self.props.removeUser(id);
+        message.success('User succesfully removed.');
       }
     });
   }

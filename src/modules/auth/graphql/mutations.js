@@ -33,10 +33,28 @@ const resetPassword = `
   }
 `;
 
+const usersEditProfile = `
+  mutation usersEditProfile($username: String!, $password: String!, $email: String!, $firstName: String, $lastName: String, $jobTitle: String, $phone: Float) {
+    usersEditProfile(username: $username, password: $password, email: $email, firstName: $firstName, lastName: $lastName, jobTitle: $jobTitle, phone: $phone) {
+      _id
+      username
+      email
+      role
+      isSupplier
+      companyId
+      firstName
+      lastName
+      jobTitle
+      phone
+    }
+  }
+`;
+
 export default {
   login,
   register,
   forgotPassword,
   resetPassword,
+  usersEditProfile,
   confirmRegistration
 };

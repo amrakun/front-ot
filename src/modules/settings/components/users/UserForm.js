@@ -54,40 +54,6 @@ class UserForm extends React.Component {
 
     const title = user ? 'Edit User' : 'Add New User';
 
-    const passwordRender =
-      Object.keys(user).length === 0 ? (
-        <div>
-          <FormItem label="Password">
-            {getFieldDecorator('password', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please input your password!'
-                },
-                {
-                  validator: this.checkConfirm
-                }
-              ]
-            })(<Input type="password" />)}
-          </FormItem>
-          <FormItem label="Confirm Password">
-            {getFieldDecorator('passwordConfirmation', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please confirm your password!'
-                },
-                {
-                  validator: this.checkPassword
-                }
-              ]
-            })(<Input type="password" onBlur={this.handleConfirmBlur} />)}
-          </FormItem>
-        </div>
-      ) : (
-        ''
-      );
-
     return (
       <div>
         <Modal
@@ -154,7 +120,24 @@ class UserForm extends React.Component {
                 ]
               })(<Input />)}
             </FormItem>
-            {passwordRender}
+            <FormItem label="Password">
+              {getFieldDecorator('password', {
+                rules: [
+                  {
+                    validator: this.checkConfirm
+                  }
+                ]
+              })(<Input type="password" />)}
+            </FormItem>
+            <FormItem label="Confirm Password">
+              {getFieldDecorator('passwordConfirmation', {
+                rules: [
+                  {
+                    validator: this.checkPassword
+                  }
+                ]
+              })(<Input type="password" onBlur={this.handleConfirmBlur} />)}
+            </FormItem>
             <FormItem label="Email address">
               {getFieldDecorator('email', {
                 initialValue: user.email || '',
