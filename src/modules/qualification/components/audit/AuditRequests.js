@@ -23,11 +23,11 @@ class AuditRequests extends React.Component {
       },
       {
         title: 'Auditer improvement plan',
-        render: record => <Link to={`audit/submit/${record._id}`}>View</Link>
+        render: () => '-'
       },
       {
         title: 'Auditer report',
-        render: record => <Link to={`audit/submit/${record._id}`}>View</Link>
+        render: () => '-'
       },
       {
         title: 'More',

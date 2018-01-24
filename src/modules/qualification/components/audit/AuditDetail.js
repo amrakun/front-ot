@@ -47,11 +47,25 @@ class AuditDetail extends React.Component {
       },
       {
         title: 'Last auditer report',
-        render: () => <a>View</a>
+        render: record =>
+          record.reportFile ? (
+            <a href={record.reportFile} target="_blank">
+              View
+            </a>
+          ) : (
+            '-'
+          )
       },
       {
         title: 'Last auditer improvement plan',
-        render: () => <a>View</a>
+        render: record =>
+          record.improvementPlanFile ? (
+            <a href={record.improvementPlanFile} target="_blank">
+              View
+            </a>
+          ) : (
+            '-'
+          )
       },
       { title: 'Contact person', dataIndex: 'supplier.contactInfo.name' },
       { title: 'Email address', dataIndex: 'supplier.contactInfo.email' },

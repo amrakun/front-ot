@@ -11,6 +11,11 @@ class AuditForms extends Panes {
     const { currentTabKey } = this.state;
     const { supplierInfo, response, exportFile } = this.props;
 
+    const common = {
+      supplierInfo: supplierInfo,
+      isQualified: response.isQualified
+    };
+
     return (
       <Tabs
         activeKey={currentTabKey}
@@ -23,18 +28,18 @@ class AuditForms extends Panes {
           'Supplier profile',
           'basicInfo',
           SupplierProfile,
-          { supplierInfo: supplierInfo, response: response.basicInfo }
+          { response: response.basicInfo, ...common }
         )}
         {this.renderPane('2', 'Core HSEQ', 'coreHseqInfo', CoreHSEQ, {
           response: response.coreHseqInfo,
-          supplierInfo: supplierInfo
+          ...common
         })}
         {this.renderPane(
           '3',
           'Human resource management',
           'hrInfo',
           HumanResourceManagement,
-          { response: response.hrInfo, supplierInfo: supplierInfo }
+          { response: response.hrInfo, ...common }
         )}
         {this.renderPane(
           '4',
@@ -43,8 +48,8 @@ class AuditForms extends Panes {
           BusinessIntegriy,
           {
             response: response.businessInfo,
-            supplierInfo: supplierInfo,
-            exportFile: exportFile
+            exportFile: exportFile,
+            ...common
           }
         )}
       </Tabs>

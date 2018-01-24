@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Select, Popover, Icon, Divider, Alert, Popconfirm } from 'antd';
+import { Input, Select, Popover, Icon, Divider, Alert } from 'antd';
 import { BaseForm } from 'modules/common/components';
 import { booleanData } from 'modules/common/constants';
 import { labels } from './constants';
@@ -18,7 +18,7 @@ class AuditFormsBase extends BaseForm {
       : this.collectForSupplier;
 
     this.booleanOptions = this.renderOptions(booleanData);
-    this.fieldNames = [];
+    this.fields = [];
 
     this.renderQuestion = this.renderQuestion.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,10 +38,15 @@ class AuditFormsBase extends BaseForm {
   collectForSupplier() {
     const doc = {};
 
-    this.fieldNames.forEach(fieldName => {
-      doc[fieldName] = {
-        supplierAnswer: this.getFieldValue(`${fieldName}Answer`),
-        supplierComment: this.getFieldValue(`${fieldName}Comment`)
+    this.fields.forEach(field => {
+      const name = field.name;
+
+      let answer = this.getFieldValue(`${name}Answer`);
+      if (field.type !== 'multiple') answer = answer === 'true';
+
+      doc[name] = {
+        supplierAnswer: answer,
+        supplierComment: this.getFieldValue(`${name}Comment`)
       };
     });
 
@@ -51,11 +56,16 @@ class AuditFormsBase extends BaseForm {
   collectForBuyer() {
     const doc = {};
 
-    this.fieldNames.forEach(fieldName => {
-      doc[fieldName] = {
-        auditorScore: this.getFieldValue(`${fieldName}Score`),
-        auditorComment: this.getFieldValue(`${fieldName}Comment`),
-        auditorRecommendation: this.getFieldValue(`${fieldName}Recommendation`)
+    this.fields.forEach(field => {
+      const name = field.name;
+
+      let score = this.getFieldValue(`${name}Score`);
+      if (field.type !== 'multiple') score = score === 'true';
+
+      doc[name] = {
+        auditorScore: score,
+        auditorComment: this.getFieldValue(`${name}Comment`),
+        auditorRecommendation: this.getFieldValue(`${name}Recommendation`)
       };
     });
 
@@ -67,17 +77,23 @@ class AuditFormsBase extends BaseForm {
   }
 
   renderForSupplier(name, type) {
-    this.fieldNames.includes(name) || this.fieldNames.push(name);
+    this.fields.includes(name) || this.fields.push({ name, type });
 
     const data = this.props.data || {};
     const answer = data[name] || {};
+    const supplierAnswer = answer.supplierAnswer;
+    const multipleOptions = labels[name].options;
 
     return (
       <div className="audit-question">
         {this.renderField({
           label: this.renderTooltipLabel(name),
           name: `${name}Answer`,
-          initialValue: answer.supplierAnswer,
+          initialValue: multipleOptions
+            ? multipleOptions[supplierAnswer]
+              ? multipleOptions[supplierAnswer].text
+              : ''
+            : supplierAnswer.toString(),
           hasFeedback: false,
           dataType: type !== 'multiple' ? 'boolean' : null,
           control: (
@@ -100,7 +116,7 @@ class AuditFormsBase extends BaseForm {
   }
 
   renderForBuyer(name, type) {
-    this.fieldNames.includes(name) || this.fieldNames.push(name);
+    this.fields.includes(name) || this.fields.push({ name, type });
 
     const response = this.props.response || {};
     const responseData = response[name] || {};
@@ -138,7 +154,7 @@ class AuditFormsBase extends BaseForm {
             ? multipleOptions[auditorScore]
               ? multipleOptions[auditorScore].text
               : ''
-            : auditorScore,
+            : auditorScore.toString(),
           hasFeedback: false,
           dataType: type !== 'multiple' ? 'boolean' : null,
           control: (
@@ -187,8 +203,7 @@ class AuditFormsBase extends BaseForm {
   }
 
   renderIsQualifiedAlert() {
-    const isQualified = false;
-    const { supplierInfo, response } = this.props;
+    const { supplierInfo, response, isQualified } = this.props;
 
     if (response) {
       return (
@@ -205,20 +220,7 @@ class AuditFormsBase extends BaseForm {
             />
           ) : (
             <Alert
-              message={
-                <span>
-                  This supplier is not qualified. Click&nbsp;
-                  <Popconfirm
-                    title="Are you sure to pre-qualify this supplier?"
-                    onConfirm=""
-                    okText="Yes"
-                    cancelText="No"
-                  >
-                    <a>here</a>
-                  </Popconfirm>
-                  &nbsp;to qualify
-                </span>
-              }
+              message="This supplier is not qualified."
               type="warning"
               showIcon
             />

@@ -73,9 +73,6 @@ const QualifyAuditContainer = props => {
     ...props,
     save,
     exportFile,
-    company: {
-      ...auditResponseDetailQuery
-    },
     response: auditResponseDetailQuery.auditResponseDetail,
     supplierInfo: supplierBasicInfoQuery.companyDetail
   };

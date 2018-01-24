@@ -62,28 +62,28 @@ class BusinessIntegriy extends AuditFormsBase {
             {this.renderSubmit('Save & create report', e =>
               this.saveAndShowModal(e, 'report')
             )}
+
+            <CreatePlan
+              {...supplierInfo}
+              exportFile={exportFile}
+              title="Supplier's improvement plan"
+              visible={planModalVisible}
+              hideModal={() => this.hideModal('plan')}
+            />
+
+            <CreateReport
+              {...supplierInfo}
+              exportFile={exportFile}
+              title="Supplier's audit report"
+              visible={reportModalVisible}
+              hideModal={() => this.hideModal('report')}
+            />
           </div>
         ) : (
           this.renderSubmit('Save & submit', e =>
             this.saveAndShowModal(e, 'evidence')
           )
         )}
-
-        <CreatePlan
-          {...supplierInfo}
-          exportFile={exportFile}
-          title="Supplier's improvement plan"
-          visible={planModalVisible}
-          hideModal={() => this.hideModal('plan')}
-        />
-
-        <CreateReport
-          {...supplierInfo}
-          exportFile={exportFile}
-          title="Supplier's audit report"
-          visible={reportModalVisible}
-          hideModal={() => this.hideModal('report')}
-        />
 
         <EvidenceCheck
           title="Confirmation"

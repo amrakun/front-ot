@@ -255,7 +255,10 @@ const auditDetail = `
       responses {
         _id
         status
-        isSent
+        improvementPlanFile
+        improvementPlanSentDate
+        reportFile
+        reportSentDate
         supplier {
           _id
           basicInfo {
@@ -384,6 +387,7 @@ const auditResponseDetail = `
       hrInfo { ${AuditHrInfo} }
       businessInfo { ${AuditBusinessInfo} }
       evidenceInfo { ${AuditEvidenceInfo} }
+      isQualified
     }
   }
 `;
@@ -417,7 +421,7 @@ const auditImprovementPlan = `
 `;
 
 const auditReport = `
-  query auditImprovementPlan(
+  query auditReport(
     $auditId: String!
     $supplierId: String!
     $auditDate: Date!
@@ -425,7 +429,7 @@ const auditReport = `
     $auditor: String!
     $reportNo: String!
   ) {
-    auditImprovementPlan(
+    auditReport(
       auditId: $auditId
       supplierId: $supplierId
       auditDate: $auditDate

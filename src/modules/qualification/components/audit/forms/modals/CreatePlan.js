@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Select, Input, DatePicker, Divider } from 'antd';
-import { booleanData } from 'modules/common/constants';
+import { Form, Input, DatePicker, Divider } from 'antd';
 import ModalWrapper from './ModalWrapper';
 import PropTypes from 'prop-types';
 import { dateFormat } from 'modules/common/constants';
@@ -21,7 +20,6 @@ class CreatePlan extends React.Component {
 
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
         exportFile('auditImprovementPlan', values);
       }
     });
@@ -30,9 +28,6 @@ class CreatePlan extends React.Component {
   render() {
     const { basicInfo } = this.props;
     const { getFieldDecorator } = this.props.form;
-    const booleanOptions = booleanData.map(option => (
-      <Select.Option key={option}>{option}</Select.Option>
-    ));
     const rules = [
       {
         required: true,

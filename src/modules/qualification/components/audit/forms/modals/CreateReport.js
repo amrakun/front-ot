@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Select, Input, DatePicker, Divider } from 'antd';
-import { booleanData } from 'modules/common/constants';
+import { Form, Input, DatePicker, Divider } from 'antd';
 import ModalWrapper from './ModalWrapper';
 import PropTypes from 'prop-types';
 import { Editor } from 'modules/common/components';
@@ -23,12 +22,7 @@ class CreateReport extends React.Component {
 
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        const updatedValues = {
-          ...values,
-          content: this.editorContent
-        };
-        console.log('Received values of form: ', updatedValues);
-        exportFile('auditReport', updatedValues);
+        exportFile('auditReport', values);
       }
     });
   }
@@ -40,9 +34,6 @@ class CreateReport extends React.Component {
   render() {
     const { basicInfo, contactInfo } = this.props;
     const { getFieldDecorator } = this.props.form;
-    const booleanOptions = booleanData.map(option => (
-      <Select.Option key={option}>{option}</Select.Option>
-    ));
     const rules = [
       {
         required: true,
