@@ -6,6 +6,10 @@ const currentUser = `
       email
       isSupplier
       companyId
+      firstName
+      lastName
+      jobTitle
+      phone
     }
   }
 `;

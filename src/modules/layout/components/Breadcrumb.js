@@ -23,7 +23,10 @@ const routes = {
   feedback: 'Feedback',
   responses: 'Responses',
   blocking: 'Blocking',
-  reports: 'Reports & Improvement plans'
+  reports: 'Reports & Improvement plans',
+  'user-list': 'Manage Users',
+  'my-profile': 'My Profile',
+  'change-password': 'Change Password'
 };
 
 const Breadcrumbs = location => {

@@ -63,18 +63,6 @@ const usersEdit = `
     }
 `;
 
-const usersEditProfile = `
-    mutation usersEditProfile($username: String, $email: String, $password: String) {
-        usersEditProfile(username: $username, email: $email, password: $password) {
-            username
-            email
-            role
-            isSupplier
-            companyId
-        }
-    }
-`;
-
 const usersRemove = `
     mutation usersRemove($_id: String!) {
         usersRemove(_id: $_id)
@@ -92,6 +80,5 @@ export default {
   usersAdd,
   usersEdit,
   resetPassword,
-  usersEditProfile,
   usersRemove
 };
