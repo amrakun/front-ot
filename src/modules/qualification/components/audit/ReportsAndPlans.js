@@ -27,7 +27,7 @@ class ReportsAndPlans extends Common {
   }
 
   columns() {
-    return this.getWrappedColumns([
+    return [
       {
         title: 'Status by action',
         dataIndex: 'status',
@@ -42,6 +42,8 @@ class ReportsAndPlans extends Common {
           }
         ]
       },
+      { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
+      { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
       {
         title: 'Submission date',
         render: record => moment(record.createdDate).format(dateFormat)
@@ -61,8 +63,11 @@ class ReportsAndPlans extends Common {
       {
         title: 'Last auditer improvement plan',
         render: () => <a>View</a>
-      }
-    ]);
+      },
+      { title: 'Contact person', dataIndex: 'contactInfo.name' },
+      { title: 'Email address', dataIndex: 'contactInfo.email' },
+      { title: 'Phone number', dataIndex: 'contactInfo.phone' }
+    ];
   }
 
   render() {
