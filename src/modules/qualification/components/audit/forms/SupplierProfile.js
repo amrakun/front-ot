@@ -41,6 +41,7 @@ class SupplierProfile extends AuditFormsBase {
 
     return (
       <Form onSubmit={this.handleSubmit}>
+        {this.renderIsQualifiedAlert()}
         <Card title="Company information">
           <List style={{ marginBottom: '16px' }}>
             {renderListItem('type', '-')}

@@ -4,7 +4,9 @@ import { gql, compose, graphql } from 'react-apollo';
 import { queries, mutations } from '../../graphql';
 import { QualifyAudit } from '../../components';
 import { Loading } from 'modules/common/components';
-import { message } from 'antd';
+import client from 'apolloClient';
+import { notifyReady, notifyLoading } from 'modules/common/constants';
+import { message, notification, Button, Icon } from 'antd';
 
 const QualifyAuditContainer = props => {
   const { auditResponseDetailQuery, supplierBasicInfoQuery, location } = props;
@@ -31,9 +33,46 @@ const QualifyAuditContainer = props => {
       });
   };
 
+  const exportFile = (name, variables) => {
+    notification.open(notifyLoading);
+
+    client
+      .query({
+        query: gql(queries[name]),
+        name: name,
+        variables: {
+          auditId: location.state.auditId,
+          supplierId: location.state.supplierId,
+          auditResult: true,
+          ...variables
+        }
+      })
+      .then(response => {
+        notification.close('loadingNotification');
+        notification.open({
+          ...notifyReady,
+          btn: (
+            <Button
+              type="primary"
+              onClick={() => {
+                notification.close('downloadNotification');
+                window.open(response.data[Object.keys(response.data)[0]]);
+              }}
+            >
+              <Icon type="download" /> Download
+            </Button>
+          )
+        });
+      })
+      .catch(error => {
+        message.error(error.message);
+      });
+  };
+
   const updatedProps = {
     ...props,
     save,
+    exportFile,
     company: {
       ...auditResponseDetailQuery
     },

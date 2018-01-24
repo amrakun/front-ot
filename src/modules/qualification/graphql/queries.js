@@ -198,7 +198,11 @@ const feedbackResponseDetail = `
 const basicInfoCompanyFields = `
   _id
   basicInfo {
+    enName
     totalNumberOfEmployees
+  }
+  contactInfo {
+    name
   }
   shareholderInfo {
     shareholders {
@@ -392,6 +396,46 @@ const supplierBasicInfo = `
   }
 `;
 
+const auditImprovementPlan = `
+  query auditImprovementPlan(
+    $auditId: String!
+    $supplierId: String!
+    $auditDate: Date!
+    $auditResult: Boolean!
+    $reassessmentDate: Date!
+    $auditorName: String!
+  ) {
+    auditImprovementPlan(
+      auditId: $auditId
+      supplierId: $supplierId
+      auditDate: $auditDate
+      auditResult: $auditResult
+      reassessmentDate: $reassessmentDate
+      auditorName: $auditorName
+    )
+  }
+`;
+
+const auditReport = `
+  query auditImprovementPlan(
+    $auditId: String!
+    $supplierId: String!
+    $auditDate: Date!
+    $auditResult: Boolean!
+    $auditor: String!
+    $reportNo: String!
+  ) {
+    auditImprovementPlan(
+      auditId: $auditId
+      supplierId: $supplierId
+      auditDate: $auditDate
+      auditResult: $auditResult
+      auditor: $auditor
+      reportNo: $reportNo
+    )
+  }
+`;
+
 export default {
   blockedCompanies,
   supplierPrequalification,
@@ -405,5 +449,7 @@ export default {
   auditDetail,
   auditResponseByUser,
   auditResponseDetail,
-  supplierBasicInfo
+  supplierBasicInfo,
+  auditImprovementPlan,
+  auditReport
 };

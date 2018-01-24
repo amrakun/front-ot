@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Select, Popover, Icon, Divider } from 'antd';
+import { Input, Select, Popover, Icon, Divider, Alert, Popconfirm } from 'antd';
 import { BaseForm } from 'modules/common/components';
 import { booleanData } from 'modules/common/constants';
 import { labels } from './constants';
@@ -184,6 +184,50 @@ class AuditFormsBase extends BaseForm {
         </Popover>
       </span>
     );
+  }
+
+  renderIsQualifiedAlert() {
+    const isQualified = false;
+    const { supplierInfo, response } = this.props;
+
+    if (response) {
+      return (
+        <div>
+          <h2 style={{ textAlign: 'center', marginBottom: '16px' }}>
+            {supplierInfo.basicInfo.enName}
+          </h2>
+
+          {isQualified ? (
+            <Alert
+              message="This supplier is qualified"
+              type="success"
+              showIcon
+            />
+          ) : (
+            <Alert
+              message={
+                <span>
+                  This supplier is not qualified. Click&nbsp;
+                  <Popconfirm
+                    title="Are you sure to pre-qualify this supplier?"
+                    onConfirm=""
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                    <a>here</a>
+                  </Popconfirm>
+                  &nbsp;to qualify
+                </span>
+              }
+              type="warning"
+              showIcon
+            />
+          )}
+
+          <p style={{ height: '8px' }} />
+        </div>
+      );
+    }
   }
 }
 

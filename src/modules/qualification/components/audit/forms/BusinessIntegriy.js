@@ -1,8 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Card, Button, Modal, Checkbox } from 'antd';
+import { Form, Card } from 'antd';
 import AuditFormsBase from './AuditFormsBase';
-import { evidenceCheckList } from './constants';
+import CreateReport from './modals/CreateReport';
+import CreatePlan from './modals/CreatePlan';
+import EvidenceCheck from './modals/EvidenceCheck';
 
 class BusinessIntegriy extends AuditFormsBase {
   constructor(props) {
@@ -13,60 +15,36 @@ class BusinessIntegriy extends AuditFormsBase {
     this.state = {
       ...this.state,
       evidenceModalVisible: false,
-      submitLoading: false
+      reportModalVisible: false,
+      planModalVisible: false
     };
 
-    this.saveAndCheckEvidence = this.saveAndCheckEvidence.bind(this);
-    this.hideEvidenceModal = this.hideEvidenceModal.bind(this);
-    this.handleEvidenceChange = this.handleEvidenceChange.bind(this);
-    this.handleOk = this.handleOk.bind(this);
-    this.saveAndCreatePlan = this.saveAndCreatePlan.bind(this);
-    this.saveAndCreateReport = this.saveAndCreateReport.bind(this);
+    this.saveAndShowModal = this.saveAndShowModal.bind(this);
   }
 
-  saveAndCheckEvidence(e) {
-    e.preventDefault();
-
-    this.collectAndSave(true); //lastTab = true
-    this.setState({ evidenceModalVisible: true });
-  }
-
-  handleEvidenceChange(values) {
-    this.evidenceChecks = values;
-  }
-
-  hideEvidenceModal() {
-    this.setState({ evidenceModalVisible: false });
-  }
-
-  saveAndCreatePlan(e) {
+  saveAndShowModal(e, name) {
     e.preventDefault();
 
     this.collectAndSave(true);
+    this.setState({ [`${name}ModalVisible`]: true });
   }
 
-  saveAndCreateReport(e) {
-    e.preventDefault();
-
-    this.collectAndSave(true);
-  }
-
-  handleOk() {
-    this.setState({ submitLoading: true });
-
-    const doc = {};
-    this.evidenceChecks.forEach(item => (doc[item] = true));
-
-    this.props.saveEvidenceChecks(doc);
+  hideModal(name) {
+    this.setState({ [`${name}ModalVisible`]: false });
   }
 
   render() {
     const render = this.renderQuestion;
-    const { evidenceModalVisible, submitLoading } = this.state;
-    const { response } = this.props;
+    const {
+      evidenceModalVisible,
+      reportModalVisible,
+      planModalVisible
+    } = this.state;
+    const { response, supplierInfo, exportFile } = this.props;
 
     return (
       <Form onSubmit={this.handleSubmit}>
+        {this.renderIsQualifiedAlert()}
         <Card title="Business integrity">
           {render('doesHavePolicyStatement')}
           {render('ensureThroughoutCompany')}
@@ -78,52 +56,41 @@ class BusinessIntegriy extends AuditFormsBase {
         {this.renderGoBack()}
         {response ? (
           <div style={{ float: 'right' }}>
-            {this.renderSubmit(
-              'Save & create improvement plan',
-              this.saveAndCreatePlan
+            {this.renderSubmit('Save & create improvement plan', e =>
+              this.saveAndShowModal(e, 'plan')
             )}
-            {this.renderSubmit(
-              'Save & create report',
-              this.saveAndCreateReport
+            {this.renderSubmit('Save & create report', e =>
+              this.saveAndShowModal(e, 'report')
             )}
           </div>
         ) : (
-          this.renderSubmit('Save & submit', this.saveAndCheckEvidence)
+          this.renderSubmit('Save & submit', e =>
+            this.saveAndShowModal(e, 'evidence')
+          )
         )}
 
-        <Modal
+        <CreatePlan
+          {...supplierInfo}
+          exportFile={exportFile}
+          title="Supplier's improvement plan"
+          visible={planModalVisible}
+          hideModal={() => this.hideModal('plan')}
+        />
+
+        <CreateReport
+          {...supplierInfo}
+          exportFile={exportFile}
+          title="Supplier's audit report"
+          visible={reportModalVisible}
+          hideModal={() => this.hideModal('report')}
+        />
+
+        <EvidenceCheck
           title="Confirmation"
           visible={evidenceModalVisible}
-          onCancel={this.hideEvidenceModal}
-          width="80vh"
-          bodyStyle={{ height: '60vh', overflow: 'scroll' }}
-          footer={[
-            <Button key="back" onClick={this.hideEvidenceModal}>
-              Return
-            </Button>,
-            <Button
-              key="submit"
-              type="primary"
-              loading={submitLoading}
-              onClick={this.handleOk}
-            >
-              Submit
-            </Button>
-          ]}
-        >
-          <strong>
-            Please send your evidences for each question to &#34;
-            <a href="mailto:narantsatsral@ot.mn" target="_top">
-              narantsatsral@ot.mn
-            </a>&#34; , and tick the boxes to confirm that you have sent each
-            evidence.
-          </strong>
-          <Checkbox.Group
-            options={evidenceCheckList}
-            className="horizontal margin"
-            onChange={this.handleEvidenceChange}
-          />
-        </Modal>
+          save={this.props.saveEvidenceChecks}
+          hideModal={() => this.hideModal('evidence')}
+        />
       </Form>
     );
   }

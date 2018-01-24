@@ -9,7 +9,7 @@ import { Panes } from 'modules/companies/components';
 class AuditForms extends Panes {
   render() {
     const { currentTabKey } = this.state;
-    const { supplierInfo, response } = this.props;
+    const { supplierInfo, response, exportFile } = this.props;
 
     return (
       <Tabs
@@ -26,21 +26,26 @@ class AuditForms extends Panes {
           { supplierInfo: supplierInfo, response: response.basicInfo }
         )}
         {this.renderPane('2', 'Core HSEQ', 'coreHseqInfo', CoreHSEQ, {
-          response: response.coreHseqInfo
+          response: response.coreHseqInfo,
+          supplierInfo: supplierInfo
         })}
         {this.renderPane(
           '3',
           'Human resource management',
           'hrInfo',
           HumanResourceManagement,
-          { response: response.hrInfo }
+          { response: response.hrInfo, supplierInfo: supplierInfo }
         )}
         {this.renderPane(
           '4',
           'Business integrity',
           'businessInfo',
           BusinessIntegriy,
-          { response: response.businessInfo }
+          {
+            response: response.businessInfo,
+            supplierInfo: supplierInfo,
+            exportFile: exportFile
+          }
         )}
       </Tabs>
     );

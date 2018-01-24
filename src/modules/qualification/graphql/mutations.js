@@ -228,6 +228,14 @@ const auditsSupplierSendResponse = `
   }
 `;
 
+const qualificationsPrequalify = `
+  mutation qualificationsPrequalify($supplierId: String!) {
+    qualificationsPrequalify(supplierId: $supplierId) {
+      _id
+    }
+  }
+`;
+
 export default {
   addDifotScores,
   addDueDiligence,
@@ -250,5 +258,6 @@ export default {
   auditsBuyerSaveCoreHseqInfo,
   auditsBuyerSaveHrInfo,
   auditsBuyerSaveBusinessInfo,
-  auditsSupplierSendResponse
+  auditsSupplierSendResponse,
+  qualificationsPrequalify
 };
