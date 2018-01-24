@@ -40,7 +40,13 @@ const SubmitAuditContainer = (props, context) => {
   };
 
   const saveEvidenceChecks = doc => {
-    evidenceInfoEdit({ variables: { evidenceInfo: doc } })
+    evidenceInfoEdit({
+      variables: {
+        auditId: match.params.id,
+        supplierId: currentUser.companyId,
+        evidenceInfo: doc
+      }
+    })
       .then(() => {
         message.success('Saved');
         send();

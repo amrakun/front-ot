@@ -54,8 +54,11 @@ const HeaderBar = (props, context) => {
             </span>
           }
         >
-          <Menu.Item disabled key="profile">
-            My profile
+          <Menu.Item key="profile">
+            <Link to="/my-profile">My profile</Link>
+          </Menu.Item>
+          <Menu.Item key="change-password">
+            <Link to="/change-password">Change Password</Link>
           </Menu.Item>
           <Menu.Item disabled key="delegate">
             Delegation

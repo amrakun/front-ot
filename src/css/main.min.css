@@ -451,3 +451,6 @@ form .ant-input-number {
   width: 100%;
   margin-top: 24px;
 }
+.user-phone .ant-input-number-handler-wrap {
+  display: none;
+}

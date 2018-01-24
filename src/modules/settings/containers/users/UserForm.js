@@ -4,6 +4,7 @@ import { compose, gql, graphql } from 'react-apollo';
 import { mutations } from '../../graphql';
 import { UserForm as UserFormComponent } from '../../components';
 import { Loading } from '../../../common/components';
+import { message } from 'antd';
 
 const propTypes = {
   user: PropTypes.object,
@@ -22,8 +23,12 @@ class UserFormContainer extends React.Component {
 
     const mainAction = doc => {
       const mutation = user ? usersEditMutation : usersAddMutation;
+      const messageText = user
+        ? 'User succesfully edited.'
+        : 'User succesfully added.';
       mutation({ variables: doc }).then(() => {
         onSuccess();
+        message.success(messageText);
       });
     };
 

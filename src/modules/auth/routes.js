@@ -6,7 +6,9 @@ import {
   ForgotPassword,
   ResetPassword,
   Register,
-  RegisterConfirmation
+  RegisterConfirmation,
+  Profile,
+  ChangePassword
 } from './containers';
 import { Home, PublicEoi } from './components';
 
@@ -42,6 +44,24 @@ export default [
     component={({ location }) => {
       const parsed = queryString.parse(location.search);
       return <RegisterConfirmation token={parsed.token} />;
+    }}
+  />,
+  <Route
+    key="/my-profile"
+    exact
+    path="/my-profile"
+    component={({ location }) => {
+      const parsed = queryString.parse(location.search);
+      return <Profile token={parsed.token} />;
+    }}
+  />,
+  <Route
+    key="/change-password"
+    exact
+    path="/change-password"
+    component={({ location }) => {
+      const parsed = queryString.parse(location.search);
+      return <ChangePassword token={parsed.token} />;
     }}
   />
 ];

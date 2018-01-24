@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Input, Modal, Select } from 'antd';
+import { Form, Input, Modal, Select, InputNumber } from 'antd';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -53,40 +53,6 @@ class UserForm extends React.Component {
     const user = this.props.user || {};
 
     const title = user ? 'Edit User' : 'Add New User';
-
-    const passwordRender =
-      Object.keys(user).length === 0 ? (
-        <div>
-          <FormItem label="Password">
-            {getFieldDecorator('password', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please input your password!'
-                },
-                {
-                  validator: this.checkConfirm
-                }
-              ]
-            })(<Input type="password" />)}
-          </FormItem>
-          <FormItem label="Confirm Password">
-            {getFieldDecorator('passwordConfirmation', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please confirm your password!'
-                },
-                {
-                  validator: this.checkPassword
-                }
-              ]
-            })(<Input type="password" onBlur={this.handleConfirmBlur} />)}
-          </FormItem>
-        </div>
-      ) : (
-        ''
-      );
 
     return (
       <div>
@@ -154,7 +120,24 @@ class UserForm extends React.Component {
                 ]
               })(<Input />)}
             </FormItem>
-            {passwordRender}
+            <FormItem label="Password">
+              {getFieldDecorator('password', {
+                rules: [
+                  {
+                    validator: this.checkConfirm
+                  }
+                ]
+              })(<Input type="password" />)}
+            </FormItem>
+            <FormItem label="Confirm Password">
+              {getFieldDecorator('passwordConfirmation', {
+                rules: [
+                  {
+                    validator: this.checkPassword
+                  }
+                ]
+              })(<Input type="password" onBlur={this.handleConfirmBlur} />)}
+            </FormItem>
             <FormItem label="Email address">
               {getFieldDecorator('email', {
                 initialValue: user.email || '',
@@ -177,13 +160,11 @@ class UserForm extends React.Component {
                   {
                     required: true,
                     message: 'Please input your phone number!'
-                  },
-                  {
-                    type: 'number',
-                    message: 'Please fill correct only number!'
                   }
                 ]
-              })(<Input style={{ width: '100%' }} />)}
+              })(
+                <InputNumber className="user-phone" style={{ width: '100%' }} />
+              )}
             </FormItem>
           </Form>
         </Modal>
