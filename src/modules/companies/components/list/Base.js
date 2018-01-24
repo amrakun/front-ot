@@ -41,7 +41,10 @@ class Base extends Common {
           <Link to={`/view-registration/${record._id}`}>View</Link>
         )
       },
-      { title: 'Qualification status', dataIndex: 'audit' },
+      {
+        title: 'Qualification status',
+        render: record => (record.isQualified ? 'Yes' : 'No')
+      },
       {
         title: 'Validation status',
         render: record => (record.isProductsInfoValidated ? 'Yes' : '-')

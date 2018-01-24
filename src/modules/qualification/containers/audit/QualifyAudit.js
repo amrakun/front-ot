@@ -27,6 +27,7 @@ const QualifyAuditContainer = props => {
     })
       .then(() => {
         message.success('Saved');
+        auditResponseDetailQuery.refetch();
       })
       .catch(error => {
         message.error(error.message);

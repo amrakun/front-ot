@@ -32,7 +32,7 @@ class CreateReport extends React.Component {
   }
 
   render() {
-    const { basicInfo, contactInfo } = this.props;
+    const { basicInfo, contactInfo, isQualified } = this.props;
     const { getFieldDecorator } = this.props.form;
     const rules = [
       {
@@ -50,6 +50,10 @@ class CreateReport extends React.Component {
 
           <p>
             Key contact person: <strong>{contactInfo.name}</strong>
+          </p>
+
+          <p>
+            Audit result: <strong>{isQualified ? 'Yes' : 'No'}</strong>
           </p>
           <Divider />
           <FormItem label="Qualification/audit date">
@@ -82,7 +86,8 @@ CreateReport.propTypes = {
   form: PropTypes.object,
   basicInfo: PropTypes.object,
   exportFile: PropTypes.func,
-  contactInfo: PropTypes.object
+  contactInfo: PropTypes.object,
+  isQualified: PropTypes.bool
 };
 
 const ReportsForm = Form.create()(CreateReport);

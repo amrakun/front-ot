@@ -40,7 +40,13 @@ class BusinessIntegriy extends AuditFormsBase {
       reportModalVisible,
       planModalVisible
     } = this.state;
-    const { response, supplierInfo, exportFile } = this.props;
+    const { response, supplierInfo, exportFile, isQualified } = this.props;
+
+    const exportModalArgs = {
+      ...supplierInfo,
+      exportFile,
+      isQualified
+    };
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -64,16 +70,14 @@ class BusinessIntegriy extends AuditFormsBase {
             )}
 
             <CreatePlan
-              {...supplierInfo}
-              exportFile={exportFile}
+              {...exportModalArgs}
               title="Supplier's improvement plan"
               visible={planModalVisible}
               hideModal={() => this.hideModal('plan')}
             />
 
             <CreateReport
-              {...supplierInfo}
-              exportFile={exportFile}
+              {...exportModalArgs}
               title="Supplier's audit report"
               visible={reportModalVisible}
               hideModal={() => this.hideModal('report')}

@@ -74,7 +74,8 @@ const generator = (Component, query) => {
           difotScore: difotScore,
           includeBlocked: status.includes('includeBlocked'),
           isPrequalified: status.includes('isPrequalified'),
-          isProductsInfoValidated: status.includes('isProductsInfoValidated')
+          isProductsInfoValidated: status.includes('isProductsInfoValidated'),
+          isQualified: status.includes('isQualified')
         },
         notifyOnNetworkStatusChange: true
       };

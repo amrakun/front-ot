@@ -272,6 +272,7 @@ const commonParams = `
   $isProductsInfoValidated: Boolean
   $includeBlocked: Boolean
   $isPrequalified: Boolean
+  $isQualified: Boolean
   $difotScore: String
   $_ids: [String]
 `;
@@ -283,6 +284,7 @@ const commonValues = `
   isProductsInfoValidated: $isProductsInfoValidated,
   includeBlocked: $includeBlocked,
   isPrequalified: $isPrequalified,
+  isQualified: $isQualified,
   difotScore: $difotScore
   _ids: $_ids
 `;
@@ -313,6 +315,7 @@ const companies = `
       isProductsInfoValidated
       isBlocked
       isPrequalified
+      isQualified
     }
   }
 `;
