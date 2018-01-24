@@ -1,9 +1,13 @@
+/* eslint-disable react/display-name */
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
+import { Table, Card, Row, Col, DatePicker } from 'antd';
+import { NumberCard } from 'modules/common/components';
+import { colors } from 'modules/common/colors';
+import { dateFormat } from 'modules/common/constants';
 import { Link } from 'react-router-dom';
-import { Table, Card, DatePicker } from 'antd';
-import { dateTimeFormat } from 'modules/common/constants';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Search } from 'modules/companies/components';
 import queryString from 'query-string';
@@ -12,11 +16,12 @@ class AuditResponses extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleDateRangeChange = this.handleDateRangeChange.bind(this);
+    this.columns = this.columns.bind(this);
   }
 
   handleDateRangeChange(value) {
     const { history } = this.props;
+
     let query = queryString.parse(history.location.search);
     query.from = value[0]._d;
     query.to = value[1]._d;
@@ -27,97 +32,145 @@ class AuditResponses extends React.Component {
 
   columns() {
     return [
-      {
-        title: 'Type',
-        dataIndex: 'status',
-        filters: [
-          {
-            text: 'Open',
-            value: 'open'
-          },
-          {
-            text: 'Closed',
-            value: 'closed'
-          }
-        ]
-      },
+      { title: 'Status by date', dataIndex: 'status' },
+      { title: 'Status by action', dataIndex: 'statusByAction' },
+      { title: 'Supplier name', dataIndex: 'supplier.basicInfo.enName' },
+      { title: 'SAP number', dataIndex: 'supplier.basicInfo.sapNumber' },
       {
         title: 'Publish date',
-        render: record => moment(record.publishDate).format(dateTimeFormat),
-        key: 'date'
+        render: record => moment(record.createdDate).format(dateFormat)
       },
       {
-        title: 'Expiration date',
-        render: record => moment(record.expirationDate).format(dateTimeFormat),
-        key: 'expirationDate'
+        title: 'Close date',
+        render: record => moment(record.createdDate).format(dateFormat)
       },
       {
-        title: 'Invited suppliers',
+        title: 'Submission date',
+        render: record => moment(record.createdDate).format(dateFormat)
+      },
+      {
+        title: 'Applied information',
         render: record =>
-          record.supplierIds ? record.supplierIds.length : '-',
-        key: 'suppliers'
+          record.supplier ? (
+            <Link
+              to={{
+                pathname: '/audit/qualify',
+                state: {
+                  supplierId: record.supplier._id,
+                  auditId: record.auditId
+                }
+              }}
+            >
+              View
+            </Link>
+          ) : (
+            '-'
+          )
       },
       {
-        title: 'Participated suppliers',
-        render: record => (record.responses ? record.responses.length : '-'),
-        key: 'responses'
+        title: 'Last auditer report',
+        render: record =>
+          record.reportFile ? (
+            <a href={record.reportFile} target="_blank">
+              View
+            </a>
+          ) : (
+            '-'
+          )
       },
       {
-        title: 'Qualified suppliers',
-        render: () => '0',
-        key: 'qualified'
-      },
-      {
-        title: 'Sent improvement plan',
-        render: () => '0',
-        key: 'isSent'
-      },
-      {
-        title: 'Sent auditer report',
-        render: () => '0',
-        key: 'auditerReportSent'
-      },
-      {
-        title: 'More',
-        render: record => (
-          <Link to={`/audit/response/${record._id}`}>View</Link>
-        ),
-        key: 'action'
+        title: 'Last auditer improvement plan',
+        render: record =>
+          record.improvementPlanFile ? (
+            <a href={record.improvementPlanFile} target="_blank">
+              View
+            </a>
+          ) : (
+            '-'
+          )
       }
     ];
   }
 
   render() {
-    const { data, pagination, loading, onChange } = this.props;
+    const { pagination, loading, onChange } = this.props;
+
+    const data = this.props.data || [];
+    const requested = data.supplierIds ? data.supplierIds.length : 0;
+    const submitted = data.responses ? data.responses.length : 0;
+    const notResponded = requested - submitted;
+
+    const colSpan = {
+      xl: 6,
+      lg: 12,
+      sm: 24
+    };
 
     return (
-      <Card title="Qualification responses">
-        <div className="table-operations">
-          <Search />
-          <DatePicker.RangePicker onChange={this.handleDateRangeChange} />
-        </div>
+      <div>
+        <Row gutter={24}>
+          <Col key={0} {...colSpan}>
+            <NumberCard
+              icon="message"
+              title="Invite suppliers"
+              color={colors[3]}
+              number={requested}
+            />
+          </Col>
+          <Col key={2} {...colSpan}>
+            <NumberCard
+              icon="question"
+              title="Not responded"
+              color={colors[5]}
+              number={notResponded}
+            />
+          </Col>
+          <Col key={3} {...colSpan}>
+            <NumberCard
+              icon="like"
+              title="Qualified"
+              color={colors[2]}
+              number={submitted}
+            />
+          </Col>
+          <Col key={4} {...colSpan}>
+            <NumberCard
+              icon="mail"
+              title="Sent improvement plan"
+              color={colors[8]}
+              number={submitted}
+            />
+          </Col>
+        </Row>
 
-        <Table
-          columns={this.columns()}
-          rowKey={record => record._id}
-          dataSource={data}
-          pagination={pagination}
-          loading={loading}
-          scroll={{ x: 1500 }}
-          onChange={(pagination, filters, sorter) =>
-            onChange(pagination, filters, sorter)
-          }
-        />
-      </Card>
+        <Card title="Success audit responses">
+          <div className="table-operations">
+            <Search />
+            <DatePicker.RangePicker onChange={this.handleDateRangeChange} />
+          </div>
+          <Table
+            columns={this.columns()}
+            rowKey={record => record._id}
+            dataSource={data}
+            pagination={pagination}
+            loading={loading}
+            scroll={{ x: 1400 }}
+            onChange={(pagination, filters, sorter) =>
+              onChange(pagination, filters, sorter)
+            }
+          />
+        </Card>
+      </div>
     );
   }
 }
 
 AuditResponses.propTypes = {
-  data: PropTypes.array,
   pagination: PropTypes.object,
-  loading: PropTypes.bool.isRequired,
+  data: PropTypes.array,
+  loading: PropTypes.bool,
   onChange: PropTypes.func,
+  match: PropTypes.object,
   history: PropTypes.object
 };
 

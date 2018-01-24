@@ -236,6 +236,24 @@ const qualificationsPrequalify = `
   }
 `;
 
+const auditsBuyerSendFiles = `
+  mutation auditsBuyerSendFiles(
+    $auditId: String
+    $supplierId: String
+    $improvementPlan: Boolean
+    $report: Boolean
+  ) {
+    auditsBuyerSendFiles(
+      auditId: $auditId
+      supplierId: $supplierId
+      improvementPlan: $improvementPlan
+      report: $report
+    ) {
+      _id
+    }
+  }
+`;
+
 export default {
   addDifotScores,
   addDueDiligence,
@@ -259,5 +277,6 @@ export default {
   auditsBuyerSaveHrInfo,
   auditsBuyerSaveBusinessInfo,
   auditsSupplierSendResponse,
-  qualificationsPrequalify
+  qualificationsPrequalify,
+  auditsBuyerSendFiles
 };

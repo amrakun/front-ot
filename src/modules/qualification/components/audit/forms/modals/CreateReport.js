@@ -18,11 +18,12 @@ class CreateReport extends React.Component {
   }
 
   handleOk() {
-    const { form, exportFile } = this.props;
+    const { form, exportFile, hideModal } = this.props;
 
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         exportFile('auditReport', values);
+        hideModal();
       }
     });
   }
@@ -87,7 +88,8 @@ CreateReport.propTypes = {
   basicInfo: PropTypes.object,
   exportFile: PropTypes.func,
   contactInfo: PropTypes.object,
-  isQualified: PropTypes.bool
+  isQualified: PropTypes.bool,
+  hideModal: PropTypes.func
 };
 
 const ReportsForm = Form.create()(CreateReport);

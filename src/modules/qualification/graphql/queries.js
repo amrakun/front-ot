@@ -247,33 +247,32 @@ const audits = `
     }
   }
 `;
-const auditDetail = `
-  query auditDetail($_id: String!) {
-    auditDetail(_id: $_id) {
+const auditResponses = `
+  query auditResponses {
+    auditResponses {
+
       _id
-      supplierIds
-      responses {
+      status
+      auditId
+      improvementPlanFile
+      improvementPlanSentDate
+      reportFile
+      reportSentDate
+      supplier {
         _id
-        status
-        improvementPlanFile
-        improvementPlanSentDate
-        reportFile
-        reportSentDate
-        supplier {
-          _id
-          basicInfo {
-            enName,
-            email,
-            sapNumber
-          }
-          contactInfo {
-            name,
-            email,
-            phone
-          }
-          isPrequalified
+        basicInfo {
+          enName,
+          email,
+          sapNumber
         }
+        contactInfo {
+          name,
+          email,
+          phone
+        }
+        isPrequalified
       }
+
     }
   }
 `;
@@ -450,7 +449,7 @@ export default {
   companyByUser,
   auditRequests,
   audits,
-  auditDetail,
+  auditResponses,
   auditResponseByUser,
   auditResponseDetail,
   supplierBasicInfo,

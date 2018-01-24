@@ -9,8 +9,8 @@ import { Panes } from 'modules/companies/components';
 class AuditForms extends Panes {
   render() {
     const { currentTabKey } = this.state;
-    const { supplierInfo, response, exportFile } = this.props;
-
+    const { supplierInfo, exportFile } = this.props;
+    const response = this.props.response || {};
     const common = {
       supplierInfo: supplierInfo,
       isQualified: response.isQualified

@@ -23,20 +23,19 @@ class AuditResponsesContainer extends React.Component {
   }
 
   render() {
-    const { auditsQuery } = this.props;
+    const { auditResponsesQuery } = this.props;
 
-    if (auditsQuery.loading) {
+    if (auditResponsesQuery.loading) {
       return <AuditResponses loading={true} />;
     }
 
     const { pagination } = this.state;
-    const audits = auditsQuery.audits || [];
+    const auditResponses = auditResponsesQuery.auditResponses || [];
 
     const updatedProps = {
-      ...this.props,
-      data: audits,
+      data: auditResponses,
       pagination: {
-        total: audits.length,
+        total: auditResponses.length,
         pageSize: pagination.pageSize,
         current: pagination.current
       },
@@ -50,11 +49,11 @@ class AuditResponsesContainer extends React.Component {
 }
 
 AuditResponsesContainer.propTypes = {
-  auditsQuery: PropTypes.object
+  auditResponsesQuery: PropTypes.object
 };
 
 export default compose(
-  graphql(gql(queries.audits), {
-    name: 'auditsQuery'
+  graphql(gql(queries.auditResponses), {
+    name: 'auditResponsesQuery'
   })
 )(AuditResponsesContainer);

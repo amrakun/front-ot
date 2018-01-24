@@ -16,7 +16,6 @@ import {
   AuditResponses,
   SubmitAudit,
   AuditRequests,
-  AuditDetail,
   QualifyAudit,
   ReportsAndPlans
 } from './containers';
@@ -145,11 +144,5 @@ export default [
     exact
     path={'/qualification'}
     component={AuditRequests}
-  />,
-  <Route
-    key="/audit/response"
-    exact
-    path="/audit/response/:id"
-    component={AuditDetail}
   />
 ];

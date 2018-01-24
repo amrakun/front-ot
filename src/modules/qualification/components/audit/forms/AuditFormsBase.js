@@ -84,16 +84,20 @@ class AuditFormsBase extends BaseForm {
     const supplierAnswer = answer.supplierAnswer;
     const multipleOptions = labels[name].options;
 
+    let initialAnswer = '';
+    if (multipleOptions) {
+      if (multipleOptions[supplierAnswer])
+        initialAnswer = multipleOptions[supplierAnswer].text;
+    } else {
+      initialAnswer = supplierAnswer ? supplierAnswer.toString() : '';
+    }
+
     return (
       <div className="audit-question">
         {this.renderField({
           label: this.renderTooltipLabel(name),
           name: `${name}Answer`,
-          initialValue: multipleOptions
-            ? multipleOptions[supplierAnswer]
-              ? multipleOptions[supplierAnswer].text
-              : ''
-            : supplierAnswer.toString(),
+          initialValue: initialAnswer,
           hasFeedback: false,
           dataType: type !== 'multiple' ? 'boolean' : null,
           control: (
@@ -129,6 +133,14 @@ class AuditFormsBase extends BaseForm {
     } = responseData;
     const multipleOptions = labels[name].options;
 
+    let initialScore = '';
+    if (multipleOptions) {
+      if (multipleOptions[auditorScore])
+        initialScore = multipleOptions[auditorScore].text;
+    } else {
+      initialScore = auditorScore ? auditorScore.toString() : '';
+    }
+
     return (
       <div className="audit-question">
         <div className="ant-form-item-label">
@@ -150,11 +162,7 @@ class AuditFormsBase extends BaseForm {
 
         {this.renderField({
           name: `${name}Score`,
-          initialValue: multipleOptions
-            ? multipleOptions[auditorScore]
-              ? multipleOptions[auditorScore].text
-              : ''
-            : auditorScore.toString(),
+          initialValue: initialScore,
           hasFeedback: false,
           dataType: type !== 'multiple' ? 'boolean' : null,
           control: (
