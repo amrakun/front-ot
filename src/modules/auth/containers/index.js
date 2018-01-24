@@ -5,6 +5,7 @@ import withCurrentUser from './withCurrentUser';
 import Register from './Register';
 import Profile from './Profile';
 import RegisterConfirmation from './RegisterConfirmation';
+import ChangePassword from './ChangePassword';
 
 export {
   withCurrentUser,
@@ -13,5 +14,6 @@ export {
   ResetPassword,
   Register,
   Profile,
-  RegisterConfirmation
+  RegisterConfirmation,
+  ChangePassword
 };

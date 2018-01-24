@@ -33,6 +33,23 @@ const resetPassword = `
   }
 `;
 
+const usersChangePassword = `
+  mutation usersChangePassword($currentPassword: String!, $newPassword: String!) {
+    usersChangePassword(currentPassword: $currentPassword, newPassword: $newPassword){
+      _id
+      username
+      email
+      role
+      isSupplier
+      companyId
+      firstName
+      lastName
+      jobTitle
+      phone
+    }
+  }
+`;
+
 const usersEditProfile = `
   mutation usersEditProfile($username: String!, $password: String!, $email: String!, $firstName: String, $lastName: String, $jobTitle: String, $phone: Float) {
     usersEditProfile(username: $username, password: $password, email: $email, firstName: $firstName, lastName: $lastName, jobTitle: $jobTitle, phone: $phone) {
@@ -56,5 +73,6 @@ export default {
   forgotPassword,
   resetPassword,
   usersEditProfile,
-  confirmRegistration
+  confirmRegistration,
+  usersChangePassword
 };

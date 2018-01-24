@@ -25,7 +25,8 @@ const routes = {
   blocking: 'Blocking',
   reports: 'Reports & Improvement plans',
   'user-list': 'Manage Users',
-  'my-profile': 'My Profile'
+  'my-profile': 'My Profile',
+  'change-password': 'Change Password'
 };
 
 const Breadcrumbs = location => {

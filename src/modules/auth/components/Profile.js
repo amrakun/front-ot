@@ -24,15 +24,11 @@ class Profile extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    const { currentUser, form } = this.props;
+    const { form } = this.props;
 
     form.validateFieldsAndScroll((err, data) => {
       if (err) {
         return;
-      }
-
-      if (currentUser) {
-        data._id = currentUser._id;
       }
 
       this.props.mainAction(data);
