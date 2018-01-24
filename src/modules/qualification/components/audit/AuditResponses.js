@@ -72,7 +72,7 @@ class AuditResponses extends React.Component {
         render: record =>
           record.reportFile ? (
             <a href={record.reportFile} target="_blank">
-              View
+              {moment(record.reportSentDate).format(dateFormat)}
             </a>
           ) : (
             '-'
@@ -83,7 +83,7 @@ class AuditResponses extends React.Component {
         render: record =>
           record.improvementPlanFile ? (
             <a href={record.improvementPlanFile} target="_blank">
-              View
+              {moment(record.improvementPlanSentDate).format(dateFormat)}
             </a>
           ) : (
             '-'
@@ -99,6 +99,8 @@ class AuditResponses extends React.Component {
     const requested = data.supplierIds ? data.supplierIds.length : 0;
     const submitted = data.responses ? data.responses.length : 0;
     const notResponded = requested - submitted;
+
+    console.log(data);
 
     const colSpan = {
       xl: 6,
