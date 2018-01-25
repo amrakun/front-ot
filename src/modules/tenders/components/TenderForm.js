@@ -117,6 +117,8 @@ class TenderForm extends BaseForm {
     product[name] = value;
 
     this.state[stateKey] = product;
+
+    console.log(this.state);
   }
 
   renderProductColumn(props) {

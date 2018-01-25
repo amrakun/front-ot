@@ -35,11 +35,11 @@ class SubmitTender extends TenderForm {
       }
     });
 
-    this.save({
-      supplierId: currentUser.companyId,
-      tenderId: this.props.data._id,
-      respondedProducts: products
-    });
+    // this.save({
+    //   supplierId: currentUser.companyId,
+    //   tenderId: this.props.data._id,
+    //   respondedProducts: products
+    // });
   }
 
   render() {

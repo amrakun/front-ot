@@ -26,7 +26,6 @@ const PublishContainer = ({
         });
       })
       .catch(error => {
-        console.log(error);
         message.error(error.message);
       });
   };
