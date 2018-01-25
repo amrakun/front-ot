@@ -181,7 +181,6 @@ class Dashboard extends React.Component {
     const queryParams = queryString.parse(props.location.search);
     const extendedProps = { ...props, queryParams };
     const dateFormat = 'YYYY/MM/DD';
-    const now = new Date();
 
     return (
       <Tabs animated={false}>
@@ -191,14 +190,22 @@ class Dashboard extends React.Component {
               <DatePicker
                 className="chart-filter-input"
                 placeholder="Publish date"
-                defaultValue={moment(now, dateFormat)}
+                defaultValue={
+                  queryParams.startDate
+                    ? moment(queryParams.startDate, dateFormat)
+                    : null
+                }
                 format={dateFormat}
                 onChange={(d, date) => this.handleSearch('startDate', date)}
               />
               <DatePicker
                 className="chart-filter-input"
                 placeholder="Close date"
-                defaultValue={moment(now, dateFormat)}
+                defaultValue={
+                  queryParams.endDate
+                    ? moment(queryParams.endDate, dateFormat)
+                    : null
+                }
                 format={dateFormat}
                 onChange={(d, date) => this.handleSearch('endDate', date)}
               />

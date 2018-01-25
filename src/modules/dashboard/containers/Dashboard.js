@@ -4,7 +4,6 @@ import { gql, compose, graphql } from 'react-apollo';
 import { queries } from '../graphql';
 import { Loading } from 'modules/common/components';
 import { Dashboard } from '../components';
-import moment from 'moment';
 
 const DashboardContainer = props => {
   const {
@@ -79,29 +78,41 @@ export default compose(
     name: 'companiesCountByTierTypeQuery',
     options: ({ queryParams }) => ({
       variables: {
-        startDate: new Date(queryParams.startDate),
-        endDate: new Date(queryParams.endDate)
+        startDate: new Date(
+          queryParams.startDate ? queryParams.startDate : '1900-01-01'
+        ),
+        endDate: new Date(
+          queryParams.endDate ? queryParams.endDate : '2040-09-26'
+        )
       }
     })
   }),
 
   graphql(gql(queries.companiesCountByRegisteredVsPrequalified), {
     name: 'ccbrvpQuery',
-    options: () => ({
+    options: ({ queryParams }) => ({
       variables: {
-        startDate: new Date('1900-01-01'),
-        endDate: new Date('2040-09-26'),
-        productCodes: 'a01001'
+        startDate: new Date(
+          queryParams.startDate ? queryParams.startDate : '1900-01-01'
+        ),
+        endDate: new Date(
+          queryParams.endDate ? queryParams.endDate : '2040-09-26'
+        ),
+        productCodes: queryParams.productCodes ? queryParams.productCodes : ''
       }
     })
   }),
 
   graphql(gql(queries.tenderCountByStatus), {
     name: 'tenderCountByStatusEoi',
-    options: () => ({
+    options: ({ queryParams }) => ({
       variables: {
-        startDate: new Date('1900-01-01'),
-        endDate: new Date('2040-09-26'),
+        startDate: new Date(
+          queryParams.startDate ? queryParams.startDate : '1900-01-01'
+        ),
+        endDate: new Date(
+          queryParams.endDate ? queryParams.endDate : '2040-09-26'
+        ),
         type: 'eoi'
       }
     })
@@ -109,10 +120,14 @@ export default compose(
 
   graphql(gql(queries.tenderCountByStatus), {
     name: 'tenderCountByStatusRfq',
-    options: () => ({
+    options: ({ queryParams }) => ({
       variables: {
-        startDate: new Date('1900-01-01'),
-        endDate: new Date('2040-09-26'),
+        startDate: new Date(
+          queryParams.startDate ? queryParams.startDate : '1900-01-01'
+        ),
+        endDate: new Date(
+          queryParams.endDate ? queryParams.endDate : '2040-09-26'
+        ),
         type: 'rfq'
       }
     })
@@ -120,10 +135,14 @@ export default compose(
 
   graphql(gql(queries.tendersTotalCount), {
     name: 'tendersTotalCountRfq',
-    options: () => ({
+    options: ({ queryParams }) => ({
       variables: {
-        startDate: new Date('1900-01-01'),
-        endDate: new Date('2040-09-26'),
+        startDate: new Date(
+          queryParams.startDate ? queryParams.startDate : '1900-01-01'
+        ),
+        endDate: new Date(
+          queryParams.endDate ? queryParams.endDate : '2040-09-26'
+        ),
         type: 'rfq'
       }
     })
@@ -131,10 +150,14 @@ export default compose(
 
   graphql(gql(queries.tendersTotalCount), {
     name: 'tendersTotalCountEoi',
-    options: () => ({
+    options: ({ queryParams }) => ({
       variables: {
-        startDate: new Date('1900-01-01'),
-        endDate: new Date('2040-09-26'),
+        startDate: new Date(
+          queryParams.startDate ? queryParams.startDate : '1900-01-01'
+        ),
+        endDate: new Date(
+          queryParams.endDate ? queryParams.endDate : '2040-09-26'
+        ),
         type: 'eoi'
       }
     })
