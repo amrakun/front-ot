@@ -14,6 +14,34 @@ const currentUser = `
   }
 `;
 
+const systemConfig = `
+  query config {
+    config {
+      logo
+      name
+      phone
+      email
+      address
+
+      eoiTemplate
+      rfqTemplate
+      regretLetterTemplate
+      successFeedbackTemplate
+      auditTemplate
+
+      prequalificationDow
+      specificPrequalificationDows
+
+      auditDow
+      specificAuditDows
+
+      improvementPlanDow
+      specificImprovementPlanDows
+    }
+  }
+`;
+
 export default {
-  currentUser
+  currentUser,
+  systemConfig
 };

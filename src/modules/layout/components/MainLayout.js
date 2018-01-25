@@ -33,7 +33,10 @@ class MainLayout extends React.Component {
   }
 
   getChildContext() {
-    return { currentUser: this.props.currentUser };
+    return {
+      currentUser: this.props.currentUser,
+      systemConfig: this.props.systemConfig
+    };
   }
 
   componentDidMount() {
@@ -81,13 +84,15 @@ class MainLayout extends React.Component {
 
 MainLayout.propTypes = {
   currentUser: PropTypes.object,
+  systemConfig: PropTypes.object,
   children: PropTypes.object,
   history: PropTypes.object,
   location: PropTypes.object
 };
 
 MainLayout.childContextTypes = {
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
+  systemConfig: PropTypes.object
 };
 
 export default MainLayout;
