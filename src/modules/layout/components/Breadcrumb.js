@@ -38,9 +38,8 @@ const Breadcrumbs = location => {
   ];
 
   location.pathname.split('/').forEach((path, index) => {
-    breadcrumbItems.push(
-      <BreadcrumbItem key={index}>{routes[path]}</BreadcrumbItem>
-    );
+    const title = routes[path];
+    breadcrumbItems.push(<BreadcrumbItem key={index}>{title}</BreadcrumbItem>);
   });
 
   return <Breadcrumb>{breadcrumbItems}</Breadcrumb>;

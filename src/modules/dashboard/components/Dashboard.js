@@ -18,8 +18,9 @@ import queryString from 'query-string';
 import { Tenders } from 'modules/tenders/containers';
 import moment from 'moment';
 import productsTree from 'modules/companies/productsTree';
+import { colors } from 'modules/common/colors';
 
-const COLORS = ['#52c41a', '#faad14', '#1890ff', '#f5222d', '#f47721'];
+const COLORS = [colors[2], colors[3], colors[4], colors[6], colors[8]];
 
 class Dashboard extends React.Component {
   constructor(props) {

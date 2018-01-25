@@ -1,3 +1,5 @@
+import { pageParams, pageValues } from 'modules/common/queries';
+
 const basicInfoFields = `
   isRegisteredOnSup,
   sapNumber,
@@ -306,8 +308,8 @@ const commonFields = `
 `;
 
 const companies = `
-  query companies(${commonParams}) {
-    companies(${commonValues}) {
+  query companies(${commonParams} ${pageParams}) {
+    companies(${commonValues} ${pageValues}) {
       ${commonFields}
       tierType
       averageDifotScore

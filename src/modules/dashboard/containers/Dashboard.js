@@ -4,6 +4,7 @@ import { gql, compose, graphql } from 'react-apollo';
 import { queries } from '../graphql';
 import { Loading } from 'modules/common/components';
 import { Dashboard } from '../components';
+import moment from 'moment';
 
 const DashboardContainer = props => {
   const {
@@ -76,10 +77,10 @@ DashboardContainer.propTypes = {
 export default compose(
   graphql(gql(queries.companiesCountByTierType), {
     name: 'companiesCountByTierTypeQuery',
-    options: () => ({
+    options: ({ queryParams }) => ({
       variables: {
-        startDate: new Date('1900-01-01'),
-        endDate: new Date('2040-09-26')
+        startDate: new Date(queryParams.startDate),
+        endDate: new Date(queryParams.endDate)
       }
     })
   }),
