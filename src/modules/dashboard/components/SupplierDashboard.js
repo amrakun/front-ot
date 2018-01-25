@@ -89,7 +89,7 @@ class Dashboard extends React.Component {
           </Col>
           <Col key={4} lg={8} sm={12}>
             <NumberCardLines
-              icon="calculator"
+              icon="calendar"
               title="DIFOT score"
               tooltip={averageDifotScore < 75 && labels.difotSuggestion}
               color={averageDifotScore ? colors[7] : colors[5]}

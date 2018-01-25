@@ -13,6 +13,7 @@ const EoiTable = props => {
       dataSource={products}
       pagination={false}
       size="middle"
+      scroll={{ x: 600, y: '65vh' }}
     >
       {renderProductColumn({
         name: 'document',

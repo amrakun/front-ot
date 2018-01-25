@@ -30,7 +30,8 @@ class Base extends Common {
       loading,
       onChange,
       exportCompanies,
-      exportLoading
+      exportLoading,
+      exportCompany
     } = this.props;
     const { selectedCompanies } = this.state;
 
@@ -66,7 +67,12 @@ class Base extends Common {
           record.averageDifotScore ? `${record.averageDifotScore}%` : '-'
       },
       { title: 'Blocking', render: record => (record.isBlocked ? 'Yes' : '-') },
-      { title: 'Export profile', key: 'export' }
+      {
+        title: 'Export profile',
+        render: record => (
+          <a onClick={() => exportCompany(record._id)}>Export</a>
+        )
+      }
     ]);
 
     return (

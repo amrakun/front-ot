@@ -132,6 +132,7 @@ export const productDescription = `
 `;
 
 export const aimagData = [
+  { text: 'Ulaanbaatar', value: 'Ulaanbaatar' },
   { text: 'Arkhangai', value: 'Arkhangai' },
   { text: 'Bayankhongor', value: 'Bayankhongor' },
   { text: 'Bayan-Olgii', value: 'Bayan-Olgii' },

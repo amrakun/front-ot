@@ -326,6 +326,12 @@ const exportCompanies = `
   }
 `;
 
+const exportCompany = `
+  query companyDetailExport($_id: String!) {
+    companyDetailExport(_id: $_id)
+  }
+`;
+
 const status = `
   query companies(${commonParams}) {
     companies(${commonValues}) {
@@ -430,5 +436,6 @@ export default {
   status,
   prequalificationFields,
   companyDetail,
-  audit
+  audit,
+  exportCompany
 };

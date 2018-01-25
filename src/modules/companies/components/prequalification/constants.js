@@ -14,18 +14,11 @@ export const booleanData = [
 ];
 
 export const currencyData = [
-  {
-    value: 'Dollar – Trinidad & Tobago (TTD)',
-    text: 'Dollar – Trinidad & Tobago (TTD)'
-  },
+  { value: 'Tugrug (MNT)', text: 'Tugrugt (MNT)' },
   {
     value: 'Dollar – United States (USD)',
     text: 'Dollar – United States (USD)'
   },
-  { value: 'Dollar – Zimbabwe (ZWL)', text: 'Dollar – Zimbabwe (ZWL)' },
-  { value: 'Dong (VND)', text: 'Dong (VND)' },
-  { value: 'Dram (AMD)', text: 'Dram (AMD)' },
-  { value: 'Escudo (CVE)', text: 'Escudo (CVE)' },
   { value: 'Euro (EUR)', text: 'Euro (EUR)' }
 ];
 
