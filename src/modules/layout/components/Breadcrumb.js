@@ -26,7 +26,8 @@ const routes = {
   reports: 'Reports & Improvement plans',
   'user-list': 'Manage Users',
   'my-profile': 'My Profile',
-  'change-password': 'Change Password'
+  'change-password': 'Change Password',
+  qualification: 'Qualification/audit'
 };
 
 const Breadcrumbs = location => {
