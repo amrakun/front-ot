@@ -30,32 +30,47 @@ class SupplierProfile extends AuditFormsBase {
   }
 
   render() {
+    const { response } = this.props;
     const supplierInfo = this.props.supplierInfo || {};
+    const tierType = supplierInfo.tierType || '-';
+    const isQualified = supplierInfo.isQualified || {};
     const shareholderInfo = supplierInfo.shareholderInfo || {};
     const shareholders = shareholderInfo.shareholders || {};
-    const shareholder = shareholders[0] || {};
+    const owner = shareholders[0] || {};
     const basicInfo = supplierInfo.basicInfo || {};
     const renderListItem = this.renderListItem;
 
-    const { response } = this.props;
+    const shareholdersList = shareholders.map(
+      (shareholder, i) =>
+        `${shareholder.name} ${(shareholder.jobTitle,
+        shareholder.percentage)}%${i < shareholders.length - 1 ? ', ' : ''}`
+    );
+
+    let sqaResult = '-';
+    if (isQualified !== null) sqaResult = isQualified ? 'Aidited' : 'No';
 
     return (
       <Form onSubmit={this.handleSubmit}>
         {this.renderIsQualifiedAlert()}
         <Card title="Company information">
           <List style={{ marginBottom: '16px' }}>
-            {renderListItem('type', '-')}
-            {renderListItem('ownership', shareholder.name)}
-            {renderListItem('shareholder', shareholder.name)}
+            {renderListItem('type', tierType)}
+            {renderListItem('ownership', owner.name)}
+            {renderListItem('shareholder', shareholdersList)}
             {renderListItem(
               'numberOfEmployees',
               basicInfo.totalNumberOfEmployees
             )}
-            {renderListItem('otExperience', '-')}
-            {renderListItem('sqaResult', '-')}
+            {renderListItem('sqaResult', sqaResult)}
           </List>
         </Card>
         <Card title="Oyu Tolgoi LLC (OT) related performance rations">
+          {this.renderField({
+            label: this.renderTooltipLabel('otExperience'),
+            name: 'otExperience',
+            initialValue: response && response.otExperience,
+            control: <TextArea disabled={response !== undefined} />
+          })}
           {this.renderField({
             label: this.renderTooltipLabel('sotri'),
             name: 'sotri',

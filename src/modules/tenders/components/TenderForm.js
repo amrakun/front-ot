@@ -120,7 +120,13 @@ class TenderForm extends BaseForm {
   }
 
   renderProductColumn(props) {
-    const { name, title, type, isSupplier } = props;
+    const { name, title, type, isSupplier, width } = props;
+    const { location } = this.props;
+
+    const hidden = isSupplier && location.pathname.includes('eoi');
+
+    if (hidden) return null;
+
     const render = (text, record) => {
       const inputProps = {
         defaultValue: record[name],
@@ -163,7 +169,7 @@ class TenderForm extends BaseForm {
         key={name}
         dataIndex={name}
         render={render}
-        width={250}
+        width={width || 250}
       />
     );
   }

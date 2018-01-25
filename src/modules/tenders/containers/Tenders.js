@@ -155,8 +155,8 @@ export default compose(
     options: ({ type, supplierId, queryParams }) => {
       return {
         variables: {
-          page: 200,
-          perPage: 20,
+          page: 1,
+          perPage: 1,
           search: queryParams ? queryParams.search : '',
           status: queryParams ? queryParams.status : '',
           type: type,

@@ -182,11 +182,11 @@ class Tenders extends React.Component {
           },
           {
             text: <span>{renderIcon('closed')} Closed</span>,
-            value: 'draft'
+            value: 'closed'
           },
           {
             text: <span>{renderIcon('participated')} Participated</span>,
-            value: 'closed'
+            value: 'participated'
           }
         ],
         filteredValue: this.state.statuses,

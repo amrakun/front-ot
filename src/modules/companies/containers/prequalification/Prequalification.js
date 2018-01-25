@@ -4,7 +4,7 @@ import { gql, compose, graphql } from 'react-apollo';
 import { queries, mutations } from '../../graphql';
 import { PrequalificationForms } from '../../components';
 import { Loading } from 'modules/common/components';
-import { message } from 'antd';
+import { message, notification, Icon } from 'antd';
 
 const PrequalificationContainer = (props, context) => {
   let { companyByUserQuery } = props;
@@ -15,7 +15,7 @@ const PrequalificationContainer = (props, context) => {
 
   const save = (name, doc) => {
     const mutation = props[`${name}Edit`];
-    console.log(doc);
+
     mutation({ variables: { [name]: doc } })
       .then(() => {
         message.success('Saved');
@@ -32,7 +32,13 @@ const PrequalificationContainer = (props, context) => {
 
     sendToBuyer({ variables: { _id: currentUser.companyId } })
       .then(() => {
-        message.success('Succesfully submitted');
+        notification.open({
+          message: 'Done!',
+          description:
+            'You have successfully submitted your pre-qualification form.',
+          icon: <Icon type="smile" style={{ color: 'rgb(0,153,168)' }} />,
+          duration: 10
+        });
         history.push('/capacity-building');
       })
       .catch(error => {

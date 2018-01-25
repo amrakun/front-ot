@@ -193,11 +193,14 @@ const labels = {
     title: '1. Work Contract Management',
     desc: `Is there a current signed work contract for all types of employees (Skilled/unskilled manufacturing employees, Temporary employees, Young workers)?`,
     options: [
-      { value: 0, text: `No contract signed.` },
-      { value: 1, text: `Contract signed according to local requirements.` },
+      { value: 0, text: `0 - No contract signed.` },
+      {
+        value: 1,
+        text: `1 - Contract signed according to local requirements.`
+      },
       {
         value: 2,
-        text: `No work occurs before a contract is in place. Evidence for at least 3 years.`
+        text: `2 - No work occurs before a contract is in place. Evidence for at least 3 years.`
       }
     ]
   },
@@ -205,14 +208,14 @@ const labels = {
     title: '2. Job Description Procedure',
     desc: `Does the Company have a job description procedure in place? Does this take HSE into consideration?`,
     options: [
-      { value: 0, text: `No approach in place` },
+      { value: 0, text: `0 - No approach in place` },
       {
         value: 1,
-        text: `The defined approach is running for all of the jobs and includes HSE capabilities`
+        text: `1 - The defined approach is running for all of the jobs and includes HSE capabilities`
       },
       {
         value: 2,
-        text: `The approach mirrors RT (OT) standards (any new role to be benchmarked against other roles within the organisation) or data/documentation for at least the last 3 years exists. An improvement process is in place.`
+        text: `2 - The approach mirrors RT (OT) standards (any new role to be benchmarked against other roles within the organisation) or data/documentation for at least the last 3 years exists. An improvement process is in place.`
       }
     ]
   },
@@ -220,11 +223,11 @@ const labels = {
     title: '3. Training and Development Policy',
     desc: `Does the Company have a training & development policy to improve their employee's skills (in line with their job descriptions)?`,
     options: [
-      { value: 0, text: `No system` },
-      { value: 1, text: `A defined system is running` },
+      { value: 0, text: `0 - No system` },
+      { value: 1, text: `1 - A defined system is running` },
       {
         value: 2,
-        text: `The system mirrors the RT system (i.e. specific and dedicated budget per employee, followed and monitored). The system is in place for at least 3 years and has been improved.`
+        text: `2 - The system mirrors the RT system (i.e. specific and dedicated budget per employee, followed and monitored). The system is in place for at least 3 years and has been improved.`
       }
     ]
   },
@@ -234,15 +237,15 @@ const labels = {
     options: [
       {
         value: 0,
-        text: `No evaluation criteria set for the assessment of employee performance (only subjective assessment)`
+        text: `0 - No evaluation criteria set for the assessment of employee performance (only subjective assessment)`
       },
       {
         value: 1,
-        text: `Assessment of employees implemented with pre-determined criteria on a regular basis`
+        text: `1 - Assessment of employees implemented with pre-determined criteria on a regular basis`
       },
       {
         value: 2,
-        text: `Results are formally captured once a year and informally as required within the year. There is a follow up across the year of the employee performance.`
+        text: `2 - Results are formally captured once a year and informally as required within the year. There is a follow up across the year of the employee performance.`
       }
     ]
   },
@@ -250,14 +253,14 @@ const labels = {
     title: '5. Time-Keeping Management',
     desc: `Does the company have a time-keeping management system (including overtime), a procedure to ensure employees are compensated and record-keeping requirements meet local legislation?`,
     options: [
-      { value: 0, text: `No process to capture working time` },
+      { value: 0, text: `0 - No process to capture working time` },
       {
         value: 1,
-        text: `Existing process and monthly employee confirmation in place`
+        text: `1 - Existing process and monthly employee confirmation in place`
       },
       {
         value: 2,
-        text: `Existing process automated to capture working time, wied for at least 3 years to ensure improvements.`
+        text: `2 - Existing process automated to capture working time, wied for at least 3 years to ensure improvements.`
       }
     ]
   },
@@ -265,14 +268,14 @@ const labels = {
     title: '6. Management of Practices related to conduct',
     desc: `Are there any policies that relate to performance and employee conduct practices? (Incl. disciplinary, anti-discrimination process, etc.)?`,
     options: [
-      { value: 0, text: `No company policy` },
+      { value: 0, text: `0 - No company policy` },
       {
         value: 1,
-        text: `Policy exists regarding performance and conduct with systematic monitoring.`
+        text: `1 - Policy exists regarding performance and conduct with systematic monitoring.`
       },
       {
         value: 2,
-        text: `Training materials exist for all employees. Training of employees carried out regarding performance and expected conduct practices. At least for the last 3 years to ensure improvements`
+        text: `2 - Training materials exist for all employees. Training of employees carried out regarding performance and expected conduct practices. At least for the last 3 years to ensure improvements`
       }
     ]
   },
@@ -280,11 +283,11 @@ const labels = {
     title: '7. Management of workforce engagement',
     desc: `Does the company have a process or framework to support the active engagement (feedback, up and down communication) of their workforce, for example a procedure/tool which covers awards, collective agreements and contracts.`,
     options: [
-      { value: 0, text: `No process or framework` },
-      { value: 1, text: `Existing process or framework.` },
+      { value: 0, text: `0 - No process or framework` },
+      { value: 1, text: `1 - Existing process or framework.` },
       {
         value: 2,
-        text: `Evidence of regular communication (quarterly). And for at least 3 years to ensure improvements.`
+        text: `2 - Evidence of regular communication (quarterly). And for at least 3 years to ensure improvements.`
       }
     ]
   },
@@ -294,15 +297,15 @@ const labels = {
     options: [
       {
         value: 0,
-        text: `No union or alternate means of employee representation / Worker representatives are not allowed to carry out their duties within working hours without losing pay.`
+        text: `0 - No union or alternate means of employee representation / Worker representatives are not allowed to carry out their duties within working hours without losing pay.`
       },
       {
         value: 1,
-        text: `Regular meetings with trade unions or their worker's committees representative are held`
+        text: `1 - Regular meetings with trade unions or their worker's committees representative are held`
       },
       {
         value: 2,
-        text: `Employee representation is authorised and organisations for worker representation exist (eg independent trade union, workers committee, health and safety committees). This is in place for at least the last 3 years`
+        text: `2 - Employee representation is authorised and organisations for worker representation exist (eg independent trade union, workers committee, health and safety committees). This is in place for at least the last 3 years`
       }
     ]
   },
@@ -310,14 +313,14 @@ const labels = {
     title: '9. Employee selection and  recruitment process',
     desc: `Are there any policies and procedures that relate to employee selection and recruitment process? `,
     options: [
-      { value: 0, text: `No written policy/procedure` },
+      { value: 0, text: `0 - No written policy/procedure` },
       {
         value: 1,
-        text: `Written procedure/process exists regarding employee recruitment and selection`
+        text: `1 - Written procedure/process exists regarding employee recruitment and selection`
       },
       {
         value: 2,
-        text: `The procedure/process mirrors the OT (RT) system. The system is in place for at least 3 years and has been improved`
+        text: `2 - The procedure/process mirrors the OT (RT) system. The system is in place for at least 3 years and has been improved`
       }
     ]
   },
@@ -325,14 +328,14 @@ const labels = {
     title: '10. Employee exit management',
     desc: `Does the company have a procedure related to employee labor contract termination and retrenchment (including collective redundancy case) `,
     options: [
-      { value: 0, text: `No system` },
+      { value: 0, text: `0 - No system` },
       {
         value: 1,
-        text: `Evidence that systems are in place to ensure all proper processes occur to exit an employee`
+        text: `1 - Evidence that systems are in place to ensure all proper processes occur to exit an employee`
       },
       {
         value: 2,
-        text: `Evidence that in the event of redundancies efforts have been made to redeploy employees. The system mirrors the OT (RT) system.`
+        text: `2 - Evidence that in the event of redundancies efforts have been made to redeploy employees. The system mirrors the OT (RT) system.`
       }
     ]
   },
@@ -340,11 +343,11 @@ const labels = {
     title: '11. Grievance and Fair treatment ',
     desc: `Does the company have employee grievance/complaint and fair treatment policy and procedure?  (OT SPEAK-OUT programme etc.)`,
     options: [
-      { value: 0, text: `No system` },
-      { value: 1, text: `Existing policy and procedure.` },
+      { value: 0, text: `0 - No system` },
+      { value: 1, text: `1 - Existing policy and procedure.` },
       {
         value: 2,
-        text: `Evidence that raised issues have been investigated and closed with employees. The system mirrors the OT (RT) system and is inducted to employees. And that is in place for at least 3 years and has been improved.`
+        text: `2 - Evidence that raised issues have been investigated and closed with employees. The system mirrors the OT (RT) system and is inducted to employees. And that is in place for at least 3 years and has been improved.`
       }
     ]
   },
@@ -383,7 +386,6 @@ const labels = {
       </div>
     )
   },
-  //
   doesHaveDocumentedPolicyToCorruption: {
     title: `5. Does your company have a documented policy in place to prevent corruption? `,
     desc: `If yes, please provide a copy of your Anti-Corruption Management policy.`
@@ -413,7 +415,8 @@ const evidenceCheckList = [
   {
     label:
       '4. Do the organisations work procedures conform to local statutory, legislative or regulatory codes and standards?',
-    value: 'workProceduresConform'
+    value: 'workProceduresConform',
+    disabled: true
   },
   {
     label:

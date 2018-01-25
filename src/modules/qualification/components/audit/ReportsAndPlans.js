@@ -53,10 +53,6 @@ class ReportsAndPlans extends Common {
         render: () => <a>View</a>
       },
       {
-        title: 'Re-participation date',
-        render: record => moment(record.createdDate).format(dateFormat)
-      },
-      {
         title: 'Last auditor report',
         render: () => <a>View</a>
       },

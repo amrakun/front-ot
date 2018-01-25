@@ -492,3 +492,13 @@ form .ant-input-number {
     display: none;
   }
 }
+
+.evidence-check {
+  label:nth-child(11), label:nth-child(22) {
+    margin-top: 16px;
+  }
+}
+
+.ant-table-thead th span {
+  text-transform: capitalize;
+}

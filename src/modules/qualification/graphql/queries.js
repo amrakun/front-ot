@@ -197,6 +197,8 @@ const feedbackResponseDetail = `
 
 const basicInfoCompanyFields = `
   _id
+  tierType
+  isQualified
   basicInfo {
     enName
     totalNumberOfEmployees
@@ -207,6 +209,8 @@ const basicInfoCompanyFields = `
   shareholderInfo {
     shareholders {
       name
+      percentage
+      jobTitle
     }
   }
 `;

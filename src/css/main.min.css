@@ -460,3 +460,10 @@ form .ant-input-number {
 .user-phone .ant-input-number-handler-wrap {
   display: none;
 }
+.evidence-check label:nth-child(11),
+.evidence-check label:nth-child(22) {
+  margin-top: 16px;
+}
+.ant-table-thead th span {
+  text-transform: capitalize;
+}

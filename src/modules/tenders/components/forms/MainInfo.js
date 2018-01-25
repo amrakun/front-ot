@@ -54,7 +54,7 @@ const MainInfo = props => {
             ...fieldProps,
             label: 'Number',
             name: 'number',
-            control: <Input type="number" />
+            control: <Input />
           })}
           {renderField({
             ...fieldProps,
