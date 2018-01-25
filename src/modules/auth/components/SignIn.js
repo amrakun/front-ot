@@ -58,7 +58,7 @@ class SignIn extends Component {
             <FormItem>
               {getFieldDecorator('email', {
                 rules: [{ required: true, message: 'Please enter your email!' }]
-              })(<Input prefix={<Icon type="user" />} placeholder="Email" />)}
+              })(<Input prefix={<Icon type="mail" />} placeholder="Email" />)}
             </FormItem>
             <FormItem>
               {getFieldDecorator('password', {

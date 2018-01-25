@@ -88,7 +88,7 @@ class Dashboard extends React.Component {
     };
 
     return (
-      <Card title="SUPPLIER BY TIER TYPE">
+      <Card title="Supplier By Tier Type">
         <div className="pie-chart-labels">
           {data.map((detail, index) => (
             <span key={index} className="chart-text">
@@ -144,7 +144,7 @@ class Dashboard extends React.Component {
 
     return (
       <Card
-        title="PRODUCT & SERVICE CODE"
+        title="Registered vs Pre-qualified"
         className="barchart-wrapper"
         extra={
           <TreeSelect
@@ -227,10 +227,10 @@ class Dashboard extends React.Component {
 
             <div className="ant-row chart-row">
               <div className="ant-col-sm-12 ant-col-lg-6">
-                {this.renderCountData('TOTAL EOI', eoiTotalCount)}
+                {this.renderCountData('Total EOI', eoiTotalCount)}
               </div>
               <div className="ant-col-sm-12 ant-col-lg-18">
-                <Card title="EOI(this year)" className="barchart-wrapper">
+                <Card title="EOI (this year)" className="barchart-wrapper">
                   {this.renderBarChart({
                     data: eoiData,
                     key1: 'open',
@@ -243,10 +243,10 @@ class Dashboard extends React.Component {
 
             <div className="ant-row chart-row">
               <div className="ant-col-sm-12 ant-col-lg-6">
-                {this.renderCountData('TOTAL RFQ', rfqTotalCount)}
+                {this.renderCountData('Total RFQ', rfqTotalCount)}
               </div>
               <div className="ant-col-sm-12 ant-col-lg-18">
-                <Card title="RFQ(this year)" className="barchart-wrapper">
+                <Card title="RFQ (this year)" className="barchart-wrapper">
                   {this.renderBarChart({
                     data: rfqData,
                     key1: 'open',
