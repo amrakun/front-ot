@@ -28,17 +28,15 @@
     "xlsx": "^0.11.16"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": [
-      "prettier --single-quote --write",
-      "git add"
-    ]
+    "src/**/*.{js,jsx,json,css}": ["prettier --single-quote --write", "git add"]
   },
   "scripts": {
     "precommit": "lint-staged",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
-    "format": "prettier --single-quote --trailing-comma es5 --write 'src/**/*.js'",
+    "format":
+      "prettier --single-quote --trailing-comma es5 --write 'src/**/*.js'",
     "eject": "react-scripts eject"
   },
   "devDependencies": {

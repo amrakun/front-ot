@@ -117,6 +117,14 @@ export const buyerSideMenu = [
     icon: 'setting',
     subMenu: [
       {
+        url: '/settings/templates',
+        title: 'Templates'
+      },
+      {
+        url: '/settings/manage-expiry-dates',
+        title: 'Manage Expiry Dates'
+      },
+      {
         url: '/user-list',
         title: 'Manage Users'
       }

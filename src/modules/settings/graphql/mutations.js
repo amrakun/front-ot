@@ -75,10 +75,35 @@ const resetPassword = `
     }
 `;
 
+const configsSaveTemplate = `
+    mutation configsSaveTemplate($name: String!, $content: String!) {
+        configsSaveTemplate(name: $name, content: $content) {
+            _id
+            logo
+            name
+            phone
+            email
+            address
+            eoiTemplate
+            rfqTemplate
+            regretLetterTemplate
+            successFeedbackTemplate
+            auditTemplate
+            prequalificationDow
+            specificPrequalificationDows
+            auditDow
+            specificAuditDows
+            improvementPlanDow
+            specificImprovementPlanDows
+        }
+    }
+`;
+
 export default {
   register,
   usersAdd,
   usersEdit,
   resetPassword,
-  usersRemove
+  usersRemove,
+  configsSaveTemplate
 };
