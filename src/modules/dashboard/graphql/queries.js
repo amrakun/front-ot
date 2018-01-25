@@ -105,11 +105,26 @@ const tenderCountByStatus = `
   }
 `;
 
+const tendersTotalCount = `
+  query tendersTotalCount(
+    $startDate: Date!,
+    $endDate: Date!
+    $type: String!
+  ){
+    tendersTotalCount(
+      startDate: $startDate,
+      endDate: $endDate,
+      type: $type
+    )
+  }
+`;
+
 export default {
   companyByUser,
   companiesCountByTierType,
   companiesCountByRegisteredVsPrequalified,
   tenderCountByStatus,
+  tendersTotalCount,
   reportsSuppliersExport,
   reportsTendersExport
 };

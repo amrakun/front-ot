@@ -144,6 +144,7 @@ class Dashboard extends React.Component {
     return (
       <Card
         title="PRODUCT & SERVICE CODE"
+        className="barchart-wrapper"
         extra={
           <TreeSelect
             treeData={productsTree}
@@ -175,7 +176,7 @@ class Dashboard extends React.Component {
 
   render() {
     const props = this.props;
-    const { eoiData, rfqData } = props;
+    const { eoiData, rfqData, eoiTotalCount, rfqTotalCount } = props;
     const queryParams = queryString.parse(props.location.search);
     const extendedProps = { ...props, queryParams };
     const dateFormat = 'YYYY/MM/DD';
@@ -217,40 +218,34 @@ class Dashboard extends React.Component {
             </div>
 
             <div className="ant-row chart-row">
-              <div className="ant-col-sm-12 ant-col-lg-4">
-                {this.renderCountData('TOTAL EOI', 250)}
+              <div className="ant-col-sm-12 ant-col-lg-6">
+                {this.renderCountData('TOTAL EOI', eoiTotalCount)}
               </div>
-              <div className="ant-col-sm-12 ant-col-lg-16">
-                <Card title="EOI(this year)">
+              <div className="ant-col-sm-12 ant-col-lg-18">
+                <Card title="EOI(this year)" className="barchart-wrapper">
                   {this.renderBarChart({
                     data: eoiData,
                     key1: 'open',
                     key2: 'closed',
-                    height: 300
+                    height: 200
                   })}
                 </Card>
-              </div>
-              <div className="ant-col-sm-12 ant-col-lg-4">
-                {this.renderCountData('EOI AVAREGE DURATION', 21)}
               </div>
             </div>
 
             <div className="ant-row chart-row">
-              <div className="ant-col-sm-12 ant-col-lg-4">
-                {this.renderCountData('TOTAL RFQ', 250)}
+              <div className="ant-col-sm-12 ant-col-lg-6">
+                {this.renderCountData('TOTAL RFQ', rfqTotalCount)}
               </div>
-              <div className="ant-col-sm-12 ant-col-lg-16">
-                <Card title="RFQ(this year)">
+              <div className="ant-col-sm-12 ant-col-lg-18">
+                <Card title="RFQ(this year)" className="barchart-wrapper">
                   {this.renderBarChart({
                     data: rfqData,
                     key1: 'open',
                     key2: 'closed',
-                    height: 300
+                    height: 200
                   })}
                 </Card>
-              </div>
-              <div className="ant-col-sm-12 ant-col-lg-4">
-                {this.renderCountData('RFQ AVAREGE DURATION', 14)}
               </div>
             </div>
           </div>

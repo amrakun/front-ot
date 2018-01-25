@@ -9,13 +9,19 @@ const DashboardContainer = props => {
   const {
     companiesCountByTierTypeQuery,
     ccbrvpQuery,
-    tenderCountByStatus
+    tenderCountByStatusRfq,
+    tenderCountByStatusEoi,
+    tendersTotalCountRfq,
+    tendersTotalCountEoi
   } = props;
 
   if (
     companiesCountByTierTypeQuery.loading ||
     ccbrvpQuery.loading ||
-    tenderCountByStatus.loading
+    tenderCountByStatusRfq.loading ||
+    tenderCountByStatusEoi.loading ||
+    tendersTotalCountRfq.loading ||
+    tendersTotalCountEoi.loading
   ) {
     return <Loading />;
   }
@@ -48,8 +54,11 @@ const DashboardContainer = props => {
     productData: renderData(
       ccbrvpQuery.companiesCountByRegisteredVsPrequalified
     ),
-    eoiData: renderData(tenderCountByStatus.tenderCountByStatus),
-    rfqData: renderData(tenderCountByStatus.tenderCountByStatus)
+    eoiData: renderData(tenderCountByStatusEoi.tenderCountByStatus),
+    rfqData: renderData(tenderCountByStatusRfq.tenderCountByStatus),
+
+    eoiTotalCount: tendersTotalCountEoi.tendersTotalCount,
+    rfqTotalCount: tendersTotalCountRfq.tendersTotalCount
   };
 
   return <Dashboard {...updatedProps} />;
@@ -58,7 +67,10 @@ const DashboardContainer = props => {
 DashboardContainer.propTypes = {
   companiesCountByTierTypeQuery: PropTypes.object,
   ccbrvpQuery: PropTypes.object,
-  tenderCountByStatus: PropTypes.object
+  tenderCountByStatusRfq: PropTypes.object,
+  tenderCountByStatusEoi: PropTypes.object,
+  tendersTotalCountRfq: PropTypes.object,
+  tendersTotalCountEoi: PropTypes.object
 };
 
 export default compose(
@@ -78,13 +90,46 @@ export default compose(
       variables: {
         startDate: new Date('1900-01-01'),
         endDate: new Date('2040-09-26'),
-        productCodes: 'code1'
+        productCodes: 'a01001'
       }
     })
   }),
 
   graphql(gql(queries.tenderCountByStatus), {
-    name: 'tenderCountByStatus',
+    name: 'tenderCountByStatusEoi',
+    options: () => ({
+      variables: {
+        startDate: new Date('1900-01-01'),
+        endDate: new Date('2040-09-26'),
+        type: 'eoi'
+      }
+    })
+  }),
+
+  graphql(gql(queries.tenderCountByStatus), {
+    name: 'tenderCountByStatusRfq',
+    options: () => ({
+      variables: {
+        startDate: new Date('1900-01-01'),
+        endDate: new Date('2040-09-26'),
+        type: 'rfq'
+      }
+    })
+  }),
+
+  graphql(gql(queries.tendersTotalCount), {
+    name: 'tendersTotalCountRfq',
+    options: () => ({
+      variables: {
+        startDate: new Date('1900-01-01'),
+        endDate: new Date('2040-09-26'),
+        type: 'rfq'
+      }
+    })
+  }),
+
+  graphql(gql(queries.tendersTotalCount), {
+    name: 'tendersTotalCountEoi',
     options: () => ({
       variables: {
         startDate: new Date('1900-01-01'),
