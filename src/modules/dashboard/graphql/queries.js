@@ -71,8 +71,15 @@ const reportsTendersExport = `
   }
 `;
 
+const companiesCountByTierType = `
+  query companiesCountByTierType{
+    companiesCountByTierType
+  }
+`;
+
 export default {
   companyByUser,
+  companiesCountByTierType,
   reportsSuppliersExport,
   reportsTendersExport
 };
