@@ -72,14 +72,44 @@ const reportsTendersExport = `
 `;
 
 const companiesCountByTierType = `
-  query companiesCountByTierType{
-    companiesCountByTierType
+  query companiesCountByTierType($startDate: Date!, $endDate: Date!){
+    companiesCountByTierType(startDate: $startDate, endDate: $endDate)
+  }
+`;
+
+const companiesCountByRegisteredVsPrequalified = `
+  query companiesCountByRegisteredVsPrequalified(
+    $startDate: Date!,
+    $endDate: Date!
+    $productCodes: String
+  ){
+    companiesCountByRegisteredVsPrequalified(
+      startDate: $startDate,
+      endDate: $endDate,
+      productCodes: $productCodes
+    )
+  }
+`;
+
+const tenderCountByStatus = `
+  query tenderCountByStatus(
+    $startDate: Date!,
+    $endDate: Date!
+    $type: String!
+  ){
+    tenderCountByStatus(
+      startDate: $startDate,
+      endDate: $endDate,
+      type: $type
+    )
   }
 `;
 
 export default {
   companyByUser,
   companiesCountByTierType,
+  companiesCountByRegisteredVsPrequalified,
+  tenderCountByStatus,
   reportsSuppliersExport,
   reportsTendersExport
 };
