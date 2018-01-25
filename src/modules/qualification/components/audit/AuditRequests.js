@@ -23,11 +23,11 @@ class AuditRequests extends React.Component {
       },
       {
         title: 'Auditor report',
-        render: () => '-'
+        render: record => (record.status === 'open' ? '-' : <a>View</a>)
       },
       {
         title: 'Auditor improvement plan',
-        render: () => '-'
+        render: record => (record.status === 'open' ? '-' : <a>View</a>)
       },
       {
         title: 'More',

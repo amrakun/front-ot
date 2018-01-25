@@ -27,6 +27,7 @@ class Dashboard extends React.Component {
     this.onIsPrequalifiedChange = this.onIsPrequalifiedChange.bind(this);
     this.exportSuppliers = this.exportSuppliers.bind(this);
     this.exportTenders = this.exportTenders.bind(this);
+    this.exportAudits = this.exportAudits.bind(this);
   }
 
   onIsPrequalifiedChange(e) {
@@ -46,11 +47,25 @@ class Dashboard extends React.Component {
 
   exportTenders() {
     this.props.export('reportsTendersExport', {
-      type: this.tenderType,
-      publishDate: this.publishDate
-        ? this.getDateInterval(this.publishDate)
+      type: this.tenderTypeTenders,
+      publishDate: this.publishDateTenders
+        ? this.getDateInterval(this.publishDateTenders)
         : null,
-      closeDate: this.closeDate ? this.getDateInterval(this.closeDate) : null
+      closeDate: this.closeDateTenders
+        ? this.getDateInterval(this.closeDateTenders)
+        : null
+    });
+  }
+
+  exportAudits() {
+    this.props.export('reportsAuditExport', {
+      type: this.tenderTypeAudits,
+      publishDate: this.publishDateAudits
+        ? this.getDateInterval(this.publishDateAudits)
+        : null,
+      closeDate: this.closeDateAudits
+        ? this.getDateInterval(this.closeDateAudits)
+        : null
     });
   }
 
@@ -64,7 +79,7 @@ class Dashboard extends React.Component {
   renderButton(onClick) {
     return (
       <Button onClick={onClick} className="report-btn">
-        <Icon type="file" />Export report
+        <Icon type="file-excel" />Export report
       </Button>
     );
   }
@@ -101,7 +116,9 @@ class Dashboard extends React.Component {
             <p>
               <label>Publish date: </label>
               <RangePicker
-                onChange={value => this.onInputChange('publishDate', value)}
+                onChange={value =>
+                  this.onInputChange('publishDateTenders', value)
+                }
                 format={dateFormat}
               />
             </p>
@@ -109,13 +126,15 @@ class Dashboard extends React.Component {
             <p>
               <label>Close date: </label>
               <RangePicker
-                onChange={value => this.onInputChange('closeDate', value)}
+                onChange={value =>
+                  this.onInputChange('closeDateTenders', value)
+                }
                 format={dateFormat}
               />
             </p>
 
             <Radio.Group
-              onChange={value => this.onInputChange('tenderType', value)}
+              onChange={value => this.onInputChange('tenderTypeTenders', value)}
               value={this.tenderType}
             >
               <Radio value="eoi">EOI</Radio>
@@ -123,6 +142,38 @@ class Dashboard extends React.Component {
             </Radio.Group>
 
             {this.renderButton(this.exportTenders)}
+          </Card>
+        </Col>
+
+        <Col {...span}>
+          <Card title="Audits">
+            <p>
+              <label>Publish date: </label>
+              <RangePicker
+                onChange={value =>
+                  this.onInputChange('publishDateAudits', value)
+                }
+                format={dateFormat}
+              />
+            </p>
+
+            <p>
+              <label>Close date: </label>
+              <RangePicker
+                onChange={value => this.onInputChange('closeDateAudits', value)}
+                format={dateFormat}
+              />
+            </p>
+
+            <Radio.Group
+              onChange={value => this.onInputChange('tenderTypeAudits', value)}
+              value={this.tenderType}
+            >
+              <Radio value="eoi">EOI</Radio>
+              <Radio value="rfq">RFQ</Radio>
+            </Radio.Group>
+
+            {this.renderButton(this.exportAudits)}
           </Card>
         </Col>
       </Row>

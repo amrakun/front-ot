@@ -44,11 +44,11 @@ export const buyerSideMenu = [
     subMenu: [
       {
         url: '/prequalification-status',
-        title: 'Pre-qualification status'
+        title: 'Pre-qualification'
       },
       {
         url: 'audit',
-        title: 'Supplier Qualification',
+        title: 'Qualification',
         subMenu: [
           {
             url: '/audit',
@@ -66,7 +66,7 @@ export const buyerSideMenu = [
       },
       {
         url: '/validation',
-        title: 'Supplier Validation'
+        title: 'Validation'
       },
       {
         url: '/difot',

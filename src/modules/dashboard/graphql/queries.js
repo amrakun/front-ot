@@ -71,8 +71,23 @@ const reportsTendersExport = `
   }
 `;
 
+const reportsAuditExport = `
+  query reportsAuditExport(
+    $type: String
+    $publishDate: DateInterval
+    $closeDate: DateInterval
+  ) {
+    reportsAuditExport(
+      type: $type
+      publishDate: $publishDate
+      closeDate: $closeDate
+    )
+  }
+`;
+
 export default {
   companyByUser,
   reportsSuppliersExport,
-  reportsTendersExport
+  reportsTendersExport,
+  reportsAuditExport
 };
