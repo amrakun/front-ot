@@ -69,6 +69,11 @@ class UserList extends React.Component {
 
     this.columns = [
       {
+        title: 'Num',
+        key: '_id',
+        render: (value, row, index) => <span>{index + 1}</span>
+      },
+      {
         title: 'First Name',
         dataIndex: 'firstName',
         key: 'firstName'
