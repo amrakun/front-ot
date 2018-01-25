@@ -26,7 +26,8 @@ const PublishContainer = ({
         });
       })
       .catch(error => {
-        message.error('Error occurred: SubmitTender' + error);
+        console.log(error);
+        message.error(error.message);
       });
   };
 

@@ -12,6 +12,9 @@ module.exports = function override(config, env) {
       "@font-size-base": "12px",
       "@font-size-lg": "14px",
       "@font-size-sm": "11px",
+      "@heading-color": "fade(#000, 100%)",
+      "@text-color": "fade(#000, 90%)",
+      "@text-color-secondary": "fade(#000, 75%)",
     },
   })(config, env);
   return config;
