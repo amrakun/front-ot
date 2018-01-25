@@ -20,7 +20,6 @@ const DashboardContainer = props => {
     return <Loading />;
   }
 
-  console.log(tenderCountByStatus);
   // tier type chart data ===============
   const companiesByTierType = [];
 
@@ -33,18 +32,24 @@ const DashboardContainer = props => {
     }
   });
 
-  // product & service code chart data ===============
-  const productData = [];
-  const ccb = ccbrvpQuery.companiesCountByRegisteredVsPrequalified;
+  const renderData = object => {
+    const array = [];
 
-  Object.keys(ccb).forEach(key => {
-    productData.push({ name: key, ...ccb[key] });
-  });
+    Object.keys(object).forEach(key => {
+      array.push({ name: key, ...object[key] });
+    });
+
+    return array;
+  };
 
   const updatedProps = {
     ...props,
     companiesByTierType,
-    productData
+    productData: renderData(
+      ccbrvpQuery.companiesCountByRegisteredVsPrequalified
+    ),
+    eoiData: renderData(tenderCountByStatus.tenderCountByStatus),
+    rfqData: renderData(tenderCountByStatus.tenderCountByStatus)
   };
 
   return <Dashboard {...updatedProps} />;

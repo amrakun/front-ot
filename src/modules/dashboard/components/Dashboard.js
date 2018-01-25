@@ -10,7 +10,8 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend
+  Legend,
+  ResponsiveContainer
 } from 'recharts';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
@@ -26,8 +27,7 @@ class Dashboard extends React.Component {
 
     this.state = {
       pieChartWidth: 400,
-      pieChartHeight: 400,
-      productWidth: 800
+      pieChartHeight: 400
     };
 
     this.onProductCodesChange = this.onProductCodesChange.bind(this);
@@ -36,10 +36,7 @@ class Dashboard extends React.Component {
   componentDidMount() {
     const { clientWidth } = this.pieWrapper;
 
-    this.setState({
-      pieChartWidth: clientWidth,
-      productWidth: this.productWrapper.clientWidth
-    });
+    this.setState({ pieChartWidth: clientWidth });
   }
 
   onProductCodesChange(value) {
@@ -92,7 +89,6 @@ class Dashboard extends React.Component {
     return (
       <Card title="SUPPLIER BY TIER TYPE">
         <div className="pie-chart-labels">
-          onProductCodesChange
           {data.map((detail, index) => (
             <span key={index} className="chart-text">
               <Badge
@@ -124,9 +120,24 @@ class Dashboard extends React.Component {
     );
   }
 
+  renderBarChart({ data, key1, key2, height }) {
+    return (
+      <ResponsiveContainer width="100%" height={height}>
+        <BarChart data={data}>
+          <XAxis dataKey="name" />
+          <YAxis />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey={key1} stackId="a" fill={COLORS[1]} />
+          <Bar dataKey={key2} stackId="a" fill={COLORS[0]} />
+        </BarChart>
+      </ResponsiveContainer>
+    );
+  }
+
   renderPrequalified() {
     const { productData, location } = this.props;
-    const width = this.state.productWidth * 0.9;
     const height = this.state.pieChartWidth * 0.75;
     const queryParams = queryString.parse(location.search);
 
@@ -144,21 +155,27 @@ class Dashboard extends React.Component {
           />
         }
       >
-        <BarChart width={width} height={height} data={productData}>
-          <XAxis dataKey="name" />
-          <YAxis />
-          <CartesianGrid strokeDasharray="3 3" />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="prequalified" stackId="a" fill={COLORS[1]} />
-          <Bar dataKey="registered" stackId="a" fill={COLORS[0]} />
-        </BarChart>
+        {this.renderBarChart({
+          data: productData,
+          key1: 'prequalified',
+          key2: 'registered',
+          height
+        })}
+      </Card>
+    );
+  }
+
+  renderCountData(title, count) {
+    return (
+      <Card title={title}>
+        <div className="chart-count">{count}</div>
       </Card>
     );
   }
 
   render() {
     const props = this.props;
+    const { eoiData, rfqData } = props;
     const queryParams = queryString.parse(props.location.search);
     const extendedProps = { ...props, queryParams };
     const dateFormat = 'YYYY/MM/DD';
@@ -186,12 +203,7 @@ class Dashboard extends React.Component {
             </div>
 
             <div className="ant-row chart-row">
-              <div
-                className="ant-col-sm-12 ant-col-lg-16"
-                ref={element => {
-                  this.productWrapper = element;
-                }}
-              >
+              <div className="ant-col-sm-12 ant-col-lg-16">
                 {this.renderPrequalified()}
               </div>
               <div
@@ -201,6 +213,44 @@ class Dashboard extends React.Component {
                 }}
               >
                 {this.renderTierType()}
+              </div>
+            </div>
+
+            <div className="ant-row chart-row">
+              <div className="ant-col-sm-12 ant-col-lg-4">
+                {this.renderCountData('TOTAL EOI', 250)}
+              </div>
+              <div className="ant-col-sm-12 ant-col-lg-16">
+                <Card title="EOI(this year)">
+                  {this.renderBarChart({
+                    data: eoiData,
+                    key1: 'open',
+                    key2: 'closed',
+                    height: 300
+                  })}
+                </Card>
+              </div>
+              <div className="ant-col-sm-12 ant-col-lg-4">
+                {this.renderCountData('EOI AVAREGE DURATION', 21)}
+              </div>
+            </div>
+
+            <div className="ant-row chart-row">
+              <div className="ant-col-sm-12 ant-col-lg-4">
+                {this.renderCountData('TOTAL RFQ', 250)}
+              </div>
+              <div className="ant-col-sm-12 ant-col-lg-16">
+                <Card title="RFQ(this year)">
+                  {this.renderBarChart({
+                    data: rfqData,
+                    key1: 'open',
+                    key2: 'closed',
+                    height: 300
+                  })}
+                </Card>
+              </div>
+              <div className="ant-col-sm-12 ant-col-lg-4">
+                {this.renderCountData('RFQ AVAREGE DURATION', 14)}
               </div>
             </div>
           </div>
@@ -219,7 +269,9 @@ Dashboard.propTypes = {
   companiesByTierType: PropTypes.array,
   location: PropTypes.object,
   history: PropTypes.object,
-  productData: PropTypes.array
+  productData: PropTypes.array,
+  eoiData: PropTypes.array,
+  rfqData: PropTypes.array
 };
 
 export default Dashboard;

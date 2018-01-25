@@ -462,7 +462,7 @@ form .ant-input-number {
 }
 .chart-filter,
 .chart-row {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 .chart-filter .chart-filter-input {
   margin-right: 20px;
@@ -477,4 +477,12 @@ form .ant-input-number {
 }
 .chart-text label {
   padding-left: 8px;
+}
+.chart-count {
+  height: 300px;
+  line-height: 300px;
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  color: #000;
 }
