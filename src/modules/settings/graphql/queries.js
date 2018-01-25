@@ -52,11 +52,11 @@ const Config = `
     successFeedbackTemplate
     auditTemplate
     prequalificationDow
-    specificPrequalificationDows
+    specificPrequalificationDow
     auditDow
-    specificAuditDows
+    specificAuditDow
     improvementPlanDow
-    specificImprovementPlanDows
+    specificImprovementPlanDow
 `;
 
 export const config = `

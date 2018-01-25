@@ -7,21 +7,12 @@ import { Card, Row, Col, Tabs } from 'antd';
 const TabPane = Tabs.TabPane;
 
 class ManageExpiryDates extends React.Component {
-  constructor(props) {
-    super(props);
-    this.callback = this.callback.bind(this);
-  }
-
-  callback() {
-    console.log('Tab Changed');
-  }
-
   render() {
     return (
       <Row gutter={16}>
         <Col span={24}>
           <Card title="Templates">
-            <Tabs defaultActiveKey="1" onChange={this.callback}>
+            <Tabs defaultActiveKey="2">
               <TabPane tab="Pre-qualification" key="1">
                 <PreQualification />
               </TabPane>

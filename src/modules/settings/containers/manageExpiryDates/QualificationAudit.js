@@ -4,22 +4,47 @@ import { compose, gql, graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
 import { QualificationAudit } from '../../components';
 import { Loading } from '../../../common/components';
-import { queries } from '../../graphql';
+import { queries, mutations } from '../../graphql';
+import { message } from 'antd';
 
-const QualificationAuditContainer = ({ usersListQuery }) => {
-  if (usersListQuery.loading) {
+const QualificationAuditContainer = ({
+  usersListQuery,
+  configsSaveAuditDowMutation,
+  configsSaveImprovementPlanDowMutation
+}) => {
+  if (
+    usersListQuery.loading ||
+    configsSaveAuditDowMutation.loading ||
+    configsSaveImprovementPlanDowMutation.loading
+  ) {
     return <Loading />;
   }
 
+  const mainAction = auditDoc => {
+    console.log(auditDoc);
+    configsSaveAuditDowMutation({ variables: { doc: auditDoc } }).then(() => {
+      message.success('Saved Successfully');
+      // configsSaveImprovementPlanDowMutation({ variables: { impDoc } }).then(
+      //   () => {
+      //     message.success('Saved Successfully');
+      //   }
+      // );
+    });
+  };
+
   const updatedProps = {
-    users: usersListQuery.users
+    ...this.props,
+    users: usersListQuery.users,
+    mainAction
   };
 
   return <QualificationAudit {...updatedProps} />;
 };
 
 QualificationAuditContainer.propTypes = {
-  usersListQuery: PropTypes.object.isRequired
+  usersListQuery: PropTypes.object.isRequired,
+  configsSaveAuditDowMutation: PropTypes.func.isRequired,
+  configsSaveImprovementPlanDowMutation: PropTypes.func.isRequired
 };
 
 export default compose(
@@ -33,5 +58,11 @@ export default compose(
         notifyOnNetworkStatusChange: true
       };
     }
+  }),
+  graphql(gql(mutations.configsSaveAuditDow), {
+    name: 'configsSaveAuditDowMutation'
+  }),
+  graphql(gql(mutations.configsSaveImprovementPlanDow), {
+    name: 'configsSaveImprovementPlanDowMutation'
   })
 )(withRouter(QualificationAuditContainer));

@@ -79,22 +79,41 @@ const configsSaveTemplate = `
     mutation configsSaveTemplate($name: String!, $content: String!) {
         configsSaveTemplate(name: $name, content: $content) {
             _id
-            logo
-            name
-            phone
-            email
-            address
             eoiTemplate
             rfqTemplate
             regretLetterTemplate
             successFeedbackTemplate
             auditTemplate
+        }
+    }
+`;
+
+const configsSavePrequalificationDow = `
+    mutation configsSavePrequalificationDow($doc: ConfigPrequalificationDowInput!) {
+        configsSavePrequalificationDow(doc: $doc) {
+            _id
             prequalificationDow
-            specificPrequalificationDows
+            specificPrequalificationDow
+        }
+    }
+`;
+
+const configsSaveAuditDow = `
+    mutation configsSaveAuditDow($doc: ConfigAuditDowInput!) {
+        configsSaveAuditDow(doc: $doc) {
+            _id
             auditDow
-            specificAuditDows
+            specificAuditDow
+        }
+    }
+`;
+
+const configsSaveImprovementPlanDow = `
+    mutation configsSaveImprovementPlanDow($doc: ConfigImprovementPlanDowInput!){
+        configsSaveImprovementPlanDow(doc: $doc){
+            _id
             improvementPlanDow
-            specificImprovementPlanDows
+            specificImprovementPlanDow
         }
     }
 `;
@@ -105,5 +124,8 @@ export default {
   usersEdit,
   resetPassword,
   usersRemove,
-  configsSaveTemplate
+  configsSaveTemplate,
+  configsSavePrequalificationDow,
+  configsSaveAuditDow,
+  configsSaveImprovementPlanDow
 };
