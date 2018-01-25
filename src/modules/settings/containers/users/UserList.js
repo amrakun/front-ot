@@ -34,7 +34,10 @@ const UserListContainer = ({
       : 1,
     refetchUsers: () => {
       usersListQuery.refetch();
-    }
+    },
+    numbering: router.getParam(history, 'page')
+      ? 10 * (Number(router.getParam(history, 'page')) - 1) + 1
+      : 1
   };
 
   return <UserList {...updatedProps} />;
