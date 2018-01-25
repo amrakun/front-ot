@@ -6,7 +6,7 @@ export const supplierSideMenu = [
   },
   {
     url: '/registration',
-    title: 'Supplier registration',
+    title: 'Registration',
     icon: 'contacts'
   },
   {

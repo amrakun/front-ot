@@ -22,11 +22,11 @@ class AuditRequests extends React.Component {
         render: record => moment(record.closeDate).format(dateTimeFormat)
       },
       {
-        title: 'Auditer improvement plan',
+        title: 'Auditor report',
         render: () => '-'
       },
       {
-        title: 'Auditer report',
+        title: 'Auditor improvement plan',
         render: () => '-'
       },
       {

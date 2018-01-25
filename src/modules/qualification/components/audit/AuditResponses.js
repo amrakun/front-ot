@@ -68,7 +68,7 @@ class AuditResponses extends React.Component {
           )
       },
       {
-        title: 'Last auditer report',
+        title: 'Last auditor report',
         render: record =>
           record.reportFile ? (
             <a href={record.reportFile} target="_blank">
@@ -79,7 +79,7 @@ class AuditResponses extends React.Component {
           )
       },
       {
-        title: 'Last auditer improvement plan',
+        title: 'Last auditor improvement plan',
         render: record =>
           record.improvementPlanFile ? (
             <a href={record.improvementPlanFile} target="_blank">

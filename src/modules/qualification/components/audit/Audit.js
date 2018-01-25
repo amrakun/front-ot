@@ -73,11 +73,11 @@ class Audit extends Common {
         render: () => 'No'
       },
       {
-        title: 'Auditer report',
+        title: 'Auditor report',
         render: () => <a>View</a>
       },
       {
-        title: 'Auditer impromenet plan',
+        title: 'Auditor improvement plan',
         render: () => <a>View</a>
       },
       {

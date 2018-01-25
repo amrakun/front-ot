@@ -57,11 +57,11 @@ class ReportsAndPlans extends Common {
         render: record => moment(record.createdDate).format(dateFormat)
       },
       {
-        title: 'Last auditer report',
+        title: 'Last auditor report',
         render: () => <a>View</a>
       },
       {
-        title: 'Last auditer improvement plan',
+        title: 'Last auditor improvement plan',
         render: () => <a>View</a>
       },
       { title: 'Contact person', dataIndex: 'contactInfo.name' },

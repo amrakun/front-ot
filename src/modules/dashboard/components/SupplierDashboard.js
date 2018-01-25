@@ -138,7 +138,7 @@ class Dashboard extends React.Component {
           </Col>
           <Col key={6} lg={8} sm={12}>
             <TextCard
-              icon="notification"
+              icon="calculator"
               title="Qualification/audit"
               color={colors[7]}
               text={
