@@ -6,7 +6,7 @@ import { Table, Card, Row, Col, Button, Icon } from 'antd';
 import { xlsxHandler } from 'modules/common/utils';
 import { Common } from 'modules/companies/components';
 import { Sidebar } from 'modules/companies/components';
-import { Search } from 'modules/companies/components';
+import { Search } from 'modules/common/components';
 import moment from 'moment';
 import { dateFormat } from 'modules/common/constants';
 

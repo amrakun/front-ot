@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Search } from 'modules/companies/components';
+import { Search } from 'modules/common/components';
 import {
   Table,
   Card,

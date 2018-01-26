@@ -16,7 +16,7 @@ import {
 } from 'antd';
 import { Common } from 'modules/companies/components';
 import { Sidebar } from 'modules/companies/components';
-import { Search } from 'modules/companies/components';
+import { Search } from 'modules/common/components';
 import { Editor } from 'modules/common/components';
 import moment from 'moment';
 import { dateFormat, dateTimeFormat } from 'modules/common/constants';

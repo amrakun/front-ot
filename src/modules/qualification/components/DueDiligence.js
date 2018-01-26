@@ -6,7 +6,7 @@ import { Table, Card, Row, Col, Button } from 'antd';
 import { Uploader } from 'modules/common/components';
 import { Common } from 'modules/companies/components';
 import { Sidebar } from 'modules/companies/components';
-import { Search } from 'modules/companies/components';
+import { Search } from 'modules/common/components';
 import { dateFormat } from 'modules/common/constants';
 import moment from 'moment';
 

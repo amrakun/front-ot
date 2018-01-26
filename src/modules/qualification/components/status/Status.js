@@ -4,9 +4,8 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Table, Card, Row, Col } from 'antd';
-import { Common } from 'modules/companies/components';
-import { Sidebar } from 'modules/companies/components';
-import { Search } from 'modules/companies/components';
+import { Common, Sidebar } from 'modules/companies/components';
+import { Search } from 'modules/common/components';
 import moment from 'moment';
 import { dateFormat } from 'modules/common/constants';
 

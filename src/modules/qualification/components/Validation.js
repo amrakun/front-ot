@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 import { Table, Card, Row, Col, Modal, Checkbox, Divider } from 'antd';
 import { Common } from 'modules/companies/components';
 import { Sidebar } from 'modules/companies/components';
-import { Search } from 'modules/companies/components';
+import { Search } from 'modules/common/components';
 import moment from 'moment';
 import { dateFormat } from 'modules/common/constants';
 

@@ -13,9 +13,8 @@ import {
   message,
   DatePicker
 } from 'antd';
-import { Common } from 'modules/companies/components';
-import { Sidebar } from 'modules/companies/components';
-import { Search } from 'modules/companies/components';
+import { Common, Sidebar } from 'modules/companies/components';
+import { Search } from 'modules/common/components';
 import { dateFormat, dateTimeFormat } from 'modules/common/constants';
 import moment from 'moment';
 

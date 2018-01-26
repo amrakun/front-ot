@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 import { Table, Card, DatePicker } from 'antd';
 import { dateFormat } from 'modules/common/constants';
 import moment from 'moment';
-import { Search } from 'modules/companies/components';
+import { Search } from 'modules/common/components';
 import queryString from 'query-string';
 import { Common } from 'modules/companies/components';
 

@@ -4,9 +4,9 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Table, Card, Row, Col, Button, Icon, message } from 'antd';
+import { Search } from 'modules/common/components';
 import Common from './Common';
 import Sidebar from './Sidebar';
-import Search from './Search';
 
 class Base extends Common {
   constructor(props) {

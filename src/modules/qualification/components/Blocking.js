@@ -14,7 +14,7 @@ import {
 } from 'antd';
 import { dateFormat } from 'modules/common/constants';
 import moment from 'moment';
-import { Search } from 'modules/companies/components';
+import { Search } from 'modules/common/components';
 import { Common } from 'modules/companies/components';
 import { SupplierSearcher } from 'modules/companies/components';
 

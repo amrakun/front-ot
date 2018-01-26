@@ -8,7 +8,7 @@ import { dateFormat, colors } from 'modules/common/constants';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { Search } from 'modules/companies/components';
+import { Search } from 'modules/common/components';
 import queryString from 'query-string';
 
 class AuditResponses extends React.Component {
