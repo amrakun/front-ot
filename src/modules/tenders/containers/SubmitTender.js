@@ -9,6 +9,7 @@ import { message } from 'antd';
 const PublishContainer = ({
   tenderDetailQuery,
   tendersResponsesAdd,
+  tenderResponsesSend,
   history
 }) => {
   if (tenderDetailQuery.loading) {
@@ -30,8 +31,24 @@ const PublishContainer = ({
       });
   };
 
+  const send = doc => {
+    tenderResponsesSend({
+      variables: { ...doc }
+    })
+      .then(() => {
+        message.success('Successfully submitted a tender!');
+        history.push('/rfq-and-eoi?refetch', {
+          newTenderId: doc.tenderId
+        });
+      })
+      .catch(error => {
+        message.error(error.message);
+      });
+  };
+
   const updatedProps = {
     save,
+    send,
     data: tenderDetailQuery.tenderDetail || {}
   };
 
@@ -47,6 +64,7 @@ PublishContainer.propTypes = {
   location: PropTypes.object,
   tenderDetailQuery: PropTypes.object,
   tendersResponsesAdd: PropTypes.func,
+  tenderResponsesSend: PropTypes.func,
   history: PropTypes.object
 };
 
@@ -62,5 +80,9 @@ export default compose(
 
   graphql(gql(mutations.tendersResponsesAdd), {
     name: 'tendersResponsesAdd'
+  }),
+
+  graphql(gql(mutations.tenderResponsesSend), {
+    name: 'tenderResponsesSend'
   })
 )(PublishContainer);

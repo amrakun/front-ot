@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, TreeSelect, Card, Alert } from 'antd';
+import { Form, TreeSelect, Card, Alert, message } from 'antd';
 import { Field, BaseForm } from 'modules/common/components';
 import { productDescription } from '../constants';
 import productsTree from '../../../productsTree';
@@ -9,7 +9,11 @@ class RegistrationForm extends BaseForm {
   handleSubmit(e) {
     e.preventDefault();
 
-    this.saveDirect(this.getFieldValue('productsInfo'), true);
+    const productCodes = this.getFieldValue('productsInfo');
+
+    if (productCodes.length < 21)
+      this.saveDirect(this.getFieldValue('productsInfo'), true);
+    else message.error('Please choose maximum of 20 product codes');
   }
 
   render() {
@@ -25,6 +29,7 @@ class RegistrationForm extends BaseForm {
                 treeData={productsTree}
                 treeCheckable={true}
                 searchPlaceholder="Please select products"
+                allowClear
               />
             }
           />

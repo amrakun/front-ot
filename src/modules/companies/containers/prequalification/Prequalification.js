@@ -18,6 +18,7 @@ const PrequalificationContainer = (props, context) => {
 
     mutation({ variables: { [name]: doc } })
       .then(() => {
+        companyByUserQuery.refetch();
         message.success('Saved');
         if (name === 'healthInfo') send();
       })

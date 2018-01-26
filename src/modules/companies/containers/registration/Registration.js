@@ -18,12 +18,7 @@ const RegistrationContainer = (props, context) => {
 
     mutation({ variables: { [name]: doc } })
       .then(() => {
-        if (name === 'basicInfo') {
-          companyByUserQuery.refetch();
-          props.history.push({
-            search: 'tab=2'
-          });
-        }
+        companyByUserQuery.refetch();
         message.success('Saved');
         if (name === 'productsInfo') send();
       })

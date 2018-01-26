@@ -15,23 +15,6 @@ import { Link } from 'react-router-dom';
 import { labels } from '../constants';
 
 class Dashboard extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-
-    let registrationComplete = true;
-    let prequalificationComplete = true;
-    const { data } = this.props;
-    delete data.__typename;
-    delete data._id;
-    Object.keys(data).forEach(function(key, index) {
-      if (index < 8)
-        if (data[key] === null) registrationComplete = false;
-        else if (data[key] === null) prequalificationComplete = false;
-    });
-    this.registrationComplete = registrationComplete;
-    this.prequalificationComplete = prequalificationComplete;
-  }
-
   render() {
     const { data, history, location } = this.props;
     const {
@@ -39,7 +22,9 @@ class Dashboard extends React.Component {
       lastFeedback,
       openTendersCount,
       audits,
-      isPrequalified
+      isPrequalified,
+      isSentPrequalificationInfo,
+      isSentRegistrationInfo
     } = data;
 
     const queryParams = queryString.parse(location.search);
@@ -49,29 +34,27 @@ class Dashboard extends React.Component {
 
     return (
       <div>
-        {!this.registrationComplete && !this.prequalificationComplete ? (
+        {!isSentRegistrationInfo || !isSentPrequalificationInfo ? (
           <Alert
             message="Welcome!"
             description={
               <div>
-                Please fill in &#34;
-                <Link
-                  className={this.registrationComplete ? 'hidden' : ''}
-                  to="/registration"
-                >
-                  Supplier registration
-                </Link>
-                &#34; and &#34;
-                <Link
-                  className={this.prequalificationComplete ? 'hidden' : ''}
-                  to="prequalification"
-                >
-                  Pre-qualification
-                </Link>
-                &#34; forms to be able to participate in tenders and EOI
+                Please fill in&nbsp;
+                {!isSentRegistrationInfo && (
+                  <Link to="/registration" className="sn">
+                    Registration{' '}
+                  </Link>
+                )}
+                &nbsp;
+                {!isSentPrequalificationInfo && (
+                  <Link to="prequalification" className="sn">
+                    Pre-qualification
+                  </Link>
+                )}
+                &nbsp;forms to be able to participate in tenders and EOI
               </div>
             }
-            type="success"
+            type="info"
             showIcon
             className={
               this.registrationComplete && this.prequalificationComplete

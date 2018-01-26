@@ -72,6 +72,14 @@ const tendersResponsesAdd = `
   }
 `;
 
+const tenderResponsesSend = `
+  mutation tenderResponsesSend($tenderId: String, $supplierId: String) {
+    tenderResponsesSend(tenderId: $tenderId, supplierId: $supplierId) {
+      _id
+    }
+  }
+`;
+
 const tendersAward = `
   mutation tendersAward(
     $_id: String!
@@ -105,5 +113,6 @@ export default {
   tendersEdit,
   tendersResponsesAdd,
   tendersAward,
-  sendRegretLetter
+  sendRegretLetter,
+  tenderResponsesSend
 };

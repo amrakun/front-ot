@@ -18,6 +18,7 @@ const RegistrationContainer = props => {
 
     certificateInfoEdit({ variables: { certificateInfo: doc } })
       .then(() => {
+        companyByUserQuery.refetch();
         message.success('Succesfully saved');
         history.push('/');
       })

@@ -502,3 +502,11 @@ form .ant-input-number {
 .ant-table-thead th span {
   text-transform: capitalize;
 }
+a.sn {
+  font-weight: 600;
+  color: #333;
+  text-decoration: underline;
+}
+a.sn:hover {
+  text-decoration: none;
+}
