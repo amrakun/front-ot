@@ -27,6 +27,8 @@ const routes = {
   'user-list': 'Manage Users',
   'my-profile': 'My Profile',
   'change-password': 'Change Password',
+  templates: 'Templates',
+  'manage-expiry-dates': 'Manage Expiry Dates',
   qualification: 'Qualification/audit'
 };
 

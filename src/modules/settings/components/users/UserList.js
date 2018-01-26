@@ -30,7 +30,8 @@ const propTypes = {
   resetPassword: PropTypes.func,
   refetchUsers: PropTypes.func,
   setPaginationParams: PropTypes.func.isRequired,
-  page: PropTypes.number.isRequired
+  page: PropTypes.number.isRequired,
+  numbering: PropTypes.number.isRequired
 };
 
 class UserList extends React.Component {
@@ -68,6 +69,13 @@ class UserList extends React.Component {
     this.showConfirm = this.showConfirm.bind(this);
 
     this.columns = [
+      {
+        title: 'Num',
+        key: '_id',
+        render: (value, row, index) => (
+          <span>{this.props.numbering + index}</span>
+        )
+      },
       {
         title: 'First Name',
         dataIndex: 'firstName',

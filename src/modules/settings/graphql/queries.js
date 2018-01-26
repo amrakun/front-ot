@@ -39,9 +39,36 @@ export const currentUser = `
     }
 `;
 
+const Config = `
+    _id
+    logo
+    name
+    phone
+    email
+    address
+    eoiTemplate
+    rfqTemplate
+    regretLetterTemplate
+    successFeedbackTemplate
+    auditTemplate
+    prequalificationDow
+    specificPrequalificationDow
+    auditDow
+    specificAuditDow
+    improvementPlanDow
+    specificImprovementPlanDow
+`;
+
+export const config = `
+    query config {
+        ${Config}
+    }
+`;
+
 export default {
   users,
   userDetail,
   usersTotalCount,
-  currentUser
+  currentUser,
+  config
 };
