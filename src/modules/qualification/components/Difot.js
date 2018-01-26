@@ -28,7 +28,7 @@ class Difot extends Common {
   }
 
   render() {
-    const { data, pagination, loading, onChange } = this.props;
+    const { data, pagination, loading, onChange, generate } = this.props;
     const { selectedCompanies } = this.state;
 
     const columns = this.getWrappedColumns([
@@ -55,11 +55,6 @@ class Difot extends Common {
       }
     ]);
 
-    const { REACT_APP_API_URL } = process.env;
-    const templateUrl = `${
-      REACT_APP_API_URL
-    }/static/templates/difot_score.xlsx`;
-
     return (
       <Row gutter={16}>
         <Sidebar suppliersCount={data && data.length} />
@@ -69,7 +64,7 @@ class Difot extends Common {
             <div className="table-operations">
               <Search />
 
-              <Button onClick={() => window.open(templateUrl)}>
+              <Button onClick={generate}>
                 Download template
                 <Icon type="download" />
               </Button>

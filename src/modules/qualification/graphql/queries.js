@@ -155,6 +155,41 @@ const feedbacks = `
   }
 `;
 
+const feedbackResponses = `
+  query feedbackResponses {
+    feedbackResponses {
+      _id
+      status
+      supplierId
+      employmentNumberBefore
+      employmentNumberNow
+      nationalSpendBefore
+      nationalSpendAfter
+      umnugobiSpendBefore
+      umnugobiSpendAfter
+      investment
+      trainings
+      corporateSocial
+      technologyImprovement
+      supplier {
+        basicInfo {
+          enName
+        }
+        contactInfo {
+          name
+          email
+          phone
+        }
+      }
+      feedback {
+        status
+        createdDate
+        closeDate
+      }
+    }
+  }
+`;
+
 const feedbackResponseDetail = `
   query feedbackDetail($_id: String!) {
     feedbackDetail(_id: $_id) {
@@ -232,6 +267,9 @@ const auditRequests = `
         publishDate
         closeDate
         status
+        supplierResponse {
+          isSent
+        }
       }
     }
   }
@@ -443,6 +481,36 @@ const auditReport = `
   }
 `;
 
+const commonParams = `
+  $search: String
+  $region: String
+  $productCodes: String
+  $isProductsInfoValidated: Boolean
+  $includeBlocked: Boolean
+  $isPrequalified: Boolean
+  $isQualified: Boolean
+  $difotScore: String
+  $_ids: [String]
+`;
+
+const commonValues = `
+  search: $search,
+  region: $region,
+  productCodes: $productCodes,
+  isProductsInfoValidated: $isProductsInfoValidated,
+  includeBlocked: $includeBlocked,
+  isPrequalified: $isPrequalified,
+  isQualified: $isQualified,
+  difotScore: $difotScore
+  _ids: $_ids
+`;
+
+const companiesGenerateDifotScoreList = `
+  query companiesGenerateDifotScoreList(${commonParams}) {
+    companiesGenerateDifotScoreList(${commonValues})
+  }
+`;
+
 export default {
   blockedCompanies,
   supplierPrequalification,
@@ -458,5 +526,7 @@ export default {
   auditResponseDetail,
   supplierBasicInfo,
   auditImprovementPlan,
-  auditReport
+  auditReport,
+  feedbackResponses,
+  companiesGenerateDifotScoreList
 };

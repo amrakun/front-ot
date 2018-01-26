@@ -17,7 +17,7 @@ class SubmitFeedback extends BaseForm {
 
     this.state = {
       ...this.state,
-      feedbackContent: 'asf'
+      feedbackContent: 'You have been invited to success feedback'
     };
 
     this.handleFeedbackContentChange = this.handleFeedbackContentChange.bind(
