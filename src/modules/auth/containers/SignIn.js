@@ -18,7 +18,7 @@ class SignInContainer extends React.Component {
   }
 
   render() {
-    const { loginMutation, history } = this.props;
+    const { loginMutation } = this.props;
     const { loading } = this.state;
 
     const login = variables => {
@@ -35,8 +35,9 @@ class SignInContainer extends React.Component {
 
           apolloClient.resetStore();
 
-          history.push('/');
+          window.location.href = '/';
         })
+
         .catch(error => {
           message.error(error.message);
 
