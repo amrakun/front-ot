@@ -97,7 +97,7 @@ class Dashboard extends React.Component {
             <NumberCardLines
               icon="calendar"
               title="DIFOT score"
-              tooltip={averageDifotScore < 75 && labels.difotSuggestion}
+              tooltip={averageDifotScore < 75 ? labels.difotSuggestion : null}
               color={averageDifotScore ? colors[7] : colors[5]}
               number={averageDifotScore || 0}
               percent={averageDifotScore || 0}
@@ -136,8 +136,8 @@ class Dashboard extends React.Component {
               icon="solution"
               title="Pre-qualification status"
               color={isPrequalified ? colors[7] : colors[5]}
-              tooltip={labels.preqSuggestion}
-              text={isPrequalified ? 'Yes' : 'No'}
+              tooltip={isPrequalified ? null : labels.preqSuggestion}
+              text={<span>{isPrequalified ? 'Yes' : 'No'}</span>}
               withPercent={true}
             />
           </Col>
