@@ -7,9 +7,13 @@ const withSystemConfig = Component => {
   const Container = props => {
     const { systemConfigQuery } = props;
 
+    if (systemConfigQuery.loading) {
+      return null;
+    }
+
     const updatedProps = {
       ...props,
-      systemConfig: systemConfigQuery.config
+      systemConfig: systemConfigQuery.config || {}
     };
 
     return <Component {...updatedProps} />;

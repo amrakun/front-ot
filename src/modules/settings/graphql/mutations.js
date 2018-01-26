@@ -75,10 +75,57 @@ const resetPassword = `
     }
 `;
 
+const configsSaveTemplate = `
+    mutation configsSaveTemplate($name: String!, $content: String!) {
+        configsSaveTemplate(name: $name, content: $content) {
+            _id
+            eoiTemplate
+            rfqTemplate
+            regretLetterTemplate
+            successFeedbackTemplate
+            auditTemplate
+        }
+    }
+`;
+
+const configsSavePrequalificationDow = `
+    mutation configsSavePrequalificationDow($doc: ConfigPrequalificationDowInput!) {
+        configsSavePrequalificationDow(doc: $doc) {
+            _id
+            prequalificationDow
+            specificPrequalificationDow
+        }
+    }
+`;
+
+const configsSaveAuditDow = `
+    mutation configsSaveAuditDow($doc: ConfigAuditDowInput!) {
+        configsSaveAuditDow(doc: $doc) {
+            _id
+            auditDow
+            specificAuditDow
+        }
+    }
+`;
+
+const configsSaveImprovementPlanDow = `
+    mutation configsSaveImprovementPlanDow($doc: ConfigImprovementPlanDowInput!){
+        configsSaveImprovementPlanDow(doc: $doc){
+            _id
+            improvementPlanDow
+            specificImprovementPlanDow
+        }
+    }
+`;
+
 export default {
   register,
   usersAdd,
   usersEdit,
   resetPassword,
-  usersRemove
+  usersRemove,
+  configsSaveTemplate,
+  configsSavePrequalificationDow,
+  configsSaveAuditDow,
+  configsSaveImprovementPlanDow
 };
