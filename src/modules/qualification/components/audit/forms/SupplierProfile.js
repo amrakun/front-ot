@@ -35,7 +35,7 @@ class SupplierProfile extends AuditFormsBase {
     const tierType = supplierInfo.tierType || '-';
     const isQualified = supplierInfo.isQualified || {};
     const shareholderInfo = supplierInfo.shareholderInfo || {};
-    const shareholders = shareholderInfo.shareholders || {};
+    const shareholders = shareholderInfo.shareholders || [];
     const owner = shareholders[0] || {};
     const basicInfo = supplierInfo.basicInfo || {};
     const renderListItem = this.renderListItem;
