@@ -1,5 +1,5 @@
 const commonParams = `
-  $number: Float!,
+  $number: String!,
   $name: String!,
   $content: String!,
   $publishDate: Date!,

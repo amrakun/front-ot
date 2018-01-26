@@ -23,20 +23,20 @@ class TendersContainer extends React.Component {
   }
 
   render() {
-    const { feedbacksQuery } = this.props;
+    const { feedbackResponsesQuery } = this.props;
 
-    if (feedbacksQuery.loading) {
+    if (feedbackResponsesQuery.loading) {
       return <FeedbackResponses loading={true} />;
     }
 
     const { pagination } = this.state;
-    const feedbacks = feedbacksQuery.feedbacks || [];
+    const feedbackResponses = feedbackResponsesQuery.feedbackResponses || [];
 
     const updatedProps = {
       ...this.props,
-      data: feedbacks,
+      data: feedbackResponses,
       pagination: {
-        total: feedbacks.length,
+        total: feedbackResponses.length,
         pageSize: pagination.pageSize,
         current: pagination.current
       },
@@ -50,11 +50,11 @@ class TendersContainer extends React.Component {
 }
 
 TendersContainer.propTypes = {
-  feedbacksQuery: PropTypes.object
+  feedbackResponsesQuery: PropTypes.object
 };
 
 export default compose(
-  graphql(gql(queries.feedbacks), {
-    name: 'feedbacksQuery'
+  graphql(gql(queries.feedbackResponses), {
+    name: 'feedbackResponsesQuery'
   })
 )(TendersContainer);

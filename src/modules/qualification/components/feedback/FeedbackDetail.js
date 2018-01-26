@@ -4,6 +4,8 @@ import { withRouter } from 'react-router';
 import { Table, Card, Row, Col, Button, Icon } from 'antd';
 import { NumberCard } from 'modules/common/components';
 import { colors } from 'modules/common/colors';
+import { dateFormat } from 'modules/common/constants';
+import moment from 'moment';
 
 class FeedbackResponses extends React.Component {
   constructor(props) {
@@ -35,6 +37,18 @@ class FeedbackResponses extends React.Component {
 
   columns() {
     return [
+      {
+        title: 'Feedback Status',
+        dataIndex: 'feedbackStatus'
+      },
+      {
+        title: 'Open date',
+        render: record => moment(record.createdDate).format(dateFormat)
+      },
+      {
+        title: 'Close date',
+        render: record => moment(record.closeDate).format(dateFormat)
+      },
       {
         title: 'Status',
         dataIndex: 'status'

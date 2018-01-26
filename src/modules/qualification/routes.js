@@ -9,7 +9,6 @@ import {
   Feedback,
   SubmitFeedback,
   FeedbackResponses,
-  FeedbackDetail,
   SupplierStatus,
   Status,
   Audit,
@@ -93,12 +92,6 @@ export default [
     exact
     path={'/feedback/responses'}
     component={FeedbackResponses}
-  />,
-  <Route
-    key="/feedback/response"
-    exact
-    path="/feedback/response/:id"
-    component={FeedbackDetail}
   />,
   <Route
     key="/audit"
