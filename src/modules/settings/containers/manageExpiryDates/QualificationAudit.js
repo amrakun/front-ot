@@ -20,15 +20,13 @@ const QualificationAuditContainer = ({
     return <Loading />;
   }
 
-  const mainAction = auditDoc => {
-    console.log(auditDoc);
+  const mainAction = (auditDoc, impDoc) => {
     configsSaveAuditDowMutation({ variables: { doc: auditDoc } }).then(() => {
-      message.success('Saved Successfully');
-      // configsSaveImprovementPlanDowMutation({ variables: { impDoc } }).then(
-      //   () => {
-      //     message.success('Saved Successfully');
-      //   }
-      // );
+      configsSaveImprovementPlanDowMutation({
+        variables: { doc: impDoc }
+      }).then(() => {
+        message.success('Saved Successfully');
+      });
     });
   };
 

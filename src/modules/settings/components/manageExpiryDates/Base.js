@@ -12,7 +12,7 @@ class ManageExpiryDates extends React.Component {
       <Row gutter={16}>
         <Col span={24}>
           <Card title="Templates">
-            <Tabs defaultActiveKey="2">
+            <Tabs defaultActiveKey="1">
               <TabPane tab="Pre-qualification" key="1">
                 <PreQualification />
               </TabPane>

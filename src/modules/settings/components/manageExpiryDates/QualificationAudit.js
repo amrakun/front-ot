@@ -18,12 +18,12 @@ class QualificationAudit extends React.Component {
 
     const { systemConfig } = context;
 
-    console.log(systemConfig);
-
     this.state = {
       users: this.props.users,
-      specificAuditDow: systemConfig.specificAuditDow || '',
-      auditDow: systemConfig.auditDow || ''
+      specificAuditDow: systemConfig.specificAuditDow || {},
+      auditDow: systemConfig.auditDow || {},
+      specificImprovementPlanDow: systemConfig.specificImprovementPlanDow || {},
+      improvementPlanDow: systemConfig.improvementPlanDow || {}
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,8 +39,6 @@ class QualificationAudit extends React.Component {
         return;
       }
 
-      console.log(data);
-
       const auditDoc = {
         common: {
           duration: data.duration,
@@ -55,15 +53,49 @@ class QualificationAudit extends React.Component {
 
       const impDoc = {
         common: {
-          tierType: data.duration,
-          duration: data.duration,
-          amount: data.duration
+          national: {
+            duration: data.nationalDuration,
+            amount: data.nationalAmount
+          },
+          umnugobi: {
+            duration: data.umnugobiDuration,
+            amount: data.umnugobiAmount
+          },
+          tier1: {
+            duration: data.tier1Duration,
+            amount: data.tier1Amount
+          },
+          tier2: {
+            duration: data.tier2Duration,
+            amount: data.tier2Amount
+          },
+          tier3: {
+            duration: data.tier3Duration,
+            amount: data.tier3Amount
+          }
         },
         specific: {
-          supplierIds: data.supplierId,
-          tierType: data.type,
-          duration: data.duration,
-          amount: data.amount
+          supplierIds: data.specificSupplierId,
+          national: {
+            duration: data.nationalSpecificDuration,
+            amount: data.nationalSpecificAmount
+          },
+          umnugobi: {
+            duration: data.umnugobiSpecificDuration,
+            amount: data.umnugobiSpecificAmount
+          },
+          tier1: {
+            duration: data.tier1SpecificDuration,
+            amount: data.tier1SpecificAmount
+          },
+          tier2: {
+            duration: data.tier2SpecificDuration,
+            amount: data.tier2SpecificAmount
+          },
+          tier3: {
+            duration: data.tier3SpecificDuration,
+            amount: data.tier3SpecificAmount
+          }
         }
       };
 
@@ -73,41 +105,89 @@ class QualificationAudit extends React.Component {
 
   improvementPlanRender(type) {
     const { getFieldDecorator } = this.props.form;
+    const { improvementPlanDow, specificImprovementPlanDow } = this.state;
 
-    const tierTypes = [
+    const common = [
       {
-        name: 'commonNational',
+        name: 'national',
+        duration: 'nationalDuration',
+        amount: 'nationalAmount',
         title: 'National supplier'
       },
       {
         name: 'umnugobi',
+        duration: 'umnugobiDuration',
+        amount: 'umnugobiAmount',
         title: 'Umnugobi supplier'
       },
       {
         name: 'tier1',
+        duration: 'tier1Duration',
+        amount: 'tier1Amount',
         title: 'International Tier 1 supplier'
       },
       {
         name: 'tier2',
+        duration: 'tier2Duration',
+        amount: 'tier2Amount',
         title: 'International Tier 2 supplier'
       },
       {
         name: 'tier3',
+        duration: 'tier3Duration',
+        amount: 'tier3Amount',
         title: 'International Tier 3 supplier'
       }
     ];
 
+    const specific = [
+      {
+        name: 'national',
+        duration: 'nationalSpecificDuration',
+        amount: 'nationalSpecificAmount',
+        title: 'National supplier'
+      },
+      {
+        name: 'umnugobi',
+        duration: 'umnugobiSpecificDuration',
+        amount: 'umnugobiSpecificAmount',
+        title: 'Umnugobi supplier'
+      },
+      {
+        name: 'tier1',
+        duration: 'tier1SpecificDuration',
+        amount: 'tier1SpecificAmount',
+        title: 'International Tier 1 supplier'
+      },
+      {
+        name: 'tier2',
+        duration: 'tier2SpecificDuration',
+        amount: 'tier2SpecificAmount',
+        title: 'International Tier 2 supplier'
+      },
+      {
+        name: 'tier3',
+        duration: 'tier3SpecificDuration',
+        amount: 'tier3SpecificAmount',
+        title: 'International Tier 3 supplier'
+      }
+    ];
+
+    const tierTypes = type === 'common' ? common : specific;
+    const initials =
+      type === 'common' ? improvementPlanDow : specificImprovementPlanDow;
+
     const improvementPlanRender = [];
     tierTypes.map(tier =>
       improvementPlanRender.push(
-        <Row gutter={16} key={`${tier.name}${type}`}>
+        <Row gutter={16} key={tier.name}>
           <Col span={12}>
             <p>{tier.title}</p>
           </Col>
           <Col span={6}>
             <FormItem>
-              {getFieldDecorator(`${tier.name}${type}`, {
-                initialValue: 'year'
+              {getFieldDecorator(tier.duration, {
+                initialValue: initials[tier.name]['duration'] || 'year'
               })(
                 <Select style={{ width: 120 }}>
                   <Option value="day">Day</Option>
@@ -120,8 +200,8 @@ class QualificationAudit extends React.Component {
           </Col>
           <Col span={6}>
             <FormItem>
-              {getFieldDecorator('amount', {
-                initialValue: ''
+              {getFieldDecorator(tier.amount, {
+                initialValue: initials[tier.name]['amount'] || 0
               })(<Input />)}
             </FormItem>
           </Col>
@@ -133,7 +213,12 @@ class QualificationAudit extends React.Component {
   }
 
   render() {
-    const { users, specificAuditDow, auditDow } = this.state;
+    const {
+      users,
+      specificAuditDow,
+      auditDow,
+      specificImprovementPlanDow
+    } = this.state;
     const { getFieldDecorator } = this.props.form;
 
     const children = [];
@@ -166,7 +251,7 @@ class QualificationAudit extends React.Component {
               <Col span={6}>
                 <FormItem>
                   {getFieldDecorator('amount', {
-                    initialValue: auditDow.amount || ''
+                    initialValue: auditDow.amount || 0
                   })(<Input />)}
                 </FormItem>
               </Col>
@@ -188,7 +273,7 @@ class QualificationAudit extends React.Component {
               <Col span={12}>
                 <FormItem>
                   {getFieldDecorator('supplierId', {
-                    initialValue: specificAuditDow.supplierIds || ''
+                    initialValue: specificAuditDow.supplierIds || []
                   })(
                     <Select
                       mode="multiple"
@@ -223,7 +308,7 @@ class QualificationAudit extends React.Component {
               <Col span={6}>
                 <FormItem>
                   {getFieldDecorator('specificAmount', {
-                    initialValue: specificAuditDow.amount || ''
+                    initialValue: specificAuditDow.amount || 0
                   })(<Input />)}
                 </FormItem>
               </Col>
@@ -233,7 +318,7 @@ class QualificationAudit extends React.Component {
         <Row gutter={32} type="flex">
           <Col span={12} style={{ borderRight: 'solid 1px #eee' }}>
             <h2>Improvement Plan</h2>
-            {this.improvementPlanRender('Common')}
+            {this.improvementPlanRender('common')}
           </Col>
 
           <Col span={12}>
@@ -249,8 +334,8 @@ class QualificationAudit extends React.Component {
               </Col>
               <Col span={12}>
                 <FormItem>
-                  {getFieldDecorator('supplierIds', {
-                    initialValue: specificAuditDow.amount || ''
+                  {getFieldDecorator('specificSupplierId', {
+                    initialValue: specificImprovementPlanDow.supplierIds || []
                   })(
                     <Select
                       mode="multiple"
@@ -264,7 +349,7 @@ class QualificationAudit extends React.Component {
               </Col>
             </Row>
 
-            {this.improvementPlanRender('Specific')}
+            {this.improvementPlanRender('specific')}
           </Col>
           <Col span={24}>
             <Button

@@ -13,7 +13,7 @@ const withSystemConfig = Component => {
 
     const updatedProps = {
       ...props,
-      systemConfig: systemConfigQuery.config
+      systemConfig: systemConfigQuery.config || {}
     };
 
     return <Component {...updatedProps} />;

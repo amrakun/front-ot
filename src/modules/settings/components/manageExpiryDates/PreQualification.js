@@ -84,7 +84,7 @@ class PreQualification extends React.Component {
               <Col span={6}>
                 <FormItem>
                   {getFieldDecorator('amount', {
-                    initialValue: preQualification.amount || ''
+                    initialValue: preQualification.amount || 0
                   })(<Input />)}
                 </FormItem>
               </Col>
@@ -105,7 +105,7 @@ class PreQualification extends React.Component {
               <Col span={12}>
                 <FormItem>
                   {getFieldDecorator('supplierId', {
-                    initialValue: specificPrequalificationDow.supplierIds || ''
+                    initialValue: specificPrequalificationDow.supplierIds || []
                   })(
                     <Select
                       mode="multiple"
@@ -140,7 +140,7 @@ class PreQualification extends React.Component {
               <Col span={6}>
                 <FormItem>
                   {getFieldDecorator('specificAmount', {
-                    initialValue: specificPrequalificationDow.amount || ''
+                    initialValue: specificPrequalificationDow.amount || 0
                   })(<Input />)}
                 </FormItem>
               </Col>
