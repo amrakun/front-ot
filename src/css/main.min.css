@@ -53,6 +53,41 @@
   height: 32px;
   margin-bottom: 0;
 }
+.chart-row {
+  margin: 0 -12px;
+}
+.chart-row [class^='ant-col'] {
+  padding: 0 12px;
+}
+.chart-filter,
+.chart-row {
+  margin-bottom: 24px;
+}
+.chart-filter .chart-filter-input {
+  margin-right: 20px;
+}
+.pie-chart-labels {
+  text-align: center;
+}
+.pie-chart-labels .chart-text {
+  display: inline-block;
+  line-height: 20px;
+  margin: 0 12px 12px;
+}
+.chart-text label {
+  padding-left: 8px;
+}
+.chart-count {
+  height: 200px;
+  line-height: 200px;
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  color: #000;
+}
+.barchart-wrapper .ant-card-body {
+  padding-left: 0px;
+}
 .hidden {
   display: none;
 }
