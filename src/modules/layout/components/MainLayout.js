@@ -68,7 +68,15 @@ class MainLayout extends React.Component {
     return (
       <Layout>
         {currentUser && <Sidenav {...navProps} />}
-        <Layout className="main" style={layoutStyle}>
+        <Layout
+          className="main"
+          style={{
+            layoutStyle,
+            backgroundImage: `url(
+              ${process.env.PUBLIC_URL + '/images/background.jpg'}
+            )`
+          }}
+        >
           <Header />
           <Content>
             {currentUser && <Breadcrumb {...location} />}
