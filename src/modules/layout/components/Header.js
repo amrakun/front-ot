@@ -3,7 +3,7 @@ import { Menu, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 import consts from 'consts';
 import PropTypes from 'prop-types';
-import { colors } from 'modules/common/colors';
+import { colors } from 'modules/common/constants';
 
 const SubMenu = Menu.SubMenu;
 

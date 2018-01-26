@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Table, Card, Input, Icon, Row, Col, Button, Modal } from 'antd';
 import { NumberCard, NumberCardLines } from 'modules/common/components';
-import { colors } from 'modules/common/colors';
+import { colors } from 'modules/common/constants';
 import { Editor } from 'modules/common/components';
 import { regretLetterTemplate } from './constants';
 import { Common } from 'modules/companies/components/';

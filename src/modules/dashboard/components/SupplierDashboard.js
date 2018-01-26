@@ -9,7 +9,7 @@ import {
   NumberCardLines,
   TextCard
 } from 'modules/common/components';
-import { colors } from 'modules/common/colors';
+import { colors } from 'modules/common/constants';
 import { Row, Col, Alert } from 'antd';
 import { Link } from 'react-router-dom';
 import { labels } from '../constants';

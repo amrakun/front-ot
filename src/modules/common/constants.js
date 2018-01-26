@@ -56,6 +56,23 @@ const notifyReady = {
 const { REACT_APP_API_URL } = process.env;
 const uploadUrl = `${REACT_APP_API_URL}/upload-file`;
 
+const colors = [
+  'rgb(0,153,168)',
+  'rgb(0,116,155)',
+  'rgb(110,180,175)',
+  'rgb(253,185,19)',
+  'rgb(188,90,58)',
+  'rgb(161,161,164)',
+  'rgb(191,111,125)',
+  'rgb(101,176,186)',
+  'rgb(204,131,65)',
+  'rgb(67,83,99)'
+];
+
+// query params
+const pageParams = `$page: Int $perPage: Int`;
+const pageValues = `page: $page, perPage: $perPage`;
+
 export {
   dateFormat,
   dateTimeFormat,
@@ -66,5 +83,8 @@ export {
   booleanDataReverse,
   notifyLoading,
   notifyReady,
-  uploadUrl
+  uploadUrl,
+  colors,
+  pageParams,
+  pageValues
 };

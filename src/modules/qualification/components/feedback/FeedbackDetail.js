@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Table, Card, Row, Col, Button, Icon } from 'antd';
 import { NumberCard } from 'modules/common/components';
-import { colors } from 'modules/common/colors';
-import { dateFormat } from 'modules/common/constants';
+import { dateFormat, colors } from 'modules/common/constants';
 import moment from 'moment';
 
 class FeedbackResponses extends React.Component {

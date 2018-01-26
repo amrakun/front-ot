@@ -8,8 +8,15 @@ import {
   EditTender,
   SubmitTender
 } from './containers';
+import { PublicEoi } from './components';
 
 export default [
+  <Route
+    key="peoi"
+    exact
+    path="/expression-of-interest"
+    component={PublicEoi}
+  />,
   <Route
     key={'/rfq'}
     exact

@@ -4,10 +4,9 @@ import { Rfq, Eoi } from '../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries, mutations } from '../graphql';
 import { message, notification, Icon, Button } from 'antd';
-import { colors } from 'modules/common/colors';
 import client from 'apolloClient';
 import { Loading } from 'modules/common/components';
-import { notifyReady, notifyLoading } from 'modules/common/constants';
+import { notifyReady, notifyLoading, colors } from 'modules/common/constants';
 
 const notifyIfWantToSend = {
   message: 'Succesfully awarded',

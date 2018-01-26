@@ -5,5 +5,6 @@ import RfqForm from './forms/RfqForm';
 import EoiForm from './forms/EoiForm';
 import SubmitRfq from './submit/SubmitRfq';
 import SubmitEoi from './submit/SubmitEoi';
+import PublicEoi from './PublicEoi';
 
-export { Tenders, RfqForm, EoiForm, SubmitRfq, SubmitEoi, Rfq, Eoi };
+export { Tenders, RfqForm, EoiForm, SubmitRfq, SubmitEoi, Rfq, Eoi, PublicEoi };

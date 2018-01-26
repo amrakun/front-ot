@@ -18,7 +18,7 @@ import queryString from 'query-string';
 import { Tenders } from 'modules/tenders/containers';
 import moment from 'moment';
 import productsTree from 'modules/companies/productsTree';
-import { colors } from 'modules/common/colors';
+import { colors } from 'modules/common/constants';
 
 const COLORS = [colors[2], colors[3], colors[4], colors[6], colors[8]];
 

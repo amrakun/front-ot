@@ -1,8 +1,7 @@
 import React from 'react';
 import { Card, Icon, Row, Col, Modal, Button } from 'antd';
 import moment from 'moment';
-import { dateTimeFormat as dFormat } from 'modules/common/constants';
-import { colors } from 'modules/common/colors';
+import { dateTimeFormat as dFormat, colors } from 'modules/common/constants';
 import PropTypes from 'prop-types';
 
 class MainInfo extends React.Component {
