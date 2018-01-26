@@ -119,6 +119,20 @@ class TenderForm extends BaseForm {
     this.state[stateKey] = product;
   }
 
+  onProductFileChange(e, name, recordKey) {
+    const stateKey = `product__${recordKey}`;
+    const product = this.state[stateKey] || {};
+
+    let value = {
+      url: e.response,
+      name: e.name
+    };
+
+    product[name] = value;
+
+    this.state[stateKey] = product;
+  }
+
   renderProductColumn(props) {
     const { name, title, type, isSupplier, width } = props;
     const { location } = this.props;
@@ -143,7 +157,7 @@ class TenderForm extends BaseForm {
             initialFile={record[name]}
             disabled={isSupplier}
             onReceiveFile={args =>
-              this.onProductInputChange(args, name, record.key)
+              this.onProductFileChange(args, name, record.key)
             }
           />
         );

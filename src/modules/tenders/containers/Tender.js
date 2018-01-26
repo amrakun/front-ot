@@ -147,6 +147,7 @@ class TenderContainer extends React.Component {
     }
 
     const tenderDetail = tenderDetailQuery.tenderDetail;
+
     const {
       pagination,
       rfqBidSummaryReportLoading,

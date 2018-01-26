@@ -1,8 +1,9 @@
+/* eslint-disable react/display-name */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { message, Button, Icon } from 'antd';
-import { eoiResponseColumns } from '../../constants';
 import Tender from './Tender';
 
 class Eoi extends Tender {
@@ -32,6 +33,23 @@ class Eoi extends Tender {
         );
   }
 
+  responseColumns() {
+    return [
+      { title: 'Document file name', dataIndex: 'name', key: '3' },
+      { title: 'Submitted', dataIndex: 'isSubmitted', key: '2' },
+      {
+        title: 'Picture',
+        key: '5',
+        render: record => (
+          <a onClick={() => window.open(record.file.url)} target="_blank">
+            Download
+          </a>
+        )
+      },
+      { title: 'Notes', dataIndex: 'notes', key: '4' }
+    ];
+  }
+
   render() {
     const tableOperations = [
       <Button onClick={this.handleEoiBidderList} key={0}>
@@ -45,7 +63,7 @@ class Eoi extends Tender {
     ];
 
     return this.renderTender({
-      responseColumns: eoiResponseColumns,
+      responseColumns: this.responseColumns(),
       tableOperations: tableOperations
     });
   }

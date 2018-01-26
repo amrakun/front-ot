@@ -46,6 +46,10 @@ const tenderDetail = `
       responses {
         supplier {
           _id
+          isQualified
+          isProductsInfoValidated
+          averageDifotScore
+          lastDueDiligence
           basicInfo {
             enName,
             sapNumber,

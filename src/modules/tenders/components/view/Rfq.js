@@ -1,8 +1,10 @@
+/* eslint-disable react/display-name */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { message, Button, Icon } from 'antd';
-import { rfqRequestColumns, rfqResponseColumns } from '../../constants';
+import { rfqRequestColumns } from '../../constants';
 import Tender from './Tender';
 
 class Rfq extends Tender {
@@ -36,6 +38,39 @@ class Rfq extends Tender {
     }
   }
 
+  responseColumns() {
+    return [
+      {
+        title: 'Suggested manufacturer if any',
+        dataIndex: 'suggestedManufacturer',
+        key: '8'
+      },
+      {
+        title: 'Suggested manufacturer part number',
+        dataIndex: 'suggestedManufacturerPartNumber',
+        key: '9'
+      },
+      {
+        title: 'Unit price (excluding VAT)',
+        dataIndex: 'unitPrice',
+        key: '10'
+      },
+      { title: 'Total price', dataIndex: 'totalPrice', key: '11' },
+      { title: 'Lead time', dataIndex: 'leadTime', key: '12' },
+      { title: 'Shipping terms', dataIndex: 'shippingTerms', key: '13' },
+      { title: 'Comment', dataIndex: 'comment', key: '14' },
+      {
+        title: 'Picture (if required)',
+        key: '15',
+        render: record => (
+          <a onClick={() => window.open(record.file.url)} target="_blank">
+            Download
+          </a>
+        )
+      }
+    ];
+  }
+
   render() {
     const { rfqBidSummaryReportLoading } = this.props;
     const data = this.props.data || {};
@@ -63,7 +98,7 @@ class Rfq extends Tender {
 
     return this.renderTender({
       requestColumns: rfqRequestColumns,
-      responseColumns: rfqResponseColumns,
+      responseColumns: this.responseColumns(),
       requestedData: requestedProducts,
       tableOperations: tableOperations
     });

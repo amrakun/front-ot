@@ -97,11 +97,14 @@ class Tender extends Common {
           </Link>
         )
       },
-      { title: 'Qualification/audit status', dataIndex: 'audit' },
+      {
+        title: 'Qualification/audit status',
+        render: record => (record.supplier.isQualified ? 'Yes' : 'No')
+      },
       {
         title: 'Validation status',
         render: record =>
-          record.supplier.isProductsInfoValidated ? 'Yes' : '-'
+          record.supplier.isProductsInfoValidated ? 'Yes' : 'No'
       },
       {
         title: 'Due dilligence',
@@ -252,7 +255,8 @@ class Tender extends Common {
             }}
             columns={this.columns()}
             rowKey={record => (record.supplier ? record.supplier._id : '')}
-            dataSource={status !== 'open' ? responses : []}
+            dataSource={responses}
+            // dataSource={status !== 'open' ? responses : []}
             pagination={pagination}
             loading={loading}
             scroll={{ x: 2500 }}

@@ -91,7 +91,7 @@ class MainInfo extends React.Component {
 
 MainInfo.propTypes = {
   name: PropTypes.string,
-  number: PropTypes.number,
+  number: PropTypes.string,
   publishDate: PropTypes.number,
   closeDate: PropTypes.number,
   file: PropTypes.object,
