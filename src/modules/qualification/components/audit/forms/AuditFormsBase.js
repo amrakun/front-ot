@@ -88,7 +88,7 @@ class AuditFormsBase extends BaseForm {
     let initialAnswer = '';
     if (multipleOptions) {
       if (multipleOptions[supplierAnswer])
-        initialAnswer = multipleOptions[supplierAnswer].text;
+        initialAnswer = multipleOptions[supplierAnswer].value;
     } else {
       initialAnswer =
         supplierAnswer !== undefined ? supplierAnswer.toString() : '';
@@ -139,7 +139,7 @@ class AuditFormsBase extends BaseForm {
     let initialScore = '';
     if (multipleOptions) {
       if (multipleOptions[auditorScore])
-        initialScore = multipleOptions[auditorScore].text;
+        initialScore = multipleOptions[auditorScore].value;
     } else {
       initialScore = auditorScore !== undefined ? auditorScore.toString() : '';
     }

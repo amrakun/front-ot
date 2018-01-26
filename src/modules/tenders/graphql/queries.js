@@ -1,5 +1,3 @@
-import { pageParams, pageValues } from 'modules/common/queries';
-
 const tenderFields = `
   _id,
   status,
@@ -100,8 +98,8 @@ const tenderParams = `$type: String!, $supplierId: String, $ignoreSubmitted: Boo
 const tenderValues = `type: $type, supplierId: $supplierId, ignoreSubmitted: $ignoreSubmitted, search: $search, status: $status`;
 
 const tenders = `
-  query tenders(${tenderParams} ${pageParams}) {
-    tenders(${tenderValues} ${pageValues}) {
+  query tenders(${tenderParams}) {
+    tenders(${tenderValues}) {
       ${tenderFields}
     }
   }
