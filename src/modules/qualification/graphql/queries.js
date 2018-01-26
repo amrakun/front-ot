@@ -481,6 +481,36 @@ const auditReport = `
   }
 `;
 
+const commonParams = `
+  $search: String
+  $region: String
+  $productCodes: String
+  $isProductsInfoValidated: Boolean
+  $includeBlocked: Boolean
+  $isPrequalified: Boolean
+  $isQualified: Boolean
+  $difotScore: String
+  $_ids: [String]
+`;
+
+const commonValues = `
+  search: $search,
+  region: $region,
+  productCodes: $productCodes,
+  isProductsInfoValidated: $isProductsInfoValidated,
+  includeBlocked: $includeBlocked,
+  isPrequalified: $isPrequalified,
+  isQualified: $isQualified,
+  difotScore: $difotScore
+  _ids: $_ids
+`;
+
+const companiesGenerateDifotScoreList = `
+  query companiesGenerateDifotScoreList(${commonParams}) {
+    companiesGenerateDifotScoreList(${commonValues})
+  }
+`;
+
 export default {
   blockedCompanies,
   supplierPrequalification,
@@ -497,5 +527,6 @@ export default {
   supplierBasicInfo,
   auditImprovementPlan,
   auditReport,
-  feedbackResponses
+  feedbackResponses,
+  companiesGenerateDifotScoreList
 };

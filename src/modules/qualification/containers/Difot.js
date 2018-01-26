@@ -1,10 +1,12 @@
 import React from 'react';
-import { message } from 'antd';
+import { notification, Icon, Button, message } from 'antd';
 import { gql, graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
 import { Difot } from '../components';
-import { mutations } from '../graphql';
+import { mutations, queries } from '../graphql';
 import { generator } from 'modules/companies/containers';
+import { notifyReady, notifyLoading } from 'modules/common/constants';
+import client from 'apolloClient';
 
 class DifotContainer extends React.Component {
   render() {
@@ -24,9 +26,43 @@ class DifotContainer extends React.Component {
         });
     };
 
+    const generate = () => {
+      notification.open(notifyLoading);
+      this.setState({ exportLoading: true });
+
+      client
+        .query({
+          query: gql(queries.companiesGenerateDifotScoreList),
+          name: `generateQuery`,
+          variables: companiesQuery ? companiesQuery.variables : null
+        })
+        .then(response => {
+          notification.close('loadingNotification');
+          notification.open({
+            ...notifyReady,
+            btn: (
+              <Button
+                type="primary"
+                onClick={() => {
+                  notification.close('downloadNotification');
+                  window.open(response.data[Object.keys(response.data)[0]]);
+                }}
+              >
+                <Icon type="download" /> Download
+              </Button>
+            )
+          });
+          this.setState({ exportLoading: false });
+        })
+        .catch(error => {
+          message.error(error.message);
+        });
+    };
+
     const extendedProps = {
       ...this.props,
-      addDifotScores
+      addDifotScores,
+      generate
     };
 
     return <Difot {...extendedProps} />;
