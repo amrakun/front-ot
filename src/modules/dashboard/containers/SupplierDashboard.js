@@ -6,7 +6,7 @@ import { Loading } from 'modules/common/components';
 import { SupplierDashboard } from '../components';
 
 const SupplierDashboardContainer = props => {
-  const { companyByUserQuery, location } = props;
+  const { companyByUserQuery, location, history } = props;
 
   if (companyByUserQuery.loading) {
     return <Loading />;
@@ -14,6 +14,7 @@ const SupplierDashboardContainer = props => {
 
   if (location.search === '?refetch') {
     companyByUserQuery.refetch();
+    history.push({ location: null });
   }
 
   const updatedProps = {
@@ -28,7 +29,8 @@ const SupplierDashboardContainer = props => {
 
 SupplierDashboardContainer.propTypes = {
   companyByUserQuery: PropTypes.object,
-  location: PropTypes.object
+  location: PropTypes.object,
+  history: PropTypes.object
 };
 
 export default compose(

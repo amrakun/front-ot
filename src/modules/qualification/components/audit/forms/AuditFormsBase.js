@@ -90,7 +90,8 @@ class AuditFormsBase extends BaseForm {
       if (multipleOptions[supplierAnswer])
         initialAnswer = multipleOptions[supplierAnswer].text;
     } else {
-      initialAnswer = supplierAnswer ? supplierAnswer.toString() : '';
+      initialAnswer =
+        supplierAnswer !== undefined ? supplierAnswer.toString() : '';
     }
 
     return (
@@ -125,6 +126,7 @@ class AuditFormsBase extends BaseForm {
 
     const response = this.props.response || {};
     const responseData = response[name] || {};
+
     const {
       supplierAnswer,
       supplierComment,
@@ -139,7 +141,7 @@ class AuditFormsBase extends BaseForm {
       if (multipleOptions[auditorScore])
         initialScore = multipleOptions[auditorScore].text;
     } else {
-      initialScore = auditorScore ? auditorScore.toString() : '';
+      initialScore = auditorScore !== undefined ? auditorScore.toString() : '';
     }
 
     return (

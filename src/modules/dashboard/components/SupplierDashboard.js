@@ -35,6 +35,7 @@ class Dashboard extends React.Component {
   render() {
     const { data, history, location } = this.props;
     const { averageDifotScore, lastFeedback, openTendersCount, audits } = data;
+    console.log(data);
 
     const queryParams = queryString.parse(location.search);
     const currentUser = this.context.currentUser || {};

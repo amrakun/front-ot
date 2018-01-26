@@ -4,6 +4,7 @@ export const companyByUser = `
       _id
       openTendersCount
       averageDifotScore
+      isPrequalified
       audits {
         _id
         publishDate
