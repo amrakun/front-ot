@@ -187,7 +187,9 @@ class QualificationAudit extends React.Component {
           <Col span={6}>
             <FormItem>
               {getFieldDecorator(tier.duration, {
-                initialValue: initials[tier.name]['duration'] || 'year'
+                initialValue: initials[tier.name]
+                  ? initials[tier.name]['duration']
+                  : 'year'
               })(
                 <Select style={{ width: 120 }}>
                   <Option value="day">Day</Option>
@@ -201,7 +203,9 @@ class QualificationAudit extends React.Component {
           <Col span={6}>
             <FormItem>
               {getFieldDecorator(tier.amount, {
-                initialValue: initials[tier.name]['amount'] || 0
+                initialValue: initials[tier.name]
+                  ? initials[tier.name]['amount']
+                  : 0
               })(<Input />)}
             </FormItem>
           </Col>
