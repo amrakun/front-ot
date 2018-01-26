@@ -155,6 +155,41 @@ const feedbacks = `
   }
 `;
 
+const feedbackResponses = `
+  query feedbackResponses {
+    feedbackResponses {
+      _id
+      status
+      supplierId
+      employmentNumberBefore
+      employmentNumberNow
+      nationalSpendBefore
+      nationalSpendAfter
+      umnugobiSpendBefore
+      umnugobiSpendAfter
+      investment
+      trainings
+      corporateSocial
+      technologyImprovement
+      supplier {
+        basicInfo {
+          enName
+        }
+        contactInfo {
+          name
+          email
+          phone
+        }
+      }
+      feedback {
+        status
+        createdDate
+        closeDate
+      }
+    }
+  }
+`;
+
 const feedbackResponseDetail = `
   query feedbackDetail($_id: String!) {
     feedbackDetail(_id: $_id) {
@@ -232,6 +267,9 @@ const auditRequests = `
         publishDate
         closeDate
         status
+        supplierResponse {
+          isSent
+        }
       }
     }
   }
@@ -458,5 +496,6 @@ export default {
   auditResponseDetail,
   supplierBasicInfo,
   auditImprovementPlan,
-  auditReport
+  auditReport,
+  feedbackResponses
 };

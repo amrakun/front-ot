@@ -31,7 +31,18 @@ class AuditRequests extends React.Component {
       },
       {
         title: 'More',
-        render: record => <Link to={`audit/submit/${record._id}`}>View</Link>
+        render: record => {
+          const isSent = record.supplierResponse
+            ? record.supplierResponse.isSent
+            : null;
+          const status = record.status;
+
+          if (!isSent && status === 'open')
+            return <Link to={`audit/submit/${record._id}`}>View</Link>;
+          else if (isSent !== null && isSent) return 'Already sent';
+
+          return '-';
+        }
       }
     ];
   }
