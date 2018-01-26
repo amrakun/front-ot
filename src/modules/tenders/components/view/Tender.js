@@ -255,8 +255,7 @@ class Tender extends Common {
             }}
             columns={this.columns()}
             rowKey={record => (record.supplier ? record.supplier._id : '')}
-            dataSource={responses}
-            // dataSource={status !== 'open' ? responses : []}
+            dataSource={status !== 'open' ? responses : []}
             pagination={pagination}
             loading={loading}
             scroll={{ x: 2500 }}

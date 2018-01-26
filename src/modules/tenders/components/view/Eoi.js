@@ -36,7 +36,11 @@ class Eoi extends Tender {
   responseColumns() {
     return [
       { title: 'Document file name', dataIndex: 'name', key: '3' },
-      { title: 'Submitted', dataIndex: 'isSubmitted', key: '2' },
+      {
+        title: 'Submitted',
+        key: '2',
+        render: record => (record.isSubmitted ? 'Yes' : 'No')
+      },
       {
         title: 'Picture',
         key: '5',
