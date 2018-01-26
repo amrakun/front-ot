@@ -189,17 +189,18 @@ class PrequalificationForm extends BaseForm {
             )
           })}
 
-          {this.renderField({
-            label: 'Currency',
-            name: 'currency',
-            isVisible: canProvideAccountsInfo,
-            optional: !canProvideAccountsInfo,
-            control: (
-              <Select placeholder="Select a currency">{currencyOptions}</Select>
-            )
-          })}
-
           <div className={!canProvideAccountsInfo ? 'hidden' : ''}>
+            {this.renderField({
+              label: 'Currency',
+              name: 'currency',
+              optional: !canProvideAccountsInfo,
+              control: (
+                <Select placeholder="Select a currency">
+                  {currencyOptions}
+                </Select>
+              )
+            })}
+
             {this.renderYearAmountGroup('Annual turnover', 'annualTurnover')}
             {this.renderYearAmountGroup('Pre-tax profit', 'preTaxProfit')}
             {this.renderYearAmountGroup('Total assets', 'totalAssets')}
@@ -216,7 +217,10 @@ class PrequalificationForm extends BaseForm {
           {this.renderField({
             label: 'If not, explain the reasons',
             name: 'reasonToCannotNotProvide',
-            isVisible: !canProvideAccountsInfo,
+            isVisible:
+              canProvideAccountsInfo !== undefined
+                ? !canProvideAccountsInfo
+                : false,
             optional: canProvideAccountsInfo,
             control: <Input.TextArea style={{ minHeight: '80px' }} />
           })}

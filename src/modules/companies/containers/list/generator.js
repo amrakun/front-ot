@@ -24,6 +24,7 @@ const generator = (Component, query) => {
 
     render() {
       const { companiesQuery } = this.props;
+      const { pagination } = this.state;
 
       if (companiesQuery.loading) {
         return <Component loading={true} />;
@@ -36,8 +37,8 @@ const generator = (Component, query) => {
         data: companies,
         pagination: {
           total: companies.length,
-          pageSize: companies.length,
-          current: 1
+          pageSize: pagination.pageSize,
+          current: pagination.current
         },
         loading: false,
         onChange: (pagination, filters, sorter) =>
@@ -66,8 +67,8 @@ const generator = (Component, query) => {
 
       return {
         variables: {
-          page: 200,
-          perPage: 20,
+          page: 1,
+          perPage: 1,
           search: search,
           region: region,
           productCodes: productCodes,

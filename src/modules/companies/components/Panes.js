@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Icon } from 'antd';
+import queryString from 'query-string';
 
 export default class Panes extends React.Component {
   constructor(props) {
     super(props);
 
+    const queryParams = queryString.parse(this.props.location.search);
+
     this.state = {
-      currentTabKey: '1'
+      currentTabKey: queryParams.tab || '1'
     };
 
     this.nextTab = this.nextTab.bind(this);
@@ -75,5 +78,6 @@ export default class Panes extends React.Component {
 Panes.propTypes = {
   company: PropTypes.object,
   save: PropTypes.func,
-  history: PropTypes.object
+  history: PropTypes.object,
+  location: PropTypes.object
 };

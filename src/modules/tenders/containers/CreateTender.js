@@ -16,7 +16,7 @@ const CreateTenderContainer = props => {
 
   const save = doc => {
     const [publishDate, closeDate] = doc.dateRange;
-    console.log(doc);
+
     tendersAdd({ variables: { ...doc, publishDate, closeDate } })
       .then(tender => {
         message.success('Successfully created a tender!');

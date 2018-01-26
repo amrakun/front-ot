@@ -27,6 +27,11 @@ const booleanData = [
   { text: 'No', value: 'false' }
 ];
 
+const booleanDataReverse = [
+  { text: 'No', value: 'true' },
+  { text: 'Yes', value: 'false' }
+];
+
 const days = [
   { text: '1 day before', value: '1' },
   { text: '3 days before', value: '3' },
@@ -58,6 +63,7 @@ export {
   noLabelLayout,
   days,
   booleanData,
+  booleanDataReverse,
   notifyLoading,
   notifyReady,
   uploadUrl

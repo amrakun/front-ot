@@ -5,7 +5,8 @@ import queryString from 'query-string';
 import { Input, Icon } from 'antd';
 
 const propTypes = {
-  history: PropTypes.object
+  history: PropTypes.object,
+  placeholder: PropTypes.string
 };
 
 class Search extends React.Component {
@@ -49,6 +50,8 @@ class Search extends React.Component {
 
   render() {
     const { search } = this.state;
+    const { placeholder } = this.props;
+
     const suffix = search ? (
       <Icon type="close-circle" onClick={this.emitEmpty} />
     ) : null;
@@ -57,7 +60,7 @@ class Search extends React.Component {
       <Input
         value={search}
         prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />}
-        placeholder="Supplier name or SAP number"
+        placeholder={placeholder || 'Supplier name or SAP number'}
         onPressEnter={e => this.handleSearch(e.target.value)}
         onChange={this.handleChange}
         suffix={suffix}

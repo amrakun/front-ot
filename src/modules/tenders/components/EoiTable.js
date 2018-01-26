@@ -30,7 +30,8 @@ const EoiTable = props => {
         name: 'file',
         title: 'Upload',
         type: 'uploader',
-        isSupplier: !isSupplier
+        isSupplier: !isSupplier,
+        widt: '100px'
       })}
       {renderProductColumn({
         name: 'notes',

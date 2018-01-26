@@ -52,7 +52,7 @@ class Register extends BaseForm {
             description="Email confirmed succesfully! Please enter your password."
             type="success"
           />
-          <Form onSubmit={this.handleSubmit}>
+          <Form onSubmit={this.handleSubmit} className="margin">
             <Field
               name="password"
               layout={noLabelLayout}

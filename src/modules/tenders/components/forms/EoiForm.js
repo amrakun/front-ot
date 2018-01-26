@@ -9,7 +9,14 @@ import EoiTable from '../EoiTable';
 const initialProducts = [
   { key: 1, document: 'Scope specific experience' },
   { key: 2, document: 'Customer reference /atleast 2/' },
-  { key: 3, document: 'Special licences if applicable (copy)' }
+  { key: 10, document: 'Special licenes if applicable (copy)' },
+  { key: 3, document: 'State registration certificate (copy)' },
+  { key: 4, document: 'HSE policy & procedures (copy)' },
+  { key: 5, document: 'Business code of conduct (copy)' },
+  { key: 6, document: 'Brief introduction of company' },
+  { key: 7, document: 'Ownership/shareholder information' },
+  { key: 8, document: 'Executive team structure/introduction' },
+  { key: 9, document: 'Organization structure & total manpower' }
 ];
 const initialPerProducts = {
   product__1: { document: 'Scope specific experience' },

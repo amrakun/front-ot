@@ -100,8 +100,6 @@ class AuditResponses extends React.Component {
     const submitted = data.responses ? data.responses.length : 0;
     const notResponded = requested - submitted;
 
-    console.log(data);
-
     const colSpan = {
       xl: 6,
       lg: 12,

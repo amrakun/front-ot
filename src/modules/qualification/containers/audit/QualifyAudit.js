@@ -16,11 +16,15 @@ const QualifyAuditContainer = props => {
     location
   } = props;
 
-  if (auditResponseDetailQuery.loading || supplierBasicInfoQuery.loading) {
+  if (supplierBasicInfoQuery.loading) {
     return <Loading />;
   }
 
-  const auditResponseDetail = auditResponseDetailQuery.auditResponseDetail;
+  let auditResponseDetail = {};
+
+  if (!supplierBasicInfoQuery.loading) {
+    auditResponseDetail = auditResponseDetailQuery.auditResponseDetail;
+  }
 
   const save = (name, doc) => {
     const mutation = props[`${name}Edit`];

@@ -27,7 +27,7 @@ class CreatePlan extends React.Component {
   }
 
   render() {
-    const { basicInfo } = this.props;
+    const { basicInfo, isQualified } = this.props;
     const { getFieldDecorator } = this.props.form;
     const rules = [
       {
@@ -42,6 +42,11 @@ class CreatePlan extends React.Component {
           <p>
             Supplier name: <strong>{basicInfo.enName}</strong>
           </p>
+
+          <p>
+            Audit result: <strong>{isQualified ? 'Yes' : 'No'}</strong>
+          </p>
+
           <Divider />
 
           <FormItem label="Qualification/audit date">
@@ -69,7 +74,8 @@ CreatePlan.propTypes = {
   form: PropTypes.object,
   basicInfo: PropTypes.object,
   exportFile: PropTypes.func,
-  hideModal: PropTypes.func
+  hideModal: PropTypes.func,
+  isQualified: PropTypes.bool
 };
 
 const ReportsForm = Form.create()(CreatePlan);

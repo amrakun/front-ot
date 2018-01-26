@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input, Select, Popover, Icon, Divider, Alert } from 'antd';
 import { BaseForm } from 'modules/common/components';
-import { booleanData } from 'modules/common/constants';
+import { booleanData, booleanDataReverse } from 'modules/common/constants';
 import { labels } from './constants';
 
 const TextArea = Input.TextArea;
@@ -18,6 +18,7 @@ class AuditFormsBase extends BaseForm {
       : this.collectForSupplier;
 
     this.booleanOptions = this.renderOptions(booleanData);
+    this.booleanOptionsReverse = this.renderOptions(booleanDataReverse);
     this.fields = [];
 
     this.renderQuestion = this.renderQuestion.bind(this);
@@ -87,9 +88,10 @@ class AuditFormsBase extends BaseForm {
     let initialAnswer = '';
     if (multipleOptions) {
       if (multipleOptions[supplierAnswer])
-        initialAnswer = multipleOptions[supplierAnswer].text;
+        initialAnswer = multipleOptions[supplierAnswer].value;
     } else {
-      initialAnswer = supplierAnswer ? supplierAnswer.toString() : '';
+      initialAnswer =
+        supplierAnswer !== undefined ? supplierAnswer.toString() : '';
     }
 
     return (
@@ -124,6 +126,7 @@ class AuditFormsBase extends BaseForm {
 
     const response = this.props.response || {};
     const responseData = response[name] || {};
+
     const {
       supplierAnswer,
       supplierComment,
@@ -136,9 +139,9 @@ class AuditFormsBase extends BaseForm {
     let initialScore = '';
     if (multipleOptions) {
       if (multipleOptions[auditorScore])
-        initialScore = multipleOptions[auditorScore].text;
+        initialScore = multipleOptions[auditorScore].value;
     } else {
-      initialScore = auditorScore ? auditorScore.toString() : '';
+      initialScore = auditorScore !== undefined ? auditorScore.toString() : '';
     }
 
     return (
@@ -168,7 +171,9 @@ class AuditFormsBase extends BaseForm {
           control: (
             <Select>
               {type !== 'multiple'
-                ? this.booleanOptions
+                ? type === 'reversed'
+                  ? this.booleanOptionsReverse
+                  : this.booleanOptions
                 : this.renderOptions(labels[name].options)}
             </Select>
           )

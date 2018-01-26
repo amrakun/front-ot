@@ -6,7 +6,8 @@ import addressFields from './address';
 
 class ContactInfo extends BaseForm {
   render() {
-    const { basicInfo, form } = this.props;
+    const { form } = this.props;
+    const basicInfo = this.props.basicInfo || {};
 
     const copyAddress = () => {
       const { setFieldsValue } = form;
@@ -60,13 +61,13 @@ class ContactInfo extends BaseForm {
           {this.renderField({
             label: 'Phone',
             name: 'phone',
-            control: <Input />
+            control: <Input type="number" placeholder="Numeric" />
           })}
 
           {this.renderField({
             label: 'Phone 2',
             name: 'phone2',
-            control: <Input />
+            control: <Input type="number" placeholder="Numeric" />
           })}
 
           {this.renderField({

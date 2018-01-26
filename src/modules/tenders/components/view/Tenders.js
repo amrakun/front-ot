@@ -182,11 +182,11 @@ class Tenders extends React.Component {
           },
           {
             text: <span>{renderIcon('closed')} Closed</span>,
-            value: 'draft'
+            value: 'closed'
           },
           {
             text: <span>{renderIcon('participated')} Participated</span>,
-            value: 'closed'
+            value: 'participated'
           }
         ],
         filteredValue: this.state.statuses,
@@ -297,7 +297,7 @@ class Tenders extends React.Component {
     return (
       <Card style={{ marginBottom: '16px' }} title={labels[type]}>
         <div className="table-operations">
-          <Search />
+          <Search placeholder="Tender name" />
 
           <MonthPicker
             style={{ float: 'left', marginLeft: '16px' }}
@@ -307,10 +307,14 @@ class Tenders extends React.Component {
             disabled
           />
 
-          <Button disabled={exportLoading} onClick={exportTenders}>
-            Export to excel
-            <Icon type="file-excel" />
-          </Button>
+          {currentUser && !currentUser.isSupplier ? (
+            <Button disabled={exportLoading} onClick={exportTenders}>
+              Export to excel
+              <Icon type="file-excel" />
+            </Button>
+          ) : (
+            <div style={{ height: '30px' }} />
+          )}
         </div>
 
         <Table

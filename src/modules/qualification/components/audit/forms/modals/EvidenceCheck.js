@@ -30,7 +30,7 @@ const EvidenceCheck = props => {
         </strong>
         <Checkbox.Group
           options={evidenceCheckList}
-          className="horizontal margin"
+          className="horizontal margin evidence-check"
           onChange={handleEvidenceChange}
         />
       </div>

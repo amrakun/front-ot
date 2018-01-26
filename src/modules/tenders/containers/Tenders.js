@@ -37,10 +37,12 @@ class TendersContainer extends React.Component {
 
   componentWillMount() {
     const { tendersQuery } = this.props;
+    const history = this.props.history || {};
     const location = this.props.location || {};
 
     if (location.search === '?refetch') {
       tendersQuery.refetch();
+      history.push({ location: null });
     }
   }
 
@@ -155,8 +157,8 @@ export default compose(
     options: ({ type, supplierId, queryParams }) => {
       return {
         variables: {
-          page: 200,
-          perPage: 20,
+          page: 1,
+          perPage: 1,
           search: queryParams ? queryParams.search : '',
           status: queryParams ? queryParams.status : '',
           type: type,

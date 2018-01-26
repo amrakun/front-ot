@@ -4,7 +4,7 @@ import { gql, compose, graphql } from 'react-apollo';
 import { queries, mutations } from '../../graphql';
 import { RegistrationForms } from '../../components';
 import { Loading } from 'modules/common/components';
-import { message } from 'antd';
+import { message, notification, Icon } from 'antd';
 
 const RegistrationContainer = (props, context) => {
   let { companyByUserQuery } = props;
@@ -15,10 +15,15 @@ const RegistrationContainer = (props, context) => {
 
   const save = (name, doc) => {
     const mutation = props[`${name}Edit`];
-    console.log(doc);
+
     mutation({ variables: { [name]: doc } })
       .then(() => {
-        companyByUserQuery.refetch();
+        if (name === 'basicInfo') {
+          companyByUserQuery.refetch();
+          props.history.push({
+            search: 'tab=2'
+          });
+        }
         message.success('Saved');
         if (name === 'productsInfo') send();
       })
@@ -33,7 +38,12 @@ const RegistrationContainer = (props, context) => {
 
     sendToBuyer({ variables: { _id: currentUser.companyId } })
       .then(() => {
-        message.success('Succesfully submitted');
+        notification.open({
+          message: 'You have successfully completed your registration!',
+          description: 'Please submit a pre-qualification form as a next step.',
+          icon: <Icon type="smile" style={{ color: 'rgb(0,153,168)' }} />,
+          duration: 10
+        });
         history.push('/prequalification');
       })
       .catch(error => {

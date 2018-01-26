@@ -28,7 +28,8 @@ const routes = {
   'my-profile': 'My Profile',
   'change-password': 'Change Password',
   templates: 'Templates',
-  'manage-expiry-dates': 'Manage Expiry Dates'
+  'manage-expiry-dates': 'Manage Expiry Dates',
+  qualification: 'Qualification/audit'
 };
 
 const Breadcrumbs = location => {
@@ -39,9 +40,8 @@ const Breadcrumbs = location => {
   ];
 
   location.pathname.split('/').forEach((path, index) => {
-    breadcrumbItems.push(
-      <BreadcrumbItem key={index}>{routes[path]}</BreadcrumbItem>
-    );
+    const title = routes[path];
+    breadcrumbItems.push(<BreadcrumbItem key={index}>{title}</BreadcrumbItem>);
   });
 
   return <Breadcrumb>{breadcrumbItems}</Breadcrumb>;
