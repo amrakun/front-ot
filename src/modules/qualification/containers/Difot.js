@@ -12,7 +12,13 @@ class DifotContainer extends React.Component {
   render() {
     const { companiesQuery, addDifotScoresMutation } = this.props;
 
-    const addDifotScores = difotScores => {
+    const addDifotScores = scores => {
+      const difotScores = scores.map(s => ({
+        supplierName: s['Supplier name'],
+        date: s['Month/Year'],
+        amount: s['DIFOT score']
+      }));
+
       addDifotScoresMutation({
         variables: { difotScores }
       })
