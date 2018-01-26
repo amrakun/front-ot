@@ -34,8 +34,13 @@ class Dashboard extends React.Component {
 
   render() {
     const { data, history, location } = this.props;
-    const { averageDifotScore, lastFeedback, openTendersCount, audits } = data;
-    console.log(data);
+    const {
+      averageDifotScore,
+      lastFeedback,
+      openTendersCount,
+      audits,
+      isPrequalified
+    } = data;
 
     const queryParams = queryString.parse(location.search);
     const currentUser = this.context.currentUser || {};
@@ -127,13 +132,12 @@ class Dashboard extends React.Component {
             />
           </Col>
           <Col key={3} lg={8} sm={12}>
-            <NumberCardLines
+            <TextCard
               icon="solution"
               title="Pre-qualification status"
-              color={colors[5]}
+              color={isPrequalified ? colors[7] : colors[5]}
               tooltip={labels.preqSuggestion}
-              number={0}
-              percent={0}
+              text={isPrequalified ? 'Yes' : 'No'}
               withPercent={true}
             />
           </Col>
