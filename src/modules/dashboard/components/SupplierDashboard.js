@@ -30,7 +30,10 @@ class Dashboard extends React.Component {
     const queryParams = queryString.parse(location.search);
     const currentUser = this.context.currentUser || {};
 
-    const lastAudit = audits[0];
+    let hasNewAudit = false;
+    audits.forEach(audit => {
+      if (audit.supplierResponse === null) hasNewAudit = true;
+    });
 
     return (
       <div>
@@ -130,7 +133,7 @@ class Dashboard extends React.Component {
               title="Qualification/audit"
               color={colors[7]}
               text={
-                lastAudit ? (
+                hasNewAudit ? (
                   <span>
                     You have new audit invitation. Click&nbsp;
                     <Link to="qualification">here</Link>
@@ -140,7 +143,7 @@ class Dashboard extends React.Component {
                   <span>Nothing new</span>
                 )
               }
-              badge={lastAudit !== undefined}
+              badge={hasNewAudit}
             />
           </Col>
         </Row>

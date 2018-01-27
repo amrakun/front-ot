@@ -1,10 +1,49 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input, Select, DatePicker, Tag, Card, Row, Col } from 'antd';
+import { Input, Select, DatePicker, Tag, Card, Row, Col, Tooltip } from 'antd';
 import moment from 'moment';
 import { Editor, Uploader } from 'modules/common/components';
-import { days, dateTimeFormat } from 'modules/common/constants';
+import { days, dateTimeFormat, colors } from 'modules/common/constants';
 import { SupplierSearcher } from 'modules/companies/components';
+
+function getColoredTags(suppliers) {
+  let ownerNames = [];
+
+  suppliers.forEach(supplier => {
+    const owner = getOwner(supplier);
+    if (owner) ownerNames.push(owner);
+  });
+
+  return setColors(findDuplicates(ownerNames));
+}
+
+function findDuplicates(array) {
+  let result = [];
+  array.forEach((element, index) => {
+    if (array.indexOf(element, index + 1) > -1) {
+      if (result.indexOf(element) === -1) {
+        result.push(element);
+      }
+    }
+  });
+  return result;
+}
+
+function setColors(array) {
+  let result = {};
+  array.forEach((element, index) => {
+    result[element] =
+      colors[index] || '#' + ((Math.random() * 0xffffff) << 0).toString(16);
+  });
+  return result;
+}
+
+function getOwner(supplier) {
+  const info = supplier.shareholderInfo || {};
+  if (info)
+    if (info.shareholders) return info.shareholders[0].name;
+    else return null;
+}
 
 const MainInfo = props => {
   const {
@@ -22,15 +61,21 @@ const MainInfo = props => {
     ? [moment(data.publishDate), moment(data.closeDate)]
     : null;
 
-  const supplierTags = suppliers.map(el => {
+  const coloredTags = getColoredTags(suppliers);
+
+  const supplierTags = suppliers.map(supplier => {
+    const owner = getOwner(supplier);
     return (
-      <Tag
-        key={el._id}
-        closable={true}
-        afterClose={() => removeSupplier(el._id)}
-      >
-        {el.basicInfo.enName}
-      </Tag>
+      <Tooltip key={supplier._id} title={owner ? `Owner: ${owner}` : ''}>
+        <Tag
+          color={coloredTags[owner] || null}
+          key={supplier._id}
+          closable={true}
+          afterClose={() => removeSupplier(supplier._id)}
+        >
+          {supplier.basicInfo.enName}
+        </Tag>
+      </Tooltip>
     );
   });
 
@@ -42,10 +87,18 @@ const MainInfo = props => {
     <Row gutter={24}>
       <Col span={10}>
         <Card title="Main info" className="no-pad-bottom">
-          <label>Requesting suppliers: </label>
+          <label>
+            Requesting suppliers: <strong>{suppliers.length}</strong>
+          </label>
           <br />
 
-          <div style={{ margin: '6px 0 16px 0' }}>
+          <div
+            style={{
+              margin: '6px 0 16px 0',
+              maxHeight: '200px',
+              overflow: 'scroll'
+            }}
+          >
             {supplierTags}
             <SupplierSearcher withTag={true} onSelect={onAddSuppliers} />
           </div>

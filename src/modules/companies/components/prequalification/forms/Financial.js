@@ -136,6 +136,7 @@ class PrequalificationForm extends BaseForm {
   }
 
   renderDateFile(index) {
+    const { canProvideAccountsInfo } = this.state;
     const data = this.props.data || {};
     const recordsInfo = data.recordsInfo || [];
 
@@ -154,7 +155,7 @@ class PrequalificationForm extends BaseForm {
             name: `recordsInfo${index}Date`,
             initialValue: initialDate,
             hasFeedback: false,
-            optional: true,
+            optional: !canProvideAccountsInfo,
             control: (
               <DatePicker format={dateFormat} placeholder="Choose date" />
             )
@@ -165,6 +166,7 @@ class PrequalificationForm extends BaseForm {
             name: `recordsInfo${index}File`,
             initialValue: initialFile,
             hasFeedback: false,
+            optional: !canProvideAccountsInfo,
             dataType: 'file',
             control: <Uploader />
           })}
@@ -177,6 +179,9 @@ class PrequalificationForm extends BaseForm {
     const currencyOptions = this.renderOptions(currencyData);
     const booleanOptions = this.renderOptions(booleanData);
     const { canProvideAccountsInfo } = this.state;
+
+    const reasonVisible =
+      canProvideAccountsInfo !== undefined ? !canProvideAccountsInfo : false;
 
     return (
       <Form className="preq-form">
@@ -212,31 +217,27 @@ class PrequalificationForm extends BaseForm {
               'Total shareholders equity ',
               'totalShareholderEquity'
             )}
+
+            <Form.Item
+              className="multiple-wrapper"
+              label="Please provide financial records for your last 3 years"
+              extra="The most recent years worth of accounts will always appear on top."
+            >
+              {this.renderDateFile(0)}
+              {this.renderDateFile(1)}
+              {this.renderDateFile(2)}
+            </Form.Item>
           </div>
 
           {this.renderField({
             label: 'If not, explain the reasons',
             name: 'reasonToCannotNotProvide',
-            isVisible:
-              canProvideAccountsInfo !== undefined
-                ? !canProvideAccountsInfo
-                : false,
-            optional: canProvideAccountsInfo,
+            isVisible: reasonVisible,
+            optional: !reasonVisible,
             control: <Input.TextArea style={{ minHeight: '80px' }} />
           })}
         </Card>
 
-        <Card>
-          <Form.Item
-            className="multiple-wrapper"
-            label="Please provide financial records for your last 3 years"
-            extra="The most recent years worth of accounts will always appear on top."
-          >
-            {this.renderDateFile(0)}
-            {this.renderDateFile(1)}
-            {this.renderDateFile(2)}
-          </Form.Item>
-        </Card>
         <Card bodyStyle={{ paddingBottom: '16px' }}>
           {this.renderField({
             label: 'Is your company up to date with Social Security payments?',

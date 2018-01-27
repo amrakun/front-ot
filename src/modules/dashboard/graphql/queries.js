@@ -8,6 +8,9 @@ export const companyByUser = `
       audits {
         _id
         publishDate
+        supplierResponse {
+          isSent
+        }
       }
       lastFeedback {
         _id

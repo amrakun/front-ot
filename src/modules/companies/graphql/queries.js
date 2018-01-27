@@ -411,6 +411,11 @@ const simpleCompanies = `
         mnName,
         enName
       }
+      shareholderInfo {
+        shareholders {
+          name
+        }
+      }
     }
   }
 `;

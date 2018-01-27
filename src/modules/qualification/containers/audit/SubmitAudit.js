@@ -32,6 +32,7 @@ const SubmitAuditContainer = (props, context) => {
       }
     })
       .then(() => {
+        auditResponseByUserQuery.refetch();
         message.success('Saved');
       })
       .catch(error => {
