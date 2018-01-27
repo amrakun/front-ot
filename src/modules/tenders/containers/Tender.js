@@ -7,6 +7,7 @@ import { message, notification, Icon, Button } from 'antd';
 import client from 'apolloClient';
 import { Loading } from 'modules/common/components';
 import { notifyReady, notifyLoading, colors } from 'modules/common/constants';
+import { withTableProps } from 'modules/common/containers';
 
 const notifyIfWantToSend = {
   message: 'Succesfully awarded',
@@ -20,21 +21,11 @@ class TenderContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      pagination: {
-        current: 1,
-        pageSize: 10
-      }
-    };
+    this.state = {};
 
-    this.handleTableChange = this.handleTableChange.bind(this);
     this.downloadReport = this.downloadReport.bind(this);
     this.award = this.award.bind(this);
     this.sendRegretLetter = this.sendRegretLetter.bind(this);
-  }
-
-  handleTableChange(pagination) {
-    this.setState({ pagination });
   }
 
   award(companyId) {
@@ -140,6 +131,7 @@ class TenderContainer extends React.Component {
 
   render() {
     const { tenderDetailQuery } = this.props;
+    const { systemConfig } = this.context;
 
     if (tenderDetailQuery.loading) {
       return <Loading />;
@@ -147,27 +139,17 @@ class TenderContainer extends React.Component {
 
     const tenderDetail = tenderDetailQuery.tenderDetail;
 
-    const {
-      pagination,
-      rfqBidSummaryReportLoading,
-      regretLetterModalVisible
-    } = this.state;
+    const { rfqBidSummaryReportLoading, regretLetterModalVisible } = this.state;
 
     const updatedProps = {
       ...this.props,
       rfqBidSummaryReportLoading,
       regretLetterModalVisible,
+      emailTemplate: systemConfig.regretLetterTemplate,
       award: this.award,
       downloadReport: this.downloadReport,
       sendRegretLetter: this.sendRegretLetter,
-      data: tenderDetail,
-      loading: false,
-      pagination: {
-        pageSize: pagination.pageSize,
-        current: pagination.current
-      },
-      onChange: (pagination, filters, sorter) =>
-        this.handleTableChange(pagination, filters, sorter)
+      data: tenderDetail
     };
 
     if (tenderDetail.type === 'rfq') return <Rfq {...updatedProps} />;
@@ -180,6 +162,10 @@ TenderContainer.propTypes = {
   tendersAward: PropTypes.func,
   sendRegretLetter: PropTypes.func,
   history: PropTypes.object
+};
+
+TenderContainer.contextTypes = {
+  systemConfig: PropTypes.object
 };
 
 export default compose(
@@ -199,4 +185,4 @@ export default compose(
   graphql(gql(mutations.sendRegretLetter), {
     name: 'sendRegretLetter'
   })
-)(TenderContainer);
+)(withTableProps(TenderContainer));

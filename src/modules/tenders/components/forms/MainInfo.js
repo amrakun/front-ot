@@ -95,7 +95,7 @@ const MainInfo = props => {
         <Card title="Email content">
           <Editor
             onEmailContentChange={onEmailContentChange}
-            content={content}
+            content={content || ''}
           />
         </Card>
       </Col>

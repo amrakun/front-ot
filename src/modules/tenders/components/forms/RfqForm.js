@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { Form, Button, Card, Icon, message } from 'antd';
-import { rfqEmailTemplate } from '../../constants';
 import TenderForm from '../TenderForm';
 import RfqTable from '../RfqTable';
 import { xlsxHandler } from 'modules/common/utils';
@@ -10,8 +9,10 @@ import { xlsxHandler } from 'modules/common/utils';
 const initialProducts = [{ key: Math.random() }];
 
 class RfqForm extends TenderForm {
-  constructor(props) {
+  constructor(props, context) {
     super(props);
+
+    this.emailTemplate = context.systemConfig.rfqTemplate;
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFile = this.handleFile.bind(this);
@@ -20,7 +21,7 @@ class RfqForm extends TenderForm {
   componentDidMount() {
     if (!this.state.content) {
       this.setState({
-        content: rfqEmailTemplate,
+        content: this.emailTemplate,
         products: initialProducts
       });
     }
@@ -74,7 +75,7 @@ class RfqForm extends TenderForm {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        {this.renderMainInfo(rfqEmailTemplate)}
+        {this.renderMainInfo(this.emailTemplate)}
 
         <Card title="Form" className="margin">
           <RfqTable
@@ -108,6 +109,10 @@ class RfqForm extends TenderForm {
 
 RfqForm.propTypes = {
   data: PropTypes.object
+};
+
+RfqForm.contextTypes = {
+  systemConfig: PropTypes.object
 };
 
 const form = Form.create()(RfqForm);

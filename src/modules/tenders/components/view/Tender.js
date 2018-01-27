@@ -6,19 +6,10 @@ import { Table, Card, Input, Icon, Row, Col, Button, Modal } from 'antd';
 import { NumberCard, NumberCardLines } from 'modules/common/components';
 import { colors } from 'modules/common/constants';
 import { Editor } from 'modules/common/components';
-import { regretLetterTemplate } from './constants';
 import { Common } from 'modules/companies/components/';
 import { Link } from 'react-router-dom';
 
 const Search = Input.Search;
-
-const propTypes = {
-  data: PropTypes.object,
-  filter: PropTypes.func,
-  sendRegretLetter: PropTypes.func,
-  sentRegretLetter: PropTypes.boolean,
-  regretLetterModalVisible: PropTypes.boolean
-};
 
 class Tender extends Common {
   constructor(props) {
@@ -28,7 +19,7 @@ class Tender extends Common {
       ...this.state,
       responseModal: { visible: false },
       regretLetterModal: { visible: false },
-      regretLetterContent: regretLetterTemplate
+      regretLetterContent: props.emailTemplate || ''
     };
 
     this.showResponsesModal = this.showResponsesModal.bind(this);
@@ -317,6 +308,12 @@ class Tender extends Common {
   }
 }
 
-Tender.propTypes = propTypes;
+Tender.propTypes = {
+  data: PropTypes.object,
+  filter: PropTypes.func,
+  sendRegretLetter: PropTypes.func,
+  sentRegretLetter: PropTypes.boolean,
+  regretLetterModalVisible: PropTypes.boolean
+};
 
 export default Tender;

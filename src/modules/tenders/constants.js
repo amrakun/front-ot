@@ -94,12 +94,6 @@ export const rfqResponseColumns = [
 
 export const rfqColumns = [...rfqRequestColumns, ...rfqResponseColumns];
 
-export const eoiEmailTemplate =
-  '<p>Dearsss Supplier,</p>\n<p></p>\n<p>You are kindly invited to quote for following items.</p>\n<p>Bid closing time: 14:00 PM , May 2017 Local time (Ulaanbaatar) .,</p>\n<p></p>\n<p>NOTE: please ensure the pricing to be valid for partial purchase.</p>\n<p></p>\n<p>Please submit Quotation only in MS Excel format, all other formats will not be accepted. Additional information can be attached.</p>\n<p>Please send your quote for this RFQ just replying to the email it came from, do not change the email subject line.</p>\n<p></p>\n<p>Your lead time must include your packaging and document preperation time. (The goods need to be ready: packaged, documented and ready for pick up by the end of your lead time given)</p>\n<p>Quote must include actual pick up address of the order * (*applicable to international orders under FCA term)</p>\n<p>Please include Oyu Tolgoi stock code/ Material number** to your quote (each item has individual code), if there is no stock code in the Request For Quote you can leave it blank.</p>\n<p>Please send your quote before the bid end time as we do not consider the bids received after bid closing time valid for evaluation.</p>\n<p>Currency should be in MNT from Mongolian companies and USD from International vendors.</p>\n<p>If you offer alternative product (brand, make, model etc) with alternative technical specifications, please send technical data sheet (picture or link from the internet) with your quotation so they can be evaluated.</p>\n<p>Oyu Tolgoi (OT) General Conditions for Services and Supply of Goods can be accessed at:</p>\n<p></p>\n<p>These changes would mean that:</p>\n<p>Our payment terms will be 45 days from the end of the calendar month (accumulation period) in which the invoice is received.</p>\n<p>Our current weekly payment runs schedule will be replaced by twice-monthly payment runs, occurring on the 1st and 15th day (or next business day) of each month.</p>\n<p>All payments will be made in the payment run immediately following the end of the payment term.</p>\n<p></p>\n<p>Oyu Tolgoi LLC. values our relationship with your company and we ask for your help in implementing these changes. We believe this change will increase the efficiency and predictability in our accounts payable process and help provide cash flow certainty to our companies.</p>\n<p></p>\n<p>This letter is notice to you that our new standard payment policy and processing arrangements will be applied to all invoices dated and received from you from 1 June 2015. Please update your records to reflect this change.</p>\n';
-
-export const rfqEmailTemplate =
-  '<p>Dears Supplier,</p>\n<p></p>\n<p>You are kindly invited to quote for following items.</p>\n<p>Bid closing time: 14:00 PM , May 2017 Local time (Ulaanbaatar) .,</p>\n<p></p>\n<p>NOTE: please ensure the pricing to be valid for partial purchase.</p>\n<p></p>\n<p>Please submit Quotation only in MS Excel format, all other formats will not be accepted. Additional information can be attached.</p>\n<p>Please send your quote for this RFQ just replying to the email it came from, do not change the email subject line.</p>\n<p></p>\n<p>Your lead time must include your packaging and document preperation time. (The goods need to be ready: packaged, documented and ready for pick up by the end of your lead time given)</p>\n<p>Quote must include actual pick up address of the order * (*applicable to international orders under FCA term)</p>\n<p>Please include Oyu Tolgoi stock code/ Material number** to your quote (each item has individual code), if there is no stock code in the Request For Quote you can leave it blank.</p>\n<p>Please send your quote before the bid end time as we do not consider the bids received after bid closing time valid for evaluation.</p>\n<p>Currency should be in MNT from Mongolian companies and USD from International vendors.</p>\n<p>If you offer alternative product (brand, make, model etc) with alternative technical specifications, please send technical data sheet (picture or link from the internet) with your quotation so they can be evaluated.</p>\n<p>Oyu Tolgoi (OT) General Conditions for Services and Supply of Goods can be accessed at:</p>\n<p></p>\n<p>These changes would mean that:</p>\n<p>Our payment terms will be 45 days from the end of the calendar month (accumulation period) in which the invoice is received.</p>\n<p>Our current weekly payment runs schedule will be replaced by twice-monthly payment runs, occurring on the 1st and 15th day (or next business day) of each month.</p>\n<p>All payments will be made in the payment run immediately following the end of the payment term.</p>\n<p></p>\n<p>Oyu Tolgoi LLC. values our relationship with your company and we ask for your help in implementing these changes. We believe this change will increase the efficiency and predictability in our accounts payable process and help provide cash flow certainty to our companies.</p>\n<p></p>\n<p>This letter is notice to you that our new standard payment policy and processing arrangements will be applied to all invoices dated and received from you from 1 June 2015. Please update your records to reflect this change.</p>\n';
-
 export const rfqDisclaimer = {
   title: 'Disclaimer',
   description: [
@@ -108,4 +102,29 @@ export const rfqDisclaimer = {
     "*Please don't delete the lines you cannot quote just leave with a value of '0' and don't  change the sequence of lines.",
     '*Quoted price must include all expenses including packaging and delivery to OT warehouse'
   ]
+};
+
+export const initialProducts = [
+  { key: 1, document: 'Scope specific experience' },
+  { key: 2, document: 'Customer reference /atleast 2/' },
+  { key: 3, document: 'Special licences if applicable (copy)' },
+  { key: 4, document: 'State registration certificate (copy)' },
+  { key: 5, document: 'HSE policy & procedures (copy)' },
+  { key: 6, document: 'Business code of conduct (copy)' },
+  { key: 7, document: 'Brief introduction of company' },
+  { key: 8, document: 'Ownership/shareholder information' },
+  { key: 9, document: 'Executive team structure/introduction' },
+  { key: 10, document: 'Organization structure & total manpower' }
+];
+export const initialPerProducts = {
+  product__1: { document: 'Scope specific experience' },
+  product__2: { document: 'Customer reference /atleast 2/' },
+  product__3: { document: 'Special licences if applicable (copy)' },
+  product__4: { document: 'State registration certificate (copy)' },
+  product__5: { document: 'HSE policy & procedures (copy)' },
+  product__6: { document: 'Business code of conduct (copy)' },
+  product__7: { document: 'Brief introduction of company' },
+  product__8: { document: 'Ownership/shareholder information' },
+  product__9: { document: 'Executive team structure/introduction' },
+  product__10: { document: 'Organization structure & total manpower' }
 };

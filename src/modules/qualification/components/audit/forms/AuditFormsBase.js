@@ -90,8 +90,7 @@ class AuditFormsBase extends BaseForm {
       if (multipleOptions[supplierAnswer])
         initialAnswer = multipleOptions[supplierAnswer].value;
     } else {
-      initialAnswer =
-        supplierAnswer !== undefined ? supplierAnswer.toString() : '';
+      initialAnswer = supplierAnswer !== null ? supplierAnswer.toString() : '';
     }
 
     return (
@@ -141,7 +140,7 @@ class AuditFormsBase extends BaseForm {
       if (multipleOptions[auditorScore])
         initialScore = multipleOptions[auditorScore].value;
     } else {
-      initialScore = auditorScore !== undefined ? auditorScore.toString() : '';
+      initialScore = auditorScore !== null ? auditorScore.toString() : '';
     }
 
     return (

@@ -26,18 +26,4 @@ const titles = {
   }
 };
 
-const template = `
-<div>
-<p>Dear Supplier,</p>
-<p>OT Procurement works with businesses to build a competitive and sustainable
-national supply chain and to maintain a productive and positive relationship
-with suppliers to support the creation of empowered and sustainable local community.</p>
-<p>We would want to hear about your successes, stories, achievements and contributions
-to a community which will inspire and support other communities as well.
-</p><p>Please share your stories in below field and submit to us!<br />
-Together we can endure value, knowledge and skills!</p><p>
-Stay safe,</p><p>OP Procurement Department.</p>
-</div>
-`;
-
-export { labels, titles, template };
+export { labels, titles };

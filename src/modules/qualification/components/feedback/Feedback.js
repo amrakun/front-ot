@@ -20,16 +20,17 @@ import { Search } from 'modules/common/components';
 import { Editor } from 'modules/common/components';
 import moment from 'moment';
 import { dateFormat, dateTimeFormat } from 'modules/common/constants';
-import { labels, template } from './constants';
+import { labels } from './constants';
+import PropTypes from 'prop-types';
 
 class Feedback extends Common {
-  constructor(props) {
+  constructor(props, context) {
     super(props);
 
     this.state = {
       ...this.state,
       feedbackModalVisible: false,
-      feedbackContent: template,
+      feedbackContent: context.systemConfig.successFeedbackTemplate || '',
       feedbackCloseDate: moment(),
       viewModalVisible: false,
       viewModalData: {}
@@ -206,5 +207,9 @@ class Feedback extends Common {
     );
   }
 }
+
+Feedback.contextTypes = {
+  systemConfig: PropTypes.object
+};
 
 export default withRouter(Feedback);
