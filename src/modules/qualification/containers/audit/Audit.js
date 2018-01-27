@@ -11,7 +11,6 @@ class AuditContainer extends React.Component {
     const { companiesQuery, addAuditMutation } = this.props;
 
     const addAudit = variables => {
-      console.log(variables);
       addAuditMutation({ variables })
         .then(() => {
           message.success('Successfully sent audit');

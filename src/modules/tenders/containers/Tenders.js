@@ -7,6 +7,7 @@ import { message } from 'antd';
 import client from 'apolloClient';
 import { notification, Icon, Button } from 'antd';
 import { notifyReady, notifyLoading } from 'modules/common/constants';
+import { withTableProps } from 'modules/common/containers';
 
 class TendersContainer extends React.Component {
   constructor(props) {
@@ -20,19 +21,10 @@ class TendersContainer extends React.Component {
       this.type = 'eoi';
 
     this.state = {
-      pagination: {
-        current: 1,
-        pageSize: 10
-      },
       tenders: []
     };
 
-    this.handleTableChange = this.handleTableChange.bind(this);
     this.exportTenders = this.exportTenders.bind(this);
-  }
-
-  handleTableChange(pagination) {
-    this.setState({ pagination });
   }
 
   componentWillMount() {
@@ -113,24 +105,17 @@ class TendersContainer extends React.Component {
         });
     };
 
-    const { pagination, exportLoading } = this.state;
+    const { exportLoading } = this.state;
     const tenders = tendersQuery.tenders || [];
 
     const updatedProps = {
       ...this.props,
+      exportLoading,
       data: tenders,
-      pagination: {
-        total: tenders.length,
-        pageSize: pagination.pageSize,
-        current: pagination.current
-      },
       type: this.type,
-      loading: false,
       notInterested: notInterested,
       currentUser: currentUser,
-      handleTableChange: this.handleTableChange,
-      exportTenders: this.exportTenders,
-      exportLoading
+      exportTenders: this.exportTenders
     };
 
     return <Tenders {...updatedProps} />;
@@ -173,4 +158,4 @@ export default compose(
   graphql(gql(mutations.tendersResponsesAdd), {
     name: 'tendersResponsesAdd'
   })
-)(TendersContainer);
+)(withTableProps(TendersContainer));

@@ -93,7 +93,6 @@ class AuditResponses extends React.Component {
 
   render() {
     const { pagination, loading, onChange } = this.props;
-
     const data = this.props.data || [];
     const requested = data.supplierIds ? data.supplierIds.length : 0;
     const submitted = data.responses ? data.responses.length : 0;

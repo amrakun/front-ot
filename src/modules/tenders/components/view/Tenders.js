@@ -65,7 +65,7 @@ class Tenders extends React.Component {
       });
     }
 
-    this.props.handleTableChange(pagination);
+    this.props.onChange(pagination);
   }
 
   renderIcon(name, style) {
@@ -339,7 +339,7 @@ Tenders.propTypes = {
   data: PropTypes.array,
   pagination: PropTypes.object,
   loading: PropTypes.bool.isRequired,
-  handleTableChange: PropTypes.func,
+  onChange: PropTypes.func,
   currentUser: PropTypes.object,
   notInterested: PropTypes.func,
   history: PropTypes.object,

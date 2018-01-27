@@ -34,6 +34,9 @@ const Sidenav = (props, context) => {
   if (['/audit', '/audit/responses', '/audit/reports'].includes(pathname)) {
     defaultOpenKeys.push('action', 'audit');
   }
+  if (['/templates', '/manage-expiry-dates', '/user-list'].includes(pathname)) {
+    defaultOpenKeys.push('settings');
+  }
 
   return (
     <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>

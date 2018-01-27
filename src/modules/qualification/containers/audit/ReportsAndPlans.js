@@ -3,25 +3,9 @@ import PropTypes from 'prop-types';
 import { ReportsAndPlans } from '../../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries } from '../../graphql';
+import { withTableProps } from 'modules/common/containers';
 
 class ReportsAndPlansContainer extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      pagination: {
-        current: 1,
-        pageSize: 10
-      }
-    };
-
-    this.handleTableChange = this.handleTableChange.bind(this);
-  }
-
-  handleTableChange(pagination) {
-    this.setState({ pagination });
-  }
-
   render() {
     const { auditsQuery } = this.props;
 
@@ -29,20 +13,9 @@ class ReportsAndPlansContainer extends React.Component {
       return <ReportsAndPlans loading={true} />;
     }
 
-    const { pagination } = this.state;
-    const audits = auditsQuery.audits || [];
-
     const updatedProps = {
       ...this.props,
-      data: audits,
-      pagination: {
-        total: audits.length,
-        pageSize: pagination.pageSize,
-        current: pagination.current
-      },
-      loading: false,
-      onChange: (pagination, filters, sorter) =>
-        this.handleTableChange(pagination, filters, sorter)
+      data: auditsQuery.audits || []
     };
 
     return <ReportsAndPlans {...updatedProps} />;
@@ -57,4 +30,4 @@ export default compose(
   graphql(gql(queries.audits), {
     name: 'auditsQuery'
   })
-)(ReportsAndPlansContainer);
+)(withTableProps(ReportsAndPlansContainer));

@@ -112,7 +112,7 @@ export const buyerSideMenu = [
     icon: 'file'
   },
   {
-    url: '/settings',
+    url: 'settings',
     title: 'Settings',
     icon: 'setting',
     subMenu: [

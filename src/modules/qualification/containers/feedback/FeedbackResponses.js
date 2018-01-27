@@ -3,25 +3,9 @@ import PropTypes from 'prop-types';
 import { FeedbackResponses } from '../../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries } from '../../graphql';
+import { withTableProps } from 'modules/common/containers';
 
 class TendersContainer extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      pagination: {
-        current: 1,
-        pageSize: 10
-      }
-    };
-
-    this.handleTableChange = this.handleTableChange.bind(this);
-  }
-
-  handleTableChange(pagination) {
-    this.setState({ pagination });
-  }
-
   render() {
     const { feedbackResponsesQuery } = this.props;
 
@@ -29,20 +13,9 @@ class TendersContainer extends React.Component {
       return <FeedbackResponses loading={true} />;
     }
 
-    const { pagination } = this.state;
-    const feedbackResponses = feedbackResponsesQuery.feedbackResponses || [];
-
     const updatedProps = {
       ...this.props,
-      data: feedbackResponses,
-      pagination: {
-        total: feedbackResponses.length,
-        pageSize: pagination.pageSize,
-        current: pagination.current
-      },
-      loading: false,
-      onChange: (pagination, filters, sorter) =>
-        this.handleTableChange(pagination, filters, sorter)
+      data: feedbackResponsesQuery.feedbackResponses || []
     };
 
     return <FeedbackResponses {...updatedProps} />;
@@ -57,4 +30,4 @@ export default compose(
   graphql(gql(queries.feedbackResponses), {
     name: 'feedbackResponsesQuery'
   })
-)(TendersContainer);
+)(withTableProps(TendersContainer));
