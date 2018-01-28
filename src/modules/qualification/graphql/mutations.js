@@ -144,8 +144,8 @@ const addAudit = `
   }
 `;
 
-const commonInputs = '$auditId: String, $supplierId: String';
-const commonFields = 'auditId: $auditId, supplierId: $supplierId';
+const commonInputs = '$auditId: String';
+const commonFields = 'auditId: $auditId';
 
 const auditsSupplierSaveBasicInfo = `
   mutation auditsSupplierSaveBasicInfo(${
@@ -193,36 +193,41 @@ const auditsSupplierSaveEvidenceInfo = `
 `;
 
 const auditsBuyerSaveCoreHseqInfo = `
-  mutation auditsBuyerSaveCoreHseqInfo(${
-    commonInputs
-  }, $coreHseqInfo: AuditBuyerCoreHseqInfoInput) {
-    auditsBuyerSaveCoreHseqInfo(${
-      commonFields
-    }, coreHseqInfo: $coreHseqInfo) { _id }
+  mutation auditsBuyerSaveCoreHseqInfo(
+    ${commonInputs}, $supplierId: String
+    $coreHseqInfo: AuditBuyerCoreHseqInfoInput
+  ) {
+    auditsBuyerSaveCoreHseqInfo(
+      ${commonFields}, supplierId: $supplierId,
+      coreHseqInfo: $coreHseqInfo
+    ) { _id }
   }
 `;
 
 const auditsBuyerSaveHrInfo = `
-  mutation auditsBuyerSaveHrInfo(${
-    commonInputs
-  }, $hrInfo: AuditBuyerHrInfoInput) {
-    auditsBuyerSaveHrInfo(${commonFields}, hrInfo: $hrInfo) { _id }
+  mutation auditsBuyerSaveHrInfo(
+    ${commonInputs}, $supplierId: String, $hrInfo: AuditBuyerHrInfoInput) {
+    auditsBuyerSaveHrInfo(${
+      commonFields
+    }, supplierId: $supplierId, hrInfo: $hrInfo) { _id }
   }
 `;
 
 const auditsBuyerSaveBusinessInfo = `
-  mutation auditsBuyerSaveBusinessInfo(${
-    commonInputs
-  }, $businessInfo: AuditBuyerBusinessInfoInput) {
-    auditsBuyerSaveBusinessInfo(${
-      commonFields
-    }, businessInfo: $businessInfo) { _id }
+  mutation auditsBuyerSaveBusinessInfo(
+    ${
+      commonInputs
+    }, $supplierId: String, $businessInfo: AuditBuyerBusinessInfoInput) {
+    auditsBuyerSaveBusinessInfo(
+      ${
+        commonFields
+      }, supplierId: $supplierId, businessInfo: $businessInfo) { _id }
   }
 `;
 
 const auditsSupplierSendResponse = `
-  mutation auditsSupplierSendResponse($auditId: String, $supplierId: String) {
-    auditsSupplierSendResponse(auditId: $auditId, supplierId: $supplierId) {
+  mutation auditsSupplierSendResponse($auditId: String) {
+    auditsSupplierSendResponse(auditId: $auditId) {
       _id
     }
   }
