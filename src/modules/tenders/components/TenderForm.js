@@ -11,13 +11,14 @@ class TenderForm extends BaseForm {
   constructor(props) {
     super(props);
 
-    const { data, response } = props;
+    const { data } = props;
+    const response = props.response || {};
 
     const products = [];
     const perProductStates = {};
 
     if (data.requestedProducts) {
-      const respondedProducts = response.respondedProducts;
+      const respondedProducts = response.respondedProducts || [];
 
       data.requestedProducts.forEach((product, i) => {
         const productResponse = respondedProducts[i];

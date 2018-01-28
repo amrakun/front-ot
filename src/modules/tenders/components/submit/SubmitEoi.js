@@ -93,17 +93,20 @@ class SubmitTender extends TenderForm {
 
         <Card title="Apply to EOI" className="margin">
           <EoiTable {...formProps} />
+
           <br />
-          <Button
-            className="margin"
-            style={{ marginRight: '16px' }}
-            onClick={this.saveDraft}
-          >
-            Save as draft
-          </Button>
-          <Button type="primary" htmlType="submit" className="margin">
-            Save & submit
-          </Button>
+
+          {!data.isSent && (
+            <div className="margin">
+              <Button style={{ marginRight: '16px' }} onClick={this.saveDraft}>
+                Save as draft
+              </Button>
+              <Button type="primary" htmlType="submit">
+                Save & submit
+              </Button>
+            </div>
+          )}
+
           <Modal
             title="Confirmation"
             visible={agreementModalVisible}

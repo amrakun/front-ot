@@ -11,11 +11,11 @@ class SubmitTender extends TenderForm {
     super(props);
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.saveDraft = this.saveDraft.bind(this);
+    this.collectInputs = this.collectInputs.bind(this);
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-
+  collectInputs() {
     const products = [];
 
     // collect products table values
@@ -34,10 +34,17 @@ class SubmitTender extends TenderForm {
       }
     });
 
-    this.save({
-      tenderId: this.props.data._id,
-      respondedProducts: products
-    });
+    return products;
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    this.props.save({ respondedProducts: this.collectInputs() }, true);
+  }
+
+  saveDraft() {
+    this.save({ respondedProducts: this.collectInputs() });
   }
 
   render() {
@@ -56,9 +63,17 @@ class SubmitTender extends TenderForm {
         <Card title="Form" className="margin">
           <RfqTable {...formProps} />
           <br />
-          <Button type="primary" htmlType="submit" className="margin">
-            Save & continue
-          </Button>
+
+          {!data.isSent && (
+            <div className="margin">
+              <Button style={{ marginRight: '16px' }} onClick={this.saveDraft}>
+                Save as draft
+              </Button>
+              <Button type="primary" htmlType="submit">
+                Save & submit
+              </Button>
+            </div>
+          )}
         </Card>
       </Form>
     );

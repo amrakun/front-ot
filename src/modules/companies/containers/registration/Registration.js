@@ -13,6 +13,13 @@ const RegistrationContainer = (props, context) => {
     return <Loading />;
   }
 
+  const companyByUser = companyByUserQuery.companyByUser;
+
+  let formsComplete = true;
+  Object.keys(companyByUser).forEach(key => {
+    if (!companyByUser[key]) formsComplete = false;
+  });
+
   const save = (name, doc) => {
     const mutation = props[`${name}Edit`];
 
@@ -20,7 +27,10 @@ const RegistrationContainer = (props, context) => {
       .then(() => {
         companyByUserQuery.refetch();
         message.success('Saved');
-        if (name === 'productsInfo') send();
+        if (name === 'productsInfo')
+          formsComplete
+            ? send()
+            : message.error('Please complete all forms before submitting');
       })
       .catch(error => {
         message.error(error.message);
@@ -51,7 +61,7 @@ const RegistrationContainer = (props, context) => {
     save,
     send,
     company: {
-      ...companyByUserQuery.companyByUser
+      ...companyByUser
     }
   };
   return <RegistrationForms {...updatedProps} />;

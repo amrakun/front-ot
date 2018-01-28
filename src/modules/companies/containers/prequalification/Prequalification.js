@@ -13,6 +13,13 @@ const PrequalificationContainer = (props, context) => {
     return <Loading />;
   }
 
+  const companyByUser = companyByUserQuery.companyByUser;
+
+  let formsComplete = true;
+  Object.keys(companyByUser).forEach(key => {
+    if (!companyByUser[key]) formsComplete = false;
+  });
+
   const save = (name, doc) => {
     const mutation = props[`${name}Edit`];
 
@@ -20,7 +27,10 @@ const PrequalificationContainer = (props, context) => {
       .then(() => {
         companyByUserQuery.refetch();
         message.success('Saved');
-        if (name === 'healthInfo') send();
+        if (name === 'healthInfo')
+          formsComplete
+            ? send()
+            : message.error('Please complete all forms before submitting');
       })
       .catch(error => {
         message.error(error.message);
@@ -52,7 +62,7 @@ const PrequalificationContainer = (props, context) => {
     save,
     send,
     company: {
-      ...companyByUserQuery.companyByUser
+      ...companyByUser
     }
   };
   return <PrequalificationForms {...updatedProps} />;

@@ -1,3 +1,15 @@
+const requestedProductsFields = `
+  requestedProducts {
+    code
+    purchaseRequestNumber
+    shortText
+    quantity
+    uom
+    manufacturer
+    manufacturerPartNumber
+  }
+`;
+
 const tenderFields = `
   _id,
   status,
@@ -17,21 +29,11 @@ const tenderFields = `
   createdUser {
     email
   },
-  requestedProducts {
-    code
-    purchaseRequestNumber
-    shortText
-    quantity
-    uom
-    manufacturer
-    manufacturerPartNumber
-  },
+  ${requestedProductsFields}
   requestedDocuments
   winnerId
   isAwarded
   sentRegretLetter
-  isParticipated
-  isSent
 `;
 
 const rfqResponseFields = `
@@ -93,6 +95,26 @@ const tenderDetail = `
   }
 `;
 
+const tenderDetailSupplier = `
+  query tenderDetailSupplier($_id: String!) {
+    tenderDetailSupplier(_id: $_id) {
+      _id
+      status
+      type
+      number
+      name
+      content
+      publishDate
+      closeDate
+      file
+      ${requestedProductsFields}
+      requestedDocuments
+      isSent
+    }
+  }
+
+`;
+
 const tenderResponseByUser = `
   query tenderResponseByUser($tenderId: String!) {
     tenderResponseByUser(tenderId: $tenderId) {
@@ -128,6 +150,25 @@ const tenders = `
   }
 `;
 
+const tendersSupplier = `
+  query tendersSupplier(${tenderParams}) {
+    tendersSupplier(${tenderValues}) {
+      _id
+      status
+      type
+      createdDate
+      number
+      name
+      publishDate
+      closeDate
+      reminderDay
+      isAwarded
+      isParticipated
+      isSent
+    }
+  }
+`;
+
 const exportTenders = `
   query tendersExport(${tenderParams}) {
     tendersExport(${tenderValues})
@@ -155,7 +196,9 @@ const eoiBidderList = `
 export default {
   tenderDetail,
   tenders,
+  tendersSupplier,
   tenderUpdateDetail,
+  tenderDetailSupplier,
   rfqBidSummaryReport,
   eoiShortList,
   eoiBidderList,

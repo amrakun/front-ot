@@ -21,10 +21,8 @@ const PublishContainer = (
     return <Loading />;
   }
 
-  const tenderDetail = tenderDetailQuery.tenderDetail || {};
+  const tenderDetail = tenderDetailQuery.tenderDetailSupplier || {};
   const tenderResponseByUser = tenderResponseByUserQuery.tenderResponseByUser;
-
-  if (tenderResponseByUser.isSent) history.push('/'); //already sent
 
   const save = (doc, shouldSend) => {
     const mutation = tenderResponseByUser
@@ -47,10 +45,6 @@ const PublishContainer = (
 
   const send = tenderId => {
     const { currentUser } = context;
-    console.log({
-      tenderId: tenderDetail._id,
-      supplierId: currentUser.companyId
-    });
     tenderResponsesSend({
       variables: {
         tenderId: tenderDetail._id,
@@ -79,12 +73,8 @@ const PublishContainer = (
     response: tenderResponseByUser
   };
 
-  let form = <SubmitRfq {...updatedProps} />;
-
-  if (tenderDetailQuery.tenderDetail.type === 'eoi')
-    form = <SubmitEoi {...updatedProps} />;
-
-  return form;
+  if (tenderDetail.type === 'eoi') return <SubmitEoi {...updatedProps} />;
+  else return <SubmitRfq {...updatedProps} />;
 };
 
 PublishContainer.propTypes = {
@@ -102,7 +92,7 @@ PublishContainer.contextTypes = {
 };
 
 export default compose(
-  graphql(gql(queries.tenderDetail), {
+  graphql(gql(queries.tenderDetailSupplier), {
     name: 'tenderDetailQuery',
     options: ({ match }) => {
       return {

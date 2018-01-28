@@ -1,7 +1,7 @@
 /*eslint-disable max-len */
 
 import React from 'react';
-import { Tenders } from '../../tenders/containers';
+import { SupplierTenders } from '../../tenders/containers';
 import { PropTypes } from 'prop-types';
 import queryString from 'query-string';
 import {
@@ -148,7 +148,7 @@ class Dashboard extends React.Component {
           </Col>
         </Row>
 
-        <Tenders
+        <SupplierTenders
           history={history}
           location={location}
           type="eoi"
@@ -156,7 +156,7 @@ class Dashboard extends React.Component {
           queryParams={queryParams}
         />
 
-        <Tenders
+        <SupplierTenders
           history={history}
           location={location}
           type="rfq"

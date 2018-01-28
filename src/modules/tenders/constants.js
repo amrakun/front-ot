@@ -37,7 +37,7 @@ export const eoiProductsColumns = {
 };
 
 export const eoiRequestColumns = [
-  { title: 'Document', dataIndex: 'document', key: '1' }
+  { title: 'Required document', dataIndex: 'document', key: '1' }
 ];
 
 export const eoiResponseColumns = [

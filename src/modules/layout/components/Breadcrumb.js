@@ -29,7 +29,8 @@ const routes = {
   'change-password': 'Change Password',
   templates: 'Templates',
   'manage-expiry-dates': 'Manage Expiry Dates',
-  qualification: 'Qualification/audit'
+  qualification: 'Qualification/audit',
+  settings: 'Settings'
 };
 
 const Breadcrumbs = location => {
