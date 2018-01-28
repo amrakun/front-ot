@@ -36,16 +36,14 @@ class Tender extends Common {
   }
 
   showResponsesModal(record) {
-    const { supplier, response } = record;
+    const { supplier, respondedDocuments, respondedProducts } = record;
 
     this.setState({
       responseModal: {
         visible: true,
         title: supplier ? supplier.basicInfo.enName : '',
         data:
-          response.respondedDocuments.length > 0
-            ? response.respondedDocuments
-            : response.respondedProducts
+          respondedDocuments.length > 0 ? respondedDocuments : respondedProducts
       }
     });
   }

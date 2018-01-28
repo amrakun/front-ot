@@ -137,7 +137,7 @@ class TenderContainer extends React.Component {
       return <Loading />;
     }
 
-    const tenderDetail = tenderDetailQuery.tenderDetail;
+    const tenderDetail = tenderDetailQuery.tenderDetail || {};
 
     const { rfqBidSummaryReportLoading, regretLetterModalVisible } = this.state;
 

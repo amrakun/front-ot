@@ -87,10 +87,8 @@ const tenderDetail = `
             email
           }
         }
-        response {
-          ${rfqResponseFields}
-          ${eoiResponseFields}
-        }
+        ${rfqResponseFields}
+        ${eoiResponseFields}
       },
     }
   }
