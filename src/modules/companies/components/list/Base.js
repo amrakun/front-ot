@@ -64,7 +64,9 @@ class Base extends Common {
       {
         title: 'DIFOT score (average)',
         render: record =>
-          record.averageDifotScore ? `${record.averageDifotScore}%` : '-'
+          record.averageDifotScore ? `${record.averageDifotScore}%` : '-',
+        sorter: true,
+        key: 'averageDifotScore'
       },
       { title: 'Blocking', render: record => (record.isBlocked ? 'Yes' : '-') },
       {

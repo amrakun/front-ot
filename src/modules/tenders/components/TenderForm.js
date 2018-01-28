@@ -5,12 +5,6 @@ import { BaseForm, Uploader } from 'modules/common/components';
 import MainInfo from './forms/MainInfo';
 
 const { Column } = Table;
-const defaultCheckedDocuments = [
-  'State registration certificate (copy)',
-  'HSE policy & procedures (copy)',
-  'Ownership/shareholder information',
-  'Executive team structure/introduction'
-];
 
 class TenderForm extends BaseForm {
   constructor(props) {

@@ -107,24 +107,24 @@ export const rfqDisclaimer = {
 export const initialProducts = [
   { key: 1, document: 'Scope specific experience' },
   { key: 2, document: 'Customer reference /atleast 2/' },
-  { key: 3, document: 'Special licences if applicable (copy)' },
-  { key: 4, document: 'State registration certificate (copy)' },
-  { key: 5, document: 'HSE policy & procedures (copy)' },
-  { key: 6, document: 'Business code of conduct (copy)' },
-  { key: 7, document: 'Brief introduction of company' },
-  { key: 8, document: 'Ownership/shareholder information' },
-  { key: 9, document: 'Executive team structure/introduction' },
-  { key: 10, document: 'Organization structure & total manpower' }
+  { key: 3, document: 'Special licences if applicable (copy)' }
+  // { key: 4, document: 'State registration certificate (copy)' },
+  // { key: 5, document: 'HSE policy & procedures (copy)' },
+  // { key: 6, document: 'Business code of conduct (copy)' },
+  // { key: 7, document: 'Brief introduction of company' },
+  // { key: 8, document: 'Ownership/shareholder information' },
+  // { key: 9, document: 'Executive team structure/introduction' },
+  // { key: 10, document: 'Organization structure & total manpower' }
 ];
 export const initialPerProducts = {
   product__1: { document: 'Scope specific experience' },
   product__2: { document: 'Customer reference /atleast 2/' },
-  product__3: { document: 'Special licences if applicable (copy)' },
-  product__4: { document: 'State registration certificate (copy)' },
-  product__5: { document: 'HSE policy & procedures (copy)' },
-  product__6: { document: 'Business code of conduct (copy)' },
-  product__7: { document: 'Brief introduction of company' },
-  product__8: { document: 'Ownership/shareholder information' },
-  product__9: { document: 'Executive team structure/introduction' },
-  product__10: { document: 'Organization structure & total manpower' }
+  product__3: { document: 'Special licences if applicable (copy)' }
+  // product__4: { document: 'State registration certificate (copy)' },
+  // product__5: { document: 'HSE policy & procedures (copy)' },
+  // product__6: { document: 'Business code of conduct (copy)' },
+  // product__7: { document: 'Brief introduction of company' },
+  // product__8: { document: 'Ownership/shareholder information' },
+  // product__9: { document: 'Executive team structure/introduction' },
+  // product__10: { document: 'Organization structure & total manpower' }
 };

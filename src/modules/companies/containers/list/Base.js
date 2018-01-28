@@ -17,6 +17,7 @@ class BaseListContainer extends React.Component {
       exportLoading: false
     };
   }
+
   render() {
     const { queryParams } = this.props;
 

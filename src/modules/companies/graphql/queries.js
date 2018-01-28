@@ -275,6 +275,8 @@ const commonParams = `
   $isQualified: Boolean
   $difotScore: String
   $_ids: [String]
+  $sortField: String
+  $sortDirection: Int
 `;
 
 const commonValues = `
@@ -287,6 +289,8 @@ const commonValues = `
   isQualified: $isQualified,
   difotScore: $difotScore
   _ids: $_ids
+  sortField: $sortField
+  sortDirection: $sortDirection
 `;
 
 const commonFields = `

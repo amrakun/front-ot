@@ -32,9 +32,9 @@ export default [
     key="/companies"
     exact
     path="/companies"
-    component={({ location }) => {
-      const queryParams = queryString.parse(location.search);
-      return <BaseList queryParams={queryParams} />;
+    component={props => {
+      const queryParams = queryString.parse(props.location.search);
+      return <BaseList queryParams={queryParams} {...props} />;
     }}
   />,
   <Route
