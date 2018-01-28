@@ -92,16 +92,16 @@ const generator = (Component, query) => {
         variables: {
           page: 1,
           perPage: 1,
-          search: search,
-          region: region,
-          productCodes: productCodes,
-          difotScore: difotScore,
+          search,
+          region,
+          productCodes,
+          difotScore,
+          sortField,
+          sortDirection,
           includeBlocked: status.includes('includeBlocked'),
           isPrequalified: status.includes('isPrequalified'),
           isProductsInfoValidated: status.includes('isProductsInfoValidated'),
-          isQualified: status.includes('isQualified'),
-          sortField,
-          sortDirection
+          isQualified: status.includes('isQualified')
         },
         notifyOnNetworkStatusChange: true
       };
