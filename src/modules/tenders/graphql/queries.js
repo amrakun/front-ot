@@ -44,6 +44,7 @@ const rfqResponseFields = `
     unitPrice
     totalPrice
     leadTime
+    shippingTerms
     comment
     file
   }

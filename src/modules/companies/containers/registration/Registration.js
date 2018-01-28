@@ -17,7 +17,7 @@ const RegistrationContainer = props => {
 
   let formsComplete = true;
   Object.keys(companyByUser).forEach(key => {
-    if (!companyByUser[key]) formsComplete = false;
+    if (!companyByUser[key] && key !== 'certificateInfo') formsComplete = false;
   });
 
   const save = (name, doc) => {
