@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input, Table, Select } from 'antd';
+import { Input, Table, Checkbox } from 'antd';
 import { BaseForm, Uploader } from 'modules/common/components';
-import { booleanData } from 'modules/common/constants';
 import MainInfo from './forms/MainInfo';
 
 const { Column } = Table;
@@ -34,10 +33,10 @@ class TenderForm extends BaseForm {
 
     //data iniltialization
     if (data.requestedDocuments) {
-      const respondedDocuments = response.respondedDocuments;
+      const respondedDocuments = response.respondedDocuments || [];
 
       data.requestedDocuments.forEach((doc, i) => {
-        const productResponse = respondedDocuments[i];
+        const productResponse = respondedDocuments[i] || {};
         const key = Math.random();
         const product = {
           key,
@@ -177,18 +176,8 @@ class TenderForm extends BaseForm {
           />
         );
       }
-      if (type === 'select') {
-        control = (
-          <Select
-            defaultValue={
-              typeof record[name] === 'boolean' ? record[name].toString() : ''
-            }
-            disabled={isSupplier}
-            onSelect={e => this.onProductInputChange(e, name, record.key)}
-          >
-            {this.renderOptions(booleanData)}
-          </Select>
-        );
+      if (type === 'checkbox') {
+        control = <Checkbox defaultChecked={record[name]}>Submitted</Checkbox>;
       }
 
       return control;

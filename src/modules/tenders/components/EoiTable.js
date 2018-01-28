@@ -23,7 +23,7 @@ const EoiTable = props => {
       {renderProductColumn({
         name: 'isSubmitted',
         title: rpc.isSubmitted,
-        type: 'select',
+        type: 'checkbox',
         isSupplier: !isSupplier
       })}
       {renderProductColumn({
