@@ -17,6 +17,7 @@ class TenderForm extends BaseForm {
     const products = [];
     const perProductStates = {};
 
+    //data iniltialization
     if (data.requestedProducts) {
       const respondedProducts = response.respondedProducts || [];
 
@@ -31,6 +32,7 @@ class TenderForm extends BaseForm {
       });
     }
 
+    //data iniltialization
     if (data.requestedDocuments) {
       const respondedDocuments = response.respondedDocuments;
 
@@ -198,7 +200,7 @@ class TenderForm extends BaseForm {
         key={name}
         dataIndex={name}
         render={render}
-        width={width || 250}
+        width={width || 300}
       />
     );
   }
