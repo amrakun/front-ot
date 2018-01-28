@@ -32,7 +32,8 @@ class SubmitFeedback extends BaseForm {
 
   render() {
     const { feedbackContent } = this.state;
-    const { data, forSubmit } = this.props;
+    const { forSubmit } = this.props;
+    const data = this.props.data || {};
 
     return (
       <Tabs tabPosition="left" className="supplier-forms">
