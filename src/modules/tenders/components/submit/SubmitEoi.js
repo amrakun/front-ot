@@ -46,6 +46,7 @@ class SubmitTender extends TenderForm {
     Object.keys(this.state).forEach(key => {
       if (key.startsWith('product__')) {
         const product = this.state[key];
+
         documents.push({
           notes: product.notes,
           isSubmitted: product.isSubmitted,

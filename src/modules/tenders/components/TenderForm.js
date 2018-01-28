@@ -38,6 +38,7 @@ class TenderForm extends BaseForm {
       data.requestedDocuments.forEach((doc, i) => {
         const productResponse = respondedDocuments[i] || {};
         const key = Math.random();
+
         const product = {
           key,
           document: doc,
@@ -124,11 +125,7 @@ class TenderForm extends BaseForm {
     const stateKey = `product__${recordKey}`;
     const product = this.state[stateKey] || {};
 
-    let value = e.target ? e.target.value : e;
-
-    if (name === 'isSubmitted') value = value === 'true';
-
-    product[name] = value;
+    product[name] = e.target ? e.target.checked : e;
 
     this.state[stateKey] = product;
   }
@@ -148,7 +145,7 @@ class TenderForm extends BaseForm {
   }
 
   renderProductColumn(props) {
-    const { name, title, type, isSupplier, width } = props;
+    const { name, title, type, isSupplier } = props;
     const { location } = this.props;
 
     const hidden = isSupplier && location.pathname.includes('eoi');
@@ -177,7 +174,14 @@ class TenderForm extends BaseForm {
         );
       }
       if (type === 'checkbox') {
-        control = <Checkbox defaultChecked={record[name]}>Submitted</Checkbox>;
+        control = (
+          <Checkbox
+            defaultChecked={record[name]}
+            onChange={e => this.onProductInputChange(e, name, record.key)}
+          >
+            Submitted
+          </Checkbox>
+        );
       }
 
       return control;
@@ -189,7 +193,7 @@ class TenderForm extends BaseForm {
         key={name}
         dataIndex={name}
         render={render}
-        width={width || 300}
+        width={300}
       />
     );
   }
