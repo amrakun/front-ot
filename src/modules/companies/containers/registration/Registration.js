@@ -6,7 +6,7 @@ import { RegistrationForms } from '../../components';
 import { Loading } from 'modules/common/components';
 import { message, notification, Icon } from 'antd';
 
-const RegistrationContainer = (props, context) => {
+const RegistrationContainer = props => {
   let { companyByUserQuery } = props;
 
   if (companyByUserQuery.loading) {
@@ -39,9 +39,8 @@ const RegistrationContainer = (props, context) => {
 
   const send = () => {
     const { sendToBuyer, history } = props;
-    const { currentUser } = context;
 
-    sendToBuyer({ variables: { _id: currentUser.companyId } })
+    sendToBuyer()
       .then(() => {
         notification.open({
           message: 'You have successfully completed your registration!',

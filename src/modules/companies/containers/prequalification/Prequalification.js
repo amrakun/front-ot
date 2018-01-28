@@ -6,7 +6,7 @@ import { PrequalificationForms } from '../../components';
 import { Loading } from 'modules/common/components';
 import { message, notification, Icon } from 'antd';
 
-const PrequalificationContainer = (props, context) => {
+const PrequalificationContainer = props => {
   let { companyByUserQuery } = props;
 
   if (companyByUserQuery.loading) {
@@ -39,9 +39,8 @@ const PrequalificationContainer = (props, context) => {
 
   const send = () => {
     const { sendToBuyer, history } = props;
-    const { currentUser } = context;
 
-    sendToBuyer({ variables: { _id: currentUser.companyId } })
+    sendToBuyer()
       .then(() => {
         notification.open({
           message: 'Done!',

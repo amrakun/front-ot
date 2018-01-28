@@ -87,16 +87,16 @@ const healthInfo = `
 `;
 
 const companiesSendRegistrationInfo = `
-  mutation companiesSendRegistrationInfo($_id: String!) {
-    companiesSendRegistrationInfo(_id: $_id) {
+  mutation companiesSendRegistrationInfo {
+    companiesSendRegistrationInfo {
       _id
     }
   }
 `;
 
 const companiesSendPrequalificationInfo = `
-  mutation companiesSendPrequalificationInfo($_id: String!) {
-    companiesSendPrequalificationInfo(_id: $_id) {
+  mutation companiesSendPrequalificationInfo {
+    companiesSendPrequalificationInfo {
       _id
     }
   }
