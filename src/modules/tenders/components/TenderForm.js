@@ -38,7 +38,7 @@ class TenderForm extends BaseForm {
       data.requestedDocuments.forEach((doc, i) => {
         const productResponse = respondedDocuments[i] || {};
         const key = Math.random();
-        console.log(doc);
+
         const product = {
           key,
           document: doc,
