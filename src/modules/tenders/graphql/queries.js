@@ -138,8 +138,8 @@ const tenderUpdateDetail = `
   }
 `;
 
-const tenderParams = `$type: String!, $supplierId: String, $ignoreSubmitted: Boolean, $search: String, $status: String`;
-const tenderValues = `type: $type, supplierId: $supplierId, ignoreSubmitted: $ignoreSubmitted, search: $search, status: $status`;
+const tenderParams = `$type: String!, $search: String, $status: String`;
+const tenderValues = `type: $type, search: $search, status: $status`;
 
 const tenders = `
   query tenders(${tenderParams}) {

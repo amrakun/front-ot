@@ -73,16 +73,14 @@ TendersContainer.contextTypes = {
 export default compose(
   graphql(gql(queries.tendersSupplier), {
     name: 'tendersQuery',
-    options: ({ type, supplierId, queryParams }) => {
+    options: ({ type, queryParams }) => {
       return {
         variables: {
           page: 1,
           perPage: 1,
           search: queryParams ? queryParams.search : '',
           status: queryParams ? queryParams.status : '',
-          type: type,
-          supplierId: supplierId,
-          ignoreSubmitted: queryParams ? queryParams.ignoreSubmitted : ''
+          type: type
         },
         notifyOnNetworkStatusChange: true
       };
