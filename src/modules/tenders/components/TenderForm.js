@@ -11,15 +11,18 @@ class TenderForm extends BaseForm {
   constructor(props) {
     super(props);
 
-    const { data } = props;
+    const { data, response } = props;
 
     const products = [];
     const perProductStates = {};
 
     if (data.requestedProducts) {
-      data.requestedProducts.forEach(product => {
+      const respondedProducts = response.respondedProducts;
+
+      data.requestedProducts.forEach((product, i) => {
+        const productResponse = respondedProducts[i];
         const key = Math.random();
-        const extendedProduct = { key, ...product };
+        const extendedProduct = { key, ...product, ...productResponse };
 
         products.push(extendedProduct);
 
@@ -28,9 +31,18 @@ class TenderForm extends BaseForm {
     }
 
     if (data.requestedDocuments) {
-      data.requestedDocuments.forEach(doc => {
+      const respondedDocuments = response.respondedDocuments;
+
+      data.requestedDocuments.forEach((doc, i) => {
+        const productResponse = respondedDocuments[i];
         const key = Math.random();
-        const product = { key, document: doc };
+        const product = {
+          key,
+          document: doc,
+          notes: productResponse.notes,
+          file: productResponse.file,
+          isSubmitted: productResponse.isSubmitted
+        };
 
         products.push(product);
 
@@ -162,10 +174,12 @@ class TenderForm extends BaseForm {
           />
         );
       }
-
       if (type === 'select') {
         control = (
           <Select
+            defaultValue={
+              typeof record[name] === 'boolean' ? record[name].toString() : ''
+            }
             disabled={isSupplier}
             onSelect={e => this.onProductInputChange(e, name, record.key)}
           >

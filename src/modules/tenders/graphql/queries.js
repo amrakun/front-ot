@@ -31,6 +31,29 @@ const tenderFields = `
   isAwarded
   sentRegretLetter
   isParticipated
+  isSent
+`;
+
+const rfqResponseFields = `
+  respondedProducts {
+    code
+    suggestedManufacturer
+    suggestedManufacturerPartNumber
+    unitPrice
+    totalPrice
+    leadTime
+    comment
+    file
+  }
+`;
+
+const eoiResponseFields = `
+  respondedDocuments {
+    name
+    isSubmitted
+    notes
+    file
+  }
 `;
 
 const tenderDetail = `
@@ -62,24 +85,20 @@ const tenderDetail = `
           }
         }
         response {
-          respondedProducts {
-            code
-            suggestedManufacturer
-            suggestedManufacturerPartNumber
-            unitPrice
-            totalPrice
-            leadTime
-            comment
-            file
-          }
-          respondedDocuments {
-            name
-            isSubmitted
-            notes
-            file
-          }
+          ${rfqResponseFields}
+          ${eoiResponseFields}
         }
       },
+    }
+  }
+`;
+
+const tenderResponseByUser = `
+  query tenderResponseByUser($tenderId: String!) {
+    tenderResponseByUser(tenderId: $tenderId) {
+      isSent
+      ${rfqResponseFields}
+      ${eoiResponseFields}
     }
   }
 `;
@@ -140,5 +159,6 @@ export default {
   rfqBidSummaryReport,
   eoiShortList,
   eoiBidderList,
-  exportTenders
+  exportTenders,
+  tenderResponseByUser
 };

@@ -60,7 +60,7 @@ const StatusContainer = props => {
   const prequalifySupplier = () => {
     prequalify({ variables: { supplierId: companyDetail._id } })
       .then(() => {
-        qualificationDetailQuery.refetch();
+        supplierPrequalificationQuery.refetch();
         message.success('Pre-qualified!');
       })
       .catch(error => {

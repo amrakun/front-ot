@@ -52,20 +52,38 @@ const tendersEdit = `
   }
 `;
 
+const tenderResponseParams = `
+  $tenderId: String!
+  $isNotInterested: Boolean
+  $respondedProducts: [TenderRespondedProductInput]
+  $respondedDocuments: [TenderRespondedDocumentInput]
+`;
+
+const tenderResponseFields = `
+  tenderId: $tenderId,
+  isNotInterested: $isNotInterested
+  respondedProducts: $respondedProducts
+  respondedDocuments: $respondedDocuments
+`;
+
 const tendersResponsesAdd = `
   mutation tenderResponsesAdd(
-    $tenderId: String!
-    $supplierId: String!
-    $isNotInterested: Boolean
-    $respondedProducts: [TenderRespondedProductInput]
-    $respondedDocuments: [TenderRespondedDocumentInput]
+    ${tenderResponseParams}
   ) {
     tenderResponsesAdd(
-      tenderId: $tenderId,
-      supplierId: $supplierId
-      isNotInterested: $isNotInterested
-      respondedProducts: $respondedProducts
-      respondedDocuments: $respondedDocuments
+      ${tenderResponseFields}
+    ) {
+      _id
+    }
+  }
+`;
+
+const tendersResponsesEdit = `
+  mutation tenderResponsesEdit(
+    ${tenderResponseParams}
+  ) {
+    tenderResponsesEdit(
+      ${tenderResponseFields}
     ) {
       _id
     }
@@ -112,6 +130,7 @@ export default {
   tendersAdd,
   tendersEdit,
   tendersResponsesAdd,
+  tendersResponsesEdit,
   tendersAward,
   sendRegretLetter,
   tenderResponsesSend

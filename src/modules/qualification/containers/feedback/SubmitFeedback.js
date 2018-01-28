@@ -18,7 +18,7 @@ class FeedbackContainer extends React.Component {
       return <Loading />;
     }
 
-    const { feedbackDetail } = feedbackDetailQuery;
+    const feedbackDetail = feedbackDetailQuery.feedbackDetail || {};
 
     const addFeedbackResponse = args => {
       addFeedbackResponseMutation({

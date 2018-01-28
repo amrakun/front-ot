@@ -6,50 +6,77 @@ import { queries, mutations } from '../graphql';
 import { Loading } from 'modules/common/components';
 import { message } from 'antd';
 
-const PublishContainer = ({
-  tenderDetailQuery,
-  tendersResponsesAdd,
-  tenderResponsesSend,
-  history
-}) => {
-  if (tenderDetailQuery.loading) {
+const PublishContainer = (
+  {
+    tenderDetailQuery,
+    tendersResponsesAdd,
+    tendersResponsesEdit,
+    tenderResponsesSend,
+    tenderResponseByUserQuery,
+    history
+  },
+  context
+) => {
+  if (tenderDetailQuery.loading || tenderResponseByUserQuery.loading) {
     return <Loading />;
   }
 
-  const save = doc => {
-    tendersResponsesAdd({
-      variables: { ...doc }
+  const tenderDetail = tenderDetailQuery.tenderDetail || {};
+  const tenderResponseByUser = tenderResponseByUserQuery.tenderResponseByUser;
+
+  if (tenderResponseByUser.isSent) history.push('/'); //already sent
+
+  const save = (doc, shouldSend) => {
+    const mutation = tenderResponseByUser
+      ? tendersResponsesEdit
+      : tendersResponsesAdd;
+
+    mutation({
+      variables: { tenderId: tenderDetail._id, ...doc }
     })
       .then(() => {
-        message.success('Successfully submitted a tender!');
-        history.push('/rfq-and-eoi?refetch', {
-          newTenderId: doc.tenderId
-        });
+        message.success('Successfully saved a tender!');
+        tenderResponseByUserQuery.refetch();
+        if (shouldSend) send(doc.tenderId);
+        else redirect(doc.tenderId);
       })
       .catch(error => {
         message.error(error.message);
       });
   };
 
-  const send = doc => {
+  const send = tenderId => {
+    const { currentUser } = context;
+    console.log({
+      tenderId: tenderDetail._id,
+      supplierId: currentUser.companyId
+    });
     tenderResponsesSend({
-      variables: { ...doc }
+      variables: {
+        tenderId: tenderDetail._id,
+        supplierId: currentUser.companyId
+      }
     })
       .then(() => {
         message.success('Successfully submitted a tender!');
-        history.push('/rfq-and-eoi?refetch', {
-          newTenderId: doc.tenderId
-        });
+        redirect(tenderId);
       })
       .catch(error => {
         message.error(error.message);
       });
+  };
+
+  const redirect = tenderId => {
+    history.push('/rfq-and-eoi?refetch', {
+      newTenderId: tenderId
+    });
   };
 
   const updatedProps = {
     save,
     send,
-    data: tenderDetailQuery.tenderDetail || {}
+    data: tenderDetail,
+    response: tenderResponseByUser
   };
 
   let form = <SubmitRfq {...updatedProps} />;
@@ -63,9 +90,15 @@ const PublishContainer = ({
 PublishContainer.propTypes = {
   location: PropTypes.object,
   tenderDetailQuery: PropTypes.object,
+  tenderResponseByUserQuery: PropTypes.object,
   tendersResponsesAdd: PropTypes.func,
+  tendersResponsesEdit: PropTypes.func,
   tenderResponsesSend: PropTypes.func,
   history: PropTypes.object
+};
+
+PublishContainer.contextTypes = {
+  currentUser: PropTypes.object
 };
 
 export default compose(
@@ -78,8 +111,21 @@ export default compose(
     }
   }),
 
+  graphql(gql(queries.tenderResponseByUser), {
+    name: 'tenderResponseByUserQuery',
+    options: ({ match }) => {
+      return {
+        variables: { tenderId: match.params.id }
+      };
+    }
+  }),
+
   graphql(gql(mutations.tendersResponsesAdd), {
     name: 'tendersResponsesAdd'
+  }),
+
+  graphql(gql(mutations.tendersResponsesEdit), {
+    name: 'tendersResponsesEdit'
   }),
 
   graphql(gql(mutations.tenderResponsesSend), {

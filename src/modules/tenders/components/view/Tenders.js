@@ -74,9 +74,10 @@ class Tenders extends React.Component {
   }
 
   renderTooltippedIcon(record) {
-    let { status, isParticipated } = record;
+    let { status, isParticipated, isSent } = record;
 
-    if (isParticipated) status = 'participated';
+    if (isParticipated) status = 'draft';
+    if (isSent) status = 'participated';
 
     return (
       <Tooltip title={<span className="capitalize">{status}</span>}>
@@ -231,17 +232,19 @@ class Tenders extends React.Component {
 
   renderOperation(record) {
     const { currentUser, notInterested } = this.props;
-    const { status, _id, isParticipated } = record;
-    const canParticipate = status === 'open' && !isParticipated;
+    const { status, _id, isParticipated, isSent } = record;
+
+    const canNotInterested = status === 'open' && !isSent && !isParticipated;
 
     if (currentUser) {
       if (currentUser.isSupplier) {
         return (
-          canParticipate && (
-            <div style={{ width: '160px' }}>
-              <Link to={`/tender/submit/${_id}`}>Open</Link>
-              <Divider type="vertical" />
+          <div style={{ width: '160px' }}>
+            <Link to={`/tender/submit/${_id}`}>Open</Link>
+            {canNotInterested && [
+              <Divider type="vertical" key={0} />,
               <Popconfirm
+                key={1}
                 title="Are you sure you are not interested？"
                 placement="bottomRight"
                 okText="Yes"
@@ -250,8 +253,8 @@ class Tenders extends React.Component {
               >
                 <a>Not interested</a>
               </Popconfirm>
-            </div>
-          )
+            ]}
+          </div>
         );
       } else {
         return (

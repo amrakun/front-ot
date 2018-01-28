@@ -29,12 +29,10 @@ class TendersContainer extends React.Component {
 
   componentWillMount() {
     const { tendersQuery } = this.props;
-    const history = this.props.history || {};
     const location = this.props.location || {};
 
     if (location.search === '?refetch') {
       tendersQuery.refetch();
-      history.push({ location: null });
     }
   }
 

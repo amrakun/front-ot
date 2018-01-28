@@ -16,7 +16,6 @@ class SubmitTender extends TenderForm {
   handleSubmit(e) {
     e.preventDefault();
 
-    const { currentUser } = this.context;
     const products = [];
 
     // collect products table values
@@ -36,7 +35,6 @@ class SubmitTender extends TenderForm {
     });
 
     this.save({
-      supplierId: currentUser.companyId,
       tenderId: this.props.data._id,
       respondedProducts: products
     });
@@ -69,10 +67,6 @@ class SubmitTender extends TenderForm {
 
 SubmitTender.propTypes = {
   data: PropTypes.object
-};
-
-SubmitTender.contextTypes = {
-  currentUser: PropTypes.object
 };
 
 const form = Form.create()(SubmitTender);

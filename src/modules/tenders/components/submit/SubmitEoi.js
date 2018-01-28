@@ -24,6 +24,8 @@ class SubmitTender extends TenderForm {
     this.toggleAgreementModal = this.toggleAgreementModal.bind(this);
     this.handleOk = this.handleOk.bind(this);
     this.handleAgreementChange = this.handleAgreementChange.bind(this);
+    this.saveDraft = this.saveDraft.bind(this);
+    this.collectInputs = this.collectInputs.bind(this);
   }
 
   toggleAgreementModal() {
@@ -37,6 +39,25 @@ class SubmitTender extends TenderForm {
       : this.setState({ submitDisabled: true });
   }
 
+  collectInputs() {
+    const documents = [];
+
+    // collect products table values
+    Object.keys(this.state).forEach(key => {
+      if (key.startsWith('product__')) {
+        const product = this.state[key];
+        documents.push({
+          notes: product.notes,
+          isSubmitted: product.isSubmitted,
+          file: product.file,
+          name: product.document
+        });
+      }
+    });
+
+    return documents;
+  }
+
   handleSubmit(e) {
     e.preventDefault();
 
@@ -44,27 +65,12 @@ class SubmitTender extends TenderForm {
   }
 
   handleOk() {
-    const { currentUser } = this.context;
-    const products = [];
-
     this.setState({ submitLoading: true });
+    this.props.save({ respondedDocuments: this.collectInputs() }, true);
+  }
 
-    // collect products table values
-    Object.keys(this.state).forEach(key => {
-      if (key.startsWith('product__')) {
-        const product = this.state[key];
-        product.name = product.document;
-        delete product.key;
-        delete product.document;
-        products.push(product);
-      }
-    });
-
-    this.save({
-      supplierId: currentUser.companyId,
-      tenderId: this.props.data._id,
-      respondedDocuments: products
-    });
+  saveDraft() {
+    this.save({ respondedDocuments: this.collectInputs() });
   }
 
   render() {
@@ -88,10 +94,16 @@ class SubmitTender extends TenderForm {
         <Card title="Apply to EOI" className="margin">
           <EoiTable {...formProps} />
           <br />
-          <Button type="primary" htmlType="submit" className="margin">
-            Save
+          <Button
+            className="margin"
+            style={{ marginRight: '16px' }}
+            onClick={this.saveDraft}
+          >
+            Save as draft
           </Button>
-
+          <Button type="primary" htmlType="submit" className="margin">
+            Save & submit
+          </Button>
           <Modal
             title="Confirmation"
             visible={agreementModalVisible}
@@ -134,10 +146,6 @@ class SubmitTender extends TenderForm {
 
 SubmitTender.propTypes = {
   data: PropTypes.object
-};
-
-SubmitTender.contextTypes = {
-  currentUser: PropTypes.object
 };
 
 const form = Form.create()(SubmitTender);
