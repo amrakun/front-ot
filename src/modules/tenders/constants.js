@@ -3,7 +3,8 @@ export const statusIcons = {
   open: { type: 'sync', color: 'rgb(0,153,168)' },
   closed: { type: 'lock', color: 'rgb(188, 90, 58)' },
   awarded: { type: 'trophy', color: 'rgb(244,119,33)' },
-  participated: { type: 'check-circle-o', color: 'rgb(244,119,33)' }
+  participated: { type: 'check-circle-o', color: 'rgb(244,119,33)' },
+  canceled: { type: 'close-circle', color: 'rgb(191,111,125)' }
 };
 
 export const labels = {

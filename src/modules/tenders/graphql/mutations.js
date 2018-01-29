@@ -126,8 +126,17 @@ const sendRegretLetter = `
   }
 `;
 
+const tendersCancel = `
+  mutation tendersCancel($_id: String!) {
+    tendersCancel(_id: $_id) {
+      _id
+    }
+  }
+`;
+
 export default {
   tendersAdd,
+  tendersCancel,
   tendersEdit,
   tendersResponsesAdd,
   tendersResponsesEdit,

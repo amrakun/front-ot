@@ -231,7 +231,7 @@ class Tenders extends React.Component {
   }
 
   renderOperation(record) {
-    const { currentUser, notInterested } = this.props;
+    const { currentUser, notInterested, cancelTender } = this.props;
     const { status, _id, isParticipated, isSent } = record;
 
     const canNotInterested = status === 'open' && !isSent && !isParticipated;
@@ -258,13 +258,26 @@ class Tenders extends React.Component {
         );
       } else {
         return (
-          <div>
+          <div style={{ width: '120px' }}>
             <Link to={`/tender/${_id}`}>View</Link>
             {!['closed', 'awarded'].includes(status) && [
               <Divider key={0} type="vertical" />,
               <Link key={1} to={`/tender/edit/${_id}`}>
                 Edit
               </Link>
+            ]}
+            {!['closed', 'awarded', 'canceled'].includes(status) && [
+              <Divider key={0} type="vertical" />,
+              <Popconfirm
+                key={3}
+                title="Are you sure you want to cancel this tender？"
+                placement="bottomRight"
+                okText="Yes"
+                cancelText="No"
+                onConfirm={() => cancelTender(_id)}
+              >
+                <a>Cancel</a>
+              </Popconfirm>
             ]}
           </div>
         );
@@ -345,6 +358,7 @@ Tenders.propTypes = {
   onChange: PropTypes.func,
   currentUser: PropTypes.object,
   notInterested: PropTypes.func,
+  cancelTender: PropTypes.func,
   history: PropTypes.object,
   exportTenders: PropTypes.func,
   exportLoading: PropTypes.bool

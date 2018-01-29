@@ -25,6 +25,7 @@ class TendersContainer extends React.Component {
     };
 
     this.exportTenders = this.exportTenders.bind(this);
+    this.cancelTender = this.cancelTender.bind(this);
   }
 
   componentWillMount() {
@@ -78,6 +79,21 @@ class TendersContainer extends React.Component {
       });
   }
 
+  cancelTender(_id) {
+    const { tendersCancel, tendersQuery } = this.props;
+
+    tendersCancel({
+      variables: { _id }
+    })
+      .then(() => {
+        tendersQuery.refetch();
+        message.success('Canceled a tender');
+      })
+      .catch(error => {
+        message.error(error.message);
+      });
+  }
+
   render() {
     const { tendersQuery } = this.props;
     const { currentUser } = this.context;
@@ -92,6 +108,7 @@ class TendersContainer extends React.Component {
     const updatedProps = {
       ...this.props,
       exportLoading,
+      cancelTender: this.cancelTender,
       data: tenders,
       type: this.type,
       currentUser: currentUser,
@@ -108,6 +125,7 @@ TendersContainer.propTypes = {
   history: PropTypes.object,
   tendersQuery: PropTypes.object,
   tendersResponsesAdd: PropTypes.func,
+  tendersCancel: PropTypes.func,
   queryParams: PropTypes.object,
   supplierId: PropTypes.string
 };
@@ -135,5 +153,9 @@ export default compose(
 
   graphql(gql(mutations.tendersResponsesAdd), {
     name: 'tendersResponsesAdd'
+  }),
+
+  graphql(gql(mutations.tendersCancel), {
+    name: 'tendersCancel'
   })
 )(withTableProps(TendersContainer));
