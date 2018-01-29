@@ -4,7 +4,7 @@ export const statusIcons = {
   closed: { type: 'lock', color: 'rgb(188, 90, 58)' },
   awarded: { type: 'trophy', color: 'rgb(244,119,33)' },
   participated: { type: 'check-circle-o', color: 'rgb(244,119,33)' },
-  canceled: { type: 'close-circle', color: 'rgb(191,111,125)' }
+  canceled: { type: 'close-circle', color: 'rgb(67,83,99)' }
 };
 
 export const labels = {
