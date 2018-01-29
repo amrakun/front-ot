@@ -91,7 +91,10 @@ export default [
     key={'/feedback/responses'}
     exact
     path={'/feedback/responses'}
-    component={FeedbackResponses}
+    component={props => {
+      const queryParams = queryString.parse(props.location.search);
+      return <FeedbackResponses queryParams={queryParams} {...props} />;
+    }}
   />,
   <Route
     key="/audit"

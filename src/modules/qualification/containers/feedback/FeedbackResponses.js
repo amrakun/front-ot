@@ -28,6 +28,16 @@ TendersContainer.propTypes = {
 
 export default compose(
   graphql(gql(queries.feedbackResponses), {
-    name: 'feedbackResponsesQuery'
+    name: 'feedbackResponsesQuery',
+    options: ({ queryParams }) => {
+      const { search } = queryParams;
+
+      return {
+        variables: {
+          supplierName: search
+        },
+        notifyOnNetworkStatusChange: true
+      };
+    }
   })
 )(withTableProps(TendersContainer));

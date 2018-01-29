@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 import { Table, Card, Button, Icon } from 'antd';
 import { dateFormat } from 'modules/common/constants';
 import moment from 'moment';
+import { Search } from 'modules/common/components';
 
 class FeedbackResponses extends React.Component {
   constructor(props) {
@@ -112,6 +113,7 @@ class FeedbackResponses extends React.Component {
     return (
       <Card title="Success feedback responses">
         <div className="table-operations">
+          <Search placeholder="Supplier name" />
           <Button disabled>
             Export to excel <Icon type="file-excel" />
           </Button>

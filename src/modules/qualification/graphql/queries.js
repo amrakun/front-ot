@@ -156,8 +156,8 @@ const feedbacks = `
 `;
 
 const feedbackResponses = `
-  query feedbackResponses {
-    feedbackResponses {
+  query feedbackResponses($supplierName: String) {
+    feedbackResponses(supplierName: $supplierName) {
       _id
       status
       supplierId
