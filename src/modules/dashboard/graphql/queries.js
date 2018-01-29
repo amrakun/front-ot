@@ -55,6 +55,7 @@ const reportsAuditExport = `
       publishDate: $publishDate
       closeDate: $closeDate
     )
+  }
 `;
 
 const companiesCountByTierType = `
