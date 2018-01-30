@@ -7,6 +7,7 @@ import Register from './Register';
 import Profile from './Profile';
 import RegisterConfirmation from './RegisterConfirmation';
 import ChangePassword from './ChangePassword';
+import Delegation from './Delegation';
 
 export {
   withCurrentUser,
@@ -17,5 +18,6 @@ export {
   Register,
   Profile,
   RegisterConfirmation,
-  ChangePassword
+  ChangePassword,
+  Delegation
 };

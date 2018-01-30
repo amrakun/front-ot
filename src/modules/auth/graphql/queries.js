@@ -41,7 +41,19 @@ const systemConfig = `
   }
 `;
 
+const simpleUsers = `
+  query users($search: String) {
+    users(page: 1, perPage: 10, search: $search) {
+      _id
+      firstName
+      lastName
+      email
+    }
+  }
+`;
+
 export default {
   currentUser,
-  systemConfig
+  systemConfig,
+  simpleUsers
 };

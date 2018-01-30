@@ -6,6 +6,7 @@ import Home from './Home';
 import Register from './Register';
 import Profile from './Profile';
 import RegisterConfirmation from './RegisterConfirmation';
+import Delegation from './Delegation';
 
 export {
   SignIn,
@@ -15,5 +16,6 @@ export {
   Home,
   Register,
   Profile,
-  RegisterConfirmation
+  RegisterConfirmation,
+  Delegation
 };

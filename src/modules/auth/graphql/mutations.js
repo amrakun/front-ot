@@ -67,6 +67,24 @@ const usersEditProfile = `
   }
 `;
 
+const usersDelegate = `
+  mutation usersDelegate(
+    $userId: String!
+    $reason: String!
+    $startDate: Date!
+    $endDate: Date!
+  ) {
+    usersDelegate(
+      userId: $userId
+      reason: $reason
+      startDate: $startDate
+      endDate: $endDate
+    ) {
+      _id
+    }
+  }
+`;
+
 export default {
   login,
   register,
@@ -74,5 +92,6 @@ export default {
   resetPassword,
   usersEditProfile,
   confirmRegistration,
-  usersChangePassword
+  usersChangePassword,
+  usersDelegate
 };

@@ -8,7 +8,8 @@ import {
   Register,
   RegisterConfirmation,
   Profile,
-  ChangePassword
+  ChangePassword,
+  Delegation
 } from './containers';
 import { Home } from './components';
 
@@ -16,6 +17,7 @@ export default [
   <Route key="home" exact path="/" component={Home} />,
   <Route key="/sign-in" exact path="/sign-in" component={SignIn} />,
   <Route key="/register" exact path="/register" component={Register} />,
+  <Route key="/delegation" exact path="/delegation" component={Delegation} />,
   <Route
     key="/forgot-password"
     exact
