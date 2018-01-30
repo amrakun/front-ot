@@ -6,6 +6,7 @@ import { Layout, BackTop } from 'antd';
 import { PropTypes } from 'prop-types';
 
 const { Content, Footer } = Layout;
+
 const visitorPaths = [
   '/sign-in',
   '/register',
@@ -13,6 +14,7 @@ const visitorPaths = [
   '/confirm-registration',
   '/'
 ];
+
 const withSidebar = { marginLeft: 200 };
 const withSidebarCollapsed = { marginLeft: 80 };
 
