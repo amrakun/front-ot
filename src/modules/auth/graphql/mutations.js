@@ -1,8 +1,23 @@
 const login = `
-  mutation login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
+  mutation login($email: String!, $password: String!, $loginAs: String) {
+    login(email: $email, password: $password, loginAs: $loginAs) {
+      status
       token
       refreshToken
+
+      user {
+        _id
+        username
+        firstName
+        lastName
+      }
+
+      delegatedUser {
+        _id
+        username
+        firstName
+        lastName
+      }
     }
   }
 `;
