@@ -160,7 +160,7 @@ class Tenders extends React.Component {
       },
       {
         title: 'Sourcing officer',
-        dataIndex: 'createdUser.email'
+        dataIndex: 'sourcingOfficer'
       },
       {
         title: 'Regret letter',

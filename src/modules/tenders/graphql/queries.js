@@ -20,6 +20,7 @@ const tenderFields = `
   publishDate,
   closeDate,
   file,
+  sourcingOfficer,
   reminderDay,
   supplierIds,
   requestedCount,
