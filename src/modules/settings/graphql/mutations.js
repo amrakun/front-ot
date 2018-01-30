@@ -11,7 +11,8 @@ const commonParams = `
     $firstName: String,
     $lastName: String,
     $jobTitle: String,
-    $phone: Float
+    $phone: Float,
+    $permissions: [String!],
 `;
 
 const commonValues = `
@@ -23,7 +24,8 @@ const commonValues = `
     jobTitle: $jobTitle,
     phone: $phone,
     password: $password,
-    passwordConfirmation: $passwordConfirmation
+    passwordConfirmation: $passwordConfirmation,
+    permissions: $permissions,
 `;
 
 const usersAdd = `

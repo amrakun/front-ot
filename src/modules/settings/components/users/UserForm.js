@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Input, Modal, Select, InputNumber } from 'antd';
+import { Form, Input, Modal, Select, InputNumber, TreeSelect } from 'antd';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -11,7 +11,8 @@ const propTypes = {
   mainAction: PropTypes.func,
   handleCancel: PropTypes.func,
   onSuccess: PropTypes.func,
-  onClose: PropTypes.func
+  onClose: PropTypes.func,
+  permissions: PropTypes.array.isRequired
 };
 
 class UserForm extends React.Component {
@@ -24,10 +25,15 @@ class UserForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
   }
 
   handleCancel() {
     this.props.onClose();
+  }
+
+  onInputChange(name, value) {
+    this[name] = value;
   }
 
   handleSubmit(e) {
@@ -50,6 +56,7 @@ class UserForm extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { permissions } = this.props;
     const user = this.props.user || {};
 
     const title = user ? 'Edit User' : 'Add New User';
@@ -102,6 +109,20 @@ class UserForm extends React.Component {
                   <Option value="admin">Admin</Option>
                   <Option value="contributor">Contributor</Option>
                 </Select>
+              )}
+            </FormItem>
+            <FormItem label="Permissions">
+              {getFieldDecorator('permissions', {
+                initialValue: user.permissions || 'permissions',
+                rules: [{ required: true, message: 'Set permissions!' }]
+              })(
+                <TreeSelect
+                  treeData={permissions}
+                  onChange={value => this.onInputChange('permissions', value)}
+                  treeCheckable={true}
+                  searchPlaceholder="Please select"
+                  style={{ width: '100%', marginBottom: '16px' }}
+                />
               )}
             </FormItem>
             <FormItem label="Job Title">

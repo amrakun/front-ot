@@ -9,6 +9,7 @@ const User = `
     lastName
     jobTitle
     phone
+    permissions
 `;
 
 export const users = `
@@ -65,10 +66,20 @@ export const config = `
     }
 `;
 
+export const modulePermissions = `
+    query modulePermissions {
+        modulePermissions {
+            name
+            permissions
+        }
+    }
+`;
+
 export default {
   users,
   userDetail,
   usersTotalCount,
   currentUser,
-  config
+  config,
+  modulePermissions
 };

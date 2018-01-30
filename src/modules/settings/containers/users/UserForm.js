@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, gql, graphql } from 'react-apollo';
-import { mutations } from '../../graphql';
+import { mutations, queries } from '../../graphql';
 import { UserForm as UserFormComponent } from '../../components';
 import { Loading } from '../../../common/components';
 import { message } from 'antd';
@@ -10,15 +10,44 @@ const propTypes = {
   user: PropTypes.object,
   usersAddMutation: PropTypes.func,
   usersEditMutation: PropTypes.func,
-  onSuccess: PropTypes.func
+  modulePermissionsQuery: PropTypes.object,
+  onSuccess: PropTypes.func.isRequired
 };
 
 class UserFormContainer extends React.Component {
   render() {
-    const { user, usersAddMutation, usersEditMutation, onSuccess } = this.props;
+    const {
+      user,
+      usersAddMutation,
+      usersEditMutation,
+      onSuccess,
+      modulePermissionsQuery
+    } = this.props;
 
-    if (usersEditMutation.loading || usersAddMutation.loading) {
+    if (
+      usersEditMutation.loading ||
+      usersAddMutation.loading ||
+      modulePermissionsQuery.loading
+    ) {
       return <Loading />;
+    }
+
+    const modulePermissions = modulePermissionsQuery.modulePermissions,
+      permissions = [];
+
+    for (let module of modulePermissions) {
+      const moduleName = module.name;
+      const treeBranch = { label: moduleName, children: [] };
+
+      for (let permission of module.permissions) {
+        treeBranch.children.push({
+          label: permission,
+          value: permission,
+          key: permission
+        });
+      }
+
+      permissions.push(treeBranch);
     }
 
     const mainAction = doc => {
@@ -34,7 +63,8 @@ class UserFormContainer extends React.Component {
 
     const updatedProps = {
       ...this.props,
-      mainAction
+      mainAction,
+      permissions
     };
     return <UserFormComponent {...updatedProps} />;
   }
@@ -48,5 +78,8 @@ export default compose(
   }),
   graphql(gql(mutations.usersEdit), {
     name: 'usersEditMutation'
+  }),
+  graphql(gql(queries.modulePermissions), {
+    name: 'modulePermissionsQuery'
   })
 )(UserFormContainer);
