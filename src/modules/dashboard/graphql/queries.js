@@ -106,12 +106,27 @@ const tendersTotalCount = `
   }
 `;
 
+const tendersAverageDuration = `
+  query tendersAverageDuration(
+    $startDate: Date!,
+    $endDate: Date!
+    $type: String!
+  ){
+    tendersAverageDuration(
+      startDate: $startDate,
+      endDate: $endDate,
+      type: $type
+    )
+  }
+`;
+
 export default {
   companyByUser,
   companiesCountByTierType,
   companiesCountByRegisteredVsPrequalified,
   tenderCountByStatus,
   tendersTotalCount,
+  tendersAverageDuration,
   reportsSuppliersExport,
   reportsTendersExport,
   reportsAuditExport

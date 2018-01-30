@@ -177,7 +177,14 @@ class Dashboard extends React.Component {
 
   render() {
     const props = this.props;
-    const { eoiData, rfqData, eoiTotalCount, rfqTotalCount } = props;
+    const {
+      eoiData,
+      rfqData,
+      eoiTotalCount,
+      rfqTotalCount,
+      eoiAverageDuration,
+      rfqAverageDuration
+    } = props;
     const queryParams = queryString.parse(props.location.search);
     const extendedProps = { ...props, queryParams };
     const dateFormat = 'YYYY/MM/DD';
@@ -226,10 +233,10 @@ class Dashboard extends React.Component {
             </div>
 
             <div className="ant-row chart-row">
-              <div className="ant-col-sm-12 ant-col-lg-6">
+              <div className="ant-col-sm-24 ant-col-lg-5">
                 {this.renderCountData('Total EOI', eoiTotalCount)}
               </div>
-              <div className="ant-col-sm-12 ant-col-lg-18">
+              <div className="ant-col-sm-24 ant-col-lg-14">
                 <Card title="EOI (this year)" className="barchart-wrapper">
                   {this.renderBarChart({
                     data: eoiData,
@@ -239,13 +246,19 @@ class Dashboard extends React.Component {
                   })}
                 </Card>
               </div>
+              <div className="ant-col-sm-24 ant-col-lg-5">
+                {this.renderCountData(
+                  'EOI average duration',
+                  eoiAverageDuration
+                )}
+              </div>
             </div>
 
             <div className="ant-row chart-row">
-              <div className="ant-col-sm-12 ant-col-lg-6">
+              <div className="ant-col-sm-24 ant-col-lg-5">
                 {this.renderCountData('Total RFQ', rfqTotalCount)}
               </div>
-              <div className="ant-col-sm-12 ant-col-lg-18">
+              <div className="ant-col-sm-24 ant-col-lg-14">
                 <Card title="RFQ (this year)" className="barchart-wrapper">
                   {this.renderBarChart({
                     data: rfqData,
@@ -254,6 +267,12 @@ class Dashboard extends React.Component {
                     height: 200
                   })}
                 </Card>
+              </div>
+              <div className="ant-col-sm-24 ant-col-lg-5">
+                {this.renderCountData(
+                  'RFQ average duration',
+                  rfqAverageDuration
+                )}
               </div>
             </div>
           </div>

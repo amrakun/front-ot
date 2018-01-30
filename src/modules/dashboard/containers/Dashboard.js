@@ -12,7 +12,9 @@ const DashboardContainer = props => {
     tenderCountByStatusRfq,
     tenderCountByStatusEoi,
     tendersTotalCountRfq,
-    tendersTotalCountEoi
+    tendersTotalCountEoi,
+    tendersAverageDurationRfq,
+    tendersAverageDurationEoi
   } = props;
 
   if (
@@ -21,7 +23,9 @@ const DashboardContainer = props => {
     tenderCountByStatusRfq.loading ||
     tenderCountByStatusEoi.loading ||
     tendersTotalCountRfq.loading ||
-    tendersTotalCountEoi.loading
+    tendersTotalCountEoi.loading ||
+    tendersAverageDurationRfq.loading ||
+    tendersAverageDurationEoi.loading
   ) {
     return <Loading />;
   }
@@ -58,7 +62,10 @@ const DashboardContainer = props => {
     rfqData: renderData(tenderCountByStatusRfq.tenderCountByStatus),
 
     eoiTotalCount: tendersTotalCountEoi.tendersTotalCount,
-    rfqTotalCount: tendersTotalCountRfq.tendersTotalCount
+    rfqTotalCount: tendersTotalCountRfq.tendersTotalCount,
+
+    eoiAverageDuration: tendersAverageDurationEoi.tendersAverageDuration,
+    rfqAverageDuration: tendersAverageDurationRfq.tendersAverageDuration
   };
 
   return <Dashboard {...updatedProps} />;
@@ -70,7 +77,9 @@ DashboardContainer.propTypes = {
   tenderCountByStatusRfq: PropTypes.object,
   tenderCountByStatusEoi: PropTypes.object,
   tendersTotalCountRfq: PropTypes.object,
-  tendersTotalCountEoi: PropTypes.object
+  tendersTotalCountEoi: PropTypes.object,
+  tendersAverageDurationRfq: PropTypes.object,
+  tendersAverageDurationEoi: PropTypes.object
 };
 
 export default compose(
@@ -159,6 +168,36 @@ export default compose(
           queryParams.endDate ? queryParams.endDate : '2040-09-26'
         ),
         type: 'eoi'
+      }
+    })
+  }),
+
+  graphql(gql(queries.tendersAverageDuration), {
+    name: 'tendersAverageDurationEoi',
+    options: ({ queryParams }) => ({
+      variables: {
+        startDate: new Date(
+          queryParams.startDate ? queryParams.startDate : '1900-01-01'
+        ),
+        endDate: new Date(
+          queryParams.endDate ? queryParams.endDate : '2040-09-26'
+        ),
+        type: 'eoi'
+      }
+    })
+  }),
+
+  graphql(gql(queries.tendersAverageDuration), {
+    name: 'tendersAverageDurationRfq',
+    options: ({ queryParams }) => ({
+      variables: {
+        startDate: new Date(
+          queryParams.startDate ? queryParams.startDate : '1900-01-01'
+        ),
+        endDate: new Date(
+          queryParams.endDate ? queryParams.endDate : '2040-09-26'
+        ),
+        type: 'rfq'
       }
     })
   })
