@@ -1,19 +1,11 @@
 import React from 'react';
 import { Menu, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
-import consts from 'consts';
 import PropTypes from 'prop-types';
 import { colors } from 'modules/common/constants';
+import { logout } from '../utils';
 
 const SubMenu = Menu.SubMenu;
-
-function logout() {
-  const { LOGIN_TOKEN_KEY, LOGIN_REFRESH_TOKEN_KEY } = consts;
-  localStorage.removeItem(LOGIN_TOKEN_KEY);
-  localStorage.removeItem(LOGIN_REFRESH_TOKEN_KEY);
-
-  window.location.href = '/';
-}
 
 function getColor(username) {
   let length = username.length;
