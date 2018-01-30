@@ -292,10 +292,13 @@ const audits = `
 const auditResponses = `
   query auditResponses {
     auditResponses {
-
       _id
       status
-      auditId
+      audit {
+        status
+        publishDate
+        closeDate
+      }
       improvementPlanFile
       improvementPlanSentDate
       reportFile
@@ -314,7 +317,6 @@ const auditResponses = `
         }
         isPrequalified
       }
-
     }
   }
 `;
@@ -511,6 +513,37 @@ const companiesGenerateDifotScoreList = `
   }
 `;
 
+const physicalAuditFields = `
+  _id
+  createdDate
+  isQualified
+  reportFile
+  improvementPlanFile
+  supplier {
+    _id
+    basicInfo {
+      enName,
+      sapNumber
+    }
+  }
+`;
+
+const physicalAudits = `
+  query physicalAudits {
+    physicalAudits {
+      ${physicalAuditFields}
+    }
+  }
+`;
+
+const physicalAuditDetail = `
+  query physicalAuditDetail($_id: String!) {
+    physicalAudits(_id: $_id) {
+      ${physicalAuditFields}
+    }
+  }
+`;
+
 export default {
   blockedCompanies,
   supplierPrequalification,
@@ -528,5 +561,7 @@ export default {
   auditImprovementPlan,
   auditReport,
   feedbackResponses,
-  companiesGenerateDifotScoreList
+  companiesGenerateDifotScoreList,
+  physicalAudits,
+  physicalAuditDetail
 };

@@ -259,6 +259,52 @@ const auditsBuyerSendFiles = `
   }
 `;
 
+const physicalAuditParams = `
+  $isQualified: Boolean!
+  $supplierId: String!
+  $reportFile: String!
+  $improvementPlanFile: String!
+`;
+
+const physicalAuditFields = `
+  isQualified: $isQualified
+  supplierId: $supplierId
+  reportFile: $reportFile
+  improvementPlanFile: $improvementPlanFile
+`;
+
+const physicalAuditsAdd = `
+  mutation physicalAuditsAdd(
+    ${physicalAuditParams}
+  ) {
+    physicalAuditsAdd(
+      ${physicalAuditFields}
+    ) {
+      _id
+    }
+  }
+`;
+
+const physicalAuditsEdit = `
+  mutation physicalAuditsEdit(
+    $_id: String!
+    ${physicalAuditParams}
+  ) {
+    physicalAuditsEdit(
+      _id: $_id
+      ${physicalAuditFields}
+    ) {
+      _id
+    }
+  }
+`;
+
+const physicalAuditsRemove = `
+  mutation physicalAuditsRemove($_id: String!) {
+    physicalAuditsRemove(_id: $_id)
+  }
+`;
+
 export default {
   addDifotScores,
   addDueDiligence,
@@ -283,5 +329,8 @@ export default {
   auditsBuyerSaveBusinessInfo,
   auditsSupplierSendResponse,
   qualificationsPrequalify,
-  auditsBuyerSendFiles
+  auditsBuyerSendFiles,
+  physicalAuditsAdd,
+  physicalAuditsEdit,
+  physicalAuditsRemove
 };

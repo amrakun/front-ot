@@ -30,7 +30,8 @@ const routes = {
   templates: 'Templates',
   'manage-expiry-dates': 'Manage Expiry Dates',
   qualification: 'Qualification/audit',
-  settings: 'Settings'
+  settings: 'Settings',
+  'responses-physical': 'Physical audit responses'
 };
 
 const Breadcrumbs = location => {

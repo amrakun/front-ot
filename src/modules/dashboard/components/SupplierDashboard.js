@@ -100,7 +100,7 @@ class Dashboard extends React.Component {
                   <span>
                     You have new success feedback request. Click&nbsp;
                     <Link to={`feedback/submit/${lastFeedback._id}`}>here</Link>
-                    &nbsp;to submit yoir response.
+                    &nbsp;to submit your response.
                   </span>
                 ) : (
                   <span>Nothing new</span>

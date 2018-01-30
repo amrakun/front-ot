@@ -56,7 +56,11 @@ export const buyerSideMenu = [
           },
           {
             url: '/audit/responses',
-            title: 'Responses'
+            title: 'Responses (desktop)'
+          },
+          {
+            url: '/audit/responses-physical',
+            title: 'Responses (physical)'
           },
           {
             url: '/audit/reports',
