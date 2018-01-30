@@ -9,7 +9,8 @@ const propTypes = {
   login: PropTypes.func.isRequired,
   form: PropTypes.object,
   location: PropTypes.object,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  chooseLoginAs: PropTypes.object
 };
 
 class SignIn extends Component {
@@ -21,6 +22,7 @@ class SignIn extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
     this.props.form.validateFields((err, values) => {
       if (!err) {
         const email = values.email;
@@ -30,63 +32,103 @@ class SignIn extends Component {
     });
   }
 
-  render() {
+  renderLogin() {
     const { getFieldDecorator } = this.props.form;
     const search = this.props.location.search || [{}];
     const { loading } = this.props;
 
     return (
+      <div>
+        {search === '?confirmation' ? (
+          <Alert
+            description="Confirmation link has been sent to your email!"
+            type="success"
+          />
+        ) : null}
+        {search === '?confirmed' ? (
+          <Alert
+            description="Account activated succesfully! Please login using your provided details"
+            type="success"
+          />
+        ) : null}
+        {search === '?required' ? (
+          <Alert description="Please sign in to continue!" type="info" />
+        ) : null}
+
+        <Form onSubmit={this.handleSubmit} className="margin">
+          <FormItem>
+            {getFieldDecorator('email', {
+              rules: [{ required: true, message: 'Please enter your email!' }]
+            })(<Input prefix={<Icon type="mail" />} placeholder="Email" />)}
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator('password', {
+              rules: [
+                { required: true, message: 'Please enter your Password!' }
+              ]
+            })(
+              <Input
+                prefix={<Icon type="lock" />}
+                type="password"
+                placeholder="Password"
+              />
+            )}
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator('remember', {
+              valuePropName: 'checked',
+              initialValue: true
+            })(<Checkbox>Remember me</Checkbox>)}
+            <Link className="right" to="/forgot-password">
+              Forgot password
+            </Link>
+            <Button type="primary" loading={loading} htmlType="submit">
+              Log in
+            </Button>
+            Or <Link to="/register">register now!</Link>
+          </FormItem>
+        </Form>
+      </div>
+    );
+  }
+
+  renderLoginAsItem({ login, loginParams, user }) {
+    let content = user.username;
+
+    if (user.firstName && user.lastName) {
+      content = `${user.lastName} ${user.firstName}`;
+    }
+
+    return (
+      <li onClick={() => login({ ...loginParams, loginAs: user._id })}>
+        {content}
+      </li>
+    );
+  }
+
+  renderChooseLoginAs() {
+    const { chooseLoginAs, login } = this.props;
+    const { loginParams, user, delegatedUser } = chooseLoginAs;
+
+    return (
+      <div>
+        <Alert description="Please choose your account!" type="info" />
+
+        <ul className="login-as-form">
+          {this.renderLoginAsItem({ login, loginParams, user })}
+          {this.renderLoginAsItem({ login, loginParams, user: delegatedUser })}
+        </ul>
+      </div>
+    );
+  }
+
+  render() {
+    const { chooseLoginAs } = this.props;
+
+    return (
       <div className="center-content">
         <Card className="login-card" bordered={false}>
-          {search === '?confirmation' ? (
-            <Alert
-              description="Confirmation link has been sent to your email!"
-              type="success"
-            />
-          ) : null}
-          {search === '?confirmed' ? (
-            <Alert
-              description="Account activated succesfully! Please login using your provided details"
-              type="success"
-            />
-          ) : null}
-          {search === '?required' ? (
-            <Alert description="Please sign in to continue!" type="info" />
-          ) : null}
-
-          <Form onSubmit={this.handleSubmit} className="margin">
-            <FormItem>
-              {getFieldDecorator('email', {
-                rules: [{ required: true, message: 'Please enter your email!' }]
-              })(<Input prefix={<Icon type="mail" />} placeholder="Email" />)}
-            </FormItem>
-            <FormItem>
-              {getFieldDecorator('password', {
-                rules: [
-                  { required: true, message: 'Please enter your Password!' }
-                ]
-              })(
-                <Input
-                  prefix={<Icon type="lock" />}
-                  type="password"
-                  placeholder="Password"
-                />
-              )}
-            </FormItem>
-            <FormItem>
-              {getFieldDecorator('remember', {
-                valuePropName: 'checked',
-                initialValue: true
-              })(<Checkbox>Remember me</Checkbox>)}
-              <Link className="right" to="/forgot-password">
-                Forgot password
-              </Link>
-              <Button type="primary" loading={loading} htmlType="submit">
-                Log in
-              </Button>
-              Or <Link to="/register">register now!</Link>
-            </FormItem>
-          </Form>
+          {chooseLoginAs ? this.renderChooseLoginAs() : this.renderLogin()}
         </Card>
       </div>
     );

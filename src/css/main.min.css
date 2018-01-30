@@ -510,3 +510,13 @@ a.sn {
 a.sn:hover {
   text-decoration: none;
 }
+
+.login-as-form {
+  margin: 10px 0px;
+  cursor: pointer;
+}
+
+.login-as-form li {
+  font-weight: bold;
+  font-size: 13px;
+}
