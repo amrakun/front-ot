@@ -5,6 +5,7 @@ import { mutations, queries } from '../../graphql';
 import { UserForm as UserFormComponent } from '../../components';
 import { Loading } from '../../../common/components';
 import { message } from 'antd';
+import permissionTable from '../../permissionTable';
 
 const propTypes = {
   user: PropTypes.object,
@@ -41,7 +42,7 @@ class UserFormContainer extends React.Component {
 
       for (let permission of module.permissions) {
         treeBranch.children.push({
-          label: permission,
+          label: permissionTable[permission],
           value: permission,
           key: permission
         });
