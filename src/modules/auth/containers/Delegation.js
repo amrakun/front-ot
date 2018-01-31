@@ -61,21 +61,11 @@ class DelegationContainer extends React.Component {
 
 DelegationContainer.propTypes = {
   usersDelegate: PropTypes.func,
-  usersQuery: PropTypes.object,
   history: PropTypes.object
 };
 
 export default compose(
   graphql(gql(mutations.usersDelegate), {
     name: 'usersDelegate'
-  }),
-
-  graphql(gql(queries.simpleUsers), {
-    name: 'usersQuery',
-    options: ({ searchValue }) => {
-      return {
-        variables: { search: searchValue }
-      };
-    }
   })
 )(DelegationContainer);

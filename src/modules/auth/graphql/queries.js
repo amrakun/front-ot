@@ -48,6 +48,7 @@ const simpleUsers = `
       firstName
       lastName
       email
+      isSupplier
     }
   }
 `;

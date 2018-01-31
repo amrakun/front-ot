@@ -17,6 +17,8 @@ class Delegation extends BaseForm {
     this.handleSearch = this.handleSearch.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.clearSearch = this.clearSearch.bind(this);
+
+    this.props.searchUser();
   }
 
   handleSubmit(e) {
@@ -53,7 +55,7 @@ class Delegation extends BaseForm {
   render() {
     const { usersResult } = this.props;
     const { selectedUser, searchValue } = this.state;
-
+    console.log(usersResult);
     return (
       <Form onSubmit={this.handleSubmit}>
         <Col lg={{ span: 12, offset: 6 }} xl={{ span: 10, offset: 7 }}>
@@ -81,11 +83,14 @@ class Delegation extends BaseForm {
                 onSelect={this.handleSelect}
                 style={{ marginBottom: '24px' }}
               >
-                {usersResult.map(user => (
-                  <Select.Option key={JSON.stringify(user)}>
-                    {user.firstName || user.email}
-                  </Select.Option>
-                ))}
+                {usersResult.map(
+                  user =>
+                    !user.isSupplier && (
+                      <Select.Option key={JSON.stringify(user)}>
+                        {user.firstName || user.email}
+                      </Select.Option>
+                    )
+                )}
               </Select>
             )}
 
