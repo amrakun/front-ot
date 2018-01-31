@@ -27,15 +27,46 @@ const PERMISSION_PHYSICAL_AUDITS_ADD = 'Insert physical audit';
 
 const PERMISSION_CONFIGS_SAVE_IMPROVEMENT_PLAN_DOW = 'Create improvement plan';
 
+// eoi
+const PERMISSION_TENDER_RESPONSES_EOI_SHORT_LIST = 'EOI short list Create';
+const PERMISSION_TENDER_RESPONSES_EOI_BIDDER_LIST = 'EOI bidder list Create';
+
+// feedbacks
+const PERMISSION_FEEDBACKS_ADD = 'Send success feedback';
+
+// difot
+const PERMISSION_COMPANIES_GENERATE_DIFOT_SCORE_LIST = 'Download template';
+const PERMISSION_COMPANIES_ADD_DIFOT_SCORES = 'Import difot score';
+
+// pre-qualification
+const PERMISSION_APPROVE_PRE_QUALIFICATION_STATUS =
+  'Approve pre-qualification status';
+const PERMISSION_QUALIFICATIONS_SAVE_TIER_TYPE = 'Supplier tier type';
+
+// audits
+const PERMISSION_AUDITS_ADD = 'Create audit';
+const PERMISSION_AUDITS_REPORT = 'Create report';
+const PERMISSION_AUDITS_BUYER_SEND_FILES =
+  'Responses & send report, send improvement plan';
+
 export default {
+  // pre-qualification
+  qualificationsPrequalify: PERMISSION_APPROVE_PRE_QUALIFICATION_STATUS,
+  qualificationsSaveTierType: PERMISSION_QUALIFICATIONS_SAVE_TIER_TYPE,
+
   // qualification
   physicalAuditsAdd: PERMISSION_PHYSICAL_AUDITS_ADD,
   configsSaveImprovementPlanDow: PERMISSION_CONFIGS_SAVE_IMPROVEMENT_PLAN_DOW,
+  auditsAdd: PERMISSION_AUDITS_ADD,
+  auditReport: PERMISSION_AUDITS_REPORT,
+  auditsBuyerSendFiles: PERMISSION_AUDITS_BUYER_SEND_FILES,
 
   // validation
   companiesValidateProductsInfo: PERMISSION_COMPANIES_VALIDATE_PRODUCT_INFO,
 
   // difot score
+  companiesGenerateDifotScoreList: PERMISSION_COMPANIES_GENERATE_DIFOT_SCORE_LIST,
+  companiesAddDifotScores: PERMISSION_COMPANIES_ADD_DIFOT_SCORES,
 
   // due diligences
   companiesAddDueDiligences: PERMISSION_COMPANIES_ADD_DUE_DILIGENCES,
@@ -46,6 +77,7 @@ export default {
 
   // success feedback
   tenderResponses: PERMISSION_RESPONSES,
+  feedbacksAdd: PERMISSION_FEEDBACKS_ADD,
 
   // rfq & eoi
   tendersEdit: PERMISSION_EDIT,
@@ -58,13 +90,15 @@ export default {
   tendersAward: PERMISSION_AWARD,
 
   // eoi
+  tenderResponsesEoiShortList: PERMISSION_TENDER_RESPONSES_EOI_SHORT_LIST,
+  tenderResponsesEoiBidderList: PERMISSION_TENDER_RESPONSES_EOI_BIDDER_LIST,
 
   // reports
   reportsTendersExport: PERMISSION_REPORTS_TENDERS_EXPORT,
   reportsAuditExport: PERMISSION_REPORTS_AUDIT_EXPORT,
   companyDetailExport: PERMISSION_COMPANIES_DETAIL_EXPORT,
 
-  //users
+  // users
   usersAdd: PERMISSION_ADD_USER,
   usersEdit: PERMISSION_EDIT_USER,
   usersRemove: PERMISSION_REMOVE_USER
