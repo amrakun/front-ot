@@ -13,15 +13,24 @@ const Home = (props, context) => {
   }
 
   return (
-    <div className="center-content">
-      <div className="home-landing">
-        <h1>Oyu Tolgoi - Supplier database</h1>
-        <Link to="/expression-of-interest" className="home-btn">
-          Expression Of Interest
-        </Link>
-        <Link to="/register" className="home-btn-transparent">
-          Register
-        </Link>
+    <div className="home-landing">
+      <div
+        className="background"
+        style={{
+          backgroundImage: `url(${process.env.PUBLIC_URL +
+            '/images/background.jpg'})`
+        }}
+      />
+      <div className="content-wrapper">
+        <div className="content">
+          <h1>Suppliers database</h1>
+          <Link to="/expression-of-interest" className="home-btn">
+            Expression Of Interest
+          </Link>
+          <Link to="/register" className="home-btn-transparent">
+            Register as supplier
+          </Link>
+        </div>
       </div>
     </div>
   );
