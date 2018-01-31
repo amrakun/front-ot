@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { message, Button, Icon } from 'antd';
-import { rfqRequestColumns } from '../../constants';
+import { rfqRequestColumns } from '../../../constants';
 import Tender from './Tender';
 
 class Rfq extends Tender {

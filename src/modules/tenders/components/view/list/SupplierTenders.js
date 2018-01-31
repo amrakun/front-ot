@@ -1,0 +1,114 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
+import { Divider, Popconfirm } from 'antd';
+import { dateTimeFormat } from 'modules/common/constants';
+import moment from 'moment';
+import Tenders from './Tenders';
+
+class SupplierTenders extends Tenders {
+  columns() {
+    const renderIcon = this.renderIcon;
+    return [
+      {
+        title: 'Status',
+        filters: [
+          {
+            text: <span>{renderIcon('open')} Open</span>,
+            value: 'open'
+          },
+          {
+            text: <span>{renderIcon('closed')} Closed</span>,
+            value: 'closed'
+          },
+          {
+            text: <span>{renderIcon('participated')} Participated</span>,
+            value: 'participated'
+          }
+        ],
+        filteredValue: this.state.statuses,
+        key: 'status',
+        render: record => this.renderTooltippedIcon(record)
+      },
+      ...this.commonColumns(),
+      {
+        title: 'File',
+        render: (text, record) =>
+          record.file ? this.renderFileDownload(record.file.url) : '-'
+      },
+      {
+        title: 'Action',
+        fixed: 'right',
+        width: 100,
+        render: (text, record) => this.renderOperation(record)
+      }
+    ];
+  }
+
+  renderStatus(text, record) {
+    return record.isParticipated ? 'participated' : record.status;
+  }
+
+  renderBoolean(text, record) {
+    if (record.sentRegretLetter) return 'Yes';
+    else return '-';
+  }
+
+  renderDate(date) {
+    return moment(date).format(dateTimeFormat);
+  }
+
+  renderFileDownload(url) {
+    return (
+      <a href={url} target="_blank">
+        View
+      </a>
+    );
+  }
+
+  renderOperation(record) {
+    const { currentUser, notInterested } = this.props;
+    const { status, _id, isParticipated, isSent } = record;
+
+    const canNotInterested = status === 'open' && !isSent && !isParticipated;
+
+    if (currentUser) {
+      return (
+        <div style={{ width: '160px' }}>
+          <Link to={`/tender/submit/${_id}`}>Open</Link>
+          {canNotInterested && [
+            <Divider type="vertical" key={0} />,
+            <Popconfirm
+              key={1}
+              title="Are you sure you are not interested？"
+              placement="bottomRight"
+              okText="Yes"
+              cancelText="No"
+              onConfirm={() => notInterested(_id)}
+            >
+              <a>Not interested</a>
+            </Popconfirm>
+          ]}
+        </div>
+      );
+    } else {
+      return (
+        <div style={{ width: '160px' }}>
+          <Link to={`/sign-in?required`}>More</Link>
+        </div>
+      );
+    }
+  }
+
+  render() {
+    return this.renderTenders({ columns: this.columns() });
+  }
+}
+
+SupplierTenders.propTypes = {
+  currentUser: PropTypes.object,
+  notInterested: PropTypes.func
+};
+
+export default withRouter(SupplierTenders);
