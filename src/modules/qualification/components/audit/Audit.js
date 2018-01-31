@@ -17,6 +17,7 @@ import { Common, Sidebar } from 'modules/companies/components';
 import { Search } from 'modules/common/components';
 import { dateFormat, dateTimeFormat } from 'modules/common/constants';
 import moment from 'moment';
+import ModalForm from './physical/ModalForm';
 
 class Audit extends Common {
   constructor(props) {
@@ -24,7 +25,8 @@ class Audit extends Common {
 
     this.state = {
       ...this.state,
-      auditModalVisible: false
+      auditModalVisible: false,
+      physicalAuditModalVisible: false
     };
 
     this.addAudit = this.addAudit.bind(this);
@@ -54,6 +56,12 @@ class Audit extends Common {
     else this.setState({ auditModalVisible: value });
   }
 
+  togglePhysicalAuditModal(value) {
+    if (value && this.state.selectedCompanies.length !== 1)
+      message.error('Please select only one supplier');
+    else this.setState({ physicalAuditModalVisible: value });
+  }
+
   toggleViewModal(value) {
     this.setState({ viewModalVisible: value });
   }
@@ -63,8 +71,18 @@ class Audit extends Common {
   }
 
   render() {
-    const { data, pagination, loading, onChange } = this.props;
-    const { selectedCompanies, auditModalVisible } = this.state;
+    const {
+      data,
+      pagination,
+      loading,
+      onChange,
+      addPhysicalAudit
+    } = this.props;
+    const {
+      selectedCompanies,
+      auditModalVisible,
+      physicalAuditModalVisible
+    } = this.state;
 
     const columns = this.getWrappedColumns([
       {
@@ -97,6 +115,10 @@ class Audit extends Common {
             <div className="table-operations">
               <Search />
 
+              <Button onClick={() => this.togglePhysicalAuditModal(true)}>
+                Insert physical audit
+                <Icon type="mail" />
+              </Button>
               <Button onClick={() => this.toggleAuditModal(true)}>
                 Send desktop audit invitation
                 <Icon type="mail" />
@@ -125,6 +147,7 @@ class Audit extends Common {
             visible={auditModalVisible}
             onCancel={() => this.toggleAuditModal(false)}
             onOk={this.addAudit}
+            okText="Send"
           >
             Sending desktop audit invitation to&nbsp;
             <strong>{selectedCompanies.length}</strong> suppliers.
@@ -136,6 +159,17 @@ class Audit extends Common {
               format={dateTimeFormat}
             />
           </Modal>
+
+          <ModalForm
+            visible={physicalAuditModalVisible}
+            onSubmit={inputs =>
+              addPhysicalAudit({
+                supplierId: selectedCompanies ? selectedCompanies[0] : '',
+                ...inputs
+              })
+            }
+            hideModal={() => this.togglePhysicalAuditModal(false)}
+          />
         </Col>
       </Row>
     );

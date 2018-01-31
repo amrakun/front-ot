@@ -32,16 +32,16 @@ class AuditResponses extends React.Component {
   columns() {
     return [
       { title: 'Status by date', dataIndex: 'status' },
-      { title: 'Status by action', dataIndex: 'statusByAction' },
+      { title: 'Status by action', dataIndex: 'audit.status' },
       { title: 'Supplier name', dataIndex: 'supplier.basicInfo.enName' },
       { title: 'SAP number', dataIndex: 'supplier.basicInfo.sapNumber' },
       {
         title: 'Publish date',
-        render: record => moment(record.createdDate).format(dateFormat)
+        render: record => moment(record.audit.publishDate).format(dateFormat)
       },
       {
         title: 'Close date',
-        render: record => moment(record.createdDate).format(dateFormat)
+        render: record => moment(record.audit.closeDate).format(dateFormat)
       },
       {
         title: 'Submission date',
@@ -141,7 +141,7 @@ class AuditResponses extends React.Component {
           </Col>
         </Row>
 
-        <Card title="Success audit responses">
+        <Card title="Desktop audit responses">
           <div className="table-operations">
             <Search />
             <DatePicker.RangePicker onChange={this.handleDateRangeChange} />

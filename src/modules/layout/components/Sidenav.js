@@ -31,7 +31,14 @@ const Sidenav = (props, context) => {
   if (['/feedback', '/feedback/responses'].includes(pathname)) {
     defaultOpenKeys.push('action', 'feedback');
   }
-  if (['/audit', '/audit/responses', '/audit/reports'].includes(pathname)) {
+  if (
+    [
+      '/audit',
+      '/audit/responses',
+      '/audit/reports',
+      '/audit/responses-physical'
+    ].includes(pathname)
+  ) {
     defaultOpenKeys.push('action', 'audit');
   }
   if (['/templates', '/manage-expiry-dates', '/user-list'].includes(pathname)) {

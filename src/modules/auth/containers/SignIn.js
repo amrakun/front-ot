@@ -13,13 +13,14 @@ class SignInContainer extends React.Component {
     super(props);
 
     this.state = {
-      loading: false
+      loading: false,
+      chooseLoginAs: null
     };
   }
 
   render() {
     const { loginMutation } = this.props;
-    const { loading } = this.state;
+    const { loading, chooseLoginAs } = this.state;
 
     const login = variables => {
       const { LOGIN_TOKEN_KEY, LOGIN_REFRESH_TOKEN_KEY } = consts;
@@ -28,7 +29,20 @@ class SignInContainer extends React.Component {
 
       loginMutation({ variables })
         .then(({ data }) => {
-          const { token, refreshToken } = data.login;
+          const {
+            status,
+            delegatedUser,
+            user,
+            token,
+            refreshToken
+          } = data.login;
+
+          if (status === 'chooseLoginAs') {
+            return this.setState({
+              chooseLoginAs: { loginParams: variables, delegatedUser, user }
+            });
+          }
+
           // save tokens
           localStorage.setItem(LOGIN_TOKEN_KEY, token);
           localStorage.setItem(LOGIN_REFRESH_TOKEN_KEY, refreshToken);
@@ -48,6 +62,7 @@ class SignInContainer extends React.Component {
     const updatedProps = {
       ...this.props,
       login,
+      chooseLoginAs,
       loading
     };
 

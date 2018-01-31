@@ -13,6 +13,7 @@ import SubmitAudit from './audit/SubmitAudit';
 import QualifyAudit from './audit/QualifyAudit';
 import AuditRequests from './audit/AuditRequests';
 import ReportsAndPlans from './audit/ReportsAndPlans';
+import PhysicalAudits from './audit/physical/PhysicalAudits';
 
 export {
   Difot,
@@ -29,5 +30,6 @@ export {
   SubmitAudit,
   QualifyAudit,
   AuditRequests,
-  ReportsAndPlans
+  ReportsAndPlans,
+  PhysicalAudits
 };

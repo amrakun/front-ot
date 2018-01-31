@@ -56,7 +56,7 @@ class Register extends BaseForm {
               layout={noLabelLayout}
               validation="email"
               control={
-                <Input prefix={<Icon type="user" />} placeholder="Email" />
+                <Input prefix={<Icon type="mail" />} placeholder="Email" />
               }
             />
             <Button

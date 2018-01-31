@@ -1,8 +1,23 @@
 const login = `
-  mutation login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
+  mutation login($email: String!, $password: String!, $loginAs: String) {
+    login(email: $email, password: $password, loginAs: $loginAs) {
+      status
       token
       refreshToken
+
+      user {
+        _id
+        username
+        firstName
+        lastName
+      }
+
+      delegatedUser {
+        _id
+        username
+        firstName
+        lastName
+      }
     }
   }
 `;
@@ -67,6 +82,24 @@ const usersEditProfile = `
   }
 `;
 
+const usersDelegate = `
+  mutation usersDelegate(
+    $userId: String!
+    $reason: String!
+    $startDate: Date!
+    $endDate: Date!
+  ) {
+    usersDelegate(
+      userId: $userId
+      reason: $reason
+      startDate: $startDate
+      endDate: $endDate
+    ) {
+      _id
+    }
+  }
+`;
+
 export default {
   login,
   register,
@@ -74,5 +107,6 @@ export default {
   resetPassword,
   usersEditProfile,
   confirmRegistration,
-  usersChangePassword
+  usersChangePassword,
+  usersDelegate
 };

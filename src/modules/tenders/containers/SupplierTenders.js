@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tenders } from '../components';
+import { SupplierTenders } from '../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries, mutations } from '../graphql';
 import { message } from 'antd';
@@ -21,7 +21,7 @@ class TendersContainer extends React.Component {
     const { currentUser } = this.context;
 
     if (tendersQuery.loading) {
-      return <Tenders loading={true} />;
+      return <SupplierTenders loading={true} />;
     }
 
     const notInterested = tenderId => {
@@ -52,7 +52,7 @@ class TendersContainer extends React.Component {
       exportTenders: this.exportTenders
     };
 
-    return <Tenders {...updatedProps} />;
+    return <SupplierTenders {...updatedProps} />;
   }
 }
 

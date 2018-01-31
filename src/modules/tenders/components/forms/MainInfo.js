@@ -137,6 +137,13 @@ const MainInfo = props => {
           {renderField({
             hasFeedback: false,
             optional: true,
+            label: 'Sourcing officer',
+            name: 'sourcingOfficer',
+            control: <Input />
+          })}
+          {renderField({
+            hasFeedback: false,
+            optional: true,
             label: 'File',
             name: 'file',
             dataType: 'file',

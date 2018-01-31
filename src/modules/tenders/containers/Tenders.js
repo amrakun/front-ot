@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tenders } from '../components';
+import { BuyerTenders } from '../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries, mutations } from '../graphql';
 import { message } from 'antd';
@@ -96,10 +96,9 @@ class TendersContainer extends React.Component {
 
   render() {
     const { tendersQuery } = this.props;
-    const { currentUser } = this.context;
 
     if (tendersQuery.loading) {
-      return <Tenders loading={true} />;
+      return <BuyerTenders loading={true} />;
     }
 
     const { exportLoading } = this.state;
@@ -111,11 +110,10 @@ class TendersContainer extends React.Component {
       cancelTender: this.cancelTender,
       data: tenders,
       type: this.type,
-      currentUser: currentUser,
       exportTenders: this.exportTenders
     };
 
-    return <Tenders {...updatedProps} />;
+    return <BuyerTenders {...updatedProps} />;
   }
 }
 
@@ -128,10 +126,6 @@ TendersContainer.propTypes = {
   tendersCancel: PropTypes.func,
   queryParams: PropTypes.object,
   supplierId: PropTypes.string
-};
-
-TendersContainer.contextTypes = {
-  currentUser: PropTypes.object
 };
 
 export default compose(
