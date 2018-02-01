@@ -36,6 +36,7 @@ class Register extends BaseForm {
       callback();
     }
   }
+
   checkConfirm(rule, value, callback) {
     const form = this.props.form;
     if (value) {
