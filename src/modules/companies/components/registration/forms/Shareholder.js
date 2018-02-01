@@ -3,6 +3,14 @@ import { withRouter } from 'react-router';
 import { Form, Input, Card } from 'antd';
 import { BaseForm, Field, Uploader } from 'modules/common/components';
 import { uploadDisclaimer } from 'modules/common/constants';
+import { intlShape, injectIntl, defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+  shareholder: {
+    id: 'shareholder',
+    defaultMessage: 'Shareholder'
+  }
+});
 
 class ShareHolders extends BaseForm {
   handleSubmit(e) {
@@ -31,12 +39,14 @@ class ShareHolders extends BaseForm {
     const shareholderInfo = this.props.data || {};
     const shareholders = shareholderInfo.shareholders || [];
     const shareholder = shareholders[k - 1] || {};
+    const { formatMessage } = this.props.intl;
 
     return (
-      <Card title={`Shareholder ${k}`}>
+      <Card title={formatMessage(messages.shareholder) + ` ${k}`}>
         <Field
           label="Name"
           name={`name${k}`}
+          numberSuffix={k}
           control={<Input />}
           initialValue={shareholder.name}
           optional={optional}
@@ -45,6 +55,7 @@ class ShareHolders extends BaseForm {
         <Field
           label="Job title"
           name={`jobTitle${k}`}
+          numberSuffix={k}
           control={<Input />}
           initialValue={shareholder.jobTitle}
           optional={optional}
@@ -53,6 +64,7 @@ class ShareHolders extends BaseForm {
         <Field
           label="Share percentage %"
           name={`percentage${k}`}
+          numberSuffix={k}
           initialValue={shareholder.percentage}
           control={<Input type="number" />}
           optional={optional}
@@ -88,6 +100,10 @@ class ShareHolders extends BaseForm {
   }
 }
 
+ShareHolders.propTypes = {
+  intl: intlShape.isRequired
+};
+
 const ShareHoldersForm = Form.create()(ShareHolders);
 
-export default withRouter(ShareHoldersForm);
+export default injectIntl(withRouter(ShareHoldersForm));

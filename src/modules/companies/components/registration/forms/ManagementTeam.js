@@ -4,6 +4,7 @@ import { Form, Input, Card, Button, Icon } from 'antd';
 import Field from 'modules/common/components/Field';
 import BaseForm from 'modules/common/components/BaseForm';
 import { labels } from '../constants';
+import { intlShape, injectIntl, defineMessages } from 'react-intl';
 
 const groups = [
   'managingDirector',
@@ -14,6 +15,41 @@ const groups = [
   'otherMember2',
   'otherMember3'
 ];
+
+const messages = defineMessages({
+  managingDirector: {
+    id: 'managingDirector',
+    defaultMessage: '15. Managing director'
+  },
+  executiveOfficer: {
+    id: 'executiveOfficer',
+    defaultMessage: '16. Executive officer'
+  },
+  salesDirector: {
+    id: 'salesDirector',
+    defaultMessage: '17. Sales director'
+  },
+  financialDirector: {
+    id: 'financialDirector',
+    defaultMessage: '18. Financial director'
+  },
+  otherMember1: {
+    id: 'otherMember1',
+    defaultMessage: '19. Other management team member'
+  },
+  otherMember2: {
+    id: 'otherMember2',
+    defaultMessage: '20. Other management team member 2'
+  },
+  otherMember3: {
+    id: 'otherMember3',
+    defaultMessage: '21. Other management team member 3'
+  },
+  copy: {
+    id: 'copyAbove',
+    defaultMessage: 'Copy above'
+  }
+});
 
 class ManagementTeam extends BaseForm {
   constructor(props) {
@@ -58,14 +94,16 @@ class ManagementTeam extends BaseForm {
 
   renderItem(prefix, optional = false) {
     const data = this.props.data[prefix] || {};
+    const { formatMessage } = this.props.intl;
 
     return (
       <Card
-        title={labels[prefix]}
+        title={formatMessage(messages[prefix])}
         extra={
           prefix !== 'managingDirector' ? (
             <Button onClick={() => this.copyAbove(prefix)}>
-              <Icon type="copy" />Copy above
+              <Icon type="copy" />
+              {formatMessage(messages.copy)}
             </Button>
           ) : (
             ''
@@ -75,6 +113,7 @@ class ManagementTeam extends BaseForm {
         <Field
           label="Full name"
           name={`${prefix}Name`}
+          prefix={prefix}
           initialValue={data.name}
           optional={optional}
           control={<Input placeholder="First name + Last name" />}
@@ -83,6 +122,7 @@ class ManagementTeam extends BaseForm {
         <Field
           label="Job title"
           name={`${prefix}JobTitle`}
+          prefix={prefix}
           initialValue={data.jobTitle || labels[prefix]}
           optional={optional}
           control={<Input />}
@@ -91,6 +131,7 @@ class ManagementTeam extends BaseForm {
         <Field
           label="Phone"
           name={`${prefix}Phone`}
+          prefix={prefix}
           initialValue={data.phone}
           optional={optional}
           control={<Input type="number" />}
@@ -99,6 +140,7 @@ class ManagementTeam extends BaseForm {
         <Field
           label="E-mail"
           name={`${prefix}Email`}
+          prefix={prefix}
           validation="email"
           initialValue={data.email}
           optional={optional}
@@ -127,6 +169,10 @@ class ManagementTeam extends BaseForm {
   }
 }
 
+ManagementTeam.propTypes = {
+  intl: intlShape.isRequired
+};
+
 const ManagementTeamForm = Form.create()(ManagementTeam);
 
-export default withRouter(ManagementTeamForm);
+export default injectIntl(withRouter(ManagementTeamForm));

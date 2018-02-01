@@ -4,6 +4,19 @@ import { Form, TreeSelect, Card, Alert, message } from 'antd';
 import { Field, BaseForm } from 'modules/common/components';
 import { productDescription } from '../constants';
 import productsTree from '../../../productsTree';
+import { intlShape, injectIntl, defineMessages } from 'react-intl';
+import { _t } from 'modules/common/components';
+
+const messages = defineMessages({
+  help: {
+    id: 'help',
+    defaultMessage: 'Help'
+  },
+  product: {
+    id: 'productsDesc',
+    defaultMessage: productDescription
+  }
+});
 
 class RegistrationForm extends BaseForm {
   handleSubmit(e) {
@@ -17,6 +30,8 @@ class RegistrationForm extends BaseForm {
   }
 
   render() {
+    const { formatMessage } = this.props.intl;
+
     return (
       <Form>
         <Card>
@@ -34,8 +49,8 @@ class RegistrationForm extends BaseForm {
             }
           />
           <Alert
-            message="Help"
-            description={productDescription}
+            message={formatMessage(messages.help)}
+            description={formatMessage(messages.product)}
             type="info"
             style={{ marginBottom: '24px' }}
           />
@@ -48,6 +63,10 @@ class RegistrationForm extends BaseForm {
   }
 }
 
+RegistrationForm.propTypes = {
+  intl: intlShape.isRequired
+};
+
 const ProductsForm = Form.create()(RegistrationForm);
 
-export default withRouter(ProductsForm);
+export default injectIntl(withRouter(ProductsForm));

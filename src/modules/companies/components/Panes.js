@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Icon } from 'antd';
 import queryString from 'query-string';
+import { _t } from 'modules/common/components';
 
 export default class Panes extends React.Component {
   constructor(props) {
@@ -64,7 +65,8 @@ export default class Panes extends React.Component {
       <Tabs.TabPane
         tab={
           <span>
-            {title} {this.isEmpty(company[name]) ? '' : <Icon type="check" />}
+            <_t id={name}>{title}</_t>{' '}
+            {this.isEmpty(company[name]) ? '' : <Icon type="check" />}
           </span>
         }
         key={key}

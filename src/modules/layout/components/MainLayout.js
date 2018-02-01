@@ -4,7 +4,13 @@ import Header from './Header';
 import Breadcrumb from './Breadcrumb';
 import { Layout, BackTop } from 'antd';
 import { PropTypes } from 'prop-types';
+import { IntlProvider, addLocaleData } from 'react-intl';
+import { _t } from '../../common/components';
+import mn from 'react-intl/locale-data/mn';
+import en from 'react-intl/locale-data/en';
+import messages from 'modules/locales/translation';
 
+addLocaleData([...mn, ...en]);
 const { Content, Footer } = Layout;
 
 const visitorPaths = [
@@ -23,15 +29,39 @@ class MainLayout extends React.Component {
     super(props);
 
     this.state = {
-      collapsed: localStorage.getItem('collapsed') === 'true' ? true : false
+      collapsed: localStorage.getItem('collapsed') === 'true' ? true : false,
+      toggleLang: false,
+      locale: 'en',
+      messages: messages
     };
 
     this.onCollapse = this.onCollapse.bind(this);
+    this.toggleLang = this.toggleLang.bind(this);
   }
 
   onCollapse(collapsed) {
     localStorage.setItem('collapsed', collapsed);
     this.setState({ collapsed });
+  }
+
+  toggleLang() {
+    this.setState(prevState => ({
+      toggleLang: !prevState.toggleLang
+    }));
+    switch (this.state.toggleLang) {
+      case true:
+        this.setState({
+          locale: 'mn',
+          messages: messages
+        });
+        break;
+      case false:
+        this.setState({
+          locale: 'en',
+          messages: {}
+        });
+        break;
+    }
   }
 
   getChildContext() {
@@ -52,7 +82,7 @@ class MainLayout extends React.Component {
 
   render() {
     const { currentUser, children, location } = this.props;
-    const { collapsed } = this.state;
+    const { collapsed, locale, messages, toggleLang } = this.state;
 
     const navProps = {
       collapsed: collapsed ? true : false,
@@ -68,18 +98,22 @@ class MainLayout extends React.Component {
     }
 
     return (
-      <Layout>
-        {currentUser && <Sidenav {...navProps} />}
-        <Layout className="main" style={layoutStyle}>
-          <Header />
-          <Content>
-            {currentUser && <Breadcrumb {...location} />}
-            {children}
-            <BackTop />
-          </Content>
-          <Footer>Oyu Tolgoi ©2018 All Rights Reserved</Footer>
+      <IntlProvider key={locale} locale={locale} messages={messages}>
+        <Layout>
+          {currentUser && <Sidenav {...navProps} />}
+          <Layout className="main" style={layoutStyle}>
+            <Header toggleLang={this.toggleLang} langLabel={toggleLang} />
+            <Content>
+              {currentUser && <Breadcrumb {...location} />}
+              {children}
+              <BackTop />
+            </Content>
+            <Footer>
+              <_t id="footer">Oyu Tolgoi ©2018 All Rights Reserved</_t>
+            </Footer>
+          </Layout>
         </Layout>
-      </Layout>
+      </IntlProvider>
     );
   }
 }

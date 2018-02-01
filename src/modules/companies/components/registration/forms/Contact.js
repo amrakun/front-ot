@@ -3,6 +3,22 @@ import { withRouter } from 'react-router';
 import { Form, Input, Card, Button, Icon } from 'antd';
 import BaseForm from 'modules/common/components/BaseForm';
 import addressFields from './address';
+import { intlShape, injectIntl, defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+  business: {
+    id: 'businessContact',
+    defaultMessage: '14. Primary business contact'
+  },
+  address: {
+    id: 'address',
+    defaultMessage: 'Address'
+  },
+  copy: {
+    id: 'copyFromCompany',
+    defaultMessage: 'Copy from Company Information'
+  }
+});
 
 class ContactInfo extends BaseForm {
   render() {
@@ -25,9 +41,11 @@ class ContactInfo extends BaseForm {
       setFieldsValue(values);
     };
 
+    const { formatMessage } = this.props.intl;
+
     return (
       <Form onSubmit={this.handleSubmit}>
-        <Card title="14. Primary business contact">
+        <Card title={formatMessage(messages.business)}>
           {this.renderField({
             label: 'Full name',
             name: 'name',
@@ -42,11 +60,12 @@ class ContactInfo extends BaseForm {
         </Card>
 
         <Card
-          title="Address"
+          title={formatMessage(messages.address)}
           extra={
             basicInfo.address && (
               <Button onClick={copyAddress}>
-                <Icon type="copy" />Copy from Company information
+                <Icon type="copy" />
+                {formatMessage(messages.copy)}
               </Button>
             )
           }
@@ -84,6 +103,10 @@ class ContactInfo extends BaseForm {
   }
 }
 
+ContactInfo.propTypes = {
+  intl: intlShape.isRequired
+};
+
 const ContactForm = Form.create()(ContactInfo);
 
-export default withRouter(ContactForm);
+export default injectIntl(withRouter(ContactForm));

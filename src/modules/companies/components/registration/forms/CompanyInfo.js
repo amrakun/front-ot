@@ -14,6 +14,19 @@ import {
   labels
 } from '../constants';
 import { BaseForm, Uploader } from 'modules/common/components';
+import { intlShape, injectIntl, defineMessages } from 'react-intl';
+import { _t } from 'modules/common/components';
+
+const messages = defineMessages({
+  title: {
+    id: 'basicInfo.title',
+    defaultMessage: '1. Please provide us with your company details'
+  },
+  address: {
+    id: 'addressTitle',
+    defaultMessage: '2. Address'
+  }
+});
 
 class CompanyInfo extends BaseForm {
   constructor(props) {
@@ -51,11 +64,12 @@ class CompanyInfo extends BaseForm {
 
     const booleanOptions = this.renderOptions(booleanData);
     const countryOptions = this.renderOptions(countryData);
+    const { formatMessage } = this.props.intl;
 
     return (
       <Spin spinning={this.state.loading} delay={500}>
         <Form>
-          <Card title="1. Please provide us with your company details">
+          <Card title={formatMessage(messages.title)}>
             {this.renderField({
               label: 'Are you an existing supplier?',
               name: 'isRegisteredOnSup',
@@ -80,7 +94,7 @@ class CompanyInfo extends BaseForm {
             })}
           </Card>
 
-          <Card title="2. Address">
+          <Card title={formatMessage(messages.address)}>
             {addressFields(
               this.renderField.bind(this),
               this.renderOptions.bind(this)
@@ -177,14 +191,7 @@ class CompanyInfo extends BaseForm {
               control: <Input />
             })}
             {this.renderField({
-              label: (
-                <span>
-                  9. Company e-mail&nbsp;
-                  <Tooltip title={descriptions.email}>
-                    <Icon type="question-circle-o" />
-                  </Tooltip>
-                </span>
-              ),
+              label: '9. Company e-mail',
               name: 'email',
               control: <Input />,
               validation: 'email'
@@ -223,9 +230,10 @@ class CompanyInfo extends BaseForm {
 
 CompanyInfo.propTypes = {
   form: PropTypes.object,
-  data: PropTypes.object
+  data: PropTypes.object,
+  intl: intlShape.isRequired
 };
 
 const CompanyInfoForm = Form.create()(CompanyInfo);
 
-export default withRouter(CompanyInfoForm);
+export default injectIntl(withRouter(CompanyInfoForm));

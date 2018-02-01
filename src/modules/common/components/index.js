@@ -1,4 +1,5 @@
 import Field from './Field';
+import _t from './Formatted';
 import Uploader from './Uploader';
 import BaseForm from './BaseForm';
 import TextCard from './dataDisplay/textCard';
@@ -11,6 +12,7 @@ import Search from './Search';
 export {
   Uploader,
   Field,
+  _t,
   BaseForm,
   NumberCard,
   NumberCardLines,

@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'antd';
+import { intlShape, injectIntl, defineMessages } from 'react-intl';
 
-export default class Field extends React.Component {
+class Field extends React.Component {
   /*
    * For example: Select is accepting only string value, So we are
    * converting boolean, number to string
@@ -53,17 +54,31 @@ export default class Field extends React.Component {
     return '';
   }
 
+  setName(prefix, numberSuffix, name) {
+    if (prefix) {
+      return name.replace(prefix, 'common');
+    }
+
+    if (numberSuffix) {
+      return name.replace(numberSuffix, 'Common');
+    }
+
+    return name;
+  }
+
   render() {
     const {
       label,
       description = '',
       name,
+      prefix,
       control,
       optional,
       validation,
       isVisible = true,
       hasFeedback = true,
       layout,
+      numberSuffix,
       rules = [],
       dataType
     } = this.props;
@@ -99,11 +114,26 @@ export default class Field extends React.Component {
       args.valuePropName = 'defaultFileList';
     }
 
+    const { formatMessage } = this.props.intl;
+    const commonName = this.setName(prefix, numberSuffix, name);
+    const messages = defineMessages({
+      label: {
+        id: commonName,
+        defaultMessage: label
+      },
+      extra: {
+        id: name + 'Desc',
+        defaultMessage: description
+      }
+    });
+
+    const extra = description ? formatMessage(messages.extra) : description;
+
     return (
       <Form.Item
         {...layout}
-        label={label}
-        extra={description}
+        label={formatMessage(messages.label)}
+        extra={extra}
         style={isVisible ? {} : { display: 'none' }}
         hasFeedback={hasFeedback}
       >
@@ -126,9 +156,12 @@ Field.propTypes = {
   layout: PropTypes.object,
   rules: PropTypes.array,
   getFieldValue: PropTypes.func,
-  dataType: PropTypes.string
+  dataType: PropTypes.string,
+  intl: intlShape.isRequired
 };
 
 Field.contextTypes = {
   form: PropTypes.object
 };
+
+export default injectIntl(Field);

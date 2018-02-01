@@ -3,8 +3,15 @@ import { withRouter } from 'react-router';
 import { Form, Input, Icon, Button, Select, Row, Col, Card } from 'antd';
 import { booleanData, roleData, countryData, groupLabels } from '../constants';
 import { BaseForm, Field, Uploader } from 'modules/common/components';
+import { intlShape, injectIntl, defineMessages } from 'react-intl';
 
 const FormItem = Form.Item;
+const messages = defineMessages({
+  group: {
+    id: 'groupLabelsHead',
+    defaultMessage: groupLabels.head
+  }
+});
 
 class RegistrationForm extends BaseForm {
   constructor(props) {
@@ -170,9 +177,11 @@ class RegistrationForm extends BaseForm {
       this.renderFactory(factory, index)
     );
 
+    const { formatMessage } = this.props.intl;
+
     return (
       <Form onSubmit={this.handleSubmit}>
-        <Card title={groupLabels.head}>
+        <Card title={formatMessage(messages.group)}>
           {this.renderField({
             name: 'hasParent',
             label: groupLabels.hasParent,
@@ -290,6 +299,10 @@ class RegistrationForm extends BaseForm {
   }
 }
 
+RegistrationForm.propTypes = {
+  intl: intlShape.isRequired
+};
+
 const GroupForm = Form.create()(RegistrationForm);
 
-export default withRouter(GroupForm);
+export default injectIntl(withRouter(GroupForm));
