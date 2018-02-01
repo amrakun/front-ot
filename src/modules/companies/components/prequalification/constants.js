@@ -184,6 +184,11 @@ export const labels = {
 };
 
 export const descriptions = {
+  employeeTurnoverRate: `Employee Turnover is the act of replacing an employee with a new employee.
+    You calculate the turnover rate by dividing the number of employees who left by the total number
+    of employees at the beginning of the period.
+    `,
+
   doesMeetMinimumStandarts: `Fair employment practice includes disabled ethnic groups,
     anti-discrimination etc.`,
 

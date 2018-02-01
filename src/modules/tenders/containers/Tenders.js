@@ -135,7 +135,7 @@ export default compose(
       return {
         variables: {
           page: 1,
-          perPage: 1,
+          perPage: 100,
           search: queryParams ? queryParams.search : '',
           status: queryParams ? queryParams.status : '',
           type: type

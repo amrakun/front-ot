@@ -1,3 +1,5 @@
+import { pageParams, pageValues } from 'modules/common/constants';
+
 const requestedProductsFields = `
   requestedProducts {
     code
@@ -143,8 +145,8 @@ const tenderParams = `$type: String!, $search: String, $status: String`;
 const tenderValues = `type: $type, search: $search, status: $status`;
 
 const tenders = `
-  query tenders(${tenderParams}) {
-    tenders(${tenderValues}) {
+  query tenders(${tenderParams} ${pageParams}) {
+    tenders(${tenderValues} ${pageValues}) {
       ${tenderFields}
     }
   }
