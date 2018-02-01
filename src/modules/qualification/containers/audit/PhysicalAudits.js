@@ -59,7 +59,16 @@ PhysicalAuditsContainer.propTypes = {
 
 export default compose(
   graphql(gql(queries.physicalAudits), {
-    name: 'physicalAuditsQuery'
+    name: 'physicalAuditsQuery',
+    options: ({ queryParams }) => {
+      const params = queryParams || {};
+      return {
+        variables: {
+          supplierSearch: params.search
+        },
+        notifyOnNetworkStatusChange: true
+      };
+    }
   }),
 
   graphql(gql(mutations.physicalAuditsEdit), {

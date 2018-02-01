@@ -110,13 +110,19 @@ export default [
     key={'/audit/responses'}
     exact
     path={'/audit/responses'}
-    component={AuditResponses}
+    component={props => {
+      const queryParams = queryString.parse(props.location.search);
+      return <AuditResponses {...props} queryParams={queryParams} />;
+    }}
   />,
   <Route
     key={'/audit/responses-physical'}
     exact
     path={'/audit/responses-physical'}
-    component={PhysicalAudits}
+    component={props => {
+      const queryParams = queryString.parse(props.location.search);
+      return <PhysicalAudits {...props} queryParams={queryParams} />;
+    }}
   />,
   <Route
     key={'/audit/reports'}

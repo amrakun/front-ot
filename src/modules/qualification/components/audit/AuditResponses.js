@@ -16,14 +16,15 @@ class AuditResponses extends React.Component {
     super(props);
 
     this.columns = this.columns.bind(this);
+    this.handleDateRangeChange = this.handleDateRangeChange.bind(this);
   }
 
   handleDateRangeChange(value) {
     const { history } = this.props;
 
     let query = queryString.parse(history.location.search);
-    query.from = value[0]._d;
-    query.to = value[1]._d;
+    query.from = value[0] ? value[0]._d : null;
+    query.to = value[1] ? value[1]._d : null;
     history.push({
       search: queryString.stringify(query)
     });
@@ -144,7 +145,10 @@ class AuditResponses extends React.Component {
         <Card title="Desktop audit responses">
           <div className="table-operations">
             <Search />
-            <DatePicker.RangePicker onChange={this.handleDateRangeChange} />
+            <DatePicker.RangePicker
+              onChange={this.handleDateRangeChange}
+              allowClear
+            />
           </div>
           <Table
             columns={this.columns()}

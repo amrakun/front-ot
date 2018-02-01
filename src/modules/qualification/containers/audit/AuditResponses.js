@@ -28,6 +28,17 @@ AuditResponsesContainer.propTypes = {
 
 export default compose(
   graphql(gql(queries.auditResponses), {
-    name: 'auditResponsesQuery'
+    name: 'auditResponsesQuery',
+    options: ({ queryParams }) => {
+      const params = queryParams || {};
+      return {
+        variables: {
+          publishDate: params.from,
+          closeDate: params.to,
+          supplierSearch: params.search
+        },
+        notifyOnNetworkStatusChange: true
+      };
+    }
   })
 )(withTableProps(AuditResponsesContainer));

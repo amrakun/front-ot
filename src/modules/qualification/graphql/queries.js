@@ -290,8 +290,8 @@ const audits = `
   }
 `;
 const auditResponses = `
-  query auditResponses {
-    auditResponses {
+  query auditResponses($supplierSearch: String, $publishDate: Date, $closeDate: Date) {
+    auditResponses(supplierSearch: $supplierSearch, publishDate: $publishDate, closeDate: $closeDate) {
       _id
       status
       audit {
@@ -529,8 +529,8 @@ const physicalAuditFields = `
 `;
 
 const physicalAudits = `
-  query physicalAudits {
-    physicalAudits {
+  query physicalAudits($supplierSearch: String) {
+    physicalAudits(supplierSearch: $supplierSearch) {
       ${physicalAuditFields}
     }
   }
