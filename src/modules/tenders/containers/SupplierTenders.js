@@ -8,19 +8,19 @@ import { withTableProps } from 'modules/common/containers';
 
 class TendersContainer extends React.Component {
   componentWillMount() {
-    const { tendersQuery } = this.props;
+    const { tendersTableQuery } = this.props;
     const location = this.props.location || {};
 
     if (location.search === '?refetch') {
-      tendersQuery.refetch();
+      tendersTableQuery.refetch();
     }
   }
 
   render() {
-    const { tendersQuery, tendersResponsesAdd } = this.props;
+    const { tendersTableQuery, tendersResponsesAdd } = this.props;
     const { currentUser } = this.context;
 
-    if (tendersQuery.loading) {
+    if (tendersTableQuery.loading) {
       return <SupplierTenders loading={true} />;
     }
 
@@ -34,14 +34,14 @@ class TendersContainer extends React.Component {
       })
         .then(() => {
           message.success('Not interested tender has been removed');
-          tendersQuery.refetch();
+          tendersTableQuery.refetch();
         })
         .catch(error => {
           message.error('Error occurred' + error);
         });
     };
 
-    const tenders = tendersQuery.tendersSupplier || [];
+    const tenders = tendersTableQuery.tendersSupplier || [];
 
     const updatedProps = {
       ...this.props,
@@ -60,7 +60,7 @@ TendersContainer.propTypes = {
   type: PropTypes.string,
   location: PropTypes.object,
   history: PropTypes.object,
-  tendersQuery: PropTypes.object,
+  tendersTableQuery: PropTypes.object,
   tendersResponsesAdd: PropTypes.func,
   queryParams: PropTypes.object,
   supplierId: PropTypes.string
@@ -72,7 +72,7 @@ TendersContainer.contextTypes = {
 
 export default compose(
   graphql(gql(queries.tendersSupplier), {
-    name: 'tendersQuery',
+    name: 'tendersTableQuery',
     options: ({ type, queryParams }) => {
       return {
         variables: {

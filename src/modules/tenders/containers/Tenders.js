@@ -29,11 +29,11 @@ class TendersContainer extends React.Component {
   }
 
   componentWillMount() {
-    const { tendersQuery } = this.props;
+    const { tendersTableQuery } = this.props;
     const location = this.props.location || {};
 
     if (location.search === '?refetch') {
-      tendersQuery.refetch();
+      tendersTableQuery.refetch();
     }
   }
 
@@ -80,13 +80,13 @@ class TendersContainer extends React.Component {
   }
 
   cancelTender(_id) {
-    const { tendersCancel, tendersQuery } = this.props;
+    const { tendersCancel, tendersTableQuery } = this.props;
 
     tendersCancel({
       variables: { _id }
     })
       .then(() => {
-        tendersQuery.refetch();
+        tendersTableQuery.refetch();
         message.success('Canceled a tender');
       })
       .catch(error => {
@@ -95,14 +95,14 @@ class TendersContainer extends React.Component {
   }
 
   render() {
-    const { tendersQuery } = this.props;
+    const { tendersTableQuery } = this.props;
 
-    if (tendersQuery.loading) {
+    if (tendersTableQuery.loading) {
       return <BuyerTenders loading={true} />;
     }
 
     const { exportLoading } = this.state;
-    const tenders = tendersQuery.tenders || [];
+    const tenders = tendersTableQuery.tenders || [];
 
     const updatedProps = {
       ...this.props,
@@ -121,7 +121,7 @@ TendersContainer.propTypes = {
   type: PropTypes.string,
   location: PropTypes.object,
   history: PropTypes.object,
-  tendersQuery: PropTypes.object,
+  tendersTableQuery: PropTypes.object,
   tendersResponsesAdd: PropTypes.func,
   tendersCancel: PropTypes.func,
   queryParams: PropTypes.object,
@@ -130,7 +130,7 @@ TendersContainer.propTypes = {
 
 export default compose(
   graphql(gql(queries.tenders), {
-    name: 'tendersQuery',
+    name: 'tendersTableQuery',
     options: ({ type, queryParams }) => {
       return {
         variables: {

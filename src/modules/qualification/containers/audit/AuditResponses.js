@@ -9,12 +9,12 @@ import { message } from 'antd';
 class AuditResponsesContainer extends React.Component {
   render() {
     const {
-      auditResponsesQuery,
+      auditResponsesTableQuery,
       totalCountsQuery,
       auditsBuyerSendFiles
     } = this.props;
 
-    if (auditResponsesQuery.loading || totalCountsQuery.loading) {
+    if (auditResponsesTableQuery.loading || totalCountsQuery.loading) {
       return <AuditResponses loading={true} />;
     }
 
@@ -39,7 +39,7 @@ class AuditResponsesContainer extends React.Component {
       ...this.props,
       sendFiles,
       counts: totalCountsQuery.auditResponseTotalCounts,
-      data: auditResponsesQuery.auditResponses || []
+      data: auditResponsesTableQuery.auditResponses || []
     };
 
     return <AuditResponses {...updatedProps} />;
@@ -47,14 +47,14 @@ class AuditResponsesContainer extends React.Component {
 }
 
 AuditResponsesContainer.propTypes = {
-  auditResponsesQuery: PropTypes.object,
+  auditResponsesTableQuery: PropTypes.object,
   totalCountsQuery: PropTypes.object,
   auditsBuyerSendFiles: PropTypes.func
 };
 
 export default compose(
   graphql(gql(queries.auditResponses), {
-    name: 'auditResponsesQuery',
+    name: 'auditResponsesTableQuery',
     options: ({ queryParams }) => {
       const params = queryParams || {};
       return {

@@ -9,12 +9,12 @@ import { message } from 'antd';
 class PhysicalAuditsContainer extends React.Component {
   render() {
     const {
-      physicalAuditsQuery,
+      physicalAuditsTableQuery,
       physicalAuditsEdit,
       physicalAuditsRemove
     } = this.props;
 
-    if (physicalAuditsQuery.loading) {
+    if (physicalAuditsTableQuery.loading) {
       return <PhysicalAudits loading={true} />;
     }
 
@@ -22,7 +22,7 @@ class PhysicalAuditsContainer extends React.Component {
       physicalAuditsEdit({ variables })
         .then(() => {
           message.success('Successfully edited physical audit');
-          physicalAuditsQuery.refetch();
+          physicalAuditsTableQuery.refetch();
         })
         .catch(error => {
           message.error(error.message);
@@ -33,7 +33,7 @@ class PhysicalAuditsContainer extends React.Component {
       physicalAuditsRemove({ variables: { _id } })
         .then(() => {
           message.success('Successfully remove physical audit');
-          physicalAuditsQuery.refetch();
+          physicalAuditsTableQuery.refetch();
         })
         .catch(error => {
           message.error(error.message);
@@ -44,7 +44,7 @@ class PhysicalAuditsContainer extends React.Component {
       ...this.props,
       editPhysicalAudit,
       removePhysicalAudit,
-      data: physicalAuditsQuery.physicalAudits || []
+      data: physicalAuditsTableQuery.physicalAudits || []
     };
 
     return <PhysicalAudits {...updatedProps} />;
@@ -52,14 +52,14 @@ class PhysicalAuditsContainer extends React.Component {
 }
 
 PhysicalAuditsContainer.propTypes = {
-  physicalAuditsQuery: PropTypes.object,
+  physicalAuditsTableQuery: PropTypes.object,
   physicalAuditsEdit: PropTypes.func,
   physicalAuditsRemove: PropTypes.func
 };
 
 export default compose(
   graphql(gql(queries.physicalAudits), {
-    name: 'physicalAuditsQuery',
+    name: 'physicalAuditsTableQuery',
     options: ({ queryParams }) => {
       const params = queryParams || {};
       return {
