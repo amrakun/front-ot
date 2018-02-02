@@ -57,7 +57,7 @@ class AuditResponses extends React.Component {
                 pathname: '/audit/qualify',
                 state: {
                   supplierId: record.supplier._id,
-                  auditId: record.auditId
+                  auditId: record.audit._id
                 }
               }}
             >

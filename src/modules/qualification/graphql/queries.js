@@ -1,3 +1,5 @@
+/*eslint-disable max-len*/
+
 import { queries } from 'modules/companies/graphql';
 
 const { prequalificationFields } = queries;
@@ -290,11 +292,12 @@ const audits = `
   }
 `;
 const auditResponses = `
-  query auditResponses($supplierSearch: String, $publishDate: Date, $closeDate: Date) {
-    auditResponses(supplierSearch: $supplierSearch, publishDate: $publishDate, closeDate: $closeDate) {
+  query auditResponses($supplierSearch: String, $publishDate: Date, $closeDate: Date, $isFileGenerated: Boolean) {
+    auditResponses(supplierSearch: $supplierSearch, publishDate: $publishDate, closeDate: $closeDate, isFileGenerated: $isFileGenerated) {
       _id
       status
       audit {
+        _id
         status
         publishDate
         closeDate

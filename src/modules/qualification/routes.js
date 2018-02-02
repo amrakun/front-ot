@@ -128,7 +128,10 @@ export default [
     key={'/audit/reports'}
     exact
     path={'/audit/reports'}
-    component={ReportsAndPlans}
+    component={props => {
+      const queryParams = queryString.parse(props.location.search);
+      return <ReportsAndPlans {...props} queryParams={queryParams} />;
+    }}
   />,
   <Route
     key={'/audit/template'}

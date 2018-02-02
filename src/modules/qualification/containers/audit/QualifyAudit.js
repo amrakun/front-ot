@@ -4,16 +4,10 @@ import { gql, compose, graphql } from 'react-apollo';
 import { queries, mutations } from '../../graphql';
 import { QualifyAudit } from '../../components';
 import { Loading } from 'modules/common/components';
-import { notifyLoading } from 'modules/common/constants';
-import { message, notification } from 'antd';
+import { message } from 'antd';
 
 const QualifyAuditContainer = props => {
-  const {
-    auditResponseDetailQuery,
-    supplierBasicInfoQuery,
-    auditsBuyerSendFiles,
-    location
-  } = props;
+  const { auditResponseDetailQuery, supplierBasicInfoQuery, location } = props;
 
   if (supplierBasicInfoQuery.loading) {
     return <Loading />;
@@ -45,26 +39,10 @@ const QualifyAuditContainer = props => {
   };
 
   const exportFile = (name, variables) => {
-    notification.open(notifyLoading);
-
     const common = {
       supplierId: location.state.supplierId,
       auditId: location.state.auditId
     };
-
-    auditsBuyerSendFiles({
-      variables: {
-        ...common,
-        improvementPlan: name === 'auditReport',
-        report: name === 'auditImprovementPlan'
-      }
-    })
-      .then(() => {
-        message.success('Successfuly sent!');
-      })
-      .catch(error => {
-        message.error(error.message);
-      });
 
     exportFile({
       query: queries[name],
@@ -91,14 +69,14 @@ QualifyAuditContainer.propTypes = {
   auditResponseDetailQuery: PropTypes.object,
   evidenceInfoEdit: PropTypes.func,
   supplierBasicInfoQuery: PropTypes.object,
-  location: PropTypes.object,
-  auditsBuyerSendFiles: PropTypes.func
+  location: PropTypes.object
 };
 
 export default compose(
   graphql(gql(queries.auditResponseDetail), {
     name: 'auditResponseDetailQuery',
     options: ({ location }) => {
+      console.log(location);
       return {
         variables: {
           auditId: location.state.auditId,
@@ -134,9 +112,5 @@ export default compose(
 
   graphql(gql(mutations.auditsBuyerSaveBusinessInfo), {
     name: 'businessInfoEdit'
-  }),
-
-  graphql(gql(mutations.auditsBuyerSendFiles), {
-    name: 'auditsBuyerSendFiles'
   })
 )(QualifyAuditContainer);

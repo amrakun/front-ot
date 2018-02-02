@@ -58,7 +58,7 @@ class DueDiligence extends Common {
 
           return (
             <DatePicker
-              defaultValue={date && moment(date, dateFormat)}
+              defaultValue={date && moment(date)}
               format={dateFormat}
               onChange={value => this.handleDateChange(value, record._id)}
             />
@@ -73,7 +73,7 @@ class DueDiligence extends Common {
 
           return file ? (
             <a href={file.url} target="_blank">
-              {moment(lastDueDiligence.createdDate).format(dateFormat)}
+              {moment(lastDueDiligence.date).format(dateFormat)}
             </a>
           ) : (
             '-'
