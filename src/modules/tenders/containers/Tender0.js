@@ -4,10 +4,10 @@ import { Rfq, Eoi } from '../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries, mutations } from '../graphql';
 import { message, notification, Icon, Button } from 'antd';
+import client from 'apolloClient';
 import { Loading } from 'modules/common/components';
-import { colors } from 'modules/common/constants';
+import { notifyReady, notifyLoading, colors } from 'modules/common/constants';
 import { withTableProps } from 'modules/common/containers';
-import { exportFile } from 'modules/common/components';
 
 const notifyIfWantToSend = {
   message: 'Succesfully awarded',
@@ -86,25 +86,47 @@ class TenderContainer extends React.Component {
 
   downloadReport(companies, name) {
     const { tenderDetailQuery } = this.props;
+
     const loadingReportName = `${name}Loading`;
-
     let loading = {};
-
     loading[loadingReportName] = true;
     this.setState(loading);
 
-    exportFile({
-      query: queries[name],
-      name,
-      variables: {
-        tenderId: tenderDetailQuery.tenderDetail._id,
-        supplierIds: companies
-      },
-      onFinish: () => {
+    notification.open(notifyLoading);
+
+    client
+      .query({
+        query: gql(queries[name]),
+        name: name,
+
+        variables: {
+          tenderId: tenderDetailQuery.tenderDetail._id,
+          supplierIds: companies
+        }
+      })
+      .then(response => {
         loading[loadingReportName] = false;
         this.setState(loading);
-      }
-    });
+
+        notification.close('loadingNotification');
+        notification.open({
+          ...notifyReady,
+          btn: (
+            <Button
+              type="primary"
+              onClick={() => {
+                notification.close('downloadNotification');
+                window.open(response.data[Object.keys(response.data)[0]]);
+              }}
+            >
+              <Icon type="download" /> Download
+            </Button>
+          )
+        });
+      })
+      .catch(error => {
+        message.error(error.message);
+      });
   }
 
   render() {

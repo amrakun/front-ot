@@ -7,6 +7,7 @@ import NumberCardLines from './dataDisplay/numberCard_lines';
 import Editor from './Editor';
 import Loading from './Loading';
 import Search from './Search';
+import exportFile from './exportFile';
 
 export {
   Uploader,
@@ -17,5 +18,6 @@ export {
   TextCard,
   Editor,
   Loading,
-  Search
+  Search,
+  exportFile
 };

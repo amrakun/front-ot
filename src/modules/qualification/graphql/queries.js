@@ -513,6 +513,18 @@ const companiesGenerateDifotScoreList = `
   }
 `;
 
+const companiesValidatedProductsInfoExport = `
+  query companiesValidatedProductsInfoExport(${commonParams}) {
+    companiesValidatedProductsInfoExport(${commonValues})
+  }
+`;
+
+const companiesGenerateDueDiligenceList = `
+  query companiesGenerateDueDiligenceList(${commonParams}) {
+    companiesGenerateDueDiligenceList(${commonValues})
+  }
+`;
+
 const physicalAuditFields = `
   _id
   createdDate
@@ -575,5 +587,7 @@ export default {
   feedbackResponses,
   companiesGenerateDifotScoreList,
   physicalAudits,
-  physicalAuditDetail
+  physicalAuditDetail,
+  companiesValidatedProductsInfoExport,
+  companiesGenerateDueDiligenceList
 };
