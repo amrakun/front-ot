@@ -12,7 +12,7 @@ class ReportsAndPlansContainer extends React.Component {
     if (auditResponsesTableQuery.loading) {
       return <ReportsAndPlans loading={true} />;
     }
-    console.log(auditResponsesTableQuery);
+
     const updatedProps = {
       ...this.props,
       data: auditResponsesTableQuery.auditResponses || []

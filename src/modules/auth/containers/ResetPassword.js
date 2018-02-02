@@ -10,7 +10,6 @@ const ResetPasswordContainer = props => {
   const { resetPasswordMutation, history, token } = props;
 
   const resetPassword = args => {
-    console.log(args.password, token);
     resetPasswordMutation({
       variables: {
         newPassword: args.password,

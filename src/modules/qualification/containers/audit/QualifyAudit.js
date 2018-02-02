@@ -72,7 +72,6 @@ export default compose(
   graphql(gql(queries.auditResponseDetail), {
     name: 'auditResponseDetailQuery',
     options: ({ location }) => {
-      console.log(location);
       return {
         variables: {
           auditId: location.state.auditId,
