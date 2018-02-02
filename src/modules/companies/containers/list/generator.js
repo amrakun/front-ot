@@ -30,7 +30,7 @@ const generator = (Component, query) => {
         router.setParams(history, {
           sort: `${sorter.columnKey},${order}`
         });
-      } else {
+      } else if (history) {
         router.removeParams(history, 'sort');
       }
     }

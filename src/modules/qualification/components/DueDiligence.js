@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Table, Card, Row, Col, Button } from 'antd';
+import { Table, Card, Row, Col, Button, Icon } from 'antd';
 import { Uploader } from 'modules/common/components';
 import { Common } from 'modules/companies/components';
 import { Sidebar } from 'modules/companies/components';
@@ -32,7 +32,14 @@ class DueDiligence extends Common {
   }
 
   render() {
-    const { data, pagination, loading, onChange, addDueDiligence } = this.props;
+    const {
+      data,
+      pagination,
+      loading,
+      onChange,
+      addDueDiligence,
+      exportExcel
+    } = this.props;
 
     const columns = this.getWrappedColumns([
       {
@@ -61,6 +68,10 @@ class DueDiligence extends Common {
       {
         title: 'Expiration date',
         render: () => moment().format(dateFormat)
+      },
+      {
+        title: 'Submission date',
+        render: () => moment().format(dateFormat)
       }
     ]);
 
@@ -73,7 +84,14 @@ class DueDiligence extends Common {
             <div className="table-operations">
               <Search />
 
-              <Button onClick={() => addDueDiligence(this.reports)}>
+              <Button onClick={exportExcel}>
+                Export excel
+                <Icon type="file-excel" />
+              </Button>
+              <Button
+                type="primary"
+                onClick={() => addDueDiligence(this.reports)}
+              >
                 Save
               </Button>
             </div>
