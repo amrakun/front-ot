@@ -544,6 +544,17 @@ const physicalAuditDetail = `
   }
 `;
 
+const auditResponseTotalCounts = `
+  query auditResponseTotalCounts {
+    auditResponseTotalCounts {
+      invited
+      notResponded
+      qualified
+      sentImprovementPlan
+    }
+  }
+`;
+
 export default {
   blockedCompanies,
   supplierPrequalification,
@@ -555,6 +566,7 @@ export default {
   auditRequests,
   audits,
   auditResponses,
+  auditResponseTotalCounts,
   auditResponseByUser,
   auditResponseDetail,
   supplierBasicInfo,

@@ -7,14 +7,15 @@ import { withTableProps } from 'modules/common/containers';
 
 class AuditResponsesContainer extends React.Component {
   render() {
-    const { auditResponsesQuery } = this.props;
+    const { auditResponsesQuery, totalCountsQuery } = this.props;
 
-    if (auditResponsesQuery.loading) {
+    if (auditResponsesQuery.loading || totalCountsQuery.loading) {
       return <AuditResponses loading={true} />;
     }
 
     const updatedProps = {
       ...this.props,
+      counts: totalCountsQuery.auditResponseTotalCounts,
       data: auditResponsesQuery.auditResponses || []
     };
 
@@ -23,7 +24,8 @@ class AuditResponsesContainer extends React.Component {
 }
 
 AuditResponsesContainer.propTypes = {
-  auditResponsesQuery: PropTypes.object
+  auditResponsesQuery: PropTypes.object,
+  totalCountsQuery: PropTypes.object
 };
 
 export default compose(
@@ -40,5 +42,9 @@ export default compose(
         notifyOnNetworkStatusChange: true
       };
     }
+  }),
+
+  graphql(gql(queries.auditResponseTotalCounts), {
+    name: 'totalCountsQuery'
   })
 )(withTableProps(AuditResponsesContainer));
