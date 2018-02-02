@@ -40,11 +40,11 @@ class BusinessIntegriy extends AuditFormsBase {
       reportModalVisible,
       planModalVisible
     } = this.state;
-    const { response, supplierInfo, exportFile, isQualified } = this.props;
+    const { response, supplierInfo, exportFiles, isQualified } = this.props;
 
     const exportModalArgs = {
       ...supplierInfo,
-      exportFile,
+      exportFiles,
       isQualified
     };
 

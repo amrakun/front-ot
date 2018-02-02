@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { gql, compose, graphql } from 'react-apollo';
 import { queries, mutations } from '../../graphql';
 import { QualifyAudit } from '../../components';
-import { Loading } from 'modules/common/components';
+import { Loading, exportFile } from 'modules/common/components';
 import { message } from 'antd';
 
 const QualifyAuditContainer = props => {
@@ -38,18 +38,14 @@ const QualifyAuditContainer = props => {
       });
   };
 
-  const exportFile = (name, variables) => {
-    const common = {
-      supplierId: location.state.supplierId,
-      auditId: location.state.auditId
-    };
-
+  const exportFiles = (name, variables) => {
     exportFile({
       query: queries[name],
       name,
       variables: {
-        ...common,
         ...variables,
+        supplierId: location.state.supplierId,
+        auditId: location.state.auditId,
         auditResult: auditResponseDetail.isQualified
       }
     });
@@ -58,7 +54,7 @@ const QualifyAuditContainer = props => {
   const updatedProps = {
     ...props,
     save,
-    exportFile,
+    exportFiles,
     response: auditResponseDetail,
     supplierInfo: supplierBasicInfoQuery.companyDetail
   };

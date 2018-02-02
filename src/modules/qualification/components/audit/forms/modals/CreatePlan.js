@@ -16,11 +16,11 @@ class CreatePlan extends React.Component {
   }
 
   handleOk() {
-    const { form, exportFile, hideModal } = this.props;
+    const { form, exportFiles, hideModal } = this.props;
 
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        exportFile('auditImprovementPlan', values);
+        exportFiles('auditImprovementPlan', values);
         hideModal();
       }
     });
@@ -73,7 +73,7 @@ class CreatePlan extends React.Component {
 CreatePlan.propTypes = {
   form: PropTypes.object,
   basicInfo: PropTypes.object,
-  exportFile: PropTypes.func,
+  exportFiles: PropTypes.func,
   hideModal: PropTypes.func,
   isQualified: PropTypes.bool
 };
