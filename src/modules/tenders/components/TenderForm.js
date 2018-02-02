@@ -125,7 +125,7 @@ class TenderForm extends BaseForm {
     const stateKey = `product__${recordKey}`;
     const product = this.state[stateKey] || {};
 
-    product[name] = e.target ? e.target.checked : e;
+    product[name] = e.target ? e.target.value || e.target.checked : e;
 
     this.state[stateKey] = product;
   }
