@@ -14,7 +14,8 @@ class DueDiligenceContainer extends React.Component {
     const addDueDiligence = reports => {
       const dueDiligences = Object.keys(reports).map(supplierId => ({
         supplierId,
-        file: reports[supplierId]
+        file: reports[supplierId].file,
+        expireDate: reports[supplierId].expireDate
       }));
 
       addDueDiligenceMutation({

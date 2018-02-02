@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Table, Card, Row, Col, Button, Icon } from 'antd';
+import { Table, Card, Row, Col, Button, Icon, DatePicker } from 'antd';
 import { Uploader } from 'modules/common/components';
 import { Common } from 'modules/companies/components';
 import { Sidebar } from 'modules/companies/components';
@@ -17,18 +17,18 @@ class DueDiligence extends Common {
     this.reports = {};
   }
 
-  componentWillUpdate(nextProps) {
-    (nextProps.data || []).forEach(record => {
-      this[`${record._id}Upload`] = file => {
-        let value = { name: file.name, url: file.response };
+  handleUpload(file, id) {
+    let value = { name: file.name, url: file.response };
 
-        if (file.status === 'removed') {
-          value = null;
-        }
+    if (file.status === 'removed') {
+      value = null;
+    }
 
-        this.reports[record._id] = value;
-      };
-    });
+    this.reports[id] = { ...this.reports[id], file: value };
+  }
+
+  handleDateChange(date, id) {
+    this.reports[id] = { ...this.reports[id], expireDate: date };
   }
 
   render() {
@@ -46,9 +46,24 @@ class DueDiligence extends Common {
         title: 'Report',
         render: record => (
           <Uploader
-            onReceiveFile={(...args) => this[`${record._id}Upload`](...args)}
+            onReceiveFile={args => this.handleUpload(args, record._id)}
           />
         )
+      },
+      {
+        title: 'Expiration date',
+        render: record => {
+          const lastDueDiligence = record.lastDueDiligence || {};
+          const date = lastDueDiligence.expireDate;
+
+          return (
+            <DatePicker
+              defaultValue={date && moment(date, dateFormat)}
+              format={dateFormat}
+              onChange={value => this.handleDateChange(value, record._id)}
+            />
+          );
+        }
       },
       {
         title: 'Last report file',
@@ -58,20 +73,12 @@ class DueDiligence extends Common {
 
           return file ? (
             <a href={file.url} target="_blank">
-              View
+              {moment(lastDueDiligence.createdDate).format(dateFormat)}
             </a>
           ) : (
             '-'
           );
         }
-      },
-      {
-        title: 'Expiration date',
-        render: () => moment().format(dateFormat)
-      },
-      {
-        title: 'Submission date',
-        render: () => moment().format(dateFormat)
       }
     ]);
 
