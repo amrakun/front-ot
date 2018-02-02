@@ -36,6 +36,7 @@ const exportExcel = props => {
     })
     .catch(error => {
       message.error(error.message);
+      console.log(error);
     });
 };
 

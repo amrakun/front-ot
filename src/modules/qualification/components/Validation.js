@@ -2,7 +2,17 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Table, Card, Row, Col, Modal, Checkbox, Divider } from 'antd';
+import {
+  Table,
+  Card,
+  Row,
+  Col,
+  Modal,
+  Checkbox,
+  Divider,
+  Button,
+  Icon
+} from 'antd';
 import { Common } from 'modules/companies/components';
 import { Sidebar } from 'modules/companies/components';
 import { Search } from 'modules/common/components';
@@ -57,7 +67,7 @@ class Validation extends Common {
   }
 
   render() {
-    const { data, pagination, loading, onChange } = this.props;
+    const { data, pagination, loading, onChange, exportExcel } = this.props;
     const { modalVisible, modalData, validatedValues } = this.state;
 
     let validationOptions = [];
@@ -106,8 +116,12 @@ class Validation extends Common {
           <Card title="Suppliers">
             <div className="table-operations">
               <Search />
+
+              <Button onClick={exportExcel}>
+                Export excel
+                <Icon type="file-excel" />
+              </Button>
             </div>
-            <br />
             <Table
               columns={columns}
               rowKey={record => record._id}
@@ -118,7 +132,6 @@ class Validation extends Common {
               onChange={(pagination, filters, sorter) =>
                 onChange(pagination, filters, sorter)
               }
-              className="margin"
             />
           </Card>
 
