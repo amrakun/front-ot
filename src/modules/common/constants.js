@@ -40,14 +40,14 @@ const days = [
 
 const notifyLoading = {
   message: 'Building an excel...',
-  description: 'You will get notified when your report is ready!',
+  description: 'You will get notified when your file is ready to download!',
   icon: <Icon type="loading" />,
   duration: 5,
   key: 'loadingNotification'
 };
 
 const notifyReady = {
-  message: 'Your report is ready to download',
+  message: 'Your file is ready to download',
   icon: <Icon type="file-excel" style={{ color: 'rgb(0,153,168)' }} />,
   duration: 0,
   key: 'downloadNotification'

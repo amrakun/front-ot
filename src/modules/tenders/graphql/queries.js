@@ -195,6 +195,12 @@ const eoiBidderList = `
   }
 `;
 
+const generateMaterialsTemplate = `
+  query tenderGenerateMaterialsTemplate($tenderId: String!) {
+    tenderGenerateMaterialsTemplate(tenderId: $tenderId)
+  }
+`;
+
 export default {
   tenderDetail,
   tenders,
@@ -205,5 +211,6 @@ export default {
   eoiShortList,
   eoiBidderList,
   exportTenders,
-  tenderResponseByUser
+  tenderResponseByUser,
+  generateMaterialsTemplate
 };

@@ -4,7 +4,9 @@ import { compose, gql, graphql } from 'react-apollo';
 import { SubmitRfq, SubmitEoi } from '../components';
 import { queries, mutations } from '../graphql';
 import { Loading } from 'modules/common/components';
-import { message } from 'antd';
+import { message, notification, Button, Icon } from 'antd';
+import client from 'apolloClient';
+import { notifyReady, notifyLoading } from 'modules/common/constants';
 
 const PublishContainer = (
   {
@@ -66,9 +68,42 @@ const PublishContainer = (
     });
   };
 
+  const generateTemplate = () => {
+    notification.open(notifyLoading);
+
+    client
+      .query({
+        query: gql(queries.generateMaterialsTemplate),
+        name: 'generateTemplate',
+
+        variables: { tenderId: tenderDetail._id }
+      })
+      .then(response => {
+        notification.close('loadingNotification');
+        notification.open({
+          ...notifyReady,
+          btn: (
+            <Button
+              type="primary"
+              onClick={() => {
+                notification.close('downloadNotification');
+                window.open(response.data[Object.keys(response.data)[0]]);
+              }}
+            >
+              <Icon type="download" /> Download
+            </Button>
+          )
+        });
+      })
+      .catch(error => {
+        message.error(error.message);
+      });
+  };
+
   const updatedProps = {
     save,
     send,
+    generateTemplate,
     data: tenderDetail,
     response: tenderResponseByUser
   };

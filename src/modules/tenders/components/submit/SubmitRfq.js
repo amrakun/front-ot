@@ -5,6 +5,7 @@ import { Form, Button, Card } from 'antd';
 import TenderForm from '../TenderForm';
 import RfqTable from '../RfqTable';
 import MainInfo from './MainInfo';
+import { xlsxHandler } from 'modules/common/utils';
 
 class SubmitTender extends TenderForm {
   constructor(props) {
@@ -13,6 +14,7 @@ class SubmitTender extends TenderForm {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.saveDraft = this.saveDraft.bind(this);
     this.collectInputs = this.collectInputs.bind(this);
+    this.handleFile = this.handleFile.bind(this);
   }
 
   collectInputs() {
@@ -47,13 +49,62 @@ class SubmitTender extends TenderForm {
     this.save({ respondedProducts: this.collectInputs() });
   }
 
+  handleFile(e) {
+    xlsxHandler({
+      e,
+      success: data => {
+        Object.keys(this.state).forEach(key => {
+          if (key.startsWith('product__')) {
+            delete this.state[key];
+          }
+        });
+
+        const products = [];
+        const perProductStates = {};
+
+        data.forEach(product => {
+          const key = Math.random();
+          const {
+            suggestedManufacturer,
+            suggestedManufacturerPart,
+            unitPrice,
+            totalPrice,
+            leadTime,
+            shippingTerms,
+            comment,
+            picture
+          } = product;
+          const extendedProduct = {
+            key,
+            suggestedManufacturer,
+            suggestedManufacturerPart,
+            unitPrice,
+            totalPrice,
+            leadTime,
+            shippingTerms,
+            comment,
+            picture
+          };
+
+          products.push(extendedProduct);
+
+          perProductStates[`product__${key}`] = extendedProduct;
+        });
+
+        this.setState({ products, ...perProductStates });
+      }
+    });
+  }
+
   render() {
     const { products } = this.state;
-    const { data } = this.props;
+    const { data, generateTemplate } = this.props;
 
     const formProps = {
+      generateTemplate,
       products: products,
-      renderProductColumn: this.renderProductColumn
+      renderProductColumn: this.renderProductColumn,
+      handleFile: this.handleFile
     };
 
     return (
