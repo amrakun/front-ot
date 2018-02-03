@@ -1,11 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Form, Input, Card, Button, Icon } from 'antd';
-import BaseForm from 'modules/common/components/BaseForm';
+import { BaseForm, commonMessages } from 'modules/common/components';
 import addressFields from './address';
 import { intlShape, injectIntl, defineMessages } from 'react-intl';
 
 const messages = defineMessages({
+  ...commonMessages,
   business: {
     id: 'businessContact',
     defaultMessage: '14. Primary business contact'
@@ -49,7 +50,11 @@ class ContactInfo extends BaseForm {
           {this.renderField({
             label: 'Full name',
             name: 'name',
-            control: <Input placeholder="First name + Last name" />
+            control: (
+              <Input
+                placeholder={formatMessage(messages.placeholderFullName)}
+              />
+            )
           })}
 
           {this.renderField({

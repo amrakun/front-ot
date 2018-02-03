@@ -1,6 +1,8 @@
 import React from 'react';
 import { Breadcrumb, Icon } from 'antd';
 import { PropTypes } from 'prop-types';
+import { _t } from 'modules/common/components';
+import { intlShape, injectIntl, defineMessages } from 'react-intl';
 
 const BreadcrumbItem = Breadcrumb.Item;
 
@@ -37,20 +39,28 @@ const routes = {
 const Breadcrumbs = location => {
   const breadcrumbItems = [
     <BreadcrumbItem key={0}>
-      <Icon type="home" /> Home
+      <Icon type="home" /> <_t id="home">Home</_t>
     </BreadcrumbItem>
   ];
 
   location.pathname.split('/').forEach((path, index) => {
-    const title = routes[path];
-    breadcrumbItems.push(<BreadcrumbItem key={index}>{title}</BreadcrumbItem>);
+    const title = !path
+      ? ''
+      : location.intl.formatMessage({
+          id: 'b_' + path,
+          defaultMessage: routes[path]
+        });
+    breadcrumbItems.push(
+      <BreadcrumbItem key={index}>{title || ''}</BreadcrumbItem>
+    );
   });
 
   return <Breadcrumb>{breadcrumbItems}</Breadcrumb>;
 };
 
 Breadcrumbs.propTypes = {
-  location: PropTypes.object
+  location: PropTypes.object,
+  intl: intlShape.isRequired
 };
 
-export default Breadcrumbs;
+export default injectIntl(Breadcrumbs);

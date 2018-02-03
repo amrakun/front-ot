@@ -41,6 +41,7 @@ class RegistrationForm extends BaseForm {
             {this.renderField({
               label: 'Please upload your certificate',
               name: 'file',
+              attachmentType: 'Certificate',
               isVisible: isReceived,
               optional: !isReceived,
               dataType: 'file',

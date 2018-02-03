@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { Form, Input, Card, Button, Icon } from 'antd';
 import Field from 'modules/common/components/Field';
-import BaseForm from 'modules/common/components/BaseForm';
+import { BaseForm, commonMessages } from 'modules/common/components';
 import { labels } from '../constants';
 import { intlShape, injectIntl, defineMessages } from 'react-intl';
 
@@ -17,6 +17,7 @@ const groups = [
 ];
 
 const messages = defineMessages({
+  ...commonMessages,
   managingDirector: {
     id: 'managingDirector',
     defaultMessage: '15. Managing director'
@@ -116,7 +117,9 @@ class ManagementTeam extends BaseForm {
           prefix={prefix}
           initialValue={data.name}
           optional={optional}
-          control={<Input placeholder="First name + Last name" />}
+          control={
+            <Input placeholder={formatMessage(messages.placeholderFullName)} />
+          }
         />
 
         <Field

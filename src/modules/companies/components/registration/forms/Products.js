@@ -15,6 +15,10 @@ const messages = defineMessages({
   product: {
     id: 'productsDesc',
     defaultMessage: productDescription
+  },
+  placeholder: {
+    id: 'selectProducts',
+    defaultMessage: 'Please select products'
   }
 });
 
@@ -43,7 +47,7 @@ class RegistrationForm extends BaseForm {
               <TreeSelect
                 treeData={productsTree}
                 treeCheckable={true}
-                searchPlaceholder="Please select products"
+                searchPlaceholder={formatMessage(messages.placeholder)}
                 allowClear
               />
             }

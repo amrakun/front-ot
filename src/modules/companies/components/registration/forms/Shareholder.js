@@ -46,7 +46,7 @@ class ShareHolders extends BaseForm {
         <Field
           label="Name"
           name={`name${k}`}
-          numberSuffix={k}
+          suffix={k}
           control={<Input />}
           initialValue={shareholder.name}
           optional={optional}
@@ -55,7 +55,7 @@ class ShareHolders extends BaseForm {
         <Field
           label="Job title"
           name={`jobTitle${k}`}
-          numberSuffix={k}
+          suffix={k}
           control={<Input />}
           initialValue={shareholder.jobTitle}
           optional={optional}
@@ -64,7 +64,7 @@ class ShareHolders extends BaseForm {
         <Field
           label="Share percentage %"
           name={`percentage${k}`}
-          numberSuffix={k}
+          suffix={k}
           initialValue={shareholder.percentage}
           control={<Input type="number" />}
           optional={optional}

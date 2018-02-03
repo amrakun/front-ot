@@ -54,16 +54,41 @@ class Field extends React.Component {
     return '';
   }
 
-  setName(prefix, numberSuffix, name) {
+  setName(prefix, suffix, name) {
     if (prefix) {
       return name.replace(prefix, 'common');
     }
 
-    if (numberSuffix) {
-      return name.replace(numberSuffix, 'Common');
+    if (suffix) {
+      return name.replace(suffix, 'Common');
     }
 
     return name;
+  }
+
+  getTranslation(prefix, suffix, name, label, description, attachmentType) {
+    const { formatMessage } = this.props.intl;
+    let commonName = this.setName(prefix, suffix, name);
+
+    if (attachmentType) {
+      commonName += attachmentType;
+    }
+
+    const messages = defineMessages({
+      label: {
+        id: commonName,
+        defaultMessage: label
+      },
+      extra: {
+        id: commonName + 'Desc',
+        defaultMessage: description
+      }
+    });
+
+    const val = label ? formatMessage(messages.label) : '';
+    const extra = description ? formatMessage(messages.extra) : description;
+
+    return { val, extra };
   }
 
   render() {
@@ -78,7 +103,8 @@ class Field extends React.Component {
       isVisible = true,
       hasFeedback = true,
       layout,
-      numberSuffix,
+      suffix,
+      attachmentType,
       rules = [],
       dataType
     } = this.props;
@@ -114,25 +140,19 @@ class Field extends React.Component {
       args.valuePropName = 'defaultFileList';
     }
 
-    const { formatMessage } = this.props.intl;
-    const commonName = this.setName(prefix, numberSuffix, name);
-    const messages = defineMessages({
-      label: {
-        id: commonName,
-        defaultMessage: label
-      },
-      extra: {
-        id: name + 'Desc',
-        defaultMessage: description
-      }
-    });
-
-    const extra = description ? formatMessage(messages.extra) : description;
+    const { val, extra } = this.getTranslation(
+      prefix,
+      suffix,
+      name,
+      label,
+      description,
+      attachmentType
+    );
 
     return (
       <Form.Item
         {...layout}
-        label={formatMessage(messages.label)}
+        label={val}
         extra={extra}
         style={isVisible ? {} : { display: 'none' }}
         hasFeedback={hasFeedback}

@@ -7,6 +7,34 @@ import { intlShape, injectIntl, defineMessages } from 'react-intl';
 
 const FormItem = Form.Item;
 const messages = defineMessages({
+  factory: {
+    id: 'factory',
+    defaultMessage: 'Factory'
+  },
+  addFactory: {
+    id: 'addFactory',
+    defaultMessage: 'Add factory'
+  },
+  name: {
+    id: 'name',
+    defaultMessage: 'Name'
+  },
+  townOrCity: {
+    id: 'townOrCity',
+    defaultMessage: 'Town or city'
+  },
+  country: {
+    id: 'country',
+    defaultMessage: 'Country'
+  },
+  productCodes: {
+    id: 'productCodes',
+    defaultMessage: 'Product codes'
+  },
+  distName: {
+    id: 'distributionRightName',
+    defaultMessage: 'Distribution right name'
+  },
   group: {
     id: 'groupLabelsHead',
     defaultMessage: groupLabels.head
@@ -102,11 +130,12 @@ class RegistrationForm extends BaseForm {
 
   renderFactory(factory, index) {
     const _id = factory._id;
+    const { formatMessage } = this.props.intl;
 
     return (
       <FormItem
         className="multiple-wrapper"
-        label={`Factory ${index + 1}`}
+        label={formatMessage(messages.factory) + ` ${index + 1}`}
         key={_id}
       >
         <Row gutter={16}>
@@ -116,7 +145,7 @@ class RegistrationForm extends BaseForm {
               initialValue={factory.name}
               hasFeedback={false}
               optional={true}
-              control={<Input placeholder="Name" />}
+              control={<Input placeholder={formatMessage(messages.name)} />}
             />
           </Col>
           <Col span={6}>
@@ -125,7 +154,9 @@ class RegistrationForm extends BaseForm {
               initialValue={factory.townOrCity}
               hasFeedback={false}
               optional={true}
-              control={<Input placeholder="Town or city" />}
+              control={
+                <Input placeholder={formatMessage(messages.townOrCity)} />
+              }
             />
           </Col>
           <Col span={6}>
@@ -134,7 +165,7 @@ class RegistrationForm extends BaseForm {
               initialValue={factory.country}
               hasFeedback={false}
               optional={true}
-              control={<Input placeholder="Country" />}
+              control={<Input placeholder={formatMessage(messages.country)} />}
             />
           </Col>
           <Col span={6}>
@@ -143,7 +174,9 @@ class RegistrationForm extends BaseForm {
               hasFeedback={false}
               initialValue={factory.productCodes}
               optional={true}
-              control={<Input placeholder="Product codes" />}
+              control={
+                <Input placeholder={formatMessage(messages.productCodes)} />
+              }
             />
           </Col>
         </Row>
@@ -153,12 +186,13 @@ class RegistrationForm extends BaseForm {
 
   renderDistrubutionRightInput(index) {
     const initValues = this.props.data.authorizedDistributions || {};
+    const { formatMessage } = this.props.intl;
 
     return (
       <Field
         name={`distributionRightName${index}`}
         initialValue={initValues[index]}
-        label={`Distribution right name ${index + 1}`}
+        label={formatMessage(messages.distName) + ` ${index + 1}`}
         hasFeedback={false}
         optional={true}
         control={<Input />}
@@ -236,7 +270,7 @@ class RegistrationForm extends BaseForm {
             {factoryItems}
             <FormItem>
               <Button type="dashed" onClick={this.addFactory}>
-                <Icon type="plus" /> Add factory
+                <Icon type="plus" /> {formatMessage(messages.addFactory)}
               </Button>
             </FormItem>
           </div>
@@ -264,6 +298,7 @@ class RegistrationForm extends BaseForm {
             {this.renderField({
               label: groupLabels.attachments,
               name: 'attachments',
+              attachmentType: 'Group',
               description: `Please upload your authorized distribution rights files`,
               optional: !isExclusiveDistributor,
               dataType: 'file-multiple',
