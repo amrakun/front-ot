@@ -6,11 +6,11 @@ import { BaseForm, Field } from 'modules/common/components';
 import { noLabelLayout } from 'modules/common/constants';
 
 const propTypes = {
-  confirmRegistration: PropTypes.func.isRequired,
+  submit: PropTypes.func.isRequired,
   form: PropTypes.object
 };
 
-class Register extends BaseForm {
+class PasswordSubmission extends BaseForm {
   constructor(props) {
     super(props);
 
@@ -23,7 +23,7 @@ class Register extends BaseForm {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.confirmRegistration(values);
+        this.props.submit(values);
       }
     });
   }
@@ -36,6 +36,7 @@ class Register extends BaseForm {
       callback();
     }
   }
+
   checkConfirm(rule, value, callback) {
     const form = this.props.form;
     if (value) {
@@ -45,13 +46,23 @@ class Register extends BaseForm {
   }
 
   render() {
+    const { reset } = this.props;
+
     return (
       <div className="center-content">
         <Card className="login-card" bordered={false}>
-          <Alert
-            description="Email confirmed succesfully! Please enter your password."
-            type="success"
-          />
+          {reset ? (
+            <Alert
+              description="Please enter your new password."
+              type="success"
+            />
+          ) : (
+            <Alert
+              description="Email confirmed succesfully! Please enter your password."
+              type="success"
+            />
+          )}
+
           <Form onSubmit={this.handleSubmit} className="margin">
             <Field
               name="password"
@@ -83,9 +94,13 @@ class Register extends BaseForm {
               size="large"
               style={{ marginBottom: '5px' }}
             >
-              Register
+              {reset ? 'Reset password' : 'Register'}
             </Button>
-            Already registered? <Link to="/sign-in">Sign in</Link>
+            {!reset && (
+              <div>
+                Already registered? <Link to="/sign-in">Sign in</Link>
+              </div>
+            )}
           </Form>
         </Card>
       </div>
@@ -93,8 +108,8 @@ class Register extends BaseForm {
   }
 }
 
-Register.propTypes = propTypes;
+PasswordSubmission.propTypes = propTypes;
 
-const RegisterForm = Form.create()(Register);
+const PasswordSubmissionForm = Form.create()(PasswordSubmission);
 
-export default RegisterForm;
+export default PasswordSubmissionForm;

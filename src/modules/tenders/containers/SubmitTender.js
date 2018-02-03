@@ -5,6 +5,7 @@ import { SubmitRfq, SubmitEoi } from '../components';
 import { queries, mutations } from '../graphql';
 import { Loading } from 'modules/common/components';
 import { message } from 'antd';
+import { exportFile } from 'modules/common/components';
 
 const PublishContainer = (
   {
@@ -66,9 +67,17 @@ const PublishContainer = (
     });
   };
 
+  const generateTemplate = () => {
+    exportFile({
+      query: queries.generateMaterialsTemplate,
+      variables: { tenderId: tenderDetail._id }
+    });
+  };
+
   const updatedProps = {
     save,
     send,
+    generateTemplate,
     data: tenderDetail,
     response: tenderResponseByUser
   };

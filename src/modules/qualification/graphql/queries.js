@@ -1,3 +1,5 @@
+/*eslint-disable max-len*/
+
 import { queries } from 'modules/companies/graphql';
 
 const { prequalificationFields } = queries;
@@ -290,11 +292,12 @@ const audits = `
   }
 `;
 const auditResponses = `
-  query auditResponses {
-    auditResponses {
+  query auditResponses($supplierSearch: String, $publishDate: Date, $closeDate: Date, $isFileGenerated: Boolean) {
+    auditResponses(supplierSearch: $supplierSearch, publishDate: $publishDate, closeDate: $closeDate, isFileGenerated: $isFileGenerated) {
       _id
       status
       audit {
+        _id
         status
         publishDate
         closeDate
@@ -513,6 +516,18 @@ const companiesGenerateDifotScoreList = `
   }
 `;
 
+const companiesValidatedProductsInfoExport = `
+  query companiesValidatedProductsInfoExport(${commonParams}) {
+    companiesValidatedProductsInfoExport(${commonValues})
+  }
+`;
+
+const companiesGenerateDueDiligenceList = `
+  query companiesGenerateDueDiligenceList(${commonParams}) {
+    companiesGenerateDueDiligenceList(${commonValues})
+  }
+`;
+
 const physicalAuditFields = `
   _id
   createdDate
@@ -529,8 +544,8 @@ const physicalAuditFields = `
 `;
 
 const physicalAudits = `
-  query physicalAudits {
-    physicalAudits {
+  query physicalAudits($supplierSearch: String) {
+    physicalAudits(supplierSearch: $supplierSearch) {
       ${physicalAuditFields}
     }
   }
@@ -540,6 +555,17 @@ const physicalAuditDetail = `
   query physicalAuditDetail($_id: String!) {
     physicalAudits(_id: $_id) {
       ${physicalAuditFields}
+    }
+  }
+`;
+
+const auditResponseTotalCounts = `
+  query auditResponseTotalCounts {
+    auditResponseTotalCounts {
+      invited
+      notResponded
+      qualified
+      sentImprovementPlan
     }
   }
 `;
@@ -555,6 +581,7 @@ export default {
   auditRequests,
   audits,
   auditResponses,
+  auditResponseTotalCounts,
   auditResponseByUser,
   auditResponseDetail,
   supplierBasicInfo,
@@ -563,5 +590,7 @@ export default {
   feedbackResponses,
   companiesGenerateDifotScoreList,
   physicalAudits,
-  physicalAuditDetail
+  physicalAuditDetail,
+  companiesValidatedProductsInfoExport,
+  companiesGenerateDueDiligenceList
 };

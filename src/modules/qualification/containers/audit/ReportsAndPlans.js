@@ -7,15 +7,15 @@ import { withTableProps } from 'modules/common/containers';
 
 class ReportsAndPlansContainer extends React.Component {
   render() {
-    const { auditsQuery } = this.props;
+    const { auditResponsesTableQuery } = this.props;
 
-    if (auditsQuery.loading) {
+    if (auditResponsesTableQuery.loading) {
       return <ReportsAndPlans loading={true} />;
     }
 
     const updatedProps = {
       ...this.props,
-      data: auditsQuery.audits || []
+      data: auditResponsesTableQuery.auditResponses || []
     };
 
     return <ReportsAndPlans {...updatedProps} />;
@@ -23,11 +23,23 @@ class ReportsAndPlansContainer extends React.Component {
 }
 
 ReportsAndPlansContainer.propTypes = {
-  auditsQuery: PropTypes.object
+  auditResponsesTableQuery: PropTypes.object
 };
 
 export default compose(
-  graphql(gql(queries.audits), {
-    name: 'auditsQuery'
+  graphql(gql(queries.auditResponses), {
+    name: 'auditResponsesTableQuery',
+    options: ({ queryParams }) => {
+      const params = queryParams || {};
+      return {
+        variables: {
+          publishDate: params.from,
+          closeDate: params.to,
+          supplierSearch: params.search,
+          isFileGenerated: true
+        },
+        notifyOnNetworkStatusChange: true
+      };
+    }
   })
 )(withTableProps(ReportsAndPlansContainer));

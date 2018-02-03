@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Table, Card, Row, Col, Button } from 'antd';
+import { Table, Card, Row, Col, Button, Icon, DatePicker } from 'antd';
 import { Uploader } from 'modules/common/components';
 import { Common } from 'modules/companies/components';
 import { Sidebar } from 'modules/companies/components';
@@ -17,31 +17,53 @@ class DueDiligence extends Common {
     this.reports = {};
   }
 
-  componentWillUpdate(nextProps) {
-    (nextProps.data || []).forEach(record => {
-      this[`${record._id}Upload`] = file => {
-        let value = { name: file.name, url: file.response };
+  handleUpload(file, id) {
+    let value = { name: file.name, url: file.response };
 
-        if (file.status === 'removed') {
-          value = null;
-        }
+    if (file.status === 'removed') {
+      value = null;
+    }
 
-        this.reports[record._id] = value;
-      };
-    });
+    this.reports[id] = { ...this.reports[id], file: value };
+  }
+
+  handleDateChange(date, id) {
+    this.reports[id] = { ...this.reports[id], expireDate: date };
   }
 
   render() {
-    const { data, pagination, loading, onChange, addDueDiligence } = this.props;
+    const {
+      data,
+      pagination,
+      loading,
+      onChange,
+      addDueDiligence,
+      exportExcel
+    } = this.props;
 
     const columns = this.getWrappedColumns([
       {
         title: 'Report',
         render: record => (
           <Uploader
-            onReceiveFile={(...args) => this[`${record._id}Upload`](...args)}
+            onReceiveFile={args => this.handleUpload(args, record._id)}
           />
         )
+      },
+      {
+        title: 'Expiration date',
+        render: record => {
+          const lastDueDiligence = record.lastDueDiligence || {};
+          const date = lastDueDiligence.expireDate;
+
+          return (
+            <DatePicker
+              defaultValue={date && moment(date)}
+              format={dateFormat}
+              onChange={value => this.handleDateChange(value, record._id)}
+            />
+          );
+        }
       },
       {
         title: 'Last report file',
@@ -51,16 +73,12 @@ class DueDiligence extends Common {
 
           return file ? (
             <a href={file.url} target="_blank">
-              View
+              {moment(lastDueDiligence.date).format(dateFormat)}
             </a>
           ) : (
             '-'
           );
         }
-      },
-      {
-        title: 'Expiration date',
-        render: () => moment().format(dateFormat)
       }
     ]);
 
@@ -73,7 +91,14 @@ class DueDiligence extends Common {
             <div className="table-operations">
               <Search />
 
-              <Button onClick={() => addDueDiligence(this.reports)}>
+              <Button onClick={exportExcel}>
+                Export excel
+                <Icon type="file-excel" />
+              </Button>
+              <Button
+                type="primary"
+                onClick={() => addDueDiligence(this.reports)}
+              >
                 Save
               </Button>
             </div>

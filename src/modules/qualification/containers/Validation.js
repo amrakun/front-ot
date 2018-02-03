@@ -3,8 +3,9 @@ import { message } from 'antd';
 import { gql, graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
 import { Validation } from '../components';
-import { mutations } from '../graphql';
+import { mutations, queries } from '../graphql';
 import { generator } from 'modules/companies/containers';
+import { exportFile } from 'modules/common/components';
 
 class ValidationContainer extends React.Component {
   render() {
@@ -24,8 +25,16 @@ class ValidationContainer extends React.Component {
         });
     };
 
+    const exportExcel = () => {
+      exportFile({
+        query: queries.companiesValidatedProductsInfoExport,
+        variables: companiesQuery ? companiesQuery.variables : null
+      });
+    };
+
     const extendedProps = {
       ...this.props,
+      exportExcel,
       addValidation
     };
 

@@ -26,7 +26,9 @@ class Status extends Common {
       {
         title: 'Pre-qualification information',
         render: record => (
-          <Link to={`/prequalification-status/${record._id}`}>View</Link>
+          <Link to={`/prequalification-status/${record._id}`}>
+            {record.isPrequalified ? 'Yes' : 'No'}
+          </Link>
         )
       },
       {

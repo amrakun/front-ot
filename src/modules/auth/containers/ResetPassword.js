@@ -2,22 +2,25 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { compose, graphql, gql } from 'react-apollo';
-import { ResetPassword } from '../components';
+import { PasswordSubmission } from '../components';
 import { mutations } from '../graphql';
 import { message } from 'antd';
 
 const ResetPasswordContainer = props => {
   const { resetPasswordMutation, history, token } = props;
 
-  const resetPassword = newPassword => {
+  const resetPassword = args => {
     resetPasswordMutation({
       variables: {
-        newPassword,
+        newPassword: args.password,
         token
       }
     })
       .then(() => {
-        history.push('/');
+        history.push('/sign-in');
+        message.success(
+          'Your password has been reset, please sign in using your new password'
+        );
       })
       .catch(error => {
         message.error(error.message);
@@ -26,10 +29,11 @@ const ResetPasswordContainer = props => {
 
   const updatedProps = {
     ...props,
-    resetPassword
+    submit: resetPassword,
+    reset: true
   };
 
-  return <ResetPassword {...updatedProps} />;
+  return <PasswordSubmission {...updatedProps} />;
 };
 
 ResetPasswordContainer.propTypes = {

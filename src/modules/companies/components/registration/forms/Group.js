@@ -263,10 +263,14 @@ class RegistrationForm extends BaseForm {
           {this.renderField({
             name: 'role',
             label: groupLabels.role,
-            control: <Select onChange={this.onRoleChange}>{roleOptions}</Select>
+            control: (
+              <Select onChange={this.onRoleChange} mode="multiple">
+                {roleOptions}
+              </Select>
+            )
           })}
 
-          <div className={role === 'EOM' ? '' : 'hidden'}>
+          <div className={role.includes('EOM') ? '' : 'hidden'}>
             {factoryItems}
             <FormItem>
               <Button type="dashed" onClick={this.addFactory}>
@@ -279,8 +283,8 @@ class RegistrationForm extends BaseForm {
             name: 'isExclusiveDistributor',
             label: groupLabels.isExclusiveDistributor,
             dataType: 'boolean',
-            isVisible: role === 'Distributor',
-            optional: role !== 'Distributor',
+            isVisible: role.includes('Distributor'),
+            optional: !role.includes('Distributor'),
             control: (
               <Select onChange={this.onIsExcChange}>{booleanOptions}</Select>
             )
@@ -288,7 +292,9 @@ class RegistrationForm extends BaseForm {
 
           <div
             className={
-              role === 'Distributor' && isExclusiveDistributor ? '' : 'hidden'
+              role.includes('Distributor') && isExclusiveDistributor
+                ? ''
+                : 'hidden'
             }
           >
             {this.renderDistrubutionRightInput(0)}

@@ -39,21 +39,21 @@ class SignIn extends Component {
 
     return (
       <div>
-        {search === '?confirmation' ? (
+        {search === '?confirmation' && (
           <Alert
             description="Confirmation link has been sent to your email!"
             type="success"
           />
-        ) : null}
-        {search === '?confirmed' ? (
+        )}
+        {search === '?confirmed' && (
           <Alert
             description="Account activated succesfully! Please login using your provided details"
             type="success"
           />
-        ) : null}
-        {search === '?required' ? (
+        )}
+        {search === '?required' && (
           <Alert description="Please sign in to continue!" type="info" />
-        ) : null}
+        )}
 
         <Form onSubmit={this.handleSubmit} className="margin">
           <FormItem>

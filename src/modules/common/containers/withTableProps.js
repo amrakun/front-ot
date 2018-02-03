@@ -22,10 +22,20 @@ const generator = Component => {
     render() {
       const { pagination } = this.state;
 
+      let tableQuery = {};
+      Object.keys(this.props).forEach(key => {
+        if (key.endsWith('TableQuery')) tableQuery = this.props[key];
+      });
+
+      let data = [];
+      Object.keys(tableQuery).forEach(key => {
+        if (Array.isArray(tableQuery[key])) data = tableQuery[key];
+      });
+
       const updatedProps = {
         ...this.props,
         pagination: {
-          total: 10,
+          total: data.length,
           pageSize: pagination.pageSize,
           current: pagination.current
         },

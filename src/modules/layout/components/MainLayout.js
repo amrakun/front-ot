@@ -18,6 +18,8 @@ const visitorPaths = [
   '/register',
   '/expression-of-interest',
   '/confirm-registration',
+  '/forgot-password',
+  '/reset-password',
   '/'
 ];
 

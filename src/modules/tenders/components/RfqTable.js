@@ -9,17 +9,14 @@ const RfqTable = props => {
     products,
     renderProductColumn,
     isSupplier = true,
-    handleFile
+    handleFile,
+    generateTemplate
   } = props;
 
   const { REACT_APP_API_URL } = process.env;
   const requestUrl = `${
     REACT_APP_API_URL
   }/static/templates/rfq_requested_products.xlsx`;
-
-  const respondUrl = `${
-    REACT_APP_API_URL
-  }/static/templates/rfq_responded_products.xlsx`;
 
   return (
     <div>
@@ -37,7 +34,7 @@ const RfqTable = props => {
       <div className="table-operations margin">
         <Button
           onClick={() =>
-            isSupplier ? window.open(respondUrl) : window.open(requestUrl)
+            isSupplier ? generateTemplate() : window.open(requestUrl)
           }
         >
           Download template
@@ -142,7 +139,8 @@ RfqTable.propTypes = {
   products: PropTypes.array,
   renderProductColumn: PropTypes.func,
   isSupplier: PropTypes.bool,
-  handleFile: PropTypes.func
+  handleFile: PropTypes.func,
+  generateTemplate: PropTypes.func
 };
 
 export default RfqTable;

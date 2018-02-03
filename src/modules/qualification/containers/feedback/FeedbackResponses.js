@@ -7,15 +7,15 @@ import { withTableProps } from 'modules/common/containers';
 
 class TendersContainer extends React.Component {
   render() {
-    const { feedbackResponsesQuery } = this.props;
+    const { feedbackResponsesTableQuery } = this.props;
 
-    if (feedbackResponsesQuery.loading) {
+    if (feedbackResponsesTableQuery.loading) {
       return <FeedbackResponses loading={true} />;
     }
 
     const updatedProps = {
       ...this.props,
-      data: feedbackResponsesQuery.feedbackResponses || []
+      data: feedbackResponsesTableQuery.feedbackResponses || []
     };
 
     return <FeedbackResponses {...updatedProps} />;
@@ -23,12 +23,12 @@ class TendersContainer extends React.Component {
 }
 
 TendersContainer.propTypes = {
-  feedbackResponsesQuery: PropTypes.object
+  feedbackResponsesTableQuery: PropTypes.object
 };
 
 export default compose(
   graphql(gql(queries.feedbackResponses), {
-    name: 'feedbackResponsesQuery',
+    name: 'feedbackResponsesTableQuery',
     options: ({ queryParams }) => {
       const { search } = queryParams;
 

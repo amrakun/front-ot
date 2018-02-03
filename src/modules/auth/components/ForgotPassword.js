@@ -1,42 +1,66 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { Form, Input, Icon, Card, Button } from 'antd';
+import { BaseForm, Field } from 'modules/common/components';
+import { Link } from 'react-router-dom';
 
 const propTypes = {
-  forgotPassword: PropTypes.func.isRequired
+  forgotPassword: PropTypes.func.isRequired,
+  form: PropTypes.object
 };
 
-class ForgotPassword extends Component {
+class ForgotPassword extends BaseForm {
   constructor(props) {
     super(props);
 
-    this.state = { email: '' };
+    this.state = {
+      loading: false
+    };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleEmailChange = this.handleEmailChange.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
-    const { email } = this.state;
-
-    this.props.forgotPassword({ email }, err => {
+    this.props.form.validateFields((err, values) => {
       if (!err) {
-        window.location.href = '/sign-in';
+        this.setState({ loading: true });
+        this.props.forgotPassword({ email: values.email });
       }
     });
   }
 
-  handleEmailChange(e) {
-    e.preventDefault();
-    this.setState({ email: e.target.value });
-  }
-
   render() {
-    return <div>reset</div>;
+    return (
+      <div className="center-content">
+        <Card className="login-card" bordered={false}>
+          <Form onSubmit={this.handleSubmit}>
+            <Field
+              name="email"
+              validation="email"
+              control={
+                <Input prefix={<Icon type="mail" />} placeholder="Email" />
+              }
+            />
+            <Button
+              loading={this.state.loading}
+              type="primary"
+              htmlType="submit"
+              style={{ marginBottom: '12px' }}
+            >
+              Send
+            </Button>
+            <Link to="/sign-in">Sign in</Link>
+          </Form>
+        </Card>
+      </div>
+    );
   }
 }
 
 ForgotPassword.propTypes = propTypes;
 
-export default ForgotPassword;
+const ForgotPasswordForm = Form.create()(ForgotPassword);
+
+export default ForgotPasswordForm;

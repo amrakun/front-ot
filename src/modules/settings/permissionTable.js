@@ -18,7 +18,9 @@ const PERMISSION_RESPONSES = 'Responses';
 const PERMISSION_BLOCKED_COMPANIES_BLOCK = 'Add block';
 const PERMISSION_BLOCKED_COMPANIES_UNBLOCK = 'Unblock';
 
-const PERMISSION_COMPANIES_ADD_DUE_DILIGENCES = 'Insert Due diligence report';
+const PERMISSION_COMPANIES_ADD_DUE_DILIGENCES = 'Insert due diligence report';
+const PERMISSION_COMPANIES_EXPORT_DUE_DILIGENCE_LIST =
+  'Export due diligence list';
 
 const PERMISSION_COMPANIES_VALIDATE_PRODUCT_INFO =
   'Validated product & service code';
@@ -70,6 +72,7 @@ export default {
 
   // due diligences
   companiesAddDueDiligences: PERMISSION_COMPANIES_ADD_DUE_DILIGENCES,
+  companiesGenerateDueDiligenceList: PERMISSION_COMPANIES_EXPORT_DUE_DILIGENCE_LIST,
 
   // blocking
   blockedCompaniesBlock: PERMISSION_BLOCKED_COMPANIES_BLOCK,

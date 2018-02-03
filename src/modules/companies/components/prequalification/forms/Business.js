@@ -186,6 +186,7 @@ class PrequalificationForm extends PreqForm {
           {this.renderField({
             name: 'employeeTurnoverRate',
             label: labels.employeeTurnoverRate,
+            description: descriptions.employeeTurnoverRate,
             control: <Input type="number" />
           })}
         </Card>

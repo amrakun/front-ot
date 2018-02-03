@@ -16,14 +16,15 @@ class AuditResponses extends React.Component {
     super(props);
 
     this.columns = this.columns.bind(this);
+    this.handleDateRangeChange = this.handleDateRangeChange.bind(this);
   }
 
   handleDateRangeChange(value) {
     const { history } = this.props;
 
     let query = queryString.parse(history.location.search);
-    query.from = value[0]._d;
-    query.to = value[1]._d;
+    query.from = value[0] ? value[0]._d : null;
+    query.to = value[1] ? value[1]._d : null;
     history.push({
       search: queryString.stringify(query)
     });
@@ -56,7 +57,7 @@ class AuditResponses extends React.Component {
                 pathname: '/audit/qualify',
                 state: {
                   supplierId: record.supplier._id,
-                  auditId: record.auditId
+                  auditId: record.audit._id
                 }
               }}
             >
@@ -93,10 +94,8 @@ class AuditResponses extends React.Component {
 
   render() {
     const { pagination, loading, onChange } = this.props;
+    const counts = this.props.counts || {};
     const data = this.props.data || [];
-    const requested = data.supplierIds ? data.supplierIds.length : 0;
-    const submitted = data.responses ? data.responses.length : 0;
-    const notResponded = requested - submitted;
 
     const colSpan = {
       xl: 6,
@@ -110,9 +109,9 @@ class AuditResponses extends React.Component {
           <Col key={0} {...colSpan}>
             <NumberCard
               icon="message"
-              title="Invite suppliers"
+              title="Invited suppliers"
               color={colors[3]}
-              number={requested}
+              number={counts.invited || 0}
             />
           </Col>
           <Col key={2} {...colSpan}>
@@ -120,7 +119,7 @@ class AuditResponses extends React.Component {
               icon="question"
               title="Not responded"
               color={colors[5]}
-              number={notResponded}
+              number={counts.notResponded || 0}
             />
           </Col>
           <Col key={3} {...colSpan}>
@@ -128,7 +127,7 @@ class AuditResponses extends React.Component {
               icon="like"
               title="Qualified"
               color={colors[2]}
-              number={submitted}
+              number={counts.qualified || 0}
             />
           </Col>
           <Col key={4} {...colSpan}>
@@ -136,7 +135,7 @@ class AuditResponses extends React.Component {
               icon="mail"
               title="Sent improvement plan"
               color={colors[8]}
-              number={submitted}
+              number={counts.sentImprovementPlan || 0}
             />
           </Col>
         </Row>
@@ -144,7 +143,10 @@ class AuditResponses extends React.Component {
         <Card title="Desktop audit responses">
           <div className="table-operations">
             <Search />
-            <DatePicker.RangePicker onChange={this.handleDateRangeChange} />
+            <DatePicker.RangePicker
+              onChange={this.handleDateRangeChange}
+              allowClear
+            />
           </div>
           <Table
             columns={this.columns()}
@@ -169,7 +171,8 @@ AuditResponses.propTypes = {
   loading: PropTypes.bool,
   onChange: PropTypes.func,
   match: PropTypes.object,
-  history: PropTypes.object
+  history: PropTypes.object,
+  counts: PropTypes.object
 };
 
 export default withRouter(AuditResponses);

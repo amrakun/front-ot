@@ -3,8 +3,9 @@ import { message } from 'antd';
 import { gql, graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
 import { DueDiligence } from '../components';
-import { mutations } from '../graphql';
+import { mutations, queries } from '../graphql';
 import { generator } from 'modules/companies/containers';
+import { exportFile } from 'modules/common/components';
 
 class DueDiligenceContainer extends React.Component {
   render() {
@@ -13,7 +14,8 @@ class DueDiligenceContainer extends React.Component {
     const addDueDiligence = reports => {
       const dueDiligences = Object.keys(reports).map(supplierId => ({
         supplierId,
-        file: reports[supplierId]
+        file: reports[supplierId].file,
+        expireDate: reports[supplierId].expireDate
       }));
 
       addDueDiligenceMutation({
@@ -29,9 +31,17 @@ class DueDiligenceContainer extends React.Component {
         });
     };
 
+    const exportExcel = () => {
+      exportFile({
+        query: queries.companiesGenerateDueDiligenceList,
+        variables: companiesQuery ? companiesQuery.variables : null
+      });
+    };
+
     const extendedProps = {
       ...this.props,
-      addDueDiligence
+      addDueDiligence,
+      exportExcel
     };
 
     return <DueDiligence {...extendedProps} />;

@@ -55,7 +55,7 @@ class Delegation extends BaseForm {
   render() {
     const { usersResult } = this.props;
     const { selectedUser, searchValue } = this.state;
-    console.log(usersResult);
+
     return (
       <Form onSubmit={this.handleSubmit}>
         <Col lg={{ span: 12, offset: 6 }} xl={{ span: 10, offset: 7 }}>

@@ -4,10 +4,10 @@ import { Rfq, Eoi } from '../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries, mutations } from '../graphql';
 import { message, notification, Icon, Button } from 'antd';
-import client from 'apolloClient';
 import { Loading } from 'modules/common/components';
-import { notifyReady, notifyLoading, colors } from 'modules/common/constants';
+import { colors } from 'modules/common/constants';
 import { withTableProps } from 'modules/common/containers';
+import { exportFile } from 'modules/common/components';
 
 const notifyIfWantToSend = {
   message: 'Succesfully awarded',
@@ -29,16 +29,16 @@ class TenderContainer extends React.Component {
   }
 
   award(companyId) {
-    const { tendersAward, tenderDetailQuery } = this.props;
+    const { tendersAward, tenderDetailTableQuery } = this.props;
 
     tendersAward({
       variables: {
-        _id: tenderDetailQuery.tenderDetail._id,
+        _id: tenderDetailTableQuery.tenderDetail._id,
         supplierId: companyId
       }
     })
       .then(() => {
-        tenderDetailQuery.refetch();
+        tenderDetailTableQuery.refetch();
         notification.open({
           ...notifyIfWantToSend,
           btn: (
@@ -64,8 +64,8 @@ class TenderContainer extends React.Component {
   }
 
   sendRegretLetter(content) {
-    const { sendRegretLetter, tenderDetailQuery } = this.props;
-    const { tenderDetail } = tenderDetailQuery;
+    const { sendRegretLetter, tenderDetailTableQuery } = this.props;
+    const { tenderDetail } = tenderDetailTableQuery;
 
     sendRegretLetter({
       variables: {
@@ -76,7 +76,7 @@ class TenderContainer extends React.Component {
     })
       .then(() => {
         message.success('Succesfully sent regret letters!');
-        tenderDetailQuery.refetch();
+        tenderDetailTableQuery.refetch();
         this.setState({ regretLetterModalVisible: false });
       })
       .catch(error => {
@@ -85,59 +85,37 @@ class TenderContainer extends React.Component {
   }
 
   downloadReport(companies, name) {
-    const { tenderDetailQuery } = this.props;
-
+    const { tenderDetailTableQuery } = this.props;
     const loadingReportName = `${name}Loading`;
+
     let loading = {};
+
     loading[loadingReportName] = true;
     this.setState(loading);
 
-    notification.open(notifyLoading);
-
-    client
-      .query({
-        query: gql(queries[name]),
-        name: name,
-
-        variables: {
-          tenderId: tenderDetailQuery.tenderDetail._id,
-          supplierIds: companies
-        }
-      })
-      .then(response => {
+    exportFile({
+      query: queries[name],
+      name,
+      variables: {
+        tenderId: tenderDetailTableQuery.tenderDetail._id,
+        supplierIds: companies
+      },
+      onFinish: () => {
         loading[loadingReportName] = false;
         this.setState(loading);
-
-        notification.close('loadingNotification');
-        notification.open({
-          ...notifyReady,
-          btn: (
-            <Button
-              type="primary"
-              onClick={() => {
-                notification.close('downloadNotification');
-                window.open(response.data[Object.keys(response.data)[0]]);
-              }}
-            >
-              <Icon type="download" /> Download
-            </Button>
-          )
-        });
-      })
-      .catch(error => {
-        message.error(error.message);
-      });
+      }
+    });
   }
 
   render() {
-    const { tenderDetailQuery } = this.props;
+    const { tenderDetailTableQuery } = this.props;
     const { systemConfig } = this.context;
 
-    if (tenderDetailQuery.loading) {
+    if (tenderDetailTableQuery.loading) {
       return <Loading />;
     }
 
-    const tenderDetail = tenderDetailQuery.tenderDetail || {};
+    const tenderDetail = tenderDetailTableQuery.tenderDetail || {};
 
     const { rfqBidSummaryReportLoading, regretLetterModalVisible } = this.state;
 
@@ -158,7 +136,7 @@ class TenderContainer extends React.Component {
 }
 
 TenderContainer.propTypes = {
-  tenderDetailQuery: PropTypes.object,
+  tenderDetailTableQuery: PropTypes.object,
   tendersAward: PropTypes.func,
   sendRegretLetter: PropTypes.func,
   history: PropTypes.object
@@ -170,7 +148,7 @@ TenderContainer.contextTypes = {
 
 export default compose(
   graphql(gql(queries.tenderDetail), {
-    name: 'tenderDetailQuery',
+    name: 'tenderDetailTableQuery',
     options: ({ match }) => {
       return {
         variables: { _id: match.params.id }

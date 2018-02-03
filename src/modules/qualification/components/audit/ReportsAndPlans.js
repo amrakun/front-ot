@@ -42,8 +42,8 @@ class ReportsAndPlans extends Common {
           }
         ]
       },
-      { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
-      { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
+      { title: 'Supplier name', dataIndex: 'supplier.basicInfo.enName' },
+      { title: 'SAP number', dataIndex: 'supplier.basicInfo.sapNumber' },
       {
         title: 'Submission date',
         render: record => moment(record.createdDate).format(dateFormat)
@@ -60,14 +60,14 @@ class ReportsAndPlans extends Common {
         title: 'Last auditor improvement plan',
         render: () => <a>View</a>
       },
-      { title: 'Contact person', dataIndex: 'contactInfo.name' },
-      { title: 'Email address', dataIndex: 'contactInfo.email' },
-      { title: 'Phone number', dataIndex: 'contactInfo.phone' }
+      { title: 'Contact person', dataIndex: 'supplier.contactInfo.name' },
+      { title: 'Email address', dataIndex: 'supplier.contactInfo.email' },
+      { title: 'Phone number', dataIndex: 'supplier.contactInfo.phone' }
     ];
   }
 
   render() {
-    const { pagination, loading, onChange } = this.props;
+    const { pagination, loading, onChange, data } = this.props;
 
     return (
       <Card title="Reports & improvement plans">
@@ -79,7 +79,7 @@ class ReportsAndPlans extends Common {
         <Table
           columns={this.columns()}
           rowKey={record => record._id}
-          // dataSource={data}
+          dataSource={data}
           scroll={{ x: 1500 }}
           pagination={pagination}
           loading={loading}
