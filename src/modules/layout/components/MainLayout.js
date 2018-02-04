@@ -62,24 +62,31 @@ class MainLayout extends React.Component {
     this.setState({ collapsed });
   }
 
+  getLang() {
+    let lang = localStorage.getItem('locale');
+    if (lang !== 'mn') {
+      this.setLang('en', {});
+    } else {
+      this.setLang('mn', mergedMessages);
+    }
+  }
+
+  setLang(locale, messages) {
+    localStorage.setItem('locale', locale);
+    this.setState({ locale, messages });
+  }
+
+  onCollapse(collapsed) {
+    localStorage.setItem('collapsed', collapsed);
+    this.setState({ collapsed });
+  }
+
   toggleLang() {
     this.setState(prevState => ({
       toggleLang: !prevState.toggleLang
     }));
-    switch (this.state.toggleLang) {
-      case true:
-        this.setState({
-          locale: 'mn',
-          messages: mergedMessages
-        });
-        break;
-      case false:
-        this.setState({
-          locale: 'en',
-          messages: {}
-        });
-        break;
-    }
+    const { toggleLang } = this.state;
+    toggleLang ? this.setLang('mn', mergedMessages) : this.setLang('en', {});
   }
 
   getChildContext() {
@@ -93,6 +100,7 @@ class MainLayout extends React.Component {
     const { history, currentUser } = this.props;
     const path = history.location.pathname;
 
+    this.getLang();
     if (!currentUser && !visitorPaths.includes(path)) {
       history.push('/sign-in?required');
     }
@@ -120,7 +128,7 @@ class MainLayout extends React.Component {
         <Layout>
           {currentUser && <Sidenav {...navProps} />}
           <Layout className="main" style={layoutStyle}>
-            <Header toggleLang={this.toggleLang} langLabel={toggleLang} />
+            <Header toggleLang={this.toggleLang} langLabel={locale} />
             <Content>
               {currentUser && <Breadcrumb {...location} />}
               {children}
