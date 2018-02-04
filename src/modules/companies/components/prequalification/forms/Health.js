@@ -3,6 +3,17 @@ import { withRouter } from 'react-router';
 import { Form, Card } from 'antd';
 import PreqForm from './PreqForm';
 import PropTypes from 'prop-types';
+import {
+  Title,
+  Common,
+  Prequalification
+} from 'modules/common/components/translations';
+import { intlShape, injectIntl, defineMessages } from 'react-intl';
+const messages = defineMessages({
+  ...Common,
+  ...Title,
+  ...Prequalification.Health
+});
 
 class PrequalificationForm extends PreqForm {
   constructor(props) {
@@ -82,9 +93,10 @@ class PrequalificationForm extends PreqForm {
 }
 
 PrequalificationForm.propTypes = {
-  productsInfo: PropTypes.array
+  productsInfo: PropTypes.array,
+  intl: intlShape.isRequired
 };
 
 const BusinessForm = Form.create()(PrequalificationForm);
 
-export default withRouter(BusinessForm);
+export default injectIntl(withRouter(BusinessForm));

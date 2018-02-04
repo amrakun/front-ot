@@ -3,38 +3,14 @@ import { withRouter } from 'react-router';
 import { Form, Input, Icon, Button, Select, Row, Col, Card } from 'antd';
 import { booleanData, roleData, countryData, groupLabels } from '../constants';
 import { BaseForm, Field, Uploader } from 'modules/common/components';
+import { Title, Common, Regular } from 'modules/common/components/translations';
 import { intlShape, injectIntl, defineMessages } from 'react-intl';
 
 const FormItem = Form.Item;
 const messages = defineMessages({
-  factory: {
-    id: 'factory',
-    defaultMessage: 'Factory'
-  },
-  addFactory: {
-    id: 'addFactory',
-    defaultMessage: 'Add factory'
-  },
-  name: {
-    id: 'name',
-    defaultMessage: 'Name'
-  },
-  townOrCity: {
-    id: 'townOrCity',
-    defaultMessage: 'Town or city'
-  },
-  country: {
-    id: 'country',
-    defaultMessage: 'Country'
-  },
-  productCodes: {
-    id: 'productCodes',
-    defaultMessage: 'Product codes'
-  },
-  distName: {
-    id: 'distributionRightName',
-    defaultMessage: 'Distribution right name'
-  },
+  ...Title,
+  ...Common,
+  ...Regular,
   group: {
     id: 'groupLabelsHead',
     defaultMessage: groupLabels.head
@@ -145,7 +121,9 @@ class RegistrationForm extends BaseForm {
               initialValue={factory.name}
               hasFeedback={false}
               optional={true}
-              control={<Input placeholder={formatMessage(messages.name)} />}
+              control={
+                <Input placeholder={formatMessage(messages.nameGroup)} />
+              }
             />
           </Col>
           <Col span={6}>

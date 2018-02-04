@@ -5,9 +5,20 @@ import { booleanData, actionStatusData } from '../constants';
 import { dateFormat } from 'modules/common/constants';
 import { labels } from '../constants';
 import { BaseForm, Uploader } from 'modules/common/components';
+import {
+  Title,
+  Common,
+  Prequalification
+} from 'modules/common/components/translations';
 import moment from 'moment';
+import { intlShape, injectIntl, defineMessages } from 'react-intl';
 
 const { TextArea } = Input;
+const messages = defineMessages({
+  ...Common,
+  ...Title,
+  ...Prequalification.Enviroment
+});
 
 class PrequalificationForm extends BaseForm {
   constructor(props) {
@@ -146,6 +157,10 @@ class PrequalificationForm extends BaseForm {
   }
 }
 
+PrequalificationForm.propTypes = {
+  intl: intlShape.isRequired
+};
+
 const BusinessForm = Form.create()(PrequalificationForm);
 
-export default withRouter(BusinessForm);
+export default injectIntl(withRouter(BusinessForm));

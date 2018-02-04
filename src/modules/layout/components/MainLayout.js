@@ -8,7 +8,7 @@ import { IntlProvider, addLocaleData } from 'react-intl';
 import { _t } from '../../common/components';
 import mn from 'react-intl/locale-data/mn';
 import en from 'react-intl/locale-data/en';
-import messages from 'modules/locales/translation';
+import * as messages from 'modules/translations';
 
 addLocaleData([...mn, ...en]);
 const { Content, Footer } = Layout;
@@ -23,6 +23,22 @@ const visitorPaths = [
   '/'
 ];
 
+const mergedMessages = {
+  ...messages.Registration.CompanyInfo,
+  ...messages.Registration.Contact,
+  ...messages.Registration.Shareholder,
+  ...messages.Registration.ManagementTeam,
+  ...messages.Registration.Group,
+  ...messages.Registration.Products,
+  ...messages.CapacityBuilding,
+  ...messages.Common,
+  ...messages.Qualification,
+  ...messages.Prequalification.BusinessIntegrity,
+  ...messages.Prequalification.Enviroment,
+  ...messages.Prequalification.Health,
+  ...messages.Prequalification.FinancialInfo
+};
+
 const withSidebar = { marginLeft: 200 };
 const withSidebarCollapsed = { marginLeft: 80 };
 
@@ -34,7 +50,7 @@ class MainLayout extends React.Component {
       collapsed: localStorage.getItem('collapsed') === 'true' ? true : false,
       toggleLang: false,
       locale: 'en',
-      messages: messages
+      messages: mergedMessages
     };
 
     this.onCollapse = this.onCollapse.bind(this);
@@ -54,7 +70,7 @@ class MainLayout extends React.Component {
       case true:
         this.setState({
           locale: 'mn',
-          messages: messages
+          messages: mergedMessages
         });
         break;
       case false:

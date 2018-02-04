@@ -14,11 +14,18 @@ import {
 import { booleanData, labels, descriptions } from '../constants';
 import { dateFormat } from 'modules/common/constants';
 import { Field, Uploader } from 'modules/common/components';
+import { Title, Common } from 'modules/common/components/translations';
 import moment from 'moment';
 import PreqForm from './PreqForm';
+import { intlShape, injectIntl, defineMessages } from 'react-intl';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
+
+const messages = defineMessages({
+  ...Common,
+  ...Title
+});
 
 class PrequalificationForm extends PreqForm {
   constructor(props) {
@@ -102,11 +109,12 @@ class PrequalificationForm extends PreqForm {
 
   renderInvestigation(investigation, index) {
     const _id = investigation._id;
+    const { formatMessage } = this.props.intl;
 
     return (
       <FormItem
         className="multiple-wrapper"
-        label={`Investigation ${index + 1}`}
+        label={`${index + 1}-р ` + formatMessage(messages.investigation)}
         key={_id}
         hasFeedback
       >
@@ -117,7 +125,11 @@ class PrequalificationForm extends PreqForm {
               initialValue={investigation.name}
               hasFeedback={false}
               optional={true}
-              control={<Input placeholder="Name" />}
+              control={
+                <Input
+                  placeholder={formatMessage(messages.placeholderInvestigation)}
+                />
+              }
             />
           </Col>
           <Col span={6}>
@@ -135,7 +147,7 @@ class PrequalificationForm extends PreqForm {
               initialValue={investigation.status}
               hasFeedback={false}
               optional={true}
-              control={<Input placeholder="Status" />}
+              control={<Input placeholder={formatMessage(messages.status)} />}
             />
           </Col>
           <Col span={6}>
@@ -154,6 +166,7 @@ class PrequalificationForm extends PreqForm {
 
   render() {
     const booleanOptions = this.renderOptions(booleanData);
+    const { formatMessage } = this.props.intl;
 
     const {
       hasConvictedForBusinessIntegrity,
@@ -168,7 +181,7 @@ class PrequalificationForm extends PreqForm {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        <h2>Human resource management</h2>
+        <h2>{formatMessage(messages.hrTitle)}</h2>
         <Card>
           {this.renderField({
             label: labels.organisationChart,
@@ -193,7 +206,7 @@ class PrequalificationForm extends PreqForm {
 
         {this.renderConditionalField('doesHaveLiabilityInsurance')}
 
-        <h2>Company business integrity</h2>
+        <h2>{formatMessage(messages.businessIntegrityTitle)}</h2>
         {this.renderConditionalField('doesHaveCodeEthics')}
         {this.renderConditionalField('doesHaveResponsiblityPolicy')}
 
@@ -258,7 +271,7 @@ class PrequalificationForm extends PreqForm {
                 onClick={this.addInvestigation}
                 style={{ width: '100%' }}
               >
-                <Icon type="plus" /> Add investigation
+                <Icon type="plus" /> {formatMessage(messages.addInvestigation)}
               </Button>
             </FormItem>
           </div>
@@ -293,4 +306,8 @@ class PrequalificationForm extends PreqForm {
 
 const BusinessForm = Form.create()(PrequalificationForm);
 
-export default withRouter(BusinessForm);
+PrequalificationForm.propTypes = {
+  intl: intlShape.isRequired
+};
+
+export default injectIntl(withRouter(BusinessForm));

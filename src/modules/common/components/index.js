@@ -1,7 +1,6 @@
 import Field from './Field';
-import _t from './Formatted';
-import commonMessages from './commonMessages';
 import Uploader from './Uploader';
+import _t from './Formatted';
 import BaseForm from './BaseForm';
 import TextCard from './dataDisplay/textCard';
 import NumberCard from './dataDisplay/numberCard';
@@ -15,7 +14,6 @@ export {
   Uploader,
   Field,
   _t,
-  commonMessages,
   BaseForm,
   NumberCard,
   NumberCardLines,

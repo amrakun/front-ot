@@ -4,39 +4,11 @@ import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Table, Card } from 'antd';
 import { dateTimeFormat } from 'modules/common/constants';
+import { qualification, Common } from 'modules/common/components/translations';
 import moment from 'moment';
 import { intlShape, injectIntl, defineMessages } from 'react-intl';
 
-const messages = defineMessages({
-  title: {
-    id: 'qualificationTitle',
-    defaultMessage: 'Qualification/audit requests'
-  },
-  status: {
-    id: 'status',
-    defaultMessage: 'Status'
-  },
-  publishDate: {
-    id: 'publishDate',
-    defaultMessage: 'Publish date'
-  },
-  expirationDate: {
-    id: 'expirationDate',
-    defaultMessage: 'Expiration date'
-  },
-  auditorReport: {
-    id: 'auditorReport',
-    defaultMessage: 'Auditor report'
-  },
-  auditorImprovement: {
-    id: 'auditorImprovement',
-    defaultMessage: 'Auditor improvement plan'
-  },
-  more: {
-    id: 'more',
-    defaultMessage: 'More'
-  }
-});
+const messages = defineMessages({ ...qualification, ...Common });
 
 class AuditRequests extends React.Component {
   columns() {
@@ -56,11 +28,13 @@ class AuditRequests extends React.Component {
       },
       {
         title: formatMessage(messages.auditorReport),
-        render: record => (record.status === 'open' ? '-' : <a>View</a>)
+        render: record =>
+          record.status === 'open' ? '-' : <a>{formatMessage(messages.view)}</a>
       },
       {
         title: formatMessage(messages.auditorImprovement),
-        render: record => (record.status === 'open' ? '-' : <a>View</a>)
+        render: record =>
+          record.status === 'open' ? '-' : <a>{formatMessage(messages.view)}</a>
       },
       {
         title: formatMessage(messages.more),
@@ -85,7 +59,7 @@ class AuditRequests extends React.Component {
     const { formatMessage } = this.props.intl;
 
     return (
-      <Card title={formatMessage(messages.title)}>
+      <Card title={formatMessage(messages.qualificationTitle)}>
         <Table
           columns={this.columns()}
           rowKey={record => record._id}

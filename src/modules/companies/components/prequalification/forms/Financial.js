@@ -3,40 +3,20 @@ import { Form, Select, Row, Col, DatePicker, Input, Card } from 'antd';
 import moment from 'moment';
 import { yearData, booleanData, currencyData } from '../constants';
 import { BaseForm, Uploader } from 'modules/common/components';
+import {
+  Title,
+  Common,
+  Prequalification
+} from 'modules/common/components/translations';
 import { dateFormat } from 'modules/common/constants';
 import { intlShape, injectIntl, defineMessages } from 'react-intl';
 
 const messages = defineMessages({
-  annualTurnover: {
-    id: 'annualTurnover',
-    defaultMessage: 'Annual turnover'
-  },
-  preTaxProfit: {
-    id: 'preTaxProfit',
-    defaultMessage: 'Pre-tax profit'
-  },
-  totalAssets: {
-    id: 'totalAssets',
-    defaultMessage: 'Total assets'
-  },
-  totalCurrentAssets: {
-    id: 'totalCurrentAssets',
-    defaultMessage: 'Total current assets'
-  },
-  totalShareholderEquity: {
-    id: 'totalCurrentAssets',
-    defaultMessage: 'Total current assets'
-  },
-  financialInfo: {
-    id: 'financialInfo',
-    defaultMessage: 'Please provide financial records for your last 3 years'
-  },
-  financialInfoDesc: {
-    id: 'financialInfoDesc',
-    defaultMessage:
-      'The most recent years worth of accounts will always appear on top'
-  }
+  ...Common,
+  ...Title,
+  ...Prequalification.Financial
 });
+
 class PrequalificationForm extends BaseForm {
   constructor(props) {
     super(props);
@@ -116,6 +96,7 @@ class PrequalificationForm extends BaseForm {
 
   renderYearAmount(prefix, index) {
     const { canProvideAccountsInfo } = this.state;
+    const { formatMessage } = this.props.intl;
     const data = this.props.data || {};
     const yearAmountArray = data[prefix] || [];
 
@@ -137,7 +118,7 @@ class PrequalificationForm extends BaseForm {
             hasFeedback: false,
             optional: !canProvideAccountsInfo,
             control: (
-              <Select placeholder="Select an year">
+              <Select placeholder={formatMessage(messages.placeholderYear)}>
                 {this.renderOptions(yearData)}
               </Select>
             )
@@ -174,6 +155,7 @@ class PrequalificationForm extends BaseForm {
 
   renderDateFile(index) {
     const { canProvideAccountsInfo } = this.state;
+    const { formatMessage } = this.props.intl;
     const data = this.props.data || {};
     const recordsInfo = data.recordsInfo || [];
 
@@ -194,7 +176,10 @@ class PrequalificationForm extends BaseForm {
             hasFeedback: false,
             optional: !canProvideAccountsInfo,
             control: (
-              <DatePicker format={dateFormat} placeholder="Choose date" />
+              <DatePicker
+                format={dateFormat}
+                placeholder={formatMessage(messages.placeholderDate)}
+              />
             )
           })}
         </Col>
@@ -258,8 +243,8 @@ class PrequalificationForm extends BaseForm {
 
             <Form.Item
               className="multiple-wrapper"
-              label={formatMessage(messages.financialInfo)}
-              extra={formatMessage(messages.financialInfoDesc)}
+              label={formatMessage(messages.financialRecord)}
+              extra={formatMessage(messages.financialRecordDesc)}
             >
               {this.renderDateFile(0)}
               {this.renderDateFile(1)}

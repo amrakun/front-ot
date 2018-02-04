@@ -14,18 +14,11 @@ import {
   labels
 } from '../constants';
 import { BaseForm, Uploader } from 'modules/common/components';
+import { Title } from 'modules/common/components/translations';
 import { intlShape, injectIntl, defineMessages } from 'react-intl';
-import { _t } from 'modules/common/components';
 
 const messages = defineMessages({
-  title: {
-    id: 'basicInfo.title',
-    defaultMessage: '1. Please provide us with your company details'
-  },
-  address: {
-    id: 'addressTitle',
-    defaultMessage: '2. Address'
-  }
+  ...Title
 });
 
 class CompanyInfo extends BaseForm {
