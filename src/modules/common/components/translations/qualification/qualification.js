@@ -26,6 +26,10 @@ const qualification = {
   more: {
     id: 'more',
     defaultMessage: 'More'
+  },
+  difotScore: {
+    id: 'difotScore',
+    defaultMessage: 'DIFOT score'
   }
 };
 

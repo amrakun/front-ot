@@ -1,9 +1,10 @@
 {
-  "qualificationTitle": "",
+  "qualificationTitle": "Гэрээ хэрэгжүүлэх чадварын үнэлгээ хийх хүсэлт",
   "status": "Төлөв",
   "publishDate": "Нийтлэгдсэн Огноо",
   "expirationDate": "Дуусах Огноо",
   "auditorReport": "Аудитын Тайлан",
   "auditorImprovement": "Сайжруулах Төлөвлөгөө",
-  "more": "Бусад"
+  "more": "Бусад",
+  "difotScore": "DIFOT оноо"
 }

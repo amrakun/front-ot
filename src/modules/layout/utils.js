@@ -5,6 +5,7 @@ export const logout = () => {
 
   localStorage.removeItem(LOGIN_TOKEN_KEY);
   localStorage.removeItem(LOGIN_REFRESH_TOKEN_KEY);
+  localStorage.removeItem('locale');
 
   window.location.href = '/';
 };
