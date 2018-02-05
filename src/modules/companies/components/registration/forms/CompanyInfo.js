@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import addressFields from './address';
-import { Form, Input, Tooltip, Icon, Select, Spin, Card } from 'antd';
+import { Form, Input, Select, Spin, Card } from 'antd';
 import {
   structureData,
   foreignPercentageData,
@@ -15,7 +15,7 @@ import {
 } from '../constants';
 import { BaseForm, Uploader } from 'modules/common/components';
 import { Title } from 'modules/common/components/translations';
-import { intlShape, injectIntl, defineMessages } from 'react-intl';
+import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
   ...Title
@@ -57,7 +57,7 @@ class CompanyInfo extends BaseForm {
 
     const booleanOptions = this.renderOptions(booleanData);
     const countryOptions = this.renderOptions(countryData);
-    const { formatMessage } = this.props.intl;
+    const { formatMessage } = this.context;
 
     return (
       <Spin spinning={this.state.loading} delay={500}>
@@ -223,10 +223,13 @@ class CompanyInfo extends BaseForm {
 
 CompanyInfo.propTypes = {
   form: PropTypes.object,
-  data: PropTypes.object,
-  intl: intlShape.isRequired
+  data: PropTypes.object
+};
+
+CompanyInfo.contextTypes = {
+  formatMessage: PropTypes.func
 };
 
 const CompanyInfoForm = Form.create()(CompanyInfo);
 
-export default injectIntl(withRouter(CompanyInfoForm));
+export default withRouter(CompanyInfoForm);
