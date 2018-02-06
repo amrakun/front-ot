@@ -59,7 +59,7 @@ class Field extends React.Component {
       return name.replace(prefix, 'common');
     }
 
-    if (suffix) {
+    if (suffix || suffix === 0) {
       return name.replace(suffix, 'Common');
     }
 

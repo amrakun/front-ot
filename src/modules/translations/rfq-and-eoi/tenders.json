@@ -1,6 +1,7 @@
 {
   "tenderStatus": "Төлөв",
   "tenderNumber": "Тендерийн дугаар",
+  "tenderName": "Тендерийн нэр",
   "tenderRegularNumber": "Дугаар",
   "tenderRegularName": "Нэр",
   "tenderFile": "Файл",

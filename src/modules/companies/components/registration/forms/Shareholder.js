@@ -71,7 +71,7 @@ class ShareHolders extends BaseForm {
     });
 
     return (
-      <Card title={formatMessage(messages.shareholder) + ` ${k}`}>
+      <Card title={formatMessage(messages.shareholder) + ` ${k + 1}`}>
         <Field
           label="Name"
           name={`name${k}`}
