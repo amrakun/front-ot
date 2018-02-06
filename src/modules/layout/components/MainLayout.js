@@ -5,7 +5,7 @@ import Breadcrumb from './Breadcrumb';
 import { Layout, BackTop } from 'antd';
 import { PropTypes } from 'prop-types';
 import { IntlProvider, addLocaleData } from 'react-intl';
-import { _t } from '../../common/components';
+import { T } from '../../common/components';
 import mn from 'react-intl/locale-data/mn';
 import en from 'react-intl/locale-data/en';
 import * as messages from 'modules/translations';
@@ -30,13 +30,13 @@ const mergedMessages = {
   ...messages.Registration.ManagementTeam,
   ...messages.Registration.Group,
   ...messages.Registration.Products,
-  ...messages.CapacityBuilding,
-  ...messages.Common,
-  ...messages.Qualification,
   ...messages.Prequalification.BusinessIntegrity,
   ...messages.Prequalification.Enviroment,
   ...messages.Prequalification.Health,
-  ...messages.Prequalification.FinancialInfo
+  ...messages.Prequalification.FinancialInfo,
+  ...messages.CapacityBuilding,
+  ...messages.Common,
+  ...messages.Qualification
 };
 
 const withSidebar = { marginLeft: 200 };
@@ -55,11 +55,6 @@ class MainLayout extends React.Component {
 
     this.onCollapse = this.onCollapse.bind(this);
     this.toggleLang = this.toggleLang.bind(this);
-  }
-
-  onCollapse(collapsed) {
-    localStorage.setItem('collapsed', collapsed);
-    this.setState({ collapsed });
   }
 
   getLang() {
@@ -135,7 +130,7 @@ class MainLayout extends React.Component {
               <BackTop />
             </Content>
             <Footer>
-              <_t id="footer">Oyu Tolgoi ©2018 All Rights Reserved</_t>
+              <T id="footer">Oyu Tolgoi ©2018 All Rights Reserved</T>
             </Footer>
           </Layout>
         </Layout>

@@ -2,12 +2,14 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { Form, Input, Card } from 'antd';
 import { BaseForm, Field, Uploader } from 'modules/common/components';
-import { Title } from 'modules/common/components/translations';
 import { uploadDisclaimer } from 'modules/common/constants';
 import { intlShape, injectIntl, defineMessages } from 'react-intl';
 
 const messages = defineMessages({
-  ...Title
+  shareholder: {
+    id: 'shareholder',
+    defaultMessage: 'Shareholder'
+  }
 });
 
 class ShareHolders extends BaseForm {

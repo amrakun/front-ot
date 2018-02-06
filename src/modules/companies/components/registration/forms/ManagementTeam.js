@@ -3,7 +3,6 @@ import { withRouter } from 'react-router';
 import { Form, Input, Card, Button, Icon } from 'antd';
 import Field from 'modules/common/components/Field';
 import { BaseForm } from 'modules/common/components';
-import { Title, Common } from 'modules/common/components/translations';
 import { labels } from '../constants';
 import { intlShape, injectIntl, defineMessages } from 'react-intl';
 
@@ -18,8 +17,42 @@ const groups = [
 ];
 
 const messages = defineMessages({
-  ...Common,
-  ...Title
+  placeholderFullName: {
+    id: 'placeholderFullName',
+    defaultMessage: 'First name + Last name'
+  },
+  copyAbove: {
+    id: 'copyAbove',
+    defaultMessage: 'Copy above'
+  },
+  managingDirector: {
+    id: 'managingDirector',
+    defaultMessage: '15. Managing director'
+  },
+  executiveOfficer: {
+    id: 'executiveOfficer',
+    defaultMessage: '16. Executive officer'
+  },
+  salesDirector: {
+    id: 'salesDirector',
+    defaultMessage: '17. Sales director'
+  },
+  financialDirector: {
+    id: 'financialDirector',
+    defaultMessage: '18. Financial director'
+  },
+  otherMember1: {
+    id: 'otherMember1',
+    defaultMessage: '19. Other management team member'
+  },
+  otherMember2: {
+    id: 'otherMember2',
+    defaultMessage: '20. Other management team member 2'
+  },
+  otherMember3: {
+    id: 'otherMember3',
+    defaultMessage: '21. Other management team member 3'
+  }
 });
 
 class ManagementTeam extends BaseForm {

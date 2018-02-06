@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 import { supplierSideMenu, buyerSideMenu } from '../consts';
 import { PropTypes } from 'prop-types';
-import { _t } from 'modules/common/components';
+import { T } from 'modules/common/components';
 
 const { Sider } = Layout;
 const SubMenu = Menu.SubMenu;
@@ -92,7 +92,7 @@ function renderMenu(sideMenu, translate) {
       );
     } else {
       let title =
-        (translate && <_t id={'b_' + m.url.replace('/', '')}>{m.title}</_t>) ||
+        (translate && <T id={'b_' + m.url.replace('/', '')}>{m.title}</T>) ||
         m.title;
 
       menuItems.push(

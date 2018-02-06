@@ -2,13 +2,30 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { Form, Input, Card, Button, Icon } from 'antd';
 import { BaseForm } from 'modules/common/components';
-import { Title, Common } from 'modules/common/components/translations';
 import addressFields from './address';
 import { intlShape, injectIntl, defineMessages } from 'react-intl';
 
 const messages = defineMessages({
-  ...Common,
-  ...Title
+  business: {
+    id: 'businessContact',
+    defaultMessage: '14. Primary business contact'
+  },
+  address: {
+    id: 'address',
+    defaultMessage: 'Address'
+  },
+  copy: {
+    id: 'copyFromCompany',
+    defaultMessage: 'Copy from Company Information'
+  },
+  placeholderFullName: {
+    id: 'placeholderFullName',
+    defaultMessage: 'First name + Last name'
+  },
+  placeholderNumeric: {
+    id: 'placeholderNumeric',
+    defaultMessage: 'Numeric'
+  }
 });
 
 class ContactInfo extends BaseForm {

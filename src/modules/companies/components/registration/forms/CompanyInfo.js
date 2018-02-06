@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import addressFields from './address';
-import { Form, Input, Tooltip, Icon, Select, Spin, Card } from 'antd';
+import { Form, Input, Select, Spin, Card } from 'antd';
 import {
   structureData,
   foreignPercentageData,
@@ -14,11 +14,17 @@ import {
   labels
 } from '../constants';
 import { BaseForm, Uploader } from 'modules/common/components';
-import { Title } from 'modules/common/components/translations';
 import { intlShape, injectIntl, defineMessages } from 'react-intl';
 
 const messages = defineMessages({
-  ...Title
+  title: {
+    id: 'basicInfo.title',
+    defaultMessage: '1. Please provide us with your company details'
+  },
+  address: {
+    id: 'addressTitle',
+    defaultMessage: '2. Address'
+  }
 });
 
 class CompanyInfo extends BaseForm {

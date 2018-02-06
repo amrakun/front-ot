@@ -3,18 +3,47 @@ import { Form, Select, Row, Col, DatePicker, Input, Card } from 'antd';
 import moment from 'moment';
 import { yearData, booleanData, currencyData } from '../constants';
 import { BaseForm, Uploader } from 'modules/common/components';
-import {
-  Title,
-  Common,
-  Prequalification
-} from 'modules/common/components/translations';
 import { dateFormat } from 'modules/common/constants';
 import { intlShape, injectIntl, defineMessages } from 'react-intl';
 
 const messages = defineMessages({
-  ...Common,
-  ...Title,
-  ...Prequalification.Financial
+  placeholderDate: {
+    id: 'placeholderDate',
+    defaultMessage: 'Choose date'
+  },
+  placeholderYear: {
+    id: 'placeholderYear',
+    defaultMessage: 'Select an year'
+  },
+  annualTurnover: {
+    id: 'annualTurnover',
+    defaultMessage: 'Annual turnover'
+  },
+  preTaxProfit: {
+    id: 'preTaxProfit',
+    defaultMessage: 'Pre-tax profit'
+  },
+  totalAssets: {
+    id: 'totalAssets',
+    defaultMessage: 'Total assets'
+  },
+  totalCurrentAssets: {
+    id: 'totalCurrentAssets',
+    defaultMessage: 'Total current assets'
+  },
+  totalShareholderEquity: {
+    id: 'totalCurrentAssets',
+    defaultMessage: 'Total current assets'
+  },
+  financialRecord: {
+    id: 'financialRecord',
+    defaultMessage: 'Please provide financial records for your last 3 years'
+  },
+  financialRecordDesc: {
+    id: 'financialRecordDesc',
+    defaultMessage:
+      'The most recent years worth of accounts will always appear on top'
+  }
 });
 
 class PrequalificationForm extends BaseForm {

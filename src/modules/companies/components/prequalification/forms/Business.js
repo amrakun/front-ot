@@ -14,7 +14,6 @@ import {
 import { booleanData, labels, descriptions } from '../constants';
 import { dateFormat } from 'modules/common/constants';
 import { Field, Uploader } from 'modules/common/components';
-import { Title, Common } from 'modules/common/components/translations';
 import moment from 'moment';
 import PreqForm from './PreqForm';
 import { intlShape, injectIntl, defineMessages } from 'react-intl';
@@ -23,8 +22,26 @@ const FormItem = Form.Item;
 const { TextArea } = Input;
 
 const messages = defineMessages({
-  ...Common,
-  ...Title
+  investigation: {
+    id: 'investigation',
+    defaultMessage: 'Investigation'
+  },
+  addInvestigation: {
+    id: 'addInvestigation',
+    defaultMessage: 'Add investigation'
+  },
+  businessIntegrityTitle: {
+    id: 'businessIntegrityTitle',
+    defaultMessage: 'Company business integrity'
+  },
+  hrTitle: {
+    id: 'hrTitle',
+    defaultMessage: 'Human resource management'
+  },
+  pepName: {
+    id: 'pepName',
+    defaultMessage: 'PEP Name'
+  }
 });
 
 class PrequalificationForm extends PreqForm {

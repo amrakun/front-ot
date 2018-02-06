@@ -3,14 +3,22 @@ import { withRouter } from 'react-router';
 import { Form, Input, Icon, Button, Select, Row, Col, Card } from 'antd';
 import { booleanData, roleData, countryData, groupLabels } from '../constants';
 import { BaseForm, Field, Uploader } from 'modules/common/components';
-import { Title, Common, Regular } from 'modules/common/components/translations';
 import { intlShape, injectIntl, defineMessages } from 'react-intl';
 
 const FormItem = Form.Item;
 const messages = defineMessages({
-  ...Title,
-  ...Common,
-  ...Regular,
+  distName: {
+    id: 'distributionRightName',
+    defaultMessage: 'Distribution right name'
+  },
+  factory: {
+    id: 'factory',
+    defaultMessage: 'Factory'
+  },
+  addFactory: {
+    id: 'addFactory',
+    defaultMessage: 'Add factory'
+  },
   group: {
     id: 'groupLabelsHead',
     defaultMessage: groupLabels.head

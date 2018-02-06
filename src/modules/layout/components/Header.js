@@ -68,7 +68,7 @@ const HeaderBar = (props, context) => {
       <Menu.Item className="right" key="lang">
         <a onClick={props.toggleLang}>
           <span className="bordered">
-            {props.langLabel == 'en' ? 'EN' : 'MN'}
+            {props.langLabel === 'en' ? 'EN' : 'MN'}
           </span>
         </a>
       </Menu.Item>

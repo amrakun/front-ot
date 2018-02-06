@@ -33,9 +33,10 @@ class PreqForm extends BaseForm {
   renderTextArea(name, isVisible) {
     return this.renderField({
       name: name,
-      label: labels[name] || 'Provide details',
+      label: labels[name],
       isVisible: isVisible,
       optional: labels[name] ? false : true,
+      controlType: 'textarea',
       control: <TextArea />
     });
   }

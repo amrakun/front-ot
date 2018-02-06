@@ -1,7 +1,7 @@
 import React from 'react';
 import { Breadcrumb, Icon } from 'antd';
 import { PropTypes } from 'prop-types';
-import { _t } from 'modules/common/components';
+import { T } from 'modules/common/components';
 import { intlShape, injectIntl, defineMessages } from 'react-intl';
 
 const BreadcrumbItem = Breadcrumb.Item;
@@ -39,7 +39,7 @@ const routes = {
 const Breadcrumbs = location => {
   const breadcrumbItems = [
     <BreadcrumbItem key={0}>
-      <Icon type="home" /> <_t id="home">Home</_t>
+      <Icon type="home" /> <T id="home">Home</T>
     </BreadcrumbItem>
   ];
 

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Select, Icon, Button } from 'antd';
 import Field from './Field';
-import { _t } from 'modules/common/components';
+import { T } from 'modules/common/components';
 
 export default class BaseForm extends React.Component {
   constructor(props) {
@@ -116,7 +116,7 @@ export default class BaseForm extends React.Component {
         htmlType="submit"
         onClick={onClick}
       >
-        <_t id="saveContinue">{text}</_t>
+        <T id="saveContinue">{text}</T>
         <Icon type="right" />
       </Button>
     );
@@ -126,7 +126,7 @@ export default class BaseForm extends React.Component {
     return (
       <Button onClick={this.props.previousTab}>
         <Icon type="left" />
-        <_t id="back">Back</_t>
+        <T id="back">Back</T>
       </Button>
     );
   }

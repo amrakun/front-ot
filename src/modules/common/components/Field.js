@@ -66,12 +66,30 @@ class Field extends React.Component {
     return name;
   }
 
-  getTranslation(prefix, suffix, name, label, description, attachmentType) {
+  getTranslation(
+    prefix,
+    suffix,
+    name,
+    label,
+    description,
+    attachmentType,
+    dataType,
+    controlType
+  ) {
     const { formatMessage } = this.props.intl;
     let commonName = this.setName(prefix, suffix, name);
 
     if (attachmentType) {
       commonName += attachmentType;
+    }
+
+    if (commonName.includes('File') && dataType === 'file') {
+      commonName = 'file';
+    }
+
+    if (controlType === 'textarea') {
+      commonName = 'textarea';
+      label = label || 'Provide details';
     }
 
     const messages = defineMessages({
@@ -106,7 +124,8 @@ class Field extends React.Component {
       suffix,
       attachmentType,
       rules = [],
-      dataType
+      dataType,
+      controlType
     } = this.props;
 
     const { form } = this.context;
@@ -146,7 +165,9 @@ class Field extends React.Component {
       name,
       label,
       description,
-      attachmentType
+      attachmentType,
+      dataType,
+      controlType
     );
 
     return (

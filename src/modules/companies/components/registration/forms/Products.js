@@ -2,13 +2,19 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { Form, TreeSelect, Card, Alert, message } from 'antd';
 import { Field, BaseForm } from 'modules/common/components';
-import { Common, Description } from 'modules/common/components/translations';
 import { productDescription } from '../constants';
 import productsTree from '../../../productsTree';
 import { intlShape, injectIntl, defineMessages } from 'react-intl';
 
 const messages = defineMessages({
-  ...Common,
+  help: {
+    id: 'help',
+    defaultMessage: 'Help'
+  },
+  placeholder: {
+    id: 'selectProducts',
+    defaultMessage: 'Please select products'
+  },
   product: {
     id: 'productsDesc',
     defaultMessage: productDescription
