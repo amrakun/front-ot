@@ -9,6 +9,7 @@ import { T } from '../../common/components';
 import mn from 'react-intl/locale-data/mn';
 import en from 'react-intl/locale-data/en';
 import * as messages from 'modules/translations';
+import { injectIntl } from 'react-intl';
 
 addLocaleData([...mn, ...en]);
 const { Content, Footer } = Layout;
@@ -41,6 +42,32 @@ const mergedMessages = {
 
 const withSidebar = { marginLeft: 200 };
 const withSidebarCollapsed = { marginLeft: 80 };
+
+class Test extends React.Component {
+  getChildContext() {
+    const { intl } = this.props;
+    const { formatMessage } = intl;
+
+    return {
+      formatMessage
+    };
+  }
+
+  render() {
+    return <div>{this.props.children}</div>;
+  }
+}
+
+Test.propTypes = {
+  intl: PropTypes.object,
+  children: PropTypes.object
+};
+
+Test.childContextTypes = {
+  formatMessage: PropTypes.func
+};
+
+const InjectedTest = injectIntl(Test);
 
 class MainLayout extends React.Component {
   constructor(props) {
@@ -102,8 +129,8 @@ class MainLayout extends React.Component {
   }
 
   render() {
-    const { currentUser, children, location } = this.props;
-    const { collapsed, locale, messages, toggleLang } = this.state;
+    const { currentUser, location } = this.props;
+    const { collapsed, locale, messages } = this.state;
 
     const navProps = {
       collapsed: collapsed ? true : false,
@@ -126,7 +153,7 @@ class MainLayout extends React.Component {
             <Header toggleLang={this.toggleLang} langLabel={locale} />
             <Content>
               {currentUser && <Breadcrumb {...location} />}
-              {children}
+              <InjectedTest {...this.props} />
               <BackTop />
             </Content>
             <Footer>

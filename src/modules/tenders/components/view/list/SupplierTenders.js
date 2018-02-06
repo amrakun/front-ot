@@ -111,4 +111,8 @@ SupplierTenders.propTypes = {
   notInterested: PropTypes.func
 };
 
+SupplierTenders.contextTypes = {
+  formatMessage: PropTypes.func
+};
+
 export default withRouter(SupplierTenders);
