@@ -62,37 +62,46 @@ const eoiResponseFields = `
   }
 `;
 
+const tenderResponses = `
+  query tenderResponses(
+    $tenderId: String!
+    $sort: JSON
+    $betweenSearch: JSON
+    $supplierSearch: String
+  ) {
+    tenderResponses(
+      tenderId: $tenderId
+      sort: $sort
+      betweenSearch: $betweenSearch
+      supplierSearch: $supplierSearch
+    ) {
+      supplier {
+        _id
+        isQualified
+        isProductsInfoValidated
+        averageDifotScore
+        lastDueDiligence
+        basicInfo {
+          enName,
+          sapNumber,
+          totalNumberOfEmployees
+        }
+        contactInfo {
+          name,
+          phone,
+          email
+        }
+      }
+      ${rfqResponseFields}
+      ${eoiResponseFields}
+    }
+  }
+`;
+
 const tenderDetail = `
   query tenderDetail($_id: String!) {
     tenderDetail(_id: $_id) {
       ${tenderFields}
-      suppliers {
-        _id
-        basicInfo {
-          enName
-        }
-      }
-      responses {
-        supplier {
-          _id
-          isQualified
-          isProductsInfoValidated
-          averageDifotScore
-          lastDueDiligence
-          basicInfo {
-            enName,
-            sapNumber,
-            totalNumberOfEmployees
-          }
-          contactInfo {
-            name,
-            phone,
-            email
-          }
-        }
-        ${rfqResponseFields}
-        ${eoiResponseFields}
-      },
     }
   }
 `;
@@ -202,6 +211,7 @@ const generateMaterialsTemplate = `
 `;
 
 export default {
+  tenderResponses,
   tenderDetail,
   tenders,
   tendersSupplier,

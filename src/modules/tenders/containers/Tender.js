@@ -4,7 +4,6 @@ import { Rfq, Eoi } from '../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries, mutations } from '../graphql';
 import { message, notification, Icon, Button } from 'antd';
-import { Loading } from 'modules/common/components';
 import { colors } from 'modules/common/constants';
 import { withTableProps } from 'modules/common/containers';
 import { exportFile } from 'modules/common/components';
@@ -29,16 +28,16 @@ class TenderContainer extends React.Component {
   }
 
   award(companyId) {
-    const { tendersAward, tenderDetailTableQuery } = this.props;
+    const { tendersAward, tenderDetailQuery } = this.props;
 
     tendersAward({
       variables: {
-        _id: tenderDetailTableQuery.tenderDetail._id,
+        _id: tenderDetailQuery.tenderDetail._id,
         supplierId: companyId
       }
     })
       .then(() => {
-        tenderDetailTableQuery.refetch();
+        tenderDetailQuery.refetch();
         notification.open({
           ...notifyIfWantToSend,
           btn: (
@@ -64,8 +63,8 @@ class TenderContainer extends React.Component {
   }
 
   sendRegretLetter(content) {
-    const { sendRegretLetter, tenderDetailTableQuery } = this.props;
-    const { tenderDetail } = tenderDetailTableQuery;
+    const { sendRegretLetter, tenderDetailQuery } = this.props;
+    const { tenderDetail } = tenderDetailQuery;
 
     sendRegretLetter({
       variables: {
@@ -76,7 +75,7 @@ class TenderContainer extends React.Component {
     })
       .then(() => {
         message.success('Succesfully sent regret letters!');
-        tenderDetailTableQuery.refetch();
+        tenderDetailQuery.refetch();
         this.setState({ regretLetterModalVisible: false });
       })
       .catch(error => {
@@ -85,7 +84,7 @@ class TenderContainer extends React.Component {
   }
 
   downloadReport(companies, name) {
-    const { tenderDetailTableQuery } = this.props;
+    const { tenderDetailQuery } = this.props;
     const loadingReportName = `${name}Loading`;
 
     let loading = {};
@@ -97,7 +96,7 @@ class TenderContainer extends React.Component {
       query: queries[name],
       name,
       variables: {
-        tenderId: tenderDetailTableQuery.tenderDetail._id,
+        tenderId: tenderDetailQuery.tenderDetail._id,
         supplierIds: companies
       },
       onFinish: () => {
@@ -108,14 +107,21 @@ class TenderContainer extends React.Component {
   }
 
   render() {
-    const { tenderDetailTableQuery } = this.props;
+    const {
+      tenderDetailQuery,
+      tenderResponsesTableQuery,
+      location
+    } = this.props;
     const { systemConfig } = this.context;
 
-    if (tenderDetailTableQuery.loading) {
-      return <Loading />;
+    const Component = location.pathname.includes('rfq') ? Rfq : Eoi;
+
+    if (tenderDetailQuery.loading || tenderResponsesTableQuery.loading) {
+      return <Component loading={true} />;
     }
 
-    const tenderDetail = tenderDetailTableQuery.tenderDetail || {};
+    const tenderDetail = tenderDetailQuery.tenderDetail || {};
+    const tenderResponses = tenderResponsesTableQuery.tenderResponses || {};
 
     const { rfqBidSummaryReportLoading, regretLetterModalVisible } = this.state;
 
@@ -123,23 +129,25 @@ class TenderContainer extends React.Component {
       ...this.props,
       rfqBidSummaryReportLoading,
       regretLetterModalVisible,
+      tenderDetail,
       emailTemplate: systemConfig.regretLetterTemplate,
       award: this.award,
       downloadReport: this.downloadReport,
       sendRegretLetter: this.sendRegretLetter,
-      data: tenderDetail
+      data: tenderResponses
     };
 
-    if (tenderDetail.type === 'rfq') return <Rfq {...updatedProps} />;
-    else return <Eoi {...updatedProps} />;
+    return <Component {...updatedProps} />;
   }
 }
 
 TenderContainer.propTypes = {
-  tenderDetailTableQuery: PropTypes.object,
+  tenderDetailQuery: PropTypes.object,
+  tenderResponsesTableQuery: PropTypes.object,
   tendersAward: PropTypes.func,
   sendRegretLetter: PropTypes.func,
-  history: PropTypes.object
+  history: PropTypes.object,
+  location: PropTypes.object
 };
 
 TenderContainer.contextTypes = {
@@ -148,10 +156,33 @@ TenderContainer.contextTypes = {
 
 export default compose(
   graphql(gql(queries.tenderDetail), {
-    name: 'tenderDetailTableQuery',
+    name: 'tenderDetailQuery',
     options: ({ match }) => {
       return {
         variables: { _id: match.params.id }
+      };
+    }
+  }),
+
+  graphql(gql(queries.tenderResponses), {
+    name: 'tenderResponsesTableQuery',
+    options: ({ match, queryParams }) => {
+      return {
+        variables: {
+          tenderId: match.params.id,
+          supplierSearch: queryParams.search,
+          sort: {
+            name: queryParams.sorter,
+            productCode: queryParams.productCode
+          },
+          betweenSearch: {
+            name: queryParams.between,
+            productCode: queryParams.productCode,
+            minValue: queryParams.from,
+            maxValue: queryParams.to
+          }
+        },
+        notifyOnNetworkStatusChange: true
       };
     }
   }),
