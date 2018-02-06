@@ -65,7 +65,9 @@ export default class Field extends React.Component {
       hasFeedback = true,
       layout,
       rules = [],
-      dataType
+      dataType,
+      validateStatus,
+      help
     } = this.props;
 
     const { form } = this.context;
@@ -106,6 +108,8 @@ export default class Field extends React.Component {
         extra={description}
         style={isVisible ? {} : { display: 'none' }}
         hasFeedback={hasFeedback}
+        validateStatus={validateStatus}
+        help={help}
       >
         {getFieldDecorator(name, args)(control)}
       </Form.Item>
@@ -126,7 +130,9 @@ Field.propTypes = {
   layout: PropTypes.object,
   rules: PropTypes.array,
   getFieldValue: PropTypes.func,
-  dataType: PropTypes.string
+  dataType: PropTypes.string,
+  validateStatus: PropTypes.string,
+  help: PropTypes.string
 };
 
 Field.contextTypes = {

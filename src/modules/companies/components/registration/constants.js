@@ -27,13 +27,6 @@ export const booleanData = [
   { text: 'No', value: 'false' }
 ];
 
-export const roleData = [
-  { text: 'Original Equipment Manufacturer (OEM)', value: 'EOM' },
-  { text: 'Stockist', value: 'Stockist' },
-  { text: 'Distributor', value: 'Distributor' },
-  { text: 'None of above', value: 'None' }
-];
-
 export const descriptions = {
   isSubContractor: `
     Belarus,
@@ -114,7 +107,7 @@ export const groupLabels = {
 
   parentRegistrationNumber: `Registration number of Ultimate Parent Company`,
 
-  role: `23. Are you a Manufacturer, Distributor or Stockist?`,
+  role: `23. Are you a Manufacturer, Distributor or Service Provider?`,
 
   isExclusiveDistributor: `Are you an exclusive distributor?`,
 

@@ -35,7 +35,7 @@ class PreqForm extends BaseForm {
       name: name,
       label: labels[name] || 'Provide details',
       isVisible: isVisible,
-      optional: labels[name] ? false : true,
+      optional: !isVisible,
       control: <TextArea />
     });
   }

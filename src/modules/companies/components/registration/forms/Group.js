@@ -1,10 +1,11 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Form, Input, Icon, Button, Select, Row, Col, Card } from 'antd';
-import { booleanData, roleData, countryData, groupLabels } from '../constants';
+import { booleanData, countryData, groupLabels } from '../constants';
 import { BaseForm, Field, Uploader } from 'modules/common/components';
 
 const FormItem = Form.Item;
+const Option = Select.Option;
 
 class RegistrationForm extends BaseForm {
   constructor(props) {
@@ -36,7 +37,13 @@ class RegistrationForm extends BaseForm {
   }
 
   onRoleChange(value) {
-    this.setState({ role: value });
+    let updatedValue = value;
+
+    if (value.includes('None')) {
+      updatedValue = ['None'];
+    }
+
+    this.setState({ role: updatedValue });
   }
 
   onIsExcChange(value) {
@@ -161,10 +168,11 @@ class RegistrationForm extends BaseForm {
 
   render() {
     const booleanOptions = this.renderOptions(booleanData);
-    const roleOptions = this.renderOptions(roleData);
     const countryOptions = this.renderOptions(countryData);
 
     const { hasParent, role, factories, isExclusiveDistributor } = this.state;
+
+    const roleNone = role.includes('None');
 
     const factoryItems = factories.map((factory, index) =>
       this.renderFactory(factory, index)
@@ -222,7 +230,18 @@ class RegistrationForm extends BaseForm {
             label: groupLabels.role,
             control: (
               <Select onChange={this.onRoleChange} mode="multiple">
-                {roleOptions}
+                <Option value="EOM" disabled={roleNone}>
+                  Original Equipment Manufacturer (OEM)
+                </Option>
+                <Option value="Service Provider" disabled={roleNone}>
+                  Service Provider
+                </Option>
+                <Option value="Distributor" disabled={roleNone}>
+                  Distributor
+                </Option>
+                <Option value="None" disabled={role.length > 0 && !roleNone}>
+                  None of above
+                </Option>
               </Select>
             )
           })}

@@ -5,10 +5,29 @@ import { BaseForm, Field, Uploader } from 'modules/common/components';
 import { uploadDisclaimer } from 'modules/common/constants';
 
 class ShareHolders extends BaseForm {
+  constructor(props) {
+    super(props);
+
+    const shareholderInfo = this.props.data || {};
+    const shareholders = shareholderInfo.shareholders || [];
+
+    let percentages = {};
+
+    shareholders.forEach((shareholder, i) => {
+      if (shareholder) percentages[`percentage${i}`] = shareholder.percentage;
+    });
+
+    this.state = { ...percentages };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleShareChange = this.handleShareChange.bind(this);
+    this.renderShareholder = this.renderShareholder.bind(this);
+  }
+
   handleSubmit(e) {
     e.preventDefault();
 
-    const items = [1, 2, 3, 4, 5];
+    const items = [0, 1, 2, 3, 4];
 
     const shareholders = [];
 
@@ -22,18 +41,27 @@ class ShareHolders extends BaseForm {
       }
     });
 
-    this.save({
-      shareholders
-    });
+    this.save({ shareholders });
+  }
+
+  handleShareChange(e, name) {
+    const value = e.target.value;
+
+    this.setState({ [name]: value ? parseInt(value, 10) : 0 });
   }
 
   renderShareholder(k, optional) {
     const shareholderInfo = this.props.data || {};
     const shareholders = shareholderInfo.shareholders || [];
-    const shareholder = shareholders[k - 1] || {};
+    const shareholder = shareholders[k] || {};
+
+    let totalShare = 0;
+    Object.keys(this.state).forEach(key => {
+      totalShare += this.state[key];
+    });
 
     return (
-      <Card title={`Shareholder ${k}`}>
+      <Card title={`Shareholder ${k + 1}`}>
         <Field
           label="Name"
           name={`name${k}`}
@@ -54,8 +82,19 @@ class ShareHolders extends BaseForm {
           label="Share percentage %"
           name={`percentage${k}`}
           initialValue={shareholder.percentage}
-          control={<Input type="number" />}
+          control={
+            <Input
+              type="number"
+              onChange={e => this.handleShareChange(e, `percentage${k}`)}
+            />
+          }
           optional={optional}
+          validateStatus={totalShare > 100 ? 'error' : undefined}
+          help={
+            totalShare > 100
+              ? 'Total share should be lower than 100%'
+              : undefined
+          }
         />
       </Card>
     );
@@ -75,11 +114,11 @@ class ShareHolders extends BaseForm {
           })}
         </Card>
 
-        {this.renderShareholder('1', false)}
-        {this.renderShareholder('2', true)}
-        {this.renderShareholder('3', true)}
-        {this.renderShareholder('4', true)}
-        {this.renderShareholder('5', true)}
+        {this.renderShareholder(0, false)}
+        {this.renderShareholder(1, true)}
+        {this.renderShareholder(2, true)}
+        {this.renderShareholder(3, true)}
+        {this.renderShareholder(4, true)}
 
         {this.renderGoBack()}
         {this.renderSubmit()}

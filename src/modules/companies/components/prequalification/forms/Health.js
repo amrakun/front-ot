@@ -43,7 +43,7 @@ class PrequalificationForm extends PreqForm {
     return (
       <Form onSubmit={this.save}>
         {this.renderConditionalField('doesHaveHealthSafety')}
-        <Card>{this.renderBoolean('areHSEResourcesClearlyIdentified')}</Card>
+        {this.renderConditionalField('areHSEResourcesClearlyIdentified')}
         {this.renderConditionalField('doesHaveDocumentedProcessToEnsure')}
         <Card>{this.renderBoolean('areEmployeesUnderYourControl')}</Card>
         {this.renderConditionalField('doesHaveDocumentForRiskAssesment')}
