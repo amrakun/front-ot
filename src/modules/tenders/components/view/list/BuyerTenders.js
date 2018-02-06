@@ -73,11 +73,11 @@ class BuyerTenders extends Tenders {
 
   renderOperation(record) {
     const { cancelTender } = this.props;
-    const { status, _id } = record;
+    const { status, _id, type } = record;
 
     return (
       <div style={{ width: '120px' }}>
-        <Link to={`/tender/${_id}`}>View</Link>
+        <Link to={`/${type}/${_id}`}>View</Link>
         {!['closed', 'awarded'].includes(status) && [
           <Divider key={0} type="vertical" />,
           <Link key={1} to={`/tender/edit/${_id}`}>

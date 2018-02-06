@@ -2,14 +2,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Table, Card, Input, Icon, Row, Col, Button, Modal } from 'antd';
+import { Table, Card, Icon, Row, Col, Button, Modal } from 'antd';
 import { NumberCard, NumberCardLines } from 'modules/common/components';
 import { colors } from 'modules/common/constants';
-import { Editor } from 'modules/common/components';
+import { Search, Editor } from 'modules/common/components';
 import { Common } from 'modules/companies/components/';
 import { Link } from 'react-router-dom';
-
-const Search = Input.Search;
 
 class Tender extends Common {
   constructor(props) {
@@ -140,7 +138,57 @@ class Tender extends Common {
     return <a onClick={() => this.showResponsesModal(record)}>View</a>;
   }
 
-  renderTender(args) {
+  renderStats() {
+    const tenderDetail = this.props.tenderDetail || {};
+    const {
+      submittedCount,
+      requestedCount,
+      notInterestedCount,
+      notRespondedCount
+    } = tenderDetail;
+
+    return (
+      <Row gutter={24}>
+        <Col key={1} lg={6} sm={12}>
+          <NumberCard
+            icon="message"
+            title="Requested"
+            color={colors[3]}
+            number={requestedCount}
+          />
+        </Col>
+        <Col key={2} lg={6} sm={12}>
+          <NumberCardLines
+            icon="like-o"
+            title="Submitted"
+            color={colors[2]}
+            number={submittedCount}
+            percent={this.getPercent(requestedCount, submittedCount)}
+          />
+        </Col>
+        <Col key={3} lg={6} sm={12}>
+          <NumberCardLines
+            icon="dislike-o"
+            title="Not intereseted"
+            color={colors[4]}
+            number={notInterestedCount}
+            percent={this.getPercent(requestedCount, notInterestedCount)}
+          />
+        </Col>
+        <Col key={4} lg={6} sm={12}>
+          <NumberCardLines
+            icon="question"
+            title="Not responded"
+            color={colors[5]}
+            number={notRespondedCount}
+            percent={this.getPercent(requestedCount, notRespondedCount)}
+          />
+        </Col>
+      </Row>
+    );
+  }
+
+  renderTable(args) {
     //args passed from Rfq.js and Eoi.js
     const {
       requestColumns,
@@ -160,99 +208,49 @@ class Tender extends Common {
       regretLetterModal,
       regretLetterContent
     } = this.state;
-    const data = this.props.data || {};
-    const {
-      submittedCount,
-      requestedCount,
-      notInterestedCount,
-      notRespondedCount,
-      winnerId,
-      responses,
-      sentRegretLetter,
-      status
-    } = data;
+    const data = this.props.data || [];
+    const tenderDetail = this.props.tenderDetail || {};
+    const { winnerId, sentRegretLetter, status } = tenderDetail;
 
     return (
-      <div>
-        <Row gutter={24}>
-          <Col key={1} lg={6} sm={12}>
-            <NumberCard
-              icon="message"
-              title="Requested"
-              color={colors[3]}
-              number={requestedCount}
-            />
-          </Col>
-          <Col key={2} lg={6} sm={12}>
-            <NumberCardLines
-              icon="like-o"
-              title="Submitted"
-              color={colors[2]}
-              number={submittedCount}
-              percent={this.getPercent(requestedCount, submittedCount)}
-            />
-          </Col>
-          <Col key={3} lg={6} sm={12}>
-            <NumberCardLines
-              icon="dislike-o"
-              title="Not intereseted"
-              color={colors[4]}
-              number={notInterestedCount}
-              percent={this.getPercent(requestedCount, notInterestedCount)}
-            />
-          </Col>
-          <Col key={4} lg={6} sm={12}>
-            <NumberCardLines
-              icon="question"
-              title="Not responded"
-              color={colors[5]}
-              number={notRespondedCount}
-              percent={this.getPercent(requestedCount, notRespondedCount)}
-            />
-          </Col>
-        </Row>
-        <Card
-          bordered={true}
-          title={
-            <div>
-              Submitted companies for <strong>{data.name}</strong>
-            </div>
-          }
-        >
-          <div className="table-operations">
-            <Search
-              placeholder="Supplier name or SAP number"
-              style={{ width: 200, float: 'left' }}
-            />
-            <Button
-              disabled={sentRegretLetter || ['open', 'draft'].includes(status)}
-              onClick={this.toggleRegretLetterModal}
-            >
-              Send regret letter
-              <Icon type="mail" />
-            </Button>
-            {tableOperations}
-          </div>
+      <Card
+        bordered={true}
+        title={
+          <span>
+            Submitted companies for <strong>{tenderDetail.name}</strong>
+          </span>
+        }
+      >
+        <div className="table-operations">
+          <Search placeholder="Supplier name or SAP number" />
+          <Button
+            disabled={sentRegretLetter || ['open', 'draft'].includes(status)}
+            onClick={this.toggleRegretLetterModal}
+          >
+            Send regret letter
+            <Icon type="mail" />
+          </Button>
+          {tableOperations}
+        </div>
 
-          <Table
-            rowSelection={{
-              selectedCompanies,
-              onChange: this.onSelectedCompaniesChange
-            }}
-            rowClassName={record => {
-              if (record.supplier._id === winnerId) return 'highlight';
-            }}
-            columns={this.columns()}
-            rowKey={record => (record.supplier ? record.supplier._id : '')}
-            dataSource={status !== 'open' ? responses : []}
-            pagination={pagination}
-            loading={loading}
-            scroll={{ x: 2500 }}
-            onChange={(pagination, filters, sorter) =>
-              onChange(pagination, filters, sorter)
-            }
-          />
-        </Card>
+        <Table
+          rowSelection={{
+            selectedCompanies,
+            onChange: this.onSelectedCompaniesChange
+          }}
+          rowClassName={record => {
+            if (record.supplier._id === winnerId) return 'highlight';
+          }}
+          columns={this.columns()}
+          rowKey={record => (record.supplier ? record.supplier._id : '')}
+          dataSource={status !== 'open' ? data : []}
+          pagination={pagination}
+          loading={loading}
+          scroll={{ x: 2500 }}
+          onChange={(pagination, filters, sorter) =>
+            onChange(pagination, filters, sorter)
+          }
+        />
 
         <Modal
           title={`${responseModal.title}'s response`}
@@ -286,7 +284,7 @@ class Tender extends Common {
         </Modal>
 
         <Modal
-          title={`Sending regret letters to "${responses.length - 1}" bidders`}
+          title={`Sending regret letters to "${data.length - 1}" bidders`}
           visible={
             regretLetterModalVisible !== undefined
               ? regretLetterModalVisible
@@ -301,13 +299,13 @@ class Tender extends Common {
             onEmailContentChange={this.handleRegretLetterChange}
           />
         </Modal>
-      </div>
+      </Card>
     );
   }
 }
 
 Tender.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.array,
   filter: PropTypes.func,
   sendRegretLetter: PropTypes.func,
   sentRegretLetter: PropTypes.boolean,

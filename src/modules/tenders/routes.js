@@ -41,7 +41,24 @@ export default [
       return <Tenders type="eoi" {...props} queryParams={queryParams} />;
     }}
   />,
-  <Route key={'/tender'} exact path={`${'/tender'}/:id`} component={Tender} />,
+  <Route
+    key={'/rfq'}
+    exact
+    path={`/rfq/:id`}
+    component={props => {
+      const queryParams = queryString.parse(props.location.search);
+      return <Tender {...props} queryParams={queryParams} />;
+    }}
+  />,
+  <Route
+    key={'/eoi'}
+    exact
+    path={`/eoi/:id`}
+    component={props => {
+      const queryParams = queryString.parse(props.location.search);
+      return <Tender {...props} queryParams={queryParams} />;
+    }}
+  />,
   <Route
     key={'/tender/submit'}
     exact

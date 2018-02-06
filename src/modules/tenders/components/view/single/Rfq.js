@@ -3,16 +3,51 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
-import { message, Button, Icon } from 'antd';
+import {
+  message,
+  Button,
+  Icon,
+  TreeSelect,
+  Select,
+  Row,
+  Col,
+  Card,
+  Input
+} from 'antd';
 import { rfqRequestColumns } from '../../../constants';
+import productsTree from 'modules/companies/productsTree';
 import Tender from './Tender';
+import router from 'modules/common/router';
+
+const Option = Select.Option;
 
 class Rfq extends Tender {
   constructor(props) {
     super(props);
 
+    const { history } = props;
+
+    const sort = router.getParam(history, 'sorter');
+    const productCode = router.getParam(history, 'productCode');
+    const betweenSearch = router.getParam(history, 'between');
+    const from = router.getParam(history, 'from');
+    const to = router.getParam(history, 'to');
+
+    this.state = {
+      ...this.state,
+      productCodes: [productCode],
+      filter: sort || betweenSearch,
+      from,
+      to
+    };
+
     this.bidSummaryReport = this.bidSummaryReport.bind(this);
     this.award = this.award.bind(this);
+    this.handleProductCodesChange = this.handleProductCodesChange.bind(this);
+    this.handleFilterChange = this.handleFilterChange.bind(this);
+    this.handleBetweenSearch = this.handleBetweenSearch.bind(this);
+    this.handleRangeChange = this.handleRangeChange.bind(this);
+    this.clearFilter = this.clearFilter.bind(this);
   }
 
   bidSummaryReport() {
@@ -36,6 +71,49 @@ class Rfq extends Tender {
     } else {
       this.props.award(selectedCompanies[0]);
     }
+  }
+
+  handleProductCodesChange(value) {
+    this.setState({ productCodes: value });
+
+    router.setParams(this.props.history, { productCode: value[0] });
+  }
+
+  handleFilterChange(value) {
+    this.setState({ filter: value });
+
+    const { history } = this.props;
+
+    if (value === 'minTotalPrice' || value === 'minUnitPrice') {
+      router.removeParams(history, 'between', 'from', 'to');
+      router.setParams(history, { sorter: value });
+    } else {
+      router.removeParams(history, 'sorter');
+    }
+  }
+
+  handleBetweenSearch() {
+    const { history } = this.props;
+
+    const { from, to } = this.state;
+
+    router.setParams(history, { between: this.state.filter, from, to });
+  }
+
+  handleRangeChange(e, name) {
+    this.setState({ [name]: e.target.value });
+  }
+
+  clearFilter() {
+    this.setState({});
+    router.removeParams(
+      this.props.history,
+      'between',
+      'from',
+      'to',
+      'sorter',
+      'productCode'
+    );
   }
 
   responseColumns() {
@@ -75,6 +153,7 @@ class Rfq extends Tender {
     const { rfqBidSummaryReportLoading } = this.props;
     const data = this.props.data || {};
     const { requestedProducts, status } = data;
+    const { productCodes, filter, from, to } = this.state;
 
     const tableOperations = [
       <Button
@@ -96,12 +175,92 @@ class Rfq extends Tender {
       </Button>
     ];
 
-    return this.renderTender({
-      requestColumns: rfqRequestColumns,
-      responseColumns: this.responseColumns(),
-      requestedData: requestedProducts,
-      tableOperations: tableOperations
-    });
+    return (
+      <div>
+        {this.renderStats()}
+        <Row gutter={24}>
+          <Col sm={24} xl={6} lg={7}>
+            <Card title="Product code">
+              <TreeSelect
+                treeData={productsTree}
+                value={productCodes}
+                onChange={this.handleProductCodesChange}
+                treeCheckable={true}
+                searchPlaceholder="Product code"
+                style={{ width: '100%' }}
+              />
+            </Card>
+
+            <Card className="margin" title="Filter">
+              <Select
+                value={filter}
+                disabled={productCodes.length < 1}
+                placeholder="Select a filter"
+                onChange={this.handleFilterChange}
+                style={{ width: '100%' }}
+              >
+                <Option value="minTotalPrice">By minimum total price</Option>
+                <Option value="minUnitPrice">By minimum unit price</Option>
+                <Option value="totalPrice">
+                  In between values (total price)
+                </Option>
+                <Option value="unitPrice">
+                  In between values (unit price)
+                </Option>
+              </Select>
+
+              <div
+                className={
+                  filter === 'totalPrice' || filter === 'unitPrice'
+                    ? 'margin'
+                    : 'hidden'
+                }
+              >
+                <Input
+                  type="number"
+                  placeholder="From"
+                  style={{ width: 'calc(50% - 7px)' }}
+                  value={from}
+                  onChange={e => this.handleRangeChange(e, 'from')}
+                />
+                &nbsp;~&nbsp;
+                <Input
+                  type="number"
+                  placeholder="To"
+                  style={{ width: 'calc(50% - 7px)' }}
+                  value={to}
+                  onChange={e => this.handleRangeChange(e, 'to')}
+                />
+                <Button
+                  onClick={this.handleBetweenSearch}
+                  className="margin"
+                  type="primary"
+                  style={{ width: '100%' }}
+                >
+                  Apply filter
+                </Button>
+              </div>
+            </Card>
+            <Button
+              onClick={this.clearFilter}
+              className="margin"
+              style={{ width: '100%' }}
+            >
+              <Icon type="close" />Clear filter
+            </Button>
+          </Col>
+
+          <Col sm={24} xl={18} lg={17}>
+            {this.renderTable({
+              requestColumns: rfqRequestColumns,
+              responseColumns: this.responseColumns(),
+              requestedData: requestedProducts,
+              tableOperations: tableOperations
+            })}
+          </Col>
+        </Row>
+      </div>
+    );
   }
 }
 
@@ -109,7 +268,7 @@ Rfq.propTypes = {
   award: PropTypes.func,
   downloadReport: PropTypes.func,
   bidSummaryReportLoading: PropTypes.bool,
-  data: PropTypes.object
+  data: PropTypes.array
 };
 
 export default withRouter(Rfq);

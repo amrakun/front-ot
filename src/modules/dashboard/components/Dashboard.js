@@ -96,7 +96,9 @@ class Dashboard extends React.Component {
                 count={detail.value}
                 style={{ backgroundColor: COLORS[index % COLORS.length] }}
               />
-              <label>{detail.name}</label>
+              <label style={{ textTransform: 'uppercase' }}>
+                {detail.name}
+              </label>
             </span>
           ))}
         </div>

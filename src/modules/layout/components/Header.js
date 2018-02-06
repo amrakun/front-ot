@@ -52,9 +52,11 @@ const HeaderBar = (props, context) => {
           <Menu.Item key="change-password">
             <Link to="/change-password">Change Password</Link>
           </Menu.Item>
-          <Menu.Item key="delegation">
-            <Link to="/delegation">Delegation</Link>
-          </Menu.Item>
+          {!currentUser.isSupplier && (
+            <Menu.Item key="delegation">
+              <Link to="/delegation">Delegation</Link>
+            </Menu.Item>
+          )}
           <Menu.Item key="logout">
             <a onClick={logout}>Sign out</a>
           </Menu.Item>

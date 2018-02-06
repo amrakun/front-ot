@@ -66,15 +66,20 @@ class Eoi extends Tender {
       </Button>
     ];
 
-    return this.renderTender({
-      responseColumns: this.responseColumns(),
-      tableOperations: tableOperations
-    });
+    return (
+      <div>
+        {this.renderStats()}
+        {this.renderTable({
+          responseColumns: this.responseColumns(),
+          tableOperations: tableOperations
+        })}
+      </div>
+    );
   }
 }
 
 Eoi.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.array
 };
 
 export default withRouter(Eoi);
