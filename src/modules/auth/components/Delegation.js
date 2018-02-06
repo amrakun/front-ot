@@ -97,7 +97,9 @@ class Delegation extends BaseForm {
             {this.renderField({
               label: 'Duration',
               name: 'date',
-              control: <DatePicker.RangePicker format={dateTimeFormat} />
+              control: (
+                <DatePicker.RangePicker showTime format={dateTimeFormat} />
+              )
             })}
 
             {this.renderField({

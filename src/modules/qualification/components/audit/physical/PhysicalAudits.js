@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Table, Card, Button, Icon, Divider, Popconfirm } from 'antd';
+import { Table, Card, Divider, Popconfirm } from 'antd';
 import { dateFormat } from 'modules/common/constants';
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -100,12 +100,8 @@ class AuditResponses extends React.Component {
 
     return (
       <Card title="Physical audit responses">
-        <div className="table-operations">
-          <Search />
-          <Button>
-            Delete <Icon type="delete" />
-          </Button>
-        </div>
+        <Search />
+        <div style={{ height: '48px' }} />
         <Table
           columns={this.columns()}
           rowKey={record => record._id}
