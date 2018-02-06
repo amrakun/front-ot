@@ -76,7 +76,7 @@ class MainLayout extends React.Component {
     this.state = {
       collapsed: localStorage.getItem('collapsed') === 'true' ? true : false,
       toggleLang: false,
-      locale: 'en',
+      locale: '',
       messages: mergedMessages
     };
 
@@ -146,7 +146,7 @@ class MainLayout extends React.Component {
     }
 
     return (
-      <IntlProvider key={locale} locale={locale} messages={messages}>
+      <IntlProvider locale={locale || 'en'} messages={messages}>
         <Layout>
           {currentUser && <Sidenav {...navProps} />}
           <Layout className="main" style={layoutStyle}>
