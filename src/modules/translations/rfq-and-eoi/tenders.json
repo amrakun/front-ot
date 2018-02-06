@@ -1,6 +1,23 @@
 {
+  "tenderStatus": "Төлөв",
   "tenderNumber": "Тендерийн дугаар",
-  "tenderName": "Тендерийн нэр",
+  "tenderRegularNumber": "Дугаар",
+  "tenderRegularName": "Нэр",
+  "tenderFile": "Файл",
   "tenderPublishDate": "Нийтлэх огноо",
-  "tenderCloseDate": "Хаагдах огноо"
+  "tenderCloseDate": "Хаагдах огноо",
+  "tenderPlaceholderName": "Тендер нэр",
+  "tenderSelectDate": "Огноо сонгох",
+  "tenderAction": "Дараагийн Алхам",
+  "tenderOpen": "Нээх",
+  "tenderView": "Харах",
+  "tenderDownload": "Татах",
+  "tenderDocument": "Бичиг баримт",
+  "tenderInformation": "Мэдээлэл",
+  "dashboardOpenRfqAndEoi":
+    "Нээлттэй Оролцох сонирхлоо илэрхийлэх хүсэлт/Үнийн санал авах хүсэлт (ОСИХ ба ҮСАХ)",
+  "dashboardDifotScore": "DIFOT оноо",
+  "dashboardSuccessFeedback": "Бидний Амжилт",
+  "dashboardPrequalification": "Гэрээ хэрэгжүүлэх чадварын урьдчилсан үнэлгээ",
+  "dashboardNothingNew": "Шинэ зүйл алга"
 }

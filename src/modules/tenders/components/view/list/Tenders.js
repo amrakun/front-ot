@@ -6,6 +6,34 @@ import { labels, statusIcons } from '../../../constants';
 import { dateTimeFormat } from 'modules/common/constants';
 import queryString from 'query-string';
 import moment from 'moment';
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+  tenderNumber: {
+    id: 'tenderNumber',
+    defaultMessage: 'Tender Number'
+  },
+  tenderName: {
+    id: 'tenderName',
+    defaultMessage: 'Tender Name'
+  },
+  tenderPublishDate: {
+    id: 'tenderPublishDate',
+    defaultMessage: 'Publish Date'
+  },
+  tenderCloseDate: {
+    id: 'tenderCloseDate',
+    defaultMessage: 'Close Date'
+  },
+  tenderPlaceholderName: {
+    id: 'tenderPlaceholderName',
+    defaultMessage: 'Tender name'
+  },
+  tenderSelectDate: {
+    id: 'tenderSelectDate',
+    defaultMessage: 'Select year and month'
+  }
+});
 
 const MonthPicker = DatePicker.MonthPicker;
 
@@ -79,21 +107,22 @@ class Tenders extends React.Component {
   }
 
   commonColumns() {
+    const { formatMessage } = this.context;
     return [
       {
-        title: 'Tender number',
+        title: formatMessage(messages.tenderNumber),
         dataIndex: 'number'
       },
       {
-        title: 'Tender name',
+        title: formatMessage(messages.tenderName),
         dataIndex: 'name'
       },
       {
-        title: 'Publish date',
+        title: formatMessage(messages.tenderPublishDate),
         render: (text, record) => this.renderDate(record.publishDate)
       },
       {
-        title: 'Close date',
+        title: formatMessage(messages.tenderCloseDate),
         render: (text, record) => this.renderDate(record.closeDate)
       }
     ];
@@ -129,14 +158,16 @@ class Tenders extends React.Component {
 
     const highlightedId = location.state && location.state.newTenderId;
 
+    const { formatMessage } = this.context;
+
     return (
       <Card style={{ marginBottom: '16px' }} title={labels[type]}>
         <div className="table-operations">
-          <Search placeholder="Tender name" />
+          <Search placeholder={formatMessage(messages.tenderPlaceholderName)} />
 
           <MonthPicker
             style={{ float: 'left', marginLeft: '16px' }}
-            placeholder="Select year and month"
+            placeholder={formatMessage(messages.tenderSelectDate)}
             onChange={this.handleMonthChange}
             allowClear
             disabled
@@ -169,6 +200,10 @@ Tenders.propTypes = {
   loading: PropTypes.bool.isRequired,
   onChange: PropTypes.func,
   history: PropTypes.object
+};
+
+Tenders.contextTypes = {
+  formatMessage: PropTypes.func
 };
 
 export default Tenders;

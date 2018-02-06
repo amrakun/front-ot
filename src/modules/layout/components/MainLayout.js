@@ -37,7 +37,8 @@ const mergedMessages = {
   ...messages.Prequalification.FinancialInfo,
   ...messages.CapacityBuilding,
   ...messages.Common,
-  ...messages.Qualification
+  ...messages.Qualification,
+  ...messages.RfqAndEoi.Tenders
 };
 
 const withSidebar = { marginLeft: 200 };
