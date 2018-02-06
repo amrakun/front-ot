@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Form, Input, Card } from 'antd';
 import { BaseForm, Field, Uploader } from 'modules/common/components';
 import { uploadDisclaimer } from 'modules/common/constants';
-import { intlShape, injectIntl, defineMessages } from 'react-intl';
+import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
   shareholder: {
@@ -39,7 +40,7 @@ class ShareHolders extends BaseForm {
     const shareholderInfo = this.props.data || {};
     const shareholders = shareholderInfo.shareholders || [];
     const shareholder = shareholders[k - 1] || {};
-    const { formatMessage } = this.props.intl;
+    const { formatMessage } = this.context;
 
     return (
       <Card title={formatMessage(messages.shareholder) + ` ${k}`}>
@@ -100,10 +101,10 @@ class ShareHolders extends BaseForm {
   }
 }
 
-ShareHolders.propTypes = {
-  intl: intlShape.isRequired
+ShareHolders.contextTypes = {
+  formatMessage: PropTypes.func
 };
 
 const ShareHoldersForm = Form.create()(ShareHolders);
 
-export default injectIntl(withRouter(ShareHoldersForm));
+export default withRouter(ShareHoldersForm);

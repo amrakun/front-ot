@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Form, Input, Card, Button, Icon } from 'antd';
 import Field from 'modules/common/components/Field';
 import { BaseForm } from 'modules/common/components';
 import { labels } from '../constants';
-import { intlShape, injectIntl, defineMessages } from 'react-intl';
+import { defineMessages } from 'react-intl';
 
 const groups = [
   'managingDirector',
@@ -98,7 +99,7 @@ class ManagementTeam extends BaseForm {
 
   renderItem(prefix, optional = false) {
     const data = this.props.data[prefix] || {};
-    const { formatMessage } = this.props.intl;
+    const { formatMessage } = this.context;
 
     return (
       <Card
@@ -175,10 +176,10 @@ class ManagementTeam extends BaseForm {
   }
 }
 
-ManagementTeam.propTypes = {
-  intl: intlShape.isRequired
+ManagementTeam.contextTypes = {
+  formatMessage: PropTypes.func
 };
 
 const ManagementTeamForm = Form.create()(ManagementTeam);
 
-export default injectIntl(withRouter(ManagementTeamForm));
+export default withRouter(ManagementTeamForm);

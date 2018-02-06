@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import {
   Form,
@@ -16,7 +17,7 @@ import { dateFormat } from 'modules/common/constants';
 import { Field, Uploader } from 'modules/common/components';
 import moment from 'moment';
 import PreqForm from './PreqForm';
-import { intlShape, injectIntl, defineMessages } from 'react-intl';
+import { defineMessages } from 'react-intl';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -126,7 +127,7 @@ class PrequalificationForm extends PreqForm {
 
   renderInvestigation(investigation, index) {
     const _id = investigation._id;
-    const { formatMessage } = this.props.intl;
+    const { formatMessage } = this.context;
 
     return (
       <FormItem
@@ -183,7 +184,7 @@ class PrequalificationForm extends PreqForm {
 
   render() {
     const booleanOptions = this.renderOptions(booleanData);
-    const { formatMessage } = this.props.intl;
+    const { formatMessage } = this.context;
 
     const {
       hasConvictedForBusinessIntegrity,
@@ -323,8 +324,8 @@ class PrequalificationForm extends PreqForm {
 
 const BusinessForm = Form.create()(PrequalificationForm);
 
-PrequalificationForm.propTypes = {
-  intl: intlShape.isRequired
+PrequalificationForm.contextTypes = {
+  formatMessage: PropTypes.func
 };
 
-export default injectIntl(withRouter(BusinessForm));
+export default withRouter(BusinessForm);

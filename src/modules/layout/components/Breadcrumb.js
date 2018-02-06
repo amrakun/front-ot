@@ -44,13 +44,6 @@ const Breadcrumbs = location => {
   ];
 
   location.pathname.split('/').forEach((path, index) => {
-    /*const title = !path
-      ? ''
-      : location.intl.formatMessage({
-          id: 'b_' + path,
-          defaultMessage: routes[path]
-        });
-        */
     const title = routes[path];
     breadcrumbItems.push(
       <BreadcrumbItem key={index}>{title || ''}</BreadcrumbItem>

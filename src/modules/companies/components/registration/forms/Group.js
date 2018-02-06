@@ -1,15 +1,26 @@
 import React from 'react';
 import { withRouter } from 'react-router';
+import PropTypes from 'prop-types';
 import { Form, Input, Icon, Button, Select, Row, Col, Card } from 'antd';
 import { booleanData, roleData, countryData, groupLabels } from '../constants';
 import { BaseForm, Field, Uploader } from 'modules/common/components';
-import { intlShape, injectIntl, defineMessages } from 'react-intl';
+import { defineMessages } from 'react-intl';
 
 const FormItem = Form.Item;
 const messages = defineMessages({
   distName: {
-    id: 'distributionRightName',
-    defaultMessage: 'Distribution right name'
+    0: {
+      id: 'distributionRightName0',
+      defaultMessage: 'Distribution right name'
+    },
+    1: {
+      id: 'distributionRightName1',
+      defaultMessage: 'Distribution right name 1'
+    },
+    2: {
+      id: 'distributionRightName2',
+      defaultMessage: 'Distribution right name 2'
+    }
   },
   factory: {
     id: 'factory',
@@ -114,7 +125,7 @@ class RegistrationForm extends BaseForm {
 
   renderFactory(factory, index) {
     const _id = factory._id;
-    const { formatMessage } = this.props.intl;
+    const { formatMessage } = this.context;
 
     return (
       <FormItem
@@ -172,13 +183,13 @@ class RegistrationForm extends BaseForm {
 
   renderDistrubutionRightInput(index) {
     const initValues = this.props.data.authorizedDistributions || {};
-    const { formatMessage } = this.props.intl;
+    const { formatMessage } = this.context;
 
     return (
       <Field
         name={`distributionRightName${index}`}
         initialValue={initValues[index]}
-        label={formatMessage(messages.distName) + ` ${index + 1}`}
+        label={formatMessage(messages.distName[index])}
         hasFeedback={false}
         optional={true}
         control={<Input />}
@@ -197,7 +208,7 @@ class RegistrationForm extends BaseForm {
       this.renderFactory(factory, index)
     );
 
-    const { formatMessage } = this.props.intl;
+    const { formatMessage } = this.context;
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -326,10 +337,10 @@ class RegistrationForm extends BaseForm {
   }
 }
 
-RegistrationForm.propTypes = {
-  intl: intlShape.isRequired
+RegistrationForm.contextTypes = {
+  formatMessage: PropTypes.func
 };
 
 const GroupForm = Form.create()(RegistrationForm);
 
-export default injectIntl(withRouter(GroupForm));
+export default withRouter(GroupForm);

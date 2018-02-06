@@ -11,7 +11,9 @@
   "hasParent": "22. Танайд  Толгой компани бий юу?",
   "isParentExistingSup":
     "Танай толгой компани Оюу Толгой компанийн гэрээт ханган нийлүүлэгч үү?",
-  "distributionRightName": "Гэрээт борлуулагчын эрхийн нэр",
+  "distributionRightName0": "Гэрээт борлуулагчын эрхийн нэр",
+  "distributionRightName1": "Гэрээт борлуулагчын эрхийн нэр 1",
+  "distributionRightName2": "Гэрээт борлуулагчын эрхийн нэр 2",
   "productCodes": "Үйлдвэрлэдэг бүтээгдэхүүн",
   "factory": "Үйлдвэр",
   "addFactory": "Үйлдвэр нэмэх",

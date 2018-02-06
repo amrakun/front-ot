@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Form, Select, Row, Col, DatePicker, Input, Card } from 'antd';
 import moment from 'moment';
 import { yearData, booleanData, currencyData } from '../constants';
 import { BaseForm, Uploader } from 'modules/common/components';
 import { dateFormat } from 'modules/common/constants';
-import { intlShape, injectIntl, defineMessages } from 'react-intl';
+import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
   placeholderDate: {
@@ -125,7 +126,7 @@ class PrequalificationForm extends BaseForm {
 
   renderYearAmount(prefix, index) {
     const { canProvideAccountsInfo } = this.state;
-    const { formatMessage } = this.props.intl;
+    const { formatMessage } = this.context;
     const data = this.props.data || {};
     const yearAmountArray = data[prefix] || [];
 
@@ -168,7 +169,7 @@ class PrequalificationForm extends BaseForm {
   }
 
   renderYearAmountGroup(label, prefix) {
-    const { formatMessage } = this.props.intl;
+    const { formatMessage } = this.context;
     return (
       <Form.Item
         className="multiple-wrapper"
@@ -184,7 +185,7 @@ class PrequalificationForm extends BaseForm {
 
   renderDateFile(index) {
     const { canProvideAccountsInfo } = this.state;
-    const { formatMessage } = this.props.intl;
+    const { formatMessage } = this.context;
     const data = this.props.data || {};
     const recordsInfo = data.recordsInfo || [];
 
@@ -230,7 +231,7 @@ class PrequalificationForm extends BaseForm {
     const currencyOptions = this.renderOptions(currencyData);
     const booleanOptions = this.renderOptions(booleanData);
     const { canProvideAccountsInfo } = this.state;
-    const { formatMessage } = this.props.intl;
+    const { formatMessage } = this.context;
 
     const reasonVisible =
       canProvideAccountsInfo !== undefined ? !canProvideAccountsInfo : false;
@@ -310,8 +311,8 @@ class PrequalificationForm extends BaseForm {
   }
 }
 
-PrequalificationForm.propTypes = {
-  intl: intlShape.isRequired
+PrequalificationForm.contextTypes = {
+  formatMessage: PropTypes.func
 };
 
-export default injectIntl(Form.create()(PrequalificationForm));
+export default Form.create()(PrequalificationForm);

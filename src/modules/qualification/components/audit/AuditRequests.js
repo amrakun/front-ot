@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Table, Card } from 'antd';
 import { dateTimeFormat } from 'modules/common/constants';
 import moment from 'moment';
-import { intlShape, injectIntl, defineMessages } from 'react-intl';
+import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
   qualificationTitle: {
@@ -40,7 +40,7 @@ const messages = defineMessages({
 
 class AuditRequests extends React.Component {
   columns() {
-    const { formatMessage } = this.props.intl;
+    const { formatMessage } = this.context;
     return [
       {
         title: formatMessage(messages.status),
@@ -84,7 +84,7 @@ class AuditRequests extends React.Component {
 
   render() {
     const { data, pagination, loading, onChange } = this.props;
-    const { formatMessage } = this.props.intl;
+    const { formatMessage } = this.context;
 
     return (
       <Card title={formatMessage(messages.qualificationTitle)}>
@@ -107,8 +107,11 @@ AuditRequests.propTypes = {
   data: PropTypes.array,
   pagination: PropTypes.object,
   loading: PropTypes.bool.isRequired,
-  onChange: PropTypes.func,
-  intl: intlShape.isRequired
+  onChange: PropTypes.func
 };
 
-export default injectIntl(withRouter(AuditRequests));
+AuditRequests.contextTypes = {
+  formatMessage: PropTypes.func
+};
+
+export default withRouter(AuditRequests);

@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Form, Input, Card, Button, Icon } from 'antd';
 import { BaseForm } from 'modules/common/components';
 import addressFields from './address';
-import { intlShape, injectIntl, defineMessages } from 'react-intl';
+import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
   business: {
@@ -49,7 +50,7 @@ class ContactInfo extends BaseForm {
       setFieldsValue(values);
     };
 
-    const { formatMessage } = this.props.intl;
+    const { formatMessage } = this.context;
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -125,10 +126,10 @@ class ContactInfo extends BaseForm {
   }
 }
 
-ContactInfo.propTypes = {
-  intl: intlShape.isRequired
+ContactInfo.contextTypes = {
+  formatMessage: PropTypes.func
 };
 
 const ContactForm = Form.create()(ContactInfo);
 
-export default injectIntl(withRouter(ContactForm));
+export default withRouter(ContactForm);

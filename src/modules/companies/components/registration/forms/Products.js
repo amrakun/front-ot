@@ -1,10 +1,11 @@
 import React from 'react';
 import { withRouter } from 'react-router';
+import PropTypes from 'prop-types';
 import { Form, TreeSelect, Card, Alert, message } from 'antd';
 import { Field, BaseForm } from 'modules/common/components';
 import { productDescription } from '../constants';
 import productsTree from '../../../productsTree';
-import { intlShape, injectIntl, defineMessages } from 'react-intl';
+import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
   help: {
@@ -33,7 +34,7 @@ class RegistrationForm extends BaseForm {
   }
 
   render() {
-    const { formatMessage } = this.props.intl;
+    const { formatMessage } = this.context;
 
     return (
       <Form>
@@ -66,10 +67,10 @@ class RegistrationForm extends BaseForm {
   }
 }
 
-RegistrationForm.propTypes = {
-  intl: intlShape.isRequired
+RegistrationForm.contextTypes = {
+  formatMessage: PropTypes.func
 };
 
 const ProductsForm = Form.create()(RegistrationForm);
 
-export default injectIntl(withRouter(ProductsForm));
+export default withRouter(ProductsForm);
