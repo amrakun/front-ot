@@ -227,24 +227,8 @@ class PrequalificationForm extends PreqForm {
         <h2>{formatMessage(messages.businessIntegrityTitle)}</h2>
         {this.renderConditionalField('doesHaveCodeEthics')}
         {this.renderConditionalField('doesHaveResponsiblityPolicy')}
-
-        <Card>
-          {this.renderField({
-            name: 'hasConvictedLabourLaws',
-            label: labels.hasConvictedLabourLaws,
-            description: descriptions.hasConvictedLabourLaws,
-            dataType: 'boolean',
-            control: <Select>{booleanOptions}</Select>
-          })}
-
-          {this.renderField({
-            name: 'hasConvictedForHumanRights',
-            label: labels.hasConvictedForHumanRights,
-            description: descriptions.hasConvictedForHumanRights,
-            dataType: 'boolean',
-            control: <Select>{booleanOptions}</Select>
-          })}
-        </Card>
+        {this.renderConditionalField('hasConvictedLabourLaws', true)}
+        {this.renderConditionalField('hasConvictedForHumanRights', true)}
 
         <Card>
           {this.renderField({

@@ -38,12 +38,16 @@ class CompanyInfo extends BaseForm {
       selectedCountry: data.registeredInCountry,
       selectedAimag: data.registeredInAimag,
       isRegisteredOnSup: data.isRegisteredOnSup,
+      totalEmps: data.totalNumberOfEmployees,
+      mongolEmps: data.totalNumberOfMongolianEmployees,
+      umnugoviEmps: data.totalNumberOfUmnugoviEmployees,
       loading: false
     };
 
     this.handleCountryChange = this.handleCountryChange.bind(this);
     this.handleAimagChange = this.handleAimagChange.bind(this);
     this.handleIsRegisteredChange = this.handleIsRegisteredChange.bind(this);
+    this.handleEmpsNumChange = this.handleEmpsNumChange.bind(this);
   }
 
   handleCountryChange(value) {
@@ -58,8 +62,19 @@ class CompanyInfo extends BaseForm {
     this.setState({ isRegisteredOnSup: value === 'true' });
   }
 
+  handleEmpsNumChange(e, name) {
+    this.setState({ [name]: e.target.value });
+  }
+
   render() {
-    const { selectedCountry, selectedAimag, isRegisteredOnSup } = this.state;
+    const {
+      selectedCountry,
+      selectedAimag,
+      isRegisteredOnSup,
+      totalEmps,
+      mongolEmps,
+      umnugoviEmps
+    } = this.state;
 
     const booleanOptions = this.renderOptions(booleanData);
     const countryOptions = this.renderOptions(countryData);
@@ -207,17 +222,42 @@ class CompanyInfo extends BaseForm {
             {this.renderField({
               label: `11. Total number of employees`,
               name: 'totalNumberOfEmployees',
-              control: <Input type="number" />
+              control: (
+                <Input
+                  onChange={e => this.handleEmpsNumChange(e, 'totalEmps')}
+                  type="number"
+                />
+              )
             })}
             {this.renderField({
               label: `12. Total number of Mongolian employees`,
               name: 'totalNumberOfMongolianEmployees',
-              control: <Input type="number" />
+              validateStatus: totalEmps < mongolEmps ? 'error' : undefined,
+              help:
+                totalEmps < mongolEmps
+                  ? 'Should be fewer than total number of employees'
+                  : undefined,
+              control: (
+                <Input
+                  onChange={e => this.handleEmpsNumChange(e, 'mongolEmps')}
+                  type="number"
+                />
+              )
             })}
             {this.renderField({
               label: `13. Total number of Umnugovi employees`,
               name: 'totalNumberOfUmnugoviEmployees',
-              control: <Input type="number" />
+              validateStatus: mongolEmps < umnugoviEmps ? 'error' : undefined,
+              help:
+                mongolEmps < umnugoviEmps
+                  ? 'Should be fewer than total number of Mongolian employees'
+                  : undefined,
+              control: (
+                <Input
+                  onChange={e => this.handleEmpsNumChange(e, 'umnugoviEmps')}
+                  type="number"
+                />
+              )
             })}
           </Card>
           {this.renderSubmit()}

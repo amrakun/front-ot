@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'antd';
-import { intlShape, injectIntl, defineMessages } from 'react-intl';
+import { defineMessages } from 'react-intl';
 
 class Field extends React.Component {
   /*
@@ -76,7 +76,7 @@ class Field extends React.Component {
     dataType,
     controlType
   ) {
-    const { formatMessage } = this.props.intl;
+    const { formatMessage } = this.context;
     let commonName = this.setName(prefix, suffix, name);
 
     if (attachmentType) {
@@ -125,7 +125,9 @@ class Field extends React.Component {
       attachmentType,
       rules = [],
       dataType,
-      controlType
+      controlType,
+      validateStatus,
+      help
     } = this.props;
 
     const { form } = this.context;
@@ -177,6 +179,8 @@ class Field extends React.Component {
         extra={extra}
         style={isVisible ? {} : { display: 'none' }}
         hasFeedback={hasFeedback}
+        validateStatus={validateStatus}
+        help={help}
       >
         {getFieldDecorator(name, args)(control)}
       </Form.Item>
@@ -198,11 +202,13 @@ Field.propTypes = {
   rules: PropTypes.array,
   getFieldValue: PropTypes.func,
   dataType: PropTypes.string,
-  intl: intlShape.isRequired
+  validateStatus: PropTypes.string,
+  help: PropTypes.string
 };
 
 Field.contextTypes = {
-  form: PropTypes.object
+  form: PropTypes.object,
+  formatMessage: PropTypes.func
 };
 
-export default injectIntl(Field);
+export default Field;
