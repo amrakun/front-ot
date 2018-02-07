@@ -160,7 +160,7 @@ class Dashboard extends React.Component {
           <Col key={6} lg={8} sm={12}>
             <TextCard
               icon="calculator"
-              title="Qualification/audit"
+              title={formatMessage(messages.dashboardQualification)}
               color={colors[7]}
               text={
                 hasNewAudit ? (
