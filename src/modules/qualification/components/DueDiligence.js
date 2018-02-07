@@ -73,11 +73,20 @@ class DueDiligence extends Common {
 
           return file ? (
             <a href={file.url} target="_blank">
-              {moment(lastDueDiligence.date).format(dateFormat)}
+              View
             </a>
           ) : (
             '-'
           );
+        }
+      },
+      {
+        title: 'Submission date',
+        render: record => {
+          const lastDueDiligence = record.lastDueDiligence || {};
+          const file = lastDueDiligence.file;
+
+          return file ? moment(lastDueDiligence.date).format(dateFormat) : '-';
         }
       }
     ]);

@@ -22,6 +22,7 @@ class CompanyInfo extends BaseForm {
     const { data } = props;
 
     this.state = {
+      confirmDirty: false,
       selectedCountry: data.registeredInCountry,
       selectedAimag: data.registeredInAimag,
       isRegisteredOnSup: data.isRegisteredOnSup,
@@ -35,7 +36,6 @@ class CompanyInfo extends BaseForm {
     this.handleAimagChange = this.handleAimagChange.bind(this);
     this.handleIsRegisteredChange = this.handleIsRegisteredChange.bind(this);
     this.handleEmpsNumChange = this.handleEmpsNumChange.bind(this);
-    this.validateEmpsNum = this.validateEmpsNum.bind(this);
   }
 
   handleCountryChange(value) {
@@ -54,20 +54,15 @@ class CompanyInfo extends BaseForm {
     this.setState({ [name]: e.target.value });
   }
 
-  validateEmpsNum(value, callback, name) {
-    const { totalEmps, mongolEmps } = this.state;
-
-    if (name === 'mongolEmps' && parseInt(value, 10) > totalEmps)
-      callback('Should be less than total number of employees');
-
-    if (name === 'umnugoviEmps' && parseInt(value, 10) > mongolEmps)
-      callback('Should be less than total number of Mongolian employees');
-
-    callback();
-  }
-
   render() {
-    const { selectedCountry, selectedAimag, isRegisteredOnSup } = this.state;
+    const {
+      selectedCountry,
+      selectedAimag,
+      isRegisteredOnSup,
+      totalEmps,
+      mongolEmps,
+      umnugoviEmps
+    } = this.state;
 
     const booleanOptions = this.renderOptions(booleanData);
     const countryOptions = this.renderOptions(countryData);
@@ -231,8 +226,11 @@ class CompanyInfo extends BaseForm {
             {this.renderField({
               label: `12. Total number of Mongolian employees`,
               name: 'totalNumberOfMongolianEmployees',
-              validator: (rule, value, callback) =>
-                this.validateEmpsNum(value, callback, 'mongolEmps'),
+              validateStatus: totalEmps < mongolEmps ? 'error' : undefined,
+              help:
+                totalEmps < mongolEmps
+                  ? 'Should be fewer than total number of employees'
+                  : undefined,
               control: (
                 <Input
                   onChange={e => this.handleEmpsNumChange(e, 'mongolEmps')}
@@ -243,9 +241,17 @@ class CompanyInfo extends BaseForm {
             {this.renderField({
               label: `13. Total number of Umnugovi employees`,
               name: 'totalNumberOfUmnugoviEmployees',
-              validator: (rule, value, callback) =>
-                this.validateEmpsNum(value, callback, 'umnugoviEmps'),
-              control: <Input type="number" />
+              validateStatus: mongolEmps < umnugoviEmps ? 'error' : undefined,
+              help:
+                mongolEmps < umnugoviEmps
+                  ? 'Should be fewer than total number of Mongolian employees'
+                  : undefined,
+              control: (
+                <Input
+                  onChange={e => this.handleEmpsNumChange(e, 'umnugoviEmps')}
+                  type="number"
+                />
+              )
             })}
           </Card>
           {this.renderSubmit()}

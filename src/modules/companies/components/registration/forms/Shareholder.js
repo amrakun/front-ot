@@ -22,6 +22,7 @@ class ShareHolders extends BaseForm {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleShareChange = this.handleShareChange.bind(this);
     this.renderShareholder = this.renderShareholder.bind(this);
+    this.validateShare = this.validateShare.bind(this);
   }
 
   handleSubmit(e) {
@@ -50,15 +51,22 @@ class ShareHolders extends BaseForm {
     this.setState({ [name]: value ? parseInt(value, 10) : 0 });
   }
 
+  validateShare(value, callback, name) {
+    let totalShare = 0;
+    Object.keys(this.state).forEach(key => {
+      if (key !== name) totalShare += this.state[key];
+    });
+
+    if (totalShare + parseInt(value, 10) > 100)
+      callback('Total share percentage should be lower than 100%');
+
+    callback();
+  }
+
   renderShareholder(k, optional) {
     const shareholderInfo = this.props.data || {};
     const shareholders = shareholderInfo.shareholders || [];
     const shareholder = shareholders[k] || {};
-
-    let totalShare = 0;
-    Object.keys(this.state).forEach(key => {
-      totalShare += this.state[key];
-    });
 
     return (
       <Card title={`Shareholder ${k + 1}`}>
@@ -89,11 +97,8 @@ class ShareHolders extends BaseForm {
             />
           }
           optional={optional}
-          validateStatus={totalShare > 100 ? 'error' : undefined}
-          help={
-            totalShare > 100
-              ? 'Total share should be lower than 100%'
-              : undefined
+          validator={(rules, value, callback) =>
+            this.validateShare(value, callback, `percentage${k}`)
           }
         />
       </Card>

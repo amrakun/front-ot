@@ -88,6 +88,14 @@ $padding-xs: 8px;
       opacity: 1;
     }
   }
+  .ant-menu-sub.ant-menu-inline > .ant-menu-item, .ant-menu-item {
+    line-height: 16px;
+    padding: 10px 0;
+    height: auto;
+    a {
+      white-space: normal;
+    }
+  }
 }
 .ant-layout-sider-trigger {
   background: transparent;

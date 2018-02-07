@@ -67,7 +67,8 @@ export default class Field extends React.Component {
       rules = [],
       dataType,
       validateStatus,
-      help
+      help,
+      validator
     } = this.props;
 
     const { form } = this.context;
@@ -85,6 +86,10 @@ export default class Field extends React.Component {
         type: 'email',
         message: 'The input is not valid E-mail!'
       });
+    }
+
+    if (validator) {
+      rules.push({ validator });
     }
 
     let args = {
@@ -132,7 +137,8 @@ Field.propTypes = {
   getFieldValue: PropTypes.func,
   dataType: PropTypes.string,
   validateStatus: PropTypes.string,
-  help: PropTypes.string
+  help: PropTypes.string,
+  validator: PropTypes.func
 };
 
 Field.contextTypes = {
