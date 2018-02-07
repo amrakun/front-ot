@@ -26,9 +26,9 @@ class Popup extends React.Component {
 
     return (
       <Modal
-        okText={slogan || 'Invite'}
+        okText={slogan || 'Add'}
         cancelText="Cancel"
-        title={`${slogan || 'Invite'} a new supplier`}
+        title={`${slogan || 'Add'} an existing supplier`}
         visible={visible}
         onOk={onOk}
         onCancel={onCancel}

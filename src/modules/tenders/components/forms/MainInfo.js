@@ -4,7 +4,7 @@ import { Input, Select, DatePicker, Tag, Card, Row, Col, Tooltip } from 'antd';
 import moment from 'moment';
 import { Editor, Uploader } from 'modules/common/components';
 import { days, dateTimeFormat, colors } from 'modules/common/constants';
-import { SupplierSearcher } from 'modules/companies/components';
+import { SupplierSearcher, AddCompany } from 'modules/companies/components';
 
 function getColoredTags(suppliers) {
   let ownerNames = [];
@@ -101,6 +101,7 @@ const MainInfo = props => {
           >
             {supplierTags}
             <SupplierSearcher withTag={true} onSelect={onAddSuppliers} />
+            <AddCompany onAdd={supplier => onAddSuppliers([supplier])} />
           </div>
 
           {renderField({

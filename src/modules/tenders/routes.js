@@ -33,6 +33,12 @@ export default [
     component={CreateTender}
   />,
   <Route
+    key={'/eoi/publish'}
+    exact
+    path={'/eoi/publish'}
+    component={CreateTender}
+  />,
+  <Route
     key={'/eoi'}
     exact
     path={'/eoi'}
@@ -70,11 +76,5 @@ export default [
     exact
     path={`${'/tender/edit'}/:id`}
     component={EditTender}
-  />,
-  <Route
-    key={'/eoi/publish'}
-    exact
-    path={'/eoi/publish'}
-    component={CreateTender}
   />
 ];

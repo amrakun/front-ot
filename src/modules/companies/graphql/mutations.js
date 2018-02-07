@@ -102,6 +102,32 @@ const companiesSendPrequalificationInfo = `
   }
 `;
 
+const registerViaBuyer = `
+  mutation registerViaBuyer(
+    $companyName: String!
+    $contactPersonName: String!
+    $contactPersonPhone: String!
+    $contactPersonEmail: String!
+  ) {
+    registerViaBuyer(
+      companyName: $companyName
+      contactPersonName: $contactPersonName
+      contactPersonPhone: $contactPersonPhone
+      contactPersonEmail: $contactPersonEmail
+    ) {
+      user {
+        email
+      }
+      company {
+        _id
+        basicInfo {
+          enName
+        }
+      }
+    }
+  }
+`;
+
 export default {
   basicInfo,
   contactInfo,
@@ -115,5 +141,6 @@ export default {
   environmentalInfo,
   healthInfo,
   companiesSendRegistrationInfo,
-  companiesSendPrequalificationInfo
+  companiesSendPrequalificationInfo,
+  registerViaBuyer
 };
