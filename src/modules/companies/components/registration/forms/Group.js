@@ -15,7 +15,7 @@ class RegistrationForm extends BaseForm {
 
     this.state = {
       hasParent: data.hasParent || false,
-      role: data.role || '',
+      role: data.role,
       isExclusiveDistributor: data.isExclusiveDistributor || false,
       isParentExistingSup: data.isParentExistingSup || false,
       factories: (data.factories || []).map(f => ({
