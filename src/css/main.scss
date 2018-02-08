@@ -94,7 +94,21 @@ $padding-xs: 8px;
     height: auto;
     a {
       white-space: normal;
+      padding-right: 36px;
     }
+  }
+  &.ant-layout-sider-collapsed {
+    .ant-menu-sub.ant-menu-inline > .ant-menu-item, .ant-menu-item {
+      a {
+        white-space: nowrap;
+      }
+    }
+  }
+}
+.ant-menu-item.multi-line {
+  i {
+    position: relative;
+    top: -8px;
   }
 }
 .ant-layout-sider-trigger {

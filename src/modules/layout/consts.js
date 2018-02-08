@@ -12,17 +12,20 @@ export const supplierSideMenu = [
   {
     url: '/prequalification',
     title: 'Pre-qualification',
-    icon: 'solution'
+    icon: 'solution',
+    className: 'multi-line'
   },
   {
     url: '/qualification',
     title: 'Qualification/audit',
-    icon: 'calendar'
+    icon: 'calendar',
+    className: 'multi-line'
   },
   {
     url: '/capacity-building',
     title: 'Capacity building',
-    icon: 'file-text'
+    icon: 'file-text',
+    className: 'multi-line'
   }
 ];
 

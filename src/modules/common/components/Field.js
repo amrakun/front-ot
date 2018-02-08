@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'antd';
-import { defineMessages } from 'react-intl';
 
-class Field extends React.Component {
+export default class Field extends React.Component {
   /*
    * For example: Select is accepting only string value, So we are
    * converting boolean, number to string
@@ -21,7 +20,7 @@ class Field extends React.Component {
     const { control, initialValue, dataType } = this.props;
     const controlProps = control.props;
 
-    if (initialValue === null || initialValue === undefined) return null;
+    if (initialValue === null || initialValue === undefined) return undefined;
 
     if (dataType === 'file' || dataType === 'file-multiple') {
       //file upload
@@ -54,78 +53,19 @@ class Field extends React.Component {
     return '';
   }
 
-  setName(prefix, suffix, name) {
-    if (prefix) {
-      return name.replace(prefix, 'common');
-    }
-
-    if (suffix || suffix === 0) {
-      return name.replace(suffix, 'Common');
-    }
-
-    return name;
-  }
-
-  getTranslation(
-    prefix,
-    suffix,
-    name,
-    label,
-    description,
-    attachmentType,
-    dataType,
-    controlType
-  ) {
-    const { formatMessage } = this.context;
-    let commonName = this.setName(prefix, suffix, name);
-
-    if (attachmentType) {
-      commonName += attachmentType;
-    }
-
-    if (commonName.includes('File') && dataType === 'file') {
-      commonName = 'file';
-    }
-
-    if (controlType === 'textarea') {
-      commonName = 'textarea';
-      label = label || 'Provide details';
-    }
-
-    const messages = defineMessages({
-      label: {
-        id: commonName,
-        defaultMessage: label
-      },
-      extra: {
-        id: commonName + 'Desc',
-        defaultMessage: description
-      }
-    });
-
-    const val = label ? formatMessage(messages.label) : '';
-    const extra = description ? formatMessage(messages.extra) : description;
-
-    return { val, extra };
-  }
-
   render() {
     const {
       label,
       description = '',
       name,
-      prefix,
       control,
       optional,
       validation,
       isVisible = true,
       hasFeedback = true,
       layout,
-      suffix,
-      attachmentType,
       rules = [],
       dataType,
-      controlType,
       validateStatus,
       help,
       validator
@@ -166,22 +106,11 @@ class Field extends React.Component {
       args.valuePropName = 'defaultFileList';
     }
 
-    const { val, extra } = this.getTranslation(
-      prefix,
-      suffix,
-      name,
-      label,
-      description,
-      attachmentType,
-      dataType,
-      controlType
-    );
-
     return (
       <Form.Item
         {...layout}
-        label={val}
-        extra={extra}
+        label={label}
+        extra={description}
         style={isVisible ? {} : { display: 'none' }}
         hasFeedback={hasFeedback}
         validateStatus={validateStatus}
@@ -213,8 +142,5 @@ Field.propTypes = {
 };
 
 Field.contextTypes = {
-  form: PropTypes.object,
-  formatMessage: PropTypes.func
+  form: PropTypes.object
 };
-
-export default Field;

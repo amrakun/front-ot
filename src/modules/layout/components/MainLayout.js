@@ -41,7 +41,7 @@ const mergedMessages = {
   ...messages.RfqAndEoi.Tenders
 };
 
-const withSidebar = { marginLeft: 200 };
+const withSidebar = { marginLeft: 230 };
 const withSidebarCollapsed = { marginLeft: 80 };
 
 class InjectInstance extends React.Component {

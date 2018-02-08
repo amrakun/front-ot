@@ -21,6 +21,10 @@ const messages = defineMessages({
     id: 'dashboardOpenRfqAndEoi',
     defaultMessage: 'Open EOI/RFQ'
   },
+  dashboardOpenRfqAndEoiDescription: {
+    id: 'dashboardOpenRfqAndEoiDescription',
+    defaultMessage: 'Expression Of Interest (EOI), Request for quotation (RFQ)'
+  },
   dashboardDifotScore: {
     id: 'dashboardDifotScore',
     defaultMessage: 'DIFOT Score'
@@ -65,6 +69,8 @@ class Dashboard extends React.Component {
       if (audit.supplierResponse === null) hasNewAudit = true;
     });
 
+    const hasFeedback = lastFeedback && !lastFeedback.supplierResponse;
+
     return (
       <div>
         {!isSentRegistrationInfo || !isSentPrequalificationInfo ? (
@@ -105,8 +111,11 @@ class Dashboard extends React.Component {
             <NumberCard
               icon="message"
               title={formatMessage(messages.dashboardOpenRfqAndEoi)}
-              color={colors[7]}
+              color={openTendersCount > 0 ? colors[7] : colors[5]}
               number={openTendersCount}
+              tooltip={formatMessage(
+                messages.dashboardOpenRfqAndEoiDescription
+              )}
             />
           </Col>
           <Col key={4} lg={8} sm={12}>
@@ -124,9 +133,9 @@ class Dashboard extends React.Component {
             <TextCard
               icon="mail"
               title={formatMessage(messages.dashboardSuccessFeedback)}
-              color={colors[7]}
+              color={hasFeedback ? colors[7] : colors[5]}
               text={
-                lastFeedback && !lastFeedback.supplierResponse ? (
+                hasFeedback ? (
                   <span>
                     You have new success feedback request. Click&nbsp;
                     <Link to={`feedback/submit/${lastFeedback._id}`}>here</Link>
@@ -161,7 +170,7 @@ class Dashboard extends React.Component {
             <TextCard
               icon="calculator"
               title={formatMessage(messages.dashboardQualification)}
-              color={colors[7]}
+              color={hasNewAudit ? colors[7] : colors[5]}
               text={
                 hasNewAudit ? (
                   <span>

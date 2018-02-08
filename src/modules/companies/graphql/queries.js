@@ -261,6 +261,8 @@ export const companyPrequalificationDetail = `
     companyByUser {
       ${prequalificationFields}
       productsInfo
+      isSentPrequalificationInfo
+      isPrequalified
     }
   }
 `;

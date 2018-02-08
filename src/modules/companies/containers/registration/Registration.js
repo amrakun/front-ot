@@ -15,11 +15,6 @@ const RegistrationContainer = props => {
 
   const companyByUser = companyByUserQuery.companyByUser;
 
-  let formsComplete = true;
-  Object.keys(companyByUser).forEach(key => {
-    if (!companyByUser[key] && key !== 'certificateInfo') formsComplete = false;
-  });
-
   const save = (name, doc) => {
     const mutation = props[`${name}Edit`];
 
@@ -27,10 +22,17 @@ const RegistrationContainer = props => {
       .then(() => {
         companyByUserQuery.refetch();
         message.success('Saved');
-        if (name === 'productsInfo')
+        if (name === 'productsInfo') {
+          let formsComplete = true;
+          Object.keys(companyByUser).forEach(key => {
+            if (!companyByUser[key] && key !== 'certificateInfo')
+              formsComplete = false;
+          });
+
           formsComplete
             ? send()
             : message.error('Please complete all forms before submitting');
+        }
       })
       .catch(error => {
         message.error(error.message);
@@ -43,7 +45,8 @@ const RegistrationContainer = props => {
     sendToBuyer()
       .then(() => {
         notification.open({
-          message: `Your registration has been successfully completed.
+          message: 'Done!',
+          description: `Your registration has been successfully completed.
             Oyu Tolgoi procurement team now has started the pre-qualification
             process on your company. A gap report will be sent once the
             pre-qualification process complete.`,

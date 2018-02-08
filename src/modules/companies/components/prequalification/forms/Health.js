@@ -12,6 +12,8 @@ class PrequalificationForm extends PreqForm {
 
     this.state = {
       doesHaveHealthSafety: data.doesHaveHealthSafety || false,
+      areHSEResourcesClearlyIdentified:
+        data.areHSEResourcesClearlyIdentified || false,
       doesHaveDocumentedProcessToEnsure:
         data.doesHaveDocumentedProcessToEnsure || false,
       doesHaveDocumentForRiskAssesment:

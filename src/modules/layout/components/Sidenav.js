@@ -47,7 +47,12 @@ const Sidenav = (props, context) => {
   }
 
   return (
-    <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
+    <Sider
+      collapsible
+      collapsed={collapsed}
+      onCollapse={onCollapse}
+      width={230}
+    >
       <NavLink to="/" className="logo">
         <img src={process.env.PUBLIC_URL + '/images/logo_mn.png'} alt="logo" />
       </NavLink>
@@ -96,7 +101,7 @@ function renderMenu(sideMenu, translate) {
         m.title;
 
       menuItems.push(
-        <MenuItem key={m.url} disabled={m.disabled}>
+        <MenuItem key={m.url} disabled={m.disabled} className={m.className}>
           {m.icon ? <Icon type={m.icon} /> : ''}
           <NavLink to={m.url}>{title}</NavLink>
         </MenuItem>
