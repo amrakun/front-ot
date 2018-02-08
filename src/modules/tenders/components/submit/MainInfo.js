@@ -3,6 +3,35 @@ import { Card, Icon, Row, Col, Modal, Button } from 'antd';
 import moment from 'moment';
 import { dateTimeFormat as dFormat, colors } from 'modules/common/constants';
 import PropTypes from 'prop-types';
+import { T } from 'modules/common/components';
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+  tenderRegularName: {
+    id: 'tenderRegularName',
+    defaultMessage: 'Name'
+  },
+  tenderRegularNumber: {
+    id: 'tenderRegularNumber',
+    defaultMessage: 'Number'
+  },
+  tenderDocument: {
+    id: 'tenderDocument',
+    defaultMessage: 'Document'
+  },
+  tenderInformation: {
+    id: 'tenderInformation',
+    defaultMessage: 'Information'
+  },
+  tenderPublishDate: {
+    id: 'tenderPublishDate',
+    defaultMessage: 'Publish Date'
+  },
+  tenderCloseDate: {
+    id: 'tenderCloseDate',
+    defaultMessage: 'Close Date'
+  }
+});
 
 class MainInfo extends React.Component {
   constructor(props) {
@@ -47,29 +76,42 @@ class MainInfo extends React.Component {
   render() {
     const { name, number, publishDate, closeDate, file, content } = this.props;
     const renderCard = this.renderCard;
+    const { formatMessage } = this.context;
 
     return (
       <Row gutter={16}>
-        {renderCard('Name', name, 'idcard')}
-        {renderCard('Number', number, 'profile')}
+        {renderCard(formatMessage(messages.tenderRegularName), name, 'idcard')}
         {renderCard(
-          'Publish date',
+          formatMessage(messages.tenderRegularNumber),
+          number,
+          'profile'
+        )}
+        {renderCard(
+          formatMessage(messages.tenderPublishDate),
           moment(publishDate).format(dFormat),
           'clock-circle-o'
         )}
         {renderCard(
-          'Close date',
+          formatMessage(messages.tenderCloseDate),
           moment(closeDate).format(dFormat),
           'clock-circle'
         )}
         {renderCard(
-          'Document',
-          file ? <a href={file.url}>Download</a> : '-',
+          formatMessage(messages.tenderDocument),
+          file ? (
+            <a href={file.url}>
+              <T id="tenderDownload">Download</T>
+            </a>
+          ) : (
+            '-'
+          ),
           'file'
         )}
         {renderCard(
-          'Information',
-          <a onClick={this.showModal}>View</a>,
+          formatMessage(messages.tenderInformation),
+          <a onClick={this.showModal}>
+            <T id="tenderView">View</T>
+          </a>,
           'info-circle-o'
         )}
 
@@ -95,6 +137,10 @@ MainInfo.propTypes = {
   closeDate: PropTypes.number,
   file: PropTypes.object,
   content: PropTypes.string
+};
+
+MainInfo.contextTypes = {
+  formatMessage: PropTypes.func
 };
 
 export default MainInfo;

@@ -1,9 +1,51 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Form, Select, Row, Col, DatePicker, Input, Card } from 'antd';
 import moment from 'moment';
 import { yearData, booleanData, currencyData } from '../constants';
 import { BaseForm, Uploader } from 'modules/common/components';
 import { dateFormat } from 'modules/common/constants';
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+  placeholderDate: {
+    id: 'placeholderDate',
+    defaultMessage: 'Choose date'
+  },
+  placeholderYear: {
+    id: 'placeholderYear',
+    defaultMessage: 'Select an year'
+  },
+  annualTurnover: {
+    id: 'annualTurnover',
+    defaultMessage: 'Annual turnover'
+  },
+  preTaxProfit: {
+    id: 'preTaxProfit',
+    defaultMessage: 'Pre-tax profit'
+  },
+  totalAssets: {
+    id: 'totalAssets',
+    defaultMessage: 'Total assets'
+  },
+  totalCurrentAssets: {
+    id: 'totalCurrentAssets',
+    defaultMessage: 'Total current assets'
+  },
+  totalShareholderEquity: {
+    id: 'totalCurrentAssets',
+    defaultMessage: 'Total current assets'
+  },
+  financialRecord: {
+    id: 'financialRecord',
+    defaultMessage: 'Please provide financial records for your last 3 years'
+  },
+  financialRecordDesc: {
+    id: 'financialRecordDesc',
+    defaultMessage:
+      'The most recent years worth of accounts will always appear on top'
+  }
+});
 
 class PrequalificationForm extends BaseForm {
   constructor(props) {
@@ -84,6 +126,7 @@ class PrequalificationForm extends BaseForm {
 
   renderYearAmount(prefix, index) {
     const { canProvideAccountsInfo } = this.state;
+    const { formatMessage } = this.context;
     const data = this.props.data || {};
     const yearAmountArray = data[prefix] || [];
 
@@ -105,7 +148,7 @@ class PrequalificationForm extends BaseForm {
             hasFeedback: false,
             optional: !canProvideAccountsInfo,
             control: (
-              <Select placeholder="Select an year">
+              <Select placeholder={formatMessage(messages.placeholderYear)}>
                 {this.renderOptions(yearData)}
               </Select>
             )
@@ -126,8 +169,13 @@ class PrequalificationForm extends BaseForm {
   }
 
   renderYearAmountGroup(label, prefix) {
+    const { formatMessage } = this.context;
     return (
-      <Form.Item className="multiple-wrapper" required={true} label={label}>
+      <Form.Item
+        className="multiple-wrapper"
+        required={true}
+        label={formatMessage(messages[prefix])}
+      >
         {this.renderYearAmount(prefix, 0)}
         {this.renderYearAmount(prefix, 1)}
         {this.renderYearAmount(prefix, 2)}
@@ -137,6 +185,7 @@ class PrequalificationForm extends BaseForm {
 
   renderDateFile(index) {
     const { canProvideAccountsInfo } = this.state;
+    const { formatMessage } = this.context;
     const data = this.props.data || {};
     const recordsInfo = data.recordsInfo || [];
 
@@ -157,7 +206,10 @@ class PrequalificationForm extends BaseForm {
             hasFeedback: false,
             optional: !canProvideAccountsInfo,
             control: (
-              <DatePicker format={dateFormat} placeholder="Choose date" />
+              <DatePicker
+                format={dateFormat}
+                placeholder={formatMessage(messages.placeholderDate)}
+              />
             )
           })}
         </Col>
@@ -179,6 +231,7 @@ class PrequalificationForm extends BaseForm {
     const currencyOptions = this.renderOptions(currencyData);
     const booleanOptions = this.renderOptions(booleanData);
     const { canProvideAccountsInfo } = this.state;
+    const { formatMessage } = this.context;
 
     const reasonVisible =
       canProvideAccountsInfo !== undefined ? !canProvideAccountsInfo : false;
@@ -220,8 +273,8 @@ class PrequalificationForm extends BaseForm {
 
             <Form.Item
               className="multiple-wrapper"
-              label="Please provide financial records for your last 3 years"
-              extra="The most recent years worth of accounts will always appear on top."
+              label={formatMessage(messages.financialRecord)}
+              extra={formatMessage(messages.financialRecordDesc)}
             >
               {this.renderDateFile(0)}
               {this.renderDateFile(1)}
@@ -257,5 +310,9 @@ class PrequalificationForm extends BaseForm {
     );
   }
 }
+
+PrequalificationForm.contextTypes = {
+  formatMessage: PropTypes.func
+};
 
 export default Form.create()(PrequalificationForm);

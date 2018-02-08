@@ -4,7 +4,14 @@ import Header from './Header';
 import Breadcrumb from './Breadcrumb';
 import { Layout, BackTop } from 'antd';
 import { PropTypes } from 'prop-types';
+import { IntlProvider, addLocaleData } from 'react-intl';
+import { T } from '../../common/components';
+import mn from 'react-intl/locale-data/mn';
+import en from 'react-intl/locale-data/en';
+import * as messages from 'modules/translations';
+import { injectIntl } from 'react-intl';
 
+addLocaleData([...mn, ...en]);
 const { Content, Footer } = Layout;
 
 const visitorPaths = [
@@ -17,18 +24,94 @@ const visitorPaths = [
   '/'
 ];
 
+const mergedMessages = {
+  ...messages.Registration.CompanyInfo,
+  ...messages.Registration.Contact,
+  ...messages.Registration.Shareholder,
+  ...messages.Registration.ManagementTeam,
+  ...messages.Registration.Group,
+  ...messages.Registration.Products,
+  ...messages.Prequalification.BusinessIntegrity,
+  ...messages.Prequalification.Enviroment,
+  ...messages.Prequalification.Health,
+  ...messages.Prequalification.FinancialInfo,
+  ...messages.CapacityBuilding,
+  ...messages.Common,
+  ...messages.Qualification,
+  ...messages.RfqAndEoi.Tenders
+};
+
 const withSidebar = { marginLeft: 200 };
 const withSidebarCollapsed = { marginLeft: 80 };
+
+class InjectInstance extends React.Component {
+  getChildContext() {
+    const { intl } = this.props;
+    const { formatMessage } = intl;
+
+    return {
+      formatMessage
+    };
+  }
+
+  render() {
+    return <div>{this.props.children}</div>;
+  }
+}
+
+InjectInstance.propTypes = {
+  intl: PropTypes.object,
+  children: PropTypes.object
+};
+
+InjectInstance.childContextTypes = {
+  formatMessage: PropTypes.func
+};
+
+const InjectedComponent = injectIntl(InjectInstance);
 
 class MainLayout extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      collapsed: localStorage.getItem('collapsed') === 'true' ? true : false
+      collapsed: localStorage.getItem('collapsed') === 'true' ? true : false,
+      toggleLang: false,
+      locale: '',
+      messages: mergedMessages
     };
 
     this.onCollapse = this.onCollapse.bind(this);
+    this.toggleLang = this.toggleLang.bind(this);
+  }
+
+  componentDidMount() {
+    const { history, currentUser } = this.props;
+    const path = history.location.pathname;
+
+    if (!currentUser && !visitorPaths.includes(path)) {
+      history.push('/sign-in?required');
+    }
+
+    this.getLang();
+  }
+
+  toggleLang() {
+    this.setState(prevState => ({ toggleLang: !prevState.toggleLang }));
+    const { toggleLang } = this.state;
+    toggleLang ? this.setLang('mn', mergedMessages) : this.setLang('en', {});
+  }
+
+  getLang() {
+    const lang = localStorage.getItem('locale');
+    const messages = lang === 'mn' ? mergedMessages : {};
+
+    this.setLang(lang || 'en', messages);
+  }
+
+  setLang(locale, messages) {
+    localStorage.setItem('locale', locale);
+    this.setState({ locale, messages });
   }
 
   onCollapse(collapsed) {
@@ -43,18 +126,9 @@ class MainLayout extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const { history, currentUser } = this.props;
-    const path = history.location.pathname;
-
-    if (!currentUser && !visitorPaths.includes(path)) {
-      history.push('/sign-in?required');
-    }
-  }
-
   render() {
-    const { currentUser, children, location } = this.props;
-    const { collapsed } = this.state;
+    const { currentUser, location } = this.props;
+    const { collapsed, locale, messages } = this.state;
 
     const navProps = {
       collapsed: collapsed ? true : false,
@@ -70,18 +144,22 @@ class MainLayout extends React.Component {
     }
 
     return (
-      <Layout>
-        {currentUser && <Sidenav {...navProps} />}
-        <Layout className="main" style={layoutStyle}>
-          <Header />
-          <Content>
-            {currentUser && <Breadcrumb {...location} />}
-            {children}
-            <BackTop />
-          </Content>
-          <Footer>Oyu Tolgoi ©2018 All Rights Reserved</Footer>
+      <IntlProvider locale={locale || 'en'} messages={messages}>
+        <Layout>
+          {currentUser && <Sidenav {...navProps} />}
+          <Layout className="main" style={layoutStyle}>
+            <Header toggleLang={this.toggleLang} langLabel={locale} />
+            <Content>
+              {currentUser && <Breadcrumb {...location} />}
+              <InjectedComponent {...this.props} />
+              <BackTop />
+            </Content>
+            <Footer>
+              <T id="footer">Oyu Tolgoi ©2018 All Rights Reserved</T>
+            </Footer>
+          </Layout>
         </Layout>
-      </Layout>
+      </IntlProvider>
     );
   }
 }

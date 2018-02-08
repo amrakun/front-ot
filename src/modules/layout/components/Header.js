@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { colors } from 'modules/common/constants';
 import { logout } from '../utils';
+import { T } from 'modules/common/components';
 
 const SubMenu = Menu.SubMenu;
 
@@ -47,10 +48,14 @@ const HeaderBar = (props, context) => {
           }
         >
           <Menu.Item key="profile">
-            <Link to="/my-profile">My profile</Link>
+            <Link to="/my-profile">
+              <T id="myProfile">My Profile</T>
+            </Link>
           </Menu.Item>
           <Menu.Item key="change-password">
-            <Link to="/change-password">Change Password</Link>
+            <Link to="/change-password">
+              <T id="changePassword">Change Password</T>
+            </Link>
           </Menu.Item>
           {!currentUser.isSupplier && (
             <Menu.Item key="delegation">
@@ -58,17 +63,25 @@ const HeaderBar = (props, context) => {
             </Menu.Item>
           )}
           <Menu.Item key="logout">
-            <a onClick={logout}>Sign out</a>
+            <a onClick={logout}>
+              <T id="signOut">Sign Out</T>
+            </a>
           </Menu.Item>
         </SubMenu>
       ) : (
         <Menu.Item className="right">
-          <Link to="/sign-in">Sign in</Link>
+          <Link to="/sign-in">
+            <T id="signIn">Sign In</T>
+          </Link>
         </Menu.Item>
       )}
 
-      <Menu.Item className="right" disabled key="lang">
-        <span className="bordered">EN</span>
+      <Menu.Item className="right" key="lang">
+        <a onClick={props.toggleLang}>
+          <span className="bordered">
+            {props.langLabel === 'en' ? 'EN' : 'MN'}
+          </span>
+        </a>
       </Menu.Item>
     </Menu>
   );

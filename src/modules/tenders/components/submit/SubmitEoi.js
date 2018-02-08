@@ -6,8 +6,15 @@ import TenderForm from '../TenderForm';
 import EoiTable from '../EoiTable';
 import { agreementOptions } from './constants';
 import MainInfo from './MainInfo';
+import { defineMessages } from 'react-intl';
 
 const CheckboxGroup = Checkbox.Group;
+const messages = defineMessages({
+  applyToEoi: {
+    id: 'applyToEoi',
+    defaultMessage: 'Apply to EOI'
+  }
+});
 
 class SubmitTender extends TenderForm {
   constructor(props) {
@@ -88,11 +95,13 @@ class SubmitTender extends TenderForm {
       renderProductColumn: this.renderProductColumn
     };
 
+    const { formatMessage } = this.context;
+
     return (
       <Form layout="inline" onSubmit={this.handleSubmit}>
         <MainInfo {...data} />
 
-        <Card title="Apply to EOI" className="margin">
+        <Card title={formatMessage(messages.applyToEoi)} className="margin">
           <EoiTable {...formProps} />
 
           <br />
@@ -150,6 +159,10 @@ class SubmitTender extends TenderForm {
 
 SubmitTender.propTypes = {
   data: PropTypes.object
+};
+
+SubmitTender.contextTypes = {
+  formatMessage: PropTypes.func
 };
 
 const form = Form.create()(SubmitTender);

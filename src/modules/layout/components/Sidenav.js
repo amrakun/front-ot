@@ -3,12 +3,13 @@ import { NavLink } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 import { supplierSideMenu, buyerSideMenu } from '../consts';
 import { PropTypes } from 'prop-types';
+import { T } from 'modules/common/components';
 
 const { Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 const MenuItem = Menu.Item;
 
-const supplier = renderMenu(supplierSideMenu);
+const supplier = renderMenu(supplierSideMenu, true);
 const buyer = renderMenu(buyerSideMenu);
 
 const Sidenav = (props, context) => {
@@ -71,7 +72,7 @@ Sidenav.contextTypes = {
   currentUser: PropTypes.object
 };
 
-function renderMenu(sideMenu) {
+function renderMenu(sideMenu, translate) {
   const menuItems = [];
   sideMenu.forEach(m => {
     if (m.subMenu) {
@@ -90,10 +91,14 @@ function renderMenu(sideMenu) {
         </SubMenu>
       );
     } else {
+      let title =
+        (translate && <T id={'b_' + m.url.replace('/', '')}>{m.title}</T>) ||
+        m.title;
+
       menuItems.push(
         <MenuItem key={m.url} disabled={m.disabled}>
           {m.icon ? <Icon type={m.icon} /> : ''}
-          <NavLink to={m.url}>{m.title}</NavLink>
+          <NavLink to={m.url}>{title}</NavLink>
         </MenuItem>
       );
     }

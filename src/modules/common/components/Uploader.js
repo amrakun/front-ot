@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Upload, message, Button, Icon } from 'antd';
 import { uploadUrl } from 'modules/common/constants';
+import { T } from 'modules/common/components';
 
 class Uploader extends React.Component {
   constructor(props) {
@@ -56,7 +57,7 @@ class Uploader extends React.Component {
     return (
       <Upload {...extendedProps}>
         <Button>
-          <Icon type="upload" /> {label}
+          <Icon type="upload" /> <T id="upload">{label}</T>
         </Button>
       </Upload>
     );

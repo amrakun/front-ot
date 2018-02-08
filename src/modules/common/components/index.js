@@ -1,5 +1,6 @@
 import Field from './Field';
 import Uploader from './Uploader';
+import T from './Formatted';
 import BaseForm from './BaseForm';
 import TextCard from './dataDisplay/textCard';
 import NumberCard from './dataDisplay/numberCard';
@@ -12,6 +13,7 @@ import exportFile from './exportFile';
 export {
   Uploader,
   Field,
+  T,
   BaseForm,
   NumberCard,
   NumberCardLines,

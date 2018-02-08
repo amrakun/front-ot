@@ -1,8 +1,33 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Form, Input, Card, Button, Icon } from 'antd';
-import BaseForm from 'modules/common/components/BaseForm';
+import { BaseForm } from 'modules/common/components';
 import addressFields from './address';
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+  business: {
+    id: 'businessContact',
+    defaultMessage: '14. Primary business contact'
+  },
+  address: {
+    id: 'address',
+    defaultMessage: 'Address'
+  },
+  copy: {
+    id: 'copyFromCompany',
+    defaultMessage: 'Copy from Company Information'
+  },
+  placeholderFullName: {
+    id: 'placeholderFullName',
+    defaultMessage: 'First name + Last name'
+  },
+  placeholderNumeric: {
+    id: 'placeholderNumeric',
+    defaultMessage: 'Numeric'
+  }
+});
 
 class ContactInfo extends BaseForm {
   render() {
@@ -25,13 +50,19 @@ class ContactInfo extends BaseForm {
       setFieldsValue(values);
     };
 
+    const { formatMessage } = this.context;
+
     return (
       <Form onSubmit={this.handleSubmit}>
-        <Card title="14. Primary business contact">
+        <Card title={formatMessage(messages.business)}>
           {this.renderField({
             label: 'Full name',
             name: 'name',
-            control: <Input placeholder="First name + Last name" />
+            control: (
+              <Input
+                placeholder={formatMessage(messages.placeholderFullName)}
+              />
+            )
           })}
 
           {this.renderField({
@@ -42,11 +73,12 @@ class ContactInfo extends BaseForm {
         </Card>
 
         <Card
-          title="Address"
+          title={formatMessage(messages.address)}
           extra={
             basicInfo.address && (
               <Button onClick={copyAddress}>
-                <Icon type="copy" />Copy from Company information
+                <Icon type="copy" />
+                {formatMessage(messages.copy)}
               </Button>
             )
           }
@@ -61,13 +93,23 @@ class ContactInfo extends BaseForm {
           {this.renderField({
             label: 'Phone',
             name: 'phone',
-            control: <Input type="number" placeholder="Numeric" />
+            control: (
+              <Input
+                type="number"
+                placeholder={formatMessage(messages.placeholderNumeric)}
+              />
+            )
           })}
 
           {this.renderField({
             label: 'Phone 2',
             name: 'phone2',
-            control: <Input type="number" placeholder="Numeric" />
+            control: (
+              <Input
+                type="number"
+                placeholder={formatMessage(messages.placeholderNumeric)}
+              />
+            )
           })}
 
           {this.renderField({
@@ -83,6 +125,10 @@ class ContactInfo extends BaseForm {
     );
   }
 }
+
+ContactInfo.contextTypes = {
+  formatMessage: PropTypes.func
+};
 
 const ContactForm = Form.create()(ContactInfo);
 

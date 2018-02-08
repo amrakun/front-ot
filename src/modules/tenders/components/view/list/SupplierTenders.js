@@ -6,13 +6,31 @@ import { Divider, Popconfirm } from 'antd';
 import { dateTimeFormat } from 'modules/common/constants';
 import moment from 'moment';
 import Tenders from './Tenders';
+import { T } from 'modules/common/components';
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+  tenderFile: {
+    id: 'tenderFile',
+    defaultMessage: 'File'
+  },
+  tenderAction: {
+    id: 'tenderAction',
+    defaultMessage: 'Action'
+  },
+  tenderStatus: {
+    id: 'tenderStatus',
+    defaultMessage: 'Status'
+  }
+});
 
 class SupplierTenders extends Tenders {
   columns() {
+    const { formatMessage } = this.context;
     const renderIcon = this.renderIcon;
     return [
       {
-        title: 'Status',
+        title: formatMessage(messages.tenderStatus),
         filters: [
           {
             text: <span>{renderIcon('open')} Open</span>,
@@ -33,12 +51,12 @@ class SupplierTenders extends Tenders {
       },
       ...this.commonColumns(),
       {
-        title: 'File',
+        title: formatMessage(messages.tenderFile),
         render: (text, record) =>
           record.file ? this.renderFileDownload(record.file.url) : '-'
       },
       {
-        title: 'Action',
+        title: formatMessage(messages.tenderAction),
         fixed: 'right',
         width: 100,
         render: (text, record) => this.renderOperation(record)
@@ -76,7 +94,9 @@ class SupplierTenders extends Tenders {
     if (currentUser) {
       return (
         <div style={{ width: '160px' }}>
-          <Link to={`/tender/submit/${_id}`}>Open</Link>
+          <Link to={`/tender/submit/${_id}`}>
+            <T id="tenderOpen">Open</T>
+          </Link>
           {canNotInterested && [
             <Divider type="vertical" key={0} />,
             <Popconfirm
@@ -109,6 +129,10 @@ class SupplierTenders extends Tenders {
 SupplierTenders.propTypes = {
   currentUser: PropTypes.object,
   notInterested: PropTypes.func
+};
+
+SupplierTenders.contextTypes = {
+  formatMessage: PropTypes.func
 };
 
 export default withRouter(SupplierTenders);

@@ -5,32 +5,67 @@ import { Link } from 'react-router-dom';
 import { Table, Card } from 'antd';
 import { dateTimeFormat } from 'modules/common/constants';
 import moment from 'moment';
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+  qualificationTitle: {
+    id: 'qualificationTitle',
+    defaultMessage: 'Qualification/audit requests'
+  },
+  status: {
+    id: 'status',
+    defaultMessage: 'Status'
+  },
+  publishDate: {
+    id: 'publishDate',
+    defaultMessage: 'Publish date'
+  },
+  expirationDate: {
+    id: 'expirationDate',
+    defaultMessage: 'Expiration date'
+  },
+  auditorReport: {
+    id: 'auditorReport',
+    defaultMessage: 'Auditor report'
+  },
+  auditorImprovement: {
+    id: 'auditorImprovement',
+    defaultMessage: 'Auditor improvement plan'
+  },
+  more: {
+    id: 'more',
+    defaultMessage: 'More'
+  }
+});
 
 class AuditRequests extends React.Component {
   columns() {
+    const { formatMessage } = this.context;
     return [
       {
-        title: 'Status',
+        title: formatMessage(messages.status),
         dataIndex: 'status'
       },
       {
-        title: 'Publish date',
+        title: formatMessage(messages.publishDate),
         render: record => moment(record.publishDate).format(dateTimeFormat)
       },
       {
-        title: 'Expiration date',
+        title: formatMessage(messages.expirationDate),
         render: record => moment(record.closeDate).format(dateTimeFormat)
       },
       {
-        title: 'Auditor report',
-        render: record => (record.status === 'open' ? '-' : <a>View</a>)
+        title: formatMessage(messages.auditorReport),
+        render: record =>
+          record.status === 'open' ? '-' : <a>{formatMessage(messages.view)}</a>
       },
       {
-        title: 'Auditor improvement plan',
-        render: record => (record.status === 'open' ? '-' : <a>View</a>)
+        title: formatMessage(messages.auditorImprovement),
+        render: record =>
+          record.status === 'open' ? '-' : <a>{formatMessage(messages.view)}</a>
       },
       {
-        title: 'More',
+        title: formatMessage(messages.more),
         render: record => {
           const isSent = record.supplierResponse
             ? record.supplierResponse.isSent
@@ -49,9 +84,10 @@ class AuditRequests extends React.Component {
 
   render() {
     const { data, pagination, loading, onChange } = this.props;
+    const { formatMessage } = this.context;
 
     return (
-      <Card title="Qualification/audit requests">
+      <Card title={formatMessage(messages.qualificationTitle)}>
         <Table
           columns={this.columns()}
           rowKey={record => record._id}
@@ -72,6 +108,10 @@ AuditRequests.propTypes = {
   pagination: PropTypes.object,
   loading: PropTypes.bool.isRequired,
   onChange: PropTypes.func
+};
+
+AuditRequests.contextTypes = {
+  formatMessage: PropTypes.func
 };
 
 export default withRouter(AuditRequests);

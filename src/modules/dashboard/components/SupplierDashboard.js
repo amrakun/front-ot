@@ -13,6 +13,35 @@ import { colors } from 'modules/common/constants';
 import { Row, Col, Alert } from 'antd';
 import { Link } from 'react-router-dom';
 import { labels } from '../constants';
+import { T } from 'modules/common/components';
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+  dashboardOpenRfqAndEoi: {
+    id: 'dashboardOpenRfqAndEoi',
+    defaultMessage: 'Open EOI/RFQ'
+  },
+  dashboardDifotScore: {
+    id: 'dashboardDifotScore',
+    defaultMessage: 'DIFOT Score'
+  },
+  dashboardSuccessFeedback: {
+    id: 'dashboardSuccessFeedback',
+    defaultMessage: 'Success feedback'
+  },
+  dashboardReminder: {
+    id: 'dashboardReminder',
+    defaultMessage: 'Reminder'
+  },
+  dashboardPrequalification: {
+    id: 'dashboardPrequalification',
+    defaultMessage: 'Pre-Qualification status'
+  },
+  dashboardQualification: {
+    id: 'dashboardQualification',
+    defaultMessage: 'Qualificaiton/audit'
+  }
+});
 
 class Dashboard extends React.Component {
   render() {
@@ -29,6 +58,7 @@ class Dashboard extends React.Component {
 
     const queryParams = queryString.parse(location.search);
     const currentUser = this.context.currentUser || {};
+    const { formatMessage } = this.context;
 
     let hasNewAudit = false;
     audits.forEach(audit => {
@@ -74,7 +104,7 @@ class Dashboard extends React.Component {
           <Col key={1} lg={8} sm={12}>
             <NumberCard
               icon="message"
-              title="Open EOI/RFQ"
+              title={formatMessage(messages.dashboardOpenRfqAndEoi)}
               color={colors[7]}
               number={openTendersCount}
             />
@@ -82,8 +112,8 @@ class Dashboard extends React.Component {
           <Col key={4} lg={8} sm={12}>
             <NumberCardLines
               icon="calendar"
-              title="DIFOT score"
-              tooltip={averageDifotScore > 75 ? labels.difotSuggestion : null}
+              title={formatMessage(messages.dashboardDifotScore)}
+              tooltip={averageDifotScore < 75 ? labels.difotSuggestion : null}
               color={averageDifotScore ? colors[7] : colors[5]}
               number={averageDifotScore || 0}
               percent={averageDifotScore || 0}
@@ -93,7 +123,7 @@ class Dashboard extends React.Component {
           <Col key={5} lg={8} sm={12}>
             <TextCard
               icon="mail"
-              title="Success feedback"
+              title={formatMessage(messages.dashboardSuccessFeedback)}
               color={colors[7]}
               text={
                 lastFeedback && !lastFeedback.supplierResponse ? (
@@ -103,7 +133,7 @@ class Dashboard extends React.Component {
                     &nbsp;to submit your response.
                   </span>
                 ) : (
-                  <span>Nothing new</span>
+                  <T id="dashboardNothingNew">Nothing new</T>
                 )
               }
               badge={lastFeedback !== null && !lastFeedback.supplierResponse}
@@ -112,7 +142,7 @@ class Dashboard extends React.Component {
           <Col key={2} lg={8} sm={12}>
             <NumberCard
               icon="clock-circle-o"
-              title="Reminder"
+              title={formatMessage(messages.dashboardReminder)}
               color={colors[5]}
               number={0}
             />
@@ -120,7 +150,7 @@ class Dashboard extends React.Component {
           <Col key={3} lg={8} sm={12}>
             <TextCard
               icon="solution"
-              title="Pre-qualification status"
+              title={formatMessage(messages.dashboardPrequalification)}
               color={isPrequalified ? colors[7] : colors[5]}
               tooltip={isPrequalified ? null : labels.preqSuggestion}
               text={<span>{isPrequalified ? 'Yes' : 'No'}</span>}
@@ -130,7 +160,7 @@ class Dashboard extends React.Component {
           <Col key={6} lg={8} sm={12}>
             <TextCard
               icon="calculator"
-              title="Qualification/audit"
+              title={formatMessage(messages.dashboardQualification)}
               color={colors[7]}
               text={
                 hasNewAudit ? (
@@ -140,7 +170,7 @@ class Dashboard extends React.Component {
                     &nbsp;view your audit invitations
                   </span>
                 ) : (
-                  <span>Nothing new</span>
+                  <T id="dashboardNothingNew">Nothing new</T>
                 )
               }
               badge={hasNewAudit}
@@ -175,7 +205,8 @@ Dashboard.propTypes = {
 };
 
 Dashboard.contextTypes = {
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
+  formatMessage: PropTypes.func
 };
 
 export default Dashboard;
