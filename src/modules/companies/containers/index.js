@@ -3,6 +3,7 @@ import Prequalification from './prequalification/Prequalification';
 import Registration from './registration/Registration';
 import ViewRegistration from './registration/ViewRegistration';
 import CapacityBuilding from './registration/CapacityBuilding';
+import AddCompany from './addCompany';
 
 import generator from './list/generator';
 
@@ -12,5 +13,6 @@ export {
   Prequalification,
   CapacityBuilding,
   ViewRegistration,
-  generator
+  generator,
+  AddCompany
 };

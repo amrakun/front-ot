@@ -37,6 +37,7 @@ class ForgotPassword extends BaseForm {
         <Card className="login-card" bordered={false}>
           <Form onSubmit={this.handleSubmit}>
             <Field
+              label="Please enter your registered email address"
               name="email"
               validation="email"
               control={

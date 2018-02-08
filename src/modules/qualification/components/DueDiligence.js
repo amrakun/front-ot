@@ -73,11 +73,20 @@ class DueDiligence extends Common {
 
           return file ? (
             <a href={file.url} target="_blank">
-              {moment(lastDueDiligence.date).format(dateFormat)}
+              View
             </a>
           ) : (
             '-'
           );
+        }
+      },
+      {
+        title: 'Submission date',
+        render: record => {
+          const lastDueDiligence = record.lastDueDiligence || {};
+          const file = lastDueDiligence.file;
+
+          return file ? moment(lastDueDiligence.date).format(dateFormat) : '-';
         }
       }
     ]);
@@ -109,7 +118,7 @@ class DueDiligence extends Common {
               dataSource={data}
               pagination={pagination}
               loading={loading}
-              scroll={{ x: 1500 }}
+              scroll={{ x: 2000 }}
               onChange={(pagination, filters, sorter) =>
                 onChange(pagination, filters, sorter)
               }

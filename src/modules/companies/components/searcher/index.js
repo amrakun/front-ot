@@ -80,13 +80,13 @@ class SupplierSearcher extends React.Component {
       <span>
         {!withTag && (
           <Button disabled onClick={this.showPopup}>
-            {`${slogan || 'Invite'} a new supplier`}
+            {`${slogan || 'Add'} an existing supplier`}
           </Button>
         )}
 
         {withTag && (
           <Tag onClick={this.showPopup} className="dashed-button">
-            <Icon type="plus" /> {`${slogan || 'Invite'} a new supplier`}
+            <Icon type="plus" /> {`${slogan || 'Add'} an existing supplier`}
           </Tag>
         )}
 

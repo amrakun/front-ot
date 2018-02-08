@@ -97,7 +97,7 @@ class Dashboard extends React.Component {
                 style={{ backgroundColor: COLORS[index % COLORS.length] }}
               />
               <label style={{ textTransform: 'uppercase' }}>
-                {detail.name}
+                {detail.name === 'umnugovi' ? 'umnugobi' : detail.name}
               </label>
             </span>
           ))}
@@ -250,8 +250,8 @@ class Dashboard extends React.Component {
               </div>
               <div className="ant-col-sm-24 ant-col-lg-5">
                 {this.renderCountData(
-                  'EOI average duration',
-                  eoiAverageDuration
+                  'EOI average duration /days/',
+                  Math.round(eoiAverageDuration)
                 )}
               </div>
             </div>
@@ -272,8 +272,8 @@ class Dashboard extends React.Component {
               </div>
               <div className="ant-col-sm-24 ant-col-lg-5">
                 {this.renderCountData(
-                  'RFQ average duration',
-                  rfqAverageDuration
+                  'RFQ average duration /days/',
+                  Math.round(rfqAverageDuration)
                 )}
               </div>
             </div>

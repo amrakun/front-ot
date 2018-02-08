@@ -153,6 +153,16 @@
 .ant-layout-sider.ant-layout-sider-collapsed ul li ul li a {
   opacity: 1;
 }
+.ant-layout-sider .ant-menu-sub.ant-menu-inline > .ant-menu-item,
+.ant-layout-sider .ant-menu-item {
+  line-height: 16px;
+  padding: 10px 0;
+  height: auto;
+}
+.ant-layout-sider .ant-menu-sub.ant-menu-inline > .ant-menu-item a,
+.ant-layout-sider .ant-menu-item a {
+  white-space: normal;
+}
 .ant-layout-sider-trigger {
   background: transparent;
 }

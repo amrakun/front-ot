@@ -83,7 +83,7 @@ class SignIn extends Component {
               Forgot password
             </Link>
             <Button type="primary" loading={loading} htmlType="submit">
-              Log in
+              Sign in
             </Button>
             Or <Link to="/register">register now!</Link>
           </FormItem>

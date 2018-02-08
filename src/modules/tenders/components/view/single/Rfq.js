@@ -3,19 +3,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
-import {
-  message,
-  Button,
-  Icon,
-  TreeSelect,
-  Select,
-  Row,
-  Col,
-  Card,
-  Input
-} from 'antd';
+import { message, Button, Icon, Select, Row, Col, Card, Input } from 'antd';
 import { rfqRequestColumns } from '../../../constants';
-import productsTree from 'modules/companies/productsTree';
 import Tender from './Tender';
 import router from 'modules/common/router';
 
@@ -35,7 +24,7 @@ class Rfq extends Tender {
 
     this.state = {
       ...this.state,
-      productCodes: [productCode],
+      productCode: productCode || '',
       filter: sort || betweenSearch,
       from,
       to
@@ -43,7 +32,7 @@ class Rfq extends Tender {
 
     this.bidSummaryReport = this.bidSummaryReport.bind(this);
     this.award = this.award.bind(this);
-    this.handleProductCodesChange = this.handleProductCodesChange.bind(this);
+    this.handleProductCodeChange = this.handleProductCodeChange.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
     this.handleBetweenSearch = this.handleBetweenSearch.bind(this);
     this.handleRangeChange = this.handleRangeChange.bind(this);
@@ -73,10 +62,10 @@ class Rfq extends Tender {
     }
   }
 
-  handleProductCodesChange(value) {
-    this.setState({ productCodes: value });
+  handleProductCodeChange(e) {
+    this.setState({ productCode: e.target.value });
 
-    router.setParams(this.props.history, { productCode: value[0] });
+    router.setParams(this.props.history, { productCode: e.target.value });
   }
 
   handleFilterChange(value) {
@@ -152,8 +141,10 @@ class Rfq extends Tender {
   render() {
     const { rfqBidSummaryReportLoading } = this.props;
     const data = this.props.data || {};
-    const { requestedProducts, status } = data;
-    const { productCodes, filter, from, to } = this.state;
+    const tenderDetail = this.props.tenderDetail || {};
+    const { status } = data;
+    const { requestedProducts } = tenderDetail;
+    const { productCode, filter, from, to } = this.state;
 
     const tableOperations = [
       <Button
@@ -180,21 +171,14 @@ class Rfq extends Tender {
         {this.renderStats()}
         <Row gutter={24}>
           <Col sm={24} xl={6} lg={7}>
-            <Card title="Product code">
-              <TreeSelect
-                treeData={productsTree}
-                value={productCodes}
-                onChange={this.handleProductCodesChange}
-                treeCheckable={true}
-                searchPlaceholder="Product code"
-                style={{ width: '100%' }}
-              />
+            <Card title="Product name">
+              <Input onChange={this.handleProductCodeChange} />
             </Card>
 
             <Card className="margin" title="Filter">
               <Select
                 value={filter}
-                disabled={productCodes.length < 1}
+                disabled={productCode.length < 1}
                 placeholder="Select a filter"
                 onChange={this.handleFilterChange}
                 style={{ width: '100%' }}

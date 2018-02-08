@@ -34,11 +34,8 @@ const CreateTenderContainer = props => {
     data: { suppliers: simpleCompaniesQuery.companies }
   };
 
-  let form = <RfqForm {...updatedProps} />;
-
-  if (location.pathname.includes('eoi')) form = <EoiForm {...updatedProps} />;
-
-  return form;
+  if (location.pathname.includes('eoi')) return <EoiForm {...updatedProps} />;
+  else return <RfqForm {...updatedProps} />;
 };
 
 CreateTenderContainer.propTypes = {

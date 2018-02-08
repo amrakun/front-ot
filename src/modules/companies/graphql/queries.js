@@ -403,11 +403,7 @@ const audit = `
   query companies(${commonParams}) {
     companies(${commonValues}) {
       ${commonFields}
-      audits {
-        supplierResponse {
-          isQualified
-        }
-      }
+      isQualified
     }
   }
 `;
