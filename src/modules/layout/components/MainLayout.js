@@ -99,17 +99,17 @@ class MainLayout extends React.Component {
     this.setState({ locale, messages });
   }
 
-  onCollapse(collapsed) {
-    localStorage.setItem('collapsed', collapsed);
-    this.setState({ collapsed });
-  }
-
   toggleLang() {
     this.setState(prevState => ({
       toggleLang: !prevState.toggleLang
     }));
     const { toggleLang } = this.state;
     toggleLang ? this.setLang('mn', mergedMessages) : this.setLang('en', {});
+  }
+
+  onCollapse(collapsed) {
+    localStorage.setItem('collapsed', collapsed);
+    this.setState({ collapsed });
   }
 
   getChildContext() {
