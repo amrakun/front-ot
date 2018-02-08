@@ -105,12 +105,16 @@ $padding-xs: 8px;
     }
   }
 }
-.ant-menu-item.multi-line {
-  i {
-    position: relative;
-    top: -8px;
+
+.main-wrapper.mn.ant-layout {
+  .ant-menu-item.multi-line {
+    i {
+      position: relative;
+      top: -8px;
+    }
   }
 }
+
 .ant-layout-sider-trigger {
   background: transparent;
   i {

@@ -145,7 +145,7 @@ class MainLayout extends React.Component {
 
     return (
       <IntlProvider locale={locale || 'en'} messages={messages}>
-        <Layout>
+        <Layout className={`main-wrapper ${locale}`}>
           {currentUser && <Sidenav {...navProps} />}
           <Layout className="main" style={layoutStyle}>
             <Header toggleLang={this.toggleLang} langLabel={locale} />

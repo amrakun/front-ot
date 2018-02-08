@@ -91,4 +91,9 @@ HeaderBar.contextTypes = {
   currentUser: PropTypes.object
 };
 
+HeaderBar.propTypes = {
+  toggleLang: PropTypes.func,
+  langLabel: PropTypes.string
+};
+
 export default HeaderBar;
