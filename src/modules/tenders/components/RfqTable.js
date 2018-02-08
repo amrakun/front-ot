@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Table, Button, Icon, Alert, Col, Row } from 'antd';
 import { rfqProductsColumns, rfqDisclaimer } from '../constants';
 import { T } from 'modules/common/components';
-import { defineMessages, intlShape, injectIntl } from 'react-intl';
+import { defineMessages } from 'react-intl';
 
 const rpc = rfqProductsColumns;
 
