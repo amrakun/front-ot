@@ -44,7 +44,7 @@ const mergedMessages = {
 const withSidebar = { marginLeft: 200 };
 const withSidebarCollapsed = { marginLeft: 80 };
 
-class Test extends React.Component {
+class InjectInstance extends React.Component {
   getChildContext() {
     const { intl } = this.props;
     const { formatMessage } = intl;
@@ -59,16 +59,16 @@ class Test extends React.Component {
   }
 }
 
-Test.propTypes = {
+InjectInstance.propTypes = {
   intl: PropTypes.object,
   children: PropTypes.object
 };
 
-Test.childContextTypes = {
+InjectInstance.childContextTypes = {
   formatMessage: PropTypes.func
 };
 
-const InjectedTest = injectIntl(Test);
+const InjectedComponent = injectIntl(InjectInstance);
 
 class MainLayout extends React.Component {
   constructor(props) {
@@ -85,26 +85,33 @@ class MainLayout extends React.Component {
     this.toggleLang = this.toggleLang.bind(this);
   }
 
-  getLang() {
-    let lang = localStorage.getItem('locale');
-    if (lang !== 'mn') {
-      this.setLang('en', {});
-    } else {
-      this.setLang('mn', mergedMessages);
+  componentDidMount() {
+    const { history, currentUser } = this.props;
+    const path = history.location.pathname;
+
+    if (!currentUser && !visitorPaths.includes(path)) {
+      history.push('/sign-in?required');
     }
+
+    this.getLang();
+  }
+
+  toggleLang() {
+    this.setState(prevState => ({ toggleLang: !prevState.toggleLang }));
+    const { toggleLang } = this.state;
+    toggleLang ? this.setLang('mn', mergedMessages) : this.setLang('en', {});
+  }
+
+  getLang() {
+    const lang = localStorage.getItem('locale');
+    const messages = lang === 'mn' ? mergedMessages : {};
+
+    this.setLang(lang || 'en', messages);
   }
 
   setLang(locale, messages) {
     localStorage.setItem('locale', locale);
     this.setState({ locale, messages });
-  }
-
-  toggleLang() {
-    this.setState(prevState => ({
-      toggleLang: !prevState.toggleLang
-    }));
-    const { toggleLang } = this.state;
-    toggleLang ? this.setLang('mn', mergedMessages) : this.setLang('en', {});
   }
 
   onCollapse(collapsed) {
@@ -117,16 +124,6 @@ class MainLayout extends React.Component {
       currentUser: this.props.currentUser,
       systemConfig: this.props.systemConfig
     };
-  }
-
-  componentDidMount() {
-    const { history, currentUser } = this.props;
-    const path = history.location.pathname;
-
-    this.getLang();
-    if (!currentUser && !visitorPaths.includes(path)) {
-      history.push('/sign-in?required');
-    }
   }
 
   render() {
@@ -154,7 +151,7 @@ class MainLayout extends React.Component {
             <Header toggleLang={this.toggleLang} langLabel={locale} />
             <Content>
               {currentUser && <Breadcrumb {...location} />}
-              <InjectedTest {...this.props} />
+              <InjectedComponent {...this.props} />
               <BackTop />
             </Content>
             <Footer>
