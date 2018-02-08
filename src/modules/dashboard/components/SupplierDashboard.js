@@ -142,7 +142,7 @@ class Dashboard extends React.Component {
           <Col key={2} lg={8} sm={12}>
             <NumberCard
               icon="clock-circle-o"
-              title="Reminder"
+              title={formatMessage(messages.dashboardReminder)}
               color={colors[5]}
               number={0}
             />

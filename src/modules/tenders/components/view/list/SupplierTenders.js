@@ -6,6 +6,7 @@ import { Divider, Popconfirm } from 'antd';
 import { dateTimeFormat } from 'modules/common/constants';
 import moment from 'moment';
 import Tenders from './Tenders';
+import { T } from 'modules/common/components';
 import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
@@ -16,10 +17,6 @@ const messages = defineMessages({
   tenderAction: {
     id: 'tenderAction',
     defaultMessage: 'Action'
-  },
-  tenderOpen: {
-    id: 'tenderOpen',
-    defaultMessage: 'Open'
   },
   tenderStatus: {
     id: 'tenderStatus',
@@ -97,7 +94,9 @@ class SupplierTenders extends Tenders {
     if (currentUser) {
       return (
         <div style={{ width: '160px' }}>
-          <Link to={`/tender/submit/${_id}`}>Open</Link>
+          <Link to={`/tender/submit/${_id}`}>
+            <T id="tenderOpen">Open</T>
+          </Link>
           {canNotInterested && [
             <Divider type="vertical" key={0} />,
             <Popconfirm
