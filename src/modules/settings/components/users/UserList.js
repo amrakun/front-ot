@@ -12,12 +12,10 @@ import {
   Input,
   Divider,
   Button,
-  Modal,
   Form,
-  message
+  message,
+  Popconfirm
 } from 'antd';
-
-const confirm = Modal.confirm;
 
 const propTypes = {
   form: PropTypes.object.isRequired,
@@ -66,7 +64,7 @@ class UserList extends React.Component {
     this.onSuccess = this.onSuccess.bind(this);
     this.onClose = this.onClose.bind(this);
     this.emitEmpty = this.emitEmpty.bind(this);
-    this.showConfirm = this.showConfirm.bind(this);
+    this.removeUser = this.removeUser.bind(this);
 
     this.columns = [
       {
@@ -108,23 +106,25 @@ class UserList extends React.Component {
           <span>
             <a onClick={this.editUser.bind(this, record)}>Edit</a>
             <Divider type="vertical" />
-            <a onClick={this.showConfirm.bind(this, record._id)}>Remove</a>
+            <Popconfirm
+              key={3}
+              title="Are you sure you want to remove this user？"
+              placement="bottomRight"
+              okText="Yes"
+              cancelText="No"
+              onConfirm={() => this.removeUser(record._id)}
+            >
+              <a>Remove</a>
+            </Popconfirm>
           </span>
         )
       }
     ];
   }
 
-  showConfirm(id) {
-    const self = this;
-
-    confirm({
-      title: 'Do you want to delete these user?',
-      onOk() {
-        self.props.removeUser(id);
-        message.success('User succesfully removed.');
-      }
-    });
+  removeUser(id) {
+    this.props.removeUser(id);
+    message.success('User succesfully removed.');
   }
 
   handleSearch(value) {

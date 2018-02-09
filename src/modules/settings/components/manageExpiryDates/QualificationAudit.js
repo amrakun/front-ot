@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { SupplierSearcher } from 'modules/companies/components';
 import { Row, Col, Select, Input, Button, Form } from 'antd';
+
 const Option = Select.Option;
 const FormItem = Form.Item;
 
@@ -278,15 +279,7 @@ class QualificationAudit extends React.Component {
                 <FormItem>
                   {getFieldDecorator('supplierId', {
                     initialValue: specificAuditDow.supplierIds || []
-                  })(
-                    <Select
-                      mode="multiple"
-                      style={{ width: '100%' }}
-                      placeholder="Please select"
-                    >
-                      {children}
-                    </Select>
-                  )}
+                  })(<SupplierSearcher mode="select" />)}
                 </FormItem>
               </Col>
             </Row>
@@ -340,15 +333,7 @@ class QualificationAudit extends React.Component {
                 <FormItem>
                   {getFieldDecorator('specificSupplierId', {
                     initialValue: specificImprovementPlanDow.supplierIds || []
-                  })(
-                    <Select
-                      mode="multiple"
-                      style={{ width: '100%' }}
-                      placeholder="Please select"
-                    >
-                      {children}
-                    </Select>
-                  )}
+                  })(<SupplierSearcher mode="select" />)}
                 </FormItem>
               </Col>
             </Row>

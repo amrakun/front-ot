@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Tag, Icon } from 'antd';
+import { Tag, Icon } from 'antd';
 import { Popup } from '../../containers/searcher';
 
 const propTypes = {
-  withTag: PropTypes.bool,
   onSelect: PropTypes.func,
-  slogan: PropTypes.string
+  slogan: PropTypes.string,
+  mode: PropTypes.string,
+  onChange: PropTypes.func,
+  value: PropTypes.array
 };
 
 class SupplierSearcher extends React.Component {
@@ -55,10 +57,10 @@ class SupplierSearcher extends React.Component {
     }
   }
 
-  renderPopup() {
+  renderPopup(onlySelect) {
     const { searchValue, visible } = this.state;
 
-    if (visible) {
+    if (visible || onlySelect) {
       return (
         <Popup
           searchValue={searchValue}
@@ -67,28 +69,26 @@ class SupplierSearcher extends React.Component {
           onOk={this.onOk}
           onCancel={this.onCancel}
           onSelect={this.onSelect}
+          onChange={this.props.onChange}
           slogan={this.props.slogan}
+          mode={this.props.mode}
+          value={this.props.value}
         />
       );
     }
   }
 
   render() {
-    const { withTag, slogan } = this.props;
+    const { slogan, mode } = this.props;
 
-    return (
+    return mode === 'select' ? (
+      //render only supplier select without modal
+      this.renderPopup(true)
+    ) : (
       <span>
-        {!withTag && (
-          <Button disabled onClick={this.showPopup}>
-            {`${slogan || 'Add'} an existing supplier`}
-          </Button>
-        )}
-
-        {withTag && (
-          <Tag onClick={this.showPopup} className="dashed-button">
-            <Icon type="plus" /> {`${slogan || 'Add'} an existing supplier`}
-          </Tag>
-        )}
+        <Tag onClick={this.showPopup} className="dashed-button">
+          <Icon type="plus" /> {`${slogan || 'Add'} an existing supplier`}
+        </Tag>
 
         {this.renderPopup()}
       </span>

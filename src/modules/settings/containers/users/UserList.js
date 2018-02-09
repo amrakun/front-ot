@@ -23,8 +23,9 @@ const UserListContainer = ({
       ? usersTotalCountQuery.usersTotalCount
       : 0,
     removeUser: _id => {
-      usersRemoveMutation({ variables: { _id } });
-      usersListQuery.refetch();
+      usersRemoveMutation({ variables: { _id } }).then(() => {
+        usersListQuery.refetch();
+      });
     },
     setPaginationParams: ({ page }) => {
       router.setParams(history, { page });

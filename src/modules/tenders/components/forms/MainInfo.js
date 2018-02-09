@@ -100,7 +100,7 @@ const MainInfo = props => {
             }}
           >
             {supplierTags}
-            <SupplierSearcher withTag={true} onSelect={onAddSuppliers} />
+            <SupplierSearcher onSelect={onAddSuppliers} />
             <AddCompany onAdd={supplier => onAddSuppliers([supplier])} />
           </div>
 

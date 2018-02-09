@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Row, Col, Select, Input, Button } from 'antd';
+import { SupplierSearcher } from 'modules/companies/components';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -8,8 +9,7 @@ const Option = Select.Option;
 const propTypes = {
   form: PropTypes.object.isRequired,
   onEmailContentChange: PropTypes.func,
-  mainAction: PropTypes.func,
-  users: PropTypes.array
+  mainAction: PropTypes.func
 };
 
 class PreQualification extends React.Component {
@@ -19,7 +19,6 @@ class PreQualification extends React.Component {
     const { systemConfig } = context;
 
     this.state = {
-      users: this.props.users,
       preQualification: systemConfig.prequalificationDow || '',
       specificPrequalificationDow:
         systemConfig.specificPrequalificationDow || ''
@@ -44,7 +43,7 @@ class PreQualification extends React.Component {
           amount: parseInt(data.amount, 10)
         },
         specific: {
-          supplierIds: data.supplierId,
+          supplierIds: data.supplierIds,
           duration: data.specificDuration,
           amount: parseInt(data.specificAmount, 10)
         }
@@ -53,11 +52,8 @@ class PreQualification extends React.Component {
   }
 
   render() {
-    const { users, preQualification, specificPrequalificationDow } = this.state;
+    const { preQualification, specificPrequalificationDow } = this.state;
     const { getFieldDecorator } = this.props.form;
-
-    const children = [];
-    users.map(v => children.push(<Option key={v._id}>{v.username}</Option>));
 
     return (
       <Form>
@@ -104,17 +100,9 @@ class PreQualification extends React.Component {
               </Col>
               <Col span={12}>
                 <FormItem>
-                  {getFieldDecorator('supplierId', {
+                  {getFieldDecorator('supplierIds', {
                     initialValue: specificPrequalificationDow.supplierIds || []
-                  })(
-                    <Select
-                      mode="multiple"
-                      style={{ width: '100%' }}
-                      placeholder="Please select supplier"
-                    >
-                      {children}
-                    </Select>
-                  )}
+                  })(<SupplierSearcher mode="select" />)}
                 </FormItem>
               </Col>
             </Row>

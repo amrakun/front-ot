@@ -9,22 +9,48 @@ const propTypes = {
   onSearch: PropTypes.func,
   onCancel: PropTypes.func,
   onSelect: PropTypes.func,
-  slogan: PropTypes.string
+  onChange: PropTypes.func,
+  slogan: PropTypes.string,
+  mode: PropTypes.string,
+  value: PropTypes.array
 };
 
 class Popup extends React.Component {
-  render() {
-    const {
-      visible,
-      onSearch,
-      onOk,
-      onCancel,
-      onSelect,
-      suppliers,
-      slogan
-    } = this.props;
+  constructor(props) {
+    super(props);
+
+    this.renderSelect = this.renderSelect.bind(this);
+  }
+
+  renderSelect() {
+    const { onSearch, onSelect, suppliers, onChange, value, mode } = this.props;
 
     return (
+      <Select
+        mode="multiple"
+        style={{ width: '100%' }}
+        onSelect={onSelect}
+        onSearch={onSearch}
+        onChange={onChange}
+        value={value}
+      >
+        {suppliers.map(supplier => (
+          <Select.Option
+            key={mode === 'select' ? supplier._id : JSON.stringify(supplier)}
+          >
+            {supplier.basicInfo.enName}
+          </Select.Option>
+        ))}
+      </Select>
+    );
+  }
+
+  render() {
+    const { visible, onOk, onCancel, slogan, mode } = this.props;
+
+    return mode === 'select' ? (
+      this.renderSelect()
+    ) : (
       <Modal
         okText={slogan || 'Add'}
         cancelText="Cancel"
@@ -33,18 +59,7 @@ class Popup extends React.Component {
         onOk={onOk}
         onCancel={onCancel}
       >
-        <Select
-          mode="multiple"
-          style={{ width: '100%' }}
-          onSelect={onSelect}
-          onSearch={onSearch}
-        >
-          {suppliers.map(supplier => (
-            <Select.Option key={JSON.stringify(supplier)}>
-              {supplier.basicInfo.enName}
-            </Select.Option>
-          ))}
-        </Select>
+        {this.renderSelect()}
       </Modal>
     );
   }
