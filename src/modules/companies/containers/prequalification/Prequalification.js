@@ -16,9 +16,15 @@ const PrequalificationContainer = props => {
   const companyByUser = companyByUserQuery.companyByUser;
 
   let formsComplete = true;
-  Object.keys(companyByUserQuery.companyByUser).forEach(key => {
-    if (key.includes('Info') && !companyByUser[key] && key !== 'healthInfo')
+  Object.keys(companyByUser).forEach(key => {
+    if (
+      key.includes('Info') &&
+      !companyByUser[key] &&
+      key !== 'healthInfo' &&
+      key !== 'isSentPrequalificationInfo'
+    ) {
       formsComplete = false;
+    }
   });
 
   const save = (name, doc) => {

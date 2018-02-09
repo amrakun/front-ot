@@ -62,6 +62,8 @@ class PrequalificationForm extends PreqForm {
       doesHaveLiabilityInsurance: data.doesHaveLiabilityInsurance || false,
       doesHaveCodeEthics: data.doesHaveCodeEthics || false,
       doesHaveResponsiblityPolicy: data.doesHaveResponsiblityPolicy || false,
+      hasConvictedLabourLaws: data.hasConvictedLabourLaws || false,
+      hasConvictedForHumanRights: data.hasConvictedForHumanRights || false,
       investigations: (data.investigations || []).map(i => ({
         _id: Math.random(),
         ...i
