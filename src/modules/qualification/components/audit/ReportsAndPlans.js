@@ -2,18 +2,24 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Table, Card, DatePicker } from 'antd';
-import { dateFormat } from 'modules/common/constants';
+import { Table, Card, DatePicker, Button, Icon } from 'antd';
+import { dateFormat, dateTimeFormat } from 'modules/common/constants';
 import moment from 'moment';
-import { Search } from 'modules/common/components';
+import { Search, Uploader } from 'modules/common/components';
 import queryString from 'query-string';
 import { Common } from 'modules/companies/components';
+import { Link } from 'react-router-dom';
 
 class ReportsAndPlans extends Common {
   constructor(props) {
     super(props);
 
     this.handleDateRangeChange = this.handleDateRangeChange.bind(this);
+    this.handleUpload = this.handleUpload.bind(this);
+  }
+
+  handleUpload(file, id) {
+    // this.reports[id] = { ...this.reports[id], file: value };
   }
 
   handleDateRangeChange(value) {
@@ -33,12 +39,12 @@ class ReportsAndPlans extends Common {
         dataIndex: 'status',
         filters: [
           {
-            text: 'Qualified',
-            value: 'qualfied'
+            text: 'On time',
+            value: 'onTime'
           },
           {
-            text: 'Sent improvement plan/report',
-            value: 'sent'
+            text: 'Late',
+            value: 'late'
           }
         ]
       },
@@ -49,16 +55,51 @@ class ReportsAndPlans extends Common {
         render: record => moment(record.createdDate).format(dateFormat)
       },
       {
-        title: 'More',
-        render: () => <a>View</a>
+        title: 'Applied information',
+        render: record =>
+          record.supplier ? (
+            <Link
+              to={{
+                pathname: '/audit/qualify',
+                state: {
+                  supplierId: record.supplier._id,
+                  auditId: record.audit._id
+                }
+              }}
+            >
+              View
+            </Link>
+          ) : (
+            '-'
+          )
       },
       {
         title: 'Last auditor report',
-        render: () => <a>View</a>
+        render: record => (
+          <Uploader
+            onChange={args => this.handleUpload(args, record._id)}
+            defaultFileList={{
+              url: record.reportFile,
+              name: record.reportSentDate
+                ? moment(record.reportSentDate, dateTimeFormat)
+                : 'Not sent yet'
+            }}
+          />
+        )
       },
       {
         title: 'Last auditor improvement plan',
-        render: () => <a>View</a>
+        render: record => (
+          <Uploader
+            onChange={args => this.handleUpload(args, record._id)}
+            defaultFileList={{
+              url: record.improvementPlanFile,
+              name: record.improvementPlanSentDate
+                ? moment(record.improvementPlanSentDate, dateTimeFormat)
+                : 'Not sent yet'
+            }}
+          />
+        )
       },
       { title: 'Contact person', dataIndex: 'supplier.contactInfo.name' },
       { title: 'Email address', dataIndex: 'supplier.contactInfo.email' },
@@ -68,19 +109,30 @@ class ReportsAndPlans extends Common {
 
   render() {
     const { pagination, loading, onChange, data } = this.props;
+    const { selectedCompanies } = this.state;
 
     return (
       <Card title="Reports & improvement plans">
         <div className="table-operations">
           <Search />
-          <DatePicker.RangePicker onChange={this.handleDateRangeChange} />
+          <DatePicker.RangePicker
+            style={{ float: 'left', marginLeft: '8px' }}
+            onChange={this.handleDateRangeChange}
+          />
+          <Button>
+            Send<Icon type="mail" />
+          </Button>
         </div>
 
         <Table
+          rowSelection={{
+            selectedCompanies,
+            onChange: this.onSelectedCompaniesChange
+          }}
           columns={this.columns()}
           rowKey={record => record._id}
           dataSource={data}
-          scroll={{ x: 1500 }}
+          scroll={{ x: 1700 }}
           pagination={pagination}
           loading={loading}
           onChange={(pagination, filters, sorter) =>

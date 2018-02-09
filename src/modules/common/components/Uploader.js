@@ -8,51 +8,55 @@ class Uploader extends React.Component {
   constructor(props) {
     super(props);
 
+    const { defaultFileList } = this.props;
+
+    const fileList = (defaultFileList || []).map((file, index) => ({
+      uid: index,
+      ...file
+    }));
+
+    this.state = { fileList };
+
     this.onChange = this.onChange.bind(this);
   }
 
-  onChange(info) {
-    if (info.file.status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully`);
+  onChange(e) {
+    const { multiple, onChange } = this.props;
+    const { file, fileList } = e;
 
-      return this.props.onReceiveFile(info.file, info.fileList);
+    if (file.status === 'error') {
+      return message.error(`${file.name} file upload failed.`);
     }
 
-    if (info.file.status === 'removed') {
-      return this.props.onReceiveFile(info.file, info.fileList);
+    if (file.status === 'removed') {
+      this.setState({ fileList });
+      return onChange(null);
     }
 
-    if (info.file.status === 'error') {
-      return message.error(`${info.file.name} file upload failed.`);
+    if (fileList.length > 0) {
+      if (multiple) {
+        this.setState({ fileList });
+        return onChange(
+          fileList.map(f => ({ name: f.name, url: f.response || f.url }))
+        );
+      } else {
+        this.setState({ fileList: [file] });
+        return onChange([{ name: file.name, url: file.response }]);
+      }
     }
+
+    return null;
   }
 
   render() {
-    const {
-      initialFile,
-      initialFiles,
-      label = 'Click to upload',
-      onReceiveFile
-    } = this.props;
+    const { label = 'Click to upload' } = this.props;
 
     const extendedProps = {
       ...this.props,
-      action: uploadUrl
+      action: uploadUrl,
+      onChange: this.onChange,
+      fileList: this.state.fileList
     };
-
-    if (onReceiveFile) {
-      const defaultFileList = (initialFiles || []).map((file, index) => ({
-        uid: index,
-        ...file
-      }));
-
-      if (initialFile) {
-        defaultFileList.push({ uid: 1, ...initialFile });
-      }
-
-      extendedProps.onChange = this.onChange;
-      extendedProps.defaultFileList = defaultFileList;
-    }
 
     return (
       <Upload {...extendedProps}>
@@ -65,10 +69,10 @@ class Uploader extends React.Component {
 }
 
 Uploader.propTypes = {
-  onReceiveFile: PropTypes.func,
-  initialFile: PropTypes.object,
-  initialFiles: PropTypes.array,
-  label: PropTypes.string
+  defaultFileList: PropTypes.array,
+  label: PropTypes.string,
+  multiple: PropTypes.bool,
+  onChange: PropTypes.func
 };
 
 export default Uploader;

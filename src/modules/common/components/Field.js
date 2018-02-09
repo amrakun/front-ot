@@ -8,35 +8,22 @@ export default class Field extends React.Component {
    * converting boolean, number to string
    */
 
-  normFile(e, multiple) {
-    if (e && e.fileList.length > 0) {
-      if (multiple)
-        return e.fileList.map(f => ({ name: f.name, url: f.response }));
-      else return [{ name: e.file.name, url: e.file.response }];
-    }
-  }
-
   cleanInitialValue() {
     const { control, initialValue, dataType } = this.props;
     const controlProps = control.props;
 
-    if (initialValue === null || initialValue === undefined) return undefined;
+    if (initialValue === undefined || initialValue === null) return undefined;
 
     if (dataType === 'file' || dataType === 'file-multiple') {
-      //file upload
-      if (Array.isArray(initialValue)) {
-        return initialValue.map((f, i) => ({
-          uid: i,
-          name: f.name,
-          url: f.url
-        }));
-      }
-      return [{ uid: 1, name: initialValue.name, url: initialValue.url }];
+      if (!Array.isArray(initialValue))
+        return [{ uid: 1, name: initialValue.name, url: initialValue.url }];
+      else return initialValue;
     }
 
     if (
       controlProps.prefixCls !== 'ant-select' ||
-      controlProps.dropdownClassName === 'ant-select-tree-dropdown'
+      controlProps.dropdownClassName === 'ant-select-tree-dropdown' ||
+      dataType === 'file'
     ) {
       return initialValue;
     }
@@ -101,8 +88,6 @@ export default class Field extends React.Component {
       args.valuePropName = 'checked';
 
     if (dataType === 'file' || dataType === 'file-multiple') {
-      //file upload
-      args.getValueFromEvent = e => this.normFile(e, dataType !== 'file');
       args.valuePropName = 'defaultFileList';
     }
 

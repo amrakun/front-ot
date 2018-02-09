@@ -130,16 +130,11 @@ class TenderForm extends BaseForm {
     this.state[stateKey] = product;
   }
 
-  onProductFileChange(e, name, recordKey) {
+  onProductFileChange(files, name, recordKey) {
     const stateKey = `product__${recordKey}`;
     const product = this.state[stateKey] || {};
 
-    let value = {
-      url: e.response,
-      name: e.name
-    };
-
-    product[name] = value;
+    product[name] = files[0];
 
     this.state[stateKey] = product;
   }
@@ -165,10 +160,10 @@ class TenderForm extends BaseForm {
       if (type === 'uploader') {
         control = (
           <Uploader
-            initialFile={record[name]}
+            defaultFileList={[record[name]]}
             disabled={isSupplier}
-            onReceiveFile={args =>
-              this.onProductFileChange(args, name, record.key)
+            onChange={files =>
+              this.onProductFileChange(files, name, record.key)
             }
           />
         );

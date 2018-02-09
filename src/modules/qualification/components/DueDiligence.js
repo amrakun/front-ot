@@ -3,10 +3,8 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Table, Card, Row, Col, Button, Icon, DatePicker } from 'antd';
-import { Uploader } from 'modules/common/components';
-import { Common } from 'modules/companies/components';
-import { Sidebar } from 'modules/companies/components';
-import { Search } from 'modules/common/components';
+import { Uploader, Search } from 'modules/common/components';
+import { Common, Sidebar } from 'modules/companies/components';
 import { dateFormat } from 'modules/common/constants';
 import moment from 'moment';
 
@@ -17,14 +15,8 @@ class DueDiligence extends Common {
     this.reports = {};
   }
 
-  handleUpload(file, id) {
-    let value = { name: file.name, url: file.response };
-
-    if (file.status === 'removed') {
-      value = null;
-    }
-
-    this.reports[id] = { ...this.reports[id], file: value };
+  handleUpload(files, id) {
+    this.reports[id] = { ...this.reports[id], file: files[0] };
   }
 
   handleDateChange(date, id) {
@@ -45,9 +37,7 @@ class DueDiligence extends Common {
       {
         title: 'Report',
         render: record => (
-          <Uploader
-            onReceiveFile={args => this.handleUpload(args, record._id)}
-          />
+          <Uploader onChange={files => this.handleUpload(files, record._id)} />
         )
       },
       {

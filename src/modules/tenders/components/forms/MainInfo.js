@@ -172,7 +172,6 @@ MainInfo.propTypes = {
   content: PropTypes.string,
   suppliers: PropTypes.array,
   onEmailContentChange: PropTypes.func,
-  onReceiveFile: PropTypes.func,
   onAddSuppliers: PropTypes.func,
   removeSupplier: PropTypes.func
 };
