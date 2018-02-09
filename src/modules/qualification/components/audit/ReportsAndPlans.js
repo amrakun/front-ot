@@ -78,12 +78,14 @@ class ReportsAndPlans extends Common {
         render: record => (
           <Uploader
             onChange={args => this.handleUpload(args, record._id)}
-            defaultFileList={{
-              url: record.reportFile,
-              name: record.reportSentDate
-                ? moment(record.reportSentDate, dateTimeFormat)
-                : 'Not sent yet'
-            }}
+            defaultFileList={[
+              {
+                url: record.reportFile,
+                name: record.reportSentDate
+                  ? moment(record.reportSentDate, dateTimeFormat)
+                  : 'Not sent yet'
+              }
+            ]}
           />
         )
       },
@@ -92,12 +94,14 @@ class ReportsAndPlans extends Common {
         render: record => (
           <Uploader
             onChange={args => this.handleUpload(args, record._id)}
-            defaultFileList={{
-              url: record.improvementPlanFile,
-              name: record.improvementPlanSentDate
-                ? moment(record.improvementPlanSentDate, dateTimeFormat)
-                : 'Not sent yet'
-            }}
+            defaultFileList={[
+              {
+                url: record.improvementPlanFile,
+                name: record.improvementPlanSentDate
+                  ? moment(record.improvementPlanSentDate, dateTimeFormat)
+                  : 'Not sent yet'
+              }
+            ]}
           />
         )
       },

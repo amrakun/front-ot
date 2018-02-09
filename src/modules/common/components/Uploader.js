@@ -8,9 +8,9 @@ class Uploader extends React.Component {
   constructor(props) {
     super(props);
 
-    const { defaultFileList } = this.props;
+    const defaultFileList = this.props.defaultFileList || [];
 
-    const fileList = (defaultFileList || []).map((file, index) => ({
+    const fileList = defaultFileList.map((file, index) => ({
       uid: index,
       ...file
     }));
