@@ -122,7 +122,7 @@ class ReportsAndPlans extends Common {
               {
                 url: record.reportFile,
                 name: record.reportSentDate
-                  ? moment(record.reportSentDate, dateTimeFormat)
+                  ? moment(record.reportSentDate).format(dateTimeFormat)
                   : 'Not sent yet'
               }
             ]}
@@ -140,7 +140,9 @@ class ReportsAndPlans extends Common {
               {
                 url: record.improvementPlanFile,
                 name: record.improvementPlanSentDate
-                  ? moment(record.improvementPlanSentDate, dateTimeFormat)
+                  ? moment(record.improvementPlanSentDate).format(
+                      dateTimeFormat
+                    )
                   : 'Not sent yet'
               }
             ]}
@@ -156,7 +158,7 @@ class ReportsAndPlans extends Common {
   render() {
     const { pagination, loading, onChange, data } = this.props;
     const { selectedCompanies, modalVisible, filesToSend } = this.state;
-    console.log(data);
+
     const filesToSendOptions = [
       { label: 'Report', value: 'report' },
       { label: 'Improvement plan', value: 'improvementPlan' }
