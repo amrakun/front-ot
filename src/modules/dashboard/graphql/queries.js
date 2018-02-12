@@ -25,8 +25,16 @@ export const companyByUser = `
 `;
 
 const reportsSuppliersExport = `
-  query reportsSuppliersExport($productCodes: [String], $isPrequalified: Boolean) {
-    reportsSuppliersExport(productCodes: $productCodes, isPrequalified: $isPrequalified)
+  query reportsSuppliersExport(
+    $productCodes: [String],
+    $isPrequalified: Boolean,
+    $tierType: String
+  ) {
+    reportsSuppliersExport(
+      productCodes: $productCodes,
+      isPrequalified: $isPrequalified,
+      tierType: $tierType
+    )
   }
 `;
 

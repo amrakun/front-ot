@@ -6,15 +6,18 @@ import {
   Row,
   Col,
   TreeSelect,
+  Select,
   Checkbox,
   Button,
   Icon,
   Radio,
   DatePicker
 } from 'antd';
+
 import { dateFormat } from 'modules/common/constants';
 
 const RangePicker = DatePicker.RangePicker;
+const Option = Select.Option;
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -22,9 +25,11 @@ class Dashboard extends React.Component {
 
     this.tenderType = 'eoi';
     this.isPrequalified = false;
+    this.tierType = '';
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onIsPrequalifiedChange = this.onIsPrequalifiedChange.bind(this);
+    this.onTierTypeChange = this.onTierTypeChange.bind(this);
     this.exportSuppliers = this.exportSuppliers.bind(this);
     this.exportTenders = this.exportTenders.bind(this);
     this.exportAudits = this.exportAudits.bind(this);
@@ -34,6 +39,10 @@ class Dashboard extends React.Component {
     this.isPrequalified = e.target.checked;
   }
 
+  onTierTypeChange(value) {
+    this.tierType = value;
+  }
+
   onInputChange(name, value) {
     this[name] = value;
   }
@@ -41,7 +50,8 @@ class Dashboard extends React.Component {
   exportSuppliers() {
     this.props.export('reportsSuppliersExport', {
       productCodes: this.productCodes,
-      isPrequalified: this.isPrequalified
+      isPrequalified: this.isPrequalified,
+      tierType: this.tierType
     });
   }
 
@@ -103,9 +113,23 @@ class Dashboard extends React.Component {
               style={{ width: '100%', marginBottom: '16px' }}
             />
 
-            <Checkbox onChange={this.onIsPrequalifiedChange}>
+            <Checkbox
+              style={{ marginBottom: '16px' }}
+              onChange={this.onIsPrequalifiedChange}
+            >
               Pre-qualified
             </Checkbox>
+
+            <Select
+              style={{ width: '100%', marginBottom: '16px' }}
+              onChange={this.onTierTypeChange}
+            >
+              <Option value="national">National suppliers</Option>
+              <Option value="umnugobi">Umnugobi suppliers</Option>
+              <Option value="tier1">International Tier 1 suppliers</Option>
+              <Option value="tier2">International Tier 2 suppliers</Option>
+              <Option value="tier3">International Tier 3 suppliers</Option>
+            </Select>
 
             {this.renderButton(this.exportSuppliers)}
           </Card>
