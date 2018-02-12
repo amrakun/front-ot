@@ -32,6 +32,7 @@ class ReportsAndPlansContainer extends React.Component {
       auditsBuyerSendFiles({ variables })
         .then(() => {
           message.success('Succesfully sent!');
+          auditResponsesTableQuery.refetch();
         })
         .catch(() => {
           message.error(message.error);

@@ -32,10 +32,12 @@ class ReportsAndPlans extends Common {
     const { selectedCompanies, filesToSend } = this.state;
 
     this.props.sendFiles({
-      supplierIds: selectedCompanies,
+      responseIds: selectedCompanies,
       improvementPlan: filesToSend.includes('improvementPlan'),
       report: filesToSend.includes('report')
     });
+
+    this.hideModal();
   }
 
   handleFilesToSendChange(value) {
@@ -154,7 +156,7 @@ class ReportsAndPlans extends Common {
   render() {
     const { pagination, loading, onChange, data } = this.props;
     const { selectedCompanies, modalVisible, filesToSend } = this.state;
-
+    console.log(data);
     const filesToSendOptions = [
       { label: 'Report', value: 'report' },
       { label: 'Improvement plan', value: 'improvementPlan' }
