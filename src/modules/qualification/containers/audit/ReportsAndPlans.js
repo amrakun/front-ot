@@ -2,19 +2,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ReportsAndPlans } from '../../components';
 import { gql, graphql, compose } from 'react-apollo';
-import { queries } from '../../graphql';
+import { queries, mutations } from '../../graphql';
 import { withTableProps } from 'modules/common/containers';
+import { message } from 'antd';
 
 class ReportsAndPlansContainer extends React.Component {
   render() {
-    const { auditResponsesTableQuery } = this.props;
+    const { auditResponsesTableQuery, auditsBuyerSaveFiles } = this.props;
 
     if (auditResponsesTableQuery.loading) {
       return <ReportsAndPlans loading={true} />;
     }
 
+    const saveFiles = variables => {
+      auditsBuyerSaveFiles({ variables })
+        .then(() => {
+          message.success('Succesfully saved your file!');
+        })
+        .catch(() => {
+          message.error(message.error);
+        });
+    };
+
     const updatedProps = {
       ...this.props,
+      saveFiles,
       data: auditResponsesTableQuery.auditResponses || []
     };
 
@@ -23,7 +35,8 @@ class ReportsAndPlansContainer extends React.Component {
 }
 
 ReportsAndPlansContainer.propTypes = {
-  auditResponsesTableQuery: PropTypes.object
+  auditResponsesTableQuery: PropTypes.object,
+  auditsBuyerSaveFiles: PropTypes.func
 };
 
 export default compose(
@@ -41,5 +54,9 @@ export default compose(
         notifyOnNetworkStatusChange: true
       };
     }
+  }),
+
+  graphql(gql(mutations.auditsBuyerSaveFiles), {
+    name: 'auditsBuyerSaveFiles'
   })
 )(withTableProps(ReportsAndPlansContainer));

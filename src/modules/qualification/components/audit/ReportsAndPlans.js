@@ -18,8 +18,14 @@ class ReportsAndPlans extends Common {
     this.handleUpload = this.handleUpload.bind(this);
   }
 
-  handleUpload(file, id) {
-    // this.reports[id] = { ...this.reports[id], file: value };
+  handleUpload(file, record, fileType) {
+    if (file[0].url) {
+      this.props.saveFiles({
+        supplierId: record.supplier._id,
+        auditId: record.audit._id,
+        [fileType]: file[0].url
+      });
+    }
   }
 
   handleDateRangeChange(value) {
@@ -77,7 +83,7 @@ class ReportsAndPlans extends Common {
         title: 'Last auditor report',
         render: record => (
           <Uploader
-            onChange={args => this.handleUpload(args, record._id)}
+            onChange={args => this.handleUpload(args, record, 'report')}
             defaultFileList={[
               {
                 url: record.reportFile,
@@ -93,7 +99,9 @@ class ReportsAndPlans extends Common {
         title: 'Last auditor improvement plan',
         render: record => (
           <Uploader
-            onChange={args => this.handleUpload(args, record._id)}
+            onChange={args =>
+              this.handleUpload(args, record, 'improvementPlan')
+            }
             defaultFileList={[
               {
                 url: record.improvementPlanFile,

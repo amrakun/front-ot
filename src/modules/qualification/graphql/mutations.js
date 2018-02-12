@@ -249,12 +249,30 @@ const undoIsSentPrequalificationInfo = `
   }
 `;
 
+const auditsBuyerSaveFiles = `
+  mutation auditsBuyerSaveFiles(
+    $auditId: String!
+    $supplierId: String!
+    $improvementPlan: String
+    $report: String
+  ) {
+    auditsBuyerSaveFiles(
+      auditId: $auditId
+      supplierId: $supplierId
+      improvementPlan: $improvementPlan
+      report: $report
+    ) {
+      _id
+    }
+  }
+`;
+
 const auditsBuyerSendFiles = `
   mutation auditsBuyerSendFiles(
     $auditId: String
     $supplierId: String
-    $improvementPlan: Boolean
-    $report: Boolean
+    $improvementPlan: String
+    $report: String
   ) {
     auditsBuyerSendFiles(
       auditId: $auditId
@@ -336,6 +354,7 @@ export default {
   auditsBuyerSaveHrInfo,
   auditsBuyerSaveBusinessInfo,
   auditsSupplierSendResponse,
+  auditsBuyerSaveFiles,
   qualificationsPrequalify,
   undoIsSentPrequalificationInfo,
   auditsBuyerSendFiles,
