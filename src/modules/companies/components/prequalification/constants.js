@@ -186,10 +186,34 @@ export const labels = {
 
   isUpToDateCTP: `Is your company up to date with Corporation Tax payments?`,
 
-  recordsInfo: `Please provide financial records for your last 3 years`
+  recordsInfo: `Please provide financial records for your last 3 years`,
+
+  isSubContractor: `Does your company, parent company or any sub-contractor is
+        registered in any of the following countries to which
+        international trade sanctions apply`
 };
 
 export const descriptions = {
+  isSubContractor: `
+    Belarus,
+    Burundi,
+    Central African Republic,
+    Cuba,
+    Democratic Republic of Congo,
+    Iran,
+    Iraq,
+    Lebanon,
+    Libya,
+    North Korea,
+    Somalia,
+    Sudan,
+    Syria,
+    Ukraine/Russia,
+    Venezuela,
+    Yemen and
+    Zimbabwe.
+  `,
+
   employeeTurnoverRate: `Employee Turnover is the act of replacing an employee with a new employee.
     You calculate the turnover rate by dividing the number of employees who left by the total number
     of employees at the beginning of the period.

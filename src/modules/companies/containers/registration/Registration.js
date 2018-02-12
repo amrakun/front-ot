@@ -15,16 +15,30 @@ const RegistrationContainer = props => {
 
   const companyByUser = companyByUserQuery.companyByUser;
 
+  const { basicInfo } = companyByUser || {};
+  const soleTrader = basicInfo.corporateStructure === 'Sole Trader';
+
   let formsComplete = true;
-  Object.keys(companyByUser).forEach(key => {
+
+  if (!soleTrader) {
+    Object.keys(companyByUser).forEach(key => {
+      if (
+        key.includes('Info') &&
+        !companyByUser[key] &&
+        key !== 'certificateInfo' &&
+        key !== 'productsInfo'
+      )
+        formsComplete = false;
+    });
+  } else {
     if (
-      key.includes('Info') &&
-      !companyByUser[key] &&
-      key !== 'certificateInfo' &&
-      key !== 'productsInfo'
-    )
+      !companyByUser.basicInfo ||
+      !companyByUser.contactInfo ||
+      !companyByUser.productsInfo
+    ) {
       formsComplete = false;
-  });
+    }
+  }
 
   const save = (name, doc) => {
     const mutation = props[`${name}Edit`];

@@ -299,6 +299,17 @@ class PrequalificationForm extends PreqForm {
             optional: !doesEmployeePoliticallyExposed,
             control: <Input />
           })}
+
+          {this.renderField({
+            label: labels.isSubContractor,
+            description: descriptions.isSubContractor,
+            name: 'isSubContractor',
+            control: (
+              <Select placeholder="Please select an option">
+                {booleanOptions}
+              </Select>
+            )
+          })}
         </Card>
 
         {this.renderGoBack()}

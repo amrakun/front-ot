@@ -1,16 +1,16 @@
 /*eslint-disable max-len */
 
 export const structureData = [
-  { text: 'Sole Trader', value: 'Sole Trader' },
+  { text: 'Company or Incorporated', value: 'Company or Incorporated' },
   { text: 'Partnership', value: 'Partnership' },
-  { text: 'Limited Liability Company', value: 'Limited Liability Company' },
-  { text: 'Public Limited Company', value: 'Public Limited Company' },
-  { text: 'Joint Stock Company', value: 'Joint Stock Company' },
+  { text: 'Trust', value: 'Trust' },
+  { text: 'Government Owned Enterprise', value: 'Government Owned Enterprise' },
   {
-    text: 'Non-Governmental Organisation (NGO)',
-    value: 'Non-Governmental Organisation (NGO)'
+    text: 'Non-Governmental Organization (NGO)',
+    value: 'Non-Governmental Organization (NGO)'
   },
-  { text: 'Government Owned Enterprise', value: 'Government Owned Enterprise' }
+  { text: 'Sole trader or Individual', value: 'Sole Trader' },
+  { text: 'Other', value: 'Other' }
 ];
 
 export const foreignPercentageData = [
@@ -28,26 +28,6 @@ export const booleanData = [
 ];
 
 export const descriptions = {
-  isSubContractor: `
-    Belarus,
-    Burundi,
-    Central African Republic,
-    Cuba,
-    Democratic Republic of Congo,
-    Iran,
-    Iraq,
-    Lebanon,
-    Libya,
-    North Korea,
-    Somalia,
-    Sudan,
-    Syria,
-    Ukraine/Russia,
-    Venezuela,
-    Yemen and
-    Zimbabwe.
-  `,
-
   certificateOfRegistration: `
     You may upload &quot;jpg,jpeg,png,rtf,pdf&quot; files, or simple Adobe
    PDF files. Files that have the ability to contain macros or other
@@ -69,12 +49,7 @@ export const labels = {
     foreign entity
   `,
 
-  corporateStructure: `5. Please select the corporate structure that most closely
-        matches your company`,
-
-  isSubContractor: `4. Does your company, parent company or any sub-contractor is
-        registered in any of the following countries to which
-        international trade sanctions apply`,
+  corporateStructure: `Business type`,
 
   managingDirector: `15. Managing director`,
   executiveOfficer: `16. Executive officer`,

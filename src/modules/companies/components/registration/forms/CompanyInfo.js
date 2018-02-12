@@ -32,6 +32,7 @@ class CompanyInfo extends BaseForm {
     super(props);
 
     const { data } = props;
+    const soleTrader = data.corporateStructure === 'Sole Trader';
 
     this.state = {
       selectedCountry: data.registeredInCountry,
@@ -40,7 +41,8 @@ class CompanyInfo extends BaseForm {
       totalEmps: data.totalNumberOfEmployees,
       mongolEmps: data.totalNumberOfMongolianEmployees,
       umnugoviEmps: data.totalNumberOfUmnugoviEmployees,
-      loading: false
+      loading: false,
+      soleTrader
     };
 
     this.handleCountryChange = this.handleCountryChange.bind(this);
@@ -48,6 +50,7 @@ class CompanyInfo extends BaseForm {
     this.handleIsRegisteredChange = this.handleIsRegisteredChange.bind(this);
     this.handleEmpsNumChange = this.handleEmpsNumChange.bind(this);
     this.validateEmpsNum = this.validateEmpsNum.bind(this);
+    this.handleBusinessTypeChange = this.handleBusinessTypeChange.bind(this);
   }
 
   handleCountryChange(value) {
@@ -78,8 +81,17 @@ class CompanyInfo extends BaseForm {
     callback();
   }
 
+  handleBusinessTypeChange(value) {
+    this.setState({ soleTrader: value === 'Sole Trader' });
+  }
+
   render() {
-    const { selectedCountry, selectedAimag, isRegisteredOnSup } = this.state;
+    const {
+      selectedCountry,
+      selectedAimag,
+      isRegisteredOnSup,
+      soleTrader
+    } = this.state;
 
     const booleanOptions = this.renderOptions(booleanData);
     const countryOptions = this.renderOptions(countryData);
@@ -99,6 +111,20 @@ class CompanyInfo extends BaseForm {
                 </Select>
               )
             })}
+
+            {this.renderField({
+              label: labels.corporateStructure,
+              name: 'corporateStructure',
+              control: (
+                <Select
+                  placeholder="Please select an option"
+                  onChange={this.handleBusinessTypeChange}
+                >
+                  {this.renderOptions(structureData)}
+                </Select>
+              )
+            })}
+
             {this.renderField({
               label: 'SAP number',
               name: 'sapNumber',
@@ -106,6 +132,7 @@ class CompanyInfo extends BaseForm {
               optional: !isRegisteredOnSup,
               control: <Input type="number" />
             })}
+
             {this.renderField({
               label: 'Company name (in English)',
               name: 'enName',
@@ -170,28 +197,12 @@ class CompanyInfo extends BaseForm {
               isVisible: selectedCountry === 'CN',
               optional: selectedCountry !== 'CN'
             })}
-            {this.renderField({
-              label: labels.isSubContractor,
-              description: descriptions.isSubContractor,
-              name: 'isSubContractor',
-              control: (
-                <Select placeholder="Please select an option">
-                  {booleanOptions}
-                </Select>
-              )
-            })}
-            {this.renderField({
-              label: labels.corporateStructure,
-              name: 'corporateStructure',
-              control: (
-                <Select placeholder="Please select an option">
-                  {this.renderOptions(structureData)}
-                </Select>
-              )
-            })}
+
             {this.renderField({
               label: '6. Company registration number',
               name: 'registrationNumber',
+              isVisible: !soleTrader,
+              optional: soleTrader,
               control: <Input type="number" />
             })}
 
@@ -200,6 +211,8 @@ class CompanyInfo extends BaseForm {
               description: descriptions.certificateOfRegistration,
               name: 'certificateOfRegistration',
               dataType: 'file',
+              isVisible: !soleTrader,
+              optional: soleTrader,
               control: <Uploader />
             })}
 
@@ -207,23 +220,29 @@ class CompanyInfo extends BaseForm {
               label: '8. Company website',
               name: 'website',
               optional: true,
+              isVisible: !soleTrader,
               control: <Input />
             })}
             {this.renderField({
               label: '9. Company e-mail',
               name: 'email',
-              control: <Input />,
-              validation: 'email'
+              validation: 'email',
+              isVisible: !soleTrader,
+              optional: soleTrader,
+              control: <Input />
             })}
             {this.renderField({
               label: labels.foreignOwnershipPercentage,
               name: 'foreignOwnershipPercentage',
+              isVisible: !soleTrader,
+              optional: soleTrader,
               control: (
                 <Select placeholder="Please select an option">
                   {this.renderOptions(foreignPercentageData)}
                 </Select>
               )
             })}
+
             {this.renderField({
               label: `11. Total number of employees`,
               name: 'totalNumberOfEmployees',

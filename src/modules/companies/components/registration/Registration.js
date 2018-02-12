@@ -16,6 +16,8 @@ class RegistrationForms extends Panes {
     const { location, send } = this.props;
     const viewMode = location.pathname.includes('view-registration');
 
+    const soleTrader = basicInfo.corporateStructure === 'Sole Trader';
+
     return (
       <div>
         {viewMode && <h2 className="registration-title">{basicInfo.enName}</h2>}
@@ -34,21 +36,28 @@ class RegistrationForms extends Panes {
           {this.renderPane('2', 'Contact details', 'contactInfo', ContactForm, {
             basicInfo: basicInfo
           })}
+
+          {!soleTrader &&
+            this.renderPane(
+              '3',
+              'Management Team',
+              'managementTeamInfo',
+              ManagementForm
+            )}
+
+          {!soleTrader &&
+            this.renderPane(
+              '4',
+              'Company shareholder information',
+              'shareholderInfo',
+              ShareholderForm
+            )}
+
+          {!soleTrader &&
+            this.renderPane('5', 'Group information', 'groupInfo', GroupForm)}
+
           {this.renderPane(
-            '3',
-            'Management Team',
-            'managementTeamInfo',
-            ManagementForm
-          )}
-          {this.renderPane(
-            '4',
-            'Company shareholder information',
-            'shareholderInfo',
-            ShareholderForm
-          )}
-          {this.renderPane('5', 'Group information', 'groupInfo', GroupForm)}
-          {this.renderPane(
-            '6',
+            soleTrader ? '3' : '6',
             'Products & services',
             'productsInfo',
             ProductsForm,
