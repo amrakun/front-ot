@@ -128,6 +128,22 @@ const registerViaBuyer = `
   }
 `;
 
+const sendEmail = `
+  mutation massMailsSend(
+    $supplierIds: [String!]!
+    $subject: String
+    $content: String
+  ) {
+    massMailsSend(
+      supplierIds: $supplierIds
+      subject: $subject
+      content: $content
+    ) {
+      _id
+    }
+  }
+`;
+
 export default {
   basicInfo,
   contactInfo,
@@ -142,5 +158,6 @@ export default {
   healthInfo,
   companiesSendRegistrationInfo,
   companiesSendPrequalificationInfo,
-  registerViaBuyer
+  registerViaBuyer,
+  sendEmail
 };
