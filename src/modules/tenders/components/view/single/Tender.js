@@ -121,6 +121,10 @@ class Tender extends Common {
       },
       { title: 'Work experience', dataIndex: 'workExperience' },
       {
+        title: 'Status',
+        render: record => (record.status ? record.status : 'on time')
+      },
+      {
         title: 'Response information',
         render: this.renderViewResponse
       },

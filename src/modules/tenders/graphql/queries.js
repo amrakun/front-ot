@@ -54,6 +54,7 @@ const rfqResponseFields = `
 `;
 
 const eoiResponseFields = `
+  status
   respondedDocuments {
     name
     isSubmitted
