@@ -164,9 +164,17 @@ class Dashboard extends React.Component {
               }
               text={
                 <span>
-                  {isPrequalified === null
-                    ? 'Nothin new'
-                    : isPrequalified ? 'Yes' : 'No'}
+                  {isPrequalified === null ? (
+                    'Nothin new'
+                  ) : isPrequalified ? (
+                    'Yes'
+                  ) : (
+                    <span>
+                      You are not pre-qualified, please click&nbsp;<Link to="/prequalification">
+                        here
+                      </Link>&nbsp;to update your information
+                    </span>
+                  )}
                 </span>
               }
               withPercent={true}
