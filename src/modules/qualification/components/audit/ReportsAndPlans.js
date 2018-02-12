@@ -6,9 +6,9 @@ import { Table, Card, DatePicker, Button, Icon, Modal, Checkbox } from 'antd';
 import { dateFormat, dateTimeFormat } from 'modules/common/constants';
 import moment from 'moment';
 import { Search, Uploader } from 'modules/common/components';
-import queryString from 'query-string';
 import { Common } from 'modules/companies/components';
 import { Link } from 'react-router-dom';
+import router from 'modules/common/router';
 
 class ReportsAndPlans extends Common {
   constructor(props) {
@@ -64,12 +64,14 @@ class ReportsAndPlans extends Common {
 
   handleDateRangeChange(value) {
     const { history } = this.props;
-    let query = queryString.parse(history.location.search);
-    query.from = value[0]._d;
-    query.to = value[1]._d;
-    history.push({
-      search: queryString.stringify(query)
-    });
+    if (value[0]) {
+      router.setParams(history, {
+        from: value[0]._d,
+        to: value[1]._d
+      });
+    } else {
+      router.removeParams(history, 'from', 'to');
+    }
   }
 
   columns() {
@@ -156,8 +158,11 @@ class ReportsAndPlans extends Common {
   }
 
   render() {
-    const { pagination, loading, onChange, data } = this.props;
+    const { pagination, loading, onChange, data, history } = this.props;
     const { selectedCompanies, modalVisible, filesToSend } = this.state;
+
+    const from = moment(router.getParam(history, 'from'));
+    const to = moment(router.getParam(history, 'to'));
 
     const filesToSendOptions = [
       { label: 'Report', value: 'report' },
@@ -170,6 +175,7 @@ class ReportsAndPlans extends Common {
           <Search />
 
           <DatePicker.RangePicker
+            defaultValue={[from, to]}
             style={{ float: 'left', marginLeft: '8px' }}
             onChange={this.handleDateRangeChange}
           />

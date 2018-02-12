@@ -12,6 +12,7 @@ const PopupContainer = props => {
     registerViaBuyer({ variables })
       .then(payload => {
         const data = payload.data.registerViaBuyer;
+
         message.success(
           <span>
             Invitation email for&nbsp;
