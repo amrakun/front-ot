@@ -29,6 +29,12 @@ export const actionStatusData = [
 
 //texts
 export const labels = {
+  hasConvictedLabourLawsDescription:
+    'If Yes, what steps have you taken to ensure this does not happen again',
+
+  hasConvictedForHumanRightsDescription:
+    'If Yes, what steps have you taken to ensure this does not happen again',
+
   organisationChart: 'Please upload copy of your organisation chart',
 
   documentLabel: 'Please upload supporting document',

@@ -14,6 +14,7 @@ class PrequalificationForm extends PreqForm {
       doesHaveHealthSafety: data.doesHaveHealthSafety || false,
       areHSEResourcesClearlyIdentified:
         data.areHSEResourcesClearlyIdentified || false,
+      areEmployeesUnderYourControl: data.areEmployeesUnderYourControl || false,
       doesHaveDocumentedProcessToEnsure:
         data.doesHaveDocumentedProcessToEnsure || false,
       doesHaveDocumentForRiskAssesment:
@@ -43,9 +44,9 @@ class PrequalificationForm extends PreqForm {
     return (
       <Form>
         {this.renderConditionalField('doesHaveHealthSafety')}
-        <Card>{this.renderBoolean('areHSEResourcesClearlyIdentified')}</Card>
+        {this.renderConditionalField('areHSEResourcesClearlyIdentified')}
         {this.renderConditionalField('doesHaveDocumentedProcessToEnsure')}
-        <Card>{this.renderBoolean('areEmployeesUnderYourControl')}</Card>
+        {this.renderConditionalField('areEmployeesUnderYourControl')}
         {this.renderConditionalField('doesHaveDocumentForRiskAssesment')}
         {this.renderConditionalField(
           'doesHaveDocumentForIncidentInvestigation'
