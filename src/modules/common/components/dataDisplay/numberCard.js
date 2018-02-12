@@ -33,7 +33,7 @@ function NumberCard(props) {
 NumberCard.propTypes = {
   icon: PropTypes.string,
   color: PropTypes.string,
-  title: PropTypes.string,
+  title: PropTypes.node,
   number: PropTypes.number,
   countUp: PropTypes.object,
   tooltip: PropTypes.string

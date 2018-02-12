@@ -17,7 +17,7 @@ class Tender extends Common {
       ...this.state,
       responseModal: { visible: false },
       regretLetterModal: { visible: false },
-      regretLetterContent: props.emailTemplate || ''
+      regretLetterContent: ''
     };
 
     this.showResponsesModal = this.showResponsesModal.bind(this);

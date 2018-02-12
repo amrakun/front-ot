@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Card } from 'antd';
+import { Form, Card, Popconfirm, Button } from 'antd';
 import PreqForm from './PreqForm';
 import PropTypes from 'prop-types';
 
@@ -33,9 +33,7 @@ class PrequalificationForm extends PreqForm {
     this.state[name] = value === 'true';
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-
+  handleSubmit() {
     this.save({}, true);
   }
 
@@ -43,7 +41,7 @@ class PrequalificationForm extends PreqForm {
     const { productsInfo } = this.props;
 
     return (
-      <Form onSubmit={this.save}>
+      <Form>
         {this.renderConditionalField('doesHaveHealthSafety')}
         <Card>{this.renderBoolean('areHSEResourcesClearlyIdentified')}</Card>
         {this.renderConditionalField('doesHaveDocumentedProcessToEnsure')}
@@ -77,7 +75,15 @@ class PrequalificationForm extends PreqForm {
         )}
 
         {this.renderGoBack()}
-        {this.renderSubmit('Save & submit')}
+        <Popconfirm
+          title="Are you sure you want to finalize and submit? You are not able to edit the answers once submit"
+          onConfirm={this.handleSubmit}
+          okText="Submit"
+        >
+          <Button style={{ float: 'right' }} type="primary">
+            Save & submit
+          </Button>
+        </Popconfirm>
       </Form>
     );
   }

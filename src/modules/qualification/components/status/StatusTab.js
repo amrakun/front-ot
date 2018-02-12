@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unescaped-entities*/
+
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
@@ -111,28 +113,35 @@ class StatusTab extends BaseForm {
   }
 
   render() {
-    const { title, statusData, prequalifySupplier } = this.props;
-    const { enName, isPrequalified } = statusData;
+    const {
+      title,
+      statusData,
+      prequalifySupplier,
+      enableSupplierForm
+    } = this.props;
+    const { enName, isPrequalified, isSentPrequalificationInfo } = statusData;
     const { checkAll } = this.state;
 
     return (
       <Form>
         <h2 style={{ textAlign: 'center', marginBottom: '16px' }}>{enName}</h2>
 
-        {isPrequalified ? (
+        {isPrequalified && (
           <Alert
             message="This supplier is pre-qualified"
             type="success"
             showIcon
           />
-        ) : (
+        )}
+
+        {isPrequalified === false && (
           <Alert
             message={
               <span>
-                This supplier is not pre-qualified. Click&nbsp;
+                This supplier is not pre-qualfied. Click&nbsp;
                 <Popconfirm
-                  title="Are you sure to pre-qualify this supplier?"
-                  onConfirm={prequalifySupplier}
+                  title="Are you sure?"
+                  onConfirm={() => prequalifySupplier(true)}
                   okText="Yes"
                   cancelText="No"
                 >
@@ -141,8 +150,53 @@ class StatusTab extends BaseForm {
                 &nbsp;to pre-qualify
               </span>
             }
+            type="error"
+            showIcon
+          />
+        )}
+
+        {isPrequalified === null && (
+          <Alert
+            message={
+              <span>
+                This supplier is not evaluated. Click&nbsp;
+                <Popconfirm
+                  title="Evaluation"
+                  onConfirm={() => prequalifySupplier(true)}
+                  onCancel={() => prequalifySupplier(false)}
+                  okText="Qualified"
+                  cancelText="Unqualified"
+                >
+                  <a>here</a>
+                </Popconfirm>
+                &nbsp;to evaluate
+              </span>
+            }
             type="warning"
             showIcon
+          />
+        )}
+
+        {isSentPrequalificationInfo && (
+          <Alert
+            message={
+              <span>
+                Supplier's pre-qualification form is currently disabled.
+                Click&nbsp;
+                <Popconfirm
+                  title="Are you sure to enable supplier's pre-qualification form?"
+                  onConfirm={enableSupplierForm}
+                  okText="Yes"
+                  cancelText="No"
+                >
+                  <a>here</a>
+                </Popconfirm>
+                &nbsp;to enable
+              </span>
+            }
+            type="warning"
+            showIcon
+            className="margin"
           />
         )}
 

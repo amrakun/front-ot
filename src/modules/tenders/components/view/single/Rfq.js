@@ -11,7 +11,7 @@ import router from 'modules/common/router';
 const Option = Select.Option;
 
 class Rfq extends Tender {
-  constructor(props) {
+  constructor(props, context) {
     super(props);
 
     const { history } = props;
@@ -24,6 +24,7 @@ class Rfq extends Tender {
 
     this.state = {
       ...this.state,
+      regretLetterContent: context.systemConfig.regretLetterTemplate || '',
       productCode: productCode || '',
       filter: sort || betweenSearch,
       from,
@@ -253,6 +254,10 @@ Rfq.propTypes = {
   downloadReport: PropTypes.func,
   bidSummaryReportLoading: PropTypes.bool,
   data: PropTypes.array
+};
+
+Rfq.contextTypes = {
+  systemConfig: PropTypes.object
 };
 
 export default withRouter(Rfq);

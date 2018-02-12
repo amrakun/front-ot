@@ -7,8 +7,13 @@ import { message, Button, Icon } from 'antd';
 import Tender from './Tender';
 
 class Eoi extends Tender {
-  constructor(props) {
+  constructor(props, context) {
     super(props);
+
+    this.state = {
+      ...this.state,
+      regretLetterContent: context.systemConfig.regretLetterTemplate || ''
+    };
 
     this.handleEoiShortList = this.handleEoiShortList.bind(this);
     this.handleEoiBidderList = this.handleEoiBidderList.bind(this);
@@ -80,6 +85,10 @@ class Eoi extends Tender {
 
 Eoi.propTypes = {
   data: PropTypes.array
+};
+
+Eoi.contextTypes = {
+  systemConfig: PropTypes.object
 };
 
 export default withRouter(Eoi);

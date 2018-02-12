@@ -10,14 +10,17 @@ class Status extends Panes {
     const supplierInputs = this.props.supplierInputs || {};
     const saveTierType = this.props.saveTierType || {};
     const prequalifySupplier = this.props.prequalifySupplier || {};
+    const enableSupplierForm = this.props.enableSupplierForm || {};
 
     const extraProps = name => ({
       statusData: {
         ...supplierInputs.basicInfo,
         isPrequalified: supplierInputs.isPrequalified,
+        isSentPrequalificationInfo: supplierInputs.isSentPrequalificationInfo,
         supplierInputs: supplierInputs[name] || {}
       },
       prequalifySupplier: prequalifySupplier,
+      enableSupplierForm: enableSupplierForm,
       saveTierType: saveTierType
     });
 

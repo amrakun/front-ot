@@ -11,7 +11,8 @@ const StatusContainer = props => {
     supplierPrequalificationQuery,
     qualificationDetailQuery,
     tierTypeSave,
-    prequalify
+    prequalify,
+    undoIsSentPrequalificationInfo
   } = props;
 
   if (
@@ -30,7 +31,7 @@ const StatusContainer = props => {
     tierTypeSave({ variables })
       .then(() => {
         message.success('Saved');
-        supplierPrequalificationQuery.refetch().then(() => {
+        qualificationDetailQuery.refetch().then(() => {
           history.push('/prequalification-status');
         });
       })
@@ -57,11 +58,24 @@ const StatusContainer = props => {
       });
   };
 
-  const prequalifySupplier = () => {
-    prequalify({ variables: { supplierId: companyDetail._id } })
+  const prequalifySupplier = qualified => {
+    prequalify({ variables: { supplierId: companyDetail._id, qualified } })
       .then(() => {
         supplierPrequalificationQuery.refetch();
         message.success('Pre-qualified!');
+      })
+      .catch(error => {
+        message.error(error.message);
+      });
+  };
+
+  const enableSupplierForm = () => {
+    undoIsSentPrequalificationInfo({
+      variables: { supplierId: companyDetail._id }
+    })
+      .then(() => {
+        supplierPrequalificationQuery.refetch();
+        message.success('Supplier pre-qualification form has been enabled!');
       })
       .catch(error => {
         message.error(error.message);
@@ -73,6 +87,7 @@ const StatusContainer = props => {
     save,
     saveTierType,
     prequalifySupplier,
+    enableSupplierForm,
     company: {
       ...qualificationDetailQuery.qualificationDetail
     },
@@ -87,7 +102,8 @@ StatusContainer.propTypes = {
   supplierPrequalificationQuery: PropTypes.object,
   qualificationDetailQuery: PropTypes.object,
   tierTypeSave: PropTypes.func,
-  prequalify: PropTypes.func
+  prequalify: PropTypes.func,
+  undoIsSentPrequalificationInfo: PropTypes.func
 };
 
 export default compose(
@@ -137,5 +153,9 @@ export default compose(
 
   graphql(gql(mutations.qualificationsPrequalify), {
     name: 'prequalify'
+  }),
+
+  graphql(gql(mutations.undoIsSentPrequalificationInfo), {
+    name: 'undoIsSentPrequalificationInfo'
   })
 )(StatusContainer);

@@ -1,4 +1,4 @@
-export const companyByUser = `
+const companyByUser = `
   query companyByUser {
     companyByUser {
       _id
@@ -55,6 +55,12 @@ const reportsAuditExport = `
       publishDate: $publishDate
       closeDate: $closeDate
     )
+  }
+`;
+
+const reportsShareholder = `
+  query reportsShareholder {
+    reportsShareholder
   }
 `;
 
@@ -129,5 +135,6 @@ export default {
   tendersAverageDuration,
   reportsSuppliersExport,
   reportsTendersExport,
-  reportsAuditExport
+  reportsAuditExport,
+  reportsShareholder
 };

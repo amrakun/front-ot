@@ -28,6 +28,7 @@ class Dashboard extends React.Component {
     this.exportSuppliers = this.exportSuppliers.bind(this);
     this.exportTenders = this.exportTenders.bind(this);
     this.exportAudits = this.exportAudits.bind(this);
+    this.exportShareholders = this.exportShareholders.bind(this);
   }
 
   onIsPrequalifiedChange(e) {
@@ -69,6 +70,10 @@ class Dashboard extends React.Component {
     });
   }
 
+  exportShareholders() {
+    this.props.export('reportsShareholder', null);
+  }
+
   getDateInterval(date) {
     return {
       startDate: date[0],
@@ -86,9 +91,10 @@ class Dashboard extends React.Component {
 
   render() {
     const span = {
-      xl: 8,
-      lg: 12,
-      md: 24
+      xl: 6,
+      lg: 8,
+      md: 12,
+      sm: 24
     };
 
     return (
@@ -134,8 +140,10 @@ class Dashboard extends React.Component {
             </p>
 
             <Radio.Group
-              onChange={value => this.onInputChange('tenderTypeTenders', value)}
-              value={this.tenderType}
+              onChange={e =>
+                this.onInputChange('tenderTypeTenders', e.target.value)
+              }
+              defaultValue={this.tenderType}
             >
               <Radio value="eoi">EOI</Radio>
               <Radio value="rfq">RFQ</Radio>
@@ -166,14 +174,22 @@ class Dashboard extends React.Component {
             </p>
 
             <Radio.Group
-              onChange={value => this.onInputChange('tenderTypeAudits', value)}
-              value={this.tenderType}
+              onChange={e =>
+                this.onInputChange('tenderTypeAudits', e.target.value)
+              }
+              defaultValue={this.tenderType}
             >
               <Radio value="eoi">EOI</Radio>
               <Radio value="rfq">RFQ</Radio>
             </Radio.Group>
 
             {this.renderButton(this.exportAudits)}
+          </Card>
+        </Col>
+
+        <Col {...span}>
+          <Card title="Shareholders report">
+            {this.renderButton(this.exportShareholders)}
           </Card>
         </Col>
       </Row>

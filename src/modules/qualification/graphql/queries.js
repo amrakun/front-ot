@@ -16,6 +16,7 @@ const supplierPrequalification = `
         totalNumberOfMongolianEmployees,
       }
       isPrequalified
+      isSentPrequalificationInfo
     }
   }
 `;

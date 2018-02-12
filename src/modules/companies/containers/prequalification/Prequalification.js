@@ -14,6 +14,7 @@ const PrequalificationContainer = props => {
   }
 
   const companyByUser = companyByUserQuery.companyByUser;
+  const { isSentPrequalificationInfo } = companyByUser;
 
   let formsComplete = true;
   Object.keys(companyByUser).forEach(key => {
@@ -29,9 +30,8 @@ const PrequalificationContainer = props => {
 
   const save = (name, doc) => {
     const mutation = props[`${name}Edit`];
-    const { isSentPrequalificationInfo, isPrequalified } = companyByUser;
 
-    if (!isSentPrequalificationInfo || !isPrequalified) {
+    if (!isSentPrequalificationInfo) {
       mutation({ variables: { [name]: doc } })
         .then(() => {
           companyByUserQuery.refetch();
@@ -45,6 +45,8 @@ const PrequalificationContainer = props => {
         .catch(error => {
           message.error(error.message);
         });
+    } else {
+      message.warning('You have already sent your pre-qualification info');
     }
   };
 

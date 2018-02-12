@@ -22,7 +22,7 @@ function NumberCard(props) {
 NumberCard.propTypes = {
   icon: PropTypes.string,
   color: PropTypes.string,
-  title: PropTypes.string,
+  title: PropTypes.node,
   text: PropTypes.object,
   countUp: PropTypes.object,
   badge: PropTypes.bool,

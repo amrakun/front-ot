@@ -10,7 +10,7 @@ import {
   TextCard
 } from 'modules/common/components';
 import { colors } from 'modules/common/constants';
-import { Row, Col, Alert } from 'antd';
+import { Row, Col, Alert, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import { labels } from '../constants';
 import { T } from 'modules/common/components';
@@ -56,7 +56,6 @@ class Dashboard extends React.Component {
       openTendersCount,
       audits,
       isPrequalified,
-      isSentPrequalificationInfo,
       isSentRegistrationInfo
     } = data;
 
@@ -73,24 +72,16 @@ class Dashboard extends React.Component {
 
     return (
       <div>
-        {!isSentRegistrationInfo || !isSentPrequalificationInfo ? (
+        {!isSentRegistrationInfo && (
           <Alert
             message="Welcome!"
             description={
               <div>
                 Please fill in&nbsp;
-                {!isSentRegistrationInfo && (
-                  <Link to="/registration" className="sn">
-                    Registration{' '}
-                  </Link>
-                )}
-                &nbsp;
-                {!isSentPrequalificationInfo && (
-                  <Link to="prequalification" className="sn">
-                    Pre-qualification
-                  </Link>
-                )}
-                &nbsp;forms to be able to participate in tenders and EOI
+                <Link to="/registration" className="sn">
+                  Registration
+                </Link>
+                &nbsp;form to be able to participate in tenders and EOI
               </div>
             }
             type="info"
@@ -101,8 +92,6 @@ class Dashboard extends React.Component {
                 : ''
             }
           />
-        ) : (
-          ''
         )}
 
         <div className="margin" />
@@ -159,10 +148,27 @@ class Dashboard extends React.Component {
           <Col key={3} lg={8} sm={12}>
             <TextCard
               icon="solution"
-              title={formatMessage(messages.dashboardPrequalification)}
-              color={isPrequalified ? colors[7] : colors[5]}
-              tooltip={isPrequalified ? null : labels.preqSuggestion}
-              text={<span>{isPrequalified ? 'Yes' : 'No'}</span>}
+              title={
+                <span>
+                  {formatMessage(messages.dashboardPrequalification)}
+                  {isPrequalified === false && (
+                    <Icon type="warning" style={{ color: 'f15a24' }} />
+                  )}
+                </span>
+              }
+              color={isPrequalified === null ? colors[5] : colors[7]}
+              tooltip={
+                isPrequalified === null
+                  ? null
+                  : !isPrequalified ? labels.preqSuggestion : null
+              }
+              text={
+                <span>
+                  {isPrequalified === null
+                    ? 'Nothin new'
+                    : isPrequalified ? 'Yes' : 'No'}
+                </span>
+              }
               withPercent={true}
             />
           </Col>

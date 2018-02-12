@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs } from 'antd';
+import { Tabs, notification, Icon } from 'antd';
 import FinancialForm from './forms/Financial';
 import EnvironmentalForm from './forms/Environmental';
 import BusinessForm from './forms/Business';
@@ -7,6 +7,18 @@ import HealthForm from './forms/Health';
 import Panes from '../Panes';
 
 class PrequalificationForms extends Panes {
+  componentDidMount() {
+    if (this.props.company.isSentPrequalificationInfo) {
+      notification.open({
+        message: 'Changes disabled',
+        description:
+          'You have already submitted your pre-qualification form and changes are disabled.',
+        icon: <Icon type="warning" style={{ color: '#f47721' }} />,
+        duration: 10
+      });
+    }
+  }
+
   render() {
     const { currentTabKey } = this.state;
     const { productsInfo } = this.props.company || {};

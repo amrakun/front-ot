@@ -234,8 +234,16 @@ const auditsSupplierSendResponse = `
 `;
 
 const qualificationsPrequalify = `
-  mutation qualificationsPrequalify($supplierId: String!) {
-    qualificationsPrequalify(supplierId: $supplierId) {
+  mutation qualificationsPrequalify($supplierId: String!, $qualified: Boolean) {
+    qualificationsPrequalify(supplierId: $supplierId, qualified: $qualified) {
+      _id
+    }
+  }
+`;
+
+const undoIsSentPrequalificationInfo = `
+  mutation companiesUndoIsSentPrequalificationInfo($supplierId: String!) {
+    companiesUndoIsSentPrequalificationInfo(supplierId: $supplierId) {
       _id
     }
   }
@@ -329,6 +337,7 @@ export default {
   auditsBuyerSaveBusinessInfo,
   auditsSupplierSendResponse,
   qualificationsPrequalify,
+  undoIsSentPrequalificationInfo,
   auditsBuyerSendFiles,
   physicalAuditsAdd,
   physicalAuditsEdit,
