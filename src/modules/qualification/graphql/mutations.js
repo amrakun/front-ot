@@ -269,14 +269,12 @@ const auditsBuyerSaveFiles = `
 
 const auditsBuyerSendFiles = `
   mutation auditsBuyerSendFiles(
-    $auditId: String
-    $supplierId: String
-    $improvementPlan: String
-    $report: String
+    $supplierIds: [String]
+    $improvementPlan: Boolean
+    $report: Boolean
   ) {
     auditsBuyerSendFiles(
-      auditId: $auditId
-      supplierId: $supplierId
+      supplierIds: $supplierId
       improvementPlan: $improvementPlan
       report: $report
     ) {

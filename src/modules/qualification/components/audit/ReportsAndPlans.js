@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Table, Card, DatePicker, Button, Icon } from 'antd';
+import { Table, Card, DatePicker, Button, Icon, Modal, Checkbox } from 'antd';
 import { dateFormat, dateTimeFormat } from 'modules/common/constants';
 import moment from 'moment';
 import { Search, Uploader } from 'modules/common/components';
@@ -14,8 +14,40 @@ class ReportsAndPlans extends Common {
   constructor(props) {
     super(props);
 
+    this.state = {
+      ...this.state,
+      modalVisible: false,
+      filesToSend: ['report', 'improvementPlan']
+    };
+
     this.handleDateRangeChange = this.handleDateRangeChange.bind(this);
     this.handleUpload = this.handleUpload.bind(this);
+    this.handleSend = this.handleSend.bind(this);
+    this.showModal = this.showModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
+    this.handleFilesToSendChange = this.handleFilesToSendChange.bind(this);
+  }
+
+  handleSend() {
+    const { selectedCompanies, filesToSend } = this.state;
+
+    this.props.sendFiles({
+      supplierIds: selectedCompanies,
+      improvementPlan: filesToSend.includes('improvementPlan'),
+      report: filesToSend.includes('report')
+    });
+  }
+
+  handleFilesToSendChange(value) {
+    this.setState({ filesToSend: value });
+  }
+
+  showModal() {
+    this.setState({ modalVisible: true });
+  }
+
+  hideModal() {
+    this.setState({ modalVisible: false });
   }
 
   handleUpload(file, record, fileType) {
@@ -121,17 +153,27 @@ class ReportsAndPlans extends Common {
 
   render() {
     const { pagination, loading, onChange, data } = this.props;
-    const { selectedCompanies } = this.state;
+    const { selectedCompanies, modalVisible, filesToSend } = this.state;
+
+    const filesToSendOptions = [
+      { label: 'Report', value: 'report' },
+      { label: 'Improvement plan', value: 'improvementPlan' }
+    ];
 
     return (
       <Card title="Reports & improvement plans">
         <div className="table-operations">
           <Search />
+
           <DatePicker.RangePicker
             style={{ float: 'left', marginLeft: '8px' }}
             onChange={this.handleDateRangeChange}
           />
-          <Button>
+
+          <Button
+            onClick={this.showModal}
+            disabled={selectedCompanies.length < 1}
+          >
             Send<Icon type="mail" />
           </Button>
         </div>
@@ -151,6 +193,21 @@ class ReportsAndPlans extends Common {
             onChange(pagination, filters, sorter)
           }
         />
+
+        <Modal
+          title={`Send reports and improvement plans for ${
+            selectedCompanies.length
+          } suppliers`}
+          visible={modalVisible}
+          onOk={this.handleSend}
+          onCancel={this.hideModal}
+        >
+          <Checkbox.Group
+            options={filesToSendOptions}
+            value={filesToSend}
+            onChange={this.handleFilesToSendChange}
+          />
+        </Modal>
       </Card>
     );
   }

@@ -8,7 +8,11 @@ import { message } from 'antd';
 
 class ReportsAndPlansContainer extends React.Component {
   render() {
-    const { auditResponsesTableQuery, auditsBuyerSaveFiles } = this.props;
+    const {
+      auditResponsesTableQuery,
+      auditsBuyerSaveFiles,
+      auditsBuyerSendFiles
+    } = this.props;
 
     if (auditResponsesTableQuery.loading) {
       return <ReportsAndPlans loading={true} />;
@@ -24,9 +28,20 @@ class ReportsAndPlansContainer extends React.Component {
         });
     };
 
+    const sendFiles = variables => {
+      auditsBuyerSendFiles({ variables })
+        .then(() => {
+          message.success('Succesfully sent!');
+        })
+        .catch(() => {
+          message.error(message.error);
+        });
+    };
+
     const updatedProps = {
       ...this.props,
       saveFiles,
+      sendFiles,
       data: auditResponsesTableQuery.auditResponses || []
     };
 
@@ -36,7 +51,8 @@ class ReportsAndPlansContainer extends React.Component {
 
 ReportsAndPlansContainer.propTypes = {
   auditResponsesTableQuery: PropTypes.object,
-  auditsBuyerSaveFiles: PropTypes.func
+  auditsBuyerSaveFiles: PropTypes.func,
+  auditsBuyerSendFiles: PropTypes.func
 };
 
 export default compose(
@@ -58,5 +74,9 @@ export default compose(
 
   graphql(gql(mutations.auditsBuyerSaveFiles), {
     name: 'auditsBuyerSaveFiles'
+  }),
+
+  graphql(gql(mutations.auditsBuyerSendFiles), {
+    name: 'auditsBuyerSendFiles'
   })
 )(withTableProps(ReportsAndPlansContainer));
