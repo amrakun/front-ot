@@ -13,6 +13,16 @@ class FeedbackResponses extends React.Component {
     this.renderExpandedRow = this.renderExpandedRow.bind(this);
   }
 
+  componentDidUpdate() {
+    const { loading } = this.props;
+    const data = this.props.data || [];
+
+    if (!loading) {
+      const lastFeedbackId = data[0]._id;
+      localStorage.setItem('lastFeedbackId', lastFeedbackId);
+    }
+  }
+
   extraColumns() {
     return [
       {
@@ -106,9 +116,29 @@ class FeedbackResponses extends React.Component {
     );
   }
 
+  getDiscretedRows() {
+    const data = this.props.data || [];
+    const lastFeedbackId = localStorage.getItem('lastFeedbackId');
+    let updatedData = [];
+    let isLastFeedbackReached = false;
+
+    data.forEach(record => {
+      if (record && record._id !== lastFeedbackId && !isLastFeedbackReached) {
+        updatedData.push({
+          ...record,
+          className: 'highlight'
+        });
+      } else {
+        isLastFeedbackReached = false;
+        updatedData.push(record);
+      }
+    });
+
+    return updatedData;
+  }
+
   render() {
     const { pagination, loading, onChange } = this.props;
-    const data = this.props.data || [];
 
     return (
       <Card title="Success feedback responses">
@@ -121,7 +151,8 @@ class FeedbackResponses extends React.Component {
         <Table
           columns={this.columns()}
           rowKey={record => record._id}
-          dataSource={data}
+          rowClassName={record => record.className}
+          dataSource={this.getDiscretedRows()}
           pagination={pagination}
           loading={loading}
           scroll={{ x: 2000 }}
