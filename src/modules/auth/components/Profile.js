@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Form, Input, Button, InputNumber, Row, Col } from 'antd';
+import { T } from 'modules/common/components';
+import { defineMessages } from 'react-intl';
 
 const FormItem = Form.Item;
 
@@ -9,6 +11,68 @@ const propTypes = {
   currentUser: PropTypes.object,
   mainAction: PropTypes.func
 };
+
+const messages = defineMessages({
+  firstName: {
+    id: 'profileFirstName',
+    defaultMessage: 'First Name'
+  },
+  lastName: {
+    id: 'profileLastName',
+    defaultMessage: 'Last Name'
+  },
+  jobTitle: {
+    id: 'profileJobTitle',
+    defaultMessage: 'Job Title'
+  },
+  email: {
+    id: 'profileEmail',
+    defaultMessage: 'Email address'
+  },
+  phone: {
+    id: 'profilePhone',
+    defaultMessage: 'Phone Number'
+  },
+  username: {
+    id: 'profileUserName',
+    defaultMessage: 'Username'
+  },
+  password: {
+    id: 'profilePassword',
+    defaultMessage: 'Password'
+  }
+});
+
+const placeholders = defineMessages({
+  firstName: {
+    id: 'profilePlaceholderFirstName',
+    defaultMessage: 'Please input your First Name!'
+  },
+  lastName: {
+    id: 'profilePlaceholderLastName',
+    defaultMessage: 'Please input your Last Name!'
+  },
+  validEmail: {
+    id: 'profilePlaceholderValidEmail',
+    defaultMessage: 'The input is not valid E-mail!'
+  },
+  email: {
+    id: 'profilePlaceholderEmail',
+    defaultMessage: 'Please input your Email address!'
+  },
+  phone: {
+    id: 'profilePlaceholderPhone',
+    defaultMessage: 'Please input your Phone Number!'
+  },
+  username: {
+    id: 'profilePlaceholderUsername',
+    defaultMessage: 'Please input your Username!'
+  },
+  password: {
+    id: 'profilePlaceholderPassword',
+    defaultMessage: 'Please input your current Password!'
+  }
+});
 
 class Profile extends React.Component {
   constructor(props) {
@@ -37,63 +101,68 @@ class Profile extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { formatMessage } = this.context;
+    const f = messages;
+    const p = placeholders;
     const user = this.props.currentUser || {};
 
     return (
       <Card>
-        <h2 style={{ marginBottom: 40 }}>General Information</h2>
+        <h2 style={{ marginBottom: 40 }}>
+          <T id="profileGeneralInformation">General Information</T>
+        </h2>
         <Row>
           <Col span={12} offset={2}>
             <Form className="user-register-form" onSubmit={this.handleSubmit}>
-              <FormItem label="First Name">
+              <FormItem label={formatMessage(f.firstName)}>
                 {getFieldDecorator('firstName', {
                   initialValue: user.firstName || '',
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your First Name!'
+                      message: formatMessage(p.firstName)
                     }
                   ]
                 })(<Input />)}
               </FormItem>
-              <FormItem label="Last Name">
+              <FormItem label={formatMessage(f.lastName)}>
                 {getFieldDecorator('lastName', {
                   initialValue: user.lastName || '',
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your Last Name!'
+                      message: formatMessage(p.lastName)
                     }
                   ]
                 })(<Input />)}
               </FormItem>
-              <FormItem label="Job Title">
+              <FormItem label={formatMessage(f.jobTitle)}>
                 {getFieldDecorator('jobTitle', {
                   initialValue: user.jobTitle || ''
                 })(<Input />)}
               </FormItem>
-              <FormItem label="Email address">
+              <FormItem label={formatMessage(f.email)}>
                 {getFieldDecorator('email', {
                   initialValue: user.email || '',
                   rules: [
                     {
                       type: 'email',
-                      message: 'The input is not valid E-mail!'
+                      message: formatMessage(p.validEmail)
                     },
                     {
                       required: true,
-                      message: 'Please input your E-mail!'
+                      message: formatMessage(p.email)
                     }
                   ]
                 })(<Input />)}
               </FormItem>
-              <FormItem label="Phone Number">
+              <FormItem label={formatMessage(f.phone)}>
                 {getFieldDecorator('phone', {
                   initialValue: user.phone || '',
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your phone number!'
+                      message: formatMessage(p.phone)
                     }
                   ]
                 })(
@@ -103,24 +172,26 @@ class Profile extends React.Component {
                   />
                 )}
               </FormItem>
-              <h2>Username & Password</h2>
-              <FormItem label="Username">
+              <h2>
+                <T id="profileUsernameAndPassword">Username & Password</T>
+              </h2>
+              <FormItem label={formatMessage(f.username)}>
                 {getFieldDecorator('username', {
                   initialValue: user.username || '',
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your Username!'
+                      message: formatMessage(p.username)
                     }
                   ]
                 })(<Input />)}
               </FormItem>
-              <FormItem label="Password">
+              <FormItem label={formatMessage(f.password)}>
                 {getFieldDecorator('password', {
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your current password!'
+                      message: formatMessage(p.password)
                     }
                   ]
                 })(<Input type="password" />)}
@@ -131,7 +202,7 @@ class Profile extends React.Component {
                   htmlType="submit"
                   style={{ float: 'right' }}
                 >
-                  Save
+                  <T id="profileSaveBtn">Save</T>
                 </Button>
               </FormItem>
             </Form>
@@ -143,5 +214,8 @@ class Profile extends React.Component {
 }
 
 Profile.propTypes = propTypes;
+Profile.contextTypes = {
+  formatMessage: PropTypes.func
+};
 
 export default Form.create()(Profile);

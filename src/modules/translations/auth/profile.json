@@ -1,0 +1,19 @@
+{
+  "profileFirstName": "Нэр",
+  "profileLastName": "Овог",
+  "profileJobTitle": "Албан тушаал",
+  "profileEmail": "И-мэйл",
+  "profilePhone": "Утас",
+  "profileUserName": "Нэвтрэх нэр",
+  "profilePassword": "Нууц үг",
+  "profileGeneralInformation": "Ерөнхий мэдээлэл",
+  "profileUsernameAndPassword": "Нэвтрэх нэр болон Нууц үг",
+  "profileSaveBtn": "Хадгалах",
+  "profilePlaceholderFirstName": "Нэрээ оруулна уу!",
+  "profilePlaceholderLastName": "Овогоо оруулна уу!",
+  "profilePlaceholderValidEmail": "Зөв И-мэйл оруулна уу!",
+  "profilePlaceholderEmail": "И-мэйл оруулна уу!",
+  "profilePlaceholderPhone": "Утасны дугаар оруулна уу!",
+  "profilePlaceholderUsername": "Нэвтрэх нэр оруулна уу!",
+  "profilePlaceholderPassword": "Нууц үг оруулна уу!"
+}
