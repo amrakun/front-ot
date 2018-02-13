@@ -17,6 +17,10 @@ const messages = defineMessages({
     id: 'b_prequalification',
     defaultMessage: 'Prequalification'
   },
+  profile: {
+    id: 'b_profile',
+    defaultMessage: 'My Profile'
+  },
   registration: {
     id: 'b_registration',
     defaultMessage: 'Registration'
@@ -24,6 +28,10 @@ const messages = defineMessages({
   qualification: {
     id: 'b_qualification',
     defaultMessage: 'Qualification/audit'
+  },
+  changePassword: {
+    id: 'b_changePassword',
+    defaultMessage: 'Change Password'
   },
   capacityBuilding: {
     id: 'b_capacity-building',
@@ -56,8 +64,8 @@ const Breadcrumbs = location => {
     blocking: 'Blocking',
     reports: 'Reports & Improvement plans',
     'user-list': 'Manage Users',
-    'my-profile': 'My Profile',
-    'change-password': 'Change Password',
+    'my-profile': formatMessage(messages.profile),
+    'change-password': formatMessage(messages.changePassword),
     templates: 'Templates',
     'manage-expiry-dates': 'Manage Expiry Dates',
     qualification: formatMessage(messages.qualification),

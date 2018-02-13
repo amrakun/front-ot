@@ -102,9 +102,12 @@ class Profile extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const { formatMessage } = this.context;
-    const f = messages;
-    const p = placeholders;
     const user = this.props.currentUser || {};
+    // Field messages
+    const f = messages;
+
+    // Placeholder messages
+    const p = placeholders;
 
     return (
       <Card>
@@ -202,7 +205,7 @@ class Profile extends React.Component {
                   htmlType="submit"
                   style={{ float: 'right' }}
                 >
-                  <T id="profileSaveBtn">Save</T>
+                  <T id="btnSave">Save</T>
                 </Button>
               </FormItem>
             </Form>

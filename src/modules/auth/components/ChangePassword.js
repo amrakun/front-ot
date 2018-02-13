@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Form, Input, Button, Row, Col } from 'antd';
+import { T } from 'modules/common/components';
+import { defineMessages } from 'react-intl';
 
 const FormItem = Form.Item;
 
@@ -9,6 +11,29 @@ const propTypes = {
   currentUser: PropTypes.object,
   mainAction: PropTypes.func
 };
+
+const messages = defineMessages({
+  currentPassword: {
+    id: 'currentPassword',
+    defaultMessage: 'Current Password'
+  },
+  placeholderCurrentPassword: {
+    id: 'placeholderCurrentPassword',
+    defaultMessage: 'Please input your current password!'
+  },
+  newPassword: {
+    id: 'newPassword',
+    defaultMessage: 'New password'
+  },
+  confirmPassword: {
+    id: 'confirmPassword',
+    defaultMessage: 'Confirm New Password'
+  },
+  inconsistentPassword: {
+    id: 'inconsistentPassword',
+    defaultMessage: 'Two passwords that you enter is inconsistent!'
+  }
+});
 
 class ChangePassword extends React.Component {
   constructor(props) {
@@ -45,8 +70,11 @@ class ChangePassword extends React.Component {
 
   checkPassword(rule, value, callback) {
     const form = this.props.form;
+    const { formatMessage } = this.context;
+    const { inconsistentPassword } = messages;
+
     if (value && value !== form.getFieldValue('newPassword')) {
-      callback('Two passwords that you enter is inconsistent!');
+      callback(formatMessage(inconsistentPassword));
     } else {
       callback();
     }
@@ -62,24 +90,33 @@ class ChangePassword extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { formatMessage } = this.context;
+    const {
+      currentPassword,
+      placeholderCurrentPassword,
+      newPassword,
+      confirmPassword
+    } = messages;
 
     return (
       <Card>
-        <h2 style={{ marginBottom: 40 }}>Change Password</h2>
+        <h2 style={{ marginBottom: 40 }}>
+          <T id="changePassword">Change Password</T>
+        </h2>
         <Row>
           <Col span={12} offset={2}>
             <Form className="user-register-form" onSubmit={this.handleSubmit}>
-              <FormItem label="Current Password">
+              <FormItem label={formatMessage(currentPassword)}>
                 {getFieldDecorator('currentPassword', {
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your current password!'
+                      message: formatMessage(placeholderCurrentPassword)
                     }
                   ]
                 })(<Input type="password" />)}
               </FormItem>
-              <FormItem label="New Password">
+              <FormItem label={formatMessage(newPassword)}>
                 {getFieldDecorator('newPassword', {
                   rules: [
                     {
@@ -88,7 +125,7 @@ class ChangePassword extends React.Component {
                   ]
                 })(<Input type="password" />)}
               </FormItem>
-              <FormItem label="Confirm New Password">
+              <FormItem label={formatMessage(confirmPassword)}>
                 {getFieldDecorator('newPasswordConfirmation', {
                   rules: [
                     {
@@ -103,7 +140,7 @@ class ChangePassword extends React.Component {
                   htmlType="submit"
                   style={{ float: 'right' }}
                 >
-                  Save
+                  <T id="btnSave">Save</T>
                 </Button>
               </FormItem>
             </Form>
@@ -115,5 +152,8 @@ class ChangePassword extends React.Component {
 }
 
 ChangePassword.propTypes = propTypes;
+ChangePassword.contextTypes = {
+  formatMessage: PropTypes.func
+};
 
 export default Form.create()(ChangePassword);
