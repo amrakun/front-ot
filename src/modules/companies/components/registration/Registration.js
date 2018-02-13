@@ -12,9 +12,9 @@ import { Tabs } from 'antd';
 class RegistrationForms extends Panes {
   render() {
     const { currentTabKey } = this.state;
-    const { basicInfo } = this.props.company || {};
     const { location, send } = this.props;
     const viewMode = location.pathname.includes('view-registration');
+    const basicInfo = this.props.company.basicInfo || {};
 
     const soleTrader = basicInfo.corporateStructure === 'Sole Trader';
 
