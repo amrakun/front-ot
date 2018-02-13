@@ -42,6 +42,14 @@ const messages = defineMessages({
   pepName: {
     id: 'pepName',
     defaultMessage: 'PEP Name'
+  },
+  placeholderInvestigation: {
+    id: 'investigationName',
+    defaultMessage: 'Investigation name'
+  },
+  status: {
+    id: 'investigationStatus',
+    defaultMessage: 'Investigation status'
   }
 });
 

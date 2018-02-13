@@ -33,6 +33,22 @@ const messages = defineMessages({
   group: {
     id: 'groupLabelsHead',
     defaultMessage: groupLabels.head
+  },
+  nameGroup: {
+    id: 'factoryName',
+    defaultMessage: 'Name'
+  },
+  townOrCity: {
+    id: 'factoryTownOrCity',
+    defaultMessage: 'Town or city'
+  },
+  country: {
+    id: 'factoryCountry',
+    defaultMessage: 'Country'
+  },
+  productCodes: {
+    id: 'factoryProductCodes',
+    defaultMessage: 'Product codes'
   }
 });
 const Option = Select.Option;
