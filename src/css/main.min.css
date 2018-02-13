@@ -560,3 +560,13 @@ a.sn:hover {
 .ant-upload-list-item-name {
   max-width: 150px;
 }
+.login-as-form {
+  list-style: none;
+}
+.login-as-form li {
+  color: #0099a8;
+  cursor: pointer;
+}
+.login-as-form li:hover {
+  text-decoration: underline;
+}

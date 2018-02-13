@@ -114,7 +114,7 @@ class SignIn extends Component {
       <div>
         <Alert description="Please choose your account!" type="info" />
 
-        <ul className="login-as-form">
+        <ul className="login-as-form margin">
           {this.renderLoginAsItem({ login, loginParams, user })}
           {this.renderLoginAsItem({ login, loginParams, user: delegatedUser })}
         </ul>
