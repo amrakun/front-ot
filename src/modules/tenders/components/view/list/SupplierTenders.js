@@ -33,15 +33,28 @@ class SupplierTenders extends Tenders {
         title: formatMessage(messages.tenderStatus),
         filters: [
           {
-            text: <span>{renderIcon('open')} Open</span>,
+            text: (
+              <span>
+                {renderIcon('open')} <T id="statusOpen">Open</T>
+              </span>
+            ),
             value: 'open'
           },
           {
-            text: <span>{renderIcon('closed')} Closed</span>,
+            text: (
+              <span>
+                {renderIcon('closed')} <T id="statusClosed">Closed</T>
+              </span>
+            ),
             value: 'closed'
           },
           {
-            text: <span>{renderIcon('participated')} Participated</span>,
+            text: (
+              <span>
+                {renderIcon('participated')}{' '}
+                <T id="statusParticipated">Participated</T>
+              </span>
+            ),
             value: 'participated'
           }
         ],
@@ -69,7 +82,7 @@ class SupplierTenders extends Tenders {
   }
 
   renderBoolean(text, record) {
-    if (record.sentRegretLetter) return 'Yes';
+    if (record.sentRegretLetter) return 'Yeasdasds';
     else return '-';
   }
 
@@ -80,7 +93,7 @@ class SupplierTenders extends Tenders {
   renderFileDownload(url) {
     return (
       <a href={url} target="_blank">
-        View
+        <T id="view">View</T>
       </a>
     );
   }
@@ -107,7 +120,9 @@ class SupplierTenders extends Tenders {
               cancelText="No"
               onConfirm={() => notInterested(_id)}
             >
-              <a>Not interested</a>
+              <a>
+                <T id="notInterested">Not interested</T>
+              </a>
             </Popconfirm>
           ]}
         </div>
@@ -115,7 +130,9 @@ class SupplierTenders extends Tenders {
     } else {
       return (
         <div style={{ width: '160px' }}>
-          <Link to={`/sign-in?required`}>More</Link>
+          <Link to={`/sign-in?required`}>
+            <T id="more">More</T>
+          </Link>
         </div>
       );
     }

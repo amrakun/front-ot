@@ -6,6 +6,7 @@ import TenderForm from '../TenderForm';
 import RfqTable from '../RfqTable';
 import MainInfo from './MainInfo';
 import { xlsxHandler } from 'modules/common/utils';
+import { T } from 'modules/common/components';
 
 class SubmitTender extends TenderForm {
   constructor(props) {
@@ -118,10 +119,10 @@ class SubmitTender extends TenderForm {
           {!data.isSent && (
             <div className="margin">
               <Button style={{ marginRight: '16px' }} onClick={this.saveDraft}>
-                Save as draft
+                <T id="saveAsDraft">Save as draft</T>
               </Button>
               <Button type="primary" htmlType="submit">
-                Save & submit
+                <T id="saveAndSubmit">Save & submit</T>
               </Button>
             </div>
           )}

@@ -3,6 +3,17 @@ import PropTypes from 'prop-types';
 import { Form } from 'antd';
 import { defineMessages } from 'react-intl';
 
+const requireMessages = defineMessages({
+  field: {
+    id: 'fieldRequire',
+    defaultMessage: 'This field is required!'
+  },
+  email: {
+    id: 'emailRequire',
+    defaultMessage: 'The input is not valid E-mail!'
+  }
+});
+
 export default class Field extends React.Component {
   /*
    * For example: Select is accepting only string value, So we are
@@ -59,20 +70,27 @@ export default class Field extends React.Component {
     description,
     attachmentType,
     dataType,
-    controlType
+    controlType,
+    messageId
   ) {
     const { formatMessage } = this.context;
     let commonName = this.setName(prefix, suffix, name);
+
     if (attachmentType) {
       commonName += attachmentType;
     }
+
     if (commonName.includes('File') && dataType === 'file') {
       commonName = 'file';
     }
+
     if (controlType === 'textarea') {
       commonName = 'textarea';
       label = label || 'Provide details';
     }
+
+    commonName = messageId || commonName;
+
     const messages = defineMessages({
       label: {
         id: commonName,
@@ -83,8 +101,10 @@ export default class Field extends React.Component {
         defaultMessage: description
       }
     });
+
     const val = label ? formatMessage(messages.label) : '';
     const extra = description ? formatMessage(messages.extra) : description;
+
     return { val, extra };
   }
 
@@ -107,23 +127,25 @@ export default class Field extends React.Component {
       controlType,
       validateStatus,
       help,
-      validator
+      validator,
+      messageId
     } = this.props;
 
-    const { form } = this.context;
+    const { form, formatMessage } = this.context;
     const { getFieldDecorator } = form;
+    const { field, email } = requireMessages;
 
     if (!optional) {
       rules.push({
         required: true,
-        message: 'This field is required!'
+        message: formatMessage(field)
       });
     }
 
     if (validation === 'email') {
       rules.push({
         type: 'email',
-        message: 'The input is not valid E-mail!'
+        message: formatMessage(email)
       });
     }
 
@@ -151,7 +173,8 @@ export default class Field extends React.Component {
       description,
       attachmentType,
       dataType,
-      controlType
+      controlType,
+      messageId
     );
 
     return (

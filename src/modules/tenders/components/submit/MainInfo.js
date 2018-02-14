@@ -121,7 +121,11 @@ class MainInfo extends React.Component {
           onCancel={this.hideModal}
           width="700px"
           bodyStyle={{ height: '60vh', overflow: 'scroll' }}
-          footer={<Button onClick={this.hideModal}>Close</Button>}
+          footer={
+            <Button onClick={this.hideModal}>
+              <T id="close">Close</T>
+            </Button>
+          }
         >
           <div dangerouslySetInnerHTML={{ __html: content }} />
         </Modal>

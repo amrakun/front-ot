@@ -6,6 +6,7 @@ import { labels, statusIcons } from '../../../constants';
 import { dateTimeFormat } from 'modules/common/constants';
 import queryString from 'query-string';
 import moment from 'moment';
+import { T } from 'modules/common/components';
 import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
@@ -144,7 +145,7 @@ class Tenders extends React.Component {
   renderFileDownload(url) {
     return (
       <a href={url} target="_blank">
-        View
+        <T id="view">View</T>
       </a>
     );
   }

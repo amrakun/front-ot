@@ -40,7 +40,8 @@ const mergedMessages = {
   ...messages.Qualification,
   ...messages.RfqAndEoi.Tenders,
   ...messages.Auth.Profile,
-  ...messages.Auth.ChangePassword
+  ...messages.Auth.ChangePassword,
+  ...messages.Auth.SignIn
 };
 
 const withSidebar = { marginLeft: 230 };

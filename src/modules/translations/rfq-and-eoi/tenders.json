@@ -24,6 +24,8 @@
   "dashboardQualification": "Гэрээ хэрэгжүүлэх чадварын үнэлгээ",
   "dashboardPrequalification": "Гэрээ хэрэгжүүлэх чадварын урьдчилсан үнэлгээ",
   "dashboardNothingNew": "Шинэ зүйл алга",
+  "dashboardPrequalificationNot":
+    "Таны мэдээлэл бүрэн баталгаажаагүй байна, Энд дарж мэдээллээ шинэчилнэ үү",
   "applyToEoi": "Оролцох Сонирхлоо Илэрхийлэх",
   "eoiDocument": "Баримт Бичиг",
   "eoiSubmitted": "Илгээсэн",
@@ -49,5 +51,17 @@
   "rfqLeadTime": "Нийлүүлэх хугацаа Days - Өдрөөр",
   "rfqShippingTerms": "Хүргэлтийн нөхцөл",
   "rfqComment": "Тэмдэглэл",
-  "rfqFile": "Зураг (Хэрэв шаардлагатай бол)"
+  "rfqFile": "Зураг (Хэрэв шаардлагатай бол)",
+  "statusOpen": "Нээлттэй",
+  "statusClosed": "Хаалттай",
+  "statusParticipated": "Оролцсон",
+  "statusYes": "Тийм",
+  "statusReset": "Цуцлах",
+  "notInterested": "Оролцохгүй",
+  "more": "Цааш нь",
+  "submitted": "Илгээсэн",
+  "saveAsDraft": "Нооргоор хадгалах",
+  "saveAndSubmit": "Хадгалаад үргэлжлүүлэх",
+  "submit": "Илгээх",
+  "return": "Буцах"
 }

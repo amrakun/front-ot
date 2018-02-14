@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Form, Button, Input, Icon, Checkbox, Card, Alert } from 'antd';
+import { T } from 'modules/common/components';
+import { defineMessages } from 'react-intl';
 
 const FormItem = Form.Item;
 
@@ -12,6 +14,38 @@ const propTypes = {
   loading: PropTypes.bool,
   chooseLoginAs: PropTypes.object
 };
+
+const messages = defineMessages({
+  email: {
+    id: 'signInEmail',
+    defaultMessage: 'Email'
+  },
+  password: {
+    id: 'password',
+    defaultMessage: 'Password'
+  },
+  placeholderEmail: {
+    id: 'profilePlaceholderEmail',
+    defaultMessage: 'Please enter your email!'
+  },
+  placeholderPassword: {
+    id: 'profilePlaceholderPassword',
+    defaultMessage: 'Please enter your password!'
+  },
+  confirmation: {
+    id: 'confirmationEmail',
+    defaultMessage: 'Confirmation link has been sent to your email!'
+  },
+  activated: {
+    id: 'activatedEmail',
+    defaultMessage:
+      'Account activated succesfully! Please login using your provided details'
+  },
+  signInToContinue: {
+    id: 'signInToContinue',
+    defaultMessage: 'Please sign in to continue!'
+  }
+});
 
 class SignIn extends Component {
   constructor(props) {
@@ -34,43 +68,54 @@ class SignIn extends Component {
 
   renderLogin() {
     const { getFieldDecorator } = this.props.form;
+    const { formatMessage } = this.context;
     const search = this.props.location.search || [{}];
     const { loading } = this.props;
+    const {
+      email,
+      password,
+      placeholderEmail,
+      placeholderPassword,
+      confirmation,
+      activated,
+      signInToContinue
+    } = messages;
 
     return (
       <div>
         {search === '?confirmation' && (
-          <Alert
-            description="Confirmation link has been sent to your email!"
-            type="success"
-          />
+          <Alert description={formatMessage(confirmation)} type="success" />
         )}
         {search === '?confirmed' && (
-          <Alert
-            description="Account activated succesfully! Please login using your provided details"
-            type="success"
-          />
+          <Alert description={formatMessage(activated)} type="success" />
         )}
         {search === '?required' && (
-          <Alert description="Please sign in to continue!" type="info" />
+          <Alert description={formatMessage(signInToContinue)} type="info" />
         )}
 
         <Form onSubmit={this.handleSubmit} className="margin">
           <FormItem>
             {getFieldDecorator('email', {
-              rules: [{ required: true, message: 'Please enter your email!' }]
-            })(<Input prefix={<Icon type="mail" />} placeholder="Email" />)}
+              rules: [
+                { required: true, message: formatMessage(placeholderEmail) }
+              ]
+            })(
+              <Input
+                prefix={<Icon type="mail" />}
+                placeholder={formatMessage(email)}
+              />
+            )}
           </FormItem>
           <FormItem>
             {getFieldDecorator('password', {
               rules: [
-                { required: true, message: 'Please enter your Password!' }
+                { required: true, message: formatMessage(placeholderPassword) }
               ]
             })(
               <Input
                 prefix={<Icon type="lock" />}
                 type="password"
-                placeholder="Password"
+                placeholder={formatMessage(password)}
               />
             )}
           </FormItem>
@@ -78,14 +123,21 @@ class SignIn extends Component {
             {getFieldDecorator('remember', {
               valuePropName: 'checked',
               initialValue: true
-            })(<Checkbox>Remember me</Checkbox>)}
+            })(
+              <Checkbox>
+                <T id="rememberMe">Remember me</T>
+              </Checkbox>
+            )}
             <Link className="right" to="/forgot-password">
-              Forgot password
+              <T id="forgotPassword">Forgot password</T>
             </Link>
             <Button type="primary" loading={loading} htmlType="submit">
-              Sign in
+              <T id="signIn">Нэвтрэх</T>
             </Button>
-            Or <Link to="/register">register now!</Link>
+            <T id="or">Or</T>{' '}
+            <Link to="/register">
+              <T id="registerNow">register now!</T>
+            </Link>
           </FormItem>
         </Form>
       </div>
@@ -136,6 +188,9 @@ class SignIn extends Component {
 }
 
 SignIn.propTypes = propTypes;
+SignIn.contextTypes = {
+  formatMessage: PropTypes.func
+};
 
 const SignInForm = Form.create()(SignIn);
 

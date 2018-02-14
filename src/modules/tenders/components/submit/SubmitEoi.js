@@ -6,6 +6,7 @@ import TenderForm from '../TenderForm';
 import EoiTable from '../EoiTable';
 import { agreementOptions } from './constants';
 import MainInfo from './MainInfo';
+import { T } from 'modules/common/components';
 import { defineMessages } from 'react-intl';
 
 const CheckboxGroup = Checkbox.Group;
@@ -109,10 +110,10 @@ class SubmitTender extends TenderForm {
           {!data.isSent && (
             <div className="margin">
               <Button style={{ marginRight: '16px' }} onClick={this.saveDraft}>
-                Save as draft
+                <T id="saveAsDraft">Save as draft</T>
               </Button>
               <Button type="primary" htmlType="submit">
-                Save & submit
+                <T id="saveAndSubmit">Save & submit</T>
               </Button>
             </div>
           )}
@@ -127,7 +128,7 @@ class SubmitTender extends TenderForm {
                 size="large"
                 onClick={this.toggleAgreementModal}
               >
-                Return
+                <T id="return">Return</T>
               </Button>,
               <Button
                 key="submit"
@@ -137,7 +138,7 @@ class SubmitTender extends TenderForm {
                 loading={submitLoading}
                 onClick={this.handleOk}
               >
-                Submit
+                <T id="submit">Submit</T>
               </Button>
             ]}
           >

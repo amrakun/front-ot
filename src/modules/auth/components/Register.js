@@ -2,13 +2,21 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Form, Input, Icon, Card, Button } from 'antd';
-import { BaseForm, Field } from 'modules/common/components';
+import { BaseForm, Field, T } from 'modules/common/components';
 import { noLabelLayout } from 'modules/common/constants';
+import { defineMessages } from 'react-intl';
 
 const propTypes = {
   register: PropTypes.func.isRequired,
   form: PropTypes.object
 };
+
+const messages = defineMessages({
+  email: {
+    id: 'profileEmail',
+    defaultMessage: 'Email'
+  }
+});
 
 class Register extends BaseForm {
   constructor(props) {
@@ -47,6 +55,8 @@ class Register extends BaseForm {
 
   render() {
     const { loading } = this.props;
+    const { formatMessage } = this.context;
+    const { email } = messages;
 
     return (
       <div className="center-content">
@@ -57,7 +67,10 @@ class Register extends BaseForm {
               layout={noLabelLayout}
               validation="email"
               control={
-                <Input prefix={<Icon type="mail" />} placeholder="Email" />
+                <Input
+                  prefix={<Icon type="mail" />}
+                  placeholder={formatMessage(email)}
+                />
               }
             />
             <Button
@@ -66,9 +79,12 @@ class Register extends BaseForm {
               loading={loading}
               style={{ marginBottom: '12px' }}
             >
-              Register
+              <T id="register">Register</T>
             </Button>
-            Already registered? <Link to="/sign-in">Sign in</Link>
+            <T id="alreadyRegistered">Already registered?</T>{' '}
+            <Link to="/sign-in">
+              <T id="signIn">Sign in</T>
+            </Link>
           </Form>
         </Card>
       </div>
@@ -77,6 +93,9 @@ class Register extends BaseForm {
 }
 
 Register.propTypes = propTypes;
+Register.contextTypes = {
+  formatMessage: PropTypes.func
+};
 
 const RegisterForm = Form.create()(Register);
 

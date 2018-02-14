@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Input, Table, Checkbox } from 'antd';
-import { BaseForm, Uploader } from 'modules/common/components';
+import { BaseForm, Uploader, T } from 'modules/common/components';
 import MainInfo from './forms/MainInfo';
 
 const { Column } = Table;
@@ -174,7 +174,7 @@ class TenderForm extends BaseForm {
             defaultChecked={record[name]}
             onChange={e => this.onProductInputChange(e, name, record.key)}
           >
-            Submitted
+            <T id="submitted">Submitted</T>
           </Checkbox>
         );
       }

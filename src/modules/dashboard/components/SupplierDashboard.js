@@ -165,9 +165,9 @@ class Dashboard extends React.Component {
               text={
                 <span>
                   {isPrequalified === null ? (
-                    'Nothin new'
+                    <T id="dashboardNothingNew">Nothing new</T>
                   ) : isPrequalified ? (
-                    'Yes'
+                    <T id="yes">Yes</T>
                   ) : (
                     <span>
                       You are not pre-qualified, please click&nbsp;<Link to="/prequalification">

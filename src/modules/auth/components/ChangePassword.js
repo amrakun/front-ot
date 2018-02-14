@@ -25,8 +25,8 @@ const messages = defineMessages({
     id: 'newPassword',
     defaultMessage: 'New password'
   },
-  confirmPassword: {
-    id: 'confirmPassword',
+  confirmNewPassword: {
+    id: 'confirmNewPassword',
     defaultMessage: 'Confirm New Password'
   },
   inconsistentPassword: {
@@ -95,7 +95,7 @@ class ChangePassword extends React.Component {
       currentPassword,
       placeholderCurrentPassword,
       newPassword,
-      confirmPassword
+      confirmNewPassword
     } = messages;
 
     return (
@@ -125,7 +125,7 @@ class ChangePassword extends React.Component {
                   ]
                 })(<Input type="password" />)}
               </FormItem>
-              <FormItem label={formatMessage(confirmPassword)}>
+              <FormItem label={formatMessage(confirmNewPassword)}>
                 {getFieldDecorator('newPasswordConfirmation', {
                   rules: [
                     {

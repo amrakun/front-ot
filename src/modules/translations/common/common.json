@@ -26,5 +26,13 @@
   "changePassword": "Нууц үг солих",
   "signOut": "Гарах",
   "signIn": "Нэвтрэх",
-  "btnSave": "Хадгалах"
+  "btnSave": "Хадгалах",
+  "btnSend": "Илгээх",
+  "registeredEmail": "Бүртгэлтэй и-мэйл хаягаа оруулна уу:",
+  "alreadyRegistered": "Бүртгүүлчихсэн?",
+  "register": "Бүртгүүлэх",
+  "fieldRequire": "Энэ талбарыг заавал бөглөнө үү!",
+  "emailRequire": "Зөв и-мэйл оруулна уу!",
+  "close": "Хаах",
+  "yes": "Тийм"
 }
