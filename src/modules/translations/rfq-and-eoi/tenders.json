@@ -24,8 +24,12 @@
   "dashboardQualification": "Гэрээ хэрэгжүүлэх чадварын үнэлгээ",
   "dashboardPrequalification": "Гэрээ хэрэгжүүлэх чадварын урьдчилсан үнэлгээ",
   "dashboardNothingNew": "Шинэ зүйл алга",
-  "dashboardPrequalificationNot":
-    "Таны мэдээлэл бүрэн баталгаажаагүй байна, Энд дарж мэдээллээ шинэчилнэ үү",
+  "dashboardPrequalificationText1": "Таны мэдээлэл бүрэн баталгаажаагүй байна",
+  "dashboardPrequalificationText2": "мэдээллээ шинэчилнэ үү",
+  "dashboardAuditText1": "Танд шинэ аудит хийх хүсэлт ирсэн байна",
+  "dashboardAuditText2": "хүсэлтийг харна уу.",
+  "dashboardFeedbackText1": "Та гэрээ гүйцэтгэлийн амжилтаа",
+  "dashboardFeedbackText2": "хуваалцана уу",
   "applyToEoi": "Оролцох Сонирхлоо Илэрхийлэх",
   "eoiDocument": "Баримт Бичиг",
   "eoiSubmitted": "Илгээсэн",
@@ -60,8 +64,9 @@
   "notInterested": "Оролцохгүй",
   "more": "Цааш нь",
   "submitted": "Илгээсэн",
-  "saveAsDraft": "Нооргоор хадгалах",
+  "saveAsDraft": "Ноорог хадгалах",
   "saveAndSubmit": "Хадгалаад үргэлжлүүлэх",
   "submit": "Илгээх",
-  "return": "Буцах"
+  "return": "Буцах",
+  "clickHere": "Энд дарж"
 }

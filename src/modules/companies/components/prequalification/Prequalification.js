@@ -1,18 +1,33 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Tabs, notification, Icon } from 'antd';
 import FinancialForm from './forms/Financial';
 import EnvironmentalForm from './forms/Environmental';
 import BusinessForm from './forms/Business';
 import HealthForm from './forms/Health';
 import Panes from '../Panes';
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+  notificationTitle: {
+    id: 'changesDisabled',
+    defaultMessage: 'Changes disabled'
+  },
+  notificationDescription: {
+    id: 'changesDisabledDescription',
+    defaultMessage:
+      'You have already submitted your pre-qualification form and changes are disabled.'
+  }
+});
 
 class PrequalificationForms extends Panes {
   componentDidMount() {
+    const { formatMessage } = this.context;
+    const { notificationTitle, notificationDescription } = messages;
     if (this.props.company.isSentPrequalificationInfo) {
       notification.open({
-        message: 'Changes disabled',
-        description:
-          'You have already submitted your pre-qualification form and changes are disabled.',
+        message: formatMessage(notificationTitle),
+        description: formatMessage(notificationDescription),
         icon: <Icon type="warning" style={{ color: '#f47721' }} />,
         duration: 10
       });
@@ -60,5 +75,9 @@ class PrequalificationForms extends Panes {
     );
   }
 }
+
+PrequalificationForms.contextTypes = {
+  formatMessage: PropTypes.func
+};
 
 export default PrequalificationForms;

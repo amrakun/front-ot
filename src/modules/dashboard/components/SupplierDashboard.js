@@ -126,9 +126,13 @@ class Dashboard extends React.Component {
               text={
                 hasFeedback ? (
                   <span>
-                    You have new success feedback request. Click&nbsp;
-                    <Link to={`feedback/submit/${lastFeedback._id}`}>here</Link>
-                    &nbsp;to submit your response.
+                    <T id="dashboardFeedbackText1">
+                      You have new success feedback request. Click
+                    </T>{' '}
+                    <Link to={`feedback/submit/${lastFeedback._id}`}>
+                      <T id="clickHere">here</T>
+                    </Link>{' '}
+                    <T id="dashboardFeedbackText2">to submit your response.</T>
                   </span>
                 ) : (
                   <T id="dashboardNothingNew">Nothing new</T>
@@ -170,9 +174,15 @@ class Dashboard extends React.Component {
                     <T id="yes">Yes</T>
                   ) : (
                     <span>
-                      You are not pre-qualified, please click&nbsp;<Link to="/prequalification">
-                        here
-                      </Link>&nbsp;to update your information
+                      <T id="dashboardPrequalificationText1">
+                        You are not pre-qualified, please click
+                      </T>{' '}
+                      <Link to="/prequalification">
+                        <T id="clickHere">here</T>
+                      </Link>{' '}
+                      <T id="dashboardPrequalificationText2">
+                        to update your information
+                      </T>
                     </span>
                   )}
                 </span>
@@ -188,9 +198,13 @@ class Dashboard extends React.Component {
               text={
                 hasNewAudit ? (
                   <span>
-                    You have new audit invitation. Click&nbsp;
-                    <Link to="qualification">here</Link>
-                    &nbsp;view your audit invitations
+                    <T id="dashboardAuditText1">
+                      You have new audit invitation. Click
+                    </T>{' '}
+                    <Link to="qualification">
+                      <T id="clickHere">here</T>
+                    </Link>{' '}
+                    <T id="dashboardAuditText2">view your audit invitations</T>
                   </span>
                 ) : (
                   <T id="dashboardNothingNew">Nothing new</T>

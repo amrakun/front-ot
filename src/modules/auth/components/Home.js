@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import { withRouter } from 'react-router';
+import { T } from 'modules/common/components';
 
 const Home = (props, context) => {
   const { currentUser } = context;
@@ -23,12 +24,14 @@ const Home = (props, context) => {
       />
       <div className="content-wrapper">
         <div className="content">
-          <h1>Suppliers database</h1>
+          <h1>
+            <T id="homeTitle">Oyu Suppliers database</T>
+          </h1>
           <Link to="/expression-of-interest" className="home-btn">
-            Expression Of Interest
+            <T id="homeButtonLeft">Expression of Interest</T>
           </Link>
           <Link to="/register" className="home-btn-transparent">
-            Register as supplier
+            <T id="homeButtonRight">Register as supplier</T>
           </Link>
         </div>
       </div>

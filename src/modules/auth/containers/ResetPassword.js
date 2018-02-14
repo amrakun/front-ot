@@ -5,9 +5,18 @@ import { compose, graphql, gql } from 'react-apollo';
 import { PasswordSubmission } from '../components';
 import { mutations } from '../graphql';
 import { message } from 'antd';
+import { defineMessages, injectIntl, intlShape } from 'react-intl';
+
+const messages = defineMessages({
+  successResetPassword: {
+    id: 'successResetPassword',
+    defaultMessage:
+      'Your password has been reset, please sign in using your new password'
+  }
+});
 
 const ResetPasswordContainer = props => {
-  const { resetPasswordMutation, history, token } = props;
+  const { resetPasswordMutation, history, token, intl } = props;
 
   const resetPassword = args => {
     resetPasswordMutation({
@@ -18,9 +27,7 @@ const ResetPasswordContainer = props => {
     })
       .then(() => {
         history.push('/sign-in');
-        message.success(
-          'Your password has been reset, please sign in using your new password'
-        );
+        message.success(intl.formatMessage(messages.successResetPassword));
       })
       .catch(error => {
         message.error(error.message);
@@ -39,13 +46,16 @@ const ResetPasswordContainer = props => {
 ResetPasswordContainer.propTypes = {
   token: PropTypes.string,
   resetPasswordMutation: PropTypes.func,
-  history: PropTypes.object
+  history: PropTypes.object,
+  intl: intlShape.isRequired
 };
 
-export default withRouter(
-  compose(
-    graphql(gql(mutations.resetPassword), {
-      name: 'resetPasswordMutation'
-    })
-  )(ResetPasswordContainer)
+export default injectIntl(
+  withRouter(
+    compose(
+      graphql(gql(mutations.resetPassword), {
+        name: 'resetPasswordMutation'
+      })
+    )(ResetPasswordContainer)
+  )
 );

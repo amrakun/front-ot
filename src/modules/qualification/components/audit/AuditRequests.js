@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Table, Card } from 'antd';
 import { dateTimeFormat } from 'modules/common/constants';
 import moment from 'moment';
+import { T } from 'modules/common/components';
 import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
@@ -33,8 +34,12 @@ const messages = defineMessages({
     defaultMessage: 'Auditor improvement plan'
   },
   more: {
-    id: 'more',
+    id: 'qualificationMore',
     defaultMessage: 'More'
+  },
+  alreadySent: {
+    id: 'alreadySent',
+    defaultMessage: 'Already sent'
   }
 });
 
@@ -57,12 +62,24 @@ class AuditRequests extends React.Component {
       {
         title: formatMessage(messages.auditorReport),
         render: record =>
-          record.status === 'open' ? '-' : <a>{formatMessage(messages.view)}</a>
+          record.status === 'open' ? (
+            '-'
+          ) : (
+            <a>
+              <T id="View">View</T>
+            </a>
+          )
       },
       {
         title: formatMessage(messages.auditorImprovement),
         render: record =>
-          record.status === 'open' ? '-' : <a>{formatMessage(messages.view)}</a>
+          record.status === 'open' ? (
+            '-'
+          ) : (
+            <a>
+              <T id="view">View</T>
+            </a>
+          )
       },
       {
         title: formatMessage(messages.more),
@@ -73,8 +90,13 @@ class AuditRequests extends React.Component {
           const status = record.status;
 
           if (!isSent && status === 'open')
-            return <Link to={`audit/submit/${record._id}`}>View</Link>;
-          else if (isSent !== null && isSent) return 'Already sent';
+            return (
+              <Link to={`audit/submit/${record._id}`}>
+                <T id="view">View</T>
+              </Link>
+            );
+          else if (isSent !== null && isSent)
+            return formatMessage(messages.alreadySend);
 
           return '-';
         }
