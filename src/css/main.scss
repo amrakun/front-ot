@@ -569,3 +569,14 @@ a.sn {
 .ant-upload-list-item-name {
   max-width: 150px;
 }
+
+.login-as-form {
+  list-style: none;
+  li {
+    color: $link-color;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

@@ -15,7 +15,7 @@ const RegistrationContainer = props => {
 
   const companyByUser = companyByUserQuery.companyByUser;
 
-  const { basicInfo } = companyByUser || {};
+  const basicInfo = companyByUser.basicInfo || {};
   const soleTrader = basicInfo.corporateStructure === 'Sole Trader';
 
   let formsComplete = true;

@@ -46,7 +46,7 @@ const PERMISSION_APPROVE_PRE_QUALIFICATION_STATUS =
 const PERMISSION_QUALIFICATIONS_SAVE_TIER_TYPE = 'Supplier tier type';
 
 // audits
-const PERMISSION_AUDITS_ADD = 'Create audit';
+const PERMISSION_AUDITS_ADD = 'Send desktop audit';
 const PERMISSION_AUDITS_REPORT = 'Create report';
 const PERMISSION_AUDITS_BUYER_SEND_FILES =
   'Responses & send report, send improvement plan';
