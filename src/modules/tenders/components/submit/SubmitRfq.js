@@ -64,26 +64,10 @@ class SubmitTender extends TenderForm {
 
         data.forEach(product => {
           const key = Math.random();
-          const {
-            suggestedManufacturer,
-            suggestedManufacturerPart,
-            unitPrice,
-            totalPrice,
-            leadTime,
-            shippingTerms,
-            comment,
-            picture
-          } = product;
+
           const extendedProduct = {
             key,
-            suggestedManufacturer,
-            suggestedManufacturerPart,
-            unitPrice,
-            totalPrice,
-            leadTime,
-            shippingTerms,
-            comment,
-            picture
+            ...product
           };
 
           products.push(extendedProduct);

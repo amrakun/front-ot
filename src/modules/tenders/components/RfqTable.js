@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Table, Button, Icon, Alert, Col, Row } from 'antd';
-import { rfqProductsColumns, rfqDisclaimer } from '../constants';
+import { rfqProductsColumns as rpc, rfqDisclaimer } from '../constants';
 import { T } from 'modules/common/components';
 import { defineMessages } from 'react-intl';
-
-const rpc = rfqProductsColumns;
 
 class RfqTable extends Component {
   render() {
@@ -53,15 +51,15 @@ class RfqTable extends Component {
       },
       rfqManufacturerPartNumber: {
         id: 'rfqManufacturerPartNumber',
-        defaultMessage: rpc.manufacturerpart
+        defaultMessage: rpc.manufacturerPart
       },
       rfqSuggestedManufacturer: {
         id: 'rfqSuggestedManufacturer',
-        defaultMessage: rpc.suggestdManufacturer
+        defaultMessage: rpc.suggestedManufacturer
       },
       rfqSuggestedManufacturerPartNumber: {
         id: 'rfqSuggestedManufacturerPartNumber',
-        defaultMessage: rpc.suggestdManufacturerPart
+        defaultMessage: rpc.suggestedManufacturerPart
       },
       rfqUnitPrice: {
         id: 'rfqUnitPrice',
