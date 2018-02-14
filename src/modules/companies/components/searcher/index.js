@@ -58,7 +58,8 @@ class SupplierSearcher extends React.Component {
   }
 
   renderPopup(onlySelect) {
-    const { searchValue, visible } = this.state;
+    const { searchValue, visible, selectedValues } = this.state;
+    const { value } = this.props;
 
     if (visible || onlySelect) {
       return (
@@ -72,7 +73,7 @@ class SupplierSearcher extends React.Component {
           onChange={this.props.onChange}
           slogan={this.props.slogan}
           mode={this.props.mode}
-          value={this.props.value}
+          value={value || selectedValues}
         />
       );
     }

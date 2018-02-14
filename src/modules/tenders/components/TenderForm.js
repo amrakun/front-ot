@@ -134,7 +134,7 @@ class TenderForm extends BaseForm {
     const stateKey = `product__${recordKey}`;
     const product = this.state[stateKey] || {};
 
-    product[name] = files[0];
+    product[name] = files ? files[0] : null;
 
     this.state[stateKey] = product;
   }

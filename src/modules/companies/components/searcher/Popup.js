@@ -25,15 +25,18 @@ class Popup extends React.Component {
   renderSelect() {
     const { onSearch, onSelect, suppliers, onChange, value, mode } = this.props;
 
+    const selectProps = {
+      mode: 'multiple',
+      style: { width: '100%' },
+      onSelect: onSelect,
+      onSearch: onSearch,
+      onChange: onChange
+    };
+
+    if (value && value.length > 0) selectProps.value = value;
+
     return (
-      <Select
-        mode="multiple"
-        style={{ width: '100%' }}
-        onSelect={onSelect}
-        onSearch={onSearch}
-        onChange={onChange}
-        value={value}
-      >
+      <Select {...selectProps}>
         {suppliers.map(supplier => (
           <Select.Option
             key={mode === 'select' ? supplier._id : JSON.stringify(supplier)}
