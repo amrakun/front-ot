@@ -57,6 +57,7 @@ class Blocking extends Common {
   }
 
   onAddSuppliers(values) {
+    console.log(values);
     const suppliers = [...this.state.suppliers];
     const supplierIds = this.getSupplierIds();
 
@@ -167,11 +168,7 @@ class Blocking extends Common {
                 Blocking suppliers{' '}
               </label>
               {supplierTags}
-              <SupplierSearcher
-                withTag={true}
-                slogan="Add"
-                onSelect={this.onAddSuppliers}
-              />
+              <SupplierSearcher slogan="Add" onSelect={this.onAddSuppliers} />
             </div>
 
             <FormItem label="Date range">
