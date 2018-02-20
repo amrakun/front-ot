@@ -14,7 +14,8 @@ class RegistrationForms extends Panes {
     const { currentTabKey } = this.state;
     const { location, send } = this.props;
     const viewMode = location.pathname.includes('view-registration');
-    const basicInfo = this.props.company.basicInfo || {};
+    const company = this.props.company || {};
+    const basicInfo = company.basicInfo || {};
 
     const soleTrader = basicInfo.corporateStructure === 'Sole Trader';
 
