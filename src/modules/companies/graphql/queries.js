@@ -14,7 +14,6 @@ const basicInfoFields = `
   registeredInAimag,
   registeredInSum,
   isChinese,
-  isSubContractor,
   corporateStructure,
   registrationNumber,
   certificateOfRegistration,
