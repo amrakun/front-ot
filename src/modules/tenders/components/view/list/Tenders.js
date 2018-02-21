@@ -32,6 +32,14 @@ const messages = defineMessages({
   tenderSelectDate: {
     id: 'tenderSelectDate',
     defaultMessage: 'Select year and month'
+  },
+  eoi: {
+    id: 'eoi',
+    defaultMessage: 'Expression Of Interest'
+  },
+  rfq: {
+    id: 'rfq',
+    defaultMessage: 'Request For Quotation'
   }
 });
 

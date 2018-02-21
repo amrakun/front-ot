@@ -17,7 +17,7 @@ class TendersContainer extends React.Component {
   }
 
   render() {
-    const { tendersTableQuery, tendersResponsesAdd } = this.props;
+    const { tendersTableQuery, tendersResponsesAdd, type } = this.props;
     const { currentUser } = this.context;
 
     if (tendersTableQuery.loading) {
@@ -46,7 +46,7 @@ class TendersContainer extends React.Component {
     const updatedProps = {
       ...this.props,
       data: tenders,
-      type: this.type,
+      type: type,
       notInterested: notInterested,
       currentUser: currentUser,
       exportTenders: this.exportTenders

@@ -13,7 +13,7 @@ const basicInfoFields = `
   registeredInCountry,
   registeredInAimag,
   registeredInSum,
-  isChinese,
+  isChinese
   corporateStructure,
   registrationNumber,
   certificateOfRegistration,
@@ -207,6 +207,7 @@ const prequalificationFields = `
     doesEmployeePoliticallyExposed
     pepName
     organizationChartFile
+    
     investigations {
       name
       date

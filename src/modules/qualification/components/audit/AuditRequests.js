@@ -35,6 +35,10 @@ const messages = defineMessages({
   more: {
     id: 'more',
     defaultMessage: 'More'
+  },
+  view: {
+    id: 'view',
+    defaultMessage: 'View'
   }
 });
 
