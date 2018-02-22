@@ -13,7 +13,7 @@ const RegistrationContainer = props => {
     return <Loading />;
   }
 
-  const companyByUser = companyByUserQuery.companyByUser;
+  const companyByUser = companyByUserQuery.companyByUser || {};
 
   const basicInfo = companyByUser.basicInfo || {};
   const soleTrader = basicInfo.corporateStructure === 'Sole Trader';
