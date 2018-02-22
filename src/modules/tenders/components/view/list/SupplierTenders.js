@@ -82,7 +82,7 @@ class SupplierTenders extends Tenders {
   }
 
   renderBoolean(text, record) {
-    if (record.sentRegretLetter) return 'Yeasdasds';
+    if (record.sentRegretLetter) return 'Yes';
     else return '-';
   }
 

@@ -4,12 +4,11 @@ import Header from './Header';
 import Breadcrumb from './Breadcrumb';
 import { Layout, BackTop } from 'antd';
 import { PropTypes } from 'prop-types';
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { T } from '../../common/components';
 import mn from 'react-intl/locale-data/mn';
 import en from 'react-intl/locale-data/en';
 import * as messages from 'modules/translations';
-import { injectIntl } from 'react-intl';
 
 addLocaleData([...mn, ...en]);
 const { Content, Footer } = Layout;
@@ -100,7 +99,7 @@ class MainLayout extends React.Component {
   }
 
   toggleLang() {
-    this.setState(prevState => ({ toggleLang: !prevState.toggleLang }));
+    this.setState({ toggleLang: !this.state.toggleLang });
     const { toggleLang } = this.state;
     toggleLang ? this.setLang('mn', mergedMessages) : this.setLang('en', {});
   }
