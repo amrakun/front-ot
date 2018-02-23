@@ -39,131 +39,123 @@ export const labels = {
 
   documentLabel: 'Please upload supporting document',
 
-  doesMeetMinimumStandarts: `Does your company meet minimum standards of fair employment
-    practice required by Mongolian labor laws and regulations`,
+  doesMeetMinimumStandarts:
+    'Does your company meet minimum standards of fair employment practice required by Mongolian labor laws and regulations',
 
-  doesHaveJobDescription: `Does the Company have a job description procedure in
-    place?`,
+  doesHaveJobDescription:
+    'Does the Company have a job description procedure in place?',
 
-  doesConcludeValidContracts: `Does the company conclude valid contracts with all employees.
-    (include skilled/unskilled, temporary and permanent, and underage workers,
-    etc)`,
+  doesConcludeValidContracts:
+    'Does the company conclude valid contracts with all employees. (include skilled/unskilled, temporary and permanent, and underage workers, etc)',
 
-  employeeTurnoverRate: `Please provide the employee turnover rate within your company
-    in the last 12 months`,
+  employeeTurnoverRate:
+    'Please provide the employee turnover rate within your company in the last 12 months',
 
-  doesHaveLiabilityInsurance: `Does the organisation have Liability insurance which meets Oyu
-    Tolgoi’s minimum requirements and valid worker compensation insurance or
-    enrolment in an applicable occupational injury/illness insurance programme?`,
+  doesHaveLiabilityInsurance:
+    'Does the organisation have Liability insurance which meets Oyu Tolgoi’s minimum requirements and valid worker compensation insurance or enrolment in an applicable occupational injury/illness insurance programme?',
 
-  doesHaveCodeEthics: `Does your company have a documented code of ethics/conduct?`,
+  doesHaveCodeEthics:
+    'Does your company have a documented code of ethics/conduct?',
 
-  doesHaveResponsiblityPolicy: `Does your company have a documented Corporate Social
-    Responsibility policy?`,
+  doesHaveResponsiblityPolicy:
+    'Does your company have a documented Corporate Social Responsibility policy?',
 
-  hasConvictedLabourLaws: `Has your company ever been convicted for a breach of any labour
-    laws in the countries you operate within the last five years?`,
+  hasConvictedLabourLaws:
+    'Has your company ever been convicted for a breach of any labour laws in the countries you operate within the last five years?',
 
-  hasConvictedForHumanRights: `Has your company ever been convicted for a breach of any human
-    rights in the countries you operate within the last five years?`,
+  hasConvictedForHumanRights:
+    'Has your company ever been convicted for a breach of any human rights in the countries you operate within the last five years?',
 
-  hasConvictedForBusinessIntegrity: `Has your company ever been convicted for a breach of any
-    business integrity in the countries you operate within the last five years?`,
+  hasConvictedForBusinessIntegrity:
+    'Has your company ever been convicted for a breach of any business integrity in the countries you operate within the last five years?',
 
-  proveHasNotConvicted: `If Yes, what steps have you taken to ensure this does not
-    happen again?`,
+  proveHasNotConvicted:
+    'If Yes, what steps have you taken to ensure this does not happen again',
 
-  hasLeadersConvicted: `Has your company or any of its directors been investigated or
-    convicted of any other legal infringement not described above within the
-    last five years?`,
+  hasLeadersConvicted:
+    'Has your company or any of its directors been investigated or convicted of any other legal infringement not described above within the last five years?',
 
   inv1: `Investigation 1`,
 
-  doesEmployeePoliticallyExposed: `Does your company employ any politically exposed person? If yes,
-    provide list of PEP name`,
+  doesEmployeePoliticallyExposed:
+    'Does your company employ any politically exposed person? If yes, provide list of PEP name',
 
   PEPName: `PEP Name`,
 
   //envLabels
-  doesHavePlan: `Does the organisation have environmental management plans or
-    procedures (including air quality, greenhouse gases emissions, water and
-    contamination prevention, noise and vibration, Waste Management)?`,
+  doesHavePlan:
+    'Does the organisation have environmental management plans or procedures (including air quality, greenhouse gases emissions, water and contamination prevention, noise and vibration, Waste Management)?',
 
-  hasEnvironmentalRegulatorInvestigated: `Has any environmental regulator
-    inspected / investigated your company within the last 5 years?`,
+  hasEnvironmentalRegulatorInvestigated:
+    'Has any environmental regulator inspected / investigated your company within the last 5 years?',
 
-  dateOfInvestigation: `Date of Inspection / Investigation`,
+  dateOfInvestigation: 'Date of Inspection / Investigation',
 
-  reasonForInvestigation: `Reasons for investigation/inspection`,
+  reasonForInvestigation: 'Reasons for investigation/inspection',
 
   actionStatus: `Action status`,
 
-  investigationDocumentation: `Upload Inspection / Investigation Documentation`,
+  investigationDocumentation: 'Upload Inspection / Investigation Documentation',
 
-  hasConvictedForEnvironmentalLaws: `Has your company ever been convicted for a
-    breach of any Environmental laws in the countries you operate?`,
+  hasConvictedForEnvironmentalLaws:
+    'Has your company ever been convicted for a breach of any Environmental laws in the countries you operate?',
 
   additionalInformation: `Additional Information`,
 
   //healthLabels
-  doesHaveHealthSafety: `Does the organisation have a Health Safety &
-    Environment management system?`,
+  doesHaveHealthSafety:
+    'Does the organisation have a Health Safety & Environment management system?',
 
-  areHSEResourcesClearlyIdentified: `Are HSE resources, roles, responsibilities
-    and authority levels clearly identified and defined within your
-    Organisation?`,
+  areHSEResourcesClearlyIdentified:
+    'Are HSE resources, roles, responsibilities and authority levels clearly identified and defined within your Organisation?',
 
-  doesHaveDocumentedProcessToEnsure: `Does your company have a documented \
-    process to ensure all staff receive health and safety training and
-    induction?`,
+  doesHaveDocumentedProcessToEnsure:
+    'Does your company have a documented  process to ensure all staff receive health and safety training and induction?',
 
-  areEmployeesUnderYourControl: `Are all employees under your control required
-    to utilise appropriate Personal Protective Equipment (PPE) at all times?`,
+  areEmployeesUnderYourControl:
+    'Are all employees under your control required to utilise appropriate Personal Protective Equipment (PPE) at all times?',
 
-  doesHaveDocumentForRiskAssesment: `Does the company have a documented process
-    or guidelines for risk assessment (including CRM)?`,
+  doesHaveDocumentForRiskAssesment:
+    'Does the company have a documented process or guidelines for risk assessment (including CRM)?',
 
-  doesHaveDocumentForIncidentInvestigation: `Does the company have a documented
-    process for incident investigation?`,
+  doesHaveDocumentForIncidentInvestigation:
+    'Does the company have a documented process for incident investigation?',
 
-  doesHaveDocumentedFitness: `Does your company have a documented Fitness for
-    Work (FFW) policy?`,
+  doesHaveDocumentedFitness:
+    'Does your company have a documented Fitness for Work (FFW) policy?',
 
-  isWillingToComply: `Is your company willing to comply with Oyu Tolgoi/RT HSE
-    management system?`,
+  isWillingToComply:
+    'Is your company willing to comply with Oyu Tolgoi/RT HSE management system?',
 
-  hasIndustrialAccident: `Has there been any industrial accident in the last 5
-    financial years?`,
+  hasIndustrialAccident:
+    'Has there been any industrial accident in the last 5 financial years?',
 
-  tmha: `Provide total man hours accrued for the previous five calendar years
-    for all onsite personnel on Contractor managed projects`,
+  tmha:
+    'Provide total man hours accrued for the previous five calendar years for all onsite personnel on Contractor managed projects',
 
-  ltifr: `Provide Lost Time Injury Frequency Rate (LTIFR) as defined for the
-    previous five calendar years for all onsite personnel on Contractor managed
-    projects. Additionally, provide as an attachment, the guidance note
-    (or similar) for how the Tenderer defines a Lost Time Injury.`,
+  ltifr:
+    'Provide Lost Time Injury Frequency Rate (LTIFR) as defined for the previous five calendar years for all onsite personnel on Contractor managed projects. Additionally, provide as an attachment, the guidance note (or similar) for how the Tenderer defines a Lost Time Injury.',
 
-  injuryExplanation: `Provide a summary explaining the  fatality or injury
-    event(s) that contributed to the above:`,
+  injuryExplanation:
+    'Provide a summary explaining the  fatality or injury event(s) that contributed to the above:',
 
-  seniorManagement: `Provide details of how senior management demonstrates its
-    commitment to the Oyu Tolgoi HSE policy and management system. `,
+  seniorManagement:
+    'Provide details of how senior management demonstrates its commitment to the Oyu Tolgoi HSE policy and management system. ',
 
-  isWillingToCommit: `Is your company willing to commit itself, its employees
-    and all Sub-contractors, to implementing and being held to KPIs relating
-    to critical risk management (CRM)?`,
+  isWillingToCommit:
+    'Is your company willing to commit itself, its employees and all Sub-contractors, to implementing and being held to KPIs relating to critical risk management (CRM)?',
 
-  isPerparedToCompile: `Is your company prepared to compile weekly and monthly
-    safety statistics for the work performed on Site?`,
+  isPerparedToCompile:
+    'Is your company prepared to compile weekly and monthly safety statistics for the work performed on Site?',
 
-  hasWorkedOnWorldBank: `Has your company previously worked on World Bank or
-    International Finance Corporation projects? If so provide details.`,
+  hasWorkedOnWorldBank:
+    'Has your company previously worked on World Bank or International Finance Corporation projects? If so provide details.',
 
-  hasWorkedOnLargeProjects: `Has your company previously worked on large scale
-    mining construction projects? If so provide details.`,
+  hasWorkedOnLargeProjects:
+    'Has your company previously worked on large scale mining construction projects? If so provide details.',
 
-  doesHaveLicense: `Does the organisation have valid industry certifications
-    and/or licenses if required by the type of services provided?`,
+  doesHaveLicense:
+    'Does the organisation have valid industry certifications and/or licenses if required by the type of services provided?',
 
   //financial labels
   canProvideAccountsInfo: `Can you provide accounts for the last 3 financial years?`,
@@ -188,84 +180,47 @@ export const labels = {
 
   recordsInfo: `Please provide financial records for your last 3 years`,
 
-  isSubContractor: `Does your company, parent company or any sub-contractor is
-        registered in any of the following countries to which
-        international trade sanctions apply`
+  isSubContractor:
+    'Does your company, parent company or any sub-contractor is registered in any of the following countries to which international trade sanctions apply'
 };
 
 export const descriptions = {
-  isSubContractor: `
-    Belarus,
-    Burundi,
-    Central African Republic,
-    Cuba,
-    Democratic Republic of Congo,
-    Iran,
-    Iraq,
-    Lebanon,
-    Libya,
-    North Korea,
-    Somalia,
-    Sudan,
-    Syria,
-    Ukraine/Russia,
-    Venezuela,
-    Yemen and
-    Zimbabwe.
-  `,
+  isSubContractor:
+    'Belarus, Burundi, Central African Republic, Cuba, Democratic Republic of Congo, Iran, Iraq, Lebanon, Libya, North Korea, Somalia, Sudan, Syria, Ukraine/Russia, Venezuela, Yemen and Zimbabwe.',
 
-  employeeTurnoverRate: `Employee Turnover is the act of replacing an employee with a new employee.
-    You calculate the turnover rate by dividing the number of employees who left by the total number
-    of employees at the beginning of the period.
-    `,
+  employeeTurnoverRate:
+    'Employee Turnover is the act of replacing an employee with a new employee. You calculate the turnover rate by dividing the number of employees who left by the total number of employees at the beginning of the period.',
 
-  doesMeetMinimumStandarts: `Fair employment practice includes disabled ethnic groups,
-    anti-discrimination etc.`,
+  doesMeetMinimumStandarts:
+    'Fair employment practice includes disabled ethnic groups, anti-discrimination etc.',
 
-  doesConcludeValidContracts: `Include skilled/unskilled manufacturing employees, temporary
-    employees, underage workers etc.`,
+  doesConcludeValidContracts:
+    'Include skilled/unskilled manufacturing employees, temporary employees, underage workers etc.',
 
-  hasConvictedLabourLaws: `The five years is based on the date of your declaration and
-    submission of your questionnaire compared to the date of conviction. You
-    may remove any breaches older than five years.`,
+  hasConvictedLabourLaws:
+    'The five years is based on the date of your declaration and submission of your questionnaire compared to the date of conviction. You may remove any breaches older than five years.',
 
-  hasConvictedForHumanRights: `The five years is based on the date of your declaration and
-    submission of your questionnaire compared to the date of conviction. You
-    may remove any breaches older than five years.`,
+  hasConvictedForHumanRights:
+    'The five years is based on the date of your declaration and submission of your questionnaire compared to the date of conviction. You may remove any breaches older than five years.',
 
-  hasConvictedForBusinessIntegrity: `The five years is based on the date of your declaration and
-    submission of your questionnaire compared to the date of conviction. You
-    may remove any breaches older than five years.`,
+  hasConvictedForBusinessIntegrity:
+    'The five years is based on the date of your declaration and submission of your questionnaire compared to the date of conviction. You may remove any breaches older than five years.',
 
-  hasLeadersConvicted: `The five years is based on the date of your declaration and
-    submission of your questionnaire compared to the date of conviction. You
-    may remove any breaches older than five years.`,
+  hasLeadersConvicted:
+    'The five years is based on the date of your declaration and submission of your questionnaire compared to the date of conviction. You may remove any breaches older than five years.',
 
-  doesEmployeePoliticallyExposed: `PEP - Individuals who are or have been entrusted with prominent public
-    functions either domestically or by a foreign country, for example Heads
-    of state or Heads of government, senior politicians, senior government,
-    judicial or military officials, senior executives of state owned
-    corporations, important political party officials`,
+  doesEmployeePoliticallyExposed:
+    'PEP - Individuals who are or have been entrusted with prominent public functions either domestically or by a foreign country, for example Heads of state or Heads of government, senior politicians, senior government, judicial or military officials, senior executives of state owned corporations, important political party officials',
 
   additionalInformation: `Please use this space to provide additional information regarding
     your Corporate Social Responsibility`,
 
-  areHSEResourcesClearlyIdentified: `Staff includes all employees and
-    sub-contractors.`,
+  areHSEResourcesClearlyIdentified:
+    'Staff includes all employees and sub-contractors.',
 
-  doesHaveDocumentedFitness: `The Fitness for Work (FFW) policy should
-    incorporate alcohol, fatigue and general fitness for work.`,
+  doesHaveDocumentedFitness:
+    'The Fitness for Work (FFW) policy should incorporate alcohol, fatigue and general fitness for work.',
 
-  doesHaveCodeEthics: `
-    Prevention of Bribery & Corruption,
-    Conflict of interest,
-    Fair Labor Standards,
-    Business Ethics,
-    Human Rights,
-    Equality and Diversity,
-    Dealing with government intermediaries,
-    Charitable contributions,
-    Travels and hospitality,
-    Gifts and entertainment,
-    Money laundry`
+  doesHaveCodeEthics:
+    'Prevention of Bribery & Corruption, Conflict of interest, Fair Labor Standards, Business Ethics, Human Rights, Equality and Diversity, Dealing with government intermediaries, Charitable contributions, Travels and hospitality, Gifts and entertainment, Money laundry'
 };

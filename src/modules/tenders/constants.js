@@ -22,7 +22,7 @@ export const rfqProductsColumns = {
   manufacturerPart: 'Manufacturer part number',
   suggestedManufacturer: 'Suggested manufacturer if any',
   suggestedManufacturerPart: 'Suggest manufacturer part number',
-  unitPrice: 'Unit pirce',
+  unitPrice: 'Unit price',
   totalPrice: 'Total price',
   leadTime: 'Lead time',
   shippingTerms: 'Shipping terms',
@@ -97,12 +97,8 @@ export const rfqColumns = [...rfqRequestColumns, ...rfqResponseColumns];
 
 export const rfqDisclaimer = {
   title: 'Disclaimer',
-  description: `
-    Lead time quoted will be taken seriously and treated as final.
-    Quotes will be rejected with different formats than this template.
-    Please dont delete the lines you cannot quote just leave with a value of 0 and dont  change the sequence of lines.
-    Quoted price must include all expenses including packaging and delivery to OT warehouse.
-  `
+  description:
+    'Lead time quoted will be taken seriously and treated as final.  Quotes will be rejected with different formats than this template.  Please dont delete the lines you cannot quote just leave with a value of 0 and dont  change the sequence of lines.  Quoted price must include all expenses including packaging and delivery to OT warehouse.'
 };
 
 export const initialProducts = [

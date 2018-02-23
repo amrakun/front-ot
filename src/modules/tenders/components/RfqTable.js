@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Table, Button, Icon, Alert, Col, Row } from 'antd';
 import { rfqProductsColumns as rpc, rfqDisclaimer } from '../constants';
-import { T } from 'modules/common/components';
-import { defineMessages } from 'react-intl';
 
 class RfqTable extends Component {
   render() {
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
     const {
       products,
       renderProductColumn,
@@ -15,77 +13,6 @@ class RfqTable extends Component {
       handleFile,
       generateTemplate
     } = this.props;
-
-    const messages = defineMessages({
-      rfqDisclaimerTitle: {
-        id: 'rfqDisclaimerTitle',
-        defaultMessage: rfqDisclaimer.title
-      },
-      rfqDisclaimer: {
-        id: 'rfqDisclaimer',
-        defaultMessage: rfqDisclaimer.description
-      },
-      rfqCode: {
-        id: 'rfqCode',
-        defaultMessage: rpc.code
-      },
-      rfqPurchaseRequestNumber: {
-        id: 'rfqPurchaseRequestNumber',
-        defaultMessage: rpc.purchaseRequestNumber
-      },
-      rfqShortText: {
-        id: 'rfqShortText',
-        defaultMessage: rpc.shortText
-      },
-      rfqQuantity: {
-        id: 'rfqQuantity',
-        defaultMessage: rpc.quantity
-      },
-      rfqUom: {
-        id: 'rfqUom',
-        defaultMessage: rpc.uom
-      },
-      rfqManufacturer: {
-        id: 'rfqManufacturer',
-        defaultMessage: rpc.manufacturer
-      },
-      rfqManufacturerPartNumber: {
-        id: 'rfqManufacturerPartNumber',
-        defaultMessage: rpc.manufacturerPart
-      },
-      rfqSuggestedManufacturer: {
-        id: 'rfqSuggestedManufacturer',
-        defaultMessage: rpc.suggestedManufacturer
-      },
-      rfqSuggestedManufacturerPartNumber: {
-        id: 'rfqSuggestedManufacturerPartNumber',
-        defaultMessage: rpc.suggestedManufacturerPart
-      },
-      rfqUnitPrice: {
-        id: 'rfqUnitPrice',
-        defaultMessage: rpc.unitPrice
-      },
-      rfqTotalPrice: {
-        id: 'rfqTotalPrice',
-        defaultMessage: rpc.totalPrice
-      },
-      rfqLeadTime: {
-        id: 'rfqLeadTime',
-        defaultMessage: rpc.leadTime
-      },
-      rfqShippingTerms: {
-        id: 'rfqShippingTerms',
-        defaultMessage: rpc.shippingTerms
-      },
-      rfqComment: {
-        id: 'rfqComment',
-        defaultMessage: rpc.comment
-      },
-      rfqFile: {
-        id: 'rfqFile',
-        defaultMessage: rpc.picture
-      }
-    });
 
     const { REACT_APP_API_URL } = process.env;
     const requestUrl = `${
@@ -97,8 +24,8 @@ class RfqTable extends Component {
         <Row>
           <Col xl={12} lg={18}>
             <Alert
-              description={formatMessage(messages.rfqDisclaimer)}
-              message={formatMessage(messages.rfqDisclaimerTitle)}
+              description={__(rfqDisclaimer.description)}
+              message={__(rfqDisclaimer.title)}
               type="info"
             />
           </Col>
@@ -109,13 +36,13 @@ class RfqTable extends Component {
               isSupplier ? generateTemplate() : window.open(requestUrl)
             }
           >
-            <T id="rfqDownload">Download template</T>
+            {__('Download template')}
             <Icon type="download" />
           </Button>
 
           <div className="upload-btn-wrapper">
             <Button>
-              <T id="rfqImport">Import excel file</T> <Icon type="file-excel" />
+              {__('Import excel file')} <Icon type="file-excel" />
             </Button>
             <input type="file" className="ant-btn" onChange={handleFile} />
           </div>
@@ -129,84 +56,84 @@ class RfqTable extends Component {
         >
           {renderProductColumn({
             name: 'code',
-            title: formatMessage(messages.rfqCode),
+            title: __(rpc.code),
             isSupplier
           })}
           {renderProductColumn({
             name: 'purchaseRequestNumber',
-            title: formatMessage(messages.rfqPurchaseRequestNumber),
+            title: __(rpc.purchaseRequestNumber),
             type: 'number',
             isSupplier
           })}
           {renderProductColumn({
             name: 'shortText',
-            title: formatMessage(messages.rfqShortText),
+            title: __(rpc.shortText),
             isSupplier
           })}
           {renderProductColumn({
             name: 'quantity',
-            title: formatMessage(messages.rfqQuantity),
+            title: __(rpc.quantity),
             type: 'number',
             isSupplier
           })}
           {renderProductColumn({
             name: 'uom',
-            title: formatMessage(messages.rfqUom),
+            title: __(rpc.uom),
             isSupplier
           })}
           {renderProductColumn({
             name: 'manufacturer',
-            title: formatMessage(messages.rfqManufacturer),
+            title: __(rpc.manufacturer),
             isSupplier
           })}
           {renderProductColumn({
             name: 'manufacturerPartNumber',
-            title: formatMessage(messages.rfqManufacturerPartNumber),
+            title: __(rpc.manufacturerPart),
             type: 'number',
             isSupplier
           })}
           {renderProductColumn({
             name: 'suggestedManufacturer',
-            title: formatMessage(messages.rfqSuggestedManufacturer),
+            title: __(rpc.suggestedManufacturer),
             isSupplier: !isSupplier
           })}
           {renderProductColumn({
             name: 'suggestedManufacturerPartNumber',
-            title: formatMessage(messages.rfqSuggestedManufacturerPartNumber),
+            title: __(rpc.suggestedManufacturerPart),
             type: 'number',
             isSupplier: !isSupplier
           })}
           {renderProductColumn({
             name: 'unitPrice',
-            title: formatMessage(messages.rfqUnitPrice),
+            title: __(rpc.unitPrice),
             type: 'number',
             isSupplier: !isSupplier
           })}
           {renderProductColumn({
             name: 'totalPrice',
-            title: formatMessage(messages.rfqTotalPrice),
+            title: __(rpc.totalPrice),
             type: 'number',
             isSupplier: !isSupplier
           })}
           {renderProductColumn({
             name: 'leadTime',
-            title: formatMessage(messages.rfqLeadTime),
+            title: __(rpc.leadTime),
             type: 'number',
             isSupplier: !isSupplier
           })}
           {renderProductColumn({
             name: 'shippingTerms',
-            title: formatMessage(messages.rfqShippingTerms),
+            title: __(rpc.shippingTerms),
             isSupplier: !isSupplier
           })}
           {renderProductColumn({
             name: 'comment',
-            title: formatMessage(messages.rfqComment),
+            title: __(rpc.comment),
             isSupplier: !isSupplier
           })}
           {renderProductColumn({
             name: 'file',
-            title: formatMessage(messages.rfqFile),
+            title: __(rpc.picture),
             type: 'uploader',
             isSupplier: !isSupplier
           })}
@@ -225,7 +152,7 @@ RfqTable.propTypes = {
 };
 
 RfqTable.contextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 export default RfqTable;

@@ -17,41 +17,9 @@ import { dateFormat } from 'modules/common/constants';
 import { Field, Uploader } from 'modules/common/components';
 import moment from 'moment';
 import PreqForm from './PreqForm';
-import { defineMessages } from 'react-intl';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
-
-const messages = defineMessages({
-  investigation: {
-    id: 'investigation',
-    defaultMessage: 'Investigation'
-  },
-  addInvestigation: {
-    id: 'addInvestigation',
-    defaultMessage: 'Add investigation'
-  },
-  businessIntegrityTitle: {
-    id: 'businessIntegrityTitle',
-    defaultMessage: 'Company business integrity'
-  },
-  hrTitle: {
-    id: 'hrTitle',
-    defaultMessage: 'Human resource management'
-  },
-  pepName: {
-    id: 'pepName',
-    defaultMessage: 'PEP Name'
-  },
-  placeholderInvestigation: {
-    id: 'investigationName',
-    defaultMessage: 'Investigation name'
-  },
-  status: {
-    id: 'investigationStatus',
-    defaultMessage: 'Investigation status'
-  }
-});
 
 class PrequalificationForm extends PreqForm {
   constructor(props) {
@@ -137,12 +105,12 @@ class PrequalificationForm extends PreqForm {
 
   renderInvestigation(investigation, index) {
     const _id = investigation._id;
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
 
     return (
       <FormItem
         className="multiple-wrapper"
-        label={`${index + 1}-р ` + formatMessage(messages.investigation)}
+        label={`${index + 1}-р ` + __('Investigation')}
         key={_id}
         hasFeedback
       >
@@ -153,11 +121,7 @@ class PrequalificationForm extends PreqForm {
               initialValue={investigation.name}
               hasFeedback={false}
               optional={true}
-              control={
-                <Input
-                  placeholder={formatMessage(messages.placeholderInvestigation)}
-                />
-              }
+              control={<Input placeholder={__('Investigation name')} />}
             />
           </Col>
           <Col span={6}>
@@ -175,7 +139,7 @@ class PrequalificationForm extends PreqForm {
               initialValue={investigation.status}
               hasFeedback={false}
               optional={true}
-              control={<Input placeholder={formatMessage(messages.status)} />}
+              control={<Input placeholder={__('Investigation status')} />}
             />
           </Col>
           <Col span={6}>
@@ -184,7 +148,9 @@ class PrequalificationForm extends PreqForm {
               initialValue={moment(investigation.statusDate)}
               hasFeedback={false}
               optional={true}
-              control={<DatePicker format={dateFormat} placeholder="Close" />}
+              control={
+                <DatePicker format={dateFormat} placeholder={__('Close')} />
+              }
             />
           </Col>
         </Row>
@@ -194,7 +160,7 @@ class PrequalificationForm extends PreqForm {
 
   render() {
     const booleanOptions = this.renderOptions(booleanData);
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
 
     const {
       hasConvictedForBusinessIntegrity,
@@ -209,7 +175,7 @@ class PrequalificationForm extends PreqForm {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        <h2>{formatMessage(messages.hrTitle)}</h2>
+        <h2>{__('Human resource management')}</h2>
         <Card>
           {this.renderField({
             label: labels.organisationChart,
@@ -234,7 +200,7 @@ class PrequalificationForm extends PreqForm {
 
         {this.renderConditionalField('doesHaveLiabilityInsurance')}
 
-        <h2>{formatMessage(messages.businessIntegrityTitle)}</h2>
+        <h2>{__('Company business integrity')}</h2>
         {this.renderConditionalField('doesHaveCodeEthics')}
         {this.renderConditionalField('doesHaveResponsiblityPolicy')}
         {this.renderConditionalField('hasConvictedLabourLaws', true)}
@@ -283,7 +249,7 @@ class PrequalificationForm extends PreqForm {
                 onClick={this.addInvestigation}
                 style={{ width: '100%' }}
               >
-                <Icon type="plus" /> {formatMessage(messages.addInvestigation)}
+                <Icon type="plus" /> {__('Add investigation')}
               </Button>
             </FormItem>
           </div>
@@ -330,7 +296,7 @@ class PrequalificationForm extends PreqForm {
 const BusinessForm = Form.create()(PrequalificationForm);
 
 PrequalificationForm.contextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 export default withRouter(BusinessForm);

@@ -1,14 +1,10 @@
 {
-  "managingDirector": "15. Үйл ажиллагаа хариуцсан захирал",
-  "executiveOfficer": "16. Гүйцэтгэх захирал",
-  "salesDirector": "17. Борлуулалт хариуцсан захирал",
-  "financialDirector": "18. Санхүү хариуцсан захирал",
-  "otherMember1": "19. Удирдлагын багийн бусад гишүүд",
-  "otherMember2": "20. Удирдлагын багийн бусад гишүүд 2",
-  "otherMember3": "21. Удирдлагын багийн бусад гишүүд 3",
-  "managementTeamInfo": "Удирдлагын баг",
-  "commonName": "Бүтэн нэр",
-  "commonJobTitle": "Албан тушаал",
-  "commonPhone": "Утасны дугаар",
-  "commonEmail": "И-мэйл"
+  "Management Team": "Удирдлагын баг",
+  "15. Managing director": "15. Үйл ажиллагаа хариуцсан захирал",
+  "16. Executive officer": "16. Гүйцэтгэх захирал",
+  "17. Sales director": "17. Борлуулалт хариуцсан захирал",
+  "18. Financial director": "18. Санхүү хариуцсан захирал",
+  "19. Other management team member": "19. Удирдлагын багийн бусад гишүүд",
+  "Other management team member 2": "Удирдлагын багийн бусад гишүүд 2",
+  "Other management team member 3": "Удирдлагын багийн бусад гишүүд 3"
 }

@@ -5,22 +5,6 @@ import { Form, TreeSelect, Card, Alert, message } from 'antd';
 import { Field, BaseForm } from 'modules/common/components';
 import { productDescription } from '../constants';
 import productsTree from '../../../productsTree';
-import { defineMessages } from 'react-intl';
-
-const messages = defineMessages({
-  help: {
-    id: 'help',
-    defaultMessage: 'Help'
-  },
-  placeholder: {
-    id: 'selectProducts',
-    defaultMessage: 'Please select products'
-  },
-  product: {
-    id: 'productsDesc',
-    defaultMessage: productDescription
-  }
-});
 
 class RegistrationForm extends BaseForm {
   handleSubmit(e) {
@@ -34,7 +18,7 @@ class RegistrationForm extends BaseForm {
   }
 
   render() {
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
 
     return (
       <Form>
@@ -47,14 +31,14 @@ class RegistrationForm extends BaseForm {
               <TreeSelect
                 treeData={productsTree}
                 treeCheckable={true}
-                searchPlaceholder={formatMessage(messages.placeholder)}
+                searchPlaceholder={__('Please select products')}
                 allowClear
               />
             }
           />
           <Alert
-            message={formatMessage(messages.help)}
-            description={formatMessage(messages.product)}
+            message={__('Help')}
+            description={__(productDescription)}
             type="info"
             style={{ marginBottom: '24px' }}
           />
@@ -68,7 +52,7 @@ class RegistrationForm extends BaseForm {
 }
 
 RegistrationForm.contextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 const ProductsForm = Form.create()(RegistrationForm);

@@ -5,84 +5,33 @@ import { Link } from 'react-router-dom';
 import { Table, Card } from 'antd';
 import { dateTimeFormat } from 'modules/common/constants';
 import moment from 'moment';
-import { T } from 'modules/common/components';
-import { defineMessages } from 'react-intl';
-
-const messages = defineMessages({
-  qualificationTitle: {
-    id: 'qualificationTitle',
-    defaultMessage: 'Qualification/audit requests'
-  },
-  status: {
-    id: 'status',
-    defaultMessage: 'Status'
-  },
-  publishDate: {
-    id: 'publishDate',
-    defaultMessage: 'Publish date'
-  },
-  expirationDate: {
-    id: 'expirationDate',
-    defaultMessage: 'Expiration date'
-  },
-  auditorReport: {
-    id: 'auditorReport',
-    defaultMessage: 'Auditor report'
-  },
-  auditorImprovement: {
-    id: 'auditorImprovement',
-    defaultMessage: 'Auditor improvement plan'
-  },
-  more: {
-    id: 'qualificationMore',
-    defaultMessage: 'More'
-  },
-  alreadySent: {
-    id: 'alreadySent',
-    defaultMessage: 'Already sent'
-  }
-});
 
 class AuditRequests extends React.Component {
   columns() {
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
     return [
       {
-        title: formatMessage(messages.status),
+        title: __('Status'),
         dataIndex: 'status'
       },
       {
-        title: formatMessage(messages.publishDate),
+        title: __('Publish date'),
         render: record => moment(record.publishDate).format(dateTimeFormat)
       },
       {
-        title: formatMessage(messages.expirationDate),
+        title: __('Expiration date'),
         render: record => moment(record.closeDate).format(dateTimeFormat)
       },
       {
-        title: formatMessage(messages.auditorReport),
-        render: record =>
-          record.status === 'open' ? (
-            '-'
-          ) : (
-            <a>
-              <T id="View">View</T>
-            </a>
-          )
+        title: __('Auditor report'),
+        render: record => (record.status === 'open' ? '-' : <a>{__('View')}</a>)
       },
       {
-        title: formatMessage(messages.auditorImprovement),
-        render: record =>
-          record.status === 'open' ? (
-            '-'
-          ) : (
-            <a>
-              <T id="view">View</T>
-            </a>
-          )
+        title: __('Auditor improvement plan'),
+        render: record => (record.status === 'open' ? '-' : <a>{__('View')}</a>)
       },
       {
-        title: formatMessage(messages.more),
+        title: __('More'),
         render: record => {
           const isSent = record.supplierResponse
             ? record.supplierResponse.isSent
@@ -90,13 +39,8 @@ class AuditRequests extends React.Component {
           const status = record.status;
 
           if (!isSent && status === 'open')
-            return (
-              <Link to={`audit/submit/${record._id}`}>
-                <T id="view">View</T>
-              </Link>
-            );
-          else if (isSent !== null && isSent)
-            return formatMessage(messages.alreadySend);
+            return <Link to={`audit/submit/${record._id}`}>{__('View')}</Link>;
+          else if (isSent !== null && isSent) return __('Already sent');
 
           return '-';
         }
@@ -106,10 +50,10 @@ class AuditRequests extends React.Component {
 
   render() {
     const { data, pagination, loading, onChange } = this.props;
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
 
     return (
-      <Card title={formatMessage(messages.qualificationTitle)}>
+      <Card title={__('Qualification/audit requests')}>
         <Table
           columns={this.columns()}
           rowKey={record => record._id}
@@ -133,7 +77,7 @@ AuditRequests.propTypes = {
 };
 
 AuditRequests.contextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 export default withRouter(AuditRequests);

@@ -52,7 +52,7 @@ class InjectInstance extends React.Component {
     const { formatMessage } = intl;
 
     return {
-      formatMessage
+      __: msg => formatMessage({ id: msg, defaultMessage: msg })
     };
   }
 
@@ -67,7 +67,7 @@ InjectInstance.propTypes = {
 };
 
 InjectInstance.childContextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 const InjectedComponent = injectIntl(InjectInstance);
@@ -157,7 +157,9 @@ class MainLayout extends React.Component {
               <BackTop />
             </Content>
             <Footer>
-              <T id="footer">Oyu Tolgoi ©2018 All Rights Reserved</T>
+              <T id="Oyu Tolgoi ©2018 All Rights Reserved">
+                Oyu Tolgoi 2018 All Rights Reserved
+              </T>
             </Footer>
           </Layout>
         </Layout>

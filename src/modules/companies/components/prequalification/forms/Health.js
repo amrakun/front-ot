@@ -40,6 +40,7 @@ class PrequalificationForm extends PreqForm {
 
   render() {
     const { productsInfo } = this.props;
+    const { __ } = this.context;
 
     return (
       <Form>
@@ -82,7 +83,7 @@ class PrequalificationForm extends PreqForm {
           okText="Submit"
         >
           <Button style={{ float: 'right' }} type="primary">
-            Save & submit
+            {__('Save & submit')}
           </Button>
         </Popconfirm>
       </Form>
@@ -92,6 +93,10 @@ class PrequalificationForm extends PreqForm {
 
 PrequalificationForm.propTypes = {
   productsInfo: PropTypes.array
+};
+
+PrequalificationForm.contextTypes = {
+  __: PropTypes.func
 };
 
 const BusinessForm = Form.create()(PrequalificationForm);

@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Form, Button, Input, Icon, Checkbox, Card, Alert } from 'antd';
-import { T } from 'modules/common/components';
-import { defineMessages } from 'react-intl';
 
 const FormItem = Form.Item;
 
@@ -14,38 +12,6 @@ const propTypes = {
   loading: PropTypes.bool,
   chooseLoginAs: PropTypes.object
 };
-
-const messages = defineMessages({
-  email: {
-    id: 'signInEmail',
-    defaultMessage: 'Email'
-  },
-  password: {
-    id: 'password',
-    defaultMessage: 'Password'
-  },
-  placeholderEmail: {
-    id: 'profilePlaceholderEmail',
-    defaultMessage: 'Please enter your email!'
-  },
-  placeholderPassword: {
-    id: 'profilePlaceholderPassword',
-    defaultMessage: 'Please enter your password!'
-  },
-  confirmation: {
-    id: 'confirmationEmail',
-    defaultMessage: 'Confirmation link has been sent to your email!'
-  },
-  activated: {
-    id: 'activatedEmail',
-    defaultMessage:
-      'Account activated succesfully! Please login using your provided details'
-  },
-  signInToContinue: {
-    id: 'signInToContinue',
-    defaultMessage: 'Please sign in to continue!'
-  }
-});
 
 class SignIn extends Component {
   constructor(props) {
@@ -68,54 +34,50 @@ class SignIn extends Component {
 
   renderLogin() {
     const { getFieldDecorator } = this.props.form;
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
     const search = this.props.location.search || [{}];
     const { loading } = this.props;
-    const {
-      email,
-      password,
-      placeholderEmail,
-      placeholderPassword,
-      confirmation,
-      activated,
-      signInToContinue
-    } = messages;
 
     return (
       <div>
         {search === '?confirmation' && (
-          <Alert description={formatMessage(confirmation)} type="success" />
+          <Alert
+            description={__('Confirmation link has been sent to your email!')}
+            type="success"
+          />
         )}
         {search === '?confirmed' && (
-          <Alert description={formatMessage(activated)} type="success" />
+          <Alert
+            description={__(
+              'Account activated successfully! Please login using your provided details'
+            )}
+            type="success"
+          />
         )}
         {search === '?required' && (
-          <Alert description={formatMessage(signInToContinue)} type="info" />
+          <Alert description={__('Please sign in to continue!')} type="info" />
         )}
 
         <Form onSubmit={this.handleSubmit} className="margin">
           <FormItem>
             {getFieldDecorator('email', {
               rules: [
-                { required: true, message: formatMessage(placeholderEmail) }
+                { required: true, message: __('Please enter your email!') }
               ]
             })(
-              <Input
-                prefix={<Icon type="mail" />}
-                placeholder={formatMessage(email)}
-              />
+              <Input prefix={<Icon type="mail" />} placeholder={__('Email')} />
             )}
           </FormItem>
           <FormItem>
             {getFieldDecorator('password', {
               rules: [
-                { required: true, message: formatMessage(placeholderPassword) }
+                { required: true, message: __('Please enter your password!') }
               ]
             })(
               <Input
                 prefix={<Icon type="lock" />}
                 type="password"
-                placeholder={formatMessage(password)}
+                placeholder={__('Password')}
               />
             )}
           </FormItem>
@@ -123,21 +85,14 @@ class SignIn extends Component {
             {getFieldDecorator('remember', {
               valuePropName: 'checked',
               initialValue: true
-            })(
-              <Checkbox>
-                <T id="rememberMe">Remember me</T>
-              </Checkbox>
-            )}
+            })(<Checkbox>{__('Remember me')}</Checkbox>)}
             <Link className="right" to="/forgot-password">
-              <T id="forgotPassword">Forgot password</T>
+              {__('Forgot password')}
             </Link>
             <Button type="primary" loading={loading} htmlType="submit">
-              <T id="signIn">Нэвтрэх</T>
+              {__('Sign in')}
             </Button>
-            <T id="or">Or</T>{' '}
-            <Link to="/register">
-              <T id="registerNow">register now!</T>
-            </Link>
+            {__('Or')} <Link to="/register">{__('register now!')}</Link>
           </FormItem>
         </Form>
       </div>
@@ -189,7 +144,7 @@ class SignIn extends Component {
 
 SignIn.propTypes = propTypes;
 SignIn.contextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 const SignInForm = Form.create()(SignIn);

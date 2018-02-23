@@ -6,7 +6,6 @@ import TenderForm from '../TenderForm';
 import RfqTable from '../RfqTable';
 import MainInfo from './MainInfo';
 import { xlsxHandler } from 'modules/common/utils';
-import { T } from 'modules/common/components';
 
 class SubmitTender extends TenderForm {
   constructor(props) {
@@ -83,6 +82,7 @@ class SubmitTender extends TenderForm {
 
   render() {
     const { products } = this.state;
+    const { __ } = this.context;
     const { data, generateTemplate } = this.props;
 
     const formProps = {
@@ -103,10 +103,10 @@ class SubmitTender extends TenderForm {
           {!data.isSent && (
             <div className="margin">
               <Button style={{ marginRight: '16px' }} onClick={this.saveDraft}>
-                <T id="saveAsDraft">Save as draft</T>
+                {__('Save as draft')}
               </Button>
               <Button type="primary" htmlType="submit">
-                <T id="saveAndSubmit">Save & submit</T>
+                {__('Save & submit')}
               </Button>
             </div>
           )}
@@ -118,6 +118,10 @@ class SubmitTender extends TenderForm {
 
 SubmitTender.propTypes = {
   data: PropTypes.object
+};
+
+SubmitTender.contextTypes = {
+  __: PropTypes.func
 };
 
 const form = Form.create()(SubmitTender);

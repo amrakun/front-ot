@@ -2,21 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Form, Input, Icon, Card, Button } from 'antd';
-import { BaseForm, Field, T } from 'modules/common/components';
+import { BaseForm, Field } from 'modules/common/components';
 import { noLabelLayout } from 'modules/common/constants';
-import { defineMessages } from 'react-intl';
 
 const propTypes = {
   register: PropTypes.func.isRequired,
   form: PropTypes.object
 };
-
-const messages = defineMessages({
-  email: {
-    id: 'profileEmail',
-    defaultMessage: 'Email'
-  }
-});
 
 class Register extends BaseForm {
   constructor(props) {
@@ -55,8 +47,7 @@ class Register extends BaseForm {
 
   render() {
     const { loading } = this.props;
-    const { formatMessage } = this.context;
-    const { email } = messages;
+    const { __ } = this.context;
 
     return (
       <div className="center-content">
@@ -69,7 +60,7 @@ class Register extends BaseForm {
               control={
                 <Input
                   prefix={<Icon type="mail" />}
-                  placeholder={formatMessage(email)}
+                  placeholder={__('Email')}
                 />
               }
             />
@@ -79,12 +70,10 @@ class Register extends BaseForm {
               loading={loading}
               style={{ marginBottom: '12px' }}
             >
-              <T id="register">Register</T>
+              {__('Register')}
             </Button>
-            <T id="alreadyRegistered">Already registered?</T>{' '}
-            <Link to="/sign-in">
-              <T id="signIn">Sign in</T>
-            </Link>
+            {__('Already registered?')}{' '}
+            <Link to="/sign-in">{__('Sign in')}</Link>
           </Form>
         </Card>
       </div>
@@ -94,7 +83,7 @@ class Register extends BaseForm {
 
 Register.propTypes = propTypes;
 Register.contextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 const RegisterForm = Form.create()(Register);

@@ -1,18 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'antd';
-import { defineMessages } from 'react-intl';
-
-const requireMessages = defineMessages({
-  field: {
-    id: 'fieldRequire',
-    defaultMessage: 'This field is required!'
-  },
-  email: {
-    id: 'emailRequire',
-    defaultMessage: 'The input is not valid E-mail!'
-  }
-});
 
 export default class Field extends React.Component {
   /*
@@ -52,100 +40,38 @@ export default class Field extends React.Component {
     return '';
   }
 
-  setName(prefix, suffix, name) {
-    if (prefix) {
-      return name.replace(prefix, 'common');
-    }
-    if (suffix || suffix === 0) {
-      return name.replace(suffix, 'Common');
-    }
-    return name;
-  }
-
-  getTranslation(
-    prefix,
-    suffix,
-    name,
-    label,
-    description,
-    attachmentType,
-    dataType,
-    controlType,
-    messageId
-  ) {
-    const { formatMessage } = this.context;
-    let commonName = this.setName(prefix, suffix, name);
-
-    if (attachmentType) {
-      commonName += attachmentType;
-    }
-
-    if (commonName.includes('File') && dataType === 'file') {
-      commonName = 'file';
-    }
-
-    if (controlType === 'textarea') {
-      commonName = 'textarea';
-      label = label || 'Provide details';
-    }
-
-    commonName = messageId || commonName;
-
-    const messages = defineMessages({
-      label: {
-        id: commonName,
-        defaultMessage: label
-      },
-      extra: {
-        id: commonName + 'Desc',
-        defaultMessage: description
-      }
-    });
-
-    const val = label ? formatMessage(messages.label) : '';
-    const extra = description ? formatMessage(messages.extra) : description;
-
-    return { val, extra };
-  }
-
   render() {
     const {
       label,
       description = '',
       name,
-      prefix,
       control,
       optional,
       validation,
       isVisible = true,
       hasFeedback = true,
       layout,
-      suffix,
-      attachmentType,
       rules = [],
       dataType,
-      controlType,
       validateStatus,
       help,
-      validator,
-      messageId
+      validator
     } = this.props;
 
-    const { form, formatMessage } = this.context;
+    const { form, __ } = this.context;
     const { getFieldDecorator } = form;
-    const { field, email } = requireMessages;
 
     if (!optional) {
       rules.push({
         required: true,
-        message: formatMessage(field)
+        message: __('This field is required!')
       });
     }
 
     if (validation === 'email') {
       rules.push({
         type: 'email',
-        message: formatMessage(email)
+        message: __('The input is not valid E-mail!')
       });
     }
 
@@ -165,23 +91,14 @@ export default class Field extends React.Component {
       args.valuePropName = 'defaultFileList';
     }
 
-    const { val, extra } = this.getTranslation(
-      prefix,
-      suffix,
-      name,
-      label,
-      description,
-      attachmentType,
-      dataType,
-      controlType,
-      messageId
-    );
+    const _label = label ? __(label) : label;
+    const _description = description ? __(description) : description;
 
     return (
       <Form.Item
         {...layout}
-        label={val}
-        extra={extra}
+        label={_label}
+        extra={_description}
         style={isVisible ? {} : { display: 'none' }}
         hasFeedback={hasFeedback}
         validateStatus={validateStatus}
@@ -214,5 +131,5 @@ Field.propTypes = {
 
 Field.contextTypes = {
   form: PropTypes.object,
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };

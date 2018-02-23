@@ -3,20 +3,11 @@ import PropTypes from 'prop-types';
 import { Form, Input, Icon, Card, Button } from 'antd';
 import { BaseForm, Field } from 'modules/common/components';
 import { Link } from 'react-router-dom';
-import { T } from 'modules/common/components';
-import { defineMessages } from 'react-intl';
 
 const propTypes = {
   forgotPassword: PropTypes.func.isRequired,
   form: PropTypes.object
 };
-
-const messages = defineMessages({
-  email: {
-    id: 'signInEmail',
-    defaultMessage: 'Email'
-  }
-});
 
 class ForgotPassword extends BaseForm {
   constructor(props) {
@@ -41,21 +32,19 @@ class ForgotPassword extends BaseForm {
   }
 
   render() {
-    const { formatMessage } = this.context;
-    const { email } = messages;
+    const { __ } = this.context;
     return (
       <div className="center-content">
         <Card className="login-card" bordered={false}>
           <Form onSubmit={this.handleSubmit}>
             <Field
-              label="Please enter your registered email address:"
+              label={__('Please enter your registered email address')}
               name="email"
               validation="email"
-              messageId="registeredEmail"
               control={
                 <Input
                   prefix={<Icon type="mail" />}
-                  placeholder={formatMessage(email)}
+                  placeholder={__('Email')}
                 />
               }
             />
@@ -65,11 +54,9 @@ class ForgotPassword extends BaseForm {
               htmlType="submit"
               style={{ marginBottom: '12px' }}
             >
-              <T id="btnSend">Send</T>
+              {__('Send')}
             </Button>
-            <Link to="/sign-in">
-              <T id="signIn">Sign in</T>
-            </Link>
+            <Link to="/sign-in">{__('Sign in')}</Link>
           </Form>
         </Card>
       </div>
@@ -79,7 +66,7 @@ class ForgotPassword extends BaseForm {
 
 ForgotPassword.propTypes = propTypes;
 ForgotPassword.contextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 const ForgotPasswordForm = Form.create()(ForgotPassword);

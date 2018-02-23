@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Form, Input, Button, Row, Col } from 'antd';
-import { T } from 'modules/common/components';
-import { defineMessages } from 'react-intl';
 
 const FormItem = Form.Item;
 
@@ -11,29 +9,6 @@ const propTypes = {
   currentUser: PropTypes.object,
   mainAction: PropTypes.func
 };
-
-const messages = defineMessages({
-  currentPassword: {
-    id: 'currentPassword',
-    defaultMessage: 'Current Password'
-  },
-  placeholderCurrentPassword: {
-    id: 'placeholderCurrentPassword',
-    defaultMessage: 'Please input your current password!'
-  },
-  newPassword: {
-    id: 'newPassword',
-    defaultMessage: 'New password'
-  },
-  confirmNewPassword: {
-    id: 'confirmNewPassword',
-    defaultMessage: 'Confirm New Password'
-  },
-  inconsistentPassword: {
-    id: 'inconsistentPassword',
-    defaultMessage: 'Two passwords that you enter is inconsistent!'
-  }
-});
 
 class ChangePassword extends React.Component {
   constructor(props) {
@@ -70,11 +45,10 @@ class ChangePassword extends React.Component {
 
   checkPassword(rule, value, callback) {
     const form = this.props.form;
-    const { formatMessage } = this.context;
-    const { inconsistentPassword } = messages;
+    const { __ } = this.context;
 
     if (value && value !== form.getFieldValue('newPassword')) {
-      callback(formatMessage(inconsistentPassword));
+      callback(__('Two passwords that you enter is inconsistent!'));
     } else {
       callback();
     }
@@ -90,33 +64,25 @@ class ChangePassword extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { formatMessage } = this.context;
-    const {
-      currentPassword,
-      placeholderCurrentPassword,
-      newPassword,
-      confirmNewPassword
-    } = messages;
+    const { __ } = this.context;
 
     return (
       <Card>
-        <h2 style={{ marginBottom: 40 }}>
-          <T id="changePassword">Change Password</T>
-        </h2>
+        <h2 style={{ marginBottom: 40 }}>{__('Change Password')}</h2>
         <Row>
           <Col span={12} offset={2}>
             <Form className="user-register-form" onSubmit={this.handleSubmit}>
-              <FormItem label={formatMessage(currentPassword)}>
+              <FormItem label={__('Current Password')}>
                 {getFieldDecorator('currentPassword', {
                   rules: [
                     {
                       required: true,
-                      message: formatMessage(placeholderCurrentPassword)
+                      message: __('Please input your current Password!')
                     }
                   ]
                 })(<Input type="password" />)}
               </FormItem>
-              <FormItem label={formatMessage(newPassword)}>
+              <FormItem label={__('New password')}>
                 {getFieldDecorator('newPassword', {
                   rules: [
                     {
@@ -125,7 +91,7 @@ class ChangePassword extends React.Component {
                   ]
                 })(<Input type="password" />)}
               </FormItem>
-              <FormItem label={formatMessage(confirmNewPassword)}>
+              <FormItem label={__('Confirm New Password')}>
                 {getFieldDecorator('newPasswordConfirmation', {
                   rules: [
                     {
@@ -140,7 +106,7 @@ class ChangePassword extends React.Component {
                   htmlType="submit"
                   style={{ float: 'right' }}
                 >
-                  <T id="btnSave">Save</T>
+                  {__('Save')}
                 </Button>
               </FormItem>
             </Form>
@@ -153,7 +119,7 @@ class ChangePassword extends React.Component {
 
 ChangePassword.propTypes = propTypes;
 ChangePassword.contextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 export default Form.create()(ChangePassword);

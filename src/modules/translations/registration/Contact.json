@@ -1,8 +1,11 @@
 {
-  "businessContact": "Ажлын шугамаар холбоо барих гол хүн",
-  "name": "Нэр",
-  "jobTitle": "Албан тушаал",
-  "phone": "Утас",
-  "phone2": "Утас 2",
-  "copyFromCompany": "Компанийн Мэдээллээс Хуулах"
+  "Contact details": "Холбоо барих мэдээлэл",
+  "14. Primary business contact": "14. Ажлын шугамаар холбоо барих гол хүн",
+  "Full name": "Бүтэн нэр",
+  "Job title": "Албан тушаал",
+  "Phone": "Утас",
+  "Phone 2": "Утас 2",
+  "Copy from Company Information": "Компанийн Мэдээллээс Хуулах",
+  "E-mail": "И-мэйл",
+  "First name + Last name": "Овог нэр"
 }

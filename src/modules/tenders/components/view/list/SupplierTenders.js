@@ -6,36 +6,19 @@ import { Divider, Popconfirm } from 'antd';
 import { dateTimeFormat } from 'modules/common/constants';
 import moment from 'moment';
 import Tenders from './Tenders';
-import { T } from 'modules/common/components';
-import { defineMessages } from 'react-intl';
-
-const messages = defineMessages({
-  tenderFile: {
-    id: 'tenderFile',
-    defaultMessage: 'File'
-  },
-  tenderAction: {
-    id: 'tenderAction',
-    defaultMessage: 'Action'
-  },
-  tenderStatus: {
-    id: 'tenderStatus',
-    defaultMessage: 'Status'
-  }
-});
 
 class SupplierTenders extends Tenders {
   columns() {
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
     const renderIcon = this.renderIcon;
     return [
       {
-        title: formatMessage(messages.tenderStatus),
+        title: __('Status'),
         filters: [
           {
             text: (
               <span>
-                {renderIcon('open')} <T id="statusOpen">Open</T>
+                {renderIcon('open')} {__('Open')}
               </span>
             ),
             value: 'open'
@@ -43,7 +26,7 @@ class SupplierTenders extends Tenders {
           {
             text: (
               <span>
-                {renderIcon('closed')} <T id="statusClosed">Closed</T>
+                {renderIcon('closed')} {__('Closed')}
               </span>
             ),
             value: 'closed'
@@ -51,8 +34,7 @@ class SupplierTenders extends Tenders {
           {
             text: (
               <span>
-                {renderIcon('participated')}{' '}
-                <T id="statusParticipated">Participated</T>
+                {renderIcon('participated')} {__('Participated')}
               </span>
             ),
             value: 'participated'
@@ -64,12 +46,12 @@ class SupplierTenders extends Tenders {
       },
       ...this.commonColumns(),
       {
-        title: formatMessage(messages.tenderFile),
+        title: __('File'),
         render: (text, record) =>
           record.file ? this.renderFileDownload(record.file.url) : '-'
       },
       {
-        title: formatMessage(messages.tenderAction),
+        title: __('Action'),
         fixed: 'right',
         width: 100,
         render: (text, record) => this.renderOperation(record)
@@ -91,9 +73,10 @@ class SupplierTenders extends Tenders {
   }
 
   renderFileDownload(url) {
+    const { __ } = this.context;
     return (
       <a href={url} target="_blank">
-        <T id="view">View</T>
+        {__('View')}
       </a>
     );
   }
@@ -101,15 +84,14 @@ class SupplierTenders extends Tenders {
   renderOperation(record) {
     const { currentUser, notInterested } = this.props;
     const { status, _id, isParticipated, isSent } = record;
+    const { __ } = this.context;
 
     const canNotInterested = status === 'open' && !isSent && !isParticipated;
 
     if (currentUser) {
       return (
         <div style={{ width: '160px' }}>
-          <Link to={`/tender/submit/${_id}`}>
-            <T id="tenderOpen">Open</T>
-          </Link>
+          <Link to={`/tender/submit/${_id}`}>{__('Open')}</Link>
           {canNotInterested && [
             <Divider type="vertical" key={0} />,
             <Popconfirm
@@ -120,9 +102,7 @@ class SupplierTenders extends Tenders {
               cancelText="No"
               onConfirm={() => notInterested(_id)}
             >
-              <a>
-                <T id="notInterested">Not interested</T>
-              </a>
+              <a>{__('Not interested')}</a>
             </Popconfirm>
           ]}
         </div>
@@ -130,9 +110,7 @@ class SupplierTenders extends Tenders {
     } else {
       return (
         <div style={{ width: '160px' }}>
-          <Link to={`/sign-in?required`}>
-            <T id="more">More</T>
-          </Link>
+          <Link to={`/sign-in?required`}>{__('More')}</Link>
         </div>
       );
     }
@@ -149,7 +127,7 @@ SupplierTenders.propTypes = {
 };
 
 SupplierTenders.contextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 export default withRouter(SupplierTenders);

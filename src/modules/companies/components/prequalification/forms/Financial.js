@@ -5,47 +5,6 @@ import moment from 'moment';
 import { yearData, booleanData, currencyData } from '../constants';
 import { BaseForm, Uploader } from 'modules/common/components';
 import { dateFormat } from 'modules/common/constants';
-import { defineMessages } from 'react-intl';
-
-const messages = defineMessages({
-  placeholderDate: {
-    id: 'placeholderDate',
-    defaultMessage: 'Choose date'
-  },
-  placeholderYear: {
-    id: 'placeholderYear',
-    defaultMessage: 'Select an year'
-  },
-  annualTurnover: {
-    id: 'annualTurnover',
-    defaultMessage: 'Annual turnover'
-  },
-  preTaxProfit: {
-    id: 'preTaxProfit',
-    defaultMessage: 'Pre-tax profit'
-  },
-  totalAssets: {
-    id: 'totalAssets',
-    defaultMessage: 'Total assets'
-  },
-  totalCurrentAssets: {
-    id: 'totalCurrentAssets',
-    defaultMessage: 'Total current assets'
-  },
-  totalShareholderEquity: {
-    id: 'totalCurrentAssets',
-    defaultMessage: 'Total current assets'
-  },
-  financialRecord: {
-    id: 'financialRecord',
-    defaultMessage: 'Please provide financial records for your last 3 years'
-  },
-  financialRecordDesc: {
-    id: 'financialRecordDesc',
-    defaultMessage:
-      'The most recent years worth of accounts will always appear on top'
-  }
-});
 
 class PrequalificationForm extends BaseForm {
   constructor(props) {
@@ -126,7 +85,7 @@ class PrequalificationForm extends BaseForm {
 
   renderYearAmount(prefix, index) {
     const { canProvideAccountsInfo } = this.state;
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
     const data = this.props.data || {};
     const yearAmountArray = data[prefix] || [];
 
@@ -148,7 +107,7 @@ class PrequalificationForm extends BaseForm {
             hasFeedback: false,
             optional: !canProvideAccountsInfo,
             control: (
-              <Select placeholder={formatMessage(messages.placeholderYear)}>
+              <Select placeholder={__('Select an year')}>
                 {this.renderOptions(yearData)}
               </Select>
             )
@@ -169,13 +128,9 @@ class PrequalificationForm extends BaseForm {
   }
 
   renderYearAmountGroup(label, prefix) {
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
     return (
-      <Form.Item
-        className="multiple-wrapper"
-        required={true}
-        label={formatMessage(messages[prefix])}
-      >
+      <Form.Item className="multiple-wrapper" required={true} label={__(label)}>
         {this.renderYearAmount(prefix, 0)}
         {this.renderYearAmount(prefix, 1)}
         {this.renderYearAmount(prefix, 2)}
@@ -185,7 +140,7 @@ class PrequalificationForm extends BaseForm {
 
   renderDateFile(index) {
     const { canProvideAccountsInfo } = this.state;
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
     const data = this.props.data || {};
     const recordsInfo = data.recordsInfo || [];
 
@@ -206,10 +161,7 @@ class PrequalificationForm extends BaseForm {
             hasFeedback: false,
             optional: !canProvideAccountsInfo,
             control: (
-              <DatePicker
-                format={dateFormat}
-                placeholder={formatMessage(messages.placeholderDate)}
-              />
+              <DatePicker format={dateFormat} placeholder={__('Choose date')} />
             )
           })}
         </Col>
@@ -231,7 +183,7 @@ class PrequalificationForm extends BaseForm {
     const currencyOptions = this.renderOptions(currencyData);
     const booleanOptions = this.renderOptions(booleanData);
     const { canProvideAccountsInfo } = this.state;
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
 
     const reasonVisible =
       canProvideAccountsInfo !== undefined ? !canProvideAccountsInfo : false;
@@ -253,7 +205,7 @@ class PrequalificationForm extends BaseForm {
               name: 'currency',
               optional: !canProvideAccountsInfo,
               control: (
-                <Select placeholder="Select a currency">
+                <Select placeholder={__('Select a currency')}>
                   {currencyOptions}
                 </Select>
               )
@@ -273,8 +225,12 @@ class PrequalificationForm extends BaseForm {
 
             <Form.Item
               className="multiple-wrapper"
-              label={formatMessage(messages.financialRecord)}
-              extra={formatMessage(messages.financialRecordDesc)}
+              label={__(
+                'Please provide financial records for your last 3 years'
+              )}
+              extra={__(
+                'The most recent years worth of accounts will always appear on top'
+              )}
             >
               {this.renderDateFile(0)}
               {this.renderDateFile(1)}
@@ -312,7 +268,7 @@ class PrequalificationForm extends BaseForm {
 }
 
 PrequalificationForm.contextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 export default Form.create()(PrequalificationForm);

@@ -2,58 +2,38 @@ import React from 'react';
 import { Breadcrumb, Icon } from 'antd';
 import { PropTypes } from 'prop-types';
 import { T } from 'modules/common/components';
-import { intlShape, injectIntl, defineMessages } from 'react-intl';
-
-const messages = defineMessages({
-  rfqandeoi: {
-    id: 'b_rfq-and-eoi',
-    defaultMessage: 'RFQ and EOI'
-  },
-  tender: {
-    id: 'b_tender',
-    defaultMessage: 'Tenders and EOI'
-  },
-  prequalification: {
-    id: 'b_prequalification',
-    defaultMessage: 'Prequalification'
-  },
-  profile: {
-    id: 'b_profile',
-    defaultMessage: 'My Profile'
-  },
-  registration: {
-    id: 'b_registration',
-    defaultMessage: 'Registration'
-  },
-  qualification: {
-    id: 'b_qualification',
-    defaultMessage: 'Qualification/audit'
-  },
-  changePassword: {
-    id: 'b_changePassword',
-    defaultMessage: 'Change Password'
-  },
-  capacityBuilding: {
-    id: 'b_capacity-building',
-    defaultMessage: 'Capacity Building'
-  }
-});
+import { intlShape, injectIntl } from 'react-intl';
 
 const BreadcrumbItem = Breadcrumb.Item;
 
 const Breadcrumbs = location => {
   const { formatMessage } = location.intl;
   const routes = {
-    'rfq-and-eoi': formatMessage(messages.rfqandeoi),
+    'rfq-and-eoi': formatMessage({
+      id: 'RFQ and EOI',
+      defaultMessage: 'RFQ and EOI'
+    }),
     dashboard: 'Dashboard',
     companies: 'Suppliers',
     rfq: 'RFQ Responses',
     eoi: 'EOI Responses',
-    tender: formatMessage(messages.tender),
+    tender: formatMessage({
+      id: 'Tenders and EOI',
+      defaultMessage: 'Tenders and EOI'
+    }),
     publish: 'Publish',
-    prequalification: formatMessage(messages.prequalification),
-    registration: formatMessage(messages.registration),
-    'capacity-building': formatMessage(messages.capacityBuilding),
+    prequalification: formatMessage({
+      id: 'Prequalification',
+      defaultMessage: 'Prequalification'
+    }),
+    registration: formatMessage({
+      id: 'Registration',
+      defaultMessage: 'Registration'
+    }),
+    'capacity-building': formatMessage({
+      id: 'Capacity Building',
+      defaultMessage: 'Capacity Building'
+    }),
     'prequalification-status': 'Pre-qualification status',
     audit: 'Supplier qualification',
     validation: 'Validation',
@@ -64,17 +44,27 @@ const Breadcrumbs = location => {
     blocking: 'Blocking',
     reports: 'Reports & Improvement plans',
     'user-list': 'Manage Users',
-    'my-profile': formatMessage(messages.profile),
-    'change-password': formatMessage(messages.changePassword),
+    'my-profile': formatMessage({
+      id: 'My Profile',
+      defaultMessage: 'My Profile'
+    }),
+    'change-password': formatMessage({
+      id: 'Change Password',
+      defaultMessage: 'Change Password'
+    }),
     templates: 'Templates',
     'manage-expiry-dates': 'Manage Expiry Dates',
-    qualification: formatMessage(messages.qualification),
+    qualification: formatMessage({
+      id: 'Qualification/audit',
+      defaultMessage: 'Qualification/audit'
+    }),
     settings: 'Settings',
     'responses-physical': 'Physical audit responses'
   };
   const breadcrumbItems = [
     <BreadcrumbItem key={0}>
-      <Icon type="home" /> <T id="home">Home</T>
+      <Icon type="home" />
+      <T id="Home">Home</T>
     </BreadcrumbItem>
   ];
 

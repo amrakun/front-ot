@@ -2,45 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Form, Input, Icon, Card, Button, Alert } from 'antd';
-import { BaseForm, Field, T } from 'modules/common/components';
+import { BaseForm, Field } from 'modules/common/components';
 import { noLabelLayout } from 'modules/common/constants';
-import { defineMessages } from 'react-intl';
 
 const propTypes = {
   submit: PropTypes.func.isRequired,
   form: PropTypes.object
 };
-
-const messages = defineMessages({
-  enterNewPassword: {
-    id: 'enterNewPassword',
-    defaultMessage: 'Please enter your new password'
-  },
-  password: {
-    id: 'password',
-    defaultMessage: 'Password'
-  },
-  confirmPassword: {
-    id: 'confirmPassword',
-    defaultMessage: 'Confirm Password'
-  },
-  confirmSuccess: {
-    id: 'confirmSuccess',
-    defaultMessage: 'Email confirmed succesfully! Please enter your password.'
-  },
-  inconsistentPassword: {
-    id: 'inconsistentPassword',
-    defaultMessage: 'Two passwords that you enter is inconsistent!'
-  },
-  resetPassword: {
-    id: 'resetPassword',
-    defaultMessage: 'Reset password'
-  },
-  register: {
-    id: 'register',
-    defaultMessage: 'Register'
-  }
-});
 
 class PasswordSubmission extends BaseForm {
   constructor(props) {
@@ -62,10 +30,9 @@ class PasswordSubmission extends BaseForm {
 
   checkPassword(rule, value, callback) {
     const form = this.props.form;
-    const { formatMessage } = this.context;
-    const { inconsistentPassword } = messages;
+    const { __ } = this.context;
     if (value && value !== form.getFieldValue('password')) {
-      callback(formatMessage(inconsistentPassword));
+      callback(__('Two passwords that you enter is inconsistent!'));
     } else {
       callback();
     }
@@ -81,26 +48,23 @@ class PasswordSubmission extends BaseForm {
 
   render() {
     const { reset } = this.props;
-    const { formatMessage } = this.context;
-    const {
-      enterNewPassword,
-      confirmSuccess,
-      confirmPassword,
-      password,
-      resetPassword,
-      register
-    } = messages;
+    const { __ } = this.context;
 
     return (
       <div className="center-content">
         <Card className="login-card" bordered={false}>
           {reset ? (
             <Alert
-              description={formatMessage(enterNewPassword)}
+              description={__('Please enter your new password')}
               type="success"
             />
           ) : (
-            <Alert description={formatMessage(confirmSuccess)} type="success" />
+            <Alert
+              description={__(
+                'Email confirmed successfully! Please enter your password'
+              )}
+              type="success"
+            />
           )}
 
           <Form onSubmit={this.handleSubmit} className="margin">
@@ -112,7 +76,7 @@ class PasswordSubmission extends BaseForm {
                 <Input
                   type="password"
                   prefix={<Icon type="lock" />}
-                  placeholder={formatMessage(password)}
+                  placeholder={__('Password')}
                 />
               }
             />
@@ -124,7 +88,7 @@ class PasswordSubmission extends BaseForm {
                 <Input
                   type="password"
                   prefix={<Icon type="lock" />}
-                  placeholder={formatMessage(confirmPassword)}
+                  placeholder={__('Confirm Password')}
                 />
               }
             />
@@ -134,14 +98,12 @@ class PasswordSubmission extends BaseForm {
               size="large"
               style={{ marginBottom: '5px' }}
             >
-              {reset ? formatMessage(resetPassword) : formatMessage(register)}
+              {reset ? __('Reset password') : __('Register')}
             </Button>
             {!reset && (
               <div>
-                <T id="alreadyRegistered">Already registered?</T>{' '}
-                <Link to="/sign-in">
-                  <T id="signIn">Sign in</T>
-                </Link>
+                {__('Already registered?')}{' '}
+                <Link to="/sign-in">{__('Sign in')}</Link>
               </div>
             )}
           </Form>
@@ -153,7 +115,7 @@ class PasswordSubmission extends BaseForm {
 
 PasswordSubmission.propTypes = propTypes;
 PasswordSubmission.contextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 const PasswordSubmissionForm = Form.create()(PasswordSubmission);

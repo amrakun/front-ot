@@ -1,11 +1,11 @@
 {
-  "qualificationTitle": "Гэрээ хэрэгжүүлэх чадварын үнэлгээ хийх хүсэлт",
+  "Qualification/audit requests":
+    "Гэрээ хэрэгжүүлэх чадварын үнэлгээ хийх хүсэлт",
   "status": "Төлөв",
-  "publishDate": "Нийтлэгдсэн Огноо",
-  "expirationDate": "Дуусах Огноо",
-  "auditorReport": "Аудитын Тайлан",
-  "auditorImprovement": "Сайжруулах Төлөвлөгөө",
-  "qualificationMore": "Бусад",
-  "difotScore": "DIFOT оноо",
-  "alreadySent": "Илгээсэн"
+  "Publish date": "Нийтлэгдсэн Огноо",
+  "Expiration date": "Дуусах Огноо",
+  "Auditor report": "Аудитын Тайлан",
+  "Auditor improvement plan": "Сайжруулах Төлөвлөгөө",
+  "More": "Дэлгэрэнгүй",
+  "DIFOT Score": "DIFOT оноо"
 }

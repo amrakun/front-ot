@@ -6,43 +6,6 @@ import { labels, statusIcons } from '../../../constants';
 import { dateTimeFormat } from 'modules/common/constants';
 import queryString from 'query-string';
 import moment from 'moment';
-import { T } from 'modules/common/components';
-import { defineMessages } from 'react-intl';
-
-const messages = defineMessages({
-  tenderNumber: {
-    id: 'tenderNumber',
-    defaultMessage: 'Tender Number'
-  },
-  tenderName: {
-    id: 'tenderName',
-    defaultMessage: 'Tender Name'
-  },
-  tenderPublishDate: {
-    id: 'tenderPublishDate',
-    defaultMessage: 'Publish Date'
-  },
-  tenderCloseDate: {
-    id: 'tenderCloseDate',
-    defaultMessage: 'Close Date'
-  },
-  tenderPlaceholderName: {
-    id: 'tenderPlaceholderName',
-    defaultMessage: 'Tender name'
-  },
-  tenderSelectDate: {
-    id: 'tenderSelectDate',
-    defaultMessage: 'Select year and month'
-  },
-  eoi: {
-    id: 'eoi',
-    defaultMessage: 'Expression Of Interest'
-  },
-  rfq: {
-    id: 'rfq',
-    defaultMessage: 'Request For Quotation'
-  }
-});
 
 const MonthPicker = DatePicker.MonthPicker;
 
@@ -116,22 +79,22 @@ class Tenders extends React.Component {
   }
 
   commonColumns() {
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
     return [
       {
-        title: formatMessage(messages.tenderNumber),
+        title: __('Tender Number'),
         dataIndex: 'number'
       },
       {
-        title: formatMessage(messages.tenderName),
+        title: __('Tender Name'),
         dataIndex: 'name'
       },
       {
-        title: formatMessage(messages.tenderPublishDate),
+        title: __('Publish Date'),
         render: (text, record) => this.renderDate(record.publishDate)
       },
       {
-        title: formatMessage(messages.tenderCloseDate),
+        title: __('Close Date'),
         render: (text, record) => this.renderDate(record.closeDate)
       }
     ];
@@ -151,9 +114,10 @@ class Tenders extends React.Component {
   }
 
   renderFileDownload(url) {
+    const { __ } = this.context;
     return (
       <a href={url} target="_blank">
-        <T id="view">View</T>
+        {__('View')}
       </a>
     );
   }
@@ -167,16 +131,16 @@ class Tenders extends React.Component {
 
     const highlightedId = location.state && location.state.newTenderId;
 
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
 
     return (
       <Card style={{ marginBottom: '16px' }} title={labels[type]}>
         <div className="table-operations">
-          <Search placeholder={formatMessage(messages.tenderPlaceholderName)} />
+          <Search placeholder={__('Tender Name')} />
 
           <MonthPicker
             style={{ float: 'left', marginLeft: '16px' }}
-            placeholder={formatMessage(messages.tenderSelectDate)}
+            placeholder={__('Select year and month')}
             onChange={this.handleMonthChange}
             allowClear
             disabled
@@ -212,7 +176,7 @@ Tenders.propTypes = {
 };
 
 Tenders.contextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 export default Tenders;

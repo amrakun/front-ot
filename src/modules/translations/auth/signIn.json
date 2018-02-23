@@ -1,14 +1,13 @@
 {
-  "signInEmail": "И-мэйл",
-  "password": "Нууц үг",
-  "rememberMe": "Намайг сана",
-  "forgotPassword": "Нууц үг мартсан",
-  "signIn": "Нэвтрэх",
-  "registerNow": "бүртгүүлэх",
-  "or": "Эсвэл",
-  "confirmationEmail":
+  "Remember me": "Намайг сана",
+  "Forgot password": "Нууц үг мартсан",
+  "register now!": "бүртгүүлэх",
+  "Or": "Эсвэл",
+  "Confirmation link has been sent to your email!":
     "Баталгаажуулах холбоос таны и-мэйл хаяг руу илгээгдлээ.",
-  "activatedEmail":
+  "Account activated successfully! Please login usign your provided details":
     "Хаяг амжилттай идэвхжлээ! Өөрийн мэдээллээ ашиглан нэвтэрч орно уу",
-  "signInToContinue": "Үргэлжлүүлэн нэвтэрч орно уу"
+  "Please sign in to continue!": "Үргэлжлүүлэн нэвтэрч орно уу",
+  "Please enter your password!": "Нууц үгээ оруулна уу!",
+  "Please enter your email!": "И-мэйл хаягаа оруулна уу!"
 }

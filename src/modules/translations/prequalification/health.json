@@ -1,44 +1,45 @@
 {
-  "doesHaveHealthSafety":
+  "Does the organisation have a Health Safety & Environment management system?":
     "Танай компани үйл ажиллагаа явуулдаг улс орнууддаа байгаль орчны хуулийг зөрчсөний улмаас ял шийтгэл шүүхээр хүлээж байсан уу?",
-  "areHSEResourcesClearlyIdentified":
+  "Are HSE resources, roles, responsibilities and authority levels clearly identified and defined within your Organisation?":
     "Танай байгууллагад ЭМААБО-ы нөөц, албан тушаал, үүрэг хариуцлага, эрх мэдлийн түвшинг тодорхой зааж, зааглаж өгсөн үү?",
-  "areHSEResourcesClearlyIdentifiedDesc":
+  "Staff includes all employees and sub-contractors.":
     "Ажилтан гэдэгт бүх үндсэн болон гэрээт ажилтнууд багтана. ",
-  "doesHaveDocumentedProcessToEnsure":
+  "Does your company have a documented  process to ensure all staff receive health and safety training and induction?":
     "Танай компанид бүх ажилтнаа эрүүл мэнд, аюулгүй ажиллагааны сургалт, зааварчилгаанд зайлшгүй хамруулахыг заасан баримт бичиг байдаг уу?",
-  "areEmployeesUnderYourControl":
+  "Are all employees under your control required to utilise appropriate Personal Protective Equipment (PPE) at all times?":
     "Танай компани бүх ажилтандаа зохих хувийн хамгаалах хэрэгслийг (ХХХ) байнга ашиглаж/хэрэглэж байх шаардлагыг тавьдаг уу?",
-  "doesHaveDocumentForRiskAssesment":
+  "Does the company have a documented process or guidelines for risk assessment (including CRM)?":
     "Танай компанид эрсдэлийн үнэлгээний (Ноцтой эрсдэлийн удирдлага орно)  талаар боловсруулсан баримт бичиг, удирдамж байдаг уу?",
-  "doesHaveDocumentForIncidentInvestigation":
+  "Does the company have a documented process for incident investigation?":
     "Танай компанид осол зөрчлийн судалгаа шинжилгээ хийх талаар боловсруулсан баримт бичиг, удирдамж байдаг уу?",
-  "doesHaveDocumentedFitness":
+  "Does your company have a documented Fitness for Work (FFW) policy?":
     "Танай компанид ажилтны ажиллах чадамжийн асуудлыг зохицуулах бичиж баримтжуулсан бодлого, журам байдаг уу?",
-  "doesHaveDocumentedFitnessDesc":
+  "The Fitness for Work (FFW) policy should incorporate alcohol, fatigue and general fitness for work.":
     "Ажилд тохирох эрүүл мэндийн байдал гэдэгт согтууруулах ундаа, ядаргаа сульдал, ажил гүйцэтгэхэд бие махбодийн бэлэн байдал зэрэг багтна. ",
-  "isWillingToComply":
+  "Is your company willing to comply with Oyu Tolgoi/RT HSE management system?":
     "Танай компаний \"Оюу толгой\", эсхүл Рио Тинтогийн ЭМААБО-ы удирдлагын тогтолцоог  дагаж мөрдөх үү?",
-  "hasIndustrialAccident":
+  "Has there been any industrial accident in the last 5 financial years?":
     "Санхүүгийн сүүлийн таван жилд ямар нэг үйлдвэрийн осол гарсан уу? ",
-  "tmha":
+  "Provide total man hours accrued for the previous five calendar years for all onsite personnel on Contractor managed projects":
     "Гүйцэтгэгчийн удирдсан төслүүдэд уурхайн цогцолборт ажилласан бүх ажиллах хүчний хуанлийн сүүлийн таван жилд хуримтлагдсан нийт хүн/цаг-ийн хэмжээг өгнө үү! ",
-  "ltifr":
+  "Provide Lost Time Injury Frequency Rate (LTIFR) as defined for the previous five calendar years for all onsite personnel on Contractor managed projects. Additionally, provide as an attachment, the guidance note (or similar) for how the Tenderer defines a Lost Time Injury.":
     "Гүйцэтгэгчийн удирдсан төслүүдэд уурхайн цогцолборт ажилласан бүх ажиллах хүчний хуанлийн сүүлийн таван жил дэх ажлын чадвар түр алдсан бэртэл, гэмтэлийн давтамжийн тоог гарган өгнө үү!  Түүнээс гадна, тус тендерт оролцогч хөдөлмөрийн чадвар түр алдсан бэртэл гэмтэл хэрхэн тодорхойлдогийг харуулсан удирдамжийг (эсвэл адил төстэй баримт бичиг) хавсаргана уу!",
-  "injuryExplanation":
+  "Provide a summary explaining the  fatality or injury event(s) that contributed to the above:":
     "Дээрхэд тоологдсон хүний амь эрсэдсэн, гэмтэж бэртсэн тохиолдлуудын товч тайлбарыг гарган өгнө үү! ",
-  "seniorManagement":
+  "Provide details of how senior management demonstrates its commitment to the Oyu Tolgoi HSE policy and management system. ":
     "Танай компанийн дээд удирдлага \"Оюу толгой\"-н ЭМААБО-ы бодлого, удирдлагын тогтолцооний дагуу ажиллахын төлөө хэрхэн хичээл зүтгэл гаргадаг талаар дэлгэрэнгүй бичнэ үү!",
-  "isWillingToCommit":
+  "Is your company willing to commit itself, its employees and all Sub-contractors, to implementing and being held to KPIs relating to critical risk management (CRM)?":
     "Ноцтой эрсдэлийн удирдлагатай хамааралтай гүйцэтгэлийн үндсэн үзүүлэлтийг хэрэгжүүлж, байнга мөрдөх үүрэг амлалтыг танай компани өөртөө, ажилтнууддаа, мөн гэрээт ажилтнууддаа хүлээлгэж байна уу? ",
-  "isPerparedToCompile":
+  "Is your company prepared to compile weekly and monthly safety statistics for the work performed on Site?":
     "Танай компани уурхайн цогцолборт гүйцэтгэдэг ажлын аюулгүй ажиллагааны мэдээллийг долоо хоног, сар бүр нэгтгэн гаргаж өгөхөд бэлэн үү?  ",
-  "hasWorkedOnWorldBank":
+  "Has your company previously worked on World Bank or International Finance Corporation projects? If so provide details.":
     "Танай компани өмнө нь Дэлхийн банк, эсхүл Олон улсын санхүүгийн корпорацийн төсөл дээр ажиллаж байсан уу? Хэрэв тийм бол энэ талаарх дэлгэрэнгүй мэдээллийг өгнө үү!  ",
-  "hasWorkedOnLargeProjects":
+  "Has your company previously worked on large scale mining construction projects? If so provide details.":
     "Танай компани өмнө нь томоохон цар хүрээтэй уул уурхайн бүтээн байгуулалтын төсөлд оролцон ажиллаж байсан уу? Хэрэв тийм бол, энэ талаарх дэлгэрэнгүй мэдээллийг өгнө үү!",
-  "doesHaveLicense":
+  "Does the organisation have valid industry certifications and/or licenses if required by the type of services provided?":
     "Хүргэх үйлчилгээний төрлөөс хамаарч шаардагдах, тухайн салбарын хүчин төгөлдөр гэрчилгээ, эрхийн бичиг зэрэг баримт бичиг танай байгууллагад байгаа юу? ",
   "hasWorkedOnWorldBankDesc":
-    "Урьдчилсан үнэлгээний асуулгад оруулахгүй/Өндөр эрсдэлтэй төсөлд хамаарах"
+    "Урьдчилсан үнэлгээний асуулгад оруулахгүй/Өндөр эрсдэлтэй төсөлд хамаарах",
+  "Provide details": "Дэлгэрэнгүй мэдээлэл"
 }
