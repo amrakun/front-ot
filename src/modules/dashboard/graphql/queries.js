@@ -134,6 +134,30 @@ const tendersAverageDuration = `
   }
 `;
 
+const logsActivitiesPerBuyerExport = `
+  query logsActivitiesPerBuyerExport(
+    $startDate: Date!,
+    $endDate: Date!
+  ){
+    logsActivitiesPerBuyerExport(
+      startDate: $startDate,
+      endDate: $endDate,
+    )
+  }
+`;
+
+const logsUserLastLoginsExport = `
+  query logsUserLastLoginsExport(
+    $startDate: Date!,
+    $endDate: Date!
+  ){
+    logsUserLastLoginsExport(
+      startDate: $startDate,
+      endDate: $endDate,
+    )
+  }
+`;
+
 export default {
   companyByUser,
   companiesCountByTierType,
@@ -144,5 +168,7 @@ export default {
   reportsSuppliersExport,
   reportsTendersExport,
   reportsAuditExport,
-  reportsShareholder
+  reportsShareholder,
+  logsActivitiesPerBuyerExport,
+  logsUserLastLoginsExport
 };
