@@ -61,8 +61,8 @@ const DashboardContainer = props => {
     eoiData: renderData(tenderCountByStatusEoi.tenderCountByStatus),
     rfqData: renderData(tenderCountByStatusRfq.tenderCountByStatus),
 
-    eoiTotalCount: tendersTotalCountEoi.tendersTotalCount,
-    rfqTotalCount: tendersTotalCountRfq.tendersTotalCount,
+    eoiTotalCount: tendersTotalCountEoi.tendersTotalCountReport,
+    rfqTotalCount: tendersTotalCountRfq.tendersTotalCountReport,
 
     eoiAverageDuration: tendersAverageDurationEoi.tendersAverageDuration,
     rfqAverageDuration: tendersAverageDurationRfq.tendersAverageDuration
@@ -142,7 +142,7 @@ export default compose(
     })
   }),
 
-  graphql(gql(queries.tendersTotalCount), {
+  graphql(gql(queries.tendersTotalCountReport), {
     name: 'tendersTotalCountRfq',
     options: ({ queryParams }) => ({
       variables: {
@@ -157,7 +157,7 @@ export default compose(
     })
   }),
 
-  graphql(gql(queries.tendersTotalCount), {
+  graphql(gql(queries.tendersTotalCountReport), {
     name: 'tendersTotalCountEoi',
     options: ({ queryParams }) => ({
       variables: {
