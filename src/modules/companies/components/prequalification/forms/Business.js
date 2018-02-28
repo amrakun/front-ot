@@ -279,7 +279,7 @@ class PrequalificationForm extends PreqForm {
             description: descriptions.isSubContractor,
             name: 'isSubContractor',
             control: (
-              <Select placeholder="Please select an option">
+              <Select placeholder={__('Please select an option')}>
                 {booleanOptions}
               </Select>
             )

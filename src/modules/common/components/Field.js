@@ -42,7 +42,6 @@ export default class Field extends React.Component {
 
   render() {
     const {
-      label,
       description = '',
       name,
       control,
@@ -57,6 +56,7 @@ export default class Field extends React.Component {
       help,
       validator
     } = this.props;
+    let { label } = this.props;
 
     const { form, __ } = this.context;
     const { getFieldDecorator } = form;
@@ -91,13 +91,16 @@ export default class Field extends React.Component {
       args.valuePropName = 'defaultFileList';
     }
 
-    const _label = label ? __(label) : label;
+    if (label && typeof label !== 'object') {
+      label = __(label);
+    }
+
     const _description = description ? __(description) : description;
 
     return (
       <Form.Item
         {...layout}
-        label={_label}
+        label={label}
         extra={_description}
         style={isVisible ? {} : { display: 'none' }}
         hasFeedback={hasFeedback}

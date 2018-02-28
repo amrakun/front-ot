@@ -108,7 +108,7 @@ class PrequalificationForm extends BaseForm {
             optional: !canProvideAccountsInfo,
             control: (
               <Select placeholder={__('Select an year')}>
-                {this.renderOptions(yearData)}
+                {this.renderOptions(yearData, true)}
               </Select>
             )
           })}
@@ -251,13 +251,17 @@ class PrequalificationForm extends BaseForm {
           {this.renderField({
             label: 'Is your company up to date with Social Security payments?',
             name: 'isUpToDateSSP',
-            control: <Select placeholder="Select one">{booleanOptions}</Select>
+            control: (
+              <Select placeholder={__('Select one')}>{booleanOptions}</Select>
+            )
           })}
 
           {this.renderField({
             label: 'Is your company up to date with Corporation Tax payments?',
             name: 'isUpToDateCTP',
-            control: <Select placeholder="Select one">{booleanOptions}</Select>
+            control: (
+              <Select placeholder={__('Select one')}>{booleanOptions}</Select>
+            )
           })}
         </Card>
 

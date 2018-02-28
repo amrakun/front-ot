@@ -18,7 +18,8 @@
   "Aimag you are registered in": "Таны бүртгүүлсэн аймайг",
   "Soum you are registered in": "Таны бүртгүүлсэн сум",
   "6. Company registration number": "6. Компанийн бүртгэлийн дугаар",
-  "Are you Chinese state owned entity?": "Хятад",
+  "Are you Chinese state owned entity?":
+    "Танайх Хятадын төрийн өмчит аж ахуйн нэгж үү?",
   "isSubContractor":
     "Танай компани, толгой компани эсвэл танай туслан гүйцэтгэгч олон улсын худалдааны хориг үйлчилж буй дараах улсуудын аль нэгэнд бүртгэлтэй юу?",
   "isSubContractorDesc":

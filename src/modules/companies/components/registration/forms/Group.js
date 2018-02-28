@@ -155,14 +155,13 @@ class RegistrationForm extends BaseForm {
 
   renderDistrubutionRightInput(index) {
     const initValues = this.props.data.authorizedDistributions || {};
-    const { __ } = this.context;
     const _index = index > 0 ? index : '';
 
     return (
       <Field
         name={`distributionRightName${index}`}
         initialValue={initValues[index]}
-        label={__('Distribution right name ' + _index)}
+        label={'Distribution right name ' + _index}
         hasFeedback={false}
         optional={true}
         control={<Input />}

@@ -4,8 +4,8 @@ import { Select, Icon, Button } from 'antd';
 import Field from './Field';
 
 export default class BaseForm extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.save = this.save.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -86,10 +86,12 @@ export default class BaseForm extends React.Component {
     return value;
   }
 
-  renderOptions(options) {
+  renderOptions(options, noTranslate) {
+    const { __ } = this.context;
+
     return options.map((option, i) => (
       <Select.Option key={i} value={option.value}>
-        {option.text}
+        {noTranslate ? option.text : __(option.text)}
       </Select.Option>
     ));
   }
