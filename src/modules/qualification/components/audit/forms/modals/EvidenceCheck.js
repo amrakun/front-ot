@@ -4,7 +4,7 @@ import ModalWrapper from './ModalWrapper';
 import { evidenceCheckList } from '../constants';
 import PropTypes from 'prop-types';
 
-const EvidenceCheck = props => {
+const EvidenceCheck = ({ props }, { __ }) => {
   let evidenceChecks = [];
 
   function handleEvidenceChange(values) {
@@ -18,6 +18,10 @@ const EvidenceCheck = props => {
     props.save(doc);
   }
 
+  const evidenceCheckListModified = evidenceCheckList.map((item, i) => {
+    return __(item.label);
+  });
+
   return (
     <ModalWrapper {...props} handleOk={handleOk}>
       <div>
@@ -29,7 +33,7 @@ const EvidenceCheck = props => {
           evidence.
         </strong>
         <Checkbox.Group
-          options={evidenceCheckList}
+          options={evidenceCheckListModified}
           className="horizontal margin evidence-check"
           onChange={handleEvidenceChange}
         />
@@ -40,6 +44,10 @@ const EvidenceCheck = props => {
 
 EvidenceCheck.propTypes = {
   save: PropTypes.func
+};
+
+EvidenceCheck.contextTypes = {
+  __: PropTypes.func
 };
 
 export default EvidenceCheck;
