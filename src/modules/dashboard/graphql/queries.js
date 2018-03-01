@@ -134,24 +134,84 @@ const tendersAverageDuration = `
   }
 `;
 
-const logsActivitiesPerBuyerExport = `
-  query logsActivitiesPerBuyerExport(
+const logsSupplierLoginsExport = `
+  query logsSupplierLoginsExport(
     $startDate: Date!,
     $endDate: Date!
   ){
-    logsActivitiesPerBuyerExport(
+    logsSupplierLoginsExport(
       startDate: $startDate,
       endDate: $endDate,
     )
   }
 `;
 
-const logsUserLastLoginsExport = `
-  query logsUserLastLoginsExport(
+const logsBuyerLoginsExport = `
+  query logsBuyerLoginsExport(
     $startDate: Date!,
     $endDate: Date!
   ){
-    logsUserLastLoginsExport(
+    logsBuyerLoginsExport(
+      startDate: $startDate,
+      endDate: $endDate,
+    )
+  }
+`;
+
+const logsSupplierLoginsByEoiSubmissionsExport = `
+  query logsSupplierLoginsByEoiSubmissionsExport(
+    $startDate: Date!,
+    $endDate: Date!
+  ){
+    logsSupplierLoginsByEoiSubmissionsExport(
+      startDate: $startDate,
+      endDate: $endDate,
+    )
+  }
+`;
+
+const logsSupplierLoginsByRfqSubmissionsExport = `
+  query logsSupplierLoginsByRfqSubmissionsExport(
+    $startDate: Date!,
+    $endDate: Date!
+  ){
+    logsSupplierLoginsByRfqSubmissionsExport(
+      startDate: $startDate,
+      endDate: $endDate,
+    )
+  }
+`;
+
+const logsSearchesPerBuyerExport = `
+  query logsSearchesPerBuyerExport(
+    $startDate: Date!,
+    $endDate: Date!
+  ){
+    logsSearchesPerBuyerExport(
+      startDate: $startDate,
+      endDate: $endDate,
+    )
+  }
+`;
+
+const logsEoiCreatedAndSentExport = `
+  query logsEoiCreatedAndSentExport(
+    $startDate: Date!,
+    $endDate: Date!
+  ){
+    logsEoiCreatedAndSentExport(
+      startDate: $startDate,
+      endDate: $endDate,
+    )
+  }
+`;
+
+const logsRfqCreatedAndSentExport = `
+  query logsRfqCreatedAndSentExport(
+    $startDate: Date!,
+    $endDate: Date!
+  ){
+    logsRfqCreatedAndSentExport(
       startDate: $startDate,
       endDate: $endDate,
     )
@@ -169,6 +229,12 @@ export default {
   reportsTendersExport,
   reportsAuditExport,
   reportsShareholder,
-  logsActivitiesPerBuyerExport,
-  logsUserLastLoginsExport
+
+  logsSupplierLoginsExport,
+  logsBuyerLoginsExport,
+  logsSupplierLoginsByEoiSubmissionsExport,
+  logsSupplierLoginsByRfqSubmissionsExport,
+  logsSearchesPerBuyerExport,
+  logsEoiCreatedAndSentExport,
+  logsRfqCreatedAndSentExport
 };

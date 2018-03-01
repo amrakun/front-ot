@@ -11,24 +11,74 @@ class Dashboard extends React.Component {
     super(props);
 
     this.onInputChange = this.onInputChange.bind(this);
-    this.exportActivitiesPerBuyer = this.exportActivitiesPerBuyer.bind(this);
-    this.exportUserLastLogins = this.exportUserLastLogins.bind(this);
+    this.logsSupplierLoginsExport = this.logsSupplierLoginsExport.bind(this);
+    this.logsBuyerLoginsExport = this.logsBuyerLoginsExport.bind(this);
+    this.logsSupplierLoginsByEoiSubmissionsExport = this.logsSupplierLoginsByEoiSubmissionsExport.bind(
+      this
+    );
+    this.logsSupplierLoginsByRfqSubmissionsExport = this.logsSupplierLoginsByRfqSubmissionsExport.bind(
+      this
+    );
+    this.logsSearchesPerBuyerExport = this.logsSearchesPerBuyerExport.bind(
+      this
+    );
+    this.logsEoiCreatedAndSentExport = this.logsEoiCreatedAndSentExport.bind(
+      this
+    );
+    this.logsRfqCreatedAndSentExport = this.logsRfqCreatedAndSentExport.bind(
+      this
+    );
   }
 
   onInputChange(name, value) {
     this[name] = value;
   }
 
-  exportActivitiesPerBuyer() {
+  logsSupplierLoginsExport() {
     this.props.export(
-      'logsActivitiesPerBuyerExport',
+      'logsSupplierLoginsExport',
       this.getDateInterval(this.intervalDate)
     );
   }
 
-  exportUserLastLogins() {
+  logsBuyerLoginsExport() {
     this.props.export(
-      'logsUserLastLoginsExport',
+      'logsBuyerLoginsExport',
+      this.getDateInterval(this.intervalDate)
+    );
+  }
+
+  logsSupplierLoginsByEoiSubmissionsExport() {
+    this.props.export(
+      'logsSupplierLoginsByEoiSubmissionsExport',
+      this.getDateInterval(this.intervalDate)
+    );
+  }
+
+  logsSupplierLoginsByRfqSubmissionsExport() {
+    this.props.export(
+      'logsSupplierLoginsByRfqSubmissionsExport',
+      this.getDateInterval(this.intervalDate)
+    );
+  }
+
+  logsSearchesPerBuyerExport() {
+    this.props.export(
+      'logsSearchesPerBuyerExport',
+      this.getDateInterval(this.intervalDate)
+    );
+  }
+
+  logsEoiCreatedAndSentExport() {
+    this.props.export(
+      'logsEoiCreatedAndSentExport',
+      this.getDateInterval(this.intervalDate)
+    );
+  }
+
+  logsRfqCreatedAndSentExport() {
+    this.props.export(
+      'logsRfqCreatedAndSentExport',
       this.getDateInterval(this.intervalDate)
     );
   }
@@ -59,7 +109,7 @@ class Dashboard extends React.Component {
     return (
       <Row gutter={24}>
         <Col {...span}>
-          <Card title="Activities per buyer">
+          <Card title="Supplier logins">
             <p>
               <label>Filter interval dates: </label>
               <RangePicker
@@ -68,12 +118,12 @@ class Dashboard extends React.Component {
               />
             </p>
 
-            {this.renderButton(this.exportActivitiesPerBuyer)}
+            {this.renderButton(this.logsSupplierLoginsExport)}
           </Card>
         </Col>
 
         <Col {...span}>
-          <Card title="User last logins">
+          <Card title="Buyer logins">
             <p>
               <label>Filter interval dates: </label>
               <RangePicker
@@ -82,7 +132,77 @@ class Dashboard extends React.Component {
               />
             </p>
 
-            {this.renderButton(this.exportUserLastLogins)}
+            {this.renderButton(this.logsBuyerLoginsExport)}
+          </Card>
+        </Col>
+
+        <Col {...span}>
+          <Card title="Supplier logins by EOI submissions">
+            <p>
+              <label>Filter interval dates: </label>
+              <RangePicker
+                onChange={value => this.onInputChange('intervalDate', value)}
+                format={dateFormat}
+              />
+            </p>
+
+            {this.renderButton(this.logsSupplierLoginsByEoiSubmissionsExport)}
+          </Card>
+        </Col>
+
+        <Col {...span}>
+          <Card title="Supplier logins by RFQ submissions">
+            <p>
+              <label>Filter interval dates: </label>
+              <RangePicker
+                onChange={value => this.onInputChange('intervalDate', value)}
+                format={dateFormat}
+              />
+            </p>
+
+            {this.renderButton(this.logsSupplierLoginsByRfqSubmissionsExport)}
+          </Card>
+        </Col>
+
+        <Col {...span}>
+          <Card title="Searches per buyer">
+            <p>
+              <label>Filter interval dates: </label>
+              <RangePicker
+                onChange={value => this.onInputChange('intervalDate', value)}
+                format={dateFormat}
+              />
+            </p>
+
+            {this.renderButton(this.logsSearchesPerBuyerExport)}
+          </Card>
+        </Col>
+
+        <Col {...span}>
+          <Card title="EOI created and sent">
+            <p>
+              <label>Filter interval dates: </label>
+              <RangePicker
+                onChange={value => this.onInputChange('intervalDate', value)}
+                format={dateFormat}
+              />
+            </p>
+
+            {this.renderButton(this.logsEoiCreatedAndSentExport)}
+          </Card>
+        </Col>
+
+        <Col {...span}>
+          <Card title="RFQ created and sent">
+            <p>
+              <label>Filter interval dates: </label>
+              <RangePicker
+                onChange={value => this.onInputChange('intervalDate', value)}
+                format={dateFormat}
+              />
+            </p>
+
+            {this.renderButton(this.logsRfqCreatedAndSentExport)}
           </Card>
         </Col>
       </Row>
