@@ -17,12 +17,10 @@ class SupplierSearcher extends React.Component {
 
     this.state = {
       visible: false,
-      searchValue: '',
       selectedValues: []
     };
 
     this.showPopup = this.showPopup.bind(this);
-    this.onSearch = this.onSearch.bind(this);
     this.onCancel = this.onCancel.bind(this);
     this.onOk = this.onOk.bind(this);
     this.onSelect = this.onSelect.bind(this);
@@ -39,10 +37,6 @@ class SupplierSearcher extends React.Component {
     this.setState({ visible: false, selectedValues: [] });
   }
 
-  onSearch(value) {
-    this.setState({ searchValue: value });
-  }
-
   onCancel() {
     this.setState({ visible: false, selectedValues: [] });
   }
@@ -57,22 +51,20 @@ class SupplierSearcher extends React.Component {
     }
   }
 
-  renderPopup(onlySelect) {
-    const { searchValue, visible, selectedValues } = this.state;
-    const { value } = this.props;
+  renderPopup() {
+    const { visible, selectedValues } = this.state;
+    const { value, onChange, slogan, mode } = this.props;
 
-    if (visible || onlySelect) {
+    if (visible || mode === 'select') {
       return (
         <Popup
-          searchValue={searchValue}
           visible={visible}
-          onSearch={this.onSearch}
           onOk={this.onOk}
           onCancel={this.onCancel}
           onSelect={this.onSelect}
-          onChange={this.props.onChange}
-          slogan={this.props.slogan}
-          mode={this.props.mode}
+          onChange={onChange}
+          slogan={slogan}
+          mode={mode}
           value={value || selectedValues}
         />
       );
@@ -84,7 +76,7 @@ class SupplierSearcher extends React.Component {
 
     return mode === 'select' ? (
       //render only supplier select without modal
-      this.renderPopup(true)
+      this.renderPopup()
     ) : (
       <span>
         <Tag onClick={this.showPopup} className="dashed-button">

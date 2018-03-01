@@ -57,7 +57,6 @@ class Blocking extends Common {
   }
 
   onAddSuppliers(values) {
-    console.log(values);
     const suppliers = [...this.state.suppliers];
     const supplierIds = this.getSupplierIds();
 
