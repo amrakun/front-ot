@@ -133,8 +133,10 @@ class Tenders extends React.Component {
 
     const { __ } = this.context;
 
+    const label = labels[type] ? __(labels[type]) : labels[type];
+
     return (
-      <Card style={{ marginBottom: '16px' }} title={labels[type]}>
+      <Card style={{ marginBottom: '16px' }} title={label}>
         <div className="table-operations">
           <Search placeholder={__('Tender Name')} />
 

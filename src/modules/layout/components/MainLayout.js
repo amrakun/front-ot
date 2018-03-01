@@ -37,6 +37,7 @@ const mergedMessages = {
   ...messages.CapacityBuilding,
   ...messages.Common,
   ...messages.Options,
+  ...messages.Feedback,
   ...messages.Qualification,
   ...messages.SupplierQualification,
   ...messages.RfqAndEoi.Tenders,

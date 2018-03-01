@@ -1,10 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Checkbox } from 'antd';
 import ModalWrapper from './ModalWrapper';
 import { evidenceCheckList } from '../constants';
-import PropTypes from 'prop-types';
-
-const EvidenceCheck = ({ props }, { __ }) => {
+const EvidenceCheck = (props, { __ }) => {
   let evidenceChecks = [];
 
   function handleEvidenceChange(values) {
@@ -18,18 +17,24 @@ const EvidenceCheck = ({ props }, { __ }) => {
     props.save(doc);
   }
 
+  const evidenceCheckListModified = evidenceCheckList.map((item, i) => {
+    return __(item.label);
+  });
+
   return (
     <ModalWrapper {...props} handleOk={handleOk}>
       <div>
         <strong>
-          Please send your evidences for each question to &#34;
+          {__('Please send your evidences for each question to "')}
           <a href="mailto:narantsatsral@ot.mn" target="_top">
             narantsatsral@ot.mn
-          </a>&#34; , and tick the boxes to confirm that you have sent each
-          evidence.
+          </a>
+          {__(
+            '", and tick the boxes to confirm that you have sent each evidence.'
+          )}
         </strong>
         <Checkbox.Group
-          options={evidenceCheckList}
+          options={evidenceCheckListModified}
           className="horizontal margin evidence-check"
           onChange={handleEvidenceChange}
         />

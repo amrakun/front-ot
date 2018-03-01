@@ -5,6 +5,7 @@ import * as Auth from './auth';
 import { CapacityBuilding } from './capacity-building';
 import { Qualification, SupplierQualification } from './qualification';
 import { Common, Options } from './common';
+import { Feedback } from './feedback';
 
 export {
   Auth,
@@ -15,5 +16,6 @@ export {
   Qualification,
   SupplierQualification,
   Common,
-  Options
+  Options,
+  Feedback
 };

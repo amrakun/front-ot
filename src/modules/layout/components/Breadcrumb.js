@@ -42,7 +42,10 @@ const Breadcrumbs = location => {
     validation: 'Validation',
     difot: 'DIFOT',
     'due-diligence': 'Due diligence',
-    feedback: 'Feedback',
+    feedback: formatMessage({
+      id: 'Feedback',
+      defaultMessage: 'Feedback'
+    }),
     responses: 'Responses',
     blocking: 'Blocking',
     reports: 'Reports & Improvement plans',

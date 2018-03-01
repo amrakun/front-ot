@@ -51,5 +51,8 @@
   "Supplier name": "Нийлүүлэгч нэр",
   "Audit result": "Аудит үр дүн",
   "Select one": "Сонгох",
-  "Please select an option": "Жагсаалтаас сонгох"
+  "Please select an option": "Жагсаалтаас сонгох",
+  "Already sent": "Илгээгдсэн",
+  "Your registration has been successfully completed.  Oyu Tolgoi procurement team now has started the pre-qualification process on your company. A gap report will be sent once the pre-qualification process complete.":
+    "Та  мэдээллээ амжилттай бүртгэлээ. Оюу Толгой худалдан авалтыэ баг таны гэрээ хэрэгжүүлэх чадварын урьдчилсан үнэлгээний мэдээллийг шалгах болно. Үүний дараа таны бүртгүүлсэн мэдээлэл шаардлага хангасан эсэх мэдээллийг хүргүүлэх болно."
 }

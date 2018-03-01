@@ -95,6 +95,7 @@ class Dashboard extends React.Component {
                   <span>
                     {__('You have success feedback request. Click')}
                     <Link to={`feedback/submit/${lastFeedback._id}`}>
+                      {' '}
                       {__('here')}
                     </Link>{' '}
                     {__('to submit your response.')}

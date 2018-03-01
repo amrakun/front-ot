@@ -10,7 +10,7 @@ class ModalWrapper extends React.Component {
 
     return (
       <Modal
-        title={title}
+        title={__(title)}
         visible={visible}
         onCancel={hideModal}
         width="80vh"
