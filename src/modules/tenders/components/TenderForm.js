@@ -141,9 +141,8 @@ class TenderForm extends BaseForm {
 
   renderProductColumn(props) {
     const { name, title, type, isSupplier } = props;
-    const { location } = this.props;
 
-    const hidden = isSupplier && location.pathname.includes('eoi');
+    const hidden = isSupplier;
 
     if (hidden) return null;
 
