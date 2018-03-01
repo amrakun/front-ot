@@ -29,6 +29,23 @@ class SupplierProfile extends AuditFormsBase {
     );
   }
 
+  renderSupplierField(name) {
+    const { response, data } = this.props;
+
+    let initialValue = '';
+
+    if (data && data.length > 0) initialValue = data[name];
+
+    if (response) initialValue = response[name];
+
+    return this.renderField({
+      name,
+      initialValue,
+      label: this.renderTooltipLabel(name),
+      control: <TextArea disabled={response !== undefined} />
+    });
+  }
+
   render() {
     const { response } = this.props;
     const supplierInfo = this.props.supplierInfo || {};
@@ -47,7 +64,7 @@ class SupplierProfile extends AuditFormsBase {
     );
 
     let sqaResult = '-';
-    if (isQualified !== null) sqaResult = isQualified ? 'Aidited' : 'No';
+    if (isQualified !== null) sqaResult = isQualified ? 'Audited' : 'No';
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -65,24 +82,9 @@ class SupplierProfile extends AuditFormsBase {
           </List>
         </Card>
         <Card title="Oyu Tolgoi LLC (OT) related performance rations">
-          {this.renderField({
-            label: this.renderTooltipLabel('otExperience'),
-            name: 'otExperience',
-            initialValue: response && response.otExperience,
-            control: <TextArea disabled={response !== undefined} />
-          })}
-          {this.renderField({
-            label: this.renderTooltipLabel('sotri'),
-            name: 'sotri',
-            initialValue: response && response.sotri,
-            control: <TextArea disabled={response !== undefined} />
-          })}
-          {this.renderField({
-            label: this.renderTooltipLabel('sotie'),
-            name: 'sotie',
-            initialValue: response && response.sotie,
-            control: <TextArea disabled={response !== undefined} />
-          })}
+          {this.renderSupplierField('otExperience')}
+          {this.renderSupplierField('sotri')}
+          {this.renderSupplierField('sotie')}
         </Card>
         {!response ? this.renderSubmit() : ''}
       </Form>

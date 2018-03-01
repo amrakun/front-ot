@@ -115,7 +115,7 @@ export const aimagData = [
   { text: 'Khovd', value: 'Khovd' },
   { text: 'Khovsgol', value: 'Khovsgol' },
   { text: 'Orkhon', value: 'Orkhon' },
-  { text: 'Omnogovi', value: 'Omnogovi' },
+  { text: 'Umnugobi', value: 'Umnugobi' },
   { text: 'Ovorkhangai', value: 'Ovorkhangai' },
   { text: 'Selenge', value: 'Selenge' },
   { text: 'Sükhbaatar', value: 'Sükhbaatar' },

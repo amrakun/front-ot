@@ -66,7 +66,8 @@ export default compose(
           publishDate: params.from,
           closeDate: params.to,
           supplierSearch: params.search,
-          isFileGenerated: true
+          isFileGenerated: true,
+          status: params.status
         },
         notifyOnNetworkStatusChange: true
       };

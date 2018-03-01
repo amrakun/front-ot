@@ -328,6 +328,7 @@ const auditResponses = `
 const AuditBasicInfo = `
   sotri
   sotie
+  otExperience
 `;
 
 const AnswerRecommendation = `
