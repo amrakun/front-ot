@@ -7,8 +7,8 @@ import MainInfo from './forms/MainInfo';
 const { Column } = Table;
 
 class TenderForm extends BaseForm {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     const { data } = props;
     const response = props.response || {};
