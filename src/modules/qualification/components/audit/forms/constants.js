@@ -42,48 +42,62 @@ const labels = {
   doesHaveHealthSafety: {
     title:
       '1. Does the organisation have a Health Safety & Environment management system? ',
-    desc: (
-      <div>
-        <ol>
-          <li>
-            The system is maintained and is reviewed by management on a regular
-            basis (min Annual review)
-          </li>
-          <li>The CEO has signed off the system.</li>
-        </ol>
-        <strong>The System should include policies committing to:</strong>
-        <ol>
-          <li>
-            The prevention of incidents that may lead to: injuries, illnesses,
-            pollution, property and environmental damage, security threats,
-            process losses and product quality impacts.
-          </li>
-          <li>
-            Compliance with legal and other requirements, including
-            international accords, standards and external requirements to which
-            Rio Tinto (Oyu Tolgoi) subscribes.
-          </li>
-          <li>The effective management of HSE[Q] risks.</li>
-          <li>Adopting continual improvement practices in key HSE[Q] areas</li>
-          <li>
-            Establishing measurable objectives and targets for improving HSE[Q]
-            performance.
-          </li>
-          <li>
-            Providing the resources needed to meet performance objectives.
-          </li>
-          <li>
-            Encouraging employee consultation, participation and promoting
-            employee awareness of HSE[Q] threats and opportunities.
-          </li>
-          <li>Meeting customer requirements.</li>
-          <li>
-            Respecting the standards of conduct defined in the The way we work
-            (copy to be provided to contractor).
-          </li>
-        </ol>
-      </div>
-    )
+    desc(__) {
+      return (
+        <div>
+          <ol>
+            <li>
+              {__(
+                'The system is maintained and is reviewed by management on a regular basis (min Annual review)'
+              )}
+            </li>
+            <li>{__('The CEO has signed off the system.')}</li>
+          </ol>
+          <strong>
+            {__('The System should include policies committing to:')}
+          </strong>
+          <ol>
+            <li>
+              {__(
+                'The prevention of incidents that may lead to: injuries, illnesses, pollution, property and environmental damage, security threats, process losses and product quality impacts.'
+              )}
+            </li>
+            <li>
+              {__(
+                'Compliance with legal and other requirements, including international accords, standards and external requirements to which Rio Tinto (Oyu Tolgoi) subscribes.'
+              )}
+            </li>
+            <li>{__('The effective management of HSE[Q] risks.')}</li>
+            <li>
+              {__(
+                'Adopting continual improvement practices in key HSE[Q] areas'
+              )}
+            </li>
+            <li>
+              {__(
+                'Establishing measurable objectives and targets for improving HSE[Q] performance.'
+              )}
+            </li>
+            <li>
+              {__(
+                'Providing the resources needed to meet performance objectives.'
+              )}
+            </li>
+            <li>
+              {__(
+                'Encouraging employee consultation, participation and promoting employee awareness of HSE[Q] threats and opportunities.'
+              )}
+            </li>
+            <li>{__('Meeting customer requirements.')}</li>
+            <li>
+              {__(
+                'Respecting the standards of conduct defined in the The way we work (copy to be provided to contractor).'
+              )}
+            </li>
+          </ol>
+        </div>
+      );
+    }
   },
   doesHaveDocumentedPolicy: {
     title:
@@ -98,37 +112,38 @@ const labels = {
   },
   doWorkProceduresConform: {
     title: `4. Do the organisations work procedures conform to local statutory, legislative or regulatory codes and standards?`,
-    desc: (
-      <div>
-        <p>
-          Legislative and regulatory codes are product/region specific. if yes,
-          confirm through the provision of examples of procedures pertaining to
-          the work you are completing. Preferably commentary to outline how they
-          ensure they are compliant with regulatory codes and standards.
-        </p>
-        <strong>
-          Within Rio Tinto (Oyu Tolgoi) where the supplier performs hazardous
-          work they are to provide a copy of their procedures. Hazardous work
-          includes but is not limited to:
-        </strong>
-        <ol>
-          <li>Works at height</li>
-          <li>Works in confined spaces</li>
-          <li>Works on electrical installations</li>
-          <li>Works in explosion risks areas</li>
-          <li>Hot Work</li>
-          <li>Work with or testing high pressure equipment</li>
-          <li>Work with cranes and lifting equipment</li>
-          <li>Excavations/Penetrations</li>
-          <li>Works conducted by isolated workers</li>
-          <li>Mobile equipment's/fixed plant</li>
-          <li>Vehicle and driving</li>
-          <li>Work with hazardous substances/materials</li>
-          <li>Working over or near water</li>
-          <li>Working near a roadway or railway.</li>
-        </ol>
-      </div>
-    )
+    desc(__) {
+      return (
+        <div>
+          <p>
+            {__(
+              ' Legislative and regulatory codes are product/region specific. if yes, confirm through the provision of examples of procedures pertaining to the work you are completing. Preferably commentary to outline how they ensure they are compliant with regulatory codes and standards.'
+            )}
+          </p>
+          <strong>
+            {__(
+              ' Within Rio Tinto (Oyu Tolgoi) where the supplier performs hazardous work they are to provide a copy of their procedures. Hazardous work includes but is not limited to:'
+            )}
+          </strong>
+          <ol>
+            <li>{__('Works at height')}</li>
+            <li>{__('Works in confined spaces')}</li>
+            <li>{__('Works on electrical installations')}</li>
+            <li>{__('Works in explosion risks areas')}</li>
+            <li>{__('Hot Work')}</li>
+            <li>{__('Work with or testing high pressure equipment')}</li>
+            <li>{__('Work with cranes and lifting equipment')}</li>
+            <li>{__('Excavations/Penetrations')}</li>
+            <li>{__('Works conducted by isolated workers')}</li>
+            <li>{__("Mobile equipment's fixed plant")}</li>
+            <li>{__('Vehicle and driving')}</li>
+            <li>{__('Work with hazardous substances/materials')}</li>
+            <li>{__('Working over or near water')}</li>
+            <li>{__('Working near a roadway or railway.')}</li>
+          </ol>
+        </div>
+      );
+    }
   },
   doesHaveFormalProcess: {
     title:
@@ -147,35 +162,36 @@ const labels = {
   doesHaveFormalProcessForReporting: {
     title:
       '8. Does the organisation have a formal process for reporting and investigating incidents (including near-hits/near misses)?',
-    desc: (
-      <div>
-        <p>
-          The companies formal process includes identification of the root
-          cause.
-        </p>
-        <p>
-          The company monitors key operational parameters in order to anticipate
-          and reduce the likelihood and consequences of HSE incidents and upsets
-          - including (Material accidents; near-misses, incidents)
-        </p>
-        <p>The company has a procedure for accident analysis.</p>
-        <p>
-          The company has a process for reporting and following up on the
-          corrective actions and reporting on level of closure for each
-          corrective action identified.
-        </p>
-        <strong>
-          Definition of Incident (As per HSE Glossary on HSEC Community Page):
-        </strong>
-        An incident is a single event or continuous / repetitive series of
-        events that results in, or could have resulted in, one or more of the
-        following impacts: >an occupational injury or illness; >damage to
-        physical assets (eg plant & equipment), the environment, process,
-        product or reputation; >disruption to a community; >exposure to legal
-        liability; >security threat. It is evaluated both by its Acutal
-        Consequence, and its Maximum Reasonable Outcome for each area of impact.
-      </div>
-    )
+    desc(__) {
+      return (
+        <div>
+          <p>
+            {__(
+              'The companies formal process includes identification of the root cause.'
+            )}
+          </p>
+          <p>
+            {__(
+              'The company monitors key operational parameters in order to anticipate and reduce the likelihood and consequences of HSE incidents and upsets - including (Material accidents; near-misses, incidents)'
+            )}
+          </p>
+          <p>{__('The company has a procedure for accident analysis.')}</p>
+          <p>
+            {__(
+              'The company has a process for reporting and following up on the corrective actions and reporting on level of closure for each corrective action identified.'
+            )}
+          </p>
+          <strong>
+            {__(
+              'Definition of Incident (As per HSE Glossary on HSEC Community Page):'
+            )}
+          </strong>
+          {__(
+            'An incident is a single event or continuous / repetitive series of events that results in, or could have resulted in, one or more of the following impacts: >an occupational injury or illness; >damage to physical assets (eg plant & equipment), the environment, process, product or reputation; >disruption to a community; >exposure to legal liability; >security threat. It is evaluated both by its Acutal Consequence, and its Maximum Reasonable Outcome for each area of impact.'
+          )}
+        </div>
+      );
+    }
   },
   doesHaveLiabilityInsurance: {
     title:
@@ -367,24 +383,29 @@ const labels = {
   },
   haveBeenSubjectToInvestigation: {
     title: `4. Has your company been subject to any external investigation regarding corruption within the past five years?`,
-    desc: (
-      <div>
-        <strong>"Corruption" includes but is not limited to: </strong>
-        <ul>
-          <li>Bribery of government officials</li>
-          <li>Bribery of public officials, Commercial bribery</li>
-          <li>Falsification of the company books and records</li>
-          <li>Dealing with government intermediaries</li>
-          <li>Improper charitable contributions</li>
-          <li>Improper travels and hospitality</li>
-          <li>Improper gifts and entertainment</li>
-          <li>Improper resolution of conflicts of interest</li>
-          <li>Involvement in any Cartel or other form of market rigging</li>
-        </ul>
-        If yes, please provide details, including key dates and outcomes in
-        supplier comment column.
-      </div>
-    )
+    desc(__) {
+      return (
+        <div>
+          <strong>{__('"Corruption" includes but is not limited to: ')}</strong>
+          <ul>
+            <li>{__('Bribery of government officials')}</li>
+            <li>{__('Bribery of public officials, Commercial bribery')}</li>
+            <li>{__('Falsification of the company books and records')}</li>
+            <li>{__('Dealing with government intermediaries')}</li>
+            <li>{__('Improper charitable contributions')}</li>
+            <li>{__('Improper travels and hospitality')}</li>
+            <li>{__('Improper gifts and entertainment')}</li>
+            <li>{__('Improper resolution of conflicts of interest')}</li>
+            <li>
+              {__('Involvement in any Cartel or other form of market rigging')}
+            </li>
+          </ul>
+          {__(
+            'If yes, please provide details, including key dates and outcomes in supplier comment column.'
+          )}
+        </div>
+      );
+    }
   },
   doesHaveDocumentedPolicyToCorruption: {
     title: `5. Does your company have a documented policy in place to prevent corruption? `,

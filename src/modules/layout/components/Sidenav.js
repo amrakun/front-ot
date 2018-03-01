@@ -96,9 +96,7 @@ function renderMenu(sideMenu, translate) {
         </SubMenu>
       );
     } else {
-      let title =
-        (translate && <T id={'b_' + m.url.replace('/', '')}>{m.title}</T>) ||
-        m.title;
+      let title = (translate && <T id={m.title}>{m.title}</T>) || m.title;
 
       menuItems.push(
         <MenuItem key={m.url} disabled={m.disabled} className={m.className}>

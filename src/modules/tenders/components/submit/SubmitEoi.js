@@ -6,15 +6,8 @@ import TenderForm from '../TenderForm';
 import EoiTable from '../EoiTable';
 import { agreementOptions } from './constants';
 import MainInfo from './MainInfo';
-import { defineMessages } from 'react-intl';
 
 const CheckboxGroup = Checkbox.Group;
-const messages = defineMessages({
-  applyToEoi: {
-    id: 'applyToEoi',
-    defaultMessage: 'Apply to EOI'
-  }
-});
 
 class SubmitTender extends TenderForm {
   constructor(props) {
@@ -95,13 +88,13 @@ class SubmitTender extends TenderForm {
       renderProductColumn: this.renderProductColumn
     };
 
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
 
     return (
       <Form layout="inline" onSubmit={this.handleSubmit}>
         <MainInfo {...data} />
 
-        <Card title={formatMessage(messages.applyToEoi)} className="margin">
+        <Card title={__('Apply to EOI')} className="margin">
           <EoiTable {...formProps} />
 
           <br />
@@ -109,10 +102,10 @@ class SubmitTender extends TenderForm {
           {!data.isSent && (
             <div className="margin">
               <Button style={{ marginRight: '16px' }} onClick={this.saveDraft}>
-                Save as draft
+                {__('Save as draft')}
               </Button>
               <Button type="primary" htmlType="submit">
-                Save & submit
+                {__('Save & submit')}
               </Button>
             </div>
           )}
@@ -127,7 +120,7 @@ class SubmitTender extends TenderForm {
                 size="large"
                 onClick={this.toggleAgreementModal}
               >
-                Return
+                {__('Return')}
               </Button>,
               <Button
                 key="submit"
@@ -137,7 +130,7 @@ class SubmitTender extends TenderForm {
                 loading={submitLoading}
                 onClick={this.handleOk}
               >
-                Submit
+                {__('Submit')}
               </Button>
             ]}
           >
@@ -162,7 +155,7 @@ SubmitTender.propTypes = {
 };
 
 SubmitTender.contextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 const form = Form.create()(SubmitTender);

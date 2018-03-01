@@ -1,12 +1,10 @@
 {
-  "shareholder": "Хувьцаа эзэмшигч",
-  "shareholderInfo": "Компанийн хувь нийлүүлэгчийн мэдээлэл",
-  "nameCommon": "Нэр",
-  "jobTitleCommon": "Албан тушаал",
-  "percentageCommon": "Эзэмшлийн хувь %",
-  "attachments": "20. Гол хувьцаа эзэмшигчдийн талаар мэдээлэл өгнө үү",
-  "upload": "Байршуулахын тулд дарна уу",
-  "help": "Тусламж",
-  "attachmentsDesc":
-    "Та jpg,jpeg,png,rtf,pdf файлууд эсвэл энгийн Adobe PDF файлуудыг байрлуулж болно. Макро болон бусад төрлийн идэвхтэй код агуулах чадвартай файлуудыг хүлээж авахгүй. Файлын дээд хэмжээ 30 мегабайт."
+  "Shareholder": "Хувьцаа эзэмшигч",
+  "Company shareholder information": "Компанийн хувь нийлүүлэгчийн мэдээлэл",
+  "Share percentage %": "Эзэмшлийн хувь %",
+  "Name": "Нэр",
+  "You may upload jpg, jpeg, png, rtf, pdf files, or simple Adobe PDF files. Files that have the ability to contain macros or other types of active code are not acceptable. Maximum file size is 30mb.":
+    "Та jpg,jpeg,png,rtf,pdf файлууд эсвэл энгийн Adobe PDF файлуудыг байрлуулж болно. Макро болон бусад төрлийн идэвхтэй код агуулах чадвартай файлуудыг хүлээж авахгүй. Файлын дээд хэмжээ 30 мегабайт.",
+  "20. Please provide key shareholders information":
+    "20. Гол хувьцаа эзэмшигчдийн талаар мэдээлэл өгнө үү"
 }

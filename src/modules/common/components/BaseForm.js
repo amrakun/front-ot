@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Select, Icon, Button } from 'antd';
 import Field from './Field';
-import { T } from 'modules/common/components';
 
 export default class BaseForm extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.save = this.save.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -87,10 +86,12 @@ export default class BaseForm extends React.Component {
     return value;
   }
 
-  renderOptions(options) {
+  renderOptions(options, noTranslate) {
+    const { __ } = this.context;
+
     return options.map((option, i) => (
       <Select.Option key={i} value={option.value}>
-        {option.text}
+        {noTranslate ? option.text : __(option.text)}
       </Select.Option>
     ));
   }
@@ -109,6 +110,7 @@ export default class BaseForm extends React.Component {
   }
 
   renderSubmit(text = 'Save & continue', onClick = this.handleSubmit) {
+    const { __ } = this.context;
     return (
       <Button
         style={{ float: 'right', marginLeft: '8px' }}
@@ -116,17 +118,18 @@ export default class BaseForm extends React.Component {
         htmlType="submit"
         onClick={onClick}
       >
-        <T id="saveContinue">{text}</T>
+        {__(text)}
         <Icon type="right" />
       </Button>
     );
   }
 
   renderGoBack() {
+    const { __ } = this.context;
     return (
       <Button onClick={this.props.previousTab}>
         <Icon type="left" />
-        <T id="back">Back</T>
+        {__('Back')}
       </Button>
     );
   }
@@ -142,4 +145,8 @@ BaseForm.propTypes = {
   save: PropTypes.func,
   nextTab: PropTypes.func,
   previousTab: PropTypes.func
+};
+
+BaseForm.contextTypes = {
+  __: PropTypes.func
 };

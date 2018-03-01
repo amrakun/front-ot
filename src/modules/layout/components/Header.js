@@ -49,12 +49,12 @@ const HeaderBar = (props, context) => {
         >
           <Menu.Item key="profile">
             <Link to="/my-profile">
-              <T id="myProfile">My Profile</T>
+              <T id="My Profile">My Profile</T>
             </Link>
           </Menu.Item>
           <Menu.Item key="change-password">
             <Link to="/change-password">
-              <T id="changePassword">Change Password</T>
+              <T id="Change Password">Change Password</T>
             </Link>
           </Menu.Item>
           {!currentUser.isSupplier && (
@@ -64,14 +64,14 @@ const HeaderBar = (props, context) => {
           )}
           <Menu.Item key="logout">
             <a onClick={logout}>
-              <T id="signOut">Sign Out</T>
+              <T id="Sign out">Sign Out</T>
             </a>
           </Menu.Item>
         </SubMenu>
       ) : (
         <Menu.Item className="right">
           <Link to="/sign-in">
-            <T id="signIn">Sign In</T>
+            <T id="Sign in">Sign In</T>
           </Link>
         </Menu.Item>
       )}

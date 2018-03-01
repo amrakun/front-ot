@@ -1,22 +1,27 @@
 {
-  "financialInfo": "Санхүүгийн мэдээлэл",
-  "businessInfo": "Хүний нөөцийн удирдлага",
-  "environmentalInfo": "Байгаль орчны удирдлага",
-  "currency": "Мөнгөний тэмдэгт",
-  "reasonToCannotNotProvide": "Хэрэв үгүй бол, шалтгаанаа тайлбарлана уу!",
-  "healthInfo": "Эрүүл мэнд, аюулгүй ажиллагааны удирдлагын систем",
-  "canProvideAccountsInfo":
+  "Financial information": "Санхүүгийн мэдээлэл",
+  "Business integrity & human resource": "Хүний нөөцийн удирдлага",
+  "Environmental management": "Байгаль орчны удирдлага",
+  "Currency": "Мөнгөний тэмдэгт",
+  "If not, explain the reasons": "Хэрэв үгүй бол, шалтгаанаа тайлбарлана уу!",
+  "Health & safety management system":
+    "Эрүүл мэнд, аюулгүй ажиллагааны удирдлагын систем",
+  "Can you provide accounts for the last 3 financial years?":
     "Та сүүлийн гурван жилийн санхүүгийн тайлангаа өгөх боломжтой юу?",
-  "isUpToDateSSP":
+  "Is your company up to date with Social Security payments?":
     "Танай компани нийгмийн даатгалын шимтгэл төлөлтийн  төлбөрийн талаарх хамгийн сүүлийн үеийн мэдээллийг оруулсан уу? ",
-  "isUpToDateCTP":
+  "Is your company up to date with Corporation Tax payments?":
     "Танай компани аж ахуйн нэгжийн орлогын албан татвар төлөлтийн талаарх хамгийн сүүлийн үеийн мэдээллийг оруулсан уу? ",
-  "annualTurnover": "Жилийн эргэц эргэлт",
-  "preTaxProfit": "Татварын өмнөх ашиг",
-  "totalAssets": "Нийт хөрөнгө",
-  "totalCurrentAssets": "Нийт эргэлтийн хөрөнгө",
-  "totalShareholderEquity": "Хувьцаа эзэмшигчдийн нийт өмч",
-  "financialRecord":
+  "Annual turnover": "Жилийн эргэц эргэлт",
+  "Pre-tax profit": "Татварын өмнөх ашиг",
+  "Total assets": "Нийт хөрөнгө",
+  "Total current assets": "Нийт эргэлтийн хөрөнгө",
+  "Total shareholders equity ": "Хувьцаа эзэмшигчдийн нийт өмч",
+  "Please provide financial records for your last 3 years":
     "Сүүлийн гурван жилийнхээ санхүүгийн тайлан тооцоог өгнө үү!",
-  "financialRecordDesc": "Хамгийн сүүлийн жилийг ямагт хамгийн дээр харуулна."
+  "The most recent years worth of accounts will always appear on top":
+    "Хамгийн сүүлийн жилийг ямагт хамгийн дээр харуулна.",
+  "Select an year": "Жил сонгох",
+  "Select a currency": "Мөнгөн тэмдэгт сонгоно уу",
+  "Choose date": "Он сар сонгох"
 }

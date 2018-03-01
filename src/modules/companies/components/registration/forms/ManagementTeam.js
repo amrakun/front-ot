@@ -5,7 +5,6 @@ import { Form, Input, Card, Button, Icon } from 'antd';
 import Field from 'modules/common/components/Field';
 import { BaseForm } from 'modules/common/components';
 import { labels } from '../constants';
-import { defineMessages } from 'react-intl';
 
 const groups = [
   'managingDirector',
@@ -16,45 +15,6 @@ const groups = [
   'otherMember2',
   'otherMember3'
 ];
-
-const messages = defineMessages({
-  placeholderFullName: {
-    id: 'placeholderFullName',
-    defaultMessage: 'First name + Last name'
-  },
-  copyAbove: {
-    id: 'copyAbove',
-    defaultMessage: 'Copy above'
-  },
-  managingDirector: {
-    id: 'managingDirector',
-    defaultMessage: '15. Managing director'
-  },
-  executiveOfficer: {
-    id: 'executiveOfficer',
-    defaultMessage: '16. Executive officer'
-  },
-  salesDirector: {
-    id: 'salesDirector',
-    defaultMessage: '17. Sales director'
-  },
-  financialDirector: {
-    id: 'financialDirector',
-    defaultMessage: '18. Financial director'
-  },
-  otherMember1: {
-    id: 'otherMember1',
-    defaultMessage: '19. Other management team member'
-  },
-  otherMember2: {
-    id: 'otherMember2',
-    defaultMessage: '20. Other management team member 2'
-  },
-  otherMember3: {
-    id: 'otherMember3',
-    defaultMessage: '21. Other management team member 3'
-  }
-});
 
 class ManagementTeam extends BaseForm {
   constructor(props) {
@@ -99,16 +59,16 @@ class ManagementTeam extends BaseForm {
 
   renderItem(prefix, optional = false) {
     const data = this.props.data[prefix] || {};
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
 
     return (
       <Card
-        title={formatMessage(messages[prefix])}
+        title={__(labels[prefix])}
         extra={
           prefix !== 'managingDirector' ? (
             <Button onClick={() => this.copyAbove(prefix)}>
               <Icon type="copy" />
-              {formatMessage(messages.copyAbove)}
+              {__('Copy above')}
             </Button>
           ) : (
             ''
@@ -121,9 +81,7 @@ class ManagementTeam extends BaseForm {
           prefix={prefix}
           initialValue={data.name}
           optional={optional}
-          control={
-            <Input placeholder={formatMessage(messages.placeholderFullName)} />
-          }
+          control={<Input placeholder={__('First name + Last name')} />}
         />
 
         <Field
@@ -177,7 +135,7 @@ class ManagementTeam extends BaseForm {
 }
 
 ManagementTeam.contextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 const ManagementTeamForm = Form.create()(ManagementTeam);

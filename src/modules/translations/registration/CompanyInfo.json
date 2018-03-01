@@ -1,36 +1,40 @@
 {
-  "addressTitle": "2. Хаяг",
-  "basicInfo": "Компанийн мэдээлэл",
-  "basicInfo.title": "Компанийнхаа дэлгэрэнгүй мэдээллийг өгнө үү",
-  "address": "Хаяг",
-  "isRegisteredOnSup": "Та Оюу Толгой компанийн ханган нийлүүлэгч үү?",
-  "sapNumber": "SAP дугаар?",
-  "enName": "Компанийн нэр (Англи хэлээр)",
-  "address2": "Хаяг 2 / Сум",
-  "address3": "Хаяг 3",
-  "zipCode": "Шуудангийн код эсвэл Zip код",
-  "townOrCity": "Хот/Аймаг",
-  "province": "Муж/аймаг",
-  "country": "Улс",
-  "registeredInCountry": "Таны бүртгүүлсэн улс",
-  "registeredInAimag": "Таны бүртгүүлсэн аймайг",
-  "registeredInSum": "Таны бүртгүүлсэн сум",
-  "registrationNumber": "Компанийн бүртгэлийн дугаар",
-  "isChinese": "Хятад",
+  "2. Address": "2. Хаяг",
+  "Company information": "Компанийн мэдээлэл",
+  "1. Please provide us with your company details":
+    "1. Компанийнхаа дэлгэрэнгүй мэдээллийг өгнө үү",
+  "Address line": "Хаяг",
+  "Are you an existing supplier?":
+    "Та Оюу Толгой компанийн ханган нийлүүлэгч үү?",
+  "SAP number": "SAP дугаар?",
+  "Company name (in English)": "Компанийн нэр (Англи хэлээр)",
+  "Address line 2 / Soum": "Хаяг 2 / Сум",
+  "Address line 3": "Хаяг 3",
+  "Postcode or zipcode": "Шуудангийн код эсвэл Zip код",
+  "Town/City/Aimag": "Хот/Аймаг",
+  "Country/state/province": "Муж/аймаг",
+  "Country": "Улс",
+  "3. Country you are registered in": "3. Таны бүртгэлтэй улс",
+  "Aimag you are registered in": "Таны бүртгүүлсэн аймайг",
+  "Soum you are registered in": "Таны бүртгүүлсэн сум",
+  "6. Company registration number": "6. Компанийн бүртгэлийн дугаар",
+  "Are you Chinese state owned entity?":
+    "Танайх Хятадын төрийн өмчит аж ахуйн нэгж үү?",
   "isSubContractor":
     "Танай компани, толгой компани эсвэл танай туслан гүйцэтгэгч олон улсын худалдааны хориг үйлчилж буй дараах улсуудын аль нэгэнд бүртгэлтэй юу?",
   "isSubContractorDesc":
     "Беларус, Бурунди, Төв Африкийн Бүгд Найрамдах Улс, Куба, Бүгд Найрамдах Ардчилсан Конго Улс, Иран, Ирак, Ливан, Ливи, Хойд Солонгос, Сомали, Судан, Сири, Украйн/ОХУ, Венесуэль, Йемен, Зимбабве.",
-  "corporateStructure":
+  "Business type":
     "Танай компанийнхтай хамгийн төстэй компанийн бүтцийг сонгоно уу",
-  "certificateOfRegistration": "Бүртгэлийн гэрчилгээ",
-  "website": "Вебсайт",
-  "email": "Компанийн и-мэйл",
-  "foreignOwnershipPercentage":
-    "Танай компанийн хэдэн хувийг гадаадын аж ахуйн нэгж эзэмшдэг вэ? ",
-  "totalNumberOfEmployees": "Нийт ажилчдын тоо",
-  "totalNumberOfMongolianEmployees": "Монгол ажилчдын тоо",
-  "totalNumberOfUmnugoviEmployees": "Өмнөговь аймгийн нийт ажилчдын тоо",
-  "certificateOfRegistrationDesc":
+  "7. Certificate of registration": "7. Бүртгэлийн гэрчилгээ",
+  "8. Company website": "8. Вебсайт",
+  "9. Company e-mail": "9. Компанийн и-мэйл",
+  "10. Please indicate what percentage of company is owned by foreign entity":
+    "10. Танай компанийн хэдэн хувийг гадаадын аж ахуйн нэгж эзэмшдэг вэ? ",
+  "11. Total number of employees": "11. Нийт ажилчдын тоо",
+  "12. Total number of Mongolian employees": "12. Монгол ажилчдын тоо",
+  "13. Total number of Umnugovi employees":
+    "13. Өмнөговь аймгийн нийт ажилчдын тоо",
+  "You may upload jpg, jpeg, png, rtf, pdf files, or simple Adobe PDF files. Files that have the ability to contain macros or other types of active code are not acceptable. Maximum file size is 30mb.":
     "Та jpg,jpeg,png,rtf,pdf файлууд эсвэл энгийн Adobe PDF файлуудыг байрлуулж болно. Макро болон бусад төрлийн идэвхтэй код агуулах чадвартай файлуудыг хүлээж авахгүй. Файлын дээд хэмжээ 30 мегабайт."
 }

@@ -30,8 +30,9 @@ class PasswordSubmission extends BaseForm {
 
   checkPassword(rule, value, callback) {
     const form = this.props.form;
+    const { __ } = this.context;
     if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!');
+      callback(__('Two passwords that you enter is inconsistent!'));
     } else {
       callback();
     }
@@ -47,18 +48,21 @@ class PasswordSubmission extends BaseForm {
 
   render() {
     const { reset } = this.props;
+    const { __ } = this.context;
 
     return (
       <div className="center-content">
         <Card className="login-card" bordered={false}>
           {reset ? (
             <Alert
-              description="Please enter your new password."
+              description={__('Please enter your new password')}
               type="success"
             />
           ) : (
             <Alert
-              description="Email confirmed succesfully! Please enter your password."
+              description={__(
+                'Email confirmed successfully! Please enter your password'
+              )}
               type="success"
             />
           )}
@@ -72,7 +76,7 @@ class PasswordSubmission extends BaseForm {
                 <Input
                   type="password"
                   prefix={<Icon type="lock" />}
-                  placeholder="Password"
+                  placeholder={__('Password')}
                 />
               }
             />
@@ -84,7 +88,7 @@ class PasswordSubmission extends BaseForm {
                 <Input
                   type="password"
                   prefix={<Icon type="lock" />}
-                  placeholder="Confirm password"
+                  placeholder={__('Confirm Password')}
                 />
               }
             />
@@ -94,11 +98,12 @@ class PasswordSubmission extends BaseForm {
               size="large"
               style={{ marginBottom: '5px' }}
             >
-              {reset ? 'Reset password' : 'Register'}
+              {reset ? __('Reset password') : __('Register')}
             </Button>
             {!reset && (
               <div>
-                Already registered? <Link to="/sign-in">Sign in</Link>
+                {__('Already registered?')}{' '}
+                <Link to="/sign-in">{__('Sign in')}</Link>
               </div>
             )}
           </Form>
@@ -109,6 +114,9 @@ class PasswordSubmission extends BaseForm {
 }
 
 PasswordSubmission.propTypes = propTypes;
+PasswordSubmission.contextTypes = {
+  __: PropTypes.func
+};
 
 const PasswordSubmissionForm = Form.create()(PasswordSubmission);
 

@@ -45,8 +45,10 @@ class ChangePassword extends React.Component {
 
   checkPassword(rule, value, callback) {
     const form = this.props.form;
+    const { __ } = this.context;
+
     if (value && value !== form.getFieldValue('newPassword')) {
-      callback('Two passwords that you enter is inconsistent!');
+      callback(__('Two passwords that you enter is inconsistent!'));
     } else {
       callback();
     }
@@ -62,24 +64,25 @@ class ChangePassword extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { __ } = this.context;
 
     return (
       <Card>
-        <h2 style={{ marginBottom: 40 }}>Change Password</h2>
+        <h2 style={{ marginBottom: 40 }}>{__('Change Password')}</h2>
         <Row>
           <Col span={12} offset={2}>
             <Form className="user-register-form" onSubmit={this.handleSubmit}>
-              <FormItem label="Current Password">
+              <FormItem label={__('Current Password')}>
                 {getFieldDecorator('currentPassword', {
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your current password!'
+                      message: __('Please input your current Password!')
                     }
                   ]
                 })(<Input type="password" />)}
               </FormItem>
-              <FormItem label="New Password">
+              <FormItem label={__('New password')}>
                 {getFieldDecorator('newPassword', {
                   rules: [
                     {
@@ -88,7 +91,7 @@ class ChangePassword extends React.Component {
                   ]
                 })(<Input type="password" />)}
               </FormItem>
-              <FormItem label="Confirm New Password">
+              <FormItem label={__('Confirm New Password')}>
                 {getFieldDecorator('newPasswordConfirmation', {
                   rules: [
                     {
@@ -103,7 +106,7 @@ class ChangePassword extends React.Component {
                   htmlType="submit"
                   style={{ float: 'right' }}
                 >
-                  Save
+                  {__('Save')}
                 </Button>
               </FormItem>
             </Form>
@@ -115,5 +118,8 @@ class ChangePassword extends React.Component {
 }
 
 ChangePassword.propTypes = propTypes;
+ChangePassword.contextTypes = {
+  __: PropTypes.func
+};
 
 export default Form.create()(ChangePassword);

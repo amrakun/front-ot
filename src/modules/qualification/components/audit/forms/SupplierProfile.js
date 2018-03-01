@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Form, Input, Card, List } from 'antd';
 import AuditFormsBase from './AuditFormsBase';
@@ -6,8 +7,8 @@ import AuditFormsBase from './AuditFormsBase';
 const TextArea = Input.TextArea;
 
 class SupplierProfile extends AuditFormsBase {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.renderListItem = this.renderListItem.bind(this);
   }
@@ -56,6 +57,7 @@ class SupplierProfile extends AuditFormsBase {
     const owner = shareholders[0] || {};
     const basicInfo = supplierInfo.basicInfo || {};
     const renderListItem = this.renderListItem;
+    const { __ } = this.context;
 
     const shareholdersList = shareholders.map(
       (shareholder, i) =>
@@ -69,7 +71,7 @@ class SupplierProfile extends AuditFormsBase {
     return (
       <Form onSubmit={this.handleSubmit}>
         {this.renderIsQualifiedAlert()}
-        <Card title="Company information">
+        <Card title={__('Company information')}>
           <List style={{ marginBottom: '16px' }}>
             {renderListItem('type', tierType)}
             {renderListItem('ownership', owner.name)}
@@ -81,7 +83,7 @@ class SupplierProfile extends AuditFormsBase {
             {renderListItem('sqaResult', sqaResult)}
           </List>
         </Card>
-        <Card title="Oyu Tolgoi LLC (OT) related performance rations">
+        <Card title={__('Oyu Tolgoi LLC (OT) related performance rations')}>
           {this.renderSupplierField('otExperience')}
           {this.renderSupplierField('sotri')}
           {this.renderSupplierField('sotie')}
@@ -93,5 +95,9 @@ class SupplierProfile extends AuditFormsBase {
 }
 
 const SupplierProfileForm = Form.create()(SupplierProfile);
+
+SupplierProfile.contextTypes = {
+  __: PropTypes.func
+};
 
 export default withRouter(SupplierProfileForm);

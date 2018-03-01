@@ -47,6 +47,7 @@ class Register extends BaseForm {
 
   render() {
     const { loading } = this.props;
+    const { __ } = this.context;
 
     return (
       <div className="center-content">
@@ -57,7 +58,10 @@ class Register extends BaseForm {
               layout={noLabelLayout}
               validation="email"
               control={
-                <Input prefix={<Icon type="mail" />} placeholder="Email" />
+                <Input
+                  prefix={<Icon type="mail" />}
+                  placeholder={__('Email')}
+                />
               }
             />
             <Button
@@ -66,9 +70,10 @@ class Register extends BaseForm {
               loading={loading}
               style={{ marginBottom: '12px' }}
             >
-              Register
+              {__('Register')}
             </Button>
-            Already registered? <Link to="/sign-in">Sign in</Link>
+            {__('Already registered?')}{' '}
+            <Link to="/sign-in">{__('Sign in')}</Link>
           </Form>
         </Card>
       </div>
@@ -77,6 +82,9 @@ class Register extends BaseForm {
 }
 
 Register.propTypes = propTypes;
+Register.contextTypes = {
+  __: PropTypes.func
+};
 
 const RegisterForm = Form.create()(Register);
 

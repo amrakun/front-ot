@@ -6,17 +6,25 @@ import { ChangePassword } from '../components';
 import { Loading } from '../../common/components';
 import { queries, mutations } from '../graphql';
 import { message } from 'antd';
+import { defineMessages, intlShape, injectIntl } from 'react-intl';
 
 const propTypes = {
   currentUserQuery: PropTypes.object.isRequired,
   usersChangePasswordMutation: PropTypes.func,
-  onSuccess: PropTypes.func
+  onSuccess: PropTypes.func,
+  intl: intlShape.isRequired
 };
 
-const ChangePasswordContainer = ({
-  currentUserQuery,
-  usersChangePasswordMutation
-}) => {
+const messages = defineMessages({
+  text: {
+    id: 'successFullyUpdated',
+    defaultMessage: 'Successfully updated'
+  }
+});
+
+const ChangePasswordContainer = props => {
+  const { currentUserQuery, usersChangePasswordMutation, intl } = props;
+
   if (currentUserQuery.loading || usersChangePasswordMutation.loading) {
     return <Loading />;
   }
@@ -24,7 +32,7 @@ const ChangePasswordContainer = ({
   const mainAction = doc => {
     usersChangePasswordMutation({ variables: doc })
       .then(() => {
-        message.success('Successfully updated');
+        message.success(intl.formatMessage(messages.text));
       })
       .catch(error => {
         message.error(error.message);
@@ -41,12 +49,17 @@ const ChangePasswordContainer = ({
 };
 
 ChangePasswordContainer.propTypes = propTypes;
+ChangePasswordContainer.contextTypes = {
+  formatMessage: PropTypes.func
+};
 
-export default compose(
-  graphql(gql(queries.currentUser), {
-    name: 'currentUserQuery'
-  }),
-  graphql(gql(mutations.usersChangePassword), {
-    name: 'usersChangePasswordMutation'
-  })
-)(withRouter(ChangePasswordContainer));
+export default injectIntl(
+  compose(
+    graphql(gql(queries.currentUser), {
+      name: 'currentUserQuery'
+    }),
+    graphql(gql(mutations.usersChangePassword), {
+      name: 'usersChangePasswordMutation'
+    })
+  )(withRouter(ChangePasswordContainer))
+);

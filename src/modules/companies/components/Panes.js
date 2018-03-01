@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Icon } from 'antd';
 import queryString from 'query-string';
-import { T } from 'modules/common/components';
 
 export default class Panes extends React.Component {
   constructor(props) {
@@ -47,6 +46,7 @@ export default class Panes extends React.Component {
   renderPane(key, title, name, Component, extraProps) {
     const company = this.props.company || {};
     const save = this.props.save || {};
+    const { __ } = this.context;
 
     const saveAction = doc => {
       save(name, doc);
@@ -65,7 +65,7 @@ export default class Panes extends React.Component {
       <Tabs.TabPane
         tab={
           <span>
-            <T id={name}>{title}</T>{' '}
+            {__(title)}{' '}
             {this.isEmpty(company[name]) ? '' : <Icon type="check" />}
           </span>
         }
@@ -82,4 +82,8 @@ Panes.propTypes = {
   save: PropTypes.func,
   history: PropTypes.object,
   location: PropTypes.object
+};
+
+Panes.contextTypes = {
+  __: PropTypes.func
 };

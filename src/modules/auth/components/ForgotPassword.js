@@ -32,16 +32,20 @@ class ForgotPassword extends BaseForm {
   }
 
   render() {
+    const { __ } = this.context;
     return (
       <div className="center-content">
         <Card className="login-card" bordered={false}>
           <Form onSubmit={this.handleSubmit}>
             <Field
-              label="Please enter your registered email address"
+              label={__('Please enter your registered email address')}
               name="email"
               validation="email"
               control={
-                <Input prefix={<Icon type="mail" />} placeholder="Email" />
+                <Input
+                  prefix={<Icon type="mail" />}
+                  placeholder={__('Email')}
+                />
               }
             />
             <Button
@@ -50,9 +54,9 @@ class ForgotPassword extends BaseForm {
               htmlType="submit"
               style={{ marginBottom: '12px' }}
             >
-              Send
+              {__('Send')}
             </Button>
-            <Link to="/sign-in">Sign in</Link>
+            <Link to="/sign-in">{__('Sign in')}</Link>
           </Form>
         </Card>
       </div>
@@ -61,6 +65,9 @@ class ForgotPassword extends BaseForm {
 }
 
 ForgotPassword.propTypes = propTypes;
+ForgotPassword.contextTypes = {
+  __: PropTypes.func
+};
 
 const ForgotPasswordForm = Form.create()(ForgotPassword);
 

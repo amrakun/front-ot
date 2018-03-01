@@ -2,33 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Table } from 'antd';
 import { eoiProductsColumns } from '../constants';
-import { defineMessages } from 'react-intl';
 
 const rpc = eoiProductsColumns;
 
 class EoiTable extends Component {
   render() {
     const { products, renderProductColumn, isSupplier = true } = this.props;
-    const { formatMessage } = this.context;
-
-    const messages = defineMessages({
-      eoiDocument: {
-        id: 'eoiDocument',
-        defaultMessage: rpc.document
-      },
-      eoiSubmitted: {
-        id: 'eoiSubmitted',
-        defaultMessage: rpc.isSubmitted
-      },
-      eoiUpload: {
-        id: 'eoiUpload',
-        defaultMessage: 'Upload'
-      },
-      eoiNotes: {
-        id: 'eoiNotes',
-        defaultMessage: rpc.notes
-      }
-    });
+    const { __ } = this.context;
 
     return (
       <Table
@@ -40,25 +20,25 @@ class EoiTable extends Component {
       >
         {renderProductColumn({
           name: 'document',
-          title: formatMessage(messages.eoiDocument),
+          title: __(rpc.document),
           isSupplier
         })}
         {renderProductColumn({
           name: 'isSubmitted',
-          title: formatMessage(messages.eoiSubmitted),
+          title: __(rpc.isSubmitted),
           type: 'checkbox',
           isSupplier: !isSupplier
         })}
         {renderProductColumn({
           name: 'file',
-          title: formatMessage(messages.eoiUpload),
+          title: __('Upload'),
           type: 'uploader',
           isSupplier: !isSupplier,
           widt: '100px'
         })}
         {renderProductColumn({
           name: 'notes',
-          title: formatMessage(messages.eoiNotes),
+          title: __(rpc.notes),
           isSupplier: !isSupplier
         })}
       </Table>
@@ -73,7 +53,7 @@ EoiTable.propTypes = {
 };
 
 EoiTable.contextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 export default EoiTable;

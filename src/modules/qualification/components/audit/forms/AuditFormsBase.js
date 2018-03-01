@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Input, Select, Popover, Icon, Divider, Alert } from 'antd';
 import { BaseForm } from 'modules/common/components';
 import { booleanData, booleanDataReverse } from 'modules/common/constants';
@@ -7,8 +8,8 @@ import { labels } from './constants';
 const TextArea = Input.TextArea;
 
 class AuditFormsBase extends BaseForm {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     const { response } = props;
 
@@ -79,6 +80,7 @@ class AuditFormsBase extends BaseForm {
 
   renderForSupplier(name, type) {
     this.fields.includes(name) || this.fields.push({ name, type });
+    const { __ } = this.context;
 
     const data = this.props.data || {};
     const answer = data[name] || {};
@@ -116,7 +118,7 @@ class AuditFormsBase extends BaseForm {
           name: `${name}Comment`,
           hasFeedback: false,
           initialValue: answer.supplierComment,
-          control: <TextArea placeholder="Comment" />
+          control: <TextArea placeholder={__('Comment')} />
         })}
       </div>
     );
@@ -208,10 +210,20 @@ class AuditFormsBase extends BaseForm {
   }
 
   renderTooltipLabel(name, title) {
+    const { __ } = this.context;
+
+    let description = labels[name].desc;
+
+    if (typeof description === 'function') {
+      description = description(__);
+    } else {
+      description = __(description);
+    }
+
     return (
       <span>
-        {labels[name].title}
-        <Popover content={labels[name].desc} title={title}>
+        {__(labels[name].title)}
+        <Popover content={description} title={title}>
           &nbsp;<Icon type="question-circle-o" />
         </Popover>
       </span>
@@ -219,6 +231,7 @@ class AuditFormsBase extends BaseForm {
   }
 
   renderIsQualifiedAlert() {
+    const { __ } = this.context;
     const { supplierInfo, response, isQualified } = this.props;
 
     if (response) {
@@ -230,13 +243,13 @@ class AuditFormsBase extends BaseForm {
 
           {isQualified ? (
             <Alert
-              message="This supplier is qualified"
+              message={__('This supplier is qualified')}
               type="success"
               showIcon
             />
           ) : (
             <Alert
-              message="This supplier is not qualified."
+              message={__('This supplier is not qualified.')}
               type="warning"
               showIcon
             />
@@ -248,5 +261,9 @@ class AuditFormsBase extends BaseForm {
     }
   }
 }
+
+AuditFormsBase.contextTypes = {
+  __: PropTypes.func
+};
 
 export default AuditFormsBase;

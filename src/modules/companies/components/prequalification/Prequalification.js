@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Tabs, notification, Icon } from 'antd';
 import FinancialForm from './forms/Financial';
 import EnvironmentalForm from './forms/Environmental';
@@ -8,11 +9,13 @@ import Panes from '../Panes';
 
 class PrequalificationForms extends Panes {
   componentDidMount() {
+    const { __ } = this.context;
     if (this.props.company.isSentPrequalificationInfo) {
       notification.open({
-        message: 'Changes disabled',
-        description:
-          'You have already submitted your pre-qualification form and changes are disabled.',
+        message: __('Changes disabled'),
+        description: __(
+          'You have already submitted your pre-qualification form and changes are disabled.'
+        ),
         icon: <Icon type="warning" style={{ color: '#f47721' }} />,
         duration: 10
       });
@@ -60,5 +63,9 @@ class PrequalificationForms extends Panes {
     );
   }
 }
+
+PrequalificationForms.contextTypes = {
+  __: PropTypes.func
+};
 
 export default PrequalificationForms;

@@ -1,28 +1,30 @@
 {
-  "groupLabelsHead":
+  "Please provide details of your Ultimate Parent Company or any associated companies if applicable.":
     "Толгой компани эсвэл бусад холбогдох компанийн (байгаа бол) талаар мэдээлэл өгнө үү. ",
-  "groupInfo": "Группын мэдээлэл",
-  "parentName": "Хамгийн дээд толгой компанийн нэр",
-  "parentAddress": "Хамгийн дээд толгой компанийн хаяг",
-  "parentRegistrationNumber": "Хамгийн дээд толгой компанийн бүртгэлийн дугаар",
-  "primaryManufacturerName": "Гол үйлдвэрлэгчийн нэр",
-  "countryOfPrimaryManufacturer": "Гол үйлдвэрлэл эрхэлдэг улс",
-  "isExclusiveDistributor": "Та Монгол дахь албан ёсны гэрээт борлуулагч уу?",
-  "hasParent": "22. Танайд  Толгой компани бий юу?",
-  "isParentExistingSup":
+  "Group information": "Группын мэдээлэл",
+  "Ultimate parent company": "Хамгийн дээд толгой компанийн нэр",
+  "Ultimate Parent Company address": "Хамгийн дээд толгой компанийн хаяг",
+  "Registration number of Ultimate Parent Company":
+    "Хамгийн дээд толгой компанийн бүртгэлийн дугаар",
+  "Primary manufacturer name": "Гол үйлдвэрлэгчийн нэр",
+  "Country of primary manufacture": "Гол үйлдвэрлэл эрхэлдэг улс",
+  "Are you an exclusive distributor?":
+    "Та Монгол дахь албан ёсны гэрээт борлуулагч уу?",
+  "22. Do you have an Ultimate Parent Company?":
+    "22. Танайд Толгой компани бий юу?",
+  "Is your parent company existing supplier in OT":
     "Танай толгой компани Оюу Толгой компанийн гэрээт ханган нийлүүлэгч үү?",
-  "distributionRightName0": "Гэрээт борлуулагчын эрхийн нэр",
-  "distributionRightName1": "Гэрээт борлуулагчын эрхийн нэр 1",
-  "distributionRightName2": "Гэрээт борлуулагчын эрхийн нэр 2",
-  "productCodes": "Үйлдвэрлэдэг бүтээгдэхүүн",
-  "factory": "Үйлдвэр",
-  "addFactory": "Үйлдвэр нэмэх",
-  "role":
+  "Distribution right name ": "Гэрээт борлуулагчын эрхийн нэр",
+  "Distribution right name 1": "Гэрээт борлуулагчын эрхийн нэр 1",
+  "Distribution right name 2": "Гэрээт борлуулагчын эрхийн нэр 2",
+  "Product codes": "Үйлдвэрлэдэг бүтээгдэхүүн",
+  "Add factory": "Үйлдвэр нэмэх",
+  "23. Are you a Manufacturer, Distributor or Service Provider?":
     "23. Та үйлдвэрлэгч, гэрээт борлуулагч эсвэл жижиглэнгийн худалдаачин уу?",
-  "contactInfo": "Холбоо барих мэдээлэл",
-  "attachmentsGroup":
+  "Factory": "Үйлдвэр",
+  "Town or city": "Хот эсвэл аймаг",
+  "Please list names of authorized distribution rights /EOM/":
     "Борлуулах албан ёсны эрхийнхээ нэрсийг жагсаана уу! (Тоног төхөөрөмжийн үндсэн үйлдвэрлэгч)",
-  "attachmentsGroupDesc":
-    "Албан ёсны гэрээт борлуулагчын эрхийн баримт бичгүүдийг хавсралтаар оруулна уу.",
-  "fullName": "Бүтэн нэр"
+  "Please upload your authorized distribution rights files":
+    "Албан ёсны гэрээт борлуулагчын эрхийн баримт бичгүүдийг хавсралтаар оруулна уу."
 }

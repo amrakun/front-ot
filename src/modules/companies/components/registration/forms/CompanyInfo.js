@@ -14,18 +14,6 @@ import {
   labels
 } from '../constants';
 import { BaseForm, Uploader } from 'modules/common/components';
-import { defineMessages } from 'react-intl';
-
-const messages = defineMessages({
-  title: {
-    id: 'basicInfo.title',
-    defaultMessage: '1. Please provide us with your company details'
-  },
-  address: {
-    id: 'addressTitle',
-    defaultMessage: '2. Address'
-  }
-});
 
 class CompanyInfo extends BaseForm {
   constructor(props) {
@@ -95,12 +83,12 @@ class CompanyInfo extends BaseForm {
 
     const booleanOptions = this.renderOptions(booleanData);
     const countryOptions = this.renderOptions(countryData);
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
 
     return (
       <Spin spinning={this.state.loading} delay={500}>
         <Form>
-          <Card title={formatMessage(messages.title)}>
+          <Card title={__('1. Please provide us with your company details')}>
             {this.renderField({
               label: 'Are you an existing supplier?',
               name: 'isRegisteredOnSup',
@@ -140,7 +128,7 @@ class CompanyInfo extends BaseForm {
             })}
           </Card>
 
-          <Card title={formatMessage(messages.address)}>
+          <Card title={__('2. Address')}>
             {addressFields(
               this.renderField.bind(this),
               this.renderOptions.bind(this)
@@ -286,7 +274,7 @@ CompanyInfo.propTypes = {
 };
 
 CompanyInfo.contextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 const CompanyInfoForm = Form.create()(CompanyInfo);

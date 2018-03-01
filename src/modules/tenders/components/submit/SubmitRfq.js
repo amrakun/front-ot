@@ -82,6 +82,7 @@ class SubmitTender extends TenderForm {
 
   render() {
     const { products } = this.state;
+    const { __ } = this.context;
     const { data, generateTemplate } = this.props;
 
     const formProps = {
@@ -102,10 +103,10 @@ class SubmitTender extends TenderForm {
           {!data.isSent && (
             <div className="margin">
               <Button style={{ marginRight: '16px' }} onClick={this.saveDraft}>
-                Save as draft
+                {__('Save as draft')}
               </Button>
               <Button type="primary" htmlType="submit">
-                Save & submit
+                {__('Save & submit')}
               </Button>
             </div>
           )}
@@ -117,6 +118,10 @@ class SubmitTender extends TenderForm {
 
 SubmitTender.propTypes = {
   data: PropTypes.object
+};
+
+SubmitTender.contextTypes = {
+  __: PropTypes.func
 };
 
 const form = Form.create()(SubmitTender);

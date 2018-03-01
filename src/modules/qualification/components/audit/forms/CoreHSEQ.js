@@ -1,16 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Form, Card } from 'antd';
 import AuditFormsBase from './AuditFormsBase';
 
 class CoreHSEQ extends AuditFormsBase {
   render() {
+    const { __ } = this.context;
     const render = this.renderQuestion;
 
     return (
       <Form onSubmit={this.handleSubmit}>
         {this.renderIsQualifiedAlert()}
-        <Card title="Core HSEQ">
+        <Card title={__('Core HSEQ')}>
           {render('doesHaveHealthSafety')}
           {render('doesHaveDocumentedPolicy')}
           {render('doesPerformPreemployment')}
@@ -30,5 +32,9 @@ class CoreHSEQ extends AuditFormsBase {
 }
 
 const CoreHSEQForm = Form.create()(CoreHSEQ);
+
+CoreHSEQ.contextTypes = {
+  __: PropTypes.func
+};
 
 export default withRouter(CoreHSEQForm);
