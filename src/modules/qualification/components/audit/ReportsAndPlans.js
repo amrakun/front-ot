@@ -26,6 +26,7 @@ class ReportsAndPlans extends Common {
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.handleFilesToSendChange = this.handleFilesToSendChange.bind(this);
+    this.handleTableChange = this.handleTableChange.bind(this);
   }
 
   handleSend() {
@@ -50,6 +51,19 @@ class ReportsAndPlans extends Common {
 
   hideModal() {
     this.setState({ modalVisible: false });
+  }
+
+  handleTableChange(pagination, filters, sorter) {
+    const { history, onChange } = this.props;
+    const { status } = filters;
+
+    if (status && status.length > 0) {
+      router.setParams(history, { status: status.join(',') });
+    } else {
+      router.removeParams(history, 'status');
+    }
+
+    onChange(pagination, filters, sorter);
   }
 
   handleUpload(file, record, fileType) {
@@ -88,7 +102,8 @@ class ReportsAndPlans extends Common {
             text: 'Late',
             value: 'late'
           }
-        ]
+        ],
+        filtereredValue: []
       },
       { title: 'Supplier name', dataIndex: 'supplier.basicInfo.enName' },
       { title: 'SAP number', dataIndex: 'supplier.basicInfo.sapNumber' },
@@ -158,11 +173,19 @@ class ReportsAndPlans extends Common {
   }
 
   render() {
-    const { pagination, loading, onChange, data, history } = this.props;
-    const { selectedCompanies, modalVisible, filesToSend } = this.state;
+    const { pagination, loading, data, history } = this.props;
+    const {
+      selectedCompanies,
+      modalVisible,
+      filesToSend,
+      dateRange
+    } = this.state;
 
-    const from = moment(router.getParam(history, 'from'));
-    const to = moment(router.getParam(history, 'to'));
+    const historyFrom = router.getParam(history, 'from');
+    const historyTo = router.getParam(history, 'to');
+
+    const from = historyFrom ? moment(historyFrom) : null;
+    const to = historyTo ? moment(historyTo) : null;
 
     const filesToSendOptions = [
       { label: 'Report', value: 'report' },
@@ -178,6 +201,7 @@ class ReportsAndPlans extends Common {
             defaultValue={[from, to]}
             style={{ float: 'left', marginLeft: '8px' }}
             onChange={this.handleDateRangeChange}
+            value={dateRange}
           />
 
           <Button
@@ -200,7 +224,7 @@ class ReportsAndPlans extends Common {
           pagination={pagination}
           loading={loading}
           onChange={(pagination, filters, sorter) =>
-            onChange(pagination, filters, sorter)
+            this.handleTableChange(pagination, filters, sorter)
           }
         />
 

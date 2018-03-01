@@ -6,6 +6,7 @@ import { labels, statusIcons } from '../../../constants';
 import { dateTimeFormat } from 'modules/common/constants';
 import queryString from 'query-string';
 import moment from 'moment';
+import router from 'modules/common/router';
 
 const MonthPicker = DatePicker.MonthPicker;
 
@@ -26,32 +27,18 @@ class Tenders extends React.Component {
     this.handleTableChange = this.handleTableChange.bind(this);
   }
 
-  updateQueryString(updateder) {
-    const { history } = this.props;
-
-    let query = queryString.parse(history.location.search);
-
-    updateder(query);
-
-    history.push({
-      search: queryString.stringify(query)
-    });
-  }
-
   handleMonthChange(value) {
-    this.updateQueryString(query => {
-      query.month = value;
-    });
+    router.setParams(this.props.history, { month: value });
   }
 
   handleTableChange(pagination, filters) {
     const statuses = filters.status;
 
-    if (statuses) {
-      this.updateQueryString(query => {
-        this.setState({ statuses });
-        query.status = statuses.join(',');
-      });
+    if (statuses && statuses.length > 0) {
+      router.setParams(this.props.history, { status: statuses.join(',') });
+      this.setState({ statuses });
+    } else {
+      router.removeParams(this.props.history, 'status');
     }
 
     this.props.onChange(pagination);
@@ -145,7 +132,6 @@ class Tenders extends React.Component {
             placeholder={__('Select year and month')}
             onChange={this.handleMonthChange}
             allowClear
-            disabled
           />
 
           {operation || <div style={{ height: '32px' }} />}

@@ -138,7 +138,8 @@ export default compose(
           perPage: 100,
           search: queryParams ? queryParams.search : '',
           status: queryParams ? queryParams.status : '',
-          type: type
+          type: type,
+          month: queryParams ? queryParams.month : ''
         },
         notifyOnNetworkStatusChange: true
       };
