@@ -74,7 +74,7 @@ const SubmitAuditContainer = (props, context) => {
         message.error(error.message);
       });
   };
-  console.log(auditResponseByUserQuery);
+
   const updatedProps = {
     ...props,
     save,

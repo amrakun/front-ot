@@ -111,7 +111,7 @@ class Tenders extends React.Component {
 
   renderTenders(args) {
     const { type, data, pagination, loading, history } = this.props;
-    console.log(pagination);
+
     const { columns, operation } = args;
 
     const { location } = history;

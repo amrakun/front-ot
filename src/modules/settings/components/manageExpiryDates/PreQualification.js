@@ -54,7 +54,7 @@ class PreQualification extends React.Component {
   render() {
     const { preQualification, specificPrequalificationDow } = this.state;
     const { getFieldDecorator } = this.props.form;
-    console.log(specificPrequalificationDow);
+
     return (
       <Form>
         <Row gutter={32} type="flex">
