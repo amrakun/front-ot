@@ -119,6 +119,11 @@ export const buyerSideMenu = [
     icon: 'file'
   },
   {
+    url: '/logs',
+    title: 'Log',
+    icon: 'file'
+  },
+  {
     url: 'settings',
     title: 'Settings',
     icon: 'setting',

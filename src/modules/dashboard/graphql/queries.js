@@ -134,6 +134,90 @@ const tendersAverageDuration = `
   }
 `;
 
+const logsSupplierLoginsExport = `
+  query logsSupplierLoginsExport(
+    $startDate: Date!,
+    $endDate: Date!
+  ){
+    logsSupplierLoginsExport(
+      startDate: $startDate,
+      endDate: $endDate,
+    )
+  }
+`;
+
+const logsBuyerLoginsExport = `
+  query logsBuyerLoginsExport(
+    $startDate: Date!,
+    $endDate: Date!
+  ){
+    logsBuyerLoginsExport(
+      startDate: $startDate,
+      endDate: $endDate,
+    )
+  }
+`;
+
+const logsSupplierLoginsByEoiSubmissionsExport = `
+  query logsSupplierLoginsByEoiSubmissionsExport(
+    $startDate: Date!,
+    $endDate: Date!
+  ){
+    logsSupplierLoginsByEoiSubmissionsExport(
+      startDate: $startDate,
+      endDate: $endDate,
+    )
+  }
+`;
+
+const logsSupplierLoginsByRfqSubmissionsExport = `
+  query logsSupplierLoginsByRfqSubmissionsExport(
+    $startDate: Date!,
+    $endDate: Date!
+  ){
+    logsSupplierLoginsByRfqSubmissionsExport(
+      startDate: $startDate,
+      endDate: $endDate,
+    )
+  }
+`;
+
+const logsSearchesPerBuyerExport = `
+  query logsSearchesPerBuyerExport(
+    $startDate: Date!,
+    $endDate: Date!
+  ){
+    logsSearchesPerBuyerExport(
+      startDate: $startDate,
+      endDate: $endDate,
+    )
+  }
+`;
+
+const logsEoiCreatedAndSentExport = `
+  query logsEoiCreatedAndSentExport(
+    $startDate: Date!,
+    $endDate: Date!
+  ){
+    logsEoiCreatedAndSentExport(
+      startDate: $startDate,
+      endDate: $endDate,
+    )
+  }
+`;
+
+const logsRfqCreatedAndSentExport = `
+  query logsRfqCreatedAndSentExport(
+    $startDate: Date!,
+    $endDate: Date!
+  ){
+    logsRfqCreatedAndSentExport(
+      startDate: $startDate,
+      endDate: $endDate,
+    )
+  }
+`;
+
 export default {
   companyByUser,
   companiesCountByTierType,
@@ -144,5 +228,13 @@ export default {
   reportsSuppliersExport,
   reportsTendersExport,
   reportsAuditExport,
-  reportsShareholder
+  reportsShareholder,
+
+  logsSupplierLoginsExport,
+  logsBuyerLoginsExport,
+  logsSupplierLoginsByEoiSubmissionsExport,
+  logsSupplierLoginsByRfqSubmissionsExport,
+  logsSearchesPerBuyerExport,
+  logsEoiCreatedAndSentExport,
+  logsRfqCreatedAndSentExport
 };

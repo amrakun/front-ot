@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { Dashboard, SupplierDashboard, Report } from './containers';
+import { Dashboard, SupplierDashboard, Report, LogReport } from './containers';
 import queryString from 'query-string';
 
 export default [
@@ -19,5 +19,6 @@ export default [
     path="/rfq-and-eoi"
     component={SupplierDashboard}
   />,
-  <Route key="/report" exact path="/report" component={Report} />
+  <Route key="/report" exact path="/report" component={Report} />,
+  <Route key="/logs" exact path="/logs" component={LogReport} />
 ];
