@@ -26,8 +26,8 @@ class BusinessIntegriy extends AuditFormsBase {
   saveAndShowModal(e, name) {
     e.preventDefault();
 
-    this.collectAndSave(true);
     this.setState({ [`${name}ModalVisible`]: true });
+    this.collectAndSave(true);
   }
 
   hideModal(name) {

@@ -18,10 +18,6 @@ const EvidenceCheck = ({ props }, { __ }) => {
     props.save(doc);
   }
 
-  const evidenceCheckListModified = evidenceCheckList.map((item, i) => {
-    return __(item.label);
-  });
-
   return (
     <ModalWrapper {...props} handleOk={handleOk}>
       <div>
@@ -33,7 +29,7 @@ const EvidenceCheck = ({ props }, { __ }) => {
           evidence.
         </strong>
         <Checkbox.Group
-          options={evidenceCheckListModified}
+          options={evidenceCheckList}
           className="horizontal margin evidence-check"
           onChange={handleEvidenceChange}
         />
