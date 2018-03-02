@@ -51,11 +51,13 @@ const withSidebarCollapsed = { marginLeft: 80 };
 
 class InjectInstance extends React.Component {
   getChildContext() {
-    const { intl } = this.props;
+    const { intl, currentUser } = this.props;
     const { formatMessage } = intl;
+    const isSupplier = (currentUser && currentUser.isSupplier) || false;
 
     return {
-      __: msg => formatMessage({ id: msg, defaultMessage: msg })
+      __: msg =>
+        isSupplier ? formatMessage({ id: msg, defaultMessage: msg }) : msg
     };
   }
 
