@@ -10,7 +10,7 @@ const initialProducts = [{ key: Math.random() }];
 
 class RfqForm extends TenderForm {
   constructor(props, context) {
-    super(props);
+    super(props, context);
 
     this.emailTemplate = context.systemConfig.rfqTemplate;
 
@@ -112,7 +112,8 @@ RfqForm.propTypes = {
 };
 
 RfqForm.contextTypes = {
-  systemConfig: PropTypes.object
+  systemConfig: PropTypes.object,
+  __: PropTypes.func
 };
 
 const form = Form.create()(RfqForm);
