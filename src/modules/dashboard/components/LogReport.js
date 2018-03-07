@@ -1,14 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Row, Col, Button, Icon, DatePicker } from 'antd';
-
+import { Card, Row, Col, Button, TreeSelect, Icon, DatePicker } from 'antd';
 import { dateFormat } from 'modules/common/constants';
+import productsTree from '../../companies/productsTree';
 
 const RangePicker = DatePicker.RangePicker;
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      productCodes: []
+    };
 
     this.onInputChange = this.onInputChange.bind(this);
     this.logsSupplierLoginsExport = this.logsSupplierLoginsExport.bind(this);
@@ -28,6 +32,12 @@ class Dashboard extends React.Component {
     this.logsRfqCreatedAndSentExport = this.logsRfqCreatedAndSentExport.bind(
       this
     );
+
+    this.logsSuppliersByProductCodeLogsExport = this.logsSuppliersByProductCodeLogsExport.bind(
+      this
+    );
+
+    this.onProductCodesChange = this.onProductCodesChange.bind(this);
   }
 
   onInputChange(name, value) {
@@ -83,10 +93,21 @@ class Dashboard extends React.Component {
     );
   }
 
+  logsSuppliersByProductCodeLogsExport() {
+    this.props.export('logsSuppliersByProductCodeLogsExport', {
+      ...this.getDateInterval(this.intervalDate),
+      productCodes: this.state.productCodes
+    });
+  }
+
+  onProductCodesChange(value) {
+    this.setState({ productCodes: value });
+  }
+
   getDateInterval(date) {
     return {
-      startDate: date[0],
-      endDate: date[1]
+      startDate: date ? date[0] : new Date(),
+      endDate: date ? date[1] : new Date()
     };
   }
 
@@ -203,6 +224,32 @@ class Dashboard extends React.Component {
             </p>
 
             {this.renderButton(this.logsRfqCreatedAndSentExport)}
+          </Card>
+        </Col>
+
+        <Col {...span}>
+          <Card title="Code searches per buyer">
+            <p>
+              <label>Filter interval dates: </label>
+              <RangePicker
+                onChange={value => this.onInputChange('intervalDate', value)}
+                format={dateFormat}
+              />
+            </p>
+            <div>
+              <label>Filter interval dates: </label>
+
+              <TreeSelect
+                treeData={productsTree}
+                onChange={this.onProductCodesChange}
+                searchPlaceholder="Please select"
+                treeCheckable={true}
+                style={{ width: '100%' }}
+                required={true}
+              />
+            </div>
+
+            {this.renderButton(this.logsSuppliersByProductCodeLogsExport)}
           </Card>
         </Col>
       </Row>
