@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Form, Card } from 'antd';
 import AuditFormsBase from './AuditFormsBase';
@@ -7,8 +8,8 @@ import CreatePlan from './modals/CreatePlan';
 import EvidenceCheck from './modals/EvidenceCheck';
 
 class BusinessIntegriy extends AuditFormsBase {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.evidenceChecks = [];
 
@@ -25,8 +26,8 @@ class BusinessIntegriy extends AuditFormsBase {
   saveAndShowModal(e, name) {
     e.preventDefault();
 
-    this.collectAndSave(true);
     this.setState({ [`${name}ModalVisible`]: true });
+    this.collectAndSave(true);
   }
 
   hideModal(name) {
@@ -40,6 +41,7 @@ class BusinessIntegriy extends AuditFormsBase {
       reportModalVisible,
       planModalVisible
     } = this.state;
+    const { __ } = this.context;
     const { response, supplierInfo, exportFiles, isQualified } = this.props;
 
     const exportModalArgs = {
@@ -51,7 +53,7 @@ class BusinessIntegriy extends AuditFormsBase {
     return (
       <Form onSubmit={this.handleSubmit}>
         {this.renderIsQualifiedAlert()}
-        <Card title="Business integrity">
+        <Card title={__('Business integrity')}>
           {render('doesHavePolicyStatement')}
           {render('ensureThroughoutCompany')}
           {render('ensureThroughoutSupplyChain')}
@@ -101,5 +103,9 @@ class BusinessIntegriy extends AuditFormsBase {
 }
 
 const BusinessIntegriyForm = Form.create()(BusinessIntegriy);
+
+BusinessIntegriy.contextTypes = {
+  __: PropTypes.func
+};
 
 export default withRouter(BusinessIntegriyForm);

@@ -4,53 +4,8 @@ import PropTypes from 'prop-types';
 import { Form, Input, Icon, Button, Select, Row, Col, Card } from 'antd';
 import { booleanData, countryData, groupLabels } from '../constants';
 import { BaseForm, Field, Uploader } from 'modules/common/components';
-import { defineMessages } from 'react-intl';
 
 const FormItem = Form.Item;
-const messages = defineMessages({
-  distName: {
-    0: {
-      id: 'distributionRightName0',
-      defaultMessage: 'Distribution right name'
-    },
-    1: {
-      id: 'distributionRightName1',
-      defaultMessage: 'Distribution right name 1'
-    },
-    2: {
-      id: 'distributionRightName2',
-      defaultMessage: 'Distribution right name 2'
-    }
-  },
-  factory: {
-    id: 'factory',
-    defaultMessage: 'Factory'
-  },
-  addFactory: {
-    id: 'addFactory',
-    defaultMessage: 'Add factory'
-  },
-  group: {
-    id: 'groupLabelsHead',
-    defaultMessage: groupLabels.head
-  },
-  nameGroup: {
-    id: 'factoryName',
-    defaultMessage: 'Name'
-  },
-  townOrCity: {
-    id: 'factoryTownOrCity',
-    defaultMessage: 'Town or city'
-  },
-  country: {
-    id: 'factoryCountry',
-    defaultMessage: 'Country'
-  },
-  productCodes: {
-    id: 'factoryProductCodes',
-    defaultMessage: 'Product codes'
-  }
-});
 const Option = Select.Option;
 
 class RegistrationForm extends BaseForm {
@@ -148,12 +103,12 @@ class RegistrationForm extends BaseForm {
 
   renderFactory(factory, index) {
     const _id = factory._id;
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
 
     return (
       <FormItem
         className="multiple-wrapper"
-        label={formatMessage(messages.factory) + ` ${index + 1}`}
+        label={__('Factory') + ` ${index + 1}`}
         key={_id}
       >
         <Row gutter={16}>
@@ -163,9 +118,7 @@ class RegistrationForm extends BaseForm {
               initialValue={factory.name}
               hasFeedback={false}
               optional={true}
-              control={
-                <Input placeholder={formatMessage(messages.nameGroup)} />
-              }
+              control={<Input placeholder={__('Name')} />}
             />
           </Col>
           <Col span={6}>
@@ -174,9 +127,7 @@ class RegistrationForm extends BaseForm {
               initialValue={factory.townOrCity}
               hasFeedback={false}
               optional={true}
-              control={
-                <Input placeholder={formatMessage(messages.townOrCity)} />
-              }
+              control={<Input placeholder={__('Town or city')} />}
             />
           </Col>
           <Col span={6}>
@@ -185,7 +136,7 @@ class RegistrationForm extends BaseForm {
               initialValue={factory.country}
               hasFeedback={false}
               optional={true}
-              control={<Input placeholder={formatMessage(messages.country)} />}
+              control={<Input placeholder={__('Country')} />}
             />
           </Col>
           <Col span={6}>
@@ -194,9 +145,7 @@ class RegistrationForm extends BaseForm {
               hasFeedback={false}
               initialValue={factory.productCodes}
               optional={true}
-              control={
-                <Input placeholder={formatMessage(messages.productCodes)} />
-              }
+              control={<Input placeholder={__('Product codes')} />}
             />
           </Col>
         </Row>
@@ -206,13 +155,13 @@ class RegistrationForm extends BaseForm {
 
   renderDistrubutionRightInput(index) {
     const initValues = this.props.data.authorizedDistributions || {};
-    const { formatMessage } = this.context;
+    const _index = index > 0 ? index : '';
 
     return (
       <Field
         name={`distributionRightName${index}`}
         initialValue={initValues[index]}
-        label={formatMessage(messages.distName[index])}
+        label={'Distribution right name ' + _index}
         hasFeedback={false}
         optional={true}
         control={<Input />}
@@ -232,11 +181,11 @@ class RegistrationForm extends BaseForm {
       this.renderFactory(factory, index)
     );
 
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        <Card title={formatMessage(messages.group)}>
+        <Card title={__(groupLabels.head)}>
           {this.renderField({
             name: 'hasParent',
             label: groupLabels.hasParent,
@@ -306,7 +255,7 @@ class RegistrationForm extends BaseForm {
             {factoryItems}
             <FormItem>
               <Button type="dashed" onClick={this.addFactory}>
-                <Icon type="plus" /> {formatMessage(messages.addFactory)}
+                <Icon type="plus" /> {__('Add factory')}
               </Button>
             </FormItem>
           </div>
@@ -373,7 +322,7 @@ class RegistrationForm extends BaseForm {
 }
 
 RegistrationForm.contextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 const GroupForm = Form.create()(RegistrationForm);

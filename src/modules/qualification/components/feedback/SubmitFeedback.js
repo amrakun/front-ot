@@ -34,10 +34,11 @@ class SubmitFeedback extends BaseForm {
     const { feedbackContent } = this.state;
     const { forSubmit } = this.props;
     const data = this.props.data || {};
+    const { __ } = this.context;
 
     return (
       <Tabs tabPosition="left" className="supplier-forms">
-        <TabPane tab="Success feedback form" key={1}>
+        <TabPane tab={__('Success feedback form')} key={1}>
           {!forSubmit ? (
             <Editor
               content={feedbackContent}
@@ -45,18 +46,18 @@ class SubmitFeedback extends BaseForm {
             />
           ) : (
             <Alert
-              message="Success feedback"
+              message={__('Success feedback')}
               description={
                 <div dangerouslySetInnerHTML={{ __html: data.content }} />
               }
               type="info"
-              closeText="Close now"
+              closeText={__('Close now')}
             />
           )}
 
           <Form className="margin">
-            <Card title={titles.changes.title}>
-              <p>{titles.changes.description}</p>
+            <Card title={__(titles.changes.title)}>
+              <p>{__(titles.changes.description)}</p>
               {this.renderField({
                 label: labels.employmentNumberBefore,
                 name: 'employmentNumberBefore',
@@ -68,8 +69,8 @@ class SubmitFeedback extends BaseForm {
                 control: <Input type="number" />
               })}
             </Card>
-            <Card title={titles.spend.title} className="margin">
-              <p>{titles.spend.description}</p>
+            <Card title={__(titles.spend.title)} className="margin">
+              <p>{__(titles.spend.description)}</p>
               {this.renderField({
                 label: labels.nationalSpendBefore,
                 name: 'nationalSpendBefore',
@@ -126,6 +127,10 @@ SubmitFeedback.propTypes = {
   data: PropTypes.object,
   forSubmit: PropTypes.bool,
   form: PropTypes.object
+};
+
+SubmitFeedback.propTypes = {
+  __: PropTypes.func
 };
 
 const SubmitFeedbackForm = Form.create()(SubmitFeedback);

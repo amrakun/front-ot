@@ -5,21 +5,22 @@ import PropTypes from 'prop-types';
 
 class ModalWrapper extends React.Component {
   render() {
+    const { __ } = this.context;
     const { visible, children, handleOk, hideModal, title } = this.props;
 
     return (
       <Modal
-        title={title}
+        title={__(title)}
         visible={visible}
         onCancel={hideModal}
         width="80vh"
         bodyStyle={{ maxHeight: '60vh', overflow: 'scroll' }}
         footer={[
           <Button key="back" onClick={hideModal}>
-            Return
+            {__('Return')}
           </Button>,
           <Button key="submit" type="primary" onClick={handleOk}>
-            Submit
+            {__('Submit')}
           </Button>
         ]}
       >
@@ -36,6 +37,10 @@ ModalWrapper.propTypes = {
   handleOk: PropTypes.func,
   hideModal: PropTypes.func,
   title: PropTypes.string
+};
+
+ModalWrapper.contextTypes = {
+  __: PropTypes.func
 };
 
 const ModalWrapperForm = Form.create()(ModalWrapper);

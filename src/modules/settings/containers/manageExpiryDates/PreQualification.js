@@ -11,7 +11,6 @@ const PreQualificatoinContainer = ({
 }) => {
   const mainAction = doc => {
     configsSavePrequalificationDowMutation({ variables: { doc } }).then(() => {
-      console.log(doc);
       message.success('Saved Successfully');
     });
   };

@@ -34,6 +34,7 @@ class SignIn extends Component {
 
   renderLogin() {
     const { getFieldDecorator } = this.props.form;
+    const { __ } = this.context;
     const search = this.props.location.search || [{}];
     const { loading } = this.props;
 
@@ -41,36 +42,42 @@ class SignIn extends Component {
       <div>
         {search === '?confirmation' && (
           <Alert
-            description="Confirmation link has been sent to your email!"
+            description={__('Confirmation link has been sent to your email!')}
             type="success"
           />
         )}
         {search === '?confirmed' && (
           <Alert
-            description="Account activated succesfully! Please login using your provided details"
+            description={__(
+              'Account activated successfully! Please login using your provided details'
+            )}
             type="success"
           />
         )}
         {search === '?required' && (
-          <Alert description="Please sign in to continue!" type="info" />
+          <Alert description={__('Please sign in to continue!')} type="info" />
         )}
 
         <Form onSubmit={this.handleSubmit} className="margin">
           <FormItem>
             {getFieldDecorator('email', {
-              rules: [{ required: true, message: 'Please enter your email!' }]
-            })(<Input prefix={<Icon type="mail" />} placeholder="Email" />)}
+              rules: [
+                { required: true, message: __('Please enter your email!') }
+              ]
+            })(
+              <Input prefix={<Icon type="mail" />} placeholder={__('Email')} />
+            )}
           </FormItem>
           <FormItem>
             {getFieldDecorator('password', {
               rules: [
-                { required: true, message: 'Please enter your Password!' }
+                { required: true, message: __('Please enter your password!') }
               ]
             })(
               <Input
                 prefix={<Icon type="lock" />}
                 type="password"
-                placeholder="Password"
+                placeholder={__('Password')}
               />
             )}
           </FormItem>
@@ -78,14 +85,14 @@ class SignIn extends Component {
             {getFieldDecorator('remember', {
               valuePropName: 'checked',
               initialValue: true
-            })(<Checkbox>Remember me</Checkbox>)}
+            })(<Checkbox>{__('Remember me')}</Checkbox>)}
             <Link className="right" to="/forgot-password">
-              Forgot password
+              {__('Forgot password')}
             </Link>
             <Button type="primary" loading={loading} htmlType="submit">
-              Sign in
+              {__('Sign in')}
             </Button>
-            Or <Link to="/register">register now!</Link>
+            {__('Or')} <Link to="/register">{__('register now!')}</Link>
           </FormItem>
         </Form>
       </div>
@@ -136,6 +143,9 @@ class SignIn extends Component {
 }
 
 SignIn.propTypes = propTypes;
+SignIn.contextTypes = {
+  __: PropTypes.func
+};
 
 const SignInForm = Form.create()(SignIn);
 

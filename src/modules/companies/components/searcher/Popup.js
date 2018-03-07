@@ -23,17 +23,17 @@ class Popup extends React.Component {
   }
 
   renderSelect() {
-    const { onSearch, onSelect, suppliers, onChange, value, mode } = this.props;
+    const { onSelect, suppliers, onChange, mode, value } = this.props;
 
     const selectProps = {
       mode: 'multiple',
       style: { width: '100%' },
       onSelect: onSelect,
-      onSearch: onSearch,
-      onChange: onChange
+      onChange: onChange,
+      value: value,
+      filterOption: (inputValue, option) =>
+        option.props.children.includes(inputValue)
     };
-
-    if (value && value.length > 0) selectProps.value = value;
 
     return (
       <Select {...selectProps}>

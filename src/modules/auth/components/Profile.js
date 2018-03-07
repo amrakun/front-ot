@@ -37,63 +37,64 @@ class Profile extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const { __ } = this.context;
     const user = this.props.currentUser || {};
 
     return (
       <Card>
-        <h2 style={{ marginBottom: 40 }}>General Information</h2>
+        <h2 style={{ marginBottom: 40 }}>{__('General Information')}</h2>
         <Row>
           <Col span={12} offset={2}>
             <Form className="user-register-form" onSubmit={this.handleSubmit}>
-              <FormItem label="First Name">
+              <FormItem label={__('First name')}>
                 {getFieldDecorator('firstName', {
                   initialValue: user.firstName || '',
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your First Name!'
+                      message: __('Please input your First Name!')
                     }
                   ]
                 })(<Input />)}
               </FormItem>
-              <FormItem label="Last Name">
+              <FormItem label={__('Last name')}>
                 {getFieldDecorator('lastName', {
                   initialValue: user.lastName || '',
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your Last Name!'
+                      message: __('Please input your Last Name!')
                     }
                   ]
                 })(<Input />)}
               </FormItem>
-              <FormItem label="Job Title">
+              <FormItem label={__('Job Title')}>
                 {getFieldDecorator('jobTitle', {
                   initialValue: user.jobTitle || ''
                 })(<Input />)}
               </FormItem>
-              <FormItem label="Email address">
+              <FormItem label={__('Email address')}>
                 {getFieldDecorator('email', {
                   initialValue: user.email || '',
                   rules: [
                     {
                       type: 'email',
-                      message: 'The input is not valid E-mail!'
+                      message: __('The input is not valid E-mail!')
                     },
                     {
                       required: true,
-                      message: 'Please input your E-mail!'
+                      message: __('Please input your Email address!')
                     }
                   ]
                 })(<Input />)}
               </FormItem>
-              <FormItem label="Phone Number">
+              <FormItem label={__('Phone Number')}>
                 {getFieldDecorator('phone', {
                   initialValue: user.phone || '',
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your phone number!'
+                      message: __('Please input your Phone Number!')
                     }
                   ]
                 })(
@@ -103,24 +104,24 @@ class Profile extends React.Component {
                   />
                 )}
               </FormItem>
-              <h2>Username & Password</h2>
-              <FormItem label="Username">
+              <h2>{__('Username & Password')}</h2>
+              <FormItem label={__('Username')}>
                 {getFieldDecorator('username', {
                   initialValue: user.username || '',
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your Username!'
+                      message: __('Please input your Username!')
                     }
                   ]
                 })(<Input />)}
               </FormItem>
-              <FormItem label="Password">
+              <FormItem label={__('Password')}>
                 {getFieldDecorator('password', {
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your current password!'
+                      message: __('Please input your current Password!')
                     }
                   ]
                 })(<Input type="password" />)}
@@ -131,7 +132,7 @@ class Profile extends React.Component {
                   htmlType="submit"
                   style={{ float: 'right' }}
                 >
-                  Save
+                  {__('Save')}
                 </Button>
               </FormItem>
             </Form>
@@ -143,5 +144,8 @@ class Profile extends React.Component {
 }
 
 Profile.propTypes = propTypes;
+Profile.contextTypes = {
+  __: PropTypes.func
+};
 
 export default Form.create()(Profile);

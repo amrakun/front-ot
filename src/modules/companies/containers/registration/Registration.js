@@ -6,7 +6,7 @@ import { RegistrationForms } from '../../components';
 import { Loading } from 'modules/common/components';
 import { message, notification, Icon } from 'antd';
 
-const RegistrationContainer = props => {
+const RegistrationContainer = (props, { __ }) => {
   let { companyByUserQuery } = props;
 
   if (companyByUserQuery.loading) {
@@ -65,10 +65,9 @@ const RegistrationContainer = props => {
       .then(() => {
         notification.open({
           message: 'Done!',
-          description: `Your registration has been successfully completed.
-            Oyu Tolgoi procurement team now has started the pre-qualification
-            process on your company. A gap report will be sent once the
-            pre-qualification process complete.`,
+          description: __(
+            'Your registration has been successfully completed.  Oyu Tolgoi procurement team now has started the pre-qualification process on your company. A gap report will be sent once the pre-qualification process complete.'
+          ),
           icon: <Icon type="smile" style={{ color: 'rgb(0,153,168)' }} />,
           duration: 10
         });
@@ -96,7 +95,8 @@ RegistrationContainer.propTypes = {
 };
 
 RegistrationContainer.contextTypes = {
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
+  __: PropTypes.func
 };
 export default compose(
   graphql(gql(queries.companyByUser), {

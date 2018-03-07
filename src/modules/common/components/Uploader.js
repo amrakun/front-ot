@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Upload, message, Button, Icon } from 'antd';
 import { uploadUrl } from 'modules/common/constants';
-import { T } from 'modules/common/components';
 
 class Uploader extends React.Component {
   constructor(props) {
@@ -50,6 +49,7 @@ class Uploader extends React.Component {
 
   render() {
     const { label = 'Click to upload' } = this.props;
+    const { __ } = this.context;
 
     const extendedProps = {
       ...this.props,
@@ -61,7 +61,7 @@ class Uploader extends React.Component {
     return (
       <Upload {...extendedProps}>
         <Button>
-          <Icon type="upload" /> <T id="upload">{label}</T>
+          {__(label)} <Icon type="upload" />
         </Button>
       </Upload>
     );
@@ -73,6 +73,10 @@ Uploader.propTypes = {
   label: PropTypes.string,
   multiple: PropTypes.bool,
   onChange: PropTypes.func
+};
+
+Uploader.contextTypes = {
+  __: PropTypes.func
 };
 
 export default Uploader;

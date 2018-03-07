@@ -6,42 +6,7 @@ import { labels, statusIcons } from '../../../constants';
 import { dateTimeFormat } from 'modules/common/constants';
 import queryString from 'query-string';
 import moment from 'moment';
-import { defineMessages } from 'react-intl';
-
-const messages = defineMessages({
-  tenderNumber: {
-    id: 'tenderNumber',
-    defaultMessage: 'Tender Number'
-  },
-  tenderName: {
-    id: 'tenderName',
-    defaultMessage: 'Tender Name'
-  },
-  tenderPublishDate: {
-    id: 'tenderPublishDate',
-    defaultMessage: 'Publish Date'
-  },
-  tenderCloseDate: {
-    id: 'tenderCloseDate',
-    defaultMessage: 'Close Date'
-  },
-  tenderPlaceholderName: {
-    id: 'tenderPlaceholderName',
-    defaultMessage: 'Tender name'
-  },
-  tenderSelectDate: {
-    id: 'tenderSelectDate',
-    defaultMessage: 'Select year and month'
-  },
-  eoi: {
-    id: 'eoi',
-    defaultMessage: 'Expression Of Interest'
-  },
-  rfq: {
-    id: 'rfq',
-    defaultMessage: 'Request For Quotation'
-  }
-});
+import router from 'modules/common/router';
 
 const MonthPicker = DatePicker.MonthPicker;
 
@@ -62,32 +27,18 @@ class Tenders extends React.Component {
     this.handleTableChange = this.handleTableChange.bind(this);
   }
 
-  updateQueryString(updateder) {
-    const { history } = this.props;
-
-    let query = queryString.parse(history.location.search);
-
-    updateder(query);
-
-    history.push({
-      search: queryString.stringify(query)
-    });
-  }
-
   handleMonthChange(value) {
-    this.updateQueryString(query => {
-      query.month = value;
-    });
+    router.setParams(this.props.history, { month: value });
   }
 
   handleTableChange(pagination, filters) {
     const statuses = filters.status;
 
-    if (statuses) {
-      this.updateQueryString(query => {
-        this.setState({ statuses });
-        query.status = statuses.join(',');
-      });
+    if (statuses && statuses.length > 0) {
+      router.setParams(this.props.history, { status: statuses.join(',') });
+      this.setState({ statuses });
+    } else {
+      router.removeParams(this.props.history, 'status');
     }
 
     this.props.onChange(pagination);
@@ -115,22 +66,22 @@ class Tenders extends React.Component {
   }
 
   commonColumns() {
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
     return [
       {
-        title: formatMessage(messages.tenderNumber),
+        title: __('Tender Number'),
         dataIndex: 'number'
       },
       {
-        title: formatMessage(messages.tenderName),
+        title: __('Tender Name'),
         dataIndex: 'name'
       },
       {
-        title: formatMessage(messages.tenderPublishDate),
+        title: __('Publish Date'),
         render: (text, record) => this.renderDate(record.publishDate)
       },
       {
-        title: formatMessage(messages.tenderCloseDate),
+        title: __('Close Date'),
         render: (text, record) => this.renderDate(record.closeDate)
       }
     ];
@@ -150,9 +101,10 @@ class Tenders extends React.Component {
   }
 
   renderFileDownload(url) {
+    const { __ } = this.context;
     return (
       <a href={url} target="_blank">
-        View
+        {__('View')}
       </a>
     );
   }
@@ -166,19 +118,20 @@ class Tenders extends React.Component {
 
     const highlightedId = location.state && location.state.newTenderId;
 
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
+
+    const label = labels[type] ? __(labels[type]) : labels[type];
 
     return (
-      <Card style={{ marginBottom: '16px' }} title={labels[type]}>
+      <Card style={{ marginBottom: '16px' }} title={label}>
         <div className="table-operations">
-          <Search placeholder={formatMessage(messages.tenderPlaceholderName)} />
+          <Search placeholder={__('Tender Name')} />
 
           <MonthPicker
             style={{ float: 'left', marginLeft: '16px' }}
-            placeholder={formatMessage(messages.tenderSelectDate)}
+            placeholder={__('Select year and month')}
             onChange={this.handleMonthChange}
             allowClear
-            disabled
           />
 
           {operation || <div style={{ height: '32px' }} />}
@@ -211,7 +164,7 @@ Tenders.propTypes = {
 };
 
 Tenders.contextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 export default Tenders;

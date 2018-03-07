@@ -207,7 +207,10 @@ const prequalificationFields = `
     doesEmployeePoliticallyExposed
     pepName
     organizationChartFile
-    
+    hasConvictedLabourLawsDescription
+    hasConvictedForHumanRightsDescription
+    isSubContractor
+
     investigations {
       name
       date

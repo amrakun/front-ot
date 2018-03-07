@@ -4,12 +4,11 @@ import Header from './Header';
 import Breadcrumb from './Breadcrumb';
 import { Layout, BackTop } from 'antd';
 import { PropTypes } from 'prop-types';
-import { IntlProvider, addLocaleData } from 'react-intl';
+import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { T } from '../../common/components';
 import mn from 'react-intl/locale-data/mn';
 import en from 'react-intl/locale-data/en';
 import * as messages from 'modules/translations';
-import { injectIntl } from 'react-intl';
 
 addLocaleData([...mn, ...en]);
 const { Content, Footer } = Layout;
@@ -37,8 +36,14 @@ const mergedMessages = {
   ...messages.Prequalification.FinancialInfo,
   ...messages.CapacityBuilding,
   ...messages.Common,
+  ...messages.Options,
+  ...messages.Feedback,
   ...messages.Qualification,
-  ...messages.RfqAndEoi.Tenders
+  ...messages.SupplierQualification,
+  ...messages.RfqAndEoi.Tenders,
+  ...messages.Auth.Profile,
+  ...messages.Auth.ChangePassword,
+  ...messages.Auth.SignIn
 };
 
 const withSidebar = { marginLeft: 230 };
@@ -50,7 +55,7 @@ class InjectInstance extends React.Component {
     const { formatMessage } = intl;
 
     return {
-      formatMessage
+      __: msg => formatMessage({ id: msg, defaultMessage: msg })
     };
   }
 
@@ -65,7 +70,7 @@ InjectInstance.propTypes = {
 };
 
 InjectInstance.childContextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 const InjectedComponent = injectIntl(InjectInstance);
@@ -97,7 +102,7 @@ class MainLayout extends React.Component {
   }
 
   toggleLang() {
-    this.setState(prevState => ({ toggleLang: !prevState.toggleLang }));
+    this.setState({ toggleLang: !this.state.toggleLang });
     const { toggleLang } = this.state;
     toggleLang ? this.setLang('mn', mergedMessages) : this.setLang('en', {});
   }
@@ -155,7 +160,9 @@ class MainLayout extends React.Component {
               <BackTop />
             </Content>
             <Footer>
-              <T id="footer">Oyu Tolgoi ©2018 All Rights Reserved</T>
+              <T id="Oyu Tolgoi ©2018 All Rights Reserved">
+                Oyu Tolgoi 2018 All Rights Reserved
+              </T>
             </Footer>
           </Layout>
         </Layout>

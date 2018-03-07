@@ -28,12 +28,8 @@ export const booleanData = [
 ];
 
 export const descriptions = {
-  certificateOfRegistration: `
-    You may upload &quot;jpg,jpeg,png,rtf,pdf&quot; files, or simple Adobe
-   PDF files. Files that have the ability to contain macros or other
-   types of active code are not acceptable. Maximum file size is
-   30mb.
-  `,
+  certificateOfRegistration:
+    'You may upload jpg, jpeg, png, rtf, pdf files, or simple Adobe PDF files. Files that have the ability to contain macros or other types of active code are not acceptable. Maximum file size is 30mb.',
 
   email: `
     Please fill in generic shared email. Receive an interest in the announcement
@@ -44,10 +40,8 @@ export const descriptions = {
 };
 
 export const labels = {
-  foreignOwnershipPercentage: `
-    10. Please indicate what percentage of company is owned by
-    foreign entity
-  `,
+  foreignOwnershipPercentage:
+    '10. Please indicate what percentage of company is owned by foreign entity',
 
   corporateStructure: `Business type`,
 
@@ -69,8 +63,8 @@ export const certLabels = {
 };
 
 export const groupLabels = {
-  head: `Please provide details of your Ultimate Parent Company or any
-    associated companies if applicable.`,
+  head:
+    'Please provide details of your Ultimate Parent Company or any associated companies if applicable.',
 
   isParentExistingSup: `Is your parent company existing supplier in OT`,
 
@@ -93,11 +87,8 @@ export const groupLabels = {
   countryOfPrimaryManufacturer: `Country of primary manufacture`
 };
 
-export const productDescription = `
-  The product code is structured in a 3 level: Family Sect Code > Macro Sect Code > Sect Code. Clicking on the check boxes will expand the product codes. You can only select at “Sect Code” level.;
-  Alternatively, you can use the search tool by free text to find potential matches of your products and services.;
-  Adding and Removing product codes: To add a Product / Service click on the check box. To remove simply un tick the box, or click the “x”.
-`;
+export const productDescription =
+  'The product code is structured in a 3 level: Family Sect Code > Macro Sect Code > Sect Code. Clicking on the check boxes will expand the product codes. You can only select at “Sect Code” level.; Alternatively, you can use the search tool by free text to find potential matches of your products and services.; Adding and Removing product codes: To add a Product / Service click on the check box. To remove simply un tick the box, or click the “x”.';
 
 export const aimagData = [
   { text: 'Ulaanbaatar', value: 'Ulaanbaatar' },
@@ -115,7 +106,7 @@ export const aimagData = [
   { text: 'Khovd', value: 'Khovd' },
   { text: 'Khovsgol', value: 'Khovsgol' },
   { text: 'Orkhon', value: 'Orkhon' },
-  { text: 'Omnogovi', value: 'Omnogovi' },
+  { text: 'Umnugobi', value: 'Umnugobi' },
   { text: 'Ovorkhangai', value: 'Ovorkhangai' },
   { text: 'Selenge', value: 'Selenge' },
   { text: 'Sükhbaatar', value: 'Sükhbaatar' },

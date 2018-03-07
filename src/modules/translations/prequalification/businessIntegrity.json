@@ -1,55 +1,56 @@
 {
-  "businessIntegrityTitle": "Байгууллагын бизнесийн ёс зүй",
-  "hrTitle": "Хүний нөөцийн удирдлага",
-  "organizationChartFile":
+  "Company business integrity": "Байгууллагын бизнесийн ёс зүй",
+  "Human resource management": "Хүний нөөцийн удирдлага",
+  "Please upload copy of your organisation chart":
     "Байгууллагынхаа бүтэц зохион байгуулалтын бүдүүвчийг -схем  татаж оруулна уу.",
-  "doesMeetMinimumStandarts":
+  "Does your company meet minimum standards of fair employment practice required by Mongolian labor laws and regulations":
     "Танай компани Монгол улсын хөдөлмөрийн тухай хууль, тогтоомжид заасан, ажил хөдөлмөр эрхлэх тэгш боломж олгох хамгийн наад захын стандартыг биелүүлдэг үү?",
-  "doesMeetMinimumStandartsDesc":
+  "Fair employment practice includes disabled ethnic groups, anti-discrimination etc.":
     "Ажил хөдөлмөр эрхлэх тэгш боломж олгох зарчимд хөгжлийн бэрхшээлтэй үндэстэн ястан, үл ялгаварлан гадуурхах зэрэг зүйлс  ойлголт багтана. ",
-  "employeeTurnoverRate":
+  "Please provide the employee turnover rate within your company in the last 12 months":
     "Компанийнхаа сүүлийн 12 сарын ажиллах хүчний эргэлтийн мэдээллийг өгнө үү! ",
-  "employeeTurnoverRateDesc":
+  "Employee Turnover is the act of replacing an employee with a new employee. You calculate the turnover rate by dividing the number of employees who left by the total number of employees at the beginning of the period.":
     "Ажилчдын шилжих хөдөлгөөн гэдэг нь нэг ажилтныг шинэ ажилтнаар солих үйл явцыг хэлдэг. Шилжих хөдөлгөөний хувийг гаргахдаа ажлаас гарсан хүмүүсийн тоог хугацааны эхэнд байсан нийт ажилчдын тоонд хувааж гаргана.",
-  "doesHaveLiabilityInsurance":
+  "Does the organisation have Liability insurance which meets Oyu Tolgoi’s minimum requirements and valid worker compensation insurance or enrolment in an applicable occupational injury/illness insurance programme?":
     "Танай байгууллага \"Оюу толгой\"-н хамгийн энгийн шаардлагыг хангахуйц хариуцлагын даатгал, мөн ажилчинд олгох нөхөн төлбөрийн даатгал, эсвэл мэргэжлээс шалгаалах гэмтэл бэртэл, өвчний даатгалын зохих хөтөлбөрийг хэрэгжүүлдэг үү?",
-  "doesHaveCodeEthics": "Танай компани ёс зүйн дүрмээ боловсруулж гаргасан уу?",
-  "doesHaveCodeEthicsDesc":
+  "Does your company have a documented code of ethics/conduct?":
+    "Танай компани ёс зүйн дүрмээ боловсруулж гаргасан уу?",
+  "Prevention of Bribery & Corruption, Conflict of interest, Fair Labor Standards, Business Ethics, Human Rights, Equality and Diversity, Dealing with government intermediaries, Charitable contributions, Travels and hospitality, Gifts and entertainment, Money laundry":
     " -Хээл хахууль, авилгаас сэргийлэх -Ашиг сонирхлын зөрчил -Шударга хөдөлмөрийн стандарт -Бизнесийн ёс зүй -Хүний эрх -Тэгш эрх, олон янз байдал -Төр засгийн зуучлагчидтай харилцах -Буяны хандив -Бизнес аялал, зочлон хүндэтгэх -Бэлэг, үзвэр үйлчилгээ -Мөнгө угаах",
-  "doesHaveResponsiblityPolicy":
+  "Does your company have a documented Corporate Social Responsibility policy?":
     "Компанийн нийгмийн хариуцлагын талаарх бодлогоо танай компани боловсруулж гаргасан уу?",
-  "doesHaveJobDescription":
+  "Does the Company have a job description procedure in place?":
     "Танай компанид ажил байрны тодорхойлолт гаргах, дагаж мөрдөх үйл ажиллагааг зохицуулсан журам бий юу?  ",
-  "doesConcludeValidContracts":
+  "Does the company conclude valid contracts with all employees. (include skilled/unskilled, temporary and permanent, and underage workers, etc)":
     "Танай компани бүх ажилтантайгаа хүчин төгөлдөр гэрээ байгуулдаг уу? (Үүнд мэргэжилтэй болон мэргэжилгүй, түр болон үндсэн, насанд хүрээгүй ажилчид гэх мэт хүмүүс хамаарна)",
-  "doesConcludeValidContractsDesc":
+  "Include skilled/unskilled manufacturing employees, temporary employees, underage workers etc.":
     "Мэргэжилтэй болон мэргэжилгүй, үйлдвэрийн ажилтнууд, түр ажилтнууд, насанд хүрээгүй ажилчид гэх мэт хүмүүсийг хамруулна. ",
-  "hasConvictedLabourLaws":
+  "Has your company ever been convicted for a breach of any labour laws in the countries you operate within the last five years?":
     "Танай компани сүүлийн 5 жилд үйл ажиллагаа эрхэлсэн улсууддаа аливаа хөдөлмөрийн хуулийг зөрчсөн ял шийтгэл шүүхээр хүлээж байсан уу?",
-  "hasConvictedLabourLawsDesc":
+  "The five years is based on the date of your declaration and submission of your questionnaire compared to the date of conviction. You may remove any breaches older than five years.":
     "Таны мэдэгдлээ өгч, асуулга бөглөсөн огноог шүүхээр ял шийтгэл хүлээсэн огноотой харьцуулсан/жишсэн хугацаанд тулгуурлан тус 5 жилийн хугацааг тооцно. Та таван жилээс өмнөх хугацааны зөрчлөө хасч болно.",
-  "hasConvictedForHumanRights":
+  "Has your company ever been convicted for a breach of any human rights in the countries you operate within the last five years?":
     "Танай компани сүүлийн 5 жилд үйл ажиллагаа эрхэлсэн улсууддаа хүний аливаа эрхийг зөрчсөн ял шийтгэл шүүхээр хүлээж байсан уу",
-  "hasConvictedForHumanRightsDesc":
+  "The five years is based on the date of your declaration and submission of your questionnaire compared to the date of conviction. You may remove any breaches older than five years":
     "Таны мэдэгдлээ өгч, асуулга бөглөсөн огноог шүүхээр ял шийтгэл хүлээсэн огноотой харьцуулсан/жишсэн хугацаанд тулгуурлан тус 5 жилийн хугацааг тооцно. Та таван жилээс өмнөх хугацааны зөрчлөө хасч болно.",
-  "hasConvictedForBusinessIntegrity":
+  "Has your company ever been convicted for a breach of any business integrity in the countries you operate within the last five years?":
     "Танай компани сүүлийн 5 жилд үйл ажиллагаа эрхэлсэн улсууддаа аливаа бизнесийн ёс зүйг зөрчсөн ял шийтгэл шүүхээр хүлээж байсан уу?",
-  "hasConvictedForBusinessIntegrityDesc":
+  "The five years is based on the date of your declaration and submission of your questionnaire compared to the date of conviction. You may remove any breaches older than five years":
     "Таны мэдэгдлээ өгч, асуулга бөглөсөн огноог шүүхээр ял шийтгэл хүлээсэн огноотой харьцуулсан/жишсэн хугацаанд тулгуурлан тус 5 жилийн хугацааг тооцно. Та таван жилээс өмнөх хугацааны зөрчлөө хасч болно.",
-  "proveHasNotConvicted":
+  "If Yes, what steps have you taken to ensure this does not happen again":
     "Хэрэв тийм бол ийм алдааг дахин гаргахгүйн төлөө юу хийсэн бэ?",
-  "hasLeadersConvicted":
+  "Has your company or any of its directors been investigated or convicted of any other legal infringement not described above within the last five years?":
     "Сүүлийн таван жилд  танай компани, эсхүл танай компанийн захирлуудын аль нэг нь дээр тусгагдаагүй  өөр ямар нэг хууль зөрчсөн эсэх талаар шалгагдаж, эсхүл шүүхээс ял шийтгэл хүлээсэн үү?",
-  "hasLeadersConvictedDesc":
+  "The five years is based on the date of your declaration and submission of your questionnaire compared to the date of conviction. You may remove any breaches older than five years.":
     "Таны мэдэгдлээ өгч, асуулга бөглөсөн огноог шүүхээр ял шийтгэл хүлээсэн огноотой харьцуулсан/жишсэн хугацаанд тулгуурлан тус 5 жилийн хугацааг тооцно. Та таван жилээс өмнөх хугацааны зөрчлөө хасч болно.",
-  "doesEmployeePoliticallyExposed":
+  "Does your company employ any politically exposed person? If yes, provide list of PEP name":
     "Танай компанид  улс төрийн нөлөө бүхий хүн ажилладаг уу? Хэрэв тийм бол, тухайн хүмүүсийнхээ нэрсийг бичнэ үү",
-  "doesEmployeePoliticallyExposedDesc":
+  "PEP - Individuals who are or have been entrusted with prominent public functions either domestically or by a foreign country, for example Heads of state or Heads of government, senior politicians, senior government, judicial or military officials, senior executives of state owned corporations, important political party officials":
     "Улс төрийн нөлөө бүхий хүн гэж төрийн тэргүүн, засгийн газрын тэргүүн, томоохон улс төрч, засгийн газар, шүүх, батлан хамгаалах салбарын дээгүүр тушаалын албан хаагчид, улсын өмчийн корпорацийн дээгүүр тушаалын гүйцэтгэх захирал, улс төрийн намын нөлөө бүхий хүн гэх мэт тус улсдаа болон гадаадын улс орнуудад олон нийтийн чухал албан үүрэг хашиж буй, хашиж ирсэн хүмүүсийг хэлнэ.",
-  "addInvestigation": "Шинийг нэмэх",
-  "investigation": "Хяналт шалгалт",
-  "placeholderInvestigation": "Хяналт шалгалт",
-  "pepName": "Улс төрийн нөлөө бүхий хүний нэр",
-  "pepNameDesc":
-    "Улс төрийн нөлөө бүхий хүн гэж төрийн тэргүүн, засгийн газрын тэргүүн, томоохон улс төрч, засгийн газар, шүүх, батлан хамгаалах салбарын дээгүүр тушаалын албан хаагчид, улсын өмчийн корпорацийн дээгүүр тушаалын гүйцэтгэх захирал, улс төрийн намын нөлөө бүхий хүн гэх мэт тус улсдаа болон гадаадын улс орнуудад олон нийтийн чухал албан үүрэг хашиж буй, хашиж ирсэн хүмүүсийг хэлнэ"
+  "Add investigation": "Хяналт нэмэх",
+  "Investigation": "Хяналт шалгалт",
+  "Investigation name": "Хяналт нэр",
+  "Investigation status": "Хяналт төлөв",
+  "PEP Name": "Улс төрийн нөлөө бүхий хүний нэр",
+  "Please upload supporting document": "Холбогдох материалуудыг хавсаргана уу"
 }

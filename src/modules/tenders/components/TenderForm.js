@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Input, Table, Checkbox } from 'antd';
-import { BaseForm, Uploader } from 'modules/common/components';
+import { BaseForm, Uploader, T } from 'modules/common/components';
 import MainInfo from './forms/MainInfo';
 
 const { Column } = Table;
 
 class TenderForm extends BaseForm {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     const { data } = props;
     const response = props.response || {};
@@ -141,9 +141,8 @@ class TenderForm extends BaseForm {
 
   renderProductColumn(props) {
     const { name, title, type, isSupplier } = props;
-    const { location } = this.props;
 
-    const hidden = isSupplier && location.pathname.includes('eoi');
+    const hidden = isSupplier;
 
     if (hidden) return null;
 
@@ -174,7 +173,7 @@ class TenderForm extends BaseForm {
             defaultChecked={record[name]}
             onChange={e => this.onProductInputChange(e, name, record.key)}
           >
-            Submitted
+            <T id="submitted">Submitted</T>
           </Checkbox>
         );
       }

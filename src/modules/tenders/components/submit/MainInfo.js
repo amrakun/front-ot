@@ -3,35 +3,6 @@ import { Card, Icon, Row, Col, Modal, Button } from 'antd';
 import moment from 'moment';
 import { dateTimeFormat as dFormat, colors } from 'modules/common/constants';
 import PropTypes from 'prop-types';
-import { T } from 'modules/common/components';
-import { defineMessages } from 'react-intl';
-
-const messages = defineMessages({
-  tenderRegularName: {
-    id: 'tenderRegularName',
-    defaultMessage: 'Name'
-  },
-  tenderRegularNumber: {
-    id: 'tenderRegularNumber',
-    defaultMessage: 'Number'
-  },
-  tenderDocument: {
-    id: 'tenderDocument',
-    defaultMessage: 'Document'
-  },
-  tenderInformation: {
-    id: 'tenderInformation',
-    defaultMessage: 'Information'
-  },
-  tenderPublishDate: {
-    id: 'tenderPublishDate',
-    defaultMessage: 'Publish Date'
-  },
-  tenderCloseDate: {
-    id: 'tenderCloseDate',
-    defaultMessage: 'Close Date'
-  }
-});
 
 class MainInfo extends React.Component {
   constructor(props) {
@@ -76,42 +47,30 @@ class MainInfo extends React.Component {
   render() {
     const { name, number, publishDate, closeDate, file, content } = this.props;
     const renderCard = this.renderCard;
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
 
     return (
       <Row gutter={16}>
-        {renderCard(formatMessage(messages.tenderRegularName), name, 'idcard')}
+        {renderCard(__('Name'))}
+        {renderCard(__('Number'), number, 'profile')}
         {renderCard(
-          formatMessage(messages.tenderRegularNumber),
-          number,
-          'profile'
-        )}
-        {renderCard(
-          formatMessage(messages.tenderPublishDate),
+          __('Publish Date'),
           moment(publishDate).format(dFormat),
           'clock-circle-o'
         )}
         {renderCard(
-          formatMessage(messages.tenderCloseDate),
+          __('Close Date'),
           moment(closeDate).format(dFormat),
           'clock-circle'
         )}
         {renderCard(
-          formatMessage(messages.tenderDocument),
-          file ? (
-            <a href={file.url}>
-              <T id="tenderDownload">Download</T>
-            </a>
-          ) : (
-            '-'
-          ),
+          __('Document'),
+          file ? <a href={file.url}>{__('Download')}</a> : '-',
           'file'
         )}
         {renderCard(
-          formatMessage(messages.tenderInformation),
-          <a onClick={this.showModal}>
-            <T id="tenderView">View</T>
-          </a>,
+          __('Information'),
+          <a onClick={this.showModal}>{__('View')}</a>,
           'info-circle-o'
         )}
 
@@ -121,7 +80,7 @@ class MainInfo extends React.Component {
           onCancel={this.hideModal}
           width="700px"
           bodyStyle={{ height: '60vh', overflow: 'scroll' }}
-          footer={<Button onClick={this.hideModal}>Close</Button>}
+          footer={<Button onClick={this.hideModal}>{__('Close')}</Button>}
         >
           <div dangerouslySetInnerHTML={{ __html: content }} />
         </Modal>
@@ -140,7 +99,7 @@ MainInfo.propTypes = {
 };
 
 MainInfo.contextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 export default MainInfo;

@@ -4,14 +4,6 @@ import { withRouter } from 'react-router';
 import { Form, Input, Card } from 'antd';
 import { BaseForm, Field, Uploader } from 'modules/common/components';
 import { uploadDisclaimer } from 'modules/common/constants';
-import { defineMessages } from 'react-intl';
-
-const messages = defineMessages({
-  shareholder: {
-    id: 'shareholder',
-    defaultMessage: 'Shareholder'
-  }
-});
 
 class ShareHolders extends BaseForm {
   constructor(props) {
@@ -75,15 +67,14 @@ class ShareHolders extends BaseForm {
   renderShareholder(k, optional) {
     const shareholderInfo = this.props.data || {};
     const shareholders = shareholderInfo.shareholders || [];
-    const { formatMessage } = this.context;
+    const { __ } = this.context;
     const shareholder = shareholders[k] || {};
 
     return (
-      <Card title={formatMessage(messages.shareholder) + ` ${k + 1}`}>
+      <Card title={__('Shareholder') + ` ${k + 1}`}>
         <Field
           label="Name"
           name={`name${k}`}
-          suffix={k}
           control={<Input />}
           initialValue={shareholder.name}
           optional={optional}
@@ -92,7 +83,6 @@ class ShareHolders extends BaseForm {
         <Field
           label="Job title"
           name={`jobTitle${k}`}
-          suffix={k}
           control={<Input />}
           initialValue={shareholder.jobTitle}
           optional={optional}
@@ -101,7 +91,6 @@ class ShareHolders extends BaseForm {
         <Field
           label="Share percentage %"
           name={`percentage${k}`}
-          suffix={k}
           initialValue={shareholder.percentage}
           control={
             <Input
@@ -146,7 +135,7 @@ class ShareHolders extends BaseForm {
 }
 
 ShareHolders.contextTypes = {
-  formatMessage: PropTypes.func
+  __: PropTypes.func
 };
 
 const ShareHoldersForm = Form.create()(ShareHolders);
