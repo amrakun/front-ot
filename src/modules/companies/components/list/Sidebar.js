@@ -96,7 +96,7 @@ class Sidebar extends React.Component {
     const statusOptions = () => {
       return [
         { label: 'Pre-qualified', value: 'isPrequalified' },
-        { label: 'Qaulified', value: 'isQualified' },
+        { label: 'Qualified', value: 'isQualified' },
         { label: 'Validated', value: 'isProductsInfoValidated' },
         { label: 'Include blocked suppliers', value: 'includeBlocked' },
         {
