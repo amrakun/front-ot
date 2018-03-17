@@ -71,6 +71,7 @@ class Validation extends Common {
     const { modalVisible, modalData, validatedValues } = this.state;
 
     let validationOptions = [];
+
     modalData.productCodes &&
       modalData.productCodes.forEach(i => {
         validationOptions.push({
@@ -112,7 +113,7 @@ class Validation extends Common {
       <Row gutter={16}>
         <Sidebar suppliersCount={data && data.length} />
 
-        <Col span={18}>
+        <Col span={19}>
           <Card title="Suppliers">
             <div className="table-operations">
               <Search />

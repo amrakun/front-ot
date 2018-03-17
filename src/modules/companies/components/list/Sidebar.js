@@ -121,14 +121,14 @@ class Sidebar extends React.Component {
     };
 
     return (
-      <Col span={6} style={{ padding: '0 8px' }}>
+      <Col span={5}>
         <Card title="Suppliers">
           <div style={{ fontSize: '30px', textAlign: 'center' }}>
             {suppliersCount}
           </div>
         </Card>
 
-        <Card title="Select products & services code" className="margin">
+        <Card title="Products & services code" className="margin">
           <TreeSelect
             treeData={productsTree}
             value={productCodes}
