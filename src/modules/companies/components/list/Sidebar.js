@@ -131,6 +131,7 @@ class Sidebar extends React.Component {
         <Card title="Products & services code" className="margin">
           <TreeSelect
             treeData={productsTree}
+            allowClear={true}
             value={productCodes}
             onChange={this.onProductCodesChange}
             treeCheckable={true}
