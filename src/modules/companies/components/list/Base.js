@@ -3,17 +3,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import {
-  Table,
-  Card,
-  Row,
-  Col,
-  Button,
-  Icon,
-  message,
-  Modal,
-  Input
-} from 'antd';
+import { Card, Row, Col, Button, Icon, message, Modal, Input } from 'antd';
 import { Search, Editor } from 'modules/common/components';
 import Common from './Common';
 import Sidebar from './Sidebar';
@@ -74,15 +64,8 @@ class Base extends Common {
   }
 
   render() {
-    const {
-      data,
-      pagination,
-      loading,
-      onChange,
-      exportCompanies,
-      exportLoading,
-      exportCompany
-    } = this.props;
+    const { data, exportCompanies, exportLoading, exportCompany } = this.props;
+
     const { selectedCompanies, emailModalVisible, emailContent } = this.state;
 
     const columns = this.getWrappedColumns([
@@ -155,21 +138,13 @@ class Base extends Common {
               </Button>
             </div>
 
-            <Table
-              rowSelection={{
+            {this.renderTable({
+              rowSelection: {
                 selectedCompanies,
                 onChange: this.onSelectedCompaniesChange
-              }}
-              columns={columns}
-              rowKey={record => record._id}
-              dataSource={data}
-              pagination={pagination}
-              loading={loading}
-              scroll={{ x: 2000 }}
-              onChange={(pagination, filters, sorter) =>
-                onChange(pagination, filters, sorter)
-              }
-            />
+              },
+              columns
+            })}
           </Card>
 
           <Modal

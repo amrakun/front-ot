@@ -3,7 +3,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import {
-  Table,
   Card,
   Row,
   Col,
@@ -84,7 +83,7 @@ class Feedback extends Common {
   }
 
   render() {
-    const { data, pagination, loading, onChange } = this.props;
+    const { data } = this.props;
     const {
       selectedCompanies,
       feedbackModalVisible,
@@ -142,21 +141,13 @@ class Feedback extends Common {
               </Button>
             </div>
 
-            <Table
-              rowSelection={{
+            {this.renderTable({
+              rowSelection: {
                 selectedCompanies,
                 onChange: this.onSelectedCompaniesChange
-              }}
-              columns={columns}
-              rowKey={record => record._id}
-              dataSource={data}
-              pagination={pagination}
-              loading={loading}
-              scroll={{ x: 1600 }}
-              onChange={(pagination, filters, sorter) =>
-                onChange(pagination, filters, sorter)
-              }
-            />
+              },
+              columns
+            })}
           </Card>
 
           <Modal

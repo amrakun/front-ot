@@ -282,20 +282,24 @@ const commonParams = `
   $_ids: [String]
   $sortField: String
   $sortDirection: Int
+  $page: Int
+  $perPage: Int
 `;
 
 const commonValues = `
-  search: $search,
-  region: $region,
-  productCodes: $productCodes,
-  isProductsInfoValidated: $isProductsInfoValidated,
-  includeBlocked: $includeBlocked,
-  isPrequalified: $isPrequalified,
+  search: $search
+  region: $region
+  productCodes: $productCodes
+  isProductsInfoValidated: $isProductsInfoValidated
+  includeBlocked: $includeBlocked
+  isPrequalified: $isPrequalified
   isQualified: $isQualified,
   difotScore: $difotScore
   _ids: $_ids
   sortField: $sortField
   sortDirection: $sortDirection
+  page: $page
+  perPage: $perPage
 `;
 
 const commonFields = `
@@ -438,10 +442,17 @@ const companyDetail = `
   }
 `;
 
+const companiesTotalCount = `
+  query companiesTotalCount(${commonParams}) {
+    companiesTotalCount(${commonValues})
+  }
+`;
+
 export default {
   companyByUser,
   companyPrequalificationDetail,
   companies,
+  companiesTotalCount,
   simpleCompanies,
   exportCompanies,
   dueDiligence,

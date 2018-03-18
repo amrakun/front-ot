@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { Table } from 'antd';
+import { Paginator } from 'modules/common/components';
 
 const propTypes = {
   history: PropTypes.object,
   data: PropTypes.array,
+  totalCount: PropTypes.number,
   pagination: PropTypes.object,
   loading: PropTypes.bool.isRequired,
   onChange: PropTypes.func
@@ -41,6 +44,26 @@ export default class Common extends React.Component {
       { title: 'Email address', dataIndex: 'contactInfo.email' },
       { title: 'Phone number', dataIndex: 'contactInfo.phone' }
     ];
+  }
+
+  renderTable(extraProps) {
+    const { loading, totalCount, data } = this.props;
+
+    const props = {
+      ...extraProps,
+      dataSource: data,
+      rowKey: record => record._id,
+      pagination: false,
+      loading,
+      scroll: { x: 2000 }
+    };
+
+    return (
+      <div>
+        <Table {...props} />
+        <Paginator total={totalCount} />
+      </div>
+    );
   }
 }
 
