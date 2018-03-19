@@ -96,7 +96,7 @@ class Sidebar extends React.Component {
     const statusOptions = () => {
       return [
         { label: 'Pre-qualified', value: 'isPrequalified' },
-        { label: 'Qaulified', value: 'isQualified' },
+        { label: 'Qualified', value: 'isQualified' },
         { label: 'Validated', value: 'isProductsInfoValidated' },
         { label: 'Include blocked suppliers', value: 'includeBlocked' },
         {
@@ -121,16 +121,17 @@ class Sidebar extends React.Component {
     };
 
     return (
-      <Col span={6} style={{ padding: '0 8px' }}>
+      <Col span={5}>
         <Card title="Suppliers">
           <div style={{ fontSize: '30px', textAlign: 'center' }}>
             {suppliersCount}
           </div>
         </Card>
 
-        <Card title="Select products & services code" className="margin">
+        <Card title="Products & services code" className="margin">
           <TreeSelect
             treeData={productsTree}
+            allowClear={true}
             value={productCodes}
             onChange={this.onProductCodesChange}
             treeCheckable={true}

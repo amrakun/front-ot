@@ -112,7 +112,7 @@ class ReportsAndPlans extends Common {
         render: record => moment(record.createdDate).format(dateFormat)
       },
       {
-        title: 'Applied information',
+        title: 'Provided information',
         render: record =>
           record.supplier ? (
             <Link

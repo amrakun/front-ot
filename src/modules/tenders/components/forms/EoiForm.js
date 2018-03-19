@@ -8,7 +8,7 @@ import { initialProducts, initialPerProducts } from '../../constants';
 
 class EoiForm extends TenderForm {
   constructor(props, context) {
-    super(props);
+    super(props, context);
 
     this.emailTemplate = context.systemConfig.eoiTemplate;
 
@@ -82,7 +82,8 @@ EoiForm.propTypes = {
 };
 
 EoiForm.contextTypes = {
-  systemConfig: PropTypes.object
+  systemConfig: PropTypes.object,
+  __: PropTypes.func
 };
 
 const form = Form.create()(EoiForm);

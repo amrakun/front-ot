@@ -125,7 +125,7 @@ class Tender extends Common {
         render: record => (record.status ? record.status : 'on time')
       },
       {
-        title: 'Response information',
+        title: 'Provided information',
         render: this.renderViewResponse
       },
       { title: 'Uploaded file', dataIndex: 'file' },
