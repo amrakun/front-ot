@@ -2,17 +2,7 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import {
-  Table,
-  Card,
-  Row,
-  Col,
-  Button,
-  Icon,
-  Modal,
-  message,
-  DatePicker
-} from 'antd';
+import { Card, Row, Col, Button, Icon, Modal, message, DatePicker } from 'antd';
 import { Common, Sidebar } from 'modules/companies/components';
 import { Search } from 'modules/common/components';
 import { dateFormat, dateTimeFormat } from 'modules/common/constants';
@@ -71,13 +61,7 @@ class Audit extends Common {
   }
 
   render() {
-    const {
-      data,
-      pagination,
-      loading,
-      onChange,
-      addPhysicalAudit
-    } = this.props;
+    const { data, addPhysicalAudit } = this.props;
     const {
       selectedCompanies,
       auditModalVisible,
@@ -125,21 +109,13 @@ class Audit extends Common {
               </Button>
             </div>
 
-            <Table
-              rowSelection={{
+            {this.renderTable({
+              rowSelection: {
                 selectedCompanies,
                 onChange: this.onSelectedCompaniesChange
-              }}
-              columns={columns}
-              rowKey={record => record._id}
-              dataSource={data}
-              pagination={pagination}
-              loading={loading}
-              scroll={{ x: 1600 }}
-              onChange={(pagination, filters, sorter) =>
-                onChange(pagination, filters, sorter)
-              }
-            />
+              },
+              columns
+            })}
           </Card>
 
           <Modal

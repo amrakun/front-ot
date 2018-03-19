@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Table, Card, Row, Col, Button, Icon } from 'antd';
+import { Card, Row, Col, Button, Icon } from 'antd';
 import { xlsxHandler } from 'modules/common/utils';
 import { Common } from 'modules/companies/components';
 import { Sidebar } from 'modules/companies/components';
@@ -28,7 +28,7 @@ class Difot extends Common {
   }
 
   render() {
-    const { data, pagination, loading, onChange, generate } = this.props;
+    const { data, generate } = this.props;
     const { selectedCompanies } = this.state;
 
     const columns = this.getWrappedColumns([
@@ -81,21 +81,13 @@ class Difot extends Common {
               </div>
             </div>
 
-            <Table
-              rowSelection={{
+            {this.renderTable({
+              rowSelection: {
                 selectedCompanies,
                 onChange: this.onSelectedCompaniesChange
-              }}
-              columns={columns}
-              rowKey={record => record._id}
-              dataSource={data}
-              pagination={pagination}
-              loading={loading}
-              scroll={{ x: 1600 }}
-              onChange={(pagination, filters, sorter) =>
-                onChange(pagination, filters, sorter)
-              }
-            />
+              },
+              columns
+            })}
           </Card>
         </Col>
       </Row>

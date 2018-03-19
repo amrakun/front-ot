@@ -8,6 +8,7 @@ import NumberCardLines from './dataDisplay/numberCard_lines';
 import Editor from './Editor';
 import Loading from './Loading';
 import Search from './Search';
+import Paginator from './Paginator';
 import exportFile from './exportFile';
 
 export {
@@ -21,5 +22,6 @@ export {
   Editor,
   Loading,
   Search,
+  Paginator,
   exportFile
 };

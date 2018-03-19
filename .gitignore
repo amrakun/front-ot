@@ -3,7 +3,10 @@
 # globals
 *.un~
 *.swp
-j
+*.map
+
+.sass-cache
+
 # dependencies
 /node_modules
 

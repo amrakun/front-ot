@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Table, Card, Row, Col, Button, Icon, DatePicker } from 'antd';
+import { Card, Row, Col, Button, Icon, DatePicker } from 'antd';
 import { Uploader, Search } from 'modules/common/components';
 import { Common, Sidebar } from 'modules/companies/components';
 import { dateFormat } from 'modules/common/constants';
@@ -24,14 +24,7 @@ class DueDiligence extends Common {
   }
 
   render() {
-    const {
-      data,
-      pagination,
-      loading,
-      onChange,
-      addDueDiligence,
-      exportExcel
-    } = this.props;
+    const { data, addDueDiligence, exportExcel } = this.props;
 
     const columns = this.getWrappedColumns([
       {
@@ -102,17 +95,9 @@ class DueDiligence extends Common {
               </Button>
             </div>
 
-            <Table
-              columns={columns}
-              rowKey={record => record._id}
-              dataSource={data}
-              pagination={pagination}
-              loading={loading}
-              scroll={{ x: 2000 }}
-              onChange={(pagination, filters, sorter) =>
-                onChange(pagination, filters, sorter)
-              }
-            />
+            {this.renderTable({
+              columns
+            })}
           </Card>
         </Col>
       </Row>

@@ -69,9 +69,14 @@ class Tender extends Common {
     return [
       {
         title: 'Supplier name',
-        dataIndex: 'supplier.basicInfo.enName'
+        dataIndex: 'supplier.basicInfo.enName',
+        fixed: 'left'
       },
-      { title: 'Sap number', dataIndex: 'supplier.basicInfo.sapNumber' },
+      {
+        title: 'Sap number',
+        dataIndex: 'supplier.basicInfo.sapNumber',
+        fixed: 'left'
+      },
       {
         title: 'Tier type',
         render: () => <span>-</span>

@@ -17,7 +17,7 @@ class FeedbackResponses extends React.Component {
     const { loading } = this.props;
     const data = this.props.data || [];
 
-    if (!loading) {
+    if (!loading && data.length > 0) {
       const lastFeedbackId = data[0]._id;
       localStorage.setItem('lastFeedbackId', lastFeedbackId);
     }

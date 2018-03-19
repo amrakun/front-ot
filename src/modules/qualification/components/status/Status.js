@@ -3,7 +3,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Table, Card, Row, Col } from 'antd';
+import { Card, Row, Col } from 'antd';
 import { Common, Sidebar } from 'modules/companies/components';
 import { Search } from 'modules/common/components';
 import moment from 'moment';
@@ -17,7 +17,7 @@ class Status extends Common {
   }
 
   render() {
-    const { data, pagination, loading, onChange } = this.props;
+    const { data } = this.props;
 
     const columns = [
       { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
@@ -54,17 +54,7 @@ class Status extends Common {
               <Search />
             </div>
             <div style={{ margin: '32px 0' }} />
-            <Table
-              columns={columns}
-              rowKey={record => record._id}
-              dataSource={data}
-              pagination={pagination}
-              loading={loading}
-              scroll={{ x: 1600 }}
-              onChange={(pagination, filters, sorter) =>
-                onChange(pagination, filters, sorter)
-              }
-            />
+            {this.renderTable({ columns })}
           </Card>
         </Col>
       </Row>
