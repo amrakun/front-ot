@@ -293,8 +293,21 @@ const audits = `
   }
 `;
 const auditResponses = `
-  query auditResponses($supplierSearch: String, $publishDate: Date, $closeDate: Date, $isFileGenerated: Boolean) {
-    auditResponses(supplierSearch: $supplierSearch, publishDate: $publishDate, closeDate: $closeDate, isFileGenerated: $isFileGenerated) {
+  query auditResponses(
+    $supplierSearch: String
+    $publishDate: Date
+    $closeDate: Date
+    $isFileGenerated: Boolean
+    $status: String
+  ) {
+
+    auditResponses(
+      supplierSearch: $supplierSearch
+      publishDate: $publishDate
+      closeDate: $closeDate
+      isFileGenerated: $isFileGenerated
+      status: $status
+    ) {
       _id
       status
       audit {
