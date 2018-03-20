@@ -33,7 +33,10 @@ class CreateReport extends React.Component {
   }
 
   render() {
-    const { basicInfo, contactInfo, isQualified } = this.props;
+    const { isQualified } = this.props;
+    const basicInfo = this.props.basicInfo || {};
+    const contactInfo = this.props.contactInfo || {};
+
     const { getFieldDecorator } = this.props.form;
     const rules = [
       {
