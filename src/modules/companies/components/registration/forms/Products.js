@@ -10,11 +10,12 @@ class RegistrationForm extends BaseForm {
   handleSubmit(e) {
     e.preventDefault();
 
+    const { __ } = this.context;
     const productCodes = this.getFieldValue('productsInfo');
 
     if (productCodes.length < 21)
       this.saveDirect(this.getFieldValue('productsInfo'), true);
-    else message.error('Please choose maximum of 20 product codes');
+    else message.error(__('You can not choose 20+ product and service codes'));
   }
 
   render() {

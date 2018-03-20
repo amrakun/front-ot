@@ -2,7 +2,6 @@
 .NumberCardLines {
   height: 112px;
 }
-
 .numberCard {
   padding: 24px;
   margin-bottom: 24px;
@@ -26,7 +25,6 @@
   height: 32px;
   margin-bottom: 6px;
 }
-
 .numberCardLines {
   margin-bottom: 24px;
 }
@@ -54,38 +52,30 @@
   height: 32px;
   margin-bottom: 0;
 }
-
 .chart-row {
   margin: 0 -12px;
 }
-
 .chart-row [class^='ant-col'] {
   padding: 0 12px;
 }
-
 .chart-filter,
 .chart-row {
   margin-bottom: 24px;
 }
-
 .chart-filter .chart-filter-input {
   margin-right: 20px;
 }
-
 .pie-chart-labels {
   text-align: center;
 }
-
 .pie-chart-labels .chart-text {
   display: inline-block;
   line-height: 20px;
   margin: 0 12px 12px;
 }
-
 .chart-text label {
   padding-left: 8px;
 }
-
 .chart-count {
   height: 200px;
   line-height: 200px;
@@ -94,19 +84,15 @@
   text-align: center;
   color: #000;
 }
-
 .barchart-wrapper .ant-card-body {
   padding-left: 0px;
 }
-
 .hidden {
   display: none;
 }
-
 .ant-menu-item > a {
   display: inline-block;
 }
-
 .logo {
   height: 94px;
   display: flex;
@@ -119,18 +105,15 @@
   width: 60px;
   max-width: 100%;
 }
-
 .bordered {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 3px;
 }
-
 .ant-layout-footer {
   text-align: center;
   z-index: 0;
 }
-
 .ant-menu-horizontal.ant-menu-root {
   border: none;
   background: #fff;
@@ -150,7 +133,6 @@
 .ant-menu-horizontal.ant-menu-root .ant-avatar * {
   line-height: 26px;
 }
-
 .ant-layout-sider {
   position: relative;
   background: #fff;
@@ -188,66 +170,53 @@
 .ant-layout-sider.ant-layout-sider-collapsed .ant-menu-item a {
   white-space: nowrap;
 }
-
 .main-wrapper.mn.ant-layout .ant-menu-item.multi-line i {
   position: relative;
   top: -8px;
 }
-
 .ant-layout-sider-trigger {
   background: transparent;
 }
 .ant-layout-sider-trigger i {
   color: #333;
 }
-
 .ant-layout,
 .ant-layout-footer {
   background: #e5f4f6;
 }
-
 .ant-menu-inline,
 .ant-menu-vertical {
   border: none;
 }
-
 .ant-layout-content {
   margin: 0 24px;
 }
-
 .ant-breadcrumb {
   margin: 16px 0;
 }
-
 i.success {
   color: green;
 }
-
 .preq-form .ant-calendar-picker {
   width: calc(100% - 16px);
 }
 .preq-form .ant-row.ant-form-item {
   margin-bottom: 10px !important;
 }
-
 .multiple-wrapper {
   padding: 8px 0;
 }
-
 .ant-card:not(.ant-card-no-hovering):hover {
   box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.05);
   border-color: transparent;
 }
-
 .ant-checkbox-group.horizontal .ant-checkbox-group-item {
   display: block;
   padding: 5px 0;
 }
-
 .margin {
   margin-top: 16px;
 }
-
 .table-operations {
   padding-bottom: 16px;
   text-align: right;
@@ -261,11 +230,9 @@ i.success {
 .table-operations a.ant-btn .anticon {
   margin-right: 8px;
 }
-
 .send-rfq .ant-select-lg {
   width: 164px;
 }
-
 .rfq-form-row {
   display: flex;
   overflow: scroll;
@@ -273,7 +240,6 @@ i.success {
 .rfq-form-row .ant-input {
   width: 164px;
 }
-
 .form-table .ant-row.ant-form-item {
   margin: 0;
   display: block;
@@ -289,18 +255,15 @@ i.success {
   color: #fff;
   cursor: not-allowed;
 }
-
 .right {
   float: right !important;
 }
-
 .center-content {
   display: flex;
   justify-content: center;
   align-items: center;
   height: calc(100vh - 200px);
 }
-
 .home-landing {
   position: relative;
   height: calc(100vh - 65px);
@@ -363,7 +326,6 @@ i.success {
 .home-landing .content-wrapper .content .home-btn-transparent:hover {
   color: #f47721;
 }
-
 .login-card {
   width: 400px;
   padding: 26px 15px 15px 15px;
@@ -374,35 +336,28 @@ i.success {
 .login-card form .ant-form-item:last-child {
   margin-bottom: 0;
 }
-
 .main.ant-layout {
   min-height: 100vh;
   transition: margin-left 0.2s ease;
 }
-
 .ant-menu.landing {
   line-height: 64px;
 }
-
 .logo.landing {
   height: auto;
   margin-left: 16px;
 }
-
 *::-webkit-scrollbar-track {
   background-color: transparent;
 }
-
 *::-webkit-scrollbar {
   width: 8px;
   height: 7px;
   background-color: transparent;
 }
-
 *::-webkit-scrollbar-thumb {
   background-color: #e3e3e3;
 }
-
 .ant-pagination.ant-table-pagination {
   margin: 0 auto;
   display: table;
@@ -410,41 +365,33 @@ i.success {
   margin-bottom: 16px;
   float: none;
 }
-
 .card-container > .ant-tabs-card > .ant-tabs-content {
   margin-top: -16px;
 }
-
 .card-container > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
   background: #fff;
   padding: 16px;
 }
-
 .card-container > .ant-tabs-card > .ant-tabs-bar {
   border-color: #fff;
 }
-
 .card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
   border-color: transparent;
   background: transparent;
 }
-
 .card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
   border-color: #fff;
   background: #fff;
 }
-
 .ant-form-item-label {
   white-space: normal;
   line-height: 18px;
   margin-bottom: 6px;
   text-align: left;
 }
-
 form .ant-input-number {
   width: 100%;
 }
-
 .supplier-forms {
   max-width: 1000px;
 }
@@ -471,11 +418,22 @@ form .ant-input-number {
 .supplier-forms .audit-question .ant-row.ant-form-item {
   margin-bottom: 0;
 }
-
+.ant-table-thead > tr > th,
+.ant-table-tbody > tr > td {
+  padding: 6px;
+  word-break: normal;
+}
+.ant-table-tbody > tr > td {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ant-table-thead > tr > th {
+  font-size: 10px;
+}
 .ant-table-row.highlight {
   background-color: #f2fafb;
 }
-
 .loading {
   min-height: 50vh;
   height: 100%;
@@ -484,34 +442,27 @@ form .ant-input-number {
   justify-content: center;
   align-items: center;
 }
-
 .no-pad-bottom .ant-card-body {
   padding-bottom: 0;
 }
-
 .rdw-editor-main {
   height: 372px;
 }
-
 [class*='dashed-button'] {
   background: #fff;
   border-style: dashed;
 }
-
 .dashed-button-big {
   width: 100%;
   margin-top: 16px;
 }
-
 .ant-select-tree {
   max-height: 600px;
   overflow-y: auto;
 }
-
 .ant-tag {
   margin-bottom: 8px;
 }
-
 .upload-btn-wrapper {
   position: relative;
   display: inline-block;
@@ -540,11 +491,9 @@ form .ant-input-number {
   height: 100%;
   cursor: pointer;
 }
-
 .capitalize {
   text-transform: capitalize;
 }
-
 .suppliers-search {
   width: 200px;
   float: left;
@@ -561,12 +510,10 @@ form .ant-input-number {
 .suppliers-search .anticon-close-circle:active {
   color: #666;
 }
-
 .radio-vertical .ant-radio-wrapper {
   display: block;
   padding: 8px 0;
 }
-
 .disabled-inputs .ant-input,
 .disabled-inputs .ant-select-selection {
   pointer-events: none;
@@ -578,17 +525,14 @@ form .ant-input-number {
 .disabled-inputs .ant-select-arrow {
   display: none;
 }
-
 .registration-title {
   max-width: 1000px;
   text-align: center;
   margin-bottom: 24px;
 }
-
 .user-register-form .ant-form-item {
   margin-bottom: 10px;
 }
-
 .ant-popover-content {
   max-width: 400px;
 }
@@ -597,34 +541,27 @@ form .ant-input-number {
   margin: 8px 0;
   padding-left: 16px;
 }
-
 .users-search .ant-input-suffix {
   cursor: pointer;
 }
-
 .ant-select-dropdown-menu-item {
   white-space: normal;
 }
-
 .report-btn {
   display: block;
   width: 100%;
   margin-top: 24px;
 }
-
 .user-phone .ant-input-number-handler-wrap {
   display: none;
 }
-
 .evidence-check label:nth-child(11),
 .evidence-check label:nth-child(22) {
   margin-top: 16px;
 }
-
 .ant-table-thead th span {
   text-transform: capitalize;
 }
-
 a.sn {
   font-weight: 600;
   color: #333;
@@ -633,11 +570,9 @@ a.sn {
 a.sn:hover {
   text-decoration: none;
 }
-
 .ant-upload-list-item-name {
   max-width: 150px;
 }
-
 .login-as-form {
   list-style: none;
 }
@@ -648,9 +583,16 @@ a.sn:hover {
 .login-as-form li:hover {
   text-decoration: underline;
 }
-
 .pagination {
   margin-top: 20px;
 }
-
-/*# sourceMappingURL=main.min.css.map */
+.suppliers-count {
+  font-size: 30px;
+  text-align: center;
+}
+.suppliers-count small {
+  margin: 0 8px;
+  color: #ccc;
+  font-size: 26px;
+  font-weight: 100;
+}

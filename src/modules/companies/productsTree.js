@@ -1873,7 +1873,7 @@ export default [
         key: 'H06000'
       },
       {
-        label: 'H09000 - Support Services',
+        label: 'H07000 - Support Services',
         children: [
           {
             label: 'H07001 - Underground Mining Contractors',
@@ -1881,8 +1881,8 @@ export default [
             key: 'H07001'
           }
         ],
-        value: 'h09000 - support services',
-        key: 'H09000'
+        value: 'h07000 - support services',
+        key: 'H07000'
       },
       {
         label: 'H08000 - Professional Services',
@@ -2011,7 +2011,7 @@ export default [
           }
         ],
         value: 'h09000 - support services',
-        key: 'H09000a'
+        key: 'H0900a'
       },
       {
         label: 'H10000 - Travel',

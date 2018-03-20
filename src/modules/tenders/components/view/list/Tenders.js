@@ -7,6 +7,7 @@ import { dateTimeFormat } from 'modules/common/constants';
 import queryString from 'query-string';
 import moment from 'moment';
 import router from 'modules/common/router';
+import { Paginator } from 'modules/common/components';
 
 const MonthPicker = DatePicker.MonthPicker;
 
@@ -110,7 +111,7 @@ class Tenders extends React.Component {
   }
 
   renderTenders(args) {
-    const { type, data, pagination, loading, history } = this.props;
+    const { type, data, loading, history, totalCount } = this.props;
 
     const { columns, operation } = args;
 
@@ -143,12 +144,13 @@ class Tenders extends React.Component {
           rowClassName={record => {
             if (record._id === highlightedId) return 'highlight';
           }}
+          pagination={false}
           dataSource={data}
-          pagination={pagination}
           loading={loading}
           scroll={{ x: 1500 }}
           onChange={this.handleTableChange}
         />
+        <Paginator total={totalCount} />
       </Card>
     );
   }
@@ -160,7 +162,8 @@ Tenders.propTypes = {
   pagination: PropTypes.object,
   loading: PropTypes.bool.isRequired,
   onChange: PropTypes.func,
-  history: PropTypes.object
+  history: PropTypes.object,
+  totalCount: PropTypes.number
 };
 
 Tenders.contextTypes = {

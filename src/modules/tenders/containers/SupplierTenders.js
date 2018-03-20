@@ -17,10 +17,15 @@ class TendersContainer extends React.Component {
   }
 
   render() {
-    const { tendersTableQuery, tendersResponsesAdd, type } = this.props;
+    const {
+      tendersTableQuery,
+      tendersResponsesAdd,
+      type,
+      tendersCountQuery
+    } = this.props;
     const { currentUser } = this.context;
 
-    if (tendersTableQuery.loading) {
+    if (tendersTableQuery.loading || tendersCountQuery.loading) {
       return <SupplierTenders loading={true} />;
     }
 
@@ -40,8 +45,9 @@ class TendersContainer extends React.Component {
           message.error('Error occurred' + error);
         });
     };
-
+    console.log(tendersCountQuery);
     const tenders = tendersTableQuery.tendersSupplier || [];
+    const totalCount = tendersCountQuery.tendersSupplierTotalCount || 1;
 
     const updatedProps = {
       ...this.props,
@@ -49,7 +55,8 @@ class TendersContainer extends React.Component {
       type: type,
       notInterested: notInterested,
       currentUser: currentUser,
-      exportTenders: this.exportTenders
+      exportTenders: this.exportTenders,
+      totalCount
     };
 
     return <SupplierTenders {...updatedProps} />;
@@ -63,7 +70,8 @@ TendersContainer.propTypes = {
   tendersTableQuery: PropTypes.object,
   tendersResponsesAdd: PropTypes.func,
   queryParams: PropTypes.object,
-  supplierId: PropTypes.string
+  supplierId: PropTypes.string,
+  tendersCountQuery: PropTypes.object
 };
 
 TendersContainer.contextTypes = {
@@ -76,8 +84,24 @@ export default compose(
     options: ({ type, queryParams }) => {
       return {
         variables: {
-          page: 1,
-          perPage: 1,
+          page: queryParams.page || 1,
+          perPage: queryParams.perPage || 15,
+          search: queryParams ? queryParams.search : '',
+          status: queryParams ? queryParams.status : '',
+          type: type
+        },
+        notifyOnNetworkStatusChange: true
+      };
+    }
+  }),
+
+  graphql(gql(queries.totalSupplierTenders), {
+    name: 'tendersCountQuery',
+    options: ({ type, queryParams }) => {
+      return {
+        variables: {
+          page: queryParams.page || 1,
+          perPage: queryParams.perPage || 15,
           search: queryParams ? queryParams.search : '',
           status: queryParams ? queryParams.status : '',
           type: type

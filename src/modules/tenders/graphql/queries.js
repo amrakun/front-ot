@@ -211,6 +211,50 @@ const generateMaterialsTemplate = `
   }
 `;
 
+const totalSupplierTenders = `
+  query tendersSupplierTotalCount(
+    $page: Int
+    $perPage: Int
+    $type: String
+    $status: String
+    $search: String
+    $sortField: String
+    $sortDirection: Int
+  ) {
+    tendersBuyerTotalCount(
+      page: $page
+      perPage: $perPage
+      type: $type
+      status: $status
+      search: $search
+      sortField: $sortField
+      sortDirection: $sortDirection
+    )
+  }
+`;
+
+const totalBuyerTenders = `
+  query tendersBuyerTotalCount(
+    $page: Int
+    $perPage: Int
+    $type: String
+    $status: String
+    $search: String
+    $sortField: String
+    $sortDirection: Int
+  ) {
+    tendersBuyerTotalCount(
+      page: $page
+      perPage: $perPage
+      type: $type
+      status: $status
+      search: $search
+      sortField: $sortField
+      sortDirection: $sortDirection
+    )
+  }
+`;
+
 export default {
   tenderResponses,
   tenderDetail,
@@ -223,5 +267,7 @@ export default {
   eoiBidderList,
   exportTenders,
   tenderResponseByUser,
-  generateMaterialsTemplate
+  generateMaterialsTemplate,
+  totalSupplierTenders,
+  totalBuyerTenders
 };

@@ -28,11 +28,12 @@ export default class Common extends React.Component {
 
   getWrappedColumns(columns) {
     return [
-      { title: 'Supplier name', dataIndex: 'basicInfo.enName', fixed: 'left' },
-      { title: 'SAP number', dataIndex: 'basicInfo.sapNumber', fixed: 'left' },
-      { title: 'Tier type', dataIndex: 'tierType' },
+      { title: 'Supplier name', dataIndex: 'basicInfo.enName', width: 160 },
+      { title: 'SAP number', dataIndex: 'basicInfo.sapNumber', width: 100 },
+      { title: 'Tier type', dataIndex: 'tierType', width: 40 },
       {
         title: 'Pre-qualification status',
+        width: 40,
         render: record => (
           <Link to={`/prequalification-status/${record._id}?view`}>
             {record.isPrequalified ? 'Yes' : 'No'}
@@ -40,9 +41,9 @@ export default class Common extends React.Component {
         )
       },
       ...columns,
-      { title: 'Contact person', dataIndex: 'contactInfo.name' },
-      { title: 'Email address', dataIndex: 'contactInfo.email' },
-      { title: 'Phone number', dataIndex: 'contactInfo.phone' }
+      { title: 'Contact person', dataIndex: 'contactInfo.name', width: 60 },
+      { title: 'Email address', dataIndex: 'contactInfo.email', width: 60 },
+      { title: 'Phone number', dataIndex: 'contactInfo.phone', width: 60 }
     ];
   }
 
@@ -55,7 +56,7 @@ export default class Common extends React.Component {
       rowKey: record => record._id,
       pagination: false,
       loading,
-      scroll: { x: 2000 }
+      scroll: { x: 1224 }
     };
 
     return (

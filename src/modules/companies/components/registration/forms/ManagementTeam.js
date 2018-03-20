@@ -57,7 +57,7 @@ class ManagementTeam extends BaseForm {
     setFieldsValue(values);
   }
 
-  renderItem(prefix, optional = false) {
+  renderItem(prefix, optional = true) {
     const data = this.props.data[prefix] || {};
     const { __ } = this.context;
 
@@ -118,14 +118,14 @@ class ManagementTeam extends BaseForm {
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
-        {this.renderItem('managingDirector')}
+        {this.renderItem('managingDirector', false)}
         {this.renderItem('executiveOfficer')}
         {this.renderItem('salesDirector')}
         {this.renderItem('financialDirector')}
 
-        {this.renderItem('otherMember1', true)}
-        {this.renderItem('otherMember2', true)}
-        {this.renderItem('otherMember3', true)}
+        {this.renderItem('otherMember1')}
+        {this.renderItem('otherMember2')}
+        {this.renderItem('otherMember3')}
 
         {this.renderGoBack()}
         {this.renderSubmit()}

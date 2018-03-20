@@ -62,7 +62,7 @@ const generator = (Component, query) => {
 
     return {
       page: page || 1,
-      perPage: perPage || 10,
+      perPage: perPage || 15,
       search,
       region,
       productCodes,

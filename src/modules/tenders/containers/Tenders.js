@@ -95,18 +95,20 @@ class TendersContainer extends React.Component {
   }
 
   render() {
-    const { tendersTableQuery } = this.props;
+    const { tendersTableQuery, tendersCountQuery } = this.props;
 
-    if (tendersTableQuery.loading) {
+    if (tendersTableQuery.loading || tendersCountQuery.loading) {
       return <BuyerTenders loading={true} />;
     }
 
     const { exportLoading } = this.state;
     const tenders = tendersTableQuery.tenders || [];
+    const totalCount = tendersCountQuery.tendersBuyerTotalCount || 0;
 
     const updatedProps = {
       ...this.props,
       exportLoading,
+      totalCount,
       cancelTender: this.cancelTender,
       data: tenders,
       type: this.type,
@@ -125,7 +127,8 @@ TendersContainer.propTypes = {
   tendersResponsesAdd: PropTypes.func,
   tendersCancel: PropTypes.func,
   queryParams: PropTypes.object,
-  supplierId: PropTypes.string
+  supplierId: PropTypes.string,
+  tendersCountQuery: PropTypes.object
 };
 
 export default compose(
@@ -134,8 +137,25 @@ export default compose(
     options: ({ type, queryParams }) => {
       return {
         variables: {
-          page: 1,
-          perPage: 100,
+          page: queryParams.page || 1,
+          perPage: queryParams.perPage || 15,
+          search: queryParams ? queryParams.search : '',
+          status: queryParams ? queryParams.status : '',
+          type: type,
+          month: queryParams ? queryParams.month : ''
+        },
+        notifyOnNetworkStatusChange: true
+      };
+    }
+  }),
+
+  graphql(gql(queries.totalBuyerTenders), {
+    name: 'tendersCountQuery',
+    options: ({ type, queryParams }) => {
+      return {
+        variables: {
+          page: queryParams.page || 1,
+          perPage: queryParams.perPage || 15,
           search: queryParams ? queryParams.search : '',
           status: queryParams ? queryParams.status : '',
           type: type,

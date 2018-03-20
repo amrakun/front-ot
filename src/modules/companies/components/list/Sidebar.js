@@ -2,16 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import queryString from 'query-string';
-import { Card, Col, TreeSelect, Checkbox, Button, Icon, Select } from 'antd';
+import { Card, Col, TreeSelect, Checkbox, Select } from 'antd';
 import { regionOptions } from '../../constants';
 import productsTree from '../../productsTree';
+import router from 'modules/common/router';
 
 const Option = Select.Option;
 const CheckboxGroup = Checkbox.Group;
 
 const propTypes = {
   history: PropTypes.object,
-  suppliersCount: PropTypes.number
+  suppliersCount: PropTypes.number,
+  checkedCount: PropTypes.number
 };
 
 class Sidebar extends React.Component {
@@ -35,30 +37,16 @@ class Sidebar extends React.Component {
       difotRange: query.difotRange || '76-100'
     };
 
-    this.onProductCodesChange = this.onProductCodesChange.bind(this);
-    this.onRegionChange = this.onRegionChange.bind(this);
-    this.onStatusChange = this.onStatusChange.bind(this);
-    this.onDifotRangeChange = this.onDifotRangeChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.filter = this.filter.bind(this);
   }
 
-  onProductCodesChange(value) {
-    this.setState({ productCodes: value });
+  handleChange(filter) {
+    this.setState({ ...filter });
+    this.filter(filter);
   }
 
-  onRegionChange(values) {
-    this.setState({ region: values });
-  }
-
-  onStatusChange(values) {
-    this.setState({ status: values });
-  }
-
-  onDifotRangeChange(value) {
-    this.setState({ difotRange: value });
-  }
-
-  filter() {
+  filter(filter) {
     const { history } = this.props;
     const { region, status, productCodes, difotRange } = this.state;
 
@@ -79,19 +67,20 @@ class Sidebar extends React.Component {
     const filterValues = {
       region: regionString.replace(/.$/, ''),
       status: statusString.replace(/.$/, ''),
-      productCodes: productCodesString.replace(/.$/, '')
+      productCodes: productCodesString.replace(/.$/, ''),
+      ...filter
     };
 
     if (status.includes('byDifotScore')) {
       filterValues.difotRange = difotRange;
     }
 
-    history.push({ search: queryString.stringify(filterValues) });
+    router.setParams(history, filterValues);
   }
 
   render() {
     const { productCodes, status, region, difotRange } = this.state;
-    const { suppliersCount } = this.props;
+    const { suppliersCount, checkedCount } = this.props;
 
     const statusOptions = () => {
       return [
@@ -123,17 +112,19 @@ class Sidebar extends React.Component {
     return (
       <Col span={5}>
         <Card title="Suppliers">
-          <div style={{ fontSize: '30px', textAlign: 'center' }}>
+          <div className="suppliers-count">
             {suppliersCount}
+            <small>/</small>
+            {checkedCount}
           </div>
         </Card>
 
         <Card title="Products & services code" className="margin">
           <TreeSelect
             treeData={productsTree}
-            allowClear={true}
+            allowClear
             value={productCodes}
-            onChange={this.onProductCodesChange}
+            onChange={value => this.handleChange({ productCodes: value })}
             treeCheckable={true}
             searchPlaceholder="Please select"
             style={{ width: '100%' }}
@@ -145,7 +136,7 @@ class Sidebar extends React.Component {
             options={regionOptions}
             value={region}
             className="horizontal"
-            onChange={this.onRegionChange}
+            onChange={value => this.handleChange({ region: value })}
           />
         </Card>
 
@@ -154,17 +145,9 @@ class Sidebar extends React.Component {
             options={statusOptions()}
             value={status}
             className="horizontal"
-            onChange={this.onStatusChange}
+            onChange={value => this.handleChange({ status: value })}
           />
         </Card>
-
-        <Button
-          style={{ width: '100%', marginTop: '16px' }}
-          type="primary"
-          onClick={this.filter}
-        >
-          Apply filters<Icon type="right" />
-        </Button>
       </Col>
     );
   }

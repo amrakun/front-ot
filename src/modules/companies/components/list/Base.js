@@ -16,7 +16,8 @@ class Base extends Common {
       ...this.state,
       emailContent: '',
       emailSubject: '',
-      emailModalVisible: false
+      emailModalVisible: false,
+      checkedCount: 0
     };
 
     this.handleSend = this.handleSend.bind(this);
@@ -25,6 +26,13 @@ class Base extends Common {
     this.hideEmailModal = this.hideEmailModal.bind(this);
     this.handleEmailContentChange = this.handleEmailContentChange.bind(this);
     this.handleEmailSubjectChange = this.handleEmailSubjectChange.bind(this);
+    this.handleCheck = this.handleCheck.bind(this);
+  }
+
+  handleCheck(companies) {
+    this.setState({ checkedCount: companies.length });
+
+    this.onSelectedCompaniesChange(companies);
   }
 
   handleSend(path) {
@@ -64,27 +72,41 @@ class Base extends Common {
   }
 
   render() {
-    const { data, exportCompanies, exportLoading, exportCompany } = this.props;
+    const {
+      exportCompanies,
+      exportLoading,
+      exportCompany,
+      totalCount
+    } = this.props;
 
-    const { selectedCompanies, emailModalVisible, emailContent } = this.state;
+    const {
+      selectedCompanies,
+      emailModalVisible,
+      emailContent,
+      checkedCount
+    } = this.state;
 
     const columns = this.getWrappedColumns([
       {
         title: 'Registration',
+        width: 40,
         render: record => (
           <Link to={`/view-registration/${record._id}`}>View</Link>
         )
       },
       {
         title: 'Qualification status',
+        width: 40,
         render: record => (record.isQualified ? 'Yes' : 'No')
       },
       {
         title: 'Validation status',
+        width: 40,
         render: record => (record.isProductsInfoValidated ? 'Yes' : '-')
       },
       {
         title: 'Due dilligence',
+        width: 40,
         render: record =>
           record.lastDueDiligence && record.lastDueDiligence.file ? (
             <a href={record.lastDueDiligence.file.url} target="_blank">
@@ -96,14 +118,20 @@ class Base extends Common {
       },
       {
         title: 'DIFOT score (average)',
+        width: 40,
         render: record =>
           record.averageDifotScore ? `${record.averageDifotScore}%` : '-',
         sorter: true,
         key: 'averageDifotScore'
       },
-      { title: 'Blocking', render: record => (record.isBlocked ? 'Yes' : '-') },
+      {
+        title: 'Blocking',
+        width: 40,
+        render: record => (record.isBlocked ? 'Yes' : '-')
+      },
       {
         title: 'Export profile',
+        width: 40,
         render: record => (
           <a onClick={() => exportCompany(record._id)}>Export</a>
         )
@@ -112,7 +140,7 @@ class Base extends Common {
 
     return (
       <Row gutter={16}>
-        <Sidebar suppliersCount={data && data.length} />
+        <Sidebar suppliersCount={totalCount} checkedCount={checkedCount} />
 
         <Col span={19}>
           <Card title="Suppliers">
@@ -141,7 +169,7 @@ class Base extends Common {
             {this.renderTable({
               rowSelection: {
                 selectedCompanies,
-                onChange: this.onSelectedCompaniesChange
+                onChange: this.handleCheck
               },
               columns
             })}

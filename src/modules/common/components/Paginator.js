@@ -24,8 +24,8 @@ class Paginator extends React.Component {
 
     let { perPage, page } = queryParams;
 
-    perPage = perPage ? parseInt(perPage) : 10;
-    page = page ? parseInt(page) : 1;
+    perPage = perPage ? parseInt(perPage, 10) : 15;
+    page = page ? parseInt(page, 15) : 1;
 
     return (
       <Pagination
@@ -39,7 +39,7 @@ class Paginator extends React.Component {
         onShowSizeChange={(current, pageSize) =>
           this.onChange(current, pageSize)
         }
-        pageSizeOptions={['10', '20', '30', '50', '100', '200', '500']}
+        pageSizeOptions={['15', '20', '30', '50', '100', '200', '500']}
         current={page}
         pageSize={perPage}
         total={total}
