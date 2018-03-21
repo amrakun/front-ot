@@ -270,7 +270,7 @@ export const companyPrequalificationDetail = `
   }
 `;
 
-const commonParams = `
+const genericParams = `
   $search: String
   $region: String
   $productCodes: String
@@ -280,13 +280,17 @@ const commonParams = `
   $isQualified: Boolean
   $difotScore: String
   $_ids: [String]
-  $sortField: String
-  $sortDirection: Int
   $page: Int
   $perPage: Int
 `;
 
-const commonValues = `
+const commonParams = `
+  ${genericParams}
+  $sortField: String
+  $sortDirection: Int
+`;
+
+const genericValues = `
   search: $search
   region: $region
   productCodes: $productCodes
@@ -296,10 +300,14 @@ const commonValues = `
   isQualified: $isQualified,
   difotScore: $difotScore
   _ids: $_ids
-  sortField: $sortField
-  sortDirection: $sortDirection
   page: $page
   perPage: $perPage
+`;
+
+const commonValues = `
+  ${genericValues}
+  sortField: $sortField
+  sortDirection: $sortDirection
 `;
 
 const commonFields = `
@@ -346,9 +354,12 @@ const exportCompany = `
 `;
 
 const status = `
-  query companies(${commonParams}) {
-    companies(${commonValues}) {
+  query companies(${genericParams}) {
+    companies(${
+      genericValues
+    } sortField: "prequalifiedDate", sortDirection: -1) {
       ${commonFields}
+      prequalifiedDate
     }
   }
 `;
