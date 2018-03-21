@@ -15,7 +15,7 @@ class Tender extends Common {
 
     this.state = {
       ...this.state,
-      responseModal: { visible: false },
+      responseModal: { visible: false, data: [] },
       regretLetterModal: { visible: false },
       regretLetterContent: ''
     };
@@ -41,13 +41,58 @@ class Tender extends Common {
         visible: true,
         title: supplier ? supplier.basicInfo.enName : '',
         data:
-          respondedDocuments.length > 0 ? respondedDocuments : respondedProducts
+          respondedDocuments.length > 0
+            ? this.generateEoiData(supplier, respondedDocuments)
+            : respondedProducts
       }
     });
   }
 
+  generateEoiData(supplier, respondedDocuments) {
+    const {
+      basicInfo: {
+        certificateOfRegistration,
+        corporateStructure,
+        totalNumberOfEmployees
+      },
+      businessInfo: { doesHaveCodeEthicsFile },
+      healthInfo: { areHSEResourcesClearlyIdentifiedFile },
+      shareholderInfo: { attachments }
+    } = supplier;
+
+    return [
+      ...respondedDocuments,
+      {
+        name: 'State registration certifcate (copy)',
+        file: certificateOfRegistration,
+        isSubmitted: certificateOfRegistration !== null
+      },
+      {
+        name: 'HSE policy & procedures (copy)',
+        file: areHSEResourcesClearlyIdentifiedFile,
+        isSubmitted: areHSEResourcesClearlyIdentifiedFile !== null
+      },
+      {
+        name: 'Business Code of Conduct (copy)',
+        file: doesHaveCodeEthicsFile,
+        isSubmitted: doesHaveCodeEthicsFile !== null
+      },
+      {
+        name: 'Ownership/ shareholder information',
+        file: attachments,
+        isSubmitted: true
+      },
+      {
+        name: 'Organization structure & Total manpower',
+        file: null,
+        isSubmitted: true,
+        notes: `${corporateStructure}, ${totalNumberOfEmployees} employees`
+      }
+    ];
+  }
+
   hideResponsesModal() {
-    this.setState({ responseModal: { visible: false } });
+    this.setState({ responseModal: { visible: false, data: [] } });
   }
 
   toggleRegretLetterModal() {
@@ -70,19 +115,21 @@ class Tender extends Common {
       {
         title: 'Supplier name',
         dataIndex: 'supplier.basicInfo.enName',
-        fixed: 'left'
+        width: 160
       },
       {
         title: 'Sap number',
         dataIndex: 'supplier.basicInfo.sapNumber',
-        fixed: 'left'
+        width: 160
       },
       {
         title: 'Tier type',
+        width: 40,
         render: () => <span>-</span>
       },
       {
         title: 'Pre-qualification status',
+        width: 40,
         render: record => (
           <Link to={`/prequalification-status/${record.supplier._id}?view`}>
             {record.supplier.isPrequalified ? 'Yes' : 'No'}
@@ -91,15 +138,18 @@ class Tender extends Common {
       },
       {
         title: 'Qualification/audit status',
+        width: 40,
         render: record => (record.supplier.isQualified ? 'Yes' : 'No')
       },
       {
         title: 'Validation status',
+        width: 40,
         render: record =>
           record.supplier.isProductsInfoValidated ? 'Yes' : 'No'
       },
       {
         title: 'Due dilligence',
+        width: 40,
         render: record => {
           const { lastDueDiligence } = record.supplier;
 
@@ -114,32 +164,36 @@ class Tender extends Common {
       },
       {
         title: 'DIFOT score',
+        width: 40,
         render: record =>
           record.supplier.averageDifotScore
             ? `${record.supplier.averageDifotScore}%`
             : '-'
       },
-      { title: 'Company size', dataIndex: 'size' },
       {
         title: 'Number of employees',
+        width: 40,
         dataIndex: 'supplier.basicInfo.totalNumberOfEmployees'
       },
-      { title: 'Work experience', dataIndex: 'workExperience' },
+      { title: 'Work experience', width: 40, dataIndex: 'workExperience' },
       {
         title: 'Status',
+        width: 40,
         render: record => (record.status ? record.status : 'on time')
       },
       {
         title: 'Provided information',
+        width: 40,
         render: this.renderViewResponse
       },
-      { title: 'Uploaded file', dataIndex: 'file' },
+      { title: 'Uploaded file', width: 40, dataIndex: 'file' },
       {
         title: 'Contact person',
+        width: 40,
         dataIndex: 'supplier.contactInfo.name'
       },
-      { title: 'Email', dataIndex: 'supplier.contactInfo.email' },
-      { title: 'Phone', dataIndex: 'supplier.contactInfo.phone' }
+      { title: 'Email', width: 40, dataIndex: 'supplier.contactInfo.email' },
+      { title: 'Phone', width: 40, dataIndex: 'supplier.contactInfo.phone' }
     ];
   }
 
@@ -200,9 +254,9 @@ class Tender extends Common {
   renderTable(args) {
     //args passed from Rfq.js and Eoi.js
     const {
-      requestColumns,
-      responseColumns,
-      requestedData,
+      requestColumns = [],
+      responseColumns = [],
+      requestedData = [],
       tableOperations
     } = args;
     const {
@@ -220,6 +274,11 @@ class Tender extends Common {
     const data = this.props.data || [];
     const tenderDetail = this.props.tenderDetail || {};
     const { winnerId, sentRegretLetter, status } = tenderDetail;
+
+    const responseData = responseModal.data.map((row, index) => ({
+      ...row,
+      ...requestedData[index]
+    }));
 
     return (
       <Card
@@ -255,7 +314,7 @@ class Tender extends Common {
           dataSource={status !== 'open' ? data : []}
           pagination={pagination}
           loading={loading}
-          scroll={{ x: 2500 }}
+          scroll={{ x: 1200 }}
           onChange={(pagination, filters, sorter) =>
             onChange(pagination, filters, sorter)
           }
@@ -269,27 +328,11 @@ class Tender extends Common {
           width="100%"
           style={{ top: 16 }}
         >
-          <Row gutter={16}>
-            {requestedData && (
-              <Col span={8}>
-                <Table
-                  columns={requestColumns}
-                  rowKey={() => Math.random()}
-                  dataSource={requestedData}
-                  scroll={{ x: 1100 }}
-                />
-              </Col>
-            )}
-
-            <Col span={requestedData ? 16 : 24}>
-              <Table
-                columns={responseColumns}
-                rowKey={() => Math.random()}
-                dataSource={responseModal.data}
-                scroll={{ x: 1300 }}
-              />
-            </Col>
-          </Row>
+          <Table
+            columns={[...requestColumns, ...responseColumns]}
+            rowKey={() => Math.random()}
+            dataSource={responseData}
+          />
         </Modal>
 
         <Modal
