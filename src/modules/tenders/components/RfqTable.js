@@ -4,13 +4,28 @@ import { Table, Button, Icon, Alert, Col, Row } from 'antd';
 import { rfqProductsColumns as rpc, rfqDisclaimer } from '../constants';
 
 class RfqTable extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      file: ''
+    };
+
+    this.handleFile = this.handleFile.bind(this);
+  }
+
+  handleFile(e) {
+    this.props.handleFile(e);
+
+    this.setState({ file: '' });
+  }
+
   render() {
     const { __ } = this.context;
     const {
       products,
       renderProductColumn,
       isSupplier = true,
-      handleFile,
       generateTemplate
     } = this.props;
 
@@ -44,7 +59,12 @@ class RfqTable extends Component {
             <Button>
               {__('Import excel file')} <Icon type="file-excel" />
             </Button>
-            <input type="file" className="ant-btn" onChange={handleFile} />
+            <input
+              type="file"
+              className="ant-btn"
+              onChange={this.handleFile}
+              value={this.state.file}
+            />
           </div>
         </div>
         <Table
@@ -63,7 +83,8 @@ class RfqTable extends Component {
             name: 'purchaseRequestNumber',
             title: __(rpc.purchaseRequestNumber),
             type: 'number',
-            isSupplier
+            isSupplier,
+            dataType: 'eightDigit'
           })}
           {renderProductColumn({
             name: 'shortText',
@@ -74,7 +95,8 @@ class RfqTable extends Component {
             name: 'quantity',
             title: __(rpc.quantity),
             type: 'number',
-            isSupplier
+            isSupplier,
+            dataType: 'float'
           })}
           {renderProductColumn({
             name: 'uom',
@@ -90,7 +112,8 @@ class RfqTable extends Component {
             name: 'manufacturerPartNumber',
             title: __(rpc.manufacturerPart),
             type: 'number',
-            isSupplier
+            isSupplier,
+            dataType: 'eightDigit'
           })}
           {renderProductColumn({
             name: 'suggestedManufacturer',
@@ -101,7 +124,8 @@ class RfqTable extends Component {
             name: 'suggestedManufacturerPartNumber',
             title: __(rpc.suggestedManufacturerPart),
             type: 'number',
-            isSupplier: !isSupplier
+            isSupplier: !isSupplier,
+            dataType: 'eightDigit'
           })}
           {renderProductColumn({
             name: 'unitPrice',
