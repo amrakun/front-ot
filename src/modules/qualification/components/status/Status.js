@@ -33,7 +33,7 @@ class Status extends Common {
       },
       {
         title: 'Submission date',
-        render: () => moment().format(dateFormat)
+        render: record => moment(record.prequalifiedDate).format(dateFormat)
       },
       {
         title: 'Expiration date',
