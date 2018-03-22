@@ -1,9 +1,7 @@
 const labels = {
-  preqSuggestion: `Таны мэдээлэл бүрэн баталгаажаагүй байна.  Бүртгэл
-    баталгаажаагүй тул тендерийн шалгуур хангахгүй гэдгийг анхаарна уу.
-    Тиймээс OT сургалт хариуцсан багт яаралтай хандан сургалтанд хамрагдана уу.`,
+  preqSuggestion: `Your prequalification information is not confirmed yet`,
 
-  difotSuggestion: `Таны бараа хүргэлтийн үнэлгээ бөгөөд хамгийн багадаа 75% -тай байх ёстой.`
+  difotSuggestion: `Your DIFOT should not be less than 75%`
 };
 
 export { labels };

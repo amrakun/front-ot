@@ -82,16 +82,18 @@ class SupplierTenders extends Tenders {
   }
 
   renderOperation(record) {
-    const { currentUser, notInterested } = this.props;
+    const { currentUser, notInterested, type } = this.props;
     const { status, _id, isParticipated, isSent } = record;
     const { __ } = this.context;
 
     const canNotInterested = status === 'open' && !isSent && !isParticipated;
+    const canNotOpen = status === 'closed' && type === 'eoi';
 
     if (currentUser) {
       return (
         <div style={{ width: '160px' }}>
-          <Link to={`/tender/submit/${_id}`}>{__('Open')}</Link>
+          {canNotOpen && <Link to={`/tender/submit/${_id}`}>{__('Open')}</Link>}
+
           {canNotInterested && [
             <Divider type="vertical" key={0} />,
             <Popconfirm

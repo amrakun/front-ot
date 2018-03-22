@@ -181,6 +181,7 @@ class Base extends Common {
             onCancel={this.hideEmailModal}
             onOk={this.sendEmail}
             width="50%"
+            okText="Send"
           >
             <Input
               onChange={this.handleEmailSubjectChange}

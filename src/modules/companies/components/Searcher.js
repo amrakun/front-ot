@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Tag, Icon } from 'antd';
-import { Popup } from '../../containers/searcher';
+import { Modal, Select } from 'antd';
 
 const propTypes = {
   onSelect: PropTypes.func,
   slogan: PropTypes.string,
   mode: PropTypes.string,
   onChange: PropTypes.func,
-  value: PropTypes.array
+  value: PropTypes.array,
+  suppliers: PropTypes.array
 };
 
 class SupplierSearcher extends React.Component {
@@ -17,7 +18,7 @@ class SupplierSearcher extends React.Component {
 
     this.state = {
       visible: false,
-      selectedValues: []
+      selectedValues: props.value || []
     };
 
     this.showPopup = this.showPopup.bind(this);
@@ -45,30 +46,35 @@ class SupplierSearcher extends React.Component {
     const { selectedValues } = this.state;
 
     if (!selectedValues.includes(value)) {
-      selectedValues.push(value);
-
-      this.setState({ selectedValues });
+      this.setState({ selectedValues: [...selectedValues, value] });
     }
   }
 
-  renderPopup() {
-    const { visible, selectedValues } = this.state;
-    const { value, onChange, slogan, mode } = this.props;
+  renderSelect() {
+    const { suppliers, onChange, mode } = this.props;
+    const { selectedValues } = this.state;
 
-    if (visible || mode === 'select') {
-      return (
-        <Popup
-          visible={visible}
-          onOk={this.onOk}
-          onCancel={this.onCancel}
-          onSelect={this.onSelect}
-          onChange={onChange}
-          slogan={slogan}
-          mode={mode}
-          value={value || selectedValues}
-        />
-      );
-    }
+    const selectProps = {
+      mode: 'multiple',
+      style: { width: '100%' },
+      onSelect: this.onSelect,
+      onChange: onChange,
+      value: selectedValues,
+      filterOption: (inputValue, option) =>
+        option.props.children.includes(inputValue)
+    };
+
+    return (
+      <Select {...selectProps}>
+        {suppliers.map(supplier => (
+          <Select.Option
+            key={mode === 'select' ? supplier._id : JSON.stringify(supplier)}
+          >
+            {supplier.basicInfo.enName}
+          </Select.Option>
+        ))}
+      </Select>
+    );
   }
 
   render() {
@@ -76,14 +82,23 @@ class SupplierSearcher extends React.Component {
 
     return mode === 'select' ? (
       //render only supplier select without modal
-      this.renderPopup()
+      this.renderSelect()
     ) : (
       <span>
         <Tag onClick={this.showPopup} className="dashed-button">
           <Icon type="plus" /> {`${slogan || 'Add'} an existing supplier`}
         </Tag>
 
-        {this.renderPopup()}
+        <Modal
+          okText={slogan || 'Add'}
+          cancelText="Cancel"
+          title={`${slogan || 'Add'} an existing supplier`}
+          visible={this.state.visible}
+          onOk={this.onOk}
+          onCancel={this.onCancel}
+        >
+          {this.renderSelect()}
+        </Modal>
       </span>
     );
   }

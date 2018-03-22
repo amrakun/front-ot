@@ -24,8 +24,10 @@ class PrequalificationForms extends Panes {
 
   render() {
     const { currentTabKey } = this.state;
-    const { productsInfo } = this.props.company || {};
+    const { productsInfo, isSentPrequalificationInfo } =
+      this.props.company || {};
     const { send } = this.props;
+    const disabled = isSentPrequalificationInfo;
 
     return (
       <Tabs
@@ -38,26 +40,29 @@ class PrequalificationForms extends Panes {
           '1',
           'Financial information',
           'financialInfo',
-          FinancialForm
+          FinancialForm,
+          { disabled }
         )}
         {this.renderPane(
           '2',
           'Business integrity & human resource',
           'businessInfo',
-          BusinessForm
+          BusinessForm,
+          { disabled }
         )}
         {this.renderPane(
           '3',
           'Environmental management',
           'environmentalInfo',
-          EnvironmentalForm
+          EnvironmentalForm,
+          { disabled }
         )}
         {this.renderPane(
           '4',
           'Health & safety management system',
           'healthInfo',
           HealthForm,
-          { productsInfo: productsInfo, send: send }
+          { productsInfo: productsInfo, send: send, disabled }
         )}
       </Tabs>
     );

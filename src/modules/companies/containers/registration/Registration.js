@@ -43,13 +43,15 @@ const RegistrationContainer = (props, { __ }) => {
   const save = (name, doc) => {
     const mutation = props[`${name}Edit`];
 
+    const hasFilledBefore = companyByUser.productsInfo !== null;
+
     mutation({ variables: { [name]: doc } })
       .then(() => {
         companyByUserQuery.refetch();
         message.success('Saved');
         if (name === 'productsInfo') {
           formsComplete
-            ? send()
+            ? send(hasFilledBefore)
             : message.error('Please complete all forms before submitting');
         }
       })
@@ -58,19 +60,22 @@ const RegistrationContainer = (props, { __ }) => {
       });
   };
 
-  const send = () => {
+  const send = hasFilledBefore => {
     const { sendToBuyer, history } = props;
 
     sendToBuyer()
       .then(() => {
-        notification.open({
-          message: 'Done!',
-          description: __(
-            'Your registration has been successfully completed.  Oyu Tolgoi procurement team now has started the pre-qualification process on your company. A gap report will be sent once the pre-qualification process complete.'
-          ),
-          icon: <Icon type="smile" style={{ color: 'rgb(0,153,168)' }} />,
-          duration: 10
-        });
+        if (!hasFilledBefore) {
+          notification.open({
+            message: 'Done!',
+            description: __(
+              'Your registration has been successfully completed.  Oyu Tolgoi procurement team now has started the pre-qualification process on your company. A gap report will be sent once the pre-qualification process complete.'
+            ),
+            icon: <Icon type="smile" style={{ color: 'rgb(0,153,168)' }} />,
+            duration: 10
+          });
+        }
+
         history.push('/prequalification');
       })
       .catch(error => {

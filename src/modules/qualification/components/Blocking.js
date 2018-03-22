@@ -16,7 +16,7 @@ import { dateFormat } from 'modules/common/constants';
 import moment from 'moment';
 import { Search } from 'modules/common/components';
 import { Common } from 'modules/companies/components';
-import { SupplierSearcher } from 'modules/companies/components';
+import SupplierSearcher from 'modules/companies/containers/Searcher';
 
 const FormItem = Form.Item;
 
@@ -59,7 +59,7 @@ class Blocking extends Common {
   onAddSuppliers(values) {
     const suppliers = [...this.state.suppliers];
     const supplierIds = this.getSupplierIds();
-
+    console.log(values);
     values.forEach(value => {
       // Only add new suppliers
       if (!supplierIds.includes(value._id)) {

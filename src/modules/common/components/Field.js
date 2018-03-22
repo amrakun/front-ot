@@ -110,6 +110,7 @@ export default class Field extends React.Component {
       <Form.Item
         {...layout}
         label={label}
+        colon={false}
         extra={_description}
         style={isVisible ? {} : { display: 'none' }}
         hasFeedback={hasFeedback}

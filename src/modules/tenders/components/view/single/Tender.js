@@ -291,6 +291,7 @@ class Tender extends Common {
       >
         <div className="table-operations">
           <Search placeholder="Supplier name or SAP number" />
+          {tableOperations}
           <Button
             disabled={sentRegretLetter || ['open', 'draft'].includes(status)}
             onClick={this.toggleRegretLetterModal}
@@ -298,7 +299,6 @@ class Tender extends Common {
             Send regret letter
             <Icon type="mail" />
           </Button>
-          {tableOperations}
         </div>
 
         <Table

@@ -4,12 +4,13 @@ import { Form, Select, Input, DatePicker, Card } from 'antd';
 import { booleanData, actionStatusData } from '../constants';
 import { dateFormat } from 'modules/common/constants';
 import { labels } from '../constants';
-import { BaseForm, Uploader } from 'modules/common/components';
+import { Uploader } from 'modules/common/components';
 import moment from 'moment';
+import PreqForm from './PreqForm';
 
 const { TextArea } = Input;
 
-class PrequalificationForm extends BaseForm {
+class PrequalificationForm extends PreqForm {
   constructor(props) {
     super(props);
 
@@ -59,7 +60,11 @@ class PrequalificationForm extends BaseForm {
             name: 'doesHavePlan',
             label: labels.doesHavePlan,
             dataType: 'boolean',
-            control: <Select onChange={this.onHasPlan}>{booleanOptions}</Select>
+            control: (
+              <Select {...this.common} onChange={this.onHasPlan}>
+                {booleanOptions}
+              </Select>
+            )
           })}
           {this.renderField({
             label: labels.documentLabel,
@@ -77,7 +82,7 @@ class PrequalificationForm extends BaseForm {
             label: labels.hasEnvironmentalRegulatorInvestigated,
             dataType: 'boolean',
             control: (
-              <Select onChange={this.onInvestigatedChange}>
+              <Select {...this.common} onChange={this.onInvestigatedChange}>
                 {booleanOptions}
               </Select>
             )
@@ -105,7 +110,7 @@ class PrequalificationForm extends BaseForm {
             label: labels.actionStatus,
             isVisible: hasEnvironmentalRegulatorInvestigated,
             optional: !hasEnvironmentalRegulatorInvestigated,
-            control: <Select>{statusOptions}</Select>
+            control: <Select {...this.common}>{statusOptions}</Select>
           })}
 
           {this.renderField({
@@ -124,7 +129,7 @@ class PrequalificationForm extends BaseForm {
             label: labels.hasConvictedForEnvironmentalLaws,
             dataType: 'boolean',
             control: (
-              <Select onChange={this.onConvictedChange}>
+              <Select {...this.common} onChange={this.onConvictedChange}>
                 {booleanOptions}
               </Select>
             )

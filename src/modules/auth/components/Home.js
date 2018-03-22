@@ -24,11 +24,11 @@ const Home = (props, context) => {
       <div className="content-wrapper">
         <div className="content">
           <h1>{__('Oyu Suppliers database')}</h1>
-          <Link to="/expression-of-interest" className="home-btn">
-            {__('Expression of Interest')}
+          <Link to="/sign-in" className="home-btn">
+            {__('Sign in')}
           </Link>
           <Link to="/register" className="home-btn-transparent">
-            {__('Register as supplier')}
+            {__('Register as a supplier')}
           </Link>
         </div>
       </div>

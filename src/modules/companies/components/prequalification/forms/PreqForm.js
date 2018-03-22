@@ -6,6 +6,13 @@ import { BaseForm, Uploader } from 'modules/common/components';
 const TextArea = Input.TextArea;
 
 class PreqForm extends BaseForm {
+  constructor(props) {
+    super(props);
+
+    this.common = {
+      disabled: props.disabled
+    };
+  }
   renderConditionalField(name, isTextarea) {
     const isVisible = this.state[name];
 
@@ -50,7 +57,10 @@ class PreqForm extends BaseForm {
       dataType: 'boolean',
       description: descriptions[name] && descriptions[name],
       control: (
-        <Select onChange={value => this.onConditionalChange(value, name)}>
+        <Select
+          {...this.common}
+          onChange={value => this.onConditionalChange(value, name)}
+        >
           {booleanOptions}
         </Select>
       )

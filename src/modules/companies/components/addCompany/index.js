@@ -7,7 +7,7 @@ const propTypes = {
   onAdd: PropTypes.func.isRequired
 };
 
-class SupplierSearcher extends React.Component {
+class AddCompany extends React.Component {
   constructor(props) {
     super(props);
 
@@ -55,6 +55,6 @@ class SupplierSearcher extends React.Component {
   }
 }
 
-SupplierSearcher.propTypes = propTypes;
+AddCompany.propTypes = propTypes;
 
-export default SupplierSearcher;
+export default AddCompany;

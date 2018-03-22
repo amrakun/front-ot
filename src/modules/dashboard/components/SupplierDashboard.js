@@ -78,9 +78,11 @@ class Dashboard extends React.Component {
             <NumberCardLines
               icon="calendar"
               title={__('DIFOT Score')}
-              tooltip={averageDifotScore < 75 ? labels.difotSuggestion : null}
+              tooltip={
+                averageDifotScore < 75 ? __(labels.difotSuggestion) : null
+              }
               color={averageDifotScore ? colors[7] : colors[5]}
-              number={averageDifotScore || 0}
+              number={averageDifotScore ? averageDifotScore.toFixed(1) : 0}
               percent={averageDifotScore || 0}
               withPercent={true}
             />
@@ -93,12 +95,12 @@ class Dashboard extends React.Component {
               text={
                 hasFeedback ? (
                   <span>
-                    {__('You have success feedback request. Click')}
+                    {__('Please click here')}
                     <Link to={`feedback/submit/${lastFeedback._id}`}>
                       {' '}
                       {__('here')}
                     </Link>{' '}
-                    {__('to submit your response.')}
+                    {__('to share your successes!')}
                   </span>
                 ) : (
                   __('Nothing new')
@@ -130,7 +132,7 @@ class Dashboard extends React.Component {
               tooltip={
                 isPrequalified === null
                   ? null
-                  : !isPrequalified ? labels.preqSuggestion : null
+                  : !isPrequalified ? __(labels.preqSuggestion) : null
               }
               text={
                 <span>

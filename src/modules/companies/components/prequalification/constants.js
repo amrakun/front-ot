@@ -186,7 +186,7 @@ export const labels = {
 
 export const descriptions = {
   isSubContractor:
-    'Belarus, Burundi, Central African Republic, Cuba, Democratic Republic of Congo, Iran, Iraq, Lebanon, Libya, North Korea, Somalia, Sudan, Syria, Ukraine/Russia, Venezuela, Yemen and Zimbabwe.',
+    'Abkhazia, Andorra, Belarus, Burundi, Central African Republic, Cook Island, Cuba, Cuba, Democratic Republic of Congo, Iran, Iraq, Lebanon, Libya, Liechtenstein, Monaco, Nagamo Karabaksh, Niue and North Korea, Northern Cyprus, North Korea, Sahrawi Arab Democratic Republic, Somalia, Somaliland, South Ossetia, Sudan, Syria, Taiwan, Transnistria, Transnistria, Ukraine/Russia, Venezuela, Yemen and Zimbabwe.',
 
   employeeTurnoverRate:
     'Employee Turnover is the act of replacing an employee with a new employee. You calculate the turnover rate by dividing the number of employees who left by the total number of employees at the beginning of the period.',

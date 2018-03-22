@@ -121,7 +121,12 @@ class PrequalificationForm extends PreqForm {
               initialValue={investigation.name}
               hasFeedback={false}
               optional={true}
-              control={<Input placeholder={__('Investigation name')} />}
+              control={
+                <Input
+                  {...this.common}
+                  placeholder={__('Investigation name')}
+                />
+              }
             />
           </Col>
           <Col span={6}>
@@ -139,7 +144,12 @@ class PrequalificationForm extends PreqForm {
               initialValue={investigation.status}
               hasFeedback={false}
               optional={true}
-              control={<Input placeholder={__('Investigation status')} />}
+              control={
+                <Input
+                  {...this.common}
+                  placeholder={__('Investigation status')}
+                />
+              }
             />
           </Col>
           <Col span={6}>
@@ -194,7 +204,7 @@ class PrequalificationForm extends PreqForm {
             name: 'employeeTurnoverRate',
             label: labels.employeeTurnoverRate,
             description: descriptions.employeeTurnoverRate,
-            control: <Input type="number" />
+            control: <Input {...this.common} type="number" />
           })}
         </Card>
 
@@ -213,7 +223,7 @@ class PrequalificationForm extends PreqForm {
             description: descriptions.hasConvictedForBusinessIntegrity,
             dataType: 'boolean',
             control: (
-              <Select onChange={this.onHasConvictedChange}>
+              <Select {...this.common} onChange={this.onHasConvictedChange}>
                 {booleanOptions}
               </Select>
             )
@@ -235,7 +245,7 @@ class PrequalificationForm extends PreqForm {
             description: descriptions.hasLeadersConvicted,
             dataType: 'boolean',
             control: (
-              <Select onChange={this.onLeaderConvictedChange}>
+              <Select {...this.common} onChange={this.onLeaderConvictedChange}>
                 {booleanOptions}
               </Select>
             )
@@ -262,7 +272,9 @@ class PrequalificationForm extends PreqForm {
             description: descriptions.doesEmployeePoliticallyExposed,
             dataType: 'boolean',
             control: (
-              <Select onChange={this.onHasPEPCHange}>{booleanOptions}</Select>
+              <Select {...this.common} onChange={this.onHasPEPCHange}>
+                {booleanOptions}
+              </Select>
             )
           })}
 
@@ -271,7 +283,7 @@ class PrequalificationForm extends PreqForm {
             label: labels.PEPName,
             isVisible: doesEmployeePoliticallyExposed,
             optional: !doesEmployeePoliticallyExposed,
-            control: <Input />
+            control: <Input {...this.common} />
           })}
 
           {this.renderField({
@@ -279,7 +291,10 @@ class PrequalificationForm extends PreqForm {
             description: descriptions.isSubContractor,
             name: 'isSubContractor',
             control: (
-              <Select placeholder={__('Please select an option')}>
+              <Select
+                {...this.common}
+                placeholder={__('Please select an option')}
+              >
                 {booleanOptions}
               </Select>
             )

@@ -25,6 +25,7 @@ class DueDiligence extends Common {
 
   render() {
     const { data, addDueDiligence, exportExcel } = this.props;
+    const { selectedCompanies } = this.state;
 
     const columns = this.getWrappedColumns([
       {
@@ -96,6 +97,10 @@ class DueDiligence extends Common {
             </div>
 
             {this.renderTable({
+              rowSelection: {
+                selectedCompanies,
+                onChange: this.onSelectedCompaniesChange
+              },
               columns
             })}
           </Card>

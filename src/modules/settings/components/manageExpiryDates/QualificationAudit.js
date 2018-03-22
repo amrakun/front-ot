@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SupplierSearcher } from 'modules/companies/components';
+import SupplierSearcher from 'modules/companies/containers/Searcher';
 import { Row, Col, Select, Input, Button, Form } from 'antd';
 
 const Option = Select.Option;

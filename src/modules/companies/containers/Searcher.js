@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { gql, compose, graphql } from 'react-apollo';
-import { queries } from '../../graphql';
-import Popup from '../../components/searcher/Popup';
+import { queries } from '../graphql';
+import Searcher from '../components/Searcher';
 
-const PopupContainer = props => {
+const SearcherContainer = props => {
   const suppliers = props.companiesQuery.companies || [];
 
-  return <Popup {...{ ...props, suppliers }} />;
+  return <Searcher {...{ ...props, suppliers }} />;
 };
 
-PopupContainer.propTypes = {
+SearcherContainer.propTypes = {
   companiesQuery: PropTypes.object
 };
 
@@ -23,4 +23,4 @@ export default compose(
       };
     }
   })
-)(PopupContainer);
+)(SearcherContainer);

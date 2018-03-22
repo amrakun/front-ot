@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Checkbox } from 'antd';
 import ModalWrapper from './ModalWrapper';
 import { evidenceCheckList } from '../constants';
+
 const EvidenceCheck = (props, { __ }) => {
   let evidenceChecks = [];
 
@@ -17,9 +18,10 @@ const EvidenceCheck = (props, { __ }) => {
     props.save(doc);
   }
 
-  const evidenceCheckListModified = evidenceCheckList.map((item, i) => {
-    return __(item.label);
-  });
+  const evidenceCheckListModified = evidenceCheckList.map(item => ({
+    label: __(item.label),
+    value: item.value
+  }));
 
   return (
     <ModalWrapper {...props} handleOk={handleOk}>

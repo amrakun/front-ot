@@ -19,10 +19,11 @@ class RegistrationForm extends BaseForm {
       role: data.role || [],
       isExclusiveDistributor: data.isExclusiveDistributor || false,
       isParentExistingSup: data.isParentExistingSup || false,
-      factories: (data.factories || []).map(f => ({
+      factories: (data.factories || ['']).map(f => ({
         _id: Math.random(),
         ...f
-      }))
+      })),
+      distributionRights: data.authorizedDistributions || ['']
     };
 
     this.onHasParentChange = this.onHasParentChange.bind(this);
@@ -31,6 +32,7 @@ class RegistrationForm extends BaseForm {
     this.addFactory = this.addFactory.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onParentExists = this.onParentExists.bind(this);
+    this.addRightName = this.addRightName.bind(this);
   }
 
   onHasParentChange(value) {
@@ -69,6 +71,14 @@ class RegistrationForm extends BaseForm {
     this.setState({ factories });
   }
 
+  addRightName() {
+    const { distributionRights } = this.state;
+
+    distributionRights.push('');
+
+    this.setState({ distributionRights });
+  }
+
   handleSubmit(e) {
     e.preventDefault();
 
@@ -87,15 +97,11 @@ class RegistrationForm extends BaseForm {
     });
 
     if (this.state.isExclusiveDistributor) {
-      authorizedDistributions.push(
-        this.getFieldValue('distributionRightName0')
-      );
-      authorizedDistributions.push(
-        this.getFieldValue('distributionRightName1')
-      );
-      authorizedDistributions.push(
-        this.getFieldValue('distributionRightName2')
-      );
+      this.state.distributionRights.forEach((right, index) => {
+        authorizedDistributions.push(
+          this.getFieldValue(`distributionRightName${index}`)
+        );
+      });
     }
 
     this.save({ factories, authorizedDistributions });
@@ -153,14 +159,14 @@ class RegistrationForm extends BaseForm {
     );
   }
 
-  renderDistrubutionRightInput(index) {
-    const initValues = this.props.data.authorizedDistributions || {};
+  renderDistrubutionRightInput(value, index) {
     const _index = index > 0 ? index : '';
 
     return (
       <Field
+        key={index}
         name={`distributionRightName${index}`}
-        initialValue={initValues[index]}
+        initialValue={value}
         label={'Distribution right name ' + _index}
         hasFeedback={false}
         optional={true}
@@ -173,12 +179,22 @@ class RegistrationForm extends BaseForm {
     const booleanOptions = this.renderOptions(booleanData);
     const countryOptions = this.renderOptions(countryData);
 
-    const { hasParent, role, factories, isExclusiveDistributor } = this.state;
+    const {
+      hasParent,
+      role,
+      factories,
+      isExclusiveDistributor,
+      distributionRights
+    } = this.state;
 
     const roleNone = role.includes('None');
 
     const factoryItems = factories.map((factory, index) =>
       this.renderFactory(factory, index)
+    );
+
+    const distributionRightItems = distributionRights.map((value, index) =>
+      this.renderDistrubutionRightInput(value, index)
     );
 
     const { __ } = this.context;
@@ -278,10 +294,6 @@ class RegistrationForm extends BaseForm {
                 : 'hidden'
             }
           >
-            {this.renderDistrubutionRightInput(0)}
-            {this.renderDistrubutionRightInput(1)}
-            {this.renderDistrubutionRightInput(2)}
-
             {this.renderField({
               label: groupLabels.attachments,
               name: 'attachments',
@@ -291,6 +303,13 @@ class RegistrationForm extends BaseForm {
               dataType: 'file-multiple',
               control: <Uploader multiple={true} />
             })}
+
+            {distributionRightItems}
+            <FormItem>
+              <Button type="dashed" onClick={this.addRightName}>
+                <Icon type="plus" /> {__('Add distribution right name')}
+              </Button>
+            </FormItem>
           </div>
         </Card>
 

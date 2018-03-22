@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { Form, Select, Row, Col, DatePicker, Input, Card } from 'antd';
 import moment from 'moment';
 import { yearData, booleanData, currencyData } from '../constants';
-import { BaseForm, Uploader } from 'modules/common/components';
+import { Uploader } from 'modules/common/components';
 import { dateFormat } from 'modules/common/constants';
+import PreqForm from './PreqForm';
 
-class PrequalificationForm extends BaseForm {
+class PrequalificationForm extends PreqForm {
   constructor(props) {
     super(props);
 
@@ -107,7 +108,7 @@ class PrequalificationForm extends BaseForm {
             hasFeedback: false,
             optional: !canProvideAccountsInfo,
             control: (
-              <Select placeholder={__('Select an year')}>
+              <Select {...this.common} placeholder={__('Select an year')}>
                 {this.renderOptions(yearData, true)}
               </Select>
             )
@@ -195,7 +196,13 @@ class PrequalificationForm extends BaseForm {
             label: 'Can you provide accounts for the last 3 financial years?',
             name: 'canProvideAccountsInfo',
             control: (
-              <Select onChange={this.onCanProvide}>{booleanOptions}</Select>
+              <Select
+                {...this.common}
+                {...this.common}
+                onChange={this.onCanProvide}
+              >
+                {booleanOptions}
+              </Select>
             )
           })}
 
@@ -205,7 +212,11 @@ class PrequalificationForm extends BaseForm {
               name: 'currency',
               optional: !canProvideAccountsInfo,
               control: (
-                <Select placeholder={__('Select a currency')}>
+                <Select
+                  {...this.common}
+                  {...this.common}
+                  placeholder={__('Select a currency')}
+                >
                   {currencyOptions}
                 </Select>
               )
@@ -224,6 +235,7 @@ class PrequalificationForm extends BaseForm {
             )}
 
             <Form.Item
+              {...this.common}
               className="multiple-wrapper"
               label={__(
                 'Please provide financial records for your last 3 years'
@@ -243,7 +255,9 @@ class PrequalificationForm extends BaseForm {
             name: 'reasonToCannotNotProvide',
             isVisible: reasonVisible,
             optional: !reasonVisible,
-            control: <Input.TextArea style={{ minHeight: '80px' }} />
+            control: (
+              <Input.TextArea {...this.common} style={{ minHeight: '80px' }} />
+            )
           })}
         </Card>
 
@@ -252,7 +266,13 @@ class PrequalificationForm extends BaseForm {
             label: 'Is your company up to date with Social Security payments?',
             name: 'isUpToDateSSP',
             control: (
-              <Select placeholder={__('Select one')}>{booleanOptions}</Select>
+              <Select
+                {...this.common}
+                {...this.common}
+                placeholder={__('Select one')}
+              >
+                {booleanOptions}
+              </Select>
             )
           })}
 
@@ -260,7 +280,13 @@ class PrequalificationForm extends BaseForm {
             label: 'Is your company up to date with Corporation Tax payments?',
             name: 'isUpToDateCTP',
             control: (
-              <Select placeholder={__('Select one')}>{booleanOptions}</Select>
+              <Select
+                {...this.common}
+                {...this.common}
+                placeholder={__('Select one')}
+              >
+                {booleanOptions}
+              </Select>
             )
           })}
         </Card>

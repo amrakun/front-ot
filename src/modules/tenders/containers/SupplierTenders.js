@@ -45,7 +45,7 @@ class TendersContainer extends React.Component {
           message.error('Error occurred' + error);
         });
     };
-    console.log(tendersCountQuery);
+
     const tenders = tendersTableQuery.tendersSupplier || [];
     const totalCount = tendersCountQuery.tendersSupplierTotalCount || 1;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Row, Col, Select, Input, Button } from 'antd';
-import { SupplierSearcher } from 'modules/companies/components';
+import SupplierSearcher from 'modules/companies/containers/Searcher';
 
 const FormItem = Form.Item;
 const Option = Select.Option;

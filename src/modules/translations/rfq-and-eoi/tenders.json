@@ -25,12 +25,16 @@
   "Nothing new": "Шинэ зүйл алга",
   "You are not pre-qualified, please click":
     "Таны мэдээлэл бүрэн баталгаажаагүй байна",
+  "Your prequalification information is not confirmed yet":
+    "Таны мэдээлэл бүрэн баталгаажаагүй байна. Бүртгэл баталгаажаагүй тул тендерийн шалгуур хангахгүй гэдгийг анхаарна уу. Тиймээс OT сургалт хариуцсан багт яаралтай хандан сургалтанд хамрагдана уу.",
+  "Your DIFOT should not be less than 75%":
+    "Таны бараа хүргэлтийн үнэлгээ бөгөөд хамгийн багадаа 75% -тай байх ёстой.",
   "to update your information": "мэдээллээ шинэчилнэ үү",
-  "You have new audit invitation. Click":
-    "Танд шинэ аудит хийх хүсэлт ирсэн байна",
+  "You have new audit invitation. Click": "Танд аудит хийх хүсэлт ирсэн байна",
   "view your audit invitations": "хүсэлтийг харна уу.",
-  "You have success feedback request. Click": "Та гэрээ гүйцэтгэлийн амжилтаа",
-  "to submit your response.": "хуваалцана уу",
+  "Please click here": "Та",
+  "to share your successes!":
+    "дарж байгууллагынхаа амжилтаас бидэнтэй хуваалцана уу!",
   "Apply to EOI": "Оролцох Сонирхлоо Илэрхийлэх",
   "Closed": "Хаалттай",
   "submitted": "Илгээсэн",

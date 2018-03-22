@@ -80,12 +80,12 @@ class Eoi extends Tender {
 
   render() {
     const tableOperations = [
-      <Button onClick={this.handleEoiBidderList} key={0}>
-        EOI bidder list
-        <Icon type="file-excel" />
-      </Button>,
       <Button onClick={this.handleEoiShortList} key={1}>
         EOI short list
+        <Icon type="file-excel" />
+      </Button>,
+      <Button onClick={this.handleEoiBidderList} key={0}>
+        EOI bidder list
         <Icon type="file-excel" />
       </Button>
     ];

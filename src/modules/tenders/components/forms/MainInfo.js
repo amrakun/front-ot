@@ -4,7 +4,8 @@ import { Input, Select, DatePicker, Tag, Card, Row, Col, Tooltip } from 'antd';
 import moment from 'moment';
 import { Editor, Uploader } from 'modules/common/components';
 import { days, dateTimeFormat, colors } from 'modules/common/constants';
-import { SupplierSearcher, AddCompany } from 'modules/companies/components';
+import { AddCompany } from 'modules/companies/components';
+import SupplierSearcher from 'modules/companies/containers/Searcher';
 
 function getColoredTags(suppliers) {
   let ownerNames = [];
