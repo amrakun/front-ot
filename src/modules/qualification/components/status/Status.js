@@ -8,12 +8,24 @@ import { Common, Sidebar } from 'modules/companies/components';
 import { Search } from 'modules/common/components';
 import moment from 'moment';
 import { dateFormat } from 'modules/common/constants';
+import PropTypes from 'prop-types';
 
 class Status extends Common {
-  constructor(props) {
-    super(props);
-
+  constructor(props, context) {
+    super(props, context);
+    console.log(context);
     this.reports = {};
+  }
+
+  renderExpirationDate(date) {
+    const { systemConfig } = this.context;
+    const prequalificationDow = systemConfig.prequalificationDow || {};
+
+    let d = date ? moment(date) : moment();
+
+    return d
+      .add(prequalificationDow.amount, `${prequalificationDow.duration}s`)
+      .format(dateFormat);
   }
 
   render() {
@@ -37,7 +49,7 @@ class Status extends Common {
       },
       {
         title: 'Expiration date',
-        render: () => moment().format(dateFormat)
+        render: record => this.renderExpirationDate(record.prequalifiedDate)
       },
       { title: 'Contact person', dataIndex: 'contactInfo.name' },
       { title: 'Email address', dataIndex: 'contactInfo.email' },
@@ -61,5 +73,9 @@ class Status extends Common {
     );
   }
 }
+
+Status.contextTypes = {
+  systemConfig: PropTypes.object
+};
 
 export default withRouter(Status);

@@ -237,9 +237,9 @@ class Rfq extends Tender {
 
           <Col sm={24} xl={18} lg={17}>
             {this.renderTable({
-              requestColumns: rfqRequestColumns,
-              responseColumns: this.responseColumns(),
-              requestedData: requestedProducts,
+              requestColumns: rfqRequestColumns || [],
+              responseColumns: this.responseColumns() || [],
+              requestedData: requestedProducts || [],
               tableOperations: tableOperations
             })}
           </Col>

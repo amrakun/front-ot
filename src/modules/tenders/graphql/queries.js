@@ -85,12 +85,24 @@ const tenderResponses = `
         basicInfo {
           enName,
           sapNumber,
+          totalNumberOfEmployees,
+          certificateOfRegistration,
+          corporateStructure,
           totalNumberOfEmployees
         }
         contactInfo {
           name,
           phone,
           email
+        }
+        businessInfo {
+          doesHaveCodeEthicsFile
+        }
+        healthInfo {
+          areHSEResourcesClearlyIdentifiedFile
+        }
+        shareholderInfo {
+          attachments
         }
       }
       ${rfqResponseFields}
@@ -221,7 +233,7 @@ const totalSupplierTenders = `
     $sortField: String
     $sortDirection: Int
   ) {
-    tendersBuyerTotalCount(
+    tendersSupplierTotalCount(
       page: $page
       perPage: $perPage
       type: $type

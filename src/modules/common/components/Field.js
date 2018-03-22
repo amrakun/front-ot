@@ -40,6 +40,11 @@ export default class Field extends React.Component {
     return '';
   }
 
+  validate(rules, value, callback) {
+    console.log(value);
+    callback('zail');
+  }
+
   render() {
     const {
       description = '',
@@ -74,6 +79,10 @@ export default class Field extends React.Component {
         message: __('The input is not valid E-mail!')
       });
     }
+
+    // rules.push({
+    //   validator: e => console.log(e)
+    // })
 
     if (validator) {
       rules.push({ validator });

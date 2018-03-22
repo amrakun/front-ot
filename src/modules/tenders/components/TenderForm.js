@@ -121,11 +121,31 @@ class TenderForm extends BaseForm {
     this.setState({ products });
   }
 
-  onProductInputChange(e, name, recordKey) {
+  onProductInputChange(e, name, recordKey, dataType) {
     const stateKey = `product__${recordKey}`;
     const product = this.state[stateKey] || {};
 
-    product[name] = e.target ? e.target.value || e.target.checked : e;
+    let value;
+
+    if (e.target) {
+      if (e.target.value) {
+        //input
+        value = e.target.value;
+
+        if (dataType === 'float') value = parseFloat(value);
+
+        if (dataType === 'eightDigit' && value.length > 8)
+          value = value.substring(0, 8);
+      } else {
+        //checkbox
+        value = e.target.checked;
+      }
+    } else {
+      //file
+      value = e;
+    }
+
+    product[name] = value;
 
     this.state[stateKey] = product;
   }
@@ -140,18 +160,18 @@ class TenderForm extends BaseForm {
   }
 
   renderProductColumn(props) {
-    const { name, title, type, isSupplier } = props;
+    const { name, title, type, isSupplier, dataType } = props;
 
-    const hidden = isSupplier;
-
-    if (hidden) return null;
+    const disabled = isSupplier;
 
     const render = (text, record) => {
       const inputProps = {
         defaultValue: record[name],
-        disabled: isSupplier,
+        disabled,
         type: type,
-        onChange: e => this.onProductInputChange(e, name, record.key)
+        onChange: e => this.onProductInputChange(e, name, record.key, dataType),
+        placeholder:
+          dataType === 'eightDigit' ? 'Must be less than 8 digits' : ''
       };
 
       let control = <Input {...inputProps} />;
@@ -160,7 +180,7 @@ class TenderForm extends BaseForm {
         control = (
           <Uploader
             defaultFileList={[record[name]]}
-            disabled={isSupplier}
+            disabled={disabled}
             onChange={files =>
               this.onProductFileChange(files, name, record.key)
             }

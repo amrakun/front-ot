@@ -49,11 +49,30 @@ class Eoi extends Tender {
       {
         title: 'Picture',
         key: '5',
-        render: record => (
-          <a onClick={() => window.open(record.file.url)} target="_blank">
-            Download
-          </a>
-        )
+        render: record => {
+          const file = record.file;
+
+          if (Array.isArray(file)) {
+            return file.map((f, index) => (
+              <a
+                key={index}
+                onClick={() => window.open(f.url)}
+                target="_blank"
+                style={{ marginRight: '6px' }}
+              >
+                File{index + 1}
+              </a>
+            ));
+          } else {
+            return file ? (
+              <a onClick={() => window.open(record.file.url)} target="_blank">
+                Download
+              </a>
+            ) : (
+              '-'
+            );
+          }
+        }
       },
       { title: 'Notes', dataIndex: 'notes', key: '4' }
     ];
@@ -75,7 +94,7 @@ class Eoi extends Tender {
       <div>
         {this.renderStats()}
         {this.renderTable({
-          responseColumns: this.responseColumns(),
+          responseColumns: this.responseColumns() || [],
           tableOperations: tableOperations
         })}
       </div>

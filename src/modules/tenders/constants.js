@@ -24,7 +24,7 @@ export const rfqProductsColumns = {
   suggestedManufacturerPart: 'Suggest manufacturer part number',
   unitPrice: 'Unit price',
   totalPrice: 'Total price',
-  leadTime: 'Lead time',
+  leadTime: 'Lead time (day)',
   shippingTerms: 'Shipping terms',
   comment: 'Comment',
   picture: 'Picture (if required)'
