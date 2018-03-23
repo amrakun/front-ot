@@ -187,6 +187,11 @@ class DueDiligence extends Common {
                   <a key={0} href={item.file.url} target="_blank">
                     {moment(item.date).format(dateFormat)}
                   </a>
+
+                  {item.createdUser &&
+                    ` - ${item.createdUser.firstName}
+                    ${item.createdUser.lastName},
+                    ${item.createdUser.email}`}
                 </List.Item>
               )}
             />

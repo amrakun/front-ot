@@ -390,6 +390,11 @@ const dueDiligence = `
         date
         expireDate
         file
+        createdUser {
+          email
+          firstName
+          lastName
+        }
       }
     }
   }
