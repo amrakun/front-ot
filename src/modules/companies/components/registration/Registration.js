@@ -12,12 +12,13 @@ import { Tabs } from 'antd';
 class RegistrationForms extends Panes {
   render() {
     const { currentTabKey } = this.state;
-    const { location, send } = this.props;
+    const { location, send, exportForm } = this.props;
     const viewMode = location.pathname.includes('view-registration');
     const company = this.props.company || {};
     const basicInfo = company.basicInfo || {};
-
     const soleTrader = basicInfo.corporateStructure === 'Sole Trader';
+
+    const { isSentRegistrationInfo } = company;
 
     return (
       <div>
@@ -32,7 +33,8 @@ class RegistrationForms extends Panes {
             '1',
             'Company information',
             'basicInfo',
-            CompanyInfoForm
+            CompanyInfoForm,
+            { isSentRegistrationInfo, exportForm }
           )}
           {this.renderPane('2', 'Contact details', 'contactInfo', ContactForm, {
             basicInfo: basicInfo

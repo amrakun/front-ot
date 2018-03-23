@@ -137,6 +137,7 @@ const registrationFields = `
 export const companyByUser = `
   query companyByUser {
     companyByUser {
+      isSentRegistrationInfo
       ${registrationFields}
     }
   }
@@ -353,6 +354,12 @@ const exportCompany = `
   }
 `;
 
+const exportCurrentCompany = `
+  query companyDetailSupplierExport {
+    companyDetailSupplierExport
+  }
+`;
+
 const status = `
   query companies(${genericParams}) {
     companies(${
@@ -474,5 +481,6 @@ export default {
   prequalificationFields,
   companyDetail,
   audit,
-  exportCompany
+  exportCompany,
+  exportCurrentCompany
 };

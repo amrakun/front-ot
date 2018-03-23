@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import addressFields from './address';
-import { Form, Input, Select, Spin, Card } from 'antd';
+import { Form, Input, Select, Spin, Card, Alert } from 'antd';
 import {
   structureData,
   foreignPercentageData,
@@ -85,10 +85,29 @@ class CompanyInfo extends BaseForm {
     const countryOptions = this.renderOptions(countryData);
     const { __ } = this.context;
 
+    const { isSentRegistrationInfo, exportForm } = this.props;
+
     return (
       <Spin spinning={this.state.loading} delay={500}>
         <Form>
-          <Card title={__('1. Please provide us with your company details')}>
+          {isSentRegistrationInfo && (
+            <Alert
+              message="Registration complete"
+              description={
+                <span>
+                  Please click <a onClick={exportForm}>here</a> to download your
+                  registration form
+                </span>
+              }
+              type="success"
+              showIcon
+            />
+          )}
+
+          <Card
+            title={__('1. Please provide us with your company details')}
+            className="margin"
+          >
             {this.renderField({
               label: 'Are you an existing supplier?',
               name: 'isRegisteredOnSup',

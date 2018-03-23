@@ -5,6 +5,7 @@ import { queries, mutations } from '../../graphql';
 import { RegistrationForms } from '../../components';
 import { Loading } from 'modules/common/components';
 import { message, notification, Icon } from 'antd';
+import { exportFile } from 'modules/common/components';
 
 const RegistrationContainer = (props, { __ }) => {
   let { companyByUserQuery } = props;
@@ -40,6 +41,13 @@ const RegistrationContainer = (props, { __ }) => {
     }
   }
 
+  const exportForm = () => {
+    exportFile({
+      query: queries.exportCurrentCompany,
+      name: 'exportCompany'
+    });
+  };
+
   const save = (name, doc) => {
     const mutation = props[`${name}Edit`];
 
@@ -68,9 +76,10 @@ const RegistrationContainer = (props, { __ }) => {
         if (!hasFilledBefore) {
           notification.open({
             message: 'Done!',
-            description: __(
-              'Your registration has been successfully completed.  Oyu Tolgoi procurement team now has started the pre-qualification process on your company. A gap report will be sent once the pre-qualification process complete.'
-            ),
+            description: __(`Your registration has been successfully completed.
+              Oyu Tolgoi procurement team now has started the pre-qualification
+              process on your company. A gap report will be sent once the
+              pre-qualification process complete.`),
             icon: <Icon type="smile" style={{ color: 'rgb(0,153,168)' }} />,
             duration: 10
           });
@@ -87,6 +96,7 @@ const RegistrationContainer = (props, { __ }) => {
     ...props,
     save,
     send,
+    exportForm,
     company: {
       ...companyByUser
     }
