@@ -59,7 +59,7 @@ class Blocking extends Common {
   onAddSuppliers(values) {
     const suppliers = [...this.state.suppliers];
     const supplierIds = this.getSupplierIds();
-    console.log(values);
+
     values.forEach(value => {
       // Only add new suppliers
       if (!supplierIds.includes(value._id)) {

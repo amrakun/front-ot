@@ -41,8 +41,7 @@ export default class Field extends React.Component {
   }
 
   validate(rules, value, callback) {
-    console.log(value);
-    callback('zail');
+    callback('');
   }
 
   render() {

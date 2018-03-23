@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 class Status extends Common {
   constructor(props, context) {
     super(props, context);
-    console.log(context);
+
     this.reports = {};
   }
 
