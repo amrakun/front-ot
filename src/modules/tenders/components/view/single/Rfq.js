@@ -63,10 +63,10 @@ class Rfq extends Tender {
     }
   }
 
-  handleProductCodeChange(e) {
-    this.setState({ productCode: e.target.value });
+  handleProductCodeChange(value) {
+    this.setState({ productCode: value });
 
-    router.setParams(this.props.history, { productCode: e.target.value });
+    router.setParams(this.props.history, { productCode: value });
   }
 
   handleFilterChange(value) {
@@ -144,8 +144,14 @@ class Rfq extends Tender {
     const data = this.props.data || {};
     const tenderDetail = this.props.tenderDetail || {};
     const { status } = data;
-    const { requestedProducts } = tenderDetail;
     const { productCode, filter, from, to } = this.state;
+    const requestedProducts = tenderDetail.requestedProducts || [];
+
+    const materialCodeOptions = requestedProducts.map(product => (
+      <Option key={product.code} value={product.code}>
+        {product.code}
+      </Option>
+    ));
 
     const tableOperations = [
       <Button
@@ -172,8 +178,22 @@ class Rfq extends Tender {
         {this.renderStats()}
         <Row gutter={24}>
           <Col sm={24} xl={6} lg={7}>
-            <Card title="Product name">
-              <Input onChange={this.handleProductCodeChange} />
+            <Card title="OT Material code">
+              <Select
+                value={productCode}
+                showSearch
+                style={{ width: '100%' }}
+                placeholder="Select a material code"
+                optionFilterProp="children"
+                onChange={this.handleProductCodeChange}
+                filterOption={(input, option) =>
+                  option.props.children
+                    .toLowerCase()
+                    .indexOf(input.toLowerCase()) >= 0
+                }
+              >
+                {materialCodeOptions}
+              </Select>
             </Card>
 
             <Card className="margin" title="Filter">
