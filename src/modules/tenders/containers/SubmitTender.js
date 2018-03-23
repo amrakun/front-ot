@@ -56,8 +56,8 @@ const PublishContainer = (
         message.success('Successfully submitted a tender!');
         redirect(tenderId);
       })
-      .catch(error => {
-        message.error(error.message);
+      .catch(() => {
+        message.error('Required inputs missing');
       });
   };
 

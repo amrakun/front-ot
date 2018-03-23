@@ -24,6 +24,7 @@ class SubmitTender extends TenderForm {
     Object.keys(this.state).forEach(key => {
       if (key.startsWith('product__')) {
         const product = this.state[key];
+        const totalPrice = product.quantity * product.unitPrice;
         delete product.key;
         delete product.__typename;
         delete product.purchaseRequestNumber;
@@ -32,7 +33,10 @@ class SubmitTender extends TenderForm {
         delete product.uom;
         delete product.manufacturer;
         delete product.manufacturerPartNumber;
-        products.push(product);
+        products.push({
+          ...product,
+          totalPrice
+        });
       }
     });
 

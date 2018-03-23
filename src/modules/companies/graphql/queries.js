@@ -386,6 +386,11 @@ const dueDiligence = `
     companies(${commonValues}) {
       ${commonFields}
       lastDueDiligence
+      dueDiligences {
+        date
+        expireDate
+        file
+      }
     }
   }
 `;

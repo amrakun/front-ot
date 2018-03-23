@@ -209,7 +209,7 @@ class TenderForm extends BaseForm {
         key={name}
         dataIndex={name}
         render={render}
-        width={200}
+        width={140}
       />
     );
   }

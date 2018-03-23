@@ -31,7 +31,7 @@ class RfqTable extends Component {
     } = this.props;
 
     const scroll = {
-      x: tenderCreation ? 1000 : 3200,
+      x: tenderCreation ? 1000 : 2000,
       y: '65vh'
     };
 
@@ -136,12 +136,6 @@ class RfqTable extends Component {
           {renderProductColumn({
             name: 'unitPrice',
             title: __(rpc.unitPrice),
-            type: 'number',
-            isSupplier: !isSupplier
-          })}
-          {renderProductColumn({
-            name: 'totalPrice',
-            title: __(rpc.totalPrice),
             type: 'number',
             isSupplier: !isSupplier
           })}
