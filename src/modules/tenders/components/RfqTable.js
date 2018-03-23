@@ -26,8 +26,14 @@ class RfqTable extends Component {
       products,
       renderProductColumn,
       isSupplier = true,
-      generateTemplate
+      generateTemplate,
+      tenderCreation
     } = this.props;
+
+    const scroll = {
+      x: tenderCreation ? 1000 : 3200,
+      y: '65vh'
+    };
 
     const { REACT_APP_API_URL } = process.env;
     const requestUrl = `${
@@ -72,7 +78,7 @@ class RfqTable extends Component {
           dataSource={products}
           pagination={false}
           size="middle"
-          scroll={{ x: 3200, y: '65vh' }}
+          scroll={scroll}
         >
           {renderProductColumn({
             name: 'code',
@@ -166,7 +172,8 @@ RfqTable.propTypes = {
   renderProductColumn: PropTypes.func,
   isSupplier: PropTypes.bool,
   handleFile: PropTypes.func,
-  generateTemplate: PropTypes.func
+  generateTemplate: PropTypes.func,
+  tenderCreation: PropTypes.bool
 };
 
 RfqTable.contextTypes = {

@@ -164,6 +164,8 @@ class TenderForm extends BaseForm {
 
     const disabled = isSupplier;
 
+    if (disabled && this.props.tenderCreation) return null;
+
     const render = (text, record) => {
       const inputProps = {
         defaultValue: record[name],

@@ -31,6 +31,7 @@ const CreateTenderContainer = props => {
 
   const updatedProps = {
     save,
+    tenderCreation: true,
     data: { suppliers: simpleCompaniesQuery.companies }
   };
 

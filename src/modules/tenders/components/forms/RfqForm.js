@@ -83,6 +83,7 @@ class RfqForm extends TenderForm {
             renderProductColumn={this.renderProductColumn}
             isSupplier={false}
             handleFile={this.handleFile}
+            tenderCreation={this.props.tenderCreation}
           />
 
           <Button
