@@ -68,7 +68,8 @@ class InjectInstance extends React.Component {
 
 InjectInstance.propTypes = {
   intl: PropTypes.object,
-  children: PropTypes.object
+  children: PropTypes.object,
+  currentUser: PropTypes.object
 };
 
 InjectInstance.childContextTypes = {
@@ -129,7 +130,8 @@ class MainLayout extends React.Component {
   getChildContext() {
     return {
       currentUser: this.props.currentUser,
-      systemConfig: this.props.systemConfig
+      systemConfig: this.props.systemConfig,
+      locale: this.state.locale
     };
   }
 
@@ -183,7 +185,8 @@ MainLayout.propTypes = {
 
 MainLayout.childContextTypes = {
   currentUser: PropTypes.object,
-  systemConfig: PropTypes.object
+  systemConfig: PropTypes.object,
+  locale: PropTypes.string
 };
 
 export default MainLayout;

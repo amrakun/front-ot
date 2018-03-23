@@ -40,8 +40,14 @@ export default class Field extends React.Component {
     return '';
   }
 
-  validate(rules, value, callback) {
-    callback('');
+  validateCryllic(rules, value, callback) {
+    var cryllic = /^[\u0400-\u04FF0-9$&+,:;=?@#|'<>.^*()%!-]*$/;
+
+    if (!cryllic.test(value)) {
+      callback('Зөвхөн крилл үсгээр бичнэ үү');
+    } else {
+      callback();
+    }
   }
 
   render() {
@@ -62,7 +68,7 @@ export default class Field extends React.Component {
     } = this.props;
     let { label } = this.props;
 
-    const { form, __ } = this.context;
+    const { form, __, locale } = this.context;
     const { getFieldDecorator } = form;
 
     if (!optional) {
@@ -79,9 +85,11 @@ export default class Field extends React.Component {
       });
     }
 
-    // rules.push({
-    //   validator: e => console.log(e)
-    // })
+    if (locale === 'mn') {
+      rules.push({
+        validator: this.validateCryllic
+      });
+    }
 
     if (validator) {
       rules.push({ validator });
@@ -143,5 +151,6 @@ Field.propTypes = {
 
 Field.contextTypes = {
   form: PropTypes.object,
-  __: PropTypes.func
+  __: PropTypes.func,
+  locale: PropTypes.string
 };
