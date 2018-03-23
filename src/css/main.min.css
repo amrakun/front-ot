@@ -596,3 +596,10 @@ a.sn:hover {
   font-size: 26px;
   font-weight: 100;
 }
+table.suppliers-filter {
+  width: 100%;
+}
+table.suppliers-filter .ant-select {
+  display: block;
+  width: 110px;
+}

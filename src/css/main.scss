@@ -611,3 +611,12 @@ a.sn {
     font-weight: 100;
   }
 }
+
+table.suppliers-filter {
+  width: 100%;
+
+  .ant-select {
+    display: block;
+    width: 110px;
+  }
+}

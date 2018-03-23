@@ -41,7 +41,11 @@ const generator = (Component, query) => {
       difotRange,
       sort,
       page,
-      perPage
+      perPage,
+      includeBlocked,
+      isPrequalified,
+      isProductsInfoValidated,
+      isQualified
     } = queryParams;
     const status = queryParams.status || '';
 
@@ -69,10 +73,10 @@ const generator = (Component, query) => {
       difotScore,
       sortField,
       sortDirection,
-      includeBlocked: status.includes('includeBlocked'),
-      isPrequalified: status.includes('isPrequalified'),
-      isProductsInfoValidated: status.includes('isProductsInfoValidated'),
-      isQualified: status.includes('isQualified')
+      includeBlocked,
+      isPrequalified,
+      isProductsInfoValidated,
+      isQualified
     };
   };
 
