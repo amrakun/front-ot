@@ -146,8 +146,12 @@ class Sidebar extends React.Component {
         <Card title="Suppliers">
           <div className="suppliers-count">
             {suppliersCount}
-            <small>/</small>
-            {checkedCount}
+            {checkedCount !== undefined && (
+              <span>
+                <small>/</small>
+                {checkedCount}
+              </span>
+            )}
           </div>
         </Card>
 
