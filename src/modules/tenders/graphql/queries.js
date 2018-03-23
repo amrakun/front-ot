@@ -163,8 +163,8 @@ const tenderUpdateDetail = `
   }
 `;
 
-const tenderParams = `$type: String!, $search: String, $status: String`;
-const tenderValues = `type: $type, search: $search, status: $status`;
+const tenderParams = `$type: String!, $search: String, $status: String, $month: Date`;
+const tenderValues = `type: $type, search: $search, status: $status, month: $month`;
 
 const tenders = `
   query tenders(${tenderParams} ${pageParams}) {
