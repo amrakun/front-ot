@@ -87,12 +87,12 @@ class SupplierTenders extends Tenders {
     const { __ } = this.context;
 
     const canNotInterested = status === 'open' && !isSent && !isParticipated;
-    const canNotOpen = status === 'closed' && type === 'eoi';
+    const canNotOpen = status === 'closed' && type === 'rfq';
 
     if (currentUser) {
       return (
         <div style={{ width: '160px' }}>
-          {canNotOpen && <Link to={`/tender/submit/${_id}`}>{__('Open')}</Link>}
+          {canNotOpen || <Link to={`/tender/submit/${_id}`}>{__('Open')}</Link>}
 
           {canNotInterested && [
             <Divider type="vertical" key={0} />,

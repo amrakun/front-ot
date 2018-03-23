@@ -141,9 +141,8 @@ class Rfq extends Tender {
 
   render() {
     const { rfqBidSummaryReportLoading } = this.props;
-    const data = this.props.data || {};
     const tenderDetail = this.props.tenderDetail || {};
-    const { status } = data;
+    const { status } = tenderDetail;
     const { productCode, filter, from, to } = this.state;
     const requestedProducts = tenderDetail.requestedProducts || [];
 

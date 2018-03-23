@@ -140,6 +140,12 @@ class RfqTable extends Component {
             isSupplier: !isSupplier
           })}
           {renderProductColumn({
+            name: 'totalPrice',
+            title: __(rpc.totalPrice),
+            type: 'number',
+            isSupplier: !isSupplier
+          })}
+          {renderProductColumn({
             name: 'leadTime',
             title: __(rpc.leadTime),
             type: 'number',
