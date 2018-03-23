@@ -138,13 +138,13 @@ class FeedbackResponses extends React.Component {
   }
 
   render() {
-    const { pagination, loading, onChange } = this.props;
+    const { pagination, loading, onChange, exportResponses } = this.props;
 
     return (
       <Card title="Success feedback responses">
         <div className="table-operations">
           <Search placeholder="Supplier name" />
-          <Button disabled>
+          <Button onClick={exportResponses}>
             Export to excel <Icon type="file-excel" />
           </Button>
         </div>
@@ -170,7 +170,8 @@ FeedbackResponses.propTypes = {
   data: PropTypes.array,
   pagination: PropTypes.object,
   loading: PropTypes.bool.isRequired,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  exportResponses: PropTypes.func
 };
 
 export default withRouter(FeedbackResponses);

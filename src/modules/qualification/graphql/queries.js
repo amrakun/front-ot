@@ -233,6 +233,12 @@ const feedbackResponseDetail = `
   }
 `;
 
+const feedbackResponsesExport = `
+  query feedbackResponsesExport {
+    feedbackResponsesExport
+  }
+`;
+
 const basicInfoCompanyFields = `
   _id
   tierType
@@ -607,5 +613,6 @@ export default {
   physicalAudits,
   physicalAuditDetail,
   companiesValidatedProductsInfoExport,
-  companiesGenerateDueDiligenceList
+  companiesGenerateDueDiligenceList,
+  feedbackResponsesExport
 };

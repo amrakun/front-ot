@@ -4,23 +4,30 @@ import { FeedbackResponses } from '../../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries } from '../../graphql';
 import { withTableProps } from 'modules/common/containers';
+import { exportFile } from 'modules/common/components';
 
-class TendersContainer extends React.Component {
-  render() {
-    const { feedbackResponsesTableQuery } = this.props;
+const TendersContainer = props => {
+  const { feedbackResponsesTableQuery } = props;
 
-    if (feedbackResponsesTableQuery.loading) {
-      return <FeedbackResponses loading={true} />;
-    }
-
-    const updatedProps = {
-      ...this.props,
-      data: feedbackResponsesTableQuery.feedbackResponses || []
-    };
-
-    return <FeedbackResponses {...updatedProps} />;
+  if (feedbackResponsesTableQuery.loading) {
+    return <FeedbackResponses loading={true} />;
   }
-}
+
+  const exportResponses = () => {
+    exportFile({
+      query: queries.feedbackResponsesExport,
+      name: 'feedbackResponsesExport'
+    });
+  };
+
+  const updatedProps = {
+    ...props,
+    exportResponses,
+    data: feedbackResponsesTableQuery.feedbackResponses || []
+  };
+
+  return <FeedbackResponses {...updatedProps} />;
+};
 
 TendersContainer.propTypes = {
   feedbackResponsesTableQuery: PropTypes.object
