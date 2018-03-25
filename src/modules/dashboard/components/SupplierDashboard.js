@@ -83,7 +83,7 @@ class Dashboard extends React.Component {
               }
               color={averageDifotScore ? colors[7] : colors[5]}
               number={averageDifotScore ? averageDifotScore.toFixed(1) : 0}
-              percent={averageDifotScore || 0}
+              percent={averageDifotScore ? averageDifotScore.toFixed(1) : 0}
               withPercent={true}
             />
           </Col>

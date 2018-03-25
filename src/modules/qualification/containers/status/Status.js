@@ -1,10 +1,25 @@
 import React from 'react';
 import { Status } from '../../components';
 import { generator } from 'modules/companies/containers';
+import { exportFile } from 'modules/common/components';
+import { queries } from '../../graphql';
+import PropTypes from 'prop-types';
 
-class StatusContainer extends React.Component {
-  render() {
-    return <Status {...this.props} />;
-  }
-}
+const StatusContainer = props => {
+  const { companiesQuery } = props;
+
+  const generate = () => {
+    exportFile({
+      query: queries.companiesGenerateDifotScoreList,
+      variables: companiesQuery ? companiesQuery.variables : null
+    });
+  };
+
+  return <Status {...props} generate={generate} />;
+};
+
+StatusContainer.propTypes = {
+  companiesQuery: PropTypes.object
+};
+
 export default generator(StatusContainer, 'status');

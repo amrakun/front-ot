@@ -20,17 +20,18 @@ const RegistrationContainer = (props, { __ }) => {
   const soleTrader = basicInfo.corporateStructure === 'Sole Trader';
 
   let formsComplete = true;
-
+  console.log(companyByUser);
   if (!soleTrader) {
-    Object.keys(companyByUser).forEach(key => {
-      if (
-        key.includes('Info') &&
-        !companyByUser[key] &&
-        key !== 'certificateInfo' &&
-        key !== 'productsInfo'
-      )
-        formsComplete = false;
-    });
+    if (
+      !companyByUser.basicInfo ||
+      !companyByUser.contactInfo ||
+      !companyByUser.certificateInfo ||
+      !companyByUser.groupInfo ||
+      !companyByUser.managementTeamInfo ||
+      !companyByUser.shareholderInfo
+    ) {
+      formsComplete = false;
+    }
   } else {
     if (
       !companyByUser.basicInfo ||

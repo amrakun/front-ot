@@ -549,6 +549,12 @@ const companiesGenerateDueDiligenceList = `
   }
 `;
 
+const companiesGeneratePrequalificationList = `
+  query companiesGeneratePrequalificationList(${commonParams}) {
+    companiesGeneratePrequalificationList(${commonValues})
+  }
+`;
+
 const physicalAuditFields = `
   _id
   createdDate
@@ -614,5 +620,6 @@ export default {
   physicalAuditDetail,
   companiesValidatedProductsInfoExport,
   companiesGenerateDueDiligenceList,
+  companiesGeneratePrequalificationList,
   feedbackResponsesExport
 };
