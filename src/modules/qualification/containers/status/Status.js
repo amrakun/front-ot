@@ -10,7 +10,7 @@ const StatusContainer = props => {
 
   const generate = () => {
     exportFile({
-      query: queries.companiesGenerateDifotScoreList,
+      query: queries.companiesGeneratePrequalificationList,
       variables: companiesQuery ? companiesQuery.variables : null
     });
   };

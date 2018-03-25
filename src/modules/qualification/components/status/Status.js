@@ -30,7 +30,6 @@ class Status extends Common {
 
   render() {
     const { data, generate } = this.props;
-    const { selectedCompanies } = this.state;
 
     const columns = [
       { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
@@ -71,12 +70,7 @@ class Status extends Common {
                 <Icon type="file-excel" />
               </Button>
             </div>
-            <div style={{ margin: '32px 0' }} />
             {this.renderTable({
-              rowSelection: {
-                selectedCompanies,
-                onChange: this.onSelectedCompaniesChange
-              },
               columns
             })}
           </Card>

@@ -20,7 +20,7 @@ const RegistrationContainer = (props, { __ }) => {
   const soleTrader = basicInfo.corporateStructure === 'Sole Trader';
 
   let formsComplete = true;
-  console.log(companyByUser);
+
   if (!soleTrader) {
     if (
       !companyByUser.basicInfo ||
