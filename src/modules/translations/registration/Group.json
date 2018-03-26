@@ -26,5 +26,9 @@
   "Please list names of authorized distribution rights /EOM/":
     "Борлуулах албан ёсны эрхийнхээ нэрсийг жагсаана уу! (Тоног төхөөрөмжийн үндсэн үйлдвэрлэгч)",
   "Please upload your authorized distribution rights files":
-    "Албан ёсны гэрээт борлуулагчын эрхийн баримт бичгүүдийг хавсралтаар оруулна уу."
+    "Албан ёсны гэрээт борлуулагчын эрхийн баримт бичгүүдийг хавсралтаар оруулна уу.",
+  "Original Equipment Manufacturer (OEM)": "ОЕМ",
+  "Service Provider": "Үйлчилгээ үзүүлэгч",
+  "Distributor": "Дистрибутор",
+  "None of above": "Аль нь ч биш"
 }

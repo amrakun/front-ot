@@ -252,16 +252,16 @@ class RegistrationForm extends BaseForm {
             control: (
               <Select onChange={this.onRoleChange} mode="multiple">
                 <Option value="EOM" disabled={roleNone}>
-                  Original Equipment Manufacturer (OEM)
+                  {__('Original Equipment Manufacturer (OEM)')}
                 </Option>
                 <Option value="Service Provider" disabled={roleNone}>
-                  Service Provider
+                  {__('Service Provider')}
                 </Option>
                 <Option value="Distributor" disabled={roleNone}>
-                  Distributor
+                  {__('Distributor')}
                 </Option>
                 <Option value="None" disabled={role.length > 0 && !roleNone}>
-                  None of above
+                  {__('None of above')}
                 </Option>
               </Select>
             )
