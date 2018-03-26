@@ -616,3 +616,16 @@ table.suppliers-filter {
     width: 110px;
   }
 }
+
+.card-columns {
+  .ant-card {
+    margin-bottom: $padding-lg;
+  }
+}
+
+.tenders-table {
+  .anticon {
+    position: relative;
+    top: 3px;
+  }
+}

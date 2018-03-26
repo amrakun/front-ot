@@ -149,6 +149,7 @@ class Tenders extends React.Component {
           loading={loading}
           scroll={{ x: 1500 }}
           onChange={this.handleTableChange}
+          className="tenders-table"
         />
         <Paginator total={totalCount} />
       </Card>

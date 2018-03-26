@@ -95,7 +95,7 @@ class Dashboard extends React.Component {
               text={
                 hasFeedback ? (
                   <span>
-                    {__('Please click here')}
+                    {__('Please click')}
                     <Link to={`feedback/submit/${lastFeedback._id}`}>
                       {' '}
                       {__('here')}

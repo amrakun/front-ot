@@ -108,7 +108,7 @@ class Dashboard extends React.Component {
     };
 
     return (
-      <Row gutter={24}>
+      <Row gutter={24} className="card-columns">
         <Col {...span}>
           <Card title="Suppliers profile">
             <TreeSelect

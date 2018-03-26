@@ -600,3 +600,10 @@ table.suppliers-filter .ant-select {
   display: block;
   width: 110px;
 }
+.card-columns .ant-card {
+  margin-bottom: 24px;
+}
+.tenders-table .anticon {
+  position: relative;
+  top: 3px;
+}
