@@ -43,6 +43,7 @@ class PhysicalAuditsContainer extends React.Component {
       ...this.props,
       editPhysicalAudit,
       removePhysicalAudit,
+      loading: false,
       data: physicalAuditsTableQuery.physicalAudits || []
     };
 

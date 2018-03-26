@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { ReportsAndPlans } from '../../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries, mutations } from '../../graphql';
-import { withTableProps } from 'modules/common/containers';
 import { message } from 'antd';
 
 class ReportsAndPlansContainer extends React.Component {
@@ -43,6 +42,7 @@ class ReportsAndPlansContainer extends React.Component {
       ...this.props,
       saveFiles,
       sendFiles,
+      loading: false,
       data: auditResponsesTableQuery.auditResponses || []
     };
 
@@ -67,7 +67,9 @@ export default compose(
           closeDate: params.to,
           supplierSearch: params.search,
           isFileGenerated: true,
-          status: params.status
+          status: params.status,
+          page: params.page || 1,
+          perPage: params.perPage || 15
         },
         notifyOnNetworkStatusChange: true
       };
@@ -81,4 +83,4 @@ export default compose(
   graphql(gql(mutations.auditsBuyerSendFiles), {
     name: 'auditsBuyerSendFiles'
   })
-)(withTableProps(ReportsAndPlansContainer));
+)(ReportsAndPlansContainer);

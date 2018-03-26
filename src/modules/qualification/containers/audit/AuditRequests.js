@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { AuditRequests } from '../../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries } from '../../graphql';
-import { withTableProps } from 'modules/common/containers';
 
 class AuditRequestsContainer extends React.Component {
   render() {
@@ -20,6 +19,7 @@ class AuditRequestsContainer extends React.Component {
 
     const updatedProps = {
       ...this.props,
+      loading: false,
       data: auditRequestsTableQuery.companyByUser.audits || []
     };
 
@@ -35,6 +35,15 @@ AuditRequestsContainer.propTypes = {
 
 export default compose(
   graphql(gql(queries.auditRequests), {
-    name: 'auditRequestsTableQuery'
+    name: 'auditRequestsTableQuery',
+    options: ({ queryParams }) => {
+      return {
+        variables: {
+          page: queryParams.page || 1,
+          perPage: queryParams.perPage || 15
+        },
+        notifyOnNetworkStatusChange: true
+      };
+    }
   })
-)(withTableProps(AuditRequestsContainer));
+)(AuditRequestsContainer);

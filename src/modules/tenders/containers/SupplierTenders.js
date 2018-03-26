@@ -4,7 +4,6 @@ import { SupplierTenders } from '../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries, mutations } from '../graphql';
 import { message } from 'antd';
-import { withTableProps } from 'modules/common/containers';
 
 class TendersContainer extends React.Component {
   componentWillMount() {
@@ -114,4 +113,4 @@ export default compose(
   graphql(gql(mutations.tendersResponsesAdd), {
     name: 'tendersResponsesAdd'
   })
-)(withTableProps(TendersContainer));
+)(TendersContainer);

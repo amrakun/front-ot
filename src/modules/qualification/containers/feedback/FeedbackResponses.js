@@ -22,6 +22,7 @@ const TendersContainer = props => {
   const updatedProps = {
     ...props,
     exportResponses,
+    loading: false,
     data: feedbackResponsesTableQuery.feedbackResponses || []
   };
 

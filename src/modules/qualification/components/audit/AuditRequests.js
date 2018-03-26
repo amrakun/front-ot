@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Table, Card } from 'antd';
 import { dateTimeFormat } from 'modules/common/constants';
 import moment from 'moment';
+import { Paginator } from 'modules/common/components';
 
 class AuditRequests extends React.Component {
   columns() {
@@ -49,7 +50,7 @@ class AuditRequests extends React.Component {
   }
 
   render() {
-    const { data, pagination, loading, onChange } = this.props;
+    const { data, loading, onChange } = this.props;
     const { __ } = this.context;
 
     return (
@@ -58,12 +59,13 @@ class AuditRequests extends React.Component {
           columns={this.columns()}
           rowKey={record => record._id}
           dataSource={data}
-          pagination={pagination}
+          pagination={false}
           loading={loading}
           onChange={(pagination, filters, sorter) =>
             onChange(pagination, filters, sorter)
           }
         />
+        <Paginator total={10} />
       </Card>
     );
   }

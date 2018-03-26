@@ -358,7 +358,7 @@ i.success {
 *::-webkit-scrollbar-thumb {
   background-color: #e3e3e3;
 }
-.ant-pagination.ant-table-pagination {
+.ant-pagination {
   margin: 0 auto;
   display: table;
   margin-top: 16px;
@@ -582,9 +582,6 @@ a.sn:hover {
 }
 .login-as-form li:hover {
   text-decoration: underline;
-}
-.pagination {
-  margin-top: 20px;
 }
 .suppliers-count {
   font-size: 30px;

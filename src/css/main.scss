@@ -324,7 +324,7 @@ i.success {
   background-color: #e3e3e3;
 }
 
-.ant-pagination.ant-table-pagination {
+.ant-pagination {
   margin: 0 auto;
   display: table;
   margin-top: 16px;
@@ -594,10 +594,6 @@ a.sn {
       text-decoration: underline;
     }
   }
-}
-
-.pagination {
-  margin-top: 20px;
 }
 
 .suppliers-count {

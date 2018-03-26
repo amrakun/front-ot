@@ -155,6 +155,9 @@ export default [
     key={'/qualification'}
     exact
     path={'/qualification'}
-    component={AuditRequests}
+    component={props => {
+      const queryParams = queryString.parse(props.location.search);
+      return <AuditRequests queryParams={queryParams} {...props} />;
+    }}
   />
 ];

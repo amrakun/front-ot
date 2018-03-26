@@ -8,6 +8,7 @@ import { colors } from 'modules/common/constants';
 import { Search, Editor } from 'modules/common/components';
 import { Common } from 'modules/companies/components/';
 import { Link } from 'react-router-dom';
+import { Paginator } from 'modules/common/components';
 
 class Tender extends Common {
   constructor(props) {
@@ -259,12 +260,7 @@ class Tender extends Common {
       requestedData = [],
       tableOperations
     } = args;
-    const {
-      pagination,
-      loading,
-      onChange,
-      regretLetterModalVisible
-    } = this.props;
+    const { loading, onChange, regretLetterModalVisible } = this.props;
     const {
       selectedCompanies,
       responseModal,
@@ -312,13 +308,14 @@ class Tender extends Common {
           columns={this.columns()}
           rowKey={record => (record.supplier ? record.supplier._id : '')}
           dataSource={status !== 'open' ? data : []}
-          pagination={pagination}
+          pagination={false}
           loading={loading}
           scroll={{ x: 1200 }}
           onChange={(pagination, filters, sorter) =>
             onChange(pagination, filters, sorter)
           }
         />
+        <Paginator total={10} />
 
         <Modal
           title={`${responseModal.title}'s response`}

@@ -5,7 +5,6 @@ import { gql, graphql, compose } from 'react-apollo';
 import { queries, mutations } from '../graphql';
 import { message, notification, Icon, Button } from 'antd';
 import { colors } from 'modules/common/constants';
-import { withTableProps } from 'modules/common/containers';
 import { exportFile } from 'modules/common/components';
 
 const notifyIfWantToSend = {
@@ -169,6 +168,8 @@ export default compose(
     options: ({ match, queryParams }) => {
       return {
         variables: {
+          page: queryParams.page || 1,
+          perPage: queryParams.perPage || 15,
           tenderId: match.params.id,
           supplierSearch: queryParams.search,
           sort: {
@@ -194,4 +195,4 @@ export default compose(
   graphql(gql(mutations.sendRegretLetter), {
     name: 'sendRegretLetter'
   })
-)(withTableProps(TenderContainer));
+)(TenderContainer);
