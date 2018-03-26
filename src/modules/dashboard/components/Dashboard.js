@@ -20,6 +20,8 @@ import moment from 'moment';
 import productsTree from 'modules/companies/productsTree';
 import { colors } from 'modules/common/constants';
 
+const { MonthPicker } = DatePicker;
+
 const COLORS = [colors[2], colors[3], colors[4], colors[6], colors[8]];
 
 class Dashboard extends React.Component {
@@ -189,34 +191,35 @@ class Dashboard extends React.Component {
     } = props;
     const queryParams = queryString.parse(props.location.search);
     const extendedProps = { ...props, queryParams };
-    const dateFormat = 'YYYY/MM/DD';
+    const dateFormat = 'YYYY/MM';
 
     return (
       <Tabs animated={false}>
         <Tabs.TabPane tab="Dashboard" key="1">
           <div className="chart-wrapper">
             <div className="chart-filter">
-              <DatePicker
+              <MonthPicker
                 className="chart-filter-input"
-                placeholder="Publish date"
+                placeholder="Start month"
                 defaultValue={
                   queryParams.startDate
                     ? moment(queryParams.startDate, dateFormat)
                     : null
                 }
-                format={dateFormat}
                 onChange={(d, date) => this.handleSearch('startDate', date)}
+                format={dateFormat}
               />
-              <DatePicker
+
+              <MonthPicker
                 className="chart-filter-input"
-                placeholder="Close date"
+                placeholder="End month"
                 defaultValue={
                   queryParams.endDate
                     ? moment(queryParams.endDate, dateFormat)
                     : null
                 }
-                format={dateFormat}
                 onChange={(d, date) => this.handleSearch('endDate', date)}
+                format={dateFormat}
               />
             </div>
 
