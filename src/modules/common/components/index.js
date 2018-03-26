@@ -10,6 +10,7 @@ import Loading from './Loading';
 import Search from './Search';
 import Paginator from './Paginator';
 import exportFile from './exportFile';
+import HelpModal from './help/HelpModal';
 
 export {
   Uploader,
@@ -23,5 +24,6 @@ export {
   Loading,
   Search,
   Paginator,
-  exportFile
+  exportFile,
+  HelpModal
 };

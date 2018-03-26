@@ -56,6 +56,7 @@ $padding-xs: 8px;
   box-shadow: 4px 4px 40px 0 rgba(0, 0, 0, 0.05);
   padding-right: 16px;
   z-index: 1;
+
   .ant-avatar {
     width: 27px;
     height: 27px;
@@ -66,6 +67,10 @@ $padding-xs: 8px;
     * {
       line-height: 26px;
     }
+  }
+
+  &:not(.landing) {
+    margin-bottom: 24px;
   }
 }
 .ant-layout-sider {
@@ -133,7 +138,8 @@ $padding-xs: 8px;
   margin: 0 24px;
 }
 .ant-breadcrumb {
-  margin: 16px 0;
+  margin: 14px 0 14px 24px;
+  float: left;
 }
 
 i.success {
@@ -250,7 +256,14 @@ i.success {
       z-index: 1;
       text-align: center;
       h1 {
-        font-weight: 100;
+        strong {
+          font-weight: 600;
+          padding-right: 8px;
+          margin-right: 8px;
+        }
+        span {
+          font-weight: 100;
+        }
         font-size: 55px;
         margin-bottom: 64px;
         line-height: 60px;
@@ -628,4 +641,17 @@ table.suppliers-filter {
     position: relative;
     top: 3px;
   }
+}
+
+.video-modal {
+  .ant-modal-body {
+    padding: 0;
+  }
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
 }

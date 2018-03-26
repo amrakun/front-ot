@@ -152,7 +152,7 @@ class Dashboard extends React.Component {
         className="barchart-wrapper"
         extra={
           <TreeSelect
-            treeData={productsTree}
+            treeData={productsTree.en}
             value={queryParams.productCodes}
             onChange={this.onProductCodesChange}
             treeCheckable={true}

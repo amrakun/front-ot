@@ -112,7 +112,7 @@ class Dashboard extends React.Component {
         <Col {...span}>
           <Card title="Suppliers profile">
             <TreeSelect
-              treeData={productsTree}
+              treeData={productsTree.en}
               onChange={value => this.onInputChange('productCodes', value)}
               treeCheckable={true}
               searchPlaceholder="Please select"

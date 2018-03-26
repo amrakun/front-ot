@@ -240,7 +240,7 @@ class Dashboard extends React.Component {
               <label>Filter interval dates: </label>
 
               <TreeSelect
-                treeData={productsTree}
+                treeData={productsTree.en}
                 onChange={this.onProductCodesChange}
                 searchPlaceholder="Please select"
                 treeCheckable={true}

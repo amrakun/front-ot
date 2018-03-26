@@ -3,6 +3,7 @@ import { Card, Icon, Row, Col } from 'antd';
 import moment from 'moment';
 import { dateTimeFormat as dFormat, colors } from 'modules/common/constants';
 import PropTypes from 'prop-types';
+import { HelpModal } from 'modules/common/components';
 
 class MainInfo extends React.Component {
   constructor(props) {
@@ -68,6 +69,11 @@ class MainInfo extends React.Component {
             __('Close Date'),
             moment(closeDate).format(dFormat),
             'clock-circle'
+          )}
+          {renderCard(
+            __('Need help?'),
+            <HelpModal videoId="tenderResponse" />,
+            'question-circle-o'
           )}
         </Row>
 

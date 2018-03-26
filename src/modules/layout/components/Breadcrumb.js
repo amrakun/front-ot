@@ -34,7 +34,7 @@ const Breadcrumbs = location => {
       id: 'Capacity Building',
       defaultMessage: 'Capacity Building'
     }),
-    'prequalification-status': 'Pre-qualification status',
+    'prequalification-status': 'Pre-qualification',
     audit: formatMessage({
       id: 'Supplier qualification',
       defaultMessage: 'Supplier qualification'

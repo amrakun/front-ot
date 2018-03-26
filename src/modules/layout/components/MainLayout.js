@@ -1,7 +1,6 @@
 import React from 'react';
 import Sidenav from './Sidenav';
 import Header from './Header';
-import Breadcrumb from './Breadcrumb';
 import { Layout, BackTop } from 'antd';
 import { PropTypes } from 'prop-types';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
@@ -157,9 +156,12 @@ class MainLayout extends React.Component {
         <Layout className={`main-wrapper ${locale}`}>
           {currentUser && <Sidenav {...navProps} />}
           <Layout className="main" style={layoutStyle}>
-            <Header toggleLang={this.toggleLang} langLabel={locale} />
+            <Header
+              toggleLang={this.toggleLang}
+              langLabel={locale}
+              location={location}
+            />
             <Content>
-              {currentUser && <Breadcrumb {...location} />}
               <InjectedComponent {...this.props} />
               <BackTop />
             </Content>

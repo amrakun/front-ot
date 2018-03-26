@@ -19,7 +19,7 @@ class RegistrationForm extends BaseForm {
   }
 
   render() {
-    const { __ } = this.context;
+    const { __, locale } = this.context;
 
     return (
       <Form>
@@ -30,7 +30,7 @@ class RegistrationForm extends BaseForm {
             name="productsInfo"
             control={
               <TreeSelect
-                treeData={productsTree}
+                treeData={productsTree[locale]}
                 treeCheckable={true}
                 searchPlaceholder={__('Please select products')}
                 allowClear
@@ -53,7 +53,8 @@ class RegistrationForm extends BaseForm {
 }
 
 RegistrationForm.contextTypes = {
-  __: PropTypes.func
+  __: PropTypes.func,
+  locale: PropTypes.string
 };
 
 const ProductsForm = Form.create()(RegistrationForm);

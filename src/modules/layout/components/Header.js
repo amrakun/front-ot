@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { colors } from 'modules/common/constants';
 import { logout } from '../utils';
 import { T } from 'modules/common/components';
+import Breadcrumb from './Breadcrumb';
 
 const SubMenu = Menu.SubMenu;
 
@@ -34,6 +35,8 @@ const HeaderBar = (props, context) => {
           </Link>
         </Menu.Item>
       )}
+
+      {currentUser && <Breadcrumb {...props.location} />}
 
       {currentUser ? (
         <SubMenu
@@ -76,7 +79,7 @@ const HeaderBar = (props, context) => {
         </Menu.Item>
       )}
 
-      {currentUser && currentUser.isSupplier ? (
+      {currentUser && !currentUser.isSupplier ? null : (
         <Menu.Item className="right" key="lang">
           <a onClick={props.toggleLang}>
             <span className="bordered">
@@ -84,7 +87,7 @@ const HeaderBar = (props, context) => {
             </span>
           </a>
         </Menu.Item>
-      ) : null}
+      )}
     </Menu>
   );
 };
@@ -95,7 +98,8 @@ HeaderBar.contextTypes = {
 
 HeaderBar.propTypes = {
   toggleLang: PropTypes.func,
-  langLabel: PropTypes.string
+  langLabel: PropTypes.string,
+  location: PropTypes.object
 };
 
 export default HeaderBar;

@@ -1,4 +1,4 @@
-export default [
+const en = [
   {
     label: 'A00000 - Construction',
     children: [
@@ -2127,3 +2127,2161 @@ export default [
     key: 'X00000'
   }
 ];
+
+const mn = [
+  {
+    label: 'A00000 - Барилга угсралт',
+    children: [
+      {
+        label: 'A01000 - Барилга угсралтын гэрээт компани',
+        children: [
+          {
+            label:
+              'A01001 - ЗТХБУМ-ийн томоохон гэрээт ажлууд (100 саяас ам.долллараас дээших төслүүд)',
+            value: "a01001 - large epcm's >$100m/greenfield projects",
+            key: 'A01001'
+          },
+          {
+            label:
+              'A01002 - ЗТХБУМ-ийн жижиг гэрээт ажлууд (100 сая ам.долллараас дооших)',
+            value: "a01002 - small epcm's (<$100m)",
+            key: 'A01002'
+          }
+        ],
+        value: 'a01000 - construction contractors',
+        key: 'A01000'
+      },
+      {
+        label: 'A02000 - Барилга угсралтын үйлчилгээ',
+        children: [
+          {
+            label: 'A02001 - Барилга угсралт, засал чимэглэлийн ажил',
+            value: 'a02001 - architectural and finishes contractors',
+            key: 'A02001'
+          },
+          {
+            label: 'A02002 - Барилгын материал',
+            value: 'a02002 - building materials',
+            key: 'A02002'
+          },
+          {
+            label: 'A02003 - Барилга - Угсармал болон түр барилгууд',
+            value: 'a02003 - buildings - prefab and temporary',
+            key: 'A02003'
+          },
+          {
+            label: 'A02004 - Кабель, утас, туслах материалууд',
+            value: 'a02004 - cables',
+            key: 'A02004'
+          },
+          {
+            label: 'A02005 - Цемент, дүүргэгч, бетон зуурмаг',
+            value: 'a02005 - cement',
+            key: 'A02005'
+          },
+          {
+            label:
+              'A02006 - Хийц бүтээц, барилга угсралтын гэрээт гүйцэтгэгчид',
+            value: 'a02006 - structural & civil contractors',
+            key: 'A02006'
+          },
+          {
+            label: 'A02007 - Барилгын материал',
+            value: 'a02007 - construction materials',
+            key: 'A02007'
+          },
+          {
+            label: 'A02008 - Барилгын тусгай тоног төхөөрөмж',
+            value: 'a02008 - construction specialised equipment',
+            key: 'A02008'
+          },
+          {
+            label: 'A02009 - Хэлхээ ба араан дамжуулгын иж бүрдэл',
+            value: 'a02009 - couplings and gear units',
+            key: 'A02009'
+          },
+          {
+            label: 'A02010 - Тээвэрлэлтийн үйлчилгээ',
+            value: 'a02010 - couriers',
+            key: 'A02010'
+          },
+          {
+            label: 'A02011 - Цахилгаан ба нарийн хэмжүүрийн гэрээт гүйцэтгэгч',
+            value: 'a02011 - electrical & instrumentation contractors',
+            key: 'A02011'
+          },
+          {
+            label: 'A02012 - Цахилгаан тоног төхөөрөмж, сэлбэг хэрэгсэл',
+            value: 'a02012 - electrical equipment & parts',
+            key: 'A02012'
+          },
+          {
+            label: 'A02013 - Мотор, генератор',
+            value: 'a02013 - engines and generators',
+            key: 'A02013'
+          },
+          {
+            label: 'A02014 - Агааржуулалтын сэнс',
+            value: 'a02014 - fans and blowers',
+            key: 'A02014'
+          },
+          {
+            label: 'A02015 - Ачаа бараа зөөх үйлчилгээ',
+            value: 'a02015 - goods handling',
+            key: 'A02015'
+          },
+          {
+            label: 'A02016 - Дулааны болон дулаан солилцуурын тоног төхөөрөмж',
+            value: 'a02016 - heating & heatng exchange equipment',
+            key: 'A02016'
+          },
+          {
+            label:
+              'A02017 - ХСАС болон барилгын дотор дэд бүтцийн тоног төхөөрөмж',
+            value: 'a02017 - hvac & building services equipment',
+            key: 'A02017'
+          },
+          {
+            label: 'A02018 - Нарийн хэмжүүр, автоматжуулалт',
+            value: 'a02018 - instrumentation and automation',
+            key: 'A02018'
+          },
+          {
+            label: 'A02019 - Ачаа бараах зөөх тоног төхөөрөмж',
+            value: 'a02019 - material handling  equipment',
+            key: 'A02019'
+          },
+          {
+            label:
+              'A02020 - Барилгын дотор дэд бүтцийн угсралт суурилуулалтын гэрээт гүйцэтгэгч',
+            value: 'a02020 - mechanical contractors',
+            key: 'A02020'
+          },
+          {
+            label: 'A02021 - Шугам хоолойн угсралт суурилуулалт',
+            value: 'a02021 - piping',
+            key: 'A02021'
+          },
+          {
+            label: 'A02022 - Технологийн тоног төхөөрөмж, иж бүрдэл',
+            value: 'a02022 - special process equipment & packages',
+            key: 'A02022'
+          },
+          {
+            label: 'A02023 - Ган хийц, бэлдэц',
+            value: 'a02023 - steel and structural products',
+            key: 'A02023'
+          },
+          {
+            label: 'A02024 - Танк, сав, доторлогоо',
+            value: 'a02024 - tanks',
+            key: 'A02024'
+          },
+          {
+            label: 'A02025 - Турбин',
+            value: 'a02025 - turbines',
+            key: 'A02025'
+          },
+          {
+            label: 'A02026 - Хаалт, тохируулгатай хаалт',
+            value: 'a02026 - valves and actuators',
+            key: 'A02026'
+          },
+          {
+            label: 'A02027 - Агуулахын үйлчилгээ',
+            value: 'a02027 - warehousing',
+            key: 'A02027'
+          }
+        ],
+        value: 'a02000 - construction services',
+        key: 'A02000'
+      }
+    ],
+    value: 'a00000 - construction',
+    key: 'A00000'
+  },
+  {
+    label: 'B00000 - Эрчим хүч',
+    children: [
+      {
+        label: 'B01000 - Уламжлалт бус эрчим хүч',
+        children: [
+          {
+            label: 'B01001 - Даралтат хий',
+            value: 'b01001 - compressed air',
+            key: 'B01001'
+          },
+          {
+            label: 'B01002 - Даралтат уур',
+            value: 'b01002 - steam',
+            key: 'B01002'
+          },
+          {
+            label: 'B01003 - undefined',
+            value: 'b01003 - thermal coal',
+            key: 'B01003'
+          },
+          {
+            label: 'B01004 - undefined',
+            value: 'b01004 - domestic gas',
+            key: 'B01004'
+          }
+        ],
+        value: 'b01000 - alternate energy',
+        key: 'B01000'
+      },
+      {
+        label: 'B02000 - Түлш шатахуун',
+        children: [
+          {
+            label: 'B02001 - Дизель түлш',
+            value: 'b02001 - diesel',
+            key: 'B02001'
+          },
+          {
+            label: 'B02002 - Мазут',
+            value: 'b02002 - fuel oils',
+            key: 'B02002'
+          },
+          {
+            label: 'B02004 - Бензин',
+            value: 'b02004 - petroleum',
+            key: 'B02004'
+          },
+          {
+            label: 'B02005 - Пропан (LPG)',
+            value: 'b02005 - propane (lpg)',
+            key: 'B02005'
+          },
+          {
+            label: 'B02007 - undefined',
+            value: 'b02007 - biofuel',
+            key: 'B02007'
+          },
+          {
+            label: 'B02008 - undefined',
+            value: 'b02008 - liquid natural gas',
+            key: 'B02008'
+          },
+          {
+            label: 'B02009 - undefined',
+            value: 'b02009 - fuel terminal managemnt/maintenance serv',
+            key: 'B02009'
+          }
+        ],
+        value: 'b02000 - fuel',
+        key: 'B02000'
+      },
+      {
+        label: 'B03000 - Цахилгаан эрчим хүч',
+        children: [
+          {
+            label: 'B03001 - Цахилгаан эрчим хүч - Дотоодын',
+            value: 'b03001 - electricity - domestic',
+            key: 'B03001'
+          },
+          {
+            label: 'B03002 - Цахилгаан эрчим хүч - Үйлдвэрлэлийн',
+            value: 'b03002 - electricity - industrial',
+            key: 'B03002'
+          },
+          {
+            label: 'B03003 - Цахилгаан дамжуулалт',
+            value: 'b03003 - power transmission',
+            key: 'B03003'
+          }
+        ],
+        value: 'b03000 - power',
+        key: 'B03000'
+      }
+    ],
+    value: 'b00000 - energy',
+    key: 'B00000'
+  },
+  {
+    label: 'C00000 - Суурин үйлдвэр, тоног төхөөрөмж',
+    children: [
+      {
+        label: 'C01000 - Маетриал тээвэрлэлт',
+        children: [
+          {
+            label: 'C01001 - Олон хутгуурт экскаватор',
+            value: 'c01001 - bucket wheels',
+            key: 'C01001'
+          },
+          {
+            label: 'C01003 - Дамжуургын тоног төхөөрөмж, хангамжийн зүйлс',
+            value: 'c01003 - conveyor equipment & supplies',
+            key: 'C01003'
+          },
+          {
+            label: 'C01004 - Овоолгоос буцаан татах төхөөрөмж',
+            value: 'c01004 - reclaimers',
+            key: 'C01004'
+          },
+          {
+            label: 'C01005 - Ачих төхөөрөмж',
+            value: 'c01005 - ship loaders',
+            key: 'C01005'
+          },
+          {
+            label: 'C01006 - Овоолго хийх, овоолгоос буцаан татах төхөөрөмж',
+            value: 'c01006 - stackers & reclaimers',
+            key: 'C01006'
+          }
+        ],
+        value: 'c01000 - materials movement',
+        key: 'C01000'
+      },
+      {
+        label: 'C02000 - Материал боловсруулалт',
+        children: [
+          {
+            label: 'C02001 - Бутлуур, тээрэм',
+            value: 'c02001 - crushers and mills',
+            key: 'C02001'
+          },
+          {
+            label: 'C02002 - Бутлуурын хэрэглээний зүйлс, тээрэмдэх биет',
+            value: 'c02002 - crushing consumables/grinding media',
+            key: 'C02002'
+          },
+          {
+            label:
+              'C02003 - Тээрэмпэх биетийг ялгах шигшүүрийн сэлбэг хэрэгсэл',
+            value: 'c02003 - heavy media separation spares',
+            key: 'C02003'
+          },
+          {
+            label: 'C02004 - Технологийн процессын тоног төхөөрөмж',
+            value: 'c02004 - process equipment',
+            key: 'C02004'
+          },
+          {
+            label: 'C02005 - Шүүр',
+            value: 'c02005 - screens',
+            key: 'C02005'
+          }
+        ],
+        value: 'c02000 - materials processing',
+        key: 'C02000'
+      },
+      {
+        label: 'C03000 - Төмөр зам',
+        children: [
+          {
+            label:
+              'C03001 - Төмөр зам - зам төмөр, дэр мод, хайрган суурь зэрэг суурин дэд бүтэц',
+            value: 'c03001 - rail - fixed assets ie ballast,sleepers',
+            key: 'C03001'
+          }
+        ],
+        value: 'c03000 - rail',
+        key: 'C03000'
+      },
+      {
+        label: 'C04000 - Хайлуулалтын тоног төхөөрөмж',
+        children: [
+          {
+            label: 'C04001 - Хайлах тогоо, дээд анги',
+            value: 'c04001 - pot shells and superstructure',
+            key: 'C04001'
+          },
+          {
+            label: 'C04002 - Хайлах тогооны шулуутгагч',
+            value: 'c04002 - smelter rectifiers',
+            key: 'C04002'
+          }
+        ],
+        value: 'c04000 - smelting equipment',
+        key: 'C04000'
+      }
+    ],
+    value: 'c00000 - fixed plant & equipment',
+    key: 'C00000'
+  },
+  {
+    label: 'D00000 - Ложистик',
+    children: [
+      {
+        label: 'D01000 - Далайн тээврийн тоног төхөөрөмж',
+        children: [
+          {
+            label: 'D01001 - Чиргүүл онгоц',
+            value: 'd01001 - barges',
+            key: 'D01001'
+          },
+          {
+            label: 'D01002 - Далайн тээврийн онгоц',
+            value: 'd01002 - marine vessels',
+            key: 'D01002'
+          },
+          {
+            label: 'D01003 - Хүдэр тээвэрлэгч',
+            value: 'd01003 - ore cariers',
+            key: 'D01003'
+          },
+          {
+            label: 'D01004 - Чирэгч онгоц',
+            value: 'd01004 - tugs',
+            key: 'D01004'
+          },
+          {
+            label: 'D01005 - undefined',
+            value: 'd01005 - marine parts and spares',
+            key: 'D01005'
+          }
+        ],
+        value: 'd01000 - marine equipment',
+        key: 'D01000'
+      },
+      {
+        label: 'D02000 - Тээвэр',
+        children: [
+          {
+            label: 'D02001 - Гуравдагч этгээдийн агуулахын үйлчилгээ',
+            value: 'd02001 - 3rd party warehousing',
+            key: 'D02001'
+          },
+          {
+            label: 'D02002 - Агаарын тээвэр',
+            value: 'd02002 - air freight',
+            key: 'D02002'
+          },
+          {
+            label: 'D02003 - Далайн тээвэр',
+            value: 'd02003 - barge freight',
+            key: 'D02003'
+          },
+          {
+            label: 'D02004 - Задгай ачааны тээвэр',
+            value: 'd02004 - bulk freight',
+            key: 'D02004'
+          },
+          {
+            label: 'D02005 - Чингэлэг тээвэр - Ачих/Баглах',
+            value: 'd02005 - container - stuffing / packing',
+            key: 'D02005'
+          },
+          {
+            label: 'D02006 - Гэрээт жолоочийн үйлчилгээ',
+            value: 'd02006 - driver services leasing',
+            key: 'D02006'
+          },
+          {
+            label: 'D02007 - Олон улсын тээвэр зуучийн үйлчилгээ',
+            value: 'd02007 - international freight forwarding',
+            key: 'D02007'
+          },
+          {
+            label: 'D02008 - Далайн чингэлэг тээвэр',
+            value: 'd02008 - marine container',
+            key: 'D02008'
+          },
+          {
+            label: 'D02009 - Далайн боомтын үйлчилгээ',
+            value: 'd02009 - marine port services',
+            key: 'D02009'
+          },
+          {
+            label: 'D02010 - Илгээмжийн үйлчилгээ',
+            value: 'd02010 - parcel freight / couriers',
+            key: 'D02010'
+          },
+          {
+            label: 'D02011 - Төмөр замын тээвэр',
+            value: 'd02011 - rail freight',
+            key: 'D02011'
+          },
+          {
+            label: 'D02012 - Терминалийн талбайн түрээсийн үйлчилгээ',
+            value: 'd02012 - renting of terminal space',
+            key: 'D02012'
+          },
+          {
+            label: 'D02013 - Авто тээвэр',
+            value: 'd02013 - road freight',
+            key: 'D02013'
+          },
+          {
+            label: 'D02014 - Авто тээвэр - жижиг ачаа',
+            value: 'd02014 - road freight on ltl',
+            key: 'D02014'
+          },
+          {
+            label: 'D02015 - Авто тээвэр - том ачаа',
+            value: 'd02015 - road freight on tl',
+            key: 'D02015'
+          },
+          {
+            label: 'D02016 - Далайн тээвэр',
+            value: 'd02016 - sea freight',
+            key: 'D02016'
+          },
+          {
+            label: 'D02017 - Геодезийн хэмжилтийн онгоц',
+            value: 'd02017 - ship surveyer',
+            key: 'D02017'
+          }
+        ],
+        value: 'd02000 - transport',
+        key: 'D02000'
+      }
+    ],
+    value: 'd00000 - logistics',
+    key: 'D00000'
+  },
+  {
+    label: 'E00000 - Хөдөлгөөнт тоног төхөөрөмж',
+    children: [
+      {
+        label: 'E01000 - Өрөмдлөг, өрөмдлөгийн хэрэглээний зүйлс',
+        children: [
+          {
+            label: 'E01001 - Өрмийн толгой (том)',
+            value: 'e01001 - drill bits (heavy)',
+            key: 'E01001'
+          },
+          {
+            label: 'E01003 - Өрмийн ган хийц, хэрэглээний зүйлс',
+            value: 'e01003 - drill steel & consumables',
+            key: 'E01003'
+          },
+          {
+            label: 'E01004 - Өрөмдлөгийн үйлчилгээ',
+            value: 'e01004 - drilling services',
+            key: 'E01004'
+          }
+        ],
+        value: 'e01000 - drilling & consumables',
+        key: 'E01000'
+      },
+      {
+        label: 'E02000 - Уурхайн хүнд даацын тоног төхөөрөмж',
+        children: [
+          {
+            label: 'E02001 - Бульдозер',
+            value: 'e02001 - dozers',
+            key: 'E02001'
+          },
+          {
+            label: 'E02002 - Гидравлик экскаватор',
+            value: 'e02002 - hydraulic excavators',
+            key: 'E02002'
+          },
+          {
+            label: 'E02003 - Хүнд даацын машин',
+            value: 'e02003 - haul trucks',
+            key: 'E02003'
+          },
+          {
+            label:
+              'E02004 - Уурхайн хүнд даацын тоног төхөөрөмжийн сэлбэг хэрэгсэл',
+            value: 'e02004 - hme ancillary equipment',
+            key: 'E02004'
+          },
+          {
+            label:
+              'E02005 - Уурхайн хүнд даацын тоног төхөөрөмжийн гэрээт засвар үйлчилгээ',
+            value: 'e02005 - hme maintenance services',
+            key: 'E02005'
+          },
+          {
+            label: 'E02006 - Дугуйт ачигч',
+            value: 'e02006 - front end loaders',
+            key: 'E02006'
+          },
+          {
+            label: 'E02007 - Экскаватор',
+            value: 'e02007 - shovels',
+            key: 'E02007'
+          },
+          {
+            label: 'E02008 - Алхагч экскаватор',
+            value: 'e02008 - draglines',
+            key: 'E02008'
+          },
+          {
+            label: 'E02009 - Кран',
+            value: 'e02009 - cranes',
+            key: 'E02009'
+          },
+          {
+            label: 'E02010 - undefined',
+            value: 'e02010 - undergroung mining equipment incl lhd',
+            key: 'E02010'
+          },
+          {
+            label: 'E02011 - undefined',
+            value: 'e02011 - hme ancillary equipment parts',
+            key: 'E02011'
+          },
+          {
+            label: 'E02012 - undefined',
+            value: 'e02012 - haul truck parts',
+            key: 'E02012'
+          },
+          {
+            label: 'E02013 - undefined',
+            value: 'e02013 - dragline / rope shovel parts',
+            key: 'E02013'
+          },
+          {
+            label: 'E02014 - undefined',
+            value: 'e02014 - industrial engines',
+            key: 'E02014'
+          },
+          {
+            label: 'E02015 - undefined',
+            value: 'e02015 - industrial engine parts',
+            key: 'E02015'
+          },
+          {
+            label: 'E02016 - undefined',
+            value: 'e02016 - drilling machines',
+            key: 'E02016'
+          },
+          {
+            label: 'E02017 - undefined',
+            value: 'e02017 - drilling machine parts',
+            key: 'E02017'
+          }
+        ],
+        value: 'e02000 - mining equipment & parts',
+        key: 'E02000'
+      },
+      {
+        label: 'E03000 - Хөнгөн тэрэг',
+        children: [
+          {
+            label: 'E03001 - Хөнгөн тэрэг',
+            value: 'e03001 - light mobile equipment',
+            key: 'E03001'
+          },
+          {
+            label: 'E03002 - Хөнгөн тэрэгний түрээс, худалдан авалт',
+            value: 'e03002 - light vehicle leases & purchases',
+            key: 'E03002'
+          },
+          {
+            label: 'E03003 - Хөнгөн тэрэгний засвар үйлчилгээ',
+            value: 'e03003 - light vehicle maintenance',
+            key: 'E03003'
+          },
+          {
+            label: 'E03004 - Хөнгөн тэрэгний гэрээт үйлчилгээ',
+            value: 'e03004 - mobile equipment (hme / lme) hire',
+            key: 'E03004'
+          },
+          {
+            label: 'E03005 - Хөнгөн тэрэгний засвар үйлчилгээ',
+            value: 'e03005 - lme maintenance services',
+            key: 'E03005'
+          },
+          {
+            label: 'E03006 - Хөнгөн тэрэгний сэлбэг хэрэгсэл',
+            value: 'e03006 - lme parts',
+            key: 'E03006'
+          },
+          {
+            label: 'E03007 - Бартаат замын зорчигч тээврийн машин',
+            value: 'e03007 - off-road passenger vehicles',
+            key: 'E03007'
+          },
+          {
+            label: 'E03008 - Засмал замын зорчигч тээврийн машин',
+            value: 'e03008 - on-road passenger vehicles',
+            key: 'E03008'
+          },
+          {
+            label: 'E03009 - Сэрээт ачигч',
+            value: 'e03009 - forklifts',
+            key: 'E03009'
+          }
+        ],
+        value: 'e03000 - light mobile equipment',
+        key: 'E03000'
+      },
+      {
+        label: 'E04000 - Уурхайн тоног төхөөрөмж, сэлбэг хэрэгсэл',
+        value: 'e04000 - mining equipment & parts',
+        key: 'E04000'
+      },
+      {
+        label: 'E05000 - Төмөр зам',
+        children: [
+          {
+            label: 'E05001 - Төмөр замын автомат тээврийн удирдлагын систем',
+            value: 'e05001 - automatic train operations (ato)',
+            key: 'E05001'
+          },
+          {
+            label: 'E05002 - Зүтгүүрийн сэлбэг хэрэгсэл',
+            value: 'e05002 - locomotive parts',
+            key: 'E05002'
+          },
+          {
+            label: 'E05003 - Зүтгүүр',
+            value: 'e05003 - locomotives',
+            key: 'E05003'
+          },
+          {
+            label: 'E05004 - Хүдэр тээвэрлэгчийн сэлбэг хэрэгсэл',
+            value: 'e05004 - ore car parts',
+            key: 'E05004'
+          },
+          {
+            label: 'E05005 - Хүдэр тээвэрлэгчийн доторлогоо',
+            value: 'e05005 - ore car resheeting',
+            key: 'E05005'
+          },
+          {
+            label: 'E05006 - Хүдэр тээвэрлэгч',
+            value: 'e05006 - ore cars',
+            key: 'E05006'
+          },
+          {
+            label: 'E05007 - Үйлдвэрийн засвар үйлчилгээний төмөр зам',
+            value: 'e05007 - plant maint service rail track',
+            key: 'E05007'
+          },
+          {
+            label: 'E05008 - Төмөр замын тоног төхөөрөмж, эд анги',
+            value: 'e05008 - rail equipment & components',
+            key: 'E05008'
+          },
+          {
+            label: 'E05009 - Дохионы болон сэлгээний тоноглол',
+            value: 'e05009 - signaling and switch gear',
+            key: 'E05009'
+          }
+        ],
+        value: 'e05000 - rail',
+        key: 'E05000'
+      },
+      {
+        label: 'E06000 - Дугуй',
+        children: [
+          {
+            label:
+              'E06001 - Хөнгөн тэрэг болон хөдөлгөөнт тоног төхөөрөмжийн дугуй',
+            value: 'e06001 - light vehicle & mobile equipment tyres',
+            key: 'E06001'
+          },
+          {
+            label:
+              'E06002 - Уурхайн хүнд даацын тоног төхөөрөмжийн даацын дугуй',
+            value: 'e06002 - otr tyres for hme',
+            key: 'E06002'
+          },
+          {
+            label: 'E06003 - undefined',
+            value: 'e06003 - wheels & rims',
+            key: 'E06003'
+          },
+          {
+            label: 'E06004 - undefined',
+            value: 'e06004 - tyre services',
+            key: 'E06004'
+          },
+          {
+            label: 'E06005 - undefined',
+            value: 'e06005 - conveyor belting',
+            key: 'E06005'
+          }
+        ],
+        value: 'e06000 - tyres & belting',
+        key: 'E06000'
+      },
+      {
+        label: 'E07000 - Гүний уурхайн тоног төхөөрөмж',
+        children: [
+          {
+            label:
+              'E07001 - Гүний уурхайн тоног төхөөрөмж (ачих, тээвэрлэх буулгах)',
+            value: 'e07001 - underground mining equipment incl lhd',
+            key: 'E07001'
+          }
+        ],
+        value: 'e07000 - underground mining equipment',
+        key: 'E07000'
+      },
+      {
+        label: 'E08000 - undefined',
+        children: [
+          {
+            label: 'E08001 - undefined',
+            value: 'e08001 - equipment technologies',
+            key: 'E08001'
+          }
+        ],
+        value: 'e08000 - mining technology',
+        key: 'E08000'
+      }
+    ],
+    value: 'e00000 - mining equipment',
+    key: 'E00000'
+  },
+  {
+    label: 'F00000 - Үйл ажиллагааны засвар, үйлчилгээ, хэрэглээний зүйлс',
+    children: [
+      {
+        label: 'F01000 - Үйл ажиллагааны ерөнхий засвар, үйлчилгээ',
+        children: [
+          {
+            label: 'F01001 - Өнгөлөх, зүлгэх, тасдах материал',
+            value: 'f01001 - abrasives and grinding materials',
+            key: 'F01001'
+          },
+          {
+            label: 'F01002 - Тоосны камерын шүүлтүүр',
+            value: 'f01002 - baghouse filtration',
+            key: 'F01002'
+          },
+          {
+            label: 'F01003 - Холхивч/Хүч дамжуулагч',
+            value: 'f01003 - bearings/power transmission',
+            key: 'F01003'
+          },
+          {
+            label: 'F01004 - Буцламгай давхаргат шүүлтүүр',
+            value: 'f01004 - bed filters',
+            key: 'F01004'
+          },
+          {
+            label: 'F01005 - Дамжуургын тууз',
+            value: 'f01005 - belting',
+            key: 'F01005'
+          },
+          {
+            label: 'F01006 - Керамик бүтээгдэхүүнүүд',
+            value: 'f01006 - ceramic products',
+            key: 'F01006'
+          },
+          {
+            label: 'F01007 - Хувцас/Дүрэмт хувцас',
+            value: 'f01007 - clothing/uniforms',
+            key: 'F01007'
+          },
+          {
+            label: 'F01008 - Компрессор',
+            value: 'f01008 - compressors',
+            key: 'F01008'
+          },
+          {
+            label: 'F01009 - Кран, краны сэлбэг хэрэгсэл',
+            value: 'f01009 - cranes and spares',
+            key: 'F01009'
+          },
+          {
+            label: 'F01010 - Бэхэлгээ',
+            value: 'f01010 - fasteners',
+            key: 'F01010'
+          },
+          {
+            label: 'F01011 - Шүүлтүүр/Шүүх материал, уутан шүүлтүүр',
+            value: 'f01011 - filters/filter media and combo bags',
+            key: 'F01011'
+          },
+          {
+            label: 'F01012 - Зуухны сэлбэг хэрэгсэл',
+            value: 'f01012 - furnace spares',
+            key: 'F01012'
+          },
+          {
+            label: 'F01013 - Жийргэвч / Битүүмжлэх / Чигжих хэрэгсэл',
+            value: 'f01013 - gaskets / seals / packing',
+            key: 'F01013'
+          },
+          {
+            label: 'F01014 - Тослох материал/Masonite (Capuchon)',
+            value: 'f01014 - grease/masonite (capuchon)',
+            key: 'F01014'
+          },
+          {
+            label: 'F01016 - Гар багаж',
+            value: 'f01016 - hand tools',
+            key: 'F01016'
+          },
+          {
+            label: 'F01017 - Хоолой, тоноглолууд',
+            value: 'f01017 - hoses and fittings',
+            key: 'F01017'
+          },
+          {
+            label:
+              'F01018 - Халаалт, салхивч, агаар сэлгэлтийн төхөөрөмжийн сэлбэг хэрэгслүүд',
+            value: 'f01018 - hvac parts',
+            key: 'F01018'
+          },
+          {
+            label: 'F01019 - Гидравликийн тоног төхөөрөмж, бүрдэл хэсгүүд',
+            value: 'f01019 - hydraulic equipment & components',
+            key: 'F01019'
+          },
+          {
+            label: 'F01020 - Үйлдвэрлэлийн хангамжийн материалууд',
+            value: 'f01020 - industrial supplies',
+            key: 'F01020'
+          },
+          {
+            label: 'F01021 - Үйлдвэр/Далайн тээврийн зориулалттай бүрээс',
+            value: 'f01021 - industrial/marine coatings',
+            key: 'F01021'
+          },
+          {
+            label: 'F01022 - Лабораторын хангамжийн хэрэгсэл, засвар үйлчилгээ',
+            value: 'f01022 - laboratory supplies & maintenance',
+            key: 'F01022'
+          },
+          {
+            label: 'F01023 - Ган татлага/оосорлох хэрэгсэл',
+            value: 'f01023 - wire rope / slings',
+            key: 'F01023'
+          },
+          {
+            label: 'F01025 - Метал бэлдэц (зэс, гууль, ган гэх мэт.)',
+            value: 'f01025 - metals (copper brass steel etc.)',
+            key: 'F01025'
+          },
+          {
+            label: 'F01026 - Хоолой/тоноглол/хаалт',
+            value: 'f01026 - pipes/fittings/valves',
+            key: 'F01026'
+          },
+          {
+            label: 'F01027 - Хийн багаж төхөөрөмж',
+            value: 'f01027 - pneumatics',
+            key: 'F01027'
+          },
+          {
+            label: 'F01028 - Хүч дамжуулагч/хурдны хайрцаг',
+            value: 'f01028 - power transmission / gearboxes',
+            key: 'F01028'
+          },
+          {
+            label: 'F01029 - Технологийн процессын шүүлтүүр',
+            value: 'f01029 - process filters',
+            key: 'F01029'
+          },
+          {
+            label: 'F01030 - Хоолой/хаалт/тоноглол',
+            value: 'f01030 - pumps  /valves / fittings',
+            key: 'F01030'
+          },
+          {
+            label: 'F01031 - Шахуурга/компрессор/сэлбэг хэрэгсэл',
+            value: 'f01031 - pumps/compressors/parts',
+            key: 'F01031'
+          },
+          {
+            label: 'F01033 - Резин/резинэн бэлдэц',
+            value: 'f01033 - rubber/rubber supplies',
+            key: 'F01033'
+          },
+          {
+            label: 'F01034 - Аюулгүй ажиллагаа, галын аюулгүй байдал',
+            value: 'f01034 - safety & fire protection',
+            key: 'F01034'
+          },
+          {
+            label: 'F01035 - Аюулгүй ажиллагааны хэрэглээний зүйлс',
+            value: 'f01035 - safety consumables',
+            key: 'F01035'
+          },
+          {
+            label: 'F01036 - Элс/хайрга',
+            value: 'f01036 - sand/gravel',
+            key: 'F01036'
+          },
+          {
+            label:
+              'F01037 - Овоолго хийх, овоолгоос буцаан татах төхөөрөмжийн сэлбэг хэрэгсэл',
+            value: 'f01037 - stackers / reclaimers parts',
+            key: 'F01037'
+          },
+          {
+            label: 'F01038 - Ган болон тусгай төмөрлөгүүд',
+            value: 'f01038 - steel and specialty metals',
+            key: 'F01038'
+          },
+          {
+            label: 'F01039 - Банз/модон бүтээгдэхүүнүүд',
+            value: 'f01039 - timber/wood products',
+            key: 'F01039'
+          },
+          {
+            label: 'F01040 - Суран/гинжин дамжуулга',
+            value: 'f01040 - transmission belts and chains',
+            key: 'F01040'
+          },
+          {
+            label: 'F01041 - Гагнуурын тоног төхөөрөмж, хангамжийн зүйлс',
+            value: 'f01041 - welding equipment and supplies',
+            key: 'F01041'
+          },
+          {
+            label: 'F01042 - undefined',
+            value: 'f01042 - heavy ropes / dragline',
+            key: 'F01042'
+          }
+        ],
+        value: 'f01000 - general mro',
+        key: 'F01000'
+      },
+      {
+        label: 'F02000 - Цахилгааны болон нарийн хэмжүүрийн хэрэгсэл',
+        children: [
+          {
+            label: 'F02001 - Цахилгааны техник хэрэгсэл, тоног төхөөрөмж',
+            value: 'f02001 - electrical hardware & equipment',
+            key: 'F02001'
+          },
+          {
+            label: 'F02002 - Зай тэжээл',
+            value: 'f02002 - batteries',
+            key: 'F02002'
+          },
+          {
+            label: 'F02003 - Цахилгааны сэлбэг хэрэгсэл, хэрэглээний зүйлс',
+            value: 'f02003 - electrical consumables supplies',
+            key: 'F02003'
+          },
+          {
+            label: 'F02004 - Нарийн хэмжүүрийн тоног төхөөрөмж, эд анги',
+            value: 'f02004 - instrumentation equipment & components',
+            key: 'F02004'
+          }
+        ],
+        value: 'f02000 - electrical and instrumentation',
+        key: 'F02000'
+      },
+      {
+        label: 'F03000 - Тос, тослох материал',
+        children: [
+          {
+            label: 'F03001 - Тослох материал',
+            value: 'f03001 - greases',
+            key: 'F03001'
+          },
+          {
+            label: 'F03002 - Тос',
+            value: 'f03002 - oils',
+            key: 'F03002'
+          },
+          {
+            label: 'F03003 - undefined',
+            value: 'f03003 - coolants',
+            key: 'F03003'
+          }
+        ],
+        value: 'f03000 - lubricants',
+        key: 'F03000'
+      },
+      {
+        label: 'F04000 - Оффисын хэрэглээний зүйлс',
+        children: [
+          {
+            label: 'F04001 - Оффисын тавилга',
+            value: 'f04001 - office furniture',
+            key: 'F04001'
+          },
+          {
+            label: 'F04002 - Оффисын тоног төхөөрөмж',
+            value: 'f04002 - office machines and equipment',
+            key: 'F04002'
+          },
+          {
+            label: 'F04003 - Оффисын хангамжийн зүйлс',
+            value: 'f04003 - office supplies',
+            key: 'F04003'
+          },
+          {
+            label: 'F04004 - Хэвлэл захиалга',
+            value: 'f04004 - publications',
+            key: 'F04004'
+          }
+        ],
+        value: 'f04000 - office consumables',
+        key: 'F04000'
+      }
+    ],
+    value: 'f00000 - mro (maintenance, repair, operationals) & consumables',
+    key: 'F00000'
+  },
+  {
+    label: 'G00000 - Үйлдвэрлэлийн хэрэглээний зүйлс',
+    children: [
+      {
+        label: 'G01000 - Рио Тинтогийн борлуулах бүтээгдэхүүний савлагаа',
+        children: [
+          {
+            label: 'G01001 - Шошго, лого',
+            value: 'g01001 - labels & metalized logos',
+            key: 'G01001'
+          },
+          {
+            label: 'G01002 - Сав баглаа',
+            value: 'g01002 - packaging',
+            key: 'G01002'
+          },
+          {
+            label: 'G01003 - Ган бүслүүр',
+            value: 'g01003 - steel strapping',
+            key: 'G01003'
+          },
+          {
+            label: 'G01004 - Будаг / Далайн тээврийн зориулалттай бүрээс',
+            value: 'g01004 - paints / marine coatings',
+            key: 'G01004'
+          },
+          {
+            label: 'G01005 - Хальс - Полиэтилен',
+            value: 'g01005 - film - pe',
+            key: 'G01005'
+          },
+          {
+            label: 'G01006 - Хальс - Цулгай',
+            value: 'g01006 - film - plain',
+            key: 'G01006'
+          },
+          {
+            label: 'G01007 - Хальс - Поливенилхлорид',
+            value: 'g01007 - film - pvc',
+            key: 'G01007'
+          },
+          {
+            label: 'G01008 - Шилэн мяндас',
+            value: 'g01008 - fiber glass',
+            key: 'G01008'
+          },
+          {
+            label: 'G01009 - Боолтын цаас',
+            value: 'g01009 - tissue paper',
+            key: 'G01009'
+          },
+          {
+            label: 'G01010 - Тавиур',
+            value: 'g01010 - pallets',
+            key: 'G01010'
+          },
+          {
+            label: 'G01011 - Задгай ачааны уут',
+            value: 'g01011 - bulk bags',
+            key: 'G01011'
+          },
+          {
+            label: 'G01012 - undefined',
+            value: 'g01012 - green timber / lumber',
+            key: 'G01012'
+          }
+        ],
+        value: 'g01000 - packaging for rio tinto product sales',
+        key: 'G01000'
+      },
+      {
+        label: 'G02000 - Хөнгөнцагааны болон гангийн бэлдэц материал',
+        value: 'g02000 - aluminium and steel input materials',
+        key: 'G02000'
+      },
+      {
+        label: 'G03000 - Хэрэглээний зүйлс',
+        children: [
+          {
+            label: 'G03001 - Технологийн процссын хэрэглээний зүйлс',
+            value: 'g03001 - process consumables',
+            key: 'G03001'
+          },
+          {
+            label: 'G03002 - Цутгуурын цехийн хэрэглээний зүйлс',
+            value: 'g03002 - cast house consumables',
+            key: 'G03002'
+          },
+          {
+            label: 'G03003 - Цутгуур',
+            value: 'g03003 - castings',
+            key: 'G03003'
+          },
+          {
+            label: 'G03004 - Цилиндр / Хавтан',
+            value: 'g03004 - cylinders / plates',
+            key: 'G03004'
+          },
+          {
+            label: 'G03005 - Шаарга боловсруулах',
+            value: 'g03005 - dross tolling',
+            key: 'G03005'
+          },
+          {
+            label: 'G03006 - Эсгий',
+            value: 'g03006 - felts',
+            key: 'G03006'
+          },
+          {
+            label: 'G03007 - Ган бэлдэц материал',
+            value: 'g03007 - steel for extrusion dies',
+            key: 'G03007'
+          },
+          {
+            label: 'G03008 - Үйлдвэрлэлийн термопар, дулааны анхдагч хэмжүүр',
+            value: 'g03008 - production thermocouples',
+            key: 'G03008'
+          },
+          {
+            label: 'G03009 - Тослох-хөргөх шингэн, нэмэлт бодис',
+            value: 'g03009 - rolling oil & additives',
+            key: 'G03009'
+          },
+          {
+            label: 'G03010 - undefined',
+            value: 'g03010 - buss bar, collector straps, flexes',
+            key: 'G03010'
+          },
+          {
+            label: 'G03011 - undefined',
+            value: 'g03011 - collector bars and pot steel',
+            key: 'G03011'
+          },
+          {
+            label: 'G03012 - undefined',
+            value: 'g03012 - copper',
+            key: 'G03012'
+          },
+          {
+            label: 'G03013 - undefined',
+            value: 'g03013 - grain refiners',
+            key: 'G03013'
+          },
+          {
+            label: 'G03014 - undefined',
+            value: 'g03014 - hardeners',
+            key: 'G03014'
+          },
+          {
+            label: 'G03015 - undefined',
+            value: 'g03015 - nickel',
+            key: 'G03015'
+          },
+          {
+            label: 'G03016 - undefined',
+            value: 'g03016 - pure metals',
+            key: 'G03016'
+          },
+          {
+            label: 'G03017 - undefined',
+            value: 'g03017 - steel rods',
+            key: 'G03017'
+          },
+          {
+            label: 'G03018 - undefined',
+            value: 'g03018 - steel shot and steel balls',
+            key: 'G03018'
+          }
+        ],
+        value: 'g03000 - consumables',
+        key: 'G03000'
+      },
+      {
+        label: 'G04000 - Тэсрэх бодис',
+        children: [
+          {
+            label: 'G04001 - Аммонийн нитрат, задгай тэсрэх бодис',
+            value: 'g04001 - ammonium nitrate & bulk explosives',
+            key: 'G04001'
+          },
+          {
+            label: 'G04002 - Тэсэлгээний нэмэлт хэрэгсэл',
+            value: 'g04002 - explosives accessories',
+            key: 'G04002'
+          },
+          {
+            label: 'G04003 - Эмульсийн тэсрэх бодис',
+            value: 'g04003 - packaged explosives',
+            key: 'G04003'
+          },
+          {
+            label: 'G04004 - undefined',
+            value: 'g04004 - drill and blast services',
+            key: 'G04004'
+          }
+        ],
+        value: 'g04000 - explosives',
+        key: 'G04000'
+      },
+      {
+        label: 'G05000 - Химийн бодис',
+        children: [
+          {
+            label: 'G05001 - Хүчил',
+            value: 'g05001 - acid',
+            key: 'G05001'
+          },
+          {
+            label: 'G05002 - Хлор',
+            value: 'g05002 - chlorine',
+            key: 'G05002'
+          },
+          {
+            label: 'G05003 - Тосгүйжүүлэх, цэвэрлэх уусмал',
+            value: 'g05003 - degreasing and cleaning',
+            key: 'G05003'
+          },
+          {
+            label: 'G05004 - Этанол',
+            value: 'g05004 - ethanol',
+            key: 'G05004'
+          },
+          {
+            label: 'G05005 - Ферро цахиур',
+            value: 'g05005 - ferro silicon',
+            key: 'G05005'
+          },
+          {
+            label: 'G05006 - Флокулянт',
+            value: 'g05006 - flocculants',
+            key: 'G05006'
+          },
+          {
+            label: 'G05007 - Үйлдвэрлэлийн зориулалттай хий',
+            value: 'g05007 - industrial gases',
+            key: 'G05007'
+          },
+          {
+            label: 'G05008 - Бэх',
+            value: 'g05008 - inks',
+            key: 'G05008'
+          },
+          {
+            label: 'G05009 - Шохой',
+            value: 'g05009 - lime',
+            key: 'G05009'
+          },
+          {
+            label: 'G05010 - Метал гадаргуу боловсруулах, маажиндах бодис',
+            value: 'g05010 - metal pre-treat/lacquers',
+            key: 'G05010'
+          },
+          {
+            label: 'G05011 - Органик бодис',
+            value: 'g05011 - organic',
+            key: 'G05011'
+          },
+          {
+            label: 'G05012 - Химийн бусад бодис',
+            value: 'g05012 - other process chemicals',
+            key: 'G05012'
+          },
+          {
+            label: 'G05013 - Хүчилтөрөгч',
+            value: 'g05013 - oxygen',
+            key: 'G05013'
+          },
+          {
+            label: 'G05014 - Резин',
+            value: 'g05014 - resins',
+            key: 'G05014'
+          },
+          {
+            label: 'G05015 - Чигжээс',
+            value: 'g05015 - sealants',
+            key: 'G05015'
+          },
+          {
+            label: 'G05016 - Уусгагч',
+            value: 'g05016 - solvents',
+            key: 'G05016'
+          },
+          {
+            label: 'G05017 - Үйлдвэрлэлийн ус',
+            value: 'g05017 - water - industrial',
+            key: 'G05017'
+          },
+          {
+            label: 'G05018 - Лав',
+            value: 'g05018 - wax',
+            key: 'G05018'
+          },
+          {
+            label: 'G05020 - undefined',
+            value: 'g05020 - graphite',
+            key: 'G05020'
+          },
+          {
+            label: 'G05021 - undefined',
+            value: 'g05021 - graphite tubes',
+            key: 'G05021'
+          },
+          {
+            label: 'G05022 - undefined',
+            value: 'g05022 - iron',
+            key: 'G05022'
+          },
+          {
+            label: 'G05023 - undefined',
+            value: 'g05023 - lithium carbonate',
+            key: 'G05023'
+          },
+          {
+            label: 'G05024 - undefined',
+            value: 'g05024 - magnesium oxide',
+            key: 'G05024'
+          },
+          {
+            label: 'G05025 - undefined',
+            value: 'g05025 - metallurgical coal',
+            key: 'G05025'
+          },
+          {
+            label: 'G05026 - undefined',
+            value: 'g05026 - soda ash',
+            key: 'G05026'
+          },
+          {
+            label: 'G05027 - undefined',
+            value: 'g05027 - bone ash',
+            key: 'G05027'
+          }
+        ],
+        value: 'g05000 - process chemicals',
+        key: 'G05000'
+      },
+      {
+        label: 'G06000 - Түүхий эд',
+        children: [
+          {
+            label: 'G06001 - Хайлш',
+            value: 'g06001 - alloys',
+            key: 'G06001'
+          },
+          {
+            label: 'G06003 - Хөнгөнцагааны флорид',
+            value: 'g06003 - aluminium flouride',
+            key: 'G06003'
+          },
+          {
+            label: 'G06004 - Чулуун нүүрс',
+            value: 'g06004 - anthracite',
+            key: 'G06004'
+          },
+          {
+            label: 'G06008 - Газрын тосны хатаасан кокс',
+            value: 'g06008 - coke (petroleum) – calcined (cpc)',
+            key: 'G06008'
+          },
+          {
+            label: 'G06009 - Нүүрстөрөгч',
+            value: 'g06009 - carbon',
+            key: 'G06009'
+          },
+          {
+            label: 'G06010 - Идэмхий натри',
+            value: 'g06010 - caustic soda',
+            key: 'G06010'
+          },
+          {
+            label: 'G06011 - Кокс (металлургийн)',
+            value: 'g06011 - coke (metallurgical)',
+            key: 'G06011'
+          },
+          {
+            label: 'G06012 - Кокс (газрын тосны)',
+            value: 'g06012 - coke (petroleum) – green (gpc)',
+            key: 'G06012'
+          },
+          {
+            label: 'G06013 - Электрод',
+            value: 'g06013 - electrodes',
+            key: 'G06013'
+          },
+          {
+            label: 'G06014 - Хайлуур жонш',
+            value: 'g06014 - fluorspar',
+            key: 'G06014'
+          },
+          {
+            label: 'G06021 - Давирхай',
+            value: 'g06021 - coal tar pitch',
+            key: 'G06021'
+          },
+          {
+            label: 'G06026 - Өөрөө хатуурах хучилт',
+            value: 'g06026 - ramming paste',
+            key: 'G06026'
+          },
+          {
+            label: 'G06027 - Галд тэсвэртэй тоосго',
+            value: 'g06027 - refractories & refractory bricks',
+            key: 'G06027'
+          },
+          {
+            label: 'G06029 - Хайлуулах үйлдвэрийн технологи',
+            value: 'g06029 - smelter technology',
+            key: 'G06029'
+          },
+          {
+            label: 'G06031 - undefined',
+            value: 'g06031 - cathodes',
+            key: 'G06031'
+          },
+          {
+            label: 'G06032 - undefined',
+            value: 'g06032 - magnesium',
+            key: 'G06032'
+          },
+          {
+            label: 'G06033 - undefined',
+            value: 'g06033 - manganese',
+            key: 'G06033'
+          },
+          {
+            label: 'G06034 - undefined',
+            value: 'g06034 - silicon',
+            key: 'G06034'
+          }
+        ],
+        value: 'g06000 - raw materials',
+        key: 'G06000'
+      }
+    ],
+    value: 'g00000 - production consumables',
+    key: 'G00000'
+  },
+  {
+    label: 'H00000 - Үйлчилгээ',
+    children: [
+      {
+        label: 'H01000 - Туслах үйлчилгээ',
+        children: [
+          {
+            label: 'H01001 - Хяналт шинжилгээний гэрээт гүйцэтгэгч',
+            value: 'h01001 - component monitoring contractors',
+            key: 'H01001'
+          },
+          {
+            label: 'H01002 - Гэрээт ажилтан - Гаднын үйлчилгээ',
+            value: 'h01002 - contract labor-outside services',
+            key: 'H01002'
+          },
+          {
+            label: 'H01003 - Ажилчдын тээврийн үйлчилгээ',
+            value: 'h01003 - employee transport services',
+            key: 'H01003'
+          },
+          {
+            label: 'H01004 - Түрээсээр ашиглах тоног төхөөрөмж',
+            value: 'h01004 - equipment hire',
+            key: 'H01004'
+          },
+          {
+            label: 'H01005 - Эд анги үйлдвэрлэл',
+            value: 'h01005 - fabrication',
+            key: 'H01005'
+          },
+          {
+            label: 'H01006 - Цутгуурын цех',
+            value: 'h01006 - foundries',
+            key: 'H01006'
+          },
+          {
+            label: 'H01007 - Нарийн хэмжүүр',
+            value: 'h01007 - instrumentation',
+            key: 'H01007'
+          },
+          {
+            label: 'H01008 - Лаборатори',
+            value: 'h01008 - laboratory',
+            key: 'H01008'
+          },
+          {
+            label: 'H01009 - Токарийн цех',
+            value: 'h01009 - machining+b147',
+            key: 'H01009'
+          },
+          {
+            label: 'H01010 - Далайн тээврийн гэрээт гүйцэтгэгч',
+            value: 'h01010 - marine contractors',
+            key: 'H01010'
+          },
+          {
+            label: 'H01011 - Эмнэлгийн үйлчилгээ',
+            value: 'h01011 - medical services',
+            key: 'H01011'
+          },
+          {
+            label: 'H01012 - Метал бэлдэц үйлдвэрлэл',
+            value: 'h01012 - metal fabrication services',
+            key: 'H01012'
+          },
+          {
+            label: 'H01013 - Оффисын тоног төхөөрөмжийн засвар үйлчилгээ',
+            value: 'h01013 - office equipment maintenance services',
+            key: 'H01013'
+          },
+          {
+            label: 'H01014 - Боомтын төлбөр',
+            value: 'h01014 - port charges',
+            key: 'H01014'
+          },
+          {
+            label: 'H01015 - Хэвлэлийн үйлчилгээ',
+            value: 'h01015 - printing services',
+            key: 'H01015'
+          },
+          {
+            label: 'H01016 - Зам засвар, арчлалтын гэрээт гүйцэтгэгч',
+            value: 'h01016 - road maintenance contractors',
+            key: 'H01016'
+          },
+          {
+            label: 'H01017 - Дээж авах, шинжилгээ хийх үйлчилгээ',
+            value: 'h01017 - sampling / testing contractors',
+            key: 'H01017'
+          },
+          {
+            label: 'H01018 - Даавуун хэвлэл',
+            value: 'h01018 - screen print',
+            key: 'H01018'
+          },
+          {
+            label: 'H01019 - Тээвэрлэлтийн үйлчилгээ',
+            value: 'h01019 - shipping agents',
+            key: 'H01019'
+          },
+          {
+            label: 'H01020 - Уурхайн талбайн бусад үйлчилгээ',
+            value: 'h01020 - site services other',
+            key: 'H01020'
+          },
+          {
+            label: 'H01021 - Өндрийн засвар үйлчилгээ',
+            value: 'h01021 - steepljacks',
+            key: 'H01021'
+          },
+          {
+            label: 'H01022 - Геодезийн хэмжилт',
+            value: 'h01022 - surveying',
+            key: 'H01022'
+          },
+          {
+            label: 'H01023 - Тоолуур, хэмжилтийн үйлчилгээ',
+            value: 'h01023 - tolling',
+            key: 'H01023'
+          },
+          {
+            label: 'H01024 - Ус цэвэршүүлэх материал',
+            value: 'h01024 - water treatment materials',
+            key: 'H01024'
+          }
+        ],
+        value: 'h01000 - ancillary services',
+        key: 'H01000'
+      },
+      {
+        label: 'H02000 - Задгай материал',
+        children: [
+          {
+            label: 'H02001 - Шугам хоолойн тоолуур, хэмжилтийн үйлчилгээ',
+            value: 'h02001 - pipeline tolling service',
+            key: 'H02001'
+          }
+        ],
+        value: 'h02000 - bulk materials',
+        key: 'H02000'
+      },
+      {
+        label: 'H03000 - Барилга, уурхайн үйлчилгээ',
+        children: [
+          {
+            label: 'H03001 - Барилга угсралтын гэрээт гүйцэтгэгч',
+            value: 'h03001 - civil contractors',
+            key: 'H03001'
+          },
+          {
+            label: 'H03003 - Олборлолтын гэрээт гүйцэтгэгч',
+            value: 'h03003 - mining contractors',
+            key: 'H03003'
+          }
+        ],
+        value: 'h03000 - civil & mining services',
+        key: 'H03000'
+      },
+      {
+        label: 'H04000 - Аж ахуй, уурхайн талбайн менежмент',
+        children: [
+          {
+            label: 'H04001 - Барилгын түрээс',
+            value: 'h04001 - building lease',
+            key: 'H04001'
+          },
+          {
+            label:
+              'H04002 - Барилгын засвар үйлчилгээ, сантехникийн болон цахилгааны ажлууд',
+            value: 'h04002 - building maintenance, plumb/elect service',
+            key: 'H04002'
+          },
+          {
+            label: 'H04003 - Хоолны үйлчилгээ',
+            value: 'h04003 - catering',
+            key: 'H04003'
+          },
+          {
+            label: 'H04005 - Газрын гадаргуугийн арчлалт',
+            value: 'h04005 - grounds maintenance services',
+            key: 'H04005'
+          },
+          {
+            label: 'H04006 - Цэвэрлэгээний үйлчилгээ',
+            value: 'h04006 - janitorial services',
+            key: 'H04006'
+          },
+          {
+            label: 'H04007 - Угаалгын үйлчилгээ',
+            value: 'h04007 - laundry services',
+            key: 'H04007'
+          },
+          {
+            label: 'H04008 - Хөрөнгийн түрээс',
+            value: 'h04008 - property leases / rentals',
+            key: 'H04008'
+          },
+          {
+            label: 'H04009 - Хөрөнгийн худалдан авалт',
+            value: 'h04009 - property purchases',
+            key: 'H04009'
+          },
+          {
+            label: 'H04010 - Аюулгүй ажиллагаа, галын аюулгүй байдал',
+            value: 'h04010 - safety and fire protection services',
+            key: 'H04010'
+          },
+          {
+            label: 'H04011 - Хамгаалалтын үйлчилгээ',
+            value: 'h04011 - security services',
+            key: 'H04011'
+          },
+          {
+            label: 'H04012 - Уурхайн талбар дах барилга угсралтын ажил',
+            value: 'h04012 - site civil works',
+            key: 'H04012'
+          },
+          {
+            label:
+              'H04013 - Хог хаягдал цуглуулах, зайлуулах, дахин боловсруулах үйлчилгээ (аюултай хог хаягдал орно)',
+            value: 'h04013 - waste removal, disposal & recycling',
+            key: 'H04013'
+          },
+          {
+            label: 'H04014 - Ус хангамж - Хэрэглээний',
+            value: 'h04014 - water supply - domestic',
+            key: 'H04014'
+          }
+        ],
+        value: 'h04000 - facilities & site management',
+        key: 'H04000'
+      },
+      {
+        label: 'H05000 - Мэдээллийн технологи',
+        children: [
+          {
+            label: 'H05001 - Техник хангамжийн засвар үйлчилгээ',
+            value: 'h05001 - hardware equipment maintenance',
+            key: 'H05001'
+          },
+          {
+            label: 'H05002 - Техник хангамжийн түрээс',
+            value: 'h05002 - hardware leasing',
+            key: 'H05002'
+          },
+          {
+            label: 'H05003 - Техник хангамжийн худалдан авалт',
+            value: 'h05003 - hardware purchase',
+            key: 'H05003'
+          },
+          {
+            label: 'H05004 - Мэдээллийн технологийн үйлчилгээ',
+            value: 'h05004 - it services',
+            key: 'H05004'
+          },
+          {
+            label: 'H05005 - Суурин утас',
+            value: 'h05005 - land telecommunications',
+            key: 'H05005'
+          },
+          {
+            label: 'H05006 - Гар утас',
+            value: 'h05006 - mobile telecommunications',
+            key: 'H05006'
+          },
+          {
+            label:
+              'H05007 - Компьютер, программ хангамж, холбогдох бусад зүйлс',
+            value: 'h05007 - pc, software and related',
+            key: 'H05007'
+          },
+          {
+            label: 'H05008 - Программ хангамж',
+            value: 'h05008 - software',
+            key: 'H05008'
+          },
+          {
+            label: 'H05009 - Холбоо',
+            value: 'h05009 - telecommunications',
+            key: 'H05009'
+          }
+        ],
+        value: 'h05000 - it',
+        key: 'H05000'
+      },
+      {
+        label: 'H06000 - Засвар үйлчилгээ',
+        children: [
+          {
+            label: 'H06001 - Автын засвар үйлчилгээ',
+            value: 'h06001 - automotive maintenance',
+            key: 'H06001'
+          },
+          {
+            label: 'H06002 - Краны гэрээт үйлчилгээ үзүүлэгч',
+            value: 'h06002 - cranage contractors',
+            key: 'H06002'
+          },
+          {
+            label: 'H06003 - Бутлуур, тээрмийн гэрээт үйлчилгээ үзүүлэгч',
+            value: 'h06003 - crushing & mill contractors',
+            key: 'H06003'
+          },
+          {
+            label:
+              'H06004 - Цахилгаан дамжуулалт, цахилгаан холболтын гэрээт үйлчилгээ үзүүлэгч',
+            value: 'h06004 - elec trans/cabling contractors',
+            key: 'H06004'
+          },
+          {
+            label: 'H06005 - Зауухны засвар үйлчилгээ',
+            value: 'h06005 - furnace repair/maintenance',
+            key: 'H06005'
+          },
+          {
+            label: 'H06006 - Материал зөөх тоног төхөөрөмжийн засвар үйлчилгээ',
+            value: 'h06006 - handling & moving equipment maintenance',
+            key: 'H06006'
+          },
+          {
+            label: 'H06007 - ХСАС-ийн засвар үйлчилгээ',
+            value: 'h06007 - hvac maintenance',
+            key: 'H06007'
+          },
+          {
+            label: 'H06008 - Засвар үйлчилгээ',
+            value: 'h06008 - maintenance services',
+            key: 'H06008'
+          },
+          {
+            label:
+              'H06009 - Үйлдвэрийн цахилгаан тоног төхөөрөмжийн засвар үйлчилгээ',
+            value: 'h06009 - plant maint service electrical',
+            key: 'H06009'
+          },
+          {
+            label:
+              'H06010 - Үйлдвэрийн гидравлик тоног төхөөрөмжийн засвар үйлчилгээ',
+            value: 'h06010 - plant maint service hydraulic',
+            key: 'H06010'
+          },
+          {
+            label:
+              'H06011 - Үйлдвэрийн механикийн тоног төхөөрөмжийн засвар үйлчилгээ',
+            value: 'h06011 - plant maint service mechanical',
+            key: 'H06011'
+          },
+          {
+            label:
+              'H06012 - Үйлдвэрийн ус цэвэршүүлэх байгууламжийн засвар үйлчилгээ',
+            value: 'h06012 - plant maint service water treatment',
+            key: 'H06012'
+          },
+          {
+            label: 'H06013 - Шугам хоолойн засвар үйлчилгээ',
+            value: 'h06013 - plumbing maintenance',
+            key: 'H06013'
+          },
+          {
+            label: 'H06014 - Түр ажиллах хүчин / Үйлдвэрлэлийн',
+            value: 'h06014 - temp labor/industrial',
+            key: 'H06014'
+          },
+          {
+            label: 'H06015 - Цахилгаан дамжуулалт, цахилгаан холболт',
+            value: 'h06015 - transmission / cabling contractors',
+            key: 'H06015'
+          },
+          {
+            label: 'H06016 - undefined',
+            value: 'h06016 - refractory services',
+            key: 'H06016'
+          }
+        ],
+        value: 'h06000 - maintenance services',
+        key: 'H06000'
+      },
+      {
+        label: 'H07000 - Олборлолт',
+        children: [
+          {
+            label: 'H07001 - Гүний уурхайн олборлолтын гэрээт гүйцэтгэгч',
+            value: 'h07001 - underground mining contractors',
+            key: 'H07001'
+          }
+        ],
+        value: 'h07000 - support services',
+        key: 'H07000'
+      },
+      {
+        label: 'H08000 - Мэргэжлийн үйлчилгээ',
+        children: [
+          {
+            label: 'H08001 - НББ, санхүү, аудит, татварын зөвлөх үйлчилгээ',
+            value: 'h08001 - accounting/financial/audit/tax service',
+            key: 'H08001'
+          },
+          {
+            label: 'H08002 - Сурталчилгаа, маркетингийн үйлчилгээ',
+            value: 'h08002 - advertising/marketing service',
+            key: 'H08002'
+          },
+          {
+            label: 'H08003 - Банкны үйлчилгээ',
+            value: 'h08003 - banking services',
+            key: 'H08003'
+          },
+          {
+            label: 'H08004 - Бизнесийн болон ерөнхий зөвлөх үйлчилгээ',
+            value: 'h08004 - business & general consulting',
+            key: 'H08004'
+          },
+          {
+            label: 'H08005 - Зөвлөх үйлчилгээ',
+            value: 'h08005 - consulting services',
+            key: 'H08005'
+          },
+          {
+            label: 'H08006 - Гаалийн бүрдүүлэлт, брокерын үйлчилгээ',
+            value: 'h08006 - customs clearance & brokerage',
+            key: 'H08006'
+          },
+          {
+            label:
+              'H08007 - Инженер, техниз, мэргэжлийн болон ерөнхий зөвлөх үйлчилгээ',
+            value: 'h08007 - engineering, technical or consulting srvc',
+            key: 'H08007'
+          },
+          {
+            label:
+              'H08008 - Байгаль орчин, эрүүл мэнд, аюулгүй ажиллагааны зөвлөх үйлчилгээ',
+            value: 'h08008 - environmental, health/safety consulting',
+            key: 'H08008'
+          },
+          {
+            label: 'H08009 - Эрүүл мэндийн даатгал',
+            value: 'h08009 - health insurance',
+            key: 'H08009'
+          },
+          {
+            label: 'H08010 - Хүний нөөц, урамшууллын зөвлөх үйлчилгээ',
+            value: 'h08010 - hr services / benefits',
+            key: 'H08010'
+          },
+          {
+            label: 'H08011 - Даатгал',
+            value: 'h08011 - insurance',
+            key: 'H08011'
+          },
+          {
+            label: 'H08012 - Мэдээллийн технологийн зөвлөх үйлчилгээ',
+            value: 'h08012 - it consulting',
+            key: 'H08012'
+          },
+          {
+            label: 'H08013 - Хуулийн үйлчилгээ',
+            value: 'h08013 - legal services',
+            key: 'H08013'
+          },
+          {
+            label: 'H08014 - Зах зээлийн судалгаа',
+            value: 'h08014 - market research',
+            key: 'H08014'
+          },
+          {
+            label: 'H08015 - Эмч, эмчилгээний төлбөр',
+            value: 'h08015 - physicians fees',
+            key: 'H08015'
+          },
+          {
+            label: 'H08016 - Мэргэжлийн үйлчилгээ',
+            value: 'h08016 - outsourcing services',
+            key: 'H08016'
+          },
+          {
+            label: 'H08017 - Судалгаа, хөгжил',
+            value: 'h08017 - research and development',
+            key: 'H08017'
+          },
+          {
+            label: 'H08018 - Эрсдэлийн менежментийн үйлчилгээ',
+            value: 'h08018 - risk management services',
+            key: 'H08018'
+          },
+          {
+            label: 'H08019 - Гадаад харилцааны үйлчилгээ',
+            value: 'h08019 - services for external relations',
+            key: 'H08019'
+          },
+          {
+            label: 'H08021 - Сургалт, боловсрол - Төлбөр',
+            value: 'h08021 - training and education - fees',
+            key: 'H08021'
+          },
+          {
+            label: 'H08022 - Сургалтын үйлчилгээ',
+            value: 'h08022 - training services',
+            key: 'H08022'
+          }
+        ],
+        value: 'h08000 - professional services',
+        key: 'H08000'
+      },
+      {
+        label: 'H0900a - undefined',
+        children: [
+          {
+            label:
+              'H09001 - Уурхайн талбайн гэрээт гүйцэтгэгчид - Цахилгааны, механикийн',
+            value: 'h09001 - site contractors - electrical/mechanical',
+            key: 'H09001'
+          },
+          {
+            label: 'H09002 - Нэмэлт ажиллах хүчин',
+            value: 'h09002 - supplementary labour',
+            key: 'H09002'
+          }
+        ],
+        value: 'h09000 - support services',
+        key: 'H0900a'
+      },
+      {
+        label: 'H10000 - Аялал',
+        children: [
+          {
+            label: 'H10001 - Агаарын тээвэр - Ердийн нислэг',
+            value: 'h10001 - air travel - rpt',
+            key: 'H10001'
+          },
+          {
+            label: 'H10002 - Агаарын тээвэр - Захиалгат нислэг',
+            value: 'h10002 - air travel - scheduled charter',
+            key: 'H10002'
+          },
+          {
+            label: 'H10003 - Машины түрээс',
+            value: 'h10003 - car hire / rental',
+            key: 'H10003'
+          },
+          {
+            label: 'H10004 - Зочид буудал / Байр сууц',
+            value: 'h10004 - hotel / accommodation',
+            key: 'H10004'
+          },
+          {
+            label: 'H10005 - Хоол',
+            value: 'h10005 - meals',
+            key: 'H10005'
+          },
+          {
+            label: 'H10006 - Такси, автобус, галт тэрэг',
+            value: 'h10006 - taxi / bus / train',
+            key: 'H10006'
+          },
+          {
+            label: 'H10007 - Аялал',
+            value: 'h10007 - travel',
+            key: 'H10007'
+          },
+          {
+            label: 'H10008 - Аялалын товчооны үйлчилгээ',
+            value: 'h10008 - travel agency services',
+            key: 'H10008'
+          }
+        ],
+        value: 'h10000 - travel',
+        key: 'H10000'
+      }
+    ],
+    value: 'h00000 - services',
+    key: 'H00000'
+  },
+  {
+    label: 'X00000 - Сонгон шалгаруулалтгүй зүйлс',
+    children: [
+      {
+        label: 'X01000 - Хандив, бэлэг',
+        value: 'x01000 - donations & gifts',
+        key: 'X01000'
+      },
+      {
+        label:
+          'X02000 - Засгийн газрын болон хуулийн байгууллагын төлбөр хураамж',
+        value: 'x02000 - fees to government/legal authority',
+        key: 'X02000'
+      },
+      {
+        label: 'X03000 - Группийн компаниуд хоорондын үйлчилгээ',
+        value: 'x03000 - inter-company',
+        key: 'X03000'
+      },
+      {
+        label: 'X04000 - Мэргэжлийн холбоодын гишүүнчлэл',
+        value: 'x04000 - memberships and associations',
+        key: 'X04000'
+      },
+      {
+        label: 'X05000 - Татвар',
+        value: 'x05000 - taxes',
+        key: 'X05000'
+      },
+      {
+        label: 'X06000 - Ажилтнуудын төлбөр, зардал',
+        value: 'x06000 - expense reimbursements',
+        key: 'X06000'
+      },
+      {
+        label: 'X07000 - Хагас боловсруулсан бүтээгдэхүүн',
+        value: 'x07000 - semi finished / finished goods',
+        key: 'X07000'
+      },
+      {
+        label: 'X07001 - undefined',
+        value: 'x07001 - anode bar',
+        key: 'X07001'
+      },
+      {
+        label: 'X07002 - undefined',
+        value: 'x07002 - alumina',
+        key: 'X07002'
+      },
+      {
+        label: 'X07003 - undefined',
+        value: 'x07003 - bath / cryolite',
+        key: 'X07003'
+      },
+      {
+        label: 'X07004 - undefined',
+        value: 'x07004 - bauxite',
+        key: 'X07004'
+      }
+    ],
+    value: 'x00000 - non contestable',
+    key: 'X00000'
+  }
+];
+
+export default { en, mn };

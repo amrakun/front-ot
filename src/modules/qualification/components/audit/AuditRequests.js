@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Table, Card } from 'antd';
 import { dateTimeFormat } from 'modules/common/constants';
 import moment from 'moment';
-import { Paginator } from 'modules/common/components';
+import { Paginator, HelpModal } from 'modules/common/components';
 
 class AuditRequests extends React.Component {
   columns() {
@@ -54,7 +54,10 @@ class AuditRequests extends React.Component {
     const { __ } = this.context;
 
     return (
-      <Card title={__('Qualification/audit requests')}>
+      <Card
+        title={__('Qualification/audit requests')}
+        extra={<HelpModal videoId="desktopAudit" />}
+      >
         <Table
           columns={this.columns()}
           rowKey={record => record._id}

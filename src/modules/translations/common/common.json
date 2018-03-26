@@ -33,9 +33,10 @@
   "Close": "Хаах",
   "Yes": "Тийм",
   "This field is required!": "Энэ талбарыг заавал бөглөнө нүү",
-  "Oyu Suppliers database": "Оюу ханган нийлүүлэгчдийн мэдээллийн сан",
+  "Oyu Tolgoi": "Оюу толгой",
+  "Suppliers Database": "ханган нийлүүлэгчдийн мэдээллийн сан",
   "Expression of Interest": "Оролцох Сонирхолоо Илэрхийлэх",
-  "Register as supplier": "Ханган Нийлүүлэгчээр Бүртгүүлэх",
+  "Register as a supplier": "Ханган Нийлүүлэгчээр Бүртгүүлэх",
   "Changes disabled": "Өөрчлөлт оруулах боломжгүй",
   "You have already submitted your pre-qualification form and changes are disabled.":
     "Та гэрээ хэрэгжүүлэх чадварын үнэлгээний асуулгаа нэгэнт илгээсэн тул өөрчлөлт оруулах боломжгүй",
@@ -53,6 +54,7 @@
   "Select one": "Сонгох",
   "Please select an option": "Жагсаалтаас сонгох",
   "Already sent": "Илгээгдсэн",
+  "Help": "Тусламж",
   "Your registration has been successfully completed.  Oyu Tolgoi procurement team now has started the pre-qualification process on your company. A gap report will be sent once the pre-qualification process complete.":
     "Та  мэдээллээ амжилттай бүртгэлээ. Оюу толгой худалдан авалтыэ баг таны гэрээ хэрэгжүүлэх чадварын урьдчилсан үнэлгээний мэдээллийг шалгах болно. Үүний дараа таны бүртгүүлсэн мэдээлэл шаардлага хангасан эсэх мэдээллийг хүргүүлэх болно."
 }

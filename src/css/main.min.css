@@ -133,6 +133,9 @@
 .ant-menu-horizontal.ant-menu-root .ant-avatar * {
   line-height: 26px;
 }
+.ant-menu-horizontal.ant-menu-root:not(.landing) {
+  margin-bottom: 24px;
+}
 .ant-layout-sider {
   position: relative;
   background: #fff;
@@ -192,7 +195,8 @@
   margin: 0 24px;
 }
 .ant-breadcrumb {
-  margin: 16px 0;
+  margin: 14px 0 14px 24px;
+  float: left;
 }
 i.success {
   color: green;
@@ -296,12 +300,19 @@ i.success {
   text-align: center;
 }
 .home-landing .content-wrapper .content h1 {
-  font-weight: 100;
   font-size: 55px;
   margin-bottom: 64px;
   line-height: 60px;
   color: #fff;
   text-transform: uppercase;
+}
+.home-landing .content-wrapper .content h1 strong {
+  font-weight: 600;
+  padding-right: 8px;
+  margin-right: 8px;
+}
+.home-landing .content-wrapper .content h1 span {
+  font-weight: 100;
 }
 .home-landing .content-wrapper .content [class^='home-btn'] {
   line-height: 45px;
@@ -606,4 +617,13 @@ table.suppliers-filter .ant-select {
 .tenders-table .anticon {
   position: relative;
   top: 3px;
+}
+.video-modal .ant-modal-body {
+  padding: 0;
+}
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
 }

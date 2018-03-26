@@ -8,6 +8,7 @@ import ProductsForm from './forms/Products';
 import GroupForm from './forms/Group';
 import Panes from '../Panes';
 import { Tabs } from 'antd';
+import { HelpModal } from 'modules/common/components';
 
 class RegistrationForms extends Panes {
   render() {
@@ -22,6 +23,7 @@ class RegistrationForms extends Panes {
 
     return (
       <div>
+        <HelpModal videoId="registration" />
         {viewMode && <h2 className="registration-title">{basicInfo.enName}</h2>}
         <Tabs
           activeKey={currentTabKey}
