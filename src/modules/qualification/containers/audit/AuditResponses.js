@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { AuditResponses } from '../../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { mutations, queries } from '../../graphql';
-import { withTableProps } from 'modules/common/containers';
 import { message } from 'antd';
 
 class AuditResponsesContainer extends React.Component {
@@ -61,7 +60,9 @@ export default compose(
         variables: {
           publishDate: params.from,
           closeDate: params.to,
-          supplierSearch: params.search
+          supplierSearch: params.search,
+          page: params.page || 1,
+          perPage: params.perPage || 15
         },
         notifyOnNetworkStatusChange: true
       };
@@ -75,4 +76,4 @@ export default compose(
   graphql(gql(mutations.auditsBuyerSendFiles), {
     name: 'auditsBuyerSendFiles'
   })
-)(withTableProps(AuditResponsesContainer));
+)(AuditResponsesContainer);

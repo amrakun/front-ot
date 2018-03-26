@@ -7,7 +7,6 @@ import { message } from 'antd';
 import client from 'apolloClient';
 import { notification, Icon, Button } from 'antd';
 import { notifyReady, notifyLoading } from 'modules/common/constants';
-import { withTableProps } from 'modules/common/containers';
 
 class TendersContainer extends React.Component {
   constructor(props) {
@@ -173,4 +172,4 @@ export default compose(
   graphql(gql(mutations.tendersCancel), {
     name: 'tendersCancel'
   })
-)(withTableProps(TendersContainer));
+)(TendersContainer);

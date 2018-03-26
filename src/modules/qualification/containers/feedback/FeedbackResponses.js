@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { FeedbackResponses } from '../../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries } from '../../graphql';
-import { withTableProps } from 'modules/common/containers';
 import { exportFile } from 'modules/common/components';
 
 const TendersContainer = props => {
@@ -37,14 +36,14 @@ export default compose(
   graphql(gql(queries.feedbackResponses), {
     name: 'feedbackResponsesTableQuery',
     options: ({ queryParams }) => {
-      const { search } = queryParams;
-
       return {
         variables: {
-          supplierName: search
+          supplierName: queryParams.search || '',
+          page: queryParams.page || 1,
+          perPage: queryParams.perPage || 15
         },
         notifyOnNetworkStatusChange: true
       };
     }
   })
-)(withTableProps(TendersContainer));
+)(TendersContainer);

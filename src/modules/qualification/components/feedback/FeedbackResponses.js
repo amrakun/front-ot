@@ -5,6 +5,7 @@ import { Table, Card, Button, Icon } from 'antd';
 import { dateFormat } from 'modules/common/constants';
 import moment from 'moment';
 import { Search } from 'modules/common/components';
+import { Paginator } from 'modules/common/components';
 
 class FeedbackResponses extends React.Component {
   constructor(props) {
@@ -138,7 +139,7 @@ class FeedbackResponses extends React.Component {
   }
 
   render() {
-    const { pagination, loading, onChange, exportResponses } = this.props;
+    const { loading, onChange, exportResponses } = this.props;
 
     return (
       <Card title="Success feedback responses">
@@ -153,7 +154,7 @@ class FeedbackResponses extends React.Component {
           rowKey={record => record._id}
           rowClassName={record => record.className}
           dataSource={this.getDiscretedRows()}
-          pagination={pagination}
+          pagination={false}
           loading={loading}
           scroll={{ x: 2000 }}
           expandedRowRender={this.renderExpandedRow}
@@ -161,6 +162,7 @@ class FeedbackResponses extends React.Component {
             onChange(pagination, filters, sorter)
           }
         />
+        <Paginator total={10} />
       </Card>
     );
   }

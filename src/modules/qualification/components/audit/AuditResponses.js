@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Search } from 'modules/common/components';
 import queryString from 'query-string';
+import { Paginator } from 'modules/common/components';
 
 class AuditResponses extends React.Component {
   constructor(props) {
@@ -93,7 +94,7 @@ class AuditResponses extends React.Component {
   }
 
   render() {
-    const { pagination, loading, onChange } = this.props;
+    const { loading, onChange } = this.props;
     const counts = this.props.counts || {};
     const data = this.props.data || [];
 
@@ -152,13 +153,14 @@ class AuditResponses extends React.Component {
             columns={this.columns()}
             rowKey={record => record._id}
             dataSource={data}
-            pagination={pagination}
+            pagination={false}
             loading={loading}
             scroll={{ x: 1400 }}
             onChange={(pagination, filters, sorter) =>
               onChange(pagination, filters, sorter)
             }
           />
+          <Paginator total={10} />
         </Card>
       </div>
     );

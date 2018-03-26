@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Search } from 'modules/common/components';
 import ModalForm from './ModalForm';
+import { Paginator } from 'modules/common/components';
 
 class AuditResponses extends React.Component {
   constructor(props) {
@@ -94,7 +95,7 @@ class AuditResponses extends React.Component {
   }
 
   render() {
-    const { pagination, loading, onChange, editPhysicalAudit } = this.props;
+    const { loading, onChange, editPhysicalAudit } = this.props;
     const data = this.props.data || [];
     const { editModalVisible, selectedAudit } = this.state;
 
@@ -106,13 +107,14 @@ class AuditResponses extends React.Component {
           columns={this.columns()}
           rowKey={record => record._id}
           dataSource={data}
-          pagination={pagination}
+          pagination={false}
           loading={loading}
           scroll={{ x: 800 }}
           onChange={(pagination, filters, sorter) =>
             onChange(pagination, filters, sorter)
           }
         />
+        <Paginator total={10} />
 
         <ModalForm
           visible={editModalVisible}

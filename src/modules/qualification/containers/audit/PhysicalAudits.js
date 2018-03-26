@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { PhysicalAudits } from '../../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries, mutations } from '../../graphql';
-import { withTableProps } from 'modules/common/containers';
 import { message } from 'antd';
 
 class PhysicalAuditsContainer extends React.Component {
@@ -78,4 +77,4 @@ export default compose(
   graphql(gql(mutations.physicalAuditsRemove), {
     name: 'physicalAuditsRemove'
   })
-)(withTableProps(PhysicalAuditsContainer));
+)(PhysicalAuditsContainer);
