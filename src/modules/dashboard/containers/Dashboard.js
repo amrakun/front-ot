@@ -49,15 +49,15 @@ const DashboardContainer = props => {
 
     Object.keys(daysData).forEach(key => {
       const day = daysData[key];
-      const monthKey = moment(key).format('YYYY-M');
-      const month = monthsData[monthKey] || {};
+      const monthKey = moment(key).format('MMM, YYYY');
 
       Object.keys(day).forEach(k => {
-        if (month[k]) {
-          monthsData[monthKey][k] = month[k] || 0 + day[k];
+        if (monthsData[monthKey]) {
+          const amount = monthsData[monthKey][k] || 0;
+          monthsData[monthKey][k] = amount + day[k];
         } else {
           monthsData[monthKey] = {
-            ...month,
+            ...monthsData[monthKey],
             [k]: day[k]
           };
         }
