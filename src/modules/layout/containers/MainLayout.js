@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { gql, compose, graphql } from 'react-apollo';
 import { MainLayout } from '../components';
 import { withSystemConfig, withCurrentUser } from 'modules/auth/containers';
 import { withRouter } from 'react-router-dom';
 import { logout } from '../utils';
+import { mutations } from '../graphql';
 
 class MainLayoutContainer extends React.Component {
   componentDidMount() {
@@ -34,9 +36,12 @@ class MainLayoutContainer extends React.Component {
 }
 
 MainLayoutContainer.propTypes = {
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
+  logsWriteMutation: PropTypes.func.isRequired
 };
 
-export default withRouter(
-  withSystemConfig(withCurrentUser(MainLayoutContainer))
-);
+export default compose(
+  graphql(gql(mutations.logsWrite), {
+    name: 'logsWriteMutation'
+  })
+)(withRouter(withSystemConfig(withCurrentUser(MainLayoutContainer))));
