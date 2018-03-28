@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Tabs, DatePicker, Badge, TreeSelect } from 'antd';
+import { Card, Tabs, DatePicker, Badge, TreeSelect, Button } from 'antd';
 import {
   PieChart,
   Pie,
@@ -19,6 +19,7 @@ import { Tenders } from 'modules/tenders/containers';
 import moment from 'moment';
 import productsTree from 'modules/companies/productsTree';
 import { colors } from 'modules/common/constants';
+import router from 'modules/common/router';
 
 const { MonthPicker } = DatePicker;
 
@@ -34,6 +35,7 @@ class Dashboard extends React.Component {
     };
 
     this.onProductCodesChange = this.onProductCodesChange.bind(this);
+    this.handleByMonth = this.handleByMonth.bind(this);
   }
 
   componentDidMount() {
@@ -44,6 +46,16 @@ class Dashboard extends React.Component {
 
   onProductCodesChange(value) {
     this.handleSearch('productCodes', value);
+  }
+
+  handleByMonth(bool) {
+    if (!bool) {
+      router.setParams(this.props.history, {
+        filter: 'byMonth'
+      });
+    } else {
+      router.removeParams(this.props.history, 'filter');
+    }
   }
 
   handleSearch(key, value) {
@@ -145,6 +157,7 @@ class Dashboard extends React.Component {
     const { productData, location } = this.props;
     const height = this.state.pieChartWidth * 0.75;
     const queryParams = queryString.parse(location.search);
+    const { regVsPreq } = this.state;
 
     return (
       <Card
@@ -162,7 +175,7 @@ class Dashboard extends React.Component {
         }
       >
         {this.renderBarChart({
-          data: productData,
+          data: regVsPreq ? this.groupData(productData) : productData,
           key1: 'prequalified',
           key2: 'registered',
           height
@@ -221,6 +234,16 @@ class Dashboard extends React.Component {
                 onChange={(d, date) => this.handleSearch('endDate', date)}
                 format={dateFormat}
               />
+
+              <Button
+                className="chart-filter-input"
+                onClick={() =>
+                  this.handleByMonth(queryParams.filter === 'byMonth')
+                }
+                key={1}
+              >
+                By month
+              </Button>
             </div>
 
             <div className="ant-row chart-row">

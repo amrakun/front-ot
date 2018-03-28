@@ -4,6 +4,7 @@ import { gql, compose, graphql } from 'react-apollo';
 import { queries } from '../graphql';
 import { Loading } from 'modules/common/components';
 import { Dashboard } from '../components';
+import moment from 'moment';
 
 const DashboardContainer = props => {
   const {
@@ -14,7 +15,8 @@ const DashboardContainer = props => {
     tendersTotalCountRfq,
     tendersTotalCountEoi,
     tendersAverageDurationRfq,
-    tendersAverageDurationEoi
+    tendersAverageDurationEoi,
+    queryParams
   } = props;
 
   if (
@@ -42,11 +44,36 @@ const DashboardContainer = props => {
     }
   });
 
+  const groupData = daysData => {
+    const monthsData = {};
+
+    Object.keys(daysData).forEach(key => {
+      const day = daysData[key];
+      const monthKey = moment(key).format('YYYY-M');
+      const month = monthsData[monthKey] || {};
+
+      Object.keys(day).forEach(k => {
+        if (month[k]) {
+          monthsData[monthKey][k] = month[k] || 0 + day[k];
+        } else {
+          monthsData[monthKey] = {
+            ...month,
+            [k]: day[k]
+          };
+        }
+      });
+    });
+
+    return monthsData;
+  };
+
   const renderData = object => {
+    let data = queryParams.filter === 'byMonth' ? groupData(object) : object;
+
     const array = [];
 
-    Object.keys(object).forEach(key => {
-      array.push({ name: key, ...object[key] });
+    Object.keys(data).forEach(key => {
+      array.push({ name: key, ...data[key] });
     });
 
     return array;
