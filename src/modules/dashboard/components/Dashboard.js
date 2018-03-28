@@ -242,7 +242,7 @@ class Dashboard extends React.Component {
                 }
                 key={1}
               >
-                By month
+                {queryParams.filter === 'byMonth' ? 'By day' : 'By month'}
               </Button>
             </div>
 
