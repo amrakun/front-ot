@@ -105,11 +105,13 @@ class MainLayout extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log('ROUTE CHANGED: ', this.props.location.pathname);
-    console.log({ apiCall: this.props.location.pathname });
-    this.props.logsWriteMutation({
-      variables: { apiCall: this.props.location.pathname }
-    });
+    const path = this.props.location.pathname;
+
+    if (path != '/' && path != '/sign-in') {
+      this.props.logsWriteMutation({
+        variables: { apiCall: path }
+      });
+    }
   }
 
   toggleLang() {
