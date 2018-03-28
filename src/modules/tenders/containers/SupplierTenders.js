@@ -87,7 +87,8 @@ export default compose(
           perPage: queryParams.perPage || 15,
           search: queryParams ? queryParams.search : '',
           status: queryParams ? queryParams.status : '',
-          type: type
+          type: type,
+          month: queryParams ? queryParams.month : ''
         },
         notifyOnNetworkStatusChange: true
       };
@@ -103,7 +104,8 @@ export default compose(
           perPage: queryParams.perPage || 15,
           search: queryParams ? queryParams.search : '',
           status: queryParams ? queryParams.status : '',
-          type: type
+          type: type,
+          month: queryParams ? queryParams.month : ''
         },
         notifyOnNetworkStatusChange: true
       };

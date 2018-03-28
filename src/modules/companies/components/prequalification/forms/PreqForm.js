@@ -13,6 +13,7 @@ class PreqForm extends BaseForm {
       disabled: props.disabled
     };
   }
+
   renderConditionalField(name, isTextarea) {
     const isVisible = this.state[name];
 
@@ -33,7 +34,7 @@ class PreqForm extends BaseForm {
       isVisible: isVisible,
       optional: !isVisible,
       dataType: 'file',
-      control: <Uploader />
+      control: <Uploader {...this.common} />
     });
   }
 
@@ -44,7 +45,7 @@ class PreqForm extends BaseForm {
       isVisible: isVisible,
       controlType: 'textarea',
       optional: !isVisible,
-      control: <TextArea />
+      control: <TextArea {...this.common} />
     });
   }
 

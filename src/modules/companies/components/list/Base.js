@@ -120,7 +120,9 @@ class Base extends Common {
         title: 'DIFOT score (average)',
         width: 40,
         render: record =>
-          record.averageDifotScore ? `${record.averageDifotScore}%` : '-',
+          record.averageDifotScore
+            ? `${record.averageDifotScore.toFixed(1)}%`
+            : '-',
         sorter: true,
         key: 'averageDifotScore'
       },

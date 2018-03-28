@@ -58,9 +58,11 @@ class Uploader extends React.Component {
       fileList: this.state.fileList
     };
 
+    const disabled = this.props.disabled;
+
     return (
       <Upload {...extendedProps}>
-        <Button>
+        <Button disabled={disabled}>
           {__(label)} <Icon type="upload" />
         </Button>
       </Upload>
@@ -72,7 +74,8 @@ Uploader.propTypes = {
   defaultFileList: PropTypes.array,
   label: PropTypes.string,
   multiple: PropTypes.bool,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  disabled: PropTypes.bool
 };
 
 Uploader.contextTypes = {

@@ -51,7 +51,11 @@ class Difot extends Common {
       },
       {
         title: 'Average DIFOT score',
-        render: record => <span>{record.averageDifotScore || 0}%</span>
+        render: record => (
+          <span>
+            {record.averageDifotScore ? record.averageDifotScore.toFixed(1) : 0}%
+          </span>
+        )
       }
     ]);
 
