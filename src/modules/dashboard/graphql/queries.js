@@ -232,6 +232,20 @@ const logsSuppliersByProductCodeLogsExport = `
   }
 `;
 
+const logsActivityLogsExport = `
+  query logsActivityLogsExport(
+    $startDate: Date!,
+    $endDate: Date!,
+    $module: String!
+  ){
+    logsActivityLogsExport(
+      startDate: $startDate,
+      endDate: $endDate,
+      module: $module
+    )
+  }
+`;
+
 export default {
   companyByUser,
   companiesCountByTierType,
@@ -251,5 +265,6 @@ export default {
   logsSearchesPerBuyerExport,
   logsEoiCreatedAndSentExport,
   logsRfqCreatedAndSentExport,
-  logsSuppliersByProductCodeLogsExport
+  logsSuppliersByProductCodeLogsExport,
+  logsActivityLogsExport
 };

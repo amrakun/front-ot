@@ -1,10 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Row, Col, Button, TreeSelect, Icon, DatePicker } from 'antd';
+import {
+  Card,
+  Row,
+  Col,
+  Button,
+  TreeSelect,
+  Select,
+  Icon,
+  DatePicker
+} from 'antd';
 import { dateFormat } from 'modules/common/constants';
 import productsTree from '../../companies/productsTree';
+import { MODULES_TO_TEXT } from '../constants';
 
 const RangePicker = DatePicker.RangePicker;
+const Option = Select.Option;
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -37,7 +48,11 @@ class Dashboard extends React.Component {
       this
     );
 
+    this.logsActivityLogsExport = this.logsActivityLogsExport.bind(this);
+
     this.onProductCodesChange = this.onProductCodesChange.bind(this);
+
+    this.onModuleChange = this.onModuleChange.bind(this);
   }
 
   onInputChange(name, value) {
@@ -100,8 +115,19 @@ class Dashboard extends React.Component {
     });
   }
 
+  logsActivityLogsExport() {
+    this.props.export('logsActivityLogsExport', {
+      ...this.getDateInterval(this.intervalDate),
+      module: this.state.module
+    });
+  }
+
   onProductCodesChange(value) {
     this.setState({ productCodes: value });
+  }
+
+  onModuleChange(value) {
+    this.setState({ module: value });
   }
 
   getDateInterval(date) {
@@ -126,6 +152,15 @@ class Dashboard extends React.Component {
       md: 12,
       sm: 24
     };
+
+    const activityLogOptions = [];
+    for (let option of MODULES_TO_TEXT) {
+      activityLogOptions.push(
+        <Option key={option[0]} value={option[0]}>
+          {option[1]}
+        </Option>
+      );
+    }
 
     return (
       <Row gutter={24} className="card-columns">
@@ -237,7 +272,7 @@ class Dashboard extends React.Component {
               />
             </p>
             <div>
-              <label>Filter interval dates: </label>
+              <label>Product code: </label>
 
               <TreeSelect
                 treeData={productsTree.en}
@@ -250,6 +285,29 @@ class Dashboard extends React.Component {
             </div>
 
             {this.renderButton(this.logsSuppliersByProductCodeLogsExport)}
+          </Card>
+        </Col>
+
+        <Col {...span}>
+          <Card title="Menu review by buyer">
+            <p>
+              <label>Filter interval dates: </label>
+              <RangePicker
+                onChange={value => this.onInputChange('intervalDate', value)}
+                format={dateFormat}
+              />
+            </p>
+            <div>
+              <label>Module: </label>
+              <Select
+                style={{ width: '100%', marginBottom: '16px' }}
+                onChange={this.onModuleChange}
+              >
+                {activityLogOptions}
+              </Select>
+            </div>
+
+            {this.renderButton(this.logsActivityLogsExport)}
           </Card>
         </Col>
       </Row>

@@ -103,6 +103,16 @@ class MainLayout extends React.Component {
     this.getLang();
   }
 
+  componentDidUpdate() {
+    const path = this.props.location.pathname;
+
+    if (path != '/' && path != '/sign-in') {
+      this.props.logsWriteMutation({
+        variables: { apiCall: path }
+      });
+    }
+  }
+
   toggleLang() {
     this.setState({ toggleLang: !this.state.toggleLang });
     const { toggleLang } = this.state;
@@ -182,7 +192,8 @@ MainLayout.propTypes = {
   systemConfig: PropTypes.object,
   children: PropTypes.object,
   history: PropTypes.object,
-  location: PropTypes.object
+  location: PropTypes.object,
+  logsWriteMutation: PropTypes.func.isRequired
 };
 
 MainLayout.childContextTypes = {
