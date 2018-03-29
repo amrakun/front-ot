@@ -11,7 +11,8 @@ import {
   Button,
   Icon,
   Radio,
-  DatePicker
+  DatePicker,
+  Input
 } from 'antd';
 
 import { dateFormat } from 'modules/common/constants';
@@ -81,7 +82,9 @@ class Dashboard extends React.Component {
   }
 
   exportShareholders() {
-    this.props.export('reportsShareholder', null);
+    this.props.export('reportsShareholder', {
+      name: this.shareholderName
+    });
   }
 
   getDateInterval(date) {
@@ -213,6 +216,11 @@ class Dashboard extends React.Component {
 
         <Col {...span}>
           <Card title="Shareholders report">
+            <Input
+              onChange={e =>
+                this.onInputChange('shareholderName', e.target.value)
+              }
+            />
             {this.renderButton(this.exportShareholders)}
           </Card>
         </Col>

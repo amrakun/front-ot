@@ -67,8 +67,8 @@ const reportsAuditExport = `
 `;
 
 const reportsShareholder = `
-  query reportsShareholder {
-    reportsShareholder
+  query reportsShareholder($name: String) {
+    reportsShareholder(name: $name)
   }
 `;
 
