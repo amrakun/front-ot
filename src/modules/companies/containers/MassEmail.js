@@ -8,10 +8,11 @@ import { mutations } from '../graphql';
 const MassEmailContainer = props => {
   const { sendEmail } = props;
 
-  const sendMassEmail = variables => {
+  const sendMassEmail = (variables, callback) => {
     sendEmail({ variables })
-      .then(() => {
+      .then(response => {
         message.success('Successfully sent emails');
+        callback && callback(response.data.massMailsSend);
       })
       .catch(error => {
         message.error(error.message);

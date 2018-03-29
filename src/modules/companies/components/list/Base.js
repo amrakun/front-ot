@@ -15,17 +15,18 @@ class Base extends Common {
 
     this.state = {
       ...this.state,
-      checkedCount: 0
+      checkedCount: 0,
+      selectedSuppliers: []
     };
 
     this.handleSend = this.handleSend.bind(this);
     this.handleCheck = this.handleCheck.bind(this);
   }
 
-  handleCheck(companies) {
-    this.setState({ checkedCount: companies.length });
+  handleCheck(companyIds, selectedSuppliers) {
+    this.setState({ checkedCount: companyIds.length, selectedSuppliers });
 
-    this.onSelectedCompaniesChange(companies);
+    this.onSelectedCompaniesChange(companyIds);
   }
 
   handleSend(path) {
@@ -44,7 +45,7 @@ class Base extends Common {
       totalCount
     } = this.props;
 
-    const { selectedCompanies, checkedCount } = this.state;
+    const { selectedCompanies, checkedCount, selectedSuppliers } = this.state;
 
     const columns = this.getWrappedColumns([
       {
@@ -109,7 +110,7 @@ class Base extends Common {
             <div className="table-operations">
               <Search />
 
-              <MassEmail supplierIds={selectedCompanies} />
+              <MassEmail suppliers={selectedSuppliers} />
 
               <Button onClick={() => this.handleSend('/eoi/publish')}>
                 Send EOI

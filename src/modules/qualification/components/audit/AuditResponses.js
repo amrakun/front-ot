@@ -21,7 +21,7 @@ class AuditResponses extends React.Component {
 
     this.state = {
       selectedRowKeys: [],
-      selectedSupplierIds: []
+      selectedSuppliers: []
     };
 
     this.columns = this.columns.bind(this);
@@ -43,7 +43,7 @@ class AuditResponses extends React.Component {
   onSelectChange(selectedRowKeys, selectedRows) {
     this.setState({
       selectedRowKeys,
-      selectedSupplierIds: selectedRows.map(row => row.supplier._id)
+      selectedSuppliers: selectedRows.map(row => row.supplier)
     });
   }
 
@@ -117,7 +117,7 @@ class AuditResponses extends React.Component {
     const statsQuery = this.props.responsesQualifiedStatusQuery || {};
     const auditStats = statsQuery.auditResponsesQualifiedStatus || {};
 
-    const { selectedRowKeys, selectedSupplierIds } = this.state;
+    const { selectedRowKeys, selectedSuppliers } = this.state;
 
     const colSpan = {
       xl: 6,
@@ -167,7 +167,7 @@ class AuditResponses extends React.Component {
           <div className="table-operations">
             <Search />
 
-            <MassEmail supplierIds={selectedSupplierIds} />
+            <MassEmail suppliers={selectedSuppliers} />
 
             <DatePicker.RangePicker
               onChange={this.handleDateRangeChange}

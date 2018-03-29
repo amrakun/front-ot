@@ -11,7 +11,8 @@ class MassEmail extends React.Component {
     this.state = {
       emailContent: '',
       emailSubject: '',
-      emailModalVisible: false
+      emailModalVisible: false,
+      response: null
     };
 
     this.sendEmail = this.sendEmail.bind(this);
@@ -19,19 +20,44 @@ class MassEmail extends React.Component {
     this.hideEmailModal = this.hideEmailModal.bind(this);
     this.handleEmailContentChange = this.handleEmailContentChange.bind(this);
     this.handleEmailSubjectChange = this.handleEmailSubjectChange.bind(this);
+    this.afterSend = this.afterSend.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { suppliers } = this.props;
+
+    if (prevProps.suppliers !== suppliers) {
+      const suppliersMap = {};
+      suppliers.forEach(
+        supplier => (suppliersMap[supplier._id] = supplier.basicInfo.enName)
+      );
+      this.suppliersMap = suppliersMap;
+    }
+  }
+
+  handleOk(response) {
+    if (response) this.hideEmailModal();
+    else this.sendEmail();
   }
 
   sendEmail() {
     const { emailContent, emailSubject } = this.state;
-    const { supplierIds, sendMassEmail } = this.props;
+    const { suppliers, sendMassEmail } = this.props;
 
-    sendMassEmail({
-      supplierIds,
-      content: emailContent,
-      subject: emailSubject
-    });
+    const supplierIds = suppliers.map(supplier => supplier._id);
 
-    this.hideEmailModal();
+    sendMassEmail(
+      {
+        supplierIds,
+        content: emailContent,
+        subject: emailSubject
+      },
+      this.afterSend
+    );
+  }
+
+  afterSend(response) {
+    this.setState({ response });
   }
 
   handleEmailContentChange(value) {
@@ -50,9 +76,43 @@ class MassEmail extends React.Component {
     this.setState({ emailModalVisible: false });
   }
 
+  renderEditor() {
+    const { emailContent } = this.state;
+
+    return [
+      <Input
+        key={0}
+        onChange={this.handleEmailSubjectChange}
+        placeholder="Subject"
+      />,
+      <Editor
+        key={1}
+        content={emailContent}
+        onEmailContentChange={this.handleEmailContentChange}
+      />
+    ];
+  }
+
+  renderResponse() {
+    const { response } = this.state;
+
+    return (
+      <table className="mass-email-response">
+        <tbody>
+          {Object.keys(response.status).map(key => (
+            <tr key={key}>
+              <td>{this.suppliersMap[key]}</td>
+              <td>{response.status[key]}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  }
+
   render() {
-    const { supplierIds } = this.props;
-    const { emailModalVisible, emailContent } = this.state;
+    const { suppliers } = this.props;
+    const { emailModalVisible, response } = this.state;
 
     return [
       <Button key={0} onClick={this.showEmailModal}>
@@ -60,18 +120,14 @@ class MassEmail extends React.Component {
       </Button>,
       <Modal
         key={1}
-        title={`Sending email to ${supplierIds.length} suppliers`}
+        title={`Sending email to ${suppliers.length} suppliers`}
         visible={emailModalVisible}
         onCancel={this.hideEmailModal}
-        onOk={this.sendEmail}
+        onOk={() => this.handleOk(response)}
         width="50%"
-        okText="Send"
+        okText={response ? 'Close' : 'Send'}
       >
-        <Input onChange={this.handleEmailSubjectChange} placeholder="Subject" />
-        <Editor
-          content={emailContent}
-          onEmailContentChange={this.handleEmailContentChange}
-        />
+        {response ? this.renderResponse() : this.renderEditor()}
       </Modal>
     ];
   }
@@ -79,7 +135,7 @@ class MassEmail extends React.Component {
 
 MassEmail.propTypes = {
   sendMassEmail: PropTypes.func,
-  supplierIds: PropTypes.array
+  suppliers: PropTypes.array
 };
 
 export default withRouter(MassEmail);

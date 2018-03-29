@@ -139,7 +139,8 @@ const sendEmail = `
       subject: $subject
       content: $content
     ) {
-      _id
+      status
+      supplierIds
     }
   }
 `;
