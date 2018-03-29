@@ -134,6 +134,18 @@ const tendersAverageDuration = `
   }
 `;
 
+const companiesCountByProductCode = `
+  query companiesCountByProductCode(
+    $startDate: Date!,
+    $endDate: Date!
+  ){
+    companiesCountByProductCode(
+      startDate: $startDate,
+      endDate: $endDate,
+    )
+  }
+`;
+
 const logsSupplierLoginsExport = `
   query logsSupplierLoginsExport(
     $startDate: Date!,
@@ -250,6 +262,7 @@ export default {
   companyByUser,
   companiesCountByTierType,
   companiesCountByRegisteredVsPrequalified,
+  companiesCountByProductCode,
   tenderCountByStatus,
   tendersTotalCountReport,
   tendersAverageDuration,

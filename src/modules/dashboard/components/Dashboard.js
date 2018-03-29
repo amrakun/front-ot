@@ -153,9 +153,26 @@ class Dashboard extends React.Component {
     );
   }
 
+  renderProductCategory() {
+    const { productCategory } = this.props;
+    const height = this.state.pieChartWidth * 0.5;
+
+    return (
+      <Card title="Product categories" className="barchart-wrapper margin">
+        {this.renderBarChart({
+          data: productCategory,
+          key1: 'prequalified',
+          key2: 'registered',
+          key3: 'validated',
+          height
+        })}
+      </Card>
+    );
+  }
+
   renderPrequalified() {
     const { productData, location } = this.props;
-    const height = this.state.pieChartWidth * 0.75;
+    const height = this.state.pieChartWidth * 0.5;
     const queryParams = queryString.parse(location.search);
     const { regVsPreq } = this.state;
 
@@ -249,6 +266,7 @@ class Dashboard extends React.Component {
             <div className="ant-row chart-row">
               <div className="ant-col-sm-12 ant-col-lg-16">
                 {this.renderPrequalified()}
+                {this.renderProductCategory()}
               </div>
               <div
                 className="ant-col-sm-12 ant-col-lg-8"
@@ -316,6 +334,7 @@ class Dashboard extends React.Component {
 }
 
 Dashboard.propTypes = {
+  productCategory: PropTypes.array,
   companiesByTierType: PropTypes.array,
   location: PropTypes.object,
   history: PropTypes.object,

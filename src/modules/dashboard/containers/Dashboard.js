@@ -9,6 +9,7 @@ import moment from 'moment';
 const DashboardContainer = props => {
   const {
     companiesCountByTierTypeQuery,
+    companiesCountByProductCodeQuery,
     ccbrvpQuery,
     tenderCountByStatusRfq,
     tenderCountByStatusEoi,
@@ -21,6 +22,7 @@ const DashboardContainer = props => {
 
   if (
     companiesCountByTierTypeQuery.loading ||
+    companiesCountByProductCodeQuery.loading ||
     ccbrvpQuery.loading ||
     tenderCountByStatusRfq.loading ||
     tenderCountByStatusEoi.loading ||
@@ -82,6 +84,9 @@ const DashboardContainer = props => {
   const updatedProps = {
     ...props,
     companiesByTierType,
+    productCategory: renderData(
+      companiesCountByProductCodeQuery.companiesCountByProductCode
+    ),
     productData: renderData(
       ccbrvpQuery.companiesCountByRegisteredVsPrequalified
     ),
@@ -100,18 +105,34 @@ const DashboardContainer = props => {
 
 DashboardContainer.propTypes = {
   companiesCountByTierTypeQuery: PropTypes.object,
+  companiesCountByProductCodeQuery: PropTypes.object,
   ccbrvpQuery: PropTypes.object,
   tenderCountByStatusRfq: PropTypes.object,
   tenderCountByStatusEoi: PropTypes.object,
   tendersTotalCountRfq: PropTypes.object,
   tendersTotalCountEoi: PropTypes.object,
   tendersAverageDurationRfq: PropTypes.object,
-  tendersAverageDurationEoi: PropTypes.object
+  tendersAverageDurationEoi: PropTypes.object,
+  queryParams: PropTypes.object
 };
 
 export default compose(
   graphql(gql(queries.companiesCountByTierType), {
     name: 'companiesCountByTierTypeQuery',
+    options: ({ queryParams }) => ({
+      variables: {
+        startDate: new Date(
+          queryParams.startDate ? queryParams.startDate : '1900-01-01'
+        ),
+        endDate: new Date(
+          queryParams.endDate ? queryParams.endDate : '2040-09-26'
+        )
+      }
+    })
+  }),
+
+  graphql(gql(queries.companiesCountByProductCode), {
+    name: 'companiesCountByProductCodeQuery',
     options: ({ queryParams }) => ({
       variables: {
         startDate: new Date(
