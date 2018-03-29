@@ -3,10 +3,11 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Card, Row, Col, Button, Icon, message, Modal, Input } from 'antd';
-import { Search, Editor } from 'modules/common/components';
+import { Card, Row, Col, Button, Icon, message } from 'antd';
+import { Search } from 'modules/common/components';
 import Common from './Common';
 import Sidebar from './Sidebar';
+import { MassEmail } from 'modules/companies/containers';
 
 class Base extends Common {
   constructor(props) {
@@ -14,18 +15,10 @@ class Base extends Common {
 
     this.state = {
       ...this.state,
-      emailContent: '',
-      emailSubject: '',
-      emailModalVisible: false,
       checkedCount: 0
     };
 
     this.handleSend = this.handleSend.bind(this);
-    this.sendEmail = this.sendEmail.bind(this);
-    this.showEmailModal = this.showEmailModal.bind(this);
-    this.hideEmailModal = this.hideEmailModal.bind(this);
-    this.handleEmailContentChange = this.handleEmailContentChange.bind(this);
-    this.handleEmailSubjectChange = this.handleEmailSubjectChange.bind(this);
     this.handleCheck = this.handleCheck.bind(this);
   }
 
@@ -43,34 +36,6 @@ class Base extends Common {
       : this.props.history.push(path, { supplierIds: selectedCompanies });
   }
 
-  sendEmail() {
-    const { selectedCompanies, emailContent, emailSubject } = this.state;
-
-    this.props.sendMassEmail({
-      supplierIds: selectedCompanies,
-      content: emailContent,
-      subject: emailSubject
-    });
-
-    this.hideEmailModal();
-  }
-
-  handleEmailContentChange(value) {
-    this.setState({ emailContent: value });
-  }
-
-  handleEmailSubjectChange(e) {
-    this.setState({ emailSubject: e.target.value });
-  }
-
-  showEmailModal() {
-    this.setState({ emailModalVisible: true });
-  }
-
-  hideEmailModal() {
-    this.setState({ emailModalVisible: false });
-  }
-
   render() {
     const {
       exportCompanies,
@@ -79,12 +44,7 @@ class Base extends Common {
       totalCount
     } = this.props;
 
-    const {
-      selectedCompanies,
-      emailModalVisible,
-      emailContent,
-      checkedCount
-    } = this.state;
+    const { selectedCompanies, checkedCount } = this.state;
 
     const columns = this.getWrappedColumns([
       {
@@ -149,7 +109,7 @@ class Base extends Common {
             <div className="table-operations">
               <Search />
 
-              <Button onClick={this.showEmailModal}>Send email</Button>
+              <MassEmail supplierIds={selectedCompanies} />
 
               <Button onClick={() => this.handleSend('/eoi/publish')}>
                 Send EOI
@@ -176,24 +136,6 @@ class Base extends Common {
               columns
             })}
           </Card>
-
-          <Modal
-            title={`Sending email to "${selectedCompanies.length}" suppliers`}
-            visible={emailModalVisible}
-            onCancel={this.hideEmailModal}
-            onOk={this.sendEmail}
-            width="50%"
-            okText="Send"
-          >
-            <Input
-              onChange={this.handleEmailSubjectChange}
-              placeholder="Subject"
-            />
-            <Editor
-              content={emailContent}
-              onEmailContentChange={this.handleEmailContentChange}
-            />
-          </Modal>
         </Col>
       </Row>
     );

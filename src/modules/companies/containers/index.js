@@ -4,6 +4,7 @@ import Registration from './registration/Registration';
 import ViewRegistration from './registration/ViewRegistration';
 import CapacityBuilding from './registration/CapacityBuilding';
 import AddCompany from './addCompany';
+import MassEmail from './MassEmail';
 
 import generator from './list/generator';
 
@@ -14,5 +15,6 @@ export {
   CapacityBuilding,
   ViewRegistration,
   generator,
-  AddCompany
+  AddCompany,
+  MassEmail
 };

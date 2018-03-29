@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { BaseList } from '../../components';
-import { queries, mutations } from '../../graphql';
+import { queries } from '../../graphql';
 import generator from './generator';
 import { exportFile } from 'modules/common/components';
-import { gql, graphql } from 'react-apollo';
-import { message } from 'antd';
 
 class BaseListContainer extends React.Component {
   constructor(props) {
@@ -18,7 +16,7 @@ class BaseListContainer extends React.Component {
   }
 
   render() {
-    const { queryParams, sendEmail } = this.props;
+    const { queryParams } = this.props;
 
     const exportCompanies = companies => {
       this.setState({ exportLoading: true });
@@ -43,21 +41,10 @@ class BaseListContainer extends React.Component {
       });
     };
 
-    const sendMassEmail = variables => {
-      sendEmail({ variables })
-        .then(() => {
-          message.success('Successfully sent emails');
-        })
-        .catch(error => {
-          message.error(error.message);
-        });
-    };
-
     const extendedProps = {
       ...this.props,
       exportCompany,
       exportCompanies,
-      sendMassEmail,
       exportLoading: this.state.exportLoading
     };
 
@@ -67,12 +54,7 @@ class BaseListContainer extends React.Component {
 
 BaseListContainer.propTypes = {
   companiesQuery: PropTypes.object,
-  queryParams: PropTypes.object,
-  sendEmail: PropTypes.func
+  queryParams: PropTypes.object
 };
 
-const WithData = graphql(gql(mutations.sendEmail), {
-  name: 'sendEmail'
-})(BaseListContainer);
-
-export default generator(WithData, 'companies');
+export default generator(BaseListContainer, 'companies');

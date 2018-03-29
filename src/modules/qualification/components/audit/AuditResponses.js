@@ -13,13 +13,20 @@ import queryString from 'query-string';
 import { Paginator } from 'modules/common/components';
 import { StatsTable } from 'modules/common/components';
 import { auditTabs } from 'modules/qualification/consts';
+import { MassEmail } from 'modules/companies/containers';
 
 class AuditResponses extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      selectedRowKeys: [],
+      selectedSupplierIds: []
+    };
+
     this.columns = this.columns.bind(this);
     this.handleDateRangeChange = this.handleDateRangeChange.bind(this);
+    this.onSelectChange = this.onSelectChange.bind(this);
   }
 
   handleDateRangeChange(value) {
@@ -30,6 +37,13 @@ class AuditResponses extends React.Component {
     query.to = value[1] ? value[1]._d : null;
     history.push({
       search: queryString.stringify(query)
+    });
+  }
+
+  onSelectChange(selectedRowKeys, selectedRows) {
+    this.setState({
+      selectedRowKeys,
+      selectedSupplierIds: selectedRows.map(row => row.supplier._id)
     });
   }
 
@@ -103,6 +117,8 @@ class AuditResponses extends React.Component {
     const statsQuery = this.props.responsesQualifiedStatusQuery || {};
     const auditStats = statsQuery.auditResponsesQualifiedStatus || {};
 
+    const { selectedRowKeys, selectedSupplierIds } = this.state;
+
     const colSpan = {
       xl: 6,
       lg: 12,
@@ -150,6 +166,9 @@ class AuditResponses extends React.Component {
         <Card title="Desktop audit responses">
           <div className="table-operations">
             <Search />
+
+            <MassEmail supplierIds={selectedSupplierIds} />
+
             <DatePicker.RangePicker
               onChange={this.handleDateRangeChange}
               allowClear
@@ -165,6 +184,10 @@ class AuditResponses extends React.Component {
             onChange={(pagination, filters, sorter) =>
               onChange(pagination, filters, sorter)
             }
+            rowSelection={{
+              selectedRowKeys,
+              onChange: this.onSelectChange
+            }}
           />
           <Paginator total={10} />
         </Card>

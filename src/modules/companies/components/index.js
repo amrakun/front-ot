@@ -6,6 +6,7 @@ import Panes from './Panes';
 import BaseList from './list/Base';
 import Common from './list/Common';
 import Sidebar from './list/Sidebar';
+import MassEmail from './MassEmail';
 
 export {
   RegistrationForms,
@@ -15,5 +16,6 @@ export {
   Common,
   Sidebar,
   Panes,
-  AddCompany
+  AddCompany,
+  MassEmail
 };
