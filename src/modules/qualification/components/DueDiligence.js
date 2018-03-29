@@ -88,7 +88,7 @@ class DueDiligence extends Common {
   }
 
   render() {
-    const { data, addDueDiligence, exportExcel } = this.props;
+    const { totalCount, addDueDiligence, exportExcel } = this.props;
     const { selectedCompanies, filesModal } = this.state;
 
     const columns = [
@@ -145,7 +145,7 @@ class DueDiligence extends Common {
 
     return (
       <Row gutter={16}>
-        <Sidebar suppliersCount={data && data.length} />
+        <Sidebar suppliersCount={totalCount} />
 
         <Col span={19}>
           <Card title="Suppliers">

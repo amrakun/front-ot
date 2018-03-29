@@ -9,6 +9,8 @@ import { Search } from 'modules/common/components';
 import moment from 'moment';
 import { dateFormat } from 'modules/common/constants';
 import PropTypes from 'prop-types';
+import { statusTabs } from 'modules/qualification/consts';
+import { StatsTable } from 'modules/common/components';
 
 class Status extends Common {
   constructor(props, context) {
@@ -28,8 +30,16 @@ class Status extends Common {
       .format(dateFormat);
   }
 
+  renderStats() {
+    const { prequalifiedStatusQuery } = this.props;
+
+    const stats = prequalifiedStatusQuery.companiesPrequalifiedStatus || {};
+
+    return <StatsTable stats={stats} tabs={statusTabs} />;
+  }
+
   render() {
-    const { data, generate } = this.props;
+    const { generate, totalCount } = this.props;
 
     const columns = [
       { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
@@ -58,7 +68,7 @@ class Status extends Common {
 
     return (
       <Row gutter={16}>
-        <Sidebar suppliersCount={data && data.length} />
+        <Sidebar suppliersCount={totalCount} stats={this.renderStats()} />
 
         <Col span={19}>
           <Card title="Suppliers">

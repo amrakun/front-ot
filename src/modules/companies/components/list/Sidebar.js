@@ -13,7 +13,8 @@ const CheckboxGroup = Checkbox.Group;
 const propTypes = {
   history: PropTypes.object,
   suppliersCount: PropTypes.number,
-  checkedCount: PropTypes.number
+  checkedCount: PropTypes.number,
+  stats: PropTypes.node
 };
 
 class Sidebar extends React.Component {
@@ -139,7 +140,7 @@ class Sidebar extends React.Component {
 
   render() {
     const { productCodes, region } = this.state;
-    const { suppliersCount, checkedCount } = this.props;
+    const { suppliersCount, checkedCount, stats } = this.props;
 
     return (
       <Col span={5}>
@@ -153,6 +154,7 @@ class Sidebar extends React.Component {
               </span>
             )}
           </div>
+          {stats}
         </Card>
 
         <Card title="Products & services code" className="margin">

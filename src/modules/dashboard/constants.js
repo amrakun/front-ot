@@ -4,9 +4,7 @@ const labels = {
   difotSuggestion: `Your DIFOT should not be less than 75%`
 };
 
-export { labels };
-
-export const MODULES_TO_TEXT = [
+const MODULES_TO_TEXT = [
   ['dashboard', 'Dashboard'],
   ['companies', 'Suppliers'],
   ['prequalification-status', 'Pre-qualification'],
@@ -28,3 +26,5 @@ export const MODULES_TO_TEXT = [
   ['settings/manage-expiry-dates', 'Settings - Manage expiry dates'],
   ['user-list', 'Settings - Manage users']
 ];
+
+export { labels, MODULES_TO_TEXT };

@@ -9,7 +9,8 @@ import { Panes } from 'modules/companies/components';
 class AuditForms extends Panes {
   render() {
     const { currentTabKey } = this.state;
-    const { supplierInfo, saveEvidenceChecks } = this.props;
+    const { supplierInfo, saveEvidenceChecks, company } = this.props;
+    const { qualifiedStatus } = company;
 
     return (
       <Tabs
@@ -23,21 +24,24 @@ class AuditForms extends Panes {
           'Supplier profile',
           'basicInfo',
           SupplierProfile,
-          { supplierInfo }
+          { supplierInfo, qualifiedStatus }
         )}
-        {this.renderPane('2', 'Core HSEQ', 'coreHseqInfo', CoreHSEQ)}
+        {this.renderPane('2', 'Core HSEQ', 'coreHseqInfo', CoreHSEQ, {
+          qualifiedStatus
+        })}
         {this.renderPane(
           '3',
           'Human resource management',
           'hrInfo',
-          HumanResourceManagement
+          HumanResourceManagement,
+          { qualifiedStatus }
         )}
         {this.renderPane(
           '4',
           'Business integrity',
           'businessInfo',
           BusinessIntegriy,
-          { saveEvidenceChecks }
+          { saveEvidenceChecks, qualifiedStatus }
         )}
       </Tabs>
     );

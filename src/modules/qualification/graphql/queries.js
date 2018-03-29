@@ -298,21 +298,39 @@ const audits = `
     }
   }
 `;
+
+const auditResponseParams = `
+  $supplierSearch: String
+  $publishDate: Date
+  $closeDate: Date
+  $isFileGenerated: Boolean
+  $status: String
+`;
+
+const auditResponseValues = `
+  supplierSearch: $supplierSearch
+  publishDate: $publishDate
+  closeDate: $closeDate
+  isFileGenerated: $isFileGenerated
+  status: $status
+`;
+
+const auditResponsesQualifiedStatus = `
+  query auditResponsesQualifiedStatus(
+    ${auditResponseParams}
+  ) {
+    auditResponsesQualifiedStatus (
+      ${auditResponseValues}
+    )
+  }
+`;
+
 const auditResponses = `
   query auditResponses(
-    $supplierSearch: String
-    $publishDate: Date
-    $closeDate: Date
-    $isFileGenerated: Boolean
-    $status: String
+    ${auditResponseParams}
   ) {
-
     auditResponses(
-      supplierSearch: $supplierSearch
-      publishDate: $publishDate
-      closeDate: $closeDate
-      isFileGenerated: $isFileGenerated
-      status: $status
+      ${auditResponseValues}
     ) {
       _id
       status
@@ -436,6 +454,7 @@ const auditResponseByUser = `
   query auditResponseByUser($auditId: String!) {
     auditResponseByUser(auditId: $auditId) {
       _id
+      qualifiedStatus
       basicInfo { ${AuditBasicInfo} }
       coreHseqInfo { ${AuditCoreHseqInfo} }
       hrInfo { ${AuditHrInfo} }
@@ -597,6 +616,16 @@ const auditResponseTotalCounts = `
   }
 `;
 
+const companiesPrequalifiedStatus = `
+  query companiesPrequalifiedStatus(
+    ${commonParams}
+  ) {
+    companiesPrequalifiedStatus(
+      ${commonValues}
+    )
+  }
+`;
+
 export default {
   blockedCompanies,
   supplierPrequalification,
@@ -621,5 +650,7 @@ export default {
   companiesValidatedProductsInfoExport,
   companiesGenerateDueDiligenceList,
   companiesGeneratePrequalificationList,
-  feedbackResponsesExport
+  feedbackResponsesExport,
+  companiesPrequalifiedStatus,
+  auditResponsesQualifiedStatus
 };

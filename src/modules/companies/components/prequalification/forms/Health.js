@@ -44,6 +44,8 @@ class PrequalificationForm extends PreqForm {
 
     return (
       <Form>
+        {this.renderStatus('healthInfo')}
+
         {this.renderConditionalField('doesHaveHealthSafety')}
         {this.renderConditionalField('areHSEResourcesClearlyIdentified')}
         {this.renderConditionalField('doesHaveDocumentedProcessToEnsure')}

@@ -100,3 +100,32 @@
 .barchart-wrapper .ant-card-body {
   padding-left: 0px;
 }
+
+.stats-table-wrapper {
+  p {
+    font-size: 24px;
+    margin-bottom: 0;
+  }
+}
+
+.textCard.big {
+  padding: 10px;
+
+  .iconWarp {
+    margin-top: 16px;
+  }
+}
+
+table.stats {
+  width: 100%;
+  margin-top: 16px;
+
+  tr td {
+    &:first-child {
+      color: #888;
+    }
+    &:last-child {
+      text-align: right;
+    }
+  }
+}

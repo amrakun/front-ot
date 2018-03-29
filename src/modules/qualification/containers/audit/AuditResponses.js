@@ -47,6 +47,7 @@ class AuditResponsesContainer extends React.Component {
 
 AuditResponsesContainer.propTypes = {
   auditResponsesTableQuery: PropTypes.object,
+  responsesQualifiedStatusQuery: PropTypes.object,
   totalCountsQuery: PropTypes.object,
   auditsBuyerSendFiles: PropTypes.func
 };
@@ -54,6 +55,23 @@ AuditResponsesContainer.propTypes = {
 export default compose(
   graphql(gql(queries.auditResponses), {
     name: 'auditResponsesTableQuery',
+    options: ({ queryParams }) => {
+      const params = queryParams || {};
+      return {
+        variables: {
+          publishDate: params.from,
+          closeDate: params.to,
+          supplierSearch: params.search,
+          page: params.page || 1,
+          perPage: params.perPage || 15
+        },
+        notifyOnNetworkStatusChange: true
+      };
+    }
+  }),
+
+  graphql(gql(queries.auditResponsesQualifiedStatus), {
+    name: 'responsesQualifiedStatusQuery',
     options: ({ queryParams }) => {
       const params = queryParams || {};
       return {

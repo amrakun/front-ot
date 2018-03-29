@@ -106,7 +106,7 @@ class MainLayout extends React.Component {
   componentDidUpdate() {
     const path = this.props.location.pathname;
 
-    if (path != '/' && path != '/sign-in') {
+    if (path !== '/' && path !== '/sign-in') {
       this.props.logsWriteMutation({
         variables: { apiCall: path }
       });

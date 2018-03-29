@@ -1,7 +1,8 @@
 import React from 'react';
-import { Select, Input, Card } from 'antd';
+import { Select, Input, Card, Alert } from 'antd';
 import { labels, descriptions, booleanData } from '../constants';
 import { BaseForm, Uploader } from 'modules/common/components';
+import { statusTabs } from 'modules/qualification/consts';
 
 const TextArea = Input.TextArea;
 
@@ -12,6 +13,22 @@ class PreqForm extends BaseForm {
     this.common = {
       disabled: props.disabled
     };
+  }
+
+  renderStatus(name) {
+    const { prequalifiedStatus } = this.props;
+    const qualified = prequalifiedStatus[name];
+
+    return (
+      <Alert
+        message={`${statusTabs[name]} is ${
+          qualified ? 'qualified' : 'not qualified'
+        }`}
+        type={qualified ? 'success' : 'error'}
+        style={{ marginBottom: '16px' }}
+        showIcon
+      />
+    );
   }
 
   renderConditionalField(name, isTextarea) {

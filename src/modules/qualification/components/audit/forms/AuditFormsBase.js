@@ -4,6 +4,7 @@ import { Input, Select, Popover, Icon, Divider, Alert } from 'antd';
 import { BaseForm } from 'modules/common/components';
 import { booleanData, booleanDataReverse } from 'modules/common/constants';
 import { labels } from './constants';
+import { auditTabs } from 'modules/qualification/consts';
 
 const TextArea = Input.TextArea;
 
@@ -230,9 +231,9 @@ class AuditFormsBase extends BaseForm {
     );
   }
 
-  renderIsQualifiedAlert() {
+  renderIsQualifiedAlert(name) {
     const { __ } = this.context;
-    const { supplierInfo, response, isQualified } = this.props;
+    const { supplierInfo, response, isQualified, qualifiedStatus } = this.props;
 
     if (response) {
       return (
@@ -257,6 +258,19 @@ class AuditFormsBase extends BaseForm {
 
           <p style={{ height: '8px' }} />
         </div>
+      );
+    } else if (qualifiedStatus) {
+      const qualified = qualifiedStatus[name];
+      if (!name) return null;
+      return (
+        <Alert
+          message={`${auditTabs[name]} is ${
+            qualified ? 'qualified' : 'not qualified'
+          }`}
+          type={qualified ? 'success' : 'error'}
+          style={{ marginBottom: '16px' }}
+          showIcon
+        />
       );
     }
   }

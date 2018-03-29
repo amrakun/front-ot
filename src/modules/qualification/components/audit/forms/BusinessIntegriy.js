@@ -52,7 +52,7 @@ class BusinessIntegriy extends AuditFormsBase {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        {this.renderIsQualifiedAlert()}
+        {this.renderIsQualifiedAlert('businessInfo')}
         <Card title={__('Business integrity')}>
           {render('doesHavePolicyStatement')}
           {render('ensureThroughoutCompany')}

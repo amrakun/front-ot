@@ -3,16 +3,19 @@ import { Icon, Card, Badge, Tooltip } from 'antd';
 import PropTypes from 'prop-types';
 
 function NumberCard(props) {
-  const { icon, color, title, text, badge, tooltip } = props;
+  const { icon, color, title, text, badge, tooltip, size } = props;
   return (
     <Tooltip title={tooltip} placement="bottom">
-      <Card className="numberCard" bodyStyle={{ padding: 0 }}>
+      <Card
+        className={`numberCard textCard ${size}`}
+        bodyStyle={{ padding: 0 }}
+      >
         <Badge count={badge ? 1 : 0} className="iconWarp">
           <Icon style={{ color }} type={icon} />
         </Badge>
         <div className="content">
           <p className="title">{title || 'No Title'}</p>
-          <p className="text">{text}</p>
+          <div className="text">{text}</div>
         </div>
       </Card>
     </Tooltip>
@@ -26,7 +29,8 @@ NumberCard.propTypes = {
   text: PropTypes.node,
   countUp: PropTypes.object,
   badge: PropTypes.bool,
-  tooltip: PropTypes.string
+  tooltip: PropTypes.string,
+  size: PropTypes.string
 };
 
 export default NumberCard;

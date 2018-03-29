@@ -28,7 +28,7 @@ class Difot extends Common {
   }
 
   render() {
-    const { data, generate } = this.props;
+    const { totalCount, generate } = this.props;
     const { selectedCompanies } = this.state;
 
     const columns = this.getWrappedColumns([
@@ -61,7 +61,7 @@ class Difot extends Common {
 
     return (
       <Row gutter={16}>
-        <Sidebar suppliersCount={data && data.length} />
+        <Sidebar suppliersCount={totalCount} />
 
         <Col span={19}>
           <Card title="Suppliers">

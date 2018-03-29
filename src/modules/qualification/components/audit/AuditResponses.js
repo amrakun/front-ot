@@ -3,7 +3,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Table, Card, Row, Col, DatePicker } from 'antd';
-import { NumberCard } from 'modules/common/components';
+import { NumberCard, TextCard } from 'modules/common/components';
 import { dateFormat, colors } from 'modules/common/constants';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -11,6 +11,8 @@ import moment from 'moment';
 import { Search } from 'modules/common/components';
 import queryString from 'query-string';
 import { Paginator } from 'modules/common/components';
+import { StatsTable } from 'modules/common/components';
+import { auditTabs } from 'modules/qualification/consts';
 
 class AuditResponses extends React.Component {
   constructor(props) {
@@ -98,6 +100,9 @@ class AuditResponses extends React.Component {
     const counts = this.props.counts || {};
     const data = this.props.data || [];
 
+    const statsQuery = this.props.responsesQualifiedStatusQuery || {};
+    const auditStats = statsQuery.auditResponsesQualifiedStatus || {};
+
     const colSpan = {
       xl: 6,
       lg: 12,
@@ -115,20 +120,21 @@ class AuditResponses extends React.Component {
               number={counts.invited || 0}
             />
           </Col>
+          <Col key={3} {...colSpan}>
+            <TextCard
+              icon="like"
+              title={`Qualified - ${counts.qualified || 0}`}
+              color={colors[2]}
+              size="big"
+              text={<StatsTable stats={auditStats} tabs={auditTabs} />}
+            />
+          </Col>
           <Col key={2} {...colSpan}>
             <NumberCard
               icon="question"
               title="Not responded"
               color={colors[5]}
               number={counts.notResponded || 0}
-            />
-          </Col>
-          <Col key={3} {...colSpan}>
-            <NumberCard
-              icon="like"
-              title="Qualified"
-              color={colors[2]}
-              number={counts.qualified || 0}
             />
           </Col>
           <Col key={4} {...colSpan}>
@@ -174,7 +180,8 @@ AuditResponses.propTypes = {
   onChange: PropTypes.func,
   match: PropTypes.object,
   history: PropTypes.object,
-  counts: PropTypes.object
+  counts: PropTypes.object,
+  responsesQualifiedStatusQuery: PropTypes.object
 };
 
 export default withRouter(AuditResponses);

@@ -267,6 +267,7 @@ export const companyPrequalificationDetail = `
       productsInfo
       isSentPrequalificationInfo
       isPrequalified
+      prequalifiedStatus
     }
   }
 `;

@@ -83,7 +83,7 @@ class Feedback extends Common {
   }
 
   render() {
-    const { data } = this.props;
+    const { totalCount } = this.props;
     const {
       selectedCompanies,
       feedbackModalVisible,
@@ -128,7 +128,7 @@ class Feedback extends Common {
 
     return (
       <Row gutter={16}>
-        <Sidebar suppliersCount={data && data.length} />
+        <Sidebar suppliersCount={totalCount} />
 
         <Col span={19}>
           <Card title="Suppliers">

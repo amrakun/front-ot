@@ -191,6 +191,8 @@ class PrequalificationForm extends PreqForm {
 
     return (
       <Form className="preq-form">
+        {this.renderStatus('financialInfo')}
+
         <Card bodyStyle={{ paddingBottom: '16px' }}>
           {this.renderField({
             label: 'Can you provide accounts for the last 3 financial years?',

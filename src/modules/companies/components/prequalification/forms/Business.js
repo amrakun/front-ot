@@ -185,6 +185,7 @@ class PrequalificationForm extends PreqForm {
 
     return (
       <Form onSubmit={this.handleSubmit}>
+        {this.renderStatus('businessInfo')}
         <h2>{__('Human resource management')}</h2>
         <Card>
           {this.renderField({

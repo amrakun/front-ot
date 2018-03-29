@@ -55,6 +55,8 @@ class PrequalificationForm extends PreqForm {
 
     return (
       <Form onSubmit={this.handleSubmit}>
+        {this.renderStatus('environmentalInfo')}
+
         <Card>
           {this.renderField({
             name: 'doesHavePlan',

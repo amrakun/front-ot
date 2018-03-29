@@ -61,7 +61,7 @@ class Audit extends Common {
   }
 
   render() {
-    const { data, addPhysicalAudit } = this.props;
+    const { totalCount, addPhysicalAudit } = this.props;
     const {
       selectedCompanies,
       auditModalVisible,
@@ -92,7 +92,7 @@ class Audit extends Common {
 
     return (
       <Row gutter={16}>
-        <Sidebar suppliersCount={data && data.length} />
+        <Sidebar suppliersCount={totalCount} />
 
         <Col span={19}>
           <Card title="Suppliers">

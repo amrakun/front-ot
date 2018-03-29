@@ -59,7 +59,7 @@ class Validation extends Common {
   }
 
   render() {
-    const { data, exportExcel } = this.props;
+    const { totalCount, exportExcel } = this.props;
     const { modalVisible, modalData, validatedValues } = this.state;
 
     let validationOptions = [];
@@ -103,7 +103,7 @@ class Validation extends Common {
 
     return (
       <Row gutter={16}>
-        <Sidebar suppliersCount={data && data.length} />
+        <Sidebar suppliersCount={totalCount} />
 
         <Col span={19}>
           <Card title="Suppliers">

@@ -6,10 +6,10 @@ import { queries } from '../../graphql';
 const generator = (Component, query) => {
   class Container extends React.Component {
     render() {
-      const { companiesQuery, totalCountQuery } = this.props;
+      const { companiesQuery, totalCountQuery, queryParams } = this.props;
 
       if (companiesQuery.loading || totalCountQuery.loading) {
-        return <Component loading={true} />;
+        return <Component loading={true} queryParams={queryParams} />;
       }
 
       const companies = companiesQuery.companies || [];
