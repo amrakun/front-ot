@@ -137,7 +137,7 @@ class Dashboard extends React.Component {
     );
   }
 
-  renderBarChart({ data, key1, key2, height }) {
+  renderBarChart({ data, key1, key2, key3, height }) {
     return (
       <ResponsiveContainer width="100%" height={height}>
         <BarChart data={data}>
@@ -148,6 +148,7 @@ class Dashboard extends React.Component {
           <Legend />
           <Bar dataKey={key1} stackId="a" fill={COLORS[1]} />
           <Bar dataKey={key2} stackId="a" fill={COLORS[0]} />
+          {key3 && <Bar dataKey={key3} stackId="a" fill={COLORS[3]} />}
         </BarChart>
       </ResponsiveContainer>
     );
