@@ -31,10 +31,15 @@ class DueDiligenceContainer extends React.Component {
         });
     };
 
-    const exportExcel = () => {
+    const exportExcel = _ids => {
+      const queryVariables = companiesQuery ? companiesQuery.variables : {};
+
       exportFile({
         query: queries.companiesGenerateDueDiligenceList,
-        variables: companiesQuery ? companiesQuery.variables : null
+        variables: {
+          ...queryVariables,
+          _ids
+        }
       });
     };
 

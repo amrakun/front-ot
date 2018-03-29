@@ -152,7 +152,7 @@ class DueDiligence extends Common {
             <div className="table-operations">
               <Search />
 
-              <Button onClick={exportExcel}>
+              <Button onClick={() => exportExcel(selectedCompanies)}>
                 Export excel
                 <Icon type="file-excel" />
               </Button>
