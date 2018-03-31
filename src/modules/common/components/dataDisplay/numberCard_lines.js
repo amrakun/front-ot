@@ -45,15 +45,17 @@ class NumberCard extends Component {
       number,
       countUp,
       withPercent,
-      tooltip
+      tooltip,
+      onClick
     } = this.props;
     const { percent } = this.state;
     this.componentDidMount();
     return (
       <Card
-        className="numberCardLines"
+        className={`numberCardLines ${onClick && 'clickable'}`}
         bordered={false}
         bodyStyle={{ padding: 0 }}
+        onClick={onClick}
       >
         <Tooltip title={tooltip} placement="bottom">
           <div className="flexBox">
@@ -93,7 +95,8 @@ NumberCard.propTypes = {
   countUp: PropTypes.object,
   percent: PropTypes.number,
   withPercent: PropTypes.bool,
-  tooltip: PropTypes.string
+  tooltip: PropTypes.string,
+  onClick: PropTypes.func
 };
 
 export default NumberCard;

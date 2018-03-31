@@ -105,22 +105,35 @@ class TenderContainer extends React.Component {
     });
   }
 
+  modifySuppliersQuery(suppliers) {
+    return suppliers.map(supplier => ({
+      supplier
+    }));
+  }
+
   render() {
     const {
       tenderDetailQuery,
       tenderResponsesTableQuery,
+      notRespondedSuppliersQuery,
       location
     } = this.props;
     const { systemConfig } = this.context;
 
     const Component = location.pathname.includes('rfq') ? Rfq : Eoi;
 
-    if (tenderDetailQuery.loading || tenderResponsesTableQuery.loading) {
+    if (
+      tenderDetailQuery.loading ||
+      tenderResponsesTableQuery.loading ||
+      notRespondedSuppliersQuery.loading
+    ) {
       return <Component loading={true} />;
     }
 
     const tenderDetail = tenderDetailQuery.tenderDetail || {};
     const tenderResponses = tenderResponsesTableQuery.tenderResponses || {};
+    const notRespondedSuppliers =
+      notRespondedSuppliersQuery.tenderResponseNotRespondedSuppliers || [];
 
     const { rfqBidSummaryReportLoading, regretLetterModalVisible } = this.state;
 
@@ -129,6 +142,7 @@ class TenderContainer extends React.Component {
       rfqBidSummaryReportLoading,
       regretLetterModalVisible,
       tenderDetail,
+      notRespondedSuppliers: this.modifySuppliersQuery(notRespondedSuppliers),
       emailTemplate: systemConfig.regretLetterTemplate,
       award: this.award,
       downloadReport: this.downloadReport,
@@ -146,7 +160,8 @@ TenderContainer.propTypes = {
   tendersAward: PropTypes.func,
   sendRegretLetter: PropTypes.func,
   history: PropTypes.object,
-  location: PropTypes.object
+  location: PropTypes.object,
+  notRespondedSuppliersQuery: PropTypes.object
 };
 
 TenderContainer.contextTypes = {
@@ -163,9 +178,20 @@ export default compose(
     }
   }),
 
+  graphql(gql(queries.tenderResponseNotRespondedSuppliers), {
+    name: 'notRespondedSuppliersQuery',
+    options: ({ match }) => {
+      return {
+        variables: { tenderId: match.params.id }
+      };
+    }
+  }),
+
   graphql(gql(queries.tenderResponses), {
     name: 'tenderResponsesTableQuery',
     options: ({ match, queryParams }) => {
+      const filter = queryParams.filter;
+
       return {
         variables: {
           page: queryParams.page || 1,
@@ -181,7 +207,8 @@ export default compose(
             productCode: queryParams.productCode,
             minValue: queryParams.from,
             maxValue: queryParams.to
-          }
+          },
+          isNotInterested: filter === 'isNotInterested'
         },
         notifyOnNetworkStatusChange: true
       };

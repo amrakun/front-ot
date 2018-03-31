@@ -657,3 +657,6 @@ table.mass-email-response tr td:last-child {
   letter-spacing: 1px;
   font-weight: 600;
 }
+.clickable {
+  cursor: pointer;
+}

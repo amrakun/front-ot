@@ -9,6 +9,7 @@ import { Search, Editor } from 'modules/common/components';
 import { Common } from 'modules/companies/components/';
 import { Link } from 'react-router-dom';
 import { Paginator } from 'modules/common/components';
+import router from 'modules/common/router';
 
 class Tender extends Common {
   constructor(props) {
@@ -27,11 +28,29 @@ class Tender extends Common {
     this.toggleRegretLetterModal = this.toggleRegretLetterModal.bind(this);
     this.handleRegretLetterChange = this.handleRegretLetterChange.bind(this);
     this.handleSendRegretLetters = this.handleSendRegretLetters.bind(this);
+    this.setFilter = this.setFilter.bind(this);
+    this.getTitle = this.getTitle.bind(this);
   }
 
   getPercent(requestedCount, count) {
     if (count) return count / requestedCount * 100;
     else return 0;
+  }
+
+  setFilter(name) {
+    router.setParams(this.props.history, {
+      filter: name
+    });
+  }
+
+  getTitle() {
+    const filter = router.getParam(this.props.history, 'filter');
+
+    if (filter === 'isNotInterested') return 'Not intereseted';
+
+    if (filter === 'isNotResponded') return 'Not responded';
+
+    return 'Submitted';
   }
 
   showResponsesModal(record) {
@@ -228,6 +247,7 @@ class Tender extends Common {
             color={colors[2]}
             number={submittedCount}
             percent={this.getPercent(requestedCount, submittedCount)}
+            onClick={() => this.setFilter('isSubmitted')}
           />
         </Col>
         <Col key={3} lg={6} sm={12}>
@@ -237,6 +257,7 @@ class Tender extends Common {
             color={colors[4]}
             number={notInterestedCount}
             percent={this.getPercent(requestedCount, notInterestedCount)}
+            onClick={() => this.setFilter('isNotInterested')}
           />
         </Col>
         <Col key={4} lg={6} sm={12}>
@@ -246,6 +267,7 @@ class Tender extends Common {
             color={colors[5]}
             number={notRespondedCount}
             percent={this.getPercent(requestedCount, notRespondedCount)}
+            onClick={() => this.setFilter('isNotResponded')}
           />
         </Col>
       </Row>
@@ -260,7 +282,12 @@ class Tender extends Common {
       requestedData = [],
       tableOperations
     } = args;
-    const { loading, onChange, regretLetterModalVisible } = this.props;
+    const {
+      loading,
+      onChange,
+      regretLetterModalVisible,
+      notRespondedSuppliers
+    } = this.props;
     const {
       selectedCompanies,
       responseModal,
@@ -269,7 +296,11 @@ class Tender extends Common {
     } = this.state;
     const data = this.props.data || [];
     const tenderDetail = this.props.tenderDetail || {};
+    const queryParams = this.props.queryParams || {};
     const { winnerId, sentRegretLetter, status } = tenderDetail;
+
+    const responseRows =
+      queryParams.filter === 'isNotResponded' ? notRespondedSuppliers : data;
 
     const responseData = responseModal.data.map((row, index) => ({
       ...row,
@@ -281,7 +312,7 @@ class Tender extends Common {
         bordered={true}
         title={
           <span>
-            Submitted companies for <strong>{tenderDetail.name}</strong>
+            {this.getTitle()} companies for <strong>{tenderDetail.name}</strong>
           </span>
         }
       >
@@ -307,7 +338,7 @@ class Tender extends Common {
           }}
           columns={this.columns()}
           rowKey={record => (record.supplier ? record.supplier._id : '')}
-          dataSource={status !== 'open' ? data : []}
+          dataSource={status !== 'open' ? responseRows : []}
           pagination={false}
           loading={loading}
           scroll={{ x: 1200 }}
@@ -358,7 +389,8 @@ Tender.propTypes = {
   filter: PropTypes.func,
   sendRegretLetter: PropTypes.func,
   sentRegretLetter: PropTypes.boolean,
-  regretLetterModalVisible: PropTypes.boolean
+  regretLetterModalVisible: PropTypes.boolean,
+  notRespondedSuppliers: PropTypes.array
 };
 
 export default Tender;

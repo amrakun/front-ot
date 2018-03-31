@@ -63,50 +63,68 @@ const eoiResponseFields = `
   }
 `;
 
+const tenderResponseSupplierFields = `
+  _id
+  isQualified
+  isProductsInfoValidated
+  averageDifotScore
+  lastDueDiligence
+  basicInfo {
+    enName,
+    sapNumber,
+    totalNumberOfEmployees,
+    certificateOfRegistration,
+    corporateStructure,
+    totalNumberOfEmployees
+  }
+  contactInfo {
+    name,
+    phone,
+    email
+  }
+  businessInfo {
+    doesHaveCodeEthicsFile
+  }
+  healthInfo {
+    areHSEResourcesClearlyIdentifiedFile
+  }
+  shareholderInfo {
+    attachments
+  }
+`;
+
 const tenderResponses = `
   query tenderResponses(
     $tenderId: String!
     $sort: JSON
     $betweenSearch: JSON
     $supplierSearch: String
+    $isNotInterested: Boolean
   ) {
     tenderResponses(
       tenderId: $tenderId
       sort: $sort
       betweenSearch: $betweenSearch
       supplierSearch: $supplierSearch
+      isNotInterested: $isNotInterested
     ) {
       supplier {
-        _id
-        isQualified
-        isProductsInfoValidated
-        averageDifotScore
-        lastDueDiligence
-        basicInfo {
-          enName,
-          sapNumber,
-          totalNumberOfEmployees,
-          certificateOfRegistration,
-          corporateStructure,
-          totalNumberOfEmployees
-        }
-        contactInfo {
-          name,
-          phone,
-          email
-        }
-        businessInfo {
-          doesHaveCodeEthicsFile
-        }
-        healthInfo {
-          areHSEResourcesClearlyIdentifiedFile
-        }
-        shareholderInfo {
-          attachments
-        }
+        ${tenderResponseSupplierFields}
       }
       ${rfqResponseFields}
       ${eoiResponseFields}
+    }
+  }
+`;
+
+const tenderResponseNotRespondedSuppliers = `
+  query tenderResponseNotRespondedSuppliers(
+    $tenderId: String!
+  ) {
+    tenderResponseNotRespondedSuppliers(
+      tenderId: $tenderId
+    ) {
+      ${tenderResponseSupplierFields}
     }
   }
 `;
@@ -281,5 +299,6 @@ export default {
   tenderResponseByUser,
   generateMaterialsTemplate,
   totalSupplierTenders,
-  totalBuyerTenders
+  totalBuyerTenders,
+  tenderResponseNotRespondedSuppliers
 };
