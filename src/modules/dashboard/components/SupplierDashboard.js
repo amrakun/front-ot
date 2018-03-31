@@ -15,6 +15,40 @@ import { Link } from 'react-router-dom';
 import { labels } from '../constants';
 
 class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.getPrequalifiedStatus = this.getPrequalifiedStatus.bind(this);
+  }
+
+  getPrequalifiedStatus() {
+    const { prequalifiedStatus } = this.props.data;
+    const { __ } = this.context;
+    const {
+      isApproved,
+      isExpired,
+      isFailed,
+      isOutstanding
+    } = prequalifiedStatus;
+
+    if (isApproved) return 'Approved';
+
+    if (isExpired) return 'Expired';
+
+    if (isFailed)
+      return (
+        <span>
+          {__('You are not pre-qualified, please click')}{' '}
+          <Link to="/prequalification">{__('here')}</Link>{' '}
+          {__('to update your information')}
+        </span>
+      );
+
+    if (isOutstanding) return 'Outstanding';
+
+    return 'Not complete';
+  }
+
   render() {
     const { data, history, location } = this.props;
     const {
@@ -134,21 +168,7 @@ class Dashboard extends React.Component {
                   ? null
                   : !isPrequalified ? __(labels.preqSuggestion) : null
               }
-              text={
-                <span>
-                  {isPrequalified === null ? (
-                    __('Nothing new')
-                  ) : isPrequalified ? (
-                    __('Yes')
-                  ) : (
-                    <span>
-                      {__('You are not pre-qualified, please click')}{' '}
-                      <Link to="/prequalification">{__('here')}</Link>{' '}
-                      {__('to update your information')}
-                    </span>
-                  )}
-                </span>
-              }
+              text={this.getPrequalifiedStatus()}
               withPercent={true}
             />
           </Col>

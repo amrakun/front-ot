@@ -20,6 +20,7 @@ const companyByUser = `
       }
       isSentRegistrationInfo
       isSentPrequalificationInfo
+      prequalifiedStatus
     }
   }
 `;
