@@ -2,7 +2,11 @@ const statusTabs = {
   businessInfo: 'Business integrity & human resource',
   environmentalInfo: 'Environmental management',
   financialInfo: 'Financial information',
-  healthInfo: 'Health & safety mangement system'
+  healthInfo: 'Health & safety mangement system',
+  approved: 'Approved',
+  expired: 'Expired',
+  failed: 'Failed',
+  outstanding: 'outstanding'
 };
 
 const auditTabs = {
