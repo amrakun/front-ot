@@ -24,7 +24,7 @@ const Home = (props, context) => {
       <div className="content-wrapper">
         <div className="content">
           <h1>
-            <strong>{__('Oyu Tolgoi')}</strong>
+            <strong>{__('Oyu')}</strong>
             <span>{__('Suppliers Database')}</span>
           </h1>
           <Link to="/sign-in" className="home-btn">
