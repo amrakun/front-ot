@@ -760,13 +760,14 @@ table.mass-email-response tr td:last-child {
 }
 
 .app-name strong {
-  display: block;
   font-size: 55px;
   text-transform: uppercase;
+  display: inline-block;
+  padding-right: 25px;
 }
 
 .app-name span {
-  font-size: 15px;
+  font-size: 22px;
 }
 
 /*# sourceMappingURL=main.min.css.map */
