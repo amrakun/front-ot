@@ -24,7 +24,7 @@ class Base extends Common {
   }
 
   handleCheck(companyIds, selectedSuppliers) {
-    this.setState({ checkedCount: companyIds.length, selectedSuppliers });
+    this.setState({ selectedSuppliers });
 
     this.onSelectedCompaniesChange(companyIds);
   }
@@ -45,7 +45,7 @@ class Base extends Common {
       totalCount
     } = this.props;
 
-    const { selectedCompanies, checkedCount, selectedSuppliers } = this.state;
+    const { selectedCompanies, selectedSuppliers } = this.state;
 
     const columns = this.getWrappedColumns([
       {
@@ -103,7 +103,10 @@ class Base extends Common {
 
     return (
       <Row gutter={16}>
-        <Sidebar suppliersCount={totalCount} checkedCount={checkedCount} />
+        <Sidebar
+          suppliersCount={totalCount}
+          checkedCount={selectedCompanies && selectedCompanies.length}
+        />
 
         <Col span={19}>
           <Card title="Suppliers">

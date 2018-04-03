@@ -160,7 +160,7 @@ class TenderForm extends BaseForm {
   }
 
   renderProductColumn(props) {
-    const { name, title, type, isSupplier, dataType } = props;
+    const { name, title, type, isSupplier, dataType, width = 140 } = props;
 
     const disabled = isSupplier;
 
@@ -209,7 +209,7 @@ class TenderForm extends BaseForm {
         key={name}
         dataIndex={name}
         render={render}
-        width={140}
+        width={width}
       />
     );
   }

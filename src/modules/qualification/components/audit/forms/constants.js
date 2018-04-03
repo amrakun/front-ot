@@ -417,7 +417,7 @@ const labels = {
   }
 };
 
-const evidenceCheckList = [
+const coreHseq = [
   {
     label:
       '1. Does the organisation have a Health Safety & Environment management system? ',
@@ -468,7 +468,10 @@ const evidenceCheckList = [
     label:
       '10. Does the organisation have a formal process for Health Safety and Environmental risk management ',
     value: 'doesHaveFormalProcessForHealth'
-  },
+  }
+];
+
+const humanResource = [
   {
     label: '1. Work Contract Management',
     value: 'isThereCurrentContract'
@@ -512,7 +515,10 @@ const evidenceCheckList = [
   {
     label: '11. Grievance and Fair treatment ',
     value: 'doesHaveGrievancePolicy'
-  },
+  }
+];
+
+const businessIntegrity = [
   {
     label:
       '1. Does your company have in place a policy statement or code of conduct relating to the Business Integrity and Ethics?',
@@ -545,4 +551,19 @@ const evidenceCheckList = [
   }
 ];
 
-export { labels, evidenceCheckList };
+const checkLists = {
+  coreHseq: {
+    options: coreHseq,
+    title: 'Core HSEQ'
+  },
+  businessIntegrity: {
+    options: businessIntegrity,
+    title: 'Human resource management'
+  },
+  humanResource: {
+    options: humanResource,
+    title: 'Business integrity'
+  }
+};
+
+export { labels, checkLists };

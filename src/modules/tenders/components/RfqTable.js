@@ -159,7 +159,8 @@ class RfqTable extends Component {
             name: 'file',
             title: __(rpc.picture),
             type: 'uploader',
-            isSupplier: !isSupplier
+            isSupplier: !isSupplier,
+            width: 200
           })}
         </Table>
       </div>
