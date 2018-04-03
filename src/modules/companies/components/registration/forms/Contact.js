@@ -78,6 +78,7 @@ class ContactInfo extends BaseForm {
             label: 'E-mail',
             name: 'email',
             validation: 'email',
+            canBeCryllic: false,
             control: <Input />
           })}
         </Card>

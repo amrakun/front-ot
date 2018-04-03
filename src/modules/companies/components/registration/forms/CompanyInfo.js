@@ -143,6 +143,7 @@ class CompanyInfo extends BaseForm {
             {this.renderField({
               label: 'Company name (in English)',
               name: 'enName',
+              canBeCryllic: false,
               control: <Input />
             })}
           </Card>
@@ -228,7 +229,8 @@ class CompanyInfo extends BaseForm {
               name: 'website',
               optional: true,
               isVisible: !soleTrader,
-              control: <Input />
+              control: <Input />,
+              canBeCryllic: false
             })}
             {this.renderField({
               label: '9. Company e-mail',
@@ -236,7 +238,8 @@ class CompanyInfo extends BaseForm {
               validation: 'email',
               isVisible: !soleTrader,
               optional: soleTrader,
-              control: <Input />
+              control: <Input />,
+              canBeCryllic: false
             })}
             {this.renderField({
               label: labels.foreignOwnershipPercentage,

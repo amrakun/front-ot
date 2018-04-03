@@ -30,5 +30,6 @@
   "Original Equipment Manufacturer (OEM)": "Үйлдвэрлэгч",
   "Service Provider": "Үйлчилгээ үзүүлэгч",
   "Distributor": "Албан ёсны борлуулагч",
-  "None of above": "Аль нь ч биш"
+  "None of above": "Аль нь ч биш",
+  "Add distribution right name": "Гэрээт борлуулагчын эрхийн нэр нэмэх"
 }

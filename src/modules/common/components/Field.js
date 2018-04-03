@@ -41,7 +41,7 @@ export default class Field extends React.Component {
   }
 
   validateCryllic(rules, value, callback) {
-    var cryllic = /^[\u0400-\u04FF0-9$&+,:;=?@#|'<>.^*()%!-]*$/;
+    var cryllic = /^[\u0400-\u04FF 0-9$&+,:;=?@#|'<>.^*()%!-]*$/;
 
     if (!cryllic.test(value)) {
       callback('Зөвхөн крилл үсгээр бичнэ үү');
@@ -64,7 +64,8 @@ export default class Field extends React.Component {
       dataType,
       validateStatus,
       help,
-      validator
+      validator,
+      canBeCryllic = true
     } = this.props;
     let { label } = this.props;
 
@@ -85,7 +86,11 @@ export default class Field extends React.Component {
       });
     }
 
-    if (locale === 'mn') {
+    if (
+      canBeCryllic &&
+      locale === 'mn' &&
+      control.props.prefixCls === 'ant-input'
+    ) {
       rules.push({
         validator: this.validateCryllic
       });
@@ -146,7 +151,8 @@ Field.propTypes = {
   dataType: PropTypes.string,
   validateStatus: PropTypes.string,
   help: PropTypes.string,
-  validator: PropTypes.func
+  validator: PropTypes.func,
+  canBeCryllic: PropTypes.bool
 };
 
 Field.contextTypes = {

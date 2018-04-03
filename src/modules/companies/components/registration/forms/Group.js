@@ -125,6 +125,7 @@ class RegistrationForm extends BaseForm {
               hasFeedback={false}
               optional={true}
               control={<Input placeholder={__('Name')} />}
+              canBeCryllic={false}
             />
           </Col>
           <Col span={6}>
@@ -134,6 +135,7 @@ class RegistrationForm extends BaseForm {
               hasFeedback={false}
               optional={true}
               control={<Input placeholder={__('Town or city')} />}
+              canBeCryllic={false}
             />
           </Col>
           <Col span={6}>
@@ -143,6 +145,7 @@ class RegistrationForm extends BaseForm {
               hasFeedback={false}
               optional={true}
               control={<Input placeholder={__('Country')} />}
+              canBeCryllic={false}
             />
           </Col>
           <Col span={6}>
@@ -152,6 +155,7 @@ class RegistrationForm extends BaseForm {
               initialValue={factory.productCodes}
               optional={true}
               control={<Input placeholder={__('Product codes')} />}
+              canBeCryllic={false}
             />
           </Col>
         </Row>
@@ -226,6 +230,7 @@ class RegistrationForm extends BaseForm {
             label: groupLabels.parentName,
             isVisible: hasParent,
             optional: !hasParent,
+            canBeCryllic: false,
             control: <Input />
           })}
           {this.renderField({
@@ -233,6 +238,7 @@ class RegistrationForm extends BaseForm {
             label: groupLabels.parentAddress,
             isVisible: hasParent,
             optional: !hasParent,
+            canBeCryllic: false,
             control: <Input />
           })}
 
@@ -241,6 +247,7 @@ class RegistrationForm extends BaseForm {
             label: groupLabels.parentRegistrationNumber,
             isVisible: hasParent,
             optional: !hasParent,
+            canBeCryllic: false,
             control: <Input type="number" />
           })}
         </Card>
@@ -318,6 +325,7 @@ class RegistrationForm extends BaseForm {
             name: 'primaryManufacturerName',
             label: groupLabels.primaryManufacturerName,
             optional: role !== 'Distributor',
+            canBeCryllic: false,
             control: <Input />
           })}
 
