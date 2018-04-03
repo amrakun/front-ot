@@ -129,6 +129,14 @@ const tenderResponseNotRespondedSuppliers = `
   }
 `;
 
+const companies = `
+  query companies($_ids: [String]) {
+    companies(_ids: $_ids) {
+      ${tenderResponseSupplierFields}
+    }
+  }
+`;
+
 const tenderDetail = `
   query tenderDetail($_id: String!) {
     tenderDetail(_id: $_id) {
@@ -300,5 +308,6 @@ export default {
   generateMaterialsTemplate,
   totalSupplierTenders,
   totalBuyerTenders,
-  tenderResponseNotRespondedSuppliers
+  tenderResponseNotRespondedSuppliers,
+  companies
 };

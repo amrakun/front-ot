@@ -20,6 +20,7 @@ import moment from 'moment';
 import productsTree from 'modules/companies/productsTree';
 import { colors } from 'modules/common/constants';
 import router from 'modules/common/router';
+import { productCategoryLabels } from 'modules/dashboard/constants';
 
 const { MonthPicker } = DatePicker;
 
@@ -158,10 +159,15 @@ class Dashboard extends React.Component {
     const { productCategory } = this.props;
     const height = this.state.pieChartWidth * 0.5;
 
+    const data = productCategory.map(cat => ({
+      ...cat,
+      name: productCategoryLabels[cat.name]
+    }));
+
     return (
       <Card title="Product categories" className="barchart-wrapper margin">
         {this.renderBarChart({
-          data: productCategory,
+          data,
           key1: 'prequalified',
           key2: 'registered',
           key3: 'validated',
@@ -173,7 +179,7 @@ class Dashboard extends React.Component {
 
   renderPrequalified() {
     const { productData, location } = this.props;
-    const height = this.state.pieChartWidth * 0.5;
+    const height = this.state.pieChartWidth * 0.8;
     const queryParams = queryString.parse(location.search);
     const { regVsPreq } = this.state;
 
@@ -267,7 +273,6 @@ class Dashboard extends React.Component {
             <div className="ant-row chart-row">
               <div className="ant-col-sm-12 ant-col-lg-16">
                 {this.renderPrequalified()}
-                {this.renderProductCategory()}
               </div>
               <div
                 className="ant-col-sm-12 ant-col-lg-8"
@@ -279,7 +284,9 @@ class Dashboard extends React.Component {
               </div>
             </div>
 
-            <div className="ant-row chart-row">
+            {this.renderProductCategory()}
+
+            <div className="ant-row chart-row margin">
               <div className="ant-col-sm-24 ant-col-lg-5">
                 {this.renderCountData('Total EOI', eoiTotalCount)}
               </div>
