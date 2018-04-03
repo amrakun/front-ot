@@ -168,6 +168,8 @@ class RegistrationForm extends BaseForm {
         name={`distributionRightName${index}`}
         initialValue={value}
         label={'Distribution right name ' + _index}
+        labelIndex={_index}
+        labelIgnoreIndex
         hasFeedback={false}
         optional={true}
         control={<Input />}

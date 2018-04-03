@@ -47,6 +47,34 @@
     "Таны нууц үг шинэчлэгдсэн тул, шинэ нууц үгээ ашиглан нэвтэрнэ үү.",
   "Click to upload": "Байршуулахын тулд дарна уу",
   "Save & continue": "Хадгалаад үргэлжлүүлэх",
+  "Not complete": "Бүрэн бус",
+  "Are you sure you are not interested?":
+    "Та оролцохгүй гэдэгтээ итгэлтэй байна уу?",
+  "Approved": "Зөвшөөрөгдсөн",
+  "Expired": "Хугацаа дууссан",
+  "Need help?": "Тусламж хэрэгтэй юу?",
+  "Lead time (day)": "Хүргэлтийн хугацаа(Өдрөөр)",
+  "Registration complete": "Бүртгэл амжилттай",
+  "Add distribution right name": "Гэрээт борлуулагчын эрхийн нэр нэмэх",
+  "Please click": " ",
+  "to download your registration form": "бүртгэлийн маягтаа татаж авна уу",
+  "Please tick the boxes to confirm that you have agree with the statements":
+    "",
+  "Financial information is not qualified":
+    "Санхүүгийн мэдээлэл баталгаажаагүй байна",
+  "Business integrity & human resource is not qualified":
+    "Бизнесийн ёс зүй болон хүний нөөцийн удирдлага баталгаажаагүй байна",
+  "Environmental management is not qualified":
+    "Байгаль орчны удирдлага баталгаажаагүй байна",
+  "Health & safety mangement system is not qualified":
+    "Эрүүл мэнд, аюулгүй ажиллагааны удирдлагын систем баталгаажаагүй байна",
+  "Financial information is qualified": "Санхүүгийн мэдээлэл баталгаажлаа",
+  "Business integrity & human resource is qualified":
+    "Бизнесийн ёс зүй болон хүний нөөцийн удирдлага баталгаажлаа",
+  "Health & safety mangement system is qualified":
+    "Эрүүл мэнд, аюулгүй ажиллагааны удирдлагын систем баталгаажлаа",
+  "Environmental management is qualified":
+    "Байгаль орчны удирдлага баталгаажлаа",
   "Address": "Хаяг",
   "Return": "Буцах",
   "Submit": "Нэмэх",

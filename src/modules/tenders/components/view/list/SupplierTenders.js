@@ -98,7 +98,7 @@ class SupplierTenders extends Tenders {
             <Divider type="vertical" key={0} />,
             <Popconfirm
               key={1}
-              title="Are you sure you are not interested？"
+              title={__('Are you sure you are not interested？')}
               placement="bottomRight"
               okText="Yes"
               cancelText="No"
