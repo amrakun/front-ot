@@ -69,5 +69,8 @@
   "Return": "Буцах",
   "here": "Энд дарж",
   "Expression Of Interest": "Оролцох Сонирхолоо Илэрхийлэх",
-  "Request For Quotation": "Үнийн саналын хүсэлт"
+  "Request For Quotation": "Үнийн саналын хүсэлт",
+  "Your form is incomplete": "Таны бөглөсөн форм дутуу байна",
+  "Your excel import is incomplete":
+    "Таны хуулж оруулсан файл дутуу бөглөгдсөн байна"
 }
