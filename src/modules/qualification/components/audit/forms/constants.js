@@ -558,11 +558,11 @@ const checkLists = {
   },
   businessIntegrity: {
     options: businessIntegrity,
-    title: 'Human resource management'
+    title: 'Business integrity'
   },
   humanResource: {
     options: humanResource,
-    title: 'Business integrity'
+    title: 'Human resource management'
   }
 };
 

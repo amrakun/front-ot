@@ -35,7 +35,7 @@ const EvidenceCheck = (props, { __ }) => {
           label: __(item.label),
           value: item.value
         }))}
-        className="horizontal"
+        className="horizontal evidence-check"
         onChange={values => handleEvidenceChange(values, name)}
       />
     ];

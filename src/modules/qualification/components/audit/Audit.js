@@ -92,7 +92,10 @@ class Audit extends Common {
 
     return (
       <Row gutter={16}>
-        <Sidebar suppliersCount={totalCount} />
+        <Sidebar
+          suppliersCount={totalCount}
+          checkedCount={selectedCompanies ? selectedCompanies.length : 0}
+        />
 
         <Col span={19}>
           <Card title="Suppliers">

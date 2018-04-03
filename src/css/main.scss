@@ -576,8 +576,19 @@ form .ant-input-number {
 }
 
 .evidence-check {
-  label:nth-child(11), label:nth-child(22) {
-    margin-top: 16px;
+  label {
+    position: relative;
+    padding-left: 24px !important;
+
+    span.ant-checkbox {
+      position: absolute;
+      top: 6px;
+      left: 0;
+    }
+
+    span {
+      padding: 0;
+    }
   }
 }
 
