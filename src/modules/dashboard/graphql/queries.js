@@ -249,7 +249,7 @@ const logsActivityLogsExport = `
   query logsActivityLogsExport(
     $startDate: Date!,
     $endDate: Date!,
-    $module: String!
+    $module: String
   ){
     logsActivityLogsExport(
       startDate: $startDate,

@@ -154,6 +154,11 @@ class Dashboard extends React.Component {
     };
 
     const activityLogOptions = [];
+    activityLogOptions.push(
+      <Option key={''} value={''}>
+        All modules
+      </Option>
+    );
     for (let option of MODULES_TO_TEXT) {
       activityLogOptions.push(
         <Option key={option[0]} value={option[0]}>
