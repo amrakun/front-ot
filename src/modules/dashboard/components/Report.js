@@ -206,8 +206,8 @@ class Dashboard extends React.Component {
               }
               defaultValue={this.tenderType}
             >
-              <Radio value="eoi">EOI</Radio>
-              <Radio value="rfq">RFQ</Radio>
+              <Radio value="physical">Physical</Radio>
+              <Radio value="desktop">Desktop</Radio>
             </Radio.Group>
 
             {this.renderButton(this.exportAudits)}
