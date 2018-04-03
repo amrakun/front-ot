@@ -569,8 +569,8 @@ const companiesGenerateDueDiligenceList = `
 `;
 
 const companiesGeneratePrequalificationList = `
-  query companiesGeneratePrequalificationList(${commonParams}) {
-    companiesGeneratePrequalificationList(${commonValues})
+  query companiesGeneratePrequalificationList($_ids: [String]) {
+    companiesGeneratePrequalificationList(_ids: $_ids)
   }
 `;
 

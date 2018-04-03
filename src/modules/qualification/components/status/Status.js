@@ -40,6 +40,7 @@ class Status extends Common {
 
   render() {
     const { generate, totalCount } = this.props;
+    const { selectedCompanies } = this.state;
 
     const columns = [
       { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
@@ -68,19 +69,27 @@ class Status extends Common {
 
     return (
       <Row gutter={16}>
-        <Sidebar suppliersCount={totalCount} stats={this.renderStats()} />
+        <Sidebar
+          suppliersCount={totalCount}
+          stats={this.renderStats()}
+          checkedCount={selectedCompanies ? selectedCompanies.length : 0}
+        />
 
         <Col span={19}>
           <Card title="Suppliers">
             <div className="table-operations">
               <Search />
 
-              <Button onClick={generate}>
+              <Button onClick={() => generate(selectedCompanies)}>
                 Export excel
                 <Icon type="file-excel" />
               </Button>
             </div>
             {this.renderTable({
+              rowSelection: {
+                selectedCompanies,
+                onChange: this.onSelectedCompaniesChange
+              },
               columns
             })}
           </Card>
