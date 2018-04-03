@@ -25,7 +25,7 @@ class SubmitTender extends TenderForm {
       if (key.startsWith('product__')) {
         const product = this.state[key];
 
-        if (this.isComplete(product)) return false;
+        if (!this.isComplete(product)) return false;
 
         const totalPrice = product.quantity * product.unitPrice;
         delete product.key;
@@ -51,7 +51,8 @@ class SubmitTender extends TenderForm {
 
     const respondedProducts = this.collectInputs();
 
-    if (respondedProducts) this.props.save({ respondedProducts }, true);
+    if (respondedProducts.length > 0)
+      this.props.save({ respondedProducts }, true);
     else message.error(this.context.__('Your form is incomplete'));
   }
 

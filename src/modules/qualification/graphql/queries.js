@@ -17,6 +17,7 @@ const supplierPrequalification = `
       }
       isPrequalified
       isSentPrequalificationInfo
+      prequalifiedStatus
     }
   }
 `;

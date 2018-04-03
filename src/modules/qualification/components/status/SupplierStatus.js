@@ -8,6 +8,7 @@ class Status extends Panes {
   render() {
     const { currentTabKey } = this.state;
     const supplierInputs = this.props.supplierInputs || {};
+    const prequalifiedStatus = supplierInputs.prequalifiedStatus || {};
     const saveTierType = this.props.saveTierType || {};
     const prequalifySupplier = this.props.prequalifySupplier || {};
     const enableSupplierForm = this.props.enableSupplierForm || {};
@@ -17,7 +18,8 @@ class Status extends Panes {
         ...supplierInputs.basicInfo,
         isPrequalified: supplierInputs.isPrequalified,
         isSentPrequalificationInfo: supplierInputs.isSentPrequalificationInfo,
-        supplierInputs: supplierInputs[name] || {}
+        supplierInputs: supplierInputs[name] || {},
+        tabQualified: prequalifiedStatus[name]
       },
       prequalifySupplier: prequalifySupplier,
       enableSupplierForm: enableSupplierForm,

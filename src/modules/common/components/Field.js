@@ -88,6 +88,7 @@ export default class Field extends React.Component {
 
     if (
       canBeCryllic &&
+      !optional &&
       locale === 'mn' &&
       control.props.prefixCls === 'ant-input'
     ) {
