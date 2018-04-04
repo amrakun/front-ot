@@ -43,7 +43,7 @@ export default class Panes extends React.Component {
     }
   }
 
-  renderPane(key, title, name, Component, extraProps) {
+  renderPane({ key, title, name, Component, data }) {
     const company = this.props.company || {};
     const save = this.props.save || {};
     const { __ } = this.context;
@@ -58,7 +58,7 @@ export default class Panes extends React.Component {
       title: title,
       nextTab: this.nextTab,
       previousTab: this.previousTab,
-      ...extraProps
+      ...data
     };
 
     return (
@@ -69,7 +69,7 @@ export default class Panes extends React.Component {
             {this.isEmpty(company[name]) ? '' : <Icon type="check" />}
           </span>
         }
-        key={key}
+        key={key.toString()}
       >
         <Component {...componenetProps} />
       </Tabs.TabPane>

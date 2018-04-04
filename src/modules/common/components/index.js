@@ -12,6 +12,7 @@ import Search from './Search';
 import Paginator from './Paginator';
 import exportFile from './exportFile';
 import HelpModal from './help/HelpModal';
+import Panes from './Panes';
 
 export {
   Uploader,
@@ -27,5 +28,6 @@ export {
   Search,
   Paginator,
   exportFile,
-  HelpModal
+  HelpModal,
+  Panes
 };

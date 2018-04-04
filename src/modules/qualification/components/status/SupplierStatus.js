@@ -2,7 +2,7 @@ import React from 'react';
 import { Tabs } from 'antd';
 import StatusTab from './StatusTab';
 import TierTypeTab from './TierTypeTab';
-import { Panes } from 'modules/companies/components';
+import { Panes } from 'modules/common/components';
 
 class Status extends Panes {
   render() {
@@ -33,41 +33,45 @@ class Status extends Panes {
         tabPosition="left"
         className="supplier-forms"
       >
-        {this.renderPane(
-          '1',
-          'Financial information',
-          'financialInfo',
-          StatusTab,
-          extraProps('financialInfo')
-        )}
-        {this.renderPane(
-          '2',
-          'Business integrity & human resource',
-          'businessInfo',
-          StatusTab,
-          extraProps('businessInfo')
-        )}
-        {this.renderPane(
-          '3',
-          'Environmental management',
-          'environmentalInfo',
-          StatusTab,
-          extraProps('environmentalInfo')
-        )}
-        {this.renderPane(
-          '4',
-          'Health & safety management system',
-          'healthInfo',
-          StatusTab,
-          extraProps('healthInfo')
-        )}
-        {this.renderPane(
-          '5',
-          'Select supplier tier type',
-          'tierType',
-          TierTypeTab,
-          extraProps('tierType')
-        )}
+        {this.renderPane({
+          key: 1,
+          title: 'Financial information',
+          name: 'financialInfo',
+          Component: StatusTab,
+          data: extraProps('financialInfo')
+        })}
+
+        {this.renderPane({
+          key: 2,
+          title: 'Business integrity & human resource',
+          name: 'businessInfo',
+          Component: StatusTab,
+          data: extraProps('businessInfo')
+        })}
+
+        {this.renderPane({
+          key: 3,
+          title: 'Environmental management',
+          name: 'environmentalInfo',
+          Component: StatusTab,
+          data: extraProps('environmentalInfo')
+        })}
+
+        {this.renderPane({
+          key: 4,
+          title: 'Health & safety management system',
+          name: 'healthInfo',
+          Component: StatusTab,
+          data: extraProps('healthInfo')
+        })}
+
+        {this.renderPane({
+          key: 5,
+          title: 'Select supplier tier type',
+          name: 'tierType',
+          Component: TierTypeTab,
+          data: extraProps('tierType')
+        })}
       </Tabs>
     );
   }

@@ -49,7 +49,9 @@ class NumberCard extends Component {
       onClick
     } = this.props;
     const { percent } = this.state;
+
     this.componentDidMount();
+
     return (
       <Card
         className={`numberCardLines ${onClick && 'clickable'}`}
