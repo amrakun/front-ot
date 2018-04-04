@@ -34,15 +34,10 @@ class BusinessIntegriy extends AuditFormsBase {
     this.setState({ [`${name}ModalVisible`]: false });
   }
 
-  render() {
-    const render = this.renderQuestion;
-    const {
-      evidenceModalVisible,
-      reportModalVisible,
-      planModalVisible
-    } = this.state;
-    const { __ } = this.context;
-    const { response, supplierInfo, exportFiles, isQualified } = this.props;
+  renderBuyerAction() {
+    const { reportModalVisible, planModalVisible } = this.state;
+
+    const { supplierInfo, exportFiles, isQualified } = this.props;
 
     const exportModalArgs = {
       ...supplierInfo,
@@ -51,8 +46,47 @@ class BusinessIntegriy extends AuditFormsBase {
     };
 
     return (
+      <div style={{ float: 'right' }}>
+        {this.renderSubmit('Save & create improvement plan', e =>
+          this.saveAndShowModal(e, 'plan')
+        )}
+        {this.renderSubmit('Save & create report', e =>
+          this.saveAndShowModal(e, 'report')
+        )}
+
+        <CreatePlan
+          {...exportModalArgs}
+          title="Supplier's improvement plan"
+          visible={planModalVisible}
+          hideModal={() => this.hideModal('plan')}
+        />
+
+        <CreateReport
+          {...exportModalArgs}
+          title="Supplier's audit report"
+          visible={reportModalVisible}
+          hideModal={() => this.hideModal('report')}
+        />
+      </div>
+    );
+  }
+
+  renderSupplierAction() {
+    return this.renderSubmit('Save & submit', e =>
+      this.saveAndShowModal(e, 'evidence')
+    );
+  }
+
+  render() {
+    const render = this.renderQuestion;
+    const { evidenceModalVisible } = this.state;
+    const { __ } = this.context;
+    const { response } = this.props;
+
+    return (
       <Form onSubmit={this.handleSubmit}>
         {this.renderIsQualifiedAlert('businessInfo')}
+
         <Card title={__('Business integrity')}>
           {render('doesHavePolicyStatement')}
           {render('ensureThroughoutCompany')}
@@ -61,35 +95,10 @@ class BusinessIntegriy extends AuditFormsBase {
           {render('doesHaveDocumentedPolicyToCorruption')}
           {render('whoIsResponsibleForPolicy')}
         </Card>
+
         {this.renderGoBack()}
-        {response ? (
-          <div style={{ float: 'right' }}>
-            {this.renderSubmit('Save & create improvement plan', e =>
-              this.saveAndShowModal(e, 'plan')
-            )}
-            {this.renderSubmit('Save & create report', e =>
-              this.saveAndShowModal(e, 'report')
-            )}
 
-            <CreatePlan
-              {...exportModalArgs}
-              title="Supplier's improvement plan"
-              visible={planModalVisible}
-              hideModal={() => this.hideModal('plan')}
-            />
-
-            <CreateReport
-              {...exportModalArgs}
-              title="Supplier's audit report"
-              visible={reportModalVisible}
-              hideModal={() => this.hideModal('report')}
-            />
-          </div>
-        ) : (
-          this.renderSubmit('Save & submit', e =>
-            this.saveAndShowModal(e, 'evidence')
-          )
-        )}
+        {response ? this.renderBuyerAction() : this.renderSupplierAction()}
 
         <EvidenceCheck
           title="Confirmation"

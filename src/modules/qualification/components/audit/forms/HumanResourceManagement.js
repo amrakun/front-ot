@@ -12,6 +12,7 @@ class HumanResourceManagement extends AuditFormsBase {
     return (
       <Form onSubmit={this.handleSubmit}>
         {this.renderIsQualifiedAlert('hrInfo')}
+
         <Card title={__('Human resource management')}>
           {render('workContractManagement', 'multiple')}
           {render('jobDescriptionProcedure', 'multiple')}
@@ -25,6 +26,7 @@ class HumanResourceManagement extends AuditFormsBase {
           {render('employeeExitManagement', 'multiple')}
           {render('grievanceAndFairTreatment', 'multiple')}
         </Card>
+
         {this.renderGoBack()}
         {this.renderSubmit()}
       </Form>

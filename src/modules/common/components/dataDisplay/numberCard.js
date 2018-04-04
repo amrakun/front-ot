@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 function NumberCard(props) {
   const { icon, color, title, number, tooltip, onClick } = props;
+
   return (
     <Card
       className={`numberCard ${onClick && 'clickable'}`}
@@ -14,6 +15,7 @@ function NumberCard(props) {
       <Tooltip title={tooltip} placement="bottom">
         <div className="flexBox">
           <Icon className="iconWarp" style={{ color }} type={icon} />
+
           <div className="content">
             <p className="title">{title || 'No Title'}</p>
             <p className="number">

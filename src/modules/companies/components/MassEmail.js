@@ -43,7 +43,6 @@ class MassEmail extends React.Component {
   sendEmail() {
     const { emailContent, emailSubject } = this.state;
     const { suppliers, sendMassEmail } = this.props;
-
     const supplierIds = suppliers.map(supplier => supplier._id);
 
     sendMassEmail(

@@ -40,6 +40,7 @@ class ChangePassword extends React.Component {
 
   handleConfirmBlur(e) {
     const value = e.target.value;
+
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
   }
 
@@ -56,6 +57,7 @@ class ChangePassword extends React.Component {
 
   checkConfir(rule, value, callback) {
     const form = this.props.form;
+
     if (value && this.state.confirmDirty) {
       form.validateFields(['confirm'], { force: true });
     }
@@ -82,6 +84,7 @@ class ChangePassword extends React.Component {
                   ]
                 })(<Input type="password" />)}
               </FormItem>
+
               <FormItem label={__('New password')}>
                 {getFieldDecorator('newPassword', {
                   rules: [
@@ -91,6 +94,7 @@ class ChangePassword extends React.Component {
                   ]
                 })(<Input type="password" />)}
               </FormItem>
+
               <FormItem label={__('Confirm New Password')}>
                 {getFieldDecorator('newPasswordConfirmation', {
                   rules: [
@@ -100,6 +104,7 @@ class ChangePassword extends React.Component {
                   ]
                 })(<Input type="password" onBlur={this.handleConfirmBlur} />)}
               </FormItem>
+
               <FormItem>
                 <Button
                   type="primary"

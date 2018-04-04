@@ -104,9 +104,23 @@ class SubmitTender extends TenderForm {
     return product.leadTime && product.shippingTerms && product.unitPrice;
   }
 
+  renderAction() {
+    const { __ } = this.context;
+
+    return (
+      <div className="margin">
+        <Button style={{ marginRight: '16px' }} onClick={this.saveDraft}>
+          {__('Save as draft')}
+        </Button>
+        <Button type="primary" htmlType="submit">
+          {__('Save & submit')}
+        </Button>
+      </div>
+    );
+  }
+
   render() {
     const { products } = this.state;
-    const { __ } = this.context;
     const { data, generateTemplate } = this.props;
 
     const formProps = {
@@ -124,16 +138,7 @@ class SubmitTender extends TenderForm {
           <RfqTable {...formProps} />
           <br />
 
-          {!data.isSent && (
-            <div className="margin">
-              <Button style={{ marginRight: '16px' }} onClick={this.saveDraft}>
-                {__('Save as draft')}
-              </Button>
-              <Button type="primary" htmlType="submit">
-                {__('Save & submit')}
-              </Button>
-            </div>
-          )}
+          {!data.isSent && this.renderAction()}
         </Card>
       </Form>
     );

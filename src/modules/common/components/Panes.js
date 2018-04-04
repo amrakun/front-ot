@@ -21,17 +21,20 @@ export default class Panes extends React.Component {
   nextTab() {
     const { currentTabKey } = this.state;
     const incerementedKeyInt = parseInt(currentTabKey, 10) + 1;
+
     this.moveToTab(incerementedKeyInt.toString());
   }
 
   previousTab() {
     const { currentTabKey } = this.state;
     const decerementedKeyInt = parseInt(currentTabKey, 10) - 1;
+
     this.moveToTab(decerementedKeyInt.toString());
   }
 
   moveToTab(currentTabKey) {
     this.setState({ currentTabKey });
+
     window.scrollTo(0, 0);
   }
 

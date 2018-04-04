@@ -33,6 +33,7 @@ class ForgotPassword extends BaseForm {
 
   render() {
     const { __ } = this.context;
+
     return (
       <div className="center-content">
         <Card className="login-card" bordered={false}>
@@ -48,6 +49,7 @@ class ForgotPassword extends BaseForm {
                 />
               }
             />
+
             <Button
               loading={this.state.loading}
               type="primary"
@@ -56,6 +58,7 @@ class ForgotPassword extends BaseForm {
             >
               {__('Send')}
             </Button>
+
             <Link to="/sign-in">{__('Sign in')}</Link>
           </Form>
         </Card>

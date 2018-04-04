@@ -13,7 +13,6 @@ const TendersContainer = props => {
   }
 
   const exportResponses = supplierIds => {
-    console.log(supplierIds);
     exportFile({
       query: queries.feedbackResponsesExport,
       variables: {

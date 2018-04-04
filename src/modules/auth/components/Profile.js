@@ -57,6 +57,7 @@ class Profile extends React.Component {
                   ]
                 })(<Input />)}
               </FormItem>
+
               <FormItem label={__('Last name')}>
                 {getFieldDecorator('lastName', {
                   initialValue: user.lastName || '',
@@ -68,11 +69,13 @@ class Profile extends React.Component {
                   ]
                 })(<Input />)}
               </FormItem>
+
               <FormItem label={__('Job Title')}>
                 {getFieldDecorator('jobTitle', {
                   initialValue: user.jobTitle || ''
                 })(<Input />)}
               </FormItem>
+
               <FormItem label={__('Email address')}>
                 {getFieldDecorator('email', {
                   initialValue: user.email || '',
@@ -88,6 +91,7 @@ class Profile extends React.Component {
                   ]
                 })(<Input />)}
               </FormItem>
+
               <FormItem label={__('Phone Number')}>
                 {getFieldDecorator('phone', {
                   initialValue: user.phone || '',
@@ -104,7 +108,9 @@ class Profile extends React.Component {
                   />
                 )}
               </FormItem>
+
               <h2>{__('Username & Password')}</h2>
+
               <FormItem label={__('Username')}>
                 {getFieldDecorator('username', {
                   initialValue: user.username || '',
@@ -116,6 +122,7 @@ class Profile extends React.Component {
                   ]
                 })(<Input />)}
               </FormItem>
+
               <FormItem label={__('Password')}>
                 {getFieldDecorator('password', {
                   rules: [
@@ -126,6 +133,7 @@ class Profile extends React.Component {
                   ]
                 })(<Input type="password" />)}
               </FormItem>
+
               <FormItem>
                 <Button
                   type="primary"

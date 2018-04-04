@@ -71,6 +71,7 @@ class SupplierProfile extends AuditFormsBase {
     return (
       <Form onSubmit={this.handleSubmit}>
         {this.renderIsQualifiedAlert()}
+
         <Card title={__('Company information')}>
           <List style={{ marginBottom: '16px' }}>
             {renderListItem('type', tierType)}
@@ -83,11 +84,13 @@ class SupplierProfile extends AuditFormsBase {
             {renderListItem('sqaResult', sqaResult)}
           </List>
         </Card>
+
         <Card title={__('Oyu Tolgoi LLC (OT) related performance rations')}>
           {this.renderSupplierField('otExperience')}
           {this.renderSupplierField('sotri')}
           {this.renderSupplierField('sotie')}
         </Card>
+
         {!response ? this.renderSubmit() : ''}
       </Form>
     );

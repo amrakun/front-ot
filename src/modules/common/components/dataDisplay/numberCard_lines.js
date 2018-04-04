@@ -16,6 +16,7 @@ class NumberCard extends Component {
 
   increase(count) {
     let percent = this.state.percent;
+
     if (percent < count) {
       percent++;
       if (percent > 100) {
@@ -29,7 +30,9 @@ class NumberCard extends Component {
 
   componentDidMount() {
     const { percent } = this.props;
+
     clearInterval(this.countdown);
+
     this.countdown = setInterval(() => this.increase(percent), 25);
   }
 
@@ -66,6 +69,7 @@ class NumberCard extends Component {
               style={{ backgroundColor: color }}
               type={icon}
             />
+
             <div className="content">
               <p>{title || 'No Title'}</p>
               <Progress percent={percent} strokeWidth={3} />

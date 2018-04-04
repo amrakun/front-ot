@@ -124,7 +124,7 @@ class TenderContainer extends React.Component {
         callback && callback(response.data.companies);
       })
       .catch(error => {
-        console.log(error);
+        message.error(error.message);
       });
   }
 

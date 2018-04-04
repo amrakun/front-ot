@@ -153,6 +153,7 @@ const MainInfo = props => {
           })}
         </Card>
       </Col>
+
       <Col span={14}>
         <Card title="Email content">
           <Editor

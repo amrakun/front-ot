@@ -77,13 +77,10 @@ class SupplierSearcher extends React.Component {
     );
   }
 
-  render() {
-    const { slogan, mode } = this.props;
+  renderModalTrigger() {
+    const { slogan } = this.props;
 
-    return mode === 'select' ? (
-      //render only supplier select without modal
-      this.renderSelect()
-    ) : (
+    return (
       <span>
         <Tag onClick={this.showPopup} className="dashed-button">
           <Icon type="plus" /> {`${slogan || 'Add'} an existing supplier`}
@@ -101,6 +98,12 @@ class SupplierSearcher extends React.Component {
         </Modal>
       </span>
     );
+  }
+
+  render() {
+    const { mode } = this.props;
+
+    return mode === 'select' ? this.renderSelect() : this.renderModalTrigger();
   }
 }
 

@@ -54,6 +54,7 @@ class Feedback extends Common {
     } = this.state;
 
     addFeedback({ selectedCompanies, feedbackCloseDate, feedbackContent });
+
     this.setState({ feedbackModalVisible: false });
   }
 
@@ -117,6 +118,7 @@ class Feedback extends Common {
     ]);
 
     let responseItemList = [];
+
     Object.keys(viewModalData).forEach(key => {
       if (!['_id', '__typename'].includes(key)) {
         responseItemList.push({

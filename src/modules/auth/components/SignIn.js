@@ -46,6 +46,7 @@ class SignIn extends Component {
             type="success"
           />
         )}
+
         {search === '?confirmed' && (
           <Alert
             description={__(
@@ -54,6 +55,7 @@ class SignIn extends Component {
             type="success"
           />
         )}
+
         {search === '?required' && (
           <Alert description={__('Please sign in to continue!')} type="info" />
         )}
@@ -68,6 +70,7 @@ class SignIn extends Component {
               <Input prefix={<Icon type="mail" />} placeholder={__('Email')} />
             )}
           </FormItem>
+
           <FormItem>
             {getFieldDecorator('password', {
               rules: [
@@ -81,6 +84,7 @@ class SignIn extends Component {
               />
             )}
           </FormItem>
+
           <FormItem>
             {getFieldDecorator('remember', {
               valuePropName: 'checked',

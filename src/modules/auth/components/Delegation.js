@@ -45,6 +45,7 @@ class Delegation extends BaseForm {
 
   handleSelect(value) {
     const selectedUser = JSON.parse(value);
+
     this.setState({ selectedUser });
   }
 
@@ -52,47 +53,59 @@ class Delegation extends BaseForm {
     this.setState({ selectedUser: null, searchValue: '' });
   }
 
-  render() {
+  renderUserInfo() {
+    const { selectedUser } = this.state;
+
+    return (
+      <div>
+        <p>
+          First name: <strong>{selectedUser.firstName}</strong>
+        </p>
+        <p>
+          Email: <strong>{selectedUser.email}</strong>
+          <a onClick={this.clearSearch}>
+            <Icon type="close-circle" style={{ marginLeft: '5px' }} />
+          </a>
+        </p>
+      </div>
+    );
+  }
+
+  renderUserSearch() {
     const { usersResult } = this.props;
-    const { selectedUser, searchValue } = this.state;
+    const { searchValue } = this.state;
+
+    return (
+      <Select
+        mode="combobox"
+        placeholder="Search user by name"
+        showArrow={false}
+        value={searchValue}
+        filterOption={false}
+        onChange={this.handleSearch}
+        onSelect={this.handleSelect}
+        style={{ marginBottom: '24px' }}
+      >
+        {usersResult.map(
+          user =>
+            !user.isSupplier && (
+              <Select.Option key={JSON.stringify(user)}>
+                {user.firstName || user.email}
+              </Select.Option>
+            )
+        )}
+      </Select>
+    );
+  }
+
+  render() {
+    const { selectedUser } = this.state;
 
     return (
       <Form onSubmit={this.handleSubmit}>
         <Col lg={{ span: 12, offset: 6 }} xl={{ span: 10, offset: 7 }}>
           <Card>
-            {selectedUser ? (
-              <div>
-                <p>
-                  First name: <strong>{selectedUser.firstName}</strong>
-                </p>
-                <p>
-                  Email: <strong>{selectedUser.email}</strong>
-                  <a onClick={this.clearSearch}>
-                    <Icon type="close-circle" style={{ marginLeft: '5px' }} />
-                  </a>
-                </p>
-              </div>
-            ) : (
-              <Select
-                mode="combobox"
-                placeholder="Search user by name"
-                showArrow={false}
-                value={searchValue}
-                filterOption={false}
-                onChange={this.handleSearch}
-                onSelect={this.handleSelect}
-                style={{ marginBottom: '24px' }}
-              >
-                {usersResult.map(
-                  user =>
-                    !user.isSupplier && (
-                      <Select.Option key={JSON.stringify(user)}>
-                        {user.firstName || user.email}
-                      </Select.Option>
-                    )
-                )}
-              </Select>
-            )}
+            {selectedUser ? this.renderUserInfo() : this.renderUserSearch()}
 
             {this.renderField({
               label: 'Duration',
