@@ -27,7 +27,7 @@ class FeedbackResponses extends React.Component {
   }
 
   handleResponseSelect(selectedRowKeys, selectedRows) {
-    this.selectedSuppliers = selectedRows.map(supplier => supplier._id);
+    this.selectedSuppliers = selectedRows.map(response => response._id);
   }
 
   extraColumns() {

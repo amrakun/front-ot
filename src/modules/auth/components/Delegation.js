@@ -10,15 +10,15 @@ class Delegation extends BaseForm {
 
     this.state = {
       selectedUser: null,
-      searchValue: ''
+      searchValue: '',
+      results: []
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this.handleResults = this.handleResults.bind(this);
     this.clearSearch = this.clearSearch.bind(this);
-
-    this.props.searchUser();
   }
 
   handleSubmit(e) {
@@ -40,7 +40,12 @@ class Delegation extends BaseForm {
 
   handleSearch(searchValue) {
     this.setState({ searchValue });
-    this.props.searchUser(searchValue);
+
+    this.props.searchUser(searchValue, this.handleResults);
+  }
+
+  handleResults(results) {
+    this.setState({ results });
   }
 
   handleSelect(value) {
@@ -72,8 +77,7 @@ class Delegation extends BaseForm {
   }
 
   renderUserSearch() {
-    const { usersResult } = this.props;
-    const { searchValue } = this.state;
+    const { searchValue, results } = this.state;
 
     return (
       <Select
@@ -86,7 +90,7 @@ class Delegation extends BaseForm {
         onSelect={this.handleSelect}
         style={{ marginBottom: '24px' }}
       >
-        {usersResult.map(
+        {results.map(
           user =>
             !user.isSupplier && (
               <Select.Option key={JSON.stringify(user)}>
