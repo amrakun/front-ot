@@ -24,17 +24,29 @@ class SubmitFeedback extends BaseForm {
     this.handleFeedbackContentChange = this.handleFeedbackContentChange.bind(
       this
     );
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleFeedbackContentChange(content) {
     this.setState({ feedbackContent: content });
   }
 
+  renderQuestion(name, input) {
+    return this.renderField({
+      label: labels[name],
+      control:
+        input === 'TextArea' ? (
+          <TextArea style={{ height: '80px' }} />
+        ) : (
+          <Input type="number" />
+        ),
+      name
+    });
+  }
+
   render() {
     const { feedbackContent } = this.state;
-    const { forSubmit } = this.props;
     const data = this.props.data || {};
+    const { forSubmit } = this.props;
     const { __ } = this.context;
 
     return (
@@ -60,64 +72,24 @@ class SubmitFeedback extends BaseForm {
             )}
 
             <Form className="margin">
-              <Card title={__(titles.changes.title)}>
-                <p>{__(titles.changes.description)}</p>
-                {this.renderField({
-                  label: labels.employmentNumberBefore,
-                  name: 'employmentNumberBefore',
-                  control: <Input type="number" />
-                })}
-                {this.renderField({
-                  label: labels.employmentNumberNow,
-                  name: 'employmentNumberNow',
-                  control: <Input type="number" />
-                })}
+              <Card title={__(titles['1'])}>
+                <p>{__(titles['1a'])}</p>
+                {this.renderQuestion('totalEmploymentOt')}
+                {this.renderQuestion('totalEmploymentUmnugobi')}
+                {this.renderQuestion('employmentChangesAfter')}
+                <p>{__(titles['1b'])}</p>
+                {this.renderQuestion('numberOfEmployeeWorkToScopeNational')}
+                {this.renderQuestion('numberOfEmployeeWorkToScopeUmnugobi')}
               </Card>
-              <Card title={__(titles.spend.title)} className="margin">
-                <p>{__(titles.spend.description)}</p>
-                {this.renderField({
-                  label: labels.nationalSpendBefore,
-                  name: 'nationalSpendBefore',
-                  control: <Input type="number" />
-                })}
-                {this.renderField({
-                  label: labels.nationalSpendAfter,
-                  name: 'nationalSpendAfter',
-                  control: <Input type="number" />
-                })}
-                {this.renderField({
-                  label: labels.umnugobiSpendBefore,
-                  name: 'umnugobiSpendBefore',
-                  control: <Input type="number" />
-                })}
-                {this.renderField({
-                  label: labels.umnugobiSpendAfter,
-                  name: 'umnugobiSpendAfter',
-                  control: <Input type="number" />
-                })}
+              <Card title={__(titles['2'])}>
+                {this.renderQuestion('procurementTotalSpend')}
+                {this.renderQuestion('procurementNationalSpend')}
+                {this.renderQuestion('procurementUmnugobiSpend')}
               </Card>
 
-              <Card className="margin">
-                {this.renderField({
-                  label: labels.investment,
-                  name: 'investment',
-                  control: <TextArea style={{ height: '80px' }} />
-                })}
-                {this.renderField({
-                  label: labels.trainings,
-                  name: 'trainings',
-                  control: <TextArea style={{ height: '80px' }} />
-                })}
-                {this.renderField({
-                  label: labels.corporateSocial,
-                  name: 'corporateSocial',
-                  control: <TextArea style={{ height: '80px' }} />
-                })}
-                {this.renderField({
-                  label: labels.technologyImprovement,
-                  name: 'technologyImprovement',
-                  control: <TextArea style={{ height: '80px' }} />
-                })}
+              <Card>
+                {this.renderQuestion('corporateSocial', 'TextArea')}
+                {this.renderQuestion('otherStories', 'TextArea')}
               </Card>
               {this.renderSubmit('Submit')}
             </Form>

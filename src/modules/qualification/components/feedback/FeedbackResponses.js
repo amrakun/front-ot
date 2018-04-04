@@ -6,6 +6,7 @@ import { dateFormat } from 'modules/common/constants';
 import moment from 'moment';
 import { Search } from 'modules/common/components';
 import { Paginator } from 'modules/common/components';
+import { labels } from './constants';
 
 class FeedbackResponses extends React.Component {
   constructor(props) {
@@ -27,20 +28,12 @@ class FeedbackResponses extends React.Component {
   extraColumns() {
     return [
       {
-        title: 'Investment',
-        dataIndex: 'investment'
-      },
-      {
-        title: 'Trainings',
-        dataIndex: 'trainings'
-      },
-      {
-        title: 'Corporate social responsibility',
+        title: labels.corporateSocial,
         dataIndex: 'corporateSocial'
       },
       {
-        title: 'Technoloogy Improvements',
-        dataIndex: 'technologyImprovement'
+        title: labels.otherStories,
+        dataIndex: 'otherStories'
       }
     ];
   }
@@ -68,28 +61,36 @@ class FeedbackResponses extends React.Component {
         dataIndex: 'supplier.basicInfo.enName'
       },
       {
-        title: 'Employment before',
-        dataIndex: 'employmentNumberBefore'
+        title: labels.totalEmploymentOt,
+        dataIndex: 'totalEmploymentOt'
       },
       {
-        title: 'Employment now',
-        dataIndex: 'employmentNumberNow'
+        title: labels.totalEmploymentUmnugobi,
+        dataIndex: 'totalEmploymentUmnugobi'
       },
       {
-        title: 'National spend before',
-        dataIndex: 'nationalSpendBefore'
+        title: labels.employmentChangesAfter,
+        dataIndex: 'employmentChangesAfter'
       },
       {
-        title: 'National spend after',
-        dataIndex: 'nationalSpendAfter'
+        title: labels.numberOfEmployeeWorkToScopeNational,
+        dataIndex: 'numberOfEmployeeWorkToScopeNational'
       },
       {
-        title: 'Umnugobi spend before',
-        dataIndex: 'umnugobiSpendBefore'
+        title: labels.numberOfEmployeeWorkToScopeUmnugobi,
+        dataIndex: 'totalEmploymenumberOfEmployeeWorkToScopeUmnugobintOt'
       },
       {
-        title: 'Umnugobi spend after',
-        dataIndex: 'umnugobiSpendAfter'
+        title: labels.procurementTotalSpend,
+        dataIndex: 'procurementTotalSpend'
+      },
+      {
+        title: labels.procurementNationalSpend,
+        dataIndex: 'procurementNationalSpend'
+      },
+      {
+        title: labels.procurementUmnugobiSpend,
+        dataIndex: 'procurementUmnugobiSpend'
       },
       {
         title: 'Contact person',

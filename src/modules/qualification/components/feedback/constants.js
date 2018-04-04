@@ -1,29 +1,23 @@
 const labels = {
-  status: 'Status',
-  employmentNumberBefore: 'Employment number before',
-  employmentNumberNow: 'Employment number now',
-  nationalSpendBefore: 'National spend before engaging with OT',
-  nationalSpendAfter: 'National spend after engaging with OT',
-  umnugobiSpendBefore: 'Umnugobi spend before engaging with OT',
-  umnugobiSpendAfter: 'Umnugobi spend after engaging with OT',
-  investment: 'Investment/Capital',
-  trainings: 'Trainings',
+  totalEmploymentOt: 'Total national employment',
+  totalEmploymentUmnugobi: 'Total Umnugobi employment',
+  employmentChangesAfter: 'Changes in employment number after working with OT',
+  numberOfEmployeeWorkToScopeNational: 'National',
+  numberOfEmployeeWorkToScopeUmnugobi: 'Umnugobi',
+  procurementTotalSpend: 'Total spend/procurement',
+  procurementNationalSpend: 'National spend',
+  procurementUmnugobiSpend: 'Umnugobi spend',
   corporateSocial:
-    'Corporate social responsibility - Contribution to community',
-  technologyImprovement: 'Technology improvement/efficency'
+    '3. Corporate Social Responsibility – Contribution to community',
+  otherStories: '4. Other success stories to share'
 };
 
 const titles = {
-  changes: {
-    title: 'Changes in employment number',
-    description:
-      'Please insert total employees before engaging with OT and after'
-  },
-  spend: {
-    title: 'Procurement spend in country and Umnugobi aimag',
-    description:
-      'Please provide your annual spend within the country and in Umnugobi'
-  }
+  '1': '1. Please provide your employment details',
+  '1a': 'Please provide 2017 employment details:',
+  '1b':
+    'Of which, how many employee work related to the scope you provide to OT',
+  '2': '2. Please provide 2017 procurement spend details'
 };
 
 export { labels, titles };
