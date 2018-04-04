@@ -13,6 +13,7 @@ class FeedbackResponses extends React.Component {
     super(props);
 
     this.renderExpandedRow = this.renderExpandedRow.bind(this);
+    this.handleResponseSelect = this.handleResponseSelect.bind(this);
   }
 
   componentDidUpdate() {
@@ -25,41 +26,12 @@ class FeedbackResponses extends React.Component {
     }
   }
 
-  extraColumns() {
-    return [
-      {
-        title: labels.corporateSocial,
-        dataIndex: 'corporateSocial'
-      },
-      {
-        title: labels.otherStories,
-        dataIndex: 'otherStories'
-      }
-    ];
+  handleResponseSelect(selectedRowKeys, selectedRows) {
+    this.selectedSuppliers = selectedRows.map(supplier => supplier._id);
   }
 
-  columns() {
+  extraColumns() {
     return [
-      {
-        title: 'Feedback Status',
-        dataIndex: 'feedback.status'
-      },
-      {
-        title: 'Open date',
-        render: record => moment(record.createdDate).format(dateFormat)
-      },
-      {
-        title: 'Close date',
-        render: record => moment(record.closeDate).format(dateFormat)
-      },
-      {
-        title: 'Status',
-        dataIndex: 'status'
-      },
-      {
-        title: 'Supplier',
-        dataIndex: 'supplier.basicInfo.enName'
-      },
       {
         title: labels.totalEmploymentOt,
         dataIndex: 'totalEmploymentOt'
@@ -91,6 +63,31 @@ class FeedbackResponses extends React.Component {
       {
         title: labels.procurementUmnugobiSpend,
         dataIndex: 'procurementUmnugobiSpend'
+      }
+    ];
+  }
+
+  columns() {
+    return [
+      {
+        title: 'Feedback Status',
+        dataIndex: 'feedback.status'
+      },
+      {
+        title: 'Open date',
+        render: record => moment(record.createdDate).format(dateFormat)
+      },
+      {
+        title: 'Close date',
+        render: record => moment(record.closeDate).format(dateFormat)
+      },
+      {
+        title: 'Status',
+        dataIndex: 'status'
+      },
+      {
+        title: 'Supplier',
+        dataIndex: 'supplier.basicInfo.enName'
       },
       {
         title: 'Contact person',
@@ -140,13 +137,13 @@ class FeedbackResponses extends React.Component {
   }
 
   render() {
-    const { loading, onChange, exportResponses } = this.props;
+    const { loading, exportResponses } = this.props;
 
     return (
       <Card title="Success feedback responses">
         <div className="table-operations">
           <Search placeholder="Supplier name" />
-          <Button onClick={exportResponses}>
+          <Button onClick={() => exportResponses(this.selectedSuppliers)}>
             Export to excel <Icon type="file-excel" />
           </Button>
         </div>
@@ -157,11 +154,11 @@ class FeedbackResponses extends React.Component {
           dataSource={this.getDiscretedRows()}
           pagination={false}
           loading={loading}
-          scroll={{ x: 2000 }}
+          scroll={{ x: 1000 }}
           expandedRowRender={this.renderExpandedRow}
-          onChange={(pagination, filters, sorter) =>
-            onChange(pagination, filters, sorter)
-          }
+          rowSelection={{
+            onChange: this.handleResponseSelect
+          }}
         />
         <Paginator total={10} />
       </Card>
