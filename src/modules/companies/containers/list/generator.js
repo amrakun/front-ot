@@ -64,6 +64,12 @@ const generator = (Component, query) => {
       sortDirection = split[1];
     }
 
+    const getBoolean = filter => {
+      if (filter === undefined) return undefined;
+
+      return filter === '' ? undefined : filter === 'true';
+    };
+
     return {
       page: page || 1,
       perPage: perPage || 15,
@@ -73,10 +79,10 @@ const generator = (Component, query) => {
       difotScore,
       sortField,
       sortDirection,
-      includeBlocked,
-      isPrequalified,
-      isProductsInfoValidated,
-      isQualified
+      includeBlocked: getBoolean(includeBlocked),
+      isPrequalified: getBoolean(isPrequalified),
+      isProductsInfoValidated: getBoolean(isProductsInfoValidated),
+      isQualified: getBoolean(isQualified)
     };
   };
 

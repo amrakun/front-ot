@@ -21,6 +21,7 @@ class Register extends BaseForm {
 
   handleSubmit(e) {
     e.preventDefault();
+
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.props.register(values);
@@ -30,6 +31,7 @@ class Register extends BaseForm {
 
   checkPassword(rule, value, callback) {
     const form = this.props.form;
+
     if (value && value !== form.getFieldValue('password')) {
       callback('Two passwords that you enter is inconsistent!');
     } else {
@@ -39,6 +41,7 @@ class Register extends BaseForm {
 
   checkConfirm(rule, value, callback) {
     const form = this.props.form;
+
     if (value) {
       form.validateFields(['passwordConfirmation'], { force: true });
     }

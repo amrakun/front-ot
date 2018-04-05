@@ -139,6 +139,7 @@ class SubmitTender extends TenderForm {
                 'Please tick the boxes to confirm that you have agree with the statements'
               )}
             </strong>
+
             <CheckboxGroup
               options={agreementOptions(__)}
               className="horizontal"

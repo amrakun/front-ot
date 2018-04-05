@@ -7,12 +7,10 @@ import PropTypes from 'prop-types';
 import { gql, graphql } from 'react-apollo';
 
 const StatusContainer = props => {
-  const { companiesQuery } = props;
-
-  const generate = () => {
+  const generate = _ids => {
     exportFile({
       query: queries.companiesGeneratePrequalificationList,
-      variables: companiesQuery ? companiesQuery.variables : null
+      variables: { _ids }
     });
   };
 

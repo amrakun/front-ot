@@ -6,6 +6,7 @@ import { queries, mutations } from '../graphql';
 import { message, notification, Icon, Button } from 'antd';
 import { colors } from 'modules/common/constants';
 import { exportFile } from 'modules/common/components';
+import client from 'apolloClient';
 
 const notifyIfWantToSend = {
   message: 'Succesfully awarded',
@@ -111,6 +112,22 @@ class TenderContainer extends React.Component {
     }));
   }
 
+  getSuppliersByIds(_ids, callback) {
+    client
+      .query({
+        query: gql(queries.companies),
+        name: 'requestedCompaniesQuery',
+
+        variables: { _ids }
+      })
+      .then(response => {
+        callback && callback(response.data.companies);
+      })
+      .catch(error => {
+        message.error(error.message);
+      });
+  }
+
   render() {
     const {
       tenderDetailQuery,
@@ -147,6 +164,7 @@ class TenderContainer extends React.Component {
       award: this.award,
       downloadReport: this.downloadReport,
       sendRegretLetter: this.sendRegretLetter,
+      getSuppliersByIds: this.getSuppliersByIds,
       data: tenderResponses
     };
 

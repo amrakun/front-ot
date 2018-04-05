@@ -109,6 +109,7 @@ class ManagementTeam extends BaseForm {
           validation="email"
           initialValue={data.email}
           optional={optional}
+          canBeCryllic={false}
           control={<Input />}
         />
       </Card>

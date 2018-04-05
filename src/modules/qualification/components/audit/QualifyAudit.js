@@ -4,7 +4,7 @@ import SupplierProfile from './forms/SupplierProfile';
 import CoreHSEQ from './forms/CoreHSEQ';
 import HumanResourceManagement from './forms/HumanResourceManagement';
 import BusinessIntegriy from './forms/BusinessIntegriy';
-import { Panes } from 'modules/companies/components';
+import { Panes } from 'modules/common/components';
 
 class AuditForms extends Panes {
   render() {
@@ -23,35 +23,44 @@ class AuditForms extends Panes {
         tabPosition="left"
         className="supplier-forms"
       >
-        {this.renderPane(
-          '1',
-          'Supplier profile',
-          'basicInfo',
-          SupplierProfile,
-          { response: response.basicInfo, ...common }
-        )}
-        {this.renderPane('2', 'Core HSEQ', 'coreHseqInfo', CoreHSEQ, {
-          response: response.coreHseqInfo,
-          ...common
+        {this.renderPane({
+          key: 1,
+          title: 'Supplier profile',
+          name: 'basicInfo',
+          Component: SupplierProfile,
+          data: { response: response.basicInfo, ...common }
         })}
-        {this.renderPane(
-          '3',
-          'Human resource management',
-          'hrInfo',
-          HumanResourceManagement,
-          { response: response.hrInfo, ...common }
-        )}
-        {this.renderPane(
-          '4',
-          'Business integrity',
-          'businessInfo',
-          BusinessIntegriy,
-          {
+
+        {this.renderPane({
+          key: 2,
+          title: 'Core HSEQ',
+          name: 'coreHseqInfo',
+          Component: CoreHSEQ,
+          data: {
+            response: response.coreHseqInfo,
+            ...common
+          }
+        })}
+
+        {this.renderPane({
+          key: 3,
+          title: 'Human resource management',
+          name: 'hrInfo',
+          Component: HumanResourceManagement,
+          data: { response: response.hrInfo, ...common }
+        })}
+
+        {this.renderPane({
+          key: 4,
+          title: 'Business integrity',
+          name: 'businessInfo',
+          Component: BusinessIntegriy,
+          data: {
             response: response.businessInfo,
             exportFiles: exportFiles,
             ...common
           }
-        )}
+        })}
       </Tabs>
     );
   }

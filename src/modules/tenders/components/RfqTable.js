@@ -83,7 +83,8 @@ class RfqTable extends Component {
           {renderProductColumn({
             name: 'code',
             title: __(rpc.code),
-            isSupplier
+            isSupplier,
+            dataType: 'eightDigit'
           })}
           {renderProductColumn({
             name: 'purchaseRequestNumber',
@@ -100,7 +101,7 @@ class RfqTable extends Component {
           {renderProductColumn({
             name: 'quantity',
             title: __(rpc.quantity),
-            type: 'number',
+            type: 'float',
             isSupplier,
             dataType: 'float'
           })}
@@ -159,7 +160,8 @@ class RfqTable extends Component {
             name: 'file',
             title: __(rpc.picture),
             type: 'uploader',
-            isSupplier: !isSupplier
+            isSupplier: !isSupplier,
+            width: 200
           })}
         </Table>
       </div>

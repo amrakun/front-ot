@@ -12,6 +12,7 @@ class CoreHSEQ extends AuditFormsBase {
     return (
       <Form onSubmit={this.handleSubmit}>
         {this.renderIsQualifiedAlert('coreHseqInfo')}
+
         <Card title={__('Core HSEQ')}>
           {render('doesHaveHealthSafety')}
           {render('doesHaveDocumentedPolicy')}
@@ -24,6 +25,7 @@ class CoreHSEQ extends AuditFormsBase {
           {render('doesHaveLiabilityInsurance')}
           {render('doesHaveFormalProcessForHealth')}
         </Card>
+
         {this.renderGoBack()}
         {this.renderSubmit()}
       </Form>

@@ -11,6 +11,7 @@ class EmailEditor extends React.Component {
     super(props);
 
     const { contentBlocks, entityMap } = htmlToDraft(props.content);
+
     const contentState = ContentState.createFromBlockArray(
       contentBlocks,
       entityMap
@@ -25,6 +26,7 @@ class EmailEditor extends React.Component {
 
   onEditorStateChange(editorState) {
     this.setState({ editorState });
+
     this.props.onEmailContentChange(
       stateToHTML(editorState.getCurrentContent())
     );

@@ -17,6 +17,7 @@ const supplierPrequalification = `
       }
       isPrequalified
       isSentPrequalificationInfo
+      prequalifiedStatus
     }
   }
 `;
@@ -132,17 +133,16 @@ const feedbackFields = `
   supplierIds
   content
   createdDate
+  createdUserId
+  responses {
+    _id
+  }
 `;
 
 const feedbackDetail = `
   query feedbackDetail($_id: String!) {
     feedbackDetail(_id: $_id) {
-      _id
-      status
-      closeDate
-      supplierIds
-      content
-      createdDate
+      ${feedbackFields}
     }
   }
 `;
@@ -151,44 +151,45 @@ const feedbacks = `
   query feedbacks {
     feedbacks {
       ${feedbackFields}
-      responses {
-        _id
-      }
     }
+  }
+`;
+
+const feedbackResponseFields = `
+  _id
+  status
+  feedbackId
+  supplierId
+  totalEmploymentOt
+  totalEmploymentUmnugobi
+  employmentChangesAfter
+  numberOfEmployeeWorkToScopeNational
+  numberOfEmployeeWorkToScopeUmnugobi
+  procurementTotalSpend
+  procurementNationalSpend
+  procurementUmnugobiSpend
+  corporateSocial
+  otherStories
+  supplier {
+    basicInfo {
+      enName
+    }
+    contactInfo {
+      name
+      email
+      phone
+    }
+  }
+  createdDate
+  feedback {
+    status
   }
 `;
 
 const feedbackResponses = `
   query feedbackResponses($supplierName: String) {
     feedbackResponses(supplierName: $supplierName) {
-      _id
-      status
-      supplierId
-      employmentNumberBefore
-      employmentNumberNow
-      nationalSpendBefore
-      nationalSpendAfter
-      umnugobiSpendBefore
-      umnugobiSpendAfter
-      investment
-      trainings
-      corporateSocial
-      technologyImprovement
-      supplier {
-        basicInfo {
-          enName
-        }
-        contactInfo {
-          name
-          email
-          phone
-        }
-      }
-      feedback {
-        status
-        createdDate
-        closeDate
-      }
+      ${feedbackResponseFields}
     }
   }
 `;
@@ -204,38 +205,15 @@ const feedbackResponseDetail = `
       createdDate
       createdUserId
       responses {
-        _id
-        status
-        feedbackId
-        supplierId
-        employmentNumberBefore
-        employmentNumberNow
-        nationalSpendBefore
-        nationalSpendAfter
-        umnugobiSpendBefore
-        umnugobiSpendAfter
-        investment
-        trainings
-        corporateSocial
-        technologyImprovement
-        supplier {
-          basicInfo {
-            enName
-          }
-          contactInfo {
-            name
-            email
-            phone
-          }
-        }
+        ${feedbackResponseFields}
       }
     }
   }
 `;
 
 const feedbackResponsesExport = `
-  query feedbackResponsesExport {
-    feedbackResponsesExport
+  query feedbackResponsesExport($supplierName: String $supplierIds: [String]) {
+    feedbackResponsesExport(supplierName: $supplierName supplierIds: $supplierIds)
   }
 `;
 
@@ -569,8 +547,8 @@ const companiesGenerateDueDiligenceList = `
 `;
 
 const companiesGeneratePrequalificationList = `
-  query companiesGeneratePrequalificationList(${commonParams}) {
-    companiesGeneratePrequalificationList(${commonValues})
+  query companiesGeneratePrequalificationList($_ids: [String]) {
+    companiesGeneratePrequalificationList(_ids: $_ids)
   }
 `;
 

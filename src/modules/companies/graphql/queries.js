@@ -410,16 +410,16 @@ const feedback = `
         supplierResponse {
           _id
           status
-          employmentNumberBefore
-          employmentNumberNow
-          nationalSpendBefore
-          nationalSpendAfter
-          umnugobiSpendBefore
-          umnugobiSpendAfter
-          investment
-          trainings
+          totalEmploymentOt
+          totalEmploymentUmnugobi
+          employmentChangesAfter
+          numberOfEmployeeWorkToScopeNational
+          numberOfEmployeeWorkToScopeUmnugobi
+          procurementTotalSpend
+          procurementNationalSpend
+          procurementUmnugobiSpend
           corporateSocial
-          technologyImprovement
+          otherStories
         }
       }
     }

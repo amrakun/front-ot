@@ -27,6 +27,7 @@ class Dashboard extends React.Component {
     this.tenderType = 'eoi';
     this.isPrequalified = false;
     this.tierType = '';
+    this.tenderTypeAudits = 'desktop';
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onIsPrequalifiedChange = this.onIsPrequalifiedChange.bind(this);
@@ -204,10 +205,10 @@ class Dashboard extends React.Component {
               onChange={e =>
                 this.onInputChange('tenderTypeAudits', e.target.value)
               }
-              defaultValue={this.tenderType}
+              defaultValue={this.tenderTypeAudits}
             >
-              <Radio value="eoi">EOI</Radio>
-              <Radio value="rfq">RFQ</Radio>
+              <Radio value="desktop">Desktop</Radio>
+              <Radio value="physical">Physical</Radio>
             </Radio.Group>
 
             {this.renderButton(this.exportAudits)}

@@ -13,8 +13,9 @@ class ModalWrapper extends React.Component {
         title={__(title)}
         visible={visible}
         onCancel={hideModal}
-        width="80vh"
-        bodyStyle={{ maxHeight: '60vh', overflow: 'scroll' }}
+        width="80%"
+        style={{ top: 32 }}
+        bodyStyle={{ maxHeight: '80vh', overflow: 'scroll' }}
         footer={[
           <Button key="back" onClick={hideModal}>
             {__('Return')}

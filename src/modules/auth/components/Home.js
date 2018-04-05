@@ -21,15 +21,18 @@ const Home = (props, context) => {
             '/images/background.jpg'})`
         }}
       />
+
       <div className="content-wrapper">
         <div className="content">
           <div className="app-name">
             <strong>{__('Oyu')}</strong>
             <span>{__('Suppliers Database')}</span>
           </div>
+
           <Link to="/sign-in" className="home-btn">
             {__('Sign in')}
           </Link>
+
           <Link to="/register" className="home-btn-transparent">
             {__('Register as a supplier')}
           </Link>

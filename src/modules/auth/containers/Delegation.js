@@ -10,10 +10,6 @@ class DelegationContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      usersResult: []
-    };
-
     this.delegate = this.delegate.bind(this);
     this.searchUser = this.searchUser.bind(this);
   }
@@ -29,7 +25,7 @@ class DelegationContainer extends React.Component {
       });
   }
 
-  searchUser(searchValue) {
+  searchUser(searchValue, callback) {
     client
       .query({
         query: gql(queries.simpleUsers),
@@ -38,7 +34,7 @@ class DelegationContainer extends React.Component {
         variables: { search: searchValue }
       })
       .then(response => {
-        this.setState({ usersResult: response.data.users });
+        callback && callback(response.data.users);
       })
       .catch(error => {
         message.error(error.message);
@@ -46,13 +42,10 @@ class DelegationContainer extends React.Component {
   }
 
   render() {
-    const { usersResult } = this.state;
-
     const updatedProps = {
       ...this.props,
       delegate: this.delegate,
-      searchUser: this.searchUser,
-      usersResult: usersResult || []
+      searchUser: this.searchUser
     };
 
     return <Delegation {...updatedProps} />;

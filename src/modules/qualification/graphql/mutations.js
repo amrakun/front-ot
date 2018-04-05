@@ -76,30 +76,30 @@ const addFeedbackResponse = `
   mutation feedbackResponsesAdd(
     $feedbackId: String!
     $supplierId: String!
-    $employmentNumberBefore: Float!
-    $employmentNumberNow: Float!
-    $nationalSpendBefore: Float!
-    $nationalSpendAfter: Float!
-    $umnugobiSpendBefore: Float!
-    $umnugobiSpendAfter: Float!
-    $investment: String!
-    $trainings: String!
+    $totalEmploymentOt: Float!
+    $totalEmploymentUmnugobi: Float!
+    $employmentChangesAfter: Float!
+    $numberOfEmployeeWorkToScopeNational: Float!
+    $numberOfEmployeeWorkToScopeUmnugobi: Float!
+    $procurementTotalSpend: Float!
+    $procurementNationalSpend: Float!
+    $procurementUmnugobiSpend: Float!
     $corporateSocial: String!
-    $technologyImprovement: String!
+    $otherStories: String!
   ) {
     feedbackResponsesAdd(
       feedbackId: $feedbackId
       supplierId: $supplierId
-      employmentNumberBefore: $employmentNumberBefore
-      employmentNumberNow: $employmentNumberNow
-      nationalSpendBefore: $nationalSpendBefore
-      nationalSpendAfter: $nationalSpendAfter
-      umnugobiSpendBefore: $umnugobiSpendBefore
-      umnugobiSpendAfter: $umnugobiSpendAfter
-      investment: $investment
-      trainings: $trainings
+      totalEmploymentOt: $totalEmploymentOt
+      totalEmploymentUmnugobi: $totalEmploymentUmnugobi
+      employmentChangesAfter: $employmentChangesAfter
+      numberOfEmployeeWorkToScopeNational: $numberOfEmployeeWorkToScopeNational
+      numberOfEmployeeWorkToScopeUmnugobi: $numberOfEmployeeWorkToScopeUmnugobi
+      procurementTotalSpend: $procurementTotalSpend
+      procurementNationalSpend: $procurementNationalSpend
+      procurementUmnugobiSpend: $procurementUmnugobiSpend
       corporateSocial: $corporateSocial
-      technologyImprovement: $technologyImprovement
+      otherStories: $otherStories
     ) {
       _id
     }

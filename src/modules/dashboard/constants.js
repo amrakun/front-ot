@@ -27,4 +27,16 @@ const MODULES_TO_TEXT = [
   ['user-list', 'Settings - Manage users']
 ];
 
-export { labels, MODULES_TO_TEXT };
+const productCategoryLabels = {
+  a: 'Construction',
+  b: 'Energy',
+  c: 'Fixed plant & equipment',
+  d: 'Logistics',
+  e: 'Mining equipment',
+  f: 'MRO',
+  g: 'Product consumables',
+  h: 'Services',
+  x: 'Non contestable'
+};
+
+export { labels, MODULES_TO_TEXT, productCategoryLabels };

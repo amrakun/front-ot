@@ -30,6 +30,7 @@ class Tender extends Common {
     this.handleSendRegretLetters = this.handleSendRegretLetters.bind(this);
     this.setFilter = this.setFilter.bind(this);
     this.getTitle = this.getTitle.bind(this);
+    this.showRequestedSuppliers = this.showRequestedSuppliers.bind(this);
   }
 
   getPercent(requestedCount, count) {
@@ -41,6 +42,12 @@ class Tender extends Common {
     router.setParams(this.props.history, {
       filter: name
     });
+  }
+
+  showRequestedSuppliers(suppliers) {
+    router.removeParams(this.props.history, 'filter');
+    const requestedSuppliers = suppliers.map(supplier => ({ supplier }));
+    this.setState({ requestedSuppliers });
   }
 
   getTitle() {
@@ -227,7 +234,8 @@ class Tender extends Common {
       submittedCount,
       requestedCount,
       notInterestedCount,
-      notRespondedCount
+      notRespondedCount,
+      supplierIds
     } = tenderDetail;
 
     return (
@@ -238,6 +246,12 @@ class Tender extends Common {
             title="Requested"
             color={colors[3]}
             number={requestedCount}
+            onClick={() =>
+              this.props.getSuppliersByIds(
+                supplierIds,
+                this.showRequestedSuppliers
+              )
+            }
           />
         </Col>
         <Col key={2} lg={6} sm={12}>
@@ -292,15 +306,20 @@ class Tender extends Common {
       selectedCompanies,
       responseModal,
       regretLetterModal,
-      regretLetterContent
+      regretLetterContent,
+      requestedSuppliers
     } = this.state;
     const data = this.props.data || [];
     const tenderDetail = this.props.tenderDetail || {};
     const queryParams = this.props.queryParams || {};
     const { winnerId, sentRegretLetter, status } = tenderDetail;
 
-    const responseRows =
+    let responseRows =
       queryParams.filter === 'isNotResponded' ? notRespondedSuppliers : data;
+
+    if (!queryParams.filter && requestedSuppliers) {
+      responseRows = requestedSuppliers;
+    }
 
     const responseData = responseModal.data.map((row, index) => ({
       ...row,
@@ -390,7 +409,8 @@ Tender.propTypes = {
   sendRegretLetter: PropTypes.func,
   sentRegretLetter: PropTypes.boolean,
   regretLetterModalVisible: PropTypes.boolean,
-  notRespondedSuppliers: PropTypes.array
+  notRespondedSuppliers: PropTypes.array,
+  getSuppliersByIds: PropTypes.func
 };
 
 export default Tender;

@@ -30,12 +30,14 @@ class EoiTable extends Component {
           title: __(rpc.document),
           isSupplier
         })}
+
         {renderProductColumn({
           name: 'isSubmitted',
           title: __(rpc.isSubmitted),
           type: 'checkbox',
           isSupplier: !isSupplier
         })}
+
         {renderProductColumn({
           name: 'file',
           title: __('Upload'),
@@ -43,6 +45,7 @@ class EoiTable extends Component {
           isSupplier: !isSupplier,
           widt: '100px'
         })}
+
         {renderProductColumn({
           name: 'notes',
           title: __(rpc.notes),

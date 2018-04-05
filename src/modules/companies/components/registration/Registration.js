@@ -6,9 +6,9 @@ import ManagementForm from './forms/ManagementTeam';
 import ShareholderForm from './forms/Shareholder';
 import ProductsForm from './forms/Products';
 import GroupForm from './forms/Group';
-import Panes from '../Panes';
 import { Tabs } from 'antd';
 import { HelpModal } from 'modules/common/components';
+import { Panes } from 'modules/common/components';
 
 class RegistrationForms extends Panes {
   render() {
@@ -31,43 +31,52 @@ class RegistrationForms extends Panes {
           tabPosition="left"
           className={`supplier-forms ${viewMode && 'disabled-inputs'}`}
         >
-          {this.renderPane(
-            '1',
-            'Company information',
-            'basicInfo',
-            CompanyInfoForm,
-            { isSentRegistrationInfo, exportForm }
-          )}
-          {this.renderPane('2', 'Contact details', 'contactInfo', ContactForm, {
-            basicInfo: basicInfo
+          {this.renderPane({
+            key: 1,
+            title: 'Company information',
+            name: 'basicInfo',
+            Component: CompanyInfoForm,
+            data: { isSentRegistrationInfo, exportForm }
+          })}
+          {this.renderPane({
+            key: 2,
+            title: 'Contact details',
+            name: 'contactInfo',
+            Component: ContactForm,
+            data: { basicInfo: basicInfo }
           })}
 
           {!soleTrader &&
-            this.renderPane(
-              '3',
-              'Management Team',
-              'managementTeamInfo',
-              ManagementForm
-            )}
+            this.renderPane({
+              key: 3,
+              title: 'Management Team',
+              name: 'managementTeamInfo',
+              Component: ManagementForm
+            })}
 
           {!soleTrader &&
-            this.renderPane(
-              '4',
-              'Company shareholder information',
-              'shareholderInfo',
-              ShareholderForm
-            )}
+            this.renderPane({
+              key: 4,
+              title: 'Company shareholder information',
+              name: 'shareholderInfo',
+              Component: ShareholderForm
+            })}
 
           {!soleTrader &&
-            this.renderPane('5', 'Group information', 'groupInfo', GroupForm)}
+            this.renderPane({
+              key: 5,
+              title: 'Group information',
+              name: 'groupInfo',
+              Component: GroupForm
+            })}
 
-          {this.renderPane(
-            soleTrader ? '3' : '6',
-            'Products & services',
-            'productsInfo',
-            ProductsForm,
-            { send }
-          )}
+          {this.renderPane({
+            key: soleTrader ? 3 : 6,
+            title: 'Products & services',
+            name: 'productsInfo',
+            Component: ProductsForm,
+            data: { send }
+          })}
         </Tabs>
       </div>
     );

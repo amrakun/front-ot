@@ -160,7 +160,7 @@ class TenderForm extends BaseForm {
   }
 
   renderProductColumn(props) {
-    const { name, title, type, isSupplier, dataType } = props;
+    const { name, title, type, isSupplier, dataType, width = 140 } = props;
 
     const disabled = isSupplier;
 
@@ -171,10 +171,13 @@ class TenderForm extends BaseForm {
         defaultValue: record[name],
         disabled,
         type: type,
-        onChange: e => this.onProductInputChange(e, name, record.key, dataType),
-        placeholder:
-          dataType === 'eightDigit' ? 'Must be less than 8 digits' : ''
+        onChange: e => this.onProductInputChange(e, name, record.key, dataType)
       };
+
+      if (dataType === 'eightDigit') {
+        inputProps.placeholder = 'Must be less than 8 digits';
+        inputProps.maxLength = '8';
+      }
 
       let control = <Input {...inputProps} />;
 
@@ -209,7 +212,7 @@ class TenderForm extends BaseForm {
         key={name}
         dataIndex={name}
         render={render}
-        width={140}
+        width={width}
       />
     );
   }

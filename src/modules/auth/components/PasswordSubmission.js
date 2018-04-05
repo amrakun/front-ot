@@ -21,6 +21,7 @@ class PasswordSubmission extends BaseForm {
 
   handleSubmit(e) {
     e.preventDefault();
+
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.props.submit(values);
@@ -31,6 +32,7 @@ class PasswordSubmission extends BaseForm {
   checkPassword(rule, value, callback) {
     const form = this.props.form;
     const { __ } = this.context;
+
     if (value && value !== form.getFieldValue('password')) {
       callback(__('Two passwords that you enter is inconsistent!'));
     } else {
@@ -40,10 +42,35 @@ class PasswordSubmission extends BaseForm {
 
   checkConfirm(rule, value, callback) {
     const form = this.props.form;
+
     if (value) {
       form.validateFields(['passwordConfirmation'], { force: true });
     }
     callback();
+  }
+
+  renderNewPasswordAlert() {
+    const { __ } = this.context;
+
+    return (
+      <Alert
+        description={__('Please enter your new password')}
+        type="success"
+      />
+    );
+  }
+
+  renderEmailConfirmedAlert() {
+    const { __ } = this.context;
+
+    return (
+      <Alert
+        description={__(
+          'Email confirmed successfully! Please enter your password'
+        )}
+        type="success"
+      />
+    );
   }
 
   render() {
@@ -53,19 +80,9 @@ class PasswordSubmission extends BaseForm {
     return (
       <div className="center-content">
         <Card className="login-card" bordered={false}>
-          {reset ? (
-            <Alert
-              description={__('Please enter your new password')}
-              type="success"
-            />
-          ) : (
-            <Alert
-              description={__(
-                'Email confirmed successfully! Please enter your password'
-              )}
-              type="success"
-            />
-          )}
+          {reset
+            ? this.renderNewPasswordAlert()
+            : this.renderEmailConfirmedAlert()}
 
           <Form onSubmit={this.handleSubmit} className="margin">
             <Field
@@ -80,6 +97,7 @@ class PasswordSubmission extends BaseForm {
                 />
               }
             />
+
             <Field
               name="passwordConfirmation"
               layout={noLabelLayout}
@@ -92,6 +110,7 @@ class PasswordSubmission extends BaseForm {
                 />
               }
             />
+
             <Button
               type="primary"
               htmlType="submit"
@@ -100,6 +119,7 @@ class PasswordSubmission extends BaseForm {
             >
               {reset ? __('Reset password') : __('Register')}
             </Button>
+
             {!reset && (
               <div>
                 {__('Already registered?')}{' '}

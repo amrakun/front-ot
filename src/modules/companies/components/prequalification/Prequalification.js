@@ -5,7 +5,7 @@ import FinancialForm from './forms/Financial';
 import EnvironmentalForm from './forms/Environmental';
 import BusinessForm from './forms/Business';
 import HealthForm from './forms/Health';
-import Panes from '../Panes';
+import { Panes } from 'modules/common/components';
 
 class PrequalificationForms extends Panes {
   componentDidMount() {
@@ -36,39 +36,42 @@ class PrequalificationForms extends Panes {
         tabPosition="left"
         className="supplier-forms"
       >
-        {this.renderPane(
-          '1',
-          'Financial information',
-          'financialInfo',
-          FinancialForm,
-          { disabled, prequalifiedStatus }
-        )}
-        {this.renderPane(
-          '2',
-          'Business integrity & human resource',
-          'businessInfo',
-          BusinessForm,
-          { disabled, prequalifiedStatus }
-        )}
-        {this.renderPane(
-          '3',
-          'Environmental management',
-          'environmentalInfo',
-          EnvironmentalForm,
-          { disabled, prequalifiedStatus }
-        )}
-        {this.renderPane(
-          '4',
-          'Health & safety management system',
-          'healthInfo',
-          HealthForm,
-          {
+        {this.renderPane({
+          key: 1,
+          title: 'Financial information',
+          name: 'financialInfo',
+          Component: FinancialForm,
+          data: { disabled, prequalifiedStatus }
+        })}
+
+        {this.renderPane({
+          key: 2,
+          title: 'Business integrity & human resource',
+          name: 'businessInfo',
+          Component: BusinessForm,
+          data: { disabled, prequalifiedStatus }
+        })}
+
+        {this.renderPane({
+          key: 3,
+          title: 'Environmental management',
+          name: 'environmentalInfo',
+          Component: EnvironmentalForm,
+          data: { disabled, prequalifiedStatus }
+        })}
+
+        {this.renderPane({
+          key: 4,
+          title: 'Health & safety management system',
+          name: 'healthInfo',
+          Component: HealthForm,
+          data: {
             productsInfo: productsInfo,
             send: send,
             disabled,
             prequalifiedStatus
           }
-        )}
+        })}
       </Tabs>
     );
   }

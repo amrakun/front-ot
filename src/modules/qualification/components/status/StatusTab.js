@@ -119,7 +119,12 @@ class StatusTab extends BaseForm {
       prequalifySupplier,
       enableSupplierForm
     } = this.props;
-    const { enName, isPrequalified, isSentPrequalificationInfo } = statusData;
+    const {
+      enName,
+      isPrequalified,
+      isSentPrequalificationInfo,
+      tabQualified
+    } = statusData;
     const { checkAll } = this.state;
 
     return (
@@ -133,6 +138,16 @@ class StatusTab extends BaseForm {
             showIcon
           />
         )}
+
+        <Alert
+          message={`${title} is ${
+            tabQualified ? 'qualified' : 'not qualified'
+          }`}
+          className="margin"
+          type={tabQualified ? 'success' : 'error'}
+          style={{ marginBottom: '16px' }}
+          showIcon
+        />
 
         {isPrequalified === false && (
           <Alert

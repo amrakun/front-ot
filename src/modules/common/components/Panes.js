@@ -21,17 +21,20 @@ export default class Panes extends React.Component {
   nextTab() {
     const { currentTabKey } = this.state;
     const incerementedKeyInt = parseInt(currentTabKey, 10) + 1;
+
     this.moveToTab(incerementedKeyInt.toString());
   }
 
   previousTab() {
     const { currentTabKey } = this.state;
     const decerementedKeyInt = parseInt(currentTabKey, 10) - 1;
+
     this.moveToTab(decerementedKeyInt.toString());
   }
 
   moveToTab(currentTabKey) {
     this.setState({ currentTabKey });
+
     window.scrollTo(0, 0);
   }
 
@@ -43,7 +46,7 @@ export default class Panes extends React.Component {
     }
   }
 
-  renderPane(key, title, name, Component, extraProps) {
+  renderPane({ key, title, name, Component, data }) {
     const company = this.props.company || {};
     const save = this.props.save || {};
     const { __ } = this.context;
@@ -58,7 +61,7 @@ export default class Panes extends React.Component {
       title: title,
       nextTab: this.nextTab,
       previousTab: this.previousTab,
-      ...extraProps
+      ...data
     };
 
     return (
@@ -69,7 +72,7 @@ export default class Panes extends React.Component {
             {this.isEmpty(company[name]) ? '' : <Icon type="check" />}
           </span>
         }
-        key={key}
+        key={key.toString()}
       >
         <Component {...componenetProps} />
       </Tabs.TabPane>

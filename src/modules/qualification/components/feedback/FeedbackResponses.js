@@ -6,12 +6,14 @@ import { dateFormat } from 'modules/common/constants';
 import moment from 'moment';
 import { Search } from 'modules/common/components';
 import { Paginator } from 'modules/common/components';
+import { labels } from './constants';
 
 class FeedbackResponses extends React.Component {
   constructor(props) {
     super(props);
 
     this.renderExpandedRow = this.renderExpandedRow.bind(this);
+    this.handleResponseSelect = this.handleResponseSelect.bind(this);
   }
 
   componentDidUpdate() {
@@ -24,23 +26,43 @@ class FeedbackResponses extends React.Component {
     }
   }
 
+  handleResponseSelect(selectedRowKeys, selectedRows) {
+    this.selectedSuppliers = selectedRows.map(response => response._id);
+  }
+
   extraColumns() {
     return [
       {
-        title: 'Investment',
-        dataIndex: 'investment'
+        title: labels.totalEmploymentOt,
+        dataIndex: 'totalEmploymentOt'
       },
       {
-        title: 'Trainings',
-        dataIndex: 'trainings'
+        title: labels.totalEmploymentUmnugobi,
+        dataIndex: 'totalEmploymentUmnugobi'
       },
       {
-        title: 'Corporate social responsibility',
-        dataIndex: 'corporateSocial'
+        title: labels.employmentChangesAfter,
+        dataIndex: 'employmentChangesAfter'
       },
       {
-        title: 'Technoloogy Improvements',
-        dataIndex: 'technologyImprovement'
+        title: labels.numberOfEmployeeWorkToScopeNational,
+        dataIndex: 'numberOfEmployeeWorkToScopeNational'
+      },
+      {
+        title: labels.numberOfEmployeeWorkToScopeUmnugobi,
+        dataIndex: 'totalEmploymenumberOfEmployeeWorkToScopeUmnugobintOt'
+      },
+      {
+        title: labels.procurementTotalSpend,
+        dataIndex: 'procurementTotalSpend'
+      },
+      {
+        title: labels.procurementNationalSpend,
+        dataIndex: 'procurementNationalSpend'
+      },
+      {
+        title: labels.procurementUmnugobiSpend,
+        dataIndex: 'procurementUmnugobiSpend'
       }
     ];
   }
@@ -66,30 +88,6 @@ class FeedbackResponses extends React.Component {
       {
         title: 'Supplier',
         dataIndex: 'supplier.basicInfo.enName'
-      },
-      {
-        title: 'Employment before',
-        dataIndex: 'employmentNumberBefore'
-      },
-      {
-        title: 'Employment now',
-        dataIndex: 'employmentNumberNow'
-      },
-      {
-        title: 'National spend before',
-        dataIndex: 'nationalSpendBefore'
-      },
-      {
-        title: 'National spend after',
-        dataIndex: 'nationalSpendAfter'
-      },
-      {
-        title: 'Umnugobi spend before',
-        dataIndex: 'umnugobiSpendBefore'
-      },
-      {
-        title: 'Umnugobi spend after',
-        dataIndex: 'umnugobiSpendAfter'
       },
       {
         title: 'Contact person',
@@ -139,13 +137,13 @@ class FeedbackResponses extends React.Component {
   }
 
   render() {
-    const { loading, onChange, exportResponses } = this.props;
+    const { loading, exportResponses } = this.props;
 
     return (
       <Card title="Success feedback responses">
         <div className="table-operations">
           <Search placeholder="Supplier name" />
-          <Button onClick={exportResponses}>
+          <Button onClick={() => exportResponses(this.selectedSuppliers)}>
             Export to excel <Icon type="file-excel" />
           </Button>
         </div>
@@ -156,11 +154,11 @@ class FeedbackResponses extends React.Component {
           dataSource={this.getDiscretedRows()}
           pagination={false}
           loading={loading}
-          scroll={{ x: 2000 }}
+          scroll={{ x: 1000 }}
           expandedRowRender={this.renderExpandedRow}
-          onChange={(pagination, filters, sorter) =>
-            onChange(pagination, filters, sorter)
-          }
+          rowSelection={{
+            onChange: this.handleResponseSelect
+          }}
         />
         <Paginator total={10} />
       </Card>
