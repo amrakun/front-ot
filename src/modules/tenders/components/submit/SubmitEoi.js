@@ -111,7 +111,7 @@ class SubmitTender extends TenderForm {
           )}
 
           <Modal
-            title="Confirmation"
+            title={__('Confirmation')}
             visible={agreementModalVisible}
             onCancel={this.toggleAgreementModal}
             footer={[
@@ -135,11 +135,12 @@ class SubmitTender extends TenderForm {
             ]}
           >
             <strong>
-              Please tick the boxes to confirm that you have agree with the
-              statements
+              {__(
+                'Please tick the boxes to confirm that you have agree with the statements'
+              )}
             </strong>
             <CheckboxGroup
-              options={agreementOptions}
+              options={agreementOptions(__)}
               className="horizontal"
               onChange={this.handleAgreementChange}
             />

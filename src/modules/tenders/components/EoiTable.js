@@ -7,8 +7,15 @@ const rpc = eoiProductsColumns;
 
 class EoiTable extends Component {
   render() {
-    const { products, renderProductColumn, isSupplier = true } = this.props;
     const { __ } = this.context;
+    const { renderProductColumn, isSupplier = true } = this.props;
+
+    let { products } = this.props;
+
+    products = products.map(product => {
+      product.document = __(product.document);
+      return product;
+    });
 
     return (
       <Table

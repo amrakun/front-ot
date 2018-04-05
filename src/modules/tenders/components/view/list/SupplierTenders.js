@@ -100,8 +100,8 @@ class SupplierTenders extends Tenders {
               key={1}
               title={__('Are you sure you are not interested？')}
               placement="bottomRight"
-              okText="Yes"
-              cancelText="No"
+              okText={__('Yes')}
+              cancelText={__('No')}
               onConfirm={() => notInterested(_id)}
             >
               <a>{__('Not interested')}</a>
