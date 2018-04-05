@@ -70,6 +70,24 @@
   "here": "Энд дарж",
   "Expression Of Interest": "Оролцох Сонирхолоо Илэрхийлэх",
   "Request For Quotation": "Үнийн саналын хүсэлт",
+  "Please tick the boxes to confirm that you have agree with the statements":
+    "Та доорхи заалтуудыг уншиж танилцан, зөвшөөрч байвал дөрвөлжин доторхийг тэмдэглэх эсхүл будна уу",
+  "1. We have read and agreed to Oyu Tolgoi's (I) \"Way we work\" and \"Supplier Code of conduct\". You can visit":
+    "Оюу Толгой ХХК-ийн (i) 'Бидний ажиллах арга барил' болон (ii) 'Ханган нийлүүлэгчийн ёс зүйн дүрэм' -ийг уншиж танилцан бид зөвшөөрч байна.",
+  "here ": "Эдгээр бичиг баримтуудыг",
+  "to view these documents and more": "хаягаар орон уншиж танилцах боломжтой.",
+  "2. We understand that the Company reserves the right to refuse any document(s) which is incomplete and/or submitted after the specified date.":
+    "Оюу Толгой ХХК нь бүрэн бус буюу/ болон хугацаа хоцорч ирүүлсэн аливаа бичиг баримтуудыг хүлээн авахаас татгалзах эрхтэй.",
+  "3. We understand the Company will not be responsible for any costs associated with preparing and submitting an Expression of Interest to the Company.":
+    "Оюу Толгой ХХК нь бичиг баримтуудыг бэлтгэх, ирүүлэхтэй холбогдох аливаа зардлыг хариуцахгүй гэдгийг бид ойлгон зөвшөөрч байна. ",
+  "4. We understand the Company is only seeking Expression of Interest from potential suppliers and makes no representation or promise in relation to procuring work from a supplier or suppliers.":
+    "Оюу Толгой ХХК нь \"Оролцох сонирхлоо илэрхийлэх хүсэлт\"-ийг боломжит ханган нийлүүлэгчдээс хүлээн авч байгаа бөгөөд тухайн ханган нийлүүлэгч, нийлүүлэгчдээс худалдан авалт хийнэ хэмээсэн мэдэгдэл, эсхүл амлалт өгч буй явдал биш гэдгийг бид ойлгон зөвшөөрч байна. ",
+  "5. Hereby we confirm the submitted information and document(s) are true and authentic and that we understand any false and illegal information and document(s) will result in corrective actions as per related Mongolian laws and Company's policies":
+    "Хавсарган ирүүлсэн бичиг баримт(ууд) нь үнэн зөв, хүчин төгөлдөр бөгөөд аливаа худал мэдээлэл болон хууль бус бичиг баримт(ууд) ирүүлсэн тохиолдолд Монгол Улсын хууль дүрэм, Компанийн дотоод бодлого журмын дагуу арга хэмжээ авагдана гэдгийг Бид ойлгон хүлээн зөвшөөрч байна ",
+  "Scope specific experience": "Тодорхой туршлагын хүрээ",
+  "Customer reference /atleast 2/": "Харилцагчийн тодорхойлолт (2-оос доошгүй)",
+  "Special licences if applicable (copy)":
+    "Тусгай лиценз зөвшөөрлүүд (хуулбар)",
   "Your form is incomplete": "Таны бөглөсөн форм дутуу байна",
   "Your excel import is incomplete":
     "Таны хуулж оруулсан файл дутуу бөглөгдсөн байна"

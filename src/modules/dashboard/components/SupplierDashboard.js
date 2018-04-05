@@ -31,9 +31,9 @@ class Dashboard extends React.Component {
       isOutstanding
     } = prequalifiedStatus;
 
-    if (isApproved) return 'Approved';
+    if (isApproved) return __('Approved');
 
-    if (isExpired) return 'Expired';
+    if (isExpired) return __('Expired');
 
     if (isFailed)
       return (
@@ -46,7 +46,7 @@ class Dashboard extends React.Component {
 
     if (isOutstanding) return 'Outstanding';
 
-    return 'Not complete';
+    return __('Not complete');
   }
 
   render() {
