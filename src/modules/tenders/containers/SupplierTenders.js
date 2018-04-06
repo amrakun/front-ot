@@ -22,7 +22,7 @@ class TendersContainer extends React.Component {
       type,
       tendersCountQuery
     } = this.props;
-    const { currentUser } = this.context;
+    const { __, currentUser } = this.context;
 
     if (tendersTableQuery.loading || tendersCountQuery.loading) {
       return <SupplierTenders loading={true} />;
@@ -37,7 +37,7 @@ class TendersContainer extends React.Component {
         }
       })
         .then(() => {
-          message.success('Not interested tender has been removed');
+          message.success(__('Not interested tender has been removed'));
           tendersTableQuery.refetch();
         })
         .catch(error => {
@@ -74,6 +74,7 @@ TendersContainer.propTypes = {
 };
 
 TendersContainer.contextTypes = {
+  __: PropTypes.func,
   currentUser: PropTypes.object
 };
 
