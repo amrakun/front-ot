@@ -212,8 +212,8 @@ const feedbackResponseDetail = `
 `;
 
 const feedbackResponsesExport = `
-  query feedbackResponsesExport($supplierName: String $supplierIds: [String]) {
-    feedbackResponsesExport(supplierName: $supplierName supplierIds: $supplierIds)
+  query feedbackResponsesExport($supplierName: String $responseIds: [String]) {
+    feedbackResponsesExport(supplierName: $supplierName responseIds: $responseIds)
   }
 `;
 
