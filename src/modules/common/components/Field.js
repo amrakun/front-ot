@@ -56,6 +56,8 @@ export default class Field extends React.Component {
       name,
       control,
       optional,
+      labelIgnoreIndex,
+      labelIndex,
       validation,
       isVisible = true,
       hasFeedback = true,
@@ -114,7 +116,12 @@ export default class Field extends React.Component {
     }
 
     if (label && typeof label !== 'object') {
-      label = __(label);
+      if (labelIgnoreIndex) {
+        label = label.replace(/[0-9]/g, '');
+        label = __(label) + ' ' + labelIndex;
+      } else {
+        label = __(label);
+      }
     }
 
     const _description = description ? __(description) : description;

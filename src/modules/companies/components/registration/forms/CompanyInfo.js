@@ -92,11 +92,11 @@ class CompanyInfo extends BaseForm {
         <Form>
           {isSentRegistrationInfo && (
             <Alert
-              message="Registration complete"
+              message={__('Registration complete')}
               description={
                 <span>
-                  Please click <a onClick={exportForm}>here</a> to download your
-                  registration form
+                  {__('Please click')} <a onClick={exportForm}> {__('here')}</a>{' '}
+                  {__('to download your registration form')}
                 </span>
               }
               type="success"

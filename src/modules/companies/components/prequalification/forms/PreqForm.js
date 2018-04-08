@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Select, Input, Card, Alert } from 'antd';
 import { labels, descriptions, booleanData } from '../constants';
 import { BaseForm, Uploader } from 'modules/common/components';
@@ -16,14 +17,15 @@ class PreqForm extends BaseForm {
   }
 
   renderStatus(name) {
+    const { __ } = this.context;
     const { prequalifiedStatus } = this.props;
     const qualified = prequalifiedStatus[name];
 
     return (
       <Alert
-        message={`${statusTabs[name]} is ${
-          qualified ? 'qualified' : 'not qualified'
-        }`}
+        message={__(
+          `${statusTabs[name]} is ${qualified ? 'qualified' : 'not qualified'}`
+        )}
         type={qualified ? 'success' : 'error'}
         style={{ marginBottom: '16px' }}
         showIcon
@@ -85,5 +87,9 @@ class PreqForm extends BaseForm {
     });
   }
 }
+
+PreqForm.contextTypes = {
+  __: PropTypes.func
+};
 
 export default PreqForm;
