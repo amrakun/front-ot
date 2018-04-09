@@ -3,6 +3,8 @@
 import React from 'react';
 
 export function agreementOptions(__) {
+  if (!__) __ = () => {};
+
   const data = [
     {
       label: (
