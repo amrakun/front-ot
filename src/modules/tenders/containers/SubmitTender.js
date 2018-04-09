@@ -22,6 +22,7 @@ const PublishContainer = (
     return <Loading />;
   }
 
+  const { __ } = context;
   const tenderDetail = tenderDetailQuery.tenderDetailSupplier || {};
   const tenderResponseByUser = tenderResponseByUserQuery.tenderResponseByUser;
 
@@ -34,7 +35,7 @@ const PublishContainer = (
       variables: { tenderId: tenderDetail._id, ...doc }
     })
       .then(() => {
-        message.success('Successfully saved a tender!');
+        message.success(__('Successfully saved a tender!'));
         tenderResponseByUserQuery.refetch();
         if (shouldSend) send(doc.tenderId);
         else redirect(doc.tenderId);
@@ -46,6 +47,7 @@ const PublishContainer = (
 
   const send = tenderId => {
     const { currentUser } = context;
+
     tenderResponsesSend({
       variables: {
         tenderId: tenderDetail._id,
@@ -53,11 +55,11 @@ const PublishContainer = (
       }
     })
       .then(() => {
-        message.success('Successfully submitted a tender!');
+        message.success(__('Successfully submitted a tender!'));
         redirect(tenderId);
       })
       .catch(() => {
-        message.error('Required inputs missing');
+        message.error(__('Required inputs missing'));
       });
   };
 
@@ -97,7 +99,8 @@ PublishContainer.propTypes = {
 };
 
 PublishContainer.contextTypes = {
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
+  __: PropTypes.func
 };
 
 export default compose(
