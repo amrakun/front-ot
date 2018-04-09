@@ -91,5 +91,7 @@
   "Your form is incomplete": "Таны бөглөсөн форм дутуу байна",
   "Your excel import is incomplete":
     "Таны хуулж оруулсан файл дутуу бөглөгдсөн байна",
-  "Not interested tender has been removed": "Тендерийн хүсэлтийг татгалзлаа"
+  "Not interested tender has been removed": "Тендерийн хүсэлтийг татгалзлаа",
+  "Successfully saved a tender!": "Тендер амжилттай хадгалагдлаа!",
+  "Successfully submitted a tender!": "Тендер амжилттай нэмэгдлээ!"
 }
