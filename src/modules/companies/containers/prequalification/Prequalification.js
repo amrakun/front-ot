@@ -6,7 +6,7 @@ import { PrequalificationForms } from '../../components';
 import { Loading } from 'modules/common/components';
 import { message, notification, Icon } from 'antd';
 
-const PrequalificationContainer = props => {
+const PrequalificationContainer = (props, { __ }) => {
   let { companyByUserQuery } = props;
 
   if (companyByUserQuery.loading) {
@@ -39,14 +39,16 @@ const PrequalificationContainer = props => {
           if (name === 'healthInfo') {
             formsComplete
               ? send()
-              : message.error('Please complete all forms before submitting');
+              : message.error(
+                  __('Please complete all forms before submitting')
+                );
           }
         })
         .catch(error => {
           message.error(error.message);
         });
     } else {
-      message.warning('You have already sent your pre-qualification info');
+      message.warning(__('You have already sent your pre-qualification info'));
     }
   };
 
@@ -56,9 +58,10 @@ const PrequalificationContainer = props => {
     sendToBuyer()
       .then(() => {
         notification.open({
-          message: 'Done!',
-          description:
-            'You have successfully submitted your pre-qualification form.',
+          message: __('Done!'),
+          description: __(
+            'You have successfully submitted your pre-qualification form.'
+          ),
           icon: <Icon type="smile" style={{ color: 'rgb(0,153,168)' }} />,
           duration: 10
         });
@@ -86,7 +89,8 @@ PrequalificationContainer.propTypes = {
 };
 
 PrequalificationContainer.contextTypes = {
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
+  __: PropTypes.func
 };
 
 export default compose(

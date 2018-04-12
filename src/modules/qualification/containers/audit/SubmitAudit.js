@@ -59,6 +59,7 @@ const SubmitAuditContainer = (props, context) => {
 
   const send = () => {
     const { history } = props;
+    const { __ } = context;
 
     sendResponse({
       variables: {
@@ -67,7 +68,7 @@ const SubmitAuditContainer = (props, context) => {
       }
     })
       .then(() => {
-        message.success('Successfully sent your response!');
+        message.success(__('Successfully sent your response!'));
         history.push('/qualification?refetch');
       })
       .catch(error => {
@@ -96,7 +97,8 @@ SubmitAuditContainer.propTypes = {
 };
 
 SubmitAuditContainer.contextTypes = {
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
+  __: PropTypes.func
 };
 
 export default compose(

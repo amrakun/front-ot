@@ -61,7 +61,7 @@ const RegistrationContainer = (props, { __ }) => {
         if (name === 'productsInfo') {
           formsComplete
             ? send(hasFilledBefore)
-            : message.error('Please complete all forms before submitting');
+            : message.error(__('Please complete all forms before submitting'));
         }
       })
       .catch(error => {

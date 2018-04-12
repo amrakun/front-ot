@@ -6,7 +6,7 @@ import { Certificate } from '../../components';
 import { message } from 'antd';
 import { Loading } from 'modules/common/components';
 
-const RegistrationContainer = props => {
+const RegistrationContainer = (props, { __ }) => {
   const { companyByUserQuery } = props;
 
   if (companyByUserQuery.loading) {
@@ -19,7 +19,7 @@ const RegistrationContainer = props => {
     certificateInfoEdit({ variables: { certificateInfo: doc } })
       .then(() => {
         companyByUserQuery.refetch();
-        message.success('Succesfully saved');
+        message.success(__('Succesfully saved'));
         history.push('/');
       })
       .catch(error => {
@@ -40,6 +40,10 @@ const RegistrationContainer = props => {
 
 RegistrationContainer.propTypes = {
   companyByUserQuery: PropTypes.object
+};
+
+RegistrationContainer.contextTypes = {
+  __: PropTypes.func
 };
 
 export default compose(
