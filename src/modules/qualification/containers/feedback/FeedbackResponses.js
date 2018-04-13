@@ -12,11 +12,11 @@ const TendersContainer = props => {
     return <FeedbackResponses loading={true} />;
   }
 
-  const exportResponses = supplierIds => {
+  const exportResponses = responseIds => {
     exportFile({
       query: queries.feedbackResponsesExport,
       variables: {
-        supplierIds
+        responseIds
       }
     });
   };

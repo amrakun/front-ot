@@ -34,7 +34,7 @@ class SubmitTender extends TenderForm {
   }
 
   handleAgreementChange(checkedList) {
-    checkedList.length === agreementOptions.length
+    checkedList.length === agreementOptions().length
       ? this.setState({ submitDisabled: false })
       : this.setState({ submitDisabled: true });
   }

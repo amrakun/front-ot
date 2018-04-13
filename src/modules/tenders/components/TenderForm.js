@@ -161,14 +161,19 @@ class TenderForm extends BaseForm {
 
   renderProductColumn(props) {
     const { name, title, type, isSupplier, dataType, width = 140 } = props;
+    const { __ } = this.context;
 
     const disabled = isSupplier;
 
     if (disabled && this.props.tenderCreation) return null;
 
     const render = (text, record) => {
+      let defaultValue = record[name];
+
+      if (name === 'document') defaultValue = __(record[name]);
+
       const inputProps = {
-        defaultValue: record[name],
+        defaultValue,
         disabled,
         type: type,
         onChange: e => this.onProductInputChange(e, name, record.key, dataType)

@@ -1,7 +1,7 @@
 const labels = {
   preqSuggestion: `Your prequalification information is not confirmed yet`,
 
-  difotSuggestion: `Your DIFOT should not be less than 75%`
+  difotSuggestion: `DIFOT (delivery in full, on time) is a measurement of logistics or delivery performance within a supply chain. It expressed as a percentage, and measures whether the product was able to deliver in the right quantity, at right place and within the expected time.`
 };
 
 const MODULES_TO_TEXT = [

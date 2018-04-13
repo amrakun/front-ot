@@ -22,6 +22,7 @@ const PublishContainer = (
     return <Loading />;
   }
 
+  const { __ } = context;
   const tenderDetail = tenderDetailQuery.tenderDetailSupplier || {};
   const tenderResponseByUser = tenderResponseByUserQuery.tenderResponseByUser;
 
@@ -47,6 +48,7 @@ const PublishContainer = (
 
   const send = tenderId => {
     const { currentUser, __ } = context;
+
     tenderResponsesSend({
       variables: {
         tenderId: tenderDetail._id,
@@ -58,7 +60,7 @@ const PublishContainer = (
         redirect(tenderId);
       })
       .catch(() => {
-        message.error('Required inputs missing');
+        message.error(__('Required inputs missing'));
       });
   };
 

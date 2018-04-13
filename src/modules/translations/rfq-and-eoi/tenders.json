@@ -34,7 +34,7 @@
   "view your audit invitations": "хүсэлтийг харна уу.",
   "Please click here": "Та",
   "to share your successes!":
-    "дарж байгууллагынхаа амжилтаас бидэнтэй хуваалцана уу!",
+    "байгууллагынхаа амжилтаас бидэнтэй хуваалцана уу!",
   "Apply to EOI": "Оролцох Сонирхлоо Илэрхийлэх",
   "Closed": "Хаалттай",
   "submitted": "Илгээсэн",
@@ -92,6 +92,7 @@
   "Your excel import is incomplete":
     "Таны хуулж оруулсан файл дутуу бөглөгдсөн байна",
   "Not interested tender has been removed": "Тендерийн хүсэлтийг татгалзлаа",
-  "Successfully saved a tender!": "Тендер амжилттай хадгалагдлаа!",
-  "Successfully submitted a tender!": "Тендер амжилттай нэмэгдлээ!"
+  "Successfully saved a tender!": "Амжилттай хадгалагдлаа!",
+  "Successfully submitted a tender!": "Амжилттай илгээгдлээ!",
+  "Required inputs missing": "Шаардлагатай талбарууд бөглөгдөөгүй байна"
 }
