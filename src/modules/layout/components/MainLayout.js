@@ -1,12 +1,13 @@
 import React from 'react';
 import Sidenav from './Sidenav';
 import Header from './Header';
-import { Layout, BackTop } from 'antd';
+import { LocaleProvider, Layout, BackTop } from 'antd';
 import { PropTypes } from 'prop-types';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
-import { T } from '../../common/components';
+import { T } from 'modules/common/components';
 import mn from 'react-intl/locale-data/mn';
 import en from 'react-intl/locale-data/en';
+import enUS from 'rc-pagination/lib/locale/en_US';
 import * as messages from 'modules/translations';
 
 addLocaleData([...mn, ...en]);
@@ -43,6 +44,20 @@ const mergedMessages = {
   ...messages.Auth.Profile,
   ...messages.Auth.ChangePassword,
   ...messages.Auth.SignIn
+};
+
+// antd custom component text
+const mn_Mn = {
+  locale: 'mn-MN',
+  Pagination: {
+    jump_to: 'Үсрэх',
+    items_per_page: '/ хуудас'
+  },
+  Table: {
+    filterConfirm: 'Тийм',
+    filterReset: 'Цуцлах',
+    emptyText: 'Мэдээлэл алга'
+  }
 };
 
 const withSidebar = { marginLeft: 230 };
@@ -147,6 +162,7 @@ class MainLayout extends React.Component {
   render() {
     const { currentUser, location } = this.props;
     const { collapsed, locale, messages } = this.state;
+    const antdLocale = locale === 'en' ? enUS : mn_Mn;
 
     const navProps = {
       collapsed: collapsed ? true : false,
@@ -162,27 +178,29 @@ class MainLayout extends React.Component {
     }
 
     return (
-      <IntlProvider locale={locale || 'en'} messages={messages}>
-        <Layout className={`main-wrapper ${locale}`}>
-          {currentUser && <Sidenav {...navProps} />}
-          <Layout className="main" style={layoutStyle}>
-            <Header
-              toggleLang={this.toggleLang}
-              langLabel={locale}
-              location={location}
-            />
-            <Content>
-              <InjectedComponent {...this.props} />
-              <BackTop />
-            </Content>
-            <Footer>
-              <T id="Oyu Tolgoi ©2018 All Rights Reserved">
-                Oyu Tolgoi 2018 All Rights Reserved
-              </T>
-            </Footer>
+      <LocaleProvider locale={antdLocale}>
+        <IntlProvider locale={locale || 'en'} messages={messages}>
+          <Layout className={`main-wrapper ${locale}`}>
+            {currentUser && <Sidenav {...navProps} />}
+            <Layout className="main" style={layoutStyle}>
+              <Header
+                toggleLang={this.toggleLang}
+                langLabel={locale}
+                location={location}
+              />
+              <Content>
+                <InjectedComponent {...this.props} />
+                <BackTop />
+              </Content>
+              <Footer>
+                <T id="Oyu Tolgoi ©2018 All Rights Reserved">
+                  Oyu Tolgoi 2018 All Rights Reserved
+                </T>
+              </Footer>
+            </Layout>
           </Layout>
-        </Layout>
-      </IntlProvider>
+        </IntlProvider>
+      </LocaleProvider>
     );
   }
 }

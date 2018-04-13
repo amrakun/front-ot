@@ -6,7 +6,7 @@ import { PasswordSubmission } from '../components';
 import { mutations } from '../graphql';
 import { message } from 'antd';
 
-const RegisterContainer = props => {
+const RegisterContainer = (props, { __ }) => {
   const { confirmRegistrationMutation, history, token } = props;
 
   const confirmRegistration = variables => {
@@ -17,7 +17,7 @@ const RegisterContainer = props => {
 
     confirmRegistrationMutation({ variables: updatedVariables })
       .then(() => {
-        message.success(`Welcome!`);
+        message.success(__('Welcome!'));
         history.push('/sign-in?confirmed');
       })
       .catch(error => {
@@ -37,6 +37,10 @@ RegisterContainer.propTypes = {
   confirmRegistrationMutation: PropTypes.func,
   history: PropTypes.object,
   token: PropTypes.string
+};
+
+RegisterContainer.contextTypes = {
+  __: PropTypes.func
 };
 
 export default withRouter(

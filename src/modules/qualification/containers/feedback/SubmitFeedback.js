@@ -8,6 +8,7 @@ import { Loading } from 'modules/common/components';
 
 class FeedbackContainer extends React.Component {
   render() {
+    const { __ } = this.context;
     const {
       feedbackDetailQuery,
       addFeedbackResponseMutation,
@@ -29,7 +30,7 @@ class FeedbackContainer extends React.Component {
         }
       })
         .then(() => {
-          message.success('Successfully submitted');
+          message.success(__('Successfully submitted'));
           history.push('/rfq-and-eoi?refetch');
         })
 
@@ -56,7 +57,8 @@ FeedbackContainer.propTypes = {
 };
 
 FeedbackContainer.contextTypes = {
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
+  __: PropTypes.func
 };
 
 export default compose(

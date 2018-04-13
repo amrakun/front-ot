@@ -75,14 +75,14 @@ class Dashboard extends React.Component {
       <div>
         {!isSentRegistrationInfo && (
           <Alert
-            message="Welcome!"
+            message={__('Welcome!')}
             description={
               <div>
-                Please fill in&nbsp;
+                {__('Please fill in')}{' '}
                 <Link to="/registration" className="sn">
-                  Registration
+                  {__('Registration')}{' '}
                 </Link>
-                &nbsp;form to be able to participate in tenders and EOI
+                {__('form to be able to participate in tenders and EOI')}
               </div>
             }
             type="info"

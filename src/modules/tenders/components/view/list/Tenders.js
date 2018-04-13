@@ -51,13 +51,15 @@ class Tenders extends React.Component {
   }
 
   renderTooltippedIcon(record) {
+    const { __ } = this.context;
+
     let { status, isParticipated, isSent } = record;
 
     if (isParticipated && status !== 'canceled') status = 'draft';
     if (isSent && status !== 'canceled') status = 'participated';
 
     return (
-      <Tooltip title={<span className="capitalize">{status}</span>}>
+      <Tooltip title={<span className="capitalize">{__(status)}</span>}>
         {this.renderIcon(status, {
           fontSize: '20px',
           lineHeight: '12px'
