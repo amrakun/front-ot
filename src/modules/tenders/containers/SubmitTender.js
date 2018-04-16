@@ -27,6 +27,7 @@ const PublishContainer = (
   const tenderResponseByUser = tenderResponseByUserQuery.tenderResponseByUser;
 
   const save = (doc, shouldSend) => {
+    const { __ } = context;
     const mutation = tenderResponseByUser
       ? tendersResponsesEdit
       : tendersResponsesAdd;
@@ -46,7 +47,7 @@ const PublishContainer = (
   };
 
   const send = tenderId => {
-    const { currentUser } = context;
+    const { currentUser, __ } = context;
 
     tenderResponsesSend({
       variables: {

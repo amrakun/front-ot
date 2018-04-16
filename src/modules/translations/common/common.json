@@ -85,5 +85,20 @@
   "Already sent": "Илгээгдсэн",
   "Help": "Тусламж",
   "Your registration has been successfully completed.  Oyu Tolgoi procurement team now has started the pre-qualification process on your company. A gap report will be sent once the pre-qualification process complete.":
-    "Та  мэдээллээ амжилттай бүртгэлээ. Оюу толгой худалдан авалтыэ баг таны гэрээ хэрэгжүүлэх чадварын урьдчилсан үнэлгээний мэдээллийг шалгах болно. Үүний дараа таны бүртгүүлсэн мэдээлэл шаардлага хангасан эсэх мэдээллийг хүргүүлэх болно."
+    "Та  мэдээллээ амжилттай бүртгэлээ. Оюу толгой худалдан авалтыэ баг таны гэрээ хэрэгжүүлэх чадварын урьдчилсан үнэлгээний мэдээллийг шалгах болно. Үүний дараа таны бүртгүүлсэн мэдээлэл шаардлага хангасан эсэх мэдээллийг хүргүүлэх болно.",
+  "Please fill in": "Та тендерт оролцохыг хүсвэл",
+  "form to be able to participate in tenders and EOI": "маягтыг бөглөнө үү",
+  "Please complete all forms before submitting": "Бүрэн гүйцэт бөглөнө үү.",
+  "You have already sent your pre-qualification info":
+    " Та гэрээ хэрэгжүүлэх урьдчилсан үнэлгээний мэдээллээ  илгээсэн байна.",
+  "draft": "ноороглосон",
+  "participated": "оролцсон",
+  "canceled": "цуцлагдсан",
+  "You have successfully submitted your pre-qualification form.":
+    "Таны гэрээ хэрэгжүүлэх урьдчилсан үнэлгээний мэдээлэл амжилттай илгээгдлээ.",
+  "Successfully submitted": "Амжилттай нэмэгдлээ",
+  "Successfully sent your response!":
+    "Таны хариу мэдэгдлийг амжилттай илгээлээ",
+  "Welcome!": "Тавтай морил!",
+  "Done!": "Болсон!"
 }
