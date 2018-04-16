@@ -194,13 +194,13 @@ class Dashboard extends React.Component {
           queryParams={queryParams}
         />
 
-        {/* <SupplierTenders
+        <SupplierTenders
           history={history}
           location={location}
           type="rfq"
           supplierId={currentUser.companyId}
           queryParams={queryParams}
-        /> */}
+        />
       </div>
     );
   }
