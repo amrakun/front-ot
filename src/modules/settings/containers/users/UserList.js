@@ -55,13 +55,13 @@ UserListContainer.propTypes = {
 export default compose(
   graphql(gql(queries.users), {
     name: 'usersListQuery',
-    options: ({ queryParams, role }) => {
+    options: ({ queryParams }) => {
       const { search } = queryParams;
       return {
         variables: {
           page: queryParams.page ? Number(queryParams.page) : 1,
           perPage: 10,
-          role,
+          role: 'admin',
           search
         },
         notifyOnNetworkStatusChange: true

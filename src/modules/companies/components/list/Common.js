@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Table } from 'antd';
 import { Paginator } from 'modules/common/components';
+import router from 'modules/common/router';
 
 const propTypes = {
   history: PropTypes.object,
@@ -20,6 +21,17 @@ export default class Common extends React.Component {
     this.state = { selectedCompanies: [] };
 
     this.onSelectedCompaniesChange = this.onSelectedCompaniesChange.bind(this);
+    this.handleTableChange = this.handleTableChange.bind(this);
+  }
+
+  handleTableChange(pagination, filter, sorter) {
+    const columnKey = sorter.columnKey;
+    if (columnKey) {
+      router.setParams(this.props.history, {
+        sortField: columnKey,
+        sortDirection: sorter.order === 'descend' ? -1 : 1
+      });
+    }
   }
 
   onSelectedCompaniesChange(selectedCompanies) {
@@ -56,7 +68,8 @@ export default class Common extends React.Component {
       rowKey: record => record._id,
       pagination: false,
       loading,
-      scroll: { x: 1224 }
+      scroll: { x: 1224 },
+      onChange: this.handleTableChange
     };
 
     return (

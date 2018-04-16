@@ -22,7 +22,7 @@ class NumberCard extends Component {
       if (percent > 100) {
         percent = 100;
       }
-      this.setState({ percent });
+      this.setState({ percent: percent.toFixed(1) });
     } else {
       clearInterval(this.countdown);
     }

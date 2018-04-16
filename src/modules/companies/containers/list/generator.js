@@ -39,7 +39,8 @@ const generator = (Component, query) => {
       region,
       productCodes,
       difotRange,
-      sort,
+      sortField,
+      sortDirection,
       page,
       perPage,
       includeBlocked,
@@ -53,15 +54,6 @@ const generator = (Component, query) => {
 
     if (status && status.includes('byDifotScore')) {
       difotScore = difotRange;
-    }
-
-    let sortField = null;
-    let sortDirection = null;
-
-    if (sort) {
-      const split = sort.split(',');
-      sortField = split[0];
-      sortDirection = split[1];
     }
 
     const getBoolean = filter => {

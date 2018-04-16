@@ -41,10 +41,15 @@ class DifotContainer extends React.Component {
         });
     };
 
-    const generate = () => {
+    const generate = _ids => {
       exportFile({
         query: queries.companiesGenerateDifotScoreList,
-        variables: companiesQuery ? companiesQuery.variables : null
+        variables: companiesQuery
+          ? {
+              ...companiesQuery.variables,
+              _ids
+            }
+          : null
       });
     };
 

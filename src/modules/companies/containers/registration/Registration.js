@@ -25,7 +25,6 @@ const RegistrationContainer = (props, { __ }) => {
     if (
       !companyByUser.basicInfo ||
       !companyByUser.contactInfo ||
-      !companyByUser.certificateInfo ||
       !companyByUser.groupInfo ||
       !companyByUser.managementTeamInfo ||
       !companyByUser.shareholderInfo
@@ -33,11 +32,7 @@ const RegistrationContainer = (props, { __ }) => {
       formsComplete = false;
     }
   } else {
-    if (
-      !companyByUser.basicInfo ||
-      !companyByUser.contactInfo ||
-      !companyByUser.productsInfo
-    ) {
+    if (!companyByUser.basicInfo || !companyByUser.contactInfo) {
       formsComplete = false;
     }
   }

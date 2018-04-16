@@ -88,7 +88,14 @@ BlockingContainer.propTypes = {
 
 export default compose(
   graphql(gql(queries.blockedCompanies), {
-    name: 'blockedCompaniesQuery'
+    name: 'blockedCompaniesQuery',
+    options: ({ queryParams }) => {
+      return {
+        variables: {
+          search: queryParams.search
+        }
+      };
+    }
   }),
 
   graphql(gql(mutations.blockCompanies), {

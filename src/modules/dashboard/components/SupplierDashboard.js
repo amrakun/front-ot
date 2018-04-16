@@ -24,12 +24,7 @@ class Dashboard extends React.Component {
   getPrequalifiedStatus() {
     const { prequalifiedStatus } = this.props.data;
     const { __ } = this.context;
-    const {
-      isApproved,
-      isExpired,
-      isFailed,
-      isOutstanding
-    } = prequalifiedStatus;
+    const { isApproved, isExpired, isFailed } = prequalifiedStatus;
 
     if (isApproved) return __('Approved');
 
@@ -43,8 +38,6 @@ class Dashboard extends React.Component {
           {__('to update your information')}
         </span>
       );
-
-    if (isOutstanding) return 'Outstanding';
 
     return __('Not complete');
   }
@@ -201,13 +194,13 @@ class Dashboard extends React.Component {
           queryParams={queryParams}
         />
 
-        <SupplierTenders
+        {/* <SupplierTenders
           history={history}
           location={location}
           type="rfq"
           supplierId={currentUser.companyId}
           queryParams={queryParams}
-        />
+        /> */}
       </div>
     );
   }

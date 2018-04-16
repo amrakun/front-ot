@@ -88,7 +88,7 @@ class ManagementTeam extends BaseForm {
           label="Job title"
           name={`${prefix}JobTitle`}
           prefix={prefix}
-          initialValue={data.jobTitle || labels[prefix]}
+          initialValue={data.jobTitle || __(labels[prefix])}
           optional={optional}
           control={<Input />}
         />

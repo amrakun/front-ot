@@ -14,7 +14,6 @@ import {
 } from 'antd';
 import { dateFormat } from 'modules/common/constants';
 import moment from 'moment';
-import { Search } from 'modules/common/components';
 import { Common } from 'modules/companies/components';
 import SupplierSearcher from 'modules/companies/containers/Searcher';
 
@@ -27,7 +26,8 @@ class Blocking extends Common {
     this.state = {
       ...this.state,
       modalVisible: false,
-      suppliers: []
+      suppliers: [],
+      blockedSuppliers: null
     };
 
     this.hideModal = this.hideModal.bind(this);
@@ -54,6 +54,23 @@ class Blocking extends Common {
         message.error('Please add atleast one supplier!');
       }
     });
+  }
+
+  handleSearch(value) {
+    const { data } = this.props;
+
+    const searchResults = [];
+
+    data.forEach(blockedSupplier => {
+      if (
+        blockedSupplier.supplier.basicInfo.enName
+          .toLowerCase()
+          .includes(value.toLowerCase())
+      )
+        searchResults.push(blockedSupplier);
+    });
+
+    this.setState({ blockedSuppliers: searchResults });
   }
 
   onAddSuppliers(values) {
@@ -117,7 +134,7 @@ class Blocking extends Common {
       unblockCompanies
     } = this.props;
     const { getFieldDecorator } = this.props.form;
-    const { selectedCompanies, suppliers } = this.state;
+    const { selectedCompanies, suppliers, blockedSuppliers } = this.state;
 
     const supplierTags = suppliers.map(el => {
       return <Tag key={el._id}>{el.basicInfo.enName}</Tag>;
@@ -126,7 +143,12 @@ class Blocking extends Common {
     return (
       <Card title="Blocking">
         <div className="table-operations">
-          <Search />
+          <Input
+            prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            placeholder={'Supplier name'}
+            onPressEnter={e => this.handleSearch(e.target.value)}
+            className="suppliers-search"
+          />
 
           <Button
             disabled={selectedCompanies.length < 1}
@@ -147,7 +169,7 @@ class Blocking extends Common {
           }}
           columns={this.columns()}
           rowKey={record => record.supplierId}
-          dataSource={data}
+          dataSource={blockedSuppliers || data}
           pagination={pagination}
           loading={loading}
           onChange={(pagination, filters, sorter) =>

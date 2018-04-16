@@ -36,7 +36,7 @@ class Difot extends Common {
         title: 'DIFOT score',
         render: record => {
           if (record.lastDifotScore) {
-            return <span>{record.lastDifotScore.amount}%</span>;
+            return <span>{record.lastDifotScore.amount.toFixed(1)}%</span>;
           }
 
           return <span>0%</span>;
@@ -71,7 +71,7 @@ class Difot extends Common {
             <div className="table-operations">
               <Search />
 
-              <Button onClick={generate}>
+              <Button onClick={() => generate(selectedCompanies)}>
                 Download template
                 <Icon type="download" />
               </Button>

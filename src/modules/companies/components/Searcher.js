@@ -25,6 +25,7 @@ class SupplierSearcher extends React.Component {
     this.onCancel = this.onCancel.bind(this);
     this.onOk = this.onOk.bind(this);
     this.onSelect = this.onSelect.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   showPopup() {
@@ -50,15 +51,21 @@ class SupplierSearcher extends React.Component {
     }
   }
 
+  onChange(selectedValues) {
+    this.setState({ selectedValues });
+
+    this.props.onChange(selectedValues);
+  }
+
   renderSelect() {
-    const { suppliers, onChange, mode } = this.props;
+    const { suppliers, mode } = this.props;
     const { selectedValues } = this.state;
 
     const selectProps = {
       mode: 'multiple',
       style: { width: '100%' },
       onSelect: this.onSelect,
-      onChange: onChange,
+      onChange: this.onChange,
       value: selectedValues,
       filterOption: (inputValue, option) =>
         option.props.children.includes(inputValue)

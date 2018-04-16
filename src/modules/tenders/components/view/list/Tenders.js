@@ -40,9 +40,8 @@ class Tenders extends React.Component {
       this.setState({ statuses });
     } else {
       router.removeParams(this.props.history, 'status');
+      this.setState({ statuses });
     }
-
-    this.props.onChange(pagination);
   }
 
   renderIcon(name, style) {
