@@ -9,7 +9,6 @@ import { Search, Uploader } from 'modules/common/components';
 import { Common } from 'modules/companies/components';
 import { Link } from 'react-router-dom';
 import router from 'modules/common/router';
-import { Paginator } from 'modules/common/components';
 
 class ReportsAndPlans extends Common {
   constructor(props) {
@@ -222,13 +221,8 @@ class ReportsAndPlans extends Common {
           rowKey={record => record._id}
           dataSource={data}
           scroll={{ x: 1700 }}
-          pagination={false}
           loading={loading}
-          onChange={(pagination, filters, sorter) =>
-            this.handleTableChange(pagination, filters, sorter)
-          }
         />
-        <Paginator total={30} />
 
         <Modal
           title={`Send reports and improvement plans for ${

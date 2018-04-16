@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Search } from 'modules/common/components';
 import queryString from 'query-string';
-import { Paginator } from 'modules/common/components';
 import { StatsTable } from 'modules/common/components';
 import { auditTabs } from 'modules/qualification/consts';
 import { MassEmail } from 'modules/companies/containers';
@@ -110,7 +109,7 @@ class AuditResponses extends React.Component {
   }
 
   render() {
-    const { loading, onChange } = this.props;
+    const { loading } = this.props;
     const counts = this.props.counts || {};
     const data = this.props.data || [];
 
@@ -178,18 +177,13 @@ class AuditResponses extends React.Component {
             columns={this.columns()}
             rowKey={record => record._id}
             dataSource={data}
-            pagination={false}
             loading={loading}
             scroll={{ x: 1400 }}
-            onChange={(pagination, filters, sorter) =>
-              onChange(pagination, filters, sorter)
-            }
             rowSelection={{
               selectedRowKeys,
               onChange: this.onSelectChange
             }}
           />
-          <Paginator total={10} />
         </Card>
       </div>
     );
