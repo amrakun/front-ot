@@ -130,7 +130,7 @@ class Tenders extends React.Component {
           <Search placeholder={__('Tender Name')} />
 
           <MonthPicker
-            style={{ float: 'left', marginLeft: '16px' }}
+            style={{ float: 'left', width: '200px', marginLeft: '20px' }}
             placeholder={__('Select year and month')}
             onChange={this.handleMonthChange}
             allowClear

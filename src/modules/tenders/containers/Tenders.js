@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import { BuyerTenders } from '../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries, mutations } from '../graphql';
-import { message } from 'antd';
 import client from 'apolloClient';
-import { notification, Icon, Button } from 'antd';
+import { notification, Icon, Button, message } from 'antd';
 import { notifyReady, notifyLoading } from 'modules/common/constants';
 
 class TendersContainer extends React.Component {

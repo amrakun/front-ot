@@ -135,12 +135,8 @@ export default compose(
     name: 'companiesCountByProductCodeQuery',
     options: ({ queryParams }) => ({
       variables: {
-        startDate: new Date(
-          queryParams.startDate ? queryParams.startDate : '1900-01-01'
-        ),
-        endDate: new Date(
-          queryParams.endDate ? queryParams.endDate : '2040-09-26'
-        )
+        startDate: new Date(queryParams.startDate || '1900-01'),
+        endDate: new Date(queryParams.endDate || '2040-09')
       }
     })
   }),

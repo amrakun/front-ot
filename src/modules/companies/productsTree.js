@@ -2063,68 +2063,6 @@ const en = [
     ],
     value: 'h00000 - services',
     key: 'H00000'
-  },
-  {
-    label: 'X00000 - Non Contestable',
-    children: [
-      {
-        label: 'X01000 - Donations & gifts',
-        value: 'x01000 - donations & gifts',
-        key: 'X01000'
-      },
-      {
-        label: 'X02000 - Fees to government/legal authority',
-        value: 'x02000 - fees to government/legal authority',
-        key: 'X02000'
-      },
-      {
-        label: 'X03000 - Inter-Company',
-        value: 'x03000 - inter-company',
-        key: 'X03000'
-      },
-      {
-        label: 'X04000 - Memberships and associations',
-        value: 'x04000 - memberships and associations',
-        key: 'X04000'
-      },
-      {
-        label: 'X05000 - Taxes',
-        value: 'x05000 - taxes',
-        key: 'X05000'
-      },
-      {
-        label: 'X06000 - Expense reimbursements',
-        value: 'x06000 - expense reimbursements',
-        key: 'X06000'
-      },
-      {
-        label: 'X07000 - Semi finished / finished goods',
-        value: 'x07000 - semi finished / finished goods',
-        key: 'X07000'
-      },
-      {
-        label: 'X07001 - Anode Bar',
-        value: 'x07001 - anode bar',
-        key: 'X07001'
-      },
-      {
-        label: 'X07002 - Alumina',
-        value: 'x07002 - alumina',
-        key: 'X07002'
-      },
-      {
-        label: 'X07003 - Bath / Cryolite',
-        value: 'x07003 - bath / cryolite',
-        key: 'X07003'
-      },
-      {
-        label: 'X07004 - Bauxite',
-        value: 'x07004 - bauxite',
-        key: 'X07004'
-      }
-    ],
-    value: 'x00000 - non contestable',
-    key: 'X00000'
   }
 ];
 
@@ -4218,69 +4156,6 @@ const mn = [
     ],
     value: 'h00000 - services',
     key: 'H00000'
-  },
-  {
-    label: 'X00000 - Сонгон шалгаруулалтгүй зүйлс',
-    children: [
-      {
-        label: 'X01000 - Хандив, бэлэг',
-        value: 'x01000 - donations & gifts',
-        key: 'X01000'
-      },
-      {
-        label:
-          'X02000 - Засгийн газрын болон хуулийн байгууллагын төлбөр хураамж',
-        value: 'x02000 - fees to government/legal authority',
-        key: 'X02000'
-      },
-      {
-        label: 'X03000 - Группийн компаниуд хоорондын үйлчилгээ',
-        value: 'x03000 - inter-company',
-        key: 'X03000'
-      },
-      {
-        label: 'X04000 - Мэргэжлийн холбоодын гишүүнчлэл',
-        value: 'x04000 - memberships and associations',
-        key: 'X04000'
-      },
-      {
-        label: 'X05000 - Татвар',
-        value: 'x05000 - taxes',
-        key: 'X05000'
-      },
-      {
-        label: 'X06000 - Ажилтнуудын төлбөр, зардал',
-        value: 'x06000 - expense reimbursements',
-        key: 'X06000'
-      },
-      {
-        label: 'X07000 - Хагас боловсруулсан бүтээгдэхүүн',
-        value: 'x07000 - semi finished / finished goods',
-        key: 'X07000'
-      },
-      {
-        label: 'X07001 - undefined',
-        value: 'x07001 - anode bar',
-        key: 'X07001'
-      },
-      {
-        label: 'X07002 - undefined',
-        value: 'x07002 - alumina',
-        key: 'X07002'
-      },
-      {
-        label: 'X07003 - undefined',
-        value: 'x07003 - bath / cryolite',
-        key: 'X07003'
-      },
-      {
-        label: 'X07004 - undefined',
-        value: 'x07004 - bauxite',
-        key: 'X07004'
-      }
-    ],
-    value: 'x00000 - non contestable',
-    key: 'X00000'
   }
 ];
 

@@ -103,7 +103,7 @@ class Dashboard extends React.Component {
     };
 
     return (
-      <Card title="Supplier By Tier Type">
+      <Card title="Suppliers By Tier Type">
         <div className="pie-chart-labels">
           {data.map((detail, index) => (
             <span key={index} className="chart-text">
@@ -165,7 +165,7 @@ class Dashboard extends React.Component {
     }));
 
     return (
-      <Card title="Product categories" className="barchart-wrapper margin">
+      <Card title="Suppliers by Category" className="barchart-wrapper margin">
         {this.renderBarChart({
           data,
           key1: 'prequalified',
@@ -185,7 +185,7 @@ class Dashboard extends React.Component {
 
     return (
       <Card
-        title="Registered vs Pre-qualified"
+        title="Suppliers by Qualification Status"
         className="barchart-wrapper"
         extra={
           <TreeSelect

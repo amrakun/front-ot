@@ -157,7 +157,7 @@ class Sidebar extends React.Component {
           {stats}
         </Card>
 
-        <Card title="Products & services code" className="margin">
+        <Card title="Select product & service code" className="margin">
           <TreeSelect
             treeData={productsTree.en}
             allowClear
@@ -169,7 +169,7 @@ class Sidebar extends React.Component {
           />
         </Card>
 
-        <Card title="Select supplier by tier type" className="margin">
+        <Card title="Select suppliers by tier type" className="margin">
           <CheckboxGroup
             options={regionOptions}
             value={region}
@@ -178,7 +178,10 @@ class Sidebar extends React.Component {
           />
         </Card>
 
-        <Card title="Select supplier by status" className="margin">
+        <Card
+          title="Select suppliers by qualification status"
+          className="margin"
+        >
           <table className="suppliers-filter">
             <tbody>
               {this.renderSelect('isPrequalified', 'Pre-qualified')}
