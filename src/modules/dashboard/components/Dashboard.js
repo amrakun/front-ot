@@ -103,7 +103,7 @@ class Dashboard extends React.Component {
     };
 
     return (
-      <Card title="Supplier By Tier Type">
+      <Card title="Suppliers By Tier Type">
         <div className="pie-chart-labels">
           {data.map((detail, index) => (
             <span key={index} className="chart-text">
@@ -165,7 +165,7 @@ class Dashboard extends React.Component {
     }));
 
     return (
-      <Card title="Product categories" className="barchart-wrapper margin">
+      <Card title="Suppliers by Category" className="barchart-wrapper margin">
         {this.renderBarChart({
           data,
           key1: 'prequalified',
@@ -185,7 +185,7 @@ class Dashboard extends React.Component {
 
     return (
       <Card
-        title="Registered vs Pre-qualified"
+        title="Suppliers by Qualification Status"
         className="barchart-wrapper"
         extra={
           <TreeSelect
@@ -217,17 +217,17 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    const props = this.props;
     const {
       eoiData,
       rfqData,
       eoiTotalCount,
       rfqTotalCount,
       eoiAverageDuration,
-      rfqAverageDuration
-    } = props;
-    const queryParams = queryString.parse(props.location.search);
-    const extendedProps = { ...props, queryParams };
+      rfqAverageDuration,
+      location: { search }
+    } = this.props;
+
+    const queryParams = queryString.parse(search);
     const dateFormat = 'YYYY/MM';
 
     return (
@@ -333,8 +333,8 @@ class Dashboard extends React.Component {
         </Tabs.TabPane>
 
         <Tabs.TabPane tab="My dashboard" key="2">
-          <Tenders type="eoi" {...extendedProps} />
-          <Tenders type="rfq" {...extendedProps} />
+          <Tenders type="eoi" {...this.props} />
+          <Tenders type="rfq" {...this.props} />
         </Tabs.TabPane>
       </Tabs>
     );
@@ -347,8 +347,12 @@ Dashboard.propTypes = {
   location: PropTypes.object,
   history: PropTypes.object,
   productData: PropTypes.array,
+  eoiTotalCount: PropTypes.number,
+  rfqTotalCount: PropTypes.number,
   eoiData: PropTypes.array,
-  rfqData: PropTypes.array
+  rfqData: PropTypes.array,
+  eoiAverageDuration: PropTypes.number,
+  rfqAverageDuration: PropTypes.number
 };
 
 export default Dashboard;

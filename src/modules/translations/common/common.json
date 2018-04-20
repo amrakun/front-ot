@@ -11,7 +11,6 @@
   "Tenders & EOI": "ОСИХ ба ҮСАХ",
   "Tenders and EOI": "ОСИХ ба ҮСАХ",
   "Change Password": "Нууц үг солих",
-  "My Profile": "Миний Профайл",
   "Copy above": "Хэрэв ижил бол дээрхийг хуулж тавина уу",
   "Back": "Буцах",
   "Oyu Tolgoi ©2018 All Rights Reserved":
@@ -51,7 +50,9 @@
   "Are you sure you are not interested？":
     "Та оролцохгүй гэдэгтээ итгэлтэй байна уу?",
   "Approved": "Зөвшөөрөгдсөн",
+  "Pre-qualified": "Зөвшөөрөгдсөн",
   "Expired": "Хугацаа дууссан",
+  "In progress": "Шалгаж байгаа",
   "Need help?": "Тусламж хэрэгтэй юу?",
   "Lead time (day)": "Хүргэлтийн хугацаа(Өдрөөр)",
   "Registration complete": "Бүртгэл амжилттай",

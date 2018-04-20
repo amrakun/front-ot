@@ -95,7 +95,7 @@ class AuditResponses extends React.Component {
   }
 
   render() {
-    const { loading, onChange, editPhysicalAudit } = this.props;
+    const { loading, onChange, editPhysicalAudit, totalCount } = this.props;
     const data = this.props.data || [];
     const { editModalVisible, selectedAudit } = this.state;
 
@@ -114,7 +114,7 @@ class AuditResponses extends React.Component {
             onChange(pagination, filters, sorter)
           }
         />
-        <Paginator total={10} />
+        <Paginator total={totalCount} />
 
         <ModalForm
           visible={editModalVisible}
@@ -137,6 +137,7 @@ AuditResponses.propTypes = {
   pagination: PropTypes.object,
   data: PropTypes.array,
   loading: PropTypes.bool,
+  totalCount: PropTypes.number,
   onChange: PropTypes.func,
   match: PropTypes.object,
   history: PropTypes.object,

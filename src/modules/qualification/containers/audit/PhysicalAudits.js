@@ -9,11 +9,12 @@ class PhysicalAuditsContainer extends React.Component {
   render() {
     const {
       physicalAuditsTableQuery,
+      physicalAuditsCountQuery,
       physicalAuditsEdit,
       physicalAuditsRemove
     } = this.props;
 
-    if (physicalAuditsTableQuery.loading) {
+    if (physicalAuditsTableQuery.loading || physicalAuditsCountQuery.loading) {
       return <PhysicalAudits loading={true} />;
     }
 
@@ -44,7 +45,8 @@ class PhysicalAuditsContainer extends React.Component {
       editPhysicalAudit,
       removePhysicalAudit,
       loading: false,
-      data: physicalAuditsTableQuery.physicalAudits || []
+      data: physicalAuditsTableQuery.physicalAudits,
+      totalCount: physicalAuditsCountQuery.totalPhysicalAudits
     };
 
     return <PhysicalAudits {...updatedProps} />;
@@ -53,6 +55,7 @@ class PhysicalAuditsContainer extends React.Component {
 
 PhysicalAuditsContainer.propTypes = {
   physicalAuditsTableQuery: PropTypes.object,
+  physicalAuditsCountQuery: PropTypes.object,
   physicalAuditsEdit: PropTypes.func,
   physicalAuditsRemove: PropTypes.func
 };
@@ -60,6 +63,21 @@ PhysicalAuditsContainer.propTypes = {
 export default compose(
   graphql(gql(queries.physicalAudits), {
     name: 'physicalAuditsTableQuery',
+    options: ({ queryParams }) => {
+      const params = queryParams || {};
+      return {
+        variables: {
+          page: params.page || 1,
+          perPage: params.perPage || 15,
+          supplierSearch: params.search
+        },
+        notifyOnNetworkStatusChange: true
+      };
+    }
+  }),
+
+  graphql(gql(queries.totalPhysicalAudits), {
+    name: 'physicalAuditsCountQuery',
     options: ({ queryParams }) => {
       const params = queryParams || {};
       return {

@@ -35,8 +35,7 @@ const productCategoryLabels = {
   e: 'Mining equipment',
   f: 'MRO',
   g: 'Product consumables',
-  h: 'Services',
-  x: 'Non contestable'
+  h: 'Services'
 };
 
 export { labels, MODULES_TO_TEXT, productCategoryLabels };

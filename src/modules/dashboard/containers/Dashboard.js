@@ -69,9 +69,7 @@ const DashboardContainer = props => {
     return monthsData;
   };
 
-  const renderData = object => {
-    let data = queryParams.filter === 'byMonth' ? groupData(object) : object;
-
+  const renderData = data => {
     const array = [];
 
     Object.keys(data).forEach(key => {
@@ -81,17 +79,23 @@ const DashboardContainer = props => {
     return array;
   };
 
+  const byMonthOrNot = object => {
+    const data = queryParams.filter === 'byMonth' ? groupData(object) : object;
+
+    return renderData(data);
+  };
+
   const updatedProps = {
     ...props,
     companiesByTierType,
     productCategory: renderData(
       companiesCountByProductCodeQuery.companiesCountByProductCode
     ),
-    productData: renderData(
+    productData: byMonthOrNot(
       ccbrvpQuery.companiesCountByRegisteredVsPrequalified
     ),
-    eoiData: renderData(tenderCountByStatusEoi.tenderCountByStatus),
-    rfqData: renderData(tenderCountByStatusRfq.tenderCountByStatus),
+    eoiData: byMonthOrNot(tenderCountByStatusEoi.tenderCountByStatus),
+    rfqData: byMonthOrNot(tenderCountByStatusRfq.tenderCountByStatus),
 
     eoiTotalCount: tendersTotalCountEoi.tendersTotalCountReport,
     rfqTotalCount: tendersTotalCountRfq.tendersTotalCountReport,
@@ -135,12 +139,8 @@ export default compose(
     name: 'companiesCountByProductCodeQuery',
     options: ({ queryParams }) => ({
       variables: {
-        startDate: new Date(
-          queryParams.startDate ? queryParams.startDate : '1900-01-01'
-        ),
-        endDate: new Date(
-          queryParams.endDate ? queryParams.endDate : '2040-09-26'
-        )
+        startDate: new Date(queryParams.startDate || '1900-01'),
+        endDate: new Date(queryParams.endDate || '2040-09')
       }
     })
   }),

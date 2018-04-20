@@ -22,7 +22,6 @@ const PublishContainer = (
     return <Loading />;
   }
 
-  const { __ } = context;
   const tenderDetail = tenderDetailQuery.tenderDetailSupplier || {};
   const tenderResponseByUser = tenderResponseByUserQuery.tenderResponseByUser;
 

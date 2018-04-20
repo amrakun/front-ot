@@ -24,11 +24,18 @@ class Dashboard extends React.Component {
   getPrequalifiedStatus() {
     const { prequalifiedStatus } = this.props.data;
     const { __ } = this.context;
-    const { isApproved, isExpired, isFailed } = prequalifiedStatus;
+    const {
+      isApproved,
+      isExpired,
+      isFailed,
+      isOutstanding
+    } = prequalifiedStatus;
 
-    if (isApproved) return __('Approved');
+    if (isApproved) return __('Pre-qualified');
 
     if (isExpired) return __('Expired');
+
+    if (isOutstanding) return __('In progress');
 
     if (isFailed)
       return (

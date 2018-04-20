@@ -201,8 +201,8 @@ const tenders = `
 `;
 
 const tendersSupplier = `
-  query tendersSupplier(${tenderParams}) {
-    tendersSupplier(${tenderValues}) {
+  query tendersSupplier(${tenderParams} ${pageParams}) {
+    tendersSupplier(${tenderValues} ${pageValues}) {
       _id
       status
       type

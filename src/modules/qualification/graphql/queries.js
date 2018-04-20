@@ -568,10 +568,16 @@ const physicalAuditFields = `
 `;
 
 const physicalAudits = `
-  query physicalAudits($supplierSearch: String) {
-    physicalAudits(supplierSearch: $supplierSearch) {
+  query physicalAudits($supplierSearch: String, $page: Int, $perPage: Int) {
+    physicalAudits(supplierSearch: $supplierSearch, page: $page, perPage: $perPage) {
       ${physicalAuditFields}
     }
+  }
+`;
+
+const totalPhysicalAudits = `
+  query totalPhysicalAudits($supplierSearch: String) {
+    totalPhysicalAudits(supplierSearch: $supplierSearch)
   }
 `;
 
@@ -624,6 +630,7 @@ export default {
   feedbackResponses,
   companiesGenerateDifotScoreList,
   physicalAudits,
+  totalPhysicalAudits,
   physicalAuditDetail,
   companiesValidatedProductsInfoExport,
   companiesGenerateDueDiligenceList,
