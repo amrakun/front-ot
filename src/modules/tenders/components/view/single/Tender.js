@@ -188,7 +188,7 @@ class Tender extends Common {
         <Col key={1} lg={6} sm={12}>
           <NumberCard
             icon="message"
-            title="Requested"
+            title="Invited"
             color={colors[3]}
             number={requestedCount}
             onClick={() =>
