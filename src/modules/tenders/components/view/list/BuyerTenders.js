@@ -71,32 +71,63 @@ class BuyerTenders extends Tenders {
     ];
   }
 
+  renderEditLink({ status, _id }) {
+    if (['closed', 'awarded'].includes(status)) {
+      return null;
+    }
+
+    return [
+      <Divider key={0} type="vertical" />,
+
+      <Link key={1} to={`/tender/edit/${_id}`}>
+        Edit
+      </Link>
+    ];
+  }
+
+  renderCancelLink({ status, _id, cancelTender }) {
+    if (['closed', 'awarded', 'canceled'].includes(status)) {
+      return null;
+    }
+
+    return [
+      <Divider key={0} type="vertical" />,
+
+      <Popconfirm
+        key={3}
+        title="Are you sure you want to cancel this tender？"
+        placement="bottomRight"
+        okText="Yes"
+        cancelText="No"
+        onConfirm={() => cancelTender(_id)}
+      >
+        <a>Cancel</a>
+      </Popconfirm>
+    ];
+  }
+
+  renderViewLink({ status, type, _id }) {
+    if (status === 'open') {
+      return null;
+    }
+
+    return [
+      <Divider key={0} type="vertical" />,
+      <Link key={1} to={`/${type}/${_id}`}>
+        View
+      </Link>
+    ];
+  }
+
   renderOperation(record) {
     const { cancelTender } = this.props;
     const { status, _id, type } = record;
 
     return (
       <div style={{ width: '120px' }}>
-        <Link to={`/${type}/${_id}`}>View</Link>
-        {!['closed', 'awarded'].includes(status) && [
-          <Divider key={0} type="vertical" />,
-          <Link key={1} to={`/tender/edit/${_id}`}>
-            Edit
-          </Link>
-        ]}
-        {!['closed', 'awarded', 'canceled'].includes(status) && [
-          <Divider key={0} type="vertical" />,
-          <Popconfirm
-            key={3}
-            title="Are you sure you want to cancel this tender？"
-            placement="bottomRight"
-            okText="Yes"
-            cancelText="No"
-            onConfirm={() => cancelTender(_id)}
-          >
-            <a>Cancel</a>
-          </Popconfirm>
-        ]}
+        {this.renderViewLink({ status, type, _id })}
+        {this.renderEditLink({ status, _id })}
+        {this.renderCancelLink({ status, _id, cancelTender })}
       </div>
     );
   }
