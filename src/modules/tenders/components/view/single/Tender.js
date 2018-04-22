@@ -158,7 +158,7 @@ class Tender extends Common {
         width: 40,
         render: this.renderViewResponse
       },
-      { title: 'Uploaded file', width: 40, dataIndex: 'file' },
+      { title: 'Provided file', width: 40, dataIndex: 'file' },
       {
         title: 'Contact person',
         width: 40,
