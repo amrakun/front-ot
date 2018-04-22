@@ -7,7 +7,6 @@ import { NumberCard, NumberCardLines } from 'modules/common/components';
 import { colors } from 'modules/common/constants';
 import { Search, Editor } from 'modules/common/components';
 import { Common } from 'modules/companies/components/';
-import { Link } from 'react-router-dom';
 import { Paginator } from 'modules/common/components';
 import router from 'modules/common/router';
 
@@ -149,60 +148,6 @@ class Tender extends Common {
         dataIndex: 'supplier.basicInfo.sapNumber',
         width: 160
       },
-      {
-        title: 'Tier type',
-        width: 40,
-        render: () => <span>-</span>
-      },
-      {
-        title: 'Pre-qualification status',
-        width: 40,
-        render: record => (
-          <Link to={`/prequalification-status/${record.supplier._id}?view`}>
-            {record.supplier.isPrequalified ? 'Yes' : 'No'}
-          </Link>
-        )
-      },
-      {
-        title: 'Qualification/audit status',
-        width: 40,
-        render: record => (record.supplier.isQualified ? 'Yes' : 'No')
-      },
-      {
-        title: 'Validation status',
-        width: 40,
-        render: record =>
-          record.supplier.isProductsInfoValidated ? 'Yes' : 'No'
-      },
-      {
-        title: 'Due dilligence',
-        width: 40,
-        render: record => {
-          const { lastDueDiligence } = record.supplier;
-
-          if (lastDueDiligence && lastDueDiligence.file) {
-            return (
-              <a href={lastDueDiligence.file.url} target="_blank">
-                Yes
-              </a>
-            );
-          } else return '-';
-        }
-      },
-      {
-        title: 'DIFOT score',
-        width: 40,
-        render: record =>
-          record.supplier.averageDifotScore
-            ? `${record.supplier.averageDifotScore}%`
-            : '-'
-      },
-      {
-        title: 'Number of employees',
-        width: 40,
-        dataIndex: 'supplier.basicInfo.totalNumberOfEmployees'
-      },
-      { title: 'Work experience', width: 40, dataIndex: 'workExperience' },
       {
         title: 'Status',
         width: 40,
