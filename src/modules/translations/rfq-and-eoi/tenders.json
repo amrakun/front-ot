@@ -35,7 +35,7 @@
   "Please click here": "Та",
   "to share your successes!":
     "байгууллагынхаа амжилтаас бидэнтэй хуваалцана уу!",
-  "Apply to EOI": "Оролцох Сонирхлоо Илэрхийлэх",
+  "Apply to EOI": "Оролцох сонирхолоо илэрхийлэх хүсэлт (ОСИХ)",
   "Closed": "Хаалттай",
   "submitted": "Илгээсэн",
   "Submitted": "Илгээсэн",
@@ -68,8 +68,8 @@
   "Save as draft": "Ноорог хадгалах",
   "Return": "Буцах",
   "here": "Энд дарж",
-  "Expression Of Interest": "Оролцох Сонирхолоо Илэрхийлэх",
-  "Request For Quotation": "Үнийн саналын хүсэлт",
+  "Expression Of Interest": "Оролцох сонирхолоо илэрхийлэх хүсэлт (ОСИХ)",
+  "Request For Quotation": "Үнийн санал авах хүсэлт (ҮСАХ)",
   "Please tick the boxes to confirm that you have agree with the statements":
     "Та доорхи заалтуудыг уншиж танилцан, зөвшөөрч байвал дөрвөлжин доторхийг тэмдэглэх эсхүл будна уу",
   "1. We have read and agreed to Oyu Tolgoi's (I) \"Way we work\" and \"Supplier Code of conduct\". You can visit":

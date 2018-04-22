@@ -206,7 +206,7 @@ class Tender extends Common {
       {
         title: 'Status',
         width: 40,
-        render: record => (record.status ? record.status : 'on time')
+        render: record => (record.status ? record.status : 'On time')
       },
       {
         title: 'Provided information',
