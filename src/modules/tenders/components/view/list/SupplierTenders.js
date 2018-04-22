@@ -11,6 +11,7 @@ class SupplierTenders extends Tenders {
   columns() {
     const { __ } = this.context;
     const renderIcon = this.renderIcon;
+
     return [
       {
         title: __('Status'),

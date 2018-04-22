@@ -51,8 +51,10 @@ const RegistrationContainer = (props, { __ }) => {
 
     mutation({ variables: { [name]: doc } })
       .then(() => {
+        message.success(__('Successfully saved'));
+
         companyByUserQuery.refetch();
-        message.success('Saved');
+
         if (name === 'productsInfo') {
           formsComplete
             ? send(hasFilledBefore)

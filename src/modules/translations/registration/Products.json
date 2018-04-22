@@ -1,6 +1,7 @@
 {
   "Products & services": "Бүтээгдэхүүн, үйлчилгээ",
   "Help": "Тусламж",
+  "Successfully saved": "Амжилттай хадгалагдлаа",
 
   "The product code is structured in a 3 level: Family Sect Code > Macro Sect Code > Sect Code. Clicking on the check boxes will expand the product codes. You can only select at “Sect Code” level.; Alternatively, you can use the search tool by free text to find potential matches of your products and services.; Adding and Removing product codes: To add a Product / Service click on the check box. To remove simply un tick the box, or click the “x”.":
     "1. Бүтээгдэхүүний жагсаалтаас сонгон хайх: Бүтээгдэхүүний код нь дараах 3 түвшинд эрэмбэлэгддэг: Төрөл зүйлийн код > Макро бүлгийн код > Бүлгийн код. Чагтлах дөрвөлжин дээр товшсоноор тухайн төрөл анги дэлгэгднэ. Та Бүлгийн код түвшнийг л сонгож болно. 2. Хайх:  Та тохирох зүйлсийг бүтээгдэхүүн олохын тулд текстээ бичиж оруулан хайж болно. Харин Бүгдийг харах гэсэн цэс дээр товшсоноор бүтээгдэхүүний кодын бүрэн жагсаалт руу буцна. 3.  Бүтээгдэхүүний код нэмэх, хасах:   Бүтээгдэхүүн, үйлчилгээ нэмэхийн тулд чагтлах дөрвөлжин дээр товшино уу! Сонгосон бүтээгдэхүүний кодууд баруун талын талбарт гарч ирнэ. Арилгахын тулд чагт дээр  товшиход л болно. 4. Түлхүүр үг ашиглах: Томруулдаг шилний дүрс дээр товшиход тухайн бүтээгдэхүүн, үйлчилгээнд багтсан үйл ажиллагааны хэлбэрүүдийн талаарх мэдээлэл гарч ирнэ. ",
