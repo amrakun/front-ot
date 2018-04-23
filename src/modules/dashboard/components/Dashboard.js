@@ -308,33 +308,33 @@ class Dashboard extends React.Component {
               </div>
             </div>
 
-            <div className="ant-row chart-row">
-              <div className="ant-col-sm-24 ant-col-lg-5">
-                {this.renderCountData('Total RFQ', rfqTotalCount)}
-              </div>
-              <div className="ant-col-sm-24 ant-col-lg-14">
-                <Card title="RFQ (this year)" className="barchart-wrapper">
-                  {this.renderBarChart({
-                    data: rfqData,
-                    key1: 'open',
-                    key2: 'closed',
-                    height: 200
-                  })}
-                </Card>
-              </div>
-              <div className="ant-col-sm-24 ant-col-lg-5">
-                {this.renderCountData(
-                  'RFQ average duration /days/',
-                  Math.round(rfqAverageDuration)
-                )}
-              </div>
-            </div>
+            {/* <div className="ant-row chart-row"> */}
+            {/*   <div className="ant-col-sm-24 ant-col-lg-5"> */}
+            {/*     {this.renderCountData('Total RFQ', rfqTotalCount)} */}
+            {/*   </div> */}
+            {/*   <div className="ant-col-sm-24 ant-col-lg-14"> */}
+            {/*     <Card title="RFQ (this year)" className="barchart-wrapper"> */}
+            {/*       {this.renderBarChart({ */}
+            {/*         data: rfqData, */}
+            {/*         key1: 'open', */}
+            {/*         key2: 'closed', */}
+            {/*         height: 200 */}
+            {/*       })} */}
+            {/*     </Card> */}
+            {/*   </div> */}
+            {/*   <div className="ant-col-sm-24 ant-col-lg-5"> */}
+            {/*     {this.renderCountData( */}
+            {/*       'RFQ average duration /days/', */}
+            {/*       Math.round(rfqAverageDuration) */}
+            {/*     )} */}
+            {/*   </div> */}
+            {/* </div> */}
           </div>
         </Tabs.TabPane>
 
         <Tabs.TabPane tab="My dashboard" key="2">
           <Tenders type="eoi" {...this.props} />
-          <Tenders type="rfq" {...this.props} />
+          {/* <Tenders type="rfq" {...this.props} /> */}
         </Tabs.TabPane>
       </Tabs>
     );

@@ -103,11 +103,11 @@ export const buyerSideMenu = [
       }
     ]
   },
-  {
-    url: '/rfq',
-    title: 'RFQ responses',
-    icon: 'bars'
-  },
+  // {
+  //   url: '/rfq',
+  //   title: 'RFQ responses',
+  //   icon: 'bars'
+  // },
   {
     url: '/eoi',
     title: 'EOI responses',

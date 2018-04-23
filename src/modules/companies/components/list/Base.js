@@ -119,9 +119,9 @@ class Base extends Common {
                 Send EOI
               </Button>
 
-              <Button onClick={() => this.handleSend('/rfq/publish')}>
-                Send RFQ
-              </Button>
+              {/* <Button onClick={() => this.handleSend('/rfq/publish')}> */}
+              {/*   Send RFQ */}
+              {/* </Button> */}
 
               <Button
                 loading={exportLoading}

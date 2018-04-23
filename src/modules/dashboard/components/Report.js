@@ -146,7 +146,7 @@ class Dashboard extends React.Component {
         </Col>
 
         <Col {...span}>
-          <Card title="EOI/RFQ">
+          <Card title="EOI">
             <p>
               <label>Publish date: </label>
               <RangePicker
@@ -174,7 +174,6 @@ class Dashboard extends React.Component {
               defaultValue={this.tenderType}
             >
               <Radio value="eoi">EOI</Radio>
-              <Radio value="rfq">RFQ</Radio>
             </Radio.Group>
 
             {this.renderButton(this.exportTenders)}

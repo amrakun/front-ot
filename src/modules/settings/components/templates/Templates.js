@@ -83,9 +83,9 @@ class Templates extends React.Component {
               <TabPane tab="EOI" key="eoiTemplate">
                 {this.renderEditor('eoiTemplate')}
               </TabPane>
-              <TabPane tab="RFQ" key="rfqTemplate">
-                {this.renderEditor('rfqTemplate')}
-              </TabPane>
+              {/* <TabPane tab="RFQ" key="rfqTemplate"> */}
+              {/*   {this.renderEditor('rfqTemplate')} */}
+              {/* </TabPane> */}
               <TabPane tab="Regret Letter" key="regretLetterTemplate">
                 {this.renderEditor('regretLetterTemplate')}
               </TabPane>

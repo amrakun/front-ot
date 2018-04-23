@@ -211,19 +211,19 @@ class Dashboard extends React.Component {
           </Card>
         </Col>
 
-        <Col {...span}>
-          <Card title="Supplier logins by RFQ submissions">
-            <p>
-              <label>Filter interval dates: </label>
-              <RangePicker
-                onChange={value => this.onInputChange('intervalDate', value)}
-                format={dateFormat}
-              />
-            </p>
-
-            {this.renderButton(this.logsSupplierLoginsByRfqSubmissionsExport)}
-          </Card>
-        </Col>
+        {/* <Col {...span}> */}
+        {/*   <Card title="Supplier logins by RFQ submissions"> */}
+        {/*     <p> */}
+        {/*       <label>Filter interval dates: </label> */}
+        {/*       <RangePicker */}
+        {/*         onChange={value => this.onInputChange('intervalDate', value)} */}
+        {/*         format={dateFormat} */}
+        {/*       /> */}
+        {/*     </p> */}
+        {/*  */}
+        {/*     {this.renderButton(this.logsSupplierLoginsByRfqSubmissionsExport)} */}
+        {/*   </Card> */}
+        {/* </Col> */}
 
         <Col {...span}>
           <Card title="Searches per buyer">
@@ -253,19 +253,19 @@ class Dashboard extends React.Component {
           </Card>
         </Col>
 
-        <Col {...span}>
-          <Card title="RFQ created and sent">
-            <p>
-              <label>Filter interval dates: </label>
-              <RangePicker
-                onChange={value => this.onInputChange('intervalDate', value)}
-                format={dateFormat}
-              />
-            </p>
-
-            {this.renderButton(this.logsRfqCreatedAndSentExport)}
-          </Card>
-        </Col>
+        {/* <Col {...span}> */}
+        {/*   <Card title="RFQ created and sent"> */}
+        {/*     <p> */}
+        {/*       <label>Filter interval dates: </label> */}
+        {/*       <RangePicker */}
+        {/*         onChange={value => this.onInputChange('intervalDate', value)} */}
+        {/*         format={dateFormat} */}
+        {/*       /> */}
+        {/*     </p> */}
+        {/*  */}
+        {/*     {this.renderButton(this.logsRfqCreatedAndSentExport)} */}
+        {/*   </Card> */}
+        {/* </Col> */}
 
         <Col {...span}>
           <Card title="Code searches per buyer">
