@@ -411,13 +411,13 @@ const feedback = `
           _id
           status
           totalEmploymentOt
-          totalEmploymentUmnugobi
+          totalEmploymentUmnugovi
           employmentChangesAfter
           numberOfEmployeeWorkToScopeNational
-          numberOfEmployeeWorkToScopeUmnugobi
+          numberOfEmployeeWorkToScopeUmnugovi
           procurementTotalSpend
           procurementNationalSpend
-          procurementUmnugobiSpend
+          procurementUmnugoviSpend
           corporateSocial
           otherStories
         }

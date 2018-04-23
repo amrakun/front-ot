@@ -37,8 +37,8 @@ class FeedbackResponses extends React.Component {
         dataIndex: 'totalEmploymentOt'
       },
       {
-        title: labels.totalEmploymentUmnugobi,
-        dataIndex: 'totalEmploymentUmnugobi'
+        title: labels.totalEmploymentUmnugovi,
+        dataIndex: 'totalEmploymentUmnugovi'
       },
       {
         title: labels.employmentChangesAfter,
@@ -49,8 +49,8 @@ class FeedbackResponses extends React.Component {
         dataIndex: 'numberOfEmployeeWorkToScopeNational'
       },
       {
-        title: labels.numberOfEmployeeWorkToScopeUmnugobi,
-        dataIndex: 'totalEmploymenumberOfEmployeeWorkToScopeUmnugobintOt'
+        title: labels.numberOfEmployeeWorkToScopeUmnugovi,
+        dataIndex: 'totalEmploymenumberOfEmployeeWorkToScopeUmnugovintOt'
       },
       {
         title: labels.procurementTotalSpend,
@@ -61,8 +61,8 @@ class FeedbackResponses extends React.Component {
         dataIndex: 'procurementNationalSpend'
       },
       {
-        title: labels.procurementUmnugobiSpend,
-        dataIndex: 'procurementUmnugobiSpend'
+        title: labels.procurementUmnugoviSpend,
+        dataIndex: 'procurementUmnugoviSpend'
       }
     ];
   }

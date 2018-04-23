@@ -75,16 +75,16 @@ class SubmitFeedback extends BaseForm {
               <Card title={__(titles['1'])}>
                 <p>{__(titles['1a'])}</p>
                 {this.renderQuestion('totalEmploymentOt')}
-                {this.renderQuestion('totalEmploymentUmnugobi')}
+                {this.renderQuestion('totalEmploymentUmnugovi')}
                 {this.renderQuestion('employmentChangesAfter')}
                 <p>{__(titles['1b'])}</p>
                 {this.renderQuestion('numberOfEmployeeWorkToScopeNational')}
-                {this.renderQuestion('numberOfEmployeeWorkToScopeUmnugobi')}
+                {this.renderQuestion('numberOfEmployeeWorkToScopeUmnugovi')}
               </Card>
               <Card title={__(titles['2'])}>
                 {this.renderQuestion('procurementTotalSpend')}
                 {this.renderQuestion('procurementNationalSpend')}
-                {this.renderQuestion('procurementUmnugobiSpend')}
+                {this.renderQuestion('procurementUmnugoviSpend')}
               </Card>
 
               <Card>

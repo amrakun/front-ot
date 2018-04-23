@@ -77,13 +77,13 @@ const addFeedbackResponse = `
     $feedbackId: String!
     $supplierId: String!
     $totalEmploymentOt: Float!
-    $totalEmploymentUmnugobi: Float!
+    $totalEmploymentUmnugovi: Float!
     $employmentChangesAfter: Float!
     $numberOfEmployeeWorkToScopeNational: Float!
-    $numberOfEmployeeWorkToScopeUmnugobi: Float!
+    $numberOfEmployeeWorkToScopeUmnugovi: Float!
     $procurementTotalSpend: Float!
     $procurementNationalSpend: Float!
-    $procurementUmnugobiSpend: Float!
+    $procurementUmnugoviSpend: Float!
     $corporateSocial: String!
     $otherStories: String!
   ) {
@@ -91,13 +91,13 @@ const addFeedbackResponse = `
       feedbackId: $feedbackId
       supplierId: $supplierId
       totalEmploymentOt: $totalEmploymentOt
-      totalEmploymentUmnugobi: $totalEmploymentUmnugobi
+      totalEmploymentUmnugovi: $totalEmploymentUmnugovi
       employmentChangesAfter: $employmentChangesAfter
       numberOfEmployeeWorkToScopeNational: $numberOfEmployeeWorkToScopeNational
-      numberOfEmployeeWorkToScopeUmnugobi: $numberOfEmployeeWorkToScopeUmnugobi
+      numberOfEmployeeWorkToScopeUmnugovi: $numberOfEmployeeWorkToScopeUmnugovi
       procurementTotalSpend: $procurementTotalSpend
       procurementNationalSpend: $procurementNationalSpend
-      procurementUmnugobiSpend: $procurementUmnugobiSpend
+      procurementUmnugoviSpend: $procurementUmnugoviSpend
       corporateSocial: $corporateSocial
       otherStories: $otherStories
     ) {

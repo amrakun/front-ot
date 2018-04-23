@@ -135,7 +135,7 @@ class Dashboard extends React.Component {
               onChange={this.onTierTypeChange}
             >
               <Option value="national">National suppliers</Option>
-              <Option value="umnugobi">Umnugobi suppliers</Option>
+              <Option value="umnugobi">Umnugovi suppliers</Option>
               <Option value="tier1">International Tier 1 suppliers</Option>
               <Option value="tier2">International Tier 2 suppliers</Option>
               <Option value="tier3">International Tier 3 suppliers</Option>

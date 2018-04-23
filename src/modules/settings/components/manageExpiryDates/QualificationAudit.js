@@ -119,7 +119,7 @@ class QualificationAudit extends React.Component {
         name: 'umnugobi',
         duration: 'umnugobiDuration',
         amount: 'umnugobiAmount',
-        title: 'Umnugobi supplier'
+        title: 'Umnugovi supplier'
       },
       {
         name: 'tier1',
@@ -152,7 +152,7 @@ class QualificationAudit extends React.Component {
         name: 'umnugobi',
         duration: 'umnugobiSpecificDuration',
         amount: 'umnugobiSpecificAmount',
-        title: 'Umnugobi supplier'
+        title: 'Umnugovi supplier'
       },
       {
         name: 'tier1',

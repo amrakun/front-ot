@@ -1,12 +1,12 @@
 const labels = {
   totalEmploymentOt: 'Total national employment',
-  totalEmploymentUmnugobi: 'Total Umnugobi employment',
+  totalEmploymentUmnugovi: 'Total Umnugovi employment',
   employmentChangesAfter: 'Changes in employment number after working with OT',
   numberOfEmployeeWorkToScopeNational: 'National',
-  numberOfEmployeeWorkToScopeUmnugobi: 'Umnugobi',
+  numberOfEmployeeWorkToScopeUmnugovi: 'Umnugovi',
   procurementTotalSpend: 'Total spend/procurement',
   procurementNationalSpend: 'National spend',
-  procurementUmnugobiSpend: 'Umnugobi spend',
+  procurementUmnugoviSpend: 'Umnugovi spend',
   corporateSocial:
     '3. Corporate Social Responsibility – Contribution to community',
   otherStories: '4. Other success stories to share'
