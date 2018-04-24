@@ -24,7 +24,6 @@ class SupplierSearcher extends React.Component {
     this.showPopup = this.showPopup.bind(this);
     this.onCancel = this.onCancel.bind(this);
     this.onOk = this.onOk.bind(this);
-    this.onSelect = this.onSelect.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
@@ -43,18 +42,8 @@ class SupplierSearcher extends React.Component {
     this.setState({ visible: false, selectedValues: [] });
   }
 
-  onSelect(value) {
-    const { selectedValues } = this.state;
-
-    if (!selectedValues.includes(value)) {
-      this.setState({ selectedValues: [...selectedValues, value] });
-    }
-  }
-
   onChange(selectedValues) {
     this.setState({ selectedValues });
-
-    this.props.onChange(selectedValues);
   }
 
   renderSelect() {
@@ -64,7 +53,6 @@ class SupplierSearcher extends React.Component {
     const selectProps = {
       mode: 'multiple',
       style: { width: '100%' },
-      onSelect: this.onSelect,
       onChange: this.onChange,
       value: selectedValues,
       filterOption: (inputValue, option) =>
