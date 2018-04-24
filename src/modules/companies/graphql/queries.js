@@ -433,6 +433,7 @@ const validation = `
       productsInfo
       validatedProductsInfo
       isProductsInfoValidated
+      lastProductsInfoValidation
     }
   }
 `;

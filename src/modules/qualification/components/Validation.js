@@ -1,103 +1,139 @@
 /* eslint-disable react/display-name */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
-import { Card, Row, Col, Modal, Checkbox, Divider, Button, Icon } from 'antd';
+import {
+  Card,
+  Row,
+  Col,
+  Modal,
+  Checkbox,
+  Divider,
+  Form,
+  Button,
+  Input,
+  Icon
+} from 'antd';
 import { Common } from 'modules/companies/components';
 import { Sidebar } from 'modules/companies/components';
-import { Search } from 'modules/common/components';
+import { Uploader, Search } from 'modules/common/components';
 import moment from 'moment';
 import { dateFormat } from 'modules/common/constants';
 
 const CheckboxGroup = Checkbox.Group;
+const FormItem = Form.Item;
 
 class Validation extends Common {
   constructor(props) {
     super(props);
 
-    this.state = {
-      modalVisible: false,
-      modalData: {},
-      validatedValues: []
-    };
+    this.state = { currentCompany: null };
 
     this.showValidationModal = this.showValidationModal.bind(this);
     this.hideValidationModal = this.hideValidationModal.bind(this);
-    this.handleOk = this.handleOk.bind(this);
-    this.handleValidationCheck = this.handleValidationCheck.bind(this);
+    this.handleValidationSave = this.handleValidationSave.bind(this);
   }
 
-  handleOk() {
-    const { modalData, validatedValues } = this.state;
+  handleValidationSave(values) {
+    const { currentCompany } = this.state;
 
-    this.props.addValidation({
-      _id: modalData.companyId,
-      codes: validatedValues
-    });
-
+    this.props.addValidation({ _id: currentCompany._id, ...values });
     this.hideValidationModal();
   }
 
-  handleValidationCheck(checkedValues) {
-    this.setState({ validatedValues: checkedValues });
-  }
-
-  showValidationModal(record) {
-    this.setState({
-      modalVisible: true,
-      modalData: {
-        productCodes: record.productsInfo,
-        companyId: record._id,
-        companyName: record.basicInfo.enName
-      },
-      validatedValues: record.validatedProductsInfo
-    });
+  showValidationModal(company) {
+    this.setState({ currentCompany: company });
   }
 
   hideValidationModal() {
-    this.setState({ modalVisible: false });
+    this.setState({ currentCompany: null });
   }
 
   render() {
     const { totalCount, exportExcel } = this.props;
-    const { modalVisible, modalData, validatedValues } = this.state;
+    const { currentCompany } = this.state;
 
-    let validationOptions = [];
+    // generate last products info validation
+    const generateLPIV = (record, fieldName) => {
+      const lastProductsInfoValidation =
+        record.lastProductsInfoValidation || {};
+      const value = lastProductsInfoValidation[fieldName];
 
-    modalData.productCodes &&
-      modalData.productCodes.forEach(i => {
-        validationOptions.push({
-          label: i,
-          value: i
-        });
-      });
+      if (!value) {
+        return '-';
+      }
+
+      return value;
+    };
 
     const columns = this.getWrappedColumns([
       {
         title: 'Product/Service code',
         render: record => {
           const productsInfo = record.productsInfo;
-          if (productsInfo.length > 0) {
-            return (
-              <a onClick={() => this.showValidationModal(record)}>
-                Total: <strong>{productsInfo.length}</strong>
-                <Divider type="vertical" />
-                Validated:&nbsp;
-                <strong>{record.validatedProductsInfo.length}</strong>
-              </a>
-            );
-          } else {
+
+          if (productsInfo.length === 0) {
             return '-';
           }
+
+          return (
+            <a onClick={() => this.showValidationModal(record)}>
+              Total: <strong>{productsInfo.length}</strong>
+              <Divider type="vertical" />
+              Validated:&nbsp;
+              <strong>{record.validatedProductsInfo.length}</strong>
+            </a>
+          );
         }
       },
       {
         title: 'Last validation date',
-        render: () => moment().format(dateFormat)
+        render: record => {
+          const value = generateLPIV(record, 'date');
+
+          if (value === '-') {
+            return value;
+          }
+
+          return moment(value).format(dateFormat);
+        }
+      },
+      {
+        title: 'Last validated person name',
+        render: record => generateLPIV(record, 'personName')
+      },
+      {
+        title: 'Last justification',
+        render: record => generateLPIV(record, 'justification')
       },
       {
         title: 'Last validation result',
-        render: record => (record.isProductsInfoValidated ? 'Yes' : '-')
+        render: record => {
+          if (typeof record.isProductsInfoValidated === 'undefined') {
+            return '-';
+          }
+
+          return record.isProductsInfoValidated ? 'Yes' : 'No';
+        }
+      },
+      {
+        title: 'Last supporting documents',
+        render: record => {
+          const files = generateLPIV(record, 'files') || [];
+
+          const links = [];
+
+          for (const file of files) {
+            links.push(
+              <a target="__blank" key={Math.random()} href={file.url}>
+                {file.name},{' '}
+              </a>
+            );
+          }
+
+          return links;
+        }
       }
     ]);
 
@@ -118,28 +154,100 @@ class Validation extends Common {
             {this.renderTable({ columns })}
           </Card>
 
-          <Modal
-            title={modalData.companyName}
-            visible={modalVisible}
-            onOk={this.handleOk}
-            onCancel={this.hideValidationModal}
-            bodyStyle={{ maxHeight: '60vh', overflow: 'scroll' }}
-          >
-            <p>
-              <strong>Check validated</strong>
-            </p>
-
-            <CheckboxGroup
-              options={validationOptions}
-              value={validatedValues}
-              onChange={this.handleValidationCheck}
-              className="horizontal capitalize"
-            />
-          </Modal>
+          <ValidationForm
+            company={currentCompany}
+            hide={this.hideValidationModal}
+            onSave={this.handleValidationSave}
+          />
         </Col>
       </Row>
     );
   }
 }
+
+class ValidationModal extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.onFileUpload = this.onFileUpload.bind(this);
+
+    this.state = { files: [] };
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    const { form, onSave } = this.props;
+    const { files } = this.state;
+
+    form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        onSave({ files, ...values });
+      }
+    });
+  }
+
+  onFileUpload(files) {
+    this.setState({ files: files.filter(file => file.url) });
+  }
+
+  render() {
+    const { form, hide, company } = this.props;
+    const { getFieldDecorator } = form;
+
+    if (!company) {
+      return null;
+    }
+
+    return (
+      <Modal
+        title={`Validate: ${company.basicInfo.enName}`}
+        onOk={this.handleSubmit}
+        visible={true}
+        onCancel={hide}
+        bodyStyle={{ maxHeight: '60vh', overflow: 'scroll' }}
+      >
+        <Form onSubmit={this.handleSubmit}>
+          <FormItem label="Validated person name">
+            {getFieldDecorator('personName', {})(<Input />)}
+          </FormItem>
+
+          <FormItem label="Justification*">
+            {getFieldDecorator('justification', {
+              rules: [
+                { required: true, message: 'Please input justification!' }
+              ]
+            })(<Input />)}
+          </FormItem>
+
+          <FormItem label="Supporting documents">
+            {getFieldDecorator('files', {})(
+              <Uploader multiple onChange={this.onFileUpload} />
+            )}
+          </FormItem>
+
+          <FormItem label="Check validated">
+            {getFieldDecorator('checkedItems', {})(
+              <CheckboxGroup
+                options={company.productsInfo}
+                className="horizontal capitalize"
+              />
+            )}
+          </FormItem>
+        </Form>
+      </Modal>
+    );
+  }
+}
+
+ValidationModal.propTypes = {
+  form: PropTypes.object,
+  company: PropTypes.object,
+  hide: PropTypes.func,
+  onSave: PropTypes.func
+};
+
+const ValidationForm = Form.create()(ValidationModal);
 
 export default withRouter(Validation);

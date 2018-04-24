@@ -107,8 +107,21 @@ const addFeedbackResponse = `
 `;
 
 const addValidation = `
-  mutation companiesValidateProductsInfo($_id: String! $codes: [String]!) {
-    companiesValidateProductsInfo(_id: $_id, codes: $codes) {
+  mutation companiesValidateProductsInfo(
+    $_id: String!
+    $personName: String
+    $justification: String!
+    $checkedItems: [String!]!
+    $files: [JSON]
+  ) {
+
+    companiesValidateProductsInfo(
+      _id: $_id
+      personName: $personName
+      justification: $justification
+      checkedItems: $checkedItems
+      files: $files
+    ) {
       _id
     }
   }
