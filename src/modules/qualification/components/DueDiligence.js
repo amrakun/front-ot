@@ -91,15 +91,7 @@ class DueDiligence extends Common {
     const { totalCount, addDueDiligence, exportExcel } = this.props;
     const { selectedCompanies, filesModal } = this.state;
 
-    const columns = [
-      { title: 'Supplier name', dataIndex: 'basicInfo.enName', width: 160 },
-      { title: 'SAP number', dataIndex: 'basicInfo.sapNumber', width: 100 },
-      { title: 'Tier type', dataIndex: 'tierType', width: 40 },
-      {
-        title: 'Status',
-        width: 40,
-        render: record => this.renderStatus(record)
-      },
+    const columns = this.getWrappedColumns([
       {
         title: 'Report',
         width: 134,
@@ -137,11 +129,8 @@ class DueDiligence extends Common {
 
           return file ? moment(lastDueDiligence.date).format(dateFormat) : '-';
         }
-      },
-      { title: 'Contact person', dataIndex: 'contactInfo.name', width: 60 },
-      { title: 'Email address', dataIndex: 'contactInfo.email', width: 60 },
-      { title: 'Phone number', dataIndex: 'contactInfo.phone', width: 60 }
-    ];
+      }
+    ]);
 
     return (
       <Row gutter={16}>

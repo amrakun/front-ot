@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';
 import { Card, Row, Col, Button, Icon } from 'antd';
 import { Common, Sidebar } from 'modules/companies/components';
 import { Search } from 'modules/common/components';
@@ -42,18 +41,7 @@ class Status extends Common {
     const { generate, totalCount } = this.props;
     const { selectedCompanies } = this.state;
 
-    const columns = [
-      { title: 'Supplier name', dataIndex: 'basicInfo.enName' },
-      { title: 'SAP number', dataIndex: 'basicInfo.sapNumber' },
-      { title: 'Tier type', dataIndex: 'tierType' },
-      {
-        title: 'Pre-qualification information',
-        render: record => (
-          <Link to={`/prequalification-status/${record._id}`}>
-            {record.isPrequalified ? 'Yes' : 'No'}
-          </Link>
-        )
-      },
+    const columns = this.getWrappedColumns([
       {
         title: 'Submission date',
         render: record => moment(record.prequalifiedDate).format(dateFormat)
@@ -61,11 +49,8 @@ class Status extends Common {
       {
         title: 'Expiration date',
         render: record => this.renderExpirationDate(record.prequalifiedDate)
-      },
-      { title: 'Contact person', dataIndex: 'contactInfo.name' },
-      { title: 'Email address', dataIndex: 'contactInfo.email' },
-      { title: 'Phone number', dataIndex: 'contactInfo.phone' }
-    ];
+      }
+    ]);
 
     return (
       <Row gutter={16}>

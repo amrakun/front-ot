@@ -58,12 +58,12 @@ class Base extends Common {
       {
         title: 'Qualification status',
         width: 40,
-        render: record => (record.isQualified ? 'Yes' : 'No')
+        dataIndex: 'qualificationStatusDisplay'
       },
       {
         title: 'Validation status',
         width: 40,
-        render: record => (record.isProductsInfoValidated ? 'Yes' : '-')
+        dataIndex: 'productsInfoValidationStatusDisplay'
       },
       {
         title: 'Due dilligence',

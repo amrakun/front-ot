@@ -326,6 +326,8 @@ const commonFields = `
   }
   isPrequalified
   tierType
+  tierTypeDisplay
+  prequalificationStatusDisplay
 `;
 
 const companies = `
@@ -335,10 +337,10 @@ const companies = `
       tierType
       averageDifotScore
       lastDueDiligence
-      isProductsInfoValidated
+
+      productsInfoValidationStatusDisplay
+      qualificationStatusDisplay
       isBlocked
-      isPrequalified
-      isQualified
     }
   }
 `;
@@ -442,7 +444,7 @@ const audit = `
   query companies(${commonParams}) {
     companies(${commonValues}) {
       ${commonFields}
-      isQualified
+      qualificationStatusDisplay
     }
   }
 `;

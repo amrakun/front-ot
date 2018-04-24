@@ -42,13 +42,17 @@ export default class Common extends React.Component {
     return [
       { title: 'Supplier name', dataIndex: 'basicInfo.enName', width: 160 },
       { title: 'SAP number', dataIndex: 'basicInfo.sapNumber', width: 100 },
-      { title: 'Tier type', dataIndex: 'tierType', width: 40 },
+      {
+        title: 'Tier type',
+        dataIndex: 'tierTypeDisplay',
+        width: 40
+      },
       {
         title: 'Pre-qualification status',
         width: 40,
         render: record => (
           <Link to={`/prequalification-status/${record._id}?view`}>
-            {record.isPrequalified ? 'Yes' : 'No'}
+            {record.prequalificationStatusDisplay}
           </Link>
         )
       },
