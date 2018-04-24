@@ -138,7 +138,7 @@ class Dashboard extends React.Component {
     );
   }
 
-  renderBarChart({ data, key1, key2, key3, height }) {
+  renderBarChart({ data, content, height }) {
     return (
       <ResponsiveContainer width="100%" height={height}>
         <BarChart data={data}>
@@ -147,9 +147,7 @@ class Dashboard extends React.Component {
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />
           <Legend />
-          <Bar dataKey={key1} stackId="a" fill={COLORS[1]} />
-          <Bar dataKey={key2} stackId="a" fill={COLORS[0]} />
-          {key3 && <Bar dataKey={key3} stackId="a" fill={COLORS[3]} />}
+          {content}
         </BarChart>
       </ResponsiveContainer>
     );
@@ -168,10 +166,32 @@ class Dashboard extends React.Component {
       <Card title="Suppliers by Category" className="barchart-wrapper margin">
         {this.renderBarChart({
           data,
-          key1: 'prequalified',
-          key2: 'registered',
-          key3: 'validated',
-          height
+          height,
+          content: [
+            <Bar
+              name="Prequalified"
+              key={1}
+              dataKey="prequalified"
+              stackId="a"
+              fill={COLORS[0]}
+            />,
+
+            <Bar
+              name="Registered"
+              key={2}
+              dataKey="registered"
+              stackId="a"
+              fill={COLORS[1]}
+            />,
+
+            <Bar
+              name="Validated"
+              key={3}
+              dataKey="validated"
+              stackId="a"
+              fill={COLORS[2]}
+            />
+          ]
         })}
       </Card>
     );
@@ -179,6 +199,7 @@ class Dashboard extends React.Component {
 
   renderPrequalified() {
     const { productData, location } = this.props;
+    const data = regVsPreq ? this.groupData(productData) : productData;
     const height = this.state.pieChartWidth * 0.8;
     const queryParams = queryString.parse(location.search);
     const { regVsPreq } = this.state;
@@ -199,10 +220,41 @@ class Dashboard extends React.Component {
         }
       >
         {this.renderBarChart({
-          data: regVsPreq ? this.groupData(productData) : productData,
-          key1: 'prequalified',
-          key2: 'registered',
-          height
+          data,
+          height,
+          content: [
+            <Bar
+              name="Registered"
+              key={1}
+              dataKey="registered"
+              stackId="a"
+              fill={COLORS[0]}
+            />,
+
+            <Bar
+              name="Prequalified"
+              key={2}
+              dataKey="prequalified"
+              stackId="a"
+              fill={COLORS[1]}
+            />,
+
+            <Bar
+              name="Not-prequalified"
+              key={3}
+              dataKey="notPrequalified"
+              stackId="a"
+              fill={COLORS[2]}
+            />,
+
+            <Bar
+              name="Pending qualification"
+              key={4}
+              dataKey="prequalificationPending"
+              stackId="a"
+              fill={COLORS[3]}
+            />
+          ]
         })}
       </Card>
     );
@@ -294,9 +346,24 @@ class Dashboard extends React.Component {
                 <Card title="EOI (this year)" className="barchart-wrapper">
                   {this.renderBarChart({
                     data: eoiData,
-                    key1: 'open',
-                    key2: 'closed',
-                    height: 200
+                    height: 200,
+                    content: [
+                      <Bar
+                        name="Open"
+                        key={1}
+                        dataKey="open"
+                        stackId="a"
+                        fill={COLORS[0]}
+                      />,
+
+                      <Bar
+                        name="Closed"
+                        key={1}
+                        dataKey="closed"
+                        stackId="a"
+                        fill={COLORS[1]}
+                      />
+                    ]
                   })}
                 </Card>
               </div>
