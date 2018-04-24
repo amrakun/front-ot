@@ -117,7 +117,27 @@ class Sidebar extends React.Component {
     );
   }
 
-  renderSelect(name, label) {
+  renderBlockSelect() {
+    return (
+      <tr key="block">
+        <td>
+          <label>Blocked suppliers</label>
+        </td>
+        <td>
+          <Select
+            onChange={e => this.handleSelect(e, 'includeBlocked')}
+            size="small"
+            value={this.state.includeBlocked}
+          >
+            <Option value="true">include</Option>
+            <Option value="">Not include</Option>
+          </Select>
+        </td>
+      </tr>
+    );
+  }
+
+  renderSelect({ name, label, included, notIncluded }) {
     return (
       <tr key={name}>
         <td>
@@ -130,8 +150,8 @@ class Sidebar extends React.Component {
             value={this.state[name]}
           >
             <Option value="">All</Option>
-            <Option value="true">Included</Option>
-            <Option value="false">Not included</Option>
+            <Option value="true">{included}</Option>
+            <Option value="false">{notIncluded}</Option>
           </Select>
         </td>
       </tr>
@@ -184,10 +204,25 @@ class Sidebar extends React.Component {
         >
           <table className="suppliers-filter">
             <tbody>
-              {this.renderSelect('isPrequalified', 'Pre-qualified')}
-              {this.renderSelect('isQualified', 'Qualified')}
-              {this.renderSelect('isProductsInfoValidated', 'Validated')}
-              {this.renderSelect('includeBlocked', 'Blocked suppliers')}
+              {this.renderSelect({
+                name: 'isPrequalified',
+                label: 'Pre-qualified',
+                included: 'Pre-qualified',
+                notIncluded: 'Not qualified'
+              })}
+              {this.renderSelect({
+                name: 'isQualified',
+                label: 'Qualified',
+                included: 'Qualified',
+                notIncluded: 'Not qualified'
+              })}
+              {this.renderSelect({
+                name: 'isProductsInfoValidated',
+                label: 'Validated',
+                included: 'Validated',
+                notIncluded: 'Not validated'
+              })}
+              {this.renderBlockSelect()}
               {this.renderDifotSelect()}
             </tbody>
           </table>
