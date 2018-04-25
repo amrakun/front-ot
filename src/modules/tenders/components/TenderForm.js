@@ -170,7 +170,7 @@ class TenderForm extends BaseForm {
     const render = (text, record) => {
       let defaultValue = record[name];
 
-      if (name === 'document') defaultValue = __(record[name]);
+      if (name === 'document' && defaultValue) defaultValue = __(record[name]);
 
       const inputProps = {
         defaultValue,

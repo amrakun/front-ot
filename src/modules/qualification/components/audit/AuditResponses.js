@@ -48,7 +48,10 @@ class AuditResponses extends React.Component {
 
   columns() {
     return [
-      { title: 'Status by date', dataIndex: 'status' },
+      {
+        title: 'Status by date',
+        render: record => (record.status === 'onTime' ? 'On time' : 'Late')
+      },
       { title: 'Status by action', dataIndex: 'audit.status' },
       { title: 'Supplier name', dataIndex: 'supplier.basicInfo.enName' },
       { title: 'SAP number', dataIndex: 'supplier.basicInfo.sapNumber' },
