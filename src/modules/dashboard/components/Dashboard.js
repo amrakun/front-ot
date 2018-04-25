@@ -103,7 +103,7 @@ class Dashboard extends React.Component {
     };
 
     return (
-      <Card title="Suppliers By Tier Type">
+      <Card title="Suppliers by Tier Type">
         <div className="pie-chart-labels">
           {data.map((detail, index) => (
             <span key={index} className="chart-text">
