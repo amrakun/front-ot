@@ -100,7 +100,7 @@ class Dashboard extends React.Component {
           <Col key={1} lg={8} sm={12}>
             <NumberCard
               icon="message"
-              title={__('Open EOI')}
+              title={__('Open EOI/RFQ')}
               color={openTendersCount > 0 ? colors[7] : colors[5]}
               number={openTendersCount}
               tooltip={__(
@@ -201,13 +201,13 @@ class Dashboard extends React.Component {
           queryParams={queryParams}
         />
 
-        {/* <SupplierTenders */}
-        {/*   history={history} */}
-        {/*   location={location} */}
-        {/*   type="rfq" */}
-        {/*   supplierId={currentUser.companyId} */}
-        {/*   queryParams={queryParams} */}
-        {/* /> */}
+        <SupplierTenders
+          history={history}
+          location={location}
+          type="rfq"
+          supplierId={currentUser.companyId}
+          queryParams={queryParams}
+        />
       </div>
     );
   }

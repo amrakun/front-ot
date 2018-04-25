@@ -10,8 +10,8 @@ const Breadcrumbs = location => {
   const { formatMessage } = location.intl;
   const routes = {
     'rfq-and-eoi': formatMessage({
-      id: 'EOI',
-      defaultMessage: 'EOI'
+      id: 'RFQ and EOI',
+      defaultMessage: 'RFQ and EOI'
     }),
     dashboard: 'Dashboard',
     companies: 'Suppliers',
