@@ -13,7 +13,6 @@ class AuditRequests extends React.Component {
     return [
       {
         title: __('Status'),
-        dataIndex: 'status',
         render: record => {
           return record.status === 'open' ? __('open') : __('closed');
         }
