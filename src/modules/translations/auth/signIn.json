@@ -9,5 +9,9 @@
     "Хаяг амжилттай идэвхжлээ! Өөрийн мэдээллээ ашиглан нэвтэрч орно уу",
   "Please sign in to continue!": "Үргэлжлүүлэн нэвтэрч орно уу",
   "Please enter your password!": "Нууц үгээ оруулна уу!",
-  "Please enter your email!": "И-мэйл хаягаа оруулна уу!"
+  "Please enter your email!": "И-мэйл хаягаа оруулна уу!",
+  "Invalid login": "Нэвтрэх нэр эсвэл нууц үг буруу байна",
+  "Invalid email": "Аль хэдийнэ ашигласан эсвэл буруу имэйл байна",
+  "Confirmation link has been sent to your email":
+    "Баталгаажуулах холбоос таны имэйл рүү илгээгдлээ"
 }

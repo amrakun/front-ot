@@ -1,4 +1,5 @@
 import xlsx from 'xlsx';
+import { message } from 'antd';
 
 export const xlsxHandler = ({ e, success }) => {
   const reader = new FileReader();
@@ -13,4 +14,16 @@ export const xlsxHandler = ({ e, success }) => {
   };
 
   reader.readAsBinaryString(e.target.files[0]);
+};
+
+export const alert = {
+  error: (error, __) => {
+    const fixedMessage = error.message.replace('GraphQL error: ', '');
+
+    return message.error(__ ? __(fixedMessage) : fixedMessage);
+  },
+
+  success: (msg, __) => {
+    return message.success(__ ? __(msg) : msg);
+  }
 };

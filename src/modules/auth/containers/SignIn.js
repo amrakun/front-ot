@@ -2,15 +2,15 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { compose, graphql, gql } from 'react-apollo';
+import { alert } from 'modules/common/utils';
 import { SignIn } from '../components';
 import { mutations } from '../graphql';
 import consts from 'consts';
 import apolloClient from 'apolloClient';
-import { message } from 'antd';
 
 class SignInContainer extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.state = {
       loading: false,
@@ -21,6 +21,7 @@ class SignInContainer extends React.Component {
   render() {
     const { loginMutation } = this.props;
     const { loading, chooseLoginAs } = this.state;
+    const { __ } = this.context;
 
     const login = variables => {
       const { LOGIN_TOKEN_KEY, LOGIN_REFRESH_TOKEN_KEY } = consts;
@@ -53,7 +54,7 @@ class SignInContainer extends React.Component {
         })
 
         .catch(error => {
-          message.error(error.message);
+          alert.error(error, __);
 
           this.setState({ loading: false });
         });
@@ -73,6 +74,10 @@ class SignInContainer extends React.Component {
 SignInContainer.propTypes = {
   loginMutation: PropTypes.func,
   history: PropTypes.object
+};
+
+SignInContainer.contextTypes = {
+  __: PropTypes.func
 };
 
 export default withRouter(

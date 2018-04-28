@@ -71,7 +71,7 @@ export default class Field extends React.Component {
     } = this.props;
     let { label } = this.props;
 
-    const { form, __, locale } = this.context;
+    const { form, __, locale, currentUser } = this.context;
     const { getFieldDecorator } = form;
 
     if (!optional) {
@@ -89,6 +89,7 @@ export default class Field extends React.Component {
     }
 
     if (
+      currentUser &&
       canBeCryllic &&
       !optional &&
       locale === 'mn' &&
@@ -145,6 +146,8 @@ export default class Field extends React.Component {
 
 Field.propTypes = {
   label: PropTypes.any,
+  labelIgnoreIndex: PropTypes.number,
+  labelIndex: PropTypes.number,
   description: PropTypes.string,
   name: PropTypes.string,
   control: PropTypes.node,
@@ -166,5 +169,6 @@ Field.propTypes = {
 Field.contextTypes = {
   form: PropTypes.object,
   __: PropTypes.func,
+  currentUser: PropTypes.object,
   locale: PropTypes.string
 };

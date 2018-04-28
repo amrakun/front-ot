@@ -71,7 +71,9 @@ class InjectInstance extends React.Component {
 
     return {
       __: msg =>
-        isSupplier ? formatMessage({ id: msg, defaultMessage: msg }) : msg
+        !currentUser || isSupplier
+          ? formatMessage({ id: msg, defaultMessage: msg })
+          : msg
     };
   }
 
