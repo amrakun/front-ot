@@ -7,6 +7,7 @@ import router from 'modules/common/router';
 
 const propTypes = {
   total: PropTypes.number,
+  paramPrefix: PropTypes.string,
   history: PropTypes.object,
   location: PropTypes.object
 };
@@ -15,14 +16,26 @@ class Paginator extends React.Component {
   onChange(current, pageSize) {
     const { history } = this.props;
 
-    router.setParams(history, { page: current, perPage: pageSize });
+    router.setParams(history, {
+      [this.pageParamName()]: current,
+      [this.perPageParamName()]: pageSize
+    });
+  }
+
+  pageParamName() {
+    return `${this.props.paramPrefix || ''}page`;
+  }
+
+  perPageParamName() {
+    return `${this.props.paramPrefix || ''}perPage`;
   }
 
   render() {
     const { location, total } = this.props;
     const queryParams = queryString.parse(location.search);
 
-    let { perPage, page } = queryParams;
+    let perPage = queryParams[this.perPageParamName()];
+    let page = queryParams[this.pageParamName()];
 
     perPage = perPage ? parseInt(perPage, 10) : 15;
     page = page ? parseInt(page, 15) : 1;

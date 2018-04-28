@@ -152,7 +152,11 @@ class Tenders extends React.Component {
           onChange={this.handleTableChange}
           className="tenders-table"
         />
-        <Paginator total={totalCount} />
+
+        <Paginator
+          total={totalCount}
+          paramPrefix={this.isSupplier ? type : ''}
+        />
       </Card>
     );
   }

@@ -78,19 +78,26 @@ TendersContainer.contextTypes = {
   currentUser: PropTypes.object
 };
 
+const generateVariables = ({ type, queryParams }) => {
+  const page = queryParams[`${type}page`] || 1;
+  const perPage = queryParams[`${type}perPage`] || 15;
+
+  return {
+    page,
+    perPage,
+    search: queryParams ? queryParams.search : '',
+    status: queryParams ? queryParams.status : '',
+    type: type,
+    month: queryParams ? queryParams.month : ''
+  };
+};
+
 export default compose(
   graphql(gql(queries.tendersSupplier), {
     name: 'tendersTableQuery',
-    options: ({ type, queryParams }) => {
+    options: props => {
       return {
-        variables: {
-          page: queryParams.page || 1,
-          perPage: queryParams.perPage || 15,
-          search: queryParams ? queryParams.search : '',
-          status: queryParams ? queryParams.status : '',
-          type: type,
-          month: queryParams ? queryParams.month : ''
-        },
+        variables: generateVariables(props),
         notifyOnNetworkStatusChange: true
       };
     }
@@ -98,16 +105,9 @@ export default compose(
 
   graphql(gql(queries.totalSupplierTenders), {
     name: 'tendersCountQuery',
-    options: ({ type, queryParams }) => {
+    options: props => {
       return {
-        variables: {
-          page: queryParams.page || 1,
-          perPage: queryParams.perPage || 15,
-          search: queryParams ? queryParams.search : '',
-          status: queryParams ? queryParams.status : '',
-          type: type,
-          month: queryParams ? queryParams.month : ''
-        },
+        variables: generateVariables(props),
         notifyOnNetworkStatusChange: true
       };
     }
