@@ -57,13 +57,17 @@ export default compose(
     name: 'auditResponsesTableQuery',
     options: ({ queryParams }) => {
       const params = queryParams || {};
+
       return {
         variables: {
           publishDate: params.from,
           closeDate: params.to,
           supplierSearch: params.search,
           page: params.page || 1,
-          perPage: params.perPage || 15
+          perPage: params.perPage || 15,
+          isQualified: params.isQualified,
+          isNew: params.isNew,
+          isSentImprovementPlan: params.isSentImprovementPlan
         },
         notifyOnNetworkStatusChange: true
       };

@@ -1,18 +1,21 @@
 /* eslint-disable react/display-name */
 
+import { gql, withApollo } from 'react-apollo';
+import moment from 'moment';
 import React from 'react';
+import queryString from 'query-string';
 import { withRouter } from 'react-router';
-import { Table, Card, Row, Col, DatePicker } from 'antd';
-import { NumberCard, TextCard } from 'modules/common/components';
-import { dateFormat, colors } from 'modules/common/constants';
+import { Modal, Table, Card, Row, Col, DatePicker } from 'antd';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import moment from 'moment';
+import { NumberCard, TextCard } from 'modules/common/components';
+import { dateFormat, colors } from 'modules/common/constants';
+import router from 'modules/common/router';
 import { Search } from 'modules/common/components';
-import queryString from 'query-string';
 import { StatsTable } from 'modules/common/components';
 import { auditTabs } from 'modules/qualification/consts';
 import { MassEmail } from 'modules/companies/containers';
+import { queries } from '../../graphql';
 
 class AuditResponses extends React.Component {
   constructor(props) {
@@ -20,7 +23,10 @@ class AuditResponses extends React.Component {
 
     this.state = {
       selectedRowKeys: [],
-      selectedSuppliers: []
+      selectedSuppliers: [],
+      showModal: false,
+      modalTitle: '',
+      popupData: []
     };
 
     this.columns = this.columns.bind(this);
@@ -44,6 +50,106 @@ class AuditResponses extends React.Component {
       selectedRowKeys,
       selectedSuppliers: selectedRows.map(row => row.supplier)
     });
+  }
+
+  setFilter(name) {
+    router.setParams(this.props.history, {
+      isQualified: undefined,
+      isNew: undefined,
+      isSentImprovementPlan: undefined,
+      [name]: true
+    });
+  }
+
+  showCompanies(type) {
+    const { client } = this.props;
+
+    client
+      .query({
+        query: gql(queries.auditsSuppliers),
+        variables: { type }
+      })
+      .then(({ data, loading }) => {
+        if (loading) {
+          return;
+        }
+
+        this.setState({
+          showModal: true,
+          modalTitle: `${
+            type === 'notResponded' ? 'Not responded' : 'Invited'
+          } suppliers`,
+          popupData: data.auditsSuppliers
+        });
+      });
+  }
+
+  renderModal() {
+    const { showModal, modalTitle, popupData } = this.state;
+
+    if (!showModal) {
+      return false;
+    }
+
+    const columns = [
+      { title: 'Status', dataIndex: 'audit.status', width: 160 },
+      {
+        title: 'Publish date',
+        render: record => moment(record.audit.publishDate).format(dateFormat)
+      },
+      {
+        title: 'Close date',
+        render: record => moment(record.audit.closeDate).format(dateFormat)
+      },
+      {
+        title: 'Supplier name',
+        dataIndex: 'supplier.basicInfo.enName',
+        width: 160
+      },
+      {
+        title: 'SAP number',
+        dataIndex: 'supplier.basicInfo.sapNumber',
+        width: 100
+      },
+      {
+        title: 'Tier type',
+        dataIndex: 'supplier.tierTypeDisplay',
+        width: 40
+      },
+      {
+        title: 'Contact person',
+        dataIndex: 'supplier.contactInfo.name',
+        width: 60
+      },
+      {
+        title: 'Email address',
+        dataIndex: 'supplier.contactInfo.email',
+        width: 60
+      },
+      {
+        title: 'Phone number',
+        dataIndex: 'supplier.contactInfo.phone',
+        width: 60
+      }
+    ];
+
+    const props = {
+      dataSource: popupData,
+      columns,
+      key: Math.random()
+    };
+
+    return (
+      <Modal
+        title={modalTitle}
+        visible={true}
+        footer={null}
+        width="80%"
+        onCancel={() => this.setState({ showModal: false })}
+      >
+        <Table {...props} />
+      </Modal>
+    );
   }
 
   columns() {
@@ -122,13 +228,14 @@ class AuditResponses extends React.Component {
     const { selectedRowKeys, selectedSuppliers } = this.state;
 
     const colSpan = {
-      xl: 6,
+      xl: 8,
       lg: 12,
       sm: 24
     };
 
     return (
       <div>
+        {this.renderModal()}
         <Row gutter={24}>
           <Col key={0} {...colSpan}>
             <NumberCard
@@ -136,15 +243,17 @@ class AuditResponses extends React.Component {
               title="Invited suppliers"
               color={colors[3]}
               number={counts.invited || 0}
+              onClick={() => this.showCompanies('invited')}
             />
           </Col>
-          <Col key={3} {...colSpan}>
+          <Col key={1} {...colSpan}>
             <TextCard
               icon="like"
               title={`Qualified - ${counts.qualified || 0}`}
               color={colors[2]}
               size="big"
               text={<StatsTable stats={auditStats} tabs={auditTabs} />}
+              onClick={() => this.setFilter('isQualified')}
             />
           </Col>
           <Col key={2} {...colSpan}>
@@ -153,6 +262,16 @@ class AuditResponses extends React.Component {
               title="Not responded"
               color={colors[5]}
               number={counts.notResponded || 0}
+              onClick={() => this.showCompanies('notResponded')}
+            />
+          </Col>
+          <Col key={3} {...colSpan}>
+            <NumberCard
+              icon="calculator"
+              title="New"
+              color={colors[6]}
+              number={counts.notNotified || 0}
+              onClick={() => this.setFilter('isNew')}
             />
           </Col>
           <Col key={4} {...colSpan}>
@@ -161,6 +280,7 @@ class AuditResponses extends React.Component {
               title="Sent improvement plan"
               color={colors[8]}
               number={counts.sentImprovementPlan || 0}
+              onClick={() => this.setFilter('isSentImprovementPlan')}
             />
           </Col>
         </Row>
@@ -194,6 +314,7 @@ class AuditResponses extends React.Component {
 }
 
 AuditResponses.propTypes = {
+  client: PropTypes.object,
   pagination: PropTypes.object,
   data: PropTypes.array,
   loading: PropTypes.bool,
@@ -204,4 +325,4 @@ AuditResponses.propTypes = {
   responsesQualifiedStatusQuery: PropTypes.object
 };
 
-export default withRouter(AuditResponses);
+export default withRouter(withApollo(AuditResponses));

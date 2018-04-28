@@ -245,6 +245,32 @@ const companyByUser = `
   }
 `;
 
+const auditsSuppliers = `
+  query auditsSuppliers($type: String!) {
+    auditsSuppliers(type: $type) {
+      audit {
+        _id
+        status
+        publishDate
+        closeDate
+      }
+      supplier {
+        _id
+        basicInfo {
+          enName,
+          email,
+          sapNumber
+        }
+        contactInfo {
+          name,
+          email,
+          phone
+        }
+      }
+    }
+  }
+`;
+
 const auditRequests = `
   query companyByUser {
     companyByUser {
@@ -283,6 +309,9 @@ const auditResponseParams = `
   $closeDate: Date
   $isFileGenerated: Boolean
   $status: String
+  $isQualified: Boolean
+  $isNew: Boolean
+  $isSentImprovementPlan: Boolean
 `;
 
 const auditResponseValues = `
@@ -291,6 +320,9 @@ const auditResponseValues = `
   closeDate: $closeDate
   isFileGenerated: $isFileGenerated
   status: $status
+  isQualified: $isQualified
+  isNew: $isNew
+  isSentImprovementPlan: $isSentImprovementPlan
 `;
 
 const auditResponsesQualifiedStatus = `
@@ -596,6 +628,7 @@ const auditResponseTotalCounts = `
       notResponded
       qualified
       sentImprovementPlan
+      notNotified
     }
   }
 `;
@@ -618,6 +651,7 @@ export default {
   feedbackResponseDetail,
   qualificationDetail,
   companyByUser,
+  auditsSuppliers,
   auditRequests,
   audits,
   auditResponses,
