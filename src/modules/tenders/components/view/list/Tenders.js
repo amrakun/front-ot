@@ -15,12 +15,15 @@ class Tenders extends React.Component {
   constructor(props) {
     super(props);
 
-    const { history } = props;
+    const { history, type } = props;
+
+    this.statusParam = `${type}status`;
 
     const query = queryString.parse(history.location.search);
+    const status = query[this.statusParam] || '';
 
     this.state = {
-      statuses: query.status && query.status.split(',')
+      statuses: status.split(',')
     };
 
     this.renderOperation = this.renderOperation.bind(this);
@@ -38,12 +41,14 @@ class Tenders extends React.Component {
     const statuses = filters.status;
 
     if (statuses && statuses.length > 0) {
-      router.setParams(this.props.history, { status: statuses.join(',') });
-      this.setState({ statuses });
+      router.setParams(this.props.history, {
+        [this.statusParam]: statuses.join(',')
+      });
     } else {
-      router.removeParams(this.props.history, 'status');
-      this.setState({ statuses });
+      router.removeParams(this.props.history, this.statusParam);
     }
+
+    this.setState({ statuses });
   }
 
   renderIcon(name, style) {
