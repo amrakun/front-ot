@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';
 import { Card, Row, Col, Button, Icon, message } from 'antd';
 import { Search } from 'modules/common/components';
 import Common from './Common';
@@ -47,59 +46,56 @@ class Base extends Common {
 
     const { selectedCompanies, selectedSuppliers } = this.state;
 
-    const columns = this.getWrappedColumns([
-      {
-        title: 'Registration',
-        width: 40,
-        render: record => (
-          <Link to={`/view-registration/${record._id}`}>View</Link>
-        )
-      },
-      {
-        title: 'Qualification status',
-        width: 40,
-        dataIndex: 'qualificationStatusDisplay'
-      },
-      {
-        title: 'Validation status',
-        width: 40,
-        dataIndex: 'productsInfoValidationStatusDisplay'
-      },
-      {
-        title: 'Due dilligence',
-        width: 40,
-        render: record =>
-          record.lastDueDiligence && record.lastDueDiligence.file ? (
-            <a href={record.lastDueDiligence.file.url} target="_blank">
-              View
-            </a>
-          ) : (
-            'n/a'
+    const columns = this.getWrappedColumns(
+      [
+        {
+          title: 'Qualification status',
+          width: 40,
+          dataIndex: 'qualificationStatusDisplay'
+        },
+        {
+          title: 'Validation status',
+          width: 40,
+          dataIndex: 'productsInfoValidationStatusDisplay'
+        },
+        {
+          title: 'Block status',
+          width: 40,
+          render: record => (record.isBlocked ? 'Yes' : '-')
+        },
+        {
+          title: 'Due dilligence',
+          width: 40,
+          render: record =>
+            record.lastDueDiligence && record.lastDueDiligence.file ? (
+              <a href={record.lastDueDiligence.file.url} target="_blank">
+                View
+              </a>
+            ) : (
+              'n/a'
+            )
+        },
+        {
+          title: 'DIFOT score (average)',
+          width: 40,
+          render: record =>
+            record.averageDifotScore
+              ? `${record.averageDifotScore.toFixed(1)}%`
+              : '-',
+          sorter: true,
+          key: 'averageDifotScore'
+        }
+      ],
+      [
+        {
+          title: 'Supplier profile',
+          width: 40,
+          render: record => (
+            <a onClick={() => exportCompany(record._id)}>view/export</a>
           )
-      },
-      {
-        title: 'DIFOT score (average)',
-        width: 40,
-        render: record =>
-          record.averageDifotScore
-            ? `${record.averageDifotScore.toFixed(1)}%`
-            : '-',
-        sorter: true,
-        key: 'averageDifotScore'
-      },
-      {
-        title: 'Blocking',
-        width: 40,
-        render: record => (record.isBlocked ? 'Yes' : '-')
-      },
-      {
-        title: 'Export profile',
-        width: 40,
-        render: record => (
-          <a onClick={() => exportCompany(record._id)}>Export</a>
-        )
-      }
-    ]);
+        }
+      ]
+    );
 
     return (
       <Row gutter={16}>

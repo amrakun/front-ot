@@ -38,7 +38,7 @@ export default class Common extends React.Component {
     this.setState({ selectedCompanies });
   }
 
-  getWrappedColumns(columns) {
+  getWrappedColumns(middleColumns = [], backColumns = []) {
     return [
       { title: 'Supplier name', dataIndex: 'basicInfo.enName', width: 160 },
       { title: 'SAP number', dataIndex: 'basicInfo.sapNumber', width: 100 },
@@ -56,10 +56,11 @@ export default class Common extends React.Component {
           </Link>
         )
       },
-      ...columns,
+      ...middleColumns,
       { title: 'Contact person', dataIndex: 'contactInfo.name', width: 60 },
       { title: 'Email address', dataIndex: 'contactInfo.email', width: 60 },
-      { title: 'Phone number', dataIndex: 'contactInfo.phone', width: 60 }
+      { title: 'Phone number', dataIndex: 'contactInfo.phone', width: 60 },
+      ...backColumns
     ];
   }
 
