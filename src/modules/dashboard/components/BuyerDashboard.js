@@ -15,7 +15,7 @@ import {
 } from 'recharts';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
-import { Tenders } from 'modules/tenders/containers';
+import { BuyerTenders } from 'modules/tenders/containers';
 import moment from 'moment';
 import productsTree from 'modules/companies/productsTree';
 import { colors } from 'modules/common/constants';
@@ -414,8 +414,8 @@ class Dashboard extends React.Component {
         </Tabs.TabPane>
 
         <Tabs.TabPane tab="My dashboard" key="2">
-          <Tenders type="eoi" {...this.props} />
-          <Tenders type="rfq" {...this.props} />
+          <BuyerTenders type="eoi" {...this.props} />
+          <BuyerTenders type="rfq" {...this.props} />
         </Tabs.TabPane>
       </Tabs>
     );

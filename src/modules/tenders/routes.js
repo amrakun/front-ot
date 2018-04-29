@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import queryString from 'query-string';
 import {
-  Tenders,
+  BuyerTenders,
   CreateTender,
   Tender,
   EditTender,
@@ -23,7 +23,7 @@ export default [
     path={'/rfq'}
     component={props => {
       const queryParams = queryString.parse(props.location.search);
-      return <Tenders type="rfq" {...props} queryParams={queryParams} />;
+      return <BuyerTenders type="rfq" {...props} queryParams={queryParams} />;
     }}
   />,
   <Route
@@ -44,7 +44,7 @@ export default [
     path={'/eoi'}
     component={props => {
       const queryParams = queryString.parse(props.location.search);
-      return <Tenders type="eoi" {...props} queryParams={queryParams} />;
+      return <BuyerTenders type="eoi" {...props} queryParams={queryParams} />;
     }}
   />,
   <Route

@@ -6,20 +6,20 @@ import { Input, Icon } from 'antd';
 
 const propTypes = {
   history: PropTypes.object,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  paramPrefix: PropTypes.string
 };
 
 class Search extends React.Component {
   constructor(props) {
     super(props);
 
-    const { history } = props;
+    const { history, paramPrefix = '' } = props;
 
     const query = queryString.parse(history.location.search);
 
-    const searchQuery = query.search;
-
-    this.state = { search: searchQuery || '' };
+    this.paramName = `${paramPrefix}search`;
+    this.state = { search: query[this.paramName] || '' };
 
     this.handleSearch = this.handleSearch.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -31,7 +31,7 @@ class Search extends React.Component {
 
     let query = queryString.parse(history.location.search);
 
-    query.search = value;
+    query[this.paramName] = value;
 
     history.push({
       search: queryString.stringify(query)

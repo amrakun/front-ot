@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SupplierTenders } from '../components';
-import { gql, graphql, compose } from 'react-apollo';
-import { queries, mutations } from '../graphql';
 import { message } from 'antd';
+import { gql, graphql, compose } from 'react-apollo';
+import { SupplierTenders } from '../components';
+import { mutations } from '../graphql';
+import listCommonQueriesGenerator from './listCommonQueriesGenerator';
 
 class TendersContainer extends React.Component {
   componentWillMount() {
@@ -19,13 +20,13 @@ class TendersContainer extends React.Component {
     const {
       tendersTableQuery,
       tendersResponsesAdd,
-      type,
       tendersCountQuery
     } = this.props;
+
     const { __, currentUser } = this.context;
 
     if (tendersTableQuery.loading || tendersCountQuery.loading) {
-      return <SupplierTenders loading={true} />;
+      return <SupplierTenders {...{ ...this.props, loading: true }} />;
     }
 
     const notInterested = tenderId => {
@@ -51,7 +52,6 @@ class TendersContainer extends React.Component {
     const updatedProps = {
       ...this.props,
       data: tenders,
-      type: type,
       notInterested: notInterested,
       currentUser: currentUser,
       exportTenders: this.exportTenders,
@@ -78,40 +78,8 @@ TendersContainer.contextTypes = {
   currentUser: PropTypes.object
 };
 
-const generateVariables = ({ type, queryParams }) => {
-  const page = queryParams[`${type}page`] || 1;
-  const perPage = queryParams[`${type}perPage`] || 15;
-
-  return {
-    page,
-    perPage,
-    search: queryParams ? queryParams.search : '',
-    status: queryParams ? queryParams.status : '',
-    type: type,
-    month: queryParams ? queryParams.month : ''
-  };
-};
-
 export default compose(
-  graphql(gql(queries.tendersSupplier), {
-    name: 'tendersTableQuery',
-    options: props => {
-      return {
-        variables: generateVariables(props),
-        notifyOnNetworkStatusChange: true
-      };
-    }
-  }),
-
-  graphql(gql(queries.totalSupplierTenders), {
-    name: 'tendersCountQuery',
-    options: props => {
-      return {
-        variables: generateVariables(props),
-        notifyOnNetworkStatusChange: true
-      };
-    }
-  }),
+  ...listCommonQueriesGenerator('tendersSupplier', 'totalSupplierTenders'),
 
   graphql(gql(mutations.tendersResponsesAdd), {
     name: 'tendersResponsesAdd'

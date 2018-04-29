@@ -1,6 +1,11 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { Dashboard, SupplierDashboard, Report, LogReport } from './containers';
+import {
+  BuyerDashboard,
+  SupplierDashboard,
+  Report,
+  LogReport
+} from './containers';
 import queryString from 'query-string';
 
 export default [
@@ -10,7 +15,7 @@ export default [
     path="/dashboard"
     component={props => {
       const queryParams = queryString.parse(props.location.search);
-      return <Dashboard {...props} queryParams={queryParams} />;
+      return <BuyerDashboard {...props} queryParams={queryParams} />;
     }}
   />,
   <Route

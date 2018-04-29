@@ -29,7 +29,9 @@ class Tenders extends React.Component {
   }
 
   handleMonthChange(value) {
-    router.setParams(this.props.history, { month: value });
+    const { type } = this.props;
+
+    router.setParams(this.props.history, { [`${type}month`]: value });
   }
 
   handleTableChange(pagination, filters) {
@@ -69,6 +71,7 @@ class Tenders extends React.Component {
 
   commonColumns() {
     const { __ } = this.context;
+
     return [
       {
         title: __('Tender Number'),
@@ -104,6 +107,7 @@ class Tenders extends React.Component {
 
   renderFileDownload(url) {
     const { __ } = this.context;
+
     return (
       <a href={url} target="_blank">
         {__('View')}
@@ -113,6 +117,7 @@ class Tenders extends React.Component {
 
   renderTenders(args) {
     const { type, data, loading, history, totalCount } = this.props;
+    const { __ } = this.context;
 
     const { columns, operation } = args;
 
@@ -120,14 +125,12 @@ class Tenders extends React.Component {
 
     const highlightedId = location.state && location.state.newTenderId;
 
-    const { __ } = this.context;
-
     const label = labels[type] ? __(labels[type]) : labels[type];
 
     return (
       <Card style={{ marginBottom: '16px' }} title={label}>
         <div className="table-operations">
-          <Search placeholder={__('Tender Name')} />
+          <Search placeholder={__('Tender Name')} paramPrefix={type} />
 
           <MonthPicker
             style={{ float: 'left', width: '200px', marginLeft: '20px' }}
@@ -153,10 +156,7 @@ class Tenders extends React.Component {
           className="tenders-table"
         />
 
-        <Paginator
-          total={totalCount}
-          paramPrefix={this.isSupplier ? type : ''}
-        />
+        <Paginator total={totalCount} paramPrefix={type} />
       </Card>
     );
   }

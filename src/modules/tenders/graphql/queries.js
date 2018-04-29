@@ -192,7 +192,7 @@ const tenderUpdateDetail = `
 const tenderParams = `$type: String!, $search: String, $status: String, $month: Date`;
 const tenderValues = `type: $type, search: $search, status: $status, month: $month`;
 
-const tenders = `
+const tendersBuyer = `
   query tenders(${tenderParams} ${pageParams}) {
     tenders(${tenderValues} ${pageValues}) {
       ${tenderFields}
@@ -296,8 +296,10 @@ const totalBuyerTenders = `
 export default {
   tenderResponses,
   tenderDetail,
-  tenders,
+  tendersBuyer,
   tendersSupplier,
+  totalSupplierTenders,
+  totalBuyerTenders,
   tenderUpdateDetail,
   tenderDetailSupplier,
   rfqBidSummaryReport,
@@ -306,8 +308,6 @@ export default {
   exportTenders,
   tenderResponseByUser,
   generateMaterialsTemplate,
-  totalSupplierTenders,
-  totalBuyerTenders,
   tenderResponseNotRespondedSuppliers,
   companies
 };

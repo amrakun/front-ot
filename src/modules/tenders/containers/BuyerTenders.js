@@ -1,34 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BuyerTenders } from '../components';
-import { gql, graphql, compose } from 'react-apollo';
-import { queries, mutations } from '../graphql';
-import client from 'apolloClient';
 import { notification, Icon, Button, message } from 'antd';
+import { gql, graphql, compose } from 'react-apollo';
+import client from 'apolloClient';
 import { notifyReady, notifyLoading } from 'modules/common/constants';
+import { queries, mutations } from '../graphql';
+import { BuyerTenders } from '../components';
+import listCommonQueriesGenerator from './listCommonQueriesGenerator';
 
 class TendersContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    const { location, type } = props;
-
-    this.type = 'rfq';
-
-    if (type === 'eoi' || (location && location.pathname === '/eoi'))
-      this.type = 'eoi';
-
-    this.state = {
-      tenders: []
-    };
+    this.state = { tenders: [] };
 
     this.exportTenders = this.exportTenders.bind(this);
     this.cancelTender = this.cancelTender.bind(this);
   }
 
   componentWillMount() {
-    const { tendersTableQuery } = this.props;
-    const location = this.props.location || {};
+    const { tendersTableQuery, location = {} } = this.props;
 
     if (location.search === '?refetch') {
       tendersTableQuery.refetch();
@@ -39,6 +30,7 @@ class TendersContainer extends React.Component {
     const { queryParams, type, supplierId } = this.props;
 
     notification.open(notifyLoading);
+
     this.setState({ exportLoading: true });
 
     client
@@ -96,7 +88,7 @@ class TendersContainer extends React.Component {
     const { tendersTableQuery, tendersCountQuery } = this.props;
 
     if (tendersTableQuery.loading || tendersCountQuery.loading) {
-      return <BuyerTenders loading={true} />;
+      return <BuyerTenders {...{ ...this.props, loading: true }} />;
     }
 
     const { exportLoading } = this.state;
@@ -109,7 +101,6 @@ class TendersContainer extends React.Component {
       totalCount,
       cancelTender: this.cancelTender,
       data: tenders,
-      type: this.type,
       exportTenders: this.exportTenders
     };
 
@@ -130,39 +121,7 @@ TendersContainer.propTypes = {
 };
 
 export default compose(
-  graphql(gql(queries.tenders), {
-    name: 'tendersTableQuery',
-    options: ({ type, queryParams }) => {
-      return {
-        variables: {
-          page: queryParams.page || 1,
-          perPage: queryParams.perPage || 15,
-          search: queryParams ? queryParams.search : '',
-          status: queryParams ? queryParams.status : '',
-          type,
-          month: queryParams ? queryParams.month : ''
-        },
-        notifyOnNetworkStatusChange: true
-      };
-    }
-  }),
-
-  graphql(gql(queries.totalBuyerTenders), {
-    name: 'tendersCountQuery',
-    options: ({ type, queryParams }) => {
-      return {
-        variables: {
-          page: queryParams.page || 1,
-          perPage: queryParams.perPage || 15,
-          search: queryParams ? queryParams.search : '',
-          status: queryParams ? queryParams.status : '',
-          type,
-          month: queryParams ? queryParams.month : ''
-        },
-        notifyOnNetworkStatusChange: true
-      };
-    }
-  }),
+  ...listCommonQueriesGenerator('tendersBuyer', 'totalBuyerTenders'),
 
   graphql(gql(mutations.tendersResponsesAdd), {
     name: 'tendersResponsesAdd'

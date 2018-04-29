@@ -8,12 +8,6 @@ import moment from 'moment';
 import Tenders from './Tenders';
 
 class SupplierTenders extends Tenders {
-  constructor(props, context) {
-    super(props, context);
-
-    this.isSupplier = true;
-  }
-
   columns() {
     const { __ } = this.context;
     const renderIcon = this.renderIcon;

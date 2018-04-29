@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { gql, compose, graphql } from 'react-apollo';
 import { queries } from '../graphql';
 import { Loading } from 'modules/common/components';
-import { Dashboard } from '../components';
+import { BuyerDashboard } from '../components';
 import moment from 'moment';
 
 const DashboardContainer = props => {
@@ -104,7 +104,7 @@ const DashboardContainer = props => {
     rfqAverageDuration: tendersAverageDurationRfq.tendersAverageDuration
   };
 
-  return <Dashboard {...updatedProps} />;
+  return <BuyerDashboard {...updatedProps} />;
 };
 
 DashboardContainer.propTypes = {
