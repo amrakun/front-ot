@@ -276,10 +276,10 @@ const genericParams = `
   $search: String
   $region: String
   $productCodes: String
-  $isProductsInfoValidated: Boolean
   $includeBlocked: Boolean
-  $isPrequalified: Boolean
-  $isQualified: Boolean
+  $productsInfoStatus: String
+  $prequalifiedStatus: String
+  $qualifiedStatus: String
   $difotScore: String
   $_ids: [String]
   $page: Int
@@ -296,10 +296,10 @@ const genericValues = `
   search: $search
   region: $region
   productCodes: $productCodes
-  isProductsInfoValidated: $isProductsInfoValidated
   includeBlocked: $includeBlocked
-  isPrequalified: $isPrequalified
-  isQualified: $isQualified,
+  productsInfoStatus: $productsInfoStatus
+  prequalifiedStatus: $prequalifiedStatus
+  qualifiedStatus: $qualifiedStatus,
   difotScore: $difotScore
   _ids: $_ids
   page: $page

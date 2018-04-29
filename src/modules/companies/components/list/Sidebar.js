@@ -35,9 +35,9 @@ class Sidebar extends React.Component {
       productCodes: productCodesQuery || [],
       region: regionQuery || [],
       difotRange: query.difotRange || '',
-      isPrequalified: query.isPrequalified || '',
-      isQualified: query.isQualified || '',
-      isProductsInfoValidated: query.isProductsInfoValidated || '',
+      prequalifiedStatus: query.prequalifiedStatus || '',
+      qualifiedStatus: query.qualifiedStatus || '',
+      productsInfoStatus: query.productsInfoStatus || '',
       includeBlocked: query.includeBlocked || ''
     };
 
@@ -62,9 +62,9 @@ class Sidebar extends React.Component {
       region,
       productCodes,
       difotRange,
-      isPrequalified,
-      isQualified,
-      isProductsInfoValidated,
+      prequalifiedStatus,
+      qualifiedStatus,
+      productsInfoStatus,
       includeBlocked
     } = this.state;
 
@@ -82,9 +82,9 @@ class Sidebar extends React.Component {
       region: regionString.replace(/.$/, ''),
       productCodes: productCodesString.replace(/.$/, ''),
       difotRange,
-      isPrequalified,
-      isQualified,
-      isProductsInfoValidated,
+      prequalifiedStatus,
+      qualifiedStatus,
+      productsInfoStatus,
       includeBlocked,
       ...filter
     };
@@ -150,8 +150,9 @@ class Sidebar extends React.Component {
             value={this.state[name]}
           >
             <Option value="">All</Option>
-            <Option value="true">{included}</Option>
-            <Option value="false">{notIncluded}</Option>
+            <Option value="yes">{included}</Option>
+            <Option value="no">{notIncluded}</Option>
+            <Option value="undefined">In process</Option>
           </Select>
         </td>
       </tr>
@@ -205,19 +206,19 @@ class Sidebar extends React.Component {
           <table className="suppliers-filter">
             <tbody>
               {this.renderSelect({
-                name: 'isPrequalified',
+                name: 'prequalifiedStatus',
                 label: 'Pre-qualified',
                 included: 'Pre-qualified',
                 notIncluded: 'Not qualified'
               })}
               {this.renderSelect({
-                name: 'isQualified',
+                name: 'qualifiedStatus',
                 label: 'Qualified',
                 included: 'Qualified',
                 notIncluded: 'Not qualified'
               })}
               {this.renderSelect({
-                name: 'isProductsInfoValidated',
+                name: 'productsInfoStatus',
                 label: 'Validated',
                 included: 'Validated',
                 notIncluded: 'Not validated'

@@ -44,10 +44,11 @@ const generator = (Component, query) => {
       page,
       perPage,
       includeBlocked,
-      isPrequalified,
-      isProductsInfoValidated,
-      isQualified
+      prequalifiedStatus,
+      qualifiedStatus,
+      productsInfoStatus
     } = queryParams;
+
     const status = queryParams.status || '';
 
     let difotScore = '';
@@ -72,9 +73,9 @@ const generator = (Component, query) => {
       sortField,
       sortDirection,
       includeBlocked: getBoolean(includeBlocked),
-      isPrequalified: getBoolean(isPrequalified),
-      isProductsInfoValidated: getBoolean(isProductsInfoValidated),
-      isQualified: getBoolean(isQualified)
+      prequalifiedStatus,
+      qualifiedStatus,
+      productsInfoStatus
     };
   };
 
