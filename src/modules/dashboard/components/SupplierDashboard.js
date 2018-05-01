@@ -51,6 +51,7 @@ class Dashboard extends React.Component {
 
   render() {
     const { data, history, location } = this.props;
+
     const {
       averageDifotScore,
       lastFeedback,
@@ -65,6 +66,7 @@ class Dashboard extends React.Component {
     const { __ } = this.context;
 
     let hasNewAudit = false;
+
     audits.forEach(audit => {
       if (audit.supplierResponse === null) hasNewAudit = true;
     });

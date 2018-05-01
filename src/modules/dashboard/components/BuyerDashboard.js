@@ -215,6 +215,7 @@ class Dashboard extends React.Component {
             onChange={this.onProductCodesChange}
             treeCheckable={true}
             searchPlaceholder="Please select"
+            allowClear
             style={{ width: 300 }}
           />
         }
