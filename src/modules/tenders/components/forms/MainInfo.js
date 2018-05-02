@@ -139,7 +139,7 @@ const MainInfo = props => {
           {renderField({
             hasFeedback: false,
             optional: true,
-            label: 'Sourcing officer',
+            label: 'Officer name',
             name: 'sourcingOfficer',
             control: <Input />
           })}

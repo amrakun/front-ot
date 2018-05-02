@@ -144,7 +144,7 @@ class Tender extends Common {
         width: 160
       },
       {
-        title: 'Sap number',
+        title: 'Vendor number',
         dataIndex: 'supplier.basicInfo.sapNumber',
         width: 160
       },

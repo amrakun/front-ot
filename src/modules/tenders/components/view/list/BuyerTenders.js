@@ -55,7 +55,7 @@ class BuyerTenders extends Tenders {
         dataIndex: 'notRespondedCount'
       },
       {
-        title: 'Sourcing officer',
+        title: 'Officer name',
         dataIndex: 'sourcingOfficer'
       },
       {
