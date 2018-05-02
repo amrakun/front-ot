@@ -4,11 +4,7 @@ import React from 'react';
 import { SupplierTenders } from '../../tenders/containers';
 import { PropTypes } from 'prop-types';
 import queryString from 'query-string';
-import {
-  NumberCard,
-  NumberCardLines,
-  TextCard
-} from 'modules/common/components';
+import { NumberCard, TextCard } from 'modules/common/components';
 import { colors } from 'modules/common/constants';
 import { Row, Col, Alert, Icon } from 'antd';
 import { Link } from 'react-router-dom';
@@ -111,7 +107,7 @@ class Dashboard extends React.Component {
             />
           </Col>
           <Col key={4} lg={8} sm={12}>
-            <NumberCardLines
+            <NumberCard
               icon="calendar"
               title={__('DIFOT Score')}
               tooltip={
@@ -119,8 +115,6 @@ class Dashboard extends React.Component {
               }
               color={averageDifotScore ? colors[7] : colors[5]}
               number={averageDifotScore ? averageDifotScore.toFixed(1) : 0}
-              percent={averageDifotScore ? averageDifotScore.toFixed(1) : 0}
-              withPercent={true}
             />
           </Col>
           <Col key={5} lg={8} sm={12}>
