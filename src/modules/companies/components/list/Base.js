@@ -91,7 +91,13 @@ class Base extends Common {
           title: 'Supplier profile',
           width: 40,
           render: record => (
-            <a onClick={() => exportCompany(record._id)}>view/export</a>
+            <div>
+              <a href={`/view-registration/${record._id}`} target="__blank">
+                View
+              </a>
+              &nbsp;|&nbsp;
+              <a onClick={() => exportCompany(record._id)}>Export</a>
+            </div>
           )
         }
       ]
