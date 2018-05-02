@@ -43,7 +43,7 @@ class AuditResponses extends React.Component {
   columns() {
     return [
       { title: 'Supplier name', dataIndex: 'supplier.basicInfo.enName' },
-      { title: 'SAP number', dataIndex: 'supplier.basicInfo.sapNumber' },
+      { title: 'Vendor number', dataIndex: 'supplier.basicInfo.sapNumber' },
       {
         title: 'Qualification',
         render: record => (record.isQualified ? 'Yes' : 'No')

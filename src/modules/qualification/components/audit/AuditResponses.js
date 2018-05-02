@@ -107,7 +107,7 @@ class AuditResponses extends React.Component {
         width: 160
       },
       {
-        title: 'SAP number',
+        title: 'Vendor number',
         dataIndex: 'supplier.basicInfo.sapNumber',
         width: 100
       },
@@ -160,7 +160,7 @@ class AuditResponses extends React.Component {
       },
       { title: 'Status by action', dataIndex: 'audit.status' },
       { title: 'Supplier name', dataIndex: 'supplier.basicInfo.enName' },
-      { title: 'SAP number', dataIndex: 'supplier.basicInfo.sapNumber' },
+      { title: 'Vendor number', dataIndex: 'supplier.basicInfo.sapNumber' },
       {
         title: 'Publish date',
         render: record => moment(record.audit.publishDate).format(dateFormat)

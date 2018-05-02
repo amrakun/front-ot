@@ -15,7 +15,7 @@
     "Танай байгууллага \"Оюу толгой\"-н хамгийн энгийн шаардлагыг хангахуйц хариуцлагын даатгал, мөн ажилчинд олгох нөхөн даатгал, эсвэл мэргэжлээс шалгаалах гэмтэл бэртэл, өвчний даатгалын зохих хөтөлбөрийг хэрэгжүүлдэг үү?",
   "Does your company have a documented code of ethics/conduct?":
     "Танай компани ёс зүйн дүрмээ боловсруулж гаргасан уу?",
-  "Prevention of Bribery & Corruption, Conflict of interest, Fair Labor Standards, Business Ethics, Human Rights, Equality and Diversity, Dealing with government intermediaries, Charitable contributions, Travels and hospitality, Gifts and entertainment, Money laundry":
+  "Prevention of Bribery & Corruption, Conflict of interest, Fair Labor Standards, Business Ethics, Human Rights, Equality and Diversity, Dealing with government intermediaries, Charitable contributions, Travels and hospitality, Gifts and entertainment, Money laundering":
     " -Хээл хахууль, авилгаас сэргийлэх -Ашиг сонирхлын зөрчил -Шударга хөдөлмөрийн стандарт -Бизнесийн ёс зүй -Хүний эрх -Тэгш эрх, олон янз байдал -Төр засгийн зуучлагчидтай харилцах -Буяны хандив -Бизнес аялал, зочлон хүндэтгэх -Бэлэг, үзвэр үйлчилгээ -Мөнгө угаах",
   "Does your company have a documented Corporate Social Responsibility policy?":
     "Компанийн нийгмийн хариуцлагын талаарх бодлогоо танай компани боловсруулж гаргасан уу?",
@@ -25,7 +25,7 @@
     "Танай компани бүх ажилтантайгаа хүчин төгөлдөр гэрээ байгуулдаг уу? (Үүнд мэргэжилтэй болон мэргэжилгүй, түр болон үндсэн, насанд хүрээгүй ажилчид гэх мэт хүмүүс хамаарна)",
   "Include skilled/unskilled manufacturing employees, temporary employees, underage workers etc.":
     "Мэргэжилтэй болон мэргэжилгүй, үйлдвэрийн ажилтнууд, түр ажилтнууд, насанд хүрээгүй ажилчид гэх мэт хүмүүсийг хамруулна. ",
-  "Has your company ever been convicted for a breach of any labour laws in the countries you operate within the last five years?":
+  "Has your company ever been convicted for a breach of any labour laws in the countries you operate ?":
     "Танай компани сүүлийн 5 жилд үйл ажиллагаа эрхэлсэн улсууддаа аливаа хөдөлмөрийн хуулийг зөрчсөн ял шийтгэл шүүхээр хүлээж байсан уу?",
   "The five years is based on the date of your declaration and submission of your questionnaire compared to the date of conviction. You may remove any breaches older than five years.":
     "Таны мэдэгдлээ өгч, асуулга бөглөсөн огноог шүүхээр ял шийтгэл хүлээсэн огноотой харьцуулсан/жишсэн хугацаанд тулгуурлан тус 5 жилийн хугацааг тооцно. Та таван жилээс өмнөх хугацааны зөрчлөө хасч болно.",

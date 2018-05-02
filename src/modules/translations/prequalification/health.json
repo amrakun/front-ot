@@ -19,7 +19,7 @@
     "Ажилд тохирох эрүүл мэндийн байдал гэдэгт согтууруулах ундаа, ядаргаа сульдал, ажил гүйцэтгэхэд бие махбодийн бэлэн байдал зэрэг багтна. ",
   "Is your company willing to comply with Oyu Tolgoi/RT HSE management system?":
     "Танай компаний \"Оюу толгой\", эсхүл Рио Тинтогийн ЭМААБО-ы удирдлагын тогтолцоог  дагаж мөрдөх үү?",
-  "Has there been any industrial accident in the last 5 financial years?":
+  "Has there been any industrial accident?":
     "Санхүүгийн сүүлийн таван жилд ямар нэг үйлдвэрийн осол гарсан уу? ",
   "Provide total man hours accrued for the previous five calendar years for all onsite personnel on Contractor managed projects":
     "Гүйцэтгэгчийн удирдсан төслүүдэд уурхайн цогцолборт ажилласан бүх ажиллах хүчний хуанлийн сүүлийн таван жилд хуримтлагдсан нийт хүн/цаг-ийн хэмжээг өгнө үү! ",
@@ -27,7 +27,7 @@
     "Гүйцэтгэгчийн удирдсан төслүүдэд уурхайн цогцолборт ажилласан бүх ажиллах хүчний хуанлийн сүүлийн таван жил дэх ажлын чадвар түр алдсан бэртэл, гэмтэлийн давтамжийн тоог гарган өгнө үү!  Түүнээс гадна, тус тендерт оролцогч хөдөлмөрийн чадвар түр алдсан бэртэл гэмтэл хэрхэн тодорхойлдогийг харуулсан удирдамжийг (эсвэл адил төстэй баримт бичиг) хавсаргана уу!",
   "Provide a summary explaining the  fatality or injury event(s) that contributed to the above:":
     "Дээрхэд тоологдсон хүний амь эрсэдсэн, гэмтэж бэртсэн тохиолдлуудын товч тайлбарыг гарган өгнө үү! ",
-  "Provide details of how senior management demonstrates its commitment to the Oyu Tolgoi HSE policy and management system. ":
+  "Provide details of how senior management demonstrates its commitment to the company's own HSE management system? ":
     "Танай компанийн дээд удирдлага \"Оюу толгой\"-н ЭМААБО-ы бодлого, удирдлагын тогтолцооний дагуу ажиллахын төлөө хэрхэн хичээл зүтгэл гаргадаг талаар дэлгэрэнгүй бичнэ үү!",
   "Is your company willing to commit itself, its employees and all Sub-contractors, to implementing and being held to KPIs relating to critical risk management (CRM)?":
     "Ноцтой эрсдэлийн удирдлагатай хамааралтай гүйцэтгэлийн үндсэн үзүүлэлтийг хэрэгжүүлж, байнга мөрдөх үүрэг амлалтыг танай компани өөртөө, ажилтнууддаа, мөн гэрээт ажилтнууддаа хүлээлгэж байна уу? ",

@@ -133,7 +133,7 @@ class CompanyInfo extends BaseForm {
             })}
 
             {this.renderField({
-              label: 'SAP number',
+              label: 'Vendor number',
               name: 'sapNumber',
               isVisible: isRegisteredOnSup,
               optional: !isRegisteredOnSup,

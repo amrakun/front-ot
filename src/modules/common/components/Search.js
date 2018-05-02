@@ -60,7 +60,7 @@ class Search extends React.Component {
       <Input
         value={search}
         prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />}
-        placeholder={placeholder || 'Supplier name or SAP number'}
+        placeholder={placeholder || 'Supplier name or Vendor number'}
         onPressEnter={e => this.handleSearch(e.target.value)}
         onChange={this.handleChange}
         suffix={suffix}

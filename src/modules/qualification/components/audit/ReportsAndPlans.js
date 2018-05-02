@@ -106,7 +106,7 @@ class ReportsAndPlans extends Common {
         filtereredValue: []
       },
       { title: 'Supplier name', dataIndex: 'supplier.basicInfo.enName' },
-      { title: 'SAP number', dataIndex: 'supplier.basicInfo.sapNumber' },
+      { title: 'Vendor number', dataIndex: 'supplier.basicInfo.sapNumber' },
       {
         title: 'Submission date',
         render: record => moment(record.createdDate).format(dateFormat)

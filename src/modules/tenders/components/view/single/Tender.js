@@ -281,7 +281,7 @@ class Tender extends Common {
         }
       >
         <div className="table-operations">
-          <Search placeholder="Supplier name or SAP number" />
+          <Search placeholder="Supplier name or Vendor number" />
           {tableOperations}
           <Button
             disabled={sentRegretLetter || ['open', 'draft'].includes(status)}

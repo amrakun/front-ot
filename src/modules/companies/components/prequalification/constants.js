@@ -61,7 +61,7 @@ export const labels = {
     'Does your company have a documented Corporate Social Responsibility policy?',
 
   hasConvictedLabourLaws:
-    'Has your company ever been convicted for a breach of any labour laws in the countries you operate within the last five years?',
+    'Has your company ever been convicted for a breach of any labour laws in the countries you operate ?',
 
   hasConvictedForHumanRights:
     'Has your company ever been convicted for a breach of any human rights in the countries you operate within the last five years?',
@@ -127,8 +127,7 @@ export const labels = {
   isWillingToComply:
     'Is your company willing to comply with Oyu Tolgoi/RT HSE management system?',
 
-  hasIndustrialAccident:
-    'Has there been any industrial accident in the last 5 financial years?',
+  hasIndustrialAccident: 'Has there been any industrial accident?',
 
   tmha:
     'Provide total man hours accrued for the previous five calendar years for all onsite personnel on Contractor managed projects',
@@ -139,8 +138,7 @@ export const labels = {
   injuryExplanation:
     'Provide a summary explaining the  fatality or injury event(s) that contributed to the above:',
 
-  seniorManagement:
-    'Provide details of how senior management demonstrates its commitment to the Oyu Tolgoi HSE policy and management system. ',
+  seniorManagement: `Provide details of how senior management demonstrates its commitment to the company's own HSE management system? `,
 
   isWillingToCommit:
     'Is your company willing to commit itself, its employees and all Sub-contractors, to implementing and being held to KPIs relating to critical risk management (CRM)?',
@@ -197,9 +195,6 @@ export const descriptions = {
   doesConcludeValidContracts:
     'Include skilled/unskilled manufacturing employees, temporary employees, underage workers etc.',
 
-  hasConvictedLabourLaws:
-    'The five years is based on the date of your declaration and submission of your questionnaire compared to the date of conviction. You may remove any breaches older than five years.',
-
   hasConvictedForHumanRights:
     'The five years is based on the date of your declaration and submission of your questionnaire compared to the date of conviction. You may remove any breaches older than five years.',
 
@@ -222,5 +217,7 @@ export const descriptions = {
     'The Fitness for Work (FFW) policy should incorporate alcohol, fatigue and general fitness for work.',
 
   doesHaveCodeEthics:
-    'Prevention of Bribery & Corruption, Conflict of interest, Fair Labor Standards, Business Ethics, Human Rights, Equality and Diversity, Dealing with government intermediaries, Charitable contributions, Travels and hospitality, Gifts and entertainment, Money laundry'
+    'Prevention of Bribery & Corruption, Conflict of interest, Fair Labor Standards, Business Ethics, Human Rights, Equality and Diversity, Dealing with government intermediaries, Charitable contributions, Travels and hospitality, Gifts and entertainment, Money laundering',
+  doesHaveDocumentForRiskAssesment:
+    'CRM- Critical Risk Management: http://ot.mn/худалдан-авалт-2/files-pps/'
 };
