@@ -265,7 +265,8 @@ class PrequalificationForm extends PreqForm {
 
         <Card bodyStyle={{ paddingBottom: '16px' }}>
           {this.renderField({
-            label: 'Is your company up to date with Social Security payments?',
+            label:
+              'Is your company up to date with Social Security payments? (Mongolian companies only)',
             name: 'isUpToDateSSP',
             control: (
               <Select

@@ -7,12 +7,13 @@
   "Are you an existing supplier?":
     "Та Оюу толгой компанийн ханган нийлүүлэгч үү?",
   "Vendor number": "Борлуулагчийн дугаар?",
-  "Company name (in English)": "Компанийн нэр (Англи хэлээр)",
+  "Company name (in English alphabet only)":
+    "Компанийн нэр (Англи хэлээр зөвхөн латин үсгээр оруулна уу)",
   "Address line 2 / Soum": "Хаяг 2 / Сум",
   "Address line 3": "Хаяг 3",
   "Postcode or zipcode": "Шуудангийн код эсвэл Zip код",
   "Town/City/Aimag": "Хот/Аймаг",
-  "Country/state/province": "Муж/аймаг",
+  "State/Province": "Муж/аймаг",
   "Country": "Улс",
   "3. Country you are registered in": "3. Таны бүртгэлтэй улс",
   "Aimag you are registered in": "Таны бүртгүүлсэн аймаг",

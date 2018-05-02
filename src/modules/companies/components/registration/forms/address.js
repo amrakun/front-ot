@@ -41,7 +41,7 @@ const addressCard = (renderField, renderOptions) => {
       })}
 
       {renderField({
-        label: 'Country/state/province',
+        label: 'State/Province',
         name: 'province',
         control: <Input />
       })}

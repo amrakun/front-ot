@@ -141,7 +141,7 @@ class CompanyInfo extends BaseForm {
             })}
 
             {this.renderField({
-              label: 'Company name (in English)',
+              label: 'Company name (in English alphabet only)',
               name: 'enName',
               canBeCryllic: false,
               control: <Input />
