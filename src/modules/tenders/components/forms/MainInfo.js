@@ -41,6 +41,7 @@ function setColors(array) {
 
 function getOwner(supplier) {
   const info = supplier.shareholderInfo || {};
+
   if (info)
     if (info.shareholders) return info.shareholders[0].name;
     else return null;
@@ -102,7 +103,11 @@ const MainInfo = props => {
           >
             {supplierTags}
             <SupplierSearcher onSelect={onAddSuppliers} />
-            <AddCompany onAdd={supplier => onAddSuppliers([supplier])} />
+
+            <AddCompany
+              showInvite={window.location.href.includes('eoi')}
+              onAdd={supplier => onAddSuppliers([supplier])}
+            />
           </div>
 
           {renderField({

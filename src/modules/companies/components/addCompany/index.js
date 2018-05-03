@@ -4,6 +4,7 @@ import { Tag, Icon } from 'antd';
 import { Popup } from '../../containers/addCompany';
 
 const propTypes = {
+  showInvite: PropTypes.bool,
   onAdd: PropTypes.func.isRequired
 };
 
@@ -43,12 +44,22 @@ class AddCompany extends React.Component {
     }
   }
 
+  renderInviteHandler() {
+    if (!this.props.showInvite) {
+      return null;
+    }
+
+    return (
+      <Tag onClick={this.showPopup} className="dashed-button">
+        <Icon type="plus" /> Invite a new supplier
+      </Tag>
+    );
+  }
+
   render() {
     return (
       <span>
-        <Tag onClick={this.showPopup} className="dashed-button">
-          <Icon type="plus" /> Invite a new supplier
-        </Tag>
+        {this.renderInviteHandler()}
         {this.renderPopup()}
       </span>
     );
