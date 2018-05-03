@@ -109,8 +109,8 @@ class Sidebar extends React.Component {
             <Option value="">All</Option>
             <Option value="0-25">0% - 25%</Option>
             <Option value="26-50">26% - 50%</Option>
-            <Option value="51-75">51% - 75%</Option>
-            <Option value="76-100">76% - 100%</Option>
+            <Option value="51-74">51% - 74%</Option>
+            <Option value="75-100">75% - 100%</Option>
           </Select>
         </td>
       </tr>
