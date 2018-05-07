@@ -339,69 +339,6 @@ i.success {
   overflow: hidden;
   margin: 0 -24px;
 }
-.home-landing .background,
-.home-landing .content-wrapper {
-  height: 100%;
-}
-.home-landing .background {
-  -webkit-filter: blur(10px);
-  -moz-filter: blur(10px);
-  -o-filter: blur(10px);
-  -ms-filter: blur(10px);
-  filter: blur(10px);
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 0;
-  transform: scale(1.05);
-}
-.home-landing .content-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.home-landing .content-wrapper .content {
-  z-index: 1;
-  text-align: center;
-}
-.home-landing .content-wrapper .content h1 {
-  font-size: 55px;
-  margin-bottom: 64px;
-  line-height: 60px;
-  color: #fff;
-  text-transform: uppercase;
-}
-.home-landing .content-wrapper .content h1 strong {
-  font-weight: 600;
-  padding-right: 8px;
-  margin-right: 8px;
-}
-.home-landing .content-wrapper .content h1 span {
-  font-weight: 100;
-}
-.home-landing .content-wrapper .content [class^='home-btn'] {
-  line-height: 45px;
-  padding: 0 20px;
-  display: inline-block;
-  font-size: 22px;
-  border-radius: 3px;
-  transition: background-color 0.3s ease;
-}
-.home-landing .content-wrapper .content .home-btn {
-  background-color: #f47721;
-  color: #fff;
-  margin-right: 16px;
-}
-.home-landing .content-wrapper .content .home-btn:hover {
-  background-color: #f68b42;
-}
-.home-landing .content-wrapper .content .home-btn-transparent {
-  color: #fff;
-  transition: color 0.2s ease;
-}
-.home-landing .content-wrapper .content .home-btn-transparent:hover {
-  color: #f47721;
-}
 
 .login-card {
   width: 400px;

@@ -1,7 +1,5 @@
 import React from 'react';
-import Sidenav from './Sidenav';
-import Header from './Header';
-import { LocaleProvider, Layout, BackTop } from 'antd';
+import { LocaleProvider, Layout } from 'antd';
 import { PropTypes } from 'prop-types';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import { T } from 'modules/common/components';
@@ -11,7 +9,7 @@ import enUS from 'rc-pagination/lib/locale/en_US';
 import * as messages from 'modules/translations';
 
 addLocaleData([...mn, ...en]);
-const { Content, Footer } = Layout;
+const { Content } = Layout;
 
 const visitorPaths = [
   '/sign-in',
@@ -59,9 +57,6 @@ const mn_Mn = {
     emptyText: 'Мэдээлэл алга'
   }
 };
-
-const withSidebar = { marginLeft: 230 };
-const withSidebarCollapsed = { marginLeft: 80 };
 
 class InjectInstance extends React.Component {
   getChildContext() {
@@ -162,47 +157,19 @@ class MainLayout extends React.Component {
   }
 
   render() {
-    const { currentUser, showHeader, showFooter, location } = this.props;
-    const { collapsed, locale, messages } = this.state;
+    const { locale, messages } = this.state;
     const antdLocale = locale === 'en' ? enUS : mn_Mn;
 
-    const navProps = {
-      collapsed: collapsed ? true : false,
-      onCollapse: this.onCollapse,
-      pathname: location.pathname
-    };
-
-    let layoutStyle = {};
-    if (currentUser) {
-      collapsed
-        ? (layoutStyle = withSidebarCollapsed)
-        : (layoutStyle = withSidebar);
-    }
+    const layoutStyle = {};
 
     return (
       <LocaleProvider locale={antdLocale}>
         <IntlProvider locale={locale || 'en'} messages={messages}>
           <Layout className={`main-wrapper ${locale}`}>
-            {currentUser && <Sidenav {...navProps} />}
             <Layout className="main" style={layoutStyle}>
-              {currentUser && (
-                <Header
-                  toggleLang={this.toggleLang}
-                  langLabel={locale}
-                  location={location}
-                />
-              )}
               <Content>
                 <InjectedComponent {...this.props} />
-                <BackTop />
               </Content>
-              {currentUser && (
-                <Footer>
-                  <T id="Oyu Tolgoi ©2018 All Rights Reserved">
-                    Oyu Tolgoi 2018 All Rights Reserved
-                  </T>
-                </Footer>
-              )}
             </Layout>
           </Layout>
         </IntlProvider>

@@ -14,6 +14,7 @@
     "query-string": "^5.0.1",
     "react": "^16.0.0",
     "react-apollo": "^1.4.15",
+    "react-background-slideshow": "^1.0.3",
     "react-country-region-selector": "^1.2.3",
     "react-countup": "^3.0.2",
     "react-dom": "^16.0.0",
