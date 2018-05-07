@@ -162,7 +162,7 @@ class MainLayout extends React.Component {
   }
 
   render() {
-    const { currentUser, showHeader, showFooter, location } = this.props;
+    const { currentUser, location } = this.props;
     const { collapsed, locale, messages } = this.state;
     const antdLocale = locale === 'en' ? enUS : mn_Mn;
 
