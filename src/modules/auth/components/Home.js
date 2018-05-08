@@ -34,28 +34,28 @@ const Home = (props, context) => {
                 <h1>OYU</h1>
                 <h2>Supplier Qualification Management System</h2>
               </Col>
-              <Col span={14}>
+              <Col span={12}>
                 <p className="text">
                   Together deliver a safe and globally competitive copper
                   business that contributes to the prosperity of Mongolia
                 </p>
               </Col>
-              <Col span={4}>
+              <Col span={6}>
                 <img
                   className="pull-right"
                   src={process.env.PUBLIC_URL + '/images/logo_en.png'}
                   alt="logo"
                 />
+                <ul className="pull-right">
+                  <li>
+                    <Link to="/sign-in">{__('Sign in')}</Link>
+                  </li>
+                  <li>
+                    <Link to="/register">{__('Register as a supplier')}</Link>
+                  </li>
+                </ul>
               </Col>
             </Row>
-            <ul className="pull-right">
-              <li>
-                <Link to="/sign-in">{__('Sign in')}</Link>
-              </li>
-              <li>
-                <Link to="/register">{__('Register as a supplier')}</Link>
-              </li>
-            </ul>
           </div>
 
           <div className="bottom bg-white">
