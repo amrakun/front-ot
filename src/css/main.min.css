@@ -358,6 +358,8 @@ i.success {
 }
 
 .home-landing .top {
+  position: absolute;
+  z-index: 10;
   overflow: hidden;
   padding: 20px 20px 10px;
 }
@@ -371,7 +373,7 @@ i.success {
 .home-landing .top ul {
   overflow: hidden;
   list-style: none;
-  padding: 10px 0 0;
+  padding: 50px 0 0;
 }
 
 .home-landing .top ul li {
@@ -427,7 +429,7 @@ i.success {
 .home-landing .footer {
   margin-top: 15px;
   background-color: #1f497d;
-  padding: 15px;
+  padding: 15px 15px 5px;
 }
 
 .home-landing .footer p {
@@ -841,6 +843,12 @@ table.mass-email-response tr td:last-child {
 
 .app-name span {
   font-size: 22px;
+}
+
+@media (max-height: 680px) {
+  .home-landing .top {
+    border-bottom: 1px solid #e37222;
+  }
 }
 
 /*# sourceMappingURL=main.min.css.map */
