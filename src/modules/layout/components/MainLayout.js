@@ -185,20 +185,24 @@ class MainLayout extends React.Component {
           <Layout className={`main-wrapper ${locale}`}>
             {currentUser && <Sidenav {...navProps} />}
             <Layout className="main" style={layoutStyle}>
-              <Header
-                toggleLang={this.toggleLang}
-                langLabel={locale}
-                location={location}
-              />
+              {currentUser && (
+                <Header
+                  toggleLang={this.toggleLang}
+                  langLabel={locale}
+                  location={location}
+                />
+              )}
               <Content>
                 <InjectedComponent {...this.props} />
                 <BackTop />
               </Content>
-              <Footer>
-                <T id="Oyu Tolgoi ©2018 All Rights Reserved">
-                  Oyu Tolgoi 2018 All Rights Reserved
-                </T>
-              </Footer>
+              {currentUser && (
+                <Footer>
+                  <T id="Oyu Tolgoi ©2018 All Rights Reserved">
+                    Oyu Tolgoi 2018 All Rights Reserved
+                  </T>
+                </Footer>
+              )}
             </Layout>
           </Layout>
         </IntlProvider>

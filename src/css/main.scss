@@ -232,75 +232,9 @@ i.success {
 
 .home-landing {
   position: relative;
-  height: calc(100vh - 65px);
-  overflow: hidden;
-  margin: 0 -24px;
-  .background, .content-wrapper {
-    height: 100%;
-  }
-
-  .background {
-    -webkit-filter: blur(10px);
-    -moz-filter: blur(10px);
-    -o-filter: blur(10px);
-    -ms-filter: blur(10px);
-    filter: blur(10px);
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 0;
-    transform: scale(1.05);
-  }
-
-  .content-wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .content {
-      z-index: 1;
-      text-align: center;
-      h1 {
-        strong {
-          font-weight: 600;
-          padding-right: 8px;
-          margin-right: 8px;
-        }
-        span {
-          font-weight: 100;
-        }
-        font-size: 55px;
-        margin-bottom: 64px;
-        line-height: 60px;
-        color: #fff;
-        text-transform: uppercase;
-      }
-      [class^='home-btn'] {
-        line-height: 45px;
-        padding: 0 20px;
-        display: inline-block;
-        font-size: 22px;
-        border-radius: 3px;
-        transition: background-color 0.3s ease;
-      }
-      .home-btn {
-        background-color: $primary-color;
-        color: #fff;
-        margin-right: 16px;
-        &:hover {
-          background-color: tint($primary-color, 15);
-        }
-      }
-      .home-btn-transparent {
-        color: #fff;
-        transition: color .2s ease;
-        &:hover {
-          color: $primary-color;
-        }
-      }
-    }
-
-  }
+  width: 1200px;
+  margin: 0 auto;
+  z-index: 100;
 }
 
 .login-card {

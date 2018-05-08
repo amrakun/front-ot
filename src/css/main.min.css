@@ -1,3 +1,11 @@
+.bg-white {
+  background-color: #fff;
+}
+
+.pull-right {
+  float: right;
+}
+
 .numberCard,
 .NumberCardLines {
   height: 112px;
@@ -334,73 +342,125 @@ i.success {
 }
 
 .home-landing {
-  position: relative;
-  height: calc(100vh - 65px);
-  overflow: hidden;
-  margin: 0 -24px;
-}
-.home-landing .background,
-.home-landing .content-wrapper {
-  height: 100%;
-}
-.home-landing .background {
-  -webkit-filter: blur(10px);
-  -moz-filter: blur(10px);
-  -o-filter: blur(10px);
-  -ms-filter: blur(10px);
-  filter: blur(10px);
   position: absolute;
   top: 0;
+  left: 0;
   width: 100%;
-  z-index: 0;
-  transform: scale(1.05);
+  height: 100%;
+  z-index: 100;
 }
-.home-landing .content-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+.home-container {
+  position: relative;
+  margin: 0 auto;
+  width: 1000px;
+  height: 100vh;
 }
-.home-landing .content-wrapper .content {
-  z-index: 1;
+
+.home-landing .top {
+  overflow: hidden;
+  padding: 20px 20px 10px;
+}
+
+.home-landing .top .text {
+  margin-top: 30px;
+  font-size: 15px;
+  font-style: italic;
+}
+
+.home-landing .top ul {
+  overflow: hidden;
+  list-style: none;
+  padding: 10px 0 0;
+}
+
+.home-landing .top ul li {
+  float: left;
+  padding: 5px 10px;
+  margin-right: 1px;
+  background-color: #e37222;
+}
+
+.home-landing .top ul li:hover {
+  background-color: #e68744;
+}
+
+.home-landing .top ul li a {
+  display: block;
+  color: #fff;
+}
+
+.home-landing .top .logo {
+  float: right;
+}
+
+.home-landing h1 {
+  margin: 0 0 20px;
+  font-weight: bold;
+  font-size: 60px;
+  line-height: 50px;
+  color: #009aa6;
+}
+
+.home-landing h2 {
+  font-size: 15px;
+  color: #009aa6;
+}
+
+.home-landing .bottom {
+  position: absolute;
+  bottom: 0;
+  padding: 20px;
+}
+
+.home-landing .desc {
+  height: 249px;
+  background-color: #009aa6;
+  padding: 15px;
+}
+
+.home-landing .desc p {
+  color: #fff;
+  font-size: 14px;
+}
+
+.home-landing .footer {
+  margin-top: 15px;
+  background-color: #1f497d;
+  padding: 15px;
+}
+
+.home-landing .footer p {
+  color: #fff;
+}
+
+.home-landing .item {
+  display: block;
+}
+
+.home-landing .program {
+  background-color: #1f497d;
+}
+
+.home-landing .calendar {
+  background-color: #e37222;
+}
+
+.home-landing .bottom .text {
+  padding: 10px;
+  color: #fff;
+  font-size: 13px;
+}
+
+.home-landing .bottom h3 {
   text-align: center;
+  margin-bottom: 20px;
+  font-size: 15px;
 }
-.home-landing .content-wrapper .content h1 {
-  font-size: 55px;
-  margin-bottom: 64px;
-  line-height: 60px;
-  color: #fff;
-  text-transform: uppercase;
-}
-.home-landing .content-wrapper .content h1 strong {
-  font-weight: 600;
-  padding-right: 8px;
-  margin-right: 8px;
-}
-.home-landing .content-wrapper .content h1 span {
-  font-weight: 100;
-}
-.home-landing .content-wrapper .content [class^='home-btn'] {
-  line-height: 45px;
-  padding: 0 20px;
-  display: inline-block;
-  font-size: 22px;
-  border-radius: 3px;
-  transition: background-color 0.3s ease;
-}
-.home-landing .content-wrapper .content .home-btn {
-  background-color: #f47721;
-  color: #fff;
-  margin-right: 16px;
-}
-.home-landing .content-wrapper .content .home-btn:hover {
-  background-color: #f68b42;
-}
-.home-landing .content-wrapper .content .home-btn-transparent {
-  color: #fff;
-  transition: color 0.2s ease;
-}
-.home-landing .content-wrapper .content .home-btn-transparent:hover {
-  color: #f47721;
+
+.home-landing .bottom img {
+  width: 100%;
+  height: 190px;
 }
 
 .login-card {
