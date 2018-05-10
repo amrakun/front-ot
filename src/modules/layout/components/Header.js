@@ -16,7 +16,7 @@ function getColor(username) {
 }
 
 const HeaderBar = (props, context) => {
-  const { currentUser } = context || {};
+  const { currentUser, toggleLang, locale } = context || {};
   const username = currentUser && currentUser.username;
 
   return (
@@ -81,10 +81,8 @@ const HeaderBar = (props, context) => {
 
       {currentUser && !currentUser.isSupplier ? null : (
         <Menu.Item className="right" key="lang">
-          <a onClick={props.toggleLang}>
-            <span className="bordered">
-              {props.langLabel === 'en' ? 'MN' : 'EN'}
-            </span>
+          <a onClick={toggleLang}>
+            <span className="bordered">{locale === 'en' ? 'MN' : 'EN'}</span>
           </a>
         </Menu.Item>
       )}
@@ -93,12 +91,12 @@ const HeaderBar = (props, context) => {
 };
 
 HeaderBar.contextTypes = {
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
+  toggleLang: PropTypes.func,
+  locale: PropTypes.string
 };
 
 HeaderBar.propTypes = {
-  toggleLang: PropTypes.func,
-  langLabel: PropTypes.string,
   location: PropTypes.object
 };
 

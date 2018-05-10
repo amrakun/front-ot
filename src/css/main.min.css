@@ -362,10 +362,15 @@ i.success {
   z-index: 10;
   overflow: hidden;
   padding: 20px 20px 10px;
+  -webkit-box-shadow: 0px 5px 19px 5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 5px 19px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 5px 19px 5px rgba(0, 0, 0, 0.3);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .home-landing .top .text {
-  margin-top: 30px;
+  margin-top: 20px;
   font-size: 15px;
   font-style: italic;
 }
@@ -373,7 +378,7 @@ i.success {
 .home-landing .top ul {
   overflow: hidden;
   list-style: none;
-  padding: 50px 0 0;
+  padding: 0;
 }
 
 .home-landing .top ul li {
@@ -413,6 +418,11 @@ i.success {
   position: absolute;
   bottom: 0;
   padding: 20px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  -webkit-box-shadow: 0px 5px 19px 5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 5px 19px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 5px 19px 5px rgba(0, 0, 0, 0.3);
 }
 
 .home-landing .desc {
@@ -843,12 +853,6 @@ table.mass-email-response tr td:last-child {
 
 .app-name span {
   font-size: 22px;
-}
-
-@media (max-height: 680px) {
-  .home-landing .top {
-    border-bottom: 1px solid #e37222;
-  }
 }
 
 /*# sourceMappingURL=main.min.css.map */
