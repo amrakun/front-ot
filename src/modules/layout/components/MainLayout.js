@@ -155,6 +155,7 @@ class MainLayout extends React.Component {
 
   getChildContext() {
     return {
+      toggleLang: this.toggleLang,
       currentUser: this.props.currentUser,
       systemConfig: this.props.systemConfig,
       locale: this.state.locale
@@ -185,13 +186,7 @@ class MainLayout extends React.Component {
           <Layout className={`main-wrapper ${locale}`}>
             {currentUser && <Sidenav {...navProps} />}
             <Layout className="main" style={layoutStyle}>
-              {currentUser && (
-                <Header
-                  toggleLang={this.toggleLang}
-                  langLabel={locale}
-                  location={location}
-                />
-              )}
+              {currentUser && <Header location={location} />}
               <Content>
                 <InjectedComponent {...this.props} />
                 <BackTop />
@@ -221,6 +216,7 @@ MainLayout.propTypes = {
 };
 
 MainLayout.childContextTypes = {
+  toggleLang: PropTypes.func,
   currentUser: PropTypes.object,
   systemConfig: PropTypes.object,
   locale: PropTypes.string
