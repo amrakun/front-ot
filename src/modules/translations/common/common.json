@@ -59,6 +59,7 @@
   "Changes disabled": "Өөрчлөлт оруулах боломжгүй",
   "You have already submitted your pre-qualification form and changes are disabled.":
     "Та гэрээ хэрэгжүүлэх чадварын үнэлгээний асуулгаа нэгэнт илгээсэн тул өөрчлөлт оруулах боломжгүй",
+  "Ext": "дотуур утас",
   "successFullyUpdated": "Ажилттай шинэчлэгдлээ",
   "resetInformation": "Нууц үг шинэчлэх мэдээлэл таны и-мэйл хаягруу илгээсэн",
   "successResetPassword":

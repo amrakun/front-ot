@@ -92,7 +92,7 @@ class Home extends React.Component {
                                 <b>{__('B.Togosoo')}</b>
                                 <br />
                                 <b>{__('Email')}:</b> togosoob@ot.mn<br />
-                                <b>{__('Phone')}:</b> 331880; {__('Ext')}-3604<br
+                                <b>{__('Phone')}:</b> 331880; {__('Ext')} - 3604<br
                                 />
                               </p>
                             </Col>
@@ -101,7 +101,7 @@ class Home extends React.Component {
                                 <b>{__('G.Narantsatsral')}</b>
                                 <br />
                                 <b>{__('Email')}:</b> narantsatsralg@ot.mn<br />
-                                <b>{__('Phone')}:</b> 331880; {__('Ext')}-3789
+                                <b>{__('Phone')}:</b> 331880; {__('Ext')} - 3789
                               </p>
                             </Col>
                             <Col span={24}>
