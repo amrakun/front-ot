@@ -32,7 +32,7 @@ class StatusTab extends BaseForm {
     if (registeredInCountry === 'Mongolia') {
       suggestedType = 'national';
 
-      if (registeredInAimag === 'Omnogovi') {
+      if (registeredInAimag === 'Umnugovi') {
         suggestedType = 'umnugobi';
       }
 

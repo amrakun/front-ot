@@ -188,9 +188,9 @@ class CompanyInfo extends BaseForm {
               label: 'Soum you are registered in',
               name: 'registeredInSum',
               isVisible:
-                selectedCountry === 'MN' && selectedAimag === 'Omnogovi',
+                selectedCountry === 'MN' && selectedAimag === 'Umnugovi',
               optional: !(
-                selectedCountry === 'MN' && selectedAimag === 'Omnogovi'
+                selectedCountry === 'MN' && selectedAimag === 'Umnugovi'
               ),
               control: (
                 <Select showSearch filterOption={this.filterOption}>
