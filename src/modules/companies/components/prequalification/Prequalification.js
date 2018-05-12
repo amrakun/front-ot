@@ -10,6 +10,7 @@ import { Panes } from 'modules/common/components';
 class PrequalificationForms extends Panes {
   componentDidMount() {
     const { __ } = this.context;
+
     if (this.props.company.isSentPrequalificationInfo) {
       notification.open({
         message: __('Changes disabled'),
@@ -24,8 +25,10 @@ class PrequalificationForms extends Panes {
 
   render() {
     const { currentTabKey } = this.state;
+
     const { productsInfo, isSentPrequalificationInfo, prequalifiedStatus } =
       this.props.company || {};
+
     const { send } = this.props;
     const disabled = isSentPrequalificationInfo;
 

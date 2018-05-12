@@ -47,7 +47,13 @@ const RegistrationContainer = (props, { __ }) => {
   const save = (name, doc) => {
     const mutation = props[`${name}Edit`];
 
-    const hasFilledBefore = companyByUser.productsInfo !== null;
+    const productsInfo = companyByUser.productsInfo;
+
+    let hasFilledBefore = productsInfo;
+
+    if (productsInfo && productsInfo.length === 0) {
+      hasFilledBefore = false;
+    }
 
     mutation({ variables: { [name]: doc } })
       .then(() => {

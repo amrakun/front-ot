@@ -17,6 +17,7 @@ const PrequalificationContainer = (props, { __ }) => {
   const { isSentPrequalificationInfo } = companyByUser;
 
   let formsComplete = true;
+
   Object.keys(companyByUser).forEach(key => {
     if (
       key.includes('Info') &&
@@ -36,6 +37,7 @@ const PrequalificationContainer = (props, { __ }) => {
         .then(() => {
           companyByUserQuery.refetch();
           message.success(__('Saved'));
+
           if (name === 'healthInfo') {
             formsComplete
               ? send()
@@ -44,6 +46,7 @@ const PrequalificationContainer = (props, { __ }) => {
                 );
           }
         })
+
         .catch(error => {
           message.error(error.message);
         });
