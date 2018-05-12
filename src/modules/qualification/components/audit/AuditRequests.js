@@ -10,6 +10,7 @@ import { HelpModal } from 'modules/common/components';
 class AuditRequests extends React.Component {
   columns() {
     const { __ } = this.context;
+
     return [
       {
         title: __('Status'),

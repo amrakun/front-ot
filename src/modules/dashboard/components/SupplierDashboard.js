@@ -114,7 +114,7 @@ class Dashboard extends React.Component {
                 averageDifotScore < 75 ? __(labels.difotSuggestion) : null
               }
               color={averageDifotScore ? colors[7] : colors[5]}
-              number={averageDifotScore ? averageDifotScore.toFixed(1) : 0}
+              number={averageDifotScore || 0}
             />
           </Col>
           <Col key={5} lg={8} sm={12}>
