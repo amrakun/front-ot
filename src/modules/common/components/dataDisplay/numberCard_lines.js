@@ -19,10 +19,12 @@ class NumberCard extends Component {
 
     if (percent < count) {
       percent++;
+
       if (percent > 100) {
         percent = 100;
       }
-      this.setState({ percent: percent.toFixed(1) });
+
+      this.setState({ percent: parseFloat(percent.toFixed(1)) });
     } else {
       clearInterval(this.countdown);
     }
@@ -51,6 +53,7 @@ class NumberCard extends Component {
       tooltip,
       onClick
     } = this.props;
+
     const { percent } = this.state;
 
     this.componentDidMount();
