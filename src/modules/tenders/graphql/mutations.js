@@ -101,14 +101,8 @@ const tenderResponsesSend = `
 `;
 
 const tendersAward = `
-  mutation tendersAward(
-    $_id: String!
-    $supplierId: String!
-  ) {
-    tendersAward(
-      _id: $_id
-      supplierId: $supplierId
-    ) {
+  mutation tendersAward($_id: String! $supplierIds: [String!]!) {
+    tendersAward(_id: $_id supplierIds: $supplierIds) {
       type
     }
   }

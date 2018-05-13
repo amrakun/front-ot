@@ -27,17 +27,18 @@ class TenderContainer extends React.Component {
     this.sendRegretLetter = this.sendRegretLetter.bind(this);
   }
 
-  award(companyId) {
+  award(supplierIds) {
     const { tendersAward, tenderDetailQuery } = this.props;
 
     tendersAward({
       variables: {
         _id: tenderDetailQuery.tenderDetail._id,
-        supplierId: companyId
+        supplierIds
       }
     })
       .then(() => {
         tenderDetailQuery.refetch();
+
         notification.open({
           ...notifyIfWantToSend,
           btn: (

@@ -119,12 +119,14 @@ class StatusTab extends BaseForm {
       prequalifySupplier,
       enableSupplierForm
     } = this.props;
+
     const {
       enName,
       isPrequalified,
       isSentPrequalificationInfo,
       tabQualified
     } = statusData;
+
     const { checkAll } = this.state;
 
     return (

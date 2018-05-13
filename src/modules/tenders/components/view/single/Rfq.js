@@ -43,24 +43,17 @@ class Rfq extends Tender {
   bidSummaryReport() {
     const { selectedCompanies } = this.state;
 
-    selectedCompanies.length < 1
-      ? message.error('Please select atleast one supplier!')
-      : this.props.downloadReport(
-          this.state.selectedCompanies,
-          'rfqBidSummaryReport'
-        );
+    if (selectedCompanies.length < 1) {
+      return message.error('Please select atleast one supplier!');
+    }
+
+    this.props.downloadReport(selectedCompanies, 'rfqBidSummaryReport');
   }
 
   award() {
     const { selectedCompanies } = this.state;
 
-    if (selectedCompanies.length > 1) {
-      message.error('Please select only one supplier to award!');
-    } else if (selectedCompanies.length < 1) {
-      message.error('Please select a supplier!');
-    } else {
-      this.props.award(selectedCompanies[0]);
-    }
+    this.props.award(selectedCompanies);
   }
 
   handleProductCodeChange(value) {

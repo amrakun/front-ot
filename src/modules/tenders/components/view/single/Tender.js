@@ -33,8 +33,11 @@ class Tender extends Common {
   }
 
   getPercent(requestedCount, count) {
-    if (count) return count / requestedCount * 100;
-    else return 0;
+    if (count) {
+      return count / requestedCount * 100;
+    }
+
+    return 0;
   }
 
   setFilter(name) {
@@ -52,7 +55,7 @@ class Tender extends Common {
   getTitle() {
     const filter = router.getParam(this.props.history, 'filter');
 
-    if (filter === 'isNotInterested') return 'Not intereseted';
+    if (filter === 'isNotInterested') return 'Not interested';
 
     if (filter === 'isNotResponded') return 'Not responded';
 
@@ -175,6 +178,7 @@ class Tender extends Common {
 
   renderStats() {
     const tenderDetail = this.props.tenderDetail || {};
+
     const {
       submittedCount,
       requestedCount,
@@ -212,7 +216,7 @@ class Tender extends Common {
         <Col key={3} lg={6} sm={12}>
           <NumberCardLines
             icon="dislike-o"
-            title="Not intereseted"
+            title="Not interested"
             color={colors[4]}
             number={notInterestedCount}
             percent={this.getPercent(requestedCount, notInterestedCount)}
@@ -241,12 +245,14 @@ class Tender extends Common {
       requestedData = [],
       tableOperations
     } = args;
+
     const {
       loading,
       onChange,
       regretLetterModalVisible,
       notRespondedSuppliers
     } = this.props;
+
     const {
       selectedCompanies,
       responseModal,
@@ -254,6 +260,7 @@ class Tender extends Common {
       regretLetterContent,
       requestedSuppliers
     } = this.state;
+
     const data = this.props.data || [];
     const tenderDetail = this.props.tenderDetail || {};
     const queryParams = this.props.queryParams || {};

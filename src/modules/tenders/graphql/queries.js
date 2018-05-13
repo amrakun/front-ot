@@ -34,7 +34,7 @@ const tenderFields = `
   },
   ${requestedProductsFields}
   requestedDocuments
-  winnerId
+  winnerIds
   isAwarded
   sentRegretLetter
 `;
