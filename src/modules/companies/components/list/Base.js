@@ -36,6 +36,26 @@ class Base extends Common {
       : this.props.history.push(path, { supplierIds: selectedCompanies });
   }
 
+  renderFinanceStat(prev, current) {
+    const amount = current.amount.toLocaleString();
+
+    let className = 'not-changed';
+
+    if (prev && current.amount > prev.amount) {
+      className = 'up';
+    }
+
+    if (prev && current.amount < prev.amount) {
+      className = 'down';
+    }
+
+    return (
+      <span className={`finance-stat ${className}`}>
+        <span className="year">{current.year}</span> - {amount}
+      </span>
+    );
+  }
+
   render() {
     const {
       exportCompanies,
@@ -57,6 +77,33 @@ class Base extends Common {
           title: 'Validation status',
           width: 40,
           dataIndex: 'productsInfoValidationStatusDisplay'
+        },
+        {
+          title: 'Financial status',
+          width: 40,
+          render: record => {
+            const { financialInfo } = record;
+
+            let { annualTurnover } = financialInfo || {};
+
+            if (!annualTurnover || annualTurnover.length !== 3) {
+              return 'n/a';
+            }
+
+            annualTurnover = [...annualTurnover].sort(
+              (a, b) => a.year > b.year
+            );
+
+            const [first, second, third] = annualTurnover;
+
+            return (
+              <div>
+                {this.renderFinanceStat(null, first)}
+                {this.renderFinanceStat(first, second)}
+                {this.renderFinanceStat(second, third)}
+              </div>
+            );
+          }
         },
         {
           title: 'Block status',

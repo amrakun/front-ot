@@ -341,6 +341,13 @@ const companies = `
       productsInfoValidationStatusDisplay
       qualificationStatusDisplay
       isBlocked
+
+      financialInfo {
+        annualTurnover {
+          year
+          amount
+        }
+      }
     }
   }
 `;

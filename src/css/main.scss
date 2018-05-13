@@ -640,3 +640,34 @@ table.mass-email-response {
 .app-name span {
   font-size: 22px;
 }
+
+.finance-stat {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.finance-stat {
+  .year {
+    color: #bbbaba;
+  }
+}
+
+.finance-stat.not-changed {
+  color: #bdbd5f;
+}
+
+.finance-stat.up {
+  color: green;
+}
+
+.finance-stat.up::after {
+  content: "\2191";
+}
+
+.finance-stat.down {
+  color: red;
+}
+
+.finance-stat.down::after {
+  content: "\2193";
+}
