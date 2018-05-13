@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { gql, compose, graphql } from 'react-apollo';
+import moment from 'moment';
 import { queries } from '../graphql';
 import { Loading } from 'modules/common/components';
 import { BuyerDashboard } from '../components';
-import moment from 'moment';
 
 const DashboardContainer = props => {
   const {
@@ -120,17 +120,22 @@ DashboardContainer.propTypes = {
   queryParams: PropTypes.object
 };
 
+const generateDateVariables = queryParams => {
+  const startDate = new Date(queryParams.startDate || '1900-01-01');
+  const endDate = new Date(queryParams.endDate || '2040-01-01');
+
+  return {
+    startDate: moment(startDate),
+    endDate: moment(endDate).endOf('month')
+  };
+};
+
 export default compose(
   graphql(gql(queries.companiesCountByTierType), {
     name: 'companiesCountByTierTypeQuery',
     options: ({ queryParams }) => ({
       variables: {
-        startDate: new Date(
-          queryParams.startDate ? queryParams.startDate : '1900-01-01'
-        ),
-        endDate: new Date(
-          queryParams.endDate ? queryParams.endDate : '2040-09-26'
-        )
+        ...generateDateVariables(queryParams)
       }
     })
   }),
@@ -139,37 +144,28 @@ export default compose(
     name: 'companiesCountByProductCodeQuery',
     options: ({ queryParams }) => ({
       variables: {
-        startDate: new Date(queryParams.startDate || '1900-01'),
-        endDate: new Date(queryParams.endDate || '2040-09')
+        ...generateDateVariables(queryParams)
       }
     })
   }),
 
   graphql(gql(queries.companiesCountByRegisteredVsPrequalified), {
     name: 'ccbrvpQuery',
-    options: ({ queryParams }) => ({
-      variables: {
-        startDate: new Date(
-          queryParams.startDate ? queryParams.startDate : '1900-01-01'
-        ),
-        endDate: new Date(
-          queryParams.endDate ? queryParams.endDate : '2040-09-26'
-        ),
-        productCodes: queryParams.productCodes ? queryParams.productCodes : ''
-      }
-    })
+    options: ({ queryParams }) => {
+      return {
+        variables: {
+          ...generateDateVariables(queryParams),
+          productCodes: queryParams.productCodes ? queryParams.productCodes : ''
+        }
+      };
+    }
   }),
 
   graphql(gql(queries.tenderCountByStatus), {
     name: 'tenderCountByStatusEoi',
     options: ({ queryParams }) => ({
       variables: {
-        startDate: new Date(
-          queryParams.startDate ? queryParams.startDate : '1900-01-01'
-        ),
-        endDate: new Date(
-          queryParams.endDate ? queryParams.endDate : '2040-09-26'
-        ),
+        ...generateDateVariables(queryParams),
         type: 'eoi'
       }
     })
@@ -179,12 +175,7 @@ export default compose(
     name: 'tenderCountByStatusRfq',
     options: ({ queryParams }) => ({
       variables: {
-        startDate: new Date(
-          queryParams.startDate ? queryParams.startDate : '1900-01-01'
-        ),
-        endDate: new Date(
-          queryParams.endDate ? queryParams.endDate : '2040-09-26'
-        ),
+        ...generateDateVariables(queryParams),
         type: 'rfq'
       }
     })
@@ -194,12 +185,7 @@ export default compose(
     name: 'tendersTotalCountRfq',
     options: ({ queryParams }) => ({
       variables: {
-        startDate: new Date(
-          queryParams.startDate ? queryParams.startDate : '1900-01-01'
-        ),
-        endDate: new Date(
-          queryParams.endDate ? queryParams.endDate : '2040-09-26'
-        ),
+        ...generateDateVariables(queryParams),
         type: 'rfq'
       }
     })
@@ -209,12 +195,7 @@ export default compose(
     name: 'tendersTotalCountEoi',
     options: ({ queryParams }) => ({
       variables: {
-        startDate: new Date(
-          queryParams.startDate ? queryParams.startDate : '1900-01-01'
-        ),
-        endDate: new Date(
-          queryParams.endDate ? queryParams.endDate : '2040-09-26'
-        ),
+        ...generateDateVariables(queryParams),
         type: 'eoi'
       }
     })
@@ -224,12 +205,7 @@ export default compose(
     name: 'tendersAverageDurationEoi',
     options: ({ queryParams }) => ({
       variables: {
-        startDate: new Date(
-          queryParams.startDate ? queryParams.startDate : '1900-01-01'
-        ),
-        endDate: new Date(
-          queryParams.endDate ? queryParams.endDate : '2040-09-26'
-        ),
+        ...generateDateVariables(queryParams),
         type: 'eoi'
       }
     })
@@ -239,12 +215,7 @@ export default compose(
     name: 'tendersAverageDurationRfq',
     options: ({ queryParams }) => ({
       variables: {
-        startDate: new Date(
-          queryParams.startDate ? queryParams.startDate : '1900-01-01'
-        ),
-        endDate: new Date(
-          queryParams.endDate ? queryParams.endDate : '2040-09-26'
-        ),
+        ...generateDateVariables(queryParams),
         type: 'rfq'
       }
     })

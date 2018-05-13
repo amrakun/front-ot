@@ -281,7 +281,7 @@ class Dashboard extends React.Component {
     } = this.props;
 
     const queryParams = queryString.parse(search);
-    const dateFormat = 'YYYY/MM';
+    const dateFormat = 'YYYY-MM';
 
     return (
       <Tabs animated={false}>
