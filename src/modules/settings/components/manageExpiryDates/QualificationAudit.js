@@ -195,7 +195,6 @@ class QualificationAudit extends React.Component {
                 <Select style={{ width: 120 }}>
                   <Option value="day">Day</Option>
                   <Option value="month">Month</Option>
-                  <Option value="quarter">Quarter</Option>
                   <Option value="year">Year</Option>
                 </Select>
               )}
@@ -247,7 +246,6 @@ class QualificationAudit extends React.Component {
                     <Select style={{ width: 120 }}>
                       <Option value="day">Day</Option>
                       <Option value="month">Month</Option>
-                      <Option value="quarter">Quarter</Option>
                       <Option value="year">Year</Option>
                     </Select>
                   )}
@@ -296,7 +294,6 @@ class QualificationAudit extends React.Component {
                     <Select style={{ width: 120 }}>
                       <Option value="day">Day</Option>
                       <Option value="month">Month</Option>
-                      <Option value="quarter">Quarter</Option>
                       <Option value="year">Year</Option>
                     </Select>
                   )}
