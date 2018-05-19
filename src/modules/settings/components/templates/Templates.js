@@ -1,112 +1,85 @@
 import React from 'react';
-import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import { Card, Row, Col, Tabs, Button } from 'antd';
-import { Editor } from '../../../common/components';
-const TabPane = Tabs.TabPane;
+import { Form, Select } from 'antd';
+import { Template } from '../../containers';
 
-const propTypes = {
-  onEmailContentChange: PropTypes.func,
-  configsSaveTemplate: PropTypes.func
-};
+const FormItem = Form.Item;
+const Option = Select.Option;
 
 class Templates extends React.Component {
-  constructor(props, context) {
+  constructor(props) {
     super(props);
 
-    const { systemConfig } = context;
-
     this.state = {
-      EditorContent: systemConfig.eoiTemplate || '',
-      currentTab: 'eoiTemplate',
-      eoiTemplate: systemConfig.eoiTemplate || '',
-      rfqTemplate: systemConfig.rfqTemplate || '',
-      regretLetterTemplate: systemConfig.regretLetterTemplate || '',
-      successFeedbackTemplate: systemConfig.successFeedbackTemplate || '',
-      auditTemplate: systemConfig.auditTemplate || ''
+      kind: ''
+    };
+  }
+
+  onChangeKind(kind) {
+    const { systemConfig } = this.context;
+    const { name } = this.props;
+
+    const templates = systemConfig[`${name}Templates`] || {};
+
+    const currentTemplate = templates[kind] || {
+      from: '',
+      subject: { mn: '', en: '' },
+      content: { mn: '', en: '' }
     };
 
-    this.saveEditor = this.saveEditor.bind(this);
-    this.handleEditorChange = this.handleEditorChange.bind(this);
-    this.handleTabChange = this.handleTabChange.bind(this);
+    this.setState({ kind, currentTemplate });
   }
 
-  handleTabChange(e) {
-    this.setState({ currentTab: e, EditorContent: this.state[e] });
-  }
+  renderContent() {
+    const { name } = this.props;
+    const { kind, currentTemplate } = this.state;
 
-  handleEditorChange(content) {
-    const { currentTab } = this.state;
-
-    this.setState({
-      [currentTab]: content,
-      EditorContent: content
-    });
-  }
-
-  saveEditor(name) {
-    const { EditorContent } = this.state;
-    this.props.configsSaveTemplate(name, EditorContent);
-  }
-
-  renderEditor(name) {
-    const { EditorContent } = this.state;
+    if (!currentTemplate) {
+      return null;
+    }
 
     return (
-      <div>
-        <Editor
-          content={EditorContent}
-          onEmailContentChange={this.handleEditorChange}
-        />
-        <Button
-          type="primary"
-          onClick={this.saveEditor.bind(this, name)}
-          style={{ float: 'right', marginTop: 20 }}
-        >
-          Save
-        </Button>
-      </div>
+      <Template
+        parentName={`${name}Templates`}
+        kind={kind}
+        template={currentTemplate}
+      />
     );
   }
 
-  componentDidUpdate() {}
-
   render() {
+    const { kindOptions = [] } = this.props;
+    const { kind } = this.state;
+
     return (
-      <Row gutter={16}>
-        <Col span={24}>
-          <Card title="Templates">
-            <Tabs
-              defaultActiveKey="eoiTemplate"
-              onChange={this.handleTabChange}
-            >
-              <TabPane tab="EOI" key="eoiTemplate">
-                {this.renderEditor('eoiTemplate')}
-              </TabPane>
-              <TabPane tab="RFQ" key="rfqTemplate">
-                {this.renderEditor('rfqTemplate')}
-              </TabPane>
-              <TabPane tab="Regret Letter" key="regretLetterTemplate">
-                {this.renderEditor('regretLetterTemplate')}
-              </TabPane>
-              <TabPane tab="Success feedback" key="successFeedbackTemplate">
-                {this.renderEditor('successFeedbackTemplate')}
-              </TabPane>
-              <TabPane tab="Qualification/Audit" key="auditTemplate">
-                {this.renderEditor('auditTemplate')}
-              </TabPane>
-            </Tabs>
-          </Card>
-        </Col>
-      </Row>
+      <div>
+        <FormItem label="Kind">
+          <Select
+            style={{ width: '100%' }}
+            defaultValue={kind}
+            onChange={v => this.onChangeKind(v)}
+          >
+            {kindOptions.map((option, index) => (
+              <Option value={option.value} key={index}>
+                {option.text}
+              </Option>
+            ))}
+          </Select>
+        </FormItem>
+
+        {this.renderContent()}
+      </div>
     );
   }
 }
 
-Templates.propTypes = propTypes;
+Templates.propTypes = {
+  name: PropTypes.string,
+  kindOptions: PropTypes.array
+};
 
 Templates.contextTypes = {
   systemConfig: PropTypes.object
 };
 
-export default withRouter(Templates);
+export default Templates;

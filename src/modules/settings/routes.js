@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import queryString from 'query-string';
-import { UserList, Templates } from './containers';
+import { UserList } from './containers';
+import { ManageTemplates } from './components';
 import { ManageExpiryDates } from './components';
 
 export default [
@@ -21,7 +22,7 @@ export default [
     path="/settings/templates"
     component={({ location }) => {
       const queryParams = queryString.parse(location.search);
-      return <Templates queryParams={queryParams} />;
+      return <ManageTemplates queryParams={queryParams} />;
     }}
   />,
 
