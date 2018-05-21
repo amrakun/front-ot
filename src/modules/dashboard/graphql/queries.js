@@ -5,13 +5,7 @@ const companyByUser = `
       openTendersCount
       averageDifotScore
       isPrequalified
-      audits {
-        _id
-        publishDate
-        supplierResponse {
-          isSent
-        }
-      }
+      hasNewAudit
       lastFeedback {
         _id
         supplierResponse {

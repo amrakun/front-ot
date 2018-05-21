@@ -52,7 +52,7 @@ class Dashboard extends React.Component {
       averageDifotScore,
       lastFeedback,
       openTendersCount,
-      audits,
+      hasNewAudit,
       isPrequalified,
       isSentRegistrationInfo
     } = data;
@@ -60,12 +60,6 @@ class Dashboard extends React.Component {
     const queryParams = queryString.parse(location.search);
     const currentUser = this.context.currentUser || {};
     const { __ } = this.context;
-
-    let hasNewAudit = false;
-
-    audits.forEach(audit => {
-      if (audit.supplierResponse === null) hasNewAudit = true;
-    });
 
     const hasFeedback = lastFeedback && !lastFeedback.supplierResponse;
 
