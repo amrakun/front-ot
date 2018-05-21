@@ -33,8 +33,8 @@ class ReportsAndPlansContainer extends React.Component {
           message.success('Succesfully sent!');
           auditResponsesTableQuery.refetch();
         })
-        .catch(() => {
-          message.error(message.error);
+        .catch(error => {
+          message.error(error.message);
         });
     };
 

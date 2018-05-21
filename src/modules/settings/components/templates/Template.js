@@ -28,8 +28,8 @@ class Template extends React.Component {
       editorKey: Math.random(),
       language: 'en',
       from: template.from,
-      subject: template.subject || { mn: '', en: '' },
-      content: template.content || { mn: '', en: '' }
+      subject: template.subject ? { ...template.subject } : { mn: '', en: '' },
+      content: template.content ? { ...template.content } : { mn: '', en: '' }
     };
   }
 

@@ -43,32 +43,84 @@ class ManageTemplates extends React.Component {
                 key: 'rfq',
                 kindOptions: [
                   { value: 'buyer__publish', text: 'Buyer publish' },
-                  { value: 'buyer__close', text: 'Buyer close' }
+                  { value: 'supplier__publish', text: 'Supplier publish' },
+                  { value: 'buyer__close', text: 'Buyer close' },
+                  { value: 'supplier__close', text: 'Supplier close' },
+                  { value: 'buyer__cancel', text: 'Buyer cancel' },
+                  { value: 'supplier__cancel', text: 'Supplier cancel' },
+                  { value: 'buyer__award', text: 'Buyer award' },
+                  { value: 'supplier__award', text: 'Supplier award' }
                 ]
               })}
               {this.renderTabPane({
                 tab: 'EOI',
                 key: 'eoi',
                 kindOptions: [
-                  { value: 'buyer__publish', text: 'Buyer publish' }
+                  { value: 'buyer__publish', text: 'Buyer publish' },
+                  { value: 'supplier__publish', text: 'Supplier publish' },
+                  { value: 'buyer__close', text: 'Buyer close' },
+                  { value: 'supplier__close', text: 'Supplier close' },
+                  { value: 'buyer__cancel', text: 'Buyer cancel' },
+                  { value: 'supplier__cancel', text: 'Supplier cancel' },
+                  { value: 'buyer__award', text: 'Buyer award' },
+                  { value: 'supplier__award', text: 'Supplier award' }
                 ]
               })}
               {this.renderTabPane({
                 tab: 'Success feedback',
-                key: 'successFeedback'
+                key: 'successFeedback',
+                kindOptions: [
+                  { value: 'buyer__new', text: 'Buyer' },
+                  { value: 'supplier__new', text: 'Supplier' }
+                ]
               })}
               {this.renderTabPane({
                 tab: 'Capacity building',
                 key: 'capacityBuilding'
               })}
-              {this.renderTabPane({ tab: 'Block', key: 'block' })}
+              {this.renderTabPane({
+                tab: 'Block',
+                key: 'block',
+                kindOptions: [
+                  { value: 'buyer__block', text: 'Block' },
+                  { value: 'buyer__reminder', text: 'Reminder' }
+                ]
+              })}
               {this.renderTabPane({
                 tab: 'Prequalification',
-                key: 'prequalification'
+                key: 'prequalification',
+                kindOptions: [
+                  { value: 'supplier__qualified', text: 'Approved' },
+                  { value: 'supplier__failed', text: 'Failed' },
+                  {
+                    value: 'supplier__submit',
+                    text: 'To supplier when submit'
+                  },
+                  { value: 'buyer__submit', text: 'To buyer When submit' }
+                ]
               })}
               {this.renderTabPane({
                 tab: 'Desktop audit',
-                key: 'desktopAuditn'
+                key: 'desktopAudit',
+                kindOptions: [
+                  { value: 'buyer__submit', text: 'To buyer when submit' },
+                  {
+                    value: 'supplier__invitation',
+                    text: 'To supplier when receive invitation'
+                  },
+                  {
+                    value: 'supplier__failed',
+                    text: 'To supplier when failed'
+                  },
+                  {
+                    value: 'supplier__approved_with_improvement_plan',
+                    text: 'To supplier when approved with improvement plan'
+                  },
+                  {
+                    value: 'supplier__approved',
+                    text: 'To supplier when approved'
+                  }
+                ]
               })}
             </Tabs>
           </Card>
