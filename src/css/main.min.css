@@ -1,3 +1,11 @@
+.bg-white {
+  background-color: #fff;
+}
+
+.pull-right {
+  float: right;
+}
+
 .numberCard,
 .NumberCardLines {
   height: 112px;
@@ -334,10 +342,137 @@ i.success {
 }
 
 .home-landing {
-  position: relative;
-  width: 1200px;
-  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 100;
+}
+
+.home-container {
+  position: relative;
+  margin: 0 auto;
+  width: 1000px;
+  height: 100vh;
+}
+
+.home-landing .top {
+  position: absolute;
+  z-index: 10;
+  overflow: hidden;
+  padding: 20px 20px 10px;
+  -webkit-box-shadow: 0px 5px 19px 5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 5px 19px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 5px 19px 5px rgba(0, 0, 0, 0.3);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.home-landing .top .text {
+  margin-top: 20px;
+  font-size: 15px;
+  font-style: italic;
+}
+
+.home-landing .top ul {
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+}
+
+.home-landing .top ul li {
+  float: left;
+  padding: 5px 10px;
+  margin-right: 1px;
+  background-color: #e37222;
+}
+
+.home-landing .top ul li:hover {
+  background-color: #e68744;
+}
+
+.home-landing .top ul li a {
+  display: block;
+  color: #fff;
+}
+
+.home-landing .top .logo {
+  float: right;
+}
+
+.home-landing h1 {
+  margin: 0 0 20px;
+  font-weight: bold;
+  font-size: 60px;
+  line-height: 50px;
+  color: #009aa6;
+}
+
+.home-landing h2 {
+  font-size: 15px;
+  color: #009aa6;
+}
+
+.home-landing .bottom {
+  position: absolute;
+  bottom: 0;
+  padding: 20px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  -webkit-box-shadow: 0px 5px 19px 5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 5px 19px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 5px 19px 5px rgba(0, 0, 0, 0.3);
+}
+
+.home-landing .desc {
+  height: 249px;
+  background-color: #009aa6;
+  padding: 15px;
+}
+
+.home-landing .desc p {
+  color: #fff;
+  font-size: 14px;
+}
+
+.home-landing .footer {
+  margin-top: 15px;
+  background-color: #1f497d;
+  padding: 15px 15px 5px;
+}
+
+.home-landing .footer p {
+  color: #fff;
+}
+
+.home-landing .item {
+  display: block;
+}
+
+.home-landing .program {
+  background-color: #1f497d;
+}
+
+.home-landing .calendar {
+  background-color: #e37222;
+}
+
+.home-landing .bottom .text {
+  padding: 10px;
+  color: #fff;
+  font-size: 13px;
+}
+
+.home-landing .bottom h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.home-landing .bottom img {
+  width: 100%;
+  height: 190px;
 }
 
 .login-card {
