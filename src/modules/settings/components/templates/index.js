@@ -33,6 +33,18 @@ class ManageTemplates extends React.Component {
   }
 
   render() {
+    const tenderKindOptions = [
+      { value: 'buyer__publish', text: 'To buyer when publish' },
+      { value: 'supplier__publish', text: 'To supplier when publish' },
+      { value: 'buyer__close', text: 'To buyer when close' },
+      { value: 'supplier__close', text: 'To supplier when close' },
+      { value: 'buyer__cancel', text: 'To buyer when cancel' },
+      { value: 'supplier__cancel', text: 'To supplier when cancel' },
+      { value: 'buyer__award', text: 'To buyer when award' },
+      { value: 'supplier__award', text: 'To supplier when award' },
+      { value: 'supplier__reminder', text: 'Remind supplier' }
+    ];
+
     return (
       <Row gutter={16}>
         <Col span={24}>
@@ -41,30 +53,12 @@ class ManageTemplates extends React.Component {
               {this.renderTabPane({
                 tab: 'RFQ',
                 key: 'rfq',
-                kindOptions: [
-                  { value: 'buyer__publish', text: 'Buyer publish' },
-                  { value: 'supplier__publish', text: 'Supplier publish' },
-                  { value: 'buyer__close', text: 'Buyer close' },
-                  { value: 'supplier__close', text: 'Supplier close' },
-                  { value: 'buyer__cancel', text: 'Buyer cancel' },
-                  { value: 'supplier__cancel', text: 'Supplier cancel' },
-                  { value: 'buyer__award', text: 'Buyer award' },
-                  { value: 'supplier__award', text: 'Supplier award' }
-                ]
+                kindOptions: tenderKindOptions
               })}
               {this.renderTabPane({
                 tab: 'EOI',
                 key: 'eoi',
-                kindOptions: [
-                  { value: 'buyer__publish', text: 'Buyer publish' },
-                  { value: 'supplier__publish', text: 'Supplier publish' },
-                  { value: 'buyer__close', text: 'Buyer close' },
-                  { value: 'supplier__close', text: 'Supplier close' },
-                  { value: 'buyer__cancel', text: 'Buyer cancel' },
-                  { value: 'supplier__cancel', text: 'Supplier cancel' },
-                  { value: 'buyer__award', text: 'Buyer award' },
-                  { value: 'supplier__award', text: 'Supplier award' }
-                ]
+                kindOptions: tenderKindOptions
               })}
               {this.renderTabPane({
                 tab: 'Success feedback',
