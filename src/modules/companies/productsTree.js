@@ -275,6 +275,11 @@ const en = [
             key: 'C01001'
           },
           {
+            label: 'C01002 - Conveyor Belting',
+            value: 'c01002 - Conveyor Belting',
+            key: 'C01001'
+          },
+          {
             label: 'C01003 - Conveyor Equipment & Supplies',
             value: 'c01003 - conveyor equipment & supplies',
             key: 'C01003'
@@ -506,6 +511,11 @@ const en = [
             key: 'E01001'
           },
           {
+            label: 'E01002 - Drilling Machine Parts',
+            value: 'e01002 - Drilling Machine Parts',
+            key: 'E01002'
+          },
+          {
             label: 'E01003 - Drill Steel & Consumables',
             value: 'e01003 - drill steel & consumables',
             key: 'E01003'
@@ -514,6 +524,21 @@ const en = [
             label: 'E01004 - Drilling services',
             value: 'e01004 - drilling services',
             key: 'E01004'
+          },
+          {
+            label: 'E01005 - Drilling machines',
+            value: 'e01005 - Drilling machines',
+            key: 'E01005'
+          },
+          {
+            label: 'E01006 - Underground Drill Parts',
+            value: 'e01006 - Underground Drill Parts',
+            key: 'E01006'
+          },
+          {
+            label: 'E01007 - Underground Drills',
+            value: 'e01007 - Underground Drills',
+            key: 'E01007'
           }
         ],
         value: 'e01000 - drilling & consumables',
@@ -665,6 +690,48 @@ const en = [
       },
       {
         label: 'E04000 - Mining Equipment & Parts',
+        children: [
+          {
+            label: 'E04001 - HME Ancillary Equipment Parts',
+            value: 'e04001 - HME Ancillary Equipment Parts',
+            key: 'E04001'
+          },
+          {
+            label: 'E04002 - Haul Truck Parts',
+            value: 'e04002 - Haul Truck Parts',
+            key: 'E04002'
+          },
+          {
+            label: 'E04003 - Dragline / Rope Shovel Parts',
+            value: 'e04003 - Dragline / Rope Shovel Parts',
+            key: 'E04003'
+          },
+          {
+            label: 'E04004 - Draglines / Rope Shovels',
+            value: 'e04004 - Draglines / Rope Shovels',
+            key: 'E04004'
+          },
+          {
+            label: 'E04005 - Heavy Ropes/Dragline',
+            value: 'e04005 - Heavy Ropes/Dragline',
+            key: 'E04005'
+          },
+          {
+            label: 'E04006 - HME Hire',
+            value: 'e04006 - HME Hire',
+            key: 'E04006'
+          },
+          {
+            label: 'E04007 - Industrial Engines',
+            value: 'e04007 - Industrial Engines',
+            key: 'E04007'
+          },
+          {
+            label: 'E04008 - Industrial Engine Parts',
+            value: 'e04008 - Industrial Engine Parts',
+            key: 'E04008'
+          }
+        ],
         value: 'e04000 - mining equipment & parts',
         key: 'E04000'
       },
@@ -857,6 +924,11 @@ const en = [
             key: 'F01014'
           },
           {
+            label: 'F01015 - Ground Engaging Tools (GET)',
+            value: 'f01015 - Ground Engaging Tools (GET)',
+            key: 'F01015'
+          },
+          {
             label: 'F01016 - Hand tools',
             value: 'f01016 - hand tools',
             key: 'F01016'
@@ -895,6 +967,11 @@ const en = [
             label: 'F01023 - Wire Rope / Slings',
             value: 'f01023 - wire rope / slings',
             key: 'F01023'
+          },
+          {
+            label: 'F01024 - Lubricants',
+            value: 'f01024 - Lubricants',
+            key: 'F01024'
           },
           {
             label: 'F01025 - Metals (copper brass steel etc.)',
@@ -1137,6 +1214,78 @@ const en = [
       },
       {
         label: 'G02000 - Aluminium and Steel Input Materials',
+        children: [
+          {
+            label: 'G02001 - Anode Bar',
+            value: 'g02001 - Anode Bar',
+            key: 'G02001'
+          },
+          {
+            label: 'G02002 - Buss bar, collector straps, flexes',
+            value: 'g02002 - Buss bar, collector straps, flexes',
+            key: 'G02002'
+          },
+          {
+            label: 'G02003 - Cathodes',
+            value: 'g02003 - Cathodes',
+            key: 'G02003'
+          },
+          {
+            label: 'G02004 - Collector bars and pot steel',
+            value: 'g02004 - Collector bars and pot steel',
+            key: 'G02004'
+          },
+          {
+            label: 'G02005 - Copper',
+            value: 'g02005 - Copper',
+            key: 'G02005'
+          },
+          {
+            label: 'G02006 - Grain refiners',
+            value: 'g02006 - Grain refiners',
+            key: 'G02006'
+          },
+          {
+            label: 'G02007 - Hardeners',
+            value: 'g02007 - Hardeners',
+            key: 'G02007'
+          },
+          {
+            label: 'G02008 - Magnesium',
+            value: 'g02008 - Magnesium',
+            key: 'G02008'
+          },
+          {
+            label: 'G02009 - Manganese',
+            value: 'g02009 - Manganese',
+            key: 'G02009'
+          },
+          {
+            label: 'G02010 - Nickel',
+            value: 'g02010 - Nickel',
+            key: 'G02010'
+          },
+          {
+            label: 'G02011 - Pure metals',
+            value: 'g02011 - Pure metals',
+            key: 'G02011'
+          },
+          {
+            label: 'G02012 - Silicon',
+            value: 'g02012 - Silicon',
+            key: 'G02012'
+          },
+          {
+            label: 'G02013 - Steel rods',
+            value: 'g02013 - Steel rods',
+            key: 'G02013'
+          },
+          {
+            label: 'G02014 - Steel shot and steel balls',
+            value: 'g02014 - Steel shot and steel balls',
+            key: 'G02014'
+          }
+        ],
         value: 'g02000 - aluminium and steel input materials',
         key: 'G02000'
       },
@@ -1410,6 +1559,11 @@ const en = [
             key: 'G06001'
           },
           {
+            label: 'G06002 - Alumina',
+            value: 'g06002 - Alumina',
+            key: 'G06002'
+          },
+          {
             label: 'G06003 - Aluminium Flouride',
             value: 'g06003 - aluminium flouride',
             key: 'G06003'
@@ -1418,6 +1572,21 @@ const en = [
             label: 'G06004 - Anthracite',
             value: 'g06004 - anthracite',
             key: 'G06004'
+          },
+          {
+            label: 'G06005 - Bath / Cryolite',
+            value: 'g06005 - Bath / Cryolite',
+            key: 'G06005'
+          },
+          {
+            label: 'G06006 - Bauxite',
+            value: 'g06006 - Bauxite',
+            key: 'G06006'
+          },
+          {
+            label: 'G06007 - Bone Ash',
+            value: 'g06007 - Bone Ash',
+            key: 'G06007'
           },
           {
             label: 'G06008 - Coke (Petroleum) – Calcined (CPC)',
@@ -1455,9 +1624,59 @@ const en = [
             key: 'G06014'
           },
           {
+            label: 'G06015 - Graphite',
+            value: 'g06015 - Graphite',
+            key: 'G06015'
+          },
+          {
+            label: 'G06016 - Graphite tubes',
+            value: 'g06016 - Graphite tubes',
+            key: 'G06016'
+          },
+          {
+            label: 'G06017 - Green Coke',
+            value: 'g06017 - Green Coke',
+            key: 'G06017'
+          },
+          {
+            label: 'G06018 - Green Timber / Lumber',
+            value: 'g06018 - Green Timber / Lumber',
+            key: 'G06018'
+          },
+          {
+            label: 'G06019 - Hydrated lime',
+            value: 'g06019 - Hydrated lime',
+            key: 'G06019'
+          },
+          {
+            label: 'G06020 - Iron',
+            value: 'g06020 - Iron',
+            key: 'G06020'
+          },
+          {
             label: 'G06021 - Coal Tar Pitch',
             value: 'g06021 - coal tar pitch',
             key: 'G06021'
+          },
+          {
+            label: 'G06022 - Liquid Pitch',
+            value: 'g06022 - Liquid Pitch',
+            key: 'G06022'
+          },
+          {
+            label: 'G06023 - Lithium carbonate',
+            value: 'g06023 - Lithium carbonate',
+            key: 'G06023'
+          },
+          {
+            label: 'G06024 - Magnesium oxide',
+            value: 'g06024 - Magnesium oxide',
+            key: 'G06024'
+          },
+          {
+            label: 'G06025 - Metallurgical Coal',
+            value: 'g06025 - Metallurgical Coal',
+            key: 'G06025'
           },
           {
             label: 'G06026 - Ramming Paste',
@@ -1470,9 +1689,19 @@ const en = [
             key: 'G06027'
           },
           {
+            label: 'G06028 - Refractory Services',
+            value: 'g06028 - Refractory Services',
+            key: 'G06028'
+          },
+          {
             label: 'G06029 - Smelter Technology',
             value: 'g06029 - smelter technology',
             key: 'G06029'
+          },
+          {
+            label: 'G06030 - Soda ash',
+            value: 'g06030 - Soda ash',
+            key: 'G06030'
           },
           {
             label: 'G06031 - Cathodes',
@@ -1653,6 +1882,11 @@ const en = [
             key: 'H03001'
           },
           {
+            label: 'H03002 - Explosives Services',
+            value: 'h03002 - Explosives Services',
+            key: 'H03002'
+          },
+          {
             label: 'H03003 - Mining Contractors',
             value: 'h03003 - mining contractors',
             key: 'H03003'
@@ -1678,6 +1912,11 @@ const en = [
             label: 'H04003 - Catering',
             value: 'h04003 - catering',
             key: 'H04003'
+          },
+          {
+            label: 'H04004 - Fuel terminal management and maintenance services',
+            value: 'h04004 - Fuel terminal management and maintenance services',
+            key: 'H04004'
           },
           {
             label: 'H04005 - Grounds Maintenance services',
@@ -1983,6 +2222,11 @@ const en = [
             key: 'H08019'
           },
           {
+            label: 'H08020 - Temp Labor/Administration',
+            value: 'h08020 - Temp Labor/Administration',
+            key: 'H08020'
+          },
+          {
             label: 'H08021 - Training and Education - Fees',
             value: 'h08021 - training and education - fees',
             key: 'H08021'
@@ -2255,12 +2499,12 @@ const mn = [
             key: 'B01002'
           },
           {
-            label: 'B01003 - undefined',
+            label: 'B01003 - Дулааны нүүрс',
             value: 'b01003 - thermal coal',
             key: 'B01003'
           },
           {
-            label: 'B01004 - undefined',
+            label: 'B01004 - Дотоодын хий',
             value: 'b01004 - domestic gas',
             key: 'B01004'
           }
@@ -2292,17 +2536,17 @@ const mn = [
             key: 'B02005'
           },
           {
-            label: 'B02007 - undefined',
+            label: 'B02007 - Био түлш',
             value: 'b02007 - biofuel',
             key: 'B02007'
           },
           {
-            label: 'B02008 - undefined',
+            label: 'B02008 - Шингэн хий',
             value: 'b02008 - liquid natural gas',
             key: 'B02008'
           },
           {
-            label: 'B02009 - undefined',
+            label: 'B02009 - Түлшний терминал менежмент/засвар үйлчилгээ',
             value: 'b02009 - fuel terminal managemnt/maintenance serv',
             key: 'B02009'
           }
@@ -2340,7 +2584,7 @@ const mn = [
     label: 'C00000 - Суурин үйлдвэр, тоног төхөөрөмж',
     children: [
       {
-        label: 'C01000 - Маетриал тээвэрлэлт',
+        label: 'C01000 - Материал тээвэрлэлт',
         children: [
           {
             label: 'C01001 - Олон хутгуурт экскаватор',
@@ -2465,7 +2709,7 @@ const mn = [
             key: 'D01004'
           },
           {
-            label: 'D01005 - undefined',
+            label: 'D01005 - далайн тээврийн эд анги, сэлбэг хэрэгсэл',
             value: 'd01005 - marine parts and spares',
             key: 'D01005'
           }
@@ -2645,42 +2889,42 @@ const mn = [
             key: 'E02009'
           },
           {
-            label: 'E02010 - undefined',
+            label: 'E02010 - Далд уурхай тоног төхөөрөмж',
             value: 'e02010 - undergroung mining equipment incl lhd',
             key: 'E02010'
           },
           {
-            label: 'E02011 - undefined',
+            label: 'E02011 - Тоног төхөөрөмжийн туслах хэрэгслүүд',
             value: 'e02011 - hme ancillary equipment parts',
             key: 'E02011'
           },
           {
-            label: 'E02012 - undefined',
+            label: 'E02012 - Ачааны машины эд анги',
             value: 'e02012 - haul truck parts',
             key: 'E02012'
           },
           {
-            label: 'E02013 - undefined',
+            label: 'E02013 - Алхагч экскаватор / олс хүрз эд анги',
             value: 'e02013 - dragline / rope shovel parts',
             key: 'E02013'
           },
           {
-            label: 'E02014 - undefined',
+            label: 'E02014 - Аж үйлдвэрийн хөдөлгүүр',
             value: 'e02014 - industrial engines',
             key: 'E02014'
           },
           {
-            label: 'E02015 - undefined',
+            label: 'E02015 - Аж үйлдвэрийн хөдөлгүүрийн эд анги',
             value: 'e02015 - industrial engine parts',
             key: 'E02015'
           },
           {
-            label: 'E02016 - undefined',
+            label: 'E02016 - Өрөмдлөгийн машин',
             value: 'e02016 - drilling machines',
             key: 'E02016'
           },
           {
-            label: 'E02017 - undefined',
+            label: 'E02017 - өрөмдлөгийн машины эд анги',
             value: 'e02017 - drilling machine parts',
             key: 'E02017'
           }
@@ -2813,17 +3057,17 @@ const mn = [
             key: 'E06002'
           },
           {
-            label: 'E06003 - undefined',
+            label: 'E06003 - Дугуй ба обуд',
             value: 'e06003 - wheels & rims',
             key: 'E06003'
           },
           {
-            label: 'E06004 - undefined',
+            label: 'E06004 - Дугуйны үйлчилгээ',
             value: 'e06004 - tyre services',
             key: 'E06004'
           },
           {
-            label: 'E06005 - undefined',
+            label: 'E06005 - Конвейер хошуу',
             value: 'e06005 - conveyor belting',
             key: 'E06005'
           }
@@ -2845,10 +3089,10 @@ const mn = [
         key: 'E07000'
       },
       {
-        label: 'E08000 - undefined',
+        label: 'E08000 - Уул уурхайн технологи',
         children: [
           {
-            label: 'E08001 - undefined',
+            label: 'E08001 - Тоног төхөөрөмжийн технологи',
             value: 'e08001 - equipment technologies',
             key: 'E08001'
           }
@@ -3059,7 +3303,7 @@ const mn = [
             key: 'F01041'
           },
           {
-            label: 'F01042 - undefined',
+            label: 'F01042 - Хүнд олс / Алхагч экскаватор',
             value: 'f01042 - heavy ropes / dragline',
             key: 'F01042'
           }
@@ -3108,7 +3352,7 @@ const mn = [
             key: 'F03002'
           },
           {
-            label: 'F03003 - undefined',
+            label: 'F03003 - Хөргөгч',
             value: 'f03003 - coolants',
             key: 'F03003'
           }
@@ -3209,7 +3453,7 @@ const mn = [
             key: 'G01011'
           },
           {
-            label: 'G01012 - undefined',
+            label: 'G01012 - ногоон мод / модон материал',
             value: 'g01012 - green timber / lumber',
             key: 'G01012'
           }
@@ -3271,47 +3515,48 @@ const mn = [
             key: 'G03009'
           },
           {
-            label: 'G03010 - undefined',
+            label:
+              'G03010 - buss bar, цуглуулагч оосор, цахилгаан дамжуулах уян хатан утас',
             value: 'g03010 - buss bar, collector straps, flexes',
             key: 'G03010'
           },
           {
-            label: 'G03011 - undefined',
+            label: 'G03011 - цуглуулагч сараалж болон шавар гангаар хийсэн',
             value: 'g03011 - collector bars and pot steel',
             key: 'G03011'
           },
           {
-            label: 'G03012 - undefined',
+            label: 'G03012 - Зэс',
             value: 'g03012 - copper',
             key: 'G03012'
           },
           {
-            label: 'G03013 - undefined',
+            label: 'G03013 - Тариа боловсруулагчид',
             value: 'g03013 - grain refiners',
             key: 'G03013'
           },
           {
-            label: 'G03014 - undefined',
+            label: 'G03014 - Хатууруулагч',
             value: 'g03014 - hardeners',
             key: 'G03014'
           },
           {
-            label: 'G03015 - undefined',
+            label: 'G03015 - Никель',
             value: 'g03015 - nickel',
             key: 'G03015'
           },
           {
-            label: 'G03016 - undefined',
+            label: 'G03016 - Цэвэр метал',
             value: 'g03016 - pure metals',
             key: 'G03016'
           },
           {
-            label: 'G03017 - undefined',
+            label: 'G03017 - Ган саваа',
             value: 'g03017 - steel rods',
             key: 'G03017'
           },
           {
-            label: 'G03018 - undefined',
+            label: 'G03018 - Ган бөөрөнцөг, ган бөмбөлөгтэй',
             value: 'g03018 - steel shot and steel balls',
             key: 'G03018'
           }
@@ -3338,7 +3583,7 @@ const mn = [
             key: 'G04003'
           },
           {
-            label: 'G04004 - undefined',
+            label: 'G04004 - Өрөмдлөг, тэсэлгээний үйлчилгээ',
             value: 'g04004 - drill and blast services',
             key: 'G04004'
           }
@@ -3440,42 +3685,42 @@ const mn = [
             key: 'G05018'
           },
           {
-            label: 'G05020 - undefined',
+            label: 'G05020 - Графит',
             value: 'g05020 - graphite',
             key: 'G05020'
           },
           {
-            label: 'G05021 - undefined',
+            label: 'G05021 - Графит хоолой',
             value: 'g05021 - graphite tubes',
             key: 'G05021'
           },
           {
-            label: 'G05022 - undefined',
+            label: 'G05022 - Төмөр',
             value: 'g05022 - iron',
             key: 'G05022'
           },
           {
-            label: 'G05023 - undefined',
+            label: 'G05023 - Литийн карбонат',
             value: 'g05023 - lithium carbonate',
             key: 'G05023'
           },
           {
-            label: 'G05024 - undefined',
+            label: 'G05024 - Магнийн исэл',
             value: 'g05024 - magnesium oxide',
             key: 'G05024'
           },
           {
-            label: 'G05025 - undefined',
+            label: 'G05025 - Металлургийн нүүрс',
             value: 'g05025 - metallurgical coal',
             key: 'G05025'
           },
           {
-            label: 'G05026 - undefined',
+            label: 'G05026 - содны үнс',
             value: 'g05026 - soda ash',
             key: 'G05026'
           },
           {
-            label: 'G05027 - undefined',
+            label: 'G05027 - Ясны үнс',
             value: 'g05027 - bone ash',
             key: 'G05027'
           }
@@ -3557,22 +3802,22 @@ const mn = [
             key: 'G06029'
           },
           {
-            label: 'G06031 - undefined',
+            label: 'G06031 - Катод',
             value: 'g06031 - cathodes',
             key: 'G06031'
           },
           {
-            label: 'G06032 - undefined',
+            label: 'G06032 - Магни',
             value: 'g06032 - magnesium',
             key: 'G06032'
           },
           {
-            label: 'G06033 - undefined',
+            label: 'G06033 - Марганц',
             value: 'g06033 - manganese',
             key: 'G06033'
           },
           {
-            label: 'G06034 - undefined',
+            label: 'G06034 - Цахиур',
             value: 'g06034 - silicon',
             key: 'G06034'
           }
@@ -3954,7 +4199,7 @@ const mn = [
             key: 'H06015'
           },
           {
-            label: 'H06016 - undefined',
+            label: 'H06016 - Галд тэсвэртэй үйлчилгээ',
             value: 'h06016 - refractory services',
             key: 'H06016'
           }
@@ -4089,7 +4334,7 @@ const mn = [
         key: 'H08000'
       },
       {
-        label: 'H0900a - undefined',
+        label: 'H0900a - Дэмжлэг үзүүлэх үйлчилгээ',
         children: [
           {
             label:
