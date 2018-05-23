@@ -14,45 +14,42 @@ const PrequalificationContainer = (props, { __ }) => {
   }
 
   const companyByUser = companyByUserQuery.companyByUser;
-  const { isSentPrequalificationInfo } = companyByUser;
+  const disabled = !companyByUser.isPrequalificationInfoEditable;
 
   let formsComplete = true;
 
   Object.keys(companyByUser).forEach(key => {
-    if (
-      key.includes('Info') &&
-      !companyByUser[key] &&
-      key !== 'healthInfo' &&
-      key !== 'isSentPrequalificationInfo'
-    ) {
+    if (key.includes('Info') && !companyByUser[key] && key !== 'healthInfo') {
       formsComplete = false;
     }
   });
 
   const save = (name, doc) => {
+    if (disabled) {
+      return message.error(__('Changes disabled'));
+    }
+
     const mutation = props[`${name}Edit`];
 
-    if (!isSentPrequalificationInfo) {
-      mutation({ variables: { [name]: doc } })
-        .then(() => {
-          companyByUserQuery.refetch();
-          message.success(__('Saved'));
+    mutation({ variables: { [name]: doc } })
+      .then(() => {
+        companyByUserQuery.refetch();
+        message.success(__('Saved'));
 
-          if (name === 'healthInfo') {
-            formsComplete
-              ? send()
-              : message.error(
-                  __('Please complete all forms before submitting')
-                );
+        if (name === 'healthInfo') {
+          if (formsComplete) {
+            return send();
           }
-        })
 
-        .catch(error => {
-          message.error(error.message);
-        });
-    } else {
-      message.warning(__('You have already sent your pre-qualification info'));
-    }
+          return message.error(
+            __('Please complete all forms before submitting')
+          );
+        }
+      })
+
+      .catch(error => {
+        message.error(error.message);
+      });
   };
 
   const send = () => {
@@ -68,6 +65,7 @@ const PrequalificationContainer = (props, { __ }) => {
           icon: <Icon type="smile" style={{ color: 'rgb(0,153,168)' }} />,
           duration: 10
         });
+
         history.push('/capacity-building');
       })
       .catch(error => {
@@ -79,10 +77,12 @@ const PrequalificationContainer = (props, { __ }) => {
     ...props,
     save,
     send,
+    disabled,
     company: {
       ...companyByUser
     }
   };
+
   return <PrequalificationForms {...updatedProps} />;
 };
 

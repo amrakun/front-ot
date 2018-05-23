@@ -10,13 +10,13 @@ import { Panes } from 'modules/common/components';
 class PrequalificationForms extends Panes {
   componentDidMount() {
     const { __ } = this.context;
+    const { disabled } = this.props;
 
-    if (this.props.company.isSentPrequalificationInfo) {
+    if (disabled) {
       notification.open({
         message: __('Changes disabled'),
-        description: __(
-          'You have already submitted your pre-qualification form and changes are disabled.'
-        ),
+        description: __(`You have already submitted your
+          pre-qualification form and changes are disabled.`),
         icon: <Icon type="warning" style={{ color: '#f47721' }} />,
         duration: 10
       });
@@ -25,12 +25,8 @@ class PrequalificationForms extends Panes {
 
   render() {
     const { currentTabKey } = this.state;
-
-    const { productsInfo, isSentPrequalificationInfo, prequalifiedStatus } =
-      this.props.company || {};
-
-    const { send } = this.props;
-    const disabled = isSentPrequalificationInfo;
+    const { send, company, disabled } = this.props;
+    const { productsInfo, prequalifiedStatus } = company || {};
 
     return (
       <Tabs

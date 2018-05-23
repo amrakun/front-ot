@@ -113,21 +113,9 @@ class StatusTab extends BaseForm {
   }
 
   render() {
-    const {
-      title,
-      statusData,
-      prequalifySupplier,
-      enableSupplierForm
-    } = this.props;
-
-    const {
-      enName,
-      isPrequalified,
-      isSentPrequalificationInfo,
-      tabQualified
-    } = statusData;
-
+    const { title, statusData, prequalifySupplier } = this.props;
     const { checkAll } = this.state;
+    const { enName, isPrequalified, tabQualified } = statusData;
 
     return (
       <Form>
@@ -191,29 +179,6 @@ class StatusTab extends BaseForm {
             }
             type="warning"
             showIcon
-          />
-        )}
-
-        {isSentPrequalificationInfo && (
-          <Alert
-            message={
-              <span>
-                Supplier's pre-qualification form is currently disabled.
-                Click&nbsp;
-                <Popconfirm
-                  title="Are you sure to enable supplier's pre-qualification form?"
-                  onConfirm={enableSupplierForm}
-                  okText="Yes"
-                  cancelText="No"
-                >
-                  <a>here</a>
-                </Popconfirm>
-                &nbsp;to enable
-              </span>
-            }
-            type="warning"
-            showIcon
-            className="margin"
           />
         )}
 

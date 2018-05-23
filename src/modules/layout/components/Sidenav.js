@@ -17,6 +17,7 @@ const Sidenav = (props, context) => {
   const { collapsed, onCollapse, pathname } = props;
 
   let defaultOpenKeys = [];
+
   if (
     [
       '/validation',
@@ -24,14 +25,17 @@ const Sidenav = (props, context) => {
       '/audit',
       '/difot',
       '/blocking',
-      '/prequalification-status'
+      '/prequalification-status',
+      '/capacity-building-status'
     ].includes(pathname)
   ) {
     defaultOpenKeys.push('action');
   }
+
   if (['/feedback', '/feedback/responses'].includes(pathname)) {
     defaultOpenKeys.push('action', 'feedback');
   }
+
   if (
     [
       '/audit',
@@ -42,6 +46,7 @@ const Sidenav = (props, context) => {
   ) {
     defaultOpenKeys.push('action', 'audit');
   }
+
   if (['/templates', '/manage-expiry-dates', '/user-list'].includes(pathname)) {
     defaultOpenKeys.push('settings');
   }
@@ -79,6 +84,7 @@ Sidenav.contextTypes = {
 
 function renderMenu(sideMenu, translate) {
   const menuItems = [];
+
   sideMenu.forEach(m => {
     if (m.subMenu) {
       menuItems.push(

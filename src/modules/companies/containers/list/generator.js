@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { gql, compose, graphql } from 'react-apollo';
 import { queries } from '../../graphql';
+import generateVariables from './generateVariables';
 
 const generator = (Component, query) => {
   class Container extends React.Component {
@@ -31,52 +32,6 @@ const generator = (Component, query) => {
     totalCountQuery: PropTypes.object,
     queryParams: PropTypes.object,
     history: PropTypes.object
-  };
-
-  const generateVariables = queryParams => {
-    const {
-      search,
-      region,
-      productCodes,
-      difotRange,
-      sortField,
-      sortDirection,
-      page,
-      perPage,
-      includeBlocked,
-      prequalifiedStatus,
-      qualifiedStatus,
-      productsInfoStatus
-    } = queryParams;
-
-    const status = queryParams.status || '';
-
-    let difotScore = '';
-
-    if (status && status.includes('byDifotScore')) {
-      difotScore = difotRange;
-    }
-
-    const getBoolean = filter => {
-      if (filter === undefined) return undefined;
-
-      return filter === '' ? undefined : filter === 'true';
-    };
-
-    return {
-      page: page || 1,
-      perPage: perPage || 15,
-      search,
-      region,
-      productCodes,
-      difotScore,
-      sortField,
-      sortDirection,
-      includeBlocked: getBoolean(includeBlocked),
-      prequalifiedStatus,
-      qualifiedStatus,
-      productsInfoStatus
-    };
   };
 
   return compose(

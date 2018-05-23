@@ -55,10 +55,8 @@ export const labels = {
 };
 
 export const certLabels = {
-  isReceived: `Have you received capacity building certificate?`,
-
+  description: 'Request',
   isOTSupplier: `Are you an existing supplier to OT?`,
-
   cwpo: `Please provide CW and PO number`
 };
 

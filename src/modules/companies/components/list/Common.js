@@ -26,6 +26,7 @@ export default class Common extends React.Component {
 
   handleTableChange(pagination, filter, sorter) {
     const columnKey = sorter.columnKey;
+
     if (columnKey) {
       router.setParams(this.props.history, {
         sortField: columnKey,

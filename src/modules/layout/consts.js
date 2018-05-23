@@ -50,6 +50,10 @@ export const buyerSideMenu = [
         title: 'Pre-qualification'
       },
       {
+        url: '/capacity-building-status',
+        title: 'Capacity building'
+      },
+      {
         url: 'audit',
         title: 'Qualification',
         subMenu: [

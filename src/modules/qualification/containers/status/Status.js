@@ -1,6 +1,6 @@
 import React from 'react';
 import { Status } from '../../components';
-import { generator } from 'modules/companies/containers';
+import { generator, generateVariables } from 'modules/companies/containers';
 import { exportFile } from 'modules/common/components';
 import { queries } from '../../graphql';
 import PropTypes from 'prop-types';
@@ -24,39 +24,7 @@ StatusContainer.propTypes = {
 
 const WithData = graphql(gql(queries.companiesPrequalifiedStatus), {
   name: 'prequalifiedStatusQuery',
-  options: ({ queryParams }) => {
-    const {
-      search,
-      region,
-      productCodes,
-      difotRange,
-      includeBlocked,
-      isPrequalified,
-      isProductsInfoValidated,
-      isQualified
-    } = queryParams;
-    const status = queryParams.status || '';
-
-    let difotScore = '';
-
-    if (status && status.includes('byDifotScore')) {
-      difotScore = difotRange;
-    }
-
-    return {
-      variables: {
-        search,
-        region,
-        productCodes,
-        difotScore,
-        includeBlocked,
-        isPrequalified,
-        isProductsInfoValidated,
-        isQualified
-      },
-      notifyOnNetworkStatusChange: true
-    };
-  }
+  options: generateVariables
 })(StatusContainer);
 
 export default generator(WithData, 'status');

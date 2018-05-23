@@ -10,6 +10,7 @@ import {
   SubmitFeedback,
   FeedbackResponses,
   SupplierStatus,
+  CapacityBuilding,
   Status,
   Audit,
   AuditResponses,
@@ -27,6 +28,15 @@ export default [
     exact
     path="/prequalification-status/:id"
     component={SupplierStatus}
+  />,
+  <Route
+    key="/capacity-building-status"
+    exact
+    path="/capacity-building-status"
+    component={({ location }) => {
+      const queryParams = queryString.parse(location.search);
+      return <CapacityBuilding queryParams={queryParams} />;
+    }}
   />,
   <Route
     key="/prequalification-status"

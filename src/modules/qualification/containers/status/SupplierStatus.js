@@ -11,8 +11,7 @@ const StatusContainer = props => {
     supplierPrequalificationQuery,
     qualificationDetailQuery,
     tierTypeSave,
-    prequalify,
-    undoIsSentPrequalificationInfo
+    prequalify
   } = props;
 
   if (
@@ -69,25 +68,11 @@ const StatusContainer = props => {
       });
   };
 
-  const enableSupplierForm = () => {
-    undoIsSentPrequalificationInfo({
-      variables: { supplierId: companyDetail._id }
-    })
-      .then(() => {
-        supplierPrequalificationQuery.refetch();
-        message.success('Supplier pre-qualification form has been enabled!');
-      })
-      .catch(error => {
-        message.error(error.message);
-      });
-  };
-
   const updatedProps = {
     ...props,
     save,
     saveTierType,
     prequalifySupplier,
-    enableSupplierForm,
     company: {
       ...qualificationDetailQuery.qualificationDetail
     },
@@ -102,8 +87,7 @@ StatusContainer.propTypes = {
   supplierPrequalificationQuery: PropTypes.object,
   qualificationDetailQuery: PropTypes.object,
   tierTypeSave: PropTypes.func,
-  prequalify: PropTypes.func,
-  undoIsSentPrequalificationInfo: PropTypes.func
+  prequalify: PropTypes.func
 };
 
 export default compose(
@@ -153,9 +137,5 @@ export default compose(
 
   graphql(gql(mutations.qualificationsPrequalify), {
     name: 'prequalify'
-  }),
-
-  graphql(gql(mutations.undoIsSentPrequalificationInfo), {
-    name: 'undoIsSentPrequalificationInfo'
   })
 )(StatusContainer);

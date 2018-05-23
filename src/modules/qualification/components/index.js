@@ -7,6 +7,7 @@ import SubmitFeedback from './feedback/SubmitFeedback';
 import FeedbackResponses from './feedback/FeedbackResponses';
 import Status from './status/Status';
 import SupplierStatus from './status/SupplierStatus';
+import CapacityBuilding from './CapacityBuilding';
 import Audit from './audit/Audit';
 import AuditResponses from './audit/AuditResponses';
 import SubmitAudit from './audit/SubmitAudit';
@@ -25,6 +26,7 @@ export {
   FeedbackResponses,
   Status,
   SupplierStatus,
+  CapacityBuilding,
   Audit,
   AuditResponses,
   SubmitAudit,

@@ -84,7 +84,7 @@ const shareholderItemFields = `
 `;
 
 const certificateInfoFields = `
-  isReceived,
+  description,
   file,
 `;
 
@@ -139,17 +139,6 @@ export const companyByUser = `
     companyByUser {
       isSentRegistrationInfo
       ${registrationFields}
-    }
-  }
-`;
-
-export const certificateByUser = `
-  query companyByUser {
-    companyByUser {
-      _id
-      certificateInfo {
-        ${certificateInfoFields}
-      }
     }
   }
 `;
@@ -265,7 +254,7 @@ export const companyPrequalificationDetail = `
     companyByUser {
       ${prequalificationFields}
       productsInfo
-      isSentPrequalificationInfo
+      isPrequalificationInfoEditable
       isPrequalified
       prequalifiedStatus
     }
@@ -456,6 +445,20 @@ const audit = `
   }
 `;
 
+const capacityBuilding = `
+  query companies(${commonParams}) {
+    companies(${commonValues}) {
+      ${commonFields}
+      isSentPrequalificationInfo
+      isPrequalificationInfoEditable
+      certificateInfo {
+        description
+        file
+      }
+    }
+  }
+`;
+
 const simpleCompanies = `
   query companies(${commonParams}) {
     companies(${commonValues}) {
@@ -502,6 +505,7 @@ export default {
   prequalificationFields,
   companyDetail,
   audit,
+  capacityBuilding,
   exportCompany,
   exportCurrentCompany
 };

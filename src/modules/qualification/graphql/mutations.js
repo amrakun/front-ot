@@ -1,32 +1,56 @@
 /*eslint-disable max-len*/
 
 const qualifyFinancialInfo = `
-  mutation qualificationsSaveFinancialInfo($supplierId: String!, $financialInfo: QualificationFinancialInfoInput) {
-    qualificationsSaveFinancialInfo(supplierId: $supplierId, financialInfo: $financialInfo) {
+  mutation qualificationsSaveFinancialInfo(
+    $supplierId: String!
+    $financialInfo: QualificationFinancialInfoInput
+  ) {
+    qualificationsSaveFinancialInfo(
+      supplierId: $supplierId
+      financialInfo: $financialInfo
+    ) {
       _id
     }
   }
 `;
 
 const qualifyBusinessInfo = `
-  mutation qualificationsSaveBusinessInfo($supplierId: String!, $businessInfo: QualificationBusinessInfoInput) {
-    qualificationsSaveBusinessInfo(supplierId: $supplierId, businessInfo: $businessInfo) {
+  mutation qualificationsSaveBusinessInfo(
+    $supplierId: String!
+    $businessInfo: QualificationBusinessInfoInput
+  ) {
+    qualificationsSaveBusinessInfo(
+      supplierId: $supplierId
+      businessInfo: $businessInfo
+    ) {
       _id
     }
   }
 `;
 
 const qualifyEnvironmentalInfo = `
-  mutation qualificationsSaveEnvironmentalInfo($supplierId: String!, $environmentalInfo: QualificationEnvironmentalInfoInput) {
-    qualificationsSaveEnvironmentalInfo(supplierId: $supplierId, environmentalInfo: $environmentalInfo) {
+  mutation qualificationsSaveEnvironmentalInfo(
+    $supplierId: String!
+    $environmentalInfo: QualificationEnvironmentalInfoInput
+  ) {
+    qualificationsSaveEnvironmentalInfo(
+      supplierId: $supplierId
+      environmentalInfo: $environmentalInfo
+    ) {
       _id
     }
   }
 `;
 
 const qualifyHealthInfo = `
-  mutation qualificationsSaveHealthInfo($supplierId: String!, $healthInfo: QualificationHealthInfoInput) {
-    qualificationsSaveHealthInfo(supplierId: $supplierId, healthInfo: $healthInfo) {
+  mutation qualificationsSaveHealthInfo(
+    $supplierId: String!
+    $healthInfo: QualificationHealthInfoInput
+  ) {
+    qualificationsSaveHealthInfo(
+      supplierId: $supplierId
+      healthInfo: $healthInfo
+    ) {
       _id
     }
   }
@@ -150,8 +174,16 @@ const unblockCompanies = `
 `;
 
 const addAudit = `
-  mutation auditsAdd($publishDate: Date!, $closeDate: Date!, $supplierIds: [String]!) {
-    auditsAdd(publishDate: $publishDate, closeDate: $closeDate, supplierIds: $supplierIds ) {
+  mutation auditsAdd(
+    $publishDate: Date!
+    $closeDate: Date!
+    $supplierIds: [String]!
+  ) {
+    auditsAdd(
+      publishDate: $publishDate
+      closeDate: $closeDate
+      supplierIds: $supplierIds
+    ) {
       _id
     }
   }
@@ -161,57 +193,73 @@ const commonInputs = '$auditId: String';
 const commonFields = 'auditId: $auditId';
 
 const auditsSupplierSaveBasicInfo = `
-  mutation auditsSupplierSaveBasicInfo(${
-    commonInputs
-  }, $basicInfo: AuditSupplierBasicInfoInput) {
-    auditsSupplierSaveBasicInfo(${commonFields}, basicInfo: $basicInfo) { _id }
+  mutation auditsSupplierSaveBasicInfo(
+    ${commonInputs}
+    $basicInfo: AuditSupplierBasicInfoInput
+  ) {
+    auditsSupplierSaveBasicInfo(
+      ${commonFields}
+      basicInfo: $basicInfo
+    ) { _id }
   }
 `;
 
 const auditsSupplierSaveCoreHseqInfo = `
-  mutation auditsSupplierSaveCoreHseqInfo(${
-    commonInputs
-  }, $coreHseqInfo: AuditSupplierCoreHseqInfoInput) {
-    auditsSupplierSaveCoreHseqInfo(${
-      commonFields
-    }, coreHseqInfo: $coreHseqInfo) { _id }
+  mutation auditsSupplierSaveCoreHseqInfo(
+    ${commonInputs}
+    $coreHseqInfo: AuditSupplierCoreHseqInfoInput
+  ) {
+    auditsSupplierSaveCoreHseqInfo(
+      ${commonFields},
+      coreHseqInfo: $coreHseqInfo
+    ) { _id }
   }
 `;
 const auditsSupplierSaveHrInfo = `
-  mutation auditsSupplierSaveHrInfo(${
-    commonInputs
-  }, $hrInfo: AuditSupplierHrInfoInput) {
-    auditsSupplierSaveHrInfo(${commonFields}, hrInfo: $hrInfo) { _id }
+  mutation auditsSupplierSaveHrInfo(
+    ${commonInputs}
+    $hrInfo: AuditSupplierHrInfoInput
+  ) {
+    auditsSupplierSaveHrInfo(
+      ${commonFields}
+      hrInfo: $hrInfo
+    ) { _id }
   }
 `;
 
 const auditsSupplierSaveBusinessInfo = `
-  mutation auditsSupplierSaveBusinessInfo(${
-    commonInputs
-  }, $businessInfo: AuditSupplierBusinessInfoInput) {
-    auditsSupplierSaveBusinessInfo(${
-      commonFields
-    }, businessInfo: $businessInfo) { _id }
+  mutation auditsSupplierSaveBusinessInfo(
+    ${commonInputs}
+    $businessInfo: AuditSupplierBusinessInfoInput
+  ) {
+    auditsSupplierSaveBusinessInfo(
+      ${commonFields}
+      businessInfo: $businessInfo
+    ) { _id }
   }
 `;
 
 const auditsSupplierSaveEvidenceInfo = `
-  mutation auditsSupplierSaveEvidenceInfo(${
-    commonInputs
-  }, $evidenceInfo: AuditSupplierEvidenceInfoInput) {
-    auditsSupplierSaveEvidenceInfo(${
-      commonFields
-    }, evidenceInfo: $evidenceInfo) { _id }
+  mutation auditsSupplierSaveEvidenceInfo(
+    ${commonInputs}
+    $evidenceInfo: AuditSupplierEvidenceInfoInput
+  ) {
+    auditsSupplierSaveEvidenceInfo(
+      ${commonFields}
+      evidenceInfo: $evidenceInfo
+    ) { _id }
   }
 `;
 
 const auditsBuyerSaveCoreHseqInfo = `
   mutation auditsBuyerSaveCoreHseqInfo(
-    ${commonInputs}, $supplierId: String
+    ${commonInputs}
+    $supplierId: String
     $coreHseqInfo: AuditBuyerCoreHseqInfoInput
   ) {
     auditsBuyerSaveCoreHseqInfo(
-      ${commonFields}, supplierId: $supplierId,
+      ${commonFields}
+      supplierId: $supplierId
       coreHseqInfo: $coreHseqInfo
     ) { _id }
   }
@@ -219,22 +267,29 @@ const auditsBuyerSaveCoreHseqInfo = `
 
 const auditsBuyerSaveHrInfo = `
   mutation auditsBuyerSaveHrInfo(
-    ${commonInputs}, $supplierId: String, $hrInfo: AuditBuyerHrInfoInput) {
-    auditsBuyerSaveHrInfo(${
-      commonFields
-    }, supplierId: $supplierId, hrInfo: $hrInfo) { _id }
+    ${commonInputs}
+    $supplierId: String
+    $hrInfo: AuditBuyerHrInfoInput
+  ) {
+    auditsBuyerSaveHrInfo(
+      ${commonFields}
+      supplierId: $supplierId
+      hrInfo: $hrInfo
+    ) { _id }
   }
 `;
 
 const auditsBuyerSaveBusinessInfo = `
   mutation auditsBuyerSaveBusinessInfo(
-    ${
-      commonInputs
-    }, $supplierId: String, $businessInfo: AuditBuyerBusinessInfoInput) {
+    ${commonInputs}
+    $supplierId: String
+    $businessInfo: AuditBuyerBusinessInfoInput
+  ) {
     auditsBuyerSaveBusinessInfo(
-      ${
-        commonFields
-      }, supplierId: $supplierId, businessInfo: $businessInfo) { _id }
+      ${commonFields}
+      supplierId: $supplierId
+      businessInfo: $businessInfo
+    ) { _id }
   }
 `;
 
@@ -249,14 +304,6 @@ const auditsSupplierSendResponse = `
 const qualificationsPrequalify = `
   mutation qualificationsPrequalify($supplierId: String!, $qualified: Boolean) {
     qualificationsPrequalify(supplierId: $supplierId, qualified: $qualified) {
-      _id
-    }
-  }
-`;
-
-const undoIsSentPrequalificationInfo = `
-  mutation companiesUndoIsSentPrequalificationInfo($supplierId: String!) {
-    companiesUndoIsSentPrequalificationInfo(supplierId: $supplierId) {
       _id
     }
   }
@@ -311,12 +358,8 @@ const physicalAuditFields = `
 `;
 
 const physicalAuditsAdd = `
-  mutation physicalAuditsAdd(
-    ${physicalAuditParams}
-  ) {
-    physicalAuditsAdd(
-      ${physicalAuditFields}
-    ) {
+  mutation physicalAuditsAdd(${physicalAuditParams}) {
+    physicalAuditsAdd(${physicalAuditFields}) {
       _id
     }
   }
@@ -330,15 +373,21 @@ const physicalAuditsEdit = `
     physicalAuditsEdit(
       _id: $_id
       ${physicalAuditFields}
-    ) {
-      _id
-    }
+    ) { _id }
   }
 `;
 
 const physicalAuditsRemove = `
   mutation physicalAuditsRemove($_id: String!) {
     physicalAuditsRemove(_id: $_id)
+  }
+`;
+
+const togglePrequalificationState = `
+  mutation companiesTogglePrequalificationState($supplierId: String!) {
+    companiesTogglePrequalificationState(supplierId: $supplierId) {
+      _id
+    }
   }
 `;
 
@@ -367,9 +416,9 @@ export default {
   auditsSupplierSendResponse,
   auditsBuyerSaveFiles,
   qualificationsPrequalify,
-  undoIsSentPrequalificationInfo,
   auditsBuyerSendFiles,
   physicalAuditsAdd,
   physicalAuditsEdit,
-  physicalAuditsRemove
+  physicalAuditsRemove,
+  togglePrequalificationState
 };

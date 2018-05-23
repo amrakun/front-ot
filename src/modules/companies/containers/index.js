@@ -7,6 +7,7 @@ import AddCompany from './addCompany';
 import MassEmail from './MassEmail';
 
 import generator from './list/generator';
+import generateVariables from './list/generateVariables';
 
 export {
   BaseList,
@@ -15,6 +16,7 @@ export {
   CapacityBuilding,
   ViewRegistration,
   generator,
+  generateVariables,
   AddCompany,
   MassEmail
 };
