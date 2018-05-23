@@ -19,12 +19,25 @@ class QualificationAudit extends React.Component {
 
     const { systemConfig } = context;
 
+    const {
+      specificAuditDow,
+      auditDow,
+      specificImprovementPlanDow,
+      improvementPlanDow
+    } = systemConfig;
+
     this.state = {
       users: this.props.users,
-      specificAuditDow: systemConfig.specificAuditDow || {},
-      auditDow: systemConfig.auditDow || {},
-      specificImprovementPlanDow: systemConfig.specificImprovementPlanDow || {},
-      improvementPlanDow: systemConfig.improvementPlanDow || {}
+
+      auditDow: auditDow ? { ...auditDow } : {},
+
+      specificAuditDow: specificAuditDow ? { ...specificAuditDow } : {},
+
+      improvementPlanDow: improvementPlanDow ? { ...improvementPlanDow } : {},
+
+      specificImprovementPlanDow: specificImprovementPlanDow
+        ? { ...specificImprovementPlanDow }
+        : {}
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -46,7 +59,7 @@ class QualificationAudit extends React.Component {
           amount: parseInt(data.amount, 10)
         },
         specific: {
-          supplierIds: data.supplierId,
+          supplierIds: data.auditSpecificSupplierIds,
           duration: data.specificDuration,
           amount: parseInt(data.specificAmount, 10)
         }
@@ -76,7 +89,7 @@ class QualificationAudit extends React.Component {
           }
         },
         specific: {
-          supplierIds: data.specificSupplierId,
+          supplierIds: data.impSpecificSupplierIds,
           national: {
             duration: data.nationalSpecificDuration,
             amount: data.nationalSpecificAmount
@@ -175,10 +188,12 @@ class QualificationAudit extends React.Component {
     ];
 
     const tierTypes = type === 'common' ? common : specific;
+
     const initials =
       type === 'common' ? improvementPlanDow : specificImprovementPlanDow;
 
     const improvementPlanRender = [];
+
     tierTypes.map(tier =>
       improvementPlanRender.push(
         <Row gutter={16} key={tier.name}>
@@ -223,9 +238,11 @@ class QualificationAudit extends React.Component {
       auditDow,
       specificImprovementPlanDow
     } = this.state;
+
     const { getFieldDecorator } = this.props.form;
 
     const children = [];
+
     users.map(v =>
       children.push(<Option key={v.username}>{v.username}</Option>)
     );
@@ -275,7 +292,7 @@ class QualificationAudit extends React.Component {
               </Col>
               <Col span={12}>
                 <FormItem>
-                  {getFieldDecorator('supplierId', {
+                  {getFieldDecorator('auditSpecificSupplierIds', {
                     initialValue: specificAuditDow.supplierIds || []
                   })(<SupplierSearcher mode="select" />)}
                 </FormItem>
@@ -328,7 +345,7 @@ class QualificationAudit extends React.Component {
               </Col>
               <Col span={12}>
                 <FormItem>
-                  {getFieldDecorator('specificSupplierId', {
+                  {getFieldDecorator('impSpecificSupplierIds', {
                     initialValue: specificImprovementPlanDow.supplierIds || []
                   })(<SupplierSearcher mode="select" />)}
                 </FormItem>

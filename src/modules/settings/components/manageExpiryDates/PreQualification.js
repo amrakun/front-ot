@@ -17,11 +17,14 @@ class PreQualification extends React.Component {
     super(props);
 
     const { systemConfig } = context;
+    const { prequalificationDow, specificPrequalificationDow } = systemConfig;
 
     this.state = {
-      preQualification: systemConfig.prequalificationDow || '',
-      specificPrequalificationDow:
-        systemConfig.specificPrequalificationDow || ''
+      preQualification: prequalificationDow ? { ...prequalificationDow } : {},
+
+      specificPrequalificationDow: specificPrequalificationDow
+        ? { ...specificPrequalificationDow }
+        : {}
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,7 +46,7 @@ class PreQualification extends React.Component {
           amount: parseInt(data.amount, 10)
         },
         specific: {
-          supplierIds: data.supplierIds,
+          supplierIds: data.specificSupplierIds,
           duration: data.specificDuration,
           amount: parseInt(data.specificAmount, 10)
         }
@@ -99,7 +102,7 @@ class PreQualification extends React.Component {
               </Col>
               <Col span={12}>
                 <FormItem>
-                  {getFieldDecorator('supplierIds', {
+                  {getFieldDecorator('specificSupplierIds', {
                     initialValue: specificPrequalificationDow.supplierIds || []
                   })(<SupplierSearcher mode="select" />)}
                 </FormItem>

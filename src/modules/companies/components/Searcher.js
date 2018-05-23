@@ -44,6 +44,8 @@ class SupplierSearcher extends React.Component {
 
   onChange(selectedValues) {
     this.setState({ selectedValues });
+
+    this.props.onChange(selectedValues);
   }
 
   renderSelect() {
