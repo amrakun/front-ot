@@ -223,9 +223,11 @@ const prequalificationFields = `
     doesHaveHealthSafety
     doesHaveHealthSafetyFile
     areHSEResourcesClearlyIdentified
+    areHSEResourcesClearlyIdentifiedFile
     doesHaveDocumentedProcessToEnsure
     doesHaveDocumentedProcessToEnsureFile
     areEmployeesUnderYourControl
+    areEmployeesUnderYourControlFile
     doesHaveDocumentForRiskAssesment
     doesHaveDocumentForRiskAssesmentFile
     doesHaveDocumentForIncidentInvestigation
