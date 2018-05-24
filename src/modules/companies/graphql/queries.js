@@ -350,8 +350,8 @@ const exportCompanies = `
 `;
 
 const exportCompany = `
-  query companyDetailExport($_id: String!) {
-    companyDetailExport(_id: $_id)
+  query companyRegistrationExport($_id: String!) {
+    companyRegistrationExport(_id: $_id)
   }
 `;
 
