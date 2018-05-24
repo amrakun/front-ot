@@ -2986,6 +2986,51 @@ const mn = [
       },
       {
         label: 'E04000 - Уурхайн тоног төхөөрөмж, сэлбэг хэрэгсэл',
+        children: [
+          {
+            label:
+              'E04001 - Уурхайн хүнд даацын туслах тоног төхөөрөмжийн сэлбэг хэрэгсэл',
+            value: 'e04001 - HME Ancillary Equipment Parts',
+            key: 'E04001'
+          },
+          {
+            label: 'E04002 - Хүнд даацын машины сэлбэг хэрэгсэл',
+            value: 'e04002 - Haul Truck Parts',
+            key: 'E04002'
+          },
+          {
+            label:
+              'E04003 - Алхагч экскаватор / Татлагат экскаваторын сэлбэг хэрэгсэл',
+            value: 'e04003 - Dragline / Rope Shovel Parts',
+            key: 'E04003'
+          },
+          {
+            label: 'E04004 - Алхагч экскаватор / Татлагат экскаватор',
+            value: 'e04004 - Draglines / Rope Shovels',
+            key: 'E04004'
+          },
+          {
+            label: 'E04005 - Хүнд даацын ган татлага, алхагч экскаватор',
+            value: 'e04005 - Heavy Ropes/Dragline',
+            key: 'E04005'
+          },
+          {
+            label: 'E04006 - Уурхайн хүнд даацын тоног төхөөрөмжийн түрээс',
+            value: 'e04006 - HME Hire',
+            key: 'E04006'
+          },
+          {
+            label: 'E04007 - Үйлдвэрийн зориулалттай хөдөлгүүр',
+            value: 'e04007 - Industrial Engines',
+            key: 'E04007'
+          },
+          {
+            label:
+              'E04008 - Үйлдвэрийн зориулалттай хөдөлгүүрийн сэлбэг хэрэгсэл',
+            value: 'e04008 - Industrial Engine Parts',
+            key: 'E04008'
+          }
+        ],
         value: 'e04000 - mining equipment & parts',
         key: 'E04000'
       },
