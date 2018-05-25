@@ -36,6 +36,7 @@ class SubmitTender extends TenderForm {
         delete product.uom;
         delete product.manufacturer;
         delete product.manufacturerPartNumber;
+
         products.push({
           ...product,
           totalPrice
@@ -51,9 +52,11 @@ class SubmitTender extends TenderForm {
 
     const respondedProducts = this.collectInputs();
 
-    if (respondedProducts.length > 0)
+    if (respondedProducts.length > 0) {
       this.props.save({ respondedProducts }, true);
-    else message.error(this.context.__('Your form is incomplete'));
+    } else {
+      message.error(this.context.__('Your form is incomplete'));
+    }
   }
 
   saveDraft() {

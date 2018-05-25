@@ -22,32 +22,30 @@ const PublishContainer = (
     return <Loading />;
   }
 
+  const { currentUser, __ } = context;
   const tenderDetail = tenderDetailQuery.tenderDetailSupplier || {};
   const tenderResponseByUser = tenderResponseByUserQuery.tenderResponseByUser;
 
   const save = (doc, shouldSend) => {
-    const { __ } = context;
     const mutation = tenderResponseByUser
       ? tendersResponsesEdit
       : tendersResponsesAdd;
 
-    mutation({
-      variables: { tenderId: tenderDetail._id, ...doc }
-    })
+    mutation({ variables: { tenderId: tenderDetail._id, ...doc } })
       .then(() => {
         message.success(__('Successfully saved a tender!'));
+
         tenderResponseByUserQuery.refetch();
-        if (shouldSend) send(doc.tenderId);
-        else redirect(doc.tenderId);
+
+        shouldSend ? send(doc.tenderId) : redirect(doc.tenderId);
       })
+
       .catch(error => {
         message.error(error.message);
       });
   };
 
   const send = tenderId => {
-    const { currentUser, __ } = context;
-
     tenderResponsesSend({
       variables: {
         tenderId: tenderDetail._id,
@@ -84,8 +82,15 @@ const PublishContainer = (
     response: tenderResponseByUser
   };
 
-  if (tenderDetail.type === 'eoi') return <SubmitEoi {...updatedProps} />;
-  else return <SubmitRfq {...updatedProps} />;
+  if (tenderDetail.status === 'canceled') {
+    return null;
+  }
+
+  if (tenderDetail.type === 'eoi') {
+    return <SubmitEoi {...updatedProps} />;
+  }
+
+  return <SubmitRfq {...updatedProps} />;
 };
 
 PublishContainer.propTypes = {

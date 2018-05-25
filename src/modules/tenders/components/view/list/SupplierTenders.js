@@ -75,6 +75,7 @@ class SupplierTenders extends Tenders {
 
   renderFileDownload(url) {
     const { __ } = this.context;
+
     return (
       <a href={url} target="_blank">
         {__('View')}
@@ -82,41 +83,62 @@ class SupplierTenders extends Tenders {
     );
   }
 
-  renderOperation(record) {
-    const { currentUser, notInterested, type } = this.props;
-    const { status, _id, isParticipated, isSent } = record;
+  renderNotInterestedLink(record) {
+    const { notInterested } = this.props;
+    const { __ } = this.context;
+    const { _id, status, isParticipated, isSent } = record;
+
+    if (status === 'open' && !isSent && !isParticipated) {
+      return [
+        <Divider type="vertical" key={0} />,
+        <Popconfirm
+          key={1}
+          title={__('Are you sure you are not interested？')}
+          placement="bottomRight"
+          okText={__('Yes')}
+          cancelText={__('No')}
+          onConfirm={() => notInterested(_id)}
+        >
+          <a>{__('Not interested')}</a>
+        </Popconfirm>
+      ];
+    }
+  }
+
+  renderOpenLink(record) {
+    const { type } = this.props;
+    const { status, _id } = record;
     const { __ } = this.context;
 
-    const canNotInterested = status === 'open' && !isSent && !isParticipated;
-    const canNotOpen = status === 'closed' && type === 'rfq';
+    if (status === 'canceled') {
+      return null;
+    }
+
+    if (status === 'closed' && type === 'rfq') {
+      return null;
+    }
+
+    return <Link to={`/tender/submit/${_id}`}>{__('Open')}</Link>;
+  }
+
+  renderOperation(record) {
+    const { currentUser } = this.props;
+    const { __ } = this.context;
 
     if (currentUser) {
       return (
         <div style={{ width: '160px' }}>
-          {canNotOpen || <Link to={`/tender/submit/${_id}`}>{__('Open')}</Link>}
-
-          {canNotInterested && [
-            <Divider type="vertical" key={0} />,
-            <Popconfirm
-              key={1}
-              title={__('Are you sure you are not interested？')}
-              placement="bottomRight"
-              okText={__('Yes')}
-              cancelText={__('No')}
-              onConfirm={() => notInterested(_id)}
-            >
-              <a>{__('Not interested')}</a>
-            </Popconfirm>
-          ]}
-        </div>
-      );
-    } else {
-      return (
-        <div style={{ width: '160px' }}>
-          <Link to={`/sign-in?required`}>{__('More')}</Link>
+          {this.renderOpenLink(record)}
+          {this.renderNotInterestedLink(record)}
         </div>
       );
     }
+
+    return (
+      <div style={{ width: '160px' }}>
+        <Link to={`/sign-in?required`}>{__('More')}</Link>
+      </div>
+    );
   }
 
   render() {

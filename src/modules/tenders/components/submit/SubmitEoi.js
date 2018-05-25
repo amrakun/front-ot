@@ -81,6 +81,7 @@ class SubmitTender extends TenderForm {
       submitDisabled,
       submitLoading
     } = this.state;
+
     const { data } = this.props;
 
     const formProps = {
