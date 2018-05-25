@@ -14,14 +14,6 @@ const generateVariables = queryParams => {
     productsInfoStatus
   } = queryParams;
 
-  const status = queryParams.status || '';
-
-  let difotScore = '';
-
-  if (status && status.includes('byDifotScore')) {
-    difotScore = difotRange;
-  }
-
   const getBoolean = filter => {
     if (filter === undefined) return undefined;
 
@@ -34,7 +26,7 @@ const generateVariables = queryParams => {
     search,
     region,
     productCodes,
-    difotScore,
+    difotScore: difotRange,
     sortField,
     sortDirection,
     includeBlocked: getBoolean(includeBlocked),

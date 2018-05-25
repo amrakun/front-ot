@@ -47,13 +47,15 @@ class Sidebar extends React.Component {
   }
 
   handleChange(filter) {
-    this.setState({ ...filter });
-    this.filter(filter);
+    this.setState({ ...filter }, () => {
+      this.filter(filter);
+    });
   }
 
   handleSelect(value, name) {
-    this.setState({ [name]: value });
-    this.filter({ [name]: value });
+    this.setState({ [name]: value }, () => {
+      this.filter({ [name]: value });
+    });
   }
 
   filter(filter) {
@@ -74,6 +76,7 @@ class Sidebar extends React.Component {
     region.forEach(i => {
       regionString += i + ',';
     });
+
     productCodes.forEach(i => {
       productCodesString += i + ',';
     });
