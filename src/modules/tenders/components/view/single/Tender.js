@@ -264,7 +264,7 @@ class Tender extends Common {
     const data = this.props.data || [];
     const tenderDetail = this.props.tenderDetail || {};
     const queryParams = this.props.queryParams || {};
-    const { winnerId, sentRegretLetter, status } = tenderDetail;
+    const { winnerIds = [], sentRegretLetter, status } = tenderDetail;
 
     let responseRows =
       queryParams.filter === 'isNotResponded' ? notRespondedSuppliers : data;
@@ -305,7 +305,7 @@ class Tender extends Common {
             onChange: this.onSelectedCompaniesChange
           }}
           rowClassName={record => {
-            if (record.supplier._id === winnerId) return 'highlight';
+            if (winnerIds.includes(record.supplier._id)) return 'highlight';
           }}
           columns={this.columns()}
           rowKey={record => (record.supplier ? record.supplier._id : '')}
