@@ -41,16 +41,35 @@ class Status extends Common {
     const { generate, totalCount } = this.props;
     const { selectedCompanies } = this.state;
 
-    const columns = this.getWrappedColumns([
-      {
-        title: 'Submission date',
-        render: record => moment(record.prequalifiedDate).format(dateFormat)
-      },
-      {
-        title: 'Expiration date',
-        render: record => this.renderExpirationDate(record.prequalifiedDate)
-      }
-    ]);
+    const columns = this.getWrappedColumns(
+      [
+        {
+          title: 'Submission date',
+          render: record => {
+            if (record.prequalifiedDate) {
+              return moment(record.prequalifiedDate).format(dateFormat);
+            }
+
+            return '-';
+          }
+        },
+        {
+          title: 'Expiration date',
+          render: record => this.renderExpirationDate(record.prequalifiedDate)
+        }
+      ],
+      [
+        {
+          title: 'Actions',
+          width: 40,
+          render: record => (
+            <div>
+              <a href={`/prequalification-status/${record._id}`}>View</a>
+            </div>
+          )
+        }
+      ]
+    );
 
     return (
       <Row gutter={16}>
