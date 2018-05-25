@@ -228,7 +228,9 @@ class ValidationModal extends React.Component {
           </FormItem>
 
           <FormItem label="Check validated">
-            {getFieldDecorator('checkedItems', {})(
+            {getFieldDecorator('checkedItems', {
+              initialValue: company.validatedProductsInfo
+            })(
               <CheckboxGroup
                 options={company.productsInfo}
                 className="horizontal capitalize"
