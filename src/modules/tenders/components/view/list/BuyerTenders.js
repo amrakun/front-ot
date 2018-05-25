@@ -7,32 +7,39 @@ import Tenders from './Tenders';
 
 class BuyerTenders extends Tenders {
   columns() {
+    const { type } = this.props;
     const renderIcon = this.renderIcon;
+
+    const filters = [
+      {
+        text: <span>{renderIcon('draft')} Draft</span>,
+        value: 'draft'
+      },
+      {
+        text: <span>{renderIcon('open')} Open</span>,
+        value: 'open'
+      },
+      {
+        text: <span>{renderIcon('closed')} Closed</span>,
+        value: 'closed'
+      },
+      {
+        text: <span>{renderIcon('canceled')} Canceled</span>,
+        value: 'canceled'
+      }
+    ];
+
+    if (type === 'rfq') {
+      filters.push({
+        text: <span>{renderIcon('awarded')} Awarded</span>,
+        value: 'awarded'
+      });
+    }
+
     return [
       {
         title: 'Status',
-        filters: [
-          {
-            text: <span>{renderIcon('draft')} Draft</span>,
-            value: 'draft'
-          },
-          {
-            text: <span>{renderIcon('open')} Open</span>,
-            value: 'open'
-          },
-          {
-            text: <span>{renderIcon('closed')} Closed</span>,
-            value: 'closed'
-          },
-          {
-            text: <span>{renderIcon('awarded')} Awarded</span>,
-            value: 'awarded'
-          },
-          {
-            text: <span>{renderIcon('canceled')} Canceled</span>,
-            value: 'canceled'
-          }
-        ],
+        filters,
         filteredValue: this.state.statuses,
         key: 'status',
         render: record => this.renderTooltippedIcon(record)
@@ -113,6 +120,7 @@ class BuyerTenders extends Tenders {
 
     return [
       <Divider key={0} type="vertical" />,
+
       <Link key={1} to={`/${type}/${_id}`}>
         View
       </Link>
@@ -137,6 +145,7 @@ class BuyerTenders extends Tenders {
 
     return this.renderTenders({
       columns: this.columns(),
+
       operation: (
         <Button disabled={exportLoading} onClick={exportTenders}>
           Export to excel
