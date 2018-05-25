@@ -111,6 +111,7 @@ class DueDiligence extends Common {
               defaultValue={date && moment(date)}
               format={dateFormat}
               onChange={value => this.handleDateChange(value, record._id)}
+              style={{ width: '115px' }}
             />
           );
         }
