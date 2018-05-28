@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { gql, compose, graphql } from 'react-apollo';
-import { queries } from '../graphql';
-import { Loading } from 'modules/common/components';
+import { Loading, exportFile } from 'modules/common/components';
+import { queries as companyQueries } from 'modules/companies/graphql';
 import { SupplierDashboard } from '../components';
+import { queries } from '../graphql';
 
 const SupplierDashboardContainer = props => {
   const { companyByUserQuery, location, history } = props;
@@ -12,6 +13,12 @@ const SupplierDashboardContainer = props => {
     return <Loading />;
   }
 
+  const exportPreq = () => {
+    exportFile({
+      query: companyQueries.exportCurrentCompanyPrequalification
+    });
+  };
+
   if (location.search === '?refetch') {
     companyByUserQuery.refetch();
     history.push({ location: null });
@@ -19,6 +26,7 @@ const SupplierDashboardContainer = props => {
 
   const updatedProps = {
     ...props,
+    exportPreq,
     data: {
       ...companyByUserQuery.companyByUser
     }

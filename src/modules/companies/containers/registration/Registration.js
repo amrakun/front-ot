@@ -39,7 +39,7 @@ const RegistrationContainer = (props, { __ }) => {
 
   const exportForm = () => {
     exportFile({
-      query: queries.exportCurrentCompany,
+      query: queries.exportCurrentCompanyRegistration,
       name: 'exportCompany'
     });
   };

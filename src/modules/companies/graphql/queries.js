@@ -355,9 +355,15 @@ const exportCompany = `
   }
 `;
 
-const exportCurrentCompany = `
-  query companyDetailSupplierExport {
-    companyDetailSupplierExport
+const exportCurrentCompanyRegistration = `
+  query companyRegistrationSupplierExport {
+    companyRegistrationSupplierExport
+  }
+`;
+
+const exportCurrentCompanyPrequalification = `
+  query companyPrequalificationSupplierExport {
+    companyPrequalificationSupplierExport
   }
 `;
 
@@ -509,5 +515,6 @@ export default {
   audit,
   capacityBuilding,
   exportCompany,
-  exportCurrentCompany
+  exportCurrentCompanyRegistration,
+  exportCurrentCompanyPrequalification
 };

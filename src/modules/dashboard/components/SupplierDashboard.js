@@ -18,7 +18,8 @@ class Dashboard extends React.Component {
   }
 
   getPrequalifiedStatus() {
-    const { prequalifiedStatus } = this.props.data;
+    const { data, exportPreq } = this.props;
+    const { prequalifiedStatus } = data;
     const { __ } = this.context;
     const {
       isApproved,
@@ -27,11 +28,11 @@ class Dashboard extends React.Component {
       isOutstanding
     } = prequalifiedStatus;
 
-    if (isApproved) return __('Pre-qualified');
+    if (isApproved) return <a onClick={exportPreq}>{__('Pre-qualified')}</a>;
 
-    if (isExpired) return __('Expired');
+    if (isExpired) return <a onClick={exportPreq}>{__('Expired')}</a>;
 
-    if (isOutstanding) return __('In progress');
+    if (isOutstanding) return <a onClick={exportPreq}>{__('In progress')}</a>;
 
     if (isFailed)
       return (
@@ -42,7 +43,7 @@ class Dashboard extends React.Component {
         </span>
       );
 
-    return __('Not complete');
+    return <a onClick={exportPreq}>{__('Not complete')}</a>;
   }
 
   render() {
@@ -130,7 +131,7 @@ class Dashboard extends React.Component {
                   __('Nothing new')
                 )
               }
-              badge={lastFeedback !== null && !lastFeedback.supplierResponse}
+              badge={lastFeedback && !lastFeedback.supplierResponse}
             />
           </Col>
           <Col key={2} lg={8} sm={12}>
@@ -206,7 +207,8 @@ class Dashboard extends React.Component {
 Dashboard.propTypes = {
   data: PropTypes.object,
   history: PropTypes.object,
-  location: PropTypes.object
+  location: PropTypes.object,
+  exportPreq: PropTypes.func
 };
 
 Dashboard.contextTypes = {
