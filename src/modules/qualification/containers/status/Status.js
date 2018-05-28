@@ -14,7 +14,16 @@ const StatusContainer = props => {
     });
   };
 
-  return <Status {...props} generate={generate} />;
+  const exportCompany = _id => {
+    exportFile({
+      query: queries.companyPrequalificationExport,
+      variables: { _id }
+    });
+  };
+
+  return (
+    <Status {...props} generate={generate} exportCompany={exportCompany} />
+  );
 };
 
 StatusContainer.propTypes = {

@@ -572,6 +572,12 @@ const companiesValidatedProductsInfoExport = `
   }
 `;
 
+const companyPrequalificationExport = `
+  query companyPrequalificationExport($_id: String!) {
+    companyPrequalificationExport(_id: $_id)
+  }
+`;
+
 const companiesGenerateDueDiligenceList = `
   query companiesGenerateDueDiligenceList(${commonParams}) {
     companiesGenerateDueDiligenceList(${commonValues})
@@ -666,6 +672,7 @@ export default {
   physicalAudits,
   totalPhysicalAudits,
   physicalAuditDetail,
+  companyPrequalificationExport,
   companiesValidatedProductsInfoExport,
   companiesGenerateDueDiligenceList,
   companiesGeneratePrequalificationList,

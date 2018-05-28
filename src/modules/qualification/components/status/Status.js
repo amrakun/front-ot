@@ -38,7 +38,7 @@ class Status extends Common {
   }
 
   render() {
-    const { generate, totalCount } = this.props;
+    const { generate, totalCount, exportCompany } = this.props;
     const { selectedCompanies } = this.state;
 
     const columns = this.getWrappedColumns(
@@ -65,6 +65,8 @@ class Status extends Common {
           render: record => (
             <div>
               <a href={`/prequalification-status/${record._id}`}>View</a>
+              &nbsp;|&nbsp;
+              <a onClick={() => exportCompany(record._id)}>Export</a>
             </div>
           )
         }
@@ -104,7 +106,8 @@ class Status extends Common {
 }
 
 Status.contextTypes = {
-  systemConfig: PropTypes.object
+  systemConfig: PropTypes.object,
+  exportCompany: PropTypes.func
 };
 
 export default withRouter(Status);
