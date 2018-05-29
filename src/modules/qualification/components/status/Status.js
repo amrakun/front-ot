@@ -54,6 +54,12 @@ class Status extends Common {
           }
         },
         {
+          title: 'Submitted count',
+          render: record => {
+            return record.prequalificationSubmittedCount;
+          }
+        },
+        {
           title: 'Expiration date',
           render: record => this.renderExpirationDate(record.prequalifiedDate)
         }

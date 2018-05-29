@@ -374,6 +374,7 @@ const status = `
     } sortField: "prequalifiedDate", sortDirection: -1) {
       ${commonFields}
       prequalifiedDate
+      prequalificationSubmittedCount
     }
   }
 `;
