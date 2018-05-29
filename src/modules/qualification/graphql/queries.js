@@ -282,6 +282,7 @@ const auditRequests = `
         status
         supplierResponse {
           isSent
+          isEditable
         }
       }
     }
@@ -350,6 +351,7 @@ const auditResponses = `
         publishDate
         closeDate
       }
+      submittedCount
       improvementPlanFile
       improvementPlanSentDate
       reportFile

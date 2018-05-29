@@ -14,39 +14,39 @@ class AuditRequests extends React.Component {
     return [
       {
         title: __('Status'),
+        key: 1,
         render: record => {
           return record.status === 'open' ? __('open') : __('closed');
         }
       },
       {
         title: __('Publish date'),
+        key: 2,
         render: record => moment(record.publishDate).format(dateTimeFormat)
       },
       {
         title: __('Expiration date'),
+        key: 3,
         render: record => moment(record.closeDate).format(dateTimeFormat)
       },
       {
         title: __('Auditor report'),
+        key: 4,
         render: record => (record.status === 'open' ? '-' : <a>{__('View')}</a>)
       },
       {
         title: __('Auditor improvement plan'),
+        key: 5,
         render: record => (record.status === 'open' ? '-' : <a>{__('View')}</a>)
       },
       {
         title: __('More'),
+        key: 6,
         render: record => {
           const response = record.supplierResponse;
-          const isSent = response ? response.isSent : null;
-          const status = record.status;
 
-          if (!isSent && status === 'open') {
+          if (!response || response.isEditable) {
             return <Link to={`audit/submit/${record._id}`}>{__('View')}</Link>;
-          }
-
-          if (isSent !== null && isSent) {
-            return __('Already sent');
           }
 
           return '-';

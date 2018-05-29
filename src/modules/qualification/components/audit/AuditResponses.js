@@ -38,8 +38,10 @@ class AuditResponses extends React.Component {
     const { history } = this.props;
 
     let query = queryString.parse(history.location.search);
+
     query.from = value[0] ? value[0]._d : null;
     query.to = value[1] ? value[1]._d : null;
+
     history.push({
       search: queryString.stringify(query)
     });
@@ -174,6 +176,10 @@ class AuditResponses extends React.Component {
         render: record => moment(record.createdDate).format(dateFormat)
       },
       {
+        title: 'Submitted count',
+        render: record => record.submittedCount
+      },
+      {
         title: 'Provided information',
         render: record =>
           record.supplier ? (
@@ -208,7 +214,7 @@ class AuditResponses extends React.Component {
         render: record =>
           record.improvementPlanFile ? (
             <a href={record.improvementPlanFile} target="_blank">
-              {moment(record.improvementPlanSentDate).format(dateFormat)}
+              file submitted
             </a>
           ) : (
             '-'

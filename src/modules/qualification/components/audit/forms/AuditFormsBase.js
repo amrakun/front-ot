@@ -63,6 +63,7 @@ class AuditFormsBase extends BaseForm {
       const name = field.name;
 
       let score = this.getFieldValue(`${name}Score`);
+
       if (field.type !== 'multiple') score = score === 'true';
 
       doc[name] = {
@@ -81,6 +82,7 @@ class AuditFormsBase extends BaseForm {
 
   renderForSupplier(name, type) {
     this.fields.includes(name) || this.fields.push({ name, type });
+
     const { __ } = this.context;
 
     const data = this.props.data || {};
@@ -89,6 +91,7 @@ class AuditFormsBase extends BaseForm {
     const multipleOptions = labels[name].options;
 
     let initialAnswer = '';
+
     if (multipleOptions && multipleOptions[supplierAnswer]) {
       initialAnswer = multipleOptions[supplierAnswer].value;
     } else {
@@ -138,9 +141,11 @@ class AuditFormsBase extends BaseForm {
       auditorScore,
       auditorComment
     } = responseData;
+
     const multipleOptions = labels[name].options;
 
     let initialScore = '';
+
     if (multipleOptions && multipleOptions[auditorScore]) {
       initialScore = multipleOptions[auditorScore].value;
     } else {
@@ -259,9 +264,15 @@ class AuditFormsBase extends BaseForm {
           <p style={{ height: '8px' }} />
         </div>
       );
-    } else if (qualifiedStatus) {
+    }
+
+    if (qualifiedStatus) {
       const qualified = qualifiedStatus[name];
-      if (!name) return null;
+
+      if (!name) {
+        return null;
+      }
+
       return (
         <Alert
           message={`${auditTabs[name]} is ${
