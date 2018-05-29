@@ -45,7 +45,7 @@ class AuditRequests extends React.Component {
         render: record => {
           const response = record.supplierResponse;
 
-          if (!response || response.isEditable) {
+          if (!response || response.isEditable !== false) {
             return <Link to={`audit/submit/${record._id}`}>{__('View')}</Link>;
           }
 
