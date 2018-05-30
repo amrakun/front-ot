@@ -25,11 +25,10 @@ class Sidebar extends React.Component {
 
     const query = queryString.parse(history.location.search);
 
-    const regionQuery = query.region ? query.region.split(',') : null;
+    const { region, productCodes } = query;
 
-    const productCodesQuery = query.productCodes
-      ? query.productCodes.split(',')
-      : null;
+    const regionQuery = region && region.split(',');
+    const productCodesQuery = productCodes && productCodes.split(',');
 
     this.state = {
       productCodes: productCodesQuery || [],
@@ -82,14 +81,14 @@ class Sidebar extends React.Component {
     });
 
     const filterValues = {
+      ...filter,
       region: regionString.replace(/.$/, ''),
       productCodes: productCodesString.replace(/.$/, ''),
       difotRange,
       prequalifiedStatus,
       qualifiedStatus,
       productsInfoStatus,
-      includeBlocked,
-      ...filter
+      includeBlocked
     };
 
     filterValues.difotRange = difotRange;
