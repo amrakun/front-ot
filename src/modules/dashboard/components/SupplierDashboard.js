@@ -28,11 +28,17 @@ class Dashboard extends React.Component {
       isOutstanding
     } = prequalifiedStatus;
 
-    if (isApproved) return <a onClick={exportPreq}>{__('Pre-qualified')}</a>;
+    if (isApproved) {
+      return <a onClick={exportPreq}>{__('Pre-qualified')}</a>;
+    }
 
-    if (isExpired) return <a onClick={exportPreq}>{__('Expired')}</a>;
+    if (isExpired) {
+      return <a onClick={exportPreq}>{__('Expired')}</a>;
+    }
 
-    if (isOutstanding) return <a onClick={exportPreq}>{__('In progress')}</a>;
+    if (isOutstanding) {
+      return <a onClick={exportPreq}>{__('In progress')}</a>;
+    }
 
     if (isFailed)
       return (
@@ -46,6 +52,55 @@ class Dashboard extends React.Component {
     return <a onClick={exportPreq}>{__('Not complete')}</a>;
   }
 
+  renderAuditNotification() {
+    const { auditImprovementPlanNotification, hasNewAudit } =
+      this.props.data || {};
+
+    const { __ } = this.context;
+
+    let text = __('Nothing new');
+    let color = colors[5];
+    let badge = false;
+
+    if (hasNewAudit) {
+      text = (
+        <span>
+          {__('You have new audit invitation. Click')}{' '}
+          <Link to="qualification">{__('here')}</Link>{' '}
+          {__('view your audit invitations')}
+        </span>
+      );
+
+      color = colors[7];
+      badge = true;
+    }
+
+    if (auditImprovementPlanNotification) {
+      const _id = auditImprovementPlanNotification.auditId;
+
+      text = (
+        <span>
+          {__('You have new audit improvement plan. Click')}{' '}
+          <Link to={`/audit/submit/${_id}`}>{__('here')}</Link>{' '}
+          {__('view your audit')}
+        </span>
+      );
+
+      color = colors[7];
+      badge = true;
+    }
+
+    return (
+      <TextCard
+        icon="calculator"
+        title={__('Qualification/audit')}
+        color={color}
+        text={text}
+        badge={badge}
+      />
+    );
+  }
+
   render() {
     const { data, history, location } = this.props;
 
@@ -53,7 +108,6 @@ class Dashboard extends React.Component {
       averageDifotScore,
       lastFeedback,
       openTendersCount,
-      hasNewAudit,
       isPrequalified,
       isSentRegistrationInfo
     } = data;
@@ -164,23 +218,7 @@ class Dashboard extends React.Component {
             />
           </Col>
           <Col key={6} lg={8} sm={12}>
-            <TextCard
-              icon="calculator"
-              title={__('Qualification/audit')}
-              color={hasNewAudit ? colors[7] : colors[5]}
-              text={
-                hasNewAudit ? (
-                  <span>
-                    {__('You have new audit invitation. Click')}{' '}
-                    <Link to="qualification">{__('here')}</Link>{' '}
-                    {__('view your audit invitations')}
-                  </span>
-                ) : (
-                  __('Nothing new')
-                )
-              }
-              badge={hasNewAudit}
-            />
+            {this.renderAuditNotification()}
           </Col>
         </Row>
 

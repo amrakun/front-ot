@@ -6,6 +6,12 @@ const companyByUser = `
       averageDifotScore
       isPrequalified
       hasNewAudit
+
+      auditImprovementPlanNotification {
+        _id
+        auditId
+      }
+
       lastFeedback {
         _id
         supplierResponse {
