@@ -67,6 +67,11 @@ class AuditRequests extends React.Component {
         <Table
           columns={this.columns()}
           rowKey={record => record._id}
+          rowClassName={record => {
+            const supplierResponse = record.supplierResponse || {};
+
+            if (supplierResponse.isQualified) return 'highlight';
+          }}
           dataSource={data}
           loading={loading}
         />

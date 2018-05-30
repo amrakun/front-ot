@@ -203,7 +203,7 @@ class AuditResponses extends React.Component {
         render: record =>
           record.reportFile ? (
             <a href={record.reportFile} target="_blank">
-              {moment(record.reportSentDate).format(dateFormat)}
+              file
             </a>
           ) : (
             '-'
@@ -214,7 +214,7 @@ class AuditResponses extends React.Component {
         render: record =>
           record.improvementPlanFile ? (
             <a href={record.improvementPlanFile} target="_blank">
-              file submitted
+              file
             </a>
           ) : (
             '-'
@@ -311,6 +311,9 @@ class AuditResponses extends React.Component {
             rowSelection={{
               selectedRowKeys,
               onChange: this.onSelectChange
+            }}
+            rowClassName={record => {
+              if (record.isQualified) return 'highlight';
             }}
           />
         </Card>
