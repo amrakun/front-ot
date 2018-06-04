@@ -6,12 +6,15 @@ export default class ProductsTree extends React.Component {
   render() {
     const { locale = 'en' } = this.context;
 
+    const treeData = productsTree[locale];
+
     return (
       <TreeSelect
         allowClear
-        treeCheckable={true}
+        multiple
+        treeCheckStrictly
         searchPlaceholder="Please select"
-        treeData={productsTree[locale]}
+        treeData={treeData}
         {...this.props}
       />
     );

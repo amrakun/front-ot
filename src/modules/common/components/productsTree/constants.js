@@ -1,9 +1,11 @@
 const en = [
   {
     label: 'A00000 - Construction',
+    selectable: false,
     children: [
       {
         label: 'A01000 - Construction Contractors',
+        selectable: false,
         children: [
           {
             label: "A01001 - Large EPCM's >$100M/greenfield projects",
@@ -21,6 +23,7 @@ const en = [
       },
       {
         label: 'A02000 - Construction Services',
+        selectable: false,
         children: [
           {
             label: 'A02001 - Architectural and Finishes Contractors',
@@ -167,9 +170,11 @@ const en = [
   },
   {
     label: 'B00000 - Energy',
+    selectable: false,
     children: [
       {
         label: 'B01000 - Alternate Energy',
+        selectable: false,
         children: [
           {
             label: 'B01001 - Compressed Air',
@@ -197,6 +202,7 @@ const en = [
       },
       {
         label: 'B02000 - Fuel',
+        selectable: false,
         children: [
           {
             label: 'B02001 - Diesel',
@@ -239,6 +245,7 @@ const en = [
       },
       {
         label: 'B03000 - Power',
+        selectable: false,
         children: [
           {
             label: 'B03001 - Electricity - Domestic',
@@ -265,9 +272,11 @@ const en = [
   },
   {
     label: 'C00000 - Fixed Plant & Equipment',
+    selectable: false,
     children: [
       {
         label: 'C01000 - Materials Movement',
+        selectable: false,
         children: [
           {
             label: 'C01001 - Bucket wheels',
@@ -305,6 +314,7 @@ const en = [
       },
       {
         label: 'C02000 - Materials Processing',
+        selectable: false,
         children: [
           {
             label: 'C02001 - Crushers and Mills',
@@ -337,6 +347,7 @@ const en = [
       },
       {
         label: 'C03000 - Rail',
+        selectable: false,
         children: [
           {
             label: 'C03001 - Rail - fixed assets ie ballast,sleepers',
@@ -349,6 +360,7 @@ const en = [
       },
       {
         label: 'C04000 - Smelting equipment',
+        selectable: false,
         children: [
           {
             label: 'C04001 - Pot Shells and Superstructure',
@@ -370,9 +382,11 @@ const en = [
   },
   {
     label: 'D00000 - Logistics',
+    selectable: false,
     children: [
       {
         label: 'D01000 - Marine Equipment',
+        selectable: false,
         children: [
           {
             label: 'D01001 - Barges',
@@ -405,6 +419,7 @@ const en = [
       },
       {
         label: 'D02000 - Transport',
+        selectable: false,
         children: [
           {
             label: 'D02001 - 3rd party warehousing',
@@ -501,9 +516,11 @@ const en = [
   },
   {
     label: 'E00000 - Mining equipment',
+    selectable: false,
     children: [
       {
         label: 'E01000 - Drilling & consumables',
+        selectable: false,
         children: [
           {
             label: 'E01001 - Drill Bits (heavy)',
@@ -546,6 +563,7 @@ const en = [
       },
       {
         label: 'E02000 - Mining equipment & Parts',
+        selectable: false,
         children: [
           {
             label: 'E02001 - Dozers',
@@ -638,6 +656,7 @@ const en = [
       },
       {
         label: 'E03000 - Light Mobile Equipment',
+        selectable: false,
         children: [
           {
             label: 'E03001 - Light Mobile Equipment',
@@ -690,6 +709,7 @@ const en = [
       },
       {
         label: 'E04000 - Mining Equipment & Parts',
+        selectable: false,
         children: [
           {
             label: 'E04001 - HME Ancillary Equipment Parts',
@@ -737,6 +757,7 @@ const en = [
       },
       {
         label: 'E05000 - Rail',
+        selectable: false,
         children: [
           {
             label: 'E05001 - Automatic train operations (ATO)',
@@ -789,6 +810,7 @@ const en = [
       },
       {
         label: 'E06000 - Tyres & Belting',
+        selectable: false,
         children: [
           {
             label: 'E06001 - Light Vehicle & mobile equipment tyres',
@@ -821,6 +843,7 @@ const en = [
       },
       {
         label: 'E07000 - Underground Mining Equipment',
+        selectable: false,
         children: [
           {
             label: 'E07001 - Underground Mining equipment incl LHD',
@@ -833,6 +856,7 @@ const en = [
       },
       {
         label: 'E08000 - Mining Technology',
+        selectable: false,
         children: [
           {
             label: 'E08001 - Equipment technologies',
@@ -849,9 +873,11 @@ const en = [
   },
   {
     label: 'F00000 - MRO (maintenance, repair, operationals) & Consumables',
+    selectable: false,
     children: [
       {
         label: 'F01000 - General MRO',
+        selectable: false,
         children: [
           {
             label: 'F01001 - Abrasives and grinding materials',
@@ -1064,6 +1090,7 @@ const en = [
       },
       {
         label: 'F02000 - Electrical and Instrumentation',
+        selectable: false,
         children: [
           {
             label: 'F02001 - Electrical Hardware & Equipment',
@@ -1091,6 +1118,7 @@ const en = [
       },
       {
         label: 'F03000 - Lubricants',
+        selectable: false,
         children: [
           {
             label: 'F03001 - Greases',
@@ -1113,6 +1141,7 @@ const en = [
       },
       {
         label: 'F04000 - Office Consumables',
+        selectable: false,
         children: [
           {
             label: 'F04001 - Office furniture',
@@ -1144,9 +1173,11 @@ const en = [
   },
   {
     label: 'G00000 - Production Consumables',
+    selectable: false,
     children: [
       {
         label: 'G01000 - Packaging for Rio Tinto product sales',
+        selectable: false,
         children: [
           {
             label: 'G01001 - Labels & metalized logos',
@@ -1214,6 +1245,7 @@ const en = [
       },
       {
         label: 'G02000 - Aluminium and Steel Input Materials',
+        selectable: false,
         children: [
           {
             label: 'G02001 - Anode Bar',
@@ -1291,6 +1323,7 @@ const en = [
       },
       {
         label: 'G03000 - Consumables',
+        selectable: false,
         children: [
           {
             label: 'G03001 - Process consumables',
@@ -1388,6 +1421,7 @@ const en = [
       },
       {
         label: 'G04000 - Explosives',
+        selectable: false,
         children: [
           {
             label: 'G04001 - Ammonium nitrate & bulk explosives',
@@ -1415,6 +1449,7 @@ const en = [
       },
       {
         label: 'G05000 - Process Chemicals',
+        selectable: false,
         children: [
           {
             label: 'G05001 - Acid',
@@ -1552,6 +1587,7 @@ const en = [
       },
       {
         label: 'G06000 - Raw Materials',
+        selectable: false,
         children: [
           {
             label: 'G06001 - Alloys',
@@ -1736,6 +1772,7 @@ const en = [
     children: [
       {
         label: 'H01000 - Ancillary Services',
+        selectable: false,
         children: [
           {
             label: 'H01001 - Component monitoring contractors',
@@ -1863,6 +1900,7 @@ const en = [
       },
       {
         label: 'H02000 - Bulk materials',
+        selectable: false,
         children: [
           {
             label: 'H02001 - Pipeline Tolling Service',
@@ -1875,6 +1913,7 @@ const en = [
       },
       {
         label: 'H03000 - Civil & Mining Services',
+        selectable: false,
         children: [
           {
             label: 'H03001 - Civil Contractors',
@@ -1897,6 +1936,7 @@ const en = [
       },
       {
         label: 'H04000 - Facilities & Site Management',
+        selectable: false,
         children: [
           {
             label: 'H04001 - Building lease',
@@ -1974,6 +2014,7 @@ const en = [
       },
       {
         label: 'H05000 - IT',
+        selectable: false,
         children: [
           {
             label: 'H05001 - Hardware equipment maintenance',
@@ -2026,6 +2067,7 @@ const en = [
       },
       {
         label: 'H06000 - Maintenance Services',
+        selectable: false,
         children: [
           {
             label: 'H06001 - Automotive Maintenance',
@@ -2113,6 +2155,7 @@ const en = [
       },
       {
         label: 'H07000 - Support Services',
+        selectable: false,
         children: [
           {
             label: 'H07001 - Underground Mining Contractors',
@@ -2125,6 +2168,7 @@ const en = [
       },
       {
         label: 'H08000 - Professional Services',
+        selectable: false,
         children: [
           {
             label: 'H08001 - Accounting/financial/audit/tax Service',
@@ -2242,6 +2286,7 @@ const en = [
       },
       {
         label: 'H09000 - Support Services',
+        selectable: false,
         children: [
           {
             label: 'H09001 - Site Contractors - electrical/mechanical',
@@ -2259,6 +2304,7 @@ const en = [
       },
       {
         label: 'H10000 - Travel',
+        selectable: false,
         children: [
           {
             label: 'H10001 - Air Travel - RPT',
@@ -2313,9 +2359,11 @@ const en = [
 const mn = [
   {
     label: 'A00000 - Барилга угсралт',
+    selectable: false,
     children: [
       {
         label: 'A01000 - Барилга угсралтын гэрээт компани',
+        selectable: false,
         children: [
           {
             label:
@@ -2335,6 +2383,7 @@ const mn = [
       },
       {
         label: 'A02000 - Барилга угсралтын үйлчилгээ',
+        selectable: false,
         children: [
           {
             label: 'A02001 - Барилга угсралт, засал чимэглэлийн ажил',
@@ -2484,9 +2533,11 @@ const mn = [
   },
   {
     label: 'B00000 - Эрчим хүч',
+    selectable: false,
     children: [
       {
         label: 'B01000 - Уламжлалт бус эрчим хүч',
+        selectable: false,
         children: [
           {
             label: 'B01001 - Даралтат хий',
@@ -2514,6 +2565,7 @@ const mn = [
       },
       {
         label: 'B02000 - Түлш шатахуун',
+        selectable: false,
         children: [
           {
             label: 'B02001 - Дизель түлш',
@@ -2556,6 +2608,7 @@ const mn = [
       },
       {
         label: 'B03000 - Цахилгаан эрчим хүч',
+        selectable: false,
         children: [
           {
             label: 'B03001 - Цахилгаан эрчим хүч - Дотоодын',
@@ -2582,9 +2635,11 @@ const mn = [
   },
   {
     label: 'C00000 - Суурин үйлдвэр, тоног төхөөрөмж',
+    selectable: false,
     children: [
       {
         label: 'C01000 - Материал тээвэрлэлт',
+        selectable: false,
         children: [
           {
             label: 'C01001 - Олон хутгуурт экскаватор',
@@ -2617,6 +2672,7 @@ const mn = [
       },
       {
         label: 'C02000 - Материал боловсруулалт',
+        selectable: false,
         children: [
           {
             label: 'C02001 - Бутлуур, тээрэм',
@@ -2650,6 +2706,7 @@ const mn = [
       },
       {
         label: 'C03000 - Төмөр зам',
+        selectable: false,
         children: [
           {
             label:
@@ -2663,6 +2720,7 @@ const mn = [
       },
       {
         label: 'C04000 - Хайлуулалтын тоног төхөөрөмж',
+        selectable: false,
         children: [
           {
             label: 'C04001 - Хайлах тогоо, дээд анги',
@@ -2684,9 +2742,11 @@ const mn = [
   },
   {
     label: 'D00000 - Ложистик',
+    selectable: false,
     children: [
       {
         label: 'D01000 - Далайн тээврийн тоног төхөөрөмж',
+        selectable: false,
         children: [
           {
             label: 'D01001 - Чиргүүл онгоц',
@@ -2719,6 +2779,7 @@ const mn = [
       },
       {
         label: 'D02000 - Тээвэр',
+        selectable: false,
         children: [
           {
             label: 'D02001 - Гуравдагч этгээдийн агуулахын үйлчилгээ',
@@ -2815,9 +2876,11 @@ const mn = [
   },
   {
     label: 'E00000 - Хөдөлгөөнт тоног төхөөрөмж',
+    selectable: false,
     children: [
       {
         label: 'E01000 - Өрөмдлөг, өрөмдлөгийн хэрэглээний зүйлс',
+        selectable: false,
         children: [
           {
             label: 'E01001 - Өрмийн толгой (том)',
@@ -2840,6 +2903,7 @@ const mn = [
       },
       {
         label: 'E02000 - Уурхайн хүнд даацын тоног төхөөрөмж',
+        selectable: false,
         children: [
           {
             label: 'E02001 - Бульдозер',
@@ -2934,6 +2998,7 @@ const mn = [
       },
       {
         label: 'E03000 - Хөнгөн тэрэг',
+        selectable: false,
         children: [
           {
             label: 'E03001 - Хөнгөн тэрэг',
@@ -2986,6 +3051,7 @@ const mn = [
       },
       {
         label: 'E04000 - Уурхайн тоног төхөөрөмж, сэлбэг хэрэгсэл',
+        selectable: false,
         children: [
           {
             label:
@@ -3036,6 +3102,7 @@ const mn = [
       },
       {
         label: 'E05000 - Төмөр зам',
+        selectable: false,
         children: [
           {
             label: 'E05001 - Төмөр замын автомат тээврийн удирдлагын систем',
@@ -3088,6 +3155,7 @@ const mn = [
       },
       {
         label: 'E06000 - Дугуй',
+        selectable: false,
         children: [
           {
             label:
@@ -3122,6 +3190,7 @@ const mn = [
       },
       {
         label: 'E07000 - Гүний уурхайн тоног төхөөрөмж',
+        selectable: false,
         children: [
           {
             label:
@@ -3135,6 +3204,7 @@ const mn = [
       },
       {
         label: 'E08000 - Уул уурхайн технологи',
+        selectable: false,
         children: [
           {
             label: 'E08001 - Тоног төхөөрөмжийн технологи',
@@ -3151,9 +3221,11 @@ const mn = [
   },
   {
     label: 'F00000 - Үйл ажиллагааны засвар, үйлчилгээ, хэрэглээний зүйлс',
+    selectable: false,
     children: [
       {
         label: 'F01000 - Үйл ажиллагааны ерөнхий засвар, үйлчилгээ',
+        selectable: false,
         children: [
           {
             label: 'F01001 - Өнгөлөх, зүлгэх, тасдах материал',
@@ -3358,6 +3430,7 @@ const mn = [
       },
       {
         label: 'F02000 - Цахилгааны болон нарийн хэмжүүрийн хэрэгсэл',
+        selectable: false,
         children: [
           {
             label: 'F02001 - Цахилгааны техник хэрэгсэл, тоног төхөөрөмж',
@@ -3385,6 +3458,7 @@ const mn = [
       },
       {
         label: 'F03000 - Тос, тослох материал',
+        selectable: false,
         children: [
           {
             label: 'F03001 - Тослох материал',
@@ -3407,6 +3481,7 @@ const mn = [
       },
       {
         label: 'F04000 - Оффисын хэрэглээний зүйлс',
+        selectable: false,
         children: [
           {
             label: 'F04001 - Оффисын тавилга',
@@ -3441,6 +3516,7 @@ const mn = [
     children: [
       {
         label: 'G01000 - Рио Тинтогийн борлуулах бүтээгдэхүүний савлагаа',
+        selectable: false,
         children: [
           {
             label: 'G01001 - Шошго, лого',
@@ -3513,6 +3589,7 @@ const mn = [
       },
       {
         label: 'G03000 - Хэрэглээний зүйлс',
+        selectable: false,
         children: [
           {
             label: 'G03001 - Технологийн процссын хэрэглээний зүйлс',
@@ -3611,6 +3688,7 @@ const mn = [
       },
       {
         label: 'G04000 - Тэсрэх бодис',
+        selectable: false,
         children: [
           {
             label: 'G04001 - Аммонийн нитрат, задгай тэсрэх бодис',
@@ -3638,6 +3716,7 @@ const mn = [
       },
       {
         label: 'G05000 - Химийн бодис',
+        selectable: false,
         children: [
           {
             label: 'G05001 - Хүчил',
@@ -3775,6 +3854,7 @@ const mn = [
       },
       {
         label: 'G06000 - Түүхий эд',
+        selectable: false,
         children: [
           {
             label: 'G06001 - Хайлш',
@@ -3876,9 +3956,11 @@ const mn = [
   },
   {
     label: 'H00000 - Үйлчилгээ',
+    selectable: false,
     children: [
       {
         label: 'H01000 - Туслах үйлчилгээ',
+        selectable: false,
         children: [
           {
             label: 'H01001 - Хяналт шинжилгээний гэрээт гүйцэтгэгч',
@@ -4006,6 +4088,7 @@ const mn = [
       },
       {
         label: 'H02000 - Задгай материал',
+        selectable: false,
         children: [
           {
             label: 'H02001 - Шугам хоолойн тоолуур, хэмжилтийн үйлчилгээ',
@@ -4018,6 +4101,7 @@ const mn = [
       },
       {
         label: 'H03000 - Барилга, уурхайн үйлчилгээ',
+        selectable: false,
         children: [
           {
             label: 'H03001 - Барилга угсралтын гэрээт гүйцэтгэгч',
@@ -4035,6 +4119,7 @@ const mn = [
       },
       {
         label: 'H04000 - Аж ахуй, уурхайн талбайн менежмент',
+        selectable: false,
         children: [
           {
             label: 'H04001 - Барилгын түрээс',
@@ -4109,6 +4194,7 @@ const mn = [
       },
       {
         label: 'H05000 - Мэдээллийн технологи',
+        selectable: false,
         children: [
           {
             label: 'H05001 - Техник хангамжийн засвар үйлчилгээ',
@@ -4162,6 +4248,7 @@ const mn = [
       },
       {
         label: 'H06000 - Засвар үйлчилгээ',
+        selectable: false,
         children: [
           {
             label: 'H06001 - Автын засвар үйлчилгээ',
@@ -4254,6 +4341,7 @@ const mn = [
       },
       {
         label: 'H07000 - Олборлолт',
+        selectable: false,
         children: [
           {
             label: 'H07001 - Гүний уурхайн олборлолтын гэрээт гүйцэтгэгч',
@@ -4266,6 +4354,7 @@ const mn = [
       },
       {
         label: 'H08000 - Мэргэжлийн үйлчилгээ',
+        selectable: false,
         children: [
           {
             label: 'H08001 - НББ, санхүү, аудит, татварын зөвлөх үйлчилгээ',
@@ -4380,6 +4469,7 @@ const mn = [
       },
       {
         label: 'H0900a - Дэмжлэг үзүүлэх үйлчилгээ',
+        selectable: false,
         children: [
           {
             label:
@@ -4398,6 +4488,7 @@ const mn = [
       },
       {
         label: 'H10000 - Аялал',
+        selectable: false,
         children: [
           {
             label: 'H10001 - Агаарын тээвэр - Ердийн нислэг',
