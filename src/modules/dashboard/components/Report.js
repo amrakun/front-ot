@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import productsTree from 'modules/companies/productsTree';
 import {
   Card,
   Row,
   Col,
-  TreeSelect,
   Select,
   Checkbox,
   Button,
@@ -16,6 +14,7 @@ import {
 } from 'antd';
 
 import { dateFormat } from 'modules/common/constants';
+import { ProductsTree } from 'modules/common/components';
 
 const RangePicker = DatePicker.RangePicker;
 const Option = Select.Option;
@@ -115,11 +114,8 @@ class Dashboard extends React.Component {
       <Row gutter={24} className="card-columns">
         <Col {...span}>
           <Card title="Suppliers profile">
-            <TreeSelect
-              treeData={productsTree.en}
+            <ProductsTree
               onChange={value => this.onInputChange('productCodes', value)}
-              treeCheckable={true}
-              searchPlaceholder="Please select"
               style={{ width: '100%', marginBottom: '16px' }}
             />
 

@@ -12,6 +12,7 @@ import Search from './Search';
 import Paginator from './Paginator';
 import exportFile from './exportFile';
 import HelpModal from './help/HelpModal';
+import ProductsTree from './productsTree';
 import Panes from './Panes';
 
 export {
@@ -29,5 +30,6 @@ export {
   Paginator,
   exportFile,
   HelpModal,
+  ProductsTree,
   Panes
 };

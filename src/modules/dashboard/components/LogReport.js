@@ -1,17 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Card,
-  Row,
-  Col,
-  Button,
-  TreeSelect,
-  Select,
-  Icon,
-  DatePicker
-} from 'antd';
+import { Card, Row, Col, Button, Select, Icon, DatePicker } from 'antd';
 import { dateFormat } from 'modules/common/constants';
-import productsTree from '../../companies/productsTree';
+import { ProductsTree } from 'modules/common/components';
 import { MODULES_TO_TEXT } from '../constants';
 
 const RangePicker = DatePicker.RangePicker;
@@ -279,11 +270,8 @@ class Dashboard extends React.Component {
             <div>
               <label>Product code: </label>
 
-              <TreeSelect
-                treeData={productsTree.en}
+              <ProductsTree
                 onChange={this.onProductCodesChange}
-                searchPlaceholder="Please select"
-                treeCheckable={true}
                 style={{ width: '100%' }}
                 required={true}
               />

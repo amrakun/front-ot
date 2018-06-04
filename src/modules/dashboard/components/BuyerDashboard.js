@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Tabs, DatePicker, Badge, TreeSelect, Button } from 'antd';
+import { Card, Tabs, DatePicker, Badge, Button } from 'antd';
 import {
   PieChart,
   Pie,
@@ -17,7 +17,7 @@ import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import { BuyerTenders } from 'modules/tenders/containers';
 import moment from 'moment';
-import productsTree from 'modules/companies/productsTree';
+import { ProductsTree } from 'modules/common/components';
 import { colors } from 'modules/common/constants';
 import router from 'modules/common/router';
 import { productCategoryLabels } from 'modules/dashboard/constants';
@@ -209,13 +209,9 @@ class Dashboard extends React.Component {
         title="Suppliers by Qualification Status"
         className="barchart-wrapper"
         extra={
-          <TreeSelect
-            treeData={productsTree.en}
+          <ProductsTree
             value={queryParams.productCodes}
             onChange={this.onProductCodesChange}
-            treeCheckable={true}
-            searchPlaceholder="Please select"
-            allowClear
             style={{ width: 300 }}
           />
         }

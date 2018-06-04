@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import queryString from 'query-string';
-import { Card, Col, TreeSelect, Checkbox, Select } from 'antd';
+import { Card, Col, Checkbox, Select } from 'antd';
 import { regionOptions } from '../../constants';
-import productsTree from '../../productsTree';
+import { ProductsTree } from 'modules/common/components';
 import router from 'modules/common/router';
 
 const Option = Select.Option;
@@ -59,6 +59,7 @@ class Sidebar extends React.Component {
 
   filter(filter) {
     const { history } = this.props;
+
     const {
       region,
       productCodes,
@@ -181,13 +182,9 @@ class Sidebar extends React.Component {
         </Card>
 
         <Card title="Select product & service code" className="margin">
-          <TreeSelect
-            treeData={productsTree.en}
-            allowClear
+          <ProductsTree
             value={productCodes}
             onChange={value => this.handleChange({ productCodes: value })}
-            treeCheckable={true}
-            searchPlaceholder="Please select"
             style={{ width: '100%' }}
           />
         </Card>

@@ -1,10 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import { Form, TreeSelect, Card, Alert, message } from 'antd';
-import { Field, BaseForm } from 'modules/common/components';
+import { Form, Card, Alert, message } from 'antd';
+import { Field, BaseForm, ProductsTree } from 'modules/common/components';
 import { productDescription } from '../constants';
-import productsTree from '../../../productsTree';
 
 class RegistrationForm extends BaseForm {
   handleSubmit(e) {
@@ -19,7 +18,7 @@ class RegistrationForm extends BaseForm {
   }
 
   render() {
-    const { __, locale } = this.context;
+    const { __ } = this.context;
 
     return (
       <Form>
@@ -29,12 +28,7 @@ class RegistrationForm extends BaseForm {
             initialValue={this.props.data}
             name="productsInfo"
             control={
-              <TreeSelect
-                treeData={productsTree[locale]}
-                treeCheckable={true}
-                searchPlaceholder={__('Please select products')}
-                allowClear
-              />
+              <ProductsTree searchPlaceholder={__('Please select products')} />
             }
           />
           <Alert
