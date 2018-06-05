@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { TreeSelect } from 'antd';
 import productsTree from './constants';
 
@@ -20,3 +21,7 @@ export default class ProductsTree extends React.Component {
     );
   }
 }
+
+ProductsTree.contextTypes = {
+  locale: PropTypes.string
+};
