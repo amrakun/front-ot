@@ -76,7 +76,8 @@ class ManageTemplates extends React.Component {
                     value: 'supplier__cancel',
                     text: 'To supplier when cancel'
                   },
-                  { value: 'supplier__reminder', text: 'Remind supplier' }
+                  { value: 'supplier__reminder', text: 'Remind supplier' },
+                  { value: 'supplier__regretLetter', text: 'Regret letter' }
                 ]
               })}
               {this.renderTabPane({
