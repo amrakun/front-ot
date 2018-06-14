@@ -108,7 +108,7 @@ class Base extends Common {
         {
           title: 'Block status',
           width: 40,
-          render: record => (record.isBlocked ? 'Yes' : '-')
+          render: record => record.isBlocked
         },
         {
           title: 'Due dilligence',
