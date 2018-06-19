@@ -20,6 +20,7 @@ function getColoredTags(suppliers) {
 
 function findDuplicates(array) {
   let result = [];
+
   array.forEach((element, index) => {
     if (array.indexOf(element, index + 1) > -1) {
       if (result.indexOf(element) === -1) {
@@ -27,15 +28,18 @@ function findDuplicates(array) {
       }
     }
   });
+
   return result;
 }
 
 function setColors(array) {
   let result = {};
+
   array.forEach((element, index) => {
     result[element] =
       colors[index] || '#' + ((Math.random() * 0xffffff) << 0).toString(16);
   });
+
   return result;
 }
 

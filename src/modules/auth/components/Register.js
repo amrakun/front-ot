@@ -67,14 +67,6 @@ class Register extends BaseForm {
                 />
               }
             />
-            <Button
-              type="primary"
-              htmlType="submit"
-              loading={loading}
-              style={{ marginBottom: '12px' }}
-            >
-              {__('Register')}
-            </Button>
             {__('Already registered?')}{' '}
             <Link to="/sign-in">{__('Sign in')}</Link>
           </Form>
