@@ -6,7 +6,7 @@ const commonParams = `
   $closeDate: Date!,
   $file: JSON,
   $sourcingOfficer: String,
-  $reminderDay: Float!,
+  $reminderDay: Float,
   $supplierIds: [String]!,
   $requestedProducts: [TenderRequestedProductInput]
   $requestedDocuments: [String]

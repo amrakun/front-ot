@@ -143,6 +143,7 @@ const MainInfo = props => {
             ...fieldProps,
             label: 'Reminder',
             name: 'reminderDay',
+            optional: true,
             control: <Select>{renderOptions(days)}</Select>
           })}
           {renderField({

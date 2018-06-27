@@ -24,7 +24,9 @@ class RegistrationForms extends Panes {
     return (
       <div>
         <HelpModal videoId="registration" />
+
         {viewMode && <h2 className="registration-title">{basicInfo.enName}</h2>}
+
         <Tabs
           activeKey={currentTabKey}
           onTabClick={this.moveToTab}
