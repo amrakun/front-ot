@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Form, Button, Input, Icon, Checkbox, Card, Alert } from 'antd';
+import { Form, Button, Input, Icon, Checkbox, Card, Alert, Col } from 'antd';
+import { HelpModal } from 'modules/common/components';
 
 const FormItem = Form.Item;
 
@@ -97,6 +98,10 @@ class SignIn extends Component {
               {__('Sign in')}
             </Button>
             {__('Or')} <Link to="/register">{__('register now!')}</Link>
+            <br />
+            <Col span={6}>
+              <HelpModal videoId="auth" />
+            </Col>
           </FormItem>
         </Form>
       </div>

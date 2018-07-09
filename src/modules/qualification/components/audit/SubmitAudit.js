@@ -4,7 +4,7 @@ import SupplierProfile from './forms/SupplierProfile';
 import CoreHSEQ from './forms/CoreHSEQ';
 import HumanResourceManagement from './forms/HumanResourceManagement';
 import BusinessIntegriy from './forms/BusinessIntegriy';
-import { Panes } from 'modules/common/components';
+import { HelpModal, Panes } from 'modules/common/components';
 
 class AuditForms extends Panes {
   render() {
@@ -13,46 +13,50 @@ class AuditForms extends Panes {
     const { qualifiedStatus } = company;
 
     return (
-      <Tabs
-        activeKey={currentTabKey}
-        onTabClick={this.moveToTab}
-        tabPosition="left"
-        className="supplier-forms"
-      >
-        {this.renderPane({
-          key: 1,
-          title: 'Supplier profile',
-          name: 'basicInfo',
-          Component: SupplierProfile,
-          data: { supplierInfo, qualifiedStatus }
-        })}
+      <div>
+        <HelpModal videoId="audit" />
 
-        {this.renderPane({
-          key: 2,
-          title: 'Core HSEQ',
-          name: 'coreHseqInfo',
-          Component: CoreHSEQ,
-          data: {
-            qualifiedStatus
-          }
-        })}
+        <Tabs
+          activeKey={currentTabKey}
+          onTabClick={this.moveToTab}
+          tabPosition="left"
+          className="supplier-forms"
+        >
+          {this.renderPane({
+            key: 1,
+            title: 'Supplier profile',
+            name: 'basicInfo',
+            Component: SupplierProfile,
+            data: { supplierInfo, qualifiedStatus }
+          })}
 
-        {this.renderPane({
-          key: 3,
-          title: 'Human resource management',
-          name: 'hrInfo',
-          Component: HumanResourceManagement,
-          data: { qualifiedStatus }
-        })}
+          {this.renderPane({
+            key: 2,
+            title: 'Core HSEQ',
+            name: 'coreHseqInfo',
+            Component: CoreHSEQ,
+            data: {
+              qualifiedStatus
+            }
+          })}
 
-        {this.renderPane({
-          key: 4,
-          title: 'Business integrity',
-          name: 'businessInfo',
-          Component: BusinessIntegriy,
-          data: { saveEvidenceChecks, qualifiedStatus }
-        })}
-      </Tabs>
+          {this.renderPane({
+            key: 3,
+            title: 'Human resource management',
+            name: 'hrInfo',
+            Component: HumanResourceManagement,
+            data: { qualifiedStatus }
+          })}
+
+          {this.renderPane({
+            key: 4,
+            title: 'Business integrity',
+            name: 'businessInfo',
+            Component: BusinessIntegriy,
+            data: { saveEvidenceChecks, qualifiedStatus }
+          })}
+        </Tabs>
+      </div>
     );
   }
 }

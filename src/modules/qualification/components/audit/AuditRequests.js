@@ -62,7 +62,7 @@ class AuditRequests extends React.Component {
     return (
       <Card
         title={__('Qualification/audit requests')}
-        extra={<HelpModal videoId="desktopAudit" />}
+        extra={<HelpModal videoId="audit" />}
       >
         <Table
           columns={this.columns()}

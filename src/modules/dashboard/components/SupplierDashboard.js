@@ -1,13 +1,13 @@
 /*eslint-disable max-len */
 
 import React from 'react';
-import { SupplierTenders } from '../../tenders/containers';
 import { PropTypes } from 'prop-types';
 import queryString from 'query-string';
-import { NumberCard, TextCard } from 'modules/common/components';
-import { colors } from 'modules/common/constants';
 import { Row, Col, Alert, Icon } from 'antd';
 import { Link } from 'react-router-dom';
+import { HelpModal, NumberCard, TextCard } from 'modules/common/components';
+import { colors } from 'modules/common/constants';
+import { SupplierTenders } from '../../tenders/containers';
 import { labels } from '../constants';
 
 class Dashboard extends React.Component {
@@ -93,7 +93,11 @@ class Dashboard extends React.Component {
     return (
       <TextCard
         icon="calculator"
-        title={__('Qualification/audit')}
+        title={
+          <div>
+            {__('Qualification/audit')} <HelpModal videoId="audit" />
+          </div>
+        }
         color={color}
         text={text}
         badge={badge}
@@ -120,6 +124,8 @@ class Dashboard extends React.Component {
 
     return (
       <div>
+        <HelpModal videoId="dashboard" />
+
         {!isSentRegistrationInfo && (
           <Alert
             message={__('Welcome!')}
@@ -203,8 +209,12 @@ class Dashboard extends React.Component {
                 <span>
                   {__('Pre-Qualification status')}
                   {isPrequalified === false && (
-                    <Icon type="warning" style={{ color: 'f15a24' }} />
-                  )}
+                    <span>
+                      {' '}
+                      <Icon type="warning" style={{ color: 'f15a24' }} />
+                    </span>
+                  )}{' '}
+                  <HelpModal videoId="prequalification" />
                 </span>
               }
               color={isPrequalified === null ? colors[5] : colors[7]}

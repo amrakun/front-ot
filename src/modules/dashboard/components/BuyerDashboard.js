@@ -199,10 +199,10 @@ class Dashboard extends React.Component {
 
   renderPrequalified() {
     const { productData, location } = this.props;
+    const { regVsPreq } = this.state;
     const data = regVsPreq ? this.groupData(productData) : productData;
     const height = this.state.pieChartWidth * 0.8;
     const queryParams = queryString.parse(location.search);
-    const { regVsPreq } = this.state;
 
     return (
       <Card
