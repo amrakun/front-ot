@@ -46,7 +46,15 @@ class MainInfo extends React.Component {
   }
 
   render() {
-    const { name, number, publishDate, closeDate, file, content } = this.props;
+    const {
+      type,
+      name,
+      number,
+      publishDate,
+      closeDate,
+      file,
+      content
+    } = this.props;
     const renderCard = this.renderCard;
     const { __ } = this.context;
 
@@ -72,7 +80,7 @@ class MainInfo extends React.Component {
           )}
           {renderCard(
             __('Need help?'),
-            <HelpModal videoId="tenderResponse" />,
+            <HelpModal videoId={type} />,
             'question-circle-o'
           )}
         </Row>
@@ -86,6 +94,7 @@ class MainInfo extends React.Component {
 }
 
 MainInfo.propTypes = {
+  type: PropTypes.string,
   name: PropTypes.string,
   number: PropTypes.string,
   publishDate: PropTypes.number,

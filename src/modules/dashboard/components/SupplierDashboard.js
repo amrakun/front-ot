@@ -94,9 +94,9 @@ class Dashboard extends React.Component {
       <TextCard
         icon="calculator"
         title={
-          <div>
+          <span>
             {__('Qualification/audit')} <HelpModal videoId="audit" />
-          </div>
+          </span>
         }
         color={color}
         text={text}
@@ -175,7 +175,12 @@ class Dashboard extends React.Component {
           <Col key={5} lg={8} sm={12}>
             <TextCard
               icon="mail"
-              title={__('Success feedback')}
+              title={
+                <span>
+                  {__('Success feedback')}{' '}
+                  <HelpModal videoId="successFeedback" />
+                </span>
+              }
               color={hasFeedback ? colors[7] : colors[5]}
               text={
                 hasFeedback ? (

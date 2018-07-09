@@ -142,7 +142,7 @@ class SupplierTenders extends Tenders {
   }
 
   render() {
-    return this.renderTenders({ columns: this.columns() });
+    return this.renderTenders({ columns: this.columns(), isSupplier: true });
   }
 }
 

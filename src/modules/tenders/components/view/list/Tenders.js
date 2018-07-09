@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Search } from 'modules/common/components';
-import { Table, Card, Icon, Tooltip, DatePicker } from 'antd';
-import { labels, statusIcons } from '../../../constants';
-import { dateTimeFormat } from 'modules/common/constants';
 import queryString from 'query-string';
 import moment from 'moment';
+import { Table, Card, Icon, Tooltip, DatePicker } from 'antd';
+import { Paginator, Search, HelpModal } from 'modules/common/components';
+import { dateTimeFormat } from 'modules/common/constants';
 import router from 'modules/common/router';
-import { Paginator } from 'modules/common/components';
+import { labels, statusIcons } from '../../../constants';
 
 const MonthPicker = DatePicker.MonthPicker;
 
@@ -124,7 +123,7 @@ class Tenders extends React.Component {
     const { type, data, loading, history, totalCount } = this.props;
     const { __ } = this.context;
 
-    const { columns, operation } = args;
+    const { columns, operation, isSupplier } = args;
 
     const { location } = history;
 
@@ -132,8 +131,18 @@ class Tenders extends React.Component {
 
     const label = labels[type] ? __(labels[type]) : labels[type];
 
+    let title = label;
+
+    if (isSupplier) {
+      title = (
+        <div>
+          {label} <HelpModal videoId={type} />
+        </div>
+      );
+    }
+
     return (
-      <Card style={{ marginBottom: '16px' }} title={label}>
+      <Card style={{ marginBottom: '16px' }} title={title}>
         <div className="table-operations">
           <Search placeholder={__('Tender Name')} paramPrefix={type} />
 
@@ -169,6 +178,7 @@ class Tenders extends React.Component {
 
 Tenders.propTypes = {
   type: PropTypes.string,
+  isSupplier: PropTypes.bool,
   data: PropTypes.array,
   pagination: PropTypes.object,
   loading: PropTypes.bool.isRequired,
