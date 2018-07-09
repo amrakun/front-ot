@@ -31,6 +31,7 @@ const addressCard = (renderField, renderOptions) => {
         label: 'Postcode or zipcode',
         name: 'zipCode',
         optional: true,
+        dataType: 'number',
         control: <Input type="number" />
       })}
 
