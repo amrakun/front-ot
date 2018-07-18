@@ -290,6 +290,7 @@ class PrequalificationForm extends PreqForm {
           {this.renderField({
             label: labels.isSubContractor,
             description: descriptions.isSubContractor,
+            dataType: 'boolean',
             name: 'isSubContractor',
             control: (
               <Select
