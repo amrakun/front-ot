@@ -118,6 +118,25 @@ class MainLayout extends React.Component {
     }
 
     this.getLang();
+
+    // erxes script
+    if (currentUser && currentUser.isSupplier) {
+      window.erxesSettings = {
+        messenger: {
+          brand_id: 'ta4ukM'
+        }
+      };
+
+      (() => {
+        const script = document.createElement('script');
+        script.src =
+          'http://erxeswidgets.ot.mn/build/messengerWidget.bundle.js';
+        script.async = true;
+
+        const entry = document.getElementsByTagName('script')[0];
+        entry.parentNode.insertBefore(script, entry);
+      })();
+    }
   }
 
   componentDidUpdate() {
