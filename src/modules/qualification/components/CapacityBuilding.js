@@ -37,25 +37,26 @@ class CapacityBuilding extends Common {
         {
           title: 'Actions',
           render: record => {
-            if (
+            /* if (
               record.isSentPrequalificationInfo &&
               record.prequalificationStatusDisplay !== 'In process'
             ) {
-              const onClick = () => toggleState(record._id);
+            */
 
-              if (record.isPrequalificationInfoEditable) {
-                return (
-                  <Button type="danger" size="small" onClick={onClick}>
-                    Disable
-                  </Button>
-                );
-              } else {
-                return (
-                  <Button type="primary" size="small" onClick={onClick}>
-                    Enable
-                  </Button>
-                );
-              }
+            const onClick = () => toggleState(record._id);
+
+            if (record.isPrequalificationInfoEditable) {
+              return (
+                <Button type="danger" size="small" onClick={onClick}>
+                  Disable
+                </Button>
+              );
+            } else {
+              return (
+                <Button type="primary" size="small" onClick={onClick}>
+                  Enable
+                </Button>
+              );
             }
           }
         }
