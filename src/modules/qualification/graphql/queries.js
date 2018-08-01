@@ -40,27 +40,30 @@ const qualificationDetail = `
         isUpToDateCTP
       }
       businessInfo {
-        doesMeetMinimumStandarts
-        doesMeetMinimumStandartsFile
-        doesHaveJobDescription
-        doesHaveJobDescriptionFile
-        doesConcludeValidContracts
-        employeeTurnoverRate
-        doesHaveLiabilityInsurance
-        doesHaveLiabilityInsuranceFile
-        doesHaveCodeEthics
-        doesHaveCodeEthicsFile
-        doesHaveResponsiblityPolicy
-        doesHaveResponsiblityPolicyFile
-        hasConvictedLabourLaws
-        hasConvictedForHumanRights
-        hasConvictedForBusinessIntegrity
-        proveHasNotConvicted
-        hasLeadersConvicted
-        doesEmployeePoliticallyExposed
-        pepName
-        organizationChartFile
         investigations
+        isSubContractor
+        hasConvictedForHumanRightsDescription
+        hasConvictedLabourLawsDescription
+        organizationChartFile
+        doesEmployeePoliticallyExposed
+        hasLeadersConvicted
+        proveHasNotConvicted
+        hasConvictedForBusinessIntegrity
+        hasConvictedForHumanRights
+        hasConvictedLabourLaws
+        doesHaveResponsiblityPolicyFile
+        doesHaveResponsiblityPolicy
+        doesHaveCodeEthicsFile
+        doesHaveCodeEthics
+        doesHaveLiabilityInsuranceFile
+        doesHaveLiabilityInsurance
+        employeeTurnoverRate
+        doesConcludeValidContracts
+        doesHaveJobDescriptionFile
+        doesHaveJobDescription
+        doesMeetMinimumStandartsFile
+        doesMeetMinimumStandarts
+
       }
       environmentalInfo {
         doesHavePlan
