@@ -160,13 +160,13 @@ export const labels = {
 
   currency: `Currency`,
 
-  annualTurnover: 'Annual turnover',
+  annualTurnover: 'Sales revenue',
 
-  preTaxProfit: `Pre-tax profit`,
+  preTaxProfit: `Net income before tax`,
 
-  totalAssets: `Total assets`,
+  totalAssets: `Total of assets`,
 
-  totalCurrentAssets: `Total current assets`,
+  totalCurrentAssets: `Total of current assets`,
 
   totalShareholderEquity: `Total shareholders equity`,
 
