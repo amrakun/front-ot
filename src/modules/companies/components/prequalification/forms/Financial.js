@@ -128,10 +128,15 @@ class PrequalificationForm extends PreqForm {
     );
   }
 
-  renderYearAmountGroup(label, prefix) {
+  renderYearAmountGroup(label, prefix, extra) {
     const { __ } = this.context;
     return (
-      <Form.Item className="multiple-wrapper" required={true} label={__(label)}>
+      <Form.Item
+        className="multiple-wrapper"
+        required={true}
+        label={__(label)}
+        extra={extra ? __(extra) : ''}
+      >
         {this.renderYearAmount(prefix, 0)}
         {this.renderYearAmount(prefix, 1)}
         {this.renderYearAmount(prefix, 2)}
@@ -224,12 +229,27 @@ class PrequalificationForm extends PreqForm {
               )
             })}
 
-            {this.renderYearAmountGroup('Annual turnover', 'annualTurnover')}
-            {this.renderYearAmountGroup('Pre-tax profit', 'preTaxProfit')}
-            {this.renderYearAmountGroup('Total assets', 'totalAssets')}
             {this.renderYearAmountGroup(
-              'Total current assets',
-              'totalCurrentAssets'
+              'Sales revenue',
+              'annualTurnover',
+              "Line#1 of 'Income Statement' on Financial Statements (Form-A) for Finance office of Government"
+            )}
+
+            {this.renderYearAmountGroup(
+              'Net income before tax',
+              'preTaxProfit',
+              "Line#18 of 'Income Statement' on Financial Statements (Form-A) for Finance office of Government"
+            )}
+            {this.renderYearAmountGroup(
+              'Total of assets',
+              'totalAssets',
+              "Line#1.1.11 of 'Balance sheet' on Financial Statements (Form-A) for Finance office of Government"
+            )}
+
+            {this.renderYearAmountGroup(
+              'Total of current assets',
+              'totalCurrentAssets',
+              "Line#1.3 of 'Balance sheet' on Financial Statements (Form-A) for Finance office of Government"
             )}
             {this.renderYearAmountGroup(
               'Total shareholders equity ',
