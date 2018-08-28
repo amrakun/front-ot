@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { message } from 'antd';
 import { compose, gql, graphql } from 'react-apollo';
+import { alert } from 'modules/common/utils';
 import { mutations, queries } from '../../graphql';
 import { UserForm as UserFormComponent } from '../../components';
 import { Loading } from '../../../common/components';
-import { message } from 'antd';
 import permissionTable from '../../permissionTable';
 
 const propTypes = {
@@ -56,10 +57,15 @@ class UserFormContainer extends React.Component {
       const messageText = user
         ? 'User succesfully edited.'
         : 'User succesfully added.';
-      mutation({ variables: doc }).then(() => {
-        onSuccess();
-        message.success(messageText);
-      });
+
+      mutation({ variables: doc })
+        .then(() => {
+          onSuccess();
+          message.success(messageText);
+        })
+        .catch(error => {
+          alert.error(error);
+        });
     };
 
     const updatedProps = {
