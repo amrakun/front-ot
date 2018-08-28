@@ -36,4 +36,6 @@ const WithData = graphql(gql(queries.companiesPrequalifiedStatus), {
   options: generateVariables
 })(StatusContainer);
 
-export default generator(WithData, 'status');
+export default generator(WithData, 'status', () => ({
+  source: 'prequalification'
+}));

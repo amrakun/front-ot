@@ -272,6 +272,7 @@ const genericParams = `
   $prequalifiedStatus: String
   $qualifiedStatus: String
   $difotScore: String
+  $source: String
   $_ids: [String]
   $page: Int
   $perPage: Int
@@ -292,6 +293,7 @@ const genericValues = `
   prequalifiedStatus: $prequalifiedStatus
   qualifiedStatus: $qualifiedStatus,
   difotScore: $difotScore
+  source: $source
   _ids: $_ids
   page: $page
   perPage: $perPage

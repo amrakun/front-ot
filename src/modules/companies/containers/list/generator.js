@@ -4,7 +4,7 @@ import { gql, compose, graphql } from 'react-apollo';
 import { queries } from '../../graphql';
 import generateVariables from './generateVariables';
 
-const generator = (Component, query) => {
+const generator = (Component, query, generateExtraVariables) => {
   class Container extends React.Component {
     render() {
       const { companiesQuery, totalCountQuery, queryParams } = this.props;
@@ -34,25 +34,31 @@ const generator = (Component, query) => {
     history: PropTypes.object
   };
 
+  const options = ({ queryParams }) => {
+    let variables = generateVariables(queryParams);
+
+    if (generateExtraVariables) {
+      variables = {
+        ...variables,
+        ...generateExtraVariables(queryParams)
+      };
+    }
+
+    return {
+      variables,
+      notifyOnNetworkStatusChange: true
+    };
+  };
+
   return compose(
     graphql(gql(queries[query]), {
       name: 'companiesQuery',
-      options: ({ queryParams }) => {
-        return {
-          variables: generateVariables(queryParams),
-          notifyOnNetworkStatusChange: true
-        };
-      }
+      options
     }),
 
     graphql(gql(queries.companiesTotalCount), {
       name: 'totalCountQuery',
-      options: ({ queryParams }) => {
-        return {
-          variables: generateVariables(queryParams),
-          notifyOnNetworkStatusChange: true
-        };
-      }
+      options
     })
   )(Container);
 };
