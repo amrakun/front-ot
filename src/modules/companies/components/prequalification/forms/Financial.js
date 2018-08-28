@@ -223,6 +223,7 @@ class PrequalificationForm extends PreqForm {
                   {...this.common}
                   {...this.common}
                   placeholder={__('Select a currency')}
+                  showSearch
                 >
                   {currencyOptions}
                 </Select>
