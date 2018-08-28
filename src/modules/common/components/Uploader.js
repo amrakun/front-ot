@@ -35,11 +35,17 @@ class Uploader extends React.Component {
     if (fileList.length > 0) {
       if (multiple) {
         this.setState({ fileList });
+
         return onChange(
-          fileList.map(f => ({ name: f.name, url: f.response || f.url }))
+          fileList
+            .filter(f => f.status !== 'uploading')
+            .map(f => ({ name: f.name, url: f.response || f.url }))
         );
-      } else {
-        this.setState({ fileList: [file] });
+      }
+
+      this.setState({ fileList: [file] });
+
+      if (file.status !== 'uploading') {
         return onChange([{ name: file.name, url: file.response }]);
       }
     }

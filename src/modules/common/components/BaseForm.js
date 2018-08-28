@@ -111,6 +111,7 @@ export default class BaseForm extends React.Component {
 
   renderSubmit(text = 'Save & continue', onClick = this.handleSubmit) {
     const { __ } = this.context;
+
     return (
       <Button
         style={{ float: 'right', marginLeft: '8px' }}
@@ -126,6 +127,7 @@ export default class BaseForm extends React.Component {
 
   renderGoBack() {
     const { __ } = this.context;
+
     return (
       <Button onClick={this.props.previousTab}>
         <Icon type="left" />
