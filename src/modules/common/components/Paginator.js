@@ -38,7 +38,7 @@ class Paginator extends React.Component {
     let page = queryParams[this.pageParamName()];
 
     perPage = perPage ? parseInt(perPage, 10) : 15;
-    page = page ? parseInt(page, 15) : 1;
+    page = page ? parseInt(page, 10) : 1;
 
     return (
       <Pagination
