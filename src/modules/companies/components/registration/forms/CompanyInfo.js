@@ -211,7 +211,7 @@ class CompanyInfo extends BaseForm {
               name: 'registrationNumber',
               isVisible: !soleTrader,
               optional: soleTrader,
-              control: <Input type="number" />
+              control: <Input />
             })}
 
             {this.renderField({

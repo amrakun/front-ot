@@ -89,7 +89,9 @@ const RegistrationContainer = (props, { __ }) => {
           });
         }
 
-        history.push('/prequalification');
+        if (!soleTrader) {
+          history.push('/prequalification');
+        }
       })
       .catch(error => {
         message.error(error.message);
