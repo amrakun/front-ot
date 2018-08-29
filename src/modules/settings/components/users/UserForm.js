@@ -113,8 +113,7 @@ class UserForm extends React.Component {
             </FormItem>
             <FormItem label="Permissions">
               {getFieldDecorator('permissions', {
-                initialValue: user.permissions || 'permissions',
-                rules: [{ message: 'Set permissions!' }]
+                initialValue: user.permissions || 'permissions'
               })(
                 <TreeSelect
                   treeData={permissions}
