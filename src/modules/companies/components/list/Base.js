@@ -172,6 +172,10 @@ class Base extends Common {
                 Send RFQ
               </Button>
 
+              <Button onClick={() => this.handleSend('/srfq/publish')}>
+                Send service RFQ
+              </Button>
+
               <Button
                 loading={exportLoading}
                 onClick={() => exportCompanies(selectedCompanies)}

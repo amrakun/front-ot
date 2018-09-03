@@ -51,6 +51,7 @@ const rfqResponseFields = `
     comment
     file
   }
+  respondedServiceFiles
 `;
 
 const eoiResponseFields = `

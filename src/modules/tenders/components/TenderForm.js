@@ -226,6 +226,7 @@ class TenderForm extends BaseForm {
     let { suppliers } = this.state;
 
     const updatedSuppliers = [];
+
     suppliers.forEach(supplier => {
       if (supplier._id !== supplierId) updatedSuppliers.push(supplier);
     });

@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
-import { message, Button, Icon } from 'antd';
+import { Table, message, Button, Icon } from 'antd';
 import Tender from './Tender';
 
 class Eoi extends Tender {
@@ -78,6 +78,61 @@ class Eoi extends Tender {
     ];
   }
 
+  renderResponseModal(record) {
+    const { supplier, respondedDocuments } = record;
+
+    const { basicInfo, businessInfo, healthInfo, shareholderInfo } = supplier;
+
+    const {
+      certificateOfRegistration,
+      corporateStructure,
+      totalNumberOfEmployees
+    } =
+      basicInfo || {};
+
+    const { doesHaveCodeEthicsFile } = businessInfo || {};
+    const { areHSEResourcesClearlyIdentifiedFile } = healthInfo || {};
+    const { attachments } = shareholderInfo || {};
+
+    const dataSource = [
+      ...(respondedDocuments || []),
+      {
+        name: 'State registration certifcate (copy)',
+        file: certificateOfRegistration,
+        isSubmitted: certificateOfRegistration !== null
+      },
+      {
+        name: 'HSE policy & procedures (copy)',
+        file: areHSEResourcesClearlyIdentifiedFile,
+        isSubmitted: areHSEResourcesClearlyIdentifiedFile !== null
+      },
+      {
+        name: 'Business Code of Conduct (copy)',
+        file: doesHaveCodeEthicsFile,
+        isSubmitted: doesHaveCodeEthicsFile !== null
+      },
+      {
+        name: 'Ownership/ shareholder information',
+        file: attachments,
+        isSubmitted: true
+      },
+      {
+        name: 'Organization structure & Total manpower',
+        file: null,
+        isSubmitted: true,
+        notes: `${corporateStructure}, ${totalNumberOfEmployees} employees`
+      }
+    ];
+
+    return (
+      <Table
+        columns={[...this.responseColumns()]}
+        rowKey={() => Math.random()}
+        dataSource={dataSource}
+      />
+    );
+  }
+
   render() {
     const tableOperations = [
       <Button onClick={this.handleEoiShortList} key={1}>
@@ -93,10 +148,7 @@ class Eoi extends Tender {
     return (
       <div>
         {this.renderStats()}
-        {this.renderTable({
-          responseColumns: this.responseColumns() || [],
-          tableOperations: tableOperations
-        })}
+        {this.renderTable({ tableOperations })}
       </div>
     );
   }

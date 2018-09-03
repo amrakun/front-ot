@@ -45,7 +45,11 @@ class SupplierSearcher extends React.Component {
   onChange(selectedValues) {
     this.setState({ selectedValues });
 
-    this.props.onChange(selectedValues);
+    const { onChange } = this.props;
+
+    if (onChange) {
+      onChange(selectedValues.map(v => JSON.parse(v)));
+    }
   }
 
   renderSelect() {

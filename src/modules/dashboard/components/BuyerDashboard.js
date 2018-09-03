@@ -265,14 +265,60 @@ class Dashboard extends React.Component {
     );
   }
 
+  renderRfq({ type, count, data, averageDuration }) {
+    return (
+      <div className="ant-row chart-row">
+        <div className="ant-col-sm-24 ant-col-lg-5">
+          {this.renderCountData(`Total ${type}`, count)}
+        </div>
+        <div className="ant-col-sm-24 ant-col-lg-14">
+          <Card title={`${type} (this year)`} className="barchart-wrapper">
+            {this.renderBarChart({
+              data,
+              height: 200,
+              content: [
+                <Bar
+                  name="Open"
+                  key={1}
+                  dataKey="open"
+                  stackId="a"
+                  fill={COLORS[0]}
+                />,
+                <Bar
+                  name="Closed"
+                  key={1}
+                  dataKey="closed"
+                  stackId="a"
+                  fill={COLORS[1]}
+                />
+              ]
+            })}
+          </Card>
+        </div>
+        <div className="ant-col-sm-24 ant-col-lg-5">
+          {this.renderCountData(
+            `${type} average duration /days/`,
+            Math.round(averageDuration)
+          )}
+        </div>
+      </div>
+    );
+  }
+
   render() {
     const {
       eoiData,
-      rfqData,
       eoiTotalCount,
-      rfqTotalCount,
       eoiAverageDuration,
+
+      rfqData,
+      rfqTotalCount,
       rfqAverageDuration,
+
+      srfqData,
+      srfqTotalCount,
+      srfqAverageDuration,
+
       location: { search }
     } = this.props;
 
@@ -372,47 +418,26 @@ class Dashboard extends React.Component {
               </div>
             </div>
 
-            <div className="ant-row chart-row">
-              <div className="ant-col-sm-24 ant-col-lg-5">
-                {this.renderCountData('Total RFQ', rfqTotalCount)}
-              </div>
-              <div className="ant-col-sm-24 ant-col-lg-14">
-                <Card title="RFQ (this year)" className="barchart-wrapper">
-                  {this.renderBarChart({
-                    data: rfqData,
-                    height: 200,
-                    content: [
-                      <Bar
-                        name="Open"
-                        key={1}
-                        dataKey="open"
-                        stackId="a"
-                        fill={COLORS[0]}
-                      />,
-                      <Bar
-                        name="Closed"
-                        key={1}
-                        dataKey="closed"
-                        stackId="a"
-                        fill={COLORS[1]}
-                      />
-                    ]
-                  })}
-                </Card>
-              </div>
-              <div className="ant-col-sm-24 ant-col-lg-5">
-                {this.renderCountData(
-                  'RFQ average duration /days/',
-                  Math.round(rfqAverageDuration)
-                )}
-              </div>
-            </div>
+            {this.renderRfq({
+              type: 'RFQ',
+              count: rfqTotalCount,
+              data: rfqData,
+              averageDuration: rfqAverageDuration
+            })}
+
+            {this.renderRfq({
+              type: 'Service RFQ',
+              count: srfqTotalCount,
+              data: srfqData,
+              averageDuration: srfqAverageDuration
+            })}
           </div>
         </Tabs.TabPane>
 
         <Tabs.TabPane tab="My dashboard" key="2">
           <BuyerTenders type="eoi" {...this.props} />
           <BuyerTenders type="rfq" {...this.props} />
+          <BuyerTenders type="srfq" {...this.props} />
         </Tabs.TabPane>
       </Tabs>
     );
@@ -425,12 +450,18 @@ Dashboard.propTypes = {
   location: PropTypes.object,
   history: PropTypes.object,
   productData: PropTypes.array,
+
   eoiTotalCount: PropTypes.number,
-  rfqTotalCount: PropTypes.number,
   eoiData: PropTypes.array,
-  rfqData: PropTypes.array,
   eoiAverageDuration: PropTypes.number,
-  rfqAverageDuration: PropTypes.number
+
+  rfqTotalCount: PropTypes.number,
+  rfqData: PropTypes.array,
+  rfqAverageDuration: PropTypes.number,
+
+  srfqTotalCount: PropTypes.number,
+  srfqData: PropTypes.array,
+  srfqAverageDuration: PropTypes.number
 };
 
 export default Dashboard;

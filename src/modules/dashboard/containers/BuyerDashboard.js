@@ -11,12 +11,18 @@ const DashboardContainer = props => {
     companiesCountByTierTypeQuery,
     companiesCountByProductCodeQuery,
     ccbrvpQuery,
-    tenderCountByStatusRfq,
-    tenderCountByStatusEoi,
-    tendersTotalCountRfq,
-    tendersTotalCountEoi,
-    tendersAverageDurationRfq,
-    tendersAverageDurationEoi,
+
+    tenderCountByStatuseoi,
+    tendersTotalCounteoi,
+    tendersAverageDurationeoi,
+
+    tendersTotalCountrfq,
+    tenderCountByStatusrfq,
+    tendersAverageDurationrfq,
+
+    tendersTotalCountsrfq,
+    tenderCountByStatussrfq,
+    tendersAverageDurationsrfq,
     queryParams
   } = props;
 
@@ -24,12 +30,15 @@ const DashboardContainer = props => {
     companiesCountByTierTypeQuery.loading ||
     companiesCountByProductCodeQuery.loading ||
     ccbrvpQuery.loading ||
-    tenderCountByStatusRfq.loading ||
-    tenderCountByStatusEoi.loading ||
-    tendersTotalCountRfq.loading ||
-    tendersTotalCountEoi.loading ||
-    tendersAverageDurationRfq.loading ||
-    tendersAverageDurationEoi.loading
+    tenderCountByStatuseoi.loading ||
+    tendersTotalCounteoi.loading ||
+    tendersAverageDurationeoi.loading ||
+    tendersTotalCountrfq.loading ||
+    tenderCountByStatusrfq.loading ||
+    tendersAverageDurationrfq.loading ||
+    tendersTotalCountsrfq.loading ||
+    tenderCountByStatussrfq.loading ||
+    tendersAverageDurationsrfq.loading
   ) {
     return <Loading />;
   }
@@ -94,14 +103,17 @@ const DashboardContainer = props => {
     productData: byMonthOrNot(
       ccbrvpQuery.companiesCountByRegisteredVsPrequalified
     ),
-    eoiData: byMonthOrNot(tenderCountByStatusEoi.tenderCountByStatus),
-    rfqData: byMonthOrNot(tenderCountByStatusRfq.tenderCountByStatus),
+    eoiTotalCount: tendersTotalCounteoi.tendersTotalCountReport,
+    eoiData: byMonthOrNot(tenderCountByStatuseoi.tenderCountByStatus),
+    eoiAverageDuration: tendersAverageDurationeoi.tendersAverageDuration,
 
-    eoiTotalCount: tendersTotalCountEoi.tendersTotalCountReport,
-    rfqTotalCount: tendersTotalCountRfq.tendersTotalCountReport,
+    rfqTotalCount: tendersTotalCountrfq.tendersTotalCountReport,
+    rfqData: byMonthOrNot(tenderCountByStatusrfq.tenderCountByStatus),
+    rfqAverageDuration: tendersAverageDurationrfq.tendersAverageDuration,
 
-    eoiAverageDuration: tendersAverageDurationEoi.tendersAverageDuration,
-    rfqAverageDuration: tendersAverageDurationRfq.tendersAverageDuration
+    srfqTotalCount: tendersTotalCountsrfq.tendersTotalCountReport,
+    srfqData: byMonthOrNot(tenderCountByStatussrfq.tenderCountByStatus),
+    srfqAverageDuration: tendersAverageDurationsrfq.tendersAverageDuration
   };
 
   return <BuyerDashboard {...updatedProps} />;
@@ -111,12 +123,19 @@ DashboardContainer.propTypes = {
   companiesCountByTierTypeQuery: PropTypes.object,
   companiesCountByProductCodeQuery: PropTypes.object,
   ccbrvpQuery: PropTypes.object,
-  tenderCountByStatusRfq: PropTypes.object,
-  tenderCountByStatusEoi: PropTypes.object,
-  tendersTotalCountRfq: PropTypes.object,
-  tendersTotalCountEoi: PropTypes.object,
-  tendersAverageDurationRfq: PropTypes.object,
-  tendersAverageDurationEoi: PropTypes.object,
+
+  tendersTotalCounteoi: PropTypes.object,
+  tenderCountByStatuseoi: PropTypes.object,
+  tendersAverageDurationeoi: PropTypes.object,
+
+  tenderCountByStatusrfq: PropTypes.object,
+  tendersTotalCountrfq: PropTypes.object,
+  tendersAverageDurationrfq: PropTypes.object,
+
+  tenderCountByStatussrfq: PropTypes.object,
+  tendersTotalCountsrfq: PropTypes.object,
+  tendersAverageDurationsrfq: PropTypes.object,
+
   queryParams: PropTypes.object
 };
 
@@ -128,6 +147,40 @@ const generateDateVariables = queryParams => {
     startDate: moment(startDate),
     endDate: moment(endDate).endOf('month')
   };
+};
+
+const generateCountQueries = type => {
+  return [
+    graphql(gql(queries.tenderCountByStatus), {
+      name: `tenderCountByStatus${type}`,
+      options: ({ queryParams }) => ({
+        variables: {
+          ...generateDateVariables(queryParams),
+          type
+        }
+      })
+    }),
+
+    graphql(gql(queries.tendersTotalCountReport), {
+      name: `tendersTotalCount${type}`,
+      options: ({ queryParams }) => ({
+        variables: {
+          ...generateDateVariables(queryParams),
+          type
+        }
+      })
+    }),
+
+    graphql(gql(queries.tendersAverageDuration), {
+      name: `tendersAverageDuration${type}`,
+      options: ({ queryParams }) => ({
+        variables: {
+          ...generateDateVariables(queryParams),
+          type
+        }
+      })
+    })
+  ];
 };
 
 export default compose(
@@ -161,63 +214,7 @@ export default compose(
     }
   }),
 
-  graphql(gql(queries.tenderCountByStatus), {
-    name: 'tenderCountByStatusEoi',
-    options: ({ queryParams }) => ({
-      variables: {
-        ...generateDateVariables(queryParams),
-        type: 'eoi'
-      }
-    })
-  }),
-
-  graphql(gql(queries.tenderCountByStatus), {
-    name: 'tenderCountByStatusRfq',
-    options: ({ queryParams }) => ({
-      variables: {
-        ...generateDateVariables(queryParams),
-        type: 'rfq'
-      }
-    })
-  }),
-
-  graphql(gql(queries.tendersTotalCountReport), {
-    name: 'tendersTotalCountRfq',
-    options: ({ queryParams }) => ({
-      variables: {
-        ...generateDateVariables(queryParams),
-        type: 'rfq'
-      }
-    })
-  }),
-
-  graphql(gql(queries.tendersTotalCountReport), {
-    name: 'tendersTotalCountEoi',
-    options: ({ queryParams }) => ({
-      variables: {
-        ...generateDateVariables(queryParams),
-        type: 'eoi'
-      }
-    })
-  }),
-
-  graphql(gql(queries.tendersAverageDuration), {
-    name: 'tendersAverageDurationEoi',
-    options: ({ queryParams }) => ({
-      variables: {
-        ...generateDateVariables(queryParams),
-        type: 'eoi'
-      }
-    })
-  }),
-
-  graphql(gql(queries.tendersAverageDuration), {
-    name: 'tendersAverageDurationRfq',
-    options: ({ queryParams }) => ({
-      variables: {
-        ...generateDateVariables(queryParams),
-        type: 'rfq'
-      }
-    })
-  })
+  ...generateCountQueries('eoi'),
+  ...generateCountQueries('rfq'),
+  ...generateCountQueries('srfq')
 )(DashboardContainer);

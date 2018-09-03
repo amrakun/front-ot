@@ -2,10 +2,11 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { Form, Button, Card, message } from 'antd';
+import { Uploader } from 'modules/common/components';
+import { xlsxHandler } from 'modules/common/utils';
 import TenderForm from '../TenderForm';
 import RfqTable from '../RfqTable';
 import MainInfo from './MainInfo';
-import { xlsxHandler } from 'modules/common/utils';
 
 class SubmitTender extends TenderForm {
   constructor(props, context) {
@@ -15,6 +16,11 @@ class SubmitTender extends TenderForm {
     this.saveDraft = this.saveDraft.bind(this);
     this.collectInputs = this.collectInputs.bind(this);
     this.handleFile = this.handleFile.bind(this);
+    this.onServiceFileUpload = this.onServiceFileUpload.bind(this);
+
+    const response = props.response || {};
+
+    this.state.respondedServiceFiles = response.respondedServiceFiles;
   }
 
   collectInputs() {
@@ -50,17 +56,34 @@ class SubmitTender extends TenderForm {
   handleSubmit(e) {
     e.preventDefault();
 
+    const { data, save } = this.props;
+    const { type } = data || {};
+    const { respondedServiceFiles } = this.state;
     const respondedProducts = this.collectInputs();
 
-    if (respondedProducts.length > 0) {
-      this.props.save({ respondedProducts }, true);
-    } else {
-      message.error(this.context.__('Your form is incomplete'));
+    if (type === 'rfq' && respondedProducts.length === 0) {
+      return message.error(this.context.__('Your form is incomplete'));
     }
+
+    if (
+      type === 'srfq' &&
+      (!respondedServiceFiles || respondedServiceFiles.length === 0)
+    ) {
+      return message.error(this.context.__('Your form is incomplete'));
+    }
+
+    save({ respondedProducts, respondedServiceFiles }, true);
+  }
+
+  onServiceFileUpload(files) {
+    this.setState({ respondedServiceFiles: files });
   }
 
   saveDraft() {
-    this.save({ respondedProducts: this.collectInputs() });
+    this.save({
+      respondedProducts: this.collectInputs(),
+      respondedServiceFiles: this.state.respondedServiceFiles
+    });
   }
 
   handleFile(e) {
@@ -126,19 +149,37 @@ class SubmitTender extends TenderForm {
     const { products } = this.state;
     const { data, generateTemplate } = this.props;
 
-    const formProps = {
-      generateTemplate,
-      products: products,
-      renderProductColumn: this.renderProductColumn,
-      handleFile: this.handleFile
-    };
+    let title = 'Form';
+    let form = (
+      <RfqTable
+        generateTemplate={generateTemplate}
+        products={products}
+        renderProductColumn={this.renderProductColumn}
+        handleFile={this.handleFile}
+      />
+    );
+
+    if (data.type === 'srfq') {
+      const response = this.props.response || {};
+      const serviceFiles = response.respondedServiceFiles || [];
+
+      title = 'Schedule of service/ financial proposal';
+
+      form = (
+        <Uploader
+          multiple
+          onChange={this.onServiceFileUpload}
+          defaultFileList={serviceFiles}
+        />
+      );
+    }
 
     return (
       <Form layout="inline" onSubmit={this.handleSubmit}>
         <MainInfo {...data} />
 
-        <Card title="Form" className="margin">
-          <RfqTable {...formProps} />
+        <Card title={title} className="margin">
+          {form}
           <br />
 
           {!data.isSent && this.renderAction()}

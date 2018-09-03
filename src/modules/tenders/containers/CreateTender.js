@@ -8,7 +8,7 @@ import { mutations } from '../graphql';
 import { message } from 'antd';
 
 const CreateTenderContainer = props => {
-  const { tendersAdd, simpleCompaniesQuery, location, history } = props;
+  const { type, tendersAdd, simpleCompaniesQuery, history } = props;
 
   if (simpleCompaniesQuery.loading) {
     return <Loading />;
@@ -20,7 +20,8 @@ const CreateTenderContainer = props => {
     tendersAdd({ variables: { ...doc, publishDate, closeDate } })
       .then(tender => {
         message.success('Successfully created a tender!');
-        history.push(`/${doc.type}?refetch`, {
+
+        history.push(`/${type}?refetch`, {
           newTenderId: tender.data.tendersAdd._id
         });
       })
@@ -30,17 +31,21 @@ const CreateTenderContainer = props => {
   };
 
   const updatedProps = {
+    ...props,
     save,
     tenderCreation: true,
     data: { suppliers: simpleCompaniesQuery.companies }
   };
 
-  if (location.pathname.includes('eoi')) return <EoiForm {...updatedProps} />;
-  else return <RfqForm {...updatedProps} />;
+  if (type === 'eoi') {
+    return <EoiForm {...updatedProps} />;
+  }
+
+  return <RfqForm {...updatedProps} />;
 };
 
 CreateTenderContainer.propTypes = {
-  location: PropTypes.object,
+  type: PropTypes.string,
   tendersAdd: PropTypes.func,
   simpleCompaniesQuery: PropTypes.object,
   history: PropTypes.object

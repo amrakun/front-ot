@@ -58,6 +58,7 @@ const tenderResponseParams = `
   $tenderId: String!
   $isNotInterested: Boolean
   $respondedProducts: [TenderRespondedProductInput]
+  $respondedServiceFiles: [JSON]
   $respondedDocuments: [TenderRespondedDocumentInput]
 `;
 
@@ -65,6 +66,7 @@ const tenderResponseFields = `
   tenderId: $tenderId,
   isNotInterested: $isNotInterested
   respondedProducts: $respondedProducts
+  respondedServiceFiles: $respondedServiceFiles
   respondedDocuments: $respondedDocuments
 `;
 
