@@ -1,5 +1,6 @@
 import xlsx from 'xlsx';
 import { message } from 'antd';
+import productsTree from 'modules/common/components/productsTree/constants';
 
 export const xlsxHandler = ({ e, success }) => {
   const reader = new FileReader();
@@ -26,4 +27,26 @@ export const alert = {
   success: (msg, __) => {
     return message.success(__ ? __(msg) : msg);
   }
+};
+
+const flattenProductsTree = (map, item) => {
+  if (item.value) {
+    map[item.value] = item.label;
+  }
+
+  if (item.children) {
+    for (const child of item.children) {
+      flattenProductsTree(map, child);
+    }
+  }
+};
+
+export const getFlatProductsTree = locale => {
+  const flatProductsInfo = {};
+
+  for (const item of productsTree[locale]) {
+    flattenProductsTree(flatProductsInfo, item);
+  }
+
+  return flatProductsInfo;
 };

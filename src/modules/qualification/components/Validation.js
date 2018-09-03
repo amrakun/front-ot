@@ -15,24 +15,29 @@ import {
   Input,
   Icon
 } from 'antd';
+import { Uploader, Search } from 'modules/common/components';
+import { dateFormat } from 'modules/common/constants';
+import { getFlatProductsTree } from 'modules/common/utils';
 import { Common } from 'modules/companies/components';
 import { Sidebar } from 'modules/companies/components';
-import { Uploader, Search } from 'modules/common/components';
 import moment from 'moment';
-import { dateFormat } from 'modules/common/constants';
 
 const CheckboxGroup = Checkbox.Group;
 const FormItem = Form.Item;
 
 class Validation extends Common {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.state = { currentCompany: null };
 
     this.showValidationModal = this.showValidationModal.bind(this);
     this.hideValidationModal = this.hideValidationModal.bind(this);
     this.handleValidationSave = this.handleValidationSave.bind(this);
+
+    const { locale = 'en' } = context;
+
+    this.flatProductsInfo = getFlatProductsTree(locale);
   }
 
   handleValidationSave(values) {
@@ -156,6 +161,7 @@ class Validation extends Common {
 
           <ValidationForm
             company={currentCompany}
+            flatProductsInfo={this.flatProductsInfo}
             hide={this.hideValidationModal}
             onSave={this.handleValidationSave}
           />
@@ -192,8 +198,15 @@ class ValidationModal extends React.Component {
     this.setState({ files: files.filter(file => file.url) });
   }
 
+  generateOptions(flatProductsInfo, productsInfo) {
+    return productsInfo.map(p => ({
+      value: p,
+      label: flatProductsInfo[p] || ''
+    }));
+  }
+
   render() {
-    const { form, hide, company } = this.props;
+    const { flatProductsInfo, form, hide, company } = this.props;
     const { getFieldDecorator } = form;
 
     if (!company) {
@@ -232,7 +245,10 @@ class ValidationModal extends React.Component {
               initialValue: company.validatedProductsInfo
             })(
               <CheckboxGroup
-                options={company.productsInfo}
+                options={this.generateOptions(
+                  flatProductsInfo,
+                  company.productsInfo
+                )}
                 className="horizontal capitalize"
               />
             )}
@@ -244,6 +260,7 @@ class ValidationModal extends React.Component {
 }
 
 ValidationModal.propTypes = {
+  flatProductsInfo: PropTypes.object,
   form: PropTypes.object,
   company: PropTypes.object,
   hide: PropTypes.func,
