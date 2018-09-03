@@ -46,9 +46,13 @@ function setColors(array) {
 function getOwner(supplier) {
   const info = supplier.shareholderInfo || {};
 
-  if (info)
-    if (info.shareholders) return info.shareholders[0].name;
-    else return null;
+  if (!info) {
+    return null;
+  }
+
+  if (info.shareholders) {
+    return info.shareholders[0].name;
+  }
 }
 
 const MainInfo = props => {
@@ -71,6 +75,7 @@ const MainInfo = props => {
 
   const supplierTags = suppliers.map(supplier => {
     const owner = getOwner(supplier);
+
     return (
       <Tooltip key={supplier._id} title={owner ? `Owner: ${owner}` : ''}>
         <Tag

@@ -18,6 +18,15 @@ export default [
     component={PublicEoi}
   />,
   <Route
+    key={'/srfq'}
+    exact
+    path={'/srfq'}
+    component={props => {
+      const queryParams = queryString.parse(props.location.search);
+      return <BuyerTenders {...props} queryParams={queryParams} type="srfq" />;
+    }}
+  />,
+  <Route
     key={'/rfq'}
     exact
     path={'/rfq'}
@@ -25,18 +34,6 @@ export default [
       const queryParams = queryString.parse(props.location.search);
       return <BuyerTenders type="rfq" {...props} queryParams={queryParams} />;
     }}
-  />,
-  <Route
-    key={'/rfq/publish'}
-    exact
-    path={'/rfq/publish'}
-    component={CreateTender}
-  />,
-  <Route
-    key={'/eoi/publish'}
-    exact
-    path={'/eoi/publish'}
-    component={CreateTender}
   />,
   <Route
     key={'/eoi'}
@@ -48,9 +45,42 @@ export default [
     }}
   />,
   <Route
+    key={'/srfq/publish'}
+    exact
+    path={'/srfq/publish'}
+    component={props => {
+      return <CreateTender {...props} type="srfq" />;
+    }}
+  />,
+  <Route
+    key={'/rfq/publish'}
+    exact
+    path={'/rfq/publish'}
+    component={props => {
+      return <CreateTender {...props} type="rfq" />;
+    }}
+  />,
+  <Route
+    key={'/eoi/publish'}
+    exact
+    path={'/eoi/publish'}
+    component={props => {
+      return <CreateTender {...props} type="eoi" />;
+    }}
+  />,
+  <Route
     key={'/rfq'}
     exact
     path={`/rfq/:id`}
+    component={props => {
+      const queryParams = queryString.parse(props.location.search);
+      return <Tender {...props} queryParams={queryParams} />;
+    }}
+  />,
+  <Route
+    key={'/srfq'}
+    exact
+    path={`/srfq/:id`}
     component={props => {
       const queryParams = queryString.parse(props.location.search);
       return <Tender {...props} queryParams={queryParams} />;

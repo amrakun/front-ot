@@ -29,7 +29,7 @@ class Uploader extends React.Component {
 
     if (file.status === 'removed') {
       this.setState({ fileList });
-      return onChange(null);
+      return onChange(fileList);
     }
 
     if (fileList.length > 0) {

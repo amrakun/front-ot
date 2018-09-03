@@ -113,6 +113,11 @@ export const buyerSideMenu = [
     icon: 'bars'
   },
   {
+    url: '/srfq',
+    title: 'Service RFQ responses',
+    icon: 'bars'
+  },
+  {
     url: '/eoi',
     title: 'EOI responses',
     icon: 'bars'

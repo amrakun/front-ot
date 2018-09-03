@@ -14,6 +14,7 @@ const PublishContainer = props => {
   }
 
   const tenderDetail = tenderDetailQuery.tenderDetail || {};
+  const { type } = tenderDetail;
 
   const save = doc => {
     const [publishDate, closeDate] = doc.dateRange;
@@ -29,7 +30,7 @@ const PublishContainer = props => {
     })
       .then(() => {
         message.success('Saved');
-        history.push(`/${doc.type}?refetch`);
+        history.push(`/${type}?refetch`);
       })
       .catch(error => {
         message.error(error.message);
@@ -37,15 +38,17 @@ const PublishContainer = props => {
   };
 
   const updatedProps = {
+    ...props,
+    type,
     save,
     data: tenderDetail
   };
 
-  let form = <RfqForm {...updatedProps} />;
+  if (type === 'eoi') {
+    return <EoiForm {...updatedProps} />;
+  }
 
-  if (tenderDetail.type === 'eoi') form = <EoiForm {...updatedProps} />;
-
-  return form;
+  return <RfqForm {...updatedProps} />;
 };
 
 PublishContainer.propTypes = {
@@ -58,7 +61,8 @@ export default compose(
     name: 'tenderDetailQuery',
     options: ({ match }) => {
       return {
-        variables: { _id: match.params.id }
+        variables: { _id: match.params.id },
+        fetchPolicy: 'network-only'
       };
     }
   }),

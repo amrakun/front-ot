@@ -136,6 +136,7 @@ class TenderContainer extends React.Component {
       notRespondedSuppliersQuery,
       location
     } = this.props;
+
     const { systemConfig } = this.context;
 
     const Component = location.pathname.includes('rfq') ? Rfq : Eoi;

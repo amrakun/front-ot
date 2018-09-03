@@ -3,7 +3,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
-import { message, Button, Icon, Select, Row, Col, Card, Input } from 'antd';
+import {
+  Table,
+  message,
+  Button,
+  Icon,
+  Select,
+  Row,
+  Col,
+  Card,
+  Input
+} from 'antd';
 import { rfqRequestColumns } from '../../../constants';
 import Tender from './Tender';
 import router from 'modules/common/router';
@@ -89,6 +99,7 @@ class Rfq extends Tender {
 
   clearFilter() {
     this.setState({});
+
     router.removeParams(
       this.props.history,
       'between',
@@ -132,12 +143,8 @@ class Rfq extends Tender {
     ];
   }
 
-  render() {
-    const { rfqBidSummaryReportLoading } = this.props;
-    const tenderDetail = this.props.tenderDetail || {};
-    const { status } = tenderDetail;
+  renderFilter(type, requestedProducts) {
     const { productCode, filter, from, to } = this.state;
-    const requestedProducts = tenderDetail.requestedProducts || [];
 
     const materialCodeOptions = requestedProducts.map(product => (
       <Option key={product.code} value={product.code}>
@@ -145,7 +152,95 @@ class Rfq extends Tender {
       </Option>
     ));
 
-    const tableOperations = [
+    if (type === 'srfq') {
+      return null;
+    }
+
+    return (
+      <Col sm={24} xl={6} lg={7}>
+        <Card title="OT Material code">
+          <Select
+            value={productCode}
+            showSearch
+            style={{ width: '100%' }}
+            placeholder="Select a material code"
+            optionFilterProp="children"
+            onChange={this.handleProductCodeChange}
+            filterOption={(input, option) =>
+              option.props.children
+                .toLowerCase()
+                .indexOf(input.toLowerCase()) >= 0
+            }
+          >
+            {materialCodeOptions}
+          </Select>
+        </Card>
+
+        <Card className="margin" title="Filter">
+          <Select
+            value={filter}
+            disabled={productCode.length < 1}
+            placeholder="Select a filter"
+            onChange={this.handleFilterChange}
+            style={{ width: '100%' }}
+          >
+            <Option value="minTotalPrice">By minimum total price</Option>
+            <Option value="minUnitPrice">By minimum unit price</Option>
+            <Option value="totalPrice">In between values (total price)</Option>
+            <Option value="unitPrice">In between values (unit price)</Option>
+          </Select>
+
+          <div
+            className={
+              filter === 'totalPrice' || filter === 'unitPrice'
+                ? 'margin'
+                : 'hidden'
+            }
+          >
+            <Input
+              type="number"
+              placeholder="From"
+              style={{ width: 'calc(50% - 7px)' }}
+              value={from}
+              onChange={e => this.handleRangeChange(e, 'from')}
+            />
+            &nbsp;~&nbsp;
+            <Input
+              type="number"
+              placeholder="To"
+              style={{ width: 'calc(50% - 7px)' }}
+              value={to}
+              onChange={e => this.handleRangeChange(e, 'to')}
+            />
+            <Button
+              onClick={this.handleBetweenSearch}
+              className="margin"
+              type="primary"
+              style={{ width: '100%' }}
+            >
+              Apply filter
+            </Button>
+          </div>
+        </Card>
+        <Button
+          onClick={this.clearFilter}
+          className="margin"
+          style={{ width: '100%' }}
+        >
+          <Icon type="close" />Clear filter
+        </Button>
+      </Col>
+    );
+  }
+
+  renderOperations(type, status) {
+    const { rfqBidSummaryReportLoading } = this.props;
+
+    if (type === 'srfq') {
+      return null;
+    }
+
+    return [
       <Button
         onClick={this.bidSummaryReport}
         loading={rfqBidSummaryReportLoading}
@@ -164,95 +259,46 @@ class Rfq extends Tender {
         <Icon type="trophy" />
       </Button>
     ];
+  }
+
+  renderResponseModal(record) {
+    const tenderDetail = this.props.tenderDetail || {};
+    const requestedProducts = tenderDetail.requestedProducts || [];
+    const respondedProducts = record.respondedProducts || [];
+
+    return (
+      <Table
+        columns={[
+          ...(rfqRequestColumns || []),
+          ...(this.responseColumns() || [])
+        ]}
+        rowKey={() => Math.random()}
+        dataSource={respondedProducts.map((product, index) => ({
+          ...product,
+          ...requestedProducts[index]
+        }))}
+      />
+    );
+  }
+
+  render() {
+    const tenderDetail = this.props.tenderDetail || {};
+    const { type, status } = tenderDetail;
+    const requestedProducts = tenderDetail.requestedProducts || [];
 
     return (
       <div>
         {this.renderStats()}
         <Row gutter={24}>
-          <Col sm={24} xl={6} lg={7}>
-            <Card title="OT Material code">
-              <Select
-                value={productCode}
-                showSearch
-                style={{ width: '100%' }}
-                placeholder="Select a material code"
-                optionFilterProp="children"
-                onChange={this.handleProductCodeChange}
-                filterOption={(input, option) =>
-                  option.props.children
-                    .toLowerCase()
-                    .indexOf(input.toLowerCase()) >= 0
-                }
-              >
-                {materialCodeOptions}
-              </Select>
-            </Card>
+          {this.renderFilter(type, requestedProducts)}
 
-            <Card className="margin" title="Filter">
-              <Select
-                value={filter}
-                disabled={productCode.length < 1}
-                placeholder="Select a filter"
-                onChange={this.handleFilterChange}
-                style={{ width: '100%' }}
-              >
-                <Option value="minTotalPrice">By minimum total price</Option>
-                <Option value="minUnitPrice">By minimum unit price</Option>
-                <Option value="totalPrice">
-                  In between values (total price)
-                </Option>
-                <Option value="unitPrice">
-                  In between values (unit price)
-                </Option>
-              </Select>
-
-              <div
-                className={
-                  filter === 'totalPrice' || filter === 'unitPrice'
-                    ? 'margin'
-                    : 'hidden'
-                }
-              >
-                <Input
-                  type="number"
-                  placeholder="From"
-                  style={{ width: 'calc(50% - 7px)' }}
-                  value={from}
-                  onChange={e => this.handleRangeChange(e, 'from')}
-                />
-                &nbsp;~&nbsp;
-                <Input
-                  type="number"
-                  placeholder="To"
-                  style={{ width: 'calc(50% - 7px)' }}
-                  value={to}
-                  onChange={e => this.handleRangeChange(e, 'to')}
-                />
-                <Button
-                  onClick={this.handleBetweenSearch}
-                  className="margin"
-                  type="primary"
-                  style={{ width: '100%' }}
-                >
-                  Apply filter
-                </Button>
-              </div>
-            </Card>
-            <Button
-              onClick={this.clearFilter}
-              className="margin"
-              style={{ width: '100%' }}
-            >
-              <Icon type="close" />Clear filter
-            </Button>
-          </Col>
-
-          <Col sm={24} xl={18} lg={17}>
+          <Col
+            sm={24}
+            xl={type === 'srfq' ? 24 : 18}
+            lg={type === 'srfq' ? 24 : 17}
+          >
             {this.renderTable({
-              requestColumns: rfqRequestColumns || [],
-              responseColumns: this.responseColumns() || [],
-              requestedData: requestedProducts || [],
-              tableOperations: tableOperations
+              tableOperations: this.renderOperations(type, status)
             })}
           </Col>
         </Row>

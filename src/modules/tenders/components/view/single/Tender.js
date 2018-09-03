@@ -16,7 +16,7 @@ class Tender extends Common {
 
     this.state = {
       ...this.state,
-      responseModal: { visible: false, data: [] },
+      responseModal: { visible: false, record: null },
       regretLetterModal: { visible: false },
       regretLetterContent: ''
     };
@@ -63,69 +63,24 @@ class Tender extends Common {
   }
 
   showResponsesModal(record) {
-    const { supplier, respondedDocuments, respondedProducts } = record;
+    const { supplier } = record;
 
     this.setState({
       responseModal: {
         visible: true,
         title: supplier ? supplier.basicInfo.enName : '',
-        data:
-          respondedDocuments.length > 0
-            ? this.generateEoiData(supplier, respondedDocuments)
-            : respondedProducts
+        record
       }
     });
   }
 
-  generateEoiData(supplier, respondedDocuments) {
-    const {
-      basicInfo: {
-        certificateOfRegistration,
-        corporateStructure,
-        totalNumberOfEmployees
-      },
-      businessInfo: { doesHaveCodeEthicsFile },
-      healthInfo: { areHSEResourcesClearlyIdentifiedFile },
-      shareholderInfo: { attachments }
-    } = supplier;
-
-    return [
-      ...respondedDocuments,
-      {
-        name: 'State registration certifcate (copy)',
-        file: certificateOfRegistration,
-        isSubmitted: certificateOfRegistration !== null
-      },
-      {
-        name: 'HSE policy & procedures (copy)',
-        file: areHSEResourcesClearlyIdentifiedFile,
-        isSubmitted: areHSEResourcesClearlyIdentifiedFile !== null
-      },
-      {
-        name: 'Business Code of Conduct (copy)',
-        file: doesHaveCodeEthicsFile,
-        isSubmitted: doesHaveCodeEthicsFile !== null
-      },
-      {
-        name: 'Ownership/ shareholder information',
-        file: attachments,
-        isSubmitted: true
-      },
-      {
-        name: 'Organization structure & Total manpower',
-        file: null,
-        isSubmitted: true,
-        notes: `${corporateStructure}, ${totalNumberOfEmployees} employees`
-      }
-    ];
-  }
-
   hideResponsesModal() {
-    this.setState({ responseModal: { visible: false, data: [] } });
+    this.setState({ responseModal: { visible: false, record: null } });
   }
 
   toggleRegretLetterModal() {
     const { regretLetterModal } = this.state;
+
     this.setState({
       regretLetterModal: { visible: !regretLetterModal.visible }
     });
@@ -238,13 +193,7 @@ class Tender extends Common {
   }
 
   renderTable(args) {
-    //args passed from Rfq.js and Eoi.js
-    const {
-      requestColumns = [],
-      responseColumns = [],
-      requestedData = [],
-      tableOperations
-    } = args;
+    const { tableOperations } = args;
 
     const {
       loading,
@@ -272,11 +221,6 @@ class Tender extends Common {
     if (!queryParams.filter && requestedSuppliers) {
       responseRows = requestedSuppliers;
     }
-
-    const responseData = responseModal.data.map((row, index) => ({
-      ...row,
-      ...requestedData[index]
-    }));
 
     return (
       <Card
@@ -327,11 +271,8 @@ class Tender extends Common {
           width="100%"
           style={{ top: 16 }}
         >
-          <Table
-            columns={[...requestColumns, ...responseColumns]}
-            rowKey={() => Math.random()}
-            dataSource={responseData}
-          />
+          {responseModal.record &&
+            this.renderResponseModal(responseModal.record)}
         </Modal>
 
         <Modal

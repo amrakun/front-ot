@@ -30,17 +30,16 @@ class RfqForm extends TenderForm {
   handleSubmit(e) {
     e.preventDefault();
 
-    let inputs = this.collectInputs();
+    const { type } = this.props;
+    const inputs = this.collectInputs();
 
-    inputs.type = 'rfq';
-
-    if (inputs.requestedProducts.length > 0) {
-      inputs.type = 'rfq';
-
-      this.save(inputs);
-    } else {
-      message.error('Please input atleast one row');
+    if (type === 'rfq' && inputs.requestedProducts.length === 0) {
+      return message.error('Please input atleast one row');
     }
+
+    inputs.type = type;
+
+    this.save(inputs);
   }
 
   handleFile(e) {
@@ -70,30 +69,40 @@ class RfqForm extends TenderForm {
     });
   }
 
-  render() {
+  renderProductsTable() {
     const { products } = this.state;
+    const { type } = this.props;
 
+    if (type === 'srfq') {
+      return null;
+    }
+
+    return (
+      <Card title="Form" className="margin">
+        <RfqTable
+          products={products}
+          renderProductColumn={this.renderProductColumn}
+          isSupplier={false}
+          handleFile={this.handleFile}
+          tenderCreation={this.props.tenderCreation}
+        />
+
+        <Button
+          className="dashed-button-big"
+          size="large"
+          onClick={this.addProductRow}
+        >
+          <Icon type="plus" /> Add row
+        </Button>
+      </Card>
+    );
+  }
+
+  render() {
     return (
       <Form onSubmit={this.handleSubmit}>
         {this.renderMainInfo(this.emailTemplate)}
-
-        <Card title="Form" className="margin">
-          <RfqTable
-            products={products}
-            renderProductColumn={this.renderProductColumn}
-            isSupplier={false}
-            handleFile={this.handleFile}
-            tenderCreation={this.props.tenderCreation}
-          />
-
-          <Button
-            className="dashed-button-big"
-            size="large"
-            onClick={this.addProductRow}
-          >
-            <Icon type="plus" /> Add row
-          </Button>
-        </Card>
+        {this.renderProductsTable()}
 
         <Button
           type="primary"

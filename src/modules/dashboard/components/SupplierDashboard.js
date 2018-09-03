@@ -252,6 +252,14 @@ class Dashboard extends React.Component {
           supplierId={currentUser.companyId}
           queryParams={queryParams}
         />
+
+        <SupplierTenders
+          history={history}
+          location={location}
+          type="srfq"
+          supplierId={currentUser.companyId}
+          queryParams={queryParams}
+        />
       </div>
     );
   }
