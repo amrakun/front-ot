@@ -110,39 +110,6 @@ class Rfq extends Tender {
     );
   }
 
-  responseColumns() {
-    return [
-      {
-        title: 'Suggested manufacturer if any',
-        dataIndex: 'suggestedManufacturer',
-        key: '8'
-      },
-      {
-        title: 'Suggested manufacturer part number',
-        dataIndex: 'suggestedManufacturerPartNumber',
-        key: '9'
-      },
-      {
-        title: 'Unit price (excluding VAT)',
-        dataIndex: 'unitPrice',
-        key: '10'
-      },
-      { title: 'Total price', dataIndex: 'totalPrice', key: '11' },
-      { title: 'Lead time', dataIndex: 'leadTime', key: '12' },
-      { title: 'Shipping terms', dataIndex: 'shippingTerms', key: '13' },
-      { title: 'Comment', dataIndex: 'comment', key: '14' },
-      {
-        title: 'Picture (if required)',
-        key: '15',
-        render: record => (
-          <a onClick={() => window.open(record.file.url)} target="_blank">
-            Download
-          </a>
-        )
-      }
-    ];
-  }
-
   renderFilter(type, requestedProducts) {
     const { productCode, filter, from, to } = this.state;
 
@@ -263,15 +230,70 @@ class Rfq extends Tender {
 
   renderResponseModal(record) {
     const tenderDetail = this.props.tenderDetail || {};
+    const { type } = tenderDetail;
+
+    if (type === 'srfq') {
+      const respondedServiceFiles = record.respondedServiceFiles || [];
+
+      return (
+        <Table
+          size="small"
+          columns={[
+            {
+              title: 'File',
+              key: Math.random(),
+              render: row => {
+                return (
+                  <a href={row.url} target="__blank">
+                    {row.name}
+                  </a>
+                );
+              }
+            }
+          ]}
+          rowKey={() => Math.random()}
+          dataSource={respondedServiceFiles}
+        />
+      );
+    }
+
     const requestedProducts = tenderDetail.requestedProducts || [];
     const respondedProducts = record.respondedProducts || [];
 
+    const responseColumns = [
+      {
+        title: 'Suggested manufacturer if any',
+        dataIndex: 'suggestedManufacturer',
+        key: '8'
+      },
+      {
+        title: 'Suggested manufacturer part number',
+        dataIndex: 'suggestedManufacturerPartNumber',
+        key: '9'
+      },
+      {
+        title: 'Unit price (excluding VAT)',
+        dataIndex: 'unitPrice',
+        key: '10'
+      },
+      { title: 'Total price', dataIndex: 'totalPrice', key: '11' },
+      { title: 'Lead time', dataIndex: 'leadTime', key: '12' },
+      { title: 'Shipping terms', dataIndex: 'shippingTerms', key: '13' },
+      { title: 'Comment', dataIndex: 'comment', key: '14' },
+      {
+        title: 'Picture (if required)',
+        key: '15',
+        render: record => (
+          <a onClick={() => window.open(record.file.url)} target="_blank">
+            Download
+          </a>
+        )
+      }
+    ];
+
     return (
       <Table
-        columns={[
-          ...(rfqRequestColumns || []),
-          ...(this.responseColumns() || [])
-        ]}
+        columns={[...rfqRequestColumns, ...responseColumns]}
         rowKey={() => Math.random()}
         dataSource={respondedProducts.map((product, index) => ({
           ...product,
