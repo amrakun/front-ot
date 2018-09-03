@@ -24,6 +24,7 @@ const systemConfig = `
       address
 
       rfqTemplates
+      srfqTemplates
       eoiTemplates
       successFeedbackTemplates
       capacityBuildingTemplates
