@@ -171,6 +171,7 @@ class Dashboard extends React.Component {
             >
               <Radio value="eoi">EOI</Radio>
               <Radio value="rfq">RFQ</Radio>
+              <Radio value="srfq">Service RFQ</Radio>
             </Radio.Group>
 
             {this.renderButton(this.exportTenders)}
