@@ -114,7 +114,7 @@ class SupplierTenders extends Tenders {
       return null;
     }
 
-    if (status === 'closed' && type === 'rfq') {
+    if (status === 'closed' && type !== 'eoi') {
       return null;
     }
 
