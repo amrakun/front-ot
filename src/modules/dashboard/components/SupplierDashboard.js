@@ -32,14 +32,6 @@ class Dashboard extends React.Component {
       return <a onClick={exportPreq}>{__('Pre-qualified')}</a>;
     }
 
-    if (isExpired) {
-      return <a onClick={exportPreq}>{__('Expired')}</a>;
-    }
-
-    if (isOutstanding) {
-      return <a onClick={exportPreq}>{__('In progress')}</a>;
-    }
-
     if (isFailed)
       return (
         <span>
@@ -48,6 +40,14 @@ class Dashboard extends React.Component {
           {__('to update your information')}
         </span>
       );
+
+    if (isExpired) {
+      return <a onClick={exportPreq}>{__('Expired')}</a>;
+    }
+
+    if (isOutstanding) {
+      return <a onClick={exportPreq}>{__('In progress')}</a>;
+    }
 
     return <a onClick={exportPreq}>{__('Not complete')}</a>;
   }
