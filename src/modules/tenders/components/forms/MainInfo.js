@@ -50,7 +50,7 @@ function getOwner(supplier) {
     return null;
   }
 
-  if (info.shareholders) {
+  if (info.shareholders && info.shareholders.length > 0) {
     return info.shareholders[0].name;
   }
 }
