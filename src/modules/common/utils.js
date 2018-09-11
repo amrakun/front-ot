@@ -51,7 +51,7 @@ export const getFlatProductsTree = locale => {
   return flatProductsInfo;
 };
 
-export const installErxes = brandId => {
+export const installErxes = (brandId, user) => {
   const settings = window.erxesSettings;
 
   if (settings && settings.messenger.brand_id === brandId) {
@@ -60,7 +60,9 @@ export const installErxes = brandId => {
 
   window.erxesSettings = {
     messenger: {
-      brand_id: brandId
+      brand_id: brandId,
+      email: user.email,
+      phone: user.phone
     }
   };
 

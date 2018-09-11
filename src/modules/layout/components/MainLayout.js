@@ -138,7 +138,7 @@ class MainLayout extends React.Component {
       currentUser.isSupplier &&
       !path.includes('/tender/submit')
     ) {
-      installErxes('ta4ukM');
+      installErxes('ta4ukM', currentUser);
     }
   }
 

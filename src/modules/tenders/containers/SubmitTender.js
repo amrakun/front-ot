@@ -10,20 +10,21 @@ import { queries, mutations } from '../graphql';
 class SubmitContainer extends React.Component {
   componentDidUpdate() {
     const tenderDetail = this.props.tenderDetailQuery.tenderDetailSupplier;
+    const { currentUser } = this.context;
 
     if (tenderDetail) {
       const { type } = tenderDetail;
 
       if (type === 'eoi') {
-        installErxes('zRNJmC');
+        installErxes('zRNJmC', currentUser);
       }
 
       if (type === 'rfq') {
-        installErxes('n9hNM7');
+        installErxes('n9hNM7', currentUser);
       }
 
       if (type === 'srfq') {
-        installErxes('KsTa3H');
+        installErxes('KsTa3H', currentUser);
       }
     }
   }
@@ -38,13 +39,12 @@ class SubmitContainer extends React.Component {
       history
     } = this.props;
 
-    const context = this.context;
+    const { currentUser, __ } = this.context;
 
     if (tenderDetailQuery.loading || tenderResponseByUserQuery.loading) {
       return <Loading />;
     }
 
-    const { currentUser, __ } = context;
     const tenderDetail = tenderDetailQuery.tenderDetailSupplier || {};
     const tenderResponseByUser = tenderResponseByUserQuery.tenderResponseByUser;
 
