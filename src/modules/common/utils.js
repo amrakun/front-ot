@@ -50,3 +50,31 @@ export const getFlatProductsTree = locale => {
 
   return flatProductsInfo;
 };
+
+export const installErxes = brandId => {
+  const settings = window.erxesSettings;
+
+  if (settings && settings.messenger.brand_id === brandId) {
+    return;
+  }
+
+  window.erxesSettings = {
+    messenger: {
+      brand_id: brandId
+    }
+  };
+
+  if (document.getElementById('erxes-messenger-iframe')) {
+    document.getElementById('erxes-messenger-iframe').remove();
+  }
+
+  (() => {
+    const script = document.createElement('script');
+
+    script.src = 'http://erxes.ot.mn:3002/build/messengerWidget.bundle.js';
+    script.async = true;
+
+    const entry = document.getElementsByTagName('script')[0];
+    entry.parentNode.insertBefore(script, entry);
+  })();
+};

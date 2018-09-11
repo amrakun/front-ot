@@ -1,14 +1,15 @@
 import React from 'react';
-import Sidenav from './Sidenav';
-import Header from './Header';
 import { LocaleProvider, Layout, BackTop } from 'antd';
 import { PropTypes } from 'prop-types';
 import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
-import { T } from 'modules/common/components';
 import mn from 'react-intl/locale-data/mn';
 import en from 'react-intl/locale-data/en';
+import { T } from 'modules/common/components';
+import { installErxes } from 'modules/common/utils';
 import enUS from 'rc-pagination/lib/locale/en_US';
 import * as messages from 'modules/translations';
+import Sidenav from './Sidenav';
+import Header from './Header';
 
 addLocaleData([...mn, ...en]);
 const { Content, Footer } = Layout;
@@ -118,34 +119,26 @@ class MainLayout extends React.Component {
     }
 
     this.getLang();
-
-    // erxes script
-    if (currentUser && currentUser.isSupplier) {
-      window.erxesSettings = {
-        messenger: {
-          brand_id: 'ta4ukM'
-        }
-      };
-
-      (() => {
-        const script = document.createElement('script');
-        script.src =
-          'http://erxeswidgets.ot.mn/build/messengerWidget.bundle.js';
-        script.async = true;
-
-        const entry = document.getElementsByTagName('script')[0];
-        entry.parentNode.insertBefore(script, entry);
-      })();
-    }
   }
 
   componentDidUpdate() {
-    const path = this.props.location.pathname;
+    const { currentUser, location, logsWriteMutation } = this.props;
+
+    const path = location.pathname;
 
     if (path !== '/' && path !== '/sign-in') {
-      this.props.logsWriteMutation({
+      logsWriteMutation({
         variables: { apiCall: path }
       });
+    }
+
+    // erxes script
+    if (
+      currentUser &&
+      currentUser.isSupplier &&
+      !path.includes('/tender/submit')
+    ) {
+      installErxes('ta4ukM');
     }
   }
 

@@ -1,99 +1,122 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { message } from 'antd';
 import { compose, gql, graphql } from 'react-apollo';
+import { Loading, exportFile } from 'modules/common/components';
+import { installErxes } from 'modules/common/utils';
 import { SubmitRfq, SubmitEoi } from '../components';
 import { queries, mutations } from '../graphql';
-import { Loading } from 'modules/common/components';
-import { message } from 'antd';
-import { exportFile } from 'modules/common/components';
 
-const PublishContainer = (
-  {
-    tenderDetailQuery,
-    tendersResponsesAdd,
-    tendersResponsesEdit,
-    tenderResponsesSend,
-    tenderResponseByUserQuery,
-    history
-  },
-  context
-) => {
-  if (tenderDetailQuery.loading || tenderResponseByUserQuery.loading) {
-    return <Loading />;
-  }
+class SubmitContainer extends React.Component {
+  componentDidUpdate() {
+    const tenderDetail = this.props.tenderDetailQuery.tenderDetailSupplier;
 
-  const { currentUser, __ } = context;
-  const tenderDetail = tenderDetailQuery.tenderDetailSupplier || {};
-  const tenderResponseByUser = tenderResponseByUserQuery.tenderResponseByUser;
+    if (tenderDetail) {
+      const { type } = tenderDetail;
 
-  const save = (doc, shouldSend) => {
-    const mutation = tenderResponseByUser
-      ? tendersResponsesEdit
-      : tendersResponsesAdd;
-
-    mutation({ variables: { tenderId: tenderDetail._id, ...doc } })
-      .then(() => {
-        message.success(__('Successfully saved a tender!'));
-
-        tenderResponseByUserQuery.refetch();
-
-        shouldSend ? send(doc.tenderId) : redirect(doc.tenderId);
-      })
-
-      .catch(error => {
-        message.error(error.message);
-      });
-  };
-
-  const send = tenderId => {
-    tenderResponsesSend({
-      variables: {
-        tenderId: tenderDetail._id,
-        supplierId: currentUser.companyId
+      if (type === 'eoi') {
+        installErxes('zRNJmC');
       }
-    })
-      .then(() => {
-        message.success(__('Successfully submitted a tender!'));
-        redirect(tenderId);
+
+      if (type === 'rfq') {
+        installErxes('n9hNM7');
+      }
+
+      if (type === 'srfq') {
+        installErxes('KsTa3H');
+      }
+    }
+  }
+
+  render() {
+    const {
+      tenderDetailQuery,
+      tendersResponsesAdd,
+      tendersResponsesEdit,
+      tenderResponsesSend,
+      tenderResponseByUserQuery,
+      history
+    } = this.props;
+
+    const context = this.context;
+
+    if (tenderDetailQuery.loading || tenderResponseByUserQuery.loading) {
+      return <Loading />;
+    }
+
+    const { currentUser, __ } = context;
+    const tenderDetail = tenderDetailQuery.tenderDetailSupplier || {};
+    const tenderResponseByUser = tenderResponseByUserQuery.tenderResponseByUser;
+
+    const save = (doc, shouldSend) => {
+      const mutation = tenderResponseByUser
+        ? tendersResponsesEdit
+        : tendersResponsesAdd;
+
+      mutation({ variables: { tenderId: tenderDetail._id, ...doc } })
+        .then(() => {
+          message.success(__('Successfully saved a tender!'));
+
+          tenderResponseByUserQuery.refetch();
+
+          shouldSend ? send(doc.tenderId) : redirect(doc.tenderId);
+        })
+
+        .catch(error => {
+          message.error(error.message);
+        });
+    };
+
+    const send = tenderId => {
+      tenderResponsesSend({
+        variables: {
+          tenderId: tenderDetail._id,
+          supplierId: currentUser.companyId
+        }
       })
-      .catch(() => {
-        message.error(__('Required inputs missing'));
+        .then(() => {
+          message.success(__('Successfully submitted a tender!'));
+          redirect(tenderId);
+        })
+        .catch(() => {
+          message.error(__('Required inputs missing'));
+        });
+    };
+
+    const redirect = tenderId => {
+      history.push('/rfq-and-eoi?refetch', {
+        newTenderId: tenderId
       });
-  };
+    };
 
-  const redirect = tenderId => {
-    history.push('/rfq-and-eoi?refetch', {
-      newTenderId: tenderId
-    });
-  };
+    const generateTemplate = () => {
+      exportFile({
+        query: queries.generateMaterialsTemplate,
+        variables: { tenderId: tenderDetail._id }
+      });
+    };
 
-  const generateTemplate = () => {
-    exportFile({
-      query: queries.generateMaterialsTemplate,
-      variables: { tenderId: tenderDetail._id }
-    });
-  };
+    const updatedProps = {
+      save,
+      send,
+      generateTemplate,
+      data: tenderDetail,
+      response: tenderResponseByUser
+    };
 
-  const updatedProps = {
-    save,
-    send,
-    generateTemplate,
-    data: tenderDetail,
-    response: tenderResponseByUser
-  };
+    if (tenderDetail.status === 'canceled') {
+      return null;
+    }
 
-  if (tenderDetail.status === 'canceled') {
-    return null;
+    if (tenderDetail.type === 'eoi') {
+      return <SubmitEoi {...updatedProps} />;
+    }
+
+    return <SubmitRfq {...updatedProps} />;
   }
+}
 
-  if (tenderDetail.type === 'eoi') {
-    return <SubmitEoi {...updatedProps} />;
-  }
-
-  return <SubmitRfq {...updatedProps} />;
-};
-
-PublishContainer.propTypes = {
+SubmitContainer.propTypes = {
   location: PropTypes.object,
   tenderDetailQuery: PropTypes.object,
   tenderResponseByUserQuery: PropTypes.object,
@@ -103,7 +126,7 @@ PublishContainer.propTypes = {
   history: PropTypes.object
 };
 
-PublishContainer.contextTypes = {
+SubmitContainer.contextTypes = {
   currentUser: PropTypes.object,
   __: PropTypes.func
 };
@@ -138,4 +161,4 @@ export default compose(
   graphql(gql(mutations.tenderResponsesSend), {
     name: 'tenderResponsesSend'
   })
-)(PublishContainer);
+)(SubmitContainer);
