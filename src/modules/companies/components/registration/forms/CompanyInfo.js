@@ -209,7 +209,6 @@ class CompanyInfo extends BaseForm {
             {this.renderField({
               label: '6. Company registration number',
               name: 'registrationNumber',
-              isVisible: !soleTrader,
               optional: soleTrader,
               control: <Input />
             })}
@@ -219,7 +218,6 @@ class CompanyInfo extends BaseForm {
               description: descriptions.certificateOfRegistration,
               name: 'certificateOfRegistration',
               dataType: 'file',
-              isVisible: !soleTrader,
               optional: soleTrader,
               control: <Uploader />
             })}

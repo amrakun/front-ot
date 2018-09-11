@@ -89,9 +89,7 @@ const RegistrationContainer = (props, { __ }) => {
           });
         }
 
-        if (!soleTrader) {
-          history.push('/prequalification');
-        }
+        history.push('/prequalification');
       })
       .catch(error => {
         message.error(error.message);
@@ -107,6 +105,7 @@ const RegistrationContainer = (props, { __ }) => {
       ...companyByUser
     }
   };
+
   return <RegistrationForms {...updatedProps} />;
 };
 
@@ -119,6 +118,7 @@ RegistrationContainer.contextTypes = {
   currentUser: PropTypes.object,
   __: PropTypes.func
 };
+
 export default compose(
   graphql(gql(queries.companyByUser), {
     name: 'companyByUserQuery'
