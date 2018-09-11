@@ -164,7 +164,7 @@ class RegistrationForm extends BaseForm {
   }
 
   renderDistrubutionRightInput(value, index) {
-    const _index = index > 0 ? index : '';
+    const _index = index > 0 ? index.toString() : '';
 
     return (
       <Field

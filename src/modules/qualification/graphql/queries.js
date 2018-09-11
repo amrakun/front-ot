@@ -18,6 +18,8 @@ const supplierPrequalification = `
       isPrequalified
       isSentPrequalificationInfo
       prequalifiedStatus
+      isSkippedPrequalification
+      prequalificationSkippedReason
     }
   }
 `;

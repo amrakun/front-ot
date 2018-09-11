@@ -1,13 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, notification, Icon } from 'antd';
+import { Tabs, notification, Icon, Alert } from 'antd';
+import { Panes } from 'modules/common/components';
 import FinancialForm from './forms/Financial';
 import EnvironmentalForm from './forms/Environmental';
 import BusinessForm from './forms/Business';
 import HealthForm from './forms/Health';
-import { Panes } from 'modules/common/components';
+import SkipModal from './SkipModal';
 
 class PrequalificationForms extends Panes {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state.showSkipForm = false;
+
+    this.toggleSkipForm = this.toggleSkipForm.bind(this);
+    this.skip = this.skip.bind(this);
+  }
+
+  toggleSkipForm(visible) {
+    this.setState({ showSkipForm: visible });
+  }
+
+  skip(data) {
+    this.props.skip(data, () => {
+      this.setState({ showSkipForm: false });
+    });
+  }
+
   componentDidMount() {
     const { __ } = this.context;
     const { disabled } = this.props;
@@ -23,58 +43,101 @@ class PrequalificationForms extends Panes {
     }
   }
 
-  render() {
-    const { currentTabKey } = this.state;
-    const { send, company, disabled } = this.props;
-    const { productsInfo, prequalifiedStatus } = company || {};
+  renderSkipModal() {
+    const { showSkipForm } = this.state;
+
+    if (!showSkipForm) {
+      return null;
+    }
 
     return (
-      <Tabs
-        activeKey={currentTabKey}
-        onTabClick={this.moveToTab}
-        tabPosition="left"
-        className="supplier-forms"
-      >
-        {this.renderPane({
-          key: 1,
-          title: 'Financial information',
-          name: 'financialInfo',
-          Component: FinancialForm,
-          data: { disabled, prequalifiedStatus }
-        })}
+      <SkipModal
+        onCancel={() => this.toggleSkipForm(false)}
+        onSubmit={this.skip}
+      />
+    );
+  }
 
-        {this.renderPane({
-          key: 2,
-          title: 'Business integrity & human resource',
-          name: 'businessInfo',
-          Component: BusinessForm,
-          data: { disabled, prequalifiedStatus }
-        })}
+  render() {
+    const { __ } = this.context;
+    const { send, company, disabled } = this.props;
+    const { currentTabKey } = this.state;
+    const { productsInfo, prequalifiedStatus } = company || {};
 
-        {this.renderPane({
-          key: 3,
-          title: 'Environmental management',
-          name: 'environmentalInfo',
-          Component: EnvironmentalForm,
-          data: { disabled, prequalifiedStatus }
-        })}
+    if (company.isSkippedPrequalification) {
+      if (company.isPrequalified) {
+        return <Alert message={__('Pre-qualified')} type="success" showIcon />;
+      }
 
-        {this.renderPane({
-          key: 4,
-          title: 'Health & safety management system',
-          name: 'healthInfo',
-          Component: HealthForm,
-          data: {
-            productsInfo: productsInfo,
-            send: send,
-            disabled,
-            prequalifiedStatus
-          }
-        })}
-      </Tabs>
+      return (
+        <Alert
+          message={__('Successfully sent')}
+          description={__('We are reviewing your submission')}
+          type="info"
+          showIcon
+        />
+      );
+    }
+
+    return (
+      <div>
+        {this.renderSkipModal()}
+
+        <Tabs
+          activeKey={currentTabKey}
+          onTabClick={this.moveToTab}
+          tabPosition="left"
+          className="supplier-forms"
+        >
+          {this.renderPane({
+            key: 1,
+            title: 'Financial information',
+            name: 'financialInfo',
+            Component: FinancialForm,
+            data: {
+              disabled,
+              prequalifiedStatus,
+              skip: () => this.toggleSkipForm(true)
+            }
+          })}
+
+          {this.renderPane({
+            key: 2,
+            title: 'Business integrity & human resource',
+            name: 'businessInfo',
+            Component: BusinessForm,
+            data: { disabled, prequalifiedStatus }
+          })}
+
+          {this.renderPane({
+            key: 3,
+            title: 'Environmental management',
+            name: 'environmentalInfo',
+            Component: EnvironmentalForm,
+            data: { disabled, prequalifiedStatus }
+          })}
+
+          {this.renderPane({
+            key: 4,
+            title: 'Health & safety management system',
+            name: 'healthInfo',
+            Component: HealthForm,
+            data: {
+              productsInfo: productsInfo,
+              send: send,
+              disabled,
+              prequalifiedStatus
+            }
+          })}
+        </Tabs>
+      </div>
     );
   }
 }
+
+PrequalificationForms.propTypes = {
+  skip: PropTypes.func
+};
 
 PrequalificationForms.contextTypes = {
   __: PropTypes.func

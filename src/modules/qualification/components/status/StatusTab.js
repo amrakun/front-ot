@@ -3,11 +3,12 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import { labels } from 'modules/companies/components/prequalification/constants';
-import { Card, Popconfirm, Checkbox, List, Form, Alert } from 'antd';
-import { BaseForm } from 'modules/common/components';
 import moment from 'moment';
+import { Card, Checkbox, List, Form, Alert } from 'antd';
+import { BaseForm } from 'modules/common/components';
 import { dateFormat } from 'modules/common/constants';
+import { labels } from 'modules/companies/components/prequalification/constants';
+import Prequalifier from './Prequalifier';
 
 class StatusTab extends BaseForm {
   constructor(props) {
@@ -78,8 +79,8 @@ class StatusTab extends BaseForm {
       });
     }
 
-    if (moment(value).isValid() && value.length > 16)
-      return moment(value).format(dateFormat);
+    if (moment(new Date(value)).isValid() && value.length > 16)
+      return moment(new Date(value)).format(dateFormat);
 
     return value;
   }
@@ -139,48 +140,10 @@ class StatusTab extends BaseForm {
           showIcon
         />
 
-        {isPrequalified === false && (
-          <Alert
-            message={
-              <span>
-                This supplier is not pre-qualfied. Click&nbsp;
-                <Popconfirm
-                  title="Are you sure?"
-                  onConfirm={() => prequalifySupplier(true)}
-                  okText="Yes"
-                  cancelText="No"
-                >
-                  <a>here</a>
-                </Popconfirm>
-                &nbsp;to pre-qualify
-              </span>
-            }
-            type="error"
-            showIcon
-          />
-        )}
-
-        {isPrequalified === null && (
-          <Alert
-            message={
-              <span>
-                This supplier is not evaluated. Click&nbsp;
-                <Popconfirm
-                  title="Evaluation"
-                  onConfirm={() => prequalifySupplier(true)}
-                  onCancel={() => prequalifySupplier(false)}
-                  okText="Qualified"
-                  cancelText="Unqualified"
-                >
-                  <a>here</a>
-                </Popconfirm>
-                &nbsp;to evaluate
-              </span>
-            }
-            type="warning"
-            showIcon
-          />
-        )}
+        <Prequalifier
+          isPrequalified={isPrequalified}
+          prequalifySupplier={prequalifySupplier}
+        />
 
         <p style={{ height: '8px' }} />
         <Card

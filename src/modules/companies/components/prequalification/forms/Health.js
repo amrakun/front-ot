@@ -39,7 +39,7 @@ class PrequalificationForm extends PreqForm {
   }
 
   render() {
-    const { productsInfo } = this.props;
+    const productsInfo = this.props.productsInfo || [];
     const { __ } = this.context;
 
     return (

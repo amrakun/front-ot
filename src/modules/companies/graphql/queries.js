@@ -138,6 +138,7 @@ export const companyByUser = `
   query companyByUser {
     companyByUser {
       isSentRegistrationInfo
+      isSkippedPrequalification
       ${registrationFields}
     }
   }
@@ -258,6 +259,8 @@ export const companyPrequalificationDetail = `
       productsInfo
       isPrequalificationInfoEditable
       isPrequalified
+      isSkippedPrequalification
+      prequalificationSkippedReason
       prequalifiedStatus
     }
   }

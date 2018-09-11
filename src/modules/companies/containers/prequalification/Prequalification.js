@@ -6,54 +6,32 @@ import { PrequalificationForms } from '../../components';
 import { Loading } from 'modules/common/components';
 import { message, notification, Icon } from 'antd';
 
-const PrequalificationContainer = (props, { __ }) => {
-  let { companyByUserQuery } = props;
+class PrequalificationContainer extends React.Component {
+  constructor(props, context) {
+    super(props, context);
 
-  if (companyByUserQuery.loading) {
-    return <Loading />;
+    this.send = this.send.bind(this);
+    this.save = this.save.bind(this);
+    this.skip = this.skip.bind(this);
   }
 
-  const companyByUser = companyByUserQuery.companyByUser;
-  const disabled = !companyByUser.isPrequalificationInfoEditable;
+  skip({ reason }, callback) {
+    const { skip } = this.props;
+    const { __ } = this.context;
 
-  let formsComplete = true;
-
-  Object.keys(companyByUser).forEach(key => {
-    if (key.includes('Info') && !companyByUser[key] && key !== 'healthInfo') {
-      formsComplete = false;
-    }
-  });
-
-  const save = (name, doc) => {
-    if (disabled) {
-      return message.error(__('Changes disabled'));
-    }
-
-    const mutation = props[`${name}Edit`];
-
-    mutation({ variables: { [name]: doc } })
+    skip({ variables: { reason } })
       .then(() => {
-        companyByUserQuery.refetch();
-        message.success(__('Saved'));
-
-        if (name === 'healthInfo') {
-          if (formsComplete) {
-            return send();
-          }
-
-          return message.error(
-            __('Please complete all forms before submitting')
-          );
-        }
+        message.success(__('Success'));
+        callback();
       })
-
       .catch(error => {
         message.error(error.message);
       });
-  };
+  }
 
-  const send = () => {
-    const { sendToBuyer, history } = props;
+  send() {
+    const { sendToBuyer, history } = this.props;
+    const { __ } = this.context;
 
     sendToBuyer()
       .then(() => {
@@ -71,23 +49,79 @@ const PrequalificationContainer = (props, { __ }) => {
       .catch(error => {
         message.error(error.message);
       });
-  };
+  }
 
-  const updatedProps = {
-    ...props,
-    save,
-    send,
-    disabled,
-    company: {
-      ...companyByUser
+  save(name, doc) {
+    const { companyByUserQuery } = this.props;
+    const { __ } = this.context;
+
+    const companyByUser = companyByUserQuery.companyByUser;
+    const disabled = !companyByUser.isPrequalificationInfoEditable;
+
+    if (disabled) {
+      return message.error(__('Changes disabled'));
     }
-  };
 
-  return <PrequalificationForms {...updatedProps} />;
-};
+    let formsComplete = true;
+
+    Object.keys(companyByUser).forEach(key => {
+      if (key.includes('Info') && !companyByUser[key] && key !== 'healthInfo') {
+        formsComplete = false;
+      }
+    });
+
+    const mutation = this.props[`${name}Edit`];
+
+    mutation({ variables: { [name]: doc } })
+      .then(() => {
+        companyByUserQuery.refetch();
+        message.success(__('Saved'));
+
+        if (name === 'healthInfo') {
+          if (formsComplete) {
+            return this.send();
+          }
+
+          return message.error(
+            __('Please complete all forms before submitting')
+          );
+        }
+      })
+
+      .catch(error => {
+        message.error(error.message);
+      });
+  }
+
+  render() {
+    const { companyByUserQuery } = this.props;
+
+    if (companyByUserQuery.loading) {
+      return <Loading />;
+    }
+
+    const companyByUser = companyByUserQuery.companyByUser;
+    const disabled = !companyByUser.isPrequalificationInfoEditable;
+
+    const updatedProps = {
+      ...this.props,
+      save: this.save,
+      send: this.send,
+      skip: this.skip,
+      disabled,
+      company: {
+        ...companyByUser
+      }
+    };
+
+    return <PrequalificationForms {...updatedProps} />;
+  }
+}
 
 PrequalificationContainer.propTypes = {
   companyByUserQuery: PropTypes.object,
+  history: PropTypes.object,
+  skip: PropTypes.func,
   sendToBuyer: PropTypes.func
 };
 
@@ -120,5 +154,9 @@ export default compose(
 
   graphql(gql(mutations.companiesSendPrequalificationInfo), {
     name: 'sendToBuyer'
+  }),
+
+  graphql(gql(mutations.companiesSkipPrequalification), {
+    name: 'skip'
   })
 )(PrequalificationContainer);

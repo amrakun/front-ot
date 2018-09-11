@@ -146,8 +146,8 @@ export default class Field extends React.Component {
 
 Field.propTypes = {
   label: PropTypes.any,
-  labelIgnoreIndex: PropTypes.number,
-  labelIndex: PropTypes.number,
+  labelIgnoreIndex: PropTypes.bool,
+  labelIndex: PropTypes.string,
   description: PropTypes.string,
   name: PropTypes.string,
   control: PropTypes.node,

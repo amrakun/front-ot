@@ -102,6 +102,16 @@ const companiesSendPrequalificationInfo = `
   }
 `;
 
+const companiesSkipPrequalification = `
+  mutation companiesSkipPrequalification($reason: String!) {
+    companiesSkipPrequalification(reason: $reason) {
+      _id
+      isSkippedPrequalification
+      prequalificationSkippedReason
+    }
+  }
+`;
+
 const registerViaBuyer = `
   mutation registerViaBuyer(
     $companyName: String!
@@ -159,6 +169,7 @@ export default {
   healthInfo,
   companiesSendRegistrationInfo,
   companiesSendPrequalificationInfo,
+  companiesSkipPrequalification,
   registerViaBuyer,
   sendEmail
 };

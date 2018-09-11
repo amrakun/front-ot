@@ -1,6 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Select, Row, Col, DatePicker, Input, Card } from 'antd';
+import {
+  Button,
+  Form,
+  Select,
+  Row,
+  Col,
+  DatePicker,
+  Input,
+  Card,
+  Popconfirm
+} from 'antd';
 import moment from 'moment';
 import { yearData, booleanData, currencyData } from '../constants';
 import { Uploader } from 'modules/common/components';
@@ -189,6 +199,7 @@ class PrequalificationForm extends PreqForm {
     const currencyOptions = this.renderOptions(currencyData);
     const booleanOptions = this.renderOptions(booleanData);
     const { canProvideAccountsInfo } = this.state;
+    const { skip } = this.props;
     const { __ } = this.context;
 
     const reasonVisible =
@@ -315,11 +326,21 @@ class PrequalificationForm extends PreqForm {
           })}
         </Card>
 
+        <Popconfirm title={__('Are you sure ?')} onConfirm={skip}>
+          <Button style={{ backgroundColor: '#f15a24', color: '#ffffff' }}>
+            {__('Skip prequalification')}
+          </Button>
+        </Popconfirm>
+
         {this.renderSubmit()}
       </Form>
     );
   }
 }
+
+PrequalificationForm.propTypes = {
+  onSkip: PropTypes.func
+};
 
 PrequalificationForm.contextTypes = {
   __: PropTypes.func
