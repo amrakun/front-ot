@@ -23,8 +23,6 @@
   "Qualification/audit": "Гэрээ хэрэгжүүлэх чадварын үнэлгээ",
   "Pre-Qualification status": "Гэрээ хэрэгжүүлэх чадварын урьдчилсан үнэлгээ",
   "Nothing new": "Шинэ зүйл алга",
-  "You are not pre-qualified, please click":
-    "Таны оруулсан мэдээлэл хангалтгүй байна",
   "Your prequalification information is not confirmed yet":
     "Таны мэдээлэл бүрэн баталгаажаагүй байна. Бүртгэл баталгаажаагүй тул тендерийн шалгуур хангахгүй гэдгийг анхаарна уу. Тиймээс OT сургалт хариуцсан багт яаралтай хандан сургалтанд хамрагдана уу.",
   "Your DIFOT should not be less than 75%":
@@ -35,9 +33,8 @@
     "Танд аудит хийх хүсэлт ирсэн байна.",
   "view your audit invitations": "хүсэлтийг харна уу!",
   "view your audit": "хүсэлтийг харна уу!",
-  "Please click here": "Та",
-  "to share your successes!":
-    "байгууллагынхаа амжилтаас бидэнтэй хуваалцана уу!",
+  "Please click here": "Энд дарж",
+  "to share your successes": "байгууллагынхаа амжилтаас бидэнтэй хуваалцана уу",
   "Apply to EOI": "Оролцох сонирхолоо илэрхийлэх хүсэлт (ОСИХ)",
   "Closed": "Хаалттай",
   "submitted": "Илгээсэн",

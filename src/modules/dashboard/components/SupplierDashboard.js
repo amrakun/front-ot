@@ -35,8 +35,7 @@ class Dashboard extends React.Component {
     if (isFailed)
       return (
         <span>
-          {__('You are not pre-qualified, please click')}{' '}
-          <Link to="/prequalification">{__('here')}</Link>{' '}
+          <Link to="/prequalification">{__('Please click here')}</Link>{' '}
           {__('to update your information')}
         </span>
       );
@@ -185,12 +184,10 @@ class Dashboard extends React.Component {
               text={
                 hasFeedback ? (
                   <span>
-                    {__('Please click')}
                     <Link to={`feedback/submit/${lastFeedback._id}`}>
-                      {' '}
-                      {__('here')}
+                      {__('Please click here')}
                     </Link>{' '}
-                    {__('to share your successes!')}
+                    {__('to share your successes')}
                   </span>
                 ) : (
                   __('Nothing new')
