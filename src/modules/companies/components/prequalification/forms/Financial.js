@@ -326,7 +326,12 @@ class PrequalificationForm extends PreqForm {
           })}
         </Card>
 
-        <Popconfirm title={__('Are you sure ?')} onConfirm={skip}>
+        <Popconfirm
+          title={__(
+            'This action can not be undone and this is only useful for sole traders or individuals. Are you sure ?'
+          )}
+          onConfirm={skip}
+        >
           <Button style={{ backgroundColor: '#f15a24', color: '#ffffff' }}>
             {__('Skip prequalification')}
           </Button>

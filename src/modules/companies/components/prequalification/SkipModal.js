@@ -51,12 +51,14 @@ class SkipModal extends React.Component {
       >
         <Form>
           <Alert
-            message={__('Warning')}
+            message={__(
+              'This action can not be undone and this is only useful for sole traders or individuals. Are you sure ?'
+            )}
             type="error"
             style={{ marginBottom: '16px' }}
           />
 
-          <Form.Item label="Reason">
+          <Form.Item label={__('Reason')}>
             {getFieldDecorator('reason', {
               rules: [
                 {
