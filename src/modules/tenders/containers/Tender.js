@@ -150,7 +150,7 @@ class TenderContainer extends React.Component {
     }
 
     const tenderDetail = tenderDetailQuery.tenderDetail || {};
-    const tenderResponses = tenderResponsesTableQuery.tenderResponses || {};
+    const tenderResponses = tenderResponsesTableQuery.tenderResponses || [];
     const notRespondedSuppliers =
       notRespondedSuppliersQuery.tenderResponseNotRespondedSuppliers || [];
 
