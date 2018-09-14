@@ -203,19 +203,7 @@ class Rfq extends Tender {
   renderOperations(type, status) {
     const { rfqBidSummaryReportLoading } = this.props;
 
-    if (type === 'srfq') {
-      return null;
-    }
-
-    return [
-      <Button
-        onClick={this.bidSummaryReport}
-        loading={rfqBidSummaryReportLoading}
-        key={0}
-      >
-        Bid summary list
-        {!rfqBidSummaryReportLoading ? <Icon type="file-excel" /> : ''}
-      </Button>,
+    const buttons = [
       <Button
         type="primary"
         onClick={this.award}
@@ -226,6 +214,21 @@ class Rfq extends Tender {
         <Icon type="trophy" />
       </Button>
     ];
+
+    if (type === 'rfq') {
+      buttons.push(
+        <Button
+          onClick={this.bidSummaryReport}
+          loading={rfqBidSummaryReportLoading}
+          key={0}
+        >
+          Bid summary list
+          {!rfqBidSummaryReportLoading ? <Icon type="file-excel" /> : ''}
+        </Button>
+      );
+    }
+
+    return buttons;
   }
 
   renderResponseModal(record) {
