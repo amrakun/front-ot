@@ -19,6 +19,7 @@ const tenderFields = `
   number,
   name,
   content,
+  attachments,
   publishDate,
   closeDate,
   file,

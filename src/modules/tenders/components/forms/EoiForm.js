@@ -25,6 +25,7 @@ class EoiForm extends TenderForm {
     );
 
     delete inputs.requestedProducts;
+
     inputs.type = 'eoi';
     inputs.requestedDocuments = requestedDocuments;
 

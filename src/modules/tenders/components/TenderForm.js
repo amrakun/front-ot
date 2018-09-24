@@ -57,11 +57,13 @@ class TenderForm extends BaseForm {
       products,
       ...perProductStates,
       content: data.content && data.content,
+      attachments: data.attachments,
       suppliers: data.suppliers
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onEmailContentChange = this.onEmailContentChange.bind(this);
+    this.onEmailAttachmentsChange = this.onEmailAttachmentsChange.bind(this);
     this.onAddSuppliers = this.onAddSuppliers.bind(this);
     this.onProductInputChange = this.onProductInputChange.bind(this);
     this.addProductRow = this.addProductRow.bind(this);
@@ -90,6 +92,7 @@ class TenderForm extends BaseForm {
 
     return {
       content: this.state.content,
+      attachments: this.state.attachments,
       supplierIds: supplierIds || [],
       requestedProducts: products
     };
@@ -97,6 +100,10 @@ class TenderForm extends BaseForm {
 
   onEmailContentChange(content) {
     this.setState({ content });
+  }
+
+  onEmailAttachmentsChange(attachments) {
+    this.setState({ attachments });
   }
 
   onAddSuppliers(values) {
@@ -235,7 +242,7 @@ class TenderForm extends BaseForm {
   }
 
   renderMainInfo(template) {
-    const { suppliers, content } = this.state;
+    const { suppliers, content, attachments } = this.state;
 
     return (
       <div>
@@ -243,10 +250,12 @@ class TenderForm extends BaseForm {
           suppliers={suppliers}
           data={this.props.data}
           content={content || template}
+          attachments={attachments || []}
           renderField={this.renderField.bind(this)}
           renderOptions={this.renderOptions.bind(this)}
           onAddSuppliers={this.onAddSuppliers}
           onEmailContentChange={this.onEmailContentChange}
+          onAttachmentsChange={this.onEmailAttachmentsChange}
           removeSupplier={this.removeSupplier}
         />
       </div>

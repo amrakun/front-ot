@@ -62,7 +62,9 @@ const MainInfo = props => {
     data,
     suppliers,
     content,
+    attachments,
     onEmailContentChange,
+    onAttachmentsChange,
     onAddSuppliers,
     removeSupplier
   } = props;
@@ -176,6 +178,14 @@ const MainInfo = props => {
             content={content || ''}
           />
         </Card>
+
+        <Card title="Attachments">
+          <Uploader
+            onChange={onAttachmentsChange}
+            defaultFileList={attachments}
+            multiple={true}
+          />
+        </Card>
       </Col>
     </Row>
   );
@@ -187,8 +197,10 @@ MainInfo.propTypes = {
   location: PropTypes.object,
   data: PropTypes.object,
   content: PropTypes.string,
+  attachments: PropTypes.array,
   suppliers: PropTypes.array,
   onEmailContentChange: PropTypes.func,
+  onAttachmentsChange: PropTypes.func,
   onAddSuppliers: PropTypes.func,
   removeSupplier: PropTypes.func
 };
