@@ -146,6 +146,9 @@ export const companyByUser = `
 
 const prequalificationFields = `
   _id
+  basicInfo {
+    ${basicInfoFields}
+  }
   financialInfo {
     canProvideAccountsInfo
     reasonToCannotNotProvide

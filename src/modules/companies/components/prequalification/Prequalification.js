@@ -97,6 +97,7 @@ class PrequalificationForms extends Panes {
             data: {
               disabled,
               prequalifiedStatus,
+              corporateStructure: (company.basicInfo || {}).corporateStructure,
               skip: () => this.toggleSkipForm(true)
             }
           })}

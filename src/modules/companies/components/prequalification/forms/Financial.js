@@ -195,11 +195,32 @@ class PrequalificationForm extends PreqForm {
     );
   }
 
+  renderSkipButton() {
+    const { skip, corporateStructure } = this.props;
+    const { __ } = this.context;
+
+    if (corporateStructure !== 'Sole Trader') {
+      return null;
+    }
+
+    return (
+      <Popconfirm
+        title={__(
+          'This action can not be undone and this is only useful for sole traders or individuals. Are you sure ?'
+        )}
+        onConfirm={skip}
+      >
+        <Button style={{ backgroundColor: '#f15a24', color: '#ffffff' }}>
+          {__('Skip pre qualification')}
+        </Button>
+      </Popconfirm>
+    );
+  }
+
   render() {
     const currencyOptions = this.renderOptions(currencyData);
     const booleanOptions = this.renderOptions(booleanData);
     const { canProvideAccountsInfo } = this.state;
-    const { skip } = this.props;
     const { __ } = this.context;
 
     const reasonVisible =
@@ -326,17 +347,7 @@ class PrequalificationForm extends PreqForm {
           })}
         </Card>
 
-        <Popconfirm
-          title={__(
-            'This action can not be undone and this is only useful for sole traders or individuals. Are you sure ?'
-          )}
-          onConfirm={skip}
-        >
-          <Button style={{ backgroundColor: '#f15a24', color: '#ffffff' }}>
-            {__('Skip prequalification')}
-          </Button>
-        </Popconfirm>
-
+        {this.renderSkipButton()}
         {this.renderSubmit()}
       </Form>
     );
