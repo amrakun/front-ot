@@ -28,10 +28,7 @@ const HeaderBar = (props, context) => {
       {!currentUser && (
         <Menu.Item className="logo landing">
           <Link to="/">
-            <img
-              src={process.env.PUBLIC_URL + '/images/logo_mn.png'}
-              alt="logo"
-            />
+            <img src={process.env.PUBLIC_URL + '/images/logo.jpg'} alt="logo" />
           </Link>
         </Menu.Item>
       )}
