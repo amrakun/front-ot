@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Upload, message, Button, Icon } from 'antd';
+import { message, Upload, Button, Icon } from 'antd';
 import { uploadUrl } from 'modules/common/constants';
 
 class Uploader extends React.Component {
@@ -16,7 +16,31 @@ class Uploader extends React.Component {
 
     this.state = { fileList };
 
+    this.beforeUpload = this.beforeUpload.bind(this);
     this.onChange = this.onChange.bind(this);
+  }
+
+  beforeUpload(file, fileList) {
+    let status = true;
+
+    for (const { name } of fileList || []) {
+      if (
+        name.includes('@') ||
+        name.includes('+') ||
+        name.includes('*') ||
+        name.includes('$')
+      ) {
+        message.error(
+          this.context.__('Invalid file name. Do not use @+*$ in file name')
+        );
+
+        status = false;
+
+        break;
+      }
+    }
+
+    return status;
   }
 
   onChange(e) {
@@ -61,6 +85,7 @@ class Uploader extends React.Component {
       ...this.props,
       action: uploadUrl,
       onChange: this.onChange,
+      beforeUpload: this.beforeUpload,
       fileList: this.state.fileList
     };
 
