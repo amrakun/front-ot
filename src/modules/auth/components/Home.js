@@ -55,7 +55,7 @@ class Home extends React.Component {
                 <Col span={6}>
                   <img
                     className="pull-right"
-                    src={`${process.env.PUBLIC_URL}/images/logo_${locale}.png`}
+                    src={`${process.env.PUBLIC_URL}/images/logo.jpg`}
                     width="85"
                     alt="logo"
                   />
