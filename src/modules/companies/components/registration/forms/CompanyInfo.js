@@ -234,8 +234,6 @@ class CompanyInfo extends BaseForm {
               label: '9. Company e-mail',
               name: 'email',
               validation: 'email',
-              isVisible: !soleTrader,
-              optional: soleTrader,
               control: <Input />,
               canBeCryllic: false
             })}
