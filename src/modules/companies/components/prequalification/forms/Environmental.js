@@ -19,8 +19,10 @@ class PrequalificationForm extends PreqForm {
     this.state = {
       hasEnvironmentalRegulatorInvestigated:
         data.hasEnvironmentalRegulatorInvestigated || false,
+
       hasConvictedForEnvironmentalLaws:
         data.hasConvictedForEnvironmentalLaws || false,
+
       doesHavePlan: data.doesHavePlan || false
     };
 
@@ -95,7 +97,8 @@ class PrequalificationForm extends PreqForm {
             label: labels.dateOfInvestigation,
             isVisible: hasEnvironmentalRegulatorInvestigated,
             optional: !hasEnvironmentalRegulatorInvestigated,
-            initialValue: moment(data.dateOfInvestigation),
+            initialValue:
+              data.dateOfInvestigation && moment(data.dateOfInvestigation),
             control: <DatePicker format={dateFormat} placeholder="Date" />
           })}
 
