@@ -62,10 +62,19 @@ class PrequalificationForms extends Panes {
     const { __ } = this.context;
     const { send, company, disabled } = this.props;
     const { currentTabKey } = this.state;
-    const { productsInfo, prequalifiedStatus } = company || {};
 
-    if (company.isSkippedPrequalification) {
-      if (company.isPrequalified) {
+    const {
+      productsInfo,
+      prequalifiedStatus,
+      isPrequalified,
+      isSkippedPrequalification
+    } =
+      company || {};
+
+    const basicInfo = (company || {}).basicInfo || {};
+
+    if (isSkippedPrequalification) {
+      if (isPrequalified) {
         return <Alert message={__('Pre-qualified')} type="success" showIcon />;
       }
 
@@ -97,7 +106,8 @@ class PrequalificationForms extends Panes {
             data: {
               disabled,
               prequalifiedStatus,
-              corporateStructure: (company.basicInfo || {}).corporateStructure,
+              corporateStructure: basicInfo.corporateStructure,
+              country: basicInfo.country,
               skip: () => this.toggleSkipForm(true)
             }
           })}
