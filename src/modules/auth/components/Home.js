@@ -42,8 +42,12 @@ class Home extends React.Component {
             <div className="top bg-white">
               <Row>
                 <Col span={6}>
-                  <h1>OYU</h1>
-                  <h2>Supplier Qualification Management System</h2>
+                  <img
+                    className="pull-left"
+                    src={`${process.env.PUBLIC_URL}/images/logo.jpg`}
+                    height="200"
+                    alt="logo"
+                  />
                 </Col>
                 <Col span={12}>
                   <p className="text">
@@ -55,7 +59,7 @@ class Home extends React.Component {
                 <Col span={6}>
                   <img
                     className="pull-right"
-                    src={`${process.env.PUBLIC_URL}/images/logo.jpg`}
+                    src={`${process.env.PUBLIC_URL}/images/logo.png`}
                     width="85"
                     alt="logo"
                   />

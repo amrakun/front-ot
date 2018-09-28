@@ -59,7 +59,7 @@ const Sidenav = (props, context) => {
       width={230}
     >
       <NavLink to="/" className="logo">
-        <img src={process.env.PUBLIC_URL + '/images/logo.jpg'} alt="logo" />
+        <img src={process.env.PUBLIC_URL + '/images/logo.png'} alt="logo" />
       </NavLink>
       <Menu
         selectedKeys={[pathname]}
