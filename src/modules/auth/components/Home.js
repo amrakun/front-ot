@@ -96,8 +96,8 @@ class Home extends React.Component {
                                 <b>{__('B.Togosoo')}</b>
                                 <br />
                                 <b>{__('Email')}:</b> togosoob@ot.mn<br />
-                                <b>{__('Phone')}:</b> 331880; {__('Ext')} - 3604<br
-                                />
+                                <b>{__('Phone')}:</b> 331880; {__('Ext')} -
+                                3671, 8888<br />
                               </p>
                             </Col>
                             <Col span={12}>
@@ -111,7 +111,7 @@ class Home extends React.Component {
                             <Col span={24}>
                               <p>
                                 {__(
-                                  'Oyu Tolgoi LLC Supply Department Monnis tower 5th floor Chinggis Avenue 15 Sukhbaatar District – 14240 Ulaanbaatar, Mongolia'
+                                  'Oyu Tolgoi LLC Monnis tower 5th floor Chinggis Avenue 15 Sukhbaatar District – 14240 Ulaanbaatar, Mongolia'
                                 )}
                               </p>
                             </Col>
