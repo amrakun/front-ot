@@ -302,8 +302,17 @@ const auditsSupplierSendResponse = `
 `;
 
 const qualificationsPrequalify = `
-  mutation qualificationsPrequalify($supplierId: String!, $qualified: Boolean) {
-    qualificationsPrequalify(supplierId: $supplierId, qualified: $qualified) {
+  mutation qualificationsPrequalify(
+    $supplierId: String!,
+    $qualified: Boolean,
+    $templateObject: JSON
+  ) {
+    qualificationsPrequalify(
+    supplierId: $supplierId,
+    qualified: $qualified,
+    templateObject: $templateObject,
+    ) {
+
       _id
     }
   }

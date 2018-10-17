@@ -9,7 +9,11 @@ import { mutations } from '../../graphql';
 const TemplateContainer = props => {
   const { saveMutation } = props;
 
-  const save = variables => {
+  const onSubmit = doc => {
+    const { kind, parentName } = props;
+
+    const variables = { name: parentName, kind, ...doc };
+
     saveMutation({ variables })
       .then(() => {
         message.success('Template Saved');
@@ -19,7 +23,7 @@ const TemplateContainer = props => {
       });
   };
 
-  const updatedProps = { ...props, save };
+  const updatedProps = { ...props, onSubmit };
 
   return <Template {...updatedProps} />;
 };

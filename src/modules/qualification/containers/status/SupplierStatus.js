@@ -57,8 +57,10 @@ const StatusContainer = props => {
       });
   };
 
-  const prequalifySupplier = qualified => {
-    prequalify({ variables: { supplierId: companyDetail._id, qualified } })
+  const prequalifySupplier = (qualified, templateObject) => {
+    prequalify({
+      variables: { supplierId: companyDetail._id, qualified, templateObject }
+    })
       .then(() => {
         supplierPrequalificationQuery.refetch();
         message.success('Pre-qualified!');

@@ -41,7 +41,13 @@ export default class Common extends React.Component {
 
   getWrappedColumns(middleColumns = [], backColumns = []) {
     return [
-      { title: 'Supplier name', dataIndex: 'basicInfo.enName', width: 160 },
+      {
+        title: 'Supplier name',
+        width: 160,
+        render: record => {
+          return ((record.basicInfo || {}).enName || '').toUpperCase();
+        }
+      },
       { title: 'Vendor number', dataIndex: 'basicInfo.sapNumber', width: 100 },
       {
         title: 'Tier type',

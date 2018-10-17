@@ -34,10 +34,7 @@ class Template extends React.Component {
   }
 
   onSubmit() {
-    const { kind, parentName } = this.props;
-    const { from, subject, content } = this.state;
-
-    this.props.save({ name: parentName, kind, from, subject, content });
+    this.props.onSubmit(this.state);
   }
 
   onChangeLanguage(language) {
@@ -65,6 +62,7 @@ class Template extends React.Component {
   }
 
   render() {
+    const { buttonText } = this.props;
     const { editorKey, language, from, subject, content } = this.state;
 
     return (
@@ -105,7 +103,7 @@ class Template extends React.Component {
             style={{ float: 'right', marginTop: 20 }}
             onClick={this.onSubmit}
           >
-            Save
+            {buttonText || 'Save'}
           </Button>
         </Col>
       </div>
@@ -114,9 +112,8 @@ class Template extends React.Component {
 }
 
 Template.propTypes = {
-  parentName: PropTypes.string,
-  kind: PropTypes.string,
-  save: PropTypes.func,
+  onSubmit: PropTypes.func,
+  buttonText: PropTypes.string,
   template: PropTypes.object
 };
 
