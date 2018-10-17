@@ -8,7 +8,7 @@ import { Card, Checkbox, List, Form, Alert } from 'antd';
 import { BaseForm } from 'modules/common/components';
 import { dateFormat } from 'modules/common/constants';
 import { labels } from 'modules/companies/components/prequalification/constants';
-import Prequalifier from './Prequalifier';
+import { Prequalifier } from '../../containers/status';
 
 class StatusTab extends BaseForm {
   constructor(props) {
@@ -114,9 +114,9 @@ class StatusTab extends BaseForm {
   }
 
   render() {
-    const { title, statusData, prequalifySupplier } = this.props;
+    const { title, statusData } = this.props;
     const { checkAll } = this.state;
-    const { enName, isPrequalified, tabQualified } = statusData;
+    const { supplierId, enName, isPrequalified, tabQualified } = statusData;
 
     return (
       <Form>
@@ -140,10 +140,7 @@ class StatusTab extends BaseForm {
           showIcon
         />
 
-        <Prequalifier
-          isPrequalified={isPrequalified}
-          prequalifySupplier={prequalifySupplier}
-        />
+        <Prequalifier supplierId={supplierId} isPrequalified={isPrequalified} />
 
         <p style={{ height: '8px' }} />
         <Card
@@ -177,8 +174,7 @@ class StatusTab extends BaseForm {
 }
 
 StatusTab.propTypes = {
-  title: PropTypes.string,
-  prequalifySupplier: PropTypes.func
+  title: PropTypes.string
 };
 
 const StatusTabForm = Form.create()(StatusTab);

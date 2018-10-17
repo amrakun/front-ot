@@ -22,6 +22,7 @@ class Status extends Panes {
           initialValue={company.tierType}
           saveTierType={saveTierType}
           companyInfo={{
+            supplierId: supplierInputs._id,
             ...supplierInputs.basicInfo,
             isPrequalified: supplierInputs.isPrequalified,
             isSentPrequalificationInfo:
@@ -61,6 +62,7 @@ class Status extends Panes {
 
     const extraProps = name => ({
       statusData: {
+        supplierId: supplierInputs._id,
         ...supplierInputs.basicInfo,
         isPrequalified,
         isSentPrequalificationInfo: supplierInputs.isSentPrequalificationInfo,

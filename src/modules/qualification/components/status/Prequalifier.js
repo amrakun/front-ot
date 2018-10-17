@@ -17,7 +17,7 @@ export default class Prequalifier extends React.Component {
   onUnqualify(doc) {
     this.setState({ showUnqualifyModal: false });
 
-    this.props.prequalifySupplier(false, doc);
+    this.props.prequalify(false, doc);
   }
 
   renderUnqualifyModal() {
@@ -25,14 +25,7 @@ export default class Prequalifier extends React.Component {
       return null;
     }
 
-    const { systemConfig } = this.context;
-    const templates = systemConfig.prequalificationTemplates || {};
-
-    const template = templates.supplier__failed || {
-      from: '',
-      subject: { mn: '', en: '' },
-      content: { mn: '', en: '' }
-    };
+    const { template } = this.props;
 
     return (
       <Modal
@@ -57,7 +50,7 @@ export default class Prequalifier extends React.Component {
   }
 
   render() {
-    const { isPrequalified, prequalifySupplier } = this.props;
+    const { isPrequalified, prequalify } = this.props;
 
     return (
       <div>
@@ -68,7 +61,7 @@ export default class Prequalifier extends React.Component {
                 This supplier is not pre-qualfied. Click&nbsp;
                 <Popconfirm
                   title="Are you sure?"
-                  onConfirm={() => prequalifySupplier(true)}
+                  onConfirm={() => prequalify(true)}
                   okText="Yes"
                   cancelText="No"
                 >
@@ -89,7 +82,7 @@ export default class Prequalifier extends React.Component {
                 This supplier is not evaluated. Click&nbsp;
                 <Popconfirm
                   title="Evaluation"
-                  onConfirm={() => prequalifySupplier(true)}
+                  onConfirm={() => prequalify(true)}
                   onCancel={() => this.setState({ showUnqualifyModal: true })}
                   okText="Qualified"
                   cancelText="Unqualified"
@@ -111,10 +104,7 @@ export default class Prequalifier extends React.Component {
 }
 
 Prequalifier.propTypes = {
+  template: PropTypes.object,
   isPrequalified: PropTypes.bool,
-  prequalifySupplier: PropTypes.func
-};
-
-Prequalifier.contextTypes = {
-  systemConfig: PropTypes.object
+  prequalify: PropTypes.func
 };

@@ -7,20 +7,13 @@ import TierTypeForm from './TierTypeForm';
 
 class TierTypeTab extends BaseForm {
   render() {
-    const {
-      statusData,
-      title,
-      data,
-      saveTierType,
-      prequalifySupplier
-    } = this.props;
+    const { statusData, title, data, saveTierType } = this.props;
 
     return (
       <div>
         <TierTypeForm
           title={title}
           initialValue={data}
-          prequalifySupplier={prequalifySupplier}
           saveTierType={saveTierType}
           companyInfo={statusData}
           renderButtons={save => (
@@ -38,7 +31,6 @@ class TierTypeTab extends BaseForm {
 TierTypeTab.propTypes = {
   title: PropTypes.string,
   data: PropTypes.string,
-  prequalifySupplier: PropTypes.func,
   saveTierType: PropTypes.func
 };
 

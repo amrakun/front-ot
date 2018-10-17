@@ -10,8 +10,7 @@ const StatusContainer = props => {
   const {
     supplierPrequalificationQuery,
     qualificationDetailQuery,
-    tierTypeSave,
-    prequalify
+    tierTypeSave
   } = props;
 
   if (
@@ -57,24 +56,10 @@ const StatusContainer = props => {
       });
   };
 
-  const prequalifySupplier = (qualified, templateObject) => {
-    prequalify({
-      variables: { supplierId: companyDetail._id, qualified, templateObject }
-    })
-      .then(() => {
-        supplierPrequalificationQuery.refetch();
-        message.success('Pre-qualified!');
-      })
-      .catch(error => {
-        message.error(error.message);
-      });
-  };
-
   const updatedProps = {
     ...props,
     save,
     saveTierType,
-    prequalifySupplier,
     company: {
       ...qualificationDetailQuery.qualificationDetail
     },
@@ -88,8 +73,7 @@ const StatusContainer = props => {
 StatusContainer.propTypes = {
   supplierPrequalificationQuery: PropTypes.object,
   qualificationDetailQuery: PropTypes.object,
-  tierTypeSave: PropTypes.func,
-  prequalify: PropTypes.func
+  tierTypeSave: PropTypes.func
 };
 
 export default compose(
@@ -135,9 +119,5 @@ export default compose(
 
   graphql(gql(mutations.qualifySaveTierType), {
     name: 'tierTypeSave'
-  }),
-
-  graphql(gql(mutations.qualificationsPrequalify), {
-    name: 'prequalify'
   })
 )(StatusContainer);

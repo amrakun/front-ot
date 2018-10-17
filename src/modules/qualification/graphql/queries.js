@@ -658,6 +658,12 @@ const companiesPrequalifiedStatus = `
   }
 `;
 
+const qualificationPrequalificationReplacer = `
+  query qualificationPrequalificationReplacer($supplierId: String!) {
+    qualificationPrequalificationReplacer(supplierId: $supplierId)
+  }
+`;
+
 export default {
   blockedCompanies,
   supplierPrequalification,
@@ -687,5 +693,6 @@ export default {
   companiesGeneratePrequalificationList,
   feedbackResponsesExport,
   companiesPrequalifiedStatus,
+  qualificationPrequalificationReplacer,
   auditResponsesQualifiedStatus
 };

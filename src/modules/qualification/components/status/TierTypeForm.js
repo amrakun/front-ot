@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { Card, Radio, Form, List, Alert } from 'antd';
-import Prequalifier from './Prequalifier';
+import { Prequalifier } from '../../containers/status';
 
 class TierTypeForm extends React.Component {
   constructor(props) {
@@ -85,14 +85,12 @@ class TierTypeForm extends React.Component {
   }
 
   render() {
-    const {
-      title,
-      companyInfo,
-      prequalifySupplier,
-      renderButtons
-    } = this.props;
+    const { title, companyInfo, renderButtons } = this.props;
+
     const { value } = this.state;
+
     const {
+      supplierId,
       enName,
       registeredInCountry,
       registeredInAimag,
@@ -124,10 +122,7 @@ class TierTypeForm extends React.Component {
 
         {this.renderStatus(isPrequalified)}
 
-        <Prequalifier
-          isPrequalified={isPrequalified}
-          prequalifySupplier={prequalifySupplier}
-        />
+        <Prequalifier supplierId={supplierId} isPrequalified={isPrequalified} />
 
         <p style={{ height: '8px' }} />
 
@@ -170,7 +165,6 @@ TierTypeForm.propTypes = {
   location: PropTypes.object,
   companyInfo: PropTypes.object,
   renderButtons: PropTypes.func,
-  prequalifySupplier: PropTypes.func,
   saveTierType: PropTypes.func
 };
 
