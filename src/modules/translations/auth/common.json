@@ -25,5 +25,7 @@
   "Your password has been reset, please sign in using your new password":
     "Таны нууц үг амжилттай сэргээгдлээ",
   "Account activated successfully! Please login using your provided details":
-    "Таны данс амжилттай идэвхижлээ"
+    "Таны данс амжилттай идэвхижлээ",
+  "If your email address exists in the system, an email with password reset instructions will be sent to you":
+    "Хэрвээ таны имэйл системд бүртгэлтэй байгаа бол танд заавар бүхий имэйл очих болно"
 }

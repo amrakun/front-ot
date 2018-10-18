@@ -2,32 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, graphql, gql } from 'react-apollo';
 import { ForgotPassword } from '../components';
+import { alert } from 'modules/common/utils';
 import { mutations } from '../graphql';
-import { message, notification, Icon } from 'antd';
-import { defineMessages, injectIntl, intlShape } from 'react-intl';
 
-const messages = defineMessages({
-  resetInformation: {
-    id: 'resetInformation',
-    defaultMessage: 'Password reset information has been sent to your email'
-  }
-});
-
-const ForgotPasswordContainer = props => {
-  const { forgotPasswordMutation, intl } = props;
+const ForgotPasswordContainer = (props, { __ }) => {
+  const { forgotPasswordMutation } = props;
 
   const forgotPassword = variables => {
     forgotPasswordMutation({ variables })
       .then(() => {
-        notification.open({
-          message: intl.formatMessage(messages.resetInformation),
-          icon: <Icon type="mail" style={{ color: 'rgb(0,153,168)' }} />,
-          duration: 0
-        });
+        alert.success(
+          'If your email address exists in the system, an email with password reset instructions will be sent to you',
+          __
+        );
         props.history.push('/');
       })
-      .catch(error => {
-        message.error(error.message);
+      .catch(() => {
+        alert.success(
+          'If your email address exists in the system, an email with password reset instructions will be sent to you',
+          __
+        );
+        props.history.push('/');
       });
   };
 
@@ -41,14 +36,15 @@ const ForgotPasswordContainer = props => {
 
 ForgotPasswordContainer.propTypes = {
   forgotPasswordMutation: PropTypes.func,
-  history: PropTypes.object,
-  intl: intlShape.isRequired
+  history: PropTypes.object
 };
 
-export default injectIntl(
-  compose(
-    graphql(gql(mutations.forgotPassword), {
-      name: 'forgotPasswordMutation'
-    })
-  )(ForgotPasswordContainer)
-);
+ForgotPasswordContainer.contextTypes = {
+  __: PropTypes.func
+};
+
+export default compose(
+  graphql(gql(mutations.forgotPassword), {
+    name: 'forgotPasswordMutation'
+  })
+)(ForgotPasswordContainer);

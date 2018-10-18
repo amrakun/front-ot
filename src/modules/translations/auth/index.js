@@ -1,5 +1,5 @@
 import Profile from './profile';
-import ChangePassword from './changePassword';
+import Common from './common';
 import SignIn from './signIn';
 
-export { Profile, ChangePassword, SignIn };
+export { Profile, Common, SignIn };

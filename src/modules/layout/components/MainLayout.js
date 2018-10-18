@@ -43,7 +43,7 @@ const mergedMessages = {
   ...messages.SupplierQualification,
   ...messages.RfqAndEoi.Tenders,
   ...messages.Auth.Profile,
-  ...messages.Auth.ChangePassword,
+  ...messages.Auth.Common,
   ...messages.Auth.SignIn
 };
 
