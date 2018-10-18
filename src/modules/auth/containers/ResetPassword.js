@@ -3,20 +3,12 @@ import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { compose, graphql, gql } from 'react-apollo';
 import { PasswordSubmission } from '../components';
+import { alert } from 'modules/common/utils';
 import { mutations } from '../graphql';
-import { message } from 'antd';
-import { defineMessages, injectIntl, intlShape } from 'react-intl';
 
-const messages = defineMessages({
-  successResetPassword: {
-    id: 'successResetPassword',
-    defaultMessage:
-      'Your password has been reset, please sign in using your new password'
-  }
-});
-
-const ResetPasswordContainer = props => {
-  const { resetPasswordMutation, history, token, intl } = props;
+const ResetPasswordContainer = (props, context) => {
+  const { resetPasswordMutation, history, token } = props;
+  const { __ } = context;
 
   const resetPassword = args => {
     resetPasswordMutation({
@@ -27,10 +19,14 @@ const ResetPasswordContainer = props => {
     })
       .then(() => {
         history.push('/sign-in');
-        message.success(intl.formatMessage(messages.successResetPassword));
+        alert.success(
+          __(
+            'Your password has been reset, please sign in using your new password'
+          )
+        );
       })
       .catch(error => {
-        message.error(error.message);
+        alert.error(error, __);
       });
   };
 
@@ -46,16 +42,17 @@ const ResetPasswordContainer = props => {
 ResetPasswordContainer.propTypes = {
   token: PropTypes.string,
   resetPasswordMutation: PropTypes.func,
-  history: PropTypes.object,
-  intl: intlShape.isRequired
+  history: PropTypes.object
 };
 
-export default injectIntl(
-  withRouter(
-    compose(
-      graphql(gql(mutations.resetPassword), {
-        name: 'resetPasswordMutation'
-      })
-    )(ResetPasswordContainer)
-  )
+export default withRouter(
+  compose(
+    graphql(gql(mutations.resetPassword), {
+      name: 'resetPasswordMutation'
+    })
+  )(ResetPasswordContainer)
 );
+
+ResetPasswordContainer.contextTypes = {
+  __: PropTypes.func
+};

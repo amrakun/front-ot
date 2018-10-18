@@ -3,8 +3,8 @@ import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { compose, graphql, gql } from 'react-apollo';
 import { PasswordSubmission } from '../components';
+import { alert } from 'modules/common/utils';
 import { mutations } from '../graphql';
-import { message } from 'antd';
 
 const RegisterContainer = (props, { __ }) => {
   const { confirmRegistrationMutation, history, token } = props;
@@ -17,11 +17,11 @@ const RegisterContainer = (props, { __ }) => {
 
     confirmRegistrationMutation({ variables: updatedVariables })
       .then(() => {
-        message.success(__('Welcome!'));
+        alert.success('Welcome!', __);
         history.push('/sign-in?confirmed');
       })
       .catch(error => {
-        message.error(error.message);
+        alert.error(error, __);
       });
   };
 

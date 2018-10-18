@@ -19,7 +19,10 @@ export const xlsxHandler = ({ e, success }) => {
 
 export const alert = {
   error: (error, __) => {
-    const fixedMessage = error.message.replace('GraphQL error: ', '');
+    const fixedMessage = (error.message || error).replace(
+      'GraphQL error: ',
+      ''
+    );
 
     return message.error(__ ? __(fixedMessage) : fixedMessage);
   },

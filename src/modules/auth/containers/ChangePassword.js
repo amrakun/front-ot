@@ -4,8 +4,8 @@ import { compose, gql, graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
 import { ChangePassword } from '../components';
 import { Loading } from '../../common/components';
+import { alert } from '../../common/utils';
 import { queries, mutations } from '../graphql';
-import { message } from 'antd';
 import { defineMessages, intlShape, injectIntl } from 'react-intl';
 
 const propTypes = {
@@ -32,10 +32,10 @@ const ChangePasswordContainer = props => {
   const mainAction = doc => {
     usersChangePasswordMutation({ variables: doc })
       .then(() => {
-        message.success(intl.formatMessage(messages.text));
+        alert.success(intl.formatMessage(messages.text));
       })
       .catch(error => {
-        message.error(error.message);
+        alert.error(error);
       });
   };
 
