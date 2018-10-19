@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { notification, Icon, Button, message } from 'antd';
+import { message } from 'antd';
 import { gql, graphql, compose } from 'react-apollo';
-import client from 'apolloClient';
-import { notifyReady, notifyLoading } from 'modules/common/constants';
+import { exportFile } from 'modules/common/components';
 import { queries, mutations } from '../graphql';
 import { BuyerTenders } from '../components';
 import listCommonQueriesGenerator from './listCommonQueriesGenerator';
@@ -29,44 +28,20 @@ class TendersContainer extends React.Component {
   exportTenders() {
     const { queryParams, type, supplierId } = this.props;
 
-    notification.open(notifyLoading);
-
     this.setState({ exportLoading: true });
 
-    client
-      .query({
-        query: gql(queries.exportTenders),
-        name: 'exportTenders',
-
-        variables: {
-          search: queryParams ? queryParams.search : '',
-          status: queryParams ? queryParams.status : '',
-          type: type,
-          supplierId: supplierId,
-          ignoreSubmitted: queryParams ? queryParams.ignoreSubmitted : ''
-        }
-      })
-      .then(response => {
-        notification.close('loadingNotification');
-        notification.open({
-          ...notifyReady,
-          btn: (
-            <Button
-              type="primary"
-              onClick={() => {
-                notification.close('downloadNotification');
-                window.open(response.data[Object.keys(response.data)[0]]);
-              }}
-            >
-              <Icon type="download" /> Download
-            </Button>
-          )
-        });
-        this.setState({ exportLoading: false });
-      })
-      .catch(error => {
-        message.error(error.message);
-      });
+    exportFile({
+      query: queries.exportTenders,
+      name: 'exportTenders',
+      variables: {
+        search: queryParams ? queryParams.search : '',
+        status: queryParams ? queryParams.status : '',
+        type: type,
+        supplierId: supplierId,
+        ignoreSubmitted: queryParams ? queryParams.ignoreSubmitted : ''
+      },
+      onFinish: () => this.setState({ exportLoading: false })
+    });
   }
 
   cancelTender(_id) {

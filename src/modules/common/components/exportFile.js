@@ -3,9 +3,11 @@ import { message, notification, Button, Icon } from 'antd';
 import { gql } from 'react-apollo';
 import { notifyReady, notifyLoading } from 'modules/common/constants';
 import client from 'apolloClient';
+import consts from 'consts';
 
 const exportExcel = props => {
   const { query, variables, onFinish, name = 'downloadQuery' } = props;
+  const { LOGIN_TOKEN_KEY } = consts;
 
   notification.open(notifyLoading);
 
@@ -24,7 +26,11 @@ const exportExcel = props => {
             type="primary"
             onClick={() => {
               notification.close('downloadNotification');
-              window.open(response.data[Object.keys(response.data)[0]]);
+              window.open(
+                `${
+                  response.data[Object.keys(response.data)[0]]
+                }?token=${localStorage.getItem(LOGIN_TOKEN_KEY)}`
+              );
             }}
           >
             <Icon type="download" /> Download
