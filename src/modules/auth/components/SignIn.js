@@ -97,7 +97,10 @@ class SignIn extends Component {
             <Button type="primary" loading={loading} htmlType="submit">
               {__('Sign in')}
             </Button>
-            {__('Or')} <Link to="/register">{__('register now!')}</Link>
+            <Link to="/register">{__('register now!')}</Link>
+            <Link className="right" to="/resend-confirmation-link">
+              {__('Resend confirmation link')}
+            </Link>
             <br />
             <Col span={6}>
               <HelpModal videoId="auth" />

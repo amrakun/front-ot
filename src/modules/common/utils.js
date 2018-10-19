@@ -1,6 +1,7 @@
 import xlsx from 'xlsx';
 import { message } from 'antd';
 import productsTree from 'modules/common/components/productsTree/constants';
+import consts from 'consts';
 
 export const xlsxHandler = ({ e, success }) => {
   const reader = new FileReader();
@@ -82,4 +83,12 @@ export const installErxes = (brandId, user) => {
     const entry = document.getElementsByTagName('script')[0];
     entry.parentNode.insertBefore(script, entry);
   })();
+};
+
+export const generateTemplateUrl = name => {
+  const { REACT_APP_API_URL } = process.env;
+  const { LOGIN_TOKEN_KEY } = consts;
+  const token = localStorage.getItem(LOGIN_TOKEN_KEY);
+
+  return `${REACT_APP_API_URL}/static/templates/${name}.xlsx?token=${token}`;
 };

@@ -28,6 +28,12 @@ const register = `
   }
 `;
 
+const resendConfirmationLink = `
+  mutation resendConfirmationLink($email: String!) {
+    resendConfirmationLink(email: $email)
+  }
+`;
+
 const confirmRegistration = `
   mutation confirmRegistration($token: String!, $password: String!, $passwordConfirmation: String!) {
     confirmRegistration(token: $token, password: $password, passwordConfirmation: $passwordConfirmation) {
@@ -103,6 +109,7 @@ const usersDelegate = `
 export default {
   login,
   register,
+  resendConfirmationLink,
   forgotPassword,
   resetPassword,
   usersEditProfile,

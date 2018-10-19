@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Table, Button, Icon, Alert, Col, Row } from 'antd';
+import { generateTemplateUrl } from 'modules/common/utils';
 import { rfqProductsColumns as rpc, rfqDisclaimer } from '../constants';
 
 class RfqTable extends Component {
@@ -35,10 +36,7 @@ class RfqTable extends Component {
       y: '65vh'
     };
 
-    const { REACT_APP_API_URL } = process.env;
-    const requestUrl = `${
-      REACT_APP_API_URL
-    }/static/templates/rfq_requested_products.xlsx`;
+    const requestUrl = generateTemplateUrl('rfq_requested_products');
 
     return (
       <div>

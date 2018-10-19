@@ -9,6 +9,7 @@ import {
   RegisterConfirmation,
   Profile,
   ChangePassword,
+  ResendConfirmationLink,
   Delegation
 } from './containers';
 import { Home } from './components';
@@ -17,6 +18,12 @@ export default [
   <Route key="home" exact path="/" component={Home} />,
   <Route key="/sign-in" exact path="/sign-in" component={SignIn} />,
   <Route key="/register" exact path="/register" component={Register} />,
+  <Route
+    key="/resend-confirmation-link"
+    exact
+    path="/resend-confirmation-link"
+    component={ResendConfirmationLink}
+  />,
   <Route key="/delegation" exact path="/delegation" component={Delegation} />,
   <Route
     key="/forgot-password"
