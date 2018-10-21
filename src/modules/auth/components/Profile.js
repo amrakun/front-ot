@@ -48,10 +48,11 @@ class Profile extends React.Component {
         <br />
 
         <Card>
-          <h2 style={{ marginBottom: 40 }}>{__('General Information')}</h2>
           <Row>
             <Col span={12} offset={2}>
               <Form className="user-register-form" onSubmit={this.handleSubmit}>
+                <h2>{__('General Information')}</h2>
+
                 <FormItem label={__('First name')}>
                   {getFieldDecorator('firstName', {
                     initialValue: user.firstName || '',
@@ -82,22 +83,6 @@ class Profile extends React.Component {
                   })(<Input />)}
                 </FormItem>
 
-                <FormItem label={__('Email address')}>
-                  {getFieldDecorator('email', {
-                    initialValue: user.email || '',
-                    rules: [
-                      {
-                        type: 'email',
-                        message: __('The input is not valid E-mail!')
-                      },
-                      {
-                        required: true,
-                        message: __('Please input your Email address!')
-                      }
-                    ]
-                  })(<Input />)}
-                </FormItem>
-
                 <FormItem label={__('Phone Number')}>
                   {getFieldDecorator('phone', {
                     initialValue: user.phone || '',
@@ -115,7 +100,23 @@ class Profile extends React.Component {
                   )}
                 </FormItem>
 
-                <h2>{__('Username & Password')}</h2>
+                <h2>{__('Secure information')}</h2>
+
+                <FormItem label={__('Email address')}>
+                  {getFieldDecorator('email', {
+                    initialValue: user.email || '',
+                    rules: [
+                      {
+                        type: 'email',
+                        message: __('The input is not valid E-mail!')
+                      },
+                      {
+                        required: true,
+                        message: __('Please input your Email address!')
+                      }
+                    ]
+                  })(<Input />)}
+                </FormItem>
 
                 <FormItem label={__('Username')}>
                   {getFieldDecorator('username', {

@@ -1,15 +1,21 @@
+const userFields = `
+  _id
+  username
+  email
+  isSupplier
+  companyId
+  firstName
+  lastName
+  jobTitle
+  phone
+
+  temporarySecureInformation
+`;
+
 const currentUser = `
   query currentUser {
     currentUser {
-      _id
-      username
-      email
-      isSupplier
-      companyId
-      firstName
-      lastName
-      jobTitle
-      phone
+      ${userFields}
     }
   }
 `;
@@ -56,8 +62,17 @@ const simpleUsers = `
   }
 `;
 
+const userDetail = `
+  query userDetail($_id: String) {
+    userDetail(_id: $_id) {
+      ${userFields}
+    }
+  }
+`;
+
 export default {
   currentUser,
+  userDetail,
   systemConfig,
   simpleUsers
 };

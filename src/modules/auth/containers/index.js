@@ -6,6 +6,7 @@ import withSystemConfig from './withSystemConfig';
 import Register from './Register';
 import Profile from './Profile';
 import RegisterConfirmation from './RegisterConfirmation';
+import ProfileEditConfirmation from './ProfileEditConfirmation';
 import ChangePassword from './ChangePassword';
 import Delegation from './Delegation';
 import ResendConfirmationLink from './ResendConfirmationLink';
@@ -19,6 +20,7 @@ export {
   Register,
   Profile,
   RegisterConfirmation,
+  ProfileEditConfirmation,
   ChangePassword,
   ResendConfirmationLink,
   Delegation

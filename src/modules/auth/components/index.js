@@ -5,6 +5,7 @@ import Home from './Home';
 import Register from './Register';
 import Profile from './Profile';
 import PasswordSubmission from './PasswordSubmission';
+import ProfileEditConfirmation from './ProfileEditConfirmation';
 import Delegation from './Delegation';
 import ResendConfirmationLink from './ResendConfirmationLink';
 
@@ -16,6 +17,7 @@ export {
   Register,
   Profile,
   PasswordSubmission,
+  ProfileEditConfirmation,
   ResendConfirmationLink,
   Delegation
 };

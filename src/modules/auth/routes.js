@@ -7,6 +7,7 @@ import {
   ResetPassword,
   Register,
   RegisterConfirmation,
+  ProfileEditConfirmation,
   Profile,
   ChangePassword,
   ResendConfirmationLink,
@@ -47,6 +48,15 @@ export default [
     component={({ location }) => {
       const parsed = queryString.parse(location.search);
       return <RegisterConfirmation token={parsed.token} />;
+    }}
+  />,
+  <Route
+    key="/confirm-profile-edition"
+    exact
+    path="/confirm-profile-edition"
+    component={({ location }) => {
+      const parsed = queryString.parse(location.search);
+      return <ProfileEditConfirmation token={parsed.token} />;
     }}
   />,
   <Route

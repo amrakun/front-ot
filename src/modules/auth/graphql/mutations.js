@@ -42,6 +42,14 @@ const confirmRegistration = `
   }
 `;
 
+const confirmProfileEdit = `
+  mutation confirmProfileEdit($token: String!) {
+    confirmProfileEdit(token: $token) {
+      _id
+    }
+  }
+`;
+
 const forgotPassword = `
   mutation forgotPassword($email: String!) {
     forgotPassword(email: $email)
@@ -84,6 +92,8 @@ const usersEditProfile = `
       lastName
       jobTitle
       phone
+
+      temporarySecureInformation
     }
   }
 `;
@@ -114,6 +124,7 @@ export default {
   resetPassword,
   usersEditProfile,
   confirmRegistration,
+  confirmProfileEdit,
   usersChangePassword,
   usersDelegate
 };

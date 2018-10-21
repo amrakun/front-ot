@@ -15,5 +15,9 @@
   "Please input your Phone Number!": "Утасны дугаар оруулна уу!",
   "Please input your Username!": "Нэвтрэх нэр оруулна уу!",
   "Please input your Password!": "Нууц үг оруулна уу!",
-  "Username & Password": "Нэвтрэх нэр болон нууц үг"
+  "Secure information": "Нууц мэдээлэл",
+  "Check your email to confirm":
+    "Мэдээллээ баталгаажуулхын тулд имэйл ээ шалгана уу",
+  "User name": "Хэрэглэгчийн нэр",
+  "Confirm": "Баталгаажуулах"
 }

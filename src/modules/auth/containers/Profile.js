@@ -4,37 +4,27 @@ import { compose, gql, graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
 import { Profile } from '../components';
 import { Loading } from '../../common/components';
+import { alert } from '../../common/utils';
 import { queries, mutations } from '../graphql';
-import { message } from 'antd';
-import { defineMessages, intlShape, injectIntl } from 'react-intl';
 
-const propTypes = {
-  currentUserQuery: PropTypes.object.isRequired,
-  usersEditProfileMutation: PropTypes.func,
-  onSuccess: PropTypes.func,
-  intl: intlShape.isRequired
-};
+const ProfileContainer = (props, { __ }) => {
+  const { currentUserQuery, usersEditProfileMutation } = props;
 
-const messages = defineMessages({
-  text: {
-    id: 'successFullyUpdated',
-    defaultMessage: 'Successfully updated'
-  }
-});
-
-const ProfileContainer = props => {
-  const { currentUserQuery, usersEditProfileMutation, intl } = props;
   if (currentUserQuery.loading || usersEditProfileMutation.loading) {
     return <Loading />;
   }
 
   const mainAction = doc => {
     usersEditProfileMutation({ variables: doc })
-      .then(() => {
-        message.success(intl.formatMessage(messages.text));
+      .then(({ data: { usersEditProfile } }) => {
+        if (usersEditProfile.temporarySecureInformation) {
+          alert.success('Check your email to confirm', __);
+        } else {
+          alert.success('Successfully updated', __);
+        }
       })
       .catch(error => {
-        message.error(error.message);
+        alert.error(error.message, __);
       });
   };
 
@@ -47,15 +37,21 @@ const ProfileContainer = props => {
   return <Profile {...updatedProps} />;
 };
 
-ProfileContainer.propTypes = propTypes;
+ProfileContainer.propTypes = {
+  currentUserQuery: PropTypes.object.isRequired,
+  usersEditProfileMutation: PropTypes.func,
+  onSuccess: PropTypes.func
+};
 
-export default injectIntl(
-  compose(
-    graphql(gql(queries.currentUser), {
-      name: 'currentUserQuery'
-    }),
-    graphql(gql(mutations.usersEditProfile), {
-      name: 'usersEditProfileMutation'
-    })
-  )(withRouter(ProfileContainer))
-);
+ProfileContainer.contextTypes = {
+  __: PropTypes.func
+};
+
+export default compose(
+  graphql(gql(queries.currentUser), {
+    name: 'currentUserQuery'
+  }),
+  graphql(gql(mutations.usersEditProfile), {
+    name: 'usersEditProfileMutation'
+  })
+)(withRouter(ProfileContainer));
