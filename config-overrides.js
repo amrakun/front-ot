@@ -16,6 +16,7 @@ module.exports = function override(config, env) {
       "@text-color": "fade(#000, 90%)",
       "@text-color-secondary": "fade(#000, 75%)"
     },
+    "javascriptEnabled": true 
   })(config, env);
   return config;
 };
