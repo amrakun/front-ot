@@ -1,17 +1,35 @@
-import { ApolloClient, createNetworkInterface } from 'react-apollo';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloClient } from 'apollo-client';
+import { onError } from 'apollo-link-error';
+import { createHttpLink } from 'apollo-link-http';
 
 const { REACT_APP_API_URL } = process.env;
 
-// Create a normal network interface:
-const networkInterface = createNetworkInterface({
+// Create an http link:
+const httpLink = createHttpLink({
   uri: `${REACT_APP_API_URL}/graphql`,
-  opts: {
-    credentials: 'include'
+  credentials: 'include'
+});
+
+// Network error
+const errorLink = onError(({ networkError, graphQLErrors }) => {
+  if (graphQLErrors && graphQLErrors.length > 0) {
+    const [error] = graphQLErrors;
+
+    if (error.message === 'Permission denied') {
+      window.location.href = '/permission-denied';
+    }
+  }
+
+  if (networkError) {
+    console.log('Disconnect ...');
   }
 });
 
+// Creating Apollo-client
 const client = new ApolloClient({
-  networkInterface
+  cache: new InMemoryCache(),
+  link: errorLink.concat(httpLink)
 });
 
 export default client;

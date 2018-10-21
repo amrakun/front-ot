@@ -76,5 +76,13 @@ export default [
       const parsed = queryString.parse(location.search);
       return <ChangePassword token={parsed.token} />;
     }}
+  />,
+  <Route
+    key="/permission-denied"
+    exact
+    path="/permission-denied"
+    component={() => {
+      return <div>Permission denied</div>;
+    }}
   />
 ];
