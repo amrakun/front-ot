@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { NumberCard, TextCard } from 'modules/common/components';
 import { dateFormat, colors } from 'modules/common/constants';
+import { readFileUrl } from 'modules/common/utils';
 import router from 'modules/common/router';
 import { Search } from 'modules/common/components';
 import { StatsTable } from 'modules/common/components';
@@ -200,25 +201,31 @@ class AuditResponses extends React.Component {
       },
       {
         title: 'Last auditor report',
-        render: record =>
-          record.reportFile ? (
-            <a href={record.reportFile} target="_blank">
+        render: record => {
+          if (!record.reportFile) {
+            return '-';
+          }
+
+          return (
+            <a href={readFileUrl(record.reportFile)} target="_blank">
               file
             </a>
-          ) : (
-            '-'
-          )
+          );
+        }
       },
       {
         title: 'Last auditor improvement plan',
-        render: record =>
-          record.improvementPlanFile ? (
-            <a href={record.improvementPlanFile} target="_blank">
+        render: record => {
+          if (!record.improvementPlanFile) {
+            return '-';
+          }
+
+          return (
+            <a href={readFileUrl(record.improvementPlanFile)} target="_blank">
               file
             </a>
-          ) : (
-            '-'
-          )
+          );
+        }
       }
     ];
   }
