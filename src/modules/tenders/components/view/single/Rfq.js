@@ -249,7 +249,7 @@ class Rfq extends Tender {
               key: Math.random(),
               render: row => {
                 return (
-                  <a href={row.url} target="__blank">
+                  <a href={readFileUrl(row.url)} target="__blank">
                     {row.name}
                   </a>
                 );
