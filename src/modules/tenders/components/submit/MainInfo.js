@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Card, Icon, Row, Col } from 'antd';
 import moment from 'moment';
 import { dateTimeFormat as dFormat, colors } from 'modules/common/constants';
-import PropTypes from 'prop-types';
+import { readFileUrl } from 'modules/common/utils';
 import { HelpModal } from 'modules/common/components';
 
 class MainInfo extends React.Component {
@@ -45,16 +46,22 @@ class MainInfo extends React.Component {
     );
   }
 
+  renderAttachment() {
+    const { file } = this.props;
+    const { __ } = this.context;
+
+    if (!file) {
+      return '-';
+    }
+
+    const link = <a href={readFileUrl(file.url)}>{__('Download')}</a>;
+
+    return this.renderCard(__('Document'), link, 'file');
+  }
+
   render() {
-    const {
-      type,
-      name,
-      number,
-      publishDate,
-      closeDate,
-      file,
-      content
-    } = this.props;
+    const { type, name, number, publishDate, closeDate, content } = this.props;
+
     const renderCard = this.renderCard;
     const { __ } = this.context;
 
@@ -63,11 +70,7 @@ class MainInfo extends React.Component {
         <Row gutter={16}>
           {renderCard(__('Name'), name, 'profile')}
           {renderCard(__('Number'), number, 'profile')}
-          {renderCard(
-            __('Document'),
-            file ? <a href={file.url}>{__('Download')}</a> : '-',
-            'file'
-          )}
+          {this.renderAttachment()}
           {renderCard(
             __('Publish Date'),
             moment(publishDate).format(dFormat),
