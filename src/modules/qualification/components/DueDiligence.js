@@ -14,8 +14,9 @@ import {
   List
 } from 'antd';
 import { Uploader, Search } from 'modules/common/components';
-import { Common, Sidebar } from 'modules/companies/components';
 import { dateFormat } from 'modules/common/constants';
+import { readFileUrl } from 'modules/common/utils';
+import { Common, Sidebar } from 'modules/companies/components';
 import moment from 'moment';
 
 class DueDiligence extends Common {
@@ -63,25 +64,25 @@ class DueDiligence extends Common {
 
     const files = record.dueDiligences;
 
+    if (!last) {
+      return '-';
+    }
+
     const render = [];
 
-    if (last) {
+    render.push(
+      <a key={0} href={readFileUrl(last.url)} target="_blank">
+        Last
+      </a>
+    );
+
+    if (files && files.length > 0) {
+      render.push(<Divider key={1} type="vertical" />);
       render.push(
-        <a key={0} href={last.url} target="_blank">
-          Last
+        <a key={2} onClick={() => this.showFilesModal(files)}>
+          Previous
         </a>
       );
-
-      if (files && files.length > 0) {
-        render.push(<Divider key={1} type="vertical" />);
-        render.push(
-          <a key={2} onClick={() => this.showFilesModal(files)}>
-            Previous
-          </a>
-        );
-      }
-    } else {
-      return '-';
     }
 
     return render;
