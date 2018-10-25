@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { message, Upload, Button, Icon } from 'antd';
-import { uploadUrl } from 'modules/common/constants';
+
+const { REACT_APP_API_URL } = process.env;
 
 class Uploader extends React.Component {
   constructor(props) {
@@ -18,6 +19,11 @@ class Uploader extends React.Component {
 
     this.beforeUpload = this.beforeUpload.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onPreview = this.onPreview.bind(this);
+  }
+
+  onPreview(file) {
+    window.open(`${REACT_APP_API_URL}/read-file?key=${file.url}`, '__blank');
   }
 
   beforeUpload(file, fileList) {
@@ -83,9 +89,11 @@ class Uploader extends React.Component {
 
     const extendedProps = {
       ...this.props,
-      action: uploadUrl,
+      withCredentials: true,
+      action: `${REACT_APP_API_URL}/upload-file`,
       onChange: this.onChange,
       beforeUpload: this.beforeUpload,
+      onPreview: this.onPreview,
       fileList: this.state.fileList
     };
 

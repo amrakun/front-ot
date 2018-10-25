@@ -7,6 +7,7 @@ import moment from 'moment';
 import { Card, Checkbox, List, Form, Alert } from 'antd';
 import { BaseForm } from 'modules/common/components';
 import { dateFormat } from 'modules/common/constants';
+import { readFileUrl } from 'modules/common/utils';
 import { labels } from 'modules/companies/components/prequalification/constants';
 import { Prequalifier } from '../../containers/status';
 
@@ -63,9 +64,17 @@ class StatusTab extends BaseForm {
     if (value === null || name === '__typename' || value.length < 1)
       return null;
 
-    if (typeof value === 'boolean') return value ? 'Yes' : 'No';
+    if (typeof value === 'boolean') {
+      return value ? 'Yes' : 'No';
+    }
 
-    if (value.url) return <a href={value.url}>{value.name}</a>;
+    if (value.url) {
+      return (
+        <a href={readFileUrl(value.url)} target="_blank">
+          {value.name}
+        </a>
+      );
+    }
 
     if (typeof value === 'object') {
       return this.createItems(value).map(item => {
