@@ -23,7 +23,10 @@ class Uploader extends React.Component {
   }
 
   onPreview(file) {
-    window.open(`${REACT_APP_API_URL}/read-file?key=${file.url}`, '__blank');
+    window.open(
+      `${REACT_APP_API_URL}/read-file?key=${file.url || file.response}`,
+      '__blank'
+    );
   }
 
   beforeUpload(file, fileList) {

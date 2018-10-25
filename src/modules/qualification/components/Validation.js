@@ -15,12 +15,11 @@ import {
   Input,
   Icon
 } from 'antd';
+import moment from 'moment';
 import { Uploader, Search } from 'modules/common/components';
 import { dateFormat } from 'modules/common/constants';
-import { getFlatProductsTree } from 'modules/common/utils';
-import { Common } from 'modules/companies/components';
-import { Sidebar } from 'modules/companies/components';
-import moment from 'moment';
+import { getFlatProductsTree, readFileUrl } from 'modules/common/utils';
+import { Sidebar, Common } from 'modules/companies/components';
 
 const CheckboxGroup = Checkbox.Group;
 const FormItem = Form.Item;
@@ -131,7 +130,11 @@ class Validation extends Common {
 
           for (const file of files) {
             links.push(
-              <a target="__blank" key={Math.random()} href={file.url}>
+              <a
+                target="__blank"
+                key={Math.random()}
+                href={readFileUrl(file.url)}
+              >
                 {file.name},{' '}
               </a>
             );
