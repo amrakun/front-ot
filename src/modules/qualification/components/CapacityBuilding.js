@@ -3,9 +3,9 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Card, Row, Col, Button } from 'antd';
-import { Common } from 'modules/companies/components';
-import { Sidebar } from 'modules/companies/components';
+import { Common, Sidebar } from 'modules/companies/components';
 import { Search } from 'modules/common/components';
+import { readFileUrl } from 'modules/common/utils';
 
 class CapacityBuilding extends Common {
   render() {
@@ -23,12 +23,14 @@ class CapacityBuilding extends Common {
             const certificateInfo = record.certificateInfo || {};
             const { file } = certificateInfo;
 
-            return file ? (
-              <a href={file.url} target="_blank">
+            if (!file) {
+              return '-';
+            }
+
+            return (
+              <a href={readFileUrl(file.url)} target="_blank">
                 {file.name}
               </a>
-            ) : (
-              '-'
             );
           }
         }
