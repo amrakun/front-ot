@@ -14,10 +14,12 @@ class CapacityBuilding extends Common {
     const columns = this.getWrappedColumns(
       [
         {
+          key: 'request',
           title: 'Request',
           dataIndex: 'certificateInfo.description'
         },
         {
+          key: 'certificateFile',
           title: 'Certificate file',
           render: record => {
             const certificateInfo = record.certificateInfo || {};
@@ -37,6 +39,7 @@ class CapacityBuilding extends Common {
       ],
       [
         {
+          key: 'actions',
           title: 'Actions',
           render: record => {
             /* if (
