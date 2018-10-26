@@ -16,6 +16,7 @@ import {
 } from 'antd';
 import { rfqRequestColumns } from '../../../constants';
 import Tender from './Tender';
+import { readFileUrl } from 'modules/common/utils';
 import router from 'modules/common/router';
 
 const Option = Select.Option;
@@ -194,7 +195,8 @@ class Rfq extends Tender {
           className="margin"
           style={{ width: '100%' }}
         >
-          <Icon type="close" />Clear filter
+          <Icon type="close" />
+          Clear filter
         </Button>
       </Col>
     );
@@ -247,7 +249,7 @@ class Rfq extends Tender {
               key: Math.random(),
               render: row => {
                 return (
-                  <a href={row.url} target="__blank">
+                  <a href={readFileUrl(row.url)} target="__blank">
                     {row.name}
                   </a>
                 );
@@ -287,7 +289,10 @@ class Rfq extends Tender {
         title: 'Picture (if required)',
         key: '15',
         render: record => (
-          <a onClick={() => window.open(record.file.url)} target="_blank">
+          <a
+            onClick={() => window.open(readFileUrl(record.file.url))}
+            target="_blank"
+          >
             Download
           </a>
         )

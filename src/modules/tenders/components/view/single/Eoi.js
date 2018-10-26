@@ -4,6 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Table, message, Button, Icon } from 'antd';
+import { readFileUrl } from 'modules/common/utils';
 import Tender from './Tender';
 
 class Eoi extends Tender {
@@ -22,20 +23,21 @@ class Eoi extends Tender {
   handleEoiShortList() {
     const { selectedCompanies } = this.state;
 
-    selectedCompanies.length < 1
-      ? message.error('Please select atleast one supplier!')
-      : this.props.downloadReport(this.state.selectedCompanies, 'eoiShortList');
+    if (selectedCompanies.length < 1) {
+      message.error('Please select atleast one supplier!');
+    } else {
+      this.props.downloadReport(this.state.selectedCompanies, 'eoiShortList');
+    }
   }
 
   handleEoiBidderList() {
     const { selectedCompanies } = this.state;
 
-    selectedCompanies.length < 1
-      ? message.error('Please select atleast one supplier!')
-      : this.props.downloadReport(
-          this.state.selectedCompanies,
-          'eoiBidderList'
-        );
+    if (selectedCompanies.length < 1) {
+      message.error('Please select atleast one supplier!');
+    } else {
+      this.props.downloadReport(this.state.selectedCompanies, 'eoiBidderList');
+    }
   }
 
   responseColumns() {
@@ -56,22 +58,28 @@ class Eoi extends Tender {
             return file.map((f, index) => (
               <a
                 key={index}
-                onClick={() => window.open(f.url)}
+                onClick={() => window.open(readFileUrl(f.url))}
                 target="_blank"
                 style={{ marginRight: '6px' }}
               >
-                File{index + 1}
+                File
+                {index + 1}
               </a>
             ));
-          } else {
-            return file ? (
-              <a onClick={() => window.open(record.file.url)} target="_blank">
-                Download
-              </a>
-            ) : (
-              '-'
-            );
           }
+
+          if (!file) {
+            return '-';
+          }
+
+          return (
+            <a
+              onClick={() => window.open(readFileUrl(record.file.url))}
+              target="_blank"
+            >
+              Download
+            </a>
+          );
         }
       },
       { title: 'Notes', dataIndex: 'notes', key: '4' }
@@ -87,8 +95,7 @@ class Eoi extends Tender {
       certificateOfRegistration,
       corporateStructure,
       totalNumberOfEmployees
-    } =
-      basicInfo || {};
+    } = basicInfo || {};
 
     const { doesHaveCodeEthicsFile } = businessInfo || {};
     const { areHSEResourcesClearlyIdentifiedFile } = healthInfo || {};

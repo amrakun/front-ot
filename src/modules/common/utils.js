@@ -92,3 +92,9 @@ export const generateTemplateUrl = name => {
 
   return `${REACT_APP_API_URL}/static/templates/${name}.xlsx?token=${token}`;
 };
+
+export const readFileUrl = url => {
+  const { REACT_APP_API_URL } = process.env;
+
+  return `${REACT_APP_API_URL}/read-file?key=${url}`;
+};

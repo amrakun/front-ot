@@ -51,9 +51,6 @@ const notifyReady = {
   key: 'downloadNotification'
 };
 
-const { REACT_APP_API_URL } = process.env;
-const uploadUrl = `${REACT_APP_API_URL}/upload-file`;
-
 const colors = [
   'rgb(0,153,168)',
   'rgb(0,116,155)',
@@ -81,7 +78,6 @@ export {
   booleanDataReverse,
   notifyLoading,
   notifyReady,
-  uploadUrl,
   colors,
   pageParams,
   pageValues

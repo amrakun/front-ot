@@ -42,19 +42,27 @@ export default class Common extends React.Component {
   getWrappedColumns(middleColumns = [], backColumns = []) {
     return [
       {
+        key: 'supplierName',
         title: 'Supplier name',
         width: 160,
         render: record => {
           return ((record.basicInfo || {}).enName || '').toUpperCase();
         }
       },
-      { title: 'Vendor number', dataIndex: 'basicInfo.sapNumber', width: 100 },
       {
+        key: 'venderNumber',
+        title: 'Vendor number',
+        dataIndex: 'basicInfo.sapNumber',
+        width: 100
+      },
+      {
+        key: 'tierType',
         title: 'Tier type',
         dataIndex: 'tierTypeDisplay',
         width: 40
       },
       {
+        key: 'prequalificationStatus',
         title: 'Pre-qualification status',
         width: 40,
         render: record => (
@@ -64,9 +72,24 @@ export default class Common extends React.Component {
         )
       },
       ...middleColumns,
-      { title: 'Contact person', dataIndex: 'contactInfo.name', width: 60 },
-      { title: 'Email address', dataIndex: 'contactInfo.email', width: 60 },
-      { title: 'Phone number', dataIndex: 'contactInfo.phone', width: 60 },
+      {
+        key: 'contactPerson',
+        title: 'Contact person',
+        dataIndex: 'contactInfo.name',
+        width: 60
+      },
+      {
+        key: 'email',
+        title: 'Email address',
+        dataIndex: 'contactInfo.email',
+        width: 60
+      },
+      {
+        key: 'phoneNumber',
+        title: 'Phone number',
+        dataIndex: 'contactInfo.phone',
+        width: 60
+      },
       ...backColumns
     ];
   }
