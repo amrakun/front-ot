@@ -99,7 +99,15 @@ class ManageTemplates extends React.Component {
               })}
               {this.renderTabPane({
                 tab: 'Capacity building',
-                key: 'capacityBuilding'
+                key: 'capacityBuilding',
+                kindOptions: [
+                  {
+                    value: 'supplier__submit',
+                    text: 'To supplier when submit'
+                  },
+                  { value: 'buyer__submit', text: 'To buyer when submit' },
+                  { value: 'supplier__enable', text: 'To supplier when enable' }
+                ]
               })}
               {this.renderTabPane({
                 tab: 'Block',
