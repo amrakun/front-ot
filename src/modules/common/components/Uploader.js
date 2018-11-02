@@ -32,7 +32,16 @@ class Uploader extends React.Component {
   beforeUpload(file, fileList) {
     let status = true;
 
-    for (const { name } of fileList || []) {
+    for (const { name, size } of fileList || []) {
+      // 20mb
+      if (size > 20000000) {
+        message.error(this.context.__('Maximum file upload size is 20mb'));
+
+        status = false;
+
+        break;
+      }
+
       if (
         name.includes('@') ||
         name.includes('+') ||
