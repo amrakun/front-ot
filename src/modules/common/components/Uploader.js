@@ -37,10 +37,11 @@ class Uploader extends React.Component {
         name.includes('@') ||
         name.includes('+') ||
         name.includes('*') ||
+        name.includes('#') ||
         name.includes('$')
       ) {
         message.error(
-          this.context.__('Invalid file name. Do not use @+*$ in file name')
+          this.context.__('Invalid file name. Do not use @+*#$ in file name')
         );
 
         status = false;
