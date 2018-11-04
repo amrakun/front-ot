@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { message, Upload, Button, Icon } from 'antd';
+import fileType from 'file-type';
 
 const { REACT_APP_API_URL } = process.env;
 
@@ -29,37 +30,57 @@ class Uploader extends React.Component {
     );
   }
 
-  beforeUpload(file, fileList) {
-    let status = true;
+  beforeUpload(file) {
+    const { name, size } = file;
 
-    for (const { name, size } of fileList || []) {
-      // 20mb
-      if (size > 20000000) {
-        message.error(this.context.__('Maximum file upload size is 20mb'));
+    // 20mb
+    if (size > 20000000) {
+      message.error(this.context.__('Maximum file upload size is 20mb'));
 
-        status = false;
-
-        break;
-      }
-
-      if (
-        name.includes('@') ||
-        name.includes('+') ||
-        name.includes('*') ||
-        name.includes('#') ||
-        name.includes('$')
-      ) {
-        message.error(
-          this.context.__('Invalid file name. Do not use @+*#$ in file name')
-        );
-
-        status = false;
-
-        break;
-      }
+      return false;
     }
 
-    return status;
+    if (
+      name.includes('@') ||
+      name.includes('+') ||
+      name.includes('*') ||
+      name.includes('#') ||
+      name.includes('$')
+    ) {
+      message.error(
+        this.context.__('Invalid file name. Do not use @+*#$ in file name')
+      );
+
+      return false;
+    }
+
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        // determine file type using magic numbers
+        const { mime } = fileType(new Uint8Array(reader.result));
+
+        if (
+          ![
+            'image/png',
+            'image/jpeg',
+            'image/jpg',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/pdf'
+          ].includes(mime)
+        ) {
+          message.error(this.context.__('Invalid file type.'));
+
+          reject(false);
+        } else {
+          resolve(true);
+        }
+      };
+
+      reader.readAsArrayBuffer(file);
+    });
   }
 
   onChange(e) {
