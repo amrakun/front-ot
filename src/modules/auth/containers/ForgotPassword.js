@@ -17,12 +17,8 @@ const ForgotPasswordContainer = (props, { __ }) => {
         );
         props.history.push('/');
       })
-      .catch(() => {
-        alert.success(
-          'If your email address exists in the system, an email with password reset instructions will be sent to you',
-          __
-        );
-        props.history.push('/');
+      .catch(e => {
+        alert.error(e, __);
       });
   };
 

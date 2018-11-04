@@ -13,10 +13,6 @@ class ForgotPassword extends BaseForm {
   constructor(props) {
     super(props);
 
-    this.state = {
-      loading: false
-    };
-
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -25,7 +21,6 @@ class ForgotPassword extends BaseForm {
 
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.setState({ loading: true });
         this.props.forgotPassword({ email: values.email });
       }
     });
@@ -51,7 +46,6 @@ class ForgotPassword extends BaseForm {
             />
 
             <Button
-              loading={this.state.loading}
               type="primary"
               htmlType="submit"
               style={{ marginBottom: '12px' }}
