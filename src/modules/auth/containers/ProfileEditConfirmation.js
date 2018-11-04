@@ -12,6 +12,12 @@ const ProfileEditContainer = (props, { __ }) => {
     return null;
   }
 
+  const { currentUser } = currentUserQuery;
+
+  if (!currentUser) {
+    return (window.location.href = '/');
+  }
+
   const confirmProfileEdit = () => {
     confirmProfileEditMutation({ variables: { token } })
       .then(() => {
@@ -23,7 +29,7 @@ const ProfileEditContainer = (props, { __ }) => {
   };
 
   const updatedProps = {
-    user: currentUserQuery.currentUser,
+    user: currentUser,
     submit: confirmProfileEdit
   };
 
