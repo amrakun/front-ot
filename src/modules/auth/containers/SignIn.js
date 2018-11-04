@@ -5,7 +5,6 @@ import { compose, graphql, gql } from 'react-apollo';
 import { alert } from 'modules/common/utils';
 import { SignIn } from '../components';
 import { mutations } from '../graphql';
-import consts from 'consts';
 import apolloClient from 'apolloClient';
 
 class SignInContainer extends React.Component {
@@ -24,29 +23,17 @@ class SignInContainer extends React.Component {
     const { __ } = this.context;
 
     const login = variables => {
-      const { LOGIN_TOKEN_KEY, LOGIN_REFRESH_TOKEN_KEY } = consts;
-
       this.setState({ loading: true });
 
       loginMutation({ variables })
         .then(({ data }) => {
-          const {
-            status,
-            delegatedUser,
-            user,
-            token,
-            refreshToken
-          } = data.login;
+          const { status, delegatedUser, user } = data.login;
 
           if (status === 'chooseLoginAs') {
             return this.setState({
               chooseLoginAs: { loginParams: variables, delegatedUser, user }
             });
           }
-
-          // save tokens
-          localStorage.setItem(LOGIN_TOKEN_KEY, token);
-          localStorage.setItem(LOGIN_REFRESH_TOKEN_KEY, refreshToken);
 
           apolloClient.resetStore();
 
