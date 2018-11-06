@@ -40,8 +40,20 @@ MainLayoutContainer.propTypes = {
   logsWriteMutation: PropTypes.func.isRequired
 };
 
+const BuyerLayout = withSystemConfig(MainLayoutContainer);
+
+const withUser = props => {
+  const { currentUser } = props;
+
+  if (currentUser && !currentUser.isSupplier) {
+    return <BuyerLayout {...props} />;
+  }
+
+  return <MainLayoutContainer {...props} />;
+};
+
 export default compose(
   graphql(gql(mutations.logsWrite), {
     name: 'logsWriteMutation'
   })
-)(withRouter(withSystemConfig(withCurrentUser(MainLayoutContainer))));
+)(withRouter(withCurrentUser(withUser)));
