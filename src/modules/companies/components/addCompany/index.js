@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Tag, Icon } from 'antd';
-import { Popup } from '../../containers/addCompany';
+import Popup from '../../containers/Popup';
 
 const propTypes = {
   showInvite: PropTypes.bool,
