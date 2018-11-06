@@ -37,7 +37,7 @@ class Uploader extends React.Component {
     if (size > 20000000) {
       message.error(this.context.__('Maximum file upload size is 20mb'));
 
-      return false;
+      return Promise.reject(false);
     }
 
     if (
@@ -51,7 +51,7 @@ class Uploader extends React.Component {
         this.context.__('Invalid file name. Do not use @+*#$ in file name')
       );
 
-      return false;
+      return Promise.reject(false);
     }
 
     return new Promise((resolve, reject) => {
@@ -59,7 +59,14 @@ class Uploader extends React.Component {
 
       reader.onloadend = () => {
         // determine file type using magic numbers
-        const { mime } = fileType(new Uint8Array(reader.result));
+        const ft = fileType(new Uint8Array(reader.result));
+
+        if (!ft) {
+          message.error(this.context.__('Invalid file type.'));
+          return reject(false);
+        }
+
+        const { mime } = ft;
 
         if (
           ![
