@@ -1,5 +1,6 @@
-import 'core-js';
 import 'react-app-polyfill/ie11';
+import 'core-js/fn/string/includes';
+import 'core-js/es7/array';
 import React from 'react';
 import { render } from 'react-dom';
 import { ApolloProvider } from 'react-apollo';
