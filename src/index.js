@@ -1,5 +1,4 @@
-import 'react-app-polyfill/ie11';
-import 'core-js';
+import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import { ApolloProvider } from 'react-apollo';
