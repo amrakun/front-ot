@@ -10,7 +10,6 @@
     "apollo-link": "^1.0.7",
     "apollo-link-error": "^1.0.9",
     "apollo-link-http": "^1.5.4",
-    "babel-polyfill": "^6.26.0",
     "draft-js": "^0.10.4",
     "draft-js-export-html": "^1.2.0",
     "file-type": "^10.3.0",
@@ -53,6 +52,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "babel-polyfill": "^6.26.0",
     "babel-plugin-import": "^1.6.3",
     "husky": "^0.14.3",
     "lint-staged": "^5.0.0",
@@ -61,9 +61,6 @@
     "react-app-rewired": "^1.4.0"
   },
   "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
+    ">0.2%"
   ]
 }
