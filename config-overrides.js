@@ -3,6 +3,11 @@ const rewireLess = require('react-app-rewire-less');
 
 module.exports = function override(config, env) {
   config = injectBabelPlugin(['import', { libraryName: 'antd', style: true }], config);
+
+  config.entry.unshift(
+    'babel-polyfill'
+  );
+
   config = rewireLess.withLoaderOptions({
     modifyVars: {
       "@primary-color": "#f47721",
