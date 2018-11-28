@@ -6,7 +6,12 @@ import { alert } from 'modules/common/utils';
 import { queries, mutations } from '../graphql';
 
 const ProfileEditContainer = (props, { __ }) => {
-  const { confirmProfileEditMutation, currentUserQuery, token } = props;
+  const {
+    confirmProfileEditMutation,
+    currentUserQuery,
+    token,
+    history
+  } = props;
 
   if (currentUserQuery.loading) {
     return null;
@@ -15,7 +20,8 @@ const ProfileEditContainer = (props, { __ }) => {
   const { currentUser } = currentUserQuery;
 
   if (!currentUser) {
-    return (window.location.href = '/');
+    history.push('/sign-in');
+    return null;
   }
 
   const confirmProfileEdit = () => {

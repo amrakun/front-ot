@@ -54,9 +54,9 @@ export default [
     key="/confirm-profile-edition"
     exact
     path="/confirm-profile-edition"
-    component={({ location }) => {
+    component={({ location, history }) => {
       const parsed = queryString.parse(location.search);
-      return <ProfileEditConfirmation token={parsed.token} />;
+      return <ProfileEditConfirmation token={parsed.token} history={history} />;
     }}
   />,
   <Route
