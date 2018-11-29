@@ -7,11 +7,13 @@ import { Loading } from '../../../common/components';
 import { queries, mutations } from '../../graphql';
 import { message } from 'antd';
 
-const QualificationAuditContainer = ({
-  usersListQuery,
-  configsSaveAuditDowMutation,
-  configsSaveImprovementPlanDowMutation
-}) => {
+const QualificationAuditContainer = props => {
+  const {
+    usersListQuery,
+    configsSaveAuditDowMutation,
+    configsSaveImprovementPlanDowMutation
+  } = props;
+
   if (
     usersListQuery.loading ||
     configsSaveAuditDowMutation.loading ||
@@ -31,7 +33,7 @@ const QualificationAuditContainer = ({
   };
 
   const updatedProps = {
-    ...this.props,
+    ...props,
     users: usersListQuery.users,
     mainAction
   };

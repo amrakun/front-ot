@@ -6,9 +6,9 @@ import { PreQualification } from '../../components';
 import { mutations } from '../../graphql';
 import { message } from 'antd';
 
-const PreQualificatoinContainer = ({
-  configsSavePrequalificationDowMutation
-}) => {
+const PreQualificatoinContainer = props => {
+  const { configsSavePrequalificationDowMutation } = props;
+
   const mainAction = doc => {
     configsSavePrequalificationDowMutation({ variables: { doc } }).then(() => {
       message.success('Saved Successfully');
@@ -16,7 +16,7 @@ const PreQualificatoinContainer = ({
   };
 
   const updatedProps = {
-    ...this.props,
+    ...props,
     mainAction
   };
 
