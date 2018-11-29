@@ -112,7 +112,7 @@ class Dashboard extends React.Component {
                 style={{ backgroundColor: COLORS[index % COLORS.length] }}
               />
               <label style={{ textTransform: 'uppercase' }}>
-                {detail.name === 'umnugovi' ? 'umnugobi' : detail.name}
+                {detail.name}
               </label>
             </span>
           ))}

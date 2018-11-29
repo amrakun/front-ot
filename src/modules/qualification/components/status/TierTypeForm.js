@@ -23,7 +23,7 @@ class TierTypeForm extends React.Component {
     let mep = 0;
 
     if (totalNumberOfEmployees && totalNumberOfMongolianEmployees) {
-      mep = totalNumberOfMongolianEmployees * 100 / totalNumberOfEmployees;
+      mep = (totalNumberOfMongolianEmployees * 100) / totalNumberOfEmployees;
     }
 
     // calculate tier type ==============
@@ -33,7 +33,7 @@ class TierTypeForm extends React.Component {
       suggestedType = 'national';
 
       if (registeredInAimag === 'Umnugovi') {
-        suggestedType = 'umnugobi';
+        suggestedType = 'umnugovi';
       }
 
       if (mep >= 75 && mep <= 100) {
@@ -146,7 +146,7 @@ class TierTypeForm extends React.Component {
             className="radio-vertical margin"
           >
             <Radio value="national">National supplier</Radio>
-            <Radio value="umnugobi">Umnugovi supplier</Radio>
+            <Radio value="umnugovi">Umnugovi supplier</Radio>
             <Radio value="tier1">International Tier 1 supplier</Radio>
             <Radio value="tier2">International Tier 2 supplier</Radio>
             <Radio value="tier3">International Tier 3 supplier</Radio>

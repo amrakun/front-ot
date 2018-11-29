@@ -71,9 +71,9 @@ class QualificationAudit extends React.Component {
             duration: data.nationalDuration,
             amount: data.nationalAmount
           },
-          umnugobi: {
-            duration: data.umnugobiDuration,
-            amount: data.umnugobiAmount
+          umnugovi: {
+            duration: data.umnugoviDuration,
+            amount: data.umnugoviAmount
           },
           tier1: {
             duration: data.tier1Duration,
@@ -94,9 +94,9 @@ class QualificationAudit extends React.Component {
             duration: data.nationalSpecificDuration,
             amount: data.nationalSpecificAmount
           },
-          umnugobi: {
-            duration: data.umnugobiSpecificDuration,
-            amount: data.umnugobiSpecificAmount
+          umnugovi: {
+            duration: data.umnugoviSpecificDuration,
+            amount: data.umnugoviSpecificAmount
           },
           tier1: {
             duration: data.tier1SpecificDuration,
@@ -129,9 +129,9 @@ class QualificationAudit extends React.Component {
         title: 'National supplier'
       },
       {
-        name: 'umnugobi',
-        duration: 'umnugobiDuration',
-        amount: 'umnugobiAmount',
+        name: 'umnugovi',
+        duration: 'umnugoviDuration',
+        amount: 'umnugoviAmount',
         title: 'Umnugovi supplier'
       },
       {
@@ -162,9 +162,9 @@ class QualificationAudit extends React.Component {
         title: 'National supplier'
       },
       {
-        name: 'umnugobi',
-        duration: 'umnugobiSpecificDuration',
-        amount: 'umnugobiSpecificAmount',
+        name: 'umnugovi',
+        duration: 'umnugoviSpecificDuration',
+        amount: 'umnugoviSpecificAmount',
         title: 'Umnugovi supplier'
       },
       {
