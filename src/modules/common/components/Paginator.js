@@ -52,7 +52,17 @@ class Paginator extends React.Component {
         onShowSizeChange={(current, pageSize) =>
           this.onChange(current, pageSize)
         }
-        pageSizeOptions={['15', '20', '30', '50', '100', '200', '500']}
+        pageSizeOptions={[
+          '15',
+          '20',
+          '30',
+          '50',
+          '100',
+          '200',
+          '500',
+          '1000',
+          '5000'
+        ]}
         current={page}
         pageSize={perPage}
         total={total}
