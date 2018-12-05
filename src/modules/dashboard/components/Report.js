@@ -27,6 +27,7 @@ class Dashboard extends React.Component {
     this.isPrequalified = false;
     this.tierType = '';
     this.tenderTypeAudits = 'desktop';
+    this.supplierProfileState = 'all';
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onIsPrequalifiedChange = this.onIsPrequalifiedChange.bind(this);
@@ -52,7 +53,7 @@ class Dashboard extends React.Component {
   exportSuppliers() {
     this.props.export('reportsSuppliersExport', {
       productCodes: this.productCodes,
-      isPrequalified: this.isPrequalified,
+      state: this.supplierProfileState,
       tierType: this.tierType
     });
   }
@@ -60,9 +61,11 @@ class Dashboard extends React.Component {
   exportTenders() {
     this.props.export('reportsTendersExport', {
       type: this.tenderTypeTenders,
+
       publishDate: this.publishDateTenders
         ? this.getDateInterval(this.publishDateTenders)
         : null,
+
       closeDate: this.closeDateTenders
         ? this.getDateInterval(this.closeDateTenders)
         : null
@@ -120,12 +123,19 @@ class Dashboard extends React.Component {
               style={{ width: '100%', marginBottom: '16px' }}
             />
 
-            <Checkbox
-              style={{ marginBottom: '16px' }}
-              onChange={this.onIsPrequalifiedChange}
-            >
-              Pre-qualified
-            </Checkbox>
+            <p>
+              <Radio.Group
+                onChange={e =>
+                  this.onInputChange('supplierProfileState', e.target.value)
+                }
+                defaultValue={this.supplierProfileState}
+              >
+                <Radio value="all">All</Radio>
+                <Radio value="pending">Pending</Radio>
+                <Radio value="prequalified">Qualified</Radio>
+                <Radio value="notqualified">Not qualified</Radio>
+              </Radio.Group>
+            </p>
 
             <Select
               style={{ width: '100%', marginBottom: '16px' }}

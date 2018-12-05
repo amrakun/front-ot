@@ -28,12 +28,12 @@ const companyByUser = `
 const reportsSuppliersExport = `
   query reportsSuppliersExport(
     $productCodes: [String],
-    $isPrequalified: Boolean,
+    $state: String,
     $tierType: String
   ) {
     reportsSuppliersExport(
       productCodes: $productCodes,
-      isPrequalified: $isPrequalified,
+      state: $state,
       tierType: $tierType
     )
   }
