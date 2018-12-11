@@ -87,6 +87,8 @@ class MailDeliveries extends React.Component {
               columns={this.columns}
               rowKey={record => record._id}
               dataSource={deliveries}
+              pagination={false}
+              scroll={{ x: 1224 }}
             />
 
             <Paginator total={totalCount} />
