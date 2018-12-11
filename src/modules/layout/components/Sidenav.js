@@ -47,7 +47,14 @@ const Sidenav = (props, context) => {
     defaultOpenKeys.push('action', 'audit');
   }
 
-  if (['/templates', '/manage-expiry-dates', '/user-list'].includes(pathname)) {
+  if (
+    [
+      '/templates',
+      '/manage-expiry-dates',
+      '/user-list',
+      '/mail-deliveries'
+    ].includes(pathname)
+  ) {
     defaultOpenKeys.push('settings');
   }
 

@@ -148,6 +148,10 @@ export const buyerSideMenu = [
       {
         url: '/user-list',
         title: 'Manage Users'
+      },
+      {
+        url: '/mail-deliveries',
+        title: 'Mail deliveries'
       }
     ]
   }

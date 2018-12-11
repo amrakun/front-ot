@@ -2,8 +2,8 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import queryString from 'query-string';
 import { UserList } from './containers';
-import { ManageTemplates } from './components';
-import { ManageExpiryDates } from './components';
+import { ManageTemplates, ManageExpiryDates } from './components';
+import { MailDeliveries } from './containers';
 
 export default [
   <Route
@@ -33,6 +33,16 @@ export default [
     component={({ location }) => {
       const queryParams = queryString.parse(location.search);
       return <ManageExpiryDates queryParams={queryParams} />;
+    }}
+  />,
+
+  <Route
+    key="/mail-deliveries"
+    exact
+    path="/mail-deliveries"
+    component={({ location }) => {
+      const queryParams = queryString.parse(location.search);
+      return <MailDeliveries queryParams={queryParams} />;
     }}
   />
 ];

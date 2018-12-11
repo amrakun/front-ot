@@ -13,26 +13,18 @@ const UserListContainer = ({
   usersRemoveMutation,
   history
 }) => {
-  if (usersListQuery.loading) {
+  if (usersListQuery.loading || usersTotalCountQuery.loading) {
     return <Loading />;
   }
 
   const updatedProps = {
     users: usersListQuery.users,
-    usersTotalCountQuery: usersTotalCountQuery.usersTotalCount
-      ? usersTotalCountQuery.usersTotalCount
-      : 0,
+    totalCount: usersTotalCountQuery.usersTotalCount || 0,
     removeUser: _id => {
       usersRemoveMutation({ variables: { _id } }).then(() => {
         usersListQuery.refetch();
       });
     },
-    setPaginationParams: ({ page }) => {
-      router.setParams(history, { page });
-    },
-    page: router.getParam(history, 'page')
-      ? Number(router.getParam(history, 'page'))
-      : 1,
     refetchUsers: () => {
       usersListQuery.refetch();
     },
@@ -57,10 +49,11 @@ export default compose(
     name: 'usersListQuery',
     options: ({ queryParams }) => {
       const { search } = queryParams;
+
       return {
         variables: {
           page: queryParams.page ? Number(queryParams.page) : 1,
-          perPage: 10,
+          perPage: queryParams.perPage ? Number(queryParams.perPage) : 10,
           role: 'admin',
           search
         },

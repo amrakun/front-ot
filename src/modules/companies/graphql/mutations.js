@@ -150,7 +150,6 @@ const sendEmail = `
       content: $content
     ) {
       status
-      supplierIds
     }
   }
 `;

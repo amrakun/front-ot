@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
-import { UserForm } from '../../containers';
 import {
   Table,
   Card,
@@ -16,6 +15,8 @@ import {
   message,
   Popconfirm
 } from 'antd';
+import { Paginator } from 'modules/common/components';
+import { UserForm } from '../../containers';
 
 const propTypes = {
   form: PropTypes.object.isRequired,
@@ -23,12 +24,10 @@ const propTypes = {
   history: PropTypes.object,
   user: PropTypes.object,
   addUser: PropTypes.func,
-  usersTotalCountQuery: PropTypes.number,
+  totalCount: PropTypes.number,
   removeUser: PropTypes.func,
   resetPassword: PropTypes.func,
   refetchUsers: PropTypes.func,
-  setPaginationParams: PropTypes.func.isRequired,
-  page: PropTypes.number.isRequired,
   numbering: PropTypes.number.isRequired
 };
 
@@ -46,15 +45,7 @@ class UserList extends React.Component {
       users: this.props.users,
       currentUser: null,
       showPopup: false,
-      showResetPopup: false,
-      pagination: {
-        onChange: page => {
-          this.props.setPaginationParams({ page });
-        },
-        pageSize: 10,
-        defaultCurrent: this.props.page,
-        total: this.props.usersTotalCountQuery
-      }
+      showResetPopup: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -145,6 +136,7 @@ class UserList extends React.Component {
 
   checkPassword(rule, value, callback) {
     const form = this.props.form;
+
     if (value && value !== form.getFieldValue('password')) {
       callback('Two passwords that you enter is inconsistent!');
     } else {
@@ -184,7 +176,8 @@ class UserList extends React.Component {
   }
 
   render() {
-    const { users, search, pagination } = this.state;
+    const { users, search } = this.state;
+    const { totalCount } = this.props;
 
     const suffix = search ? (
       <Icon type="close-circle" onClick={this.emitEmpty} />
@@ -223,8 +216,9 @@ class UserList extends React.Component {
               columns={this.columns}
               rowKey={record => record._id}
               dataSource={users}
-              pagination={pagination}
             />
+
+            <Paginator total={totalCount} />
           </Card>
         </Col>
       </Row>

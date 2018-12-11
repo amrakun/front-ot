@@ -1,0 +1,44 @@
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { compose, gql, graphql } from 'react-apollo';
+import PropTypes from 'prop-types';
+import { MailDeliveries } from '../components';
+import { queries } from '../graphql';
+
+const MailDeliveriesContainer = props => {
+  const { deliveriesQuery, deliveriesTotalCountQuery, queryParams } = props;
+
+  if (deliveriesQuery.loading || deliveriesTotalCountQuery.loading) {
+    return null;
+  }
+
+  const updatedProps = {
+    ...props,
+    search: queryParams.search,
+    deliveries: deliveriesQuery.mailDeliveries || [],
+    totalCount: deliveriesTotalCountQuery.mailDeliveriesTotalCount || 0
+  };
+
+  return <MailDeliveries {...updatedProps} />;
+};
+
+MailDeliveriesContainer.propTypes = {
+  deliveriesQuery: PropTypes.object.isRequired,
+  deliveriesTotalCountQuery: PropTypes.object.isRequired
+};
+
+export default compose(
+  graphql(gql(queries.mailDeliveries), {
+    name: 'deliveriesQuery',
+    options: ({ queryParams }) => ({
+      variables: {
+        search: queryParams.search,
+        page: queryParams.page ? Number(queryParams.page) : 1,
+        perPage: queryParams.perPage ? Number(queryParams.perPage) : 10
+      }
+    })
+  }),
+  graphql(gql(queries.mailDeliveriesTotalCount), {
+    name: 'deliveriesTotalCountQuery'
+  })
+)(withRouter(MailDeliveriesContainer));
