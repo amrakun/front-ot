@@ -92,10 +92,6 @@ export default compose(
     }
   }),
 
-  graphql(gql(queries.companyByUser), {
-    name: 'companyByUserQuery'
-  }),
-
   //mutations
   graphql(gql(mutations.auditsBuyerSaveCoreHseqInfo), {
     name: 'coreHseqInfoEdit'
