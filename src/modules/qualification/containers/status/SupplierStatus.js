@@ -13,6 +13,10 @@ const StatusContainer = props => {
     tierTypeSave
   } = props;
 
+  if (supplierPrequalificationQuery.error || qualificationDetailQuery.error) {
+    return null;
+  }
+
   if (
     supplierPrequalificationQuery.loading ||
     qualificationDetailQuery.loading

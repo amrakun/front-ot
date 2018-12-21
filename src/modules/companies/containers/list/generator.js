@@ -9,6 +9,10 @@ const generator = (Component, query, generateExtraVariables) => {
     render() {
       const { companiesQuery, totalCountQuery, queryParams } = this.props;
 
+      if (companiesQuery.error || totalCountQuery.error) {
+        return null;
+      }
+
       if (companiesQuery.loading || totalCountQuery.loading) {
         return <Component loading={true} queryParams={queryParams} />;
       }

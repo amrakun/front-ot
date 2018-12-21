@@ -12,15 +12,7 @@ const httpLink = createHttpLink({
 });
 
 // Network error
-const errorLink = onError(({ networkError, graphQLErrors }) => {
-  if (graphQLErrors && graphQLErrors.length > 0) {
-    const [error] = graphQLErrors;
-
-    if (error.message === 'Permission denied') {
-      window.location.href = '/permission-denied';
-    }
-  }
-
+const errorLink = onError(({ networkError }) => {
   if (networkError) {
     console.log('Disconnect ...');
   }

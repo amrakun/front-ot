@@ -1,12 +1,20 @@
 import React from 'react';
 import { Status } from '../../components';
 import { generator, generateVariables } from 'modules/companies/containers';
-import { exportFile } from 'modules/common/components';
+import { exportFile, Loading } from 'modules/common/components';
 import { queries } from '../../graphql';
 import PropTypes from 'prop-types';
 import { gql, graphql } from 'react-apollo';
 
 const StatusContainer = props => {
+  if (props.prequalifiedStatusQuery.error) {
+    return null;
+  }
+
+  if (props.prequalifiedStatusQuery.loading) {
+    return <Loading />;
+  }
+
   const generate = _ids => {
     exportFile({
       query: queries.companiesGeneratePrequalificationList,
