@@ -2,14 +2,19 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose, gql, graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
+import { Loading } from 'modules/common/components';
 import { MailDeliveries } from '../components';
 import { queries } from '../graphql';
 
 const MailDeliveriesContainer = props => {
   const { deliveriesQuery, deliveriesTotalCountQuery, queryParams } = props;
 
-  if (deliveriesQuery.loading || deliveriesTotalCountQuery.loading) {
+  if (deliveriesQuery.error || deliveriesTotalCountQuery.error) {
     return null;
+  }
+
+  if (deliveriesQuery.loading || deliveriesTotalCountQuery.loading) {
+    return <Loading />;
   }
 
   const updatedProps = {

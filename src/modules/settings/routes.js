@@ -1,8 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import queryString from 'query-string';
-import { ManageTemplates, UserList } from './containers';
-import { ManageExpiryDates } from './components';
+import { ManageExpiryDates, ManageTemplates, UserList } from './containers';
 import { MailDeliveries } from './containers';
 
 export default [

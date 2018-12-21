@@ -13,6 +13,10 @@ const UserListContainer = ({
   usersRemoveMutation,
   history
 }) => {
+  if (usersListQuery.error || usersTotalCountQuery.error) {
+    return null;
+  }
+
   if (usersListQuery.loading || usersTotalCountQuery.loading) {
     return <Loading />;
   }
