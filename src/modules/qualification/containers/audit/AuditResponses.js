@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AuditResponses } from '../../components';
 import { gql, graphql, compose } from 'react-apollo';
 import { mutations, queries } from '../../graphql';
+import { AuditResponses } from '../../components';
+import { Loading } from 'modules/common/components';
 import { message } from 'antd';
 
 class AuditResponsesContainer extends React.Component {
@@ -13,8 +14,12 @@ class AuditResponsesContainer extends React.Component {
       auditsBuyerSendFiles
     } = this.props;
 
+    if (auditResponsesTableQuery.error || totalCountsQuery.error) {
+      return null;
+    }
+
     if (auditResponsesTableQuery.loading || totalCountsQuery.loading) {
-      return <AuditResponses loading={true} />;
+      return <Loading />;
     }
 
     const sendFiles = ({ name, supplierId, auditId }) => {

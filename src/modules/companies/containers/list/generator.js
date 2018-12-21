@@ -2,19 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { gql, compose, graphql } from 'react-apollo';
 import { queries } from '../../graphql';
+import { Loading } from 'modules/common/components';
 import generateVariables from './generateVariables';
 
 const generator = (Component, query, generateExtraVariables) => {
   class Container extends React.Component {
     render() {
-      const { companiesQuery, totalCountQuery, queryParams } = this.props;
+      const { companiesQuery, totalCountQuery } = this.props;
 
       if (companiesQuery.error || totalCountQuery.error) {
         return null;
       }
 
       if (companiesQuery.loading || totalCountQuery.loading) {
-        return <Component loading={true} queryParams={queryParams} />;
+        return <Loading />;
       }
 
       const companies = companiesQuery.companies || [];

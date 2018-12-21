@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Blocking } from '../components';
 import { gql, graphql, compose } from 'react-apollo';
-import { queries, mutations } from '../graphql';
 import { message } from 'antd';
+import { Loading } from 'modules/common/components';
+import { Blocking } from '../components';
+import { queries, mutations } from '../graphql';
 
 class BlockingContainer extends React.Component {
   constructor(props) {
@@ -30,8 +31,12 @@ class BlockingContainer extends React.Component {
       unblockCompaniesMutation
     } = this.props;
 
+    if (blockedCompaniesQuery.error) {
+      return null;
+    }
+
     if (blockedCompaniesQuery.loading) {
-      return <Blocking loading={true} />;
+      return <Loading />;
     }
 
     const blockCompanies = variables => {

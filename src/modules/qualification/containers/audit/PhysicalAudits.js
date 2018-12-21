@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { PhysicalAudits } from '../../components';
-import { gql, graphql, compose } from 'react-apollo';
-import { queries, mutations } from '../../graphql';
 import { message } from 'antd';
+import { gql, graphql, compose } from 'react-apollo';
+import { PhysicalAudits } from '../../components';
+import { queries, mutations } from '../../graphql';
+import { Loading } from 'modules/common/components';
 
 class PhysicalAuditsContainer extends React.Component {
   render() {
@@ -14,8 +15,12 @@ class PhysicalAuditsContainer extends React.Component {
       physicalAuditsRemove
     } = this.props;
 
+    if (physicalAuditsTableQuery.error || physicalAuditsCountQuery.error) {
+      return null;
+    }
+
     if (physicalAuditsTableQuery.loading || physicalAuditsCountQuery.loading) {
-      return <PhysicalAudits loading={true} />;
+      return <Loading />;
     }
 
     const editPhysicalAudit = variables => {

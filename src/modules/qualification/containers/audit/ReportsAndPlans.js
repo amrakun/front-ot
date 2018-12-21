@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ReportsAndPlans } from '../../components';
 import { gql, graphql, compose } from 'react-apollo';
-import { queries, mutations } from '../../graphql';
 import { message } from 'antd';
+import { Loading } from 'modules/common/components';
+import { ReportsAndPlans } from '../../components';
+import { queries, mutations } from '../../graphql';
 
 class ReportsAndPlansContainer extends React.Component {
   render() {
@@ -13,8 +14,12 @@ class ReportsAndPlansContainer extends React.Component {
       auditsBuyerSendFiles
     } = this.props;
 
+    if (auditResponsesTableQuery.error) {
+      return null;
+    }
+
     if (auditResponsesTableQuery.loading) {
-      return <ReportsAndPlans loading={true} />;
+      return <Loading />;
     }
 
     const saveFiles = variables => {

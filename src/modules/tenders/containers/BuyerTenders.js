@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { message } from 'antd';
 import { gql, graphql, compose } from 'react-apollo';
-import { exportFile } from 'modules/common/components';
-import { queries, mutations } from '../graphql';
+import { exportFile, Loading } from 'modules/common/components';
 import { BuyerTenders } from '../components';
+import { queries, mutations } from '../graphql';
 import listCommonQueriesGenerator from './listCommonQueriesGenerator';
 
 class TendersContainer extends React.Component {
@@ -62,8 +62,12 @@ class TendersContainer extends React.Component {
   render() {
     const { tendersTableQuery, tendersCountQuery } = this.props;
 
+    if (tendersTableQuery.error || tendersCountQuery.error) {
+      return null;
+    }
+
     if (tendersTableQuery.loading || tendersCountQuery.loading) {
-      return <BuyerTenders {...{ ...this.props, loading: true }} />;
+      return <Loading />;
     }
 
     const { exportLoading } = this.state;

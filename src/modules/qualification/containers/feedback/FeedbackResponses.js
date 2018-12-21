@@ -1,15 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FeedbackResponses } from '../../components';
 import { gql, graphql, compose } from 'react-apollo';
+import { FeedbackResponses } from '../../components';
 import { queries } from '../../graphql';
-import { exportFile } from 'modules/common/components';
+import { exportFile, Loading } from 'modules/common/components';
 
 const TendersContainer = props => {
   const { feedbackResponsesTableQuery } = props;
 
+  if (feedbackResponsesTableQuery.error) {
+    return null;
+  }
+
   if (feedbackResponsesTableQuery.loading) {
-    return <FeedbackResponses loading={true} />;
+    return <Loading />;
   }
 
   const exportResponses = responseIds => {
