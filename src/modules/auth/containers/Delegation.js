@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, graphql, gql } from 'react-apollo';
+import { message } from 'antd';
+import { withCurrentUser } from 'modules/auth/containers';
 import { Delegation } from '../components';
 import { queries, mutations } from '../graphql';
-import { message } from 'antd';
 import client from 'apolloClient';
 
 class DelegationContainer extends React.Component {
@@ -42,6 +43,12 @@ class DelegationContainer extends React.Component {
   }
 
   render() {
+    const { currentUser } = this.props;
+
+    if (currentUser.isSupplier) {
+      return null;
+    }
+
     const updatedProps = {
       ...this.props,
       delegate: this.delegate,
@@ -61,4 +68,4 @@ export default compose(
   graphql(gql(mutations.usersDelegate), {
     name: 'usersDelegate'
   })
-)(DelegationContainer);
+)(withCurrentUser(DelegationContainer));
