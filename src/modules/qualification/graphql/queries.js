@@ -314,7 +314,6 @@ const auditResponseParams = `
   $supplierSearch: String
   $publishDate: Date
   $closeDate: Date
-  $isFileGenerated: Boolean
   $status: String
   $isQualified: Boolean
   $isNew: Boolean
@@ -325,7 +324,6 @@ const auditResponseValues = `
   supplierSearch: $supplierSearch
   publishDate: $publishDate
   closeDate: $closeDate
-  isFileGenerated: $isFileGenerated
   status: $status
   isQualified: $isQualified
   isNew: $isNew

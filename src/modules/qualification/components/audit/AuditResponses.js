@@ -8,12 +8,15 @@ import { withRouter } from 'react-router';
 import { Modal, Table, Card, Row, Col, DatePicker } from 'antd';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { NumberCard, TextCard } from 'modules/common/components';
+import {
+  StatsTable,
+  NumberCard,
+  TextCard,
+  Search
+} from 'modules/common/components';
 import { dateFormat, colors } from 'modules/common/constants';
 import { readFileUrl } from 'modules/common/utils';
 import router from 'modules/common/router';
-import { Search } from 'modules/common/components';
-import { StatsTable } from 'modules/common/components';
 import { auditTabs } from 'modules/qualification/consts';
 import { MassEmail } from 'modules/companies/containers';
 import { queries } from '../../graphql';

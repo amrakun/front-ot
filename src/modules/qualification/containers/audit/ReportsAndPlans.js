@@ -71,7 +71,6 @@ export default compose(
           publishDate: params.from,
           closeDate: params.to,
           supplierSearch: params.search,
-          isFileGenerated: true,
           status: params.status,
           page: params.page || 1,
           perPage: params.perPage || 15
