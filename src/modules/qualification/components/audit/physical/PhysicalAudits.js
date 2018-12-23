@@ -4,6 +4,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { Table, Card, Divider, Popconfirm } from 'antd';
 import { dateFormat } from 'modules/common/constants';
+import { readFileUrl } from 'modules/common/utils';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Search } from 'modules/common/components';
@@ -56,7 +57,7 @@ class AuditResponses extends React.Component {
         title: 'Report',
         render: record =>
           record.reportFile ? (
-            <a href={record.reportFile} target="_blank">
+            <a href={readFileUrl(record.reportFile)} target="_blank">
               View
             </a>
           ) : (
@@ -67,7 +68,7 @@ class AuditResponses extends React.Component {
         title: 'Improvement plan',
         render: record =>
           record.improvementPlanFile ? (
-            <a href={record.improvementPlanFile} target="_blank">
+            <a href={readFileUrl(record.improvementPlanFile)} target="_blank">
               View
             </a>
           ) : (
