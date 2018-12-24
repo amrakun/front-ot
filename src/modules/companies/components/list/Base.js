@@ -115,7 +115,7 @@ class Base extends Common {
           width: 40,
           render: record =>
             record.lastDueDiligence && record.lastDueDiligence.file ? (
-              <a href={record.lastDueDiligence.file.url} target="_blank">
+              <a href={record.lastDueDiligence.file.url} target="__blank">
                 View
               </a>
             ) : (
@@ -143,7 +143,9 @@ class Base extends Common {
                 View
               </a>
               &nbsp;|&nbsp;
-              <a onClick={() => exportCompany(record._id)}>Export</a>
+              <a href="#export" onClick={() => exportCompany(record._id)}>
+                Export
+              </a>
             </div>
           )
         }

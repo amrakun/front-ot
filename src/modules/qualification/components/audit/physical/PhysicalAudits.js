@@ -57,7 +57,7 @@ class AuditResponses extends React.Component {
         title: 'Report',
         render: record =>
           record.reportFile ? (
-            <a href={readFileUrl(record.reportFile)} target="_blank">
+            <a href={readFileUrl(record.reportFile)} target="__blank">
               View
             </a>
           ) : (
@@ -68,7 +68,7 @@ class AuditResponses extends React.Component {
         title: 'Improvement plan',
         render: record =>
           record.improvementPlanFile ? (
-            <a href={readFileUrl(record.improvementPlanFile)} target="_blank">
+            <a href={readFileUrl(record.improvementPlanFile)} target="__blank">
               View
             </a>
           ) : (
@@ -79,7 +79,9 @@ class AuditResponses extends React.Component {
         title: 'Action',
         render: record => (
           <span>
-            <a onClick={() => this.edit(record)}>Edit</a>
+            <a href="#edit" onClick={() => this.edit(record)}>
+              Edit
+            </a>
             <Divider type="vertical" />
             <Popconfirm
               title="Are you sure remove this audit?"
@@ -87,7 +89,7 @@ class AuditResponses extends React.Component {
               okText="Yes"
               cancelText="No"
             >
-              <a>Remove</a>
+              <a href="#remove">Remove</a>
             </Popconfirm>
           </span>
         )

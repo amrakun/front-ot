@@ -82,7 +82,7 @@ class Validation extends Common {
           }
 
           return (
-            <a onClick={() => this.showValidationModal(record)}>
+            <a href="#modal" onClick={() => this.showValidationModal(record)}>
               Total: <strong>{productsInfo.length}</strong>
               <Divider type="vertical" />
               Validated:&nbsp;

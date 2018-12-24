@@ -30,7 +30,7 @@ class CapacityBuilding extends Common {
             }
 
             return (
-              <a href={readFileUrl(file.url)} target="_blank">
+              <a href={readFileUrl(file.url)} target="__blank">
                 {file.name}
               </a>
             );

@@ -29,17 +29,34 @@ class Dashboard extends React.Component {
     } = prequalifiedStatus;
 
     if (isApproved) {
-      return <a onClick={exportPreq}>{__('Pre-qualified')}</a>;
+      return (
+        <a href="#pre-qual" onClick={exportPreq}>
+          {__('Pre-qualified')}
+        </a>
+      );
     }
 
-    if (isFailed) return <a onClick={exportPreq}>{__('Not pre-qualified')}</a>;
+    if (isFailed)
+      return (
+        <a href="#qual" onClick={exportPreq}>
+          {__('Not pre-qualified')}
+        </a>
+      );
 
     if (isExpired) {
-      return <a onClick={exportPreq}>{__('Expired')}</a>;
+      return (
+        <a href="#expired" onClick={exportPreq}>
+          {__('Expired')}
+        </a>
+      );
     }
 
     if (isOutstanding) {
-      return <a onClick={exportPreq}>{__('In progress')}</a>;
+      return (
+        <a href="#inProgress" onClick={exportPreq}>
+          {__('In progress')}
+        </a>
+      );
     }
 
     return (
@@ -222,7 +239,9 @@ class Dashboard extends React.Component {
               tooltip={
                 isPrequalified === null
                   ? null
-                  : !isPrequalified ? __(labels.preqSuggestion) : null
+                  : !isPrequalified
+                  ? __(labels.preqSuggestion)
+                  : null
               }
               text={this.getPrequalifiedStatus()}
               withPercent={true}

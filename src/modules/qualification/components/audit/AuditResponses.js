@@ -210,7 +210,7 @@ class AuditResponses extends React.Component {
           }
 
           return (
-            <a href={readFileUrl(record.reportFile)} target="_blank">
+            <a href={readFileUrl(record.reportFile)} target="__blank">
               file
             </a>
           );
@@ -224,7 +224,7 @@ class AuditResponses extends React.Component {
           }
 
           return (
-            <a href={readFileUrl(record.improvementPlanFile)} target="_blank">
+            <a href={readFileUrl(record.improvementPlanFile)} target="__blank">
               file
             </a>
           );

@@ -108,9 +108,11 @@ class Feedback extends Common {
           const lfd = record.lastFeedback;
           if (lfd && lfd.supplierResponse) {
             return (
-              <a onClick={() => this.viewFeedbackInfo(record.lastFeedback)}>
+              <Button
+                onClick={() => this.viewFeedbackInfo(record.lastFeedback)}
+              >
                 View
-              </a>
+              </Button>
             );
           } else return '-';
         }

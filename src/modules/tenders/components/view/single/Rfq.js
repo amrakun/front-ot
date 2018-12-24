@@ -290,8 +290,9 @@ class Rfq extends Tender {
         key: '15',
         render: record => (
           <a
+            href="#download"
             onClick={() => window.open(readFileUrl(record.file.url))}
-            target="_blank"
+            target="__blank"
           >
             Download
           </a>

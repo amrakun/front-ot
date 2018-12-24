@@ -65,7 +65,7 @@ export default class Prequalifier extends React.Component {
                   okText="Yes"
                   cancelText="No"
                 >
-                  <a>here</a>
+                  <a href="#here">here</a>
                 </Popconfirm>
                 &nbsp;to pre-qualify
               </span>
@@ -87,7 +87,7 @@ export default class Prequalifier extends React.Component {
                   okText="Qualified"
                   cancelText="Unqualified"
                 >
-                  <a>here</a>
+                  <a href="#here">here</a>
                 </Popconfirm>
                 &nbsp;to evaluate
               </span>

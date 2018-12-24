@@ -73,7 +73,9 @@ class Home extends React.Component {
                   <Link to="/register">{__('Register as a supplier')}</Link>
                 </li>
                 <li>
-                  <a onClick={() => this.toggleContact()}>{__('Contact us')}</a>
+                  <a href="#contact-us" onClick={() => this.toggleContact()}>
+                    {__('Contact us')}
+                  </a>
                   <Modal
                     title={__('Contact us')}
                     visible={this.state.visible}
@@ -95,16 +97,19 @@ class Home extends React.Component {
                               <p>
                                 <b>{__('B.Togosoo')}</b>
                                 <br />
-                                <b>{__('Email')}:</b> togosoob@ot.mn<br />
+                                <b>{__('Email')}:</b> togosoob@ot.mn
+                                <br />
                                 <b>{__('Phone')}:</b> 331880; {__('Ext')} -
-                                3671, 8888<br />
+                                3671, 8888
+                                <br />
                               </p>
                             </Col>
                             <Col span={12}>
                               <p>
                                 <b>{__('G.Narantsatsral')}</b>
                                 <br />
-                                <b>{__('Email')}:</b> narantsatsralg@ot.mn<br />
+                                <b>{__('Email')}:</b> narantsatsralg@ot.mn
+                                <br />
                                 <b>{__('Phone')}:</b> 331880; {__('Ext')} - 3789
                               </p>
                             </Col>
@@ -122,7 +127,9 @@ class Home extends React.Component {
                   </Modal>
                 </li>
                 <li>
-                  <a onClick={toggleLang}>{locale === 'en' ? 'MN' : 'EN'}</a>
+                  <a href="#lang" onClick={toggleLang}>
+                    {locale === 'en' ? 'MN' : 'EN'}
+                  </a>
                 </li>
               </ul>
             </div>
@@ -149,7 +156,7 @@ class Home extends React.Component {
                   </div>
                 </Col>
                 <Col span={6}>
-                  <a className="item program">
+                  <a href="#item" className="item program">
                     <div className="text">
                       {__('Capacity Building Program Coming soon!')}
                     </div>

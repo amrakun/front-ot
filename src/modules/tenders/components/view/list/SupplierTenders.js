@@ -77,7 +77,7 @@ class SupplierTenders extends Tenders {
     const { __ } = this.context;
 
     return (
-      <a href={url} target="_blank">
+      <a href={url} target="__blank">
         {__('View')}
       </a>
     );
@@ -99,7 +99,7 @@ class SupplierTenders extends Tenders {
           cancelText={__('No')}
           onConfirm={() => notInterested(_id)}
         >
-          <a>{__('Not interested')}</a>
+          <a href="#not-interested">{__('Not interested')}</a>
         </Popconfirm>
       ];
     }

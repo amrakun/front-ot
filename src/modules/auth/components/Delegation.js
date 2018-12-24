@@ -68,7 +68,7 @@ class Delegation extends BaseForm {
         </p>
         <p>
           Email: <strong>{selectedUser.email}</strong>
-          <a onClick={this.clearSearch}>
+          <a href="#clear" onClick={this.clearSearch}>
             <Icon type="close-circle" style={{ marginLeft: '5px' }} />
           </a>
         </p>

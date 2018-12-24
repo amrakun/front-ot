@@ -70,7 +70,7 @@ class StatusTab extends BaseForm {
 
     if (value.url) {
       return (
-        <a href={readFileUrl(value.url)} target="_blank">
+        <a href={readFileUrl(value.url)} target="__blank">
           {value.name}
         </a>
       );

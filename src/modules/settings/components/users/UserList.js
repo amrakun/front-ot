@@ -95,7 +95,9 @@ class UserList extends React.Component {
         key: 'action',
         render: (text, record) => (
           <span>
-            <a onClick={this.editUser.bind(this, record)}>Edit</a>
+            <a href="#edit" onClick={this.editUser.bind(this, record)}>
+              Edit
+            </a>
             <Divider type="vertical" />
             <Popconfirm
               key={3}
@@ -105,7 +107,7 @@ class UserList extends React.Component {
               cancelText="No"
               onConfirm={() => this.removeUser(record._id)}
             >
-              <a>Remove</a>
+              <a href="#remove">Remove</a>
             </Popconfirm>
           </span>
         )

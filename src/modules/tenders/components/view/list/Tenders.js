@@ -113,7 +113,7 @@ class Tenders extends React.Component {
     const { __ } = this.context;
 
     return (
-      <a href={url} target="_blank">
+      <a href={url} target="__blank">
         {__('View')}
       </a>
     );

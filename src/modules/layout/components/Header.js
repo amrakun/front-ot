@@ -63,7 +63,7 @@ const HeaderBar = (props, context) => {
             </Menu.Item>
           )}
           <Menu.Item key="logout">
-            <a onClick={logout}>
+            <a href="#sign-out" onClick={logout}>
               <T id="Sign out">Sign Out</T>
             </a>
           </Menu.Item>
@@ -78,7 +78,7 @@ const HeaderBar = (props, context) => {
 
       {currentUser && !currentUser.isSupplier ? null : (
         <Menu.Item className="right" key="lang">
-          <a onClick={toggleLang}>
+          <a href="#lang" onClick={toggleLang}>
             <span className="bordered">{locale === 'en' ? 'MN' : 'EN'}</span>
           </a>
         </Menu.Item>

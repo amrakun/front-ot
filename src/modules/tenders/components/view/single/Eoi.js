@@ -59,7 +59,8 @@ class Eoi extends Tender {
               <a
                 key={index}
                 onClick={() => window.open(readFileUrl(f.url))}
-                target="_blank"
+                href="#file"
+                target="__blank"
                 style={{ marginRight: '6px' }}
               >
                 File
@@ -74,8 +75,9 @@ class Eoi extends Tender {
 
           return (
             <a
+              href="#download"
               onClick={() => window.open(readFileUrl(record.file.url))}
-              target="_blank"
+              target="__blank"
             >
               Download
             </a>

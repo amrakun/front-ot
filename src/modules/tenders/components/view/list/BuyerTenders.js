@@ -108,7 +108,7 @@ class BuyerTenders extends Tenders {
         cancelText="No"
         onConfirm={() => cancelTender(_id)}
       >
-        <a>Cancel</a>
+        <a href="#cancel">Cancel</a>
       </Popconfirm>
     ];
   }

@@ -72,7 +72,9 @@ class Status extends Common {
             <div>
               <a href={`/prequalification-status/${record._id}`}>View</a>
               &nbsp;|&nbsp;
-              <a onClick={() => exportCompany(record._id)}>Export</a>
+              <a href="#export" onClick={() => exportCompany(record._id)}>
+                Export
+              </a>
             </div>
           )
         }

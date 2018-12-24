@@ -71,7 +71,7 @@ class DueDiligence extends Common {
     const render = [];
 
     render.push(
-      <a key={0} href={readFileUrl(last.url)} target="_blank">
+      <a key={0} href={readFileUrl(last.url)} target="__blank">
         Last
       </a>
     );
@@ -79,7 +79,7 @@ class DueDiligence extends Common {
     if (files && files.length > 0) {
       render.push(<Divider key={1} type="vertical" />);
       render.push(
-        <a key={2} onClick={() => this.showFilesModal(files)}>
+        <a href="#previous" key={2} onClick={() => this.showFilesModal(files)}>
           Previous
         </a>
       );
@@ -178,7 +178,7 @@ class DueDiligence extends Common {
               dataSource={filesModal.data}
               renderItem={item => (
                 <List.Item>
-                  <a key={0} href={item.file.url} target="_blank">
+                  <a key={0} href={item.file.url} target="__blank">
                     {moment(item.date).format(dateFormat)}
                   </a>
 

@@ -75,11 +75,11 @@ class Audit extends Common {
       },
       {
         title: 'Auditor report',
-        render: () => <a>View</a>
+        render: () => <a href="#view">View</a>
       },
       {
         title: 'Auditor improvement plan',
-        render: () => <a>View</a>
+        render: () => <a href="#view">View</a>
       },
       {
         title: 'Last qualification date',
@@ -130,7 +130,9 @@ class Audit extends Common {
           >
             Sending desktop audit invitation to&nbsp;
             <strong>{selectedCompanies.length}</strong> suppliers.
-            <a onClick={() => window.open('/audit/template')}>View template</a>
+            <a href="#view" onClick={() => window.open('/audit/template')}>
+              View template
+            </a>
             <DatePicker.RangePicker
               className="margin"
               onOk={this.handleDateRangeChange}

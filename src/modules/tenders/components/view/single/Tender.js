@@ -34,7 +34,7 @@ class Tender extends Common {
 
   getPercent(requestedCount, count) {
     if (count) {
-      return count / requestedCount * 100;
+      return (count / requestedCount) * 100;
     }
 
     return 0;
@@ -128,7 +128,11 @@ class Tender extends Common {
   }
 
   renderViewResponse(text, record) {
-    return <a onClick={() => this.showResponsesModal(record)}>View</a>;
+    return (
+      <a href="#view" onClick={() => this.showResponsesModal(record)}>
+        View
+      </a>
+    );
   }
 
   renderStats() {

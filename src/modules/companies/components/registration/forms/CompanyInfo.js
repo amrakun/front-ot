@@ -95,7 +95,11 @@ class CompanyInfo extends BaseForm {
               message={__('Registration complete')}
               description={
                 <span>
-                  {__('Please click')} <a onClick={exportForm}> {__('here')}</a>{' '}
+                  {__('Please click')}{' '}
+                  <a href="#here" onClick={exportForm}>
+                    {' '}
+                    {__('here')}
+                  </a>{' '}
                   {__('to download your registration form')}
                 </span>
               }

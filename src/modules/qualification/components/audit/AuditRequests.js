@@ -32,12 +32,14 @@ class AuditRequests extends React.Component {
       {
         title: __('Auditor report'),
         key: 4,
-        render: record => (record.status === 'open' ? '-' : <a>{__('View')}</a>)
+        render: record =>
+          record.status === 'open' ? '-' : <a href="#view">{__('View')}</a>
       },
       {
         title: __('Auditor improvement plan'),
         key: 5,
-        render: record => (record.status === 'open' ? '-' : <a>{__('View')}</a>)
+        render: record =>
+          record.status === 'open' ? '-' : <a href="#view">{__('View')}</a>
       },
       {
         title: __('More'),

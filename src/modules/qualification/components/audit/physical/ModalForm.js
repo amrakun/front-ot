@@ -80,7 +80,7 @@ class Audit extends React.Component {
               optional ? (
                 <span>
                   Report -{' '}
-                  <a href={data.reportFile} target="_blank">
+                  <a href={data.reportFile} target="__blank">
                     View current
                   </a>
                 </span>
@@ -99,7 +99,7 @@ class Audit extends React.Component {
               optional ? (
                 <span>
                   Improvement plan -{' '}
-                  <a href={data.improvementPlanFile} target="_blank">
+                  <a href={data.improvementPlanFile} target="__blank">
                     View current
                   </a>
                 </span>
