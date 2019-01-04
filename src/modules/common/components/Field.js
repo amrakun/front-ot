@@ -2,11 +2,86 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'antd';
 
+const regexNotEnglish = /[^a-zA-Z 0-9$&+,:;=?@#|'<>.^*()%!-]+?/;
+const regexNotCyrillic = /[^\u0400-\u04FF 0-9$&+,:;=?@#|'<>.^*()%!-]+?/;
+
 export default class Field extends React.Component {
   /*
    * For example: Select is accepting only string value, So we are
    * converting boolean, number to string
    */
+
+  constructor(props, context) {
+    super(props, context);
+    const {
+      description = '',
+      control,
+      optional,
+      labelIgnoreIndex,
+      labelIndex,
+      validation,
+      rules = [],
+      dataType,
+      validator,
+      canBeCryllic = true
+    } = props;
+
+    const { __, locale, currentUser } = context;
+
+    if (!optional) {
+      rules.push({
+        required: true,
+        message: __('This field is required!')
+      });
+    }
+
+    if (validation === 'email') {
+      rules.push({
+        type: 'email',
+        message: __('The input is not valid E-mail!')
+      });
+    }
+
+    if (currentUser && control.props.prefixCls === 'ant-input') {
+      if (canBeCryllic && locale === 'mn') {
+        rules.push({ validator: this.validateCryllic });
+      }
+
+      if (!canBeCryllic) {
+        rules.push({ validator: this.validateEnglish });
+      }
+    }
+
+    if (validator) {
+      rules.push({ validator });
+    }
+
+    // define args
+    this.args = {
+      initialValue: this.cleanInitialValue(),
+      rules
+    };
+    if (control.props.prefixCls === 'ant-checkbox')
+      this.args.valuePropName = 'checked';
+
+    if (dataType === 'file' || dataType === 'file-multiple') {
+      this.args.valuePropName = 'defaultFileList';
+    }
+
+    // define label
+    let { label } = props;
+    if (label && typeof label !== 'object') {
+      if (labelIgnoreIndex) {
+        label = label.replace(/[0-9]/g, '');
+        label = __(label) + ' ' + labelIndex;
+      } else {
+        label = __(label);
+      }
+    }
+    this.label = label;
+
+    this.description = description ? __(description) : description;
+  }
 
   cleanInitialValue() {
     const { control, initialValue, dataType } = this.props;
@@ -41,104 +116,54 @@ export default class Field extends React.Component {
   }
 
   validateCryllic(rules, value, callback) {
-    var cryllic = /^[\u0400-\u04FF 0-9$&+,:;=?@#|'<>.^*()%!-]*$/;
+    if (!value) {
+      return callback();
+    }
+    if (regexNotCyrillic.test(value)) {
+      callback('Зөвхөн кирилл үсгээр бичнэ үү');
+    } else {
+      callback();
+    }
+  }
 
-    if (!cryllic.test(value)) {
-      callback('Зөвхөн крилл үсгээр бичнэ үү');
+  validateEnglish(rules, value, callback) {
+    if (!value) {
+      return callback();
+    }
+    if (regexNotEnglish.test(value)) {
+      callback('Зөвхөн англиар бичнэ үү');
     } else {
       callback();
     }
   }
 
   render() {
+    console.log('render');
     const {
-      description = '',
-      name,
-      control,
-      optional,
-      labelIgnoreIndex,
-      labelIndex,
-      validation,
+      layout,
       isVisible = true,
       hasFeedback = true,
-      layout,
-      rules = [],
-      dataType,
       validateStatus,
       help,
-      validator,
-      canBeCryllic = true
+      name,
+      control
     } = this.props;
-    let { label } = this.props;
 
-    const { form, __, locale, currentUser } = this.context;
+    const { form } = this.context;
     const { getFieldDecorator } = form;
-
-    if (!optional) {
-      rules.push({
-        required: true,
-        message: __('This field is required!')
-      });
-    }
-
-    if (validation === 'email') {
-      rules.push({
-        type: 'email',
-        message: __('The input is not valid E-mail!')
-      });
-    }
-
-    if (
-      currentUser &&
-      canBeCryllic &&
-      !optional &&
-      locale === 'mn' &&
-      control.props.prefixCls === 'ant-input'
-    ) {
-      rules.push({
-        validator: this.validateCryllic
-      });
-    }
-
-    if (validator) {
-      rules.push({ validator });
-    }
-
-    let args = {
-      initialValue: this.cleanInitialValue(),
-      rules
-    };
-
-    if (control.props.prefixCls === 'ant-checkbox')
-      args.valuePropName = 'checked';
-
-    if (dataType === 'file' || dataType === 'file-multiple') {
-      args.valuePropName = 'defaultFileList';
-    }
-
-    if (label && typeof label !== 'object') {
-      if (labelIgnoreIndex) {
-        label = label.replace(/[0-9]/g, '');
-        label = __(label) + ' ' + labelIndex;
-      } else {
-        label = __(label);
-      }
-    }
-
-    const _description = description ? __(description) : description;
 
     return (
       <Form.Item
         {...layout}
-        label={label}
+        label={this.label}
         colon={false}
-        extra={_description}
+        extra={this.description}
         style={isVisible ? {} : { display: 'none' }}
         hasFeedback={hasFeedback}
         validateStatus={validateStatus}
         help={help}
       >
-        {getFieldDecorator(name, args)(control)}
+        {getFieldDecorator(name, this.args)(control)}
       </Form.Item>
     );
   }
