@@ -61,6 +61,7 @@ export default class Field extends React.Component {
       initialValue: this.cleanInitialValue(),
       rules
     };
+
     if (control.props.prefixCls === 'ant-checkbox')
       this.args.valuePropName = 'checked';
 
@@ -70,6 +71,7 @@ export default class Field extends React.Component {
 
     // define label
     let { label } = props;
+
     if (label && typeof label !== 'object') {
       if (labelIgnoreIndex) {
         label = label.replace(/[0-9]/g, '');
@@ -78,6 +80,7 @@ export default class Field extends React.Component {
         label = __(label);
       }
     }
+
     this.label = label;
 
     this.description = description ? __(description) : description;
@@ -138,7 +141,6 @@ export default class Field extends React.Component {
   }
 
   render() {
-    console.log('render');
     const {
       layout,
       isVisible = true,
