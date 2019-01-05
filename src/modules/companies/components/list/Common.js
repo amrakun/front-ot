@@ -45,6 +45,7 @@ export default class Common extends React.Component {
         key: 'supplierName',
         title: 'Supplier name',
         width: 160,
+        fixed: 'left',
         render: record => {
           return ((record.basicInfo || {}).enName || '').toUpperCase();
         }

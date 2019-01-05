@@ -129,7 +129,7 @@ const MainInfo = props => {
           })}
           {renderField({
             ...fieldProps,
-            label: 'Name',
+            label: 'Description',
             name: 'name',
             control: <Input />
           })}
