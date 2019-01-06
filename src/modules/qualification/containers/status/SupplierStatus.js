@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { gql, compose, graphql } from 'react-apollo';
 import { queries, mutations } from '../../graphql';
 import { SupplierStatus } from '../../components';
-import { Loading } from 'modules/common/components';
 import { message } from 'antd';
 
 const StatusContainer = props => {
@@ -21,7 +20,7 @@ const StatusContainer = props => {
     supplierPrequalificationQuery.loading ||
     qualificationDetailQuery.loading
   ) {
-    return <Loading />;
+    return null;
   }
 
   const { companyDetail } = supplierPrequalificationQuery;
