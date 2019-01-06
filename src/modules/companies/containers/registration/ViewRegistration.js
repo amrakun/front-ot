@@ -8,6 +8,10 @@ import { Loading } from 'modules/common/components';
 const RegistrationContainer = props => {
   let { companyDetailQuery } = props;
 
+  if (companyDetailQuery.error) {
+    return null;
+  }
+
   if (companyDetailQuery.loading) {
     return <Loading />;
   }

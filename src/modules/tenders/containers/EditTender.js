@@ -9,6 +9,10 @@ import { message } from 'antd';
 const PublishContainer = props => {
   const { tenderDetailQuery, tendersEdit } = props;
 
+  if (tenderDetailQuery.error) {
+    return null;
+  }
+
   if (tenderDetailQuery.loading) {
     return <Loading />;
   }

@@ -169,7 +169,7 @@ class MainLayout extends React.Component {
     return {
       toggleLang: this.toggleLang,
       currentUser: this.props.currentUser,
-      systemConfig: this.props.systemConfig,
+      systemConfig: this.props.systemConfig || {},
       locale: this.state.locale
     };
   }
