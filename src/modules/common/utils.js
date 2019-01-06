@@ -1,4 +1,4 @@
-import xlsx from 'xlsx';
+import xlsx from 'read-excel-file';
 import { message } from 'antd';
 import productsTree from 'modules/common/components/productsTree/constants';
 import consts from 'consts';
@@ -6,13 +6,29 @@ import consts from 'consts';
 export const xlsxHandler = ({ e, success }) => {
   const reader = new FileReader();
 
-  reader.onload = e => {
+  reader.onload = async e => {
     const data = e.target.result;
-    const workbook = xlsx.read(data, { type: 'binary' });
-    const sheetName = workbook.SheetNames[0];
-    const xlData = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName]);
+    const rows = await xlsx(data);
 
-    success(xlData);
+    if (rows.length <= 1) {
+      return success([]);
+    }
+
+    const [headers, ...dataRows] = rows;
+
+    const results = [];
+
+    dataRows.forEach(row => {
+      const mapper = {};
+
+      row.forEach((cell, index) => {
+        mapper[headers[index]] = cell;
+      });
+
+      results.push(mapper);
+    });
+
+    return success(results);
   };
 
   reader.readAsBinaryString(e.target.files[0]);
