@@ -15,6 +15,10 @@ const SubmitAuditContainer = (props, context) => {
   } = props;
   const { currentUser } = context;
 
+  if (auditResponseByUserQuery.error || companyByUserQuery.error) {
+    return null;
+  }
+
   if (auditResponseByUserQuery.loading || companyByUserQuery.loading) {
     return <Loading />;
   }
