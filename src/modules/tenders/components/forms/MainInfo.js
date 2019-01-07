@@ -116,7 +116,7 @@ const MainInfo = props => {
             <SupplierSearcher onSelect={onAddSuppliers} />
 
             <AddCompany
-              showInvite={window.location.href.includes('eoi')}
+              showInvite
               onAdd={supplier => onAddSuppliers([supplier])}
             />
           </div>
