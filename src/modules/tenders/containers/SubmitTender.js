@@ -45,6 +45,10 @@ class SubmitContainer extends React.Component {
       return <Loading />;
     }
 
+    if (tenderDetailQuery.error || tenderResponseByUserQuery.error) {
+      return null;
+    }
+
     const tenderDetail = tenderDetailQuery.tenderDetailSupplier || {};
     const tenderResponseByUser = tenderResponseByUserQuery.tenderResponseByUser;
 

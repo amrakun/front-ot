@@ -3,14 +3,18 @@ import PropTypes from 'prop-types';
 import { gql, compose, graphql } from 'react-apollo';
 import { queries, mutations } from '../../graphql';
 import { QualifyAudit } from '../../components';
-import { Loading, exportFile } from 'modules/common/components';
+import { exportFile } from 'modules/common/components';
 import { message } from 'antd';
 
 const QualifyAuditContainer = props => {
   const { auditResponseDetailQuery, supplierBasicInfoQuery, location } = props;
 
+  if (auditResponseDetailQuery.error || supplierBasicInfoQuery.error) {
+    return null;
+  }
+
   if (supplierBasicInfoQuery.loading) {
-    return <Loading />;
+    return null;
   }
 
   let auditResponseDetail = {};
@@ -74,8 +78,8 @@ export default compose(
     options: ({ location }) => {
       return {
         variables: {
-          auditId: location.state.auditId,
-          supplierId: location.state.supplierId
+          auditId: (location.state || {}).auditId,
+          supplierId: (location.state || {}).supplierId
         }
       };
     }
@@ -86,7 +90,7 @@ export default compose(
     options: ({ location }) => {
       return {
         variables: {
-          _id: location.state.supplierId
+          _id: (location.state || {}).supplierId
         }
       };
     }

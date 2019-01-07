@@ -27,6 +27,23 @@ const DashboardContainer = props => {
   } = props;
 
   if (
+    companiesCountByTierTypeQuery.error ||
+    companiesCountByProductCodeQuery.error ||
+    ccbrvpQuery.error ||
+    tenderCountByStatuseoi.error ||
+    tendersTotalCounteoi.error ||
+    tendersAverageDurationeoi.error ||
+    tendersTotalCountrfq.error ||
+    tenderCountByStatusrfq.error ||
+    tendersAverageDurationrfq.error ||
+    tendersTotalCountsrfq.error ||
+    tenderCountByStatussrfq.error ||
+    tendersAverageDurationsrfq.error
+  ) {
+    return null;
+  }
+
+  if (
     companiesCountByTierTypeQuery.loading ||
     companiesCountByProductCodeQuery.loading ||
     ccbrvpQuery.loading ||

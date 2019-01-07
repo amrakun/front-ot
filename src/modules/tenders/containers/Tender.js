@@ -142,11 +142,19 @@ class TenderContainer extends React.Component {
     const Component = location.pathname.includes('rfq') ? Rfq : Eoi;
 
     if (
+      tenderDetailQuery.error ||
+      tenderResponsesTableQuery.error ||
+      notRespondedSuppliersQuery.error
+    ) {
+      return null;
+    }
+
+    if (
       tenderDetailQuery.loading ||
       tenderResponsesTableQuery.loading ||
       notRespondedSuppliersQuery.loading
     ) {
-      return <Component loading={true} />;
+      return null;
     }
 
     const tenderDetail = tenderDetailQuery.tenderDetail || {};

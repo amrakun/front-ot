@@ -31,6 +31,48 @@ class MainLayoutContainer extends React.Component {
   }
 
   render() {
+    const pathname = window.location.pathname;
+    const { currentUser } = this.props;
+
+    if (currentUser && currentUser.isSupplier) {
+      const checkUrl = url => {
+        if (pathname === url || pathname === `${url}/`) {
+          throw new Error('Permission denied');
+        }
+      };
+
+      try {
+        checkUrl('/dashboard');
+        checkUrl('/companies');
+        checkUrl('/prequalification-status');
+        checkUrl('/capacity-building-status');
+        checkUrl('/audit');
+        checkUrl('/audit/responses');
+        checkUrl('/audit/responses-physical');
+        checkUrl('/audit/reports');
+        checkUrl('/validation');
+        checkUrl('/difot');
+        checkUrl('/due-diligence');
+        checkUrl('/feedback');
+        checkUrl('/feedback/responses');
+        checkUrl('/blocking');
+        checkUrl('/rfq');
+        checkUrl('/srfq');
+        checkUrl('/eoi');
+        checkUrl('/report');
+        checkUrl('/logs');
+        checkUrl('/settings/templates');
+        checkUrl('/settings/manage-expiry-dates');
+        checkUrl('/user-list');
+        checkUrl('/mail-deliveries');
+        checkUrl('/delegation');
+      } catch (e) {
+        if (e.message === 'Permission denied') {
+          return null;
+        }
+      }
+    }
+
     return <MainLayout {...this.props} />;
   }
 }
