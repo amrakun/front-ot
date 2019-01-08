@@ -173,11 +173,11 @@ class Home extends React.Component {
                     className="item calendar"
                   >
                     <div className="text">
-                      {__('Monthly Open Info Session Calendar')}
+                      {__('Quarterly Open Info Session')}
                     </div>
                     <img
                       src={calendarImg}
-                      alt={__('Monthly Open Info Session Calendar')}
+                      alt={__('Quarterly Open Info Session')}
                     />
                   </a>
                 </Col>
