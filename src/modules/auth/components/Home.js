@@ -169,7 +169,7 @@ class Home extends React.Component {
                 <Col span={6}>
                   <a
                     target="blank"
-                    href="http://ot.mn/plugins/event/?y=2018"
+                    href="http://ot.mn/plugins/event/?y=2019"
                     className="item calendar"
                   >
                     <div className="text">
