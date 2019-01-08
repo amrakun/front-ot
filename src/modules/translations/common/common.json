@@ -13,8 +13,7 @@
   "Change Password": "Нууц үг солих",
   "Copy above": "Хэрэв ижил бол дээрхийг хуулж тавина уу",
   "Back": "Буцах",
-  "Oyu Tolgoi ©2018 All Rights Reserved":
-    "Оюу толгой ©2018 Бүх эрх хуулиар хамгаалагдсан",
+  "Oyu Tolgoi ©2018 All Rights Reserved": "Оюу толгой ©2018 Бүх эрх хуулиар хамгаалагдсан",
   "placeholderTenderName": "Тендер нэр",
   "placeholderDate": "Огноо сонгох",
   "placeholderYear": "Жил сонгох",
@@ -38,37 +37,26 @@
   "Expression of Interest": "Оролцох Сонирхолоо Илэрхийлэх",
   "Register as a supplier": "Ханган нийлүүлэгчээр бүртгүүлэх",
   "Contact us": "Холбоо барих",
-  "Together deliver a safe and globally competitive copper business that contributes to the prosperity of Mongolia":
-    "Монгол улсын хөгжил дэвшилд хамтдаа хувь нэмрээ оруулж буй аюулгүй, дэлхийд өрсөлдөхүйц чадвар бүхий зэсийн бизнесийг хүргэж байна.",
-  "Welcome to “Oyu” Supplier Qualification Management System":
-    "\"Оюу\" ханган нийлүүлэгчийн бүртгэл үнэлгээний удирдлагын системд тавтай морилно уу.",
-  "Oyu Tolgoi LLC provides an opportunity to all potential national companies to participate in bidding process via SQMS and contributes further development of national companies.":
-    "Оюу толгой ХХК нь энэхүү мэдээллийн сангаар дамжуулан зах зээлийн чадамж сайтай үндэсний компаниудад тендерийн үйл ажиллагаанд оролцох, хөгжих боломж олгодог.",
-  "If you are interested in becoming Oyu Tolgoi supplier and become part of world class development, please register into the system.":
-    "Та Оюу толгой ХХК-ийн ханган нийлүүлэгч болж, дэлхийн хэмжээний бүтээн байгуулалтанд оролцох хүсэлтэй байгаа бол манай мэдээллийн санд бүртгүүлнэ үү.",
-  "Capacity Building Program Coming soon!":
-    "Ханган нийлүүлэгчийн чадавхижуулах хөтөлбөр тун удахгүй!",
-  "Monthly Open Info Session Calendar":
-    "Худалдан авалтын тухай сар бүрийн нээлттэй уулзалтын бүртгэл",
-  "If you have any questions about registering in the Oyu database, please contact the following address:":
-    "Хэрвээ танд Мэдээллийн санд бүртгүүлэхтэй холбоотой асуулт байвал та доорх хаягаар холбоо барина уу.",
+  "Together deliver a safe and globally competitive copper business that contributes to the prosperity of Mongolia": "Монгол улсын хөгжил дэвшилд хамтдаа хувь нэмрээ оруулж буй аюулгүй, дэлхийд өрсөлдөхүйц чадвар бүхий зэсийн бизнесийг хүргэж байна.",
+  "Welcome to “Oyu” Supplier Qualification Management System": "\"Оюу\" ханган нийлүүлэгчийн бүртгэл үнэлгээний удирдлагын системд тавтай морилно уу.",
+  "Oyu Tolgoi LLC provides an opportunity to all potential national companies to participate in bidding process via SQMS and contributes further development of national companies.": "Оюу толгой ХХК нь энэхүү мэдээллийн сангаар дамжуулан зах зээлийн чадамж сайтай үндэсний компаниудад тендерийн үйл ажиллагаанд оролцох, хөгжих боломж олгодог.",
+  "If you are interested in becoming Oyu Tolgoi supplier and become part of world class development, please register into the system.": "Та Оюу толгой ХХК-ийн ханган нийлүүлэгч болж, дэлхийн хэмжээний бүтээн байгуулалтанд оролцох хүсэлтэй байгаа бол манай мэдээллийн санд бүртгүүлнэ үү.",
+  "Capacity Building Program Coming soon!": "Ханган нийлүүлэгчийн чадавхижуулах хөтөлбөр тун удахгүй!",
+  "Quarterly Open Info Session": "Худалдан авалтын тухай сар бүрийн нээлттэй уулзалтын бүртгэл",
+  "If you have any questions about registering in the Oyu database, please contact the following address:": "Хэрвээ танд Мэдээллийн санд бүртгүүлэхтэй холбоотой асуулт байвал та доорх хаягаар холбоо барина уу.",
   "B.Togosoo": "Б.Тогосоо",
   "G.Narantsatsral": "Г.Наранцацрал",
-  "Oyu Tolgoi LLC Supply Department Monnis tower 5th floor Chinggis Avenue 15 Sukhbaatar District – 14240 Ulaanbaatar, Mongolia":
-    "Оюу Толгой ХХК Хангамжийн Хэлтэс Моннис Цамхаг 5-р Давхар Чингисийн өргөн чөлөө - 15 Сүхбаатар дүүрэг Улаанбаатар 14240, Монгол Улс",
+  "Oyu Tolgoi LLC Supply Department Monnis tower 5th floor Chinggis Avenue 15 Sukhbaatar District – 14240 Ulaanbaatar, Mongolia": "Оюу Толгой ХХК Хангамжийн Хэлтэс Моннис Цамхаг 5-р Давхар Чингисийн өргөн чөлөө - 15 Сүхбаатар дүүрэг Улаанбаатар 14240, Монгол Улс",
   "Changes disabled": "Өөрчлөлт оруулах боломжгүй",
-  "You have already submitted your pre-qualification form and changes are disabled.":
-    "Та гэрээ хэрэгжүүлэх чадварын үнэлгээний асуулгаа нэгэнт илгээсэн тул өөрчлөлт оруулах боломжгүй",
+  "You have already submitted your pre-qualification form and changes are disabled.": "Та гэрээ хэрэгжүүлэх чадварын үнэлгээний асуулгаа нэгэнт илгээсэн тул өөрчлөлт оруулах боломжгүй",
   "Ext": "дотуур утас",
   "successFullyUpdated": "Ажилттай шинэчлэгдлээ",
   "resetInformation": "Нууц үг шинэчлэх мэдээлэл таны и-мэйл хаягруу илгээсэн",
-  "successResetPassword":
-    "Таны нууц үг шинэчлэгдсэн тул, шинэ нууц үгээ ашиглан нэвтэрнэ үү.",
+  "successResetPassword": "Таны нууц үг шинэчлэгдсэн тул, шинэ нууц үгээ ашиглан нэвтэрнэ үү.",
   "Click to upload": "Файл байршуулах",
   "Save & continue": "Хадгалаад үргэлжлүүлэх",
   "Not complete": "Мэдээлэл бүрэн бус",
-  "Are you sure you are not interested？":
-    "Та оролцохгүй гэдэгтээ итгэлтэй байна уу?",
+  "Are you sure you are not interested？": "Та оролцохгүй гэдэгтээ итгэлтэй байна уу?",
   "Approved": "Зөвшөөрөгдсөн",
   "Pre-qualified": "Тэнцсэн",
   "Expired": "Хугацаа дууссан",
@@ -79,23 +67,15 @@
   "Add distribution right name": "Гэрээт борлуулагчын эрхийн нэр нэмэх",
   "Please click": " ",
   "to download your registration form": "бүртгэлийн маягтаа татаж авна уу",
-  "Please tick the boxes to confirm that you have agree with the statements":
-    "",
-  "Financial information is not qualified":
-    "Санхүүгийн мэдээлэл баталгаажаагүй байна",
-  "Business integrity & human resource is not qualified":
-    "Бизнесийн ёс зүй болон хүний нөөцийн удирдлага баталгаажаагүй байна",
-  "Environmental management is not qualified":
-    "Байгаль орчны удирдлага баталгаажаагүй байна",
-  "Health & safety mangement system is not qualified":
-    "Эрүүл мэнд, аюулгүй ажиллагааны удирдлагын систем баталгаажаагүй байна",
+  "Please tick the boxes to confirm that you have agree with the statements": "",
+  "Financial information is not qualified": "Санхүүгийн мэдээлэл баталгаажаагүй байна",
+  "Business integrity & human resource is not qualified": "Бизнесийн ёс зүй болон хүний нөөцийн удирдлага баталгаажаагүй байна",
+  "Environmental management is not qualified": "Байгаль орчны удирдлага баталгаажаагүй байна",
+  "Health & safety mangement system is not qualified": "Эрүүл мэнд, аюулгүй ажиллагааны удирдлагын систем баталгаажаагүй байна",
   "Financial information is qualified": "Санхүүгийн мэдээлэл баталгаажлаа",
-  "Business integrity & human resource is qualified":
-    "Бизнесийн ёс зүй болон хүний нөөцийн удирдлага баталгаажлаа",
-  "Health & safety mangement system is qualified":
-    "Эрүүл мэнд, аюулгүй ажиллагааны удирдлагын систем баталгаажлаа",
-  "Environmental management is qualified":
-    "Байгаль орчны удирдлага баталгаажлаа",
+  "Business integrity & human resource is qualified": "Бизнесийн ёс зүй болон хүний нөөцийн удирдлага баталгаажлаа",
+  "Health & safety mangement system is qualified": "Эрүүл мэнд, аюулгүй ажиллагааны удирдлагын систем баталгаажлаа",
+  "Environmental management is qualified": "Байгаль орчны удирдлага баталгаажлаа",
   "Address": "Хаяг",
   "Return": "Буцах",
   "Submit": "Нэмэх",
@@ -105,21 +85,17 @@
   "Please select an option": "Жагсаалтаас сонгох",
   "Already sent": "Илгээгдсэн",
   "Help": "Тусламж",
-  "Your registration has been successfully completed.  Oyu Tolgoi procurement team now has started the pre-qualification process on your company. A gap report will be sent once the pre-qualification process complete.":
-    "Та  мэдээллээ амжилттай бүртгэлээ. Оюу толгой худалдан авалтыэ баг таны гэрээ хэрэгжүүлэх чадварын урьдчилсан үнэлгээний мэдээллийг шалгах болно. Үүний дараа таны бүртгүүлсэн мэдээлэл шаардлага хангасан эсэх мэдээллийг хүргүүлэх болно.",
+  "Your registration has been successfully completed.  Oyu Tolgoi procurement team now has started the pre-qualification process on your company. A gap report will be sent once the pre-qualification process complete.": "Та  мэдээллээ амжилттай бүртгэлээ. Оюу толгой худалдан авалтыэ баг таны гэрээ хэрэгжүүлэх чадварын урьдчилсан үнэлгээний мэдээллийг шалгах болно. Үүний дараа таны бүртгүүлсэн мэдээлэл шаардлага хангасан эсэх мэдээллийг хүргүүлэх болно.",
   "Please fill in": "Та тендерт оролцохыг хүсвэл",
   "form to be able to participate in tenders and EOI": "маягтыг бөглөнө үү",
   "Please complete all forms before submitting": "Бүрэн гүйцэт бөглөнө үү.",
-  "You have already sent your pre-qualification info":
-    " Та гэрээ хэрэгжүүлэх урьдчилсан үнэлгээний мэдээллээ  илгээсэн байна.",
+  "You have already sent your pre-qualification info": " Та гэрээ хэрэгжүүлэх урьдчилсан үнэлгээний мэдээллээ  илгээсэн байна.",
   "draft": "ноороглосон",
   "participated": "оролцсон",
   "canceled": "цуцлагдсан",
-  "You have successfully submitted your pre-qualification form.":
-    "Таны гэрээ хэрэгжүүлэх урьдчилсан үнэлгээний мэдээлэл амжилттай илгээгдлээ.",
+  "You have successfully submitted your pre-qualification form.": "Таны гэрээ хэрэгжүүлэх урьдчилсан үнэлгээний мэдээлэл амжилттай илгээгдлээ.",
   "Successfully submitted": "Амжилттай нэмэгдлээ",
-  "Successfully sent your response!":
-    "Таны хариу мэдэгдлийг амжилттай илгээлээ",
+  "Successfully sent your response!": "Таны хариу мэдэгдлийг амжилттай илгээлээ",
   "Welcome!": "Тавтай морил!",
   "Done!": "Болсон!",
   "Saved": "Хадгалагдлаа",
