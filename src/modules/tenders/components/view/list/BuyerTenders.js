@@ -80,10 +80,9 @@ class BuyerTenders extends Tenders {
     ];
   }
 
-  renderEditLink({ status, _id }) {
-    if (['closed', 'awarded'].includes(status)) {
-      return null;
-    }
+  renderEditLink({ status, _id, submittedCount }) {
+    if (status === 'awarded') return null;
+    if (status === 'closed' && submittedCount !== 0) return null;
 
     return [
       <Divider key={0} type="vertical" />,
@@ -131,12 +130,12 @@ class BuyerTenders extends Tenders {
 
   renderOperation(record) {
     const { cancelTender } = this.props;
-    const { status, _id, type } = record;
+    const { status, _id, type, submittedCount } = record;
 
     return (
       <div style={{ width: '120px' }}>
         {this.renderViewLink({ status, type, _id })}
-        {this.renderEditLink({ status, _id })}
+        {this.renderEditLink({ status, _id, submittedCount })}
         {this.renderCancelLink({ status, _id, cancelTender })}
       </div>
     );
