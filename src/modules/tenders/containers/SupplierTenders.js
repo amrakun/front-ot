@@ -7,7 +7,7 @@ import { mutations } from '../graphql';
 import listCommonQueriesGenerator from './listCommonQueriesGenerator';
 
 class TendersContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { tendersTableQuery } = this.props;
     const location = this.props.location || {};
 

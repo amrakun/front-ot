@@ -17,7 +17,7 @@ class TendersContainer extends React.Component {
     this.cancelTender = this.cancelTender.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { tendersTableQuery, location = {} } = this.props;
 
     if (location.search === '?refetch') {
