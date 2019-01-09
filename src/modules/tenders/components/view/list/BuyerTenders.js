@@ -81,50 +81,46 @@ class BuyerTenders extends Tenders {
   }
 
   renderEditLink({ status, _id }) {
-    if (status === 'awarded') return null;
+    if (['draft', 'closed', 'canceled'].includes(status)) {
+      return [
+        <Divider key={0} type="vertical" />,
 
-    return [
-      <Divider key={0} type="vertical" />,
-
-      <Link key={1} to={`/tender/edit/${_id}`}>
-        Edit
-      </Link>
-    ];
+        <Link key={1} to={`/tender/edit/${_id}`}>
+          Edit
+        </Link>
+      ];
+    }
   }
 
   renderCancelLink({ status, _id }) {
-    if (['closed', 'awarded', 'canceled'].includes(status)) {
-      return null;
+    if (['open', 'draft'].includes(status)) {
+      return [
+        <Divider key={0} type="vertical" />,
+
+        <Popconfirm
+          key={3}
+          title="Are you sure you want to cancel this tender？"
+          placement="bottomRight"
+          okText="Yes"
+          cancelText="No"
+          onConfirm={() => this.props.cancelTender(_id)}
+        >
+          <a href="#cancel">Cancel</a>
+        </Popconfirm>
+      ];
     }
-
-    return [
-      <Divider key={0} type="vertical" />,
-
-      <Popconfirm
-        key={3}
-        title="Are you sure you want to cancel this tender？"
-        placement="bottomRight"
-        okText="Yes"
-        cancelText="No"
-        onConfirm={() => this.props.cancelTender(_id)}
-      >
-        <a href="#cancel">Cancel</a>
-      </Popconfirm>
-    ];
   }
 
   renderViewLink({ status, type, _id }) {
-    if (status === 'open') {
-      return null;
+    if (['canceled', 'closed', 'awarded'].includes(status)) {
+      return [
+        <Divider key={0} type="vertical" />,
+
+        <Link key={1} to={`/${type}/${_id}`}>
+          View
+        </Link>
+      ];
     }
-
-    return [
-      <Divider key={0} type="vertical" />,
-
-      <Link key={1} to={`/${type}/${_id}`}>
-        View
-      </Link>
-    ];
   }
 
   renderOperation(record) {
