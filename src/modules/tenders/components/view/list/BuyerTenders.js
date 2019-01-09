@@ -86,7 +86,7 @@ class BuyerTenders extends Tenders {
         <Divider key={0} type="vertical" />,
 
         <Link key={1} to={`/tender/edit/${_id}`}>
-          Edit
+          {['closed', 'canceled'].includes(status) ? 'Reopen' : 'Edit'}
         </Link>
       ];
     }
