@@ -73,6 +73,7 @@ class Uploader extends React.Component {
             'image/png',
             'image/jpeg',
             'image/jpg',
+            'image/gif',
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
             'application/pdf'
