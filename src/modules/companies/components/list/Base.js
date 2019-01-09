@@ -131,6 +131,10 @@ class Base extends Common {
               : '-',
           sorter: true,
           key: 'averageDifotScore'
+        },
+        {
+          title: 'Owner',
+          render: record => (record.owner ? record.owner.email : '-')
         }
       ],
       [

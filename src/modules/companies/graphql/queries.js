@@ -333,6 +333,9 @@ const companies = `
   query companies(${commonParams}) {
     companies(${commonValues}) {
       ${commonFields}
+      owner {
+        email
+      }
       tierType
       averageDifotScore
       lastDueDiligence
@@ -377,9 +380,7 @@ const exportCurrentCompanyPrequalification = `
 
 const status = `
   query companies(${genericParams}) {
-    companies(${
-      genericValues
-    } sortField: "prequalifiedDate", sortDirection: -1) {
+    companies(${genericValues} sortField: "prequalifiedDate", sortDirection: -1) {
       ${commonFields}
       prequalifiedDate
       prequalificationSubmittedCount
