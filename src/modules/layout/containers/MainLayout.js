@@ -79,10 +79,17 @@ class MainLayoutContainer extends React.Component {
 
 MainLayoutContainer.propTypes = {
   currentUser: PropTypes.object,
-  logsWriteMutation: PropTypes.func.isRequired
+  logsWriteMutation: PropTypes.func
 };
 
-const BuyerLayout = withSystemConfig(MainLayoutContainer);
+const WithLogMutation = compose(
+  graphql(gql(mutations.logsWrite), {
+    name: 'logsWriteMutation',
+    skip: props => !props.currentUser
+  })
+)(withRouter(MainLayoutContainer));
+
+const BuyerLayout = withSystemConfig(WithLogMutation);
 
 const withUser = props => {
   const { currentUser } = props;
@@ -91,11 +98,7 @@ const withUser = props => {
     return <BuyerLayout {...props} />;
   }
 
-  return <MainLayoutContainer {...props} />;
+  return <WithLogMutation {...props} />;
 };
 
-export default compose(
-  graphql(gql(mutations.logsWrite), {
-    name: 'logsWriteMutation'
-  })
-)(withRouter(withCurrentUser(withUser)));
+export default withCurrentUser(withUser);

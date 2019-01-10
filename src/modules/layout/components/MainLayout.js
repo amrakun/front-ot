@@ -127,9 +127,10 @@ class MainLayout extends React.Component {
     const path = location.pathname;
 
     if (path !== '/' && path !== '/sign-in') {
-      logsWriteMutation({
-        variables: { apiCall: path }
-      });
+      logsWriteMutation &&
+        logsWriteMutation({
+          variables: { apiCall: path }
+        });
     }
 
     // erxes script
@@ -224,7 +225,7 @@ MainLayout.propTypes = {
   children: PropTypes.object,
   history: PropTypes.object,
   location: PropTypes.object,
-  logsWriteMutation: PropTypes.func.isRequired
+  logsWriteMutation: PropTypes.func
 };
 
 MainLayout.childContextTypes = {
