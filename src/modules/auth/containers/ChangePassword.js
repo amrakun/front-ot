@@ -31,7 +31,7 @@ const ChangePasswordContainer = (props, { __ }) => {
   };
 
   const updatedProps = {
-    ...this.props,
+    ...props,
     currentUser: currentUserQuery.currentUser,
     mainAction
   };
