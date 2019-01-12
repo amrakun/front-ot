@@ -178,8 +178,8 @@ class Base extends Common {
                 Send RFQ
               </Button>
 
-              <Button onClick={() => this.handleSend('/srfq/publish')}>
-                Send service RFQ
+              <Button onClick={() => this.handleSend('/trfq/publish')}>
+                Send travel RFQ
               </Button>
 
               <Button

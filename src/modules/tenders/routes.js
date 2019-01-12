@@ -18,12 +18,12 @@ export default [
     component={PublicEoi}
   />,
   <Route
-    key={'/srfq'}
+    key={'/trfq'}
     exact
-    path={'/srfq'}
+    path={'/trfq'}
     component={props => {
       const queryParams = queryString.parse(props.location.search);
-      return <BuyerTenders {...props} queryParams={queryParams} type="srfq" />;
+      return <BuyerTenders {...props} queryParams={queryParams} type="trfq" />;
     }}
   />,
   <Route
@@ -45,11 +45,11 @@ export default [
     }}
   />,
   <Route
-    key={'/srfq/publish'}
+    key={'/trfq/publish'}
     exact
-    path={'/srfq/publish'}
+    path={'/trfq/publish'}
     component={props => {
-      return <CreateTender {...props} type="srfq" />;
+      return <CreateTender {...props} type="trfq" />;
     }}
   />,
   <Route
@@ -78,9 +78,9 @@ export default [
     }}
   />,
   <Route
-    key={'/srfq'}
+    key={'/trfq'}
     exact
-    path={`/srfq/:id`}
+    path={`/trfq/:id`}
     component={props => {
       const queryParams = queryString.parse(props.location.search);
       return <Tender {...props} queryParams={queryParams} />;

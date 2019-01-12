@@ -30,7 +30,7 @@ const systemConfig = `
       address
 
       rfqTemplates
-      srfqTemplates
+      trfqTemplates
       eoiTemplates
       successFeedbackTemplates
       capacityBuildingTemplates

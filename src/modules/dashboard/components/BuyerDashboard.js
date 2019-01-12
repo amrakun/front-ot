@@ -315,9 +315,9 @@ class Dashboard extends React.Component {
       rfqTotalCount,
       rfqAverageDuration,
 
-      srfqData,
-      srfqTotalCount,
-      srfqAverageDuration,
+      trfqData,
+      trfqTotalCount,
+      trfqAverageDuration,
 
       location: { search }
     } = this.props;
@@ -426,10 +426,10 @@ class Dashboard extends React.Component {
             })}
 
             {this.renderRfq({
-              type: 'Service RFQ',
-              count: srfqTotalCount,
-              data: srfqData,
-              averageDuration: srfqAverageDuration
+              type: 'Travel RFQ',
+              count: trfqTotalCount,
+              data: trfqData,
+              averageDuration: trfqAverageDuration
             })}
           </div>
         </Tabs.TabPane>
@@ -437,7 +437,7 @@ class Dashboard extends React.Component {
         <Tabs.TabPane tab="My dashboard" key="2">
           <BuyerTenders type="eoi" {...this.props} />
           <BuyerTenders type="rfq" {...this.props} />
-          <BuyerTenders type="srfq" {...this.props} />
+          <BuyerTenders type="trfq" {...this.props} />
         </Tabs.TabPane>
       </Tabs>
     );
@@ -459,9 +459,9 @@ Dashboard.propTypes = {
   rfqData: PropTypes.array,
   rfqAverageDuration: PropTypes.number,
 
-  srfqTotalCount: PropTypes.number,
-  srfqData: PropTypes.array,
-  srfqAverageDuration: PropTypes.number
+  trfqTotalCount: PropTypes.number,
+  trfqData: PropTypes.array,
+  trfqAverageDuration: PropTypes.number
 };
 
 export default Dashboard;

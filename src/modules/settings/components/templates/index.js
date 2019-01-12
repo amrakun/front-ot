@@ -66,8 +66,8 @@ class ManageTemplates extends React.Component {
                 kindOptions: this.rfqKindOptions()
               })}
               {this.renderTabPane({
-                tab: 'Service RFQ',
-                key: 'srfq',
+                tab: 'Travel RFQ',
+                key: 'trfq',
                 kindOptions: this.rfqKindOptions()
               })}
               {this.renderTabPane({

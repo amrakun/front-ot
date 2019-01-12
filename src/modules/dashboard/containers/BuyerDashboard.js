@@ -20,9 +20,9 @@ const DashboardContainer = props => {
     tenderCountByStatusrfq,
     tendersAverageDurationrfq,
 
-    tendersTotalCountsrfq,
-    tenderCountByStatussrfq,
-    tendersAverageDurationsrfq,
+    tendersTotalCounttrfq,
+    tenderCountByStatustrfq,
+    tendersAverageDurationtrfq,
     queryParams
   } = props;
 
@@ -36,9 +36,9 @@ const DashboardContainer = props => {
     tendersTotalCountrfq.error ||
     tenderCountByStatusrfq.error ||
     tendersAverageDurationrfq.error ||
-    tendersTotalCountsrfq.error ||
-    tenderCountByStatussrfq.error ||
-    tendersAverageDurationsrfq.error
+    tendersTotalCounttrfq.error ||
+    tenderCountByStatustrfq.error ||
+    tendersAverageDurationtrfq.error
   ) {
     return null;
   }
@@ -53,9 +53,9 @@ const DashboardContainer = props => {
     tendersTotalCountrfq.loading ||
     tenderCountByStatusrfq.loading ||
     tendersAverageDurationrfq.loading ||
-    tendersTotalCountsrfq.loading ||
-    tenderCountByStatussrfq.loading ||
-    tendersAverageDurationsrfq.loading
+    tendersTotalCounttrfq.loading ||
+    tenderCountByStatustrfq.loading ||
+    tendersAverageDurationtrfq.loading
   ) {
     return <Loading />;
   }
@@ -128,9 +128,9 @@ const DashboardContainer = props => {
     rfqData: byMonthOrNot(tenderCountByStatusrfq.tenderCountByStatus),
     rfqAverageDuration: tendersAverageDurationrfq.tendersAverageDuration,
 
-    srfqTotalCount: tendersTotalCountsrfq.tendersTotalCountReport,
-    srfqData: byMonthOrNot(tenderCountByStatussrfq.tenderCountByStatus),
-    srfqAverageDuration: tendersAverageDurationsrfq.tendersAverageDuration
+    trfqTotalCount: tendersTotalCounttrfq.tendersTotalCountReport,
+    trfqData: byMonthOrNot(tenderCountByStatustrfq.tenderCountByStatus),
+    trfqAverageDuration: tendersAverageDurationtrfq.tendersAverageDuration
   };
 
   return <BuyerDashboard {...updatedProps} />;
@@ -149,9 +149,9 @@ DashboardContainer.propTypes = {
   tendersTotalCountrfq: PropTypes.object,
   tendersAverageDurationrfq: PropTypes.object,
 
-  tenderCountByStatussrfq: PropTypes.object,
-  tendersTotalCountsrfq: PropTypes.object,
-  tendersAverageDurationsrfq: PropTypes.object,
+  tenderCountByStatustrfq: PropTypes.object,
+  tendersTotalCounttrfq: PropTypes.object,
+  tendersAverageDurationtrfq: PropTypes.object,
 
   queryParams: PropTypes.object
 };
@@ -233,5 +233,5 @@ export default compose(
 
   ...generateCountQueries('eoi'),
   ...generateCountQueries('rfq'),
-  ...generateCountQueries('srfq')
+  ...generateCountQueries('trfq')
 )(DashboardContainer);

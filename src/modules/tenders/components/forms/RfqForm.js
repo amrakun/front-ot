@@ -73,7 +73,7 @@ class RfqForm extends TenderForm {
     const { products } = this.state;
     const { type } = this.props;
 
-    if (type === 'srfq') {
+    if (type === 'trfq') {
       return null;
     }
 

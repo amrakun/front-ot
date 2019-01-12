@@ -23,7 +23,7 @@ class SubmitContainer extends React.Component {
         installErxes('n9hNM7', currentUser);
       }
 
-      if (type === 'srfq') {
+      if (type === 'trfq') {
         installErxes('KsTa3H', currentUser);
       }
     }

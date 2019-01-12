@@ -57,7 +57,7 @@ class MainLayoutContainer extends React.Component {
         checkUrl('/feedback/responses');
         checkUrl('/blocking');
         checkUrl('/rfq');
-        checkUrl('/srfq');
+        checkUrl('/trfq');
         checkUrl('/eoi');
         checkUrl('/report');
         checkUrl('/logs');

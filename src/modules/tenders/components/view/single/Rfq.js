@@ -120,7 +120,7 @@ class Rfq extends Tender {
       </Option>
     ));
 
-    if (type === 'srfq') {
+    if (type === 'trfq') {
       return null;
     }
 
@@ -237,7 +237,7 @@ class Rfq extends Tender {
     const tenderDetail = this.props.tenderDetail || {};
     const { type } = tenderDetail;
 
-    if (type === 'srfq') {
+    if (type === 'trfq') {
       const respondedServiceFiles = record.respondedServiceFiles || [];
 
       return (
@@ -325,8 +325,8 @@ class Rfq extends Tender {
 
           <Col
             sm={24}
-            xl={type === 'srfq' ? 24 : 18}
-            lg={type === 'srfq' ? 24 : 17}
+            xl={type === 'trfq' ? 24 : 18}
+            lg={type === 'trfq' ? 24 : 17}
           >
             {this.renderTable({
               tableOperations: this.renderOperations(type, status)

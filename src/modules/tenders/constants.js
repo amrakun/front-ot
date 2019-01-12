@@ -9,7 +9,7 @@ export const statusIcons = {
 
 export const labels = {
   rfq: 'Request For Quotation',
-  srfq: 'Service request for quotation',
+  trfq: 'Travel request for quotation',
   eoi: 'Expression Of Interest'
 };
 

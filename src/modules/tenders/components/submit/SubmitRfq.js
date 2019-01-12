@@ -66,7 +66,7 @@ class SubmitTender extends TenderForm {
     }
 
     if (
-      type === 'srfq' &&
+      type === 'trfq' &&
       (!respondedServiceFiles || respondedServiceFiles.length === 0)
     ) {
       return message.error(this.context.__('Your form is incomplete'));
@@ -159,7 +159,7 @@ class SubmitTender extends TenderForm {
       />
     );
 
-    if (data.type === 'srfq') {
+    if (data.type === 'trfq') {
       const response = this.props.response || {};
       const serviceFiles = response.respondedServiceFiles || [];
 
