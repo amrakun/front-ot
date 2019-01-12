@@ -6,7 +6,7 @@ import { queries, mutations } from '../graphql';
 import { Loading } from 'modules/common/components';
 import { message } from 'antd';
 
-const PublishContainer = props => {
+const EditContainer = props => {
   const { tenderDetailQuery, tendersEdit } = props;
 
   if (tenderDetailQuery.error) {
@@ -55,7 +55,7 @@ const PublishContainer = props => {
   return <RfqForm {...updatedProps} />;
 };
 
-PublishContainer.propTypes = {
+EditContainer.propTypes = {
   tenderDetailQuery: PropTypes.object,
   tendersEdit: PropTypes.func
 };
@@ -74,4 +74,4 @@ export default compose(
   graphql(gql(mutations.tendersEdit), {
     name: 'tendersEdit'
   })
-)(PublishContainer);
+)(EditContainer);

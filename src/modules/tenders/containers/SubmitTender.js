@@ -3,32 +3,10 @@ import PropTypes from 'prop-types';
 import { message } from 'antd';
 import { compose, gql, graphql } from 'react-apollo';
 import { Loading, exportFile } from 'modules/common/components';
-import { installErxes } from 'modules/common/utils';
 import { SubmitRfq, SubmitEoi } from '../components';
 import { queries, mutations } from '../graphql';
 
 class SubmitContainer extends React.Component {
-  componentDidUpdate() {
-    const tenderDetail = this.props.tenderDetailQuery.tenderDetailSupplier;
-    const { currentUser } = this.context;
-
-    if (tenderDetail) {
-      const { type } = tenderDetail;
-
-      if (type === 'eoi') {
-        installErxes('zRNJmC', currentUser);
-      }
-
-      if (type === 'rfq') {
-        installErxes('n9hNM7', currentUser);
-      }
-
-      if (type === 'trfq') {
-        installErxes('KsTa3H', currentUser);
-      }
-    }
-  }
-
   render() {
     const {
       tenderDetailQuery,
