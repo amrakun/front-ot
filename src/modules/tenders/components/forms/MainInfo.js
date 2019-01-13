@@ -143,6 +143,16 @@ class MainInfo extends React.Component {
     });
   }
 
+  renderExtraContent() {
+    const { renderExtraContent } = this.props;
+
+    if (renderExtraContent) {
+      return renderExtraContent();
+    }
+
+    return null;
+  }
+
   render() {
     const { renderField, renderOptions, data } = this.props;
     const { suppliers, content, attachments } = this.state;
@@ -160,6 +170,8 @@ class MainInfo extends React.Component {
       <Row gutter={24}>
         <Col span={10}>
           <Card title="Main info" className="no-pad-bottom">
+            {this.renderExtraContent()}
+
             <label>
               Requesting suppliers: <strong>{suppliers.length}</strong>
             </label>
@@ -200,6 +212,7 @@ class MainInfo extends React.Component {
               initialValue: dateRange,
               control: (
                 <DatePicker.RangePicker
+                  style={{ width: '100% ' }}
                   showTime={{ format: 'HH:mm' }}
                   format={dateTimeFormat}
                   placeholder={['Publish date', 'Close date']}
@@ -241,7 +254,7 @@ class MainInfo extends React.Component {
 
           <Card title="Attachments">
             <Uploader
-              onChange={this.onAttachmentsChange}
+              onChange={this.onEmailAttachmentsChange}
               defaultFileList={attachments}
               multiple={true}
             />

@@ -1,11 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import { Form, Button, message } from 'antd';
+import { Form, Button, message, Select } from 'antd';
 import RfqTable from './RfqTable';
 import MainInfo from './MainInfo';
 import { BaseForm } from 'modules/common/components';
 
+const { Option } = Select;
 class RfqForm extends BaseForm {
   constructor(props, context) {
     super(props, context);
@@ -15,10 +16,12 @@ class RfqForm extends BaseForm {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChangeMainInfo = this.onChangeMainInfo.bind(this);
     this.onChangeRequestedProducts = this.onChangeRequestedProducts.bind(this);
+    this.onRfqTypeChange = this.onRfqTypeChange.bind(this);
 
     const { data } = props;
 
     this.state = {
+      rfqType: data.rfqType || 'goods',
       requestedProducts: data.requestedProducts || [],
       suppliers: data.suppliers || [],
       attachments: data.attachments || [],
@@ -34,11 +37,21 @@ class RfqForm extends BaseForm {
     this.setState({ requestedProducts });
   }
 
+  onRfqTypeChange(rfqType) {
+    this.setState({ rfqType });
+  }
+
   handleSubmit(e) {
     e.preventDefault();
 
     const { type } = this.props;
-    const { requestedProducts, content, attachments, suppliers } = this.state;
+    const {
+      requestedProducts,
+      content,
+      attachments,
+      suppliers,
+      rfqType
+    } = this.state;
 
     const doc = {
       type,
@@ -53,8 +66,12 @@ class RfqForm extends BaseForm {
       supplierIds: suppliers.map(s => s._id)
     };
 
-    if (type === 'rfq' && doc.requestedProducts.length === 0) {
-      return message.error('Please input atleast one row');
+    if (type === 'rfq') {
+      doc.rfqType = rfqType;
+
+      if (rfqType === 'goods' && doc.requestedProducts.length === 0) {
+        return message.error('Please input atleast one row');
+      }
     }
 
     this.save(doc);
@@ -62,8 +79,13 @@ class RfqForm extends BaseForm {
 
   renderProductsTable() {
     const { type, data } = this.props;
+    const { rfqType } = this.state;
 
     if (type === 'trfq') {
+      return null;
+    }
+
+    if (rfqType === 'service') {
       return null;
     }
 
@@ -72,6 +94,28 @@ class RfqForm extends BaseForm {
         requestedProducts={data.requestedProducts || []}
         onChange={this.onChangeRequestedProducts}
       />
+    );
+  }
+
+  renderExtraContent() {
+    const { type, data } = this.props;
+    const { rfqType } = this.state;
+
+    if (type === 'trfq') {
+      return null;
+    }
+
+    if (data && data._id) {
+      return null;
+    }
+
+    return (
+      <Form.Item label="Type">
+        <Select value={rfqType} onChange={this.onRfqTypeChange}>
+          <Option value="goods">Goods</Option>
+          <Option value="service">Service</Option>
+        </Select>
+      </Form.Item>
     );
   }
 
@@ -84,6 +128,7 @@ class RfqForm extends BaseForm {
         <div>
           <MainInfo
             data={data}
+            renderExtraContent={this.renderExtraContent.bind(this)}
             renderField={this.renderField.bind(this)}
             renderOptions={this.renderOptions.bind(this)}
             onChange={this.onChangeMainInfo}

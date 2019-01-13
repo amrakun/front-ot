@@ -235,10 +235,10 @@ class Rfq extends Tender {
 
   renderResponseModal(record) {
     const tenderDetail = this.props.tenderDetail || {};
-    const { type } = tenderDetail;
+    const { type, rfqType } = tenderDetail;
 
-    if (type === 'trfq') {
-      const respondedServiceFiles = record.respondedServiceFiles || [];
+    if (type === 'trfq' || rfqType === 'service') {
+      const respondedFiles = record.respondedFiles || [];
 
       return (
         <Table
@@ -257,7 +257,7 @@ class Rfq extends Tender {
             }
           ]}
           rowKey={() => Math.random()}
-          dataSource={respondedServiceFiles}
+          dataSource={respondedFiles}
         />
       );
     }

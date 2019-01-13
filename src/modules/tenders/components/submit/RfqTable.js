@@ -40,11 +40,21 @@ class RfqTable extends Component {
 
     this.handleFile = this.handleFile.bind(this);
     this.onProductInputChange = this.onProductInputChange.bind(this);
+    this.onProductFileChange = this.onProductFileChange.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
   onChange() {
     return this.props.onChange(collectProducts(this.state));
+  }
+
+  onProductFileChange(files, name, recordKey) {
+    const stateKey = `product__${recordKey}`;
+    const product = this.state[stateKey] || {};
+
+    product[name] = files ? files[0] : null;
+
+    this.setState({ [stateKey]: product }, () => this.onChange());
   }
 
   onProductInputChange(e, name, recordKey, dataType) {

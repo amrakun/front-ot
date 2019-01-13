@@ -14,7 +14,7 @@ class SubmitTender extends BaseForm {
 
     this.state = {
       respondedProducts: response.respondedProducts || [],
-      respondedServiceFiles: response.respondedServiceFiles || []
+      respondedFiles: response.respondedFiles || []
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,8 +31,8 @@ class SubmitTender extends BaseForm {
     e.preventDefault();
 
     const { data, save } = this.props;
-    const { type } = data || {};
-    const { respondedServiceFiles } = this.state;
+    const { type, rfqType } = data || {};
+    const { respondedFiles } = this.state;
 
     const respondedProducts = this.state.respondedProducts.map(product => {
       const totalPrice = product.quantity * product.unitPrice;
@@ -51,28 +51,37 @@ class SubmitTender extends BaseForm {
       };
     });
 
-    if (type === 'rfq' && respondedProducts.length === 0) {
-      return message.error(this.context.__('Your form is incomplete'));
-    }
-
     if (
-      type === 'trfq' &&
-      (!respondedServiceFiles || respondedServiceFiles.length === 0)
+      type === 'rfq' &&
+      rfqType === 'goods' &&
+      respondedProducts.length === 0
     ) {
       return message.error(this.context.__('Your form is incomplete'));
     }
 
-    save({ respondedProducts, respondedServiceFiles }, true);
+    if (type === 'trfq' && (!respondedFiles || respondedFiles.length === 0)) {
+      return message.error(this.context.__('Your form is incomplete'));
+    }
+
+    if (
+      type === 'rfq' &&
+      rfqType === 'service' &&
+      (!respondedFiles || respondedFiles.length === 0)
+    ) {
+      return message.error(this.context.__('Your form is incomplete'));
+    }
+
+    save({ respondedProducts, respondedFiles }, true);
   }
 
   onServiceFileUpload(files) {
-    this.setState({ respondedServiceFiles: files });
+    this.setState({ respondedFiles: files });
   }
 
   saveDraft() {
     this.save({
-      respondedProducts: this.collectInputs(),
-      respondedServiceFiles: this.state.respondedServiceFiles
+      respondedProducts: this.state.respondedProducts,
+      respondedFiles: this.state.respondedFiles
     });
   }
 
@@ -97,21 +106,22 @@ class SubmitTender extends BaseForm {
 
   render() {
     const { data, generateTemplate, response } = this.props;
+    const { type, rfqType, requestedProducts } = data;
 
     let title = 'Form';
 
     let form = (
       <RfqTable
-        requestedProducts={data.requestedProducts}
+        requestedProducts={requestedProducts}
         respondedProducts={response ? response.respondedProducts : []}
         generateTemplate={generateTemplate}
         onChange={this.onChangeProducts}
       />
     );
 
-    if (data.type === 'trfq') {
+    if (type === 'trfq' || (type === 'rfq' && rfqType === 'service')) {
       const response = this.props.response || {};
-      const serviceFiles = response.respondedServiceFiles || [];
+      const serviceFiles = response.respondedFiles || [];
 
       title = 'Schedule of service/ financial proposal';
 

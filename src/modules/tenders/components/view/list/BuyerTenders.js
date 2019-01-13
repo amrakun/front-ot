@@ -71,6 +71,9 @@ class BuyerTenders extends Tenders {
         title: 'Regret letter',
         render: this.renderBoolean
       },
+      type === 'rfq'
+        ? { title: 'Type', render: (text, record) => record.rfqType }
+        : {},
       {
         title: 'More',
         fixed: 'right',

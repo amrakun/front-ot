@@ -23,7 +23,7 @@ class EoiTable extends Component {
 
         const document = {
           key,
-          document: doc,
+          name: doc,
           notes: documentResponse.notes,
           file: documentResponse.file,
           isSubmitted: documentResponse.isSubmitted
@@ -37,7 +37,7 @@ class EoiTable extends Component {
 
     this.state = {
       documents,
-      perDocumentStates
+      ...perDocumentStates
     };
 
     this.onChange = this.onChange.bind(this);
@@ -104,7 +104,7 @@ class EoiTable extends Component {
         onChange: e => this.onInputChange(e, name, record.key)
       };
 
-      if (name === 'document') {
+      if (name === 'name') {
         if (defaultValue) {
           defaultValue = __(record[name]);
         }
@@ -161,7 +161,7 @@ class EoiTable extends Component {
         scroll={{ x: 600, y: '65vh' }}
       >
         {this.renderCell({
-          name: 'document',
+          name: 'name',
           title: __(eoiProductsColumns.document)
         })}
 

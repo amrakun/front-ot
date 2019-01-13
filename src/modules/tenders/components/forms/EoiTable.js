@@ -15,8 +15,8 @@ class EoiTable extends Component {
 
     const { requestedDocuments = [] } = props;
 
-    const documents = [];
-    const perDocumentStates = {};
+    let documents = [];
+    let perDocumentStates = {};
 
     requestedDocuments.forEach(document => {
       const key = Math.random();
@@ -24,18 +24,18 @@ class EoiTable extends Component {
 
       documents.push(extendedDocument);
 
-      perDocumentStates[`document__${key}`] = extendedDocument;
+      perDocumentStates[`document__${key}`] = document;
     });
+
+    if (documents.length === 0) {
+      documents = initialDocuments;
+      perDocumentStates = initialPerDocuments;
+    }
 
     this.state = {
       documents,
       ...perDocumentStates
     };
-
-    if (this.state.documents.length === 0) {
-      this.state.documents = initialDocuments;
-      this.state.perDocumentStates = initialPerDocuments;
-    }
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -47,7 +47,7 @@ class EoiTable extends Component {
 
     Object.keys(this.state).forEach(key => {
       if (key.startsWith('document__')) {
-        documents.push(this.state[key].value);
+        documents.push(this.state[key]);
       }
     });
 
@@ -56,11 +56,8 @@ class EoiTable extends Component {
 
   onInputChange(e, key) {
     const stateKey = `document__${key}`;
-    const document = this.state[stateKey] || {};
 
-    document.value = e.target.value;
-
-    this.setState({ [stateKey]: document }, () => this.onChange());
+    this.setState({ [stateKey]: e.target.value }, () => this.onChange());
   }
 
   addRow() {

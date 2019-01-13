@@ -16,6 +16,7 @@ const tenderFields = `
   _id,
   status,
   type,
+  rfqType,
   number,
   name,
   content,
@@ -52,7 +53,7 @@ const rfqResponseFields = `
     comment
     file
   }
-  respondedServiceFiles
+  respondedFiles
 `;
 
 const eoiResponseFields = `
@@ -153,6 +154,7 @@ const tenderDetailSupplier = `
       _id
       status
       type
+      rfqType
       number
       name
       content
@@ -208,6 +210,7 @@ const tendersSupplier = `
       _id
       status
       type
+      rfqType
       createdDate
       number
       name
