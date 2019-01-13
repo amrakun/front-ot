@@ -80,10 +80,7 @@ class RfqTable extends Component {
     // collect products table values
     Object.keys(this.state).forEach(key => {
       if (key.startsWith('product__')) {
-        const product = { ...this.state[key] };
-        delete product.key;
-        delete product.__typename;
-        products.push(product);
+        products.push({ ...this.state[key] });
       }
     });
 

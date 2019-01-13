@@ -42,7 +42,12 @@ class RfqForm extends BaseForm {
 
     const doc = {
       type,
-      requestedProducts,
+      requestedProducts: (requestedProducts || []).map(product => {
+        delete product.key;
+        delete product.__typename;
+
+        return product;
+      }),
       content,
       attachments,
       supplierIds: suppliers.map(s => s._id)
