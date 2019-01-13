@@ -161,7 +161,7 @@ const generateDateVariables = ({ startDate, endDate }) => {
     startDate: startDate
       ? new Date(startDate)
       : moment()
-          .subtract(7, 'days')
+          .subtract(30, 'days')
           .format('YYYY-MM-DD'),
     endDate: endDate ? new Date(endDate) : moment().format('YYYY-MM-DD')
   };
