@@ -1,13 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import { Card, Form, Button, Icon } from 'antd';
-import TenderForm from '../TenderForm';
-import EoiTable from '../EoiTable';
+import { Card, Form, Button } from 'antd';
+import { BaseForm } from 'modules/common/components';
+import EoiTable from './EoiTable';
 import MainInfo from './MainInfo';
-import { initialProducts, initialPerProducts } from '../../constants';
 
-class EoiForm extends TenderForm {
+class EoiForm extends BaseForm {
   constructor(props, context) {
     super(props, context);
 
@@ -15,45 +14,42 @@ class EoiForm extends TenderForm {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChangeMainInfo = this.onChangeMainInfo.bind(this);
+    this.onChangeDocuments = this.onChangeDocuments.bind(this);
 
     const { data } = props;
 
-    this.state.suppliers = data.suppliers || [];
-    this.state.attachments = data.attachments || [];
-    this.state.content = data.content || '';
+    this.state = {
+      requestedDocuments: data.requestedDocuments,
+      suppliers: data.suppliers || [],
+      attachments: data.attachments || [],
+      content: data.content || ''
+    };
   }
 
   onChangeMainInfo(mainInfoState) {
     this.setState(mainInfoState);
   }
 
+  onChangeDocuments(requestedDocuments) {
+    this.setState({ requestedDocuments });
+  }
+
   handleSubmit(e) {
     e.preventDefault();
 
-    const { content, attachments, suppliers } = this.state;
+    const { requestedDocuments, content, attachments, suppliers } = this.state;
 
     this.save({
       type: 'eoi',
       content,
       attachments,
       supplierIds: suppliers.map(s => s._id),
-      requestedDocuments: this.getProducts().map(doc => doc.document)
+      requestedDocuments
     });
-  }
-
-  componentDidMount() {
-    if (!this.state.content) {
-      this.setState({
-        content: this.emailTemplate,
-        products: initialProducts,
-        ...initialPerProducts
-      });
-    }
   }
 
   render() {
     const { data } = this.props;
-    const { products } = this.state;
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -68,18 +64,9 @@ class EoiForm extends TenderForm {
 
         <Card title="Form" className="margin">
           <EoiTable
-            products={products}
-            renderProductColumn={this.renderProductColumn}
-            isSupplier={false}
+            requestedDocuments={data.requestedDocuments}
+            onChange={this.onChangeDocuments}
           />
-
-          <Button
-            className="dashed-button-big"
-            size="large"
-            onClick={this.addProductRow}
-          >
-            <Icon type="plus" /> Add row
-          </Button>
         </Card>
 
         <Button
