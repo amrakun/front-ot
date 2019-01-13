@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Card, Form, Button, Icon } from 'antd';
 import TenderForm from '../TenderForm';
 import EoiTable from '../EoiTable';
+import MainInfo from './MainInfo';
 import { initialProducts, initialPerProducts } from '../../constants';
 
 class EoiForm extends TenderForm {
@@ -13,23 +14,31 @@ class EoiForm extends TenderForm {
     this.emailTemplate = context.systemConfig.eoiTemplate;
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onChangeMainInfo = this.onChangeMainInfo.bind(this);
+
+    const { data } = props;
+
+    this.state.suppliers = data.suppliers || [];
+    this.state.attachments = data.attachments || [];
+    this.state.content = data.content || '';
+  }
+
+  onChangeMainInfo(mainInfoState) {
+    this.setState(mainInfoState);
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
-    let inputs = this.collectInputs();
+    const { content, attachments, suppliers } = this.state;
 
-    const requestedDocuments = inputs.requestedProducts.map(
-      doc => doc.document
-    );
-
-    delete inputs.requestedProducts;
-
-    inputs.type = 'eoi';
-    inputs.requestedDocuments = requestedDocuments;
-
-    this.save(inputs);
+    this.save({
+      type: 'eoi',
+      content,
+      attachments,
+      supplierIds: suppliers.map(s => s._id),
+      requestedDocuments: this.getProducts().map(doc => doc.document)
+    });
   }
 
   componentDidMount() {
@@ -43,11 +52,19 @@ class EoiForm extends TenderForm {
   }
 
   render() {
+    const { data } = this.props;
     const { products } = this.state;
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        {this.renderMainInfo(this.emailTemplate)}
+        <div>
+          <MainInfo
+            data={data}
+            renderField={this.renderField.bind(this)}
+            renderOptions={this.renderOptions.bind(this)}
+            onChange={this.onChangeMainInfo}
+          />
+        </div>
 
         <Card title="Form" className="margin">
           <EoiTable

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Input, Table, Checkbox } from 'antd';
 import { BaseForm, Uploader, T } from 'modules/common/components';
-import MainInfo from './forms/MainInfo';
 
 const { Column } = Table;
 
@@ -55,23 +54,16 @@ class TenderForm extends BaseForm {
 
     this.state = {
       products,
-      ...perProductStates,
-      content: data.content && data.content,
-      attachments: data.attachments,
-      suppliers: data.suppliers
+      ...perProductStates
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.onEmailContentChange = this.onEmailContentChange.bind(this);
-    this.onEmailAttachmentsChange = this.onEmailAttachmentsChange.bind(this);
-    this.onAddSuppliers = this.onAddSuppliers.bind(this);
     this.onProductInputChange = this.onProductInputChange.bind(this);
     this.addProductRow = this.addProductRow.bind(this);
     this.renderProductColumn = this.renderProductColumn.bind(this);
-    this.removeSupplier = this.removeSupplier.bind(this);
   }
 
-  collectInputs() {
+  getProducts() {
     const products = [];
 
     // collect products table values
@@ -84,40 +76,7 @@ class TenderForm extends BaseForm {
       }
     });
 
-    const supplierIds = [];
-
-    this.state.suppliers.forEach(i => {
-      supplierIds.push(i._id);
-    });
-
-    return {
-      content: this.state.content,
-      attachments: this.state.attachments,
-      supplierIds: supplierIds || [],
-      requestedProducts: products
-    };
-  }
-
-  onEmailContentChange(content) {
-    this.setState({ content });
-  }
-
-  onEmailAttachmentsChange(attachments) {
-    this.setState({ attachments });
-  }
-
-  onAddSuppliers(values) {
-    const suppliers = [...this.state.suppliers];
-    const supplierIds = suppliers.map(s => s._id);
-
-    values.forEach(value => {
-      // Only add new suppliers
-      if (!supplierIds.includes(value._id)) {
-        suppliers.push(value);
-      }
-    });
-
-    this.setState({ suppliers });
+    return products;
   }
 
   addProductRow() {
@@ -226,39 +185,6 @@ class TenderForm extends BaseForm {
         render={render}
         width={width}
       />
-    );
-  }
-
-  removeSupplier(supplierId) {
-    let { suppliers } = this.state;
-
-    const updatedSuppliers = [];
-
-    suppliers.forEach(supplier => {
-      if (supplier._id !== supplierId) updatedSuppliers.push(supplier);
-    });
-
-    this.setState({ suppliers: updatedSuppliers });
-  }
-
-  renderMainInfo(template) {
-    const { suppliers, content, attachments } = this.state;
-
-    return (
-      <div>
-        <MainInfo
-          suppliers={suppliers}
-          data={this.props.data}
-          content={content || template}
-          attachments={attachments || []}
-          renderField={this.renderField.bind(this)}
-          renderOptions={this.renderOptions.bind(this)}
-          onAddSuppliers={this.onAddSuppliers}
-          onEmailContentChange={this.onEmailContentChange}
-          onAttachmentsChange={this.onEmailAttachmentsChange}
-          removeSupplier={this.removeSupplier}
-        />
-      </div>
     );
   }
 }

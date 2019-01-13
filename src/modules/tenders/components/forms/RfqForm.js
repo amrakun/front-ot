@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Form, Button, Card, Icon, message } from 'antd';
 import TenderForm from '../TenderForm';
 import RfqTable from '../RfqTable';
+import MainInfo from './MainInfo';
 import { xlsxHandler } from 'modules/common/utils';
 
 const initialProducts = [{ key: Math.random() }];
@@ -16,6 +17,17 @@ class RfqForm extends TenderForm {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFile = this.handleFile.bind(this);
+    this.onChangeMainInfo = this.onChangeMainInfo.bind(this);
+
+    const { data } = props;
+
+    this.state.suppliers = data.suppliers || [];
+    this.state.attachments = data.attachments || [];
+    this.state.content = data.content || '';
+  }
+
+  onChangeMainInfo(mainInfoState) {
+    this.setState(mainInfoState);
   }
 
   componentDidMount() {
@@ -31,15 +43,21 @@ class RfqForm extends TenderForm {
     e.preventDefault();
 
     const { type } = this.props;
-    const inputs = this.collectInputs();
+    const { content, attachments, suppliers } = this.state;
 
-    if (type === 'rfq' && inputs.requestedProducts.length === 0) {
+    const doc = {
+      type,
+      requestedProducts: this.getProducts(),
+      content,
+      attachments,
+      supplierIds: suppliers.map(s => s._id)
+    };
+
+    if (type === 'rfq' && doc.requestedProducts.length === 0) {
       return message.error('Please input atleast one row');
     }
 
-    inputs.type = type;
-
-    this.save(inputs);
+    this.save(doc);
   }
 
   handleFile(e) {
@@ -99,9 +117,20 @@ class RfqForm extends TenderForm {
   }
 
   render() {
+    // data is editing tender object
+    const { data } = this.props;
+
     return (
       <Form onSubmit={this.handleSubmit}>
-        {this.renderMainInfo(this.emailTemplate)}
+        <div>
+          <MainInfo
+            data={data}
+            renderField={this.renderField.bind(this)}
+            renderOptions={this.renderOptions.bind(this)}
+            onChange={this.onChangeMainInfo}
+          />
+        </div>
+
         {this.renderProductsTable()}
 
         <Button
