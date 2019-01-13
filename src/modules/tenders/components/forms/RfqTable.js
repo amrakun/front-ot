@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Row, Col, Card, Icon, Table, Alert, Input } from 'antd';
-import { rfqProductsColumns as rpc, rfqDisclaimer } from '../../constants';
-import { xlsxHandler, generateTemplateUrl } from 'modules/common/utils';
+import { Button, Card, Icon, Table, Input } from 'antd';
+import { rfqProductsColumns as rpc } from '../../constants';
+import { generateTemplateUrl } from 'modules/common/utils';
+import {
+  controlValueParser,
+  tableFileHandler,
+  collectProducts
+} from '../utils';
 
 const { Column } = Table;
 
@@ -47,62 +52,24 @@ class RfqTable extends Component {
   }
 
   handleFile(e) {
-    xlsxHandler({
+    tableFileHandler({
       e,
-      success: data => {
-        // removing all prev products
-        Object.keys(this.state).forEach(key => {
-          if (key.startsWith('product__')) {
-            delete this.state[key];
-          }
-        });
-
-        const products = [];
-        const perProductStates = {};
-
-        data.forEach(product => {
-          const key = Math.random();
-          const extendedProduct = { key, ...product };
-
-          products.push(extendedProduct);
-
-          perProductStates[`product__${key}`] = extendedProduct;
-        });
-
-        this.setState({ products, ...perProductStates }, this.onChange);
+      state: this.state,
+      callback: stateDoc => {
+        this.setState(stateDoc, this.onChange);
       }
     });
   }
 
   onChange() {
-    const products = [];
-
-    // collect products table values
-    Object.keys(this.state).forEach(key => {
-      if (key.startsWith('product__')) {
-        products.push({ ...this.state[key] });
-      }
-    });
-
-    return this.props.onChange(products);
+    return this.props.onChange(collectProducts(this.state));
   }
 
   onProductInputChange(e, name, recordKey, dataType) {
     const stateKey = `product__${recordKey}`;
     const product = this.state[stateKey] || {};
 
-    let value;
-
-    if (e.target.value) {
-      value = e.target.value;
-
-      if (dataType === 'float') value = parseFloat(value);
-
-      if (dataType === 'eightDigit' && value.length > 8)
-        value = value.substring(0, 8);
-    }
-
-    product[name] = value;
+    product[name] = controlValueParser({ e, dataType });
 
     this.setState({ [stateKey]: product }, () => this.onChange());
   }
@@ -199,15 +166,6 @@ class RfqTable extends Component {
     return (
       <Card title="Form" className="margin">
         <div>
-          <Row>
-            <Col xl={12} lg={18}>
-              <Alert
-                description={__(rfqDisclaimer.description)}
-                message={__(rfqDisclaimer.title)}
-                type="info"
-              />
-            </Col>
-          </Row>
           <div className="table-operations margin">
             <Button onClick={() => window.open(requestUrl)}>
               {__('Download template')}
