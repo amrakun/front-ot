@@ -2,127 +2,86 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { Form, Button, Card, message } from 'antd';
-import { Uploader } from 'modules/common/components';
-import { xlsxHandler } from 'modules/common/utils';
-import TenderForm from '../TenderForm';
-import RfqTable from '../RfqTable';
+import { Uploader, BaseForm } from 'modules/common/components';
+import RfqTable from './RfqTable';
 import MainInfo from './MainInfo';
 
-class SubmitTender extends TenderForm {
+class SubmitTender extends BaseForm {
   constructor(props, context) {
     super(props, context);
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.saveDraft = this.saveDraft.bind(this);
-    this.collectInputs = this.collectInputs.bind(this);
-    this.handleFile = this.handleFile.bind(this);
-    this.onServiceFileUpload = this.onServiceFileUpload.bind(this);
-
     const response = props.response || {};
 
-    this.state.respondedServiceFiles = response.respondedServiceFiles;
+    this.state = {
+      respondedProducts: response.respondedProducts || [],
+      respondedFiles: response.respondedFiles || []
+    };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.saveDraft = this.saveDraft.bind(this);
+    this.onServiceFileUpload = this.onServiceFileUpload.bind(this);
+    this.onChangeProducts = this.onChangeProducts.bind(this);
   }
 
-  collectInputs() {
-    const products = [];
-
-    // collect products table values
-    Object.keys(this.state).forEach(key => {
-      if (key.startsWith('product__')) {
-        const product = this.state[key];
-
-        if (!this.isComplete(product)) return false;
-
-        const totalPrice = product.quantity * product.unitPrice;
-        delete product.key;
-        delete product.__typename;
-        delete product.purchaseRequestNumber;
-        delete product.shortText;
-        delete product.quantity;
-        delete product.uom;
-        delete product.manufacturer;
-        delete product.manufacturerPartNumber;
-
-        products.push({
-          ...product,
-          totalPrice
-        });
-      }
-    });
-
-    return products;
+  onChangeProducts(respondedProducts) {
+    this.setState({ respondedProducts });
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
     const { data, save } = this.props;
-    const { type } = data || {};
-    const { respondedServiceFiles } = this.state;
-    const respondedProducts = this.collectInputs();
+    const { type, rfqType } = data || {};
+    const { respondedFiles } = this.state;
 
-    if (type === 'rfq' && respondedProducts.length === 0) {
-      return message.error(this.context.__('Your form is incomplete'));
-    }
+    const respondedProducts = this.state.respondedProducts.map(product => {
+      const totalPrice = product.quantity * product.unitPrice;
+      delete product.key;
+      delete product.__typename;
+      delete product.purchaseRequestNumber;
+      delete product.shortText;
+      delete product.quantity;
+      delete product.uom;
+      delete product.manufacturer;
+      delete product.manufacturerPartNumber;
+
+      return {
+        ...product,
+        totalPrice
+      };
+    });
 
     if (
-      type === 'trfq' &&
-      (!respondedServiceFiles || respondedServiceFiles.length === 0)
+      type === 'rfq' &&
+      rfqType === 'goods' &&
+      respondedProducts.length === 0
     ) {
       return message.error(this.context.__('Your form is incomplete'));
     }
 
-    save({ respondedProducts, respondedServiceFiles }, true);
+    if (type === 'trfq' && (!respondedFiles || respondedFiles.length === 0)) {
+      return message.error(this.context.__('Your form is incomplete'));
+    }
+
+    if (
+      type === 'rfq' &&
+      rfqType === 'service' &&
+      (!respondedFiles || respondedFiles.length === 0)
+    ) {
+      return message.error(this.context.__('Your form is incomplete'));
+    }
+
+    save({ respondedProducts, respondedFiles }, true);
   }
 
   onServiceFileUpload(files) {
-    this.setState({ respondedServiceFiles: files });
+    this.setState({ respondedFiles: files });
   }
 
   saveDraft() {
     this.save({
-      respondedProducts: this.collectInputs(),
-      respondedServiceFiles: this.state.respondedServiceFiles
-    });
-  }
-
-  handleFile(e) {
-    const { __ } = this.context;
-
-    xlsxHandler({
-      e,
-      success: data => {
-        Object.keys(this.state).forEach(key => {
-          if (key.startsWith('product__')) {
-            delete this.state[key];
-          }
-        });
-
-        const products = [];
-        const perProductStates = {};
-        let allComplete = true;
-
-        data.forEach(product => {
-          if (!this.isComplete(product)) allComplete = false;
-
-          const key = Math.random();
-
-          const extendedProduct = {
-            key,
-            ...product
-          };
-
-          products.push(extendedProduct);
-
-          perProductStates[`product__${key}`] = extendedProduct;
-        });
-
-        if (!allComplete) {
-          message.warning(__('Your excel import is incomplete'));
-        }
-
-        this.setState({ products, ...perProductStates });
-      }
+      respondedProducts: this.state.respondedProducts,
+      respondedFiles: this.state.respondedFiles
     });
   }
 
@@ -146,22 +105,23 @@ class SubmitTender extends TenderForm {
   }
 
   render() {
-    const { products } = this.state;
-    const { data, generateTemplate } = this.props;
+    const { data, generateTemplate, response } = this.props;
+    const { type, rfqType, requestedProducts } = data;
 
     let title = 'Form';
+
     let form = (
       <RfqTable
+        requestedProducts={requestedProducts}
+        respondedProducts={response ? response.respondedProducts : []}
         generateTemplate={generateTemplate}
-        products={products}
-        renderProductColumn={this.renderProductColumn}
-        handleFile={this.handleFile}
+        onChange={this.onChangeProducts}
       />
     );
 
-    if (data.type === 'trfq') {
+    if (type === 'trfq' || (type === 'rfq' && rfqType === 'service')) {
       const response = this.props.response || {};
-      const serviceFiles = response.respondedServiceFiles || [];
+      const serviceFiles = response.respondedFiles || [];
 
       title = 'Schedule of service/ financial proposal';
 

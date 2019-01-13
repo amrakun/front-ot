@@ -5,7 +5,6 @@ import { IntlProvider, addLocaleData, injectIntl } from 'react-intl';
 import mn from 'react-intl/locale-data/mn';
 import en from 'react-intl/locale-data/en';
 import { T } from 'modules/common/components';
-import { installErxes } from 'modules/common/utils';
 import enUS from 'rc-pagination/lib/locale/en_US';
 import * as messages from 'modules/translations';
 import Sidenav from './Sidenav';
@@ -122,7 +121,7 @@ class MainLayout extends React.Component {
   }
 
   componentDidUpdate() {
-    const { currentUser, location, logsWriteMutation } = this.props;
+    const { location, logsWriteMutation } = this.props;
 
     const path = location.pathname;
 
@@ -131,15 +130,6 @@ class MainLayout extends React.Component {
         logsWriteMutation({
           variables: { apiCall: path }
         });
-    }
-
-    // erxes script
-    if (
-      currentUser &&
-      currentUser.isSupplier &&
-      !path.includes('/tender/submit')
-    ) {
-      installErxes('ta4ukM', currentUser);
     }
   }
 

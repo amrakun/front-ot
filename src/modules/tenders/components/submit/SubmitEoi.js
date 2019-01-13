@@ -2,30 +2,32 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { Card, Form, Button, Modal, Checkbox } from 'antd';
-import TenderForm from '../TenderForm';
-import EoiTable from '../EoiTable';
+import { BaseForm } from 'modules/common/components';
 import { agreementOptions } from './constants';
+import EoiTable from './EoiTable';
 import MainInfo from './MainInfo';
 
 const CheckboxGroup = Checkbox.Group;
 
-class SubmitTender extends TenderForm {
+class SubmitTender extends BaseForm {
   constructor(props) {
     super(props);
 
+    const { response } = props;
+
     this.state = {
-      ...this.state,
+      respondedDocuments: response ? response.respondedDocuments : [],
       submitDisabled: true,
       submitLoading: false,
       agreementModalVisible: false
     };
 
+    this.onChangeDocuments = this.onChangeDocuments.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleAgreementModal = this.toggleAgreementModal.bind(this);
     this.handleOk = this.handleOk.bind(this);
     this.handleAgreementChange = this.handleAgreementChange.bind(this);
     this.saveDraft = this.saveDraft.bind(this);
-    this.collectInputs = this.collectInputs.bind(this);
   }
 
   toggleAgreementModal() {
@@ -39,24 +41,17 @@ class SubmitTender extends TenderForm {
       : this.setState({ submitDisabled: true });
   }
 
-  collectInputs() {
-    const documents = [];
+  onChangeDocuments(respondedDocuments) {
+    this.setState({ respondedDocuments });
+  }
 
-    // collect products table values
-    Object.keys(this.state).forEach(key => {
-      if (key.startsWith('product__')) {
-        const product = this.state[key];
+  collectDocuments() {
+    return this.state.respondedDocuments.map(document => {
+      delete document.key;
+      delete document.__typename;
 
-        documents.push({
-          notes: product.notes,
-          isSubmitted: product.isSubmitted,
-          file: product.file,
-          name: product.document
-        });
-      }
+      return document;
     });
-
-    return documents;
   }
 
   handleSubmit(e) {
@@ -67,27 +62,17 @@ class SubmitTender extends TenderForm {
 
   handleOk() {
     this.setState({ submitLoading: true });
-    this.props.save({ respondedDocuments: this.collectInputs() }, true);
+    this.props.save({ respondedDocuments: this.collectDocuments() }, true);
   }
 
   saveDraft() {
-    this.save({ respondedDocuments: this.collectInputs() });
+    this.save({ respondedDocuments: this.collectDocuments() });
   }
 
   render() {
-    const {
-      products,
-      agreementModalVisible,
-      submitDisabled,
-      submitLoading
-    } = this.state;
+    const { agreementModalVisible, submitDisabled, submitLoading } = this.state;
 
-    const { data } = this.props;
-
-    const formProps = {
-      products: products,
-      renderProductColumn: this.renderProductColumn
-    };
+    const { data, response } = this.props;
 
     const { __ } = this.context;
 
@@ -96,7 +81,11 @@ class SubmitTender extends TenderForm {
         <MainInfo {...data} />
 
         <Card title={__('Apply to EOI')} className="margin">
-          <EoiTable {...formProps} />
+          <EoiTable
+            requestedDocuments={data.requestedDocuments || []}
+            respondedDocuments={response ? response.respondedDocuments : []}
+            onChange={this.onChangeDocuments}
+          />
 
           <br />
 

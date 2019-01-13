@@ -1,107 +1,140 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import { Form, Button, Card, Icon, message } from 'antd';
-import TenderForm from '../TenderForm';
-import RfqTable from '../RfqTable';
-import { xlsxHandler } from 'modules/common/utils';
+import { Form, Button, message, Select } from 'antd';
+import RfqTable from './RfqTable';
+import MainInfo from './MainInfo';
+import { BaseForm } from 'modules/common/components';
 
-const initialProducts = [{ key: Math.random() }];
-
-class RfqForm extends TenderForm {
+const { Option } = Select;
+class RfqForm extends BaseForm {
   constructor(props, context) {
     super(props, context);
 
     this.emailTemplate = context.systemConfig.rfqTemplate;
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleFile = this.handleFile.bind(this);
+    this.onChangeMainInfo = this.onChangeMainInfo.bind(this);
+    this.onChangeRequestedProducts = this.onChangeRequestedProducts.bind(this);
+    this.onRfqTypeChange = this.onRfqTypeChange.bind(this);
+
+    const { data } = props;
+
+    this.state = {
+      rfqType: data.rfqType || 'goods',
+      requestedProducts: data.requestedProducts || [],
+      suppliers: data.suppliers || [],
+      attachments: data.attachments || [],
+      content: data.content || ''
+    };
   }
 
-  componentDidMount() {
-    if (!this.state.content) {
-      this.setState({
-        content: this.emailTemplate,
-        products: initialProducts
-      });
-    }
+  onChangeMainInfo(mainInfoState) {
+    this.setState(mainInfoState);
+  }
+
+  onChangeRequestedProducts(requestedProducts) {
+    this.setState({ requestedProducts });
+  }
+
+  onRfqTypeChange(rfqType) {
+    this.setState({ rfqType });
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
     const { type } = this.props;
-    const inputs = this.collectInputs();
+    const {
+      requestedProducts,
+      content,
+      attachments,
+      suppliers,
+      rfqType
+    } = this.state;
 
-    if (type === 'rfq' && inputs.requestedProducts.length === 0) {
-      return message.error('Please input atleast one row');
+    const doc = {
+      type,
+      requestedProducts: (requestedProducts || []).map(product => {
+        delete product.key;
+        delete product.__typename;
+
+        return product;
+      }),
+      content,
+      attachments,
+      supplierIds: suppliers.map(s => s._id)
+    };
+
+    if (type === 'rfq') {
+      doc.rfqType = rfqType;
+
+      if (rfqType === 'goods' && doc.requestedProducts.length === 0) {
+        return message.error('Please input atleast one row');
+      }
     }
 
-    inputs.type = type;
-
-    this.save(inputs);
-  }
-
-  handleFile(e) {
-    xlsxHandler({
-      e,
-      success: data => {
-        Object.keys(this.state).forEach(key => {
-          if (key.startsWith('product__')) {
-            delete this.state[key];
-          }
-        });
-
-        const products = [];
-        const perProductStates = {};
-
-        data.forEach(product => {
-          const key = Math.random();
-          const extendedProduct = { key, ...product };
-
-          products.push(extendedProduct);
-
-          perProductStates[`product__${key}`] = extendedProduct;
-        });
-
-        this.setState({ products, ...perProductStates });
-      }
-    });
+    this.save(doc);
   }
 
   renderProductsTable() {
-    const { products } = this.state;
-    const { type } = this.props;
+    const { type, data } = this.props;
+    const { rfqType } = this.state;
 
     if (type === 'trfq') {
       return null;
     }
 
-    return (
-      <Card title="Form" className="margin">
-        <RfqTable
-          products={products}
-          renderProductColumn={this.renderProductColumn}
-          isSupplier={false}
-          handleFile={this.handleFile}
-          tenderCreation={this.props.tenderCreation}
-        />
+    if (rfqType === 'service') {
+      return null;
+    }
 
-        <Button
-          className="dashed-button-big"
-          size="large"
-          onClick={this.addProductRow}
-        >
-          <Icon type="plus" /> Add row
-        </Button>
-      </Card>
+    return (
+      <RfqTable
+        requestedProducts={data.requestedProducts || []}
+        onChange={this.onChangeRequestedProducts}
+      />
+    );
+  }
+
+  renderExtraContent() {
+    const { type, data } = this.props;
+    const { rfqType } = this.state;
+
+    if (type === 'trfq') {
+      return null;
+    }
+
+    if (data && data._id) {
+      return null;
+    }
+
+    return (
+      <Form.Item label="Type">
+        <Select value={rfqType} onChange={this.onRfqTypeChange}>
+          <Option value="goods">Goods</Option>
+          <Option value="service">Service</Option>
+        </Select>
+      </Form.Item>
     );
   }
 
   render() {
+    // data is editing tender object
+    const { data } = this.props;
+
     return (
       <Form onSubmit={this.handleSubmit}>
-        {this.renderMainInfo(this.emailTemplate)}
+        <div>
+          <MainInfo
+            data={data}
+            renderExtraContent={this.renderExtraContent.bind(this)}
+            renderField={this.renderField.bind(this)}
+            renderOptions={this.renderOptions.bind(this)}
+            onChange={this.onChangeMainInfo}
+          />
+        </div>
+
         {this.renderProductsTable()}
 
         <Button

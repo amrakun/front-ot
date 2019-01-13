@@ -156,13 +156,14 @@ DashboardContainer.propTypes = {
   queryParams: PropTypes.object
 };
 
-const generateDateVariables = queryParams => {
-  const startDate = new Date(queryParams.startDate || '1900-01-01');
-  const endDate = new Date(queryParams.endDate || '2040-01-01');
-
+const generateDateVariables = ({ startDate, endDate }) => {
   return {
-    startDate: moment(startDate),
-    endDate: moment(endDate).endOf('month')
+    startDate: startDate
+      ? new Date(startDate)
+      : moment()
+          .subtract(7, 'days')
+          .format('YYYY-MM-DD'),
+    endDate: endDate ? new Date(endDate) : moment().format('YYYY-MM-DD')
   };
 };
 

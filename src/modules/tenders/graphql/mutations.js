@@ -31,10 +31,12 @@ const commonFields = `
 const tendersAdd = `
   mutation tendersAdd(
     $type: String!,
+    $rfqType: String,
     ${commonParams}
   ) {
     tendersAdd(
       type: $type,
+      rfqType: $rfqType,
       ${commonFields}
     ) {
       _id
@@ -60,7 +62,7 @@ const tenderResponseParams = `
   $tenderId: String!
   $isNotInterested: Boolean
   $respondedProducts: [TenderRespondedProductInput]
-  $respondedServiceFiles: [JSON]
+  $respondedFiles: [JSON]
   $respondedDocuments: [TenderRespondedDocumentInput]
 `;
 
@@ -68,7 +70,7 @@ const tenderResponseFields = `
   tenderId: $tenderId,
   isNotInterested: $isNotInterested
   respondedProducts: $respondedProducts
-  respondedServiceFiles: $respondedServiceFiles
+  respondedFiles: $respondedFiles
   respondedDocuments: $respondedDocuments
 `;
 

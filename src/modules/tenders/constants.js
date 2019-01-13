@@ -102,13 +102,14 @@ export const rfqDisclaimer = {
     'Lead time quoted will be taken seriously and treated as final.  Quotes will be rejected with different formats than this template.  Please dont delete the lines you cannot quote just leave with a value of 0 and dont  change the sequence of lines.  Quoted price must include all expenses including packaging and delivery to OT warehouse.'
 };
 
-export const initialProducts = [
-  { key: 1, document: 'Scope specific experience' },
-  { key: 2, document: 'Customer reference /atleast 2/' },
-  { key: 3, document: 'Special licences if applicable (copy)' }
+export const initialDocuments = [
+  { key: 1, value: 'Scope specific experience' },
+  { key: 2, value: 'Customer reference /atleast 2/' },
+  { key: 3, value: 'Special licences if applicable (copy)' }
 ];
-export const initialPerProducts = {
-  product__1: { document: 'Scope specific experience' },
-  product__2: { document: 'Customer reference /atleast 2/' },
-  product__3: { document: 'Special licences if applicable (copy)' }
+
+export const initialPerDocuments = {
+  document__1: 'Scope specific experience',
+  document__2: 'Customer reference /atleast 2/',
+  document__3: 'Special licences if applicable (copy)'
 };
