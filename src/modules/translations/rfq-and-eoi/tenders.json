@@ -15,8 +15,7 @@
   "Document": "Бичиг баримт",
   "Information": "Мэдээлэл",
   "Open EOI/RFQ": "Нээлттэй ОСИХ ба ҮСАХ",
-  "Express of Interest (EOI), Request for quotation (RFQ)":
-    "Нээлттэй Оролцох сонирхлоо илэрхийлэх хүсэлт (ОСИХ) ба Үнийн санал авах хүсэлт (ҮСАХ)",
+  "Express of Interest (EOI), Request for quotation (RFQ)": "Нээлттэй Оролцох сонирхлоо илэрхийлэх хүсэлт (ОСИХ) ба Үнийн санал авах хүсэлт (ҮСАХ)",
   "dashboardDifotScore": "DIFOT оноо",
   "Reminder": "Анхаар!",
   "Success feedback": "Бидний Амжилт",
@@ -25,14 +24,11 @@
   "Not pre-qualified": "Тэнцээгүй",
   "Pre-qualified": "Тэнцсэн",
   "Nothing new": "Шинэ зүйл алга",
-  "Your prequalification information is not confirmed yet":
-    "Таны мэдээлэл бүрэн баталгаажаагүй байна. Бүртгэл баталгаажаагүй тул тендерийн шалгуур хангахгүй гэдгийг анхаарна уу. Тиймээс OT сургалт хариуцсан багт яаралтай хандан сургалтанд хамрагдана уу.",
-  "Your DIFOT should not be less than 75%":
-    "Таны бараа хүргэлтийн үнэлгээ бөгөөд хамгийн багадаа 75% -тай байх ёстой.",
+  "Your prequalification information is not confirmed yet": "Таны мэдээлэл бүрэн баталгаажаагүй байна. Бүртгэл баталгаажаагүй тул тендерийн шалгуур хангахгүй гэдгийг анхаарна уу. Тиймээс OT сургалт хариуцсан багт яаралтай хандан сургалтанд хамрагдана уу.",
+  "Your DIFOT should not be less than 75%": "Таны бараа хүргэлтийн үнэлгээ бөгөөд хамгийн багадаа 75% -тай байх ёстой.",
   "to update your information": "мэдээллээ шинэчилнэ үү",
   "You have new audit invitation. Click": "Танд аудит хийх хүсэлт ирсэн байна.",
-  "You have new audit improvement plan. Click":
-    "Танд аудит хийх хүсэлт ирсэн байна.",
+  "You have new audit improvement plan. Click": "Танд аудит хийх хүсэлт ирсэн байна.",
   "view your audit invitations": "хүсэлтийг харна уу!",
   "view your audit": "хүсэлтийг харна уу!",
   "Please click here": "Энд дарж",
@@ -47,8 +43,7 @@
   "Download template": "Хүснэгт Татах",
   "Import excel file": "Хуулж оруулах",
   "Disclaimer": "Анхааруулга:",
-  "Lead time quoted will be taken seriously and treated as final.  Quotes will be rejected with different formats than this template.  Please dont delete the lines you cannot quote just leave with a value of 0 and dont  change the sequence of lines.  Quoted price must include all expenses including packaging and delivery to OT warehouse.":
-    "Хүргэлтийн хугaцааг бодитоор тооцох нь маш чухал бөгөөд захиалга гарсны дараа дахин өөрчлөх боломжгүй.  \n *Энэхүү загвараас өөрөөр ирүүлсэн үнийн саналыг хүчингүйд тооцох болно. \n *Үнийн саналаа өгөх боломжгүй барааг жагсаалтнаас хасаж болохгүй бөгөөд харин \"0\"  гэж тэмдэглэн мөн жагсаалтын дарааллыг өөрчлөхгүйгээр явуулахыг анхаарна уу Үнийн саналд баглаа боодол, хүргэлтийн зардал гэх мэт бүх зардал орсон байх ёстой",
+  "Lead time quoted will be taken seriously and treated as final.  Quotes will be rejected with different formats than this template.  Please dont delete the lines you cannot quote just leave with a value of 0 and dont  change the sequence of lines.  Quoted price must include all expenses including packaging and delivery to OT warehouse.": "Хүргэлтийн хугaцааг бодитоор тооцох нь маш чухал бөгөөд захиалга гарсны дараа дахин өөрчлөх боломжгүй.  \n *Энэхүү загвараас өөрөөр ирүүлсэн үнийн саналыг хүчингүйд тооцох болно. \n *Үнийн саналаа өгөх боломжгүй барааг жагсаалтнаас хасаж болохгүй бөгөөд харин \"0\"  гэж тэмдэглэн мөн жагсаалтын дарааллыг өөрчлөхгүйгээр явуулахыг анхаарна уу Үнийн саналд баглаа боодол, хүргэлтийн зардал гэх мэт бүх зардал орсон байх ёстой",
   "OT material code": "ОТ барааны код",
   "Purchase request number": "Худалдан авалтын дугаар  ",
   "Short text": "Барааны товч тодорхойлолт",
@@ -57,12 +52,12 @@
   "Manufacturer": "Үйлдэвэрлэгч",
   "Manufacturer part number": "Үйлдэвэрлэгчийн эдийн дугаар",
   "Suggested manufacturer if any": "Санал болгосон үйлдэвэрлэгч байвал",
-  "Suggest manufacturer part number":
-    "Санал болгосон үйлдэвэрлэгчийн эдийн дугаар",
+  "Suggest manufacturer part number": "Санал болгосон үйлдэвэрлэгчийн эдийн дугаар",
   "Unit price": "Нэгж барааны үнэ (НӨАТ-гүй) MNT -  Төгрөгөөр",
   "Total price": "Нийт үнэ  MNT -  Төгрөгөөр",
   "Lead time": "Нийлүүлэх хугацаа Days - Өдрөөр",
   "Shipping terms": "Хүргэлтийн нөхцөл",
+  "Alternative": "Alternative",
   "Comment": "Тэмдэглэл",
   "Picture (if required)": "Зураг (Хэрэв шаардлагатай бол)",
   "Participated": "Оролцсон",
@@ -72,27 +67,19 @@
   "here": "Энд дарж",
   "Expression Of Interest": "Оролцох сонирхолоо илэрхийлэх хүсэлт (ОСИХ)",
   "Request For Quotation": "Үнийн санал авах хүсэлт (ҮСАХ)",
-  "Please tick the boxes to confirm that you have agree with the statements":
-    "Та доорхи заалтуудыг уншиж танилцан, зөвшөөрч байвал дөрвөлжин доторхийг тэмдэглэх эсхүл будна уу",
-  "1. We have read and agreed to Oyu Tolgoi's (I) \"Way we work\" and \"Supplier Code of conduct\". You can visit":
-    "Оюу толгой ХХК-ийн (i) 'Бидний ажлын арга барил' болон (ii) 'Ханган нийлүүлэгчийн ёс зүйн дүрэм' -ийг уншиж танилцан бид зөвшөөрч байна.",
+  "Please tick the boxes to confirm that you have agree with the statements": "Та доорхи заалтуудыг уншиж танилцан, зөвшөөрч байвал дөрвөлжин доторхийг тэмдэглэх эсхүл будна уу",
+  "1. We have read and agreed to Oyu Tolgoi's (I) \"Way we work\" and \"Supplier Code of conduct\". You can visit": "Оюу толгой ХХК-ийн (i) 'Бидний ажлын арга барил' болон (ii) 'Ханган нийлүүлэгчийн ёс зүйн дүрэм' -ийг уншиж танилцан бид зөвшөөрч байна.",
   "here ": "Эдгээр бичиг баримтуудыг",
   "to view these documents and more": "хаягаар орон уншиж танилцах боломжтой.",
-  "2. We understand that the Company reserves the right to refuse any document(s) which is incomplete and/or submitted after the specified date.":
-    "Оюу толгой ХХК нь бүрэн бус буюу/ болон хугацаа хоцорч ирүүлсэн аливаа бичиг баримтуудыг хүлээн авахаас татгалзах эрхтэй.",
-  "3. We understand the Company will not be responsible for any costs associated with preparing and submitting an Expression of Interest to the Company.":
-    "Оюу толгой ХХК нь бичиг баримтуудыг бэлтгэх, ирүүлэхтэй холбогдох аливаа зардлыг хариуцахгүй гэдгийг бид ойлгон зөвшөөрч байна. ",
-  "4. We understand the Company is only seeking Expression of Interest from potential suppliers and makes no representation or promise in relation to procuring work from a supplier or suppliers.":
-    "Оюу толгой ХХК нь \"Оролцох сонирхлоо илэрхийлэх хүсэлт\"-ийг боломжит ханган нийлүүлэгчдээс хүлээн авч байгаа бөгөөд тухайн ханган нийлүүлэгч, нийлүүлэгчдээс худалдан авалт хийх мэдэгдэл, эсхүл амлалт өгч буй явдал биш гэдгийг бид ойлгон зөвшөөрч байна. ",
-  "5. Hereby we confirm the submitted information and document(s) are true and authentic and that we understand any false and illegal information and document(s) will result in corrective actions as per related Mongolian laws and Company's policies":
-    "Хавсарган ирүүлсэн бичиг баримт(ууд) нь үнэн зөв, хүчин төгөлдөр бөгөөд аливаа худал мэдээлэл болон хууль бус бичиг баримт(ууд) ирүүлсэн тохиолдолд Монгол Улсын хууль дүрэм, Компанийн дотоод бодлого журмын дагуу арга хэмжээ авагдана гэдгийг Бид ойлгон хүлээн зөвшөөрч байна ",
+  "2. We understand that the Company reserves the right to refuse any document(s) which is incomplete and/or submitted after the specified date.": "Оюу толгой ХХК нь бүрэн бус буюу/ болон хугацаа хоцорч ирүүлсэн аливаа бичиг баримтуудыг хүлээн авахаас татгалзах эрхтэй.",
+  "3. We understand the Company will not be responsible for any costs associated with preparing and submitting an Expression of Interest to the Company.": "Оюу толгой ХХК нь бичиг баримтуудыг бэлтгэх, ирүүлэхтэй холбогдох аливаа зардлыг хариуцахгүй гэдгийг бид ойлгон зөвшөөрч байна. ",
+  "4. We understand the Company is only seeking Expression of Interest from potential suppliers and makes no representation or promise in relation to procuring work from a supplier or suppliers.": "Оюу толгой ХХК нь \"Оролцох сонирхлоо илэрхийлэх хүсэлт\"-ийг боломжит ханган нийлүүлэгчдээс хүлээн авч байгаа бөгөөд тухайн ханган нийлүүлэгч, нийлүүлэгчдээс худалдан авалт хийх мэдэгдэл, эсхүл амлалт өгч буй явдал биш гэдгийг бид ойлгон зөвшөөрч байна. ",
+  "5. Hereby we confirm the submitted information and document(s) are true and authentic and that we understand any false and illegal information and document(s) will result in corrective actions as per related Mongolian laws and Company's policies": "Хавсарган ирүүлсэн бичиг баримт(ууд) нь үнэн зөв, хүчин төгөлдөр бөгөөд аливаа худал мэдээлэл болон хууль бус бичиг баримт(ууд) ирүүлсэн тохиолдолд Монгол Улсын хууль дүрэм, Компанийн дотоод бодлого журмын дагуу арга хэмжээ авагдана гэдгийг Бид ойлгон хүлээн зөвшөөрч байна ",
   "Scope specific experience": "Тодорхой туршлагын хүрээ",
   "Customer reference /atleast 2/": "Харилцагчийн тодорхойлолт (2-оос доошгүй)",
-  "Special licences if applicable (copy)":
-    "Тусгай лиценз зөвшөөрлүүд (хуулбар)",
+  "Special licences if applicable (copy)": "Тусгай лиценз зөвшөөрлүүд (хуулбар)",
   "Your form is incomplete": "Таны бөглөсөн форм дутуу байна",
-  "Your excel import is incomplete":
-    "Таны хуулж оруулсан файл дутуу бөглөгдсөн байна",
+  "Your excel import is incomplete": "Таны хуулж оруулсан файл дутуу бөглөгдсөн байна",
   "Not interested tender has been removed": "Тендерийн хүсэлтийг татгалзлаа",
   "Successfully saved a tender!": "Амжилттай хадгалагдлаа!",
   "Successfully submitted a tender!": "Амжилттай илгээгдлээ!",

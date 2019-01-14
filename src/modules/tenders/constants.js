@@ -27,6 +27,7 @@ export const rfqProductsColumns = {
   totalPrice: 'Total price',
   leadTime: 'Lead time (day)',
   shippingTerms: 'Shipping terms',
+  alternative: 'Alternative',
   comment: 'Comment',
   picture: 'Picture (if required)'
 };

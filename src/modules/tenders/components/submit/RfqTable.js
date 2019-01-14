@@ -194,7 +194,7 @@ class RfqTable extends Component {
           {this.renderCell({
             name: 'suggestedManufacturerPartNumber',
             title: __(rpc.suggestedManufacturerPart),
-            type: 'number'
+            type: 'string'
           })}
           {this.renderCell({
             name: 'unitPrice',
@@ -209,6 +209,11 @@ class RfqTable extends Component {
           {this.renderCell({
             name: 'shippingTerms',
             title: __(rpc.shippingTerms),
+            type: 'string'
+          })}
+          {this.renderCell({
+            name: 'alternative',
+            title: __(rpc.alternative),
             type: 'string'
           })}
           {this.renderCell({

@@ -50,6 +50,7 @@ const rfqResponseFields = `
     totalPrice
     leadTime
     shippingTerms
+    alternative
     comment
     file
   }
