@@ -28,7 +28,7 @@ class EoiTable extends Component {
     });
 
     if (documents.length === 0) {
-      documents = initialDocuments;
+      documents = initialDocuments.map((text, i) => ({ key: i, value: text }));
       perDocumentStates = initialPerDocuments;
     }
 

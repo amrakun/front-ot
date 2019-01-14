@@ -5,6 +5,7 @@ import { Card, Form, Button } from 'antd';
 import { BaseForm } from 'modules/common/components';
 import EoiTable from './EoiTable';
 import MainInfo from './MainInfo';
+import { initialDocuments } from '../../constants';
 
 class EoiForm extends BaseForm {
   constructor(props, context) {
@@ -17,12 +18,16 @@ class EoiForm extends BaseForm {
     this.onChangeDocuments = this.onChangeDocuments.bind(this);
 
     const { data } = props;
+    const { suppliers, attachments, content, requestedDocuments } = data || {};
 
     this.state = {
-      requestedDocuments: data.requestedDocuments,
-      suppliers: data.suppliers || [],
-      attachments: data.attachments || [],
-      content: data.content || ''
+      requestedDocuments:
+        (requestedDocuments || []).length > 0
+          ? requestedDocuments
+          : initialDocuments,
+      suppliers: suppliers || [],
+      attachments: attachments || [],
+      content: content || ''
     };
   }
 

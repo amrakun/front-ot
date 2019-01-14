@@ -104,9 +104,9 @@ export const rfqDisclaimer = {
 };
 
 export const initialDocuments = [
-  { key: 1, value: 'Scope specific experience' },
-  { key: 2, value: 'Customer reference /atleast 2/' },
-  { key: 3, value: 'Special licences if applicable (copy)' }
+  'Scope specific experience',
+  'Customer reference /atleast 2/',
+  'Special licences if applicable (copy)'
 ];
 
 export const initialPerDocuments = {
