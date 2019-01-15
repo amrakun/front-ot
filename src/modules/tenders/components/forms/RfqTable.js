@@ -138,8 +138,7 @@ class RfqTable extends Component {
         {this.renderCell({
           name: 'quantity',
           title: __(rpc.quantity),
-          type: 'float',
-          dataType: 'float'
+          type: 'number'
         })}
         {this.renderCell({
           name: 'uom',
@@ -152,8 +151,7 @@ class RfqTable extends Component {
         {this.renderCell({
           name: 'manufacturerPartNumber',
           title: __(rpc.manufacturerPart),
-          type: 'number',
-          dataType: 'eightDigit'
+          type: 'string'
         })}
       </Table>
     );
