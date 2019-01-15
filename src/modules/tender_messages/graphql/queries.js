@@ -1,4 +1,4 @@
-export const tenderMessages = `
+const tenderMessages = `
   query tenderMessages($page: Int, $perPage: Int, $tenderId: String!) {
     tenderMessages(page: $page, perPage: $perPage, tenderId: $tenderId) {
       _id
@@ -67,3 +67,5 @@ export const tenderMessages = `
     }
   }
 `;
+
+export default { tenderMessages };
