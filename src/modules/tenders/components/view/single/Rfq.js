@@ -282,13 +282,14 @@ class Rfq extends Tender {
         key: '10'
       },
       { title: 'Total price', dataIndex: 'totalPrice', key: '11' },
-      { title: 'Lead time', dataIndex: 'leadTime', key: '12' },
-      { title: 'Shipping terms', dataIndex: 'shippingTerms', key: '13' },
-      { title: 'Alternative', dataIndex: 'alternative', key: '14' },
-      { title: 'Comment', dataIndex: 'comment', key: '15' },
+      { title: 'Currency', dataIndex: 'currency', key: '12' },
+      { title: 'Lead time', dataIndex: 'leadTime', key: '13' },
+      { title: 'Shipping terms', dataIndex: 'shippingTerms', key: '14' },
+      { title: 'Alternative', dataIndex: 'alternative', key: '15' },
+      { title: 'Comment', dataIndex: 'comment', key: '16' },
       {
         title: 'Picture (if required)',
-        key: '16',
+        key: '17',
         render: record => (
           <a
             href="#download"

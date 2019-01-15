@@ -3,7 +3,7 @@ import { message } from 'antd';
 import productsTree from 'modules/common/components/productsTree/constants';
 import consts from 'consts';
 
-export const xlsxHandler = ({ e, success }) => {
+export const xlsxHandler = ({ e, success, parse = true }) => {
   const reader = new FileReader();
 
   reader.onload = async e => {
@@ -15,6 +15,10 @@ export const xlsxHandler = ({ e, success }) => {
     }
 
     const [headers, ...dataRows] = rows;
+
+    if (!parse) {
+      return success(dataRows);
+    }
 
     const results = [];
 

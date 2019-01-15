@@ -48,6 +48,7 @@ const rfqResponseFields = `
     suggestedManufacturerPartNumber
     unitPrice
     totalPrice
+    currency
     leadTime
     shippingTerms
     alternative

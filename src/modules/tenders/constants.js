@@ -25,6 +25,7 @@ export const rfqProductsColumns = {
   suggestedManufacturerPart: 'Suggest manufacturer part number',
   unitPrice: 'Unit price',
   totalPrice: 'Total price',
+  currency: 'Currency',
   leadTime: 'Lead time (day)',
   shippingTerms: 'Shipping terms',
   alternative: 'Alternative',
@@ -89,10 +90,11 @@ export const rfqResponseColumns = [
   },
   { title: 'Unit price (excluding VAT)', dataIndex: 'unitPrice', key: '10' },
   { title: 'Total price', dataIndex: 'totalPrice', key: '11' },
-  { title: 'Lead time', dataIndex: 'leadTime', key: '12' },
-  { title: 'Shipping terms', dataIndex: 'shippingTerms', key: '13' },
-  { title: 'Comment', dataIndex: 'comment', key: '14' },
-  { title: 'Picture (if required)', dataIndex: 'file', key: '15' }
+  { title: 'Currency', dataIndex: 'currency', key: '12' },
+  { title: 'Lead time', dataIndex: 'leadTime', key: '13' },
+  { title: 'Shipping terms', dataIndex: 'shippingTerms', key: '14' },
+  { title: 'Comment', dataIndex: 'comment', key: '15' },
+  { title: 'Picture (if required)', dataIndex: 'file', key: '16' }
 ];
 
 export const rfqColumns = [...rfqRequestColumns, ...rfqResponseColumns];

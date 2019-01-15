@@ -202,6 +202,11 @@ class RfqTable extends Component {
             type: 'number'
           })}
           {this.renderCell({
+            name: 'currency',
+            title: __(rpc.currency),
+            type: 'string'
+          })}
+          {this.renderCell({
             name: 'leadTime',
             title: __(rpc.leadTime),
             type: 'number'

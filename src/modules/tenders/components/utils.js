@@ -24,6 +24,7 @@ export const controlValueParser = ({ e, dataType }) => {
 export const tableFileHandler = ({ e, state, callback }) => {
   xlsxHandler({
     e,
+    parse: false,
     success: data => {
       // removing all prev products
       Object.keys(state).forEach(key => {
@@ -35,9 +36,45 @@ export const tableFileHandler = ({ e, state, callback }) => {
       const products = [];
       const perProductStates = {};
 
-      data.forEach(product => {
+      data.forEach(row => {
         const key = Math.random();
-        const extendedProduct = { key, ...product };
+
+        const [
+          code,
+          purchaseRequestNumber,
+          shortText,
+          quantity,
+          uom,
+          manufacturer,
+          manufacturerPartNumber,
+          suggestedManufacturer,
+          suggestedManufacturerPartNumber,
+          unitPrice,
+          currency,
+          leadTime,
+          shippingTerms,
+          alternative,
+          comment
+        ] = row;
+
+        const extendedProduct = {
+          key,
+          code,
+          purchaseRequestNumber,
+          shortText,
+          quantity,
+          uom,
+          manufacturer,
+          manufacturerPartNumber,
+          suggestedManufacturer,
+          suggestedManufacturerPartNumber,
+          unitPrice,
+          currency,
+          leadTime,
+          shippingTerms,
+          alternative,
+          comment
+        };
 
         products.push(extendedProduct);
 
