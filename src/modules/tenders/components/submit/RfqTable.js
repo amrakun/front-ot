@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Table, Button, Icon, Alert, Col, Row, Input } from 'antd';
+import { Table, Select, Button, Icon, Alert, Col, Row, Input } from 'antd';
 import { rfqProductsColumns as rpc, rfqDisclaimer } from '../../constants';
 import { Uploader } from 'modules/common/components';
 import {
@@ -10,6 +10,7 @@ import {
 } from '../utils';
 
 const { Column } = Table;
+const { Option } = Select;
 
 class RfqTable extends Component {
   constructor(props, context) {
@@ -77,8 +78,8 @@ class RfqTable extends Component {
     });
   }
 
-  renderCell(options) {
-    const { name, title, type, width = 140 } = options;
+  renderCell(props) {
+    const { name, title, type, width = 140, options } = props;
     const disabled = !type;
 
     const render = (text, record) => {
@@ -92,6 +93,17 @@ class RfqTable extends Component {
       };
 
       let control = <Input {...inputProps} />;
+
+      if (type === 'select') {
+        control = (
+          <Select
+            defaultValue={defaultValue}
+            onChange={e => this.onProductInputChange(e, name, record.key)}
+          >
+            {options()}
+          </Select>
+        );
+      }
 
       if (type === 'uploader') {
         control = (
@@ -215,7 +227,18 @@ class RfqTable extends Component {
           {this.renderCell({
             name: 'currency',
             title: __(rpc.currency),
-            type: 'string'
+            type: 'select',
+            defaultValue: 'MNT',
+            options: () => {
+              return [
+                <Option key="1" value="MNT">
+                  MNT
+                </Option>,
+                <Option key="2" value="USD">
+                  USD
+                </Option>
+              ];
+            }
           })}
           {this.renderCell({
             name: 'leadTime',
@@ -225,12 +248,40 @@ class RfqTable extends Component {
           {this.renderCell({
             name: 'shippingTerms',
             title: __(rpc.shippingTerms),
-            type: 'string'
+            type: 'select',
+            defaultValue: 'DDP - OT UB warehouse',
+            options: () => {
+              return [
+                <Option key="1" value="DDP - OT UB warehouse">
+                  DDP - OT UB warehouse
+                </Option>,
+                <Option key="2" value="DDP - OT site">
+                  DDP - OT site
+                </Option>,
+                <Option key="3" value="FCA - Supplier Facility">
+                  FCA - Supplier Facility
+                </Option>,
+                <Option key="4" value="EXW">
+                  EXW
+                </Option>
+              ];
+            }
           })}
           {this.renderCell({
             name: 'alternative',
             title: __(rpc.alternative),
-            type: 'string'
+            type: 'select',
+            defaultValue: 'No',
+            options: () => {
+              return [
+                <Option key="1" value="Yes">
+                  Yes
+                </Option>,
+                <Option key="2" value="No">
+                  No
+                </Option>
+              ];
+            }
           })}
           {this.renderCell({
             name: 'comment',
