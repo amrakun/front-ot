@@ -5,7 +5,7 @@ import qs from 'query-string';
 
 export default compose(
   graphql(gql(queries.tenderMessages), {
-    name: 'tenderMessages',
+    name: 'tenderMessagesQuery',
     options: ({ location }) => {
       const variables = qs.parse(location.search);
       return {

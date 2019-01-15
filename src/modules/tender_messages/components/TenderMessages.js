@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Table, Icon, Divider } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 
-const renderRecipient = ({ recipientSuppliers }) => {
+const Recipient = ({ recipientSuppliers }) => {
   if (recipientSuppliers && recipientSuppliers.length > 0) {
     if (recipientSuppliers.length === 1) {
       return recipientSuppliers[0].username;
@@ -11,47 +11,53 @@ const renderRecipient = ({ recipientSuppliers }) => {
     if (recipientSuppliers.length > 1)
       return `${recipientSuppliers.length} suppliers`;
   } else {
-    return 'me';
+    return 'RFQ';
   }
 };
-
-const renderSender = ({ senderSupplier, senderBuyer }) =>
-  (senderSupplier || senderBuyer).username;
-
-const renderIsReplied = ({ isReplySent, isAuto }) => {
-  if (isAuto) return undefined;
-  else return isReplySent ? <Icon type="export" /> : <Icon type="close" />;
+Recipient.propTypes = {
+  recipientSuppliers: PropTypes.array
 };
 
-const renderActions = ({ _id }) => (
+const senderUsername = ({ senderSupplier, senderBuyer }) =>
+  (senderSupplier || senderBuyer).username;
+
+const IsRepliedIcon = ({ isReplySent, isAuto }) => {
+  if (isAuto) return <Icon type="stop" />;
+  else return isReplySent ? <Icon type="export" /> : 'no';
+};
+
+const MessageLinks = ({ _id }) => (
   <Fragment>
-    <Link key={`${_id}view`} to={`/msg/view/${_id}`}>
+    <Link key={`${_id}view`} to={`/tmsg/view/${_id}`}>
       View
     </Link>
     <Divider key="1" type="vertical" />
-    <Link key={`${_id}edit`} to={`/msg/edit/${_id}`}>
+    <Link key={`${_id}edit`} to={`/tmsg/edit/${_id}`}>
       Edit
     </Link>
   </Fragment>
 );
+MessageLinks.propTypes = {
+  _id: PropTypes.string
+};
 
-const renderAttachmentIcon = attachment =>
+const AttachmentIcon = attachment =>
   attachment ? <Icon type="paper-clip" /> : undefined;
 
 const columns = [
   {
     title: 'From',
-    render: renderSender,
+    render: senderUsername,
     width: 150
   },
   {
     title: 'To',
-    render: renderRecipient,
+    render: Recipient,
     width: 150
   },
   {
-    title: 'Reply sent',
-    render: renderIsReplied,
+    title: 'Replied',
+    render: IsRepliedIcon,
     width: 65
   },
   {
@@ -63,7 +69,7 @@ const columns = [
     title: <Icon type="paper-clip" />,
     width: 30,
     dataIndex: 'attachment',
-    render: renderAttachmentIcon
+    render: AttachmentIcon
   },
   {
     title: 'Body',
@@ -76,31 +82,29 @@ const columns = [
   {
     fixed: 'right',
     width: 80,
-    render: renderActions
+    render: MessageLinks
   }
 ];
 
 const Messages = props => {
-  console.log(props);
-  const { data, match } = props;
-  console.log(match);
+  const { tenderMessagesQuery } = props;
+  const { tenderMessages } = tenderMessagesQuery;
   return (
     <Fragment>
       <Table
         columns={columns}
         rowKey={record => record._id}
         pagination={true}
-        dataSource={data.tenderMessages}
-        loading={data.loading}
+        dataSource={tenderMessages}
+        loading={tenderMessagesQuery.loading}
       />
-      <pre>{JSON.stringify(data, null, 4)}</pre>
+      <pre>{JSON.stringify(props, null, 4)}</pre>
     </Fragment>
   );
 };
 
 Messages.propTypes = {
-  data: PropTypes.obj,
-  match: PropTypes.obj
+  tenderMessagesQuery: PropTypes.obj
 };
 
 export default withRouter(Messages);
