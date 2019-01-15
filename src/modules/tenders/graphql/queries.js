@@ -38,6 +38,8 @@ const tenderFields = `
   requestedDocuments
   winnerIds
   isAwarded
+  awardNote
+  awardAttachments
   sentRegretLetter
 `;
 

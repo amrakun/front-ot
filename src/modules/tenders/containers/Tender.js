@@ -27,13 +27,13 @@ class TenderContainer extends React.Component {
     this.sendRegretLetter = this.sendRegretLetter.bind(this);
   }
 
-  award(supplierIds) {
+  award(variables) {
     const { tendersAward, tenderDetailQuery } = this.props;
 
     tendersAward({
       variables: {
         _id: tenderDetailQuery.tenderDetail._id,
-        supplierIds
+        ...variables
       }
     })
       .then(() => {

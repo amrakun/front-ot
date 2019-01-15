@@ -16,6 +16,7 @@ class Tender extends Common {
 
     this.state = {
       ...this.state,
+      selectedCompanies: [],
       responseModal: { visible: false, record: null },
       regretLetterModal: { visible: false },
       regretLetterContent: ''

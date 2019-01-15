@@ -9,6 +9,8 @@ import {
   Button,
   Icon,
   Select,
+  Modal,
+  Form,
   Row,
   Col,
   Card,
@@ -17,9 +19,11 @@ import {
 import { rfqRequestColumns } from '../../../constants';
 import Tender from './Tender';
 import { readFileUrl } from 'modules/common/utils';
+import { Uploader } from 'modules/common/components';
 import router from 'modules/common/router';
 
-const Option = Select.Option;
+const { Option } = Select;
+const { TextArea } = Input;
 
 class Rfq extends Tender {
   constructor(props, context) {
@@ -39,10 +43,14 @@ class Rfq extends Tender {
       productCode: productCode || '',
       filter: sort || betweenSearch,
       from,
-      to
+      to,
+      showAwardForm: false,
+      awardNote: '',
+      awardAttachments: []
     };
 
     this.bidSummaryReport = this.bidSummaryReport.bind(this);
+    this.toggleAwardForm = this.toggleAwardForm.bind(this);
     this.award = this.award.bind(this);
     this.handleProductCodeChange = this.handleProductCodeChange.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
@@ -61,10 +69,22 @@ class Rfq extends Tender {
     this.props.downloadReport(selectedCompanies, 'rfqBidSummaryReport');
   }
 
-  award() {
-    const { selectedCompanies } = this.state;
+  toggleAwardForm() {
+    const { showAwardForm } = this.state;
 
-    this.props.award(selectedCompanies);
+    this.setState({ showAwardForm: !showAwardForm });
+  }
+
+  award() {
+    const { selectedCompanies, awardNote, awardAttachments } = this.state;
+
+    this.setState({ showAwardForm: false });
+
+    this.props.award({
+      supplierIds: selectedCompanies,
+      note: awardNote,
+      attachments: awardAttachments
+    });
   }
 
   handleProductCodeChange(value) {
@@ -208,7 +228,7 @@ class Rfq extends Tender {
     const buttons = [
       <Button
         type="primary"
-        onClick={this.award}
+        onClick={this.toggleAwardForm}
         disabled={status !== 'closed'}
         key={1}
       >
@@ -231,6 +251,45 @@ class Rfq extends Tender {
     }
 
     return buttons;
+  }
+
+  renderAwardModal() {
+    const tenderDetail = this.props.tenderDetail || {};
+    const { type } = tenderDetail;
+    const { showAwardForm, selectedCompanies = [] } = this.state;
+
+    let content = (
+      <>
+        <Form.Item label="Note">
+          <TextArea
+            onChange={e => this.setState({ awardNote: e.target.value })}
+          />
+        </Form.Item>
+
+        <Form.Item label="Attachments">
+          <Uploader
+            multiple
+            onChange={awardAttachments => this.setState({ awardAttachments })}
+          />
+        </Form.Item>
+      </>
+    );
+
+    if (type === 'trfq') {
+      content = `Awarding "${selectedCompanies.length}" bidders`;
+    }
+
+    return (
+      <Modal
+        title="Award"
+        visible={showAwardForm}
+        onCancel={this.toggleAwardForm}
+        onOk={this.award}
+        width="50%"
+      >
+        {content}
+      </Modal>
+    );
   }
 
   renderResponseModal(record) {
@@ -322,6 +381,8 @@ class Rfq extends Tender {
     return (
       <div>
         {this.renderStats()}
+        {this.renderAwardModal()}
+
         <Row gutter={24}>
           {this.renderFilter(type, requestedProducts)}
 
