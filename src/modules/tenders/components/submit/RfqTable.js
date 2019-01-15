@@ -201,6 +201,17 @@ class RfqTable extends Component {
             title: __(rpc.unitPrice),
             type: 'number'
           })}
+          <Column
+            title={__(rpc.totalPrice)}
+            key={'totalPrice'}
+            render={(text, record) => {
+              if (!record.unitPrice || !record.quantity) {
+                return '-----';
+              }
+
+              return (record.unitPrice * record.quantity).toLocaleString();
+            }}
+          />
           {this.renderCell({
             name: 'currency',
             title: __(rpc.currency),
