@@ -39,7 +39,6 @@ const tenderFields = `
   winnerIds
   isAwarded
   awardNote
-  awardAttachments
   sentRegretLetter
 `;
 

@@ -197,28 +197,12 @@ class Tender extends Common {
     );
   }
 
-  renderTable(args) {
-    const { tableOperations } = args;
-
-    const {
-      loading,
-      onChange,
-      regretLetterModalVisible,
-      notRespondedSuppliers
-    } = this.props;
-
-    const {
-      selectedCompanies,
-      responseModal,
-      regretLetterModal,
-      regretLetterContent,
-      requestedSuppliers
-    } = this.state;
+  getResponseRows() {
+    const { notRespondedSuppliers } = this.props;
+    const { requestedSuppliers } = this.state;
 
     const data = this.props.data || [];
-    const tenderDetail = this.props.tenderDetail || {};
     const queryParams = this.props.queryParams || {};
-    const { winnerIds = [], sentRegretLetter, status } = tenderDetail;
 
     let responseRows =
       queryParams.filter === 'isNotResponded' ? notRespondedSuppliers : data;
@@ -226,6 +210,25 @@ class Tender extends Common {
     if (!queryParams.filter && requestedSuppliers) {
       responseRows = requestedSuppliers;
     }
+
+    return responseRows;
+  }
+
+  renderTable(args) {
+    const { tableOperations } = args;
+
+    const { loading, onChange, regretLetterModalVisible } = this.props;
+
+    const {
+      selectedCompanies,
+      responseModal,
+      regretLetterModal,
+      regretLetterContent
+    } = this.state;
+
+    const data = this.props.data || [];
+    const tenderDetail = this.props.tenderDetail || {};
+    const { winnerIds = [], sentRegretLetter, status } = tenderDetail;
 
     return (
       <Card
@@ -258,7 +261,7 @@ class Tender extends Common {
           }}
           columns={this.columns()}
           rowKey={record => (record.supplier ? record.supplier._id : '')}
-          dataSource={status !== 'open' ? responseRows : []}
+          dataSource={status !== 'open' ? this.getResponseRows() : []}
           pagination={false}
           loading={loading}
           scroll={{ x: 1200 }}

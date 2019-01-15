@@ -4,7 +4,6 @@ import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Popconfirm, Button, Icon, Divider } from 'antd';
 import Tenders from './Tenders';
-import { readFileUrl } from 'modules/common/utils';
 
 class BuyerTenders extends Tenders {
   columns() {
@@ -78,18 +77,6 @@ class BuyerTenders extends Tenders {
       {
         title: 'Award note',
         dataIndex: 'awardNote'
-      },
-      {
-        title: 'Award attachments',
-        render: (text, record) => {
-          return (record.awardAttachments || []).map((attach, index) => {
-            return (
-              <div key={index}>
-                <a href={readFileUrl(attach.url)}>{attach.name}</a>
-              </div>
-            );
-          });
-        }
       },
       {
         title: 'More',
