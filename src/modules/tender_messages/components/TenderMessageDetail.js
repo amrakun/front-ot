@@ -26,9 +26,8 @@ const Receivers = ({ recipientSuppliers, tender }) => {
   );
 };
 
-const TenderMessage = ({ tenderMessageDetailQuery }) => {
-  const { tenderMessageDetail, loading } = tenderMessageDetailQuery;
-  if (loading) return <Icon type="loading" />;
+const TenderMessageDetail = ({ tenderMessageDetail }) => {
+  if (!tenderMessageDetail) return null;
   return (
     <Fragment>
       <Sender {...tenderMessageDetail} />
@@ -37,11 +36,9 @@ const TenderMessage = ({ tenderMessageDetailQuery }) => {
       <Divider />
       Subject: {tenderMessageDetail.subject}
       <Divider />
-      {/* <Divider/> */}
-      {tenderMessageDetail.body}
-      <pre>{JSON.stringify(tenderMessageDetailQuery, null, 4)}</pre>;
+      <p>{tenderMessageDetail.body}</p>
     </Fragment>
   );
 };
 
-export default TenderMessage;
+export default TenderMessageDetail;
