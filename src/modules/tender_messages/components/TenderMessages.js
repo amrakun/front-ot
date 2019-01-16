@@ -2,7 +2,8 @@ import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { Table, Icon, Divider, Card } from 'antd';
 import { Route, Link, withRouter } from 'react-router-dom';
-import TenderMessageDetail from './TenderMessageDetail';
+import { TenderMessageDetail } from '../containers/';
+import TenderMessageForm from './TenderMessageForm';
 
 const Recipient = ({ recipientSuppliers }) => {
   if (recipientSuppliers && recipientSuppliers.length > 0) {
@@ -28,11 +29,9 @@ const IsRepliedIcon = ({ isReplySent, isAuto }) => {
 };
 
 const MessageLinks = ({ _id }) => (
-  <Fragment>
-    <Link key={`${_id}view`} to={`/tmsg/view/${_id}`}>
-      View
-    </Link>
-  </Fragment>
+  <Link key={`${_id}view`} to={`/tmsg/view/${_id}`}>
+    View
+  </Link>
 );
 MessageLinks.propTypes = {
   _id: PropTypes.string
@@ -81,47 +80,41 @@ const columns = [
     title: 'Body',
     dataIndex: 'body',
     render: body => (body && body.length > 100 ? body.slice(60) + '...' : body)
+  },
+  {
+    title: 'Column',
+    render: MessageLinks
   }
 ];
 
-class Messages extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      current: undefined
-    };
-  }
-
-  renderCurrentMessage() {
-    const { tenderMessagesQuery } = this.props;
-    if (tenderMessagesQuery.loading) return null;
-    const { current } = this.state;
-    return <TenderMessageDetail tenderMessageDetail={current} />;
-  }
-  render() {
-    const { tenderMessagesQuery } = this.props;
-    const { tenderMessages } = tenderMessagesQuery;
-    return (
-      <Fragment>
-        <Card>
-          <Table
-            columns={columns}
-            rowKey={record => record._id}
-            pagination={true}
-            dataSource={tenderMessages}
-            loading={tenderMessagesQuery.loading}
-            onRow={(record, index) => {
-              return {
-                onClick: event => this.setState({ current: record })
-              };
-            }}
-          />
-        </Card>
-        <Card>{this.renderCurrentMessage()}</Card>
-      </Fragment>
-    );
-  }
-}
+const Messages = props => {
+  const { tenderMessagesQuery, match } = props;
+  const { tenderMessages } = tenderMessagesQuery;
+  return (
+    <Fragment>
+      <Link to={`${match.url}/new`}>
+        <Icon type="plus" />
+        Create message
+      </Link>
+      <Card>
+        <Table
+          columns={columns}
+          rowKey={record => record._id}
+          pagination={true}
+          dataSource={tenderMessages}
+          loading={tenderMessagesQuery.loading}
+        />
+      </Card>
+      <Card>
+        <Route
+          path={`${match.url}/view/:_id`}
+          component={TenderMessageDetail}
+        />
+        <Route path={`${match.url}/new`} component={TenderMessageForm} />
+      </Card>
+    </Fragment>
+  );
+};
 
 Messages.propTypes = {
   tenderMessagesQuery: PropTypes.obj

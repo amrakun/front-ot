@@ -14,19 +14,16 @@ import {
   Row,
   Col,
   Card,
-  Input,
-  Tabs
+  Input
 } from 'antd';
 import { rfqRequestColumns } from '../../../constants';
 import Tender from './Tender';
 import { readFileUrl } from 'modules/common/utils';
 import { Uploader } from 'modules/common/components';
 import router from 'modules/common/router';
-import TenderMessages from '../../../containers/TenderMessages';
 
 const { Option } = Select;
 const { TextArea } = Input;
-const { TabPane } = Tabs;
 
 class Rfq extends Tender {
   constructor(props, context) {
@@ -382,29 +379,23 @@ class Rfq extends Tender {
     const requestedProducts = tenderDetail.requestedProducts || [];
 
     return (
-      <Tabs defaultActiveKey="1">
-        <TabPane tab="RFQ" key="1">
-          {' '}
-          {this.renderStats()}
-          {this.renderAwardModal()}
-          <Row gutter={24}>
-            {this.renderFilter(type, requestedProducts)}
+      <Fragment>
+        {this.renderStats()}
+        {this.renderAwardModal()}
+        <Row gutter={24}>
+          {this.renderFilter(type, requestedProducts)}
 
-            <Col
-              sm={24}
-              xl={type === 'trfq' ? 24 : 18}
-              lg={type === 'trfq' ? 24 : 17}
-            >
-              {this.renderTable({
-                tableOperations: this.renderOperations(type, status)
-              })}
-            </Col>
-          </Row>
-        </TabPane>
-        <TabPane tab="Messages" key="2">
-          <TenderMessages match={this.props.match} />
-        </TabPane>
-      </Tabs>
+          <Col
+            sm={24}
+            xl={type === 'trfq' ? 24 : 18}
+            lg={type === 'trfq' ? 24 : 17}
+          >
+            {this.renderTable({
+              tableOperations: this.renderOperations(type, status)
+            })}
+          </Col>
+        </Row>
+      </Fragment>
     );
   }
 }

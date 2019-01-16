@@ -1,2 +1,3 @@
 import TenderMessages from './TenderMessages';
-export { TenderMessages };
+import TenderMessageDetail from './TenderMessageDetail';
+export { TenderMessages, TenderMessageDetail };

@@ -26,7 +26,10 @@ const Receivers = ({ recipientSuppliers, tender }) => {
   );
 };
 
-const TenderMessageDetail = ({ tenderMessageDetail }) => {
+const TenderMessageDetail = ({ tenderMessageDetailQuery }) => {
+  if (tenderMessageDetailQuery.loading) return <Icon type="loading" />;
+
+  const { tenderMessageDetail } = tenderMessageDetailQuery;
   if (!tenderMessageDetail) return null;
   return (
     <Fragment>
