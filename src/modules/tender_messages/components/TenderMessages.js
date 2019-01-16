@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Table, Icon, Divider } from 'antd';
-import { Link, withRouter } from 'react-router-dom';
+import { Table, Icon, Divider, Card } from 'antd';
+import { Route, Link, withRouter } from 'react-router-dom';
+import TenderMessage from '../containers/TenderMessage';
 
 const Recipient = ({ recipientSuppliers }) => {
   if (recipientSuppliers && recipientSuppliers.length > 0) {
@@ -31,10 +32,6 @@ const MessageLinks = ({ _id }) => (
     <Link key={`${_id}view`} to={`/tmsg/view/${_id}`}>
       View
     </Link>
-    <Divider key="1" type="vertical" />
-    <Link key={`${_id}edit`} to={`/tmsg/edit/${_id}`}>
-      Edit
-    </Link>
   </Fragment>
 );
 MessageLinks.propTypes = {
@@ -43,6 +40,9 @@ MessageLinks.propTypes = {
 
 const AttachmentIcon = attachment =>
   attachment ? <Icon type="paper-clip" /> : undefined;
+
+const isNew = isRead =>
+  !isRead ? <Icon type="info" theme="twoTone" /> : undefined;
 
 const columns = [
   {
@@ -54,6 +54,12 @@ const columns = [
     title: 'To',
     render: Recipient,
     width: 150
+  },
+  {
+    title: 'New',
+    width: 60,
+    dataIndex: 'isRead',
+    render: isNew
   },
   {
     title: 'Replied',
@@ -74,10 +80,7 @@ const columns = [
   {
     title: 'Body',
     dataIndex: 'body',
-    render: body => {
-      if (body && body.length > 100) return body.slice(100) + '...';
-      else return body;
-    }
+    render: body => (body && body.length > 100 ? body.slice(60) + '...' : body)
   },
   {
     fixed: 'right',
@@ -86,19 +89,22 @@ const columns = [
   }
 ];
 
-const Messages = props => {
-  const { tenderMessagesQuery } = props;
+const Messages = ({ tenderMessagesQuery }) => {
   const { tenderMessages } = tenderMessagesQuery;
   return (
     <Fragment>
-      <Table
-        columns={columns}
-        rowKey={record => record._id}
-        pagination={true}
-        dataSource={tenderMessages}
-        loading={tenderMessagesQuery.loading}
-      />
-      <pre>{JSON.stringify(props, null, 4)}</pre>
+      <Card>
+        <Table
+          columns={columns}
+          rowKey={record => record._id}
+          pagination={true}
+          dataSource={tenderMessages}
+          loading={tenderMessagesQuery.loading}
+        />
+      </Card>
+      <Card>
+        <Route path={`/tmsg/view/:_id`} component={TenderMessage} />
+      </Card>
     </Fragment>
   );
 };

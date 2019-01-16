@@ -1,3 +1,4 @@
 import TenderMessages from './TenderMessages';
+import TenderMessage from './TenderMessage';
 
-export { TenderMessages };
+export { TenderMessages, TenderMessage };
