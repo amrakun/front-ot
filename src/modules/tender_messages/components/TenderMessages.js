@@ -89,7 +89,7 @@ const columns = [
   }
 ];
 
-const Messages = ({ tenderMessagesQuery }) => {
+const Messages = ({ tenderMessagesQuery, match }) => {
   const { tenderMessages } = tenderMessagesQuery;
   return (
     <Fragment>
@@ -103,7 +103,7 @@ const Messages = ({ tenderMessagesQuery }) => {
         />
       </Card>
       <Card>
-        <Route path={`/tmsg/view/:_id`} component={TenderMessage} />
+        <Route path={`${match.url}/view/:_id`} component={TenderMessage} />
       </Card>
     </Fragment>
   );
