@@ -6,6 +6,7 @@ import { withSystemConfig, withCurrentUser } from 'modules/auth/containers';
 import { withRouter } from 'react-router-dom';
 import { logout } from '../utils';
 import { mutations } from '../graphql';
+import { check } from 'graphql-anywhere';
 
 class MainLayoutContainer extends React.Component {
   componentDidMount() {
@@ -66,6 +67,7 @@ class MainLayoutContainer extends React.Component {
         checkUrl('/user-list');
         checkUrl('/mail-deliveries');
         checkUrl('/delegation');
+        checkUrl('/tmsg');
       } catch (e) {
         if (e.message === 'Permission denied') {
           return null;

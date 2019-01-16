@@ -1,5 +1,15 @@
 import React, { Fragment } from 'react';
-import { Form, Icon, Input, Button, Tooltip, Tag } from 'antd';
+import {
+  Form,
+  Icon,
+  Input,
+  Button,
+  Tooltip,
+  Tag,
+  Row,
+  Select,
+  Divider
+} from 'antd';
 import SupplierSearcher from 'modules/companies/containers/Searcher';
 import { merge, Map } from 'immutable';
 
@@ -17,6 +27,7 @@ class MessageForm extends React.Component {
 
     this.onAddSuppliers = this.onAddSuppliers.bind(this);
     this.removeSupplier = this.removeSupplier.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(e) {
@@ -30,7 +41,6 @@ class MessageForm extends React.Component {
 
   renderSupplierTags() {
     const { suppliers } = this.state;
-    console.log(suppliers.toJS());
     return (
       <Fragment>
         <b>To:</b>
@@ -47,7 +57,6 @@ class MessageForm extends React.Component {
         ))}
       </Fragment>
     );
-    // return <pre>{JSON.stringify(suppliers.valueSeq(), null, 4)}</pre>;
   }
 
   onAddSuppliers(moreSuppliers) {
@@ -81,9 +90,12 @@ class MessageForm extends React.Component {
       isFieldTouched('password') && getFieldError('password');
     return (
       <Fragment>
-        {this.renderSupplierTags()}
-        <SupplierSearcher onSelect={this.onAddSuppliers} />
-        <Form layout="inline" onSubmit={this.handleSubmit.bind(this)}>
+        <Row>
+          {this.renderSupplierTags()}
+          <SupplierSearcher onSelect={this.onAddSuppliers} />
+        </Row>
+
+        <Form layout="inline" onSubmit={this.handleSubmit}>
           <Form.Item
             validateStatus={userNameError ? 'error' : ''}
             help={userNameError || ''}
