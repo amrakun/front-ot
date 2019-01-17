@@ -8,11 +8,9 @@ const CreateTenderMessageContainer = props => {
   const { tenderMessageBuyerSend } = props;
 
   const save = doc => {
-    console.log(doc);
     tenderMessageBuyerSend({ variables: { ...doc } })
-      .then(tenderMessage => {
+      .then(() => {
         message.success('Message sent');
-        console.log(tenderMessage);
       })
       .catch(error => {
         message.error(error.message);

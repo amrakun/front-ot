@@ -1,3 +1,11 @@
+const supplierFields = `
+  _id,
+  basicInfo {
+    enName,
+    email
+  }
+`;
+
 const tenderMessageFields = `
   _id,
   tender {
@@ -24,34 +32,10 @@ const tenderMessageFields = `
     temporarySecureInformation
   },
   recipientSuppliers {
-    username,
-    email,
-    role,
-    isSupplier,
-    companyId,
-    firstName,
-    lastName,
-    jobTitle,
-    phone,
-    delegatedUserId,
-    delegationStartDate,
-    delegationEndDate,
-    temporarySecureInformation
+    ${supplierFields}
   },
   senderSupplier {
-    username,
-    email,
-    role,
-    isSupplier,
-    companyId,
-    firstName,
-    lastName,
-    jobTitle,
-    phone,
-    delegatedUserId,
-    delegationStartDate,
-    delegationEndDate,
-    temporarySecureInformation
+    ${supplierFields}
   },
   subject,
   body,

@@ -117,7 +117,7 @@ class Messages extends Component {
 
     switch (route) {
       case ROUTE_ENUM.new:
-        return <CreateTenderMessage />;
+        return <CreateTenderMessage suppliers={this.props.suppliers} />;
       case ROUTE_ENUM.edit:
         break;
       case ROUTE_ENUM.view:
@@ -135,6 +135,7 @@ class Messages extends Component {
   render() {
     const { tenderMessagesQuery } = this.props;
     const { tenderMessages } = tenderMessagesQuery;
+    console.log(tenderMessages);
     return (
       <Fragment>
         <Button
@@ -159,7 +160,8 @@ class Messages extends Component {
 }
 
 Messages.propTypes = {
-  tenderMessagesQuery: PropTypes.object
+  tenderMessagesQuery: PropTypes.object,
+  suppliers: PropTypes.array
 };
 
 export default withRouter(Messages);

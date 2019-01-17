@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { Form, Input, Button, Tooltip, Tag, Row, Divider, message } from 'antd';
 import PropTypes from 'prop-types';
-import SupplierSearcher from 'modules/companies/containers/Searcher';
 import { merge, Map } from 'immutable';
+import SupplierSearcher from 'modules/companies/components/Searcher';
 
 class MessageForm extends React.Component {
   constructor(props, context) {
@@ -90,11 +90,16 @@ class MessageForm extends React.Component {
     // Only show error after a field is touched.
     const subjectError = isFieldTouched('subject') && getFieldError('subject');
     const bodyError = isFieldTouched('body') && getFieldError('body');
+    const { suppliers } = this.props;
     return (
       <Fragment>
         <Row>
           {this.renderSupplierTags()}
-          <SupplierSearcher onSelect={this.onAddSuppliers} />
+          <SupplierSearcher
+            onSelect={this.onAddSuppliers}
+            suppliers={suppliers}
+          />
+          ;
         </Row>
 
         <Form layout="vertical" onSubmit={this.handleSubmit}>
@@ -114,7 +119,7 @@ class MessageForm extends React.Component {
               rules: [
                 { required: true, message: 'Please input of message body!' }
               ]
-            })(<Input.TextArea type="body" placeholder="body" />)}
+            })(<Input.TextArea autosize type="body" placeholder="body" />)}
           </Form.Item>
           <Form.Item>
             <Button

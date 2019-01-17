@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import { Tag, Divider } from 'antd';
+import { Tag, Divider, Input } from 'antd';
 
 const renderUser = user => (
-  <Tag>
+  <Tag key={user.email}>
     {user.username}
     {'<'}
     {user.email}
@@ -10,14 +10,28 @@ const renderUser = user => (
   </Tag>
 );
 
+const renderCompany = ({ _id, basicInfo: { enName, email } }) => (
+  <Tag key={email}>
+    {enName}
+    {'<'}
+    {email}
+    {'>'}
+  </Tag>
+);
+
 const Sender = ({ senderBuyer, senderSupplier }) => {
-  const sender = senderBuyer || senderSupplier;
-  return <Fragment>From: {renderUser(sender)}</Fragment>;
+  if (senderBuyer) {
+    return <Fragment>From: {renderUser(senderBuyer)}</Fragment>;
+  }
+
+  if (senderSupplier) {
+    return <Fragment>From: {renderCompany(senderSupplier)}</Fragment>;
+  }
 };
 
 const Receivers = ({ recipientSuppliers, tender }) => {
   if (recipientSuppliers && recipientSuppliers.length > 0) {
-    return <Fragment>To: {recipientSuppliers.map(renderUser)}</Fragment>;
+    return <Fragment>To: {recipientSuppliers.map(renderCompany)}</Fragment>;
   }
   return (
     <Fragment>
@@ -36,7 +50,7 @@ const TenderMessageDetail = ({ tenderMessageDetail }) => {
       <Divider />
       Subject: {tenderMessageDetail.subject}
       <Divider />
-      <p>{tenderMessageDetail.body}</p>
+      <textera>{tenderMessageDetail.body}</textera>
     </Fragment>
   );
 };
