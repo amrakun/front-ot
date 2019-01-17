@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Table, Icon, Divider, Card, message } from 'antd';
-import { Route, Link, withRouter } from 'react-router-dom';
+import { Button, Table, Icon, Card, message } from 'antd';
+import { withRouter } from 'react-router-dom';
 import { CreateTenderMessage } from '../containers/';
 import TenderMessageDetail from './TenderMessageDetail';
 
@@ -122,9 +122,7 @@ class Messages extends Component {
         break;
       case ROUTE_ENUM.view:
         return (
-          <TenderMessageDetail
-            tenderMessageDetail={this.state.tenderMessageDetail}
-          />
+          <TenderMessageDetail tenderMessageDetail={tenderMessageDetail} />
         );
       case ROUTE_ENUM.index:
         break;
@@ -135,7 +133,7 @@ class Messages extends Component {
   }
 
   render() {
-    const { tenderMessagesQuery, match } = this.props;
+    const { tenderMessagesQuery } = this.props;
     const { tenderMessages } = tenderMessagesQuery;
     return (
       <Fragment>
@@ -161,7 +159,7 @@ class Messages extends Component {
 }
 
 Messages.propTypes = {
-  tenderMessagesQuery: PropTypes.obj
+  tenderMessagesQuery: PropTypes.object
 };
 
 export default withRouter(Messages);

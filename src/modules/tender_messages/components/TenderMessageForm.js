@@ -1,16 +1,5 @@
 import React, { Fragment } from 'react';
-import {
-  Form,
-  Icon,
-  Input,
-  Button,
-  Tooltip,
-  Tag,
-  Row,
-  Select,
-  Divider,
-  message
-} from 'antd';
+import { Form, Input, Button, Tooltip, Tag, Row, Divider, message } from 'antd';
 import PropTypes from 'prop-types';
 import SupplierSearcher from 'modules/companies/containers/Searcher';
 import { merge, Map } from 'immutable';
@@ -91,7 +80,6 @@ class MessageForm extends React.Component {
     );
   }
   render() {
-    const { suppliers } = this.state;
     const {
       getFieldDecorator,
       getFieldsError,

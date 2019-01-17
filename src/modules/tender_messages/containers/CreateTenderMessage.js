@@ -8,7 +8,8 @@ const CreateTenderMessageContainer = props => {
   const { tenderMessageBuyerSend } = props;
 
   const save = doc => {
-    tenderMessageBuyerSend({ variables: doc })
+    console.log(doc);
+    tenderMessageBuyerSend({ variables: { ...doc } })
       .then(tenderMessage => {
         message.success('Message sent');
         console.log(tenderMessage);
@@ -23,6 +24,11 @@ const CreateTenderMessageContainer = props => {
 
 export default compose(
   graphql(gql(mutations.tenderMessageBuyerSend), {
-    name: 'tenderMessageBuyerSend'
+    name: 'tenderMessageBuyerSend',
+    options: () => {
+      return {
+        refetchQueries: ['tenderMessages']
+      };
+    }
   })
 )(CreateTenderMessageContainer);

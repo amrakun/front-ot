@@ -1,5 +1,3 @@
-import { compose, gql, graphql } from 'react-apollo';
-
 const tenderMessageBuyerSend = `
   mutation tenderMessageBuyerSend(
     $tenderId: String!
@@ -13,7 +11,7 @@ const tenderMessageBuyerSend = `
       subject: $subject
       body: $body
     ) {
-      type
+      _id
     }
   }
 `;

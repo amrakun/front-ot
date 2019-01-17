@@ -2,7 +2,6 @@ import React from 'react';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries } from '../graphql';
 import { TenderMessageDetail } from '../components';
-import qs from 'query-string';
 import { Icon } from 'antd';
 import PropTypes from 'prop-types';
 
@@ -23,7 +22,7 @@ TenderMessageDetailContainer.propTypes = {
 export default compose(
   graphql(gql(queries.tenderMessageDetail), {
     name: 'tenderMessageDetailQuery',
-    options: ({ location, match }) => {
+    options: ({ match }) => {
       return {
         variables: { _id: match.params._id }
       };

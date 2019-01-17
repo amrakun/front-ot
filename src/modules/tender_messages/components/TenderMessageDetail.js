@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Tag, Tooltip, Row, Divider, Icon } from 'antd';
+import { Tag, Divider } from 'antd';
 
 const renderUser = user => (
   <Tag>
