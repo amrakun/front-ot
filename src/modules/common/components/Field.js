@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'antd';
 
-const regexNotEnglish = /[^a-zA-Z 0-9$&+,:;=?@#|'<>.^*()%!-]+?/;
-const regexNotCyrillic = /[^\u0400-\u04FF 0-9$&+,:;=?@#|'<>.^*()%!-]+?/;
+const regexNotEnglish = /[^a-zA-Z 0-9$&+,:;=?@_#|'<>.^*()%!-]+?/;
+const regexNotCyrillic = /[^\u0400-\u04FF 0-9$&+,:;=?@#_|'<>.^*()%!-]+?/;
 
 export default class Field extends React.Component {
   /*
