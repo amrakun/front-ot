@@ -97,7 +97,6 @@ class MessageForm extends React.Component {
             onSelect={this.onAddSuppliers}
             suppliers={this.props.tenderDetail.suppliers}
           />
-          ;
         </Row>
 
         <Form layout="vertical" onSubmit={this.handleSubmit}>
