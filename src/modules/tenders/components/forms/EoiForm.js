@@ -57,7 +57,7 @@ class EoiForm extends BaseForm {
     const { data } = this.props;
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form>
         <div>
           <MainInfo
             data={data}
@@ -76,9 +76,9 @@ class EoiForm extends BaseForm {
 
         <Button
           type="primary"
-          htmlType="submit"
           size="large"
           className="margin"
+          onClick={this.handleSubmit}
         >
           Send
         </Button>

@@ -124,7 +124,7 @@ class RfqForm extends BaseForm {
     const { data } = this.props;
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form>
         <div>
           <MainInfo
             data={data}
@@ -139,7 +139,7 @@ class RfqForm extends BaseForm {
 
         <Button
           type="primary"
-          htmlType="submit"
+          onClick={this.handleSubmit}
           size="large"
           className="margin"
         >
