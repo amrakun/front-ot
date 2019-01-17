@@ -1,10 +1,11 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import { Card, Form, Button } from 'antd';
+import { Card, Form } from 'antd';
 import { BaseForm } from 'modules/common/components';
 import EoiTable from './EoiTable';
 import MainInfo from './MainInfo';
+import SubmitButton from './SubmitButton';
 import { initialDocuments } from '../../constants';
 
 class EoiForm extends BaseForm {
@@ -55,9 +56,10 @@ class EoiForm extends BaseForm {
 
   render() {
     const { data } = this.props;
+    const { __ } = this.context;
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form>
         <div>
           <MainInfo
             data={data}
@@ -74,14 +76,7 @@ class EoiForm extends BaseForm {
           />
         </Card>
 
-        <Button
-          type="primary"
-          htmlType="submit"
-          size="large"
-          className="margin"
-        >
-          Send
-        </Button>
+        <SubmitButton onConfirm={this.handleSubmit} __={__} />
       </Form>
     );
   }
