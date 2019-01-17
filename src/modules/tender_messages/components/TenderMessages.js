@@ -2,10 +2,11 @@ import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Table, Icon, Divider, Card, message } from 'antd';
 import { Route, Link, withRouter } from 'react-router-dom';
-import { TenderMessageDetail } from '../containers/';
 import TenderMessageForm from './TenderMessageForm';
+import { CreateTenderMessage } from '../containers/';
+import TenderMessageDetail from './TenderMessageDetail';
 
-const ROUTES = {
+const ROUTE = {
   index: 'index',
   new: 'new',
   edit: 'edit',
@@ -44,7 +45,7 @@ const isNew = isRead =>
 class Messages extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = { route: 'index', currentMessageId: undefined };
+    this.state = { route: 'index', tenderMessageDetail: undefined };
   }
 
   columns() {
@@ -89,11 +90,11 @@ class Messages extends Component {
       },
       {
         title: 'Actions',
-        render: ({ _id }) => {
+        render: tenderMessageDetail => {
           return (
             <Button
-              key={`${_id}view`}
-              onClick={this.goto.bind(this, ROUTES.view, _id)}
+              key={`${tenderMessageDetail._id}view`}
+              onClick={this.goto.bind(this, ROUTE.view, tenderMessageDetail)}
             >
               View
             </Button>
@@ -104,21 +105,27 @@ class Messages extends Component {
     return columns;
   }
 
-  goto(route, currentMessageId) {
-    this.setState({ route, currentMessageId });
+  goto(route, tenderMessageDetail) {
+    this.setState({ route, tenderMessageDetail });
   }
 
   renderNested() {
-    const { route, currentMessageId } = this.state;
+    const { route, tenderMessageDetail } = this.state;
 
     switch (route) {
-      case ROUTES.new:
+      case ROUTE.new:
+        return <CreateTenderMessage />;
         break;
-      case ROUTES.edit:
+      case ROUTE.edit:
         break;
-      case ROUTES.view:
+      case ROUTE.view:
+        return (
+          <TenderMessageDetail
+            tenderMessageDetail={this.state.tenderMessageDetail}
+          />
+        );
         break;
-      case ROUTES.index:
+      case ROUTE.index:
         break;
       default:
         message.error('Unexpected route');
@@ -127,13 +134,14 @@ class Messages extends Component {
   }
 
   render() {
+    console.log(this.props);
     const { tenderMessagesQuery, match } = this.props;
     const { tenderMessages } = tenderMessagesQuery;
     return (
       <Fragment>
         <Button
           icon="plus"
-          onClick={this.goto.bind(this, ROUTES.new, undefined)}
+          onClick={this.goto.bind(this, ROUTE.new, undefined)}
         >
           Create message
         </Button>
