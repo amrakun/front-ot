@@ -22,6 +22,8 @@ import Tender from './Tender';
 import { readFileUrl } from 'modules/common/utils';
 import { Uploader } from 'modules/common/components';
 import router from 'modules/common/router';
+import { TenderMessagesSingle } from 'modules/tender_messages/containers/';
+
 const { Column } = Table;
 const { Option } = Select;
 const { TextArea } = Input;
@@ -439,7 +441,7 @@ class Rfq extends Tender {
           </Fragment>
         </TabPane>
         <TabPane tab="Messages" key="2">
-          messages
+          <TenderMessagesSingle match={this.props.match} />
         </TabPane>
       </Tabs>
     );

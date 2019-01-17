@@ -8,8 +8,10 @@ import {
   Tag,
   Row,
   Select,
-  Divider
+  Divider,
+  message
 } from 'antd';
+import PropTypes from 'prop-types';
 import SupplierSearcher from 'modules/companies/containers/Searcher';
 import { merge, Map } from 'immutable';
 
@@ -18,7 +20,8 @@ class MessageForm extends React.Component {
     super(props, context);
 
     this.state = {
-      suppliers: Map()
+      suppliers: Map(),
+      tenderId: '5c383932e3e2774d65b3e060'
     };
 
     this.onAddSuppliers = this.onAddSuppliers.bind(this);
@@ -29,9 +32,21 @@ class MessageForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
+      if (err) {
+        message.error('Form error', err);
+        return;
       }
+
+      const { onSubmit } = this.props;
+      const recipientSupplierIds = Array.from(this.state.suppliers.keys());
+      const { tenderId } = this.state;
+
+      const doc = {
+        tenderId,
+        recipientSupplierIds,
+        ...values
+      };
+      if (onSubmit) onSubmit(doc);
     });
   }
 
@@ -39,7 +54,7 @@ class MessageForm extends React.Component {
     const { suppliers } = this.state;
     return (
       <Fragment>
-        <b>To:</b>
+        <b>To:</b> <Divider type="vertical" />
         {suppliers.valueSeq().map(supplier => (
           <Tooltip key={supplier._id} title={supplier.email}>
             <Tag
@@ -85,10 +100,8 @@ class MessageForm extends React.Component {
     } = this.props.form;
 
     // Only show error after a field is touched.
-    const userNameError =
-      isFieldTouched('userName') && getFieldError('userName');
-    const passwordError =
-      isFieldTouched('password') && getFieldError('password');
+    const subjectError = isFieldTouched('subject') && getFieldError('subject');
+    const bodyError = isFieldTouched('body') && getFieldError('body');
     return (
       <Fragment>
         <Row>
@@ -96,34 +109,24 @@ class MessageForm extends React.Component {
           <SupplierSearcher onSelect={this.onAddSuppliers} />
         </Row>
 
-        <Form layout="inline" onSubmit={this.handleSubmit}>
+        <Form layout="vertical" onSubmit={this.handleSubmit}>
           <Form.Item
-            validateStatus={userNameError ? 'error' : ''}
-            help={userNameError || ''}
+            validateStatus={subjectError ? 'error' : ''}
+            help={subjectError || ''}
           >
-            {getFieldDecorator('userName', {
-              rules: [
-                { required: true, message: 'Please input your username!' }
-              ]
-            })(<Input prefix={<Icon type="user" />} placeholder="Username" />)}
+            {getFieldDecorator('subject', {
+              rules: [{ required: true, message: 'Please input your subject!' }]
+            })(<Input placeholder="subject" />)}
           </Form.Item>
           <Form.Item
-            validateStatus={passwordError ? 'error' : ''}
-            help={passwordError || ''}
+            validateStatus={bodyError ? 'error' : ''}
+            help={bodyError || ''}
           >
-            {getFieldDecorator('password', {
+            {getFieldDecorator('body', {
               rules: [
-                { required: true, message: 'Please input your Password!' }
+                { required: true, message: 'Please input of message body!' }
               ]
-            })(
-              <Input
-                prefix={
-                  <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
-                }
-                type="password"
-                placeholder="Password"
-              />
-            )}
+            })(<Input.TextArea type="body" placeholder="body" />)}
           </Form.Item>
           <Form.Item>
             <Button
@@ -131,7 +134,7 @@ class MessageForm extends React.Component {
               htmlType="submit"
               disabled={this.hasErrors.bind(this)(getFieldsError())}
             >
-              Log in
+              Send
             </Button>
           </Form.Item>
         </Form>
@@ -139,6 +142,10 @@ class MessageForm extends React.Component {
     );
   }
 }
+
+MessageForm.propTypes = {
+  onSubmit: PropTypes.func
+};
 
 const WrappedMessageForm = Form.create({ name: 'horizontal_login' })(
   MessageForm

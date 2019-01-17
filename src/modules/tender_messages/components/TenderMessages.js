@@ -5,11 +5,11 @@ import { Route, Link, withRouter } from 'react-router-dom';
 import { CreateTenderMessage } from '../containers/';
 import TenderMessageDetail from './TenderMessageDetail';
 
-const ROUTE = {
-  index: 'index',
-  new: 'new',
-  edit: 'edit',
-  view: 'view'
+const ROUTE_ENUM = {
+  index: 0,
+  view: 1,
+  new: 2,
+  edit: 3
 };
 
 const Recipient = ({ recipientSuppliers }) => {
@@ -93,7 +93,11 @@ class Messages extends Component {
           return (
             <Button
               key={`${tenderMessageDetail._id}view`}
-              onClick={this.goto.bind(this, ROUTE.view, tenderMessageDetail)}
+              onClick={this.goto.bind(
+                this,
+                ROUTE_ENUM.view,
+                tenderMessageDetail
+              )}
             >
               View
             </Button>
@@ -112,17 +116,17 @@ class Messages extends Component {
     const { route, tenderMessageDetail } = this.state;
 
     switch (route) {
-      case ROUTE.new:
+      case ROUTE_ENUM.new:
         return <CreateTenderMessage />;
-      case ROUTE.edit:
+      case ROUTE_ENUM.edit:
         break;
-      case ROUTE.view:
+      case ROUTE_ENUM.view:
         return (
           <TenderMessageDetail
             tenderMessageDetail={this.state.tenderMessageDetail}
           />
         );
-      case ROUTE.index:
+      case ROUTE_ENUM.index:
         break;
       default:
         message.error('Unexpected route');
@@ -137,7 +141,7 @@ class Messages extends Component {
       <Fragment>
         <Button
           icon="plus"
-          onClick={this.goto.bind(this, ROUTE.new, undefined)}
+          onClick={this.goto.bind(this, ROUTE_ENUM.new, undefined)}
         >
           Create message
         </Button>
