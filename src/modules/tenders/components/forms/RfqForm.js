@@ -1,9 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import { Form, Button, message, Select } from 'antd';
+import { Form, message, Select } from 'antd';
 import RfqTable from './RfqTable';
 import MainInfo from './MainInfo';
+import SubmitButton from './SubmitButton';
 import { BaseForm } from 'modules/common/components';
 
 const { Option } = Select;
@@ -122,6 +123,7 @@ class RfqForm extends BaseForm {
   render() {
     // data is editing tender object
     const { data } = this.props;
+    const { __ } = this.context;
 
     return (
       <Form>
@@ -137,14 +139,7 @@ class RfqForm extends BaseForm {
 
         {this.renderProductsTable()}
 
-        <Button
-          type="primary"
-          onClick={this.handleSubmit}
-          size="large"
-          className="margin"
-        >
-          Send
-        </Button>
+        <SubmitButton onConfirm={this.handleSubmit} __={__} />
       </Form>
     );
   }
