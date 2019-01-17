@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Table, Icon, Card, message } from 'antd';
+import { Button, Table, Icon, Card } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { CreateTenderMessage } from '../containers/';
 import TenderMessageDetail from './TenderMessageDetail';
