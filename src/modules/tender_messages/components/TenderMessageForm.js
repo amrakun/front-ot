@@ -13,10 +13,6 @@ import {
 import SupplierSearcher from 'modules/companies/containers/Searcher';
 import { merge, Map } from 'immutable';
 
-function hasErrors(fieldsError) {
-  return Object.keys(fieldsError).some(field => fieldsError[field]);
-}
-
 class MessageForm extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -73,7 +69,12 @@ class MessageForm extends React.Component {
     const updatedSuppliers = suppliers.remove(supplierId);
     this.setState({ suppliers: updatedSuppliers });
   }
-
+  hasErrors(fieldsError) {
+    return (
+      this.state.suppliers.isEmpty() ||
+      Object.keys(fieldsError).some(field => fieldsError[field])
+    );
+  }
   render() {
     const { suppliers } = this.state;
     const {
@@ -128,7 +129,7 @@ class MessageForm extends React.Component {
             <Button
               type="primary"
               htmlType="submit"
-              disabled={hasErrors(getFieldsError())}
+              disabled={this.hasErrors.bind(this)(getFieldsError())}
             >
               Log in
             </Button>

@@ -115,7 +115,6 @@ class Messages extends Component {
     switch (route) {
       case ROUTE.new:
         return <CreateTenderMessage />;
-        break;
       case ROUTE.edit:
         break;
       case ROUTE.view:
@@ -124,7 +123,6 @@ class Messages extends Component {
             tenderMessageDetail={this.state.tenderMessageDetail}
           />
         );
-        break;
       case ROUTE.index:
         break;
       default:
@@ -134,7 +132,6 @@ class Messages extends Component {
   }
 
   render() {
-    console.log(this.props);
     const { tenderMessagesQuery, match } = this.props;
     const { tenderMessages } = tenderMessagesQuery;
     return (
