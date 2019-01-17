@@ -22,6 +22,7 @@ import { readFileUrl } from 'modules/common/utils';
 import { Uploader } from 'modules/common/components';
 import router from 'modules/common/router';
 
+const { Column } = Table;
 const { Option } = Select;
 const { TextArea } = Input;
 
@@ -57,6 +58,7 @@ class Rfq extends Tender {
     this.handleBetweenSearch = this.handleBetweenSearch.bind(this);
     this.handleRangeChange = this.handleRangeChange.bind(this);
     this.clearFilter = this.clearFilter.bind(this);
+    this.onChangeAwardAttachment = this.onChangeAwardAttachment.bind(this);
   }
 
   bidSummaryReport() {
@@ -85,6 +87,22 @@ class Rfq extends Tender {
       note: awardNote,
       attachments: awardAttachments
     });
+  }
+
+  onChangeAwardAttachment(sId, file) {
+    const { awardAttachments } = this.state;
+    const prev = awardAttachments.find(supplierId => supplierId === sId);
+
+    if (prev) {
+      prev.attachment = file;
+    } else {
+      awardAttachments.push({
+        supplierId: sId,
+        attachment: file
+      });
+    }
+
+    this.setState({ awardAttachments });
   }
 
   handleProductCodeChange(value) {
@@ -254,9 +272,13 @@ class Rfq extends Tender {
   }
 
   renderAwardModal() {
-    const tenderDetail = this.props.tenderDetail || {};
+    const { tenderDetail } = this.props;
     const { type } = tenderDetail;
     const { showAwardForm, selectedCompanies = [] } = this.state;
+
+    const selectedRows = this.getResponseRows()
+      .filter(row => selectedCompanies.includes(row.supplier._id))
+      .map(row => row.supplier);
 
     let content = (
       <>
@@ -267,10 +289,26 @@ class Rfq extends Tender {
         </Form.Item>
 
         <Form.Item label="Attachments">
-          <Uploader
-            multiple
-            onChange={awardAttachments => this.setState({ awardAttachments })}
-          />
+          <Table dataSource={selectedRows} rowKey={company => company._id}>
+            <Column
+              title="Supplier name"
+              key="1"
+              render={(text, company) => {
+                return company.basicInfo.enName;
+              }}
+            />
+            <Column
+              title="File"
+              key="2"
+              render={(text, company) => (
+                <Uploader
+                  onChange={([file]) =>
+                    this.onChangeAwardAttachment(company._id, file)
+                  }
+                />
+              )}
+            />
+          </Table>
         </Form.Item>
       </>
     );

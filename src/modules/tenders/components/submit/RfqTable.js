@@ -166,8 +166,7 @@ class RfqTable extends Component {
           pagination={false}
           size="middle"
           scroll={{
-            x: 2000,
-            y: '65vh'
+            x: 2000
           }}
         >
           {this.renderCell({
@@ -216,12 +215,18 @@ class RfqTable extends Component {
           <Column
             title={__(rpc.totalPrice)}
             key={'totalPrice'}
+            width={140}
             render={(text, record) => {
               if (!record.unitPrice || !record.quantity) {
-                return '-----';
+                return <Input disabled value="" />;
               }
 
-              return (record.unitPrice * record.quantity).toLocaleString();
+              return (
+                <Input
+                  disabled
+                  value={(record.unitPrice * record.quantity).toLocaleString()}
+                />
+              );
             }}
           />
           {this.renderCell({

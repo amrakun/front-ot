@@ -111,7 +111,7 @@ const tendersAward = `
     $_id: String!
     $supplierIds: [String!]!
     $note: String
-    $attachments: [JSON]
+    $attachments: [TenderAwardAttachment]
   ) {
     tendersAward(
       _id: $_id
