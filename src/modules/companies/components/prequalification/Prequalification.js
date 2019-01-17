@@ -68,8 +68,7 @@ class PrequalificationForms extends Panes {
       prequalifiedStatus,
       isPrequalified,
       isSkippedPrequalification
-    } =
-      company || {};
+    } = company || {};
 
     const basicInfo = (company || {}).basicInfo || {};
 

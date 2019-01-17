@@ -2,7 +2,6 @@ import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Table, Icon, Divider, Card, message } from 'antd';
 import { Route, Link, withRouter } from 'react-router-dom';
-import TenderMessageForm from './TenderMessageForm';
 import { CreateTenderMessage } from '../containers/';
 import TenderMessageDetail from './TenderMessageDetail';
 

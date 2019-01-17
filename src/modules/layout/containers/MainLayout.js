@@ -67,7 +67,6 @@ class MainLayoutContainer extends React.Component {
         checkUrl('/user-list');
         checkUrl('/mail-deliveries');
         checkUrl('/delegation');
-        checkUrl('/tmsg');
       } catch (e) {
         if (e.message === 'Permission denied') {
           return null;
