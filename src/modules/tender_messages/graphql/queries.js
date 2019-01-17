@@ -17,19 +17,14 @@ const tenderMessageFields = `
     isAwarded
   },
   senderBuyer {
+    _id,
     username,
     email,
-    role,
     isSupplier,
-    companyId,
     firstName,
     lastName,
     jobTitle,
     phone,
-    delegatedUserId,
-    delegationStartDate,
-    delegationEndDate,
-    temporarySecureInformation
   },
   recipientSuppliers {
     ${supplierFields}

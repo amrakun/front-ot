@@ -52,43 +52,51 @@ class Messages extends Component {
       {
         title: 'From',
         render: senderUsername,
-        width: 150
+        width: 150,
+        key: 1
       },
       {
         title: 'To',
         render: Recipient,
-        width: 150
+        width: 150,
+        key: 2
       },
       {
         title: 'New',
         width: 60,
         dataIndex: 'isRead',
-        render: isNew
+        render: isNew,
+        key: 3
       },
       {
         title: 'Replied',
         render: IsRepliedIcon,
-        width: 65
+        width: 65,
+        key: 4
       },
       {
         title: 'Subject',
         dataIndex: 'subject',
-        width: 200
+        width: 200,
+        key: 5
       },
       {
         title: <Icon type="paper-clip" />,
         width: 30,
         dataIndex: 'attachment',
-        render: AttachmentIcon
+        render: AttachmentIcon,
+        key: 6
       },
       {
         title: 'Body',
         dataIndex: 'body',
+        key: 7,
         render: body =>
           body && body.length > 100 ? body.slice(60) + '...' : body
       },
       {
         title: 'Actions',
+        key: 8,
         render: tenderMessageDetail => {
           return (
             <Button
@@ -118,16 +126,15 @@ class Messages extends Component {
     switch (route) {
       case ROUTE_ENUM.new:
         return <CreateTenderMessage suppliers={this.props.suppliers} />;
-      case ROUTE_ENUM.edit:
-        break;
       case ROUTE_ENUM.view:
         return (
           <TenderMessageDetail tenderMessageDetail={tenderMessageDetail} />
         );
       case ROUTE_ENUM.index:
         break;
+      case ROUTE_ENUM.edit:
+        break;
       default:
-        message.error('Unexpected route');
         break;
     }
   }
@@ -135,7 +142,6 @@ class Messages extends Component {
   render() {
     const { tenderMessagesQuery } = this.props;
     const { tenderMessages } = tenderMessagesQuery;
-    console.log(tenderMessages);
     return (
       <Fragment>
         <Button
@@ -147,7 +153,7 @@ class Messages extends Component {
         <Card>
           <Table
             columns={this.columns()}
-            rowKey={record => record._id}
+            rowKey={({ _id }) => _id}
             pagination={true}
             dataSource={tenderMessages}
             loading={tenderMessagesQuery.loading}

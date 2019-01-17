@@ -1,5 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Tag, Divider, Input } from 'antd';
+
+const { TextArea } = Input;
 
 const renderUser = user => (
   <Tag key={user.email}>
@@ -11,7 +13,7 @@ const renderUser = user => (
 );
 
 const renderCompany = ({ _id, basicInfo: { enName, email } }) => (
-  <Tag key={email}>
+  <Tag key={_id}>
     {enName}
     {'<'}
     {email}
@@ -21,37 +23,33 @@ const renderCompany = ({ _id, basicInfo: { enName, email } }) => (
 
 const Sender = ({ senderBuyer, senderSupplier }) => {
   if (senderBuyer) {
-    return <Fragment>From: {renderUser(senderBuyer)}</Fragment>;
+    return <>From: {renderUser(senderBuyer)}</>;
   }
 
   if (senderSupplier) {
-    return <Fragment>From: {renderCompany(senderSupplier)}</Fragment>;
+    return <>From: {renderCompany(senderSupplier)}</>;
   }
 };
 
 const Receivers = ({ recipientSuppliers, tender }) => {
   if (recipientSuppliers && recipientSuppliers.length > 0) {
-    return <Fragment>To: {recipientSuppliers.map(renderCompany)}</Fragment>;
+    return <>To: {recipientSuppliers.map(renderCompany)}</>;
   }
-  return (
-    <Fragment>
-      To: {renderUser({ username: 'Tender', email: tender.number })}
-    </Fragment>
-  );
+  return <>To: {renderUser({ username: 'Tender', email: tender.number })}</>;
 };
 
 const TenderMessageDetail = ({ tenderMessageDetail }) => {
   if (!tenderMessageDetail) return null;
   return (
-    <Fragment>
+    <>
       <Sender {...tenderMessageDetail} />
       <Divider />
       <Receivers {...tenderMessageDetail} />
       <Divider />
       Subject: {tenderMessageDetail.subject}
       <Divider />
-      <textera>{tenderMessageDetail.body}</textera>
-    </Fragment>
+      <TextArea readOnly autosize value={tenderMessageDetail.body} />
+    </>
   );
 };
 
