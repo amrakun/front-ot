@@ -9,8 +9,7 @@ class MessageForm extends React.Component {
     super(props, context);
 
     this.state = {
-      suppliers: Map(),
-      tenderId: '5c383932e3e2774d65b3e060'
+      suppliers: Map()
     };
 
     this.onAddSuppliers = this.onAddSuppliers.bind(this);
@@ -28,7 +27,7 @@ class MessageForm extends React.Component {
 
       const { onSubmit } = this.props;
       const recipientSupplierIds = Array.from(this.state.suppliers.keys());
-      const { tenderId } = this.state;
+      const tenderId = this.props.tenderDetail._id;
 
       const doc = {
         tenderId,
@@ -90,14 +89,13 @@ class MessageForm extends React.Component {
     // Only show error after a field is touched.
     const subjectError = isFieldTouched('subject') && getFieldError('subject');
     const bodyError = isFieldTouched('body') && getFieldError('body');
-    const { suppliers } = this.props;
     return (
       <Fragment>
         <Row>
           {this.renderSupplierTags()}
           <SupplierSearcher
             onSelect={this.onAddSuppliers}
-            suppliers={suppliers}
+            suppliers={this.props.tenderDetail.suppliers}
           />
           ;
         </Row>
@@ -137,7 +135,8 @@ class MessageForm extends React.Component {
 }
 
 MessageForm.propTypes = {
-  onSubmit: PropTypes.func
+  onSubmit: PropTypes.func,
+  tenderDetail: PropTypes.object
 };
 
 const WrappedMessageForm = Form.create({ name: 'horizontal_login' })(

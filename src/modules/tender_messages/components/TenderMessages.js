@@ -125,7 +125,7 @@ class Messages extends Component {
 
     switch (route) {
       case ROUTE_ENUM.new:
-        return <CreateTenderMessage suppliers={this.props.suppliers} />;
+        return <CreateTenderMessage tenderDetail={this.props.tenderDetail} />;
       case ROUTE_ENUM.view:
         return (
           <TenderMessageDetail tenderMessageDetail={tenderMessageDetail} />
@@ -166,6 +166,7 @@ class Messages extends Component {
 }
 
 Messages.propTypes = {
+  tenderDetail: PropTypes.object,
   tenderMessagesQuery: PropTypes.object,
   suppliers: PropTypes.array
 };
