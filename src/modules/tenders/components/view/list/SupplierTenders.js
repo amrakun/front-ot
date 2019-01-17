@@ -44,7 +44,7 @@ class SupplierTenders extends Tenders {
         filteredValue: this.state.statuses,
         key: 'status',
         fixed: 'left',
-        width: '75',
+        width: 75,
         render: record => this.renderTooltippedIcon(record)
       },
       ...this.commonColumns(),
