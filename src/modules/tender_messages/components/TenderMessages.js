@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Table, Icon, Card } from 'antd';
+import { Row, Button, Table, Icon, Card } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { CreateTenderMessage } from '../containers/';
 import TenderMessageDetail from './TenderMessageDetail';
@@ -144,22 +144,28 @@ class Messages extends Component {
     const { tenderMessages } = tenderMessagesQuery;
     return (
       <Fragment>
-        <Button
-          icon="plus"
-          onClick={this.goto.bind(this, ROUTE_ENUM.new, undefined)}
-        >
-          Create message
-        </Button>
-        <Card>
-          <Table
-            columns={this.columns()}
-            rowKey={({ _id }) => _id}
-            pagination={true}
-            dataSource={tenderMessages}
-            loading={tenderMessagesQuery.loading}
-          />
-        </Card>
-        <Card>{this.renderNested()}</Card>
+        <Row>
+          <Button
+            icon="plus"
+            onClick={this.goto.bind(this, ROUTE_ENUM.new, undefined)}
+          >
+            Create message
+          </Button>
+        </Row>
+        <Row>
+          <Card>
+            <Table
+              columns={this.columns()}
+              rowKey={({ _id }) => _id}
+              pagination={false}
+              dataSource={tenderMessages}
+              loading={tenderMessagesQuery.loading}
+            />
+          </Card>
+        </Row>
+        <Row>
+          <Card>{this.renderNested()}</Card>
+        </Row>
       </Fragment>
     );
   }
