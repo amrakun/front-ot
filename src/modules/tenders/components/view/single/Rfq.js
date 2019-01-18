@@ -441,12 +441,7 @@ class Rfq extends Tender {
           </Fragment>
         </TabPane>
         <TabPane tab="Messages" key="2">
-          <TenderMessagesSingle
-            tenderId={tenderDetail._id}
-            suppliers={tenderDetail.suppliers}
-            tenderDetail={tenderDetail}
-            match={this.props.match}
-          />
+          <TenderMessagesSingle tenderDetail={tenderDetail} />
         </TabPane>
       </Tabs>
     );

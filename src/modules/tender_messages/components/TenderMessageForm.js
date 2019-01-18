@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Form, Input, Button, Tooltip, Tag, Row, Divider, message } from 'antd';
 import PropTypes from 'prop-types';
-import { merge, Map } from 'immutable';
+import { Map } from 'immutable';
 import SupplierSearcher from 'modules/companies/components/Searcher';
 
 class MessageForm extends React.Component {
@@ -60,18 +60,16 @@ class MessageForm extends React.Component {
 
   onAddSuppliers(moreSuppliers) {
     const { suppliers } = this.state;
-    const uniqueNewSuppliers = moreSuppliers
-      .filter(v => !suppliers.has(v._id))
-      .map(v => [v._id, v]);
-    const suppliersUpdated = merge(suppliers, uniqueNewSuppliers);
-    this.setState({ suppliers: suppliersUpdated });
+    const uniqueNewSuppliers = Map(
+      moreSuppliers.filter(v => !suppliers.has(v._id)).map(v => [v._id, v])
+    );
+    this.setState({ suppliers: suppliers.merge(uniqueNewSuppliers) });
   }
 
   removeSupplier(supplierId) {
-    const { suppliers } = this.state;
-    const updatedSuppliers = suppliers.remove(supplierId);
-    this.setState({ suppliers: updatedSuppliers });
+    this.setState({ suppliers: this.state.suppliers.delete(supplierId) });
   }
+
   hasErrors(fieldsError) {
     return (
       this.state.suppliers.isEmpty() ||

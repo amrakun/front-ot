@@ -5,9 +5,9 @@ import { queries } from 'modules/tender_messages/graphql/';
 export default compose(
   graphql(gql(queries.tenderMessages), {
     name: 'tenderMessagesQuery',
-    options: ({ match }) => {
+    options: ({ tenderDetail }) => {
       return {
-        variables: { tenderId: match.params.id }
+        variables: { tenderId: tenderDetail._id }
       };
     }
   })

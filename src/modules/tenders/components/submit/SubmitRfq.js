@@ -1,10 +1,13 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import { Form, Button, Card, message } from 'antd';
+import { Form, Button, Card, message, Tabs } from 'antd';
 import { Uploader, BaseForm } from 'modules/common/components';
 import RfqTable from './RfqTable';
 import MainInfo from './MainInfo';
+import { TenderMessagesSingle } from 'modules/tender_messages/containers/';
+
+const { TabPane } = Tabs;
 
 class SubmitTender extends BaseForm {
   constructor(props, context) {
@@ -135,16 +138,23 @@ class SubmitTender extends BaseForm {
     }
 
     return (
-      <Form layout="inline" onSubmit={this.handleSubmit}>
-        <MainInfo {...data} />
+      <Tabs defaultActiveKey="1">
+        <TabPane tab="Main" key="1">
+          <Form layout="inline" onSubmit={this.handleSubmit}>
+            <MainInfo {...data} />
 
-        <Card title={title} className="margin">
-          {form}
-          <br />
+            <Card title={title} className="margin">
+              {form}
+              <br />
 
-          {!data.isSent && this.renderAction()}
-        </Card>
-      </Form>
+              {!data.isSent && this.renderAction()}
+            </Card>
+          </Form>
+        </TabPane>
+        <TabPane tab="Message" key="1">
+          <TenderMessagesSingle tenderDetail={data} />
+        </TabPane>
+      </Tabs>
     );
   }
 }
