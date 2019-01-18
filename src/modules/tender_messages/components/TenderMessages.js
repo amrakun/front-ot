@@ -71,32 +71,32 @@ class Messages extends Component {
         width: 150,
         key: 2
       },
-      {
-        title: 'New',
-        width: 60,
-        dataIndex: 'isRead',
-        render: isNew,
-        key: 3
-      },
-      {
-        title: 'Replied',
-        render: IsRepliedIcon,
-        width: 65,
-        key: 4
-      },
+      // {
+      //   title: 'New',
+      //   width: 60,
+      //   dataIndex: 'isRead',
+      //   render: isNew,
+      //   key: 3
+      // },
+      // {
+      //   title: 'Replied',
+      //   render: IsRepliedIcon,
+      //   width: 65,
+      //   key: 4
+      // },
       {
         title: 'Subject',
         dataIndex: 'subject',
         width: 200,
         key: 5
       },
-      {
-        title: <Icon type="paper-clip" />,
-        width: 30,
-        dataIndex: 'attachment',
-        render: AttachmentIcon,
-        key: 6
-      },
+      // {
+      //   title: <Icon type="paper-clip" />,
+      //   width: 30,
+      //   dataIndex: 'attachment',
+      //   render: AttachmentIcon,
+      //   key: 6
+      // },
       {
         title: 'Body',
         dataIndex: 'body',
