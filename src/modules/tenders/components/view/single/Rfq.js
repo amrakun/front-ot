@@ -416,29 +416,37 @@ class Rfq extends Tender {
 
   render() {
     const tenderDetail = this.props.tenderDetail || {};
+    console.log(tenderDetail.status);
     const { type, status } = tenderDetail;
     const requestedProducts = tenderDetail.requestedProducts || [];
+
+    const main =
+      tenderDetail.status === 'open' ? (
+        undefined
+      ) : (
+        <Fragment>
+          {this.renderStats()}
+          {this.renderAwardModal()}
+          <Row gutter={24}>
+            {this.renderFilter(type, requestedProducts)}
+
+            <Col
+              sm={24}
+              xl={type === 'trfq' ? 24 : 18}
+              lg={type === 'trfq' ? 24 : 17}
+            >
+              {this.renderTable({
+                tableOperations: this.renderOperations(type, status)
+              })}
+            </Col>
+          </Row>
+        </Fragment>
+      );
 
     return (
       <Tabs defaultActiveKey="1">
         <TabPane tab="Main" key="1">
-          <Fragment>
-            {this.renderStats()}
-            {this.renderAwardModal()}
-            <Row gutter={24}>
-              {this.renderFilter(type, requestedProducts)}
-
-              <Col
-                sm={24}
-                xl={type === 'trfq' ? 24 : 18}
-                lg={type === 'trfq' ? 24 : 17}
-              >
-                {this.renderTable({
-                  tableOperations: this.renderOperations(type, status)
-                })}
-              </Col>
-            </Row>
-          </Fragment>
+          {main}
         </TabPane>
         <TabPane tab="Messages" key="2">
           <TenderMessagesSingle tenderDetail={tenderDetail} />
