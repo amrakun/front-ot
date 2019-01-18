@@ -80,10 +80,9 @@ const RegistrationContainer = (props, { __ }) => {
         if (!hasFilledBefore) {
           notification.open({
             message: 'Done!',
-            description: __(`Your registration has been successfully completed.
-              Oyu Tolgoi procurement team now has started the pre-qualification
-              process on your company. A gap report will be sent once the
-              pre-qualification process complete.`),
+            description: __(
+              `You have successfully submitted your registration form.`
+            ),
             icon: <Icon type="smile" style={{ color: 'rgb(0,153,168)' }} />,
             duration: 10
           });
