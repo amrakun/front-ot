@@ -28,8 +28,17 @@ Recipient.propTypes = {
   recipientSuppliers: PropTypes.array
 };
 
-const senderUsername = ({ senderSupplier, senderBuyer }) =>
-  (senderSupplier || senderBuyer).username;
+const senderUsername = record => {
+  const { senderSupplier, senderBuyer } = record;
+
+  if (senderSupplier) {
+    return senderSupplier.basicInfo.enName;
+  }
+
+  if (senderBuyer) {
+    return senderBuyer.username;
+  }
+};
 
 const IsRepliedIcon = ({ isReplySent, isAuto }) => {
   if (isAuto) return <Icon type="stop" />;
