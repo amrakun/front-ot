@@ -15,7 +15,7 @@ const renderUser = user => (
 const renderCompany = ({ _id, basicInfo: { enName, email } }) => (
   <Tag key={_id}>
     {enName}
-    {'<'}
+    {' <'}
     {email}
     {'>'}
   </Tag>

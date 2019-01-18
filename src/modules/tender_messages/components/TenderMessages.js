@@ -15,7 +15,8 @@ const ROUTE_ENUM = {
 const Recipient = ({ recipientSuppliers }) => {
   if (recipientSuppliers && recipientSuppliers.length > 0) {
     if (recipientSuppliers.length === 1) {
-      return recipientSuppliers[0].username;
+      const { enName, email } = recipientSuppliers[0].basicInfo;
+      return `${enName} <${email}>`;
     }
     if (recipientSuppliers.length > 1)
       return `${recipientSuppliers.length} suppliers`;
@@ -157,7 +158,7 @@ class Messages extends Component {
             <Table
               columns={this.columns()}
               rowKey={({ _id }) => _id}
-              pagination={false}
+              pagination={true}
               dataSource={tenderMessages}
               loading={tenderMessagesQuery.loading}
             />
