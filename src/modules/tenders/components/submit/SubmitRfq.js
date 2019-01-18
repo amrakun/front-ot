@@ -151,8 +151,8 @@ class SubmitTender extends BaseForm {
             </Card>
           </Form>
         </TabPane>
-        <TabPane tab="Message" key="1">
-          <TenderMessagesSingle tenderDetail={data} />
+        <TabPane tab="Message" key="2">
+          <TenderMessagesSingle tenderDetail={data} isSupplier />
         </TabPane>
       </Tabs>
     );

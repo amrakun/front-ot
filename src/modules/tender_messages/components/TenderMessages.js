@@ -123,7 +123,6 @@ class Messages extends Component {
 
   renderNested() {
     const { route, tenderMessageDetail } = this.state;
-
     switch (route) {
       case ROUTE_ENUM.new:
         return <CreateTenderMessage tenderDetail={this.props.tenderDetail} />;

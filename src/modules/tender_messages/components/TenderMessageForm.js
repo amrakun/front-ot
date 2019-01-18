@@ -14,6 +14,7 @@ class MessageForm extends React.Component {
 
     this.onAddSuppliers = this.onAddSuppliers.bind(this);
     this.removeSupplier = this.removeSupplier.bind(this);
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -24,17 +25,25 @@ class MessageForm extends React.Component {
         message.error('Form error', err);
         return;
       }
-
       const { onSubmit } = this.props;
-      const recipientSupplierIds = Array.from(this.state.suppliers.keys());
+      const { currentUser } = this.context;
+
+      if (!onSubmit) return;
+
       const tenderId = this.props.tenderDetail._id;
 
       const doc = {
         tenderId,
-        recipientSupplierIds,
         ...values
       };
-      if (onSubmit) onSubmit(doc);
+
+      if (currentUser.isSupplier) {
+        doc.senderSupplierId = currentUser.companyId;
+      } else {
+        doc.recipientSupplierIds = Array.from(this.state.suppliers.keys());
+      }
+
+      onSubmit(doc);
     });
   }
 
@@ -72,10 +81,30 @@ class MessageForm extends React.Component {
 
   hasErrors(fieldsError) {
     return (
-      this.state.suppliers.isEmpty() ||
+      (this.state.suppliers.isEmpty() &&
+        !this.context.currentUser.isSupplier) ||
       Object.keys(fieldsError).some(field => fieldsError[field])
     );
   }
+
+  renderBuyerFields() {
+    const {
+      currentUser: { isSupplier }
+    } = this.context;
+
+    if (!isSupplier) {
+      return (
+        <Row>
+          {this.renderSupplierTags()}
+          <SupplierSearcher
+            onSelect={this.onAddSuppliers}
+            suppliers={this.props.tenderDetail.suppliers}
+          />
+        </Row>
+      );
+    }
+  }
+
   render() {
     const {
       getFieldDecorator,
@@ -88,15 +117,8 @@ class MessageForm extends React.Component {
     const subjectError = isFieldTouched('subject') && getFieldError('subject');
     const bodyError = isFieldTouched('body') && getFieldError('body');
     return (
-      <Fragment>
-        <Row>
-          {this.renderSupplierTags()}
-          <SupplierSearcher
-            onSelect={this.onAddSuppliers}
-            suppliers={this.props.tenderDetail.suppliers}
-          />
-        </Row>
-
+      <>
+        {this.renderBuyerFields()}
         <Form layout="vertical" onSubmit={this.handleSubmit}>
           <Form.Item
             validateStatus={subjectError ? 'error' : ''}
@@ -126,7 +148,7 @@ class MessageForm extends React.Component {
             </Button>
           </Form.Item>
         </Form>
-      </Fragment>
+      </>
     );
   }
 }
@@ -134,6 +156,10 @@ class MessageForm extends React.Component {
 MessageForm.propTypes = {
   onSubmit: PropTypes.func,
   tenderDetail: PropTypes.object
+};
+
+MessageForm.contextTypes = {
+  currentUser: PropTypes.object
 };
 
 const WrappedMessageForm = Form.create({ name: 'horizontal_login' })(

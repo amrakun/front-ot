@@ -27,7 +27,7 @@ const tenderMessageSupplierSend = `
       subject: $subject
       body: $body
     ) {
-      type
+      _id
     }
   }
 `;
