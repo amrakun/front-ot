@@ -32,4 +32,15 @@ const tenderMessageSupplierSend = `
   }
 `;
 
-export default { tenderMessageBuyerSend, tenderMessageSupplierSend };
+const tenderMessageSetAsRead = `
+  mutation tenderMessageSetAsRead($_id: String!) {
+    tenderMessageSetAsRead(_id:$_id) {
+      _id
+    }
+  }
+`;
+export default {
+  tenderMessageBuyerSend,
+  tenderMessageSupplierSend,
+  tenderMessageSetAsRead
+};

@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Button, Table, Icon, Card } from 'antd';
 import { withRouter } from 'react-router-dom';
@@ -48,8 +48,7 @@ const IsRepliedIcon = ({ isReplySent, isAuto }) => {
 const AttachmentIcon = attachment =>
   attachment ? <Icon type="paper-clip" /> : undefined;
 
-const isNew = isRead =>
-  !isRead ? <Icon type="info" theme="twoTone" /> : undefined;
+const isNew = isRead => (!isRead ? <Icon type="info-circle" /> : undefined);
 
 class Messages extends Component {
   constructor(props, context) {
@@ -71,13 +70,13 @@ class Messages extends Component {
         width: 150,
         key: 2
       },
-      // {
-      //   title: 'New',
-      //   width: 60,
-      //   dataIndex: 'isRead',
-      //   render: isNew,
-      //   key: 3
-      // },
+      {
+        title: 'New',
+        width: 60,
+        dataIndex: 'isRead',
+        render: isNew,
+        key: 3
+      },
       // {
       //   title: 'Replied',
       //   render: IsRepliedIcon,
@@ -128,6 +127,11 @@ class Messages extends Component {
 
   goto(route, tenderMessageDetail) {
     this.setState({ route, tenderMessageDetail });
+
+    if (route === ROUTE_ENUM.view && !tenderMessageDetail.isRead) {
+      const { tenderMessageSetAsRead } = this.props;
+      tenderMessageSetAsRead({ variables: { _id: tenderMessageDetail._id } });
+    }
   }
 
   renderNested() {
@@ -152,7 +156,7 @@ class Messages extends Component {
     const { tenderMessagesQuery } = this.props;
     const { tenderMessages } = tenderMessagesQuery;
     return (
-      <Fragment>
+      <>
         <Row>
           <Button
             icon="plus"
@@ -166,6 +170,9 @@ class Messages extends Component {
             <Table
               columns={this.columns()}
               rowKey={({ _id }) => _id}
+              rowClassName={({ isRead }) =>
+                isRead ? undefined : 'message-new'
+              }
               pagination={true}
               dataSource={tenderMessages}
               loading={tenderMessagesQuery.loading}
@@ -175,7 +182,7 @@ class Messages extends Component {
         <Row>
           <Card>{this.renderNested()}</Card>
         </Row>
-      </Fragment>
+      </>
     );
   }
 }
@@ -183,7 +190,8 @@ class Messages extends Component {
 Messages.propTypes = {
   tenderDetail: PropTypes.object,
   tenderMessagesQuery: PropTypes.object,
-  suppliers: PropTypes.array
+  suppliers: PropTypes.array,
+  tenderMessageSetAsRead: PropTypes.func
 };
 
 export default withRouter(Messages);

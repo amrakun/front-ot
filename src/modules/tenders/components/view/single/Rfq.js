@@ -416,7 +416,6 @@ class Rfq extends Tender {
 
   render() {
     const tenderDetail = this.props.tenderDetail || {};
-    console.log(tenderDetail.status);
     const { type, status } = tenderDetail;
     const requestedProducts = tenderDetail.requestedProducts || [];
 
