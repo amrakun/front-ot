@@ -87,13 +87,13 @@ class Messages extends Component {
         width: 200,
         key: 5
       },
-      // {
-      //   title: <Icon type="paper-clip" />,
-      //   width: 30,
-      //   dataIndex: 'attachment',
-      //   render: AttachmentIcon,
-      //   key: 6
-      // },
+      {
+        title: <Icon type="paper-clip" />,
+        width: 30,
+        dataIndex: 'attachment',
+        render: AttachmentIcon,
+        key: 6
+      },
       {
         title: 'Body',
         dataIndex: 'body',
@@ -124,7 +124,6 @@ class Messages extends Component {
   }
 
   isNew(record) {
-    console.log(record);
     const { isRead, senderSupplier, senderBuyer } = record;
     const { currentUser } = this.context;
 
@@ -133,7 +132,6 @@ class Messages extends Component {
     }
 
     if (!currentUser.isSupplier && senderSupplier) {
-      console.log('from supplier', isRead);
       return isRead ? undefined : <Icon type="info-circle" />;
     }
   }

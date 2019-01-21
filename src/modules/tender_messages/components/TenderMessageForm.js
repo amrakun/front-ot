@@ -3,13 +3,16 @@ import { Form, Input, Button, Tooltip, Tag, Row, Divider, message } from 'antd';
 import PropTypes from 'prop-types';
 import { Map } from 'immutable';
 import SupplierSearcher from 'modules/companies/components/Searcher';
+import { Uploader } from 'modules/common/components';
 
 class MessageForm extends React.Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = {
-      suppliers: Map()
+      suppliers: Map(),
+      fileName: undefined,
+      fileURL: undefined
     };
 
     this.onAddSuppliers = this.onAddSuppliers.bind(this);
@@ -37,12 +40,20 @@ class MessageForm extends React.Component {
         ...values
       };
 
+      const { fileName, fileURL } = this.state;
+
+      if (fileName && fileURL) {
+        doc.attachment = {
+          name: fileName,
+          url: fileURL
+        };
+      }
+
       if (currentUser.isSupplier) {
         doc.senderSupplierId = currentUser.companyId;
       } else {
         doc.recipientSupplierIds = Array.from(this.state.suppliers.keys());
       }
-
       onSubmit(doc);
     });
   }
@@ -105,6 +116,13 @@ class MessageForm extends React.Component {
     }
   }
 
+  onFileChange(files) {
+    this.setState({
+      fileName: files[0].name,
+      fileURL: files[0].url
+    });
+  }
+
   render() {
     const {
       getFieldDecorator,
@@ -116,19 +134,20 @@ class MessageForm extends React.Component {
     // Only show error after a field is touched.
     const subjectError = isFieldTouched('subject') && getFieldError('subject');
     const bodyError = isFieldTouched('body') && getFieldError('body');
+    const { Item } = Form;
     return (
       <>
         {this.renderBuyerFields()}
         <Form layout="vertical" onSubmit={this.handleSubmit}>
-          <Form.Item
+          <Item
             validateStatus={subjectError ? 'error' : ''}
             help={subjectError || ''}
           >
             {getFieldDecorator('subject', {
               rules: [{ required: true, message: 'Please input your subject!' }]
             })(<Input placeholder="subject" />)}
-          </Form.Item>
-          <Form.Item
+          </Item>
+          <Item
             validateStatus={bodyError ? 'error' : ''}
             help={bodyError || ''}
           >
@@ -137,8 +156,11 @@ class MessageForm extends React.Component {
                 { required: true, message: 'Please input of message body!' }
               ]
             })(<Input.TextArea autosize type="body" placeholder="body" />)}
-          </Form.Item>
-          <Form.Item>
+          </Item>
+          <Item>
+            <Uploader onChange={this.onFileChange.bind(this)} />
+          </Item>
+          <Item>
             <Button
               type="primary"
               htmlType="submit"
@@ -146,7 +168,7 @@ class MessageForm extends React.Component {
             >
               Send
             </Button>
-          </Form.Item>
+          </Item>
         </Form>
       </>
     );

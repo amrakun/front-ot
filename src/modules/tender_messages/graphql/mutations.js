@@ -4,12 +4,14 @@ const tenderMessageBuyerSend = `
     $recipientSupplierIds: [String!]!
     $subject: String!
     $body: String!
+    $attachment: TenderMessageAttachmentInput
   ) {
     tenderMessageBuyerSend(
       tenderId: $tenderId
       recipientSupplierIds: $recipientSupplierIds
       subject: $subject
       body: $body
+      attachment: $attachment
     ) {
       _id
     }
@@ -21,11 +23,13 @@ const tenderMessageSupplierSend = `
     $tenderId: String!
     $subject: String!
     $body: String!
+    $attachment: TenderMessageAttachmentInput
   ) {
     tenderMessageSupplierSend(
       tenderId: $tenderId
       subject: $subject
       body: $body
+      attachment: $attachment
     ) {
       _id
     }
