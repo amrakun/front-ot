@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import {
@@ -423,7 +423,7 @@ class Rfq extends Tender {
       tenderDetail.status === 'open' ? (
         undefined
       ) : (
-        <Fragment>
+        <>
           {this.renderStats()}
           {this.renderAwardModal()}
           <Row gutter={24}>
@@ -439,12 +439,12 @@ class Rfq extends Tender {
               })}
             </Col>
           </Row>
-        </Fragment>
+        </>
       );
 
     return (
-      <Tabs defaultActiveKey="1">
-        <TabPane tab="Main" key="1">
+      <Tabs defaultActiveKey={main ? '1' : '2'}>
+        <TabPane disabled={!main} tab="Main" key="1">
           {main}
         </TabPane>
         <TabPane tab="Messages" key="2">
