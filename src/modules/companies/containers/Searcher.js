@@ -5,22 +5,51 @@ import { queries } from '../graphql';
 import Searcher from '../components/Searcher';
 
 const SearcherContainer = props => {
-  const suppliers = props.companiesQuery.companies || [];
+  const companiesQuery = props.companiesQuery || {};
+  const suppliers = companiesQuery.companies || [];
 
   return <Searcher {...{ ...props, suppliers }} />;
 };
 
 SearcherContainer.propTypes = {
-  companiesQuery: PropTypes.object
+  companiesQuery: PropTypes.object,
+  onShowPopup: PropTypes.func
 };
 
-export default compose(
+const WithData = compose(
   graphql(gql(queries.simpleCompanies), {
     name: 'companiesQuery',
-    options: ({ searchValue }) => {
+    skip: ({ isPopupVisible }) => !isPopupVisible,
+    options: () => {
       return {
-        variables: { search: searchValue }
+        variables: { search: '' }
       };
     }
   })
 )(SearcherContainer);
+
+export default class Index extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isPopupVisible: false
+    };
+
+    this.onShowPopup = this.onShowPopup.bind(this);
+  }
+
+  onShowPopup() {
+    this.setState({ isPopupVisible: true });
+  }
+
+  render() {
+    return (
+      <WithData
+        {...this.props}
+        isPopupVisible={this.state.isPopupVisible}
+        onShowPopup={this.onShowPopup}
+      />
+    );
+  }
+}
