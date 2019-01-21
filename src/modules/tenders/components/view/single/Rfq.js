@@ -406,6 +406,7 @@ class Rfq extends Tender {
       <Table
         columns={[...rfqRequestColumns, ...responseColumns]}
         rowKey={() => Math.random()}
+        scroll={{ y: 1500 }}
         dataSource={respondedProducts.map((product, index) => ({
           ...product,
           ...requestedProducts[index]

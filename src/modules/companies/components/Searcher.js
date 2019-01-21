@@ -8,6 +8,8 @@ const propTypes = {
   slogan: PropTypes.string,
   mode: PropTypes.string,
   onChange: PropTypes.func,
+  onShowPopup: PropTypes.func,
+  onSearch: PropTypes.func,
   value: PropTypes.array,
   suppliers: PropTypes.array
 };
@@ -29,6 +31,8 @@ class SupplierSearcher extends React.Component {
 
   showPopup() {
     this.setState({ visible: true });
+
+    this.props.onShowPopup();
   }
 
   onOk() {
@@ -53,16 +57,16 @@ class SupplierSearcher extends React.Component {
   }
 
   renderSelect() {
-    const { suppliers, mode } = this.props;
+    const { suppliers, mode, onSearch } = this.props;
     const { selectedValues } = this.state;
 
     const selectProps = {
       mode: 'multiple',
       style: { width: '100%' },
+      onSearch: onSearch,
       onChange: this.onChange,
       value: selectedValues,
-      filterOption: (inputValue, option) =>
-        option.props.children.includes(inputValue)
+      filterOption: true
     };
 
     return (
