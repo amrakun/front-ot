@@ -48,12 +48,11 @@ const IsRepliedIcon = ({ isReplySent, isAuto }) => {
 const AttachmentIcon = attachment =>
   attachment ? <Icon type="paper-clip" /> : undefined;
 
-const isNew = isRead => (!isRead ? <Icon type="info-circle" /> : undefined);
-
 class Messages extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = { route: 'index', tenderMessageDetail: undefined };
+    this.isNew = this.isNew.bind(this);
   }
 
   columns() {
@@ -73,8 +72,7 @@ class Messages extends Component {
       {
         title: 'New',
         width: 60,
-        dataIndex: 'isRead',
-        render: isNew,
+        render: this.isNew,
         key: 3
       },
       // {
@@ -125,12 +123,36 @@ class Messages extends Component {
     return columns;
   }
 
+  isNew(record) {
+    console.log(record);
+    const { isRead, senderSupplier, senderBuyer } = record;
+    const { currentUser } = this.context;
+
+    if (currentUser.isSupplier && senderBuyer) {
+      return isRead ? undefined : <Icon type="info-circle" />;
+    }
+
+    if (!currentUser.isSupplier && senderSupplier) {
+      console.log('from supplier', isRead);
+      return isRead ? undefined : <Icon type="info-circle" />;
+    }
+  }
+
   goto(route, tenderMessageDetail) {
     this.setState({ route, tenderMessageDetail });
 
     if (route === ROUTE_ENUM.view && !tenderMessageDetail.isRead) {
-      const { tenderMessageSetAsRead } = this.props;
-      tenderMessageSetAsRead({ variables: { _id: tenderMessageDetail._id } });
+      const { senderSupplier, senderBuyer } = tenderMessageDetail;
+      const { currentUser } = this.context;
+      if (
+        // supplier -> buyer
+        (!currentUser.isSupplier && senderSupplier) ||
+        // buyer -> supplier
+        (currentUser.isSupplier && senderBuyer)
+      ) {
+        const { tenderMessageSetAsRead } = this.props;
+        tenderMessageSetAsRead({ variables: { _id: tenderMessageDetail._id } });
+      }
     }
   }
 
@@ -192,6 +214,10 @@ Messages.propTypes = {
   tenderMessagesQuery: PropTypes.object,
   suppliers: PropTypes.array,
   tenderMessageSetAsRead: PropTypes.func
+};
+
+Messages.contextTypes = {
+  currentUser: PropTypes.object
 };
 
 export default withRouter(Messages);
