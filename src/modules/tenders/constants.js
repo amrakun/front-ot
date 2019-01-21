@@ -1,3 +1,6 @@
+import React from 'react';
+import { Tooltip } from 'antd';
+
 export const statusIcons = {
   draft: { type: 'edit', color: 'rgb(161,161,164)' },
   open: { type: 'sync', color: 'rgb(0,153,168)' },
@@ -66,7 +69,26 @@ export const rfqRequestColumns = [
     dataIndex: 'purchaseRequestNumber',
     key: '2'
   },
-  { title: 'Short text', dataIndex: 'shortText', key: '3' },
+  {
+    title: 'Short text',
+    dataIndex: 'shortText',
+    key: '3',
+    width: 150,
+    onCell: () => {
+      return {
+        style: {
+          maxWidth: 150
+        }
+      };
+    },
+    render: shortText => {
+      return (
+        <Tooltip placement="topLeft" title={shortText}>
+          <span>{shortText}</span>
+        </Tooltip>
+      );
+    }
+  },
   { title: 'Quantity', dataIndex: 'quantity', key: '4' },
   { title: 'UOM', dataIndex: 'UOM', key: '5' },
   { title: 'Manufacturer', dataIndex: 'manufacturer', key: '6' },
