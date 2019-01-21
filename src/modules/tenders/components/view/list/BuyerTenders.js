@@ -88,16 +88,14 @@ class BuyerTenders extends Tenders {
   }
 
   renderEditLink({ status, _id }) {
-    if (['draft', 'closed', 'canceled'].includes(status)) {
-      return (
-        <>
-          <Divider key={0} type="vertical" />
+    if (['draft', 'closed', 'canceled', 'open'].includes(status)) {
+      return [
+        <Divider key={0} type="vertical" />,
 
-          <Link key={1} to={`/tender/edit/${_id}`}>
-            {['closed', 'canceled'].includes(status) ? 'Reopen' : 'Edit'}
-          </Link>
-        </>
-      );
+        <Link key={1} to={`/tender/edit/${_id}`}>
+          {['closed', 'canceled'].includes(status) ? 'Reopen' : 'Edit'}
+        </Link>
+      ];
     }
   }
 
