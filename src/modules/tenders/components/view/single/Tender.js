@@ -99,32 +99,30 @@ class Tender extends Common {
     return [
       {
         title: 'Supplier name',
-        dataIndex: 'supplier.basicInfo.enName',
-        width: 160
+        dataIndex: 'supplier.basicInfo.enName'
       },
       {
         title: 'Vendor number',
-        dataIndex: 'supplier.basicInfo.sapNumber',
-        width: 160
+        dataIndex: 'supplier.basicInfo.sapNumber'
+      },
+      {
+        title: 'Prequalification status',
+        dataIndex: 'supplier.prequalificationStatusDisplay'
       },
       {
         title: 'Status',
-        width: 40,
         render: record => (record.status ? record.status : 'On time')
       },
       {
         title: 'Provided information',
-        width: 40,
         render: this.renderViewResponse
       },
-      { title: 'Provided file', width: 40, dataIndex: 'file' },
       {
         title: 'Contact person',
-        width: 40,
         dataIndex: 'supplier.contactInfo.name'
       },
-      { title: 'Email', width: 40, dataIndex: 'supplier.contactInfo.email' },
-      { title: 'Phone', width: 40, dataIndex: 'supplier.contactInfo.phone' }
+      { title: 'Email', dataIndex: 'supplier.contactInfo.email' },
+      { title: 'Phone', dataIndex: 'supplier.contactInfo.phone' }
     ];
   }
 

@@ -78,6 +78,7 @@ const eoiResponseFields = `
 const tenderResponseSupplierFields = `
   _id
   isQualified
+  prequalificationStatusDisplay
   isProductsInfoValidated
   averageDifotScore
   lastDueDiligence
