@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Button, Table, Icon, Card, Modal } from 'antd';
+import { Row, Button, Table, Icon, Card, Modal, Divider } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { CreateTenderMessage } from '../containers/';
 import TenderMessageDetail from './TenderMessageDetail';
@@ -10,7 +10,8 @@ const ROUTE_ENUM = {
   index: 0,
   view: 1,
   new: 2,
-  edit: 3
+  edit: 3,
+  reply: 4
 };
 
 const Recipient = ({ recipientSuppliers }) => {
@@ -47,8 +48,13 @@ const AttachmentIcon = attachment =>
 class Messages extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = { route: 'index', tenderMessageDetail: undefined };
+    this.state = {
+      route: 'index',
+      tenderMessageDetail: undefined
+    };
     this.isNew = this.isNew.bind(this);
+    this.renderActions = this.renderActions.bind(this);
+    this.setAsRead = this.setAsRead.bind(this);
   }
 
   columns() {
@@ -101,23 +107,49 @@ class Messages extends Component {
         title: 'Actions',
         key: 8,
         width: 100,
-        render: tenderMessageDetail => {
-          return (
-            <Button
-              key={`${tenderMessageDetail._id}view`}
-              onClick={this.goto.bind(
-                this,
-                ROUTE_ENUM.view,
-                tenderMessageDetail
-              )}
-            >
-              View
-            </Button>
-          );
-        }
+        render: this.renderActions
       }
     ];
     return columns;
+  }
+
+  renderActions(tenderMessageDetail) {
+    const { currentUser } = this.context;
+    const { senderBuyer, senderSupplier } = tenderMessageDetail;
+
+    let replyButton = null;
+
+    if (
+      (currentUser.isSupplier && senderBuyer) ||
+      (!currentUser.isSupplier && senderSupplier)
+    ) {
+      replyButton = (
+        <>
+          <Button
+            key={`${tenderMessageDetail._id}reply`}
+            onClick={this.goto.bind(
+              this,
+              ROUTE_ENUM.reply,
+              tenderMessageDetail
+            )}
+          >
+            Reply
+          </Button>
+        </>
+      );
+    }
+
+    return (
+      <>
+        <Button
+          key={`${tenderMessageDetail._id}view`}
+          onClick={this.goto.bind(this, ROUTE_ENUM.view, tenderMessageDetail)}
+        >
+          View
+        </Button>
+        {replyButton}
+      </>
+    );
   }
 
   isNew(record) {
@@ -136,7 +168,13 @@ class Messages extends Component {
   goto(route, tenderMessageDetail) {
     this.setState({ route, tenderMessageDetail });
 
-    if (route === ROUTE_ENUM.view && !tenderMessageDetail.isRead) {
+    if (route === ROUTE_ENUM.view) {
+      this.setAsRead(tenderMessageDetail);
+    }
+  }
+
+  setAsRead(tenderMessageDetail) {
+    if (!tenderMessageDetail.isRead) {
       const { senderSupplier, senderBuyer } = tenderMessageDetail;
       const { currentUser } = this.context;
       if (
@@ -172,6 +210,17 @@ class Messages extends Component {
           onCancel={this.goto.bind(this, ROUTE_ENUM.index, null)}
         >
           <TenderMessageDetail tenderMessageDetail={tenderMessageDetail} />
+        </Modal>
+        <Modal
+          visible={route === ROUTE_ENUM.reply}
+          footer={null}
+          onCancel={this.goto.bind(this, ROUTE_ENUM.index, null)}
+        >
+          <CreateTenderMessage
+            replyTo={this.state.tenderMessageDetail}
+            tenderDetail={this.props.tenderDetail}
+            onComplete={this.goto.bind(this, ROUTE_ENUM.index, null)}
+          />
         </Modal>
       </>
     );

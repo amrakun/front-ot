@@ -19,6 +19,7 @@ class MessageForm extends React.Component {
     this.onEmailContentChange = editorHTMLContent =>
       this.setState({ editorHTMLContent });
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.renderBuyerFields = this.renderBuyerFields.bind(this);
   }
 
   handleSubmit(e) {
@@ -28,7 +29,7 @@ class MessageForm extends React.Component {
         message.error('Form error', err);
         return;
       }
-      const { onSubmit } = this.props;
+      const { onSubmit, replyTo } = this.props;
       if (!onSubmit) return;
 
       const { currentUser } = this.context;
@@ -40,6 +41,10 @@ class MessageForm extends React.Component {
         ...values,
         body: this.state.editorHTMLContent
       };
+
+      if (replyTo) {
+        doc.replyToId = replyTo._id;
+      }
 
       const { fileName, fileURL } = this.state;
 
@@ -53,7 +58,6 @@ class MessageForm extends React.Component {
       if (currentUser.isSupplier) {
         doc.senderSupplierId = currentUser.companyId;
       }
-
       onSubmit(doc);
     });
   }
@@ -72,12 +76,19 @@ class MessageForm extends React.Component {
   renderBuyerFields() {
     const { getFieldDecorator } = this.props.form;
     const { currentUser } = this.context;
+    const { replyTo } = this.props;
+
+    let initialValue = undefined;
+    if (replyTo && !currentUser.isSupplier) {
+      initialValue = [replyTo.senderSupplier._id];
+    }
 
     if (currentUser.isSupplier) return null;
 
     return (
       <Item>
         {getFieldDecorator('recipientSupplierIds', {
+          initialValue,
           rules: []
         })(
           <Select mode="multiple" placeholder="supplier">
@@ -141,7 +152,8 @@ class MessageForm extends React.Component {
 
 MessageForm.propTypes = {
   onSubmit: PropTypes.func,
-  tenderDetail: PropTypes.object
+  tenderDetail: PropTypes.object,
+  replyTo: PropTypes.object
 };
 
 MessageForm.contextTypes = {

@@ -5,6 +5,7 @@ const tenderMessageBuyerSend = `
     $subject: String!
     $body: String!
     $attachment: TenderMessageAttachmentInput
+    $replyToId: String
   ) {
     tenderMessageBuyerSend(
       tenderId: $tenderId
@@ -12,6 +13,7 @@ const tenderMessageBuyerSend = `
       subject: $subject
       body: $body
       attachment: $attachment
+      replyToId: $replyToId
     ) {
       _id
     }
@@ -24,12 +26,14 @@ const tenderMessageSupplierSend = `
     $subject: String!
     $body: String!
     $attachment: TenderMessageAttachmentInput
+    $replyToId: String
   ) {
     tenderMessageSupplierSend(
       tenderId: $tenderId
       subject: $subject
       body: $body
       attachment: $attachment
+      replyToId: $replyToId
     ) {
       _id
     }
