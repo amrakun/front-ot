@@ -41,11 +41,6 @@ const senderUsername = record => {
   }
 };
 
-const IsRepliedIcon = ({ isReplySent, isAuto }) => {
-  if (isAuto) return <Icon type="stop" />;
-  else return isReplySent ? <Icon type="export" /> : 'no';
-};
-
 const AttachmentIcon = attachment =>
   attachment ? <Icon type="paper-clip" /> : undefined;
 

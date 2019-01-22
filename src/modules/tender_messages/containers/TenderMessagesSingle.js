@@ -1,4 +1,3 @@
-import React from 'react';
 import { TenderMessages } from 'modules/tender_messages/components';
 import { gql, graphql, compose } from 'react-apollo';
 import { queries } from 'modules/tender_messages/graphql/';

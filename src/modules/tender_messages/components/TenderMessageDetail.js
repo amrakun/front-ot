@@ -1,6 +1,5 @@
 import React from 'react';
 import { Tag, Divider, Input, Icon } from 'antd';
-import { Link } from 'react-router-dom';
 import { readFileUrl } from 'modules/common/utils';
 
 const { TextArea } = Input;
