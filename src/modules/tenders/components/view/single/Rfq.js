@@ -419,6 +419,7 @@ class Rfq extends Tender {
     const tenderDetail = this.props.tenderDetail || {};
     const { type, status } = tenderDetail;
     const requestedProducts = tenderDetail.requestedProducts || [];
+    const { queryParams } = this.props;
 
     const main =
       tenderDetail.status === 'open' ? (
@@ -449,7 +450,10 @@ class Rfq extends Tender {
           {main}
         </TabPane>
         <TabPane tab="Messages" key="2">
-          <TenderMessagesSingle tenderDetail={tenderDetail} />
+          <TenderMessagesSingle
+            tenderDetail={tenderDetail}
+            queryParams={queryParams}
+          />
         </TabPane>
       </Tabs>
     );

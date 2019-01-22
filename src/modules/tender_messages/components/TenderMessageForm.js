@@ -1,22 +1,18 @@
-import React, { Fragment } from 'react';
-import { Form, Input, Button, Tooltip, Tag, Row, Divider, message } from 'antd';
+import React from 'react';
+import { Form, Input, Button, Select, message } from 'antd';
 import PropTypes from 'prop-types';
-import { Map } from 'immutable';
-import SupplierSearcher from 'modules/companies/components/Searcher';
 import { Uploader } from 'modules/common/components';
+
+const { Item } = Form;
 
 class MessageForm extends React.Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = {
-      suppliers: Map(),
       fileName: undefined,
       fileURL: undefined
     };
-
-    this.onAddSuppliers = this.onAddSuppliers.bind(this);
-    this.removeSupplier = this.removeSupplier.bind(this);
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -29,9 +25,9 @@ class MessageForm extends React.Component {
         return;
       }
       const { onSubmit } = this.props;
-      const { currentUser } = this.context;
-
       if (!onSubmit) return;
+
+      const { currentUser } = this.context;
 
       const tenderId = this.props.tenderDetail._id;
 
@@ -51,69 +47,13 @@ class MessageForm extends React.Component {
 
       if (currentUser.isSupplier) {
         doc.senderSupplierId = currentUser.companyId;
-      } else {
-        doc.recipientSupplierIds = Array.from(this.state.suppliers.keys());
       }
       onSubmit(doc);
     });
   }
 
-  renderSupplierTags() {
-    const { suppliers } = this.state;
-    return (
-      <Fragment>
-        <b>To:</b> <Divider type="vertical" />
-        {suppliers.valueSeq().map(supplier => (
-          <Tooltip key={supplier._id} title={supplier.email}>
-            <Tag
-              key={supplier._id}
-              closable={true}
-              afterClose={() => this.removeSupplier(supplier._id)}
-            >
-              {supplier.basicInfo.enName}
-            </Tag>
-          </Tooltip>
-        ))}
-      </Fragment>
-    );
-  }
-
-  onAddSuppliers(moreSuppliers) {
-    const { suppliers } = this.state;
-    const uniqueNewSuppliers = Map(
-      moreSuppliers.filter(v => !suppliers.has(v._id)).map(v => [v._id, v])
-    );
-    this.setState({ suppliers: suppliers.merge(uniqueNewSuppliers) });
-  }
-
-  removeSupplier(supplierId) {
-    this.setState({ suppliers: this.state.suppliers.delete(supplierId) });
-  }
-
   hasErrors(fieldsError) {
-    return (
-      (this.state.suppliers.isEmpty() &&
-        !this.context.currentUser.isSupplier) ||
-      Object.keys(fieldsError).some(field => fieldsError[field])
-    );
-  }
-
-  renderBuyerFields() {
-    const {
-      currentUser: { isSupplier }
-    } = this.context;
-
-    if (!isSupplier) {
-      return (
-        <Row>
-          {this.renderSupplierTags()}
-          <SupplierSearcher
-            onSelect={this.onAddSuppliers}
-            suppliers={this.props.tenderDetail.suppliers}
-          />
-        </Row>
-      );
-    }
+    return Object.keys(fieldsError).some(field => fieldsError[field]);
   }
 
   onFileChange(files) {
@@ -121,6 +61,29 @@ class MessageForm extends React.Component {
       fileName: files[0].name,
       fileURL: files[0].url
     });
+  }
+
+  renderBuyerFields() {
+    const { getFieldDecorator } = this.props.form;
+    const { currentUser } = this.context;
+
+    if (currentUser.isSupplier) return null;
+
+    return (
+      <Item>
+        {getFieldDecorator('recipientSupplierIds', {
+          rules: []
+        })(
+          <Select mode="multiple" placeholder="supplier">
+            {this.props.tenderDetail.suppliers.map(supplier => (
+              <Select.Option key={supplier._id} value={supplier._id}>
+                {supplier.basicInfo.enName}
+              </Select.Option>
+            ))}
+          </Select>
+        )}
+      </Item>
+    );
   }
 
   render() {
@@ -134,11 +97,11 @@ class MessageForm extends React.Component {
     // Only show error after a field is touched.
     const subjectError = isFieldTouched('subject') && getFieldError('subject');
     const bodyError = isFieldTouched('body') && getFieldError('body');
-    const { Item } = Form;
+
     return (
       <>
-        {this.renderBuyerFields()}
         <Form layout="vertical" onSubmit={this.handleSubmit}>
+          {this.renderBuyerFields()}
           <Item
             validateStatus={subjectError ? 'error' : ''}
             help={subjectError || ''}

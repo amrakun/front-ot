@@ -108,7 +108,7 @@ class SubmitTender extends BaseForm {
   }
 
   render() {
-    const { data, generateTemplate, response } = this.props;
+    const { data, generateTemplate, response, queryParams } = this.props;
     const { type, rfqType, requestedProducts } = data;
 
     let title = 'Form';
@@ -152,7 +152,11 @@ class SubmitTender extends BaseForm {
           </Form>
         </TabPane>
         <TabPane tab="Message" key="2">
-          <TenderMessagesSingle tenderDetail={data} isSupplier />
+          <TenderMessagesSingle
+            tenderDetail={data}
+            isSupplier
+            queryParams={queryParams}
+          />
         </TabPane>
       </Tabs>
     );

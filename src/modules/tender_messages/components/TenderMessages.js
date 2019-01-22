@@ -4,6 +4,7 @@ import { Row, Button, Table, Icon, Card } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { CreateTenderMessage } from '../containers/';
 import TenderMessageDetail from './TenderMessageDetail';
+import { Paginator } from 'modules/common/components';
 
 const ROUTE_ENUM = {
   index: 0,
@@ -173,8 +174,11 @@ class Messages extends Component {
   }
 
   render() {
-    const { tenderMessagesQuery } = this.props;
+    const { tenderMessagesQuery, tenderMessageTotalCountQuery } = this.props;
     const { tenderMessages } = tenderMessagesQuery;
+    const totalCount = tenderMessageTotalCountQuery.loading
+      ? 0
+      : tenderMessageTotalCountQuery.tenderMessageTotalCount;
     return (
       <>
         <Row>
@@ -193,10 +197,11 @@ class Messages extends Component {
               rowClassName={({ isRead }) =>
                 isRead ? undefined : 'message-new'
               }
-              pagination={true}
+              pagination={false}
               dataSource={tenderMessages}
               loading={tenderMessagesQuery.loading}
             />
+            <Paginator total={totalCount} />
           </Card>
         </Row>
         <Row>
@@ -211,7 +216,8 @@ Messages.propTypes = {
   tenderDetail: PropTypes.object,
   tenderMessagesQuery: PropTypes.object,
   suppliers: PropTypes.array,
-  tenderMessageSetAsRead: PropTypes.func
+  tenderMessageSetAsRead: PropTypes.func,
+  tenderMessageTotalCountQuery: PropTypes.object
 };
 
 Messages.contextTypes = {

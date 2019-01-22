@@ -14,7 +14,8 @@ class SubmitContainer extends React.Component {
       tendersResponsesEdit,
       tenderResponsesSend,
       tenderResponseByUserQuery,
-      history
+      history,
+      queryParams
     } = this.props;
 
     const { currentUser, __ } = this.context;
@@ -83,7 +84,8 @@ class SubmitContainer extends React.Component {
       send,
       generateTemplate,
       data: tenderDetail,
-      response: tenderResponseByUser
+      response: tenderResponseByUser,
+      queryParams
     };
 
     if (tenderDetail.status === 'canceled') {

@@ -58,4 +58,10 @@ const tenderMessageDetail = `
   }
 `;
 
-export default { tenderMessages, tenderMessageDetail };
+const tenderMessageTotalCount = `
+  query tenderMessageTotalCount($tenderId: String) {
+    tenderMessageTotalCount(tenderId : $tenderId)
+  }
+`;
+
+export default { tenderMessages, tenderMessageDetail, tenderMessageTotalCount };
