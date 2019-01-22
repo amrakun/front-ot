@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Button, Table, Icon, Card, Modal, Divider } from 'antd';
+import { Row, Button, Table, Icon, Card, Modal } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { CreateTenderMessage } from '../containers/';
 import TenderMessageDetail from './TenderMessageDetail';
@@ -191,6 +191,7 @@ class Messages extends Component {
 
   renderNested() {
     const { route, tenderMessageDetail } = this.state;
+    const _id = tenderMessageDetail ? tenderMessageDetail._id : null;
     return (
       <>
         <Modal
@@ -199,10 +200,10 @@ class Messages extends Component {
           onCancel={this.goto.bind(this, ROUTE_ENUM.index, null)}
         >
           <CreateTenderMessage
+            key={Math.random()}
             tenderDetail={this.props.tenderDetail}
             onComplete={this.goto.bind(this, ROUTE_ENUM.index, null)}
           />
-          ;
         </Modal>
         <Modal
           visible={route === ROUTE_ENUM.view}
@@ -217,6 +218,7 @@ class Messages extends Component {
           onCancel={this.goto.bind(this, ROUTE_ENUM.index, null)}
         >
           <CreateTenderMessage
+            key={_id}
             replyTo={this.state.tenderMessageDetail}
             tenderDetail={this.props.tenderDetail}
             onComplete={this.goto.bind(this, ROUTE_ENUM.index, null)}

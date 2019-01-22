@@ -1,8 +1,6 @@
 import React from 'react';
-import { Tag, Divider, Input, Icon } from 'antd';
+import { Tag, Divider, Icon } from 'antd';
 import { readFileUrl } from 'modules/common/utils';
-
-const { TextArea } = Input;
 
 const renderUser = user => (
   <Tag key={user.email}>
