@@ -6,7 +6,11 @@ import { message } from 'antd';
 import PropTypes from 'prop-types';
 
 const CreateTenderMessageContainer = (props, context) => {
-  const { tenderMessageBuyerSend, tenderMessageSupplierSend } = props;
+  const {
+    tenderMessageBuyerSend,
+    tenderMessageSupplierSend,
+    onComplete
+  } = props;
   const { currentUser } = context;
 
   const mutation = currentUser.isSupplier
@@ -17,6 +21,7 @@ const CreateTenderMessageContainer = (props, context) => {
     mutation({ variables: { ...doc } })
       .then(() => {
         message.success('Message sent');
+        if (onComplete) onComplete();
       })
       .catch(error => {
         message.error(error.message);

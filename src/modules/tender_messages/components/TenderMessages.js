@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Button, Table, Icon, Card } from 'antd';
+import { Row, Button, Table, Icon, Card, Modal } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { CreateTenderMessage } from '../containers/';
 import TenderMessageDetail from './TenderMessageDetail';
@@ -157,20 +157,28 @@ class Messages extends Component {
 
   renderNested() {
     const { route, tenderMessageDetail } = this.state;
-    switch (route) {
-      case ROUTE_ENUM.new:
-        return <CreateTenderMessage tenderDetail={this.props.tenderDetail} />;
-      case ROUTE_ENUM.view:
-        return (
+    return (
+      <>
+        <Modal
+          visible={route === ROUTE_ENUM.new}
+          footer={null}
+          onCancel={this.goto.bind(this, ROUTE_ENUM.index, null)}
+        >
+          <CreateTenderMessage
+            tenderDetail={this.props.tenderDetail}
+            onComplete={this.goto.bind(this, ROUTE_ENUM.index, null)}
+          />
+          ;
+        </Modal>
+        <Modal
+          visible={route === ROUTE_ENUM.view}
+          footer={null}
+          onCancel={this.goto.bind(this, ROUTE_ENUM.index, null)}
+        >
           <TenderMessageDetail tenderMessageDetail={tenderMessageDetail} />
-        );
-      case ROUTE_ENUM.index:
-        break;
-      case ROUTE_ENUM.edit:
-        break;
-      default:
-        break;
-    }
+        </Modal>
+      </>
+    );
   }
 
   render() {
