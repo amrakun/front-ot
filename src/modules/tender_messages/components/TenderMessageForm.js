@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Button, Select, message } from 'antd';
 import PropTypes from 'prop-types';
 import { Uploader } from 'modules/common/components';
+import { Editor } from 'modules/common/components/';
 
 const { Item } = Form;
 
@@ -11,9 +12,12 @@ class MessageForm extends React.Component {
 
     this.state = {
       fileName: undefined,
-      fileURL: undefined
+      fileURL: undefined,
+      editorHTMLContent: ''
     };
 
+    this.onEmailContentChange = editorHTMLContent =>
+      this.setState({ editorHTMLContent });
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -33,7 +37,8 @@ class MessageForm extends React.Component {
 
       const doc = {
         tenderId,
-        ...values
+        ...values,
+        body: this.state.editorHTMLContent
       };
 
       const { fileName, fileURL } = this.state;
@@ -48,6 +53,7 @@ class MessageForm extends React.Component {
       if (currentUser.isSupplier) {
         doc.senderSupplierId = currentUser.companyId;
       }
+
       onSubmit(doc);
     });
   }
@@ -96,7 +102,6 @@ class MessageForm extends React.Component {
 
     // Only show error after a field is touched.
     const subjectError = isFieldTouched('subject') && getFieldError('subject');
-    const bodyError = isFieldTouched('body') && getFieldError('body');
 
     return (
       <>
@@ -110,18 +115,14 @@ class MessageForm extends React.Component {
               rules: [{ required: true, message: 'Please input your subject!' }]
             })(<Input placeholder="subject" />)}
           </Item>
-          <Item
-            validateStatus={bodyError ? 'error' : ''}
-            help={bodyError || ''}
-          >
-            {getFieldDecorator('body', {
-              rules: [
-                { required: true, message: 'Please input of message body!' }
-              ]
-            })(<Input.TextArea autosize type="body" placeholder="body" />)}
-          </Item>
           <Item>
             <Uploader onChange={this.onFileChange.bind(this)} />
+          </Item>
+          <Item>
+            <Editor
+              content={this.state.editorHTMLContent}
+              onEmailContentChange={this.onEmailContentChange}
+            />
           </Item>
           <Item>
             <Button

@@ -90,16 +90,17 @@ class Messages extends Component {
         render: AttachmentIcon,
         key: 6
       },
-      {
-        title: 'Body',
-        dataIndex: 'body',
-        key: 7,
-        render: body =>
-          body && body.length > 100 ? body.slice(60) + '...' : body
-      },
+      // {
+      //   title: 'Body',
+      //   dataIndex: 'body',
+      //   key: 7,
+      //   render: body =>
+      //     body && body.length > 100 ? body.slice(60) + '...' : body
+      // },
       {
         title: 'Actions',
         key: 8,
+        width: 100,
         render: tenderMessageDetail => {
           return (
             <Button

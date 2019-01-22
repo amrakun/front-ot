@@ -64,7 +64,7 @@ const TenderMessageDetail = ({ tenderMessageDetail }) => {
       Subject: {tenderMessageDetail.subject}
       <FileLink attachment={tenderMessageDetail.attachment} />
       <Divider />
-      <TextArea readOnly autosize value={tenderMessageDetail.body} />
+      <div dangerouslySetInnerHTML={{ __html: tenderMessageDetail.body }} />
     </>
   );
 };
