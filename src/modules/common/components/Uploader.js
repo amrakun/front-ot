@@ -76,7 +76,8 @@ class Uploader extends React.Component {
             'image/gif',
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-            'application/pdf'
+            'application/pdf',
+            'application/zip'
           ].includes(mime)
         ) {
           message.error(this.context.__('Invalid file type.'));
