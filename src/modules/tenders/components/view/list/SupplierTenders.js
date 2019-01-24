@@ -22,7 +22,7 @@ class SupplierTenders extends Tenders {
                 {renderIcon('open')} {__('Open')}
               </span>
             ),
-            value: 'open'
+            value: 'open',
           },
           {
             text: (
@@ -30,7 +30,7 @@ class SupplierTenders extends Tenders {
                 {renderIcon('closed')} {__('Closed')}
               </span>
             ),
-            value: 'closed'
+            value: 'closed',
           },
           {
             text: (
@@ -38,27 +38,26 @@ class SupplierTenders extends Tenders {
                 {renderIcon('participated')} {__('Participated')}
               </span>
             ),
-            value: 'participated'
-          }
+            value: 'participated',
+          },
         ],
         filteredValue: this.state.statuses,
         key: 'status',
         fixed: 'left',
         width: 75,
-        render: record => this.renderTooltippedIcon(record)
+        render: record => this.renderTooltippedIcon(record),
       },
       ...this.commonColumns(),
       {
         title: __('File'),
-        render: (text, record) =>
-          record.file ? this.renderFileDownload(record.file.url) : '-'
+        render: (text, record) => (record.file ? this.renderFileDownload(record.file.url) : '-'),
       },
       {
         title: __('Action'),
         fixed: 'right',
         width: 100,
-        render: (text, record) => this.renderOperation(record)
-      }
+        render: (text, record) => this.renderOperation(record),
+      },
     ];
   }
 
@@ -102,23 +101,14 @@ class SupplierTenders extends Tenders {
           onConfirm={() => notInterested(_id)}
         >
           <a href="#not-interested">{__('Not interested')}</a>
-        </Popconfirm>
+        </Popconfirm>,
       ];
     }
   }
 
   renderOpenLink(record) {
-    const { type } = this.props;
-    const { status, _id } = record;
+    const { _id } = record;
     const { __ } = this.context;
-
-    if (status === 'canceled') {
-      return null;
-    }
-
-    if (status === 'closed' && type !== 'eoi') {
-      return null;
-    }
 
     return <Link to={`/tender/submit/${_id}`}>{__('Open')}</Link>;
   }
@@ -150,11 +140,11 @@ class SupplierTenders extends Tenders {
 
 SupplierTenders.propTypes = {
   currentUser: PropTypes.object,
-  notInterested: PropTypes.func
+  notInterested: PropTypes.func,
 };
 
 SupplierTenders.contextTypes = {
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 export default withRouter(SupplierTenders);
