@@ -49,10 +49,14 @@ class Messages extends Component {
     this.state = {
       route: 'index',
       tenderMessageDetail: undefined,
+      windowWidth: 0,
+      windowHeight: 0,
     };
     this.isNew = this.isNew.bind(this);
     this.renderActions = this.renderActions.bind(this);
     this.setAsRead = this.setAsRead.bind(this);
+
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
   columns() {
@@ -109,6 +113,19 @@ class Messages extends Component {
       },
     ];
     return columns;
+  }
+
+  componentDidMount() {
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+
+  updateWindowDimensions() {
+    this.setState({ windowWidth: window.innerWidth, windowHeight: window.innerHeight });
   }
 
   renderActions(tenderMessageDetail) {
@@ -184,6 +201,7 @@ class Messages extends Component {
   renderNested() {
     const { route, tenderMessageDetail } = this.state;
     const _id = tenderMessageDetail ? tenderMessageDetail._id : null;
+    const modalWidth = this.state.windowWidth * 0.8;
     return (
       <>
         <Modal
@@ -191,13 +209,13 @@ class Messages extends Component {
           footer={null}
           onCancel={this.goto.bind(this, ROUTE_ENUM.index, null)}
           title="New message"
-          width={1080}
+          width={modalWidth}
         >
           <CreateTenderMessage
             key={Math.random()}
             tenderDetail={this.props.tenderDetail}
             onComplete={this.goto.bind(this, ROUTE_ENUM.index, null)}
-            width={1080}
+            width={modalWidth}
           />
         </Modal>
         <Modal
@@ -205,7 +223,7 @@ class Messages extends Component {
           footer={null}
           onCancel={this.goto.bind(this, ROUTE_ENUM.index, null)}
           title="View"
-          width={1080}
+          width={modalWidth}
         >
           <TenderMessageDetail tenderMessageDetail={tenderMessageDetail} />
         </Modal>
@@ -214,7 +232,7 @@ class Messages extends Component {
           footer={null}
           onCancel={this.goto.bind(this, ROUTE_ENUM.index, null)}
           title="Reply"
-          width={1080}
+          width={modalWidth}
         >
           <CreateTenderMessage
             key={_id}
