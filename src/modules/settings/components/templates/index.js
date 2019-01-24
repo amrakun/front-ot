@@ -6,7 +6,7 @@ import Templates from './Templates';
 
 const propTypes = {
   onEmailContentChange: PropTypes.func,
-  configsSaveTemplate: PropTypes.func
+  configsSaveTemplate: PropTypes.func,
 };
 
 const TabPane = Tabs.TabPane;
@@ -37,21 +37,21 @@ class ManageTemplates extends React.Component {
       { value: 'buyer__publish', text: 'To buyer when publish' },
       {
         value: 'supplier__publish',
-        text: 'To supplier when publish'
+        text: 'To supplier when publish',
       },
       { value: 'buyer__close', text: 'To buyer when close' },
       { value: 'supplier__close', text: 'To supplier when close' },
       { value: 'buyer__cancel', text: 'To buyer when cancel' },
       {
         value: 'supplier__cancel',
-        text: 'To supplier when cancel'
+        text: 'To supplier when cancel',
       },
       { value: 'buyer__award', text: 'To buyer when award' },
       { value: 'supplier__award', text: 'To supplier when award' },
       { value: 'supplier__reminder', text: 'Remind supplier' },
       { value: 'supplier__regretLetter', text: 'Regret letter' },
       { value: 'supplier__reopen', text: 'Reopen' },
-      { value: 'supplier__edit', text: 'Edit' }
+      { value: 'supplier__edit', text: 'Edit' },
     ];
   }
 
@@ -64,12 +64,12 @@ class ManageTemplates extends React.Component {
               {this.renderTabPane({
                 tab: 'RFQ',
                 key: 'rfq',
-                kindOptions: this.rfqKindOptions()
+                kindOptions: this.rfqKindOptions(),
               })}
               {this.renderTabPane({
                 tab: 'Travel RFQ',
                 key: 'trfq',
-                kindOptions: this.rfqKindOptions()
+                kindOptions: this.rfqKindOptions(),
               })}
               {this.renderTabPane({
                 tab: 'EOI',
@@ -78,26 +78,27 @@ class ManageTemplates extends React.Component {
                   { value: 'buyer__publish', text: 'To buyer when publish' },
                   {
                     value: 'supplier__publish',
-                    text: 'To supplier when publish'
+                    text: 'To supplier when publish',
                   },
                   { value: 'buyer__close', text: 'To buyer when close' },
                   { value: 'supplier__close', text: 'To supplier when close' },
                   { value: 'buyer__cancel', text: 'To buyer when cancel' },
                   {
                     value: 'supplier__cancel',
-                    text: 'To supplier when cancel'
+                    text: 'To supplier when cancel',
                   },
                   { value: 'supplier__reminder', text: 'Remind supplier' },
-                  { value: 'supplier__regretLetter', text: 'Regret letter' }
-                ]
+                  { value: 'supplier__regretLetter', text: 'Regret letter' },
+                  { value: 'supplier__edit', text: 'Edit' },
+                ],
               })}
               {this.renderTabPane({
                 tab: 'Success feedback',
                 key: 'successFeedback',
                 kindOptions: [
                   { value: 'buyer__new', text: 'Buyer' },
-                  { value: 'supplier__new', text: 'Supplier' }
-                ]
+                  { value: 'supplier__new', text: 'Supplier' },
+                ],
               })}
               {this.renderTabPane({
                 tab: 'Capacity building',
@@ -105,19 +106,19 @@ class ManageTemplates extends React.Component {
                 kindOptions: [
                   {
                     value: 'supplier__submit',
-                    text: 'To supplier when submit'
+                    text: 'To supplier when submit',
                   },
                   { value: 'buyer__submit', text: 'To buyer when submit' },
-                  { value: 'supplier__enable', text: 'To supplier when enable' }
-                ]
+                  { value: 'supplier__enable', text: 'To supplier when enable' },
+                ],
               })}
               {this.renderTabPane({
                 tab: 'Block',
                 key: 'block',
                 kindOptions: [
                   { value: 'buyer__block', text: 'Block' },
-                  { value: 'buyer__reminder', text: 'Reminder' }
-                ]
+                  { value: 'buyer__reminder', text: 'Reminder' },
+                ],
               })}
               {this.renderTabPane({
                 tab: 'Prequalification',
@@ -127,10 +128,10 @@ class ManageTemplates extends React.Component {
                   { value: 'supplier__failed', text: 'Failed' },
                   {
                     value: 'supplier__submit',
-                    text: 'To supplier when submit'
+                    text: 'To supplier when submit',
                   },
-                  { value: 'buyer__submit', text: 'To buyer When submit' }
-                ]
+                  { value: 'buyer__submit', text: 'To buyer When submit' },
+                ],
               })}
               {this.renderTabPane({
                 tab: 'Desktop audit',
@@ -139,21 +140,21 @@ class ManageTemplates extends React.Component {
                   { value: 'buyer__submit', text: 'To buyer when submit' },
                   {
                     value: 'supplier__invitation',
-                    text: 'To supplier when receive invitation'
+                    text: 'To supplier when receive invitation',
                   },
                   {
                     value: 'supplier__failed',
-                    text: 'To supplier when failed'
+                    text: 'To supplier when failed',
                   },
                   {
                     value: 'supplier__approved_with_improvement_plan',
-                    text: 'To supplier when approved with improvement plan'
+                    text: 'To supplier when approved with improvement plan',
                   },
                   {
                     value: 'supplier__approved',
-                    text: 'To supplier when approved'
-                  }
-                ]
+                    text: 'To supplier when approved',
+                  },
+                ],
               })}
             </Tabs>
           </Card>
