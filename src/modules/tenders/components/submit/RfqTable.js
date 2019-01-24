@@ -146,10 +146,10 @@ class RfqTable extends Component {
     const disabled = !type;
 
     const render = (text, record) => {
-      let defaultValue = record[name];
+      let value = record[name];
 
       const inputProps = {
-        defaultValue,
+        value,
         disabled,
         type,
         onChange: e => this.onProductInputChange(e, name, record.key),
@@ -159,10 +159,7 @@ class RfqTable extends Component {
 
       if (type === 'select') {
         control = (
-          <Select
-            defaultValue={defaultValue}
-            onChange={e => this.onProductInputChange(e, name, record.key)}
-          >
+          <Select value={value} onChange={e => this.onProductInputChange(e, name, record.key)}>
             {options()}
           </Select>
         );
@@ -283,7 +280,6 @@ class RfqTable extends Component {
             name: 'currency',
             title: __(rpc.currency),
             type: 'select',
-            defaultValue: 'MNT',
             options: () => {
               return [
                 <Option key="0" value="-" />,
@@ -305,7 +301,6 @@ class RfqTable extends Component {
             name: 'shippingTerms',
             title: __(rpc.shippingTerms),
             type: 'select',
-            defaultValue: 'DDP - OT UB warehouse',
             options: () => {
               return [
                 <Option key="0" value="-" />,
@@ -328,7 +323,6 @@ class RfqTable extends Component {
             name: 'alternative',
             title: __(rpc.alternative),
             type: 'select',
-            defaultValue: 'No',
             options: () => {
               return [
                 <Option key="0" value="-" />,
