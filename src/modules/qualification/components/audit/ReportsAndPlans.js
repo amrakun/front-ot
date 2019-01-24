@@ -208,7 +208,8 @@ class ReportsAndPlans extends Common {
             onClick={this.showModal}
             disabled={selectedCompanies.length < 1}
           >
-            Send<Icon type="mail" />
+            Send
+            <Icon type="mail" />
           </Button>
         </div>
 

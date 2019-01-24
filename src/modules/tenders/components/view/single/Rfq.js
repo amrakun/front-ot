@@ -14,17 +14,20 @@ import {
   Row,
   Col,
   Card,
-  Input
+  Input,
+  Tabs
 } from 'antd';
 import { rfqRequestColumns } from '../../../constants';
 import Tender from './Tender';
 import { readFileUrl } from 'modules/common/utils';
 import { Uploader } from 'modules/common/components';
 import router from 'modules/common/router';
+import { TenderMessagesSingle } from 'modules/tender_messages/containers/';
 
 const { Column } = Table;
 const { Option } = Select;
 const { TextArea } = Input;
+const { TabPane } = Tabs;
 
 class Rfq extends Tender {
   constructor(props, context) {
@@ -416,12 +419,12 @@ class Rfq extends Tender {
     const tenderDetail = this.props.tenderDetail || {};
     const { type, status } = tenderDetail;
     const requestedProducts = tenderDetail.requestedProducts || [];
+    const { queryParams } = this.props;
 
-    return (
-      <div>
+    let main = (
+      <>
         {this.renderStats()}
         {this.renderAwardModal()}
-
         <Row gutter={24}>
           {this.renderFilter(type, requestedProducts)}
 
@@ -435,7 +438,25 @@ class Rfq extends Tender {
             })}
           </Col>
         </Row>
-      </div>
+      </>
+    );
+
+    if (tenderDetail.status === 'open') {
+      main = undefined;
+    }
+
+    return (
+      <Tabs defaultActiveKey={main ? '1' : '2'}>
+        <TabPane disabled={!main} tab="Main" key="1">
+          {main}
+        </TabPane>
+        <TabPane tab="Messages" key="2">
+          <TenderMessagesSingle
+            tenderDetail={tenderDetail}
+            queryParams={queryParams}
+          />
+        </TabPane>
+      </Tabs>
     );
   }
 }

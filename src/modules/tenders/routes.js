@@ -99,7 +99,10 @@ export default [
     key={'/tender/submit'}
     exact
     path={`${'/tender/submit'}/:id`}
-    component={SubmitTender}
+    component={props => {
+      const queryParams = queryString.parse(props.location.search);
+      return <SubmitTender {...props} queryParams={queryParams} />;
+    }}
   />,
   <Route
     key={'/tender/edit'}
