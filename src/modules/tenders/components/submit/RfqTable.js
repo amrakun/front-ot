@@ -94,15 +94,15 @@ class RfqTable extends Component {
           };
 
           if (doc.unitPrice && !validator.isFloat((doc.unitPrice || '').toString())) {
-            errors.push(`Invalid unit price on line ${index + 1}`);
+            errors.push(`Invalid unit price on line ${index + 2}`);
           }
 
           if (!['', 'MNT', 'USD'].includes(doc.currency)) {
-            errors.push(`Invalid currency on line ${index + 1}`);
+            errors.push(`Invalid currency on line ${index + 2}`);
           }
 
           if (doc.leadTime && !validator.isInt((doc.leadTime || '').toString())) {
-            errors.push(`Invalid lead time on line ${index + 1}. Lead time must be integer number`);
+            errors.push(`Invalid lead time on line ${index + 2}. Lead time must be integer number`);
           }
 
           if (
@@ -114,11 +114,11 @@ class RfqTable extends Component {
               'EXW',
             ].includes(doc.shippingTerms)
           ) {
-            errors.push(`Invalid shipping terms on line ${index + 1}`);
+            errors.push(`Invalid shipping terms on line ${index + 2}`);
           }
 
           if (!['', 'Yes', 'No'].includes(doc.alternative)) {
-            errors.push(`Invalid alternative on line ${index + 1}`);
+            errors.push(`Invalid alternative on line ${index + 2}`);
           }
 
           docs.push(doc);
