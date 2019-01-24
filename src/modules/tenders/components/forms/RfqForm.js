@@ -26,7 +26,7 @@ class RfqForm extends BaseForm {
       requestedProducts: data.requestedProducts || [],
       suppliers: data.suppliers || [],
       attachments: data.attachments || [],
-      content: data.content || ''
+      content: data.content || '',
     };
   }
 
@@ -46,13 +46,11 @@ class RfqForm extends BaseForm {
     e.preventDefault();
 
     const { type } = this.props;
-    const {
-      requestedProducts,
-      content,
-      attachments,
-      suppliers,
-      rfqType
-    } = this.state;
+    const { requestedProducts, content, attachments, suppliers, rfqType } = this.state;
+
+    if (!content) {
+      return message.error('Content is required');
+    }
 
     const doc = {
       type,
@@ -64,7 +62,7 @@ class RfqForm extends BaseForm {
       }),
       content,
       attachments,
-      supplierIds: suppliers.map(s => s._id)
+      supplierIds: suppliers.map(s => s._id),
     };
 
     if (type === 'rfq') {
@@ -146,12 +144,12 @@ class RfqForm extends BaseForm {
 }
 
 RfqForm.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.object,
 };
 
 RfqForm.contextTypes = {
   systemConfig: PropTypes.object,
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 const form = Form.create()(RfqForm);
