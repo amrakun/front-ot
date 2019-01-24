@@ -46,20 +46,22 @@ class RfqForm extends BaseForm {
     e.preventDefault();
 
     const { type } = this.props;
-    const { requestedProducts, content, attachments, suppliers, rfqType } = this.state;
+    const { content, attachments, suppliers, rfqType } = this.state;
 
     if (!content) {
       return message.error('Content is required');
     }
 
+    const requestedProducts = (this.state.requestedProducts || []).map(product => {
+      delete product.key;
+      delete product.__typename;
+
+      return product;
+    });
+
     const doc = {
       type,
-      requestedProducts: (requestedProducts || []).map(product => {
-        delete product.key;
-        delete product.__typename;
-
-        return product;
-      }),
+      requestedProducts,
       content,
       attachments,
       supplierIds: suppliers.map(s => s._id),
@@ -71,6 +73,27 @@ class RfqForm extends BaseForm {
       if (rfqType === 'goods' && doc.requestedProducts.length === 0) {
         return message.error('Please input atleast one row');
       }
+    }
+
+    // check row values ========
+    let hasProductsError = false;
+
+    for (const product of requestedProducts) {
+      if (
+        !product.code ||
+        !product.purchaseRequestNumber ||
+        !product.shortText ||
+        !product.quantity ||
+        !product.uom ||
+        !product.manufacturer ||
+        !product.manufacturerPartNumber
+      ) {
+        hasProductsError = true;
+      }
+    }
+
+    if (hasProductsError) {
+      return message.error('Please complete table rows');
     }
 
     this.save(doc);
