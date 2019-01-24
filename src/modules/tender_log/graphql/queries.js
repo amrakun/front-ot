@@ -5,17 +5,9 @@ const tenderLogFields = `
   tender {
     _id
     rfqType
-    createdDate
-    sourcingOfficer
-    file
-    reminderDay
-    isAwarded
-    awardNote
-    sentRegretLetter
-    requestedCount
-    submittedCount
-    notInterestedCount
-    notRespondedCount
+    type
+    number
+    name
   }
   user {
     _id 
@@ -28,10 +20,6 @@ const tenderLogFields = `
     lastName
     jobTitle
     phone
-    delegatedUserId
-    delegationStartDate
-    delegationEndDate
-    temporarySecureInformation
   }
   isAuto
   action
