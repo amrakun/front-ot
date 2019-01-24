@@ -50,7 +50,8 @@ class ManageTemplates extends React.Component {
       { value: 'supplier__award', text: 'To supplier when award' },
       { value: 'supplier__reminder', text: 'Remind supplier' },
       { value: 'supplier__regretLetter', text: 'Regret letter' },
-      { value: 'supplier__reopen', text: 'Reopen' }
+      { value: 'supplier__reopen', text: 'Reopen' },
+      { value: 'supplier__edit', text: 'Edit' }
     ];
   }
 
