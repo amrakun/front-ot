@@ -11,7 +11,7 @@ const ROUTE_ENUM = {
   view: 1,
   new: 2,
   edit: 3,
-  reply: 4
+  reply: 4,
 };
 
 const Recipient = ({ recipientSuppliers }) => {
@@ -20,14 +20,13 @@ const Recipient = ({ recipientSuppliers }) => {
       const { enName, email } = recipientSuppliers[0].basicInfo;
       return `${enName} <${email}>`;
     }
-    if (recipientSuppliers.length > 1)
-      return `${recipientSuppliers.length} suppliers`;
+    if (recipientSuppliers.length > 1) return `${recipientSuppliers.length} suppliers`;
   } else {
     return 'RFQ';
   }
 };
 Recipient.propTypes = {
-  recipientSuppliers: PropTypes.array
+  recipientSuppliers: PropTypes.array,
 };
 
 const senderUsername = record => {
@@ -42,15 +41,14 @@ const senderUsername = record => {
   }
 };
 
-const AttachmentIcon = attachment =>
-  attachment ? <Icon type="paper-clip" /> : undefined;
+const AttachmentIcon = attachment => (attachment ? <Icon type="paper-clip" /> : undefined);
 
 class Messages extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       route: 'index',
-      tenderMessageDetail: undefined
+      tenderMessageDetail: undefined,
     };
     this.isNew = this.isNew.bind(this);
     this.renderActions = this.renderActions.bind(this);
@@ -63,19 +61,19 @@ class Messages extends Component {
         title: 'From',
         render: senderUsername,
         width: 150,
-        key: 1
+        key: 1,
       },
       {
         title: 'To',
         render: Recipient,
         width: 150,
-        key: 2
+        key: 2,
       },
       {
         title: 'New',
         width: 60,
         render: this.isNew,
-        key: 3
+        key: 3,
       },
       // {
       //   title: 'Replied',
@@ -87,14 +85,14 @@ class Messages extends Component {
         title: 'Subject',
         dataIndex: 'subject',
         width: 200,
-        key: 5
+        key: 5,
       },
       {
         title: <Icon type="paper-clip" />,
         width: 30,
         dataIndex: 'attachment',
         render: AttachmentIcon,
-        key: 6
+        key: 6,
       },
       // {
       //   title: 'Body',
@@ -107,8 +105,8 @@ class Messages extends Component {
         title: 'Actions',
         key: 8,
         width: 100,
-        render: this.renderActions
-      }
+        render: this.renderActions,
+      },
     ];
     return columns;
   }
@@ -119,19 +117,12 @@ class Messages extends Component {
 
     let replyButton = null;
 
-    if (
-      (currentUser.isSupplier && senderBuyer) ||
-      (!currentUser.isSupplier && senderSupplier)
-    ) {
+    if ((currentUser.isSupplier && senderBuyer) || (!currentUser.isSupplier && senderSupplier)) {
       replyButton = (
         <>
           <Button
             key={`${tenderMessageDetail._id}reply`}
-            onClick={this.goto.bind(
-              this,
-              ROUTE_ENUM.reply,
-              tenderMessageDetail
-            )}
+            onClick={this.goto.bind(this, ROUTE_ENUM.reply, tenderMessageDetail)}
           >
             Reply
           </Button>
@@ -237,10 +228,7 @@ class Messages extends Component {
     return (
       <>
         <Row>
-          <Button
-            icon="plus"
-            onClick={this.goto.bind(this, ROUTE_ENUM.new, undefined)}
-          >
+          <Button icon="plus" onClick={this.goto.bind(this, ROUTE_ENUM.new, undefined)}>
             Create message
           </Button>
         </Row>
@@ -249,9 +237,7 @@ class Messages extends Component {
             <Table
               columns={this.columns()}
               rowKey={({ _id }) => _id}
-              rowClassName={({ isRead }) =>
-                isRead ? undefined : 'message-new'
-              }
+              rowClassName={({ isRead }) => (isRead ? undefined : 'message-new')}
               pagination={false}
               dataSource={tenderMessages}
               loading={tenderMessagesQuery.loading}
@@ -272,11 +258,11 @@ Messages.propTypes = {
   tenderMessagesQuery: PropTypes.object,
   suppliers: PropTypes.array,
   tenderMessageSetAsRead: PropTypes.func,
-  tenderMessageTotalCountQuery: PropTypes.object
+  tenderMessageTotalCountQuery: PropTypes.object,
 };
 
 Messages.contextTypes = {
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
 };
 
 export default withRouter(Messages);

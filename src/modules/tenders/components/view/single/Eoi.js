@@ -3,9 +3,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
-import { Table, message, Button, Icon } from 'antd';
+import { Table, message, Button, Icon, Tabs } from 'antd';
 import { readFileUrl } from 'modules/common/utils';
 import Tender from './Tender';
+import { TenderMessagesSingle } from 'modules/tender_messages/containers/';
+
+const { TabPane } = Tabs;
 
 class Eoi extends Tender {
   constructor(props, context) {
@@ -13,7 +16,7 @@ class Eoi extends Tender {
 
     this.state = {
       ...this.state,
-      regretLetterContent: context.systemConfig.regretLetterTemplate || ''
+      regretLetterContent: context.systemConfig.regretLetterTemplate || '',
     };
 
     this.handleEoiShortList = this.handleEoiShortList.bind(this);
@@ -46,7 +49,7 @@ class Eoi extends Tender {
       {
         title: 'Submitted',
         key: '2',
-        render: record => (record.isSubmitted ? 'Yes' : 'No')
+        render: record => (record.isSubmitted ? 'Yes' : 'No'),
       },
       {
         title: 'Picture',
@@ -82,9 +85,9 @@ class Eoi extends Tender {
               Download
             </a>
           );
-        }
+        },
       },
-      { title: 'Notes', dataIndex: 'notes', key: '4' }
+      { title: 'Notes', dataIndex: 'notes', key: '4' },
     ];
   }
 
@@ -93,11 +96,8 @@ class Eoi extends Tender {
 
     const { basicInfo, businessInfo, healthInfo, shareholderInfo } = supplier;
 
-    const {
-      certificateOfRegistration,
-      corporateStructure,
-      totalNumberOfEmployees
-    } = basicInfo || {};
+    const { certificateOfRegistration, corporateStructure, totalNumberOfEmployees } =
+      basicInfo || {};
 
     const { doesHaveCodeEthicsFile } = businessInfo || {};
     const { areHSEResourcesClearlyIdentifiedFile } = healthInfo || {};
@@ -108,29 +108,29 @@ class Eoi extends Tender {
       {
         name: 'State registration certifcate (copy)',
         file: certificateOfRegistration,
-        isSubmitted: certificateOfRegistration !== null
+        isSubmitted: certificateOfRegistration !== null,
       },
       {
         name: 'HSE policy & procedures (copy)',
         file: areHSEResourcesClearlyIdentifiedFile,
-        isSubmitted: areHSEResourcesClearlyIdentifiedFile !== null
+        isSubmitted: areHSEResourcesClearlyIdentifiedFile !== null,
       },
       {
         name: 'Business Code of Conduct (copy)',
         file: doesHaveCodeEthicsFile,
-        isSubmitted: doesHaveCodeEthicsFile !== null
+        isSubmitted: doesHaveCodeEthicsFile !== null,
       },
       {
         name: 'Ownership/ shareholder information',
         file: attachments,
-        isSubmitted: true
+        isSubmitted: true,
       },
       {
         name: 'Organization structure & Total manpower',
         file: null,
         isSubmitted: true,
-        notes: `${corporateStructure}, ${totalNumberOfEmployees} employees`
-      }
+        notes: `${corporateStructure}, ${totalNumberOfEmployees} employees`,
+      },
     ];
 
     return (
@@ -151,24 +151,34 @@ class Eoi extends Tender {
       <Button onClick={this.handleEoiBidderList} key={0}>
         EOI bidder list
         <Icon type="file-excel" />
-      </Button>
+      </Button>,
     ];
 
     return (
       <div>
-        {this.renderStats()}
-        {this.renderTable({ tableOperations })}
+        <Tabs defaultActiveKey={'1'}>
+          <TabPane tab="Main" key="1">
+            {this.renderStats()}
+            {this.renderTable({ tableOperations })}
+          </TabPane>
+          <TabPane tab="Messages" key="2">
+            <TenderMessagesSingle
+              tenderDetail={this.props.tenderDetail}
+              queryParams={this.props.queryParams}
+            />
+          </TabPane>
+        </Tabs>
       </div>
     );
   }
 }
 
 Eoi.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.array,
 };
 
 Eoi.contextTypes = {
-  systemConfig: PropTypes.object
+  systemConfig: PropTypes.object,
 };
 
 export default withRouter(Eoi);

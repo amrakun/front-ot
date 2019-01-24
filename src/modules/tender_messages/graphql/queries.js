@@ -43,7 +43,7 @@ const tenderMessageFields = `
   isReplySent
 `;
 const tenderMessages = `
-  query tenderMessages($page: Int, $perPage: Int, $tenderId: String) {
+  query tenderMessages($page: Int, $perPage: Int, $tenderId: String!) {
     tenderMessages(page: $page, perPage: $perPage, tenderId: $tenderId) {
       ${tenderMessageFields}
     }
