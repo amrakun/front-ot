@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Table, Select, Button, Icon, Alert, Col, Row, Input } from 'antd';
+import {
+  Table,
+  Select,
+  Button,
+  Icon,
+  Alert,
+  Col,
+  Row,
+  Input,
+  message
+} from 'antd';
 import { rfqProductsColumns as rpc, rfqDisclaimer } from '../../constants';
 import { Uploader } from 'modules/common/components';
 import {
@@ -69,11 +79,18 @@ class RfqTable extends Component {
   }
 
   handleFile(e) {
+    const { __ } = this.context;
+    const { requestedProducts } = this.props;
+
     tableFileHandler({
       e,
       state: this.state,
-      callback: stateDoc => {
-        this.setState(stateDoc, () => this.onChange());
+      callback: ({ products, ...perProductStates }) => {
+        if (products.length !== requestedProducts.length) {
+          return message.error(__('Invalid row count'));
+        }
+
+        this.setState({ products, ...perProductStates }, () => this.onChange());
       }
     });
   }
