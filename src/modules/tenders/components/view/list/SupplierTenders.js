@@ -107,8 +107,17 @@ class SupplierTenders extends Tenders {
   }
 
   renderOpenLink(record) {
-    const { _id } = record;
+    const { type } = this.props;
+    const { status, _id } = record;
     const { __ } = this.context;
+
+    if (status === 'canceled') {
+      return null;
+    }
+
+    if (status === 'closed' && type !== 'eoi') {
+      return null;
+    }
 
     return <Link to={`/tender/submit/${_id}`}>{__('Open')}</Link>;
   }
