@@ -27,6 +27,12 @@ const tenderFields = `
   sourcingOfficer,
   reminderDay,
   supplierIds,
+  suppliers {
+    _id,
+    basicInfo {
+      enName
+    }
+  },
   requestedCount,
   submittedCount,
   notInterestedCount,

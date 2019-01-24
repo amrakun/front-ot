@@ -131,7 +131,8 @@ class Dashboard extends React.Component {
   renderButton(onClick) {
     return (
       <Button onClick={onClick} className="report-btn">
-        <Icon type="file-excel" />Export report
+        <Icon type="file-excel" />
+        Export report
       </Button>
     );
   }

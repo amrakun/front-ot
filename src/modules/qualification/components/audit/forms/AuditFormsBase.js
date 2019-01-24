@@ -163,7 +163,9 @@ class AuditFormsBase extends BaseForm {
 
         <div className="ant-list-item-meta-title">
           {typeof supplierAnswer === 'boolean'
-            ? supplierAnswer ? 'Yes' : 'No'
+            ? supplierAnswer
+              ? 'Yes'
+              : 'No'
             : multipleOptions[supplierAnswer].text}
         </div>
 
@@ -230,7 +232,8 @@ class AuditFormsBase extends BaseForm {
       <span>
         {__(labels[name].title)}
         <Popover content={description} title={title}>
-          &nbsp;<Icon type="question-circle-o" />
+          &nbsp;
+          <Icon type="question-circle-o" />
         </Popover>
       </span>
     );

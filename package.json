@@ -48,7 +48,7 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
-    "format": "prettier --single-quote --trailing-comma es5 --write 'src/**/*.js'",
+    "format": "prettier --write --print-width 100 --single-quote --trailing-comma es5 'src/**/*.js'",
     "eject": "react-scripts eject"
   },
   "devDependencies": {

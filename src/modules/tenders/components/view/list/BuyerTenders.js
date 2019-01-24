@@ -101,33 +101,34 @@ class BuyerTenders extends Tenders {
 
   renderCancelLink({ status, _id }) {
     if (['open', 'draft'].includes(status)) {
-      return [
-        <Divider key={0} type="vertical" />,
+      return (
+        <>
+          <Divider key={0} type="vertical" />
 
-        <Popconfirm
-          key={3}
-          title="Are you sure you want to cancel this tender？"
-          placement="bottomRight"
-          okText="Yes"
-          cancelText="No"
-          onConfirm={() => this.props.cancelTender(_id)}
-        >
-          <a href="#cancel">Cancel</a>
-        </Popconfirm>
-      ];
+          <Popconfirm
+            key={3}
+            title="Are you sure you want to cancel this tender？"
+            placement="bottomRight"
+            okText="Yes"
+            cancelText="No"
+            onConfirm={() => this.props.cancelTender(_id)}
+          >
+            <a href="#cancel">Cancel</a>
+          </Popconfirm>
+        </>
+      );
     }
   }
 
-  renderViewLink({ status, type, _id }) {
-    if (['canceled', 'closed', 'awarded'].includes(status)) {
-      return [
-        <Divider key={0} type="vertical" />,
-
+  renderViewLink({ type, _id }) {
+    return (
+      <>
+        <Divider key={0} type="vertical" />
         <Link key={1} to={`/${type}/${_id}`}>
           View
         </Link>
-      ];
-    }
+      </>
+    );
   }
 
   renderOperation(record) {
