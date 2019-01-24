@@ -1,23 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Table,
-  Select,
-  Button,
-  Icon,
-  Alert,
-  Col,
-  Row,
-  Input,
-  message
-} from 'antd';
+import { Table, Select, Button, Icon, Alert, Col, Row, Input, message } from 'antd';
+import validator from 'validator';
 import { rfqProductsColumns as rpc, rfqDisclaimer } from '../../constants';
 import { Uploader } from 'modules/common/components';
-import {
-  controlValueParser,
-  tableFileHandler,
-  collectProducts
-} from '../utils';
+import { xlsxHandler } from 'modules/common/utils';
+import { controlValueParser, collectProducts } from '../utils';
 
 const { Column } = Table;
 const { Option } = Select;
@@ -46,7 +34,7 @@ class RfqTable extends Component {
 
     this.state = {
       products,
-      ...perProductStates
+      ...perProductStates,
     };
 
     this.handleFile = this.handleFile.bind(this);
@@ -79,19 +67,77 @@ class RfqTable extends Component {
   }
 
   handleFile(e) {
-    const { __ } = this.context;
+    const { products } = this.state;
     const { requestedProducts } = this.props;
 
-    tableFileHandler({
+    xlsxHandler({
       e,
-      state: this.state,
-      callback: ({ products, ...perProductStates }) => {
-        if (products.length !== requestedProducts.length) {
-          return message.error(__('Invalid row count'));
+      parse: false,
+      success: data => {
+        const errors = [];
+        const docs = [];
+
+        for (const [index, row] of data.entries()) {
+          if (index + 1 > requestedProducts.length) {
+            continue;
+          }
+
+          const doc = {
+            suggestedManufacturer: row[7] || '',
+            suggestedManufacturerPartNumber: row[8] || '',
+            unitPrice: row[9] || 0,
+            currency: row[10] || '',
+            leadTime: row[11] || 0,
+            shippingTerms: row[12] || '',
+            alternative: row[13] || '',
+            comment: row[14] || '',
+          };
+
+          if (doc.unitPrice && !validator.isFloat((doc.unitPrice || '').toString())) {
+            errors.push(`Invalid unit price on line ${index + 1}`);
+          }
+
+          if (!['', 'MNT', 'USD'].includes(doc.currency)) {
+            errors.push(`Invalid currency on line ${index + 1}`);
+          }
+
+          if (doc.leadTime && !validator.isInt((doc.leadTime || '').toString())) {
+            errors.push(`Invalid lead time on line ${index + 1}. Lead time must be integer number`);
+          }
+
+          if (
+            ![
+              '',
+              'DDP - OT UB warehouse',
+              'DDP - OT site',
+              'FCA - Supplier Facility',
+              'EXW',
+            ].includes(doc.shippingTerms)
+          ) {
+            errors.push(`Invalid shipping terms on line ${index + 1}`);
+          }
+
+          if (!['', 'Yes', 'No'].includes(doc.alternative)) {
+            errors.push(`Invalid alternative on line ${index + 1}`);
+          }
+
+          docs.push(doc);
+        }
+
+        if (errors.length > 0) {
+          return message.error(errors[0]);
+        }
+
+        const perProductStates = {};
+
+        for (const [index, doc] of docs.entries()) {
+          const product = { ...products[index] };
+          products[index] = { ...product, ...doc };
+          perProductStates[`product__${product.key}`] = products[index];
         }
 
         this.setState({ products, ...perProductStates }, () => this.onChange());
-      }
+      },
     });
   }
 
@@ -106,7 +152,7 @@ class RfqTable extends Component {
         defaultValue,
         disabled,
         type,
-        onChange: e => this.onProductInputChange(e, name, record.key)
+        onChange: e => this.onProductInputChange(e, name, record.key),
       };
 
       let control = <Input {...inputProps} />;
@@ -127,9 +173,7 @@ class RfqTable extends Component {
           <Uploader
             defaultFileList={[record[name]]}
             disabled={disabled}
-            onChange={files =>
-              this.onProductFileChange(files, name, record.key)
-            }
+            onChange={files => this.onProductFileChange(files, name, record.key)}
           />
         );
       }
@@ -137,15 +181,7 @@ class RfqTable extends Component {
       return control;
     };
 
-    return (
-      <Column
-        title={title}
-        key={name}
-        dataIndex={name}
-        render={render}
-        width={width}
-      />
-    );
+    return <Column title={title} key={name} dataIndex={name} render={render} width={width} />;
   }
 
   render() {
@@ -183,51 +219,51 @@ class RfqTable extends Component {
           pagination={false}
           size="middle"
           scroll={{
-            x: 2000
+            x: 2000,
           }}
         >
           {this.renderCell({
             name: 'code',
-            title: __(rpc.code)
+            title: __(rpc.code),
           })}
           {this.renderCell({
             name: 'purchaseRequestNumber',
-            title: __(rpc.purchaseRequestNumber)
+            title: __(rpc.purchaseRequestNumber),
           })}
           {this.renderCell({
             name: 'shortText',
-            title: __(rpc.shortText)
+            title: __(rpc.shortText),
           })}
           {this.renderCell({
             name: 'quantity',
-            title: __(rpc.quantity)
+            title: __(rpc.quantity),
           })}
           {this.renderCell({
             name: 'uom',
-            title: __(rpc.uom)
+            title: __(rpc.uom),
           })}
           {this.renderCell({
             name: 'manufacturer',
-            title: __(rpc.manufacturer)
+            title: __(rpc.manufacturer),
           })}
           {this.renderCell({
             name: 'manufacturerPartNumber',
-            title: __(rpc.manufacturerPart)
+            title: __(rpc.manufacturerPart),
           })}
           {this.renderCell({
             name: 'suggestedManufacturer',
             title: __(rpc.suggestedManufacturer),
-            type: 'string'
+            type: 'string',
           })}
           {this.renderCell({
             name: 'suggestedManufacturerPartNumber',
             title: __(rpc.suggestedManufacturerPart),
-            type: 'string'
+            type: 'string',
           })}
           {this.renderCell({
             name: 'unitPrice',
             title: __(rpc.unitPrice),
-            type: 'number'
+            type: 'number',
           })}
           <Column
             title={__(rpc.totalPrice)}
@@ -239,10 +275,7 @@ class RfqTable extends Component {
               }
 
               return (
-                <Input
-                  disabled
-                  value={(record.unitPrice * record.quantity).toLocaleString()}
-                />
+                <Input disabled value={(record.unitPrice * record.quantity).toLocaleString()} />
               );
             }}
           />
@@ -253,19 +286,20 @@ class RfqTable extends Component {
             defaultValue: 'MNT',
             options: () => {
               return [
+                <Option key="0" value="-" />,
                 <Option key="1" value="MNT">
                   MNT
                 </Option>,
                 <Option key="2" value="USD">
                   USD
-                </Option>
+                </Option>,
               ];
-            }
+            },
           })}
           {this.renderCell({
             name: 'leadTime',
             title: __(rpc.leadTime),
-            type: 'number'
+            type: 'number',
           })}
           {this.renderCell({
             name: 'shippingTerms',
@@ -274,6 +308,7 @@ class RfqTable extends Component {
             defaultValue: 'DDP - OT UB warehouse',
             options: () => {
               return [
+                <Option key="0" value="-" />,
                 <Option key="1" value="DDP - OT UB warehouse">
                   DDP - OT UB warehouse
                 </Option>,
@@ -285,9 +320,9 @@ class RfqTable extends Component {
                 </Option>,
                 <Option key="4" value="EXW">
                   EXW
-                </Option>
+                </Option>,
               ];
-            }
+            },
           })}
           {this.renderCell({
             name: 'alternative',
@@ -296,25 +331,26 @@ class RfqTable extends Component {
             defaultValue: 'No',
             options: () => {
               return [
+                <Option key="0" value="-" />,
                 <Option key="1" value="Yes">
                   Yes
                 </Option>,
                 <Option key="2" value="No">
                   No
-                </Option>
+                </Option>,
               ];
-            }
+            },
           })}
           {this.renderCell({
             name: 'comment',
             title: __(rpc.comment),
-            type: 'string'
+            type: 'string',
           })}
           {this.renderCell({
             name: 'file',
             title: __(rpc.picture),
             type: 'uploader',
-            width: 200
+            width: 200,
           })}
         </Table>
       </div>
@@ -326,11 +362,11 @@ RfqTable.propTypes = {
   requestedProducts: PropTypes.array,
   respondedProducts: PropTypes.array,
   onChange: PropTypes.func,
-  generateTemplate: PropTypes.func
+  generateTemplate: PropTypes.func,
 };
 
 RfqTable.contextTypes = {
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 export default RfqTable;

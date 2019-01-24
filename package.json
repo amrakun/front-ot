@@ -35,7 +35,8 @@
     "recharts": "^1.0.0-beta.9",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "reqwest": "^2.0.5"
+    "reqwest": "^2.0.5",
+    "validator": "^10.11.0"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [
