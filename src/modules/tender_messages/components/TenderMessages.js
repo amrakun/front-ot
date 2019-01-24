@@ -248,9 +248,7 @@ class Messages extends Component {
   render() {
     const { tenderMessagesQuery, tenderMessageTotalCountQuery } = this.props;
     const { tenderMessages } = tenderMessagesQuery;
-    const totalCount = tenderMessageTotalCountQuery.loading
-      ? 0
-      : tenderMessageTotalCountQuery.tenderMessageTotalCount;
+    const totalCount = tenderMessageTotalCountQuery.tenderMessageTotalCount || 0;
     return (
       <>
         <Row>
@@ -272,7 +270,6 @@ class Messages extends Component {
               rowClassName={({ isRead }) => (isRead ? undefined : 'message-new')}
               pagination={false}
               dataSource={tenderMessages}
-              loading={tenderMessagesQuery.loading}
             />
             <Paginator total={totalCount} />
           </Card>
