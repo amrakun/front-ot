@@ -97,10 +97,14 @@ class SubmitTender extends BaseForm {
 
     return (
       <div className="margin">
-        <Button style={{ marginRight: '16px' }} onClick={this.saveDraft}>
+        <Button
+          style={{ marginRight: '16px' }}
+          htmlType="button"
+          onClick={this.saveDraft}
+        >
           {__('Save as draft')}
         </Button>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="button" onClick={this.handleSubmit}>
           {__('Save & submit')}
         </Button>
       </div>
@@ -140,7 +144,7 @@ class SubmitTender extends BaseForm {
     return (
       <Tabs defaultActiveKey="1">
         <TabPane tab="Main" key="1">
-          <Form layout="inline" onSubmit={this.handleSubmit}>
+          <Form layout="inline">
             <MainInfo {...data} />
 
             <Card title={title} className="margin">
