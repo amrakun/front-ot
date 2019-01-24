@@ -6,6 +6,7 @@ import RfqTable from './RfqTable';
 import MainInfo from './MainInfo';
 import SubmitButton from './SubmitButton';
 import { BaseForm } from 'modules/common/components';
+import { clearContent } from '../utils';
 
 const { Option } = Select;
 class RfqForm extends BaseForm {
@@ -48,7 +49,7 @@ class RfqForm extends BaseForm {
     const { type } = this.props;
     const { content, attachments, suppliers, rfqType } = this.state;
 
-    if (!content) {
+    if (!clearContent(content)) {
       return message.error('Content is required');
     }
 

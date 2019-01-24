@@ -6,6 +6,7 @@ import { BaseForm } from 'modules/common/components';
 import EoiTable from './EoiTable';
 import MainInfo from './MainInfo';
 import SubmitButton from './SubmitButton';
+import { clearContent } from '../utils';
 import { initialDocuments } from '../../constants';
 
 class EoiForm extends BaseForm {
@@ -43,7 +44,7 @@ class EoiForm extends BaseForm {
 
     const { requestedDocuments, content, attachments, suppliers } = this.state;
 
-    if (!content) {
+    if (!clearContent(content)) {
       return message.error('Content is required');
     }
 
