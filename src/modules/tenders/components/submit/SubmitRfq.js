@@ -30,14 +30,8 @@ class SubmitTender extends BaseForm {
     this.setState({ respondedProducts });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-
-    const { data, save } = this.props;
-    const { type, rfqType } = data || {};
-    const { respondedFiles } = this.state;
-
-    const respondedProducts = this.state.respondedProducts.map(product => {
+  getRespondedProducts() {
+    return this.state.respondedProducts.map(product => {
       const totalPrice = product.quantity * product.unitPrice;
       delete product.key;
       delete product.__typename;
@@ -53,6 +47,16 @@ class SubmitTender extends BaseForm {
         totalPrice
       };
     });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    const { data, save } = this.props;
+    const { type, rfqType } = data || {};
+    const { respondedFiles } = this.state;
+
+    const respondedProducts = this.getRespondedProducts();
 
     if (
       type === 'rfq' &&
@@ -83,7 +87,7 @@ class SubmitTender extends BaseForm {
 
   saveDraft() {
     this.save({
-      respondedProducts: this.state.respondedProducts,
+      respondedProducts: this.getRespondedProducts(),
       respondedFiles: this.state.respondedFiles
     });
   }
