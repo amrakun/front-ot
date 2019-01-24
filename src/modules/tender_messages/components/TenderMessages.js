@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Button, Table, Icon, Card, Modal } from 'antd';
+import { Row, Button, Table, Icon, Card, Modal, Divider } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { CreateTenderMessage } from '../containers/';
 import TenderMessageDetail from './TenderMessageDetail';
@@ -120,6 +120,7 @@ class Messages extends Component {
     if ((currentUser.isSupplier && senderBuyer) || (!currentUser.isSupplier && senderSupplier)) {
       replyButton = (
         <>
+          <Divider type="vertical" />
           <Button
             key={`${tenderMessageDetail._id}reply`}
             onClick={this.goto.bind(this, ROUTE_ENUM.reply, tenderMessageDetail)}
@@ -189,17 +190,22 @@ class Messages extends Component {
           visible={route === ROUTE_ENUM.new}
           footer={null}
           onCancel={this.goto.bind(this, ROUTE_ENUM.index, null)}
+          title="New message"
+          width={1080}
         >
           <CreateTenderMessage
             key={Math.random()}
             tenderDetail={this.props.tenderDetail}
             onComplete={this.goto.bind(this, ROUTE_ENUM.index, null)}
+            width={1080}
           />
         </Modal>
         <Modal
           visible={route === ROUTE_ENUM.view}
           footer={null}
           onCancel={this.goto.bind(this, ROUTE_ENUM.index, null)}
+          title="View"
+          width={1080}
         >
           <TenderMessageDetail tenderMessageDetail={tenderMessageDetail} />
         </Modal>
@@ -207,6 +213,8 @@ class Messages extends Component {
           visible={route === ROUTE_ENUM.reply}
           footer={null}
           onCancel={this.goto.bind(this, ROUTE_ENUM.index, null)}
+          title="Reply"
+          width={1080}
         >
           <CreateTenderMessage
             key={_id}
@@ -228,9 +236,15 @@ class Messages extends Component {
     return (
       <>
         <Row>
-          <Button icon="plus" onClick={this.goto.bind(this, ROUTE_ENUM.new, undefined)}>
-            Create message
-          </Button>
+          <div className="table-operations">
+            <Button
+              type="primary"
+              icon="plus"
+              onClick={this.goto.bind(this, ROUTE_ENUM.new, undefined)}
+            >
+              Create message
+            </Button>
+          </div>
         </Row>
         <Row>
           <Card>

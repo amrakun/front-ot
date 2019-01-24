@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tag, Divider, Icon } from 'antd';
+import { Tag, Divider, Icon, Col, Row } from 'antd';
 import { readFileUrl } from 'modules/common/utils';
 
 const renderUser = user => (
@@ -22,19 +22,39 @@ const renderCompany = ({ _id, basicInfo: { enName, email } }) => (
 
 const Sender = ({ senderBuyer, senderSupplier }) => {
   if (senderBuyer) {
-    return <>From: {renderUser(senderBuyer)}</>;
+    return (
+      <Row>
+        <Col span={2}>From: </Col>
+        <Col span={22}>{renderUser(senderBuyer)}</Col>
+      </Row>
+    );
   }
 
   if (senderSupplier) {
-    return <>From: {renderCompany(senderSupplier)}</>;
+    return (
+      <Row>
+        <Col span={2}>From: </Col>
+        <Col span={22}>{renderCompany(senderSupplier)}</Col>
+      </Row>
+    );
   }
 };
 
 const Receivers = ({ recipientSuppliers, tender }) => {
   if (recipientSuppliers && recipientSuppliers.length > 0) {
-    return <>To: {recipientSuppliers.map(renderCompany)}</>;
+    return (
+      <Row>
+        <Col span={2}>To: </Col>
+        <Col span={22}>{recipientSuppliers.map(renderCompany)}</Col>
+      </Row>
+    );
   }
-  return <>To: {renderUser({ username: 'Tender', email: tender.number })}</>;
+  return (
+    <Row>
+      <Col span={2}>To: </Col>
+      <Col span={22}>{renderUser({ username: 'Tender', email: tender.number })}</Col>
+    </Row>
+  );
 };
 
 const FileLink = ({ attachment }) => {
@@ -59,7 +79,10 @@ const TenderMessageDetail = ({ tenderMessageDetail }) => {
       <Divider />
       <Receivers {...tenderMessageDetail} />
       <Divider />
-      Subject: {tenderMessageDetail.subject}
+      <Row>
+        <Col span={2}>Subject: </Col>
+        <Col span={22}>{tenderMessageDetail.subject}</Col>
+      </Row>
       <FileLink attachment={tenderMessageDetail.attachment} />
       <Divider />
       <div dangerouslySetInnerHTML={{ __html: tenderMessageDetail.body }} />
