@@ -26,6 +26,11 @@ const columns = [
     dataIndex: 'action',
     key: 4,
   },
+  {
+    title: 'Description',
+    dataIndex: 'description',
+    key: 5,
+  },
 ];
 
 const List = props => (
