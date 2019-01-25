@@ -1,4 +1,4 @@
-import { xlsxHandler } from 'modules/common/utils';
+import strip from 'strip';
 
 export const controlValueParser = ({ e, dataType }) => {
   let value;
@@ -10,8 +10,7 @@ export const controlValueParser = ({ e, dataType }) => {
 
       if (dataType === 'float') value = parseFloat(value);
 
-      if (dataType === 'eightDigit' && value.length > 8)
-        value = value.substring(0, 8);
+      if (dataType === 'eightDigit' && value.length > 8) value = value.substring(0, 8);
     }
   } else {
     //file
@@ -19,71 +18,6 @@ export const controlValueParser = ({ e, dataType }) => {
   }
 
   return value;
-};
-
-export const tableFileHandler = ({ e, state, callback }) => {
-  xlsxHandler({
-    e,
-    parse: false,
-    success: data => {
-      // removing all prev products
-      Object.keys(state).forEach(key => {
-        if (key.startsWith('product__')) {
-          delete state[key];
-        }
-      });
-
-      const products = [];
-      const perProductStates = {};
-
-      data.forEach(row => {
-        const key = Math.random();
-
-        const [
-          code,
-          purchaseRequestNumber,
-          shortText,
-          quantity,
-          uom,
-          manufacturer,
-          manufacturerPartNumber,
-          suggestedManufacturer,
-          suggestedManufacturerPartNumber,
-          unitPrice,
-          currency,
-          leadTime,
-          shippingTerms,
-          alternative,
-          comment
-        ] = row;
-
-        const extendedProduct = {
-          key,
-          code,
-          purchaseRequestNumber,
-          shortText,
-          quantity,
-          uom,
-          manufacturer,
-          manufacturerPartNumber,
-          suggestedManufacturer,
-          suggestedManufacturerPartNumber,
-          unitPrice,
-          currency,
-          leadTime,
-          shippingTerms,
-          alternative,
-          comment
-        };
-
-        products.push(extendedProduct);
-
-        perProductStates[`product__${key}`] = extendedProduct;
-      });
-
-      callback({ products, ...perProductStates });
-    }
-  });
 };
 
 export const collectProducts = state => {
@@ -97,4 +31,8 @@ export const collectProducts = state => {
   });
 
   return products;
+};
+
+export const clearContent = content => {
+  return strip(content || '').trim();
 };

@@ -2,12 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card, Icon, Table, Input } from 'antd';
 import { rfqProductsColumns as rpc } from '../../constants';
-import { generateTemplateUrl } from 'modules/common/utils';
-import {
-  controlValueParser,
-  tableFileHandler,
-  collectProducts
-} from '../utils';
+import { generateTemplateUrl, xlsxHandler } from 'modules/common/utils';
+import { controlValueParser, collectProducts } from '../utils';
 
 const { Column } = Table;
 
@@ -31,7 +27,7 @@ class RfqTable extends Component {
 
     this.state = {
       products,
-      ...perProductStates
+      ...perProductStates,
     };
 
     if (this.state.products.length === 0) {
@@ -52,12 +48,51 @@ class RfqTable extends Component {
   }
 
   handleFile(e) {
-    tableFileHandler({
+    xlsxHandler({
       e,
-      state: this.state,
-      callback: stateDoc => {
-        this.setState(stateDoc, this.onChange);
-      }
+      parse: false,
+      success: data => {
+        // removing all prev products
+        Object.keys(this.state).forEach(key => {
+          if (key.startsWith('product__')) {
+            delete this.state[key];
+          }
+        });
+
+        const products = [];
+        const perProductStates = {};
+
+        data.forEach(row => {
+          const key = Math.random();
+
+          const [
+            code,
+            purchaseRequestNumber,
+            shortText,
+            quantity,
+            uom,
+            manufacturer,
+            manufacturerPartNumber,
+          ] = row;
+
+          const extendedProduct = {
+            key,
+            code,
+            purchaseRequestNumber,
+            shortText,
+            quantity,
+            uom,
+            manufacturer,
+            manufacturerPartNumber,
+          };
+
+          products.push(extendedProduct);
+
+          perProductStates[`product__${key}`] = extendedProduct;
+        });
+
+        this.setState({ products, ...perProductStates }, this.onChange);
+      },
     });
   }
 
@@ -83,7 +118,7 @@ class RfqTable extends Component {
       const inputProps = {
         defaultValue,
         type: type,
-        onChange: e => this.onProductInputChange(e, name, record.key, dataType)
+        onChange: e => this.onProductInputChange(e, name, record.key, dataType),
       };
 
       if (dataType === 'eightDigit') {
@@ -94,15 +129,7 @@ class RfqTable extends Component {
       return <Input {...inputProps} />;
     };
 
-    return (
-      <Column
-        title={title}
-        key={name}
-        dataIndex={name}
-        render={render}
-        width={width}
-      />
-    );
+    return <Column title={title} key={name} dataIndex={name} render={render} width={width} />;
   }
 
   renderTable() {
@@ -117,41 +144,41 @@ class RfqTable extends Component {
         size="middle"
         scroll={{
           x: 1000,
-          y: '65vh'
+          y: '65vh',
         }}
       >
         {this.renderCell({
           name: 'code',
           title: __(rpc.code),
-          dataType: 'eightDigit'
+          dataType: 'eightDigit',
         })}
         {this.renderCell({
           name: 'purchaseRequestNumber',
           title: __(rpc.purchaseRequestNumber),
           type: 'number',
-          dataType: 'eightDigit'
+          dataType: 'eightDigit',
         })}
         {this.renderCell({
           name: 'shortText',
-          title: __(rpc.shortText)
+          title: __(rpc.shortText),
         })}
         {this.renderCell({
           name: 'quantity',
           title: __(rpc.quantity),
-          type: 'number'
+          type: 'number',
         })}
         {this.renderCell({
           name: 'uom',
-          title: __(rpc.uom)
+          title: __(rpc.uom),
         })}
         {this.renderCell({
           name: 'manufacturer',
-          title: __(rpc.manufacturer)
+          title: __(rpc.manufacturer),
         })}
         {this.renderCell({
           name: 'manufacturerPartNumber',
           title: __(rpc.manufacturerPart),
-          type: 'string'
+          type: 'string',
         })}
       </Table>
     );
@@ -185,11 +212,7 @@ class RfqTable extends Component {
           {this.renderTable()}
         </div>
 
-        <Button
-          className="dashed-button-big"
-          size="large"
-          onClick={this.addProductRow}
-        >
+        <Button className="dashed-button-big" size="large" onClick={this.addProductRow}>
           <Icon type="plus" /> Add row
         </Button>
       </Card>
@@ -199,11 +222,11 @@ class RfqTable extends Component {
 
 RfqTable.propTypes = {
   requestedProducts: PropTypes.array,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
 RfqTable.contextTypes = {
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 export default RfqTable;

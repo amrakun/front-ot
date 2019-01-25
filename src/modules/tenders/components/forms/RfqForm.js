@@ -6,6 +6,7 @@ import RfqTable from './RfqTable';
 import MainInfo from './MainInfo';
 import SubmitButton from './SubmitButton';
 import { BaseForm } from 'modules/common/components';
+import { clearContent } from '../utils';
 
 const { Option } = Select;
 class RfqForm extends BaseForm {
@@ -26,7 +27,7 @@ class RfqForm extends BaseForm {
       requestedProducts: data.requestedProducts || [],
       suppliers: data.suppliers || [],
       attachments: data.attachments || [],
-      content: data.content || ''
+      content: data.content || '',
     };
   }
 
@@ -46,25 +47,25 @@ class RfqForm extends BaseForm {
     e.preventDefault();
 
     const { type } = this.props;
-    const {
-      requestedProducts,
-      content,
-      attachments,
-      suppliers,
-      rfqType
-    } = this.state;
+    const { content, attachments, suppliers, rfqType } = this.state;
+
+    if (!clearContent(content)) {
+      return message.error('Content is required');
+    }
+
+    const requestedProducts = (this.state.requestedProducts || []).map(product => {
+      delete product.key;
+      delete product.__typename;
+
+      return product;
+    });
 
     const doc = {
       type,
-      requestedProducts: (requestedProducts || []).map(product => {
-        delete product.key;
-        delete product.__typename;
-
-        return product;
-      }),
+      requestedProducts,
       content,
       attachments,
-      supplierIds: suppliers.map(s => s._id)
+      supplierIds: suppliers.map(s => s._id),
     };
 
     if (type === 'rfq') {
@@ -73,6 +74,27 @@ class RfqForm extends BaseForm {
       if (rfqType === 'goods' && doc.requestedProducts.length === 0) {
         return message.error('Please input atleast one row');
       }
+    }
+
+    // check row values ========
+    let hasProductsError = false;
+
+    for (const product of requestedProducts) {
+      if (
+        !product.code ||
+        !product.purchaseRequestNumber ||
+        !product.shortText ||
+        !product.quantity ||
+        !product.uom ||
+        !product.manufacturer ||
+        !product.manufacturerPartNumber
+      ) {
+        hasProductsError = true;
+      }
+    }
+
+    if (hasProductsError) {
+      return message.error('Please complete table rows');
     }
 
     this.save(doc);
@@ -146,12 +168,12 @@ class RfqForm extends BaseForm {
 }
 
 RfqForm.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.object,
 };
 
 RfqForm.contextTypes = {
   systemConfig: PropTypes.object,
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 const form = Form.create()(RfqForm);

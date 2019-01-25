@@ -15,7 +15,7 @@ import {
   Col,
   Card,
   Input,
-  Tabs
+  Tabs,
 } from 'antd';
 import { rfqRequestColumns } from '../../../constants';
 import Tender from './Tender';
@@ -50,7 +50,7 @@ class Rfq extends Tender {
       to,
       showAwardForm: false,
       awardNote: '',
-      awardAttachments: []
+      awardAttachments: [],
     };
 
     this.bidSummaryReport = this.bidSummaryReport.bind(this);
@@ -88,7 +88,7 @@ class Rfq extends Tender {
     this.props.award({
       supplierIds: selectedCompanies,
       note: awardNote,
-      attachments: awardAttachments
+      attachments: awardAttachments,
     });
   }
 
@@ -101,7 +101,7 @@ class Rfq extends Tender {
     } else {
       awardAttachments.push({
         supplierId: sId,
-        attachment: file
+        attachment: file,
       });
     }
 
@@ -142,14 +142,7 @@ class Rfq extends Tender {
   clearFilter() {
     this.setState({});
 
-    router.removeParams(
-      this.props.history,
-      'between',
-      'from',
-      'to',
-      'sorter',
-      'productCode'
-    );
+    router.removeParams(this.props.history, 'between', 'from', 'to', 'sorter', 'productCode');
   }
 
   renderFilter(type, requestedProducts) {
@@ -176,9 +169,7 @@ class Rfq extends Tender {
             optionFilterProp="children"
             onChange={this.handleProductCodeChange}
             filterOption={(input, option) =>
-              option.props.children
-                .toLowerCase()
-                .indexOf(input.toLowerCase()) >= 0
+              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }
           >
             {materialCodeOptions}
@@ -199,13 +190,7 @@ class Rfq extends Tender {
             <Option value="unitPrice">In between values (unit price)</Option>
           </Select>
 
-          <div
-            className={
-              filter === 'totalPrice' || filter === 'unitPrice'
-                ? 'margin'
-                : 'hidden'
-            }
-          >
+          <div className={filter === 'totalPrice' || filter === 'unitPrice' ? 'margin' : 'hidden'}>
             <Input
               type="number"
               placeholder="From"
@@ -231,11 +216,7 @@ class Rfq extends Tender {
             </Button>
           </div>
         </Card>
-        <Button
-          onClick={this.clearFilter}
-          className="margin"
-          style={{ width: '100%' }}
-        >
+        <Button onClick={this.clearFilter} className="margin" style={{ width: '100%' }}>
           <Icon type="close" />
           Clear filter
         </Button>
@@ -247,24 +228,15 @@ class Rfq extends Tender {
     const { rfqBidSummaryReportLoading } = this.props;
 
     const buttons = [
-      <Button
-        type="primary"
-        onClick={this.toggleAwardForm}
-        disabled={status !== 'closed'}
-        key={1}
-      >
+      <Button type="primary" onClick={this.toggleAwardForm} disabled={status !== 'closed'} key={1}>
         Award
         <Icon type="trophy" />
-      </Button>
+      </Button>,
     ];
 
     if (type === 'rfq') {
       buttons.push(
-        <Button
-          onClick={this.bidSummaryReport}
-          loading={rfqBidSummaryReportLoading}
-          key={0}
-        >
+        <Button onClick={this.bidSummaryReport} loading={rfqBidSummaryReportLoading} key={0}>
           Bid summary list
           {!rfqBidSummaryReportLoading ? <Icon type="file-excel" /> : ''}
         </Button>
@@ -286,9 +258,7 @@ class Rfq extends Tender {
     let content = (
       <>
         <Form.Item label="Note">
-          <TextArea
-            onChange={e => this.setState({ awardNote: e.target.value })}
-          />
+          <TextArea onChange={e => this.setState({ awardNote: e.target.value })} />
         </Form.Item>
 
         <Form.Item label="Attachments">
@@ -304,11 +274,7 @@ class Rfq extends Tender {
               title="File"
               key="2"
               render={(text, company) => (
-                <Uploader
-                  onChange={([file]) =>
-                    this.onChangeAwardAttachment(company._id, file)
-                  }
-                />
+                <Uploader onChange={([file]) => this.onChangeAwardAttachment(company._id, file)} />
               )}
             />
           </Table>
@@ -353,8 +319,8 @@ class Rfq extends Tender {
                     {row.name}
                   </a>
                 );
-              }
-            }
+              },
+            },
           ]}
           rowKey={() => Math.random()}
           dataSource={respondedFiles}
@@ -369,17 +335,17 @@ class Rfq extends Tender {
       {
         title: 'Suggested manufacturer if any',
         dataIndex: 'suggestedManufacturer',
-        key: '8'
+        key: '8',
       },
       {
         title: 'Suggested manufacturer part number',
         dataIndex: 'suggestedManufacturerPartNumber',
-        key: '9'
+        key: '9',
       },
       {
         title: 'Unit price (excluding VAT)',
         dataIndex: 'unitPrice',
-        key: '10'
+        key: '10',
       },
       { title: 'Total price', dataIndex: 'totalPrice', key: '11' },
       { title: 'Currency', dataIndex: 'currency', key: '12' },
@@ -398,18 +364,18 @@ class Rfq extends Tender {
           >
             Download
           </a>
-        )
-      }
+        ),
+      },
     ];
 
     return (
       <Table
         columns={[...rfqRequestColumns, ...responseColumns]}
         rowKey={() => Math.random()}
-        scroll={{ y: 1500 }}
+        scroll={{ x: 600 }}
         dataSource={respondedProducts.map((product, index) => ({
           ...product,
-          ...requestedProducts[index]
+          ...requestedProducts[index],
         }))}
       />
     );
@@ -428,13 +394,9 @@ class Rfq extends Tender {
         <Row gutter={24}>
           {this.renderFilter(type, requestedProducts)}
 
-          <Col
-            sm={24}
-            xl={type === 'trfq' ? 24 : 18}
-            lg={type === 'trfq' ? 24 : 17}
-          >
+          <Col sm={24} xl={type === 'trfq' ? 24 : 18} lg={type === 'trfq' ? 24 : 17}>
             {this.renderTable({
-              tableOperations: this.renderOperations(type, status)
+              tableOperations: this.renderOperations(type, status),
             })}
           </Col>
         </Row>
@@ -451,10 +413,7 @@ class Rfq extends Tender {
           {main}
         </TabPane>
         <TabPane tab="Messages" key="2">
-          <TenderMessagesSingle
-            tenderDetail={tenderDetail}
-            queryParams={queryParams}
-          />
+          <TenderMessagesSingle tenderDetail={tenderDetail} queryParams={queryParams} />
         </TabPane>
       </Tabs>
     );
@@ -465,11 +424,11 @@ Rfq.propTypes = {
   award: PropTypes.func,
   downloadReport: PropTypes.func,
   bidSummaryReportLoading: PropTypes.bool,
-  data: PropTypes.array
+  data: PropTypes.array,
 };
 
 Rfq.contextTypes = {
-  systemConfig: PropTypes.object
+  systemConfig: PropTypes.object,
 };
 
 export default withRouter(Rfq);

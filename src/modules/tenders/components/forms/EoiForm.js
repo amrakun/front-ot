@@ -1,11 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import { Card, Form } from 'antd';
+import { Card, Form, message } from 'antd';
 import { BaseForm } from 'modules/common/components';
 import EoiTable from './EoiTable';
 import MainInfo from './MainInfo';
 import SubmitButton from './SubmitButton';
+import { clearContent } from '../utils';
 import { initialDocuments } from '../../constants';
 
 class EoiForm extends BaseForm {
@@ -23,12 +24,10 @@ class EoiForm extends BaseForm {
 
     this.state = {
       requestedDocuments:
-        (requestedDocuments || []).length > 0
-          ? requestedDocuments
-          : initialDocuments,
+        (requestedDocuments || []).length > 0 ? requestedDocuments : initialDocuments,
       suppliers: suppliers || [],
       attachments: attachments || [],
-      content: content || ''
+      content: content || '',
     };
   }
 
@@ -45,12 +44,16 @@ class EoiForm extends BaseForm {
 
     const { requestedDocuments, content, attachments, suppliers } = this.state;
 
+    if (!clearContent(content)) {
+      return message.error('Content is required');
+    }
+
     this.save({
       type: 'eoi',
       content,
       attachments,
       supplierIds: suppliers.map(s => s._id),
-      requestedDocuments
+      requestedDocuments,
     });
   }
 
@@ -83,12 +86,12 @@ class EoiForm extends BaseForm {
 }
 
 EoiForm.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.object,
 };
 
 EoiForm.contextTypes = {
   systemConfig: PropTypes.object,
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 const form = Form.create()(EoiForm);

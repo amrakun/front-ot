@@ -13,24 +13,28 @@ class MessageForm extends React.Component {
     this.state = {
       fileName: undefined,
       fileURL: undefined,
-      editorHTMLContent: ''
+      editorHTMLContent: '',
     };
 
-    this.onEmailContentChange = editorHTMLContent =>
-      this.setState({ editorHTMLContent });
+    this.onEmailContentChange = editorHTMLContent => this.setState({ editorHTMLContent });
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderBuyerFields = this.renderBuyerFields.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
+
     this.props.form.validateFields((err, values) => {
       if (err) {
         message.error('Form error', err);
         return;
       }
+
       const { onSubmit, replyTo } = this.props;
-      if (!onSubmit) return;
+
+      if (!onSubmit) {
+        return;
+      }
 
       const { currentUser } = this.context;
 
@@ -39,7 +43,7 @@ class MessageForm extends React.Component {
       const doc = {
         tenderId,
         ...values,
-        body: this.state.editorHTMLContent
+        body: this.state.editorHTMLContent,
       };
 
       if (replyTo) {
@@ -51,13 +55,14 @@ class MessageForm extends React.Component {
       if (fileName && fileURL) {
         doc.attachment = {
           name: fileName,
-          url: fileURL
+          url: fileURL,
         };
       }
 
       if (currentUser.isSupplier) {
         doc.senderSupplierId = currentUser.companyId;
       }
+
       onSubmit(doc);
     });
   }
@@ -69,7 +74,7 @@ class MessageForm extends React.Component {
   onFileChange(files) {
     this.setState({
       fileName: files[0].name,
-      fileURL: files[0].url
+      fileURL: files[0].url,
     });
   }
 
@@ -86,10 +91,10 @@ class MessageForm extends React.Component {
     if (currentUser.isSupplier) return null;
 
     return (
-      <Item>
+      <Item label="Suppliers">
         {getFieldDecorator('recipientSupplierIds', {
           initialValue,
-          rules: []
+          rules: [],
         })(
           <Select mode="multiple" placeholder="supplier">
             {this.props.tenderDetail.suppliers.map(supplier => (
@@ -104,12 +109,7 @@ class MessageForm extends React.Component {
   }
 
   render() {
-    const {
-      getFieldDecorator,
-      getFieldsError,
-      getFieldError,
-      isFieldTouched
-    } = this.props.form;
+    const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
 
     // Only show error after a field is touched.
     const subjectError = isFieldTouched('subject') && getFieldError('subject');
@@ -119,17 +119,18 @@ class MessageForm extends React.Component {
         <Form layout="vertical" onSubmit={this.handleSubmit}>
           {this.renderBuyerFields()}
           <Item
+            label="Subject"
             validateStatus={subjectError ? 'error' : ''}
             help={subjectError || ''}
           >
             {getFieldDecorator('subject', {
-              rules: [{ required: true, message: 'Please input your subject!' }]
+              rules: [{ required: true, message: 'Please input your subject!' }],
             })(<Input placeholder="subject" />)}
           </Item>
-          <Item>
+          <Item label="Attachment">
             <Uploader onChange={this.onFileChange.bind(this)} />
           </Item>
-          <Item>
+          <Item label="Message">
             <Editor
               content={this.state.editorHTMLContent}
               onEmailContentChange={this.onEmailContentChange}
@@ -153,14 +154,12 @@ class MessageForm extends React.Component {
 MessageForm.propTypes = {
   onSubmit: PropTypes.func,
   tenderDetail: PropTypes.object,
-  replyTo: PropTypes.object
+  replyTo: PropTypes.object,
 };
 
 MessageForm.contextTypes = {
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
 };
 
-const WrappedMessageForm = Form.create({ name: 'horizontal_login' })(
-  MessageForm
-);
+const WrappedMessageForm = Form.create({ name: 'horizontal_login' })(MessageForm);
 export default WrappedMessageForm;
