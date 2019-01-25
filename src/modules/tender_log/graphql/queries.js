@@ -27,14 +27,6 @@ const tenderLogFields = `
   createdAt
 `;
 
-const list = gql`
-  query list($page: Int, $perPage: Int, $tenderId: String) {
-    tenderLog(page: $page, perPage: $perPage, tenderId: $tenderId) {
-      ${tenderLogFields}
-    }
-  }
-`;
-
 const listForTender = gql`
   query listForTender($page: Int, $perPage: Int, $tenderId: String!) {
     tenderLog(page: $page, perPage: $perPage, tenderId: $tenderId) {
@@ -43,10 +35,10 @@ const listForTender = gql`
   }
 `;
 
-const tenderLogTotalCount = gql`
-  query tenderMessageTotalCount($tenderId: String) {
-    tenderMessageTotalCount(tenderId: $tenderId)
+const totalCountForTender = gql`
+  query totalCountForTender($tenderId: String!) {
+    tenderLogCount(tenderId: $tenderId)
   }
 `;
 
-export default { list, listForTender, tenderLogTotalCount };
+export default { listForTender, totalCountForTender };
