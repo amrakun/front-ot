@@ -417,7 +417,7 @@ class Rfq extends Tender {
           <TenderMessagesSingle tenderDetail={tenderDetail} queryParams={queryParams} />
         </TabPane>
         <TabPane tab="Log" key="3">
-          <ListForTender tenderDetail={tenderDetail} queryParams={queryParams} />
+          <ListForTender _id={tenderDetail._id} />
         </TabPane>
       </Tabs>
     );
