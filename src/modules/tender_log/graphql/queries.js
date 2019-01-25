@@ -2,13 +2,6 @@ import { gql } from 'react-apollo';
 
 const tenderLogFields = `
   _id
-  tender {
-    _id
-    rfqType
-    type
-    number
-    name
-  }
   user {
     _id 
     username
