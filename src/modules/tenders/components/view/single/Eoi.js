@@ -7,6 +7,7 @@ import { Table, message, Button, Icon, Tabs } from 'antd';
 import { readFileUrl } from 'modules/common/utils';
 import Tender from './Tender';
 import { TenderMessagesSingle } from 'modules/tender_messages/containers/';
+import { ListForTender } from 'modules/tender_log/containers/';
 
 const { TabPane } = Tabs;
 
@@ -166,6 +167,9 @@ class Eoi extends Tender {
               tenderDetail={this.props.tenderDetail}
               queryParams={this.props.queryParams}
             />
+          </TabPane>
+          <TabPane tab="Log" key="3">
+            <ListForTender _id={this.props.tenderDetail._id} />
           </TabPane>
         </Tabs>
       </div>

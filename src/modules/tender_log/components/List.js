@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Button, Table, Icon, Card, Modal, Divider } from 'antd';
+import { Table } from 'antd';
 
 const columns = [
   {
@@ -11,25 +11,22 @@ const columns = [
   },
   {
     title: 'User',
-    dataIndex: 'user',
-    render: user => (user ? user.username + '<' + user.email + '>' : null),
+    render: record => {
+      const { user, isAuto } = record;
+      if (isAuto) return 'oyusystem';
+      else return user.username + '<' + user.email + '>';
+    },
     key: 2,
-  },
-  {
-    title: 'Is auto?',
-    dataIndex: 'isAuto',
-    render: isAuto => (isAuto ? <Icon type="check" /> : null),
-    key: 3,
   },
   {
     title: 'Action',
     dataIndex: 'action',
-    key: 4,
+    key: 3,
   },
   {
     title: 'Description',
     dataIndex: 'description',
-    key: 5,
+    key: 4,
   },
 ];
 
