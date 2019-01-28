@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table } from 'antd';
+import { Paginator } from 'modules/common/components';
 
 const columns = [
   {
@@ -30,17 +31,21 @@ const columns = [
   },
 ];
 
-const List = props => (
-  <>
-    <h1>logs</h1>
-    <pre>{JSON.stringify(props, null, 4)}</pre>
-    <Table
-      columns={columns}
-      rowKey={({ _id }) => _id}
-      dataSource={props.data.tenderLog}
-      pagination={true}
-    />
-  </>
-);
+const List = props => {
+  const { listForTender, totalCountForTender } = props;
+  return (
+    <>
+      <h1>logs</h1>
+      <pre>{JSON.stringify(listForTender, null, 4)}</pre>
+      <Table
+        columns={columns}
+        rowKey={({ _id }) => _id}
+        dataSource={listForTender.tenderLog}
+        pagination={false}
+      />
+      <Paginator total={totalCountForTender.tenderLogCount} paramPrefix="log" />
+    </>
+  );
+};
 
 export default List;
