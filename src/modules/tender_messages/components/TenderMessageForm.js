@@ -10,10 +10,22 @@ class MessageForm extends React.Component {
   constructor(props, context) {
     super(props, context);
 
+    const { replyTo } = props;
+    const { currentUser } = context;
+
+    const recipientSupplierIds = (() => {
+      if (replyTo && !currentUser.isSupplier) {
+        return [replyTo.senderSupplier._id];
+      } else {
+        return [];
+      }
+    })();
+
     this.state = {
       fileName: undefined,
       fileURL: undefined,
       editorHTMLContent: '',
+      recipientSupplierIds,
     };
 
     this.onEmailContentChange = editorHTMLContent => this.setState({ editorHTMLContent });
@@ -37,12 +49,14 @@ class MessageForm extends React.Component {
       }
 
       const { currentUser } = this.context;
+      const { recipientSupplierIds } = this.state;
 
       const tenderId = this.props.tenderDetail._id;
 
       const doc = {
         tenderId,
         ...values,
+        recipientSupplierIds,
         body: this.state.editorHTMLContent,
       };
 
@@ -63,6 +77,8 @@ class MessageForm extends React.Component {
         doc.senderSupplierId = currentUser.companyId;
       }
 
+      console.log(doc);
+      return;
       onSubmit(doc);
     });
   }
@@ -77,33 +93,50 @@ class MessageForm extends React.Component {
       fileURL: files[0].url,
     });
   }
+  selectedSupplierIdChange(values) {
+    const valuesSet = new Set(values);
+    if (valuesSet.has('select_all')) {
+      this.setState({
+        recipientSupplierIds: this.props.tenderDetail.suppliers.map(supplier => supplier._id),
+      });
+    } else if (valuesSet.has('deselect_all')) {
+      this.setState({ recipientSupplierIds: [] });
+    } else {
+      this.setState({ recipientSupplierIds: values });
+    }
+  }
 
   renderBuyerFields() {
-    const { getFieldDecorator } = this.props.form;
     const { currentUser } = this.context;
-    const { replyTo } = this.props;
-
-    let initialValue = undefined;
-    if (replyTo && !currentUser.isSupplier) {
-      initialValue = [replyTo.senderSupplier._id];
-    }
-
     if (currentUser.isSupplier) return null;
 
     return (
       <Item label="Suppliers">
-        {getFieldDecorator('recipientSupplierIds', {
-          initialValue,
-          rules: [],
-        })(
-          <Select mode="multiple" placeholder="supplier">
-            {this.props.tenderDetail.suppliers.map(supplier => (
-              <Select.Option key={supplier._id} value={supplier._id}>
-                {supplier.basicInfo.enName}
-              </Select.Option>
-            ))}
-          </Select>
-        )}
+        <Select
+          onChange={this.selectedSupplierIdChange.bind(this)}
+          value={this.state.recipientSupplierIds}
+          mode="multiple"
+          placeholder="supplier"
+          filterOption={(input, option) =>
+            option.props.enName.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
+        >
+          <Select.Option key="select_all" value="select_all" enName="Select All">
+            <b>Select All</b>
+          </Select.Option>
+          <Select.Option key="deselect_all" value="deselect_all" enName="Deselect All">
+            <b>Deselect All</b>
+          </Select.Option>
+          {this.props.tenderDetail.suppliers.map(supplier => (
+            <Select.Option
+              key={supplier._id}
+              value={supplier._id}
+              enName={supplier.basicInfo.enName}
+            >
+              {supplier.basicInfo.enName}
+            </Select.Option>
+          ))}
+        </Select>
       </Item>
     );
   }
