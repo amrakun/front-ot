@@ -96,7 +96,13 @@ class MessageForm extends React.Component {
           initialValue,
           rules: [],
         })(
-          <Select mode="multiple" placeholder="supplier">
+          <Select
+            mode="multiple"
+            placeholder="supplier"
+            filterOption={(input, option) =>
+              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+          >
             {this.props.tenderDetail.suppliers.map(supplier => (
               <Select.Option key={supplier._id} value={supplier._id}>
                 {supplier.basicInfo.enName}
