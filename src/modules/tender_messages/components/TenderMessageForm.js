@@ -76,9 +76,6 @@ class MessageForm extends React.Component {
       if (currentUser.isSupplier) {
         doc.senderSupplierId = currentUser.companyId;
       }
-
-      console.log(doc);
-      return;
       onSubmit(doc);
     });
   }
