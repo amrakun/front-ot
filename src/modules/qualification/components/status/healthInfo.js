@@ -25,7 +25,7 @@ const generateItems = () => {
 };
 
 const renderFile = value => {
-  if (value) {
+  if (!value) {
     return null;
   }
 
