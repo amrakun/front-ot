@@ -1,11 +1,12 @@
+import React from 'react';
+import moment from 'moment';
+import { dateFormat } from 'modules/common/constants';
 import { renderFile } from './utils';
 
 const generateItems = () => {
   return [
     'doesHavePlan',
     'hasEnvironmentalRegulatorInvestigated',
-    'dateOfInvestigation',
-    'reasonForInvestigation',
     'actionStatus',
     'investigationDocumentation',
     'hasConvictedForEnvironmentalLaws',
@@ -30,6 +31,23 @@ const renderDescription = props => {
 
   if (item === 'investigationDocumentation') {
     description = renderFile(value);
+  }
+
+  if (item === 'hasEnvironmentalRegulatorInvestigated') {
+    description = 'false';
+
+    if (value) {
+      description = (
+        <div>
+          <span>
+            Date of investigation:{' '}
+            {moment(new Date(environmentalInfo.dateOfInvestigation)).format(dateFormat)}
+          </span>{' '}
+          <br />
+          <span>Reason for investigation: {environmentalInfo.reasonForInvestigation}</span> <br />
+        </div>
+      );
+    }
   }
 
   const fileFields = ['doesHavePlan'];

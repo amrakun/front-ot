@@ -61,8 +61,6 @@ const qualificationDetail = `
       environmentalInfo {
         doesHavePlan
         hasEnvironmentalRegulatorInvestigated
-        dateOfInvestigation
-        reasonForInvestigation
         actionStatus
         investigationDocumentation
         hasConvictedForEnvironmentalLaws
