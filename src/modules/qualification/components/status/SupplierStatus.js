@@ -55,7 +55,7 @@ class Status extends Panes {
   render() {
     const { currentTabKey } = this.state;
     const { companyInfo, saveTierType } = this.props;
-    const { _id, isPrequalified, basicInfo } = companyInfo;
+    const { _id, isPrequalified, basicInfo, prequalifiedStatus } = companyInfo;
 
     if (companyInfo.isSkippedPrequalification) {
       return this.renderSkipped();
@@ -79,6 +79,7 @@ class Status extends Panes {
             name: 'financialInfo',
             Component: CommonTab,
             data: {
+              isQualified: prequalifiedStatus.financialInfo,
               items: financialInfo.generateItems(),
               renderDescription: financialInfo.renderDescription,
               companyInfo,
@@ -91,6 +92,7 @@ class Status extends Panes {
             name: 'businessInfo',
             Component: CommonTab,
             data: {
+              isQualified: prequalifiedStatus.businessInfo,
               items: businessInfo.generateItems(),
               renderDescription: businessInfo.renderDescription,
               companyInfo,
@@ -103,6 +105,7 @@ class Status extends Panes {
             name: 'environmentalInfo',
             Component: CommonTab,
             data: {
+              isQualified: prequalifiedStatus.environmentalInfo,
               items: environmentalInfo.generateItems(),
               renderDescription: environmentalInfo.renderDescription,
               companyInfo,
@@ -115,6 +118,7 @@ class Status extends Panes {
             name: 'healthInfo',
             Component: CommonTab,
             data: {
+              isQualified: prequalifiedStatus.healthInfo,
               items: healthInfo.generateItems(),
               renderDescription: healthInfo.renderDescription,
               companyInfo,
