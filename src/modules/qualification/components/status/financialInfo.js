@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
-import { readFileUrl } from 'modules/common/utils';
 import { dateFormat } from 'modules/common/constants';
+import { renderFile } from './utils';
 
 const generateItems = ({ companyInfo }) => {
   const financialInfo = companyInfo.financialInfo || {};
@@ -70,24 +70,11 @@ const renderDescription = props => {
 
   if (item === 'recordsInfo') {
     description = (value || []).map((v, i) => {
-      let file;
-
-      if (v.file) {
-        file = (
-          <span>
-            file:
-            <a href={readFileUrl(v.file.url)} target="__blank">
-              {v.file.name}
-            </a>
-          </span>
-        );
-      }
-
       return (
         <div key={i}>
           <span>date: {moment(new Date(v.date)).format(dateFormat)}</span>
           <br />
-          {file}
+          {renderFile(v.file)}
           <br />
         </div>
       );

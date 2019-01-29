@@ -1,7 +1,7 @@
 import React from 'react';
-import { readFileUrl } from 'modules/common/utils';
 import moment from 'moment';
 import { dateFormat } from 'modules/common/constants';
+import { renderFile } from './utils';
 
 const generateItems = () => {
   return [
@@ -23,21 +23,6 @@ const generateItems = () => {
   ];
 };
 
-const renderFile = value => {
-  if (!value) {
-    return null;
-  }
-
-  return (
-    <span>
-      file:
-      <a href={readFileUrl(value.url)} target="__blank">
-        {value.name}
-      </a>
-    </span>
-  );
-};
-
 const renderDescription = props => {
   const { item, companyInfo } = props;
   const businessInfo = companyInfo.businessInfo || {};
@@ -54,15 +39,15 @@ const renderDescription = props => {
   }
 
   if (item === 'hasConvictedLabourLaws') {
-    description = businessInfo.hasConvictedLabourLawsDescription;
+    description = businessInfo.hasConvictedLabourLawsDescription || 'false';
   }
 
   if (item === 'hasConvictedForHumanRights') {
-    description = businessInfo.hasConvictedForHumanRightsDescription;
+    description = businessInfo.hasConvictedForHumanRightsDescription || 'false';
   }
 
   if (item === 'hasConvictedForBusinessIntegrity') {
-    description = businessInfo.proveHasNotConvicted;
+    description = businessInfo.proveHasNotConvicted || 'false';
   }
 
   if (item === 'hasLeadersConvicted') {

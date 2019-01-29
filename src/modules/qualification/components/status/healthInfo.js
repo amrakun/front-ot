@@ -1,5 +1,4 @@
-import React from 'react';
-import { readFileUrl } from 'modules/common/utils';
+import { renderFile } from './utils';
 
 const generateItems = () => {
   return [
@@ -22,21 +21,6 @@ const generateItems = () => {
     'hasWorkedOnLargeProjects',
     'doesHaveLicense',
   ];
-};
-
-const renderFile = value => {
-  if (!value) {
-    return null;
-  }
-
-  return (
-    <span>
-      file:
-      <a href={readFileUrl(value.url)} target="__blank">
-        {value.name}
-      </a>
-    </span>
-  );
 };
 
 const renderDescription = props => {
@@ -71,7 +55,7 @@ const renderDescription = props => {
   const descFields = ['hasWorkedOnWorldBank', 'hasWorkedOnLargeProjects', 'doesHaveLicense'];
 
   if (descFields.includes(item)) {
-    description = healthInfo[`${item}Description`];
+    description = healthInfo[`${item}Description`] || 'false';
   }
 
   return description;
