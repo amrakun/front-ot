@@ -68,7 +68,7 @@ class TierTypeForm extends React.Component {
 
     const { value } = this.state;
 
-    const { enName, registeredInCountry, registeredInAimag } = companyInfo.basicInfo || {};
+    const { registeredInCountry, registeredInAimag } = companyInfo.basicInfo || {};
 
     const infoList = [
       {
@@ -91,10 +91,6 @@ class TierTypeForm extends React.Component {
 
     return (
       <Form>
-        <h2 style={{ textAlign: 'center', marginBottom: '16px' }}>{enName}</h2>
-
-        <p style={{ height: '8px' }} />
-
         <Card title={title} bodyStyle={{ paddingBottom: '24px' }}>
           <List
             itemLayout="horizontal"
