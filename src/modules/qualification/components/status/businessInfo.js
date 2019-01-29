@@ -37,7 +37,7 @@ const renderDescription = props => {
     description = value.toString();
   }
 
-  if (item === 'organizationChartFile') {
+  if (item === 'organizationChartFile' && value) {
     description = (
       <span>
         file:

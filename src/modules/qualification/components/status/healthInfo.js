@@ -25,6 +25,10 @@ const generateItems = () => {
 };
 
 const renderFile = value => {
+  if (value) {
+    return null;
+  }
+
   return (
     <span>
       file:

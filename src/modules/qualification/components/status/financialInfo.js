@@ -69,20 +69,29 @@ const renderDescription = props => {
   }
 
   if (item === 'recordsInfo') {
-    description = (value || []).map((v, i) => (
-      <div key={i}>
-        <span>date: {moment(new Date(v.date)).format(dateFormat)}</span>
-        <br />
+    description = (value || []).map((v, i) => {
+      let file;
 
-        <span>
-          file:
-          <a href={readFileUrl(v.file.url)} target="__blank">
-            {v.file.name}
-          </a>
-        </span>
-        <br />
-      </div>
-    ));
+      if (v.file) {
+        file = (
+          <span>
+            file:
+            <a href={readFileUrl(v.file.url)} target="__blank">
+              {v.file.name}
+            </a>
+          </span>
+        );
+      }
+
+      return (
+        <div key={i}>
+          <span>date: {moment(new Date(v.date)).format(dateFormat)}</span>
+          <br />
+          {file}
+          <br />
+        </div>
+      );
+    });
   }
 
   return description;

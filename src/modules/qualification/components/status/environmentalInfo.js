@@ -29,7 +29,7 @@ const renderDescription = props => {
     description = value.toString();
   }
 
-  if (item === 'investigationDocumentation') {
+  if (item === 'investigationDocumentation' && value) {
     description = (
       <span>
         file:
