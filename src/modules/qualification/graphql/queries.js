@@ -30,7 +30,6 @@ const qualificationDetail = `
       _id
       financialInfo {
         canProvideAccountsInfo
-        reasonToCannotNotProvide
         currency
         annualTurnover
         preTaxProfit
@@ -43,54 +42,35 @@ const qualificationDetail = `
       }
       businessInfo {
         investigations
-        isSubContractor
-        hasConvictedForHumanRightsDescription
-        hasConvictedLabourLawsDescription
-        organizationChartFile
-        doesEmployeePoliticallyExposed
-        hasLeadersConvicted
-        proveHasNotConvicted
-        hasConvictedForBusinessIntegrity
-        hasConvictedForHumanRights
-        hasConvictedLabourLaws
-        doesHaveResponsiblityPolicyFile
-        doesHaveResponsiblityPolicy
-        doesHaveCodeEthicsFile
-        doesHaveCodeEthics
-        doesHaveLiabilityInsuranceFile
-        doesHaveLiabilityInsurance
-        employeeTurnoverRate
-        doesConcludeValidContracts
-        doesHaveJobDescriptionFile
-        doesHaveJobDescription
-        doesMeetMinimumStandartsFile
         doesMeetMinimumStandarts
-
+        doesHaveJobDescription
+        doesConcludeValidContracts
+        employeeTurnoverRate
+        doesHaveLiabilityInsurance
+        doesHaveCodeEthics
+        doesHaveResponsiblityPolicy
+        hasConvictedLabourLaws
+        hasConvictedForHumanRights
+        hasConvictedForBusinessIntegrity
+        hasLeadersConvicted
+        doesEmployeePoliticallyExposed
+        pepName
+        organizationChartFile
+        isSubContractor
       }
       environmentalInfo {
         doesHavePlan
-        doesHavePlanFile
         hasEnvironmentalRegulatorInvestigated
-        dateOfInvestigation
-        reasonForInvestigation
-        actionStatus
-        investigationDocumentation
         hasConvictedForEnvironmentalLaws
-        proveHasNotConvicted
       }
       healthInfo {
         doesHaveHealthSafety
-        doesHaveHealthSafetyFile
         areHSEResourcesClearlyIdentified
         doesHaveDocumentedProcessToEnsure
-        doesHaveDocumentedProcessToEnsureFile
         areEmployeesUnderYourControl
         doesHaveDocumentForRiskAssesment
-        doesHaveDocumentForRiskAssesmentFile
         doesHaveDocumentForIncidentInvestigation
-        doesHaveDocumentForIncidentInvestigationFile
         doesHaveDocumentedFitness
-        doesHaveDocumentedFitnessFile
         isWillingToComply
         hasIndustrialAccident
         tmha
@@ -100,11 +80,8 @@ const qualificationDetail = `
         isWillingToCommit
         isPerparedToCompile
         hasWorkedOnWorldBank
-        hasWorkedOnWorldBankDescription
         hasWorkedOnLargeProjects
-        hasWorkedOnLargeProjectsDescription
         doesHaveLicense
-        doesHaveLicenseDescription
       }
       tierType
     }
@@ -692,5 +669,5 @@ export default {
   feedbackResponsesExport,
   companiesPrequalifiedStatus,
   qualificationPrequalificationReplacer,
-  auditResponsesQualifiedStatus
+  auditResponsesQualifiedStatus,
 };

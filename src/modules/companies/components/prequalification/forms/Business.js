@@ -1,17 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
-import {
-  Form,
-  Select,
-  Input,
-  DatePicker,
-  Row,
-  Col,
-  Button,
-  Icon,
-  Card
-} from 'antd';
+import { Form, Select, Input, DatePicker, Row, Col, Button, Icon, Card } from 'antd';
 import { booleanData, labels, descriptions } from '../constants';
 import { dateFormat } from 'modules/common/constants';
 import { Field, Uploader } from 'modules/common/components';
@@ -28,11 +18,9 @@ class PrequalificationForm extends PreqForm {
     const { data } = this.props;
 
     this.state = {
-      hasConvictedForBusinessIntegrity:
-        data.hasConvictedForBusinessIntegrity || false,
+      hasConvictedForBusinessIntegrity: data.hasConvictedForBusinessIntegrity || false,
       hasLeadersConvicted: data.hasLeadersConvicted || false,
-      doesEmployeePoliticallyExposed:
-        data.doesEmployeePoliticallyExposed || false,
+      doesEmployeePoliticallyExposed: data.doesEmployeePoliticallyExposed || false,
       doesMeetMinimumStandarts: data.doesMeetMinimumStandarts || false,
       doesHaveJobDescription: data.doesHaveJobDescription || false,
       doesHaveLiabilityInsurance: data.doesHaveLiabilityInsurance || false,
@@ -42,8 +30,8 @@ class PrequalificationForm extends PreqForm {
       hasConvictedForHumanRights: data.hasConvictedForHumanRights || false,
       investigations: (data.investigations || []).map(i => ({
         _id: Math.random(),
-        ...i
-      }))
+        ...i,
+      })),
     };
 
     this.onHasConvictedChange = this.onHasConvictedChange.bind(this);
@@ -74,7 +62,7 @@ class PrequalificationForm extends PreqForm {
       name: '',
       date: moment(),
       status: '',
-      statusDate: moment()
+      statusDate: moment(),
     });
 
     this.setState({ investigations });
@@ -96,7 +84,7 @@ class PrequalificationForm extends PreqForm {
         name: this.getFieldValue(`name${_id}`),
         date: this.getFieldValue(`date${_id}`),
         status: this.getFieldValue(`status${_id}`),
-        statusDate: this.getFieldValue(`statusDate${_id}`)
+        statusDate: this.getFieldValue(`statusDate${_id}`),
       });
     });
 
@@ -121,12 +109,7 @@ class PrequalificationForm extends PreqForm {
               initialValue={investigation.name}
               hasFeedback={false}
               optional={true}
-              control={
-                <Input
-                  {...this.common}
-                  placeholder={__('Investigation name')}
-                />
-              }
+              control={<Input {...this.common} placeholder={__('Investigation name')} />}
             />
           </Col>
           <Col span={6}>
@@ -144,12 +127,7 @@ class PrequalificationForm extends PreqForm {
               initialValue={investigation.status}
               hasFeedback={false}
               optional={true}
-              control={
-                <Input
-                  {...this.common}
-                  placeholder={__('Investigation status')}
-                />
-              }
+              control={<Input {...this.common} placeholder={__('Investigation status')} />}
             />
           </Col>
           <Col span={6}>
@@ -158,9 +136,7 @@ class PrequalificationForm extends PreqForm {
               initialValue={moment(investigation.statusDate)}
               hasFeedback={false}
               optional={true}
-              control={
-                <DatePicker format={dateFormat} placeholder={__('Close')} />
-              }
+              control={<DatePicker format={dateFormat} placeholder={__('Close')} />}
             />
           </Col>
         </Row>
@@ -176,7 +152,7 @@ class PrequalificationForm extends PreqForm {
       hasConvictedForBusinessIntegrity,
       hasLeadersConvicted,
       investigations,
-      doesEmployeePoliticallyExposed
+      doesEmployeePoliticallyExposed,
     } = this.state;
 
     const investigationItems = investigations.map((investigation, index) =>
@@ -189,10 +165,10 @@ class PrequalificationForm extends PreqForm {
         <h2>{__('Human resource management')}</h2>
         <Card>
           {this.renderField({
-            label: labels.organisationChart,
+            label: labels.organizationChartFile,
             name: 'organizationChartFile',
             dataType: 'file',
-            control: <Uploader />
+            control: <Uploader />,
           })}
         </Card>
 
@@ -205,7 +181,7 @@ class PrequalificationForm extends PreqForm {
             name: 'employeeTurnoverRate',
             label: labels.employeeTurnoverRate,
             description: descriptions.employeeTurnoverRate,
-            control: <Input {...this.common} type="number" />
+            control: <Input {...this.common} type="number" />,
           })}
         </Card>
 
@@ -227,7 +203,7 @@ class PrequalificationForm extends PreqForm {
               <Select {...this.common} onChange={this.onHasConvictedChange}>
                 {booleanOptions}
               </Select>
-            )
+            ),
           })}
 
           {this.renderField({
@@ -235,7 +211,7 @@ class PrequalificationForm extends PreqForm {
             label: labels.proveHasNotConvicted,
             isVisible: hasConvictedForBusinessIntegrity,
             optional: !hasConvictedForBusinessIntegrity,
-            control: <TextArea />
+            control: <TextArea />,
           })}
         </Card>
 
@@ -249,17 +225,13 @@ class PrequalificationForm extends PreqForm {
               <Select {...this.common} onChange={this.onLeaderConvictedChange}>
                 {booleanOptions}
               </Select>
-            )
+            ),
           })}
 
           <div style={!hasLeadersConvicted ? { display: 'none' } : {}}>
             {investigationItems}
             <FormItem>
-              <Button
-                type="dashed"
-                onClick={this.addInvestigation}
-                style={{ width: '100%' }}
-              >
+              <Button type="dashed" onClick={this.addInvestigation} style={{ width: '100%' }}>
                 <Icon type="plus" /> {__('Add investigation')}
               </Button>
             </FormItem>
@@ -276,15 +248,15 @@ class PrequalificationForm extends PreqForm {
               <Select {...this.common} onChange={this.onHasPEPCHange}>
                 {booleanOptions}
               </Select>
-            )
+            ),
           })}
 
           {this.renderField({
             name: 'pepName',
-            label: labels.PEPName,
+            label: labels.pepName,
             isVisible: doesEmployeePoliticallyExposed,
             optional: !doesEmployeePoliticallyExposed,
-            control: <Input {...this.common} />
+            control: <Input {...this.common} />,
           })}
 
           {this.renderField({
@@ -293,13 +265,10 @@ class PrequalificationForm extends PreqForm {
             dataType: 'boolean',
             name: 'isSubContractor',
             control: (
-              <Select
-                {...this.common}
-                placeholder={__('Please select an option')}
-              >
+              <Select {...this.common} placeholder={__('Please select an option')}>
                 {booleanOptions}
               </Select>
-            )
+            ),
           })}
         </Card>
 
@@ -313,7 +282,7 @@ class PrequalificationForm extends PreqForm {
 const BusinessForm = Form.create()(PrequalificationForm);
 
 PrequalificationForm.contextTypes = {
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 export default withRouter(BusinessForm);

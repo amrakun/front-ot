@@ -1,8 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import { Card, Radio, Form, List, Alert } from 'antd';
-import { Prequalifier } from '../../containers/status';
+import { Card, Radio, Form, List } from 'antd';
 
 class TierTypeForm extends React.Component {
   constructor(props) {
@@ -16,8 +15,8 @@ class TierTypeForm extends React.Component {
       registeredInCountry,
       registeredInAimag,
       totalNumberOfEmployees,
-      totalNumberOfMongolianEmployees
-    } = companyInfo;
+      totalNumberOfMongolianEmployees,
+    } = companyInfo.basicInfo || {};
 
     // mongolian employee's percentage
     let mep = 0;
@@ -49,7 +48,7 @@ class TierTypeForm extends React.Component {
     this.suggestedType = suggestedType;
 
     this.state = {
-      value: initialValue || suggestedType
+      value: initialValue || suggestedType,
     };
 
     this.onChange = this.onChange.bind(this);
@@ -64,87 +63,46 @@ class TierTypeForm extends React.Component {
     this.props.saveTierType(this.state.value);
   }
 
-  renderStatus(isPrequalified) {
-    if (isPrequalified) {
-      return (
-        <Alert
-          message="This supplier is pre-qualified"
-          type="success"
-          showIcon
-        />
-      );
-    }
-
-    return (
-      <Alert
-        message="This supplier is not pre-qualified"
-        type="warning"
-        showIcon
-      />
-    );
-  }
-
   render() {
     const { title, companyInfo, renderButtons } = this.props;
 
     const { value } = this.state;
 
-    const {
-      supplierId,
-      enName,
-      registeredInCountry,
-      registeredInAimag,
-      isPrequalified
-    } = companyInfo;
+    const { registeredInCountry, registeredInAimag } = companyInfo.basicInfo || {};
 
     const infoList = [
       {
         title: 'Registered country',
-        description: registeredInCountry
+        description: registeredInCountry,
       },
       {
         title: 'Registered aimag',
-        description: registeredInAimag
+        description: registeredInAimag,
       },
       {
         title: 'Mongolian employees percentage',
-        description: `${this.mep}%`
+        description: `${this.mep}%`,
       },
       {
         title: 'Suggested tier type',
-        description: this.suggestedType
-      }
+        description: this.suggestedType,
+      },
     ];
 
     return (
       <Form>
-        <h2 style={{ textAlign: 'center', marginBottom: '16px' }}>{enName}</h2>
-
-        {this.renderStatus(isPrequalified)}
-
-        <Prequalifier supplierId={supplierId} isPrequalified={isPrequalified} />
-
-        <p style={{ height: '8px' }} />
-
         <Card title={title} bodyStyle={{ paddingBottom: '24px' }}>
           <List
             itemLayout="horizontal"
             dataSource={infoList}
             renderItem={item => (
               <List.Item>
-                <List.Item.Meta
-                  title={item.title}
-                  description={item.description}
-                />
+                <List.Item.Meta title={item.title} description={item.description} />
               </List.Item>
             )}
           />
 
-          <Radio.Group
-            onChange={this.onChange}
-            value={value}
-            className="radio-vertical margin"
-          >
+          <Radio.Group onChange={this.onChange} value={value} className="radio-vertical margin">
             <Radio value="national">National supplier</Radio>
             <Radio value="umnugovi">Umnugovi supplier</Radio>
             <Radio value="tier1">International Tier 1 supplier</Radio>
@@ -165,7 +123,7 @@ TierTypeForm.propTypes = {
   location: PropTypes.object,
   companyInfo: PropTypes.object,
   renderButtons: PropTypes.func,
-  saveTierType: PropTypes.func
+  saveTierType: PropTypes.func,
 };
 
 export default withRouter(TierTypeForm);

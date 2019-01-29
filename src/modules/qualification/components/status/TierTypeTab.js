@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
-import { Form } from 'antd';
-import { BaseForm } from 'modules/common/components';
+import { Form, Button, Icon } from 'antd';
 import TierTypeForm from './TierTypeForm';
 
-class TierTypeTab extends BaseForm {
+class TierTypeTab extends React.Component {
   render() {
-    const { statusData, title, data, saveTierType } = this.props;
+    const { companyInfo, title, data, saveTierType, previousTab } = this.props;
 
     return (
       <div>
@@ -15,11 +14,22 @@ class TierTypeTab extends BaseForm {
           title={title}
           initialValue={data}
           saveTierType={saveTierType}
-          companyInfo={statusData}
+          companyInfo={companyInfo}
           renderButtons={save => (
             <div>
-              {this.renderGoBack()}
-              {this.renderSubmit('Save & submit', save)}
+              <Button onClick={previousTab}>
+                <Icon type="left" /> Back
+              </Button>
+
+              <Button
+                style={{ float: 'right', marginLeft: '8px' }}
+                type="primary"
+                htmlType="submit"
+                onClick={save}
+              >
+                Save
+                <Icon type="right" />
+              </Button>
             </div>
           )}
         />
@@ -31,7 +41,7 @@ class TierTypeTab extends BaseForm {
 TierTypeTab.propTypes = {
   title: PropTypes.string,
   data: PropTypes.string,
-  saveTierType: PropTypes.func
+  saveTierType: PropTypes.func,
 };
 
 const TierTypeTabForm = Form.create()(TierTypeTab);

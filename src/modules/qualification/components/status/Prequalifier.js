@@ -36,11 +36,7 @@ export default class Prequalifier extends React.Component {
         onOk={this.handleSubmit}
         footer={null}
       >
-        <Template
-          onSubmit={this.onUnqualify}
-          buttonText="Unqualify"
-          template={template}
-        />
+        <Template onSubmit={this.onUnqualify} buttonText="Unqualify" template={template} />
 
         <br />
         <br />
@@ -53,7 +49,11 @@ export default class Prequalifier extends React.Component {
     const { isPrequalified, prequalify } = this.props;
 
     return (
-      <div>
+      <div style={{ marginBottom: '30px' }}>
+        {isPrequalified && (
+          <Alert message="This supplier is pre-qualified" type="success" showIcon />
+        )}
+
         {isPrequalified === false && (
           <Alert
             message={
@@ -106,5 +106,5 @@ export default class Prequalifier extends React.Component {
 Prequalifier.propTypes = {
   template: PropTypes.object,
   isPrequalified: PropTypes.bool,
-  prequalify: PropTypes.func
+  prequalify: PropTypes.func,
 };

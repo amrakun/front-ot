@@ -10,7 +10,7 @@ export default class Panes extends React.Component {
     const queryParams = queryString.parse(this.props.location.search);
 
     this.state = {
-      currentTabKey: queryParams.tab || '1'
+      currentTabKey: queryParams.tab || '1',
     };
 
     this.nextTab = this.nextTab.bind(this);
@@ -48,7 +48,7 @@ export default class Panes extends React.Component {
 
   renderPane({ key, title, name, Component, data }) {
     const company = this.props.company || {};
-    const save = this.props.save || {};
+    const save = this.props.save;
     const { __ } = this.context;
 
     const saveAction = doc => {
@@ -61,15 +61,14 @@ export default class Panes extends React.Component {
       title: title,
       nextTab: this.nextTab,
       previousTab: this.previousTab,
-      ...data
+      ...data,
     };
 
     return (
       <Tabs.TabPane
         tab={
           <span>
-            {__(title)}{' '}
-            {this.isEmpty(company[name]) ? '' : <Icon type="check" />}
+            {__(title)} {this.isEmpty(company[name]) ? '' : <Icon type="check" />}
           </span>
         }
         key={key.toString()}
@@ -84,9 +83,9 @@ Panes.propTypes = {
   company: PropTypes.object,
   save: PropTypes.func,
   history: PropTypes.object,
-  location: PropTypes.object
+  location: PropTypes.object,
 };
 
 Panes.contextTypes = {
-  __: PropTypes.func
+  __: PropTypes.func,
 };
