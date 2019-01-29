@@ -14,6 +14,21 @@ const generateItems = () => {
   ];
 };
 
+const renderFile = value => {
+  if (!value) {
+    return null;
+  }
+
+  return (
+    <span>
+      file:
+      <a href={readFileUrl(value.url)} target="__blank">
+        {value.name}
+      </a>
+    </span>
+  );
+};
+
 const renderDescription = props => {
   const { item, companyInfo } = props;
   const environmentalInfo = companyInfo.environmentalInfo || {};
@@ -29,15 +44,14 @@ const renderDescription = props => {
     description = value.toString();
   }
 
-  if (item === 'investigationDocumentation' && value) {
-    description = (
-      <span>
-        file:
-        <a href={readFileUrl(value.url)} target="__blank">
-          {value.name}
-        </a>
-      </span>
-    );
+  if (item === 'investigationDocumentation') {
+    description = renderFile(value);
+  }
+
+  const fileFields = ['doesHavePlan'];
+
+  if (fileFields.includes(item)) {
+    description = renderFile(environmentalInfo[`${item}File`]);
   }
 
   return description;
