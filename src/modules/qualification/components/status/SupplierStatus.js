@@ -11,7 +11,9 @@ import healthInfo from './healthInfo';
 import { Prequalifier } from '../../containers/status';
 
 class Status extends Panes {
-  renderSkipped({ company, saveTierType, companyInfo, prequalifySupplier }) {
+  renderSkipped() {
+    const { company, companyInfo, saveTierType, prequalifySupplier } = this.props;
+
     return (
       <div>
         <Alert
@@ -51,24 +53,12 @@ class Status extends Panes {
   }
 
   render() {
-    const { company, companyInfo, saveTierType, prequalifySupplier } = this.props;
-
     const { currentTabKey } = this.state;
-
-    const { _id, prequalifiedStatus = {}, isPrequalified, basicInfo } = companyInfo;
-
-    const extraProps = name => ({
-      companyInfo: companyInfo[name] || {},
-      isQualified: prequalifiedStatus[name],
-    });
+    const { companyInfo, saveTierType } = this.props;
+    const { _id, isPrequalified, basicInfo } = companyInfo;
 
     if (companyInfo.isSkippedPrequalification) {
-      return this.renderSkipped({
-        company,
-        saveTierType,
-        companyInfo,
-        prequalifySupplier,
-      });
+      return this.renderSkipped();
     }
 
     return (
@@ -136,7 +126,10 @@ class Status extends Panes {
             title: 'Select supplier tier type',
             name: 'tierType',
             Component: TierTypeTab,
-            data: extraProps('tierType'),
+            data: {
+              companyInfo,
+              saveTierType,
+            },
           })}
         </Tabs>
       </div>
