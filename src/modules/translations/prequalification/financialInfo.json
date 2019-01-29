@@ -4,37 +4,27 @@
   "Environmental management": "Байгаль орчны удирдлага",
   "Currency": "Мөнгөний тэмдэгт",
   "If not, explain the reasons": "Хэрэв үгүй бол, шалтгаанаа тайлбарлана уу!",
-  "Health & safety management system":
-    "Эрүүл мэнд, аюулгүй ажиллагааны удирдлагын систем",
-  "Can you provide accounts for the last 3 financial years?":
-    "Та сүүлийн гурван жилийн санхүүгийн тайлангаа өгөх боломжтой юу?",
-  "Is your company up to date with Social Security payments?":
-    "Танай компани нийгмийн даатгалын шимтгэл төлөлтийн талаарх хамгийн сүүлийн үеийн мэдээллийг оруулсан уу?",
-  "Is your company up to date with Corporation Tax payments?":
-    "Танай компани аж ахуйн нэгжийн орлогын албан татвар төлөлтийн талаарх хамгийн сүүлийн үеийн мэдээллийг оруулсан уу? ",
+  "Health & safety management system": "Эрүүл мэнд, аюулгүй ажиллагааны удирдлагын систем",
+  "Can you provide accounts for the last 3 financial years?": "Та сүүлийн гурван жилийн санхүүгийн тайлангаа өгөх боломжтой юу?",
+  "Is your company up to date with Social Security payments?": "Танай компани нийгмийн даатгалын шимтгэл төлөлтийн талаарх хамгийн сүүлийн үеийн мэдээллийг оруулсан уу?",
+  "Only for mongolian suppliers": "Зөвхөн монгол ханган нийлүүлэгч бол бөглөнө үү",
+  "Is your company up to date with Corporation Tax payments?": "Танай компани аж ахуйн нэгжийн орлогын албан татвар төлөлтийн талаарх хамгийн сүүлийн үеийн мэдээллийг оруулсан уу? ",
   "Sales revenue": "Борлуулалтын орлого",
-  "Line#1 of 'Income Statement' on Financial Statements (Form-A) for Finance office of Government":
-    "Сангийн яам болон аймаг, дүүргийн санхүүгийн хэлтэст гаргадаг 'Санхүүгийн тайлан' (А маягт)-дэх 'Орлогын Дэлгэрэнгүй Тайлан'-гийн 1-р мөрийн дүн",
+  "Line#1 of 'Income Statement' on Financial Statements (Form-A) for Finance office of Government": "Сангийн яам болон аймаг, дүүргийн санхүүгийн хэлтэст гаргадаг 'Санхүүгийн тайлан' (А маягт)-дэх 'Орлогын Дэлгэрэнгүй Тайлан'-гийн 1-р мөрийн дүн",
   "Net income before tax": "Татвар төлөхийн өмнөх ашиг",
-  "Line#18 of 'Income Statement' on Financial Statements (Form-A) for Finance office of Government":
-    "Сангийн яам болон аймаг, дүүргийн санхүүгийн хэлтэст гаргадаг 'Санхүүгийн тайлан' (А маягт)-дэх 'Орлогын Дэлгэрэнгүй Тайлан'-гийн 18-р мөрийн дүн",
+  "Line#18 of 'Income Statement' on Financial Statements (Form-A) for Finance office of Government": "Сангийн яам болон аймаг, дүүргийн санхүүгийн хэлтэст гаргадаг 'Санхүүгийн тайлан' (А маягт)-дэх 'Орлогын Дэлгэрэнгүй Тайлан'-гийн 18-р мөрийн дүн",
   "Total of assets": "Эргэлтийн хөрөнгийн дүн",
-  "Line#1.1.11 of 'Balance sheet' on Financial Statements (Form-A) for Finance office of Government":
-    "Сангийн яам болон аймаг, дүүргийн санхүүгийн хэлтэст гаргадаг 'Санхүүгийн тайлан' (А маягт)-дэх 'САНХҮҮГИЙН БАЙДЛЫН ТАЙЛАН'-гийн 1.1.11-р мөрийн дүн",
+  "Line#1.1.11 of 'Balance sheet' on Financial Statements (Form-A) for Finance office of Government": "Сангийн яам болон аймаг, дүүргийн санхүүгийн хэлтэст гаргадаг 'Санхүүгийн тайлан' (А маягт)-дэх 'САНХҮҮГИЙН БАЙДЛЫН ТАЙЛАН'-гийн 1.1.11-р мөрийн дүн",
   "Total of current assets": "Нийт хөрөнгийн дүн",
-  "Line#1.3 of 'Balance sheet' on Financial Statements (Form-A) for Finance office of Government":
-    "Сангийн яам болон аймаг, дүүргийн санхүүгийн хэлтэст гаргадаг 'Санхүүгийн тайлан' (А маягт)-дэх 'САНХҮҮГИЙН БАЙДЛЫН ТАЙЛАН'-гийн 1.3-р мөрийн дүн",
+  "Line#1.3 of 'Balance sheet' on Financial Statements (Form-A) for Finance office of Government": "Сангийн яам болон аймаг, дүүргийн санхүүгийн хэлтэст гаргадаг 'Санхүүгийн тайлан' (А маягт)-дэх 'САНХҮҮГИЙН БАЙДЛЫН ТАЙЛАН'-гийн 1.3-р мөрийн дүн",
   "Total shareholders equity ": "Хувьцаа эзэмшигчдийн нийт өмч",
-  "Please provide financial records for your last 3 years":
-    "Сүүлийн гурван жилийнхээ санхүүгийн тайлан тооцоог өгнө үү!",
-  "The most recent years worth of accounts will always appear on top":
-    "Хамгийн сүүлийн жилийг ямагт хамгийн дээр харуулна.",
+  "Please provide financial records for your last 3 years": "Сүүлийн гурван жилийнхээ санхүүгийн тайлан тооцоог өгнө үү!",
+  "The most recent years worth of accounts will always appear on top": "Хамгийн сүүлийн жилийг ямагт хамгийн дээр харуулна.",
   "Select an year": "Жил сонгох",
   "Select a currency": "Мөнгөн тэмдэгт сонгоно уу",
   "Choose date": "Он сар сонгох",
   "Skip pre qualification": "Алгасах",
-  "This action can not be undone and this is only useful for sole traders or individuals. Are you sure ?":
-    "Уг үйлдэл нь буцаагдах боломжгүй ба зөвхөн хувь хүмүүст зориулагдсан болно. Та энэ үйлдлийг хийхдээ итгэлтэй байна уу ?",
+  "This action can not be undone and this is only useful for sole traders or individuals. Are you sure ?": "Уг үйлдэл нь буцаагдах боломжгүй ба зөвхөн хувь хүмүүст зориулагдсан болно. Та энэ үйлдлийг хийхдээ итгэлтэй байна уу ?",
   "Reason": "Шалтгаан",
   "Successfully sent": "Амжилттай илгээгдлээ",
   "We are reviewing your submission": "Бид таны мэдээллийг шалгаж байна"

@@ -204,7 +204,6 @@ class PrequalificationForm extends PreqForm {
     const currencyOptions = this.renderOptions(currencyData);
     const booleanOptions = this.renderOptions(booleanData);
 
-    const { country } = this.props;
     const { canProvideAccountsInfo } = this.state;
     const { __ } = this.context;
 
@@ -290,9 +289,9 @@ class PrequalificationForm extends PreqForm {
         <Card bodyStyle={{ paddingBottom: '16px' }}>
           {this.renderField({
             label: 'Is your company up to date with Social Security payments?',
+            description: 'Only for mongolian suppliers',
             name: 'isUpToDateSSP',
-            isVisible: country === 'MN',
-            optional: country !== 'MN',
+            optional: true,
             control: (
               <Select {...this.common} {...this.common} placeholder={__('Select one')}>
                 {booleanOptions}
