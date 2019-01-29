@@ -38,7 +38,7 @@ const renderYearAmount = value => {
 };
 
 const renderDescription = props => {
-  const { item, companyInfo, data } = props;
+  const { item, companyInfo } = props;
   const financialInfo = companyInfo.financialInfo || {};
   const value = financialInfo[item];
 

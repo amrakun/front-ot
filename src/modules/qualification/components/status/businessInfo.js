@@ -5,6 +5,7 @@ import { dateFormat } from 'modules/common/constants';
 
 const generateItems = () => {
   return [
+    'organizationChartFile',
     'doesMeetMinimumStandarts',
     'doesHaveJobDescription',
     'doesConcludeValidContracts',
@@ -18,9 +19,23 @@ const generateItems = () => {
     'hasLeadersConvicted',
     'doesEmployeePoliticallyExposed',
     'pepName',
-    'organizationChartFile',
     'isSubContractor',
   ];
+};
+
+const renderFile = value => {
+  if (!value) {
+    return null;
+  }
+
+  return (
+    <span>
+      file:
+      <a href={readFileUrl(value.url)} target="__blank">
+        {value.name}
+      </a>
+    </span>
+  );
 };
 
 const renderDescription = props => {
@@ -67,15 +82,19 @@ const renderDescription = props => {
     });
   }
 
-  if (item === 'organizationChartFile' && value) {
-    description = (
-      <span>
-        file:
-        <a href={readFileUrl(value.url)} target="__blank">
-          {value.name}
-        </a>
-      </span>
-    );
+  const fileFields = [
+    'doesMeetMinimumStandarts',
+    'doesHaveJobDescription',
+    'doesHaveLiabilityInsurance',
+    'doesHaveResponsiblityPolicy',
+  ];
+
+  if (fileFields.includes(item)) {
+    description = renderFile(businessInfo[`${item}File`]);
+  }
+
+  if (item === 'organizationChartFile') {
+    description = renderFile(value);
   }
 
   return description;
