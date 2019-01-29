@@ -10,7 +10,6 @@ const generateItems = () => {
     'actionStatus',
     'investigationDocumentation',
     'hasConvictedForEnvironmentalLaws',
-    'proveHasNotConvicted',
   ];
 };
 
@@ -48,6 +47,10 @@ const renderDescription = props => {
         </div>
       );
     }
+  }
+
+  if (item === 'hasConvictedForEnvironmentalLaws') {
+    description = environmentalInfo.proveHasNotConvicted || 'false';
   }
 
   const fileFields = ['doesHavePlan'];

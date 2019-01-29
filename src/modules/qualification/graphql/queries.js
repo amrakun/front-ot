@@ -64,7 +64,6 @@ const qualificationDetail = `
         actionStatus
         investigationDocumentation
         hasConvictedForEnvironmentalLaws
-        proveHasNotConvicted
       }
       healthInfo {
         doesHaveHealthSafety
