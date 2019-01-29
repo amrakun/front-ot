@@ -18,8 +18,6 @@ const generateItems = () => {
     'doesEmployeePoliticallyExposed',
     'pepName',
     'organizationChartFile',
-    'hasConvictedLabourLawsDescription',
-    'hasConvictedForHumanRightsDescription',
     'isSubContractor',
   ];
 };

@@ -43,21 +43,22 @@ const qualificationDetail = `
       }
       businessInfo {
         investigations
-        isSubContractor
-        organizationChartFile
-        doesEmployeePoliticallyExposed
-        hasLeadersConvicted
-        proveHasNotConvicted
-        hasConvictedForBusinessIntegrity
-        hasConvictedForHumanRights
-        hasConvictedLabourLaws
-        doesHaveResponsiblityPolicy
-        doesHaveCodeEthics
-        doesHaveLiabilityInsurance
-        employeeTurnoverRate
-        doesConcludeValidContracts
         doesMeetMinimumStandarts
-
+        doesHaveJobDescription
+        doesConcludeValidContracts
+        employeeTurnoverRate
+        doesHaveLiabilityInsurance
+        doesHaveCodeEthics
+        doesHaveResponsiblityPolicy
+        hasConvictedLabourLaws
+        hasConvictedForHumanRights
+        hasConvictedForBusinessIntegrity
+        proveHasNotConvicted
+        hasLeadersConvicted
+        doesEmployeePoliticallyExposed
+        pepName
+        organizationChartFile
+        isSubContractor
       }
       environmentalInfo {
         doesHavePlan
