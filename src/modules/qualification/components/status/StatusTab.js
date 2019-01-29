@@ -9,7 +9,6 @@ import { BaseForm } from 'modules/common/components';
 import { dateFormat } from 'modules/common/constants';
 import { readFileUrl } from 'modules/common/utils';
 import { labels } from 'modules/companies/components/prequalification/constants';
-import { Prequalifier } from '../../containers/status';
 
 class StatusTab extends BaseForm {
   constructor(props) {
@@ -17,12 +16,12 @@ class StatusTab extends BaseForm {
 
     this.viewMode = props.location.search === '?view';
 
-    const { supplierInputs } = props.statusData;
+    const { supplierInputs } = props;
 
     this.items = this.createItems(supplierInputs);
 
     this.state = {
-      checkAll: false
+      checkAll: false,
     };
 
     this.renderItem = this.renderItem.bind(this);
@@ -42,27 +41,27 @@ class StatusTab extends BaseForm {
   }
 
   createItems(data) {
+    if (Array.isArray(data)) {
+      return data.map(item => this.createItems(item));
+    }
+
     const items = [];
 
-    if (Array.isArray(data)) {
-      data.forEach(data => items.push(this.createItems(data)));
-    } else {
-      Object.keys(data).forEach(name => {
-        const value = this.createItem(name, data[name]);
-        value &&
-          items.push({
-            name: name,
-            value: value
-          });
-      });
-    }
+    Object.keys(data).forEach(name => {
+      const value = this.createItem(name, data[name]);
+
+      value &&
+        items.push({
+          name: name,
+          value: value,
+        });
+    });
 
     return items;
   }
 
   createItem(name, value) {
-    if (value === null || name === '__typename' || value.length < 1)
-      return null;
+    if (value === null || name === '__typename' || value.length < 1) return null;
 
     if (typeof value === 'boolean') {
       return value ? 'Yes' : 'No';
@@ -100,76 +99,47 @@ class StatusTab extends BaseForm {
 
     return (
       <List.Item>
-        <List.Item.Meta
-          title={labels[name] ? labels[name] : 'File for above'}
-          description={item.value}
-        />
+        <List.Item.Meta title={labels[name]} description={item.value} />
         {this.renderField({
           name: name,
           hasFeedback: false,
           optional: true,
           initialValue: checked,
           control: (
-            <Checkbox
-              style={{ minWidth: '80px', marginLeft: '24px' }}
-              disabled={this.viewMode}
-            >
+            <Checkbox style={{ minWidth: '80px', marginLeft: '24px' }} disabled={this.viewMode}>
               Qualified
             </Checkbox>
-          )
+          ),
         })}
       </List.Item>
     );
   }
 
   render() {
-    const { title, statusData } = this.props;
+    const { title, tabQualified } = this.props;
     const { checkAll } = this.state;
-    const { supplierId, enName, isPrequalified, tabQualified } = statusData;
 
     return (
       <Form>
-        <h2 style={{ textAlign: 'center', marginBottom: '16px' }}>{enName}</h2>
-
-        {isPrequalified && (
-          <Alert
-            message="This supplier is pre-qualified"
-            type="success"
-            showIcon
-          />
-        )}
-
         <Alert
-          message={`${title} is ${
-            tabQualified ? 'qualified' : 'not qualified'
-          }`}
+          message={`${title} is ${tabQualified ? 'qualified' : 'not qualified'}`}
           className="margin"
           type={tabQualified ? 'success' : 'error'}
           style={{ marginBottom: '16px' }}
           showIcon
         />
 
-        <Prequalifier supplierId={supplierId} isPrequalified={isPrequalified} />
-
         <p style={{ height: '8px' }} />
         <Card
           title={title}
           bodyStyle={{ paddingBottom: '24px' }}
           extra={
-            <Checkbox
-              checked={checkAll}
-              onChange={this.handleCheckAll}
-              disabled={this.viewMode}
-            >
+            <Checkbox checked={checkAll} onChange={this.handleCheckAll} disabled={this.viewMode}>
               Check all
             </Checkbox>
           }
         >
-          <List
-            itemLayout="horizontal"
-            dataSource={this.items}
-            renderItem={this.renderItem}
-          />
+          <List itemLayout="horizontal" dataSource={this.items} renderItem={this.renderItem} />
         </Card>
 
         {!this.viewMode && (
@@ -183,7 +153,7 @@ class StatusTab extends BaseForm {
 }
 
 StatusTab.propTypes = {
-  title: PropTypes.string
+  title: PropTypes.string,
 };
 
 const StatusTabForm = Form.create()(StatusTab);

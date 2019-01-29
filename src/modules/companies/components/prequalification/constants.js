@@ -5,13 +5,10 @@ export const yearData = [
   { value: '2015', text: '2015' },
   { value: '2014', text: '2014' },
   { value: '2013', text: '2013' },
-  { value: '2012', text: '2012' }
+  { value: '2012', text: '2012' },
 ];
 
-export const booleanData = [
-  { text: 'Yes', value: 'true' },
-  { text: 'No', value: 'false' }
-];
+export const booleanData = [{ text: 'Yes', value: 'true' }, { text: 'No', value: 'false' }];
 
 export const currencyData = [
   { value: 'AED', text: 'United Arab Emirates Dirham' },
@@ -183,12 +180,12 @@ export const currencyData = [
   { value: 'YER', text: 'Yemeni Rial' },
   { value: 'ZAR', text: 'South African Rand' },
   { value: 'ZMW', text: 'Zambian Kwacha' },
-  { value: 'ZWL', text: 'Zimbabwean Dollar' }
+  { value: 'ZWL', text: 'Zimbabwean Dollar' },
 ];
 
 export const actionStatusData = [
   { value: 'In Progress', text: 'In Progress' },
-  { value: 'Completed', text: 'Completed' }
+  { value: 'Completed', text: 'Completed' },
 ];
 
 //texts
@@ -199,15 +196,14 @@ export const labels = {
   hasConvictedForHumanRightsDescription:
     'If Yes, what steps have you taken to ensure this does not happen again',
 
-  organisationChart: 'Please upload copy of your organisation chart',
+  organizationChartFile: 'Please upload copy of your organisation chart',
 
   documentLabel: 'Please upload supporting document',
 
   doesMeetMinimumStandarts:
     'Does your company meet minimum standards of fair employment practice required by Mongolian labor laws and regulations',
 
-  doesHaveJobDescription:
-    'Does the Company have a job description procedure in place?',
+  doesHaveJobDescription: 'Does the Company have a job description procedure in place?',
 
   doesConcludeValidContracts:
     'Does the company conclude valid contracts with all employees. (include skilled/unskilled, temporary and permanent, and underage workers, etc)',
@@ -218,8 +214,7 @@ export const labels = {
   doesHaveLiabilityInsurance:
     'Does the organisation have Liability insurance which meets Oyu Tolgoi’s minimum requirements and valid worker compensation insurance or enrolment in an applicable occupational injury/illness insurance programme?',
 
-  doesHaveCodeEthics:
-    'Does your company have a documented code of ethics/conduct?',
+  doesHaveCodeEthics: 'Does your company have a documented code of ethics/conduct?',
 
   doesHaveResponsiblityPolicy:
     'Does your company have a documented Corporate Social Responsibility policy?',
@@ -233,8 +228,7 @@ export const labels = {
   hasConvictedForBusinessIntegrity:
     'Has your company ever been convicted for a breach of any business integrity in the countries you operate within the last five years?',
 
-  proveHasNotConvicted:
-    'If Yes, what steps have you taken to ensure this does not happen again',
+  proveHasNotConvicted: 'If Yes, what steps have you taken to ensure this does not happen again',
 
   hasLeadersConvicted:
     'Has your company or any of its directors been investigated or convicted of any other legal infringement not described above within the last five years?',
@@ -244,7 +238,7 @@ export const labels = {
   doesEmployeePoliticallyExposed:
     'Does your company employ any politically exposed person? If yes, provide list of PEP name',
 
-  PEPName: `PEP Name`,
+  pepName: `PEP Name`,
 
   //envLabels
   doesHavePlan:
@@ -285,11 +279,9 @@ export const labels = {
   doesHaveDocumentForIncidentInvestigation:
     'Does the company have a documented process for incident investigation?',
 
-  doesHaveDocumentedFitness:
-    'Does your company have a documented Fitness for Work (FFW) policy?',
+  doesHaveDocumentedFitness: 'Does your company have a documented Fitness for Work (FFW) policy?',
 
-  isWillingToComply:
-    'Is your company willing to comply with Oyu Tolgoi/RT HSE management system?',
+  isWillingToComply: 'Is your company willing to comply with Oyu Tolgoi/RT HSE management system?',
 
   hasIndustrialAccident: 'Has there been any industrial accident?',
 
@@ -343,7 +335,7 @@ export const labels = {
   recordsInfo: `Please provide financial records for your last 3 years`,
 
   isSubContractor:
-    'Does your company, parent company or any sub-contractor is registered in any of the following countries to which international trade sanctions apply'
+    'Does your company, parent company or any sub-contractor is registered in any of the following countries to which international trade sanctions apply',
 };
 
 export const descriptions = {
@@ -374,8 +366,7 @@ export const descriptions = {
   additionalInformation: `Please use this space to provide additional information regarding
     your Corporate Social Responsibility`,
 
-  areHSEResourcesClearlyIdentified:
-    'Staff includes all employees and sub-contractors.',
+  areHSEResourcesClearlyIdentified: 'Staff includes all employees and sub-contractors.',
 
   doesHaveDocumentedFitness:
     'The Fitness for Work (FFW) policy should incorporate alcohol, fatigue and general fitness for work.',
@@ -383,5 +374,5 @@ export const descriptions = {
   doesHaveCodeEthics:
     'Prevention of Bribery & Corruption, Conflict of interest, Fair Labor Standards, Business Ethics, Human Rights, Equality and Diversity, Dealing with government intermediaries, Charitable contributions, Travels and hospitality, Gifts and entertainment, Money laundering',
   doesHaveDocumentForRiskAssesment:
-    'CRM- Critical Risk Management: http://ot.mn/худалдан-авалт-2/files-pps/'
+    'CRM- Critical Risk Management: http://ot.mn/худалдан-авалт-2/files-pps/',
 };

@@ -44,8 +44,6 @@ const qualificationDetail = `
       businessInfo {
         investigations
         isSubContractor
-        hasConvictedForHumanRightsDescription
-        hasConvictedLabourLawsDescription
         organizationChartFile
         doesEmployeePoliticallyExposed
         hasLeadersConvicted
@@ -53,23 +51,16 @@ const qualificationDetail = `
         hasConvictedForBusinessIntegrity
         hasConvictedForHumanRights
         hasConvictedLabourLaws
-        doesHaveResponsiblityPolicyFile
         doesHaveResponsiblityPolicy
-        doesHaveCodeEthicsFile
         doesHaveCodeEthics
-        doesHaveLiabilityInsuranceFile
         doesHaveLiabilityInsurance
         employeeTurnoverRate
         doesConcludeValidContracts
-        doesHaveJobDescriptionFile
-        doesHaveJobDescription
-        doesMeetMinimumStandartsFile
         doesMeetMinimumStandarts
 
       }
       environmentalInfo {
         doesHavePlan
-        doesHavePlanFile
         hasEnvironmentalRegulatorInvestigated
         dateOfInvestigation
         reasonForInvestigation
@@ -80,17 +71,12 @@ const qualificationDetail = `
       }
       healthInfo {
         doesHaveHealthSafety
-        doesHaveHealthSafetyFile
         areHSEResourcesClearlyIdentified
         doesHaveDocumentedProcessToEnsure
-        doesHaveDocumentedProcessToEnsureFile
         areEmployeesUnderYourControl
         doesHaveDocumentForRiskAssesment
-        doesHaveDocumentForRiskAssesmentFile
         doesHaveDocumentForIncidentInvestigation
-        doesHaveDocumentForIncidentInvestigationFile
         doesHaveDocumentedFitness
-        doesHaveDocumentedFitnessFile
         isWillingToComply
         hasIndustrialAccident
         tmha
@@ -100,11 +86,8 @@ const qualificationDetail = `
         isWillingToCommit
         isPerparedToCompile
         hasWorkedOnWorldBank
-        hasWorkedOnWorldBankDescription
         hasWorkedOnLargeProjects
-        hasWorkedOnLargeProjectsDescription
         doesHaveLicense
-        doesHaveLicenseDescription
       }
       tierType
     }
@@ -692,5 +675,5 @@ export default {
   feedbackResponsesExport,
   companiesPrequalifiedStatus,
   qualificationPrequalificationReplacer,
-  auditResponsesQualifiedStatus
+  auditResponsesQualifiedStatus,
 };
