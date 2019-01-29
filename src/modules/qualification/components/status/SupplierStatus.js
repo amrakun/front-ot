@@ -7,6 +7,7 @@ import TierTypeTab from './TierTypeTab';
 import TierTypeForm from './TierTypeForm';
 import financialInfo from './financialInfo';
 import businessInfo from './businessInfo';
+import environmentalInfo from './environmentalInfo';
 import { Prequalifier } from '../../containers/status';
 
 class Status extends Panes {
@@ -110,8 +111,12 @@ class Status extends Panes {
             key: 3,
             title: 'Environmental management',
             name: 'environmentalInfo',
-            Component: StatusTab,
-            data: extraProps('environmentalInfo'),
+            Component: CommonTab,
+            data: {
+              items: environmentalInfo.generateItems(),
+              renderDescription: environmentalInfo.renderDescription,
+              companyInfo,
+            },
           })}
 
           {this.renderPane({
