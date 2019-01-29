@@ -61,8 +61,6 @@ const qualificationDetail = `
       environmentalInfo {
         doesHavePlan
         hasEnvironmentalRegulatorInvestigated
-        actionStatus
-        investigationDocumentation
         hasConvictedForEnvironmentalLaws
       }
       healthInfo {

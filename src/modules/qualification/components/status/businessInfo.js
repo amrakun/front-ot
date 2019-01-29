@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { dateFormat } from 'modules/common/constants';
-import { renderFile } from './utils';
+import { renderFile, renderBoolean } from './utils';
 
 const generateItems = () => {
   return [
@@ -35,19 +35,19 @@ const renderDescription = props => {
   }
 
   if (typeof value === 'boolean') {
-    description = value.toString();
+    description = renderBoolean(value);
   }
 
   if (item === 'hasConvictedLabourLaws') {
-    description = businessInfo.hasConvictedLabourLawsDescription || 'false';
+    description = businessInfo.hasConvictedLabourLawsDescription || 'No';
   }
 
   if (item === 'hasConvictedForHumanRights') {
-    description = businessInfo.hasConvictedForHumanRightsDescription || 'false';
+    description = businessInfo.hasConvictedForHumanRightsDescription || 'No';
   }
 
   if (item === 'hasConvictedForBusinessIntegrity') {
-    description = businessInfo.proveHasNotConvicted || 'false';
+    description = businessInfo.proveHasNotConvicted || 'No';
   }
 
   if (item === 'hasLeadersConvicted') {

@@ -1,4 +1,4 @@
-import { renderFile } from './utils';
+import { renderFile, renderBoolean } from './utils';
 
 const generateItems = () => {
   return [
@@ -35,7 +35,7 @@ const renderDescription = props => {
   }
 
   if (typeof value === 'boolean') {
-    description = value.toString();
+    description = renderBoolean(value);
   }
 
   const fileFields = [
@@ -55,7 +55,7 @@ const renderDescription = props => {
   const descFields = ['hasWorkedOnWorldBank', 'hasWorkedOnLargeProjects', 'doesHaveLicense'];
 
   if (descFields.includes(item)) {
-    description = healthInfo[`${item}Description`] || 'no';
+    description = healthInfo[`${item}Description`] || 'No';
   }
 
   return description;

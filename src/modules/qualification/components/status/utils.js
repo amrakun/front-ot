@@ -3,7 +3,7 @@ import { readFileUrl } from 'modules/common/utils';
 
 export const renderFile = value => {
   if (!value) {
-    return 'no';
+    return 'No';
   }
 
   return (
@@ -14,4 +14,8 @@ export const renderFile = value => {
       </a>
     </span>
   );
+};
+
+export const renderBoolean = value => {
+  return value ? 'Yes' : 'No';
 };

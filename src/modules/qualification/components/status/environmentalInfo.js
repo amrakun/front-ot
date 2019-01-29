@@ -1,14 +1,12 @@
 import React from 'react';
 import moment from 'moment';
 import { dateFormat } from 'modules/common/constants';
-import { renderFile } from './utils';
+import { renderFile, renderBoolean } from './utils';
 
 const generateItems = () => {
   return [
     'doesHavePlan',
     'hasEnvironmentalRegulatorInvestigated',
-    'actionStatus',
-    'investigationDocumentation',
     'hasConvictedForEnvironmentalLaws',
   ];
 };
@@ -25,7 +23,7 @@ const renderDescription = props => {
   }
 
   if (typeof value === 'boolean') {
-    description = value.toString();
+    description = renderBoolean(value);
   }
 
   if (item === 'investigationDocumentation') {
@@ -33,7 +31,7 @@ const renderDescription = props => {
   }
 
   if (item === 'hasEnvironmentalRegulatorInvestigated') {
-    description = 'no';
+    description = 'No';
 
     if (value) {
       description = (
@@ -44,13 +42,15 @@ const renderDescription = props => {
           </span>{' '}
           <br />
           <span>Reason for investigation: {environmentalInfo.reasonForInvestigation}</span> <br />
+          <span>Action status: {environmentalInfo.actionStatus}</span> <br />
+          <span>{renderFile(environmentalInfo.investigationDocumentation)}</span> <br />
         </div>
       );
     }
   }
 
   if (item === 'hasConvictedForEnvironmentalLaws') {
-    description = 'no';
+    description = 'No';
 
     if (value) {
       description = environmentalInfo.proveHasNotConvicted;

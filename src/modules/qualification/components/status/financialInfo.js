@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { dateFormat } from 'modules/common/constants';
-import { renderFile } from './utils';
+import { renderFile, renderBoolean } from './utils';
 
 const generateItems = ({ companyInfo }) => {
   const financialInfo = companyInfo.financialInfo || {};
@@ -49,11 +49,11 @@ const renderDescription = props => {
   }
 
   if (typeof value === 'boolean') {
-    description = value.toString();
+    description = renderBoolean(value);
   }
 
   if (item === 'canProvideAccountsInfo') {
-    description = 'yes';
+    description = 'Yes';
 
     if (!financialInfo.canProvideAccountsInfo) {
       description = financialInfo.reasonToCannotNotProvide;
