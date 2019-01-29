@@ -8,18 +8,56 @@ class CommonTab extends React.Component {
   constructor(props) {
     super(props);
 
+    const { items, data } = props;
+
+    const checkboxValues = {};
+    let checkAll = true;
+
+    for (const item of items) {
+      checkboxValues[item] = data[item];
+
+      if (!data[item]) {
+        checkAll = false;
+      }
+    }
+
+    this.state = {
+      checkAll,
+      checkboxValues,
+    };
+
     this.renderItem = this.renderItem.bind(this);
     this.nextTab = this.nextTab.bind(this);
+    this.handleCheckAll = this.handleCheckAll.bind(this);
+  }
+
+  handleCheckAll(e) {
+    const { items } = this.props;
+    const isChecked = e.target.checked;
+
+    const checkboxValues = {};
+
+    for (const item of items) {
+      checkboxValues[item] = isChecked;
+    }
+
+    this.setState({ checkAll: isChecked, checkboxValues });
+  }
+
+  onCheckChange(item, e) {
+    const { checkboxValues } = this.state;
+
+    checkboxValues[item] = e.target.checked;
+
+    this.setState({ checkboxValues });
   }
 
   nextTab() {
-    const { nextTab, save, form } = this.props;
+    const { nextTab, save } = this.props;
+    const { checkboxValues } = this.state;
 
-    form.validateFields((err, values) => {
-      save(values);
-
-      nextTab();
-    });
+    save(checkboxValues);
+    nextTab();
   }
 
   renderNextButton() {
@@ -45,8 +83,8 @@ class CommonTab extends React.Component {
   }
 
   renderItem(item) {
-    const { renderDescription, form, data, companyInfo } = this.props;
-    const { getFieldDecorator } = form;
+    const { checkboxValues } = this.state;
+    const { renderDescription, data, companyInfo } = this.props;
 
     const description = renderDescription({ item, companyInfo, data });
 
@@ -55,19 +93,20 @@ class CommonTab extends React.Component {
         <List.Item.Meta style={{ maxWidth: 450 }} title={labels[item]} description={description} />
 
         <Form.Item>
-          {getFieldDecorator(item, {
-            initialValue: data[item],
-          })(
-            <Checkbox style={{ minWidth: '80px', marginLeft: '24px' }} defaultChecked={data[item]}>
-              Qualified
-            </Checkbox>
-          )}
+          <Checkbox
+            style={{ minWidth: '80px', marginLeft: '24px' }}
+            checked={checkboxValues[item]}
+            onChange={this.onCheckChange.bind(this, item)}
+          >
+            Qualified
+          </Checkbox>
         </Form.Item>
       </List.Item>
     );
   }
 
   render() {
+    const { checkAll } = this.state;
     const { title, isQualified, items } = this.props;
 
     return (
@@ -82,7 +121,15 @@ class CommonTab extends React.Component {
 
         <p style={{ height: '8px' }} />
 
-        <Card title={title} bodyStyle={{ paddingBottom: '24px' }}>
+        <Card
+          title={title}
+          bodyStyle={{ paddingBottom: '24px' }}
+          extra={
+            <Checkbox checked={checkAll} onChange={this.handleCheckAll}>
+              Check all
+            </Checkbox>
+          }
+        >
           <List itemLayout="horizontal" dataSource={items} renderItem={this.renderItem} />
         </Card>
 
@@ -95,4 +142,4 @@ class CommonTab extends React.Component {
   }
 }
 
-export default Form.create()(CommonTab);
+export default CommonTab;
