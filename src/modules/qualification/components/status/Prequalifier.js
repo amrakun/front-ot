@@ -50,6 +50,10 @@ export default class Prequalifier extends React.Component {
 
     return (
       <div style={{ marginBottom: '30px' }}>
+        {isPrequalified && (
+          <Alert message="This supplier is pre-qualified" type="success" showIcon />
+        )}
+
         {isPrequalified === false && (
           <Alert
             message={
