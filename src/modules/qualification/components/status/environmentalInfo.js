@@ -50,7 +50,11 @@ const renderDescription = props => {
   }
 
   if (item === 'hasConvictedForEnvironmentalLaws') {
-    description = environmentalInfo.proveHasNotConvicted || 'false';
+    description = 'false';
+
+    if (value) {
+      description = environmentalInfo.proveHasNotConvicted;
+    }
   }
 
   const fileFields = ['doesHavePlan'];

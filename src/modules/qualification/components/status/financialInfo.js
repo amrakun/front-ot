@@ -52,8 +52,12 @@ const renderDescription = props => {
     description = value.toString();
   }
 
-  if (item === 'canProvideAccountsInfo' && !financialInfo.canProvideAccountsInfo) {
-    description = financialInfo.reasonToCannotNotProvide;
+  if (item === 'canProvideAccountsInfo') {
+    description = 'false';
+
+    if (financialInfo.canProvideAccountsInfo) {
+      description = financialInfo.reasonToCannotNotProvide;
+    }
   }
 
   if (
