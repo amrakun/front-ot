@@ -52,6 +52,7 @@ class ManageTemplates extends React.Component {
       { value: 'supplier__regretLetter', text: 'Regret letter' },
       { value: 'supplier__reopen', text: 'Reopen' },
       { value: 'supplier__edit', text: 'Edit' },
+      { value: 'message__notification', text: 'Message notification' },
     ];
   }
 
@@ -90,6 +91,7 @@ class ManageTemplates extends React.Component {
                   { value: 'supplier__reminder', text: 'Remind supplier' },
                   { value: 'supplier__regretLetter', text: 'Regret letter' },
                   { value: 'supplier__edit', text: 'Edit' },
+                  { value: 'message__notification', text: 'Message notification' },
                 ],
               })}
               {this.renderTabPane({
