@@ -1,13 +1,13 @@
 import React from 'react';
 import { Tabs, Button, Alert } from 'antd';
 import { Panes } from 'modules/common/components';
-import StatusTab from './StatusTab';
 import CommonTab from './CommonTab';
 import TierTypeTab from './TierTypeTab';
 import TierTypeForm from './TierTypeForm';
 import financialInfo from './financialInfo';
 import businessInfo from './businessInfo';
 import environmentalInfo from './environmentalInfo';
+import healthInfo from './healthInfo';
 import { Prequalifier } from '../../containers/status';
 
 class Status extends Panes {
@@ -123,8 +123,12 @@ class Status extends Panes {
             key: 4,
             title: 'Health & safety management system',
             name: 'healthInfo',
-            Component: StatusTab,
-            data: extraProps('healthInfo'),
+            Component: CommonTab,
+            data: {
+              items: healthInfo.generateItems(),
+              renderDescription: healthInfo.renderDescription,
+              companyInfo,
+            },
           })}
 
           {this.renderPane({
