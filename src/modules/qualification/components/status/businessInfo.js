@@ -1,5 +1,7 @@
 import React from 'react';
 import { readFileUrl } from 'modules/common/utils';
+import moment from 'moment';
+import { dateFormat } from 'modules/common/constants';
 
 const generateItems = () => {
   return [
@@ -13,7 +15,6 @@ const generateItems = () => {
     'hasConvictedLabourLaws',
     'hasConvictedForHumanRights',
     'hasConvictedForBusinessIntegrity',
-    'proveHasNotConvicted',
     'hasLeadersConvicted',
     'doesEmployeePoliticallyExposed',
     'pepName',
@@ -35,6 +36,35 @@ const renderDescription = props => {
 
   if (typeof value === 'boolean') {
     description = value.toString();
+  }
+
+  if (item === 'hasConvictedLabourLaws') {
+    description = businessInfo.hasConvictedLabourLawsDescription;
+  }
+
+  if (item === 'hasConvictedForHumanRights') {
+    description = businessInfo.hasConvictedForHumanRightsDescription;
+  }
+
+  if (item === 'hasConvictedForBusinessIntegrity') {
+    description = businessInfo.proveHasNotConvicted;
+  }
+
+  if (item === 'hasLeadersConvicted') {
+    description = (businessInfo.investigations || []).map((v, i) => {
+      return (
+        <div key={i}>
+          <span>name: {v.name}</span>
+          <br />
+          <span>date: {moment(new Date(v.date)).format(dateFormat)}</span>
+          <br />
+          <span>status: {v.status}</span>
+          <br />
+          <span>status date: {moment(new Date(v.statusDate)).format(dateFormat)}</span>
+          <br />
+        </div>
+      );
+    });
   }
 
   if (item === 'organizationChartFile' && value) {

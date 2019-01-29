@@ -52,7 +52,6 @@ const qualificationDetail = `
         hasConvictedLabourLaws
         hasConvictedForHumanRights
         hasConvictedForBusinessIntegrity
-        proveHasNotConvicted
         hasLeadersConvicted
         doesEmployeePoliticallyExposed
         pepName
