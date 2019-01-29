@@ -22,7 +22,7 @@ class Tenders extends React.Component {
     const status = query[this.statusParam] || '';
 
     this.state = {
-      statuses: status.split(',')
+      statuses: status.split(','),
     };
 
     this.renderOperation = this.renderOperation.bind(this);
@@ -41,7 +41,7 @@ class Tenders extends React.Component {
 
     if (statuses && statuses.length > 0) {
       router.setParams(this.props.history, {
-        [this.statusParam]: statuses.join(',')
+        [this.statusParam]: statuses.join(','),
       });
     } else {
       router.removeParams(this.props.history, this.statusParam);
@@ -67,7 +67,7 @@ class Tenders extends React.Component {
       <Tooltip title={<span className="capitalize">{__(status)}</span>}>
         {this.renderIcon(status, {
           fontSize: '20px',
-          lineHeight: '12px'
+          lineHeight: '12px',
         })}
       </Tooltip>
     );
@@ -81,22 +81,24 @@ class Tenders extends React.Component {
         title: __('Tender Number'),
         dataIndex: 'number',
         fixed: 'left',
-        width: 75
+        width: 75,
       },
       {
         title: __('Tender Description'),
         dataIndex: 'name',
         fixed: 'left',
-        width: 100
+        width: 100,
       },
       {
         title: __('Publish Date'),
-        render: (text, record) => this.renderDate(record.publishDate)
+        render: (text, record) => this.renderDate(record.publishDate),
+        width: 150,
       },
       {
         title: __('Close Date'),
-        render: (text, record) => this.renderDate(record.closeDate)
-      }
+        render: (text, record) => this.renderDate(record.closeDate),
+        width: 150,
+      },
     ];
   }
 
@@ -188,11 +190,11 @@ Tenders.propTypes = {
   loading: PropTypes.bool.isRequired,
   onChange: PropTypes.func,
   history: PropTypes.object,
-  totalCount: PropTypes.number
+  totalCount: PropTypes.number,
 };
 
 Tenders.contextTypes = {
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 export default Tenders;
