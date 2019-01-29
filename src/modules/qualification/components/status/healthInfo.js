@@ -55,7 +55,7 @@ const renderDescription = props => {
   const descFields = ['hasWorkedOnWorldBank', 'hasWorkedOnLargeProjects', 'doesHaveLicense'];
 
   if (descFields.includes(item)) {
-    description = healthInfo[`${item}Description`] || 'false';
+    description = healthInfo[`${item}Description`] || 'no';
   }
 
   return description;

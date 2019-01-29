@@ -33,7 +33,7 @@ const renderDescription = props => {
   }
 
   if (item === 'hasEnvironmentalRegulatorInvestigated') {
-    description = 'false';
+    description = 'no';
 
     if (value) {
       description = (
@@ -50,7 +50,7 @@ const renderDescription = props => {
   }
 
   if (item === 'hasConvictedForEnvironmentalLaws') {
-    description = 'false';
+    description = 'no';
 
     if (value) {
       description = environmentalInfo.proveHasNotConvicted;

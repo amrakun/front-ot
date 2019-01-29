@@ -3,7 +3,7 @@ import { readFileUrl } from 'modules/common/utils';
 
 export const renderFile = value => {
   if (!value) {
-    return 'false';
+    return 'no';
   }
 
   return (
