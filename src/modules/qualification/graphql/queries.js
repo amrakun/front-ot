@@ -30,7 +30,6 @@ const qualificationDetail = `
       _id
       financialInfo {
         canProvideAccountsInfo
-        reasonToCannotNotProvide
         currency
         annualTurnover
         preTaxProfit

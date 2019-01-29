@@ -3,20 +3,27 @@ import moment from 'moment';
 import { readFileUrl } from 'modules/common/utils';
 import { dateFormat } from 'modules/common/constants';
 
-const generateItems = () => {
-  return [
-    'canProvideAccountsInfo',
-    'reasonToCannotNotProvide',
-    'currency',
-    'annualTurnover',
-    'preTaxProfit',
-    'totalAssets',
-    'totalCurrentAssets',
-    'totalShareholderEquity',
-    'recordsInfo',
-    'isUpToDateSSP',
-    'isUpToDateCTP',
-  ];
+const generateItems = ({ companyInfo }) => {
+  const financialInfo = companyInfo.financialInfo || {};
+
+  let items = ['canProvideAccountsInfo'];
+
+  if (financialInfo.canProvideAccountsInfo) {
+    items = [
+      ...items,
+      'currency',
+      'preTaxProfit',
+      'annualTurnover',
+      'totalAssets',
+      'totalCurrentAssets',
+      'totalShareholderEquity',
+      'recordsInfo',
+    ];
+  }
+
+  items = [...items, 'isUpToDateSSP', 'isUpToDateCTP'];
+
+  return items;
 };
 
 const renderYearAmount = value => {
@@ -31,7 +38,7 @@ const renderYearAmount = value => {
 };
 
 const renderDescription = props => {
-  const { item, companyInfo } = props;
+  const { item, companyInfo, data } = props;
   const financialInfo = companyInfo.financialInfo || {};
   const value = financialInfo[item];
 
@@ -43,6 +50,10 @@ const renderDescription = props => {
 
   if (typeof value === 'boolean') {
     description = value.toString();
+  }
+
+  if (item === 'canProvideAccountsInfo' && !data.canProvideAccountsInfo) {
+    description = financialInfo.reasonToCannotNotProvide;
   }
 
   if (

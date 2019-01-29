@@ -1,16 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Button,
-  Form,
-  Select,
-  Row,
-  Col,
-  DatePicker,
-  Input,
-  Card,
-  Popconfirm
-} from 'antd';
+import { Button, Form, Select, Row, Col, DatePicker, Input, Card, Popconfirm } from 'antd';
 import moment from 'moment';
 import { yearData, booleanData, currencyData } from '../constants';
 import { Uploader } from 'modules/common/components';
@@ -22,7 +12,7 @@ class PrequalificationForm extends PreqForm {
     super(props);
 
     this.state = {
-      canProvideAccountsInfo: props.data.canProvideAccountsInfo
+      canProvideAccountsInfo: props.data.canProvideAccountsInfo,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -75,22 +65,17 @@ class PrequalificationForm extends PreqForm {
     e.preventDefault();
 
     this.saveDirect({
-      canProvideAccountsInfo: this.getFieldValue(
-        'canProvideAccountsInfo',
-        'boolean'
-      ),
+      canProvideAccountsInfo: this.getFieldValue('canProvideAccountsInfo', 'boolean'),
       reasonToCannotNotProvide: this.getFieldValue('reasonToCannotNotProvide'),
       currency: this.getFieldValue('currency'),
       annualTurnover: this.collectYearAmountValues('annualTurnover'),
       preTaxProfit: this.collectYearAmountValues('preTaxProfit'),
       totalAssets: this.collectYearAmountValues('totalAssets'),
       totalCurrentAssets: this.collectYearAmountValues('totalCurrentAssets'),
-      totalShareholderEquity: this.collectYearAmountValues(
-        'totalShareholderEquity'
-      ),
+      totalShareholderEquity: this.collectYearAmountValues('totalShareholderEquity'),
       recordsInfo: this.collectRecordsInfoValues(),
       isUpToDateSSP: this.getFieldValue('isUpToDateSSP', 'boolean'),
-      isUpToDateCTP: this.getFieldValue('isUpToDateCTP', 'boolean')
+      isUpToDateCTP: this.getFieldValue('isUpToDateCTP', 'boolean'),
     });
   }
 
@@ -121,7 +106,7 @@ class PrequalificationForm extends PreqForm {
               <Select {...this.common} placeholder={__('Select an year')}>
                 {this.renderOptions(yearData, true)}
               </Select>
-            )
+            ),
           })}
         </Col>
         <Col span={12}>
@@ -131,7 +116,7 @@ class PrequalificationForm extends PreqForm {
             dataType: 'number',
             optional: !canProvideAccountsInfo,
             hasFeedback: false,
-            control: <Input type="number" />
+            control: <Input type="number" />,
           })}
         </Col>
       </Row>
@@ -176,9 +161,7 @@ class PrequalificationForm extends PreqForm {
             initialValue: initialDate,
             hasFeedback: false,
             optional: !canProvideAccountsInfo,
-            control: (
-              <DatePicker format={dateFormat} placeholder={__('Choose date')} />
-            )
+            control: <DatePicker format={dateFormat} placeholder={__('Choose date')} />,
           })}
         </Col>
         <Col span={12}>
@@ -188,7 +171,7 @@ class PrequalificationForm extends PreqForm {
             hasFeedback: false,
             optional: !canProvideAccountsInfo,
             dataType: 'file',
-            control: <Uploader />
+            control: <Uploader />,
           })}
         </Col>
       </Row>
@@ -225,11 +208,10 @@ class PrequalificationForm extends PreqForm {
     const { canProvideAccountsInfo } = this.state;
     const { __ } = this.context;
 
-    const reasonVisible =
-      canProvideAccountsInfo !== undefined ? !canProvideAccountsInfo : false;
+    const reasonVisible = canProvideAccountsInfo !== undefined ? !canProvideAccountsInfo : false;
 
     return (
-      <Form className="preq-form">
+      <Form className="preq-form" key={`key-${canProvideAccountsInfo}`}>
         {this.renderStatus('financialInfo')}
 
         <Card bodyStyle={{ paddingBottom: '16px' }}>
@@ -237,14 +219,10 @@ class PrequalificationForm extends PreqForm {
             label: 'Can you provide accounts for the last 3 financial years?',
             name: 'canProvideAccountsInfo',
             control: (
-              <Select
-                {...this.common}
-                {...this.common}
-                onChange={this.onCanProvide}
-              >
+              <Select {...this.common} {...this.common} onChange={this.onCanProvide}>
                 {booleanOptions}
               </Select>
-            )
+            ),
           })}
 
           <div className={!canProvideAccountsInfo ? 'hidden' : ''}>
@@ -261,7 +239,7 @@ class PrequalificationForm extends PreqForm {
                 >
                   {currencyOptions}
                 </Select>
-              )
+              ),
             })}
 
             {this.renderYearAmountGroup(
@@ -286,20 +264,13 @@ class PrequalificationForm extends PreqForm {
               'totalCurrentAssets',
               "Line#1.3 of 'Balance sheet' on Financial Statements (Form-A) for Finance office of Government"
             )}
-            {this.renderYearAmountGroup(
-              'Total shareholders equity ',
-              'totalShareholderEquity'
-            )}
+            {this.renderYearAmountGroup('Total shareholders equity ', 'totalShareholderEquity')}
 
             <Form.Item
               {...this.common}
               className="multiple-wrapper"
-              label={__(
-                'Please provide financial records for your last 3 years'
-              )}
-              extra={__(
-                'The most recent years worth of accounts will always appear on top'
-              )}
+              label={__('Please provide financial records for your last 3 years')}
+              extra={__('The most recent years worth of accounts will always appear on top')}
             >
               {this.renderDateFile(0)}
               {this.renderDateFile(1)}
@@ -312,9 +283,7 @@ class PrequalificationForm extends PreqForm {
             name: 'reasonToCannotNotProvide',
             isVisible: reasonVisible,
             optional: !reasonVisible,
-            control: (
-              <Input.TextArea {...this.common} style={{ minHeight: '80px' }} />
-            )
+            control: <Input.TextArea {...this.common} style={{ minHeight: '80px' }} />,
           })}
         </Card>
 
@@ -325,28 +294,20 @@ class PrequalificationForm extends PreqForm {
             isVisible: country === 'MN',
             optional: country !== 'MN',
             control: (
-              <Select
-                {...this.common}
-                {...this.common}
-                placeholder={__('Select one')}
-              >
+              <Select {...this.common} {...this.common} placeholder={__('Select one')}>
                 {booleanOptions}
               </Select>
-            )
+            ),
           })}
 
           {this.renderField({
             label: 'Is your company up to date with Corporation Tax payments?',
             name: 'isUpToDateCTP',
             control: (
-              <Select
-                {...this.common}
-                {...this.common}
-                placeholder={__('Select one')}
-              >
+              <Select {...this.common} {...this.common} placeholder={__('Select one')}>
                 {booleanOptions}
               </Select>
-            )
+            ),
           })}
         </Card>
 
@@ -358,11 +319,11 @@ class PrequalificationForm extends PreqForm {
 }
 
 PrequalificationForm.propTypes = {
-  onSkip: PropTypes.func
+  onSkip: PropTypes.func,
 };
 
 PrequalificationForm.contextTypes = {
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 export default Form.create()(PrequalificationForm);

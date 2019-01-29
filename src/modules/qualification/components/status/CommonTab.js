@@ -48,13 +48,11 @@ class CommonTab extends React.Component {
     const { renderDescription, form, data, companyInfo } = this.props;
     const { getFieldDecorator } = form;
 
+    const description = renderDescription({ item, companyInfo, data });
+
     return (
       <List.Item>
-        <List.Item.Meta
-          style={{ maxWidth: 450 }}
-          title={labels[item]}
-          description={renderDescription({ item, companyInfo })}
-        />
+        <List.Item.Meta style={{ maxWidth: 450 }} title={labels[item]} description={description} />
 
         <Form.Item>
           {getFieldDecorator(item, {
