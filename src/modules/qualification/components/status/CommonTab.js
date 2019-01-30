@@ -2,11 +2,14 @@
 
 import React from 'react';
 import { Card, Form, Alert, Button, Icon, List, Checkbox } from 'antd';
+import { withRouter } from 'react-router';
 import { labels } from 'modules/companies/components/prequalification/constants';
 
 class CommonTab extends React.Component {
   constructor(props) {
     super(props);
+
+    this.viewMode = props.location.search === '?view';
 
     const { items, data } = props;
 
@@ -97,6 +100,7 @@ class CommonTab extends React.Component {
             style={{ minWidth: '80px', marginLeft: '24px' }}
             checked={checkboxValues[item]}
             onChange={this.onCheckChange.bind(this, item)}
+            disabled={this.viewMode}
           >
             Qualified
           </Checkbox>
@@ -125,7 +129,7 @@ class CommonTab extends React.Component {
           title={title}
           bodyStyle={{ paddingBottom: '24px' }}
           extra={
-            <Checkbox checked={checkAll} onChange={this.handleCheckAll}>
+            <Checkbox checked={checkAll} onChange={this.handleCheckAll} disabled={this.viewMode}>
               Check all
             </Checkbox>
           }
@@ -133,13 +137,15 @@ class CommonTab extends React.Component {
           <List itemLayout="horizontal" dataSource={items} renderItem={this.renderItem} />
         </Card>
 
-        <div>
-          {this.renderPrevButton()}
-          {this.renderNextButton()}
-        </div>
+        {!this.viewMode && (
+          <div>
+            {this.renderPrevButton()}
+            {this.renderNextButton()}
+          </div>
+        )}
       </Form>
     );
   }
 }
 
-export default CommonTab;
+export default withRouter(CommonTab);
