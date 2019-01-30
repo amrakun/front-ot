@@ -370,15 +370,13 @@ class Rfq extends Tender {
       {
         title: 'Picture (if required)',
         key: '17',
-        render: record => (
-          <a
-            href="#download"
-            onClick={() => window.open(readFileUrl(record.file.url))}
-            target="__blank"
-          >
-            Download
-          </a>
-        ),
+        dataIndex: 'file',
+        render: file =>
+          file && file.url ? (
+            <a href="#download" onClick={() => window.open(readFileUrl(file.url))} target="__blank">
+              Download
+            </a>
+          ) : null,
       },
     ];
 
