@@ -35,8 +35,6 @@ const List = props => {
   const { listForTender, totalCountForTender } = props;
   return (
     <>
-      <h1>logs</h1>
-      <pre>{JSON.stringify(listForTender, null, 4)}</pre>
       <Table
         columns={columns}
         rowKey={({ _id }) => _id}
