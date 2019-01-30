@@ -167,9 +167,9 @@ class PrequalificationForm extends PreqForm {
 
         {this.renderConditionalField('doesMeetMinimumStandarts')}
         {this.renderConditionalField('doesHaveJobDescription')}
+        {this.renderConditionalField('doesConcludeValidContracts')}
 
         <Card>
-          {this.renderBoolean('doesConcludeValidContracts')}
           {this.renderField({
             name: 'employeeTurnoverRate',
             label: labels.employeeTurnoverRate,

@@ -70,6 +70,7 @@ const renderDescription = props => {
   const fileFields = [
     'doesHaveCodeEthics',
     'doesMeetMinimumStandarts',
+    'doesConcludeValidContracts',
     'doesHaveJobDescription',
     'doesHaveLiabilityInsurance',
     'doesHaveResponsiblityPolicy',
