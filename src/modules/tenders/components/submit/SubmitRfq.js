@@ -104,7 +104,6 @@ class SubmitTender extends BaseForm {
     );
   }
   onErrorChange(hasError) {
-    console.log(hasError);
     this.setState({ hasError });
   }
   render() {
