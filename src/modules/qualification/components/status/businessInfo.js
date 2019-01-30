@@ -17,7 +17,6 @@ const generateItems = () => {
     'hasConvictedForBusinessIntegrity',
     'hasLeadersConvicted',
     'doesEmployeePoliticallyExposed',
-    'pepName',
     'organizationChartFile',
     'isSubContractor',
   ];
@@ -65,6 +64,14 @@ const renderDescription = props => {
         </div>
       );
     });
+  }
+
+  if (item === 'doesEmployeePoliticallyExposed') {
+    description = 'No';
+
+    if (value) {
+      description = businessInfo.pepName;
+    }
   }
 
   const fileFields = [

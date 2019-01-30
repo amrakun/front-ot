@@ -54,7 +54,6 @@ const qualificationDetail = `
         hasConvictedForBusinessIntegrity
         hasLeadersConvicted
         doesEmployeePoliticallyExposed
-        pepName
         organizationChartFile
         isSubContractor
       }
