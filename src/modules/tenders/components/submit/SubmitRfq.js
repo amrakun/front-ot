@@ -31,8 +31,17 @@ class SubmitTender extends BaseForm {
   }
 
   getRespondedProducts() {
-    return this.state.respondedProducts.map(product => {
-      const totalPrice = product.quantity * product.unitPrice;
+    const { requestedProducts } = this.props.data;
+
+    return this.state.respondedProducts.map((product, index) => {
+      const requestedProduct = requestedProducts[index];
+
+      if (!requestedProduct) {
+        return {};
+      }
+
+      const totalPrice = requestedProduct.quantity * product.unitPrice;
+
       delete product.key;
       delete product.__typename;
       delete product.purchaseRequestNumber;
