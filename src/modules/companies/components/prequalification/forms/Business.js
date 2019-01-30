@@ -162,15 +162,8 @@ class PrequalificationForm extends PreqForm {
     return (
       <Form onSubmit={this.handleSubmit}>
         {this.renderStatus('businessInfo')}
+
         <h2>{__('Human resource management')}</h2>
-        <Card>
-          {this.renderField({
-            label: labels.organizationChartFile,
-            name: 'organizationChartFile',
-            dataType: 'file',
-            control: <Uploader />,
-          })}
-        </Card>
 
         {this.renderConditionalField('doesMeetMinimumStandarts')}
         {this.renderConditionalField('doesHaveJobDescription')}
@@ -257,6 +250,13 @@ class PrequalificationForm extends PreqForm {
             isVisible: doesEmployeePoliticallyExposed,
             optional: !doesEmployeePoliticallyExposed,
             control: <Input {...this.common} />,
+          })}
+
+          {this.renderField({
+            label: labels.organizationChartFile,
+            name: 'organizationChartFile',
+            dataType: 'file',
+            control: <Uploader />,
           })}
 
           {this.renderField({

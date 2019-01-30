@@ -5,7 +5,6 @@ import { renderFile, renderBoolean } from './utils';
 
 const generateItems = () => {
   return [
-    'organizationChartFile',
     'doesMeetMinimumStandarts',
     'doesHaveJobDescription',
     'doesConcludeValidContracts',
@@ -19,6 +18,7 @@ const generateItems = () => {
     'hasLeadersConvicted',
     'doesEmployeePoliticallyExposed',
     'pepName',
+    'organizationChartFile',
     'isSubContractor',
   ];
 };
