@@ -186,6 +186,7 @@ const prequalificationFields = `
     doesHaveJobDescription
     doesHaveJobDescriptionFile
     doesConcludeValidContracts
+    doesConcludeValidContractsFile
     employeeTurnoverRate
     doesHaveLiabilityInsurance
     doesHaveLiabilityInsuranceFile
@@ -526,5 +527,5 @@ export default {
   capacityBuilding,
   exportCompany,
   exportCurrentCompanyRegistration,
-  exportCurrentCompanyPrequalification
+  exportCurrentCompanyPrequalification,
 };
