@@ -86,8 +86,6 @@ class Tenders extends React.Component {
       {
         title: __('Tender Description'),
         dataIndex: 'name',
-        fixed: 'left',
-        width: 100,
       },
       {
         title: __('Publish Date'),
