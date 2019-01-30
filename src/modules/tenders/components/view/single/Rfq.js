@@ -292,6 +292,7 @@ class Rfq extends Tender {
         title="Award"
         visible={showAwardForm}
         width="50%"
+        onCancel={this.toggleAwardForm}
         footer={[
           <Button key="cancel" onClick={this.toggleAwardForm}>
             Cancel
