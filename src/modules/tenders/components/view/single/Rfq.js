@@ -16,6 +16,7 @@ import {
   Card,
   Input,
   Tabs,
+  Popconfirm,
 } from 'antd';
 import { rfqRequestColumns } from '../../../constants';
 import Tender from './Tender';
@@ -291,9 +292,22 @@ class Rfq extends Tender {
       <Modal
         title="Award"
         visible={showAwardForm}
-        onCancel={this.toggleAwardForm}
-        onOk={this.award}
         width="50%"
+        onCancel={this.toggleAwardForm}
+        footer={[
+          <Button key="cancel" onClick={this.toggleAwardForm}>
+            Cancel
+          </Button>,
+          <Popconfirm
+            key="popconfirm"
+            title={`Awarding ${selectedCompanies.length} companies. Are you sure?`}
+            onConfirm={this.award}
+          >
+            <Button key="submit" type="primary">
+              Ok
+            </Button>
+          </Popconfirm>,
+        ]}
       >
         {content}
       </Modal>

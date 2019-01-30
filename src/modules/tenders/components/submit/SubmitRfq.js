@@ -126,7 +126,7 @@ class SubmitTender extends BaseForm {
               {form}
               <br />
 
-              {!data.isSent && this.renderAction()}
+              {this.renderAction()}
             </Card>
           </Form>
         </TabPane>
