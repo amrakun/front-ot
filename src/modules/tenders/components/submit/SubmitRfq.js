@@ -83,13 +83,21 @@ class SubmitTender extends BaseForm {
         <Button style={{ marginRight: '16px' }} htmlType="button" onClick={this.saveDraft}>
           {__('Save as draft')}
         </Button>
-        <Button type="primary" htmlType="button" onClick={this.handleSubmit}>
+        <Button
+          disabled={this.state.hasError}
+          type="primary"
+          htmlType="button"
+          onClick={this.handleSubmit}
+        >
           {__('Save & submit')}
         </Button>
       </div>
     );
   }
-
+  onErrorChange(hasError) {
+    console.log(hasError);
+    this.setState({ hasError });
+  }
   render() {
     const { data, generateTemplate, response, queryParams } = this.props;
     const { type, rfqType, requestedProducts } = data;
@@ -102,6 +110,7 @@ class SubmitTender extends BaseForm {
         respondedProducts={response ? response.respondedProducts : []}
         generateTemplate={generateTemplate}
         onChange={this.onChangeProducts}
+        onErrorChange={this.onErrorChange.bind(this)}
       />
     );
 

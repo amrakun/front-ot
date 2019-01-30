@@ -6,6 +6,7 @@ import { rfqProductsColumns as rpc, rfqDisclaimer } from '../../constants';
 import { Uploader } from 'modules/common/components';
 import { xlsxHandler } from 'modules/common/utils';
 import { controlValueParser, collectProducts } from '../utils';
+import debounce from 'debounce';
 
 const { Column } = Table;
 const { Option } = Select;
@@ -41,6 +42,7 @@ class RfqTable extends Component {
     this.onProductInputChange = this.onProductInputChange.bind(this);
     this.onProductFileChange = this.onProductFileChange.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.validateDebounced = debounce(this.validate.bind(this), 500);
   }
 
   onChange() {
@@ -56,14 +58,31 @@ class RfqTable extends Component {
     this.setState({ [stateKey]: product }, () => this.onChange());
   }
 
-  onProductInputChange(e, name, recordKey, dataType) {
+  async onProductInputChange(e, name, recordKey, dataType) {
     const stateKey = `product__${recordKey}`;
 
     const product = this.state[stateKey] || {};
 
     product[name] = controlValueParser({ e, dataType });
 
-    this.setState({ [stateKey]: product }, () => this.onChange());
+    await this.setState({ [stateKey]: product }, () => this.onChange());
+
+    this.validateDebounced();
+  }
+
+  validate() {
+    const { products } = this.state;
+    const { onErrorChange } = this.props;
+    let errorFound = false;
+
+    for (const product of products) {
+      if (product.unitPrice && !product.alternative) {
+        message.error('Please choose a value in "alternative" field');
+        errorFound = true;
+        break;
+      }
+    }
+    if (onErrorChange) onErrorChange(errorFound);
   }
 
   handleFile(e) {
@@ -92,6 +111,10 @@ class RfqTable extends Component {
             alternative: row[13] || '',
             comment: row[14] || '',
           };
+
+          if (doc.unitPrice && !doc.alternative) {
+            errors.push(`Input a value in a field "alternative" on line ${index + 2}`);
+          }
 
           if (doc.unitPrice && !validator.isFloat((doc.unitPrice || '').toString())) {
             errors.push(`Invalid unit price on line ${index + 2}`);
@@ -357,6 +380,7 @@ RfqTable.propTypes = {
   respondedProducts: PropTypes.array,
   onChange: PropTypes.func,
   generateTemplate: PropTypes.func,
+  onErrorChange: PropTypes.func,
 };
 
 RfqTable.contextTypes = {
