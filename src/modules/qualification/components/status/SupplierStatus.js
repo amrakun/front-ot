@@ -1,18 +1,25 @@
 import React from 'react';
 import { Tabs, Button, Alert } from 'antd';
 import { Panes } from 'modules/common/components';
-import StatusTab from './StatusTab';
+import CommonTab from './CommonTab';
 import TierTypeTab from './TierTypeTab';
 import TierTypeForm from './TierTypeForm';
+import financialInfo from './financialInfo';
+import businessInfo from './businessInfo';
+import environmentalInfo from './environmentalInfo';
+import healthInfo from './healthInfo';
+import { Prequalifier } from '../../containers/status';
 
 class Status extends Panes {
-  renderSkipped({ company, saveTierType, supplierInputs, prequalifySupplier }) {
+  renderSkipped() {
+    const { company, companyInfo, saveTierType, prequalifySupplier } = this.props;
+
     return (
       <div>
         <Alert
           style={{ marginBottom: '30px' }}
           message="This supplier is skipped prequalification"
-          description={supplierInputs.prequalificationSkippedReason}
+          description={companyInfo.prequalificationSkippedReason}
           type="warning"
           showIcon
         />
@@ -22,11 +29,10 @@ class Status extends Panes {
           initialValue={company.tierType}
           saveTierType={saveTierType}
           companyInfo={{
-            supplierId: supplierInputs._id,
-            ...supplierInputs.basicInfo,
-            isPrequalified: supplierInputs.isPrequalified,
-            isSentPrequalificationInfo:
-              supplierInputs.isSentPrequalificationInfo
+            supplierId: companyInfo._id,
+            ...companyInfo.basicInfo,
+            isPrequalified: companyInfo.isPrequalified,
+            isSentPrequalificationInfo: companyInfo.isSentPrequalificationInfo,
           }}
           prequalifySupplier={prequalifySupplier}
           renderButtons={save => (
@@ -47,89 +53,90 @@ class Status extends Panes {
   }
 
   render() {
-    const {
-      company,
-      supplierInputs = {},
-      saveTierType,
-      prequalifySupplier,
-      enableSupplierForm
-    } = this.props;
-
     const { currentTabKey } = this.state;
+    const { companyInfo, saveTierType } = this.props;
+    const { _id, isPrequalified, basicInfo, prequalifiedStatus } = companyInfo;
 
-    const prequalifiedStatus = supplierInputs.prequalifiedStatus || {};
-    const isPrequalified = supplierInputs.isPrequalified;
-
-    const extraProps = name => ({
-      statusData: {
-        supplierId: supplierInputs._id,
-        ...supplierInputs.basicInfo,
-        isPrequalified,
-        isSentPrequalificationInfo: supplierInputs.isSentPrequalificationInfo,
-        supplierInputs: supplierInputs[name] || {},
-        tabQualified: prequalifiedStatus[name]
-      },
-      prequalifySupplier,
-      enableSupplierForm,
-      saveTierType
-    });
-
-    if (supplierInputs.isSkippedPrequalification) {
-      return this.renderSkipped({
-        company,
-        saveTierType,
-        supplierInputs,
-        prequalifySupplier
-      });
+    if (companyInfo.isSkippedPrequalification) {
+      return this.renderSkipped();
     }
 
     return (
-      <Tabs
-        activeKey={currentTabKey}
-        onTabClick={this.moveToTab}
-        tabPosition="left"
-        className="supplier-forms"
-      >
-        {this.renderPane({
-          key: 1,
-          title: 'Financial information',
-          name: 'financialInfo',
-          Component: StatusTab,
-          data: extraProps('financialInfo')
-        })}
+      <div>
+        <h2 style={{ textAlign: 'center', marginBottom: '16px' }}>{basicInfo.enName}</h2>
 
-        {this.renderPane({
-          key: 2,
-          title: 'Business integrity & human resource',
-          name: 'businessInfo',
-          Component: StatusTab,
-          data: extraProps('businessInfo')
-        })}
+        <Prequalifier supplierId={_id} isPrequalified={isPrequalified} />
 
-        {this.renderPane({
-          key: 3,
-          title: 'Environmental management',
-          name: 'environmentalInfo',
-          Component: StatusTab,
-          data: extraProps('environmentalInfo')
-        })}
+        <Tabs
+          activeKey={currentTabKey}
+          onTabClick={this.moveToTab}
+          tabPosition="left"
+          className="supplier-forms"
+        >
+          {this.renderPane({
+            key: 1,
+            title: 'Financial information',
+            name: 'financialInfo',
+            Component: CommonTab,
+            data: {
+              isQualified: prequalifiedStatus.financialInfo,
+              items: financialInfo.generateItems({ companyInfo }),
+              renderDescription: financialInfo.renderDescription,
+              companyInfo,
+            },
+          })}
 
-        {this.renderPane({
-          key: 4,
-          title: 'Health & safety management system',
-          name: 'healthInfo',
-          Component: StatusTab,
-          data: extraProps('healthInfo')
-        })}
+          {this.renderPane({
+            key: 2,
+            title: 'Business integrity & human resource',
+            name: 'businessInfo',
+            Component: CommonTab,
+            data: {
+              isQualified: prequalifiedStatus.businessInfo,
+              items: businessInfo.generateItems(),
+              renderDescription: businessInfo.renderDescription,
+              companyInfo,
+            },
+          })}
 
-        {this.renderPane({
-          key: 5,
-          title: 'Select supplier tier type',
-          name: 'tierType',
-          Component: TierTypeTab,
-          data: extraProps('tierType')
-        })}
-      </Tabs>
+          {this.renderPane({
+            key: 3,
+            title: 'Environmental management',
+            name: 'environmentalInfo',
+            Component: CommonTab,
+            data: {
+              isQualified: prequalifiedStatus.environmentalInfo,
+              items: environmentalInfo.generateItems(),
+              renderDescription: environmentalInfo.renderDescription,
+              companyInfo,
+            },
+          })}
+
+          {this.renderPane({
+            key: 4,
+            title: 'Health & safety management system',
+            name: 'healthInfo',
+            Component: CommonTab,
+            data: {
+              isQualified: prequalifiedStatus.healthInfo,
+              items: healthInfo.generateItems(),
+              renderDescription: healthInfo.renderDescription,
+              companyInfo,
+            },
+          })}
+
+          {this.renderPane({
+            key: 5,
+            title: 'Select supplier tier type',
+            name: 'tierType',
+            Component: TierTypeTab,
+            data: {
+              companyInfo,
+              saveTierType,
+            },
+          })}
+        </Tabs>
+      </div>
     );
   }
 }

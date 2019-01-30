@@ -17,14 +17,12 @@ export default class BaseForm extends React.Component {
 
   getChildContext() {
     return {
-      form: this.props.form
+      form: this.props.form,
     };
   }
 
   filterOption(input, option) {
-    return (
-      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-    );
+    return option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0;
   }
 
   save(extra = {}, lastTab = false) {
@@ -39,7 +37,7 @@ export default class BaseForm extends React.Component {
         if (extra) {
           doc = {
             ...doc,
-            ...extra
+            ...extra,
           };
         }
 
@@ -97,7 +95,7 @@ export default class BaseForm extends React.Component {
   }
 
   renderField(definations) {
-    const { initialValue, name, dataType = 'string' } = definations;
+    const { initialValue, name, dataType = 'string', isVisible } = definations;
 
     // collect field definations to use in save
     this.fieldDefs.push({ name, dataType });
@@ -106,7 +104,7 @@ export default class BaseForm extends React.Component {
 
     definations.initialValue = initialValue || data[name];
 
-    return <Field {...definations} />;
+    return <Field key={`${name}-${isVisible}`} {...definations} />;
   }
 
   renderSubmit(text = 'Save & continue', onClick = this.handleSubmit) {
@@ -138,7 +136,7 @@ export default class BaseForm extends React.Component {
 }
 
 BaseForm.childContextTypes = {
-  form: PropTypes.object
+  form: PropTypes.object,
 };
 
 BaseForm.propTypes = {
@@ -146,9 +144,9 @@ BaseForm.propTypes = {
   data: PropTypes.any,
   save: PropTypes.func,
   nextTab: PropTypes.func,
-  previousTab: PropTypes.func
+  previousTab: PropTypes.func,
 };
 
 BaseForm.contextTypes = {
-  __: PropTypes.func
+  __: PropTypes.func,
 };

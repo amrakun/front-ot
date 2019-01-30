@@ -6,20 +6,13 @@ import { SupplierStatus } from '../../components';
 import { message } from 'antd';
 
 const StatusContainer = props => {
-  const {
-    supplierPrequalificationQuery,
-    qualificationDetailQuery,
-    tierTypeSave
-  } = props;
+  const { supplierPrequalificationQuery, qualificationDetailQuery, tierTypeSave } = props;
 
   if (supplierPrequalificationQuery.error || qualificationDetailQuery.error) {
     return null;
   }
 
-  if (
-    supplierPrequalificationQuery.loading ||
-    qualificationDetailQuery.loading
-  ) {
+  if (supplierPrequalificationQuery.loading || qualificationDetailQuery.loading) {
     return null;
   }
 
@@ -64,19 +57,20 @@ const StatusContainer = props => {
     save,
     saveTierType,
     company: {
-      ...qualificationDetailQuery.qualificationDetail
+      ...qualificationDetailQuery.qualificationDetail,
     },
-    supplierInputs: {
-      ...companyDetail
-    }
+    companyInfo: {
+      ...companyDetail,
+    },
   };
+
   return <SupplierStatus {...updatedProps} />;
 };
 
 StatusContainer.propTypes = {
   supplierPrequalificationQuery: PropTypes.object,
   qualificationDetailQuery: PropTypes.object,
-  tierTypeSave: PropTypes.func
+  tierTypeSave: PropTypes.func,
 };
 
 export default compose(
@@ -85,11 +79,11 @@ export default compose(
     options: ({ match }) => {
       return {
         variables: {
-          _id: match.params.id
+          _id: match.params.id,
         },
-        notifyOnNetworkStatusChange: true
+        notifyOnNetworkStatusChange: true,
       };
-    }
+    },
   }),
 
   graphql(gql(queries.qualificationDetail), {
@@ -97,30 +91,30 @@ export default compose(
     options: ({ match }) => {
       return {
         variables: {
-          supplierId: match.params.id
+          supplierId: match.params.id,
         },
-        notifyOnNetworkStatusChange: true
+        notifyOnNetworkStatusChange: true,
       };
-    }
+    },
   }),
 
   graphql(gql(mutations.qualifyFinancialInfo), {
-    name: 'financialInfoEdit'
+    name: 'financialInfoEdit',
   }),
 
   graphql(gql(mutations.qualifyBusinessInfo), {
-    name: 'businessInfoEdit'
+    name: 'businessInfoEdit',
   }),
 
   graphql(gql(mutations.qualifyEnvironmentalInfo), {
-    name: 'environmentalInfoEdit'
+    name: 'environmentalInfoEdit',
   }),
 
   graphql(gql(mutations.qualifyHealthInfo), {
-    name: 'healthInfoEdit'
+    name: 'healthInfoEdit',
   }),
 
   graphql(gql(mutations.qualifySaveTierType), {
-    name: 'tierTypeSave'
+    name: 'tierTypeSave',
   })
 )(StatusContainer);
