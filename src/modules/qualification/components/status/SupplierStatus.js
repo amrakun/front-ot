@@ -119,7 +119,7 @@ class Status extends Panes {
             Component: CommonTab,
             data: {
               isQualified: prequalifiedStatus.healthInfo,
-              items: healthInfo.generateItems(),
+              items: healthInfo.generateItems({ companyInfo }),
               renderDescription: healthInfo.renderDescription,
               companyInfo,
             },

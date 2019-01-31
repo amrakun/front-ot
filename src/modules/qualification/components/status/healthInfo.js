@@ -1,7 +1,9 @@
 import { renderFile, renderBoolean } from './utils';
 
-const generateItems = () => {
-  return [
+const generateItems = ({ companyInfo }) => {
+  const productsInfo = companyInfo.productsInfo || [];
+
+  let fields = [
     'doesHaveHealthSafety',
     'areHSEResourcesClearlyIdentified',
     'doesHaveDocumentedProcessToEnsure',
@@ -10,17 +12,25 @@ const generateItems = () => {
     'doesHaveDocumentForIncidentInvestigation',
     'doesHaveDocumentedFitness',
     'isWillingToComply',
-    'hasIndustrialAccident',
-    'tmha',
-    'ltifr',
-    'injuryExplanation',
-    'seniorManagement',
-    'isWillingToCommit',
-    'isPerparedToCompile',
-    'hasWorkedOnWorldBank',
-    'hasWorkedOnLargeProjects',
-    'doesHaveLicense',
   ];
+
+  if (productsInfo.includes('a01001') || productsInfo.includes('a01002')) {
+    fields = [
+      ...fields,
+      'hasIndustrialAccident',
+      'tmha',
+      'ltifr',
+      'injuryExplanation',
+      'seniorManagement',
+      'isWillingToCommit',
+      'isPerparedToCompile',
+      'hasWorkedOnWorldBank',
+      'hasWorkedOnLargeProjects',
+      'doesHaveLicense',
+    ];
+  }
+
+  return fields;
 };
 
 const renderDescription = props => {
