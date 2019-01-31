@@ -67,8 +67,8 @@ class Tenders extends React.Component {
       },
       {
         title: __('Tender Description'),
-        dataIndex: 'name',
         width: 100,
+        render: (text, record) => <p style={{ maxWidth: '300px' }}>{record.name}</p>,
       },
       {
         title: __('Publish Date'),
