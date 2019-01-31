@@ -99,7 +99,7 @@ class SubmitTender extends BaseForm {
 
               <Actions
                 tender={data}
-                response={data}
+                response={response}
                 __={__}
                 onNotInterested={() => this.save({ isNotInterested: true })}
                 onSaveDraft={() =>
