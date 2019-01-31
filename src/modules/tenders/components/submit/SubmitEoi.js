@@ -19,7 +19,7 @@ class SubmitTender extends BaseForm {
       respondedDocuments: response ? response.respondedDocuments : [],
       submitDisabled: true,
       submitLoading: false,
-      agreementModalVisible: false
+      agreementModalVisible: false,
     };
 
     this.onChangeDocuments = this.onChangeDocuments.bind(this);
@@ -89,35 +89,21 @@ class SubmitTender extends BaseForm {
 
           <br />
 
-          {!data.isSent && (
-            <div className="margin">
-              <Button
-                style={{ marginRight: '16px' }}
-                htmlType="button"
-                onClick={this.saveDraft}
-              >
-                {__('Save as draft')}
-              </Button>
-              <Button
-                type="primary"
-                htmlType="button"
-                onClick={this.handleSubmit}
-              >
-                {__('Save & submit')}
-              </Button>
-            </div>
-          )}
+          <div className="margin">
+            <Button style={{ marginRight: '16px' }} htmlType="button" onClick={this.saveDraft}>
+              {__('Save as draft')}
+            </Button>
+            <Button type="primary" htmlType="button" onClick={this.handleSubmit}>
+              {__('Save & submit')}
+            </Button>
+          </div>
 
           <Modal
             title={__('Confirmation')}
             visible={agreementModalVisible}
             onCancel={this.toggleAgreementModal}
             footer={[
-              <Button
-                key="back"
-                size="large"
-                onClick={this.toggleAgreementModal}
-              >
+              <Button key="back" size="large" onClick={this.toggleAgreementModal}>
                 {__('Return')}
               </Button>,
               <Button
@@ -129,13 +115,11 @@ class SubmitTender extends BaseForm {
                 onClick={this.handleOk}
               >
                 {__('Submit')}
-              </Button>
+              </Button>,
             ]}
           >
             <strong>
-              {__(
-                'Please tick the boxes to confirm that you have agree with the statements'
-              )}
+              {__('Please tick the boxes to confirm that you have agree with the statements')}
             </strong>
 
             <CheckboxGroup
@@ -151,11 +135,11 @@ class SubmitTender extends BaseForm {
 }
 
 SubmitTender.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.object,
 };
 
 SubmitTender.contextTypes = {
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 const form = Form.create()(SubmitTender);
