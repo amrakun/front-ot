@@ -62,7 +62,14 @@ class SubmitTender extends BaseForm {
 
   handleOk() {
     this.setState({ submitLoading: true });
-    this.props.save({ respondedDocuments: this.collectDocuments() }, true);
+
+    this.props.save(
+      {
+        respondedDocuments: this.collectDocuments(),
+        isNotInterested: false,
+      },
+      true
+    );
   }
 
   render() {
@@ -87,9 +94,15 @@ class SubmitTender extends BaseForm {
 
           <Actions
             tender={data}
+            response={response}
             __={__}
             onNotInterested={() => this.save({ isNotInterested: true })}
-            onSaveDraft={() => this.save({ respondedDocuments: this.collectDocuments() })}
+            onSaveDraft={() =>
+              this.save({
+                respondedDocuments: this.collectDocuments(),
+                isNotInterested: false,
+              })
+            }
             onSubmit={this.handleSubmit}
           />
 

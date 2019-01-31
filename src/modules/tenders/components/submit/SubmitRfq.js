@@ -66,7 +66,7 @@ class SubmitTender extends BaseForm {
 
     const respondedProducts = this.getRespondedProducts();
 
-    save({ respondedProducts, respondedFiles }, true);
+    save({ respondedProducts, respondedFiles, isNotInterested: false }, true);
   }
 
   onServiceFileUpload(files) {
@@ -122,11 +122,13 @@ class SubmitTender extends BaseForm {
               <Actions
                 __={__}
                 tender={data}
+                response={response}
                 onNotInterested={() => this.save({ isNotInterested: true })}
                 onSaveDraft={() =>
                   this.save({
                     respondedProducts: this.getRespondedProducts(),
                     respondedFiles: this.state.respondedFiles,
+                    isNotInterested: false,
                   })
                 }
                 onSubmit={this.handleSubmit}

@@ -183,6 +183,7 @@ const tenderResponseByUser = `
   query tenderResponseByUser($tenderId: String!) {
     tenderResponseByUser(tenderId: $tenderId) {
       isSent
+      isNotInterested
       ${rfqResponseFields}
       ${eoiResponseFields}
     }
