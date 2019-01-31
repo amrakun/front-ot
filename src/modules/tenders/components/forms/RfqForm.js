@@ -80,15 +80,7 @@ class RfqForm extends BaseForm {
     let hasProductsError = false;
 
     for (const product of requestedProducts) {
-      if (
-        !product.code ||
-        !product.purchaseRequestNumber ||
-        !product.shortText ||
-        !product.quantity ||
-        !product.uom ||
-        !product.manufacturer ||
-        !product.manufacturerPartNumber
-      ) {
+      if (!product.shortText || !product.quantity || !product.uom) {
         hasProductsError = true;
       }
     }
