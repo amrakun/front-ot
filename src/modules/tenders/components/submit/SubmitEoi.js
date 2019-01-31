@@ -1,12 +1,15 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import { Card, Form, Button, Modal, Checkbox } from 'antd';
+import { Card, Form, Button, Modal, Checkbox, Tabs } from 'antd';
 import { BaseForm } from 'modules/common/components';
 import { agreementOptions } from './constants';
 import Actions from './Actions';
 import EoiTable from './EoiTable';
 import MainInfo from './MainInfo';
+import { TenderMessagesSingle } from 'modules/tender_messages/containers/';
+
+const TabPane = Tabs.TabPane;
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -80,64 +83,74 @@ class SubmitTender extends BaseForm {
     const { __ } = this.context;
 
     return (
-      <Form layout="inline">
-        <MainInfo {...data} />
+      <Tabs defaultActiveKey="1">
+        <TabPane key="1" tab="Main">
+          <Form layout="inline">
+            <MainInfo {...data} />
 
-        <Card title={__('Apply to EOI')} className="margin">
-          <EoiTable
-            requestedDocuments={data.requestedDocuments || []}
-            respondedDocuments={response ? response.respondedDocuments : []}
-            onChange={this.onChangeDocuments}
-          />
+            <Card title={__('Apply to EOI')} className="margin">
+              <EoiTable
+                requestedDocuments={data.requestedDocuments || []}
+                respondedDocuments={response ? response.respondedDocuments : []}
+                onChange={this.onChangeDocuments}
+              />
 
-          <br />
+              <br />
 
-          <Actions
-            tender={data}
-            response={response}
-            __={__}
-            onNotInterested={() => this.save({ isNotInterested: true })}
-            onSaveDraft={() =>
-              this.save({
-                respondedDocuments: this.collectDocuments(),
-                isNotInterested: false,
-              })
-            }
-            onSubmit={this.handleSubmit}
-          />
+              <Actions
+                tender={data}
+                response={data}
+                __={__}
+                onNotInterested={() => this.save({ isNotInterested: true })}
+                onSaveDraft={() =>
+                  this.save({
+                    respondedDocuments: this.collectDocuments(),
+                    isNotInterested: false,
+                  })
+                }
+                onSubmit={this.handleSubmit}
+              />
 
-          <Modal
-            title={__('Confirmation')}
-            visible={agreementModalVisible}
-            onCancel={this.toggleAgreementModal}
-            footer={[
-              <Button key="back" size="large" onClick={this.toggleAgreementModal}>
-                {__('Return')}
-              </Button>,
-              <Button
-                key="submit"
-                type="primary"
-                size="large"
-                disabled={submitDisabled}
-                loading={submitLoading}
-                onClick={this.handleOk}
+              <Modal
+                title={__('Confirmation')}
+                visible={agreementModalVisible}
+                onCancel={this.toggleAgreementModal}
+                footer={[
+                  <Button key="back" size="large" onClick={this.toggleAgreementModal}>
+                    {__('Return')}
+                  </Button>,
+                  <Button
+                    key="submit"
+                    type="primary"
+                    size="large"
+                    disabled={submitDisabled}
+                    loading={submitLoading}
+                    onClick={this.handleOk}
+                  >
+                    {__('Submit')}
+                  </Button>,
+                ]}
               >
-                {__('Submit')}
-              </Button>,
-            ]}
-          >
-            <strong>
-              {__('Please tick the boxes to confirm that you have agree with the statements')}
-            </strong>
+                <strong>
+                  {__('Please tick the boxes to confirm that you have agree with the statements')}
+                </strong>
 
-            <CheckboxGroup
-              options={agreementOptions(__)}
-              className="horizontal"
-              onChange={this.handleAgreementChange}
-            />
-          </Modal>
-        </Card>
-      </Form>
+                <CheckboxGroup
+                  options={agreementOptions(__)}
+                  className="horizontal"
+                  onChange={this.handleAgreementChange}
+                />
+              </Modal>
+            </Card>
+          </Form>
+        </TabPane>
+        <TabPane key="2" tab="Messages">
+          <TenderMessagesSingle
+            tenderDetail={this.props.data}
+            queryParams={this.props.queryParams}
+          />
+        </TabPane>
+      </Tabs>
     );
   }
 }
