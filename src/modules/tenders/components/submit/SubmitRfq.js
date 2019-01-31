@@ -1,8 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import { Form, Button, Card, Tabs } from 'antd';
+import { Form, Card, Tabs } from 'antd';
 import { Uploader, BaseForm } from 'modules/common/components';
+import Actions from './Actions';
 import RfqTable from './RfqTable';
 import MainInfo from './MainInfo';
 import { TenderMessagesSingle } from 'modules/tender_messages/containers/';
@@ -21,7 +22,6 @@ class SubmitTender extends BaseForm {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.saveDraft = this.saveDraft.bind(this);
     this.onServiceFileUpload = this.onServiceFileUpload.bind(this);
     this.onChangeProducts = this.onChangeProducts.bind(this);
   }
@@ -73,42 +73,18 @@ class SubmitTender extends BaseForm {
     this.setState({ respondedFiles: files });
   }
 
-  saveDraft() {
-    this.save({
-      respondedProducts: this.getRespondedProducts(),
-      respondedFiles: this.state.respondedFiles,
-    });
-  }
-
   isComplete(product) {
     return product.leadTime && product.shippingTerms && product.unitPrice;
   }
 
-  renderAction() {
-    const { __ } = this.context;
-
-    return (
-      <div className="margin">
-        <Button style={{ marginRight: '16px' }} htmlType="button" onClick={this.saveDraft}>
-          {__('Save as draft')}
-        </Button>
-        <Button
-          disabled={this.state.hasError}
-          type="primary"
-          htmlType="button"
-          onClick={this.handleSubmit}
-        >
-          {__('Save & submit')}
-        </Button>
-      </div>
-    );
-  }
   onErrorChange(hasError) {
     this.setState({ hasError });
   }
+
   render() {
     const { data, generateTemplate, response, queryParams } = this.props;
     const { type, rfqType, requestedProducts } = data;
+    const { __ } = this.context;
 
     let title = 'Form';
 
@@ -143,7 +119,18 @@ class SubmitTender extends BaseForm {
               {form}
               <br />
 
-              {this.renderAction()}
+              <Actions
+                __={__}
+                tender={data}
+                onNotInterested={() => this.save({ isNotInterested: true })}
+                onSaveDraft={() =>
+                  this.save({
+                    respondedProducts: this.getRespondedProducts(),
+                    respondedFiles: this.state.respondedFiles,
+                  })
+                }
+                onSubmit={this.handleSubmit}
+              />
             </Card>
           </Form>
         </TabPane>

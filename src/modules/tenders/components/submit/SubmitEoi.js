@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Card, Form, Button, Modal, Checkbox } from 'antd';
 import { BaseForm } from 'modules/common/components';
 import { agreementOptions } from './constants';
+import Actions from './Actions';
 import EoiTable from './EoiTable';
 import MainInfo from './MainInfo';
 
@@ -27,7 +28,6 @@ class SubmitTender extends BaseForm {
     this.toggleAgreementModal = this.toggleAgreementModal.bind(this);
     this.handleOk = this.handleOk.bind(this);
     this.handleAgreementChange = this.handleAgreementChange.bind(this);
-    this.saveDraft = this.saveDraft.bind(this);
   }
 
   toggleAgreementModal() {
@@ -65,10 +65,6 @@ class SubmitTender extends BaseForm {
     this.props.save({ respondedDocuments: this.collectDocuments() }, true);
   }
 
-  saveDraft() {
-    this.save({ respondedDocuments: this.collectDocuments() });
-  }
-
   render() {
     const { agreementModalVisible, submitDisabled, submitLoading } = this.state;
 
@@ -89,14 +85,13 @@ class SubmitTender extends BaseForm {
 
           <br />
 
-          <div className="margin">
-            <Button style={{ marginRight: '16px' }} htmlType="button" onClick={this.saveDraft}>
-              {__('Save as draft')}
-            </Button>
-            <Button type="primary" htmlType="button" onClick={this.handleSubmit}>
-              {__('Save & submit')}
-            </Button>
-          </div>
+          <Actions
+            tender={data}
+            __={__}
+            onNotInterested={() => this.save({ isNotInterested: true })}
+            onSaveDraft={() => this.save({ respondedDocuments: this.collectDocuments() })}
+            onSubmit={this.handleSubmit}
+          />
 
           <Modal
             title={__('Confirmation')}

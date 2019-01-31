@@ -229,6 +229,7 @@ const tendersSupplier = `
       reminderDay
       isAwarded
       isParticipated
+      isNotInterested
       isSent
     }
   }
@@ -324,5 +325,5 @@ export default {
   tenderResponseByUser,
   generateMaterialsTemplate,
   tenderResponseNotRespondedSuppliers,
-  companies
+  companies,
 };

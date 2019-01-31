@@ -2,37 +2,38 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Popconfirm, Button, Icon, Divider } from 'antd';
+import { Popconfirm, Button, Icon, Divider, Tooltip } from 'antd';
 import Tenders from './Tenders';
 
 class BuyerTenders extends Tenders {
   columns() {
     const { type } = this.props;
+    const { __ } = this.context;
     const renderIcon = this.renderIcon;
 
     const filters = [
       {
         text: <span>{renderIcon('draft')} Draft</span>,
-        value: 'draft'
+        value: 'draft',
       },
       {
         text: <span>{renderIcon('open')} Open</span>,
-        value: 'open'
+        value: 'open',
       },
       {
         text: <span>{renderIcon('closed')} Closed</span>,
-        value: 'closed'
+        value: 'closed',
       },
       {
         text: <span>{renderIcon('canceled')} Canceled</span>,
-        value: 'canceled'
-      }
+        value: 'canceled',
+      },
     ];
 
     if (type === 'rfq') {
       filters.push({
         text: <span>{renderIcon('awarded')} Awarded</span>,
-        value: 'awarded'
+        value: 'awarded',
       });
     }
 
@@ -44,46 +45,55 @@ class BuyerTenders extends Tenders {
         key: 'status',
         fixed: 'left',
         width: 75,
-        render: record => this.renderTooltippedIcon(record)
+        render: (text, record) => {
+          const { status } = record;
+
+          return (
+            <Tooltip title={<span className="capitalize">{__(status)}</span>}>
+              {this.renderIcon(status, {
+                fontSize: '20px',
+                lineHeight: '12px',
+              })}
+            </Tooltip>
+          );
+        },
       },
       ...this.commonColumns(),
       {
         title: 'Suppliers',
-        dataIndex: 'requestedCount'
+        dataIndex: 'requestedCount',
       },
       {
         title: 'Submitted',
-        dataIndex: 'submittedCount'
+        dataIndex: 'submittedCount',
       },
       {
         title: 'Not interested',
-        dataIndex: 'notInterestedCount'
+        dataIndex: 'notInterestedCount',
       },
       {
         title: 'Not responded',
-        dataIndex: 'notRespondedCount'
+        dataIndex: 'notRespondedCount',
       },
       {
         title: 'Officer name',
-        dataIndex: 'sourcingOfficer'
+        dataIndex: 'sourcingOfficer',
       },
       {
         title: 'Regret letter',
-        render: this.renderBoolean
+        render: this.renderBoolean,
       },
-      type === 'rfq'
-        ? { title: 'Type', render: (text, record) => record.rfqType }
-        : {},
+      type === 'rfq' ? { title: 'Type', render: (text, record) => record.rfqType } : {},
       {
         title: 'Award note',
-        dataIndex: 'awardNote'
+        dataIndex: 'awardNote',
       },
       {
         title: 'More',
         fixed: 'right',
         width: 100,
-        render: (text, record) => this.renderOperation(record)
-      }
+        render: (text, record) => this.renderOperation(record),
+      },
     ];
   }
 
@@ -94,7 +104,7 @@ class BuyerTenders extends Tenders {
 
         <Link key={1} to={`/tender/edit/${_id}`}>
           {['closed', 'canceled'].includes(status) ? 'Reopen' : 'Edit'}
-        </Link>
+        </Link>,
       ];
     }
   }
@@ -152,7 +162,7 @@ class BuyerTenders extends Tenders {
           Export to excel
           <Icon type="file-excel" />
         </Button>
-      )
+      ),
     });
   }
 }
@@ -160,7 +170,7 @@ class BuyerTenders extends Tenders {
 BuyerTenders.propTypes = {
   cancelTender: PropTypes.func,
   exportTenders: PropTypes.func,
-  exportLoading: PropTypes.bool
+  exportLoading: PropTypes.bool,
 };
 
 export default withRouter(BuyerTenders);

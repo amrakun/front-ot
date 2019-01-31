@@ -15,7 +15,7 @@ class SubmitContainer extends React.Component {
       tenderResponsesSend,
       tenderResponseByUserQuery,
       history,
-      queryParams
+      queryParams,
     } = this.props;
 
     const { currentUser, __ } = this.context;
@@ -32,9 +32,7 @@ class SubmitContainer extends React.Component {
     const tenderResponseByUser = tenderResponseByUserQuery.tenderResponseByUser;
 
     const save = (doc, shouldSend) => {
-      const mutation = tenderResponseByUser
-        ? tendersResponsesEdit
-        : tendersResponsesAdd;
+      const mutation = tenderResponseByUser ? tendersResponsesEdit : tendersResponsesAdd;
 
       mutation({ variables: { tenderId: tenderDetail._id, ...doc } })
         .then(() => {
@@ -54,8 +52,8 @@ class SubmitContainer extends React.Component {
       tenderResponsesSend({
         variables: {
           tenderId: tenderDetail._id,
-          supplierId: currentUser.companyId
-        }
+          supplierId: currentUser.companyId,
+        },
       })
         .then(() => {
           message.success(__('Successfully submitted a tender!'));
@@ -68,14 +66,14 @@ class SubmitContainer extends React.Component {
 
     const redirect = tenderId => {
       history.push('/rfq-and-eoi?refetch', {
-        newTenderId: tenderId
+        newTenderId: tenderId,
       });
     };
 
     const generateTemplate = () => {
       exportFile({
         query: queries.generateMaterialsTemplate,
-        variables: { tenderId: tenderDetail._id }
+        variables: { tenderId: tenderDetail._id },
       });
     };
 
@@ -85,12 +83,8 @@ class SubmitContainer extends React.Component {
       generateTemplate,
       data: tenderDetail,
       response: tenderResponseByUser,
-      queryParams
+      queryParams,
     };
-
-    if (tenderDetail.status === 'canceled') {
-      return null;
-    }
 
     if (tenderDetail.type === 'eoi') {
       return <SubmitEoi {...updatedProps} />;
@@ -107,12 +101,12 @@ SubmitContainer.propTypes = {
   tendersResponsesAdd: PropTypes.func,
   tendersResponsesEdit: PropTypes.func,
   tenderResponsesSend: PropTypes.func,
-  history: PropTypes.object
+  history: PropTypes.object,
 };
 
 SubmitContainer.contextTypes = {
   currentUser: PropTypes.object,
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 export default compose(
@@ -120,29 +114,29 @@ export default compose(
     name: 'tenderDetailQuery',
     options: ({ match }) => {
       return {
-        variables: { _id: match.params.id }
+        variables: { _id: match.params.id },
       };
-    }
+    },
   }),
 
   graphql(gql(queries.tenderResponseByUser), {
     name: 'tenderResponseByUserQuery',
     options: ({ match }) => {
       return {
-        variables: { tenderId: match.params.id }
+        variables: { tenderId: match.params.id },
       };
-    }
+    },
   }),
 
   graphql(gql(mutations.tendersResponsesAdd), {
-    name: 'tendersResponsesAdd'
+    name: 'tendersResponsesAdd',
   }),
 
   graphql(gql(mutations.tendersResponsesEdit), {
-    name: 'tendersResponsesEdit'
+    name: 'tendersResponsesEdit',
   }),
 
   graphql(gql(mutations.tenderResponsesSend), {
-    name: 'tenderResponsesSend'
+    name: 'tenderResponsesSend',
   })
 )(SubmitContainer);
