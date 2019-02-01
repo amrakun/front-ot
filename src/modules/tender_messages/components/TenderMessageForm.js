@@ -90,6 +90,7 @@ class MessageForm extends React.Component {
       fileURL: files[0].url,
     });
   }
+
   selectedSupplierIdChange(values) {
     const valuesSet = new Set(values);
     if (valuesSet.has('select_all')) {
@@ -139,7 +140,8 @@ class MessageForm extends React.Component {
   }
 
   render() {
-    const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
+    const { form, replyTo } = this.props;
+    const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = form;
 
     // Only show error after a field is touched.
     const subjectError = isFieldTouched('subject') && getFieldError('subject');
@@ -154,6 +156,7 @@ class MessageForm extends React.Component {
             help={subjectError || ''}
           >
             {getFieldDecorator('subject', {
+              initialValue: replyTo ? replyTo.subject : '',
               rules: [{ required: true, message: 'Please input your subject!' }],
             })(<Input placeholder="subject" />)}
           </Item>

@@ -4,6 +4,7 @@ import { gql, compose, graphql } from 'react-apollo';
 import { queries, mutations } from '../../graphql';
 import { PrequalificationForms } from '../../components';
 import { Loading } from 'modules/common/components';
+import { alert } from 'modules/common/utils';
 import { message, notification, Icon } from 'antd';
 
 class PrequalificationContainer extends React.Component {
@@ -25,7 +26,7 @@ class PrequalificationContainer extends React.Component {
         callback();
       })
       .catch(error => {
-        message.error(error.message);
+        alert.error(error.message);
       });
   }
 
@@ -45,23 +46,13 @@ class PrequalificationContainer extends React.Component {
         window.location.reload();
       })
       .catch(error => {
-        message.error(error.message);
+        alert.error(error.message);
       });
   }
 
   save(name, doc) {
     const { companyByUserQuery } = this.props;
     const { __ } = this.context;
-
-    const companyByUser = companyByUserQuery.companyByUser;
-
-    let formsComplete = true;
-
-    Object.keys(companyByUser).forEach(key => {
-      if (key.includes('Info') && !companyByUser[key] && key !== 'healthInfo') {
-        formsComplete = false;
-      }
-    });
 
     const mutation = this.props[`${name}Edit`];
 
@@ -71,16 +62,12 @@ class PrequalificationContainer extends React.Component {
         message.success(__('Saved'));
 
         if (name === 'healthInfo') {
-          if (formsComplete) {
-            return this.send();
-          }
-
-          return message.error(__('Please complete all forms before submitting'));
+          return this.send();
         }
       })
 
       .catch(error => {
-        message.error(error.message);
+        alert.error(error.message);
       });
   }
 
