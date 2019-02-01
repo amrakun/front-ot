@@ -38,15 +38,27 @@ const renderDescription = props => {
   }
 
   if (item === 'hasConvictedLabourLaws') {
-    description = businessInfo.hasConvictedLabourLawsDescription || 'No';
+    description = 'No';
+
+    if (value) {
+      description = businessInfo.hasConvictedLabourLawsDescription;
+    }
   }
 
   if (item === 'hasConvictedForHumanRights') {
-    description = businessInfo.hasConvictedForHumanRightsDescription || 'No';
+    description = 'No';
+
+    if (value) {
+      description = businessInfo.hasConvictedForHumanRightsDescription;
+    }
   }
 
   if (item === 'hasConvictedForBusinessIntegrity') {
-    description = businessInfo.proveHasNotConvicted || 'No';
+    description = 'No';
+
+    if (value) {
+      description = businessInfo.proveHasNotConvicted;
+    }
   }
 
   if (item === 'hasLeadersConvicted') {
