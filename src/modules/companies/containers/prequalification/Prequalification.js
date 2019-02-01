@@ -30,21 +30,19 @@ class PrequalificationContainer extends React.Component {
   }
 
   send() {
-    const { sendToBuyer, history } = this.props;
+    const { sendToBuyer } = this.props;
     const { __ } = this.context;
 
     sendToBuyer()
       .then(() => {
         notification.open({
           message: __('Done!'),
-          description: __(
-            'You have successfully submitted your pre-qualification form.'
-          ),
+          description: __('You have successfully submitted your pre-qualification form.'),
           icon: <Icon type="smile" style={{ color: 'rgb(0,153,168)' }} />,
-          duration: 10
+          duration: 10,
         });
 
-        history.push('/capacity-building');
+        window.location.reload();
       })
       .catch(error => {
         message.error(error.message);
@@ -56,11 +54,6 @@ class PrequalificationContainer extends React.Component {
     const { __ } = this.context;
 
     const companyByUser = companyByUserQuery.companyByUser;
-    const disabled = !companyByUser.isPrequalificationInfoEditable;
-
-    if (disabled) {
-      return message.error(__('Changes disabled'));
-    }
 
     let formsComplete = true;
 
@@ -82,9 +75,7 @@ class PrequalificationContainer extends React.Component {
             return this.send();
           }
 
-          return message.error(
-            __('Please complete all forms before submitting')
-          );
+          return message.error(__('Please complete all forms before submitting'));
         }
       })
 
@@ -110,8 +101,8 @@ class PrequalificationContainer extends React.Component {
       skip: this.skip,
       disabled,
       company: {
-        ...companyByUser
-      }
+        ...companyByUser,
+      },
     };
 
     return <PrequalificationForms {...updatedProps} />;
@@ -122,41 +113,41 @@ PrequalificationContainer.propTypes = {
   companyByUserQuery: PropTypes.object,
   history: PropTypes.object,
   skip: PropTypes.func,
-  sendToBuyer: PropTypes.func
+  sendToBuyer: PropTypes.func,
 };
 
 PrequalificationContainer.contextTypes = {
   currentUser: PropTypes.object,
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 export default compose(
   graphql(gql(queries.companyPrequalificationDetail), {
-    name: 'companyByUserQuery'
+    name: 'companyByUserQuery',
   }),
 
   // mutations
   graphql(gql(mutations.financialInfo), {
-    name: 'financialInfoEdit'
+    name: 'financialInfoEdit',
   }),
 
   graphql(gql(mutations.businessInfo), {
-    name: 'businessInfoEdit'
+    name: 'businessInfoEdit',
   }),
 
   graphql(gql(mutations.environmentalInfo), {
-    name: 'environmentalInfoEdit'
+    name: 'environmentalInfoEdit',
   }),
 
   graphql(gql(mutations.healthInfo), {
-    name: 'healthInfoEdit'
+    name: 'healthInfoEdit',
   }),
 
   graphql(gql(mutations.companiesSendPrequalificationInfo), {
-    name: 'sendToBuyer'
+    name: 'sendToBuyer',
   }),
 
   graphql(gql(mutations.companiesSkipPrequalification), {
-    name: 'skip'
+    name: 'skip',
   })
 )(PrequalificationContainer);
