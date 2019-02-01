@@ -31,23 +31,8 @@ class PrequalificationContainer extends React.Component {
   }
 
   send() {
-    const { sendToBuyer, companyByUserQuery } = this.props;
+    const { sendToBuyer } = this.props;
     const { __ } = this.context;
-
-    const companyByUser = companyByUserQuery.companyByUser;
-
-    // check form completion ==========
-    let formsComplete = true;
-
-    Object.keys(companyByUser).forEach(key => {
-      if (key.includes('Info') && !companyByUser[key]) {
-        formsComplete = false;
-      }
-    });
-
-    if (!formsComplete) {
-      return alert.error(__('Please complete all forms before submitting'));
-    }
 
     sendToBuyer()
       .then(() => {
