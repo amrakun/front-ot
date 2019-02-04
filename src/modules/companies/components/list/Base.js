@@ -15,7 +15,7 @@ class Base extends Common {
     this.state = {
       ...this.state,
       checkedCount: 0,
-      selectedSuppliers: []
+      selectedSuppliers: [],
     };
 
     this.handleSend = this.handleSend.bind(this);
@@ -31,9 +31,7 @@ class Base extends Common {
   handleSend(path) {
     const { selectedCompanies } = this.state;
 
-    selectedCompanies.length < 1
-      ? message.error('Please select atleast one supplier to continue!')
-      : this.props.history.push(path, { supplierIds: selectedCompanies });
+    this.props.history.push(path, { supplierIds: selectedCompanies });
   }
 
   renderFinanceStat(prev, current) {
@@ -57,12 +55,7 @@ class Base extends Common {
   }
 
   render() {
-    const {
-      exportCompanies,
-      exportLoading,
-      exportCompany,
-      totalCount
-    } = this.props;
+    const { exportCompanies, exportLoading, exportCompany, totalCount } = this.props;
 
     const { selectedCompanies, selectedSuppliers } = this.state;
 
@@ -71,12 +64,12 @@ class Base extends Common {
         {
           title: 'Qualification status',
           width: 40,
-          dataIndex: 'qualificationStatusDisplay'
+          dataIndex: 'qualificationStatusDisplay',
         },
         {
           title: 'Validation status',
           width: 40,
-          dataIndex: 'productsInfoValidationStatusDisplay'
+          dataIndex: 'productsInfoValidationStatusDisplay',
         },
         {
           title: 'Financial status',
@@ -90,9 +83,7 @@ class Base extends Common {
               return 'n/a';
             }
 
-            annualTurnover = [...annualTurnover].sort(
-              (a, b) => a.year > b.year
-            );
+            annualTurnover = [...annualTurnover].sort((a, b) => a.year > b.year);
 
             const [first, second, third] = annualTurnover;
 
@@ -103,12 +94,12 @@ class Base extends Common {
                 {this.renderFinanceStat(second, third)}
               </div>
             );
-          }
+          },
         },
         {
           title: 'Block status',
           width: 40,
-          render: record => record.isBlocked
+          render: record => record.isBlocked,
         },
         {
           title: 'Due dilligence',
@@ -120,22 +111,20 @@ class Base extends Common {
               </a>
             ) : (
               'n/a'
-            )
+            ),
         },
         {
           title: 'DIFOT score (average)',
           width: 40,
           render: record =>
-            record.averageDifotScore
-              ? `${record.averageDifotScore.toFixed(1)}%`
-              : '-',
+            record.averageDifotScore ? `${record.averageDifotScore.toFixed(1)}%` : '-',
           sorter: true,
-          key: 'averageDifotScore'
+          key: 'averageDifotScore',
         },
         {
           title: 'Owner',
-          render: record => (record.owner ? record.owner.email : '-')
-        }
+          render: record => (record.owner ? record.owner.email : '-'),
+        },
       ],
       [
         {
@@ -151,8 +140,8 @@ class Base extends Common {
                 Export
               </a>
             </div>
-          )
-        }
+          ),
+        },
       ]
     );
 
@@ -170,22 +159,13 @@ class Base extends Common {
 
               <MassEmail suppliers={selectedSuppliers} />
 
-              <Button onClick={() => this.handleSend('/eoi/publish')}>
-                Send EOI
-              </Button>
+              <Button onClick={() => this.handleSend('/eoi/publish')}>Send EOI</Button>
 
-              <Button onClick={() => this.handleSend('/rfq/publish')}>
-                Send RFQ
-              </Button>
+              <Button onClick={() => this.handleSend('/rfq/publish')}>Send RFQ</Button>
 
-              <Button onClick={() => this.handleSend('/trfq/publish')}>
-                Send travel RFQ
-              </Button>
+              <Button onClick={() => this.handleSend('/trfq/publish')}>Send travel RFQ</Button>
 
-              <Button
-                loading={exportLoading}
-                onClick={() => exportCompanies(selectedCompanies)}
-              >
+              <Button loading={exportLoading} onClick={() => exportCompanies(selectedCompanies)}>
                 Export to excel
                 <Icon type="file-excel" />
               </Button>
@@ -194,9 +174,9 @@ class Base extends Common {
             {this.renderTable({
               rowSelection: {
                 selectedCompanies,
-                onChange: this.handleCheck
+                onChange: this.handleCheck,
               },
-              columns
+              columns,
             })}
           </Card>
         </Col>
