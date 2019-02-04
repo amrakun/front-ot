@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Card, Row, Col, Button, Icon, message } from 'antd';
+import { Card, Row, Col, Button, Icon } from 'antd';
 import { Search } from 'modules/common/components';
 import Common from './Common';
 import Sidebar from './Sidebar';

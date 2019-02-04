@@ -27,6 +27,8 @@ const tenderFields = `
   sourcingOfficer,
   reminderDay,
   supplierIds,
+  isToAll,
+  tierTypes,
   suppliers {
     _id,
     basicInfo {
