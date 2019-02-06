@@ -148,7 +148,7 @@ class RfqForm extends BaseForm {
             renderField={this.renderField.bind(this)}
             renderOptions={this.renderOptions.bind(this)}
             onChange={this.onChangeMainInfo}
-            showSupplier={true}
+            showSuppliers={true}
           />
         </div>
 

@@ -33,6 +33,10 @@ class EoiForm extends BaseForm {
       isToAll: typeof isToAll !== 'undefined' ? isToAll : true,
       tierTypes,
     };
+
+    if (suppliers.length > 0) {
+      this.state.isToAll = false;
+    }
   }
 
   onChangeMainInfo(mainInfoState) {
