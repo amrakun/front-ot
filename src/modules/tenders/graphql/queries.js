@@ -36,12 +36,16 @@ const tenderFields = `
   createdUser {
     email
   },
-  ${requestedProductsFields}
-  requestedDocuments
   winnerIds
   isAwarded
   awardNote
   sentRegretLetter
+`;
+
+const tenderDetailFields = `
+  ${tenderFields}
+  ${requestedProductsFields}
+  requestedDocuments
 `;
 
 const rfqResponseFields = `
@@ -149,7 +153,7 @@ const companies = `
 const tenderDetail = `
   query tenderDetail($_id: String!) {
     tenderDetail(_id: $_id) {
-      ${tenderFields}
+      ${tenderDetailFields}
     }
   }
 `;
@@ -189,7 +193,7 @@ const tenderResponseByUser = `
 const tenderUpdateDetail = `
   query tenderDetail($_id: String!) {
     tenderDetail(_id: $_id) {
-      ${tenderFields}
+      ${tenderDetailFields}
       suppliers {
         _id
         basicInfo {
