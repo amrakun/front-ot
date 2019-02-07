@@ -96,7 +96,7 @@ class MessageForm extends React.Component {
 
     if (valuesSet.has('select_all')) {
       this.setState({
-        recipientSupplierIds: this.props.tenderDetail.suppliers.map(supplier => supplier._id),
+        recipientSupplierIds: this.props.suppliers.map(supplier => supplier._id),
       });
     } else if (valuesSet.has('deselect_all')) {
       this.setState({ recipientSupplierIds: [] });
@@ -129,7 +129,7 @@ class MessageForm extends React.Component {
             <b>Deselect All</b>
           </Select.Option>
 
-          {this.props.tenderDetail.suppliers.map(supplier => {
+          {this.props.suppliers.map(supplier => {
             const basicInfo = supplier.basicInfo || {};
 
             return (

@@ -58,10 +58,24 @@ const tenderMessageDetail = `
   }
 `;
 
+const tenderSuppliers = `
+  query tenderDetail($_id: String!) {
+    tenderDetail(_id: $_id) {
+      _id
+      suppliers {
+        _id
+        basicInfo {
+          enName
+        }
+      }
+    }
+  }
+`;
+
 const tenderMessageTotalCount = `
   query tenderMessageTotalCount($tenderId: String) {
     tenderMessageTotalCount(tenderId : $tenderId)
   }
 `;
 
-export default { tenderMessages, tenderMessageDetail, tenderMessageTotalCount };
+export default { tenderSuppliers, tenderMessages, tenderMessageDetail, tenderMessageTotalCount };
