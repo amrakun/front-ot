@@ -29,12 +29,6 @@ const tenderFields = `
   supplierIds,
   isToAll,
   tierTypes,
-  suppliers {
-    _id,
-    basicInfo {
-      enName
-    }
-  },
   requestedCount,
   submittedCount,
   notInterestedCount,
