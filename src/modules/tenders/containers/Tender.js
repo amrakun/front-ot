@@ -6,14 +6,13 @@ import { queries, mutations } from '../graphql';
 import { message, notification, Icon, Button } from 'antd';
 import { colors } from 'modules/common/constants';
 import { exportFile } from 'modules/common/components';
-import client from 'apolloClient';
 
 const notifyIfWantToSend = {
   message: 'Succesfully awarded',
   description: 'Do you want to send regret letters to remaining suppliers now?',
   icon: <Icon type="mail" style={{ color: colors[0] }} />,
   duration: 0,
-  key: 'awardedNotification'
+  key: 'awardedNotification',
 };
 
 class TenderContainer extends React.Component {
@@ -33,8 +32,8 @@ class TenderContainer extends React.Component {
     tendersAward({
       variables: {
         _id: tenderDetailQuery.tenderDetail._id,
-        ...variables
-      }
+        ...variables,
+      },
     })
       .then(() => {
         tenderDetailQuery.refetch();
@@ -51,7 +50,7 @@ class TenderContainer extends React.Component {
             >
               Send
             </Button>
-          )
+          ),
         });
       })
       .catch(error => {
@@ -71,8 +70,8 @@ class TenderContainer extends React.Component {
       variables: {
         _id: tenderDetail._id,
         subject: `Regret notice for ${tenderDetail.name}`,
-        content: content
-      }
+        content: content,
+      },
     })
       .then(() => {
         message.success('Succesfully sent regret letters!');
@@ -98,69 +97,55 @@ class TenderContainer extends React.Component {
       name,
       variables: {
         tenderId: tenderDetailQuery.tenderDetail._id,
-        supplierIds: companies
+        supplierIds: companies,
       },
       onFinish: () => {
         loading[loadingReportName] = false;
         this.setState(loading);
-      }
+      },
     });
   }
 
   modifySuppliersQuery(suppliers) {
     return suppliers.map(supplier => ({
-      supplier
+      supplier,
     }));
-  }
-
-  getSuppliersByIds(_ids, callback) {
-    client
-      .query({
-        query: gql(queries.companies),
-        name: 'requestedCompaniesQuery',
-
-        variables: { _ids }
-      })
-      .then(response => {
-        callback && callback(response.data.companies);
-      })
-      .catch(error => {
-        message.error(error.message);
-      });
   }
 
   render() {
     const {
       tenderDetailQuery,
       tenderResponsesTableQuery,
+      tenderResponsesTotalCountQuery,
       notRespondedSuppliersQuery,
-      location
+      invitedSuppliersQuery,
+      location,
     } = this.props;
 
     const { systemConfig } = this.context;
 
     const Component = location.pathname.includes('rfq') ? Rfq : Eoi;
 
-    if (
-      tenderDetailQuery.error ||
-      tenderResponsesTableQuery.error ||
-      notRespondedSuppliersQuery.error
-    ) {
-      return null;
-    }
-
-    if (
-      tenderDetailQuery.loading ||
-      tenderResponsesTableQuery.loading ||
-      notRespondedSuppliersQuery.loading
-    ) {
+    if (tenderDetailQuery.error || tenderResponsesTableQuery.error) {
       return null;
     }
 
     const tenderDetail = tenderDetailQuery.tenderDetail || {};
     const tenderResponses = tenderResponsesTableQuery.tenderResponses || [];
-    const notRespondedSuppliers =
-      notRespondedSuppliersQuery.tenderResponseNotRespondedSuppliers || [];
+
+    let totalCount = tenderResponsesTotalCountQuery.tenderResponsesTotalCount || 0;
+    let notRespondedSuppliers = [];
+    let invitedSuppliers = [];
+
+    if (notRespondedSuppliersQuery && !notRespondedSuppliersQuery.loading) {
+      notRespondedSuppliers = notRespondedSuppliersQuery.tenderResponseNotRespondedSuppliers.list;
+      totalCount = notRespondedSuppliersQuery.tenderResponseNotRespondedSuppliers.totalCount;
+    }
+
+    if (invitedSuppliersQuery && !invitedSuppliersQuery.loading) {
+      invitedSuppliers = invitedSuppliersQuery.tenderResponseInvitedSuppliers.list;
+      totalCount = invitedSuppliersQuery.tenderResponseInvitedSuppliers.totalCount;
+    }
 
     const { rfqBidSummaryReportLoading, regretLetterModalVisible } = this.state;
 
@@ -169,13 +154,14 @@ class TenderContainer extends React.Component {
       rfqBidSummaryReportLoading,
       regretLetterModalVisible,
       tenderDetail,
-      notRespondedSuppliers: this.modifySuppliersQuery(notRespondedSuppliers),
       emailTemplate: systemConfig.regretLetterTemplate,
       award: this.award,
       downloadReport: this.downloadReport,
       sendRegretLetter: this.sendRegretLetter,
-      getSuppliersByIds: this.getSuppliersByIds,
-      data: tenderResponses
+      data: tenderResponses,
+      notRespondedSuppliers: this.modifySuppliersQuery(notRespondedSuppliers),
+      invitedSuppliers: this.modifySuppliersQuery(invitedSuppliers),
+      totalCount,
     };
 
     return <Component {...updatedProps} />;
@@ -185,69 +171,104 @@ class TenderContainer extends React.Component {
 TenderContainer.propTypes = {
   tenderDetailQuery: PropTypes.object,
   tenderResponsesTableQuery: PropTypes.object,
+  tenderResponsesTotalCountQuery: PropTypes.object,
   tendersAward: PropTypes.func,
   sendRegretLetter: PropTypes.func,
   history: PropTypes.object,
   location: PropTypes.object,
-  notRespondedSuppliersQuery: PropTypes.object
+  notRespondedSuppliersQuery: PropTypes.object,
+  invitedSuppliersQuery: PropTypes.object,
 };
 
 TenderContainer.contextTypes = {
-  systemConfig: PropTypes.object
+  systemConfig: PropTypes.object,
 };
+
+const generatePageParams = queryParams => ({
+  page: queryParams.page || 1,
+  perPage: queryParams.perPage || 15,
+});
+
+const generateResponsesParams = ({ match, queryParams }) => ({
+  tenderId: match.params.id,
+  supplierSearch: queryParams.search,
+  sort: {
+    name: queryParams.sorter,
+    productCode: queryParams.productCode,
+  },
+  betweenSearch: {
+    name: queryParams.between,
+    productCode: queryParams.productCode,
+    minValue: queryParams.from,
+    maxValue: queryParams.to,
+  },
+  isNotInterested: queryParams.filter === 'isNotInterested',
+});
 
 export default compose(
   graphql(gql(queries.tenderDetail), {
     name: 'tenderDetailQuery',
     options: ({ match }) => {
       return {
-        variables: { _id: match.params.id }
+        variables: { _id: match.params.id },
       };
-    }
+    },
   }),
 
   graphql(gql(queries.tenderResponseNotRespondedSuppliers), {
     name: 'notRespondedSuppliersQuery',
-    options: ({ match }) => {
+    options: ({ match, queryParams }) => {
       return {
-        variables: { tenderId: match.params.id }
+        variables: {
+          tenderId: match.params.id,
+          ...generatePageParams(queryParams),
+        },
+        skip: queryParams.filter !== 'isNotResponded',
       };
-    }
+    },
+  }),
+
+  graphql(gql(queries.tenderResponseInvitedSuppliers), {
+    name: 'invitedSuppliersQuery',
+    options: ({ match, queryParams }) => {
+      return {
+        variables: {
+          tenderId: match.params.id,
+          ...generatePageParams(queryParams),
+        },
+        skip: queryParams.filter !== 'isInvited',
+      };
+    },
   }),
 
   graphql(gql(queries.tenderResponses), {
     name: 'tenderResponsesTableQuery',
     options: ({ match, queryParams }) => {
-      const filter = queryParams.filter;
-
       return {
         variables: {
-          page: queryParams.page || 1,
-          perPage: queryParams.perPage || 15,
-          tenderId: match.params.id,
-          supplierSearch: queryParams.search,
-          sort: {
-            name: queryParams.sorter,
-            productCode: queryParams.productCode
-          },
-          betweenSearch: {
-            name: queryParams.between,
-            productCode: queryParams.productCode,
-            minValue: queryParams.from,
-            maxValue: queryParams.to
-          },
-          isNotInterested: filter === 'isNotInterested'
+          ...generatePageParams(queryParams),
+          ...generateResponsesParams({ match, queryParams }),
         },
-        notifyOnNetworkStatusChange: true
+        notifyOnNetworkStatusChange: true,
       };
-    }
+    },
+  }),
+
+  graphql(gql(queries.tenderResponsesTotalCount), {
+    name: 'tenderResponsesTotalCountQuery',
+    options: ({ match, queryParams }) => {
+      return {
+        variables: generateResponsesParams({ match, queryParams }),
+        notifyOnNetworkStatusChange: true,
+      };
+    },
   }),
 
   graphql(gql(mutations.tendersAward), {
-    name: 'tendersAward'
+    name: 'tendersAward',
   }),
 
   graphql(gql(mutations.sendRegretLetter), {
-    name: 'sendRegretLetter'
+    name: 'sendRegretLetter',
   })
 )(TenderContainer);
