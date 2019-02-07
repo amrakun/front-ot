@@ -126,6 +126,7 @@ class MainInfo extends React.Component {
 
     return suppliers.map(supplier => {
       const owner = this.getOwner(supplier);
+      const basicInfo = supplier.basicInfo || {};
 
       return (
         <Tooltip key={supplier._id} title={owner ? `Owner: ${owner}` : ''}>
@@ -135,7 +136,7 @@ class MainInfo extends React.Component {
             closable={true}
             afterClose={() => this.removeSupplier(supplier._id)}
           >
-            {supplier.basicInfo.enName}
+            {basicInfo.enName}
           </Tag>
         </Tooltip>
       );

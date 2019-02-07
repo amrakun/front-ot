@@ -21,7 +21,7 @@ class EoiForm extends BaseForm {
     this.onChangeMainInfo = this.onChangeMainInfo.bind(this);
     this.onChangeDocuments = this.onChangeDocuments.bind(this);
 
-    const { data } = props;
+    const { tenderCreation, data } = props;
     const { isToAll, tierTypes, suppliers, attachments, content, requestedDocuments } = data || {};
 
     this.state = {
@@ -34,7 +34,7 @@ class EoiForm extends BaseForm {
       tierTypes,
     };
 
-    if (suppliers.length > 0) {
+    if (tenderCreation && suppliers.length > 0) {
       this.state.isToAll = false;
     }
   }
