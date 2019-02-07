@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { message } from 'antd';
 import { compose, gql, graphql } from 'react-apollo';
 import { Loading, exportFile } from 'modules/common/components';
+import { alert } from 'modules/common/utils';
 import { SubmitRfq, SubmitEoi } from '../components';
 import { queries, mutations } from '../graphql';
 
@@ -36,7 +36,7 @@ class SubmitContainer extends React.Component {
 
       mutation({ variables: { tenderId: tenderDetail._id, ...doc } })
         .then(() => {
-          message.success(__('Successfully saved a tender!'));
+          alert.success('Successfully saved a tender!', __);
 
           tenderResponseByUserQuery.refetch();
 
@@ -44,7 +44,8 @@ class SubmitContainer extends React.Component {
         })
 
         .catch(error => {
-          message.error(error.message);
+          alert.error(error.message);
+          redirect(doc.tenderId);
         });
     };
 
@@ -56,11 +57,11 @@ class SubmitContainer extends React.Component {
         },
       })
         .then(() => {
-          message.success(__('Successfully submitted a tender!'));
+          alert.success('Successfully submitted a tender!', __);
           redirect(tenderId);
         })
         .catch(() => {
-          message.error(__('Required inputs missing'));
+          alert.error('Required inputs missing', __);
         });
     };
 

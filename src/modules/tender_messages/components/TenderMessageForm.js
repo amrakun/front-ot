@@ -93,9 +93,10 @@ class MessageForm extends React.Component {
 
   selectedSupplierIdChange(values) {
     const valuesSet = new Set(values);
+
     if (valuesSet.has('select_all')) {
       this.setState({
-        recipientSupplierIds: this.props.tenderDetail.suppliers.map(supplier => supplier._id),
+        recipientSupplierIds: this.props.suppliers.map(supplier => supplier._id),
       });
     } else if (valuesSet.has('deselect_all')) {
       this.setState({ recipientSupplierIds: [] });
@@ -106,6 +107,7 @@ class MessageForm extends React.Component {
 
   renderBuyerFields() {
     const { currentUser } = this.context;
+
     if (currentUser.isSupplier) return null;
 
     return (
@@ -122,18 +124,24 @@ class MessageForm extends React.Component {
           <Select.Option key="select_all" value="select_all" enName="Select All">
             <b>Select All</b>
           </Select.Option>
+
           <Select.Option key="deselect_all" value="deselect_all" enName="Deselect All">
             <b>Deselect All</b>
           </Select.Option>
-          {this.props.tenderDetail.suppliers.map(supplier => (
-            <Select.Option
-              key={supplier._id}
-              value={supplier._id}
-              enName={supplier.basicInfo.enName}
-            >
-              {supplier.basicInfo.enName}
-            </Select.Option>
-          ))}
+
+          {this.props.suppliers.map(supplier => {
+            const basicInfo = supplier.basicInfo || {};
+
+            return (
+              <Select.Option
+                key={supplier._id}
+                value={supplier._id}
+                enName={basicInfo.enName || ''}
+              >
+                {basicInfo.enName || ''}
+              </Select.Option>
+            );
+          })}
         </Select>
       </Item>
     );
