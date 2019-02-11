@@ -25,6 +25,7 @@ const Recipient = ({ recipientSuppliers }) => {
     return 'RFQ';
   }
 };
+
 Recipient.propTypes = {
   recipientSuppliers: PropTypes.array,
 };
@@ -199,9 +200,11 @@ class Messages extends Component {
   }
 
   renderNested() {
+    const { currentUser } = this.context;
     const { route, tenderMessageDetail } = this.state;
     const _id = tenderMessageDetail ? tenderMessageDetail._id : null;
     const modalWidth = this.state.windowWidth * 0.8;
+
     return (
       <>
         <Modal
@@ -213,11 +216,13 @@ class Messages extends Component {
         >
           <CreateTenderMessage
             key={Math.random()}
+            currentUser={currentUser}
             tenderDetail={this.props.tenderDetail}
             onComplete={this.goto.bind(this, ROUTE_ENUM.index, null)}
             width={modalWidth}
           />
         </Modal>
+
         <Modal
           visible={route === ROUTE_ENUM.view}
           footer={null}
@@ -227,6 +232,7 @@ class Messages extends Component {
         >
           <TenderMessageDetail tenderMessageDetail={tenderMessageDetail} />
         </Modal>
+
         <Modal
           visible={route === ROUTE_ENUM.reply}
           footer={null}
@@ -236,6 +242,7 @@ class Messages extends Component {
         >
           <CreateTenderMessage
             key={_id}
+            currentUser={currentUser}
             replyTo={this.state.tenderMessageDetail}
             tenderDetail={this.props.tenderDetail}
             onComplete={this.goto.bind(this, ROUTE_ENUM.index, null)}
@@ -249,6 +256,7 @@ class Messages extends Component {
     const { tenderMessagesQuery, tenderMessageTotalCountQuery } = this.props;
     const { tenderMessages } = tenderMessagesQuery;
     const totalCount = tenderMessageTotalCountQuery.tenderMessageTotalCount || 0;
+
     return (
       <>
         <Row>

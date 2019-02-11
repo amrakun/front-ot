@@ -3,7 +3,6 @@ import { compose, gql, graphql } from 'react-apollo';
 import { TenderMessageForm } from '../components';
 import { mutations, queries } from '../graphql';
 import { message } from 'antd';
-import PropTypes from 'prop-types';
 
 const CreateTenderMessageContainer = (props, context) => {
   const {
@@ -11,10 +10,16 @@ const CreateTenderMessageContainer = (props, context) => {
     tenderMessageBuyerSend,
     tenderMessageSupplierSend,
     onComplete,
+    currentUser,
   } = props;
-  const { currentUser } = context;
 
-  const mutation = currentUser.isSupplier ? tenderMessageSupplierSend : tenderMessageBuyerSend;
+  let mutation = tenderMessageSupplierSend;
+  let suppliers = [];
+
+  if (!currentUser.isSupplier) {
+    mutation = tenderMessageBuyerSend;
+    suppliers = tenderSuppliersQuery.loading ? [] : tenderSuppliersQuery.tenderDetail.suppliers;
+  }
 
   const save = doc => {
     mutation({ variables: { ...doc } })
@@ -29,24 +34,21 @@ const CreateTenderMessageContainer = (props, context) => {
 
   const extendedProps = {
     ...props,
-    suppliers: tenderSuppliersQuery.loading ? [] : tenderSuppliersQuery.tenderDetail.suppliers,
+    suppliers,
   };
 
   return <TenderMessageForm onSubmit={save} {...extendedProps} />;
 };
 
-CreateTenderMessageContainer.contextTypes = {
-  currentUser: PropTypes.object,
-};
-
 export default compose(
   graphql(gql(queries.tenderSuppliers), {
     name: 'tenderSuppliersQuery',
-    options: ({ tenderDetail }) => {
+    options: ({ tenderDetail, currentUser }) => {
       return {
         variables: {
           _id: tenderDetail._id,
         },
+        skip: currentUser.isSupplier,
       };
     },
   }),
