@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, gql, graphql } from 'react-apollo';
+import { notification } from 'antd';
 import { Loading, exportFile } from 'modules/common/components';
 import { alert } from 'modules/common/utils';
 import { SubmitRfq, SubmitEoi } from '../components';
@@ -9,6 +10,7 @@ import { queries, mutations } from '../graphql';
 class SubmitContainer extends React.Component {
   render() {
     const {
+      companyByUserQuery,
       tenderDetailQuery,
       tendersResponsesAdd,
       tendersResponsesEdit,
@@ -20,7 +22,11 @@ class SubmitContainer extends React.Component {
 
     const { currentUser, __ } = this.context;
 
-    if (tenderDetailQuery.loading || tenderResponseByUserQuery.loading) {
+    if (
+      companyByUserQuery.loading ||
+      tenderDetailQuery.loading ||
+      tenderResponseByUserQuery.loading
+    ) {
       return <Loading />;
     }
 
@@ -28,6 +34,7 @@ class SubmitContainer extends React.Component {
       return null;
     }
 
+    const companyByUser = companyByUserQuery.companyByUser;
     const tenderDetail = tenderDetailQuery.tenderDetailSupplier || {};
     const tenderResponseByUser = tenderResponseByUserQuery.tenderResponseByUser;
 
@@ -36,7 +43,15 @@ class SubmitContainer extends React.Component {
 
       mutation({ variables: { tenderId: tenderDetail._id, ...doc } })
         .then(() => {
-          alert.success('Successfully saved a tender!', __);
+          if (tenderDetail.type === 'eoi' && !companyByUser.isSentPrequalificationInfo) {
+            notification.warn({
+              message: __('Notification'),
+              description: __('At the time of the Expression of Interest, all suppliers must be registered to the ”Oyu” database, as a minimum, to be able to register its interests through “Oyu” database. Prequalification status will be a critical evaluation criteria and it is highly recommended that you be prequalified.'),
+              duration: 60,
+            });
+          } else {
+            alert.success('Successfully saved a tender!', __);
+          }
 
           tenderResponseByUserQuery.refetch();
 
@@ -44,7 +59,7 @@ class SubmitContainer extends React.Component {
         })
 
         .catch(error => {
-          alert.error(error.message);
+          alert.error(error.message, __);
           redirect(doc.tenderId);
         });
     };
@@ -98,6 +113,7 @@ class SubmitContainer extends React.Component {
 SubmitContainer.propTypes = {
   location: PropTypes.object,
   tenderDetailQuery: PropTypes.object,
+  companyByUserQuery: PropTypes.object,
   tenderResponseByUserQuery: PropTypes.object,
   tendersResponsesAdd: PropTypes.func,
   tendersResponsesEdit: PropTypes.func,
@@ -111,6 +127,16 @@ SubmitContainer.contextTypes = {
 };
 
 export default compose(
+  graphql(
+    gql(`
+      query companyByUser {
+        companyByUser {
+          isSentPrequalificationInfo
+        }
+      }
+   `),
+  { name: 'companyByUserQuery' }),
+
   graphql(gql(queries.tenderDetailSupplier), {
     name: 'tenderDetailQuery',
     options: ({ match }) => {
