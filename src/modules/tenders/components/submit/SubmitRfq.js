@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import { Form, Card, Tabs } from 'antd';
+import { Form, Card, Tabs, message } from 'antd';
 import { Uploader, BaseForm } from 'modules/common/components';
 import Actions from './Actions';
 import RfqTable from './RfqTable';
@@ -51,6 +51,10 @@ class SubmitTender extends BaseForm {
       delete product.manufacturer;
       delete product.manufacturerPartNumber;
 
+      if (product.unitPrice && (!product.alternative || product.alternative === '-')) {
+        throw new Error('Please choose a value in "alternative" field');
+      }
+
       return {
         ...product,
         totalPrice,
@@ -64,9 +68,12 @@ class SubmitTender extends BaseForm {
     const { save } = this.props;
     const { respondedFiles } = this.state;
 
-    const respondedProducts = this.getRespondedProducts();
-
-    save({ respondedProducts, respondedFiles, isNotInterested: false }, true);
+    try {
+      const respondedProducts = this.getRespondedProducts();
+      save({ respondedProducts, respondedFiles, isNotInterested: false }, true);
+    } catch (e) {
+      message.error(e.message);
+    }
   }
 
   onServiceFileUpload(files) {
@@ -75,10 +82,6 @@ class SubmitTender extends BaseForm {
 
   isComplete(product) {
     return product.leadTime && product.shippingTerms && product.unitPrice;
-  }
-
-  onErrorChange(hasError) {
-    this.setState({ hasError });
   }
 
   render() {
@@ -94,7 +97,6 @@ class SubmitTender extends BaseForm {
         respondedProducts={response ? response.respondedProducts : []}
         generateTemplate={generateTemplate}
         onChange={this.onChangeProducts}
-        onErrorChange={this.onErrorChange.bind(this)}
       />
     );
 
@@ -124,13 +126,17 @@ class SubmitTender extends BaseForm {
                 tender={data}
                 response={response}
                 onNotInterested={() => this.save({ isNotInterested: true })}
-                onSaveDraft={() =>
-                  this.save({
-                    respondedProducts: this.getRespondedProducts(),
-                    respondedFiles: this.state.respondedFiles,
-                    isNotInterested: false,
-                  })
-                }
+                onSaveDraft={() => {
+                  try {
+                    this.save({
+                      respondedProducts: this.getRespondedProducts(),
+                      respondedFiles: this.state.respondedFiles,
+                      isNotInterested: false,
+                    })
+                  } catch (e) {
+                    message.error(e.message);
+                  }
+                }}
                 onSubmit={this.handleSubmit}
               />
             </Card>

@@ -6,7 +6,6 @@ import { rfqProductsColumns as rpc, rfqDisclaimer } from '../../constants';
 import { Uploader } from 'modules/common/components';
 import { xlsxHandler } from 'modules/common/utils';
 import { controlValueParser, collectProducts } from '../utils';
-import debounce from 'debounce';
 
 const { Column } = Table;
 const { Option } = Select;
@@ -42,7 +41,6 @@ class RfqTable extends Component {
     this.onProductInputChange = this.onProductInputChange.bind(this);
     this.onProductFileChange = this.onProductFileChange.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.validateDebounced = debounce(this.validate.bind(this), 500);
   }
 
   onChange() {
@@ -66,23 +64,6 @@ class RfqTable extends Component {
     product[name] = controlValueParser({ e, dataType });
 
     await this.setState({ [stateKey]: product }, () => this.onChange());
-
-    this.validateDebounced();
-  }
-
-  validate() {
-    const { products } = this.state;
-    const { onErrorChange } = this.props;
-    let errorFound = false;
-
-    for (const product of products) {
-      if (product.unitPrice && !product.alternative) {
-        message.error('Please choose a value in "alternative" field');
-        errorFound = true;
-        break;
-      }
-    }
-    if (onErrorChange) onErrorChange(errorFound);
   }
 
   handleFile(e) {
@@ -380,7 +361,6 @@ RfqTable.propTypes = {
   respondedProducts: PropTypes.array,
   onChange: PropTypes.func,
   generateTemplate: PropTypes.func,
-  onErrorChange: PropTypes.func,
 };
 
 RfqTable.contextTypes = {
