@@ -80,16 +80,15 @@ class Messages extends Component {
         render: this.isNew,
         key: 3,
       },
-      // {
-      //   title: 'Replied',
-      //   render: IsRepliedIcon,
-      //   width: 65,
-      //   key: 4
-      // },
       {
         title: 'Subject',
         dataIndex: 'subject',
         width: 200,
+        render: (subject) => {
+          return (
+            <p style={{ padding: 0, margin: 0, maxWidth: '200px' }}>{subject}</p>
+          )
+        },
         key: 5,
       },
       {
@@ -99,13 +98,6 @@ class Messages extends Component {
         render: AttachmentIcon,
         key: 6,
       },
-      // {
-      //   title: 'Body',
-      //   dataIndex: 'body',
-      //   key: 7,
-      //   render: body =>
-      //     body && body.length > 100 ? body.slice(60) + '...' : body
-      // },
       {
         title: 'Actions',
         key: 8,
