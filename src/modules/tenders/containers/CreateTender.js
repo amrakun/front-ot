@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, gql, graphql } from 'react-apollo';
 import { queries as companyQueries } from 'modules/companies/graphql';
+import { alert } from 'modules/common/utils';
 import { RfqForm, EoiForm } from '../components';
 import { mutations, queries } from '../graphql';
-import { message } from 'antd';
 
 const CreateTenderContainer = props => {
   const { type, tendersAdd, simpleCompaniesQuery, buyersQuery, history } = props;
@@ -18,14 +18,14 @@ const CreateTenderContainer = props => {
 
     tendersAdd({ variables: { ...doc, publishDate, closeDate } })
       .then(tender => {
-        message.success('Successfully created a tender!');
+        alert.success('Successfully created a tender!');
 
         history.push(`/${type}?refetch`, {
           newTenderId: tender.data.tendersAdd._id
         });
       })
       .catch(error => {
-        message.error(error.message);
+        alert.error(error.message);
       });
   };
 

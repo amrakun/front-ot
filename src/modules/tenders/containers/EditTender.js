@@ -4,7 +4,7 @@ import { compose, gql, graphql } from 'react-apollo';
 import { RfqForm, EoiForm } from '../components';
 import { queries, mutations } from '../graphql';
 import { Loading } from 'modules/common/components';
-import { message } from 'antd';
+import { alert } from 'modules/common/utils';
 
 const EditContainer = props => {
   const { tenderDetailQuery, buyersQuery, tendersEdit } = props;
@@ -33,11 +33,11 @@ const EditContainer = props => {
       }
     })
       .then(() => {
-        message.success('Saved');
+        alert.success('Saved');
         history.push(`/${type}?refetch`);
       })
       .catch(error => {
-        message.error(error.message);
+        alert.error(error.message);
       });
   };
 
