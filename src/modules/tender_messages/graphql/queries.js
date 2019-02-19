@@ -41,6 +41,7 @@ const tenderMessageFields = `
   isAuto,
   isRead,
   isReplySent
+  createdAt
 `;
 const tenderMessages = `
   query tenderMessages($page: Int, $perPage: Int, $tenderId: String!) {
