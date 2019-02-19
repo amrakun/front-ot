@@ -33,6 +33,7 @@ const tenderFields = `
   createdUser {
     email
   },
+  responsibleBuyerIds
   winnerIds
   isAwarded
   awardNote
@@ -335,6 +336,16 @@ const totalBuyerTenders = `
   }
 `;
 
+const buyers = `
+  query users {
+    users {
+      _id
+      firstName
+      lastName
+    }
+  }
+`;
+
 export default {
   tenderResponses,
   tenderResponsesTotalCount,
@@ -354,4 +365,5 @@ export default {
   tenderResponseNotRespondedSuppliers,
   tenderResponseInvitedSuppliers,
   companies,
+  buyers,
 };

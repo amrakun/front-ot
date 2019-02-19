@@ -68,6 +68,7 @@ class EoiForm extends BaseForm {
   }
 
   renderExtraContent() {
+    const { data, buyers } = this.props;
     const { isToAll, tierTypes } = this.state;
 
     const options = regionOptions.map(region => {
@@ -94,6 +95,14 @@ class EoiForm extends BaseForm {
       );
     }
 
+    const buyersOptions = buyers.map(buyer => {
+      return (
+        <Option value={buyer._id} key={buyer._id}>
+          {buyer.firstName} {buyer.lastName}
+        </Option>
+      );
+    });
+
     return (
       <div>
         <p>
@@ -103,6 +112,18 @@ class EoiForm extends BaseForm {
         </p>
 
         {tierTypesField}
+
+        {this.renderField({
+          label: 'Responsible officers',
+          name: 'responsibleBuyerIds',
+          optional: true,
+          initialValue: data.responsibleBuyerIds,
+          control: (
+            <Select mode="multiple">
+              {buyersOptions}
+            </Select>
+          ),
+        })}
       </div>
     );
   }

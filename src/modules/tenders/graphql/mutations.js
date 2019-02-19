@@ -7,6 +7,7 @@ const commonParams = `
   $closeDate: Date!
   $file: JSON
   $sourcingOfficer: String
+  $responsibleBuyerIds: [String]
   $reminderDay: Float
   $supplierIds: [String]
   $isToAll: Boolean
@@ -24,6 +25,7 @@ const commonFields = `
   closeDate: $closeDate
   file: $file
   sourcingOfficer: $sourcingOfficer
+  responsibleBuyerIds: $responsibleBuyerIds
   reminderDay: $reminderDay
   supplierIds: $supplierIds
   isToAll: $isToAll
