@@ -2,9 +2,10 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose, gql, graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
+import { Loading } from 'modules/common/components';
+import { alert } from 'modules/common/utils';
+import router from 'modules/common/router';
 import { UserList } from '../../components';
-import { Loading } from '../../../common/components';
-import router from '../../../common/router';
 import { queries, mutations } from '../../graphql';
 
 const UserListContainer = ({
@@ -25,9 +26,14 @@ const UserListContainer = ({
     users: usersListQuery.users,
     totalCount: usersTotalCountQuery.usersTotalCount || 0,
     removeUser: _id => {
-      usersRemoveMutation({ variables: { _id } }).then(() => {
-        usersListQuery.refetch();
-      });
+      usersRemoveMutation({ variables: { _id } })
+        .then(() => {
+          usersListQuery.refetch();
+          alert.success('User succesfully removed.');
+        })
+        .catch((e) => {
+          alert.error(e.message);
+        });
     },
     refetchUsers: () => {
       usersListQuery.refetch();

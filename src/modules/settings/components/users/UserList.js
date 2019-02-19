@@ -12,7 +12,6 @@ import {
   Divider,
   Button,
   Form,
-  message,
   Popconfirm
 } from 'antd';
 import { Paginator } from 'modules/common/components';
@@ -117,7 +116,6 @@ class UserList extends React.Component {
 
   removeUser(id) {
     this.props.removeUser(id);
-    message.success('User succesfully removed.');
   }
 
   handleSearch(value) {
