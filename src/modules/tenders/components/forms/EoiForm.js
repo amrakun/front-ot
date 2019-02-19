@@ -105,14 +105,6 @@ class EoiForm extends BaseForm {
 
     return (
       <div>
-        <p>
-          <Checkbox checked={isToAll} onChange={e => this.setState({ isToAll: e.target.checked })}>
-            To all suppliers
-          </Checkbox>
-        </p>
-
-        {tierTypesField}
-
         {this.renderField({
           label: 'Responsible officers',
           name: 'responsibleBuyerIds',
@@ -124,6 +116,14 @@ class EoiForm extends BaseForm {
             </Select>
           ),
         })}
+
+        <p>
+          <Checkbox checked={isToAll} onChange={e => this.setState({ isToAll: e.target.checked })}>
+            To all suppliers
+          </Checkbox>
+        </p>
+
+        {tierTypesField}
       </div>
     );
   }
