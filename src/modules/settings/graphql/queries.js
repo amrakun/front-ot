@@ -29,8 +29,8 @@ export const userDetail = `
 `;
 
 export const usersTotalCount = `
-  query usersTotalCount {
-    usersTotalCount
+  query usersTotalCount($search: String) {
+    usersTotalCount(search: $search)
   }
 `;
 

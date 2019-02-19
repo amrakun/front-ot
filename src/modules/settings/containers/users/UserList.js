@@ -75,6 +75,11 @@ export default compose(
     name: 'usersRemoveMutation'
   }),
   graphql(gql(queries.usersTotalCount), {
-    name: 'usersTotalCountQuery'
+    name: 'usersTotalCountQuery',
+    options: ({ queryParams }) => ({
+        variables: {
+          search: queryParams.search,
+        },
+    })
   })
 )(withRouter(UserListContainer));
