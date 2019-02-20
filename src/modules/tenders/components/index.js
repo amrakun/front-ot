@@ -2,6 +2,7 @@ import BuyerTenders from './view/list/BuyerTenders';
 import SupplierTenders from './view/list/SupplierTenders';
 import Rfq from './view/single/Rfq';
 import Eoi from './view/single/Eoi';
+import Logs from './view/single/Logs';
 import RfqForm from './forms/RfqForm';
 import EoiForm from './forms/EoiForm';
 import SubmitRfq from './submit/SubmitRfq';
@@ -15,6 +16,7 @@ export {
   SubmitEoi,
   Rfq,
   Eoi,
+  Logs,
   PublicEoi,
   BuyerTenders,
   SupplierTenders

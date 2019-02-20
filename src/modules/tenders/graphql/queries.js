@@ -346,6 +346,36 @@ const buyers = `
   }
 `;
 
+const logsTenders = `
+  query logsTenders($page: Int, $perPage: Int, $tenderId: String!) {
+    logsTenders(page: $page, perPage: $perPage, tenderId: $tenderId) {
+      _id
+      user {
+        _id 
+        username
+        email
+        role
+        isSupplier
+        companyId
+        firstName
+        lastName
+        jobTitle
+        phone
+      }
+      isAuto
+      action
+      description
+      createdAt
+    }
+  }
+`;
+
+const logsTenderTotalCount = `
+  query logsTenderTotalCount($tenderId: String!) {
+    logsTenderTotalCount(tenderId: $tenderId)
+  }
+`;
+
 export default {
   tenderResponses,
   tenderResponsesTotalCount,
@@ -366,4 +396,6 @@ export default {
   tenderResponseInvitedSuppliers,
   companies,
   buyers,
+  logsTenders,
+  logsTenderTotalCount
 };

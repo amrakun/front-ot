@@ -32,16 +32,17 @@ const columns = [
 ];
 
 const List = props => {
-  const { listForTender, totalCountForTender } = props;
+  const { logs, totalCount } = props;
+
   return (
     <>
       <Table
         columns={columns}
         rowKey={({ _id }) => _id}
-        dataSource={listForTender.tenderLog}
+        dataSource={logs}
         pagination={false}
       />
-      <Paginator total={totalCountForTender.tenderLogCount} paramPrefix="log" />
+      <Paginator total={totalCount} paramPrefix="log" />
     </>
   );
 };

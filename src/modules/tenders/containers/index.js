@@ -4,6 +4,7 @@ import CreateTender from './CreateTender';
 import EditTender from './EditTender';
 import SubmitTender from './SubmitTender';
 import Tender from './Tender';
+import Logs from './Logs';
 
 export {
   CreateTender,
@@ -11,5 +12,6 @@ export {
   SupplierTenders,
   Tender,
   EditTender,
-  SubmitTender
+  SubmitTender,
+  Logs
 };
