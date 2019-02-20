@@ -5,11 +5,11 @@ import { queries } from '../graphql';
 import { Logs } from '..//components';
 
 const LogsContainer = props => {
-  const { logsTendersQuery, logsTenderTotalCountQuery } = props;
+  const { logsTenderQuery, logsTenderTotalCountQuery } = props;
 
   const updatedProps = {
     ...props,
-    logs: logsTendersQuery.logsTenders || [],
+    logs: logsTenderQuery.logsTender || [],
     totalCount: logsTenderTotalCountQuery.logsTenderTotalCount || 0,
   };
 
@@ -17,13 +17,13 @@ const LogsContainer = props => {
 };
 
 LogsContainer.propTypes = {
-  logsTendersQuery: PropTypes.object,
+  logsTenderQuery: PropTypes.object,
   logsTenderTotalCountQuery: PropTypes.object,
 };
 
 export default compose(
-  graphql(gql(queries.logsTenders), {
-    name: 'logsTendersQuery',
+  graphql(gql(queries.logsTender), {
+    name: 'logsTenderQuery',
     options: ({ _id }) => {
       return {
         variables: { tenderId: _id },

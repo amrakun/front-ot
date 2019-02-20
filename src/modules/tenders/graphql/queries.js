@@ -346,9 +346,9 @@ const buyers = `
   }
 `;
 
-const logsTenders = `
-  query logsTenders($page: Int, $perPage: Int, $tenderId: String!) {
-    logsTenders(page: $page, perPage: $perPage, tenderId: $tenderId) {
+const logsTender = `
+  query logsTender($page: Int, $perPage: Int, $tenderId: String!) {
+    logsTender(page: $page, perPage: $perPage, tenderId: $tenderId) {
       _id
       user {
         _id 
@@ -396,6 +396,6 @@ export default {
   tenderResponseInvitedSuppliers,
   companies,
   buyers,
-  logsTenders,
+  logsTender,
   logsTenderTotalCount
 };
