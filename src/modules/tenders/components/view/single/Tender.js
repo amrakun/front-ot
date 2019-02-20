@@ -199,6 +199,24 @@ class Tender extends Common {
     return responseRows;
   }
 
+  renderSendRegretLetterButton(tenderDetail) {
+    const { sentRegretLetter, status } = tenderDetail;
+
+    if (tenderDetail.type === 'eoi') {
+      return null;
+    }
+
+    return (
+      <Button
+        disabled={sentRegretLetter || ['open', 'draft'].includes(status)}
+        onClick={this.toggleRegretLetterModal}
+      >
+        Send regret letter
+        <Icon type="mail" />
+      </Button>
+    )
+  }
+
   renderTable(args) {
     const { tableOperations } = args;
 
@@ -208,7 +226,7 @@ class Tender extends Common {
 
     const data = this.props.data || [];
     const tenderDetail = this.props.tenderDetail || {};
-    const { winnerIds = [], sentRegretLetter, status } = tenderDetail;
+    const { winnerIds = [], status } = tenderDetail;
 
     return (
       <Card
@@ -222,13 +240,7 @@ class Tender extends Common {
         <div className="table-operations">
           <Search placeholder="Supplier name or Vendor number" />
           {tableOperations}
-          <Button
-            disabled={sentRegretLetter || ['open', 'draft'].includes(status)}
-            onClick={this.toggleRegretLetterModal}
-          >
-            Send regret letter
-            <Icon type="mail" />
-          </Button>
+          {this.renderSendRegretLetterButton(tenderDetail)}
         </div>
 
         <Table
