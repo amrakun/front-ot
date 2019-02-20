@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { compose, gql, graphql } from 'react-apollo';
 import { queries as companyQueries } from 'modules/companies/graphql';
 import { alert } from 'modules/common/utils';
+import { Loading } from 'modules/common/components';
 import { RfqForm, EoiForm } from '../components';
 import { mutations, queries } from '../graphql';
 
@@ -11,6 +12,10 @@ const CreateTenderContainer = props => {
 
   if (simpleCompaniesQuery.error) {
     return null;
+  }
+
+  if (simpleCompaniesQuery.loading) {
+    return <Loading />;
   }
 
   const save = doc => {
