@@ -24,7 +24,7 @@ const Recipient = ({ recipientSuppliers }) => {
     }
     if (recipientSuppliers.length > 1) return `${recipientSuppliers.length} suppliers`;
   } else {
-    return 'RFQ';
+    return 'No suppliers';
   }
 };
 
