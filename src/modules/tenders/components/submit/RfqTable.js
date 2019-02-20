@@ -56,14 +56,14 @@ class RfqTable extends Component {
     this.setState({ [stateKey]: product }, () => this.onChange());
   }
 
-  onProductInputChange(e, name, recordKey, dataType) {
+  async onProductInputChange(e, name, recordKey, dataType) {
     const stateKey = `product__${recordKey}`;
 
     const product = this.state[stateKey] || {};
 
     product[name] = controlValueParser({ e, dataType });
 
-    this.setState({ [stateKey]: product }, () => this.onChange());
+    await this.setState({ [stateKey]: product }, () => this.onChange());
   }
 
   handleFile(e) {
@@ -92,6 +92,10 @@ class RfqTable extends Component {
             alternative: row[13] || '',
             comment: row[14] || '',
           };
+
+          if (doc.unitPrice && !doc.alternative) {
+            errors.push(`Input a value in a field "alternative" on line ${index + 2}`);
+          }
 
           if (doc.unitPrice && !validator.isFloat((doc.unitPrice || '').toString())) {
             errors.push(`Invalid unit price on line ${index + 2}`);

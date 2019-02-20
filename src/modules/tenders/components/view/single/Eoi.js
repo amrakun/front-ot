@@ -22,6 +22,14 @@ class Eoi extends Tender {
 
     this.handleEoiShortList = this.handleEoiShortList.bind(this);
     this.handleEoiBidderList = this.handleEoiBidderList.bind(this);
+    this.downloadRespondedFiles = this.downloadRespondedFiles.bind(this);
+  }
+
+  downloadRespondedFiles() {
+    const { REACT_APP_API_URL } = process.env;
+    const { tenderDetail } = this.props;
+
+    window.open(`${REACT_APP_API_URL}/download-tender-files?tenderId=${tenderDetail._id}`, '__blank');
   }
 
   handleEoiShortList() {
@@ -151,6 +159,10 @@ class Eoi extends Tender {
       </Button>,
       <Button onClick={this.handleEoiBidderList} key={0}>
         EOI bidder list
+        <Icon type="file-excel" />
+      </Button>,
+      <Button onClick={this.downloadRespondedFiles} key={2}>
+        Download files
         <Icon type="file-excel" />
       </Button>,
     ];

@@ -41,6 +41,7 @@ const tenderMessageFields = `
   isAuto,
   isRead,
   isReplySent
+  createdAt
 `;
 const tenderMessages = `
   query tenderMessages($page: Int, $perPage: Int, $tenderId: String!) {
@@ -58,10 +59,24 @@ const tenderMessageDetail = `
   }
 `;
 
+const tenderSuppliers = `
+  query tenderDetail($_id: String!) {
+    tenderDetail(_id: $_id) {
+      _id
+      suppliers {
+        _id
+        basicInfo {
+          enName
+        }
+      }
+    }
+  }
+`;
+
 const tenderMessageTotalCount = `
   query tenderMessageTotalCount($tenderId: String) {
     tenderMessageTotalCount(tenderId : $tenderId)
   }
 `;
 
-export default { tenderMessages, tenderMessageDetail, tenderMessageTotalCount };
+export default { tenderSuppliers, tenderMessages, tenderMessageDetail, tenderMessageTotalCount };

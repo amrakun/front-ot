@@ -1,11 +1,15 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import { Card, Form, Button, Modal, Checkbox } from 'antd';
+import { Card, Form, Button, Modal, Checkbox, Tabs } from 'antd';
 import { BaseForm } from 'modules/common/components';
 import { agreementOptions } from './constants';
+import Actions from './Actions';
 import EoiTable from './EoiTable';
 import MainInfo from './MainInfo';
+import { TenderMessagesSingle } from 'modules/tender_messages/containers/';
+
+const TabPane = Tabs.TabPane;
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -19,7 +23,7 @@ class SubmitTender extends BaseForm {
       respondedDocuments: response ? response.respondedDocuments : [],
       submitDisabled: true,
       submitLoading: false,
-      agreementModalVisible: false
+      agreementModalVisible: false,
     };
 
     this.onChangeDocuments = this.onChangeDocuments.bind(this);
@@ -27,7 +31,6 @@ class SubmitTender extends BaseForm {
     this.toggleAgreementModal = this.toggleAgreementModal.bind(this);
     this.handleOk = this.handleOk.bind(this);
     this.handleAgreementChange = this.handleAgreementChange.bind(this);
-    this.saveDraft = this.saveDraft.bind(this);
   }
 
   toggleAgreementModal() {
@@ -62,11 +65,14 @@ class SubmitTender extends BaseForm {
 
   handleOk() {
     this.setState({ submitLoading: true });
-    this.props.save({ respondedDocuments: this.collectDocuments() }, true);
-  }
 
-  saveDraft() {
-    this.save({ respondedDocuments: this.collectDocuments() });
+    this.props.save(
+      {
+        respondedDocuments: this.collectDocuments(),
+        isNotInterested: false,
+      },
+      true
+    );
   }
 
   render() {
@@ -77,85 +83,84 @@ class SubmitTender extends BaseForm {
     const { __ } = this.context;
 
     return (
-      <Form layout="inline">
-        <MainInfo {...data} />
+      <Tabs defaultActiveKey="1">
+        <TabPane key="1" tab="Main">
+          <Form layout="inline">
+            <MainInfo {...data} />
 
-        <Card title={__('Apply to EOI')} className="margin">
-          <EoiTable
-            requestedDocuments={data.requestedDocuments || []}
-            respondedDocuments={response ? response.respondedDocuments : []}
-            onChange={this.onChangeDocuments}
+            <Card title={__('Apply to EOI')} className="margin">
+              <EoiTable
+                requestedDocuments={data.requestedDocuments || []}
+                respondedDocuments={response ? response.respondedDocuments : []}
+                onChange={this.onChangeDocuments}
+              />
+
+              <br />
+
+              <Actions
+                tender={data}
+                response={response}
+                __={__}
+                onNotInterested={() => this.save({ isNotInterested: true })}
+                onSaveDraft={() =>
+                  this.save({
+                    respondedDocuments: this.collectDocuments(),
+                    isNotInterested: false,
+                  })
+                }
+                onSubmit={this.handleSubmit}
+              />
+
+              <Modal
+                title={__('Confirmation')}
+                visible={agreementModalVisible}
+                onCancel={this.toggleAgreementModal}
+                footer={[
+                  <Button key="back" size="large" onClick={this.toggleAgreementModal}>
+                    {__('Return')}
+                  </Button>,
+                  <Button
+                    key="submit"
+                    type="primary"
+                    size="large"
+                    disabled={submitDisabled}
+                    loading={submitLoading}
+                    onClick={this.handleOk}
+                  >
+                    {__('Submit')}
+                  </Button>,
+                ]}
+              >
+                <strong>
+                  {__('Please tick the boxes to confirm that you have agree with the statements')}
+                </strong>
+
+                <CheckboxGroup
+                  options={agreementOptions(__)}
+                  className="horizontal"
+                  onChange={this.handleAgreementChange}
+                />
+              </Modal>
+            </Card>
+          </Form>
+        </TabPane>
+        <TabPane key="2" tab="Messages">
+          <TenderMessagesSingle
+            tenderDetail={this.props.data}
+            queryParams={this.props.queryParams}
           />
-
-          <br />
-
-          {!data.isSent && (
-            <div className="margin">
-              <Button
-                style={{ marginRight: '16px' }}
-                htmlType="button"
-                onClick={this.saveDraft}
-              >
-                {__('Save as draft')}
-              </Button>
-              <Button
-                type="primary"
-                htmlType="button"
-                onClick={this.handleSubmit}
-              >
-                {__('Save & submit')}
-              </Button>
-            </div>
-          )}
-
-          <Modal
-            title={__('Confirmation')}
-            visible={agreementModalVisible}
-            onCancel={this.toggleAgreementModal}
-            footer={[
-              <Button
-                key="back"
-                size="large"
-                onClick={this.toggleAgreementModal}
-              >
-                {__('Return')}
-              </Button>,
-              <Button
-                key="submit"
-                type="primary"
-                size="large"
-                disabled={submitDisabled}
-                loading={submitLoading}
-                onClick={this.handleOk}
-              >
-                {__('Submit')}
-              </Button>
-            ]}
-          >
-            <strong>
-              {__(
-                'Please tick the boxes to confirm that you have agree with the statements'
-              )}
-            </strong>
-
-            <CheckboxGroup
-              options={agreementOptions(__)}
-              className="horizontal"
-              onChange={this.handleAgreementChange}
-            />
-          </Modal>
-        </Card>
-      </Form>
+        </TabPane>
+      </Tabs>
     );
   }
 }
 
 SubmitTender.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.object,
 };
 
 SubmitTender.contextTypes = {
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 const form = Form.create()(SubmitTender);

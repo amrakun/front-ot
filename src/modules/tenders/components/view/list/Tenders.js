@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import moment from 'moment';
-import { Table, Card, Icon, Tooltip, DatePicker } from 'antd';
+import { Table, Card, Icon, DatePicker } from 'antd';
 import { Paginator, Search, HelpModal } from 'modules/common/components';
 import { dateTimeFormat } from 'modules/common/constants';
 import router from 'modules/common/router';
@@ -55,24 +55,6 @@ class Tenders extends React.Component {
     return <Icon type={s.type} style={{ color: s.color, ...style }} />;
   }
 
-  renderTooltippedIcon(record) {
-    const { __ } = this.context;
-
-    let { status, isParticipated, isSent } = record;
-
-    if (isParticipated && status !== 'canceled') status = 'draft';
-    if (isSent && status !== 'canceled') status = 'participated';
-
-    return (
-      <Tooltip title={<span className="capitalize">{__(status)}</span>}>
-        {this.renderIcon(status, {
-          fontSize: '20px',
-          lineHeight: '12px',
-        })}
-      </Tooltip>
-    );
-  }
-
   commonColumns() {
     const { __ } = this.context;
 
@@ -85,7 +67,8 @@ class Tenders extends React.Component {
       },
       {
         title: __('Tender Description'),
-        dataIndex: 'name',
+        width: 100,
+        render: (text, record) => <p style={{ maxWidth: '300px' }}>{record.name}</p>,
       },
       {
         title: __('Publish Date'),
@@ -98,10 +81,6 @@ class Tenders extends React.Component {
         width: 150,
       },
     ];
-  }
-
-  renderStatus(text, record) {
-    return record.isParticipated ? 'participated' : record.status;
   }
 
   renderBoolean(text, record) {

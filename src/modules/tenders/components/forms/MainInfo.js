@@ -12,13 +12,13 @@ class MainInfo extends React.Component {
     super(props, context);
 
     const {
-      data: { content, attachments, suppliers }
+      data: { content, attachments, suppliers },
     } = props;
 
     this.state = {
       content,
       attachments: (attachments || []).map(a => ({ ...a })),
-      suppliers: (suppliers || []).map(s => ({ ...s }))
+      suppliers: (suppliers || []).map(s => ({ ...s })),
     };
 
     this.onEmailContentChange = this.onEmailContentChange.bind(this);
@@ -56,8 +56,7 @@ class MainInfo extends React.Component {
     let result = {};
 
     array.forEach((element, index) => {
-      result[element] =
-        colors[index] || '#' + ((Math.random() * 0xffffff) << 0).toString(16);
+      result[element] = colors[index] || '#' + ((Math.random() * 0xffffff) << 0).toString(16);
     });
 
     return result;
@@ -127,6 +126,7 @@ class MainInfo extends React.Component {
 
     return suppliers.map(supplier => {
       const owner = this.getOwner(supplier);
+      const basicInfo = supplier.basicInfo || {};
 
       return (
         <Tooltip key={supplier._id} title={owner ? `Owner: ${owner}` : ''}>
@@ -136,7 +136,7 @@ class MainInfo extends React.Component {
             closable={true}
             afterClose={() => this.removeSupplier(supplier._id)}
           >
-            {supplier.basicInfo.enName}
+            {basicInfo.enName}
           </Tag>
         </Tooltip>
       );
@@ -153,17 +153,46 @@ class MainInfo extends React.Component {
     return null;
   }
 
+  renderSuppliers() {
+    const { showSuppliers } = this.props;
+    const { suppliers } = this.state;
+
+    if (!showSuppliers) {
+      return null;
+    }
+
+    return (
+      <div>
+        <label>
+          Requesting suppliers: <strong>{suppliers.length}</strong>
+        </label>
+        <br />
+
+        <div
+          style={{
+            margin: '6px 0 16px 0',
+            maxHeight: '200px',
+            overflow: 'scroll',
+          }}
+        >
+          {this.renderSupplierTags()}
+          <SupplierSearcher onSelect={this.onAddSuppliers} />
+
+          <AddCompany showInvite onAdd={supplier => this.onAddSuppliers([supplier])} />
+        </div>
+      </div>
+    );
+  }
+
   render() {
     const { renderField, renderOptions, data } = this.props;
-    const { suppliers, content, attachments } = this.state;
+    const { content, attachments } = this.state;
     const { publishDate, closeDate } = data;
 
-    const dateRange = publishDate
-      ? [moment(publishDate), moment(closeDate)]
-      : null;
+    const dateRange = publishDate ? [moment(publishDate), moment(closeDate)] : null;
 
     const fieldProps = {
-      hasFeedback: false
+      hasFeedback: false,
     };
 
     return (
@@ -171,39 +200,19 @@ class MainInfo extends React.Component {
         <Col span={10}>
           <Card title="Main info" className="no-pad-bottom">
             {this.renderExtraContent()}
-
-            <label>
-              Requesting suppliers: <strong>{suppliers.length}</strong>
-            </label>
-            <br />
-
-            <div
-              style={{
-                margin: '6px 0 16px 0',
-                maxHeight: '200px',
-                overflow: 'scroll'
-              }}
-            >
-              {this.renderSupplierTags()}
-              <SupplierSearcher onSelect={this.onAddSuppliers} />
-
-              <AddCompany
-                showInvite
-                onAdd={supplier => this.onAddSuppliers([supplier])}
-              />
-            </div>
+            {this.renderSuppliers()}
 
             {renderField({
               ...fieldProps,
               label: 'Number',
               name: 'number',
-              control: <Input />
+              control: <Input />,
             })}
             {renderField({
               ...fieldProps,
               label: 'Description',
               name: 'name',
-              control: <Input />
+              control: <Input />,
             })}
             {renderField({
               ...fieldProps,
@@ -217,21 +226,21 @@ class MainInfo extends React.Component {
                   format={dateTimeFormat}
                   placeholder={['Publish date', 'Close date']}
                 />
-              )
+              ),
             })}
             {renderField({
               ...fieldProps,
               label: 'Reminder',
               name: 'reminderDay',
               optional: true,
-              control: <Select>{renderOptions(days)}</Select>
+              control: <Select>{renderOptions(days)}</Select>,
             })}
             {renderField({
               hasFeedback: false,
               optional: true,
               label: 'Officer name',
               name: 'sourcingOfficer',
-              control: <Input />
+              control: <Input />,
             })}
             {renderField({
               hasFeedback: false,
@@ -239,17 +248,14 @@ class MainInfo extends React.Component {
               label: 'File',
               name: 'file',
               dataType: 'file',
-              control: <Uploader />
+              control: <Uploader />,
             })}
           </Card>
         </Col>
 
         <Col span={14}>
           <Card title="Email content">
-            <Editor
-              onEmailContentChange={this.onEmailContentChange}
-              content={content || ''}
-            />
+            <Editor onEmailContentChange={this.onEmailContentChange} content={content || ''} />
           </Card>
 
           <Card title="Attachments">
@@ -270,7 +276,8 @@ MainInfo.propTypes = {
   data: PropTypes.object,
   renderField: PropTypes.func,
   renderOptions: PropTypes.func,
-  onChange: PropTypes.func
+  showSuppliers: PropTypes.bool,
+  onChange: PropTypes.func,
 };
 
 export default MainInfo;

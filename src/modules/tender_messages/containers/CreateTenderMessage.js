@@ -1,21 +1,25 @@
 import React from 'react';
 import { compose, gql, graphql } from 'react-apollo';
 import { TenderMessageForm } from '../components';
-import { mutations } from '../graphql';
+import { mutations, queries } from '../graphql';
 import { message } from 'antd';
-import PropTypes from 'prop-types';
 
 const CreateTenderMessageContainer = (props, context) => {
   const {
+    tenderSuppliersQuery,
     tenderMessageBuyerSend,
     tenderMessageSupplierSend,
-    onComplete
+    onComplete,
+    currentUser,
   } = props;
-  const { currentUser } = context;
 
-  const mutation = currentUser.isSupplier
-    ? tenderMessageSupplierSend
-    : tenderMessageBuyerSend;
+  let mutation = tenderMessageSupplierSend;
+  let suppliers = [];
+
+  if (!currentUser.isSupplier) {
+    mutation = tenderMessageBuyerSend;
+    suppliers = tenderSuppliersQuery.loading ? [] : tenderSuppliersQuery.tenderDetail.suppliers;
+  }
 
   const save = doc => {
     mutation({ variables: { ...doc } })
@@ -28,29 +32,42 @@ const CreateTenderMessageContainer = (props, context) => {
       });
   };
 
-  return <TenderMessageForm onSubmit={save} {...props} />;
-};
+  const extendedProps = {
+    ...props,
+    suppliers,
+  };
 
-CreateTenderMessageContainer.contextTypes = {
-  currentUser: PropTypes.object
+  return <TenderMessageForm onSubmit={save} {...extendedProps} />;
 };
 
 export default compose(
+  graphql(gql(queries.tenderSuppliers), {
+    name: 'tenderSuppliersQuery',
+    options: ({ tenderDetail, currentUser }) => {
+      return {
+        variables: {
+          _id: tenderDetail._id,
+        },
+        skip: currentUser.isSupplier,
+      };
+    },
+  }),
+
   graphql(gql(mutations.tenderMessageBuyerSend), {
     name: 'tenderMessageBuyerSend',
     options: () => {
       return {
-        refetchQueries: ['tenderMessages']
+        refetchQueries: ['tenderMessages'],
       };
-    }
+    },
   }),
 
   graphql(gql(mutations.tenderMessageSupplierSend), {
     name: 'tenderMessageSupplierSend',
     options: () => {
       return {
-        refetchQueries: ['tenderMessages']
+        refetchQueries: ['tenderMessages'],
       };
-    }
+    },
   })
 )(CreateTenderMessageContainer);

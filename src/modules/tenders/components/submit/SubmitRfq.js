@@ -1,8 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import { Form, Button, Card, Tabs } from 'antd';
+import { Form, Card, Tabs, message } from 'antd';
 import { Uploader, BaseForm } from 'modules/common/components';
+import Actions from './Actions';
 import RfqTable from './RfqTable';
 import MainInfo from './MainInfo';
 import { TenderMessagesSingle } from 'modules/tender_messages/containers/';
@@ -21,7 +22,6 @@ class SubmitTender extends BaseForm {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.saveDraft = this.saveDraft.bind(this);
     this.onServiceFileUpload = this.onServiceFileUpload.bind(this);
     this.onChangeProducts = this.onChangeProducts.bind(this);
   }
@@ -31,8 +31,17 @@ class SubmitTender extends BaseForm {
   }
 
   getRespondedProducts() {
-    return this.state.respondedProducts.map(product => {
-      const totalPrice = product.quantity * product.unitPrice;
+    const { requestedProducts } = this.props.data;
+
+    return this.state.respondedProducts.map((product, index) => {
+      const requestedProduct = requestedProducts[index];
+
+      if (!requestedProduct) {
+        return {};
+      }
+
+      const totalPrice = requestedProduct.quantity * product.unitPrice;
+
       delete product.key;
       delete product.__typename;
       delete product.purchaseRequestNumber;
@@ -41,6 +50,10 @@ class SubmitTender extends BaseForm {
       delete product.uom;
       delete product.manufacturer;
       delete product.manufacturerPartNumber;
+
+      if (product.unitPrice && (!product.alternative || product.alternative === '-')) {
+        throw new Error('Please choose a value in "alternative" field');
+      }
 
       return {
         ...product,
@@ -55,44 +68,26 @@ class SubmitTender extends BaseForm {
     const { save } = this.props;
     const { respondedFiles } = this.state;
 
-    const respondedProducts = this.getRespondedProducts();
-
-    save({ respondedProducts, respondedFiles }, true);
+    try {
+      const respondedProducts = this.getRespondedProducts();
+      save({ respondedProducts, respondedFiles, isNotInterested: false }, true);
+    } catch (e) {
+      message.error(e.message);
+    }
   }
 
   onServiceFileUpload(files) {
     this.setState({ respondedFiles: files });
   }
 
-  saveDraft() {
-    this.save({
-      respondedProducts: this.getRespondedProducts(),
-      respondedFiles: this.state.respondedFiles,
-    });
-  }
-
   isComplete(product) {
     return product.leadTime && product.shippingTerms && product.unitPrice;
-  }
-
-  renderAction() {
-    const { __ } = this.context;
-
-    return (
-      <div className="margin">
-        <Button style={{ marginRight: '16px' }} htmlType="button" onClick={this.saveDraft}>
-          {__('Save as draft')}
-        </Button>
-        <Button type="primary" htmlType="button" onClick={this.handleSubmit}>
-          {__('Save & submit')}
-        </Button>
-      </div>
-    );
   }
 
   render() {
     const { data, generateTemplate, response, queryParams } = this.props;
     const { type, rfqType, requestedProducts } = data;
+    const { __ } = this.context;
 
     let title = 'Form';
 
@@ -126,7 +121,24 @@ class SubmitTender extends BaseForm {
               {form}
               <br />
 
-              {this.renderAction()}
+              <Actions
+                __={__}
+                tender={data}
+                response={response}
+                onNotInterested={() => this.save({ isNotInterested: true })}
+                onSaveDraft={() => {
+                  try {
+                    this.save({
+                      respondedProducts: this.getRespondedProducts(),
+                      respondedFiles: this.state.respondedFiles,
+                      isNotInterested: false,
+                    })
+                  } catch (e) {
+                    message.error(e.message);
+                  }
+                }}
+                onSubmit={this.handleSubmit}
+              />
             </Card>
           </Form>
         </TabPane>

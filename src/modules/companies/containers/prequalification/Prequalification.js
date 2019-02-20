@@ -4,6 +4,7 @@ import { gql, compose, graphql } from 'react-apollo';
 import { queries, mutations } from '../../graphql';
 import { PrequalificationForms } from '../../components';
 import { Loading } from 'modules/common/components';
+import { alert } from 'modules/common/utils';
 import { message, notification, Icon } from 'antd';
 
 class PrequalificationContainer extends React.Component {
@@ -25,50 +26,33 @@ class PrequalificationContainer extends React.Component {
         callback();
       })
       .catch(error => {
-        message.error(error.message);
+        alert.error(error.message);
       });
   }
 
   send() {
-    const { sendToBuyer, history } = this.props;
+    const { sendToBuyer } = this.props;
     const { __ } = this.context;
 
     sendToBuyer()
       .then(() => {
         notification.open({
           message: __('Done!'),
-          description: __(
-            'You have successfully submitted your pre-qualification form.'
-          ),
+          description: __('You have successfully submitted your pre-qualification form.'),
           icon: <Icon type="smile" style={{ color: 'rgb(0,153,168)' }} />,
-          duration: 10
+          duration: 10,
         });
 
-        history.push('/capacity-building');
+        window.location.reload();
       })
       .catch(error => {
-        message.error(error.message);
+        alert.error(error.message);
       });
   }
 
   save(name, doc) {
     const { companyByUserQuery } = this.props;
     const { __ } = this.context;
-
-    const companyByUser = companyByUserQuery.companyByUser;
-    const disabled = !companyByUser.isPrequalificationInfoEditable;
-
-    if (disabled) {
-      return message.error(__('Changes disabled'));
-    }
-
-    let formsComplete = true;
-
-    Object.keys(companyByUser).forEach(key => {
-      if (key.includes('Info') && !companyByUser[key] && key !== 'healthInfo') {
-        formsComplete = false;
-      }
-    });
 
     const mutation = this.props[`${name}Edit`];
 
@@ -78,18 +62,12 @@ class PrequalificationContainer extends React.Component {
         message.success(__('Saved'));
 
         if (name === 'healthInfo') {
-          if (formsComplete) {
-            return this.send();
-          }
-
-          return message.error(
-            __('Please complete all forms before submitting')
-          );
+          return this.send();
         }
       })
 
       .catch(error => {
-        message.error(error.message);
+        alert.error(error.message);
       });
   }
 
@@ -110,8 +88,8 @@ class PrequalificationContainer extends React.Component {
       skip: this.skip,
       disabled,
       company: {
-        ...companyByUser
-      }
+        ...companyByUser,
+      },
     };
 
     return <PrequalificationForms {...updatedProps} />;
@@ -122,41 +100,41 @@ PrequalificationContainer.propTypes = {
   companyByUserQuery: PropTypes.object,
   history: PropTypes.object,
   skip: PropTypes.func,
-  sendToBuyer: PropTypes.func
+  sendToBuyer: PropTypes.func,
 };
 
 PrequalificationContainer.contextTypes = {
   currentUser: PropTypes.object,
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 export default compose(
   graphql(gql(queries.companyPrequalificationDetail), {
-    name: 'companyByUserQuery'
+    name: 'companyByUserQuery',
   }),
 
   // mutations
   graphql(gql(mutations.financialInfo), {
-    name: 'financialInfoEdit'
+    name: 'financialInfoEdit',
   }),
 
   graphql(gql(mutations.businessInfo), {
-    name: 'businessInfoEdit'
+    name: 'businessInfoEdit',
   }),
 
   graphql(gql(mutations.environmentalInfo), {
-    name: 'environmentalInfoEdit'
+    name: 'environmentalInfoEdit',
   }),
 
   graphql(gql(mutations.healthInfo), {
-    name: 'healthInfoEdit'
+    name: 'healthInfoEdit',
   }),
 
   graphql(gql(mutations.companiesSendPrequalificationInfo), {
-    name: 'sendToBuyer'
+    name: 'sendToBuyer',
   }),
 
   graphql(gql(mutations.companiesSkipPrequalification), {
-    name: 'skip'
+    name: 'skip',
   })
 )(PrequalificationContainer);

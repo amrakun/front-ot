@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Divider, Popconfirm } from 'antd';
+import { Tooltip } from 'antd';
 import { dateTimeFormat } from 'modules/common/constants';
 import moment from 'moment';
 import Tenders from './Tenders';
@@ -40,12 +40,58 @@ class SupplierTenders extends Tenders {
             ),
             value: 'participated',
           },
+          {
+            text: (
+              <span>
+                {renderIcon('notInterested')} {__('Not interested')}
+              </span>
+            ),
+            value: 'notInterested',
+          },
         ],
         filteredValue: this.state.statuses,
         key: 'status',
         fixed: 'left',
         width: 75,
-        render: record => this.renderTooltippedIcon(record),
+        render: record => {
+          const { isParticipated, isSent, isNotInterested } = record;
+
+          let status;
+
+          if (isParticipated) status = 'participated';
+          if (isNotInterested) status = 'notInterested';
+          if (!isSent) status = 'draft';
+
+          return (
+            <Tooltip title={<span className="capitalize">{__(status)}</span>}>
+              {this.renderIcon(status, {
+                fontSize: '20px',
+                lineHeight: '12px',
+              })}
+            </Tooltip>
+          );
+        },
+      },
+      {
+        title: __('Tender status'),
+        fixed: 'left',
+        width: 90,
+        render: (text, record) => {
+          let { status } = record;
+
+          if (status === 'awarded') {
+            status = 'closed';
+          }
+
+          return (
+            <Tooltip title={<span className="capitalize">{__(status)}</span>}>
+              {this.renderIcon(status, {
+                fontSize: '20px',
+                lineHeight: '12px',
+              })}
+            </Tooltip>
+          );
+        },
       },
       ...this.commonColumns(),
       {
@@ -59,10 +105,6 @@ class SupplierTenders extends Tenders {
         render: (text, record) => this.renderOperation(record),
       },
     ];
-  }
-
-  renderStatus(text, record) {
-    return record.isParticipated ? 'participated' : record.status;
   }
 
   renderBoolean(text, record) {
@@ -84,40 +126,9 @@ class SupplierTenders extends Tenders {
     );
   }
 
-  renderNotInterestedLink(record) {
-    const { notInterested } = this.props;
-    const { __ } = this.context;
-    const { _id, status, isParticipated, isSent } = record;
-
-    if (status === 'open' && !isSent && !isParticipated) {
-      return [
-        <Divider type="vertical" key={0} />,
-        <Popconfirm
-          key={1}
-          title={__('Are you sure you are not interested？')}
-          placement="bottomRight"
-          okText={__('Yes')}
-          cancelText={__('No')}
-          onConfirm={() => notInterested(_id)}
-        >
-          <a href="#not-interested">{__('Not interested')}</a>
-        </Popconfirm>,
-      ];
-    }
-  }
-
   renderOpenLink(record) {
-    const { type } = this.props;
-    const { status, _id } = record;
+    const { _id } = record;
     const { __ } = this.context;
-
-    if (status === 'canceled') {
-      return null;
-    }
-
-    if (status === 'closed' && type !== 'eoi') {
-      return null;
-    }
 
     return <Link to={`/tender/submit/${_id}`}>{__('Open')}</Link>;
   }
@@ -127,12 +138,7 @@ class SupplierTenders extends Tenders {
     const { __ } = this.context;
 
     if (currentUser) {
-      return (
-        <div style={{ width: '160px' }}>
-          {this.renderOpenLink(record)}
-          {this.renderNotInterestedLink(record)}
-        </div>
-      );
+      return <div style={{ width: '160px' }}>{this.renderOpenLink(record)}</div>;
     }
 
     return (
@@ -149,7 +155,6 @@ class SupplierTenders extends Tenders {
 
 SupplierTenders.propTypes = {
   currentUser: PropTypes.object,
-  notInterested: PropTypes.func,
 };
 
 SupplierTenders.contextTypes = {

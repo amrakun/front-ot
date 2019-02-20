@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { Row, Button, Table, Icon, Card, Modal, Divider } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { CreateTenderMessage } from '../containers/';
 import TenderMessageDetail from './TenderMessageDetail';
 import { Paginator } from 'modules/common/components';
+import { dateTimeFormat } from 'modules/common/constants';
 
 const ROUTE_ENUM = {
   index: 0,
@@ -22,9 +24,10 @@ const Recipient = ({ recipientSuppliers }) => {
     }
     if (recipientSuppliers.length > 1) return `${recipientSuppliers.length} suppliers`;
   } else {
-    return 'RFQ';
+    return 'No suppliers';
   }
 };
+
 Recipient.propTypes = {
   recipientSuppliers: PropTypes.array,
 };
@@ -62,6 +65,12 @@ class Messages extends Component {
   columns() {
     const columns = [
       {
+        title: 'Date',
+        render: record => moment(record.createdAt).format(dateTimeFormat),
+        width: 150,
+        key: 9,
+      },
+      {
         title: 'From',
         render: senderUsername,
         width: 150,
@@ -79,16 +88,15 @@ class Messages extends Component {
         render: this.isNew,
         key: 3,
       },
-      // {
-      //   title: 'Replied',
-      //   render: IsRepliedIcon,
-      //   width: 65,
-      //   key: 4
-      // },
       {
         title: 'Subject',
         dataIndex: 'subject',
         width: 200,
+        render: (subject) => {
+          return (
+            <p style={{ padding: 0, margin: 0, maxWidth: '200px' }}>{subject}</p>
+          )
+        },
         key: 5,
       },
       {
@@ -98,13 +106,6 @@ class Messages extends Component {
         render: AttachmentIcon,
         key: 6,
       },
-      // {
-      //   title: 'Body',
-      //   dataIndex: 'body',
-      //   key: 7,
-      //   render: body =>
-      //     body && body.length > 100 ? body.slice(60) + '...' : body
-      // },
       {
         title: 'Actions',
         key: 8,
@@ -199,9 +200,11 @@ class Messages extends Component {
   }
 
   renderNested() {
+    const { currentUser } = this.context;
     const { route, tenderMessageDetail } = this.state;
     const _id = tenderMessageDetail ? tenderMessageDetail._id : null;
     const modalWidth = this.state.windowWidth * 0.8;
+
     return (
       <>
         <Modal
@@ -213,11 +216,13 @@ class Messages extends Component {
         >
           <CreateTenderMessage
             key={Math.random()}
+            currentUser={currentUser}
             tenderDetail={this.props.tenderDetail}
             onComplete={this.goto.bind(this, ROUTE_ENUM.index, null)}
             width={modalWidth}
           />
         </Modal>
+
         <Modal
           visible={route === ROUTE_ENUM.view}
           footer={null}
@@ -227,6 +232,7 @@ class Messages extends Component {
         >
           <TenderMessageDetail tenderMessageDetail={tenderMessageDetail} />
         </Modal>
+
         <Modal
           visible={route === ROUTE_ENUM.reply}
           footer={null}
@@ -236,6 +242,7 @@ class Messages extends Component {
         >
           <CreateTenderMessage
             key={_id}
+            currentUser={currentUser}
             replyTo={this.state.tenderMessageDetail}
             tenderDetail={this.props.tenderDetail}
             onComplete={this.goto.bind(this, ROUTE_ENUM.index, null)}
@@ -249,6 +256,7 @@ class Messages extends Component {
     const { tenderMessagesQuery, tenderMessageTotalCountQuery } = this.props;
     const { tenderMessages } = tenderMessagesQuery;
     const totalCount = tenderMessageTotalCountQuery.tenderMessageTotalCount || 0;
+
     return (
       <>
         <Row>

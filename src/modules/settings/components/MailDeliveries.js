@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Table, Card, Row, Col, Input } from 'antd';
-import { dateFormat } from 'modules/common/constants';
+import { dateTimeFormat } from 'modules/common/constants';
 import router from 'modules/common/router';
 import { Paginator } from 'modules/common/components';
 
 const propTypes = {
-  deliveries: PropTypes.array
+  deliveries: PropTypes.array,
 };
 
 class MailDeliveries extends React.Component {
@@ -18,39 +18,39 @@ class MailDeliveries extends React.Component {
       {
         title: 'Num',
         key: '_id',
-        render: (value, row, index) => <span>{index + 1}</span>
+        render: (value, row, index) => <span>{index + 1}</span>,
       },
       {
         title: 'Created date',
         dataIndex: 'createdDate',
         render: createdDate => {
-          return moment(createdDate).format(dateFormat);
-        }
+          return moment(createdDate).format(dateTimeFormat);
+        },
       },
       {
         title: 'From',
         dataIndex: 'from',
-        key: 'from'
+        key: 'from',
       },
       {
         title: 'To',
         dataIndex: 'to',
-        key: 'to'
+        key: 'to',
       },
       {
         title: 'Subject',
         dataIndex: 'subject',
-        key: 'subject'
+        key: 'subject',
       },
       {
         title: 'Status',
         dataIndex: 'status',
-        key: 'status'
-      }
+        key: 'status',
+      },
     ];
 
     this.state = {
-      search: props.search
+      search: props.search,
     };
 
     this.handleSearch = this.handleSearch.bind(this);

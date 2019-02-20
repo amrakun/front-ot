@@ -17,7 +17,6 @@ const generateItems = () => {
     'hasConvictedForBusinessIntegrity',
     'hasLeadersConvicted',
     'doesEmployeePoliticallyExposed',
-    'pepName',
     'organizationChartFile',
     'isSubContractor',
   ];
@@ -39,15 +38,27 @@ const renderDescription = props => {
   }
 
   if (item === 'hasConvictedLabourLaws') {
-    description = businessInfo.hasConvictedLabourLawsDescription || 'No';
+    description = 'No';
+
+    if (value) {
+      description = businessInfo.hasConvictedLabourLawsDescription;
+    }
   }
 
   if (item === 'hasConvictedForHumanRights') {
-    description = businessInfo.hasConvictedForHumanRightsDescription || 'No';
+    description = 'No';
+
+    if (value) {
+      description = businessInfo.hasConvictedForHumanRightsDescription;
+    }
   }
 
   if (item === 'hasConvictedForBusinessIntegrity') {
-    description = businessInfo.proveHasNotConvicted || 'No';
+    description = 'No';
+
+    if (value) {
+      description = businessInfo.proveHasNotConvicted;
+    }
   }
 
   if (item === 'hasLeadersConvicted') {
@@ -65,6 +76,14 @@ const renderDescription = props => {
         </div>
       );
     });
+  }
+
+  if (item === 'doesEmployeePoliticallyExposed') {
+    description = 'No';
+
+    if (value) {
+      description = businessInfo.pepName;
+    }
   }
 
   const fileFields = [

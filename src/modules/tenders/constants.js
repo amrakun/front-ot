@@ -3,10 +3,11 @@ import { Tooltip } from 'antd';
 
 export const statusIcons = {
   draft: { type: 'edit', color: 'rgb(161,161,164)' },
+  participated: { type: 'check-circle-o', color: 'rgb(244,119,33)' },
+  notInterested: { type: 'minus-circle', color: 'rgb(173,77,77,1)' },
   open: { type: 'sync', color: 'rgb(0,153,168)' },
   closed: { type: 'lock', color: 'rgb(188, 90, 58)' },
   awarded: { type: 'trophy', color: 'rgb(244,119,33)' },
-  participated: { type: 'check-circle-o', color: 'rgb(244,119,33)' },
   canceled: { type: 'close-circle', color: 'rgb(67,83,99)' },
 };
 

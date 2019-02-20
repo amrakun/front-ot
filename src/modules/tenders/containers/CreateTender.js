@@ -2,19 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, gql, graphql } from 'react-apollo';
 import { queries as companyQueries } from 'modules/companies/graphql';
+import { alert } from 'modules/common/utils';
+import { Loading } from 'modules/common/components';
 import { RfqForm, EoiForm } from '../components';
-import { mutations } from '../graphql';
-import { message } from 'antd';
+import { mutations, queries } from '../graphql';
 
 const CreateTenderContainer = props => {
-  const { type, tendersAdd, simpleCompaniesQuery, history } = props;
+  const { type, tendersAdd, simpleCompaniesQuery, buyersQuery, history } = props;
 
   if (simpleCompaniesQuery.error) {
     return null;
   }
 
   if (simpleCompaniesQuery.loading) {
-    return null;
+    return <Loading />;
   }
 
   const save = doc => {
@@ -22,14 +23,14 @@ const CreateTenderContainer = props => {
 
     tendersAdd({ variables: { ...doc, publishDate, closeDate } })
       .then(tender => {
-        message.success('Successfully created a tender!');
+        alert.success('Successfully created a tender!');
 
         history.push(`/${type}?refetch`, {
           newTenderId: tender.data.tendersAdd._id
         });
       })
       .catch(error => {
-        message.error(error.message);
+        alert.error(error.message);
       });
   };
 
@@ -37,7 +38,8 @@ const CreateTenderContainer = props => {
     ...props,
     save,
     tenderCreation: true,
-    data: { suppliers: simpleCompaniesQuery.companies }
+    data: { suppliers: simpleCompaniesQuery.companies || [] },
+    buyers: buyersQuery.users || [],
   };
 
   if (type === 'eoi') {
@@ -51,6 +53,7 @@ CreateTenderContainer.propTypes = {
   type: PropTypes.string,
   tendersAdd: PropTypes.func,
   simpleCompaniesQuery: PropTypes.object,
+  buyersQuery: PropTypes.object,
   history: PropTypes.object
 };
 
@@ -69,5 +72,9 @@ export default compose(
         notifyOnNetworkStatusChange: true
       };
     }
+  }),
+
+  graphql(gql(queries.buyers), {
+    name: 'buyersQuery',
   })
 )(CreateTenderContainer);

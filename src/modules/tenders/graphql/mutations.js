@@ -1,29 +1,35 @@
 const commonParams = `
-  $number: String!,
-  $name: String!,
-  $content: String!,
-  $attachments: [JSON],
-  $publishDate: Date!,
-  $closeDate: Date!,
-  $file: JSON,
-  $sourcingOfficer: String,
-  $reminderDay: Float,
-  $supplierIds: [String]!,
+  $number: String!
+  $name: String!
+  $content: String!
+  $attachments: [JSON]
+  $publishDate: Date!
+  $closeDate: Date!
+  $file: JSON
+  $sourcingOfficer: String
+  $responsibleBuyerIds: [String]
+  $reminderDay: Float
+  $supplierIds: [String]
+  $isToAll: Boolean
+  $tierTypes: [String]
   $requestedProducts: [TenderRequestedProductInput]
   $requestedDocuments: [String]
 `;
 
 const commonFields = `
-  number: $number,
-  name: $name,
-  content: $content,
-  attachments: $attachments,
-  publishDate: $publishDate,
-  closeDate: $closeDate,
-  file: $file,
-  sourcingOfficer: $sourcingOfficer,
-  reminderDay: $reminderDay,
-  supplierIds: $supplierIds,
+  number: $number
+  name: $name
+  content: $content
+  attachments: $attachments
+  publishDate: $publishDate
+  closeDate: $closeDate
+  file: $file
+  sourcingOfficer: $sourcingOfficer
+  responsibleBuyerIds: $responsibleBuyerIds
+  reminderDay: $reminderDay
+  supplierIds: $supplierIds
+  isToAll: $isToAll
+  tierTypes: $tierTypes
   requestedProducts: $requestedProducts
   requestedDocuments: $requestedDocuments
 `;
@@ -154,5 +160,5 @@ export default {
   tendersResponsesEdit,
   tendersAward,
   sendRegretLetter,
-  tenderResponsesSend
+  tenderResponsesSend,
 };

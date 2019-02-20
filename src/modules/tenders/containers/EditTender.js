@@ -4,10 +4,10 @@ import { compose, gql, graphql } from 'react-apollo';
 import { RfqForm, EoiForm } from '../components';
 import { queries, mutations } from '../graphql';
 import { Loading } from 'modules/common/components';
-import { message } from 'antd';
+import { alert } from 'modules/common/utils';
 
 const EditContainer = props => {
-  const { tenderDetailQuery, tendersEdit } = props;
+  const { tenderDetailQuery, buyersQuery, tendersEdit } = props;
 
   if (tenderDetailQuery.error) {
     return null;
@@ -33,11 +33,11 @@ const EditContainer = props => {
       }
     })
       .then(() => {
-        message.success('Saved');
+        alert.success('Saved');
         history.push(`/${type}?refetch`);
       })
       .catch(error => {
-        message.error(error.message);
+        alert.error(error.message);
       });
   };
 
@@ -45,7 +45,8 @@ const EditContainer = props => {
     ...props,
     type,
     save,
-    data: tenderDetail
+    data: tenderDetail,
+    buyers: buyersQuery.users || []
   };
 
   if (type === 'eoi') {
@@ -57,6 +58,7 @@ const EditContainer = props => {
 
 EditContainer.propTypes = {
   tenderDetailQuery: PropTypes.object,
+  buyersQuery: PropTypes.object,
   tendersEdit: PropTypes.func
 };
 
@@ -69,6 +71,10 @@ export default compose(
         fetchPolicy: 'network-only'
       };
     }
+  }),
+
+  graphql(gql(queries.buyers), {
+    name: 'buyersQuery',
   }),
 
   graphql(gql(mutations.tendersEdit), {

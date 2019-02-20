@@ -19,7 +19,7 @@ class Tender extends Common {
       selectedCompanies: [],
       responseModal: { visible: false, record: null },
       regretLetterModal: { visible: false },
-      regretLetterContent: ''
+      regretLetterContent: '',
     };
 
     this.showResponsesModal = this.showResponsesModal.bind(this);
@@ -30,7 +30,6 @@ class Tender extends Common {
     this.handleSendRegretLetters = this.handleSendRegretLetters.bind(this);
     this.setFilter = this.setFilter.bind(this);
     this.getTitle = this.getTitle.bind(this);
-    this.showRequestedSuppliers = this.showRequestedSuppliers.bind(this);
   }
 
   getPercent(requestedCount, count) {
@@ -43,14 +42,10 @@ class Tender extends Common {
 
   setFilter(name) {
     router.setParams(this.props.history, {
-      filter: name
+      filter: name,
+      page: undefined,
+      perPage: undefined,
     });
-  }
-
-  showRequestedSuppliers(suppliers) {
-    router.removeParams(this.props.history, 'filter');
-    const requestedSuppliers = suppliers.map(supplier => ({ supplier }));
-    this.setState({ requestedSuppliers });
   }
 
   getTitle() {
@@ -70,8 +65,8 @@ class Tender extends Common {
       responseModal: {
         visible: true,
         title: supplier ? supplier.basicInfo.enName : '',
-        record
-      }
+        record,
+      },
     });
   }
 
@@ -83,7 +78,7 @@ class Tender extends Common {
     const { regretLetterModal } = this.state;
 
     this.setState({
-      regretLetterModal: { visible: !regretLetterModal.visible }
+      regretLetterModal: { visible: !regretLetterModal.visible },
     });
   }
 
@@ -99,30 +94,30 @@ class Tender extends Common {
     return [
       {
         title: 'Supplier name',
-        dataIndex: 'supplier.basicInfo.enName'
+        dataIndex: 'supplier.basicInfo.enName',
       },
       {
         title: 'Vendor number',
-        dataIndex: 'supplier.basicInfo.sapNumber'
+        dataIndex: 'supplier.basicInfo.sapNumber',
       },
       {
         title: 'Prequalification status',
-        dataIndex: 'supplier.prequalificationStatusDisplay'
+        dataIndex: 'supplier.prequalificationStatusDisplay',
       },
       {
         title: 'Status',
-        render: record => (record.status ? record.status : 'On time')
+        render: record => (record.status ? record.status : 'On time'),
       },
       {
         title: 'Provided information',
-        render: this.renderViewResponse
+        render: this.renderViewResponse,
       },
       {
         title: 'Contact person',
-        dataIndex: 'supplier.contactInfo.name'
+        dataIndex: 'supplier.contactInfo.name',
       },
       { title: 'Email', dataIndex: 'supplier.contactInfo.email' },
-      { title: 'Phone', dataIndex: 'supplier.contactInfo.phone' }
+      { title: 'Phone', dataIndex: 'supplier.contactInfo.phone' },
     ];
   }
 
@@ -137,13 +132,7 @@ class Tender extends Common {
   renderStats() {
     const tenderDetail = this.props.tenderDetail || {};
 
-    const {
-      submittedCount,
-      requestedCount,
-      notInterestedCount,
-      notRespondedCount,
-      supplierIds
-    } = tenderDetail;
+    const { submittedCount, requestedCount, notInterestedCount, notRespondedCount } = tenderDetail;
 
     return (
       <Row gutter={24}>
@@ -153,12 +142,7 @@ class Tender extends Common {
             title="Invited"
             color={colors[3]}
             number={requestedCount}
-            onClick={() =>
-              this.props.getSuppliersByIds(
-                supplierIds,
-                this.showRequestedSuppliers
-              )
-            }
+            onClick={() => this.setFilter('isInvited')}
           />
         </Col>
         <Col key={2} lg={6} sm={12}>
@@ -196,37 +180,53 @@ class Tender extends Common {
   }
 
   getResponseRows() {
-    const { notRespondedSuppliers } = this.props;
-    const { requestedSuppliers } = this.state;
+    const { notRespondedSuppliers, invitedSuppliers } = this.props;
 
     const data = this.props.data || [];
     const queryParams = this.props.queryParams || {};
+    const { filter } = queryParams;
 
-    let responseRows =
-      queryParams.filter === 'isNotResponded' ? notRespondedSuppliers : data;
+    let responseRows = data;
 
-    if (!queryParams.filter && requestedSuppliers) {
-      responseRows = requestedSuppliers;
+    if (filter === 'isNotResponded') {
+      responseRows = notRespondedSuppliers;
+    }
+
+    if (filter === 'isInvited') {
+      responseRows = invitedSuppliers;
     }
 
     return responseRows;
   }
 
+  renderSendRegretLetterButton(tenderDetail) {
+    const { sentRegretLetter, status } = tenderDetail;
+
+    if (tenderDetail.type === 'eoi') {
+      return null;
+    }
+
+    return (
+      <Button
+        disabled={sentRegretLetter || ['open', 'draft'].includes(status)}
+        onClick={this.toggleRegretLetterModal}
+      >
+        Send regret letter
+        <Icon type="mail" />
+      </Button>
+    )
+  }
+
   renderTable(args) {
     const { tableOperations } = args;
 
-    const { loading, onChange, regretLetterModalVisible } = this.props;
+    const { loading, totalCount, onChange, regretLetterModalVisible } = this.props;
 
-    const {
-      selectedCompanies,
-      responseModal,
-      regretLetterModal,
-      regretLetterContent
-    } = this.state;
+    const { selectedCompanies, responseModal, regretLetterModal, regretLetterContent } = this.state;
 
     const data = this.props.data || [];
     const tenderDetail = this.props.tenderDetail || {};
-    const { winnerIds = [], sentRegretLetter, status } = tenderDetail;
+    const { winnerIds = [], status } = tenderDetail;
 
     return (
       <Card
@@ -240,19 +240,13 @@ class Tender extends Common {
         <div className="table-operations">
           <Search placeholder="Supplier name or Vendor number" />
           {tableOperations}
-          <Button
-            disabled={sentRegretLetter || ['open', 'draft'].includes(status)}
-            onClick={this.toggleRegretLetterModal}
-          >
-            Send regret letter
-            <Icon type="mail" />
-          </Button>
+          {this.renderSendRegretLetterButton(tenderDetail)}
         </div>
 
         <Table
           rowSelection={{
             selectedCompanies,
-            onChange: this.onSelectedCompaniesChange
+            onChange: this.onSelectedCompaniesChange,
           }}
           rowClassName={record => {
             if (winnerIds.includes(record.supplier._id)) return 'highlight';
@@ -263,11 +257,9 @@ class Tender extends Common {
           pagination={false}
           loading={loading}
           scroll={{ x: 1200 }}
-          onChange={(pagination, filters, sorter) =>
-            onChange(pagination, filters, sorter)
-          }
+          onChange={(pagination, filters, sorter) => onChange(pagination, filters, sorter)}
         />
-        <Paginator total={10} />
+        <Paginator total={totalCount} />
 
         <Modal
           title={`${responseModal.title}'s response`}
@@ -277,8 +269,7 @@ class Tender extends Common {
           width="100%"
           style={{ top: 16 }}
         >
-          {responseModal.record &&
-            this.renderResponseModal(responseModal.record)}
+          {responseModal.record && this.renderResponseModal(responseModal.record)}
         </Modal>
 
         <Modal
@@ -309,7 +300,6 @@ Tender.propTypes = {
   sentRegretLetter: PropTypes.boolean,
   regretLetterModalVisible: PropTypes.boolean,
   notRespondedSuppliers: PropTypes.array,
-  getSuppliersByIds: PropTypes.func
 };
 
 export default Tender;

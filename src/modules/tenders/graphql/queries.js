@@ -26,13 +26,6 @@ const tenderFields = `
   file,
   sourcingOfficer,
   reminderDay,
-  supplierIds,
-  suppliers {
-    _id,
-    basicInfo {
-      enName
-    }
-  },
   requestedCount,
   submittedCount,
   notInterestedCount,
@@ -40,12 +33,19 @@ const tenderFields = `
   createdUser {
     email
   },
-  ${requestedProductsFields}
-  requestedDocuments
+  responsibleBuyerIds
   winnerIds
   isAwarded
   awardNote
   sentRegretLetter
+`;
+
+const tenderDetailFields = `
+  isToAll,
+  tierTypes,
+  ${tenderFields}
+  ${requestedProductsFields}
+  requestedDocuments
 `;
 
 const rfqResponseFields = `
@@ -106,20 +106,30 @@ const tenderResponseSupplierFields = `
   }
 `;
 
+const tenderResponsesParams = `
+  $tenderId: String!
+  $sort: JSON
+  $betweenSearch: JSON
+  $supplierSearch: String
+  $isNotInterested: Boolean
+`;
+
+const tenderResponsesValues = `
+  tenderId: $tenderId
+  sort: $sort
+  betweenSearch: $betweenSearch
+  supplierSearch: $supplierSearch
+  isNotInterested: $isNotInterested
+`;
+
 const tenderResponses = `
   query tenderResponses(
-    $tenderId: String!
-    $sort: JSON
-    $betweenSearch: JSON
-    $supplierSearch: String
-    $isNotInterested: Boolean
+    ${tenderResponsesParams}
+    ${pageParams}
   ) {
     tenderResponses(
-      tenderId: $tenderId
-      sort: $sort
-      betweenSearch: $betweenSearch
-      supplierSearch: $supplierSearch
-      isNotInterested: $isNotInterested
+      ${tenderResponsesValues}
+      ${pageValues}
     ) {
       supplier {
         ${tenderResponseSupplierFields}
@@ -130,14 +140,30 @@ const tenderResponses = `
   }
 `;
 
+const tenderResponsesTotalCount = `
+  query tenderResponsesTotalCount(${tenderResponsesParams}) {
+    tenderResponsesTotalCount(${tenderResponsesValues})
+  }
+`;
+
 const tenderResponseNotRespondedSuppliers = `
-  query tenderResponseNotRespondedSuppliers(
-    $tenderId: String!
-  ) {
-    tenderResponseNotRespondedSuppliers(
-      tenderId: $tenderId
-    ) {
-      ${tenderResponseSupplierFields}
+  query tenderResponseNotRespondedSuppliers($tenderId: String!, ${pageParams}) {
+    tenderResponseNotRespondedSuppliers(tenderId: $tenderId, ${pageValues}) {
+      list {
+        ${tenderResponseSupplierFields}
+      }
+      totalCount
+    }
+  }
+`;
+
+const tenderResponseInvitedSuppliers = `
+  query tenderResponseInvitedSuppliers($tenderId: String!, ${pageParams}) {
+    tenderResponseInvitedSuppliers(tenderId: $tenderId, ${pageValues}) {
+      list {
+        ${tenderResponseSupplierFields}
+      }
+      totalCount
     }
   }
 `;
@@ -153,7 +179,7 @@ const companies = `
 const tenderDetail = `
   query tenderDetail($_id: String!) {
     tenderDetail(_id: $_id) {
-      ${tenderFields}
+      ${tenderDetailFields}
     }
   }
 `;
@@ -183,6 +209,7 @@ const tenderResponseByUser = `
   query tenderResponseByUser($tenderId: String!) {
     tenderResponseByUser(tenderId: $tenderId) {
       isSent
+      isNotInterested
       ${rfqResponseFields}
       ${eoiResponseFields}
     }
@@ -192,7 +219,7 @@ const tenderResponseByUser = `
 const tenderUpdateDetail = `
   query tenderDetail($_id: String!) {
     tenderDetail(_id: $_id) {
-      ${tenderFields}
+      ${tenderDetailFields}
       suppliers {
         _id
         basicInfo {
@@ -229,6 +256,7 @@ const tendersSupplier = `
       reminderDay
       isAwarded
       isParticipated
+      isNotInterested
       isSent
     }
   }
@@ -308,8 +336,19 @@ const totalBuyerTenders = `
   }
 `;
 
+const buyers = `
+  query users {
+    users {
+      _id
+      firstName
+      lastName
+    }
+  }
+`;
+
 export default {
   tenderResponses,
+  tenderResponsesTotalCount,
   tenderDetail,
   tendersBuyer,
   tendersSupplier,
@@ -324,5 +363,7 @@ export default {
   tenderResponseByUser,
   generateMaterialsTemplate,
   tenderResponseNotRespondedSuppliers,
-  companies
+  tenderResponseInvitedSuppliers,
+  companies,
+  buyers,
 };

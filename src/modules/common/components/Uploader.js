@@ -13,7 +13,7 @@ class Uploader extends React.Component {
 
     const fileList = defaultFileList.map((file, index) => ({
       uid: index,
-      ...file
+      ...file,
     }));
 
     this.state = { fileList };
@@ -24,10 +24,7 @@ class Uploader extends React.Component {
   }
 
   onPreview(file) {
-    window.open(
-      `${REACT_APP_API_URL}/read-file?key=${file.url || file.response}`,
-      '__blank'
-    );
+    window.open(`${REACT_APP_API_URL}/read-file?key=${file.url || file.response}`, '__blank');
   }
 
   beforeUpload(file) {
@@ -45,11 +42,10 @@ class Uploader extends React.Component {
       name.includes('+') ||
       name.includes('*') ||
       name.includes('#') ||
+      name.includes('&') ||
       name.includes('$')
     ) {
-      message.error(
-        this.context.__('Invalid file name. Do not use @+*#$ in file name')
-      );
+      message.error(this.context.__('Invalid file name. Do not use @&+*#$ in file name'));
 
       return Promise.reject(false);
     }
@@ -77,7 +73,7 @@ class Uploader extends React.Component {
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
             'application/pdf',
-            'application/zip'
+            'application/zip',
           ].includes(mime)
         ) {
           message.error(this.context.__('Invalid file type.'));
@@ -137,7 +133,7 @@ class Uploader extends React.Component {
       onChange: this.onChange,
       beforeUpload: this.beforeUpload,
       onPreview: this.onPreview,
-      fileList: this.state.fileList
+      fileList: this.state.fileList,
     };
 
     const disabled = this.props.disabled;
@@ -157,11 +153,11 @@ Uploader.propTypes = {
   label: PropTypes.string,
   multiple: PropTypes.bool,
   onChange: PropTypes.func,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
 };
 
 Uploader.contextTypes = {
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 export default Uploader;

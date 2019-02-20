@@ -254,6 +254,7 @@ const prequalificationFields = `
     doesHaveLicense
     doesHaveLicenseDescription
   }
+  productsInfo
 `;
 
 export const companyPrequalificationDetail = `

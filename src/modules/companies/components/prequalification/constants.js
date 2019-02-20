@@ -206,7 +206,7 @@ export const labels = {
   doesHaveJobDescription: 'Does the Company have a job description procedure in place?',
 
   doesConcludeValidContracts:
-    'Does the company conclude valid contracts with all employees. (include skilled/unskilled, temporary and permanent, and underage workers, etc)',
+    'Does the company conclude valid contracts with all employees. (include skilled/unskilled, temporary and permanent workers, etc)',
 
   employeeTurnoverRate:
     'Please provide the employee turnover rate within your company in the last 12 months',
