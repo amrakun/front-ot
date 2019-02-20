@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'antd';
+import { Card, Table } from 'antd';
 import { Paginator } from 'modules/common/components';
 
 const columns = [
@@ -35,7 +35,7 @@ const List = props => {
   const { logs, totalCount } = props;
 
   return (
-    <>
+    <Card>
       <Table
         columns={columns}
         rowKey={({ _id }) => _id}
@@ -43,7 +43,7 @@ const List = props => {
         pagination={false}
       />
       <Paginator total={totalCount} paramPrefix="log" />
-    </>
+    </Card>
   );
 };
 
