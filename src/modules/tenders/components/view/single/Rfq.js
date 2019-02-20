@@ -24,6 +24,7 @@ import { readFileUrl } from 'modules/common/utils';
 import { Uploader } from 'modules/common/components';
 import router from 'modules/common/router';
 import { TenderMessagesSingle } from 'modules/tender_messages/containers/';
+import { Logs } from 'modules/tenders/containers/';
 
 const { Column } = Table;
 const { Option } = Select;
@@ -426,6 +427,9 @@ class Rfq extends Tender {
         </TabPane>
         <TabPane tab="Messages" key="2">
           <TenderMessagesSingle tenderDetail={tenderDetail} queryParams={queryParams} />
+        </TabPane>
+        <TabPane tab="Log" key="3">
+          <Logs _id={tenderDetail._id} queryParams={queryParams} />
         </TabPane>
       </Tabs>
     );

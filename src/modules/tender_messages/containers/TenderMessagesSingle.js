@@ -11,27 +11,29 @@ export default compose(
         variables: {
           tenderId: tenderDetail._id,
           page: queryParams.page ? Number(queryParams.page) : 1,
-          perPage: queryParams.perPage ? Number(queryParams.perPage) : 20
-        }
+          perPage: queryParams.perPage ? Number(queryParams.perPage) : 20,
+        },
+        fetchPolicy: 'network-only',
       };
-    }
+    },
   }),
   graphql(gql(mutations.tenderMessageSetAsRead), {
     name: 'tenderMessageSetAsRead',
     options: () => {
       return {
-        refetchQueries: ['tenderMessages', 'tenderMessagesQuery']
+        refetchQueries: ['tenderMessages', 'tenderMessagesQuery'],
       };
-    }
+    },
   }),
   graphql(gql(queries.tenderMessageTotalCount), {
     name: 'tenderMessageTotalCountQuery',
     options: ({ tenderDetail }) => {
       return {
         variables: {
-          tenderId: tenderDetail._id
-        }
+          tenderId: tenderDetail._id,
+        },
+        fetchPolicy: 'network-only',
       };
-    }
+    },
   })
 )(TenderMessages);
