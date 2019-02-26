@@ -40,7 +40,7 @@ const senderUsername = record => {
   }
 
   if (senderBuyer) {
-    return senderBuyer.username;
+    return 'OT';
   }
 };
 
