@@ -25,7 +25,9 @@ const Sender = ({ senderBuyer, senderSupplier }) => {
     return (
       <Row>
         <Col span={2}>From: </Col>
-        <Col span={22}>{renderUser(senderBuyer)}</Col>
+        <Col span={22}>
+          <Tag>{senderBuyer.username}</Tag>
+        </Col>
       </Row>
     );
   }
