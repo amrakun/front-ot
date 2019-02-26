@@ -74,6 +74,7 @@ class Uploader extends React.Component {
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
             'application/pdf',
             'application/zip',
+            'application/x-rar-compressed'
           ].includes(mime)
         ) {
           message.error(this.context.__('Invalid file type.'));
