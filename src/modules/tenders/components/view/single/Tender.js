@@ -61,10 +61,12 @@ class Tender extends Common {
   showResponsesModal(record) {
     const { supplier } = record;
 
+    console.log(supplier)
+
     this.setState({
       responseModal: {
         visible: true,
-        title: supplier ? supplier.basicInfo.enName : '',
+        title: supplier && supplier.basicInfo ? supplier.basicInfo.enName : '',
         record,
       },
     });
