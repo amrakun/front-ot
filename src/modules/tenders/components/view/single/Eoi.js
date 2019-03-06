@@ -152,6 +152,8 @@ class Eoi extends Tender {
   }
 
   render() {
+    const { tenderDetail } = this.props;
+
     const tableOperations = [
       <Button onClick={this.handleEoiShortList} key={1}>
         EOI short list
@@ -161,11 +163,16 @@ class Eoi extends Tender {
         EOI bidder list
         <Icon type="file-excel" />
       </Button>,
-      <Button onClick={this.downloadRespondedFiles} key={2}>
-        Download files
-        <Icon type="file-excel" />
-      </Button>,
     ];
+
+    if (tenderDetail.status === 'closed') {
+      tableOperations.push(
+        <Button onClick={this.downloadRespondedFiles} key={2}>
+          Download files
+          <Icon type="file-excel" />
+        </Button>
+      )
+    }
 
     return (
       <div>
