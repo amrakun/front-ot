@@ -40,6 +40,7 @@ class Popup extends BaseForm {
         cancelText="Cancel"
         title="Invite a new supplier"
         visible={visible}
+        maskClosable={false}
         onOk={this.onOk}
         onCancel={onCancel}
       >

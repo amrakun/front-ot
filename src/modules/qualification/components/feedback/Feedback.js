@@ -161,6 +161,7 @@ class Feedback extends Common {
             title="Send success feedback request"
             visible={feedbackModalVisible}
             onCancel={() => this.toggleFeedbackModal(false)}
+            maskClosable={false}
             onOk={this.addFeedback}
             okText="Send"
             width="50%"

@@ -149,6 +149,7 @@ class AuditResponses extends React.Component {
       <Modal
         title={modalTitle}
         visible={true}
+        maskClosable={false}
         footer={null}
         width="80%"
         onCancel={() => this.setState({ showModal: false })}

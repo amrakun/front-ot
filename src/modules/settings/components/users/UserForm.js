@@ -66,6 +66,7 @@ class UserForm extends React.Component {
         <Modal
           title={title}
           visible={true}
+          maskClosable={false}
           width={700}
           okText="Save"
           onCancel={this.handleCancel}

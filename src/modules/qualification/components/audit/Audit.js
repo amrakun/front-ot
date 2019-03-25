@@ -123,6 +123,7 @@ class Audit extends Common {
 
           <Modal
             title="Send desktop audit invitation"
+            maskClosable={false}
             visible={auditModalVisible}
             onCancel={() => this.toggleAuditModal(false)}
             onOk={this.addAudit}

@@ -210,6 +210,7 @@ class Messages extends Component {
         <Modal
           visible={route === ROUTE_ENUM.new}
           footer={null}
+          maskClosable={false}
           onCancel={this.goto.bind(this, ROUTE_ENUM.index, null)}
           title="New message"
           width={modalWidth}
@@ -226,6 +227,7 @@ class Messages extends Component {
         <Modal
           visible={route === ROUTE_ENUM.view}
           footer={null}
+          maskClosable={false}
           onCancel={this.goto.bind(this, ROUTE_ENUM.index, null)}
           title="View"
           width={modalWidth}
@@ -236,6 +238,7 @@ class Messages extends Component {
         <Modal
           visible={route === ROUTE_ENUM.reply}
           footer={null}
+          maskClosable={false}
           onCancel={this.goto.bind(this, ROUTE_ENUM.index, null)}
           title="Reply"
           width={modalWidth}

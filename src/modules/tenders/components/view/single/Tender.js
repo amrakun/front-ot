@@ -266,6 +266,7 @@ class Tender extends Common {
         <Modal
           title={`${responseModal.title}'s response`}
           visible={responseModal.visible}
+          maskClosable={false}
           onCancel={this.hideResponsesModal}
           footer={null}
           width="100%"
@@ -276,6 +277,7 @@ class Tender extends Common {
 
         <Modal
           title={`Sending regret letters to "${data.length - 1}" bidders`}
+          maskClosable={false}
           visible={
             regretLetterModalVisible !== undefined
               ? regretLetterModalVisible

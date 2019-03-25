@@ -114,6 +114,7 @@ class SubmitTender extends BaseForm {
               <Modal
                 title={__('Confirmation')}
                 visible={agreementModalVisible}
+                maskClosable={false}
                 onCancel={this.toggleAgreementModal}
                 footer={[
                   <Button key="back" size="large" onClick={this.toggleAgreementModal}>

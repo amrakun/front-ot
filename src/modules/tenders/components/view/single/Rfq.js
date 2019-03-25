@@ -292,6 +292,7 @@ class Rfq extends Tender {
       <Modal
         title="Award"
         visible={showAwardForm}
+        maskClosable={false}
         width="50%"
         onCancel={this.toggleAwardForm}
         footer={[

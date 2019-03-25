@@ -31,6 +31,7 @@ export default class Prequalifier extends React.Component {
       <Modal
         title="Evaluation"
         visible={true}
+        maskClosable={false}
         width={700}
         onCancel={() => this.setState({ showUnqualifyModal: false })}
         onOk={this.handleSubmit}

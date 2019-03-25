@@ -171,6 +171,7 @@ class DueDiligence extends Common {
             title="Previous reports"
             visible={filesModal.visible}
             onOk={this.hideFilesModal}
+            maskClosable={false}
             onCancel={this.hideFilesModal}
           >
             <List

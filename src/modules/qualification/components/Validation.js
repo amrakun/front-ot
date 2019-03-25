@@ -221,6 +221,7 @@ class ValidationModal extends React.Component {
         title={`Validate: ${company.basicInfo.enName}`}
         onOk={this.handleSubmit}
         visible={true}
+        maskClosable={false}
         onCancel={hide}
         bodyStyle={{ maxHeight: '60vh', overflow: 'scroll' }}
       >

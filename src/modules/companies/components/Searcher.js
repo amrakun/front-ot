@@ -94,6 +94,7 @@ class SupplierSearcher extends React.Component {
         <Modal
           okText={slogan || 'Add'}
           cancelText="Cancel"
+          maskClosable={false}
           title={`${slogan || 'Add'} an existing supplier`}
           visible={this.state.visible}
           onOk={this.onOk}
