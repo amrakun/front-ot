@@ -148,11 +148,13 @@ class MessageForm extends React.Component {
   }
 
   render() {
-    const { form, replyTo } = this.props;
+    const { form, replyTo, tenderDetail } = this.props;
     const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = form;
 
     // Only show error after a field is touched.
     const subjectError = isFieldTouched('subject') && getFieldError('subject');
+
+    const initialSubjectValue = (replyTo ? replyTo.subject : null) || `${tenderDetail.number} ${tenderDetail.name}`;
 
     return (
       <>
@@ -164,7 +166,7 @@ class MessageForm extends React.Component {
             help={subjectError || ''}
           >
             {getFieldDecorator('subject', {
-              initialValue: replyTo ? replyTo.subject : '',
+              initialValue: initialSubjectValue,
               rules: [{ required: true, message: 'Please input your subject!' }],
             })(<Input placeholder="subject" />)}
           </Item>
