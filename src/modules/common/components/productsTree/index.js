@@ -16,6 +16,10 @@ export default class ProductsTree extends React.Component {
         treeCheckStrictly
         searchPlaceholder="Please select"
         treeData={treeData}
+        filterTreeNode={(search, { props }) => {
+          return (props.title.toLowerCase()).includes(search.toLowerCase());
+        }}
+        dropdownClassName='products-tree-select'
         {...this.props}
       />
     );

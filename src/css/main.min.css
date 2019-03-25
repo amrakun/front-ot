@@ -1,13 +1,5 @@
-.bg-white {
-  background-color: #fff;
-}
-
-.pull-right {
-  float: right;
-}
-
-.numberCard,
-.NumberCardLines {
+@charset "UTF-8";
+.numberCard, .NumberCardLines {
   height: 112px;
 }
 
@@ -67,7 +59,7 @@
   margin: 0 -12px;
 }
 
-.chart-row [class^='ant-col'] {
+.chart-row [class^=ant-col] {
   padding: 0 12px;
 }
 
@@ -128,6 +120,14 @@ table.stats tr td:first-child {
 }
 table.stats tr td:last-child {
   text-align: right;
+}
+
+.bg-white {
+  background-color: #fff;
+}
+
+.pull-right {
+  float: right;
 }
 
 .hidden {
@@ -204,22 +204,16 @@ table.stats tr td:last-child {
 .ant-layout-sider.ant-layout-sider-collapsed ul li ul li a {
   opacity: 1;
 }
-.ant-layout-sider .ant-menu-sub.ant-menu-inline > .ant-menu-item,
-.ant-layout-sider .ant-menu-item {
+.ant-layout-sider .ant-menu-sub.ant-menu-inline > .ant-menu-item, .ant-layout-sider .ant-menu-item {
   line-height: 16px;
   padding: 10px 0;
   height: auto;
 }
-.ant-layout-sider .ant-menu-sub.ant-menu-inline > .ant-menu-item a,
-.ant-layout-sider .ant-menu-item a {
+.ant-layout-sider .ant-menu-sub.ant-menu-inline > .ant-menu-item a, .ant-layout-sider .ant-menu-item a {
   white-space: normal;
   padding-right: 36px;
 }
-.ant-layout-sider.ant-layout-sider-collapsed
-  .ant-menu-sub.ant-menu-inline
-  > .ant-menu-item
-  a,
-.ant-layout-sider.ant-layout-sider-collapsed .ant-menu-item a {
+.ant-layout-sider.ant-layout-sider-collapsed .ant-menu-sub.ant-menu-inline > .ant-menu-item a, .ant-layout-sider.ant-layout-sider-collapsed .ant-menu-item a {
   white-space: nowrap;
 }
 
@@ -368,39 +362,32 @@ i.success {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
-
 .home-landing .top .text {
   margin-top: 20px;
   font-size: 15px;
   font-style: italic;
 }
-
 .home-landing .top ul {
   overflow: hidden;
   list-style: none;
   padding: 0;
 }
-
 .home-landing .top ul li {
   float: left;
   padding: 5px 10px;
   margin-right: 1px;
   background-color: #e37222;
 }
-
 .home-landing .top ul li:hover {
   background-color: #e68744;
 }
-
 .home-landing .top ul li a {
   display: block;
   color: #fff;
 }
-
 .home-landing .top .logo {
   float: right;
 }
-
 .home-landing h1 {
   margin: 0 0 20px;
   font-weight: bold;
@@ -408,12 +395,10 @@ i.success {
   line-height: 50px;
   color: #009aa6;
 }
-
 .home-landing h2 {
   font-size: 15px;
   color: #009aa6;
 }
-
 .home-landing .bottom {
   position: absolute;
   bottom: 0;
@@ -424,52 +409,42 @@ i.success {
   -moz-box-shadow: 0px 5px 19px 5px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 5px 19px 5px rgba(0, 0, 0, 0.3);
 }
-
 .home-landing .desc {
   height: 249px;
   background-color: #009aa6;
   padding: 15px;
 }
-
 .home-landing .desc p {
   color: #fff;
   font-size: 14px;
 }
-
 .home-landing .footer {
   margin-top: 15px;
   background-color: #1f497d;
   padding: 15px 15px 5px;
 }
-
 .home-landing .footer p {
   color: #fff;
 }
-
 .home-landing .item {
   display: block;
 }
-
 .home-landing .program {
   background-color: #1f497d;
 }
-
 .home-landing .calendar {
   background-color: #e37222;
 }
-
 .home-landing .bottom .text {
   padding: 10px;
   color: #fff;
   font-size: 13px;
 }
-
 .home-landing .bottom h3 {
   text-align: center;
   margin-bottom: 20px;
   font-size: 15px;
 }
-
 .home-landing .bottom img {
   width: 100%;
   height: 190px;
@@ -583,8 +558,7 @@ form .ant-input-number {
   margin-bottom: 0;
 }
 
-.ant-table-thead > tr > th,
-.ant-table-tbody > tr > td {
+.ant-table-thead > tr > th, .ant-table-tbody > tr > td {
   padding: 6px;
   word-break: normal;
 }
@@ -620,7 +594,7 @@ form .ant-input-number {
   height: 372px;
 }
 
-[class*='dashed-button'] {
+[class*=dashed-button] {
   background: #fff;
   border-style: dashed;
 }
@@ -656,7 +630,7 @@ form .ant-input-number {
 .upload-btn-wrapper .ant-btn {
   z-index: 0;
 }
-.upload-btn-wrapper input[type='file'] {
+.upload-btn-wrapper input[type=file] {
   z-index: 1;
   position: absolute;
   left: 0;
@@ -873,7 +847,7 @@ table.mass-email-response tr td:last-child {
 }
 
 .finance-stat.up::after {
-  content: '\2191';
+  content: "↑";
 }
 
 .finance-stat.down {
@@ -881,7 +855,11 @@ table.mass-email-response tr td:last-child {
 }
 
 .finance-stat.down::after {
-  content: '\2193';
+  content: "↓";
+}
+
+.products-tree-select {
+  width: 450px !important;
 }
 
 /*# sourceMappingURL=main.min.css.map */
