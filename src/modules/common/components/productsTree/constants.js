@@ -296,7 +296,7 @@ const en = [
           {
             label: 'C01002 - Conveyor Belting',
             value: 'c01002',
-            key: 'C01001'
+            key: 'C01002'
           },
           {
             label: 'C01003 - Conveyor Equipment & Supplies',
