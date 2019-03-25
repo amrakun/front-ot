@@ -72,7 +72,7 @@ class Base extends Common {
           dataIndex: 'productsInfoValidationStatusDisplay',
         },
         {
-          title: 'Financial status',
+          title: 'Sales Revenue',
           width: 40,
           render: record => {
             const { financialInfo } = record;
