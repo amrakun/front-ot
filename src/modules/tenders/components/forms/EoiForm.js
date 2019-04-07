@@ -129,7 +129,7 @@ class EoiForm extends BaseForm {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, isSubmitted } = this.props;
     const { isToAll, tierTypes } = this.state;
     const { __ } = this.context;
 
@@ -153,7 +153,7 @@ class EoiForm extends BaseForm {
           />
         </Card>
 
-        <SubmitButton onConfirm={this.handleSubmit} __={__} />
+        <SubmitButton onConfirm={this.handleSubmit} __={__} isSubmitted={isSubmitted} />
       </Form>
     );
   }
@@ -161,6 +161,7 @@ class EoiForm extends BaseForm {
 
 EoiForm.propTypes = {
   data: PropTypes.object,
+  isSubmitted: PropTypes.bool,
 };
 
 EoiForm.contextTypes = {

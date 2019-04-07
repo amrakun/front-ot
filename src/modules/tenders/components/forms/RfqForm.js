@@ -136,7 +136,7 @@ class RfqForm extends BaseForm {
 
   render() {
     // data is editing tender object
-    const { data } = this.props;
+    const { data, isSubmitted } = this.props;
     const { __ } = this.context;
 
     return (
@@ -154,7 +154,7 @@ class RfqForm extends BaseForm {
 
         {this.renderProductsTable()}
 
-        <SubmitButton onConfirm={this.handleSubmit} __={__} />
+        <SubmitButton isSubmitted={isSubmitted} onConfirm={this.handleSubmit} __={__} />
       </Form>
     );
   }
@@ -162,6 +162,7 @@ class RfqForm extends BaseForm {
 
 RfqForm.propTypes = {
   data: PropTypes.object,
+  isSubmitted: PropTypes.bool,
 };
 
 RfqForm.contextTypes = {

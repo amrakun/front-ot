@@ -6,23 +6,23 @@ import { queries, mutations } from '../graphql';
 import { Loading } from 'modules/common/components';
 import { alert } from 'modules/common/utils';
 
-const EditContainer = props => {
-  const { tenderDetailQuery, buyersQuery, tendersEdit } = props;
+class EditContainer extends React.Component {
+  constructor(props) {
+    super(props);
 
-  if (tenderDetailQuery.error) {
-    return null;
+    this.state = {
+      isSubmitted: false,
+    }
   }
 
-  if (tenderDetailQuery.loading) {
-    return <Loading />;
-  }
-
-  const tenderDetail = tenderDetailQuery.tenderDetail || {};
-  const { type } = tenderDetail;
-
-  const save = doc => {
+  save = doc => {
+    const { history, tendersEdit, tenderDetailQuery } = this.props;
     const [publishDate, closeDate] = doc.dateRange;
-    const { history } = props;
+
+    const tenderDetail = tenderDetailQuery.tenderDetail || {};
+    const { type } = tenderDetail;
+
+    this.setState({ isSubmitted: true });
 
     tendersEdit({
       variables: {
@@ -33,27 +33,45 @@ const EditContainer = props => {
       }
     })
       .then(() => {
+        this.setState({ isSubmitted: false });
         alert.success('Saved');
         history.push(`/${type}?refetch`);
       })
       .catch(error => {
+        this.setState({ isSubmitted: false });
         alert.error(error.message);
       });
-  };
-
-  const updatedProps = {
-    ...props,
-    type,
-    save,
-    data: tenderDetail,
-    buyers: buyersQuery.users || []
-  };
-
-  if (type === 'eoi') {
-    return <EoiForm {...updatedProps} />;
   }
 
-  return <RfqForm {...updatedProps} />;
+  render() {
+    const { tenderDetailQuery, buyersQuery } = this.props;
+
+    if (tenderDetailQuery.error) {
+      return null;
+    }
+
+    if (tenderDetailQuery.loading) {
+      return <Loading />;
+    }
+
+    const tenderDetail = tenderDetailQuery.tenderDetail || {};
+    const { type } = tenderDetail;
+
+    const updatedProps = {
+      ...this.props,
+      type,
+      save: this.save,
+      data: tenderDetail,
+      buyers: buyersQuery.users || [],
+      isSubmitted: this.state.isSubmitted,
+    };
+
+    if (type === 'eoi') {
+      return <EoiForm {...updatedProps} />;
+    }
+
+    return <RfqForm {...updatedProps} />;
+  }
 };
 
 EditContainer.propTypes = {

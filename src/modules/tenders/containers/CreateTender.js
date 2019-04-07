@@ -7,22 +7,25 @@ import { Loading } from 'modules/common/components';
 import { RfqForm, EoiForm } from '../components';
 import { mutations, queries } from '../graphql';
 
-const CreateTenderContainer = props => {
-  const { type, tendersAdd, simpleCompaniesQuery, buyersQuery, history } = props;
+class CreateTenderContainer extends React.Component {
+  constructor(props) {
+    super(props);
 
-  if (simpleCompaniesQuery.error) {
-    return null;
+    this.state = {
+      isSubmitted: false,
+    }
   }
 
-  if (simpleCompaniesQuery.loading) {
-    return <Loading />;
-  }
-
-  const save = doc => {
+  save = doc => {
+    const { type, tendersAdd, history } = this.props;
     const [publishDate, closeDate] = doc.dateRange;
+
+    this.setState({ isSubmitted: true });
 
     tendersAdd({ variables: { ...doc, publishDate, closeDate } })
       .then(tender => {
+        this.setState({ isSubmitted: false });
+
         alert.success('Successfully created a tender!');
 
         history.push(`/${type}?refetch`, {
@@ -30,23 +33,37 @@ const CreateTenderContainer = props => {
         });
       })
       .catch(error => {
+        this.setState({ isSubmitted: false });
         alert.error(error.message);
       });
-  };
-
-  const updatedProps = {
-    ...props,
-    save,
-    tenderCreation: true,
-    data: { suppliers: simpleCompaniesQuery.companies || [] },
-    buyers: buyersQuery.users || [],
-  };
-
-  if (type === 'eoi') {
-    return <EoiForm {...updatedProps} />;
   }
 
-  return <RfqForm {...updatedProps} />;
+  render() {
+    const { type, simpleCompaniesQuery, buyersQuery } = this.props;
+
+    if (simpleCompaniesQuery.error) {
+      return null;
+    }
+
+    if (simpleCompaniesQuery.loading) {
+      return <Loading />;
+    }
+
+    const updatedProps = {
+      ...this.props,
+      save: this.save,
+      tenderCreation: true,
+      data: { suppliers: simpleCompaniesQuery.companies || [] },
+      isSubmitted: this.state.isSubmitted,
+      buyers: buyersQuery.users || [],
+    };
+
+    if (type === 'eoi') {
+      return <EoiForm {...updatedProps} />;
+    }
+
+    return <RfqForm {...updatedProps} />;
+  }
 };
 
 CreateTenderContainer.propTypes = {
