@@ -135,6 +135,8 @@ class Home extends React.Component {
             </div>
 
             <div className="bottom bg-white">
+              <div id="home-quote">#OTБиднийБахархал</div>
+
               <h3>
                 {__(
                   'Welcome to “Oyu” Supplier Qualification Management System'

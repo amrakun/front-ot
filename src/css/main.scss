@@ -254,6 +254,19 @@ i.success {
   height: 100vh;
 }
 
+#home-quote {
+  position: absolute;
+  top: -70px;
+  right: 0px;
+  font-size: 30px;
+  background-color: #fff;
+  color: #63aada;
+  padding: 5px 10px;
+  font-weight: bold;
+  font-style: italic;
+  font-family: 'Overlock', cursive;
+}
+
 .home-landing {
   .top {
     position: absolute;
