@@ -102,6 +102,7 @@ class TenderContainer extends React.Component {
       },
       onFinish: () => {
         loading[loadingReportName] = false;
+        tenderDetailQuery.refetch();
         this.setState(loading);
       },
     });
