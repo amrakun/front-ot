@@ -61,8 +61,6 @@ class Tender extends Common {
   showResponsesModal(record) {
     const { supplier } = record;
 
-    console.log(supplier)
-
     this.setState({
       responseModal: {
         visible: true,
@@ -204,10 +202,6 @@ class Tender extends Common {
   renderSendRegretLetterButton(tenderDetail) {
     const { sentRegretLetter, status } = tenderDetail;
 
-    if (tenderDetail.type === 'eoi') {
-      return null;
-    }
-
     return (
       <Button
         disabled={sentRegretLetter || ['open', 'draft'].includes(status)}
@@ -219,14 +213,48 @@ class Tender extends Common {
     )
   }
 
+  renderRegretLetterModal() {
+    const { regretLetterModalVisible, tenderDetail } = this.props;
+    const { regretLetterModal, regretLetterContent } = this.state;
+
+    const { type, sentRegretLetter, shortListedSupplierIds=[] } = tenderDetail;
+
+    let targets = 0;
+
+    if (type === 'eoi') {
+      if (!sentRegretLetter) {
+        targets = shortListedSupplierIds.length;
+      }
+    } else {
+      targets = (this.props.data || []).length - 1;
+    }
+
+    return (
+      <Modal
+        title={`Sending regret letters to "${targets}" bidders`}
+        maskClosable={false}
+        visible={
+          regretLetterModalVisible !== undefined
+            ? regretLetterModalVisible
+            : regretLetterModal.visible
+        }
+        onCancel={this.toggleRegretLetterModal}
+        onOk={this.handleSendRegretLetters}
+        width="50%"
+      >
+        <Editor
+          content={regretLetterContent}
+          onEmailContentChange={this.handleRegretLetterChange}
+        />
+      </Modal>
+    )
+  }
+
   renderTable(args) {
     const { tableOperations } = args;
+    const { loading, totalCount, onChange } = this.props;
+    const { selectedCompanies, responseModal } = this.state;
 
-    const { loading, totalCount, onChange, regretLetterModalVisible } = this.props;
-
-    const { selectedCompanies, responseModal, regretLetterModal, regretLetterContent } = this.state;
-
-    const data = this.props.data || [];
     const tenderDetail = this.props.tenderDetail || {};
     const { winnerIds = [], status } = tenderDetail;
 
@@ -275,23 +303,7 @@ class Tender extends Common {
           {responseModal.record && this.renderResponseModal(responseModal.record)}
         </Modal>
 
-        <Modal
-          title={`Sending regret letters to "${data.length - 1}" bidders`}
-          maskClosable={false}
-          visible={
-            regretLetterModalVisible !== undefined
-              ? regretLetterModalVisible
-              : regretLetterModal.visible
-          }
-          onCancel={this.toggleRegretLetterModal}
-          onOk={this.handleSendRegretLetters}
-          width="50%"
-        >
-          <Editor
-            content={regretLetterContent}
-            onEmailContentChange={this.handleRegretLetterChange}
-          />
-        </Modal>
+        {this.renderRegretLetterModal()}
       </Card>
     );
   }

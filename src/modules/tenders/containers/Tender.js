@@ -6,6 +6,7 @@ import { queries, mutations } from '../graphql';
 import { message, notification, Icon, Button } from 'antd';
 import { colors } from 'modules/common/constants';
 import { exportFile } from 'modules/common/components';
+import { alert } from 'modules/common/utils';
 
 const notifyIfWantToSend = {
   message: 'Succesfully awarded',
@@ -79,7 +80,7 @@ class TenderContainer extends React.Component {
         this.setState({ regretLetterModalVisible: false });
       })
       .catch(error => {
-        message.error(error.message);
+        alert.error(error.message);
       });
   }
 
