@@ -217,13 +217,13 @@ class Tender extends Common {
     const { regretLetterModalVisible, tenderDetail } = this.props;
     const { regretLetterModal, regretLetterContent } = this.state;
 
-    const { type, sentRegretLetter, shortListedSupplierIds=[] } = tenderDetail;
+    const { type, sentRegretLetter, bidderListedSupplierIds=[] } = tenderDetail;
 
     let targets = 0;
 
     if (type === 'eoi') {
       if (!sentRegretLetter) {
-        targets = shortListedSupplierIds.length;
+        targets = bidderListedSupplierIds.length;
       }
     } else {
       targets = (this.props.data || []).length - 1;
