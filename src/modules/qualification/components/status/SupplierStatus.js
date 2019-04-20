@@ -13,6 +13,7 @@ import { Prequalifier } from '../../containers/status';
 class Status extends Panes {
   renderSkipped() {
     const { company, companyInfo, saveTierType, prequalifySupplier } = this.props;
+    const { _id, isPrequalified } = companyInfo;
 
     return (
       <div>
@@ -23,6 +24,8 @@ class Status extends Panes {
           type="warning"
           showIcon
         />
+
+        <Prequalifier supplierId={_id} isPrequalified={isPrequalified} />
 
         <TierTypeForm
           title={'Select supplier tier type'}
