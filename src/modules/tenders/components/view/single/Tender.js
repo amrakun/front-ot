@@ -217,13 +217,21 @@ class Tender extends Common {
     const { regretLetterModalVisible, tenderDetail } = this.props;
     const { regretLetterModal, regretLetterContent } = this.state;
 
-    const { type, sentRegretLetter, bidderListedSupplierIds=[] } = tenderDetail;
+    const { type, sentRegretLetter, notBidderListedSuppliers=[] } = tenderDetail;
 
     let targets = 0;
+    let extraInfo = null;
 
     if (type === 'eoi') {
       if (!sentRegretLetter) {
-        targets = bidderListedSupplierIds.length;
+        targets = notBidderListedSuppliers.length;
+        extraInfo = notBidderListedSuppliers.map((supplier) => {
+          const { basicInfo } = supplier;
+
+          return (
+            <p key={Math.random()}>{basicInfo ? basicInfo.enName : ''}</p>
+          )
+        });
       }
     } else {
       targets = (this.props.data || []).length - 1;
@@ -242,6 +250,8 @@ class Tender extends Common {
         onOk={this.handleSendRegretLetters}
         width="50%"
       >
+        {extraInfo}
+
         <Editor
           content={regretLetterContent}
           onEmailContentChange={this.handleRegretLetterChange}

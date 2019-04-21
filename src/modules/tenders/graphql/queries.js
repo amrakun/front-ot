@@ -35,7 +35,11 @@ const tenderFields = `
   },
   responsibleBuyerIds
   winnerIds
-  bidderListedSupplierIds
+  notBidderListedSuppliers {
+    basicInfo {
+      enName
+    }
+  }
   isAwarded
   awardNote
   sentRegretLetter
