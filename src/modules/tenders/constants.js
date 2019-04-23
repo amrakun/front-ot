@@ -132,7 +132,7 @@ export const initialDocuments = [
 ];
 
 export const initialPerDocuments = {
-  document__1: 'Scope specific experience',
-  document__2: 'Customer reference /atleast 2/',
-  document__3: 'Special licences if applicable (copy)',
+  document__0: 'Scope specific experience',
+  document__1: 'Customer reference /atleast 2/',
+  document__2: 'Special licences if applicable (copy)',
 };
