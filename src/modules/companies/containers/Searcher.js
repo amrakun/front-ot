@@ -22,7 +22,7 @@ const WithData = compose(
     skip: ({ isPopupVisible }) => !isPopupVisible,
     options: () => {
       return {
-        variables: { search: '' }
+        variables: { search: '', source: 'searcher' }
       };
     }
   })
