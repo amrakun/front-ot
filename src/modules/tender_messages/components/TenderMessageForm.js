@@ -93,11 +93,14 @@ class MessageForm extends React.Component {
 
   selectedSupplierIdChange(values) {
     const valuesSet = new Set(values);
+    const { suppliers, tenderDetail } = this.props;
+    const { responses } = tenderDetail;
+    const participatedResponses = responses.filter(response => response.isNotInterested !== true);
 
     if (valuesSet.has('select_all')) {
-      this.setState({
-        recipientSupplierIds: this.props.suppliers.map(supplier => supplier._id),
-      });
+      this.setState({ recipientSupplierIds: suppliers.map(supplier => supplier._id) });
+    } else if (valuesSet.has('select_participated')) {
+      this.setState({ recipientSupplierIds: participatedResponses.map(response => response.supplierId) });
     } else if (valuesSet.has('deselect_all')) {
       this.setState({ recipientSupplierIds: [] });
     } else {
@@ -121,6 +124,10 @@ class MessageForm extends React.Component {
             option.props.enName.toLowerCase().indexOf(input.toLowerCase()) >= 0
           }
         >
+          <Select.Option key="select_participated" value="select_participated" enName="Select participated suppliers">
+            <b>Select participated suppliers</b>
+          </Select.Option>
+
           <Select.Option key="select_all" value="select_all" enName="Select All">
             <b>Select All</b>
           </Select.Option>

@@ -34,6 +34,10 @@ const tenderFields = `
     email
   },
   responsibleBuyerIds
+  responses {
+    supplierId
+    isNotInterested
+  }
   winnerIds
   notBidderListedSuppliers {
     basicInfo {
