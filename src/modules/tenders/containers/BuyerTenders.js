@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { message } from 'antd';
 import { gql, graphql, compose } from 'react-apollo';
 import { exportFile, Loading } from 'modules/common/components';
+import { alert } from 'modules/common/utils';
 import { BuyerTenders } from '../components';
 import { queries, mutations } from '../graphql';
 import listCommonQueriesGenerator from './listCommonQueriesGenerator';
@@ -52,10 +52,10 @@ class TendersContainer extends React.Component {
     })
       .then(() => {
         tendersTableQuery.refetch();
-        message.success('Canceled a tender');
+        alert.success('Canceled a tender');
       })
       .catch(error => {
-        message.error(error.message);
+        alert.error(error.message);
       });
   }
 
