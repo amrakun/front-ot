@@ -59,7 +59,7 @@ class Dashboard extends React.Component {
 
   exportTenders() {
     this.props.export('reportsTendersExport', {
-      type: this.tenderTypeTenders,
+      type: this.tenderType,
 
       publishDate: this.publishDateTenders
         ? this.getDateInterval(this.publishDateTenders)
@@ -175,7 +175,7 @@ class Dashboard extends React.Component {
 
             <Radio.Group
               onChange={e =>
-                this.onInputChange('tenderTypeTenders', e.target.value)
+                this.onInputChange('tenderType', e.target.value)
               }
               defaultValue={this.tenderType}
             >
