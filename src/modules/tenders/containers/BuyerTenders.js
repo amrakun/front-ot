@@ -44,11 +44,11 @@ class TendersContainer extends React.Component {
     });
   }
 
-  cancelTender(_id) {
+  cancelTender(_id, reason) {
     const { tendersCancel, tendersTableQuery } = this.props;
 
     tendersCancel({
-      variables: { _id }
+      variables: { _id, reason }
     })
       .then(() => {
         tendersTableQuery.refetch();

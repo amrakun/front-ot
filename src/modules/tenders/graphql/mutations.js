@@ -145,8 +145,8 @@ const sendRegretLetter = `
 `;
 
 const tendersCancel = `
-  mutation tendersCancel($_id: String!) {
-    tendersCancel(_id: $_id) {
+  mutation tendersCancel($_id: String!, $reason: String!) {
+    tendersCancel(_id: $_id, reason: $reason) {
       _id
     }
   }

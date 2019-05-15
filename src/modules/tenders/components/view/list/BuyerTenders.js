@@ -2,10 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Popconfirm, Button, Icon, Divider, Tooltip } from 'antd';
+import { Button, Icon, Divider, Tooltip, Modal, Select, Form } from 'antd';
 import Tenders from './Tenders';
 
+const { Option } = Select;
+
 class BuyerTenders extends Tenders {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selectedTenderId: null,
+      cancelReason: '',
+    }
+  }
+
   columns() {
     const { type } = this.props;
     const { __ } = this.context;
@@ -109,25 +120,82 @@ class BuyerTenders extends Tenders {
     }
   }
 
+  renderCancelPopup({ _id }) {
+    const {  selectedTenderId, cancelReason } = this.state;
+
+    if (_id !== selectedTenderId) {
+      return null;
+    }
+
+    const toggleCancelForm = () => {
+      this.setState({ selectedTenderId: null });
+    }
+
+    const onChooseReason = (reason) => {
+      this.setState({ cancelReason: reason });
+    }
+
+    const onConfirm = () => {
+      this.props.cancelTender(_id, cancelReason);
+    }
+
+    return (
+      <Modal
+        title="Cancel"
+        visible={true}
+        width="50%"
+        onCancel={toggleCancelForm}
+        footer={[
+          <Button key="cancel" onClick={toggleCancelForm}>
+            Cancel
+          </Button>,
+          <Button key="confirm" type="primary" onClick={onConfirm}>
+            Confirm
+          </Button>
+        ]}
+      >
+        <Form.Item label="Reason">
+          <Select
+            onChange={onChooseReason}
+            defaultValue="Poor technical specification - Техникийн мэдээлэл хангалттай бус"
+          >
+            <Option value="Poor technical specification - Техникийн мэдээлэл хангалттай бус">
+              Poor technical specification - Техникийн мэдээлэл хангалттай бус
+            </Option>
+            <Option value="Insufficient budget - Зарцуулах төсөв, мөнгө хангалттай бус">
+              Insufficient budget - Зарцуулах төсөв, мөнгө хангалттай бус
+            </Option>
+            <Option value="Long lead time - Хүргэгдэх хугацаа хэтэрхий урт">
+              Long lead time - Хүргэгдэх хугацаа хэтэрхий урт
+            </Option>
+            <Option value="Overpriced(compared with system historic price) - Хэт их үнэтэй (САП системийн үнэтэй харьцуулахад)">
+              Overpriced(compared with system historic price) - Хэт их үнэтэй (САП системийн үнэтэй харьцуулахад)
+            </Option>
+            <Option value="No supplier responded - Ямар ч ханган нийлүүлэгч үнийн санал ирүүлээгүй">
+              No supplier responded - Ямар ч ханган нийлүүлэгч үнийн санал ирүүлээгүй
+            </Option>
+          </Select>
+        </Form.Item>
+      </Modal>
+    )
+  }
+
   renderCancelLink({ status, _id }) {
     if (['awarded', 'canceled'].includes(status)) {
       return null;
+    }
+
+    const onClick = () => {
+      this.setState({ selectedTenderId: _id });
     }
 
     return (
       <>
         <Divider key={0} type="vertical" />
 
-        <Popconfirm
-          key={3}
-          title="Are you sure you want to cancel this tender？"
-          placement="bottomRight"
-          okText="Yes"
-          cancelText="No"
-          onConfirm={() => this.props.cancelTender(_id)}
-        >
-          <a href="#cancel">Cancel</a>
-        </Popconfirm>
+        {this.renderCancelPopup({ _id })}
+
+        <a href="#cancel" onClick={onClick}>Cancel</a>
       </>
     );
   }
