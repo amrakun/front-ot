@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Button, Icon, Divider, Tooltip, Modal, Select, Form } from 'antd';
+import { Button, Icon, Divider, Tooltip, Modal, Select, Form, message } from 'antd';
 import Tenders from './Tenders';
 
 const { Option } = Select;
@@ -131,12 +131,16 @@ class BuyerTenders extends Tenders {
       this.setState({ selectedTenderId: null });
     }
 
-    const onChooseReason = (reason) => {
-      this.setState({ cancelReason: reason });
+    const onChooseReason = (reasons) => {
+      this.setState({ cancelReason: reasons.join(', ') });
     }
 
     const onConfirm = () => {
-      this.props.cancelTender(_id, cancelReason);
+      if (!cancelReason) {
+        return message.warn('Please select reasons');
+      }
+
+      return this.props.cancelTender(_id, cancelReason);
     }
 
     return (
@@ -154,10 +158,12 @@ class BuyerTenders extends Tenders {
           </Button>
         ]}
       >
-        <Form.Item label="Reason">
+        <Form.Item label="Reasons">
           <Select
             onChange={onChooseReason}
-            defaultValue="Poor technical specification - Техникийн мэдээлэл хангалттай бус"
+            placeholder="Please select reasons ..."
+            style={{ width: '100%' }}
+            mode="multiple"
           >
             <Option value="Poor technical specification - Техникийн мэдээлэл хангалттай бус">
               Poor technical specification - Техникийн мэдээлэл хангалттай бус
