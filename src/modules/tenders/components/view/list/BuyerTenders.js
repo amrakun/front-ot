@@ -180,6 +180,9 @@ class BuyerTenders extends Tenders {
             <Option value="No supplier responded - Ямар ч ханган нийлүүлэгч үнийн санал ирүүлээгүй">
               No supplier responded - Ямар ч ханган нийлүүлэгч үнийн санал ирүүлээгүй
             </Option>
+            <Option value="End user request - Эцсийн хэрэглэгчийн хүсэлт">
+              End user request - Эцсийн хэрэглэгчийн хүсэлт
+            </Option>
           </Select>
         </Form.Item>
       </Modal>
