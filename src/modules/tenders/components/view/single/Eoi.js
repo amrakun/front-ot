@@ -22,14 +22,6 @@ class Eoi extends Tender {
 
     this.handleEoiShortList = this.handleEoiShortList.bind(this);
     this.handleEoiBidderList = this.handleEoiBidderList.bind(this);
-    this.downloadRespondedFiles = this.downloadRespondedFiles.bind(this);
-  }
-
-  downloadRespondedFiles() {
-    const { REACT_APP_API_URL } = process.env;
-    const { tenderDetail } = this.props;
-
-    window.open(`${REACT_APP_API_URL}/download-tender-files?tenderId=${tenderDetail._id}`, '__blank');
   }
 
   handleEoiShortList() {
@@ -54,7 +46,14 @@ class Eoi extends Tender {
 
   responseColumns() {
     return [
-      { title: 'Document file name', dataIndex: 'name', key: '3' },
+      {
+        title: 'Document file name',
+        dataIndex: 'name',
+        key: '3',
+        render: record => {
+          return <span style={{ display: 'inline-block', width: '100px' }}>{record}</span>
+        },
+      },
       {
         title: 'Submitted',
         key: '2',
@@ -145,6 +144,7 @@ class Eoi extends Tender {
     return (
       <Table
         columns={[...this.responseColumns()]}
+        scroll={{ x: 1500 }}
         rowKey={() => Math.random()}
         dataSource={dataSource}
       />
@@ -152,8 +152,6 @@ class Eoi extends Tender {
   }
 
   render() {
-    const { tenderDetail } = this.props;
-
     const tableOperations = [
       <Button onClick={this.handleEoiShortList} key={1}>
         EOI short list
@@ -165,14 +163,7 @@ class Eoi extends Tender {
       </Button>,
     ];
 
-    if (tenderDetail.status === 'closed') {
-      tableOperations.push(
-        <Button onClick={this.downloadRespondedFiles} key={2}>
-          Download files
-          <Icon type="file-excel" />
-        </Button>
-      )
-    }
+    tableOperations.push(this.renderDownloadFilesButton());
 
     return (
       <div>

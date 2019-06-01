@@ -30,6 +30,7 @@ class Tender extends Common {
     this.handleSendRegretLetters = this.handleSendRegretLetters.bind(this);
     this.setFilter = this.setFilter.bind(this);
     this.getTitle = this.getTitle.bind(this);
+    this.downloadRespondedFiles = this.downloadRespondedFiles.bind(this);
   }
 
   getPercent(requestedCount, count) {
@@ -119,6 +120,28 @@ class Tender extends Common {
       { title: 'Email', dataIndex: 'supplier.contactInfo.email' },
       { title: 'Phone', dataIndex: 'supplier.contactInfo.phone' },
     ];
+  }
+
+  downloadRespondedFiles() {
+    const { REACT_APP_API_URL } = process.env;
+    const { tenderDetail } = this.props;
+
+    window.open(`${REACT_APP_API_URL}/download-tender-files?tenderId=${tenderDetail._id}`, '__blank');
+  }
+
+  renderDownloadFilesButton () {
+    const { tenderDetail } = this.props;
+
+    if (tenderDetail.status !== "closed") {
+      return null;
+    }
+
+    return (
+      <Button onClick={this.downloadRespondedFiles} key={2}>
+        Download files
+        <Icon type="file-excel" />
+      </Button>
+    )
   }
 
   renderViewResponse(text, record) {
@@ -296,7 +319,6 @@ class Tender extends Common {
           dataSource={status !== 'open' ? this.getResponseRows() : []}
           pagination={false}
           loading={loading}
-          scroll={{ x: 1200 }}
           onChange={(pagination, filters, sorter) => onChange(pagination, filters, sorter)}
         />
         <Paginator total={totalCount} />

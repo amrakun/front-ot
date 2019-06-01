@@ -245,6 +245,8 @@ class Rfq extends Tender {
       );
     }
 
+    buttons.push(this.renderDownloadFilesButton())
+
     return buttons;
   }
 
