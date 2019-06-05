@@ -58,6 +58,7 @@ class Messages extends Component {
     this.isNew = this.isNew.bind(this);
     this.renderActions = this.renderActions.bind(this);
     this.setAsRead = this.setAsRead.bind(this);
+    this.downloadFiles = this.downloadFiles.bind(this);
 
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
@@ -183,6 +184,13 @@ class Messages extends Component {
     }
   }
 
+  downloadFiles() {
+    const { REACT_APP_API_URL } = process.env;
+    const { tenderDetail } = this.props;
+
+    window.open(`${REACT_APP_API_URL}/download-tender-message-files?tenderId=${tenderDetail._id}`, '__blank');
+  }
+
   setAsRead(tenderMessageDetail) {
     if (!tenderMessageDetail.isRead) {
       const { senderSupplier, senderBuyer } = tenderMessageDetail;
@@ -264,6 +272,13 @@ class Messages extends Component {
       <>
         <Row>
           <div className="table-operations">
+            <Button
+              type="default"
+              onClick={this.downloadFiles}
+            >
+              Download files
+            </Button>
+
             <Button
               type="primary"
               icon="plus"
