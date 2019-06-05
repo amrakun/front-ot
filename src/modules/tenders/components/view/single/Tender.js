@@ -132,7 +132,7 @@ class Tender extends Common {
   renderDownloadFilesButton () {
     const { tenderDetail } = this.props;
 
-    if (tenderDetail.status !== "closed") {
+    if (tenderDetail.status === 'open') {
       return null;
     }
 
