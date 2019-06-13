@@ -78,12 +78,12 @@ class SubmitTender extends BaseForm {
   render() {
     const { agreementModalVisible, submitDisabled, submitLoading } = this.state;
 
-    const { data, response } = this.props;
+    const { data, response, queryParams } = this.props;
 
     const { __ } = this.context;
 
     return (
-      <Tabs defaultActiveKey="1">
+      <Tabs defaultActiveKey={`${queryParams.tab || "1" }`}>
         <TabPane key="1" tab="Main">
           <Form layout="inline">
             <MainInfo {...data} />

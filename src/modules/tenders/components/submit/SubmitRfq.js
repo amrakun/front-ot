@@ -112,7 +112,7 @@ class SubmitTender extends BaseForm {
     }
 
     return (
-      <Tabs defaultActiveKey="1">
+      <Tabs defaultActiveKey={`${queryParams.tab || "1" }`}>
         <TabPane tab="Main" key="1">
           <Form layout="inline">
             <MainInfo {...data} />
