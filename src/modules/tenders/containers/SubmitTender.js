@@ -10,7 +10,6 @@ import { queries, mutations } from '../graphql';
 class SubmitContainer extends React.Component {
   render() {
     const {
-      companyByUserQuery,
       tenderDetailQuery,
       tendersResponsesAdd,
       tendersResponsesEdit,
@@ -23,7 +22,6 @@ class SubmitContainer extends React.Component {
     const { currentUser, __ } = this.context;
 
     if (
-      companyByUserQuery.loading ||
       tenderDetailQuery.loading ||
       tenderResponseByUserQuery.loading
     ) {
@@ -34,7 +32,6 @@ class SubmitContainer extends React.Component {
       return null;
     }
 
-    const companyByUser = companyByUserQuery.companyByUser;
     const tenderDetail = tenderDetailQuery.tenderDetailSupplier || {};
     const tenderResponseByUser = tenderResponseByUserQuery.tenderResponseByUser;
 
@@ -43,16 +40,7 @@ class SubmitContainer extends React.Component {
 
       mutation({ variables: { tenderId: tenderDetail._id, ...doc } })
         .then(() => {
-          if (tenderDetail.type === 'eoi' && !companyByUser.isSentPrequalificationInfo) {
-            notification.warn({
-              message: __('Notification'),
-              description: __('At the time of the Expression of Interest, all suppliers must be registered to the ”Oyu” database, as a minimum, to be able to register its interests through “Oyu” database. Prequalification status will be a critical evaluation criteria and it is highly recommended that you be prequalified.'),
-              duration: 60,
-            });
-          } else {
-            alert.success('Successfully saved a tender!', __);
-          }
-
+          alert.success('Successfully saved a tender!', __);
           tenderResponseByUserQuery.refetch();
 
           shouldSend ? send(doc.tenderId) : redirect(doc.tenderId);
@@ -60,7 +48,22 @@ class SubmitContainer extends React.Component {
 
         .catch(error => {
           alert.error(error.message, __);
-          redirect(doc.tenderId);
+
+          if (error.message.includes('Please complete registration stage')) {
+            warn();
+
+            setTimeout(() => {
+              history.push('/registration');
+            }, 3000)
+          }
+
+          if (error.message.includes('Please complete prequalification stage')) {
+            warn();
+
+            setTimeout(() => {
+              history.push('/prequalification');
+            }, 3000)
+          }
         });
     };
 
@@ -78,6 +81,16 @@ class SubmitContainer extends React.Component {
         .catch(() => {
           alert.error('Required inputs missing', __);
         });
+    };
+
+    const warn = () => {
+      notification.warn({
+        message: __('Notification'),
+        description: __(
+          'At the time of the Expression of Interest, all suppliers must be registered to the ”Oyu” database, as a minimum, to be able to register its interests through “Oyu” database. Prequalification status will be a critical evaluation criteria and it is highly recommended that you be prequalified.'
+        ),
+        duration: 60,
+      });
     };
 
     const redirect = tenderId => {
@@ -113,7 +126,6 @@ class SubmitContainer extends React.Component {
 SubmitContainer.propTypes = {
   location: PropTypes.object,
   tenderDetailQuery: PropTypes.object,
-  companyByUserQuery: PropTypes.object,
   tenderResponseByUserQuery: PropTypes.object,
   tendersResponsesAdd: PropTypes.func,
   tendersResponsesEdit: PropTypes.func,
@@ -127,16 +139,6 @@ SubmitContainer.contextTypes = {
 };
 
 export default compose(
-  graphql(
-    gql(`
-      query companyByUser {
-        companyByUser {
-          isSentPrequalificationInfo
-        }
-      }
-   `),
-  { name: 'companyByUserQuery' }),
-
   graphql(gql(queries.tenderDetailSupplier), {
     name: 'tenderDetailQuery',
     options: ({ match }) => {
