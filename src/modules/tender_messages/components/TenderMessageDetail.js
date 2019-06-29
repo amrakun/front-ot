@@ -57,36 +57,67 @@ const Receivers = ({ recipientSuppliers, tender }) => {
   );
 };
 
-const FileLink = ({ attachment }) => {
-  if (!attachment || !attachment.url) return null;
-  else
-    return (
-      <>
-        <Divider />
-        <a href={readFileUrl(attachment.url)}>
-          <Icon type="paper-clip" />
-          Download attachment
-        </a>
-      </>
-    );
+const Attachment = ({ attachment }) => {
+  if (!attachment || !attachment.url) {
+    return null;
+  }
+
+  return (
+    <Row>
+      <Col span={2}>Attachment: </Col>
+
+      <Col span={22}>
+        <p>
+          <a href={readFileUrl(attachment.url)}>
+            <Icon type="paper-clip" />
+            Download attachment
+          </a>
+        </p>
+      </Col>
+    </Row>
+  );
+};
+
+const Message = ({ message  }) => {
+  return (
+    <>
+      <Sender {...message} />
+      <Receivers {...message} />
+
+      <Row>
+        <Col span={2}>Subject: </Col>
+        <Col span={22}><p>{message.subject}</p></Col>
+      </Row>
+
+      <Attachment attachment={message.attachment} />
+
+      <Row>
+        <Col span={2}>Content: </Col>
+        <Col span={22}>
+          <div dangerouslySetInnerHTML={{ __html: message.body }} />
+        </Col>
+      </Row>
+    </>
+  );
 };
 
 const TenderMessageDetail = ({ tenderMessageDetail }) => {
   if (!tenderMessageDetail) return null;
+
   return (
-    <>
-      <Sender {...tenderMessageDetail} />
+    <div>
+      <Message message={tenderMessageDetail} />
       <Divider />
-      <Receivers {...tenderMessageDetail} />
-      <Divider />
-      <Row>
-        <Col span={2}>Subject: </Col>
-        <Col span={22}>{tenderMessageDetail.subject}</Col>
-      </Row>
-      <FileLink attachment={tenderMessageDetail.attachment} />
-      <Divider />
-      <div dangerouslySetInnerHTML={{ __html: tenderMessageDetail.body }} />
-    </>
+
+      {tenderMessageDetail.relatedMessages.map((message) => {
+        return (
+          <div key={message._id}>
+            <Message message={message} />
+            <Divider />
+          </div>
+        );
+      })}
+    </div>
   );
 };
 

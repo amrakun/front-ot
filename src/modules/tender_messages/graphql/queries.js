@@ -55,6 +55,9 @@ const tenderMessageDetail = `
   query tenderMessageDetail($_id : String!) {
     tenderMessageDetail(_id : $_id) {
       ${tenderMessageFields}
+      relatedMessages {
+        ${tenderMessageFields}
+      }
     }
   }
 `;

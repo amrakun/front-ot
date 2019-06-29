@@ -22,9 +22,9 @@ TenderMessageDetailContainer.propTypes = {
 export default compose(
   graphql(gql(queries.tenderMessageDetail), {
     name: 'tenderMessageDetailQuery',
-    options: ({ match }) => {
+    options: ({ _id }) => {
       return {
-        variables: { _id: match.params._id }
+        variables: { _id }
       };
     }
   })

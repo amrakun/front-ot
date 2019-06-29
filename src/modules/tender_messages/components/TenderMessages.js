@@ -4,7 +4,7 @@ import moment from 'moment';
 import { Row, Button, Table, Icon, Card, Modal, Divider } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { CreateTenderMessage } from '../containers/';
-import TenderMessageDetail from './TenderMessageDetail';
+import TenderMessageDetail from '../containers/TenderMessageDetail';
 import { Paginator } from 'modules/common/components';
 import { dateTimeFormat } from 'modules/common/constants';
 
@@ -240,7 +240,7 @@ class Messages extends Component {
           title="View"
           width={modalWidth}
         >
-          <TenderMessageDetail tenderMessageDetail={tenderMessageDetail} />
+          { _id ? <TenderMessageDetail _id={_id} /> : null }
         </Modal>
 
         <Modal
