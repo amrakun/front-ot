@@ -20,9 +20,9 @@ const WithData = compose(
   graphql(gql(queries.simpleCompanies), {
     name: 'companiesQuery',
     skip: ({ isPopupVisible }) => !isPopupVisible,
-    options: () => {
+    options: ({ search }) => {
       return {
-        variables: { search: '', source: 'searcher' }
+        variables: { search, source: 'searcher', perPage: 10 }
       };
     }
   })
@@ -33,21 +33,31 @@ export default class Index extends React.Component {
     super(props);
 
     this.state = {
-      isPopupVisible: false
+      isPopupVisible: false,
+      search: '',
     };
 
     this.onShowPopup = this.onShowPopup.bind(this);
+    this.onSearch = this.onSearch.bind(this);
   }
 
   onShowPopup() {
     this.setState({ isPopupVisible: true });
   }
 
+  onSearch(search) {
+    this.setState({ search });
+  }
+
   render() {
+    const { isPopupVisible, search } = this.state;
+
     return (
       <WithData
         {...this.props}
-        isPopupVisible={this.state.isPopupVisible}
+        search={search}
+        isPopupVisible={isPopupVisible}
+        onSearch={this.onSearch}
         onShowPopup={this.onShowPopup}
       />
     );

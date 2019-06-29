@@ -20,7 +20,7 @@ class SupplierSearcher extends React.Component {
 
     this.state = {
       visible: false,
-      selectedValues: props.value || []
+      selectedValues: props.value || [],
     };
 
     this.showPopup = this.showPopup.bind(this);
@@ -60,6 +60,17 @@ class SupplierSearcher extends React.Component {
     const { suppliers, mode, onSearch } = this.props;
     const { selectedValues } = this.state;
 
+    const supplierIds = suppliers.map(s => s._id);
+    const options = suppliers;
+
+    for (const value of selectedValues) {
+      const supplier = JSON.parse(value);
+
+      if (!supplierIds.includes(supplier._id)) {
+        options.push(supplier);
+      }
+    }
+
     const selectProps = {
       mode: 'multiple',
       style: { width: '100%' },
@@ -71,7 +82,7 @@ class SupplierSearcher extends React.Component {
 
     return (
       <Select {...selectProps}>
-        {suppliers.map(supplier => (
+        {options.map(supplier => (
           <Select.Option
             key={mode === 'select' ? supplier._id : JSON.stringify(supplier)}
           >
