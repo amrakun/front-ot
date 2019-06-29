@@ -1,6 +1,8 @@
 import React from 'react';
+import moment from 'moment';
 import { Tag, Divider, Icon, Col, Row } from 'antd';
 import { readFileUrl } from 'modules/common/utils';
+import { dateTimeFormat } from 'modules/common/constants';
 
 const renderUser = user => (
   <Tag key={user.email}>
@@ -81,6 +83,11 @@ const Attachment = ({ attachment }) => {
 const Message = ({ message  }) => {
   return (
     <>
+      <Row>
+        <Col span={2}>Date: </Col>
+        <Col span={22}><p>{moment(message.createdAt).format(dateTimeFormat)}</p></Col>
+      </Row>
+
       <Sender {...message} />
       <Receivers {...message} />
 
