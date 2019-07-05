@@ -423,13 +423,13 @@ i.success {
   box-shadow: 0px 5px 19px 5px rgba(0, 0, 0, 0.3);
 }
 .home-landing .desc {
-  height: 249px;
+  height: 229px;
   background-color: #009aa6;
   padding: 15px;
 }
 .home-landing .desc p {
   color: #fff;
-  font-size: 14px;
+  font-size: 12px;
 }
 .home-landing .footer {
   margin-top: 15px;

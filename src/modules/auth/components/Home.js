@@ -143,7 +143,7 @@ class Home extends React.Component {
                 )}
               </h3>
               <Row gutter={20}>
-                <Col span={12}>
+                <Col span={6}>
                   <div className="desc">
                     <p>
                       {__(
@@ -157,8 +157,8 @@ class Home extends React.Component {
                     </p>
                   </div>
                 </Col>
-                <Col span={6}>
-                  <a href="#item" className="item program">
+                <Col span={12}>
+                  <a href="https://www.business-innovation-growth-mongolia.com/our-mission-m" target="__blank" className="item program">
                     <div className="text">
                       {__('Capacity Building Program Coming soon!')}
                     </div>
