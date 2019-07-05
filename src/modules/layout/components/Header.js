@@ -83,6 +83,14 @@ const HeaderBar = (props, context) => {
           </a>
         </Menu.Item>
       )}
+
+      {currentUser && !currentUser.isSupplier ? null : (
+        <Menu.Item className="right" key="guide">
+          <a href="https://ot-supplier.s3-ap-southeast-1.amazonaws.com/Online+training+.pptx">
+            <T id="Download guide">Download guide</T>
+          </a>
+        </Menu.Item>
+      )}
     </Menu>
   );
 };
