@@ -160,11 +160,11 @@ class Home extends React.Component {
                 <Col span={12}>
                   <a href="https://www.business-innovation-growth-mongolia.com/our-mission-m" target="__blank" className="item program">
                     <div className="text">
-                      {__('Capacity Building Program Coming soon!')}
+                      {__('Capacity Building Program')}
                     </div>
                     <img
                       src={programImg}
-                      alt={__('Capacity Building Program Coming soon!')}
+                      alt={__('Capacity Building Program')}
                     />
                   </a>
                 </Col>
