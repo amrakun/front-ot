@@ -1,15 +1,25 @@
 import React from 'react';
 import { gql, graphql, compose } from 'react-apollo';
-import { queries } from '../graphql';
+import { queries, mutations } from '../graphql';
 import { TenderMessageDetail } from '../components';
 import { Icon } from 'antd';
 import PropTypes from 'prop-types';
 
-const TenderMessageDetailContainer = ({ tenderMessageDetailQuery }) => {
+const TenderMessageDetailContainer = (props) => {
+  const { currentUser, tenderMessageDetailQuery, tenderMessageBuyerSend } = props;
+
   if (tenderMessageDetailQuery.loading) return <Icon type="loading" />;
+
+  const reply = (doc, callback) => {
+    tenderMessageBuyerSend({ variables: doc })
+      .then(() => callback())
+      .catch((e) => console.log(e.message));
+  }
 
   return (
     <TenderMessageDetail
+      currentUser={currentUser}
+      reply={reply}
       tenderMessageDetail={tenderMessageDetailQuery.tenderMessageDetail}
     />
   );
@@ -27,5 +37,13 @@ export default compose(
         variables: { _id }
       };
     }
-  })
+  }),
+  graphql(gql(mutations.tenderMessageBuyerSend), {
+    name: 'tenderMessageBuyerSend',
+    options: () => {
+      return {
+        refetchQueries: ['tenderMessages'],
+      };
+    },
+  }),
 )(TenderMessageDetailContainer);

@@ -54,6 +54,7 @@ const tenderMessages = `
 const tenderMessageDetail = `
   query tenderMessageDetail($_id : String!) {
     tenderMessageDetail(_id : $_id) {
+      tenderId
       ${tenderMessageFields}
       relatedMessages {
         ${tenderMessageFields}

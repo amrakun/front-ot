@@ -240,7 +240,7 @@ class Messages extends Component {
           title="View"
           width={modalWidth}
         >
-          { _id ? <TenderMessageDetail _id={_id} /> : null }
+          { _id ? <TenderMessageDetail currentUser={currentUser} _id={_id} /> : null }
         </Modal>
 
         <Modal
