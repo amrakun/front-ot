@@ -12,7 +12,7 @@ import {
   Tag,
   message
 } from 'antd';
-import { dateFormat } from 'modules/common/constants';
+import { dateTimeFormat } from 'modules/common/constants';
 import moment from 'moment';
 import { Common } from 'modules/companies/components';
 import SupplierSearcher from 'modules/companies/containers/Searcher';
@@ -100,11 +100,11 @@ class Blocking extends Common {
       },
       {
         title: 'Start date',
-        render: record => moment(record.startDate).format(dateFormat)
+        render: record => moment(record.startDate).format(dateTimeFormat)
       },
       {
         title: 'End date',
-        render: record => moment(record.endDate).format(dateFormat)
+        render: record => moment(record.endDate).format(dateTimeFormat)
       },
       {
         title: 'Note',
@@ -202,7 +202,8 @@ class Blocking extends Common {
                 ]
               })(
                 <DatePicker.RangePicker
-                  format={dateFormat}
+                  showTime={{ format: 'HH:mm' }}
+                  format={dateTimeFormat}
                   placeholder={['Start date', 'End date']}
                 />
               )}
