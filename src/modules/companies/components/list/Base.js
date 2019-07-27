@@ -83,7 +83,7 @@ class Base extends Common {
               return 'n/a';
             }
 
-            annualTurnover = [...annualTurnover].sort((a, b) => a.year > b.year);
+            annualTurnover.sort((a, b) => a.year - b.year);
 
             const [first, second, third] = annualTurnover;
 
