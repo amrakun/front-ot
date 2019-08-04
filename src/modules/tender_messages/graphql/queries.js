@@ -57,7 +57,12 @@ const tenderMessageDetail = `
       tenderId
       ${tenderMessageFields}
       relatedMessages {
-        ${tenderMessageFields}
+        rootMessage {
+          ${tenderMessageFields}
+        }
+        list {
+          ${tenderMessageFields}
+        }
       }
     }
   }

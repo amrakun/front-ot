@@ -92,7 +92,7 @@ class TenderMessageDetail extends React.Component {
       fileName: undefined,
       fileURL: undefined,
       editorHTMLContent: '',
-      recipientSupplierIds: [],
+      recipientSuppliers: [],
       replyToId: null,
     }
 
@@ -112,7 +112,7 @@ class TenderMessageDetail extends React.Component {
 
     this.props.form.validateFields((err, values) => {
       const { reply, tenderMessageDetail } = this.props;
-      const { fileName, fileURL } = this.state;
+      const { fileName, fileURL, replyToId, editorHTMLContent, recipientSuppliers } = this.state;
 
       if (err) {
         return message.error(err);
@@ -121,88 +121,133 @@ class TenderMessageDetail extends React.Component {
       reply({
         ...values,
         tenderId: tenderMessageDetail.tenderId,
-        replyToId: this.state.replyToId,
-        recipientSupplierIds: this.state.recipientSupplierIds,
-        body: this.state.editorHTMLContent,
+        replyToId: replyToId,
+        recipientSupplierIds: recipientSuppliers.map((sup) => sup._id),
+        body: editorHTMLContent,
         attachment: fileName && fileURL ? { name: fileName, url: fileURL } : undefined
       }, () => {
-        this.setState({ replyToId: null, recipientSupplierIds: [] });
+        this.setState({ replyToId: null, recipientSuppliers: [] });
         message.success('Success');
       });
     });
   }
 
-  renderReplyForm(tenderMessage) {
-    const { replyToId } = this.state;
+  renderReplyForm() {
+    const { recipientSuppliers } = this.state;
 
-    if (tenderMessage._id === replyToId) {
-      const { getFieldDecorator } = this.props.form;
-
-      return (
-        <Row>
-          <Col span={2}>Reply: </Col>
-          <Col span={22} style={{ maxWidth: '800px' }}>
-            <Form layout="vertical" onSubmit={this.handleSubmit} style={{ backgroundColor: '#f9f9f9', padding: '5px 10px' }}>
-              <Item label="Subject">
-                {getFieldDecorator('subject', {
-                  rules: [{ required: true }],
-                })(<Input placeholder="subject" autoFocus={true} />)}
-              </Item>
-
-              <Item label="Attachment">
-                <Uploader onChange={this.onFileChange.bind(this)} />
-              </Item>
-
-              <Item label="Message">
-                <Editor
-                  content={this.state.editorHTMLContent}
-                  onEmailContentChange={this.onEmailContentChange}
-                />
-              </Item>
-
-              <Item>
-                <div style={{ float: 'right' }}>
-                  <Button
-                    type="danger"
-                    style={{ marginRight: '5px' }}
-                    onClick={() => this.setState({ replyToId: null, recipientSupplierIds: [] })}
-                  >
-                    Cancel
-                  </Button>
-
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                  >
-                    Send
-                  </Button>
-                </div>
-              </Item>
-            </Form>
-          </Col>
-        </Row>
-      )
+    if (recipientSuppliers.length === 0) {
+      return null;
     }
+
+    const { getFieldDecorator } = this.props.form;
+
+    return (
+      <Row>
+        <Col span={2}>Reply: </Col>
+        <Col span={22} style={{ maxWidth: '800px' }}>
+          <Form layout="vertical" onSubmit={this.handleSubmit} style={{ backgroundColor: '#f9f9f9', padding: '5px 10px', marginBottom: '20px' }}>
+            <Item label="To">
+              {recipientSuppliers.map(renderCompany)}
+            </Item>
+
+            <Item label="Subject">
+              {getFieldDecorator('subject', {
+                rules: [{ required: true }],
+              })(<Input placeholder="subject" autoFocus={true} />)}
+            </Item>
+
+            <Item label="Attachment">
+              <Uploader onChange={this.onFileChange.bind(this)} />
+            </Item>
+
+            <Item label="Message">
+              <Editor
+                content={this.state.editorHTMLContent}
+                onEmailContentChange={this.onEmailContentChange}
+              />
+            </Item>
+
+            <Item>
+              <div style={{ float: 'right' }}>
+                <Button
+                  type="danger"
+                  style={{ marginRight: '5px' }}
+                  onClick={() => this.setState({ replyToId: null, recipientSuppliers: [] })}
+                >
+                  Cancel
+                </Button>
+
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                >
+                  Send
+                </Button>
+              </div>
+            </Item>
+          </Form>
+        </Col>
+      </Row>
+    )
   }
 
-  renderReplyButtons(tenderMessage) {
-    const { currentUser } = this.props;
-    const { senderSupplier } = tenderMessage;
+  renderTopReplyButtons() {
+    const { tenderMessageDetail, currentUser } = this.props;
 
-    if (!currentUser.isSupplier && senderSupplier) {
+    if (!tenderMessageDetail) {
+      return null;
+    }
+
+    if (currentUser.isSupplier) {
+      return null;
+    }
+
+    const { senderSupplier, relatedMessages } = tenderMessageDetail;
+
+    let replyButton;
+
+    if (senderSupplier) {
       const reply = () => {
         this.setState({
-          replyToId: tenderMessage._id,
-          recipientSupplierIds: [senderSupplier._id]
+          replyToId: tenderMessageDetail._id,
+          recipientSuppliers: [senderSupplier]
         });
       }
 
-      return (
-        <div style={{ float: 'right' }}>
-          <Button onClick={reply}>Reply</Button>
-        </div>
-      )
+      replyButton = <Button style={{ marginRight: '5px' }} onClick={reply}>Reply</Button>
     }
+
+    let replyAllButton;
+
+    const { rootMessage, list=[] } = relatedMessages;
+
+    if (rootMessage) {
+      const replyAll = () => {
+        let editorHTMLContent = tenderMessageDetail.body;
+
+        for (const message of list) {
+          editorHTMLContent += `<p>---------------------------------------------------------------------------------------------------------------</p> ${message.body}`;
+        }
+
+        this.setState({
+          editorHTMLContent,
+          recipientSuppliers: rootMessage.recipientSuppliers
+        });
+      }
+
+      replyAllButton = <Button onClick={replyAll}>Reply All</Button>
+    }
+
+    return (
+      <>
+        <div style={{ textAlign: 'right' }}>
+          {replyButton}
+          {replyAllButton}
+        </div>
+
+        <Divider />
+      </>
+    )
   }
 
   renderMessage(tenderMessage) {
@@ -211,8 +256,6 @@ class TenderMessageDetail extends React.Component {
         <Row>
           <Col span={2}>Date: </Col>
           <Col span={22}><p>{moment(tenderMessage.createdAt).format(dateTimeFormat)}</p></Col>
-
-          {this.renderReplyButtons(tenderMessage)}
         </Row>
 
         <Sender {...tenderMessage} />
@@ -231,7 +274,6 @@ class TenderMessageDetail extends React.Component {
             <div dangerouslySetInnerHTML={{ __html: tenderMessage.body }} />
           </Col>
         </Row>
-        {this.renderReplyForm(tenderMessage)}
       </>
     );
   }
@@ -243,10 +285,14 @@ class TenderMessageDetail extends React.Component {
 
     return (
       <div>
+        {this.renderTopReplyButtons()}
+        {this.renderReplyForm()}
+
         {this.renderMessage(tenderMessageDetail)}
+
         <Divider />
 
-        {tenderMessageDetail.relatedMessages.map((tenderMessage) => {
+        {tenderMessageDetail.relatedMessages.list.map((tenderMessage) => {
           return (
             <div key={tenderMessage._id}>
               {this.renderMessage(tenderMessage)}
