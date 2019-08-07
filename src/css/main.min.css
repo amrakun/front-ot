@@ -161,6 +161,42 @@ table.stats tr td:last-child {
   padding-left: 10px;
   font-weight: 700;
 }
+.ant-modal-content .log-box {
+  border: 1px solid #f47721;
+  padding: 5px;
+  margin: 5px;
+}
+.ant-modal-content .log-box .data-label {
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.ant-modal-content .log-box .data-label.success {
+  color: #3ccc38;
+}
+.ant-modal-content .log-box .data-label.warning {
+  color: #f7ce53;
+}
+.ant-modal-content .log-box .data-label.danger {
+  color: #ea475d;
+}
+.ant-modal-content .log-box.success {
+  border-color: #3ccc38;
+}
+.ant-modal-content .log-box.success .field-value {
+  color: #3ccc38;
+}
+.ant-modal-content .log-box.warning {
+  border-color: #f7ce53;
+}
+.ant-modal-content .log-box.warning .field-value {
+  color: #f7ce53;
+}
+.ant-modal-content .log-box.danger {
+  border-color: #ea475d;
+}
+.ant-modal-content .log-box.danger .field-value {
+  color: #ea475d;
+}
 
 .bg-white {
   background-color: #fff;

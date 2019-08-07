@@ -40,4 +40,47 @@
       font-weight: 700;
     }
   }
+
+  .log-box {
+    border: 1px solid $primary-color;
+    padding: 5px;
+    margin: 5px;
+
+    .data-label {
+      font-size: 12px;
+      text-transform: uppercase;
+
+      &.success {
+        color: $color-success;
+      }
+      &.warning {
+        color: $color-warning;
+      }
+      &.danger {
+        color: $color-danger;
+      }
+    }
+
+    &.success {
+      border-color: $color-success;
+
+      .field-value {
+        color: $color-success;
+      }
+    }
+    &.warning {
+      border-color: $color-warning;
+
+      .field-value {
+        color: $color-warning;
+      }
+    }
+    &.danger {
+      border-color: $color-danger;
+
+      .field-value {
+        color: $color-danger;
+      }
+    }
+  }
 }

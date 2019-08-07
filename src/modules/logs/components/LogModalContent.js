@@ -119,75 +119,18 @@ export default class LogModalContent extends React.Component {
     return <ul>{list}</ul>;
   }
 
-  renderLeftSide(log) {
-    let label = '';
-    let content;
-
-    if (log && log.action) {
-      switch (log.action) {
-        case 'create':
-          return null;
-        case 'update':
-          label = 'Unchanged fields';
-          break;
-        case 'delete':
-          label = 'Old data';
-          break;
-        default:
-          break;
-      }
-
-      content = (
-        <Col sm={12}>
-          <span>{label}</span>
-          <div>{this.prettyJSON(log.unchangedData)}</div>
-        </Col>
-      );
-    }
-
-    return content;
-  }
-
-  renderRightSide(log) {
-    let label = '';
-    let content;
-
-    if (log && log.action) {
-      switch (log.action) {
-        case 'create':
-          label = 'New data';
-          break;
-        case 'update':
-          label = 'Changed fields';
-          break;
-        case 'delete':
-          return null;
-        default:
-          break;
-      }
-
-      content = (
-        <Col sm={12}>
-          <span>{label}</span>
-          {this.prettyJSON(log.newData)}
-        </Col>
-      );
-    }
-
-    return content;
-  }
-
   /**
    * Renders changed, unchanged, added & removed data as html list.
    * @param {Object} data Data
    * @param {string} label Label to display
+   * @param {string} cls Css class
    */
-  renderData(data, label) {
+  renderData(data, label, cls) {
     return data ? (
-      <>
-        <span>{label}</span>
+      <div className={`log-box ${cls}`}>
+        <span className={`data-label ${cls}`}>{label}</span>
         {this.prettyJSON(data)}
-      </>
+      </div>
     ) : null;
   }
 
@@ -195,14 +138,16 @@ export default class LogModalContent extends React.Component {
     const { log } = this.props;
 
     return log ? (
-      <Row>
-        {this.renderLeftSide(log)}
-        <Col sm={12}>
-          {this.renderData(log.changedData, 'Changed fields')}
-          {this.renderData(log.addedData, 'Added fields')}
-          {this.renderData(log.removedData, 'Removed fields')}
-        </Col>
-      </Row>
+      <>
+        <Row>
+          <Col sm={12}>{this.renderData(log.unchangedData, 'Unchanged fields')}</Col>
+          <Col sm={12}>{this.renderData(log.changedData, 'Changed fields', 'warning')}</Col>
+        </Row>
+        <Row>
+          <Col sm={12}>{this.renderData(log.addedData, 'Added fields', 'success')}</Col>
+          <Col sm={12}>{this.renderData(log.removedData, 'Removed fields', 'danger')}</Col>
+        </Row>
+      </>
     ) : null;
   }
 
