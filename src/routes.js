@@ -7,6 +7,7 @@ import TendersRoutes from './modules/tenders/routes';
 import AuthRoutes from './modules/auth/routes';
 import UsersRoutes from './modules/settings/routes';
 import QualificationRoutes from './modules/qualification/routes';
+import LogRoutes from './modules/logs/routes';
 
 const Routes = () => (
   <BrowserRouter>
@@ -18,6 +19,7 @@ const Routes = () => (
         {TendersRoutes}
         {QualificationRoutes}
         {UsersRoutes}
+        {LogRoutes}
       </Switch>
     </MainLayout>
   </BrowserRouter>

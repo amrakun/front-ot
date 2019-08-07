@@ -2,43 +2,43 @@ export const supplierSideMenu = [
   {
     url: '/rfq-and-eoi',
     title: 'Tenders & EOI',
-    icon: 'desktop'
+    icon: 'desktop',
   },
   {
     url: '/registration',
     title: 'Registration',
-    icon: 'contacts'
+    icon: 'contacts',
   },
   {
     url: '/prequalification',
     title: 'Pre-qualification',
     icon: 'solution',
-    className: 'multi-line'
+    className: 'multi-line',
   },
   {
     url: '/qualification',
     title: 'Qualification/audit',
     icon: 'calendar',
-    className: 'multi-line'
+    className: 'multi-line',
   },
   {
     url: '/capacity-building',
     title: 'Capacity building',
     icon: 'file-text',
-    className: 'multi-line'
-  }
+    className: 'multi-line',
+  },
 ];
 
 export const buyerSideMenu = [
   {
     url: '/dashboard',
     title: 'Dashboard',
-    icon: 'desktop'
+    icon: 'desktop',
   },
   {
     url: '/companies',
     title: 'Suppliers',
-    icon: 'user'
+    icon: 'user',
   },
   {
     url: 'action',
@@ -47,11 +47,11 @@ export const buyerSideMenu = [
     subMenu: [
       {
         url: '/prequalification-status',
-        title: 'Pre-qualification'
+        title: 'Pre-qualification',
       },
       {
         url: '/capacity-building-status',
-        title: 'Capacity building'
+        title: 'Capacity building',
       },
       {
         url: 'audit',
@@ -59,33 +59,33 @@ export const buyerSideMenu = [
         subMenu: [
           {
             url: '/audit',
-            title: 'Send'
+            title: 'Send',
           },
           {
             url: '/audit/responses',
-            title: 'Responses (desktop)'
+            title: 'Responses (desktop)',
           },
           {
             url: '/audit/responses-physical',
-            title: 'Responses (physical)'
+            title: 'Responses (physical)',
           },
           {
             url: '/audit/reports',
-            title: 'Reports & plan'
-          }
-        ]
+            title: 'Reports & plan',
+          },
+        ],
       },
       {
         url: '/validation',
-        title: 'Validation'
+        title: 'Validation',
       },
       {
         url: '/difot',
-        title: 'DIFOT score'
+        title: 'DIFOT score',
       },
       {
         url: '/due-diligence',
-        title: 'Due Diligence'
+        title: 'Due Diligence',
       },
       {
         url: 'feedback',
@@ -93,44 +93,56 @@ export const buyerSideMenu = [
         subMenu: [
           {
             url: '/feedback',
-            title: 'Request feedback'
+            title: 'Request feedback',
           },
           {
             url: '/feedback/responses',
-            title: 'Responses'
-          }
-        ]
+            title: 'Responses',
+          },
+        ],
       },
       {
         url: '/blocking',
-        title: 'Block a supplier'
-      }
-    ]
+        title: 'Block a supplier',
+      },
+    ],
   },
   {
     url: '/rfq',
     title: 'RFQ responses',
-    icon: 'bars'
+    icon: 'bars',
   },
   {
     url: '/trfq',
     title: 'Travel RFQ responses',
-    icon: 'bars'
+    icon: 'bars',
   },
   {
     url: '/eoi',
     title: 'EOI responses',
-    icon: 'bars'
+    icon: 'bars',
   },
   {
     url: '/report',
     title: 'Report',
-    icon: 'file'
+    icon: 'file',
   },
   {
-    url: '/logs',
+    url: 'logs',
     title: 'Log',
-    icon: 'file'
+    icon: 'file',
+    subMenu: [
+      {
+        url: '/logs',
+        title: 'Activity log',
+        icon: 'file',
+      },
+      {
+        url: '/action-logs',
+        title: 'Action log',
+        icon: 'hourglass',
+      },
+    ],
   },
   {
     url: 'settings',
@@ -139,20 +151,20 @@ export const buyerSideMenu = [
     subMenu: [
       {
         url: '/settings/templates',
-        title: 'Templates'
+        title: 'Templates',
       },
       {
         url: '/settings/manage-expiry-dates',
-        title: 'Manage Expiry Dates'
+        title: 'Manage Expiry Dates',
       },
       {
         url: '/user-list',
-        title: 'Manage Users'
+        title: 'Manage Users',
       },
       {
         url: '/mail-deliveries',
-        title: 'Mail deliveries'
-      }
-    ]
-  }
+        title: 'Mail deliveries',
+      },
+    ],
+  },
 ];
