@@ -169,6 +169,7 @@ table.stats tr td:last-child {
 .ant-modal-content .log-box .data-label {
   font-size: 12px;
   text-transform: uppercase;
+  color: #f47721;
 }
 .ant-modal-content .log-box .data-label.success {
   color: #3ccc38;

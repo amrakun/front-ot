@@ -49,6 +49,7 @@
     .data-label {
       font-size: 12px;
       text-transform: uppercase;
+      color: $primary-color;
 
       &.success {
         color: $color-success;
