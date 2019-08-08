@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import queryString from 'query-string';
 
-import LogsContainer from './LogsContainer';
+import LogsContainer from './containers/LogsContainer';
 
 export default [
   <Route

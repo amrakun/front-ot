@@ -1,20 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'antd';
-import gql from 'graphql-tag';
-
-import client from 'apolloClient';
-import queries from '../graphql';
 
 export default class LogModalContent extends React.Component {
   constructor() {
     super();
 
     this.buildListFromObject = this.buildListFromObject.bind(this);
-
-    this.state = {
-      fieldNames: [],
-    };
   }
 
   buildListFromArray(array = []) {
@@ -41,7 +33,7 @@ export default class LogModalContent extends React.Component {
   }
 
   buildListFromObject(obj = {}) {
-    const { fieldNames } = this.state;
+    const { fieldNames } = this.props;
     const list = [];
     const names = obj ? Object.getOwnPropertyNames(obj) : [];
 
@@ -150,26 +142,9 @@ export default class LogModalContent extends React.Component {
       </>
     ) : null;
   }
-
-  componentDidMount() {
-    const { log } = this.props;
-
-    if (log && log.type) {
-      client
-        .query({
-          query: gql(queries.getDbFieldLabels),
-          variables: { type: log.type },
-          fetchPolicy: 'network-only',
-        })
-        .then(({ data }) => {
-          const result = data.getDbFieldLabels;
-
-          this.setState({ fieldNames: result });
-        });
-    }
-  }
 }
 
 LogModalContent.propTypes = {
   log: PropTypes.object,
+  fieldNames: PropTypes.array,
 };

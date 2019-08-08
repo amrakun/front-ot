@@ -7,7 +7,7 @@ import router from 'modules/common/router';
 import { Paginator } from 'modules/common/components';
 import { dateTimeFormat } from 'modules/common/constants';
 import LogFilter from './LogFilter';
-import LogModalContent from './LogModalContent';
+import LogModalContainer from '../containers/LogModalContainer';
 
 export default class Logs extends React.Component {
   constructor(props) {
@@ -109,7 +109,7 @@ export default class Logs extends React.Component {
           footer={null}
           onCancel={this.toggleModal}
         >
-          {<LogModalContent log={logData} />}
+          {<LogModalContainer log={logData} />}
         </Modal>
         <LogFilter
           filter={this.filter}
