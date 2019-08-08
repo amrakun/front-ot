@@ -1,5 +1,6 @@
 @charset "UTF-8";
-.numberCard, .NumberCardLines {
+.numberCard,
+.NumberCardLines {
   height: 112px;
 }
 
@@ -59,7 +60,7 @@
   margin: 0 -12px;
 }
 
-.chart-row [class^=ant-col] {
+.chart-row [class^='ant-col'] {
   padding: 0 12px;
 }
 
@@ -120,6 +121,82 @@ table.stats tr td:first-child {
 }
 table.stats tr td:last-child {
   text-align: right;
+}
+
+.ant-modal {
+  width: 85% !important;
+  margin: 0 auto;
+}
+
+.ant-modal-content {
+  border-radius: 2px;
+  border: 0;
+  box-shadow: 0 2px 10px -3px rgba(0, 0, 0, 0.5);
+  background: #fafafa;
+}
+.ant-modal-content .ant-modal-header {
+  padding: 15px 40px;
+  border: 0;
+  border-radius: 2px;
+  background: #f47721;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.ant-modal-content .ant-modal-header .ant-modal-title {
+  font-size: 16px;
+  font-weight: normal;
+  color: #fff;
+}
+.ant-modal-content .ant-modal-body {
+  padding: 30px 40px;
+}
+.ant-modal-content ul {
+  overflow: scroll;
+}
+.ant-modal-content ul .field-name {
+  font-weight: 500;
+}
+.ant-modal-content ul .field-value {
+  color: #f47721;
+  padding-left: 10px;
+  font-weight: 700;
+}
+.ant-modal-content .log-box {
+  border: 1px solid #f47721;
+  padding: 5px;
+  margin: 5px;
+}
+.ant-modal-content .log-box .data-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #f47721;
+}
+.ant-modal-content .log-box .data-label.success {
+  color: #3ccc38;
+}
+.ant-modal-content .log-box .data-label.warning {
+  color: #f7ce53;
+}
+.ant-modal-content .log-box .data-label.danger {
+  color: #ea475d;
+}
+.ant-modal-content .log-box.success {
+  border-color: #3ccc38;
+}
+.ant-modal-content .log-box.success .field-value {
+  color: #3ccc38;
+}
+.ant-modal-content .log-box.warning {
+  border-color: #f7ce53;
+}
+.ant-modal-content .log-box.warning .field-value {
+  color: #f7ce53;
+}
+.ant-modal-content .log-box.danger {
+  border-color: #ea475d;
+}
+.ant-modal-content .log-box.danger .field-value {
+  color: #ea475d;
 }
 
 .bg-white {
@@ -204,16 +281,19 @@ table.stats tr td:last-child {
 .ant-layout-sider.ant-layout-sider-collapsed ul li ul li a {
   opacity: 1;
 }
-.ant-layout-sider .ant-menu-sub.ant-menu-inline > .ant-menu-item, .ant-layout-sider .ant-menu-item {
+.ant-layout-sider .ant-menu-sub.ant-menu-inline > .ant-menu-item,
+.ant-layout-sider .ant-menu-item {
   line-height: 16px;
   padding: 10px 0;
   height: auto;
 }
-.ant-layout-sider .ant-menu-sub.ant-menu-inline > .ant-menu-item a, .ant-layout-sider .ant-menu-item a {
+.ant-layout-sider .ant-menu-sub.ant-menu-inline > .ant-menu-item a,
+.ant-layout-sider .ant-menu-item a {
   white-space: normal;
   padding-right: 36px;
 }
-.ant-layout-sider.ant-layout-sider-collapsed .ant-menu-sub.ant-menu-inline > .ant-menu-item a, .ant-layout-sider.ant-layout-sider-collapsed .ant-menu-item a {
+.ant-layout-sider.ant-layout-sider-collapsed .ant-menu-sub.ant-menu-inline > .ant-menu-item a,
+.ant-layout-sider.ant-layout-sider-collapsed .ant-menu-item a {
   white-space: nowrap;
 }
 
@@ -361,7 +441,7 @@ i.success {
   padding: 5px 10px;
   font-weight: bold;
   font-style: italic;
-  font-family: "Overlock", cursive;
+  font-family: 'Overlock', cursive;
 }
 
 .home-landing .top {
@@ -571,7 +651,8 @@ form .ant-input-number {
   margin-bottom: 0;
 }
 
-.ant-table-thead > tr > th, .ant-table-tbody > tr > td {
+.ant-table-thead > tr > th,
+.ant-table-tbody > tr > td {
   padding: 6px;
   word-break: normal;
 }
@@ -607,7 +688,7 @@ form .ant-input-number {
   height: 372px;
 }
 
-[class*=dashed-button] {
+[class*='dashed-button'] {
   background: #fff;
   border-style: dashed;
 }
@@ -643,7 +724,7 @@ form .ant-input-number {
 .upload-btn-wrapper .ant-btn {
   z-index: 0;
 }
-.upload-btn-wrapper input[type=file] {
+.upload-btn-wrapper input[type='file'] {
   z-index: 1;
   position: absolute;
   left: 0;
@@ -860,7 +941,7 @@ table.mass-email-response tr td:last-child {
 }
 
 .finance-stat.up::after {
-  content: "↑";
+  content: '↑';
 }
 
 .finance-stat.down {
@@ -868,7 +949,7 @@ table.mass-email-response tr td:last-child {
 }
 
 .finance-stat.down::after {
-  content: "↓";
+  content: '↓';
 }
 
 .products-tree-select {

@@ -1,0 +1,150 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Row, Col } from 'antd';
+
+export default class LogModalContent extends React.Component {
+  constructor() {
+    super();
+
+    this.buildListFromObject = this.buildListFromObject.bind(this);
+  }
+
+  buildListFromArray(array = []) {
+    const list = [];
+
+    array.forEach((elem, index) => {
+      if (typeof elem !== 'object') {
+        list.push(<li key={Math.random()}>{elem.toString()}</li>);
+      }
+
+      if (typeof elem === 'object') {
+        const sub = this.buildListFromObject(elem);
+
+        list.push(<li key={Math.random()}>{index + 1}:</li>);
+        list.push(<ul key={Math.random()}>{sub}</ul>);
+      }
+    });
+
+    if (list.length > 0) {
+      return <ul key={Math.random()}>{list}</ul>;
+    }
+
+    return null;
+  }
+
+  buildListFromObject(obj = {}) {
+    const { fieldNames } = this.props;
+    const list = [];
+    const names = obj ? Object.getOwnPropertyNames(obj) : [];
+
+    for (const name of names) {
+      const field = obj[name];
+      const mappedName = fieldNames.find(fn => fn.name === name);
+      let label = name;
+
+      if (mappedName && mappedName.label) {
+        label = mappedName.label;
+      }
+
+      // exclude package specific __v & _id & uid fields
+      if (!(name === '__v' || name === '_id' || name === 'uid')) {
+        let item = (
+          <li key={name}>
+            <span className="field-name">{label}:</span>
+            <span className="field-value">{String(field)}</span>
+          </li>
+        );
+
+        if (typeof field === 'object') {
+          if (Array.isArray(field)) {
+            item = this.buildListFromArray(field);
+
+            list.push(
+              <li className="field-name" key={Math.random()}>
+                {label}:
+              </li>
+            );
+
+            list.push(item);
+          } else {
+            const sub = this.buildListFromObject(field);
+
+            item = <li key={Math.random()}>{name}:</li>;
+
+            list.push(
+              <li className="field-name" key={Math.random()}>
+                {label}:
+              </li>
+            );
+
+            list.push(<ul key={Math.random()}>{sub}</ul>);
+          }
+        } else {
+          // primary types
+          list.push(item);
+        }
+      } // end unnecessary atr checking
+    } // end for loop
+
+    return list;
+  }
+  /**
+   * Reads a stringified json and builds a list using its attributes.
+   * @param {string} jsonString A stringified JSON object
+   */
+  prettyJSON(jsonString) {
+    let list = [];
+
+    if (jsonString) {
+      const clean = jsonString.replace('\n', '');
+      const parsed = JSON.parse(clean);
+
+      if (typeof parsed === 'object') {
+        list = this.buildListFromObject(parsed);
+      }
+
+      if (Array.isArray(parsed)) {
+        list = this.buildListFromArray(parsed);
+      }
+    }
+
+    return <ul>{list}</ul>;
+  }
+
+  /**
+   * Renders changed, unchanged, added & removed data as html list.
+   * @param {Object} data Data
+   * @param {string} label Label to display
+   * @param {string} cls Css class
+   */
+  renderData(data, label, cls) {
+    return data ? (
+      <div className={`log-box ${cls}`}>
+        <span className={`data-label ${cls}`}>{label}</span>
+        {this.prettyJSON(data)}
+      </div>
+    ) : null;
+  }
+
+  render() {
+    const { log } = this.props;
+
+    return log ? (
+      <>
+        <Row>
+          <Col sm={12}>{this.renderData(log.unchangedData, 'Unchanged fields')}</Col>
+          <Col sm={12}>{this.renderData(log.changedData, 'Changed fields', 'warning')}</Col>
+        </Row>
+        <Row>
+          <Col sm={12}>{this.renderData(log.addedData, 'Added fields', 'success')}</Col>
+          <Col sm={12}>{this.renderData(log.removedData, 'Removed fields', 'danger')}</Col>
+        </Row>
+      </>
+    ) : null;
+  }
+}
+
+LogModalContent.propTypes = {
+  log: PropTypes.object,
+  fieldNames: PropTypes.array,
+};

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'antd';
+import PropTypes from 'prop-types';
 
 export default class Actions extends React.Component {
   renderNotInterested() {
@@ -43,3 +44,12 @@ export default class Actions extends React.Component {
     );
   }
 }
+
+Actions.propTypes = {
+  tender: PropTypes.object,
+  onSaveDraft: PropTypes.func,
+  onSubmit: PropTypes.func,
+  onNotInterested: PropTypes.func,
+  response: PropTypes.object,
+  __: PropTypes.func,
+};
