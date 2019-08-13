@@ -5,7 +5,9 @@ query logs(
   $userId: String,
   $action: String,
   $page: Int,
-  $perPage: Int
+  $perPage: Int,
+  $type: String,
+  $desc: String
 ) {
   logs(
     start: $start,
@@ -13,9 +15,12 @@ query logs(
     userId: $userId,
     action: $action,
     page: $page,
-    perPage: $perPage
+    perPage: $perPage,
+    type: $type,
+    desc: $desc
   ) {
     totalCount
+
     logs {
       _id
       createdAt

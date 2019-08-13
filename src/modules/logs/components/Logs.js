@@ -18,6 +18,7 @@ export default class Logs extends React.Component {
       end: '',
       userId: '',
       action: '',
+      type: '',
     };
 
     this.filter = {
@@ -25,6 +26,7 @@ export default class Logs extends React.Component {
       end: qp.end,
       userId: qp.userId,
       action: qp.action,
+      type: qp.type,
     };
 
     this.onFilterChange = this.onFilterChange.bind(this);
@@ -83,7 +85,23 @@ export default class Logs extends React.Component {
         key: 'action',
         dataIndex: 'action',
         render: value => {
-          return <span>{value}</span>;
+          let colorClass = '';
+
+          switch (value) {
+            case 'create':
+              colorClass = 'success';
+              break;
+            case 'update':
+              colorClass = 'warning';
+              break;
+            case 'delete':
+              colorClass = 'danger';
+              break;
+            default:
+              break;
+          }
+
+          return <span className={`data-label ${colorClass}`}>{value}</span>;
         },
       },
       {

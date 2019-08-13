@@ -5,6 +5,25 @@ import moment from 'moment';
 
 import { dateTimeFormat } from 'modules/common/constants';
 
+const LOG_TYPES = {
+  TENDER: 'tender',
+  TENDER_MESSAGE: 'composeMessage',
+  TENDER_RESPONSE: 'tenderResponse',
+  BLOCKED_COMPANY: 'blockedCompany',
+  COMPANY: 'company',
+  QUALIFICATION: 'qualification',
+  USER: 'user',
+  ALL: [
+    'tender',
+    'tenderMessage',
+    'tenderResponse',
+    'blockedCompany',
+    'company',
+    'qualification',
+    'user',
+  ],
+};
+
 export default class LogFilter extends React.Component {
   constructor() {
     super();
@@ -41,7 +60,7 @@ export default class LogFilter extends React.Component {
 
   render() {
     const { filter, users, search } = this.props;
-    const { start, end, action, userId } = filter;
+    const { start, end, action, userId, type } = filter;
     const userOptions = users.map(user => {
       return (
         <Select.Option key={user._id} value={user._id}>
@@ -49,7 +68,7 @@ export default class LogFilter extends React.Component {
         </Select.Option>
       );
     });
-    const actionOptions = [
+    const LOG_ACTION_OPTIONS = [
       <Select.Option key="all" value="">
         All
       </Select.Option>,
@@ -63,6 +82,34 @@ export default class LogFilter extends React.Component {
         Delete
       </Select.Option>,
     ];
+
+    const LOG_TYPE_OPTIONS = [
+      <Select.Option key="all" value="">
+        All
+      </Select.Option>,
+      <Select.Option key={LOG_TYPES.BLOCKED_COMPANY} value={LOG_TYPES.BLOCKED_COMPANY}>
+        Blocked company
+      </Select.Option>,
+      <Select.Option key={LOG_TYPES.COMPANY} value={LOG_TYPES.COMPANY}>
+        Company
+      </Select.Option>,
+      <Select.Option key={LOG_TYPES.QUALIFICATION} value={LOG_TYPES.QUALIFICATION}>
+        Qualification
+      </Select.Option>,
+      <Select.Option key={LOG_TYPES.TENDER} value={LOG_TYPES.TENDER}>
+        Tender
+      </Select.Option>,
+      <Select.Option key={LOG_TYPES.TENDER_MESSAGE} value={LOG_TYPES.TENDER_MESSAGE}>
+        Tender compose message
+      </Select.Option>,
+      <Select.Option key={LOG_TYPES.TENDER_RESPONSE} value={LOG_TYPES.TENDER_RESPONSE}>
+        Tender response
+      </Select.Option>,
+      <Select.Option key={LOG_TYPES.USER} value={LOG_TYPES.USER}>
+        User
+      </Select.Option>,
+    ];
+
     const gutter = { xs: 8, sm: 16, md: 24, lg: 32 };
     const selectStyle = { width: 200 };
     const dates = [];
@@ -75,8 +122,8 @@ export default class LogFilter extends React.Component {
     }
 
     return (
-      <Row type="flex" justify="start" gutter={gutter}>
-        <Col span="8">
+      <Row gutter={gutter}>
+        <Col span="6">
           <DatePicker.RangePicker
             value={dates}
             onChange={this.onDatesChange}
@@ -84,7 +131,7 @@ export default class LogFilter extends React.Component {
             placeholder={['Choose start date', 'Choose end date']}
           />
         </Col>
-        <Col span="6">
+        <Col span="5">
           <Select
             placeholder="Choose action"
             onChange={val => this.onSelectChange(val, 'action')}
@@ -93,10 +140,22 @@ export default class LogFilter extends React.Component {
             style={selectStyle}
             allowClear={true}
           >
-            {actionOptions}
+            {LOG_ACTION_OPTIONS}
           </Select>
         </Col>
-        <Col>
+        <Col span="5">
+          <Select
+            placeholder="Choose module"
+            onChange={val => this.onSelectChange(val, 'type')}
+            value={type}
+            defaultValue=""
+            style={selectStyle}
+            allowClear={true}
+          >
+            {LOG_TYPE_OPTIONS}
+          </Select>
+        </Col>
+        <Col span="5">
           <Select
             placeholder="Choose user"
             onChange={val => this.onSelectChange(val, 'userId')}

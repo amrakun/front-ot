@@ -52,6 +52,7 @@ export default compose(
         end: qp.end,
         userId: qp.userId,
         action: qp.action,
+        type: qp.type,
       },
       notifyOnNetworkStatusChange: true,
     }),
