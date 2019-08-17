@@ -7,6 +7,7 @@ import NumberCard from './dataDisplay/numberCard';
 import NumberCardLines from './dataDisplay/numberCard_lines';
 import StatsTable from './dataDisplay/StatsTable';
 import Editor from './Editor';
+import EditorCK from './EditorCK';
 import Loading from './Loading';
 import Search from './Search';
 import Paginator from './Paginator';
@@ -25,11 +26,12 @@ export {
   TextCard,
   StatsTable,
   Editor,
+  EditorCK,
   Loading,
   Search,
   Paginator,
   exportFile,
   HelpModal,
   ProductsTree,
-  Panes
+  Panes,
 };
