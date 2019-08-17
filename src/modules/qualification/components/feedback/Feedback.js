@@ -2,21 +2,11 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import {
-  Card,
-  Row,
-  Col,
-  Button,
-  Icon,
-  Modal,
-  DatePicker,
-  message,
-  List
-} from 'antd';
+import { Card, Row, Col, Button, Icon, Modal, DatePicker, message, List } from 'antd';
 import { Common } from 'modules/companies/components';
 import { Sidebar } from 'modules/companies/components';
 import { Search } from 'modules/common/components';
-import { Editor } from 'modules/common/components';
+import { EditorCK } from 'modules/common/components';
 import moment from 'moment';
 import { dateFormat, dateTimeFormat } from 'modules/common/constants';
 import { labels } from './constants';
@@ -32,13 +22,11 @@ class Feedback extends Common {
       feedbackContent: context.systemConfig.successFeedbackTemplate || '',
       feedbackCloseDate: moment(),
       viewModalVisible: false,
-      viewModalData: {}
+      viewModalData: {},
     };
 
     this.addFeedback = this.addFeedback.bind(this);
-    this.handleFeedbackContentChange = this.handleFeedbackContentChange.bind(
-      this
-    );
+    this.handleFeedbackContentChange = this.handleFeedbackContentChange.bind(this);
     this.toggleFeedbackModal = this.toggleFeedbackModal.bind(this);
     this.handleCloseDateChange = this.handleCloseDateChange.bind(this);
     this.toggleViewModal = this.toggleViewModal.bind(this);
@@ -47,11 +35,7 @@ class Feedback extends Common {
 
   addFeedback() {
     const { addFeedback } = this.props;
-    const {
-      selectedCompanies,
-      feedbackCloseDate,
-      feedbackContent
-    } = this.state;
+    const { selectedCompanies, feedbackCloseDate, feedbackContent } = this.state;
 
     addFeedback({ selectedCompanies, feedbackCloseDate, feedbackContent });
 
@@ -64,8 +48,8 @@ class Feedback extends Common {
     else this.setState({ feedbackModalVisible: value });
   }
 
-  handleFeedbackContentChange(content) {
-    this.setState({ feedbackContent: content });
+  handleFeedbackContentChange(e) {
+    this.setState({ feedbackContent: e.editor.getData() });
   }
 
   handleCloseDateChange(value) {
@@ -75,7 +59,7 @@ class Feedback extends Common {
   viewFeedbackInfo(feedback) {
     this.setState({
       viewModalData: feedback.supplierResponse,
-      viewModalVisible: true
+      viewModalVisible: true,
     });
   }
 
@@ -91,32 +75,24 @@ class Feedback extends Common {
       feedbackContent,
       feedbackCloseDate,
       viewModalVisible,
-      viewModalData
+      viewModalData,
     } = this.state;
 
     const columns = this.getWrappedColumns([
       {
         title: 'Last feedback date',
         render: record =>
-          record.lastFeedback
-            ? moment(record.lastFeedback.closeDate).format(dateFormat)
-            : '-'
+          record.lastFeedback ? moment(record.lastFeedback.closeDate).format(dateFormat) : '-',
       },
       {
         title: 'Last feedback information',
         render: record => {
           const lfd = record.lastFeedback;
           if (lfd && lfd.supplierResponse) {
-            return (
-              <Button
-                onClick={() => this.viewFeedbackInfo(record.lastFeedback)}
-              >
-                View
-              </Button>
-            );
+            return <Button onClick={() => this.viewFeedbackInfo(record.lastFeedback)}>View</Button>;
           } else return '-';
-        }
-      }
+        },
+      },
     ]);
 
     let responseItemList = [];
@@ -125,7 +101,7 @@ class Feedback extends Common {
       if (!['_id', '__typename'].includes(key)) {
         responseItemList.push({
           title: key,
-          description: viewModalData[key]
+          description: viewModalData[key],
         });
       }
     });
@@ -151,9 +127,9 @@ class Feedback extends Common {
             {this.renderTable({
               rowSelection: {
                 selectedCompanies,
-                onChange: this.onSelectedCompaniesChange
+                onChange: this.onSelectedCompaniesChange,
               },
-              columns
+              columns,
             })}
           </Card>
 
@@ -175,10 +151,7 @@ class Feedback extends Common {
               onChange={this.handleCloseDateChange}
             />
             <p />
-            <Editor
-              content={feedbackContent}
-              onEmailContentChange={this.handleFeedbackContentChange}
-            />
+            <EditorCK content={feedbackContent} onChange={this.handleFeedbackContentChange} />
           </Modal>
 
           <Modal
@@ -193,10 +166,7 @@ class Feedback extends Common {
               dataSource={responseItemList}
               renderItem={item => (
                 <List.Item>
-                  <List.Item.Meta
-                    title={labels[item.title]}
-                    description={item.description}
-                  />
+                  <List.Item.Meta title={labels[item.title]} description={item.description} />
                 </List.Item>
               )}
             />
@@ -208,7 +178,7 @@ class Feedback extends Common {
 }
 
 Feedback.contextTypes = {
-  systemConfig: PropTypes.object
+  systemConfig: PropTypes.object,
 };
 
 export default withRouter(Feedback);
