@@ -13,7 +13,7 @@ class EditorCK extends React.Component {
     const {
       content,
       onChange,
-      height,
+      height = 400,
       insertItems,
       removeButtons,
       toolbar,
