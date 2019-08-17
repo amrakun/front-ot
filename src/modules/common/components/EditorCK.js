@@ -20,10 +20,16 @@ class EditorCK extends React.Component {
       toolbarCanCollapse,
     } = this.props;
 
+    const onFileUploadRequest = function(event) {
+      var fileLoader = event.data.fileLoader;
+      fileLoader.xhr.withCredentials = true;
+    };
+
     return (
       <CKEditor
         data={content}
         onChange={onChange}
+        onFileUploadRequest={onFileUploadRequest}
         config={{
           height,
           uiColor: colors.bgLight,
