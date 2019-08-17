@@ -6,7 +6,6 @@ import TextCard from './dataDisplay/textCard';
 import NumberCard from './dataDisplay/numberCard';
 import NumberCardLines from './dataDisplay/numberCard_lines';
 import StatsTable from './dataDisplay/StatsTable';
-import Editor from './Editor';
 import EditorCK from './EditorCK';
 import Loading from './Loading';
 import Search from './Search';
@@ -25,7 +24,6 @@ export {
   NumberCardLines,
   TextCard,
   StatsTable,
-  Editor,
   EditorCK,
   Loading,
   Search,
