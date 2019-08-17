@@ -105,13 +105,14 @@ class TenderMessageDetail extends React.Component {
   }
 
   renderReplyForm() {
+    const { form, tenderMessageDetail } = this.props;
     const { recipientSuppliers } = this.state;
 
     if (recipientSuppliers.length === 0) {
       return null;
     }
 
-    const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator } = form;
 
     return (
       <Row>
@@ -126,6 +127,7 @@ class TenderMessageDetail extends React.Component {
 
             <Item label="Subject">
               {getFieldDecorator('subject', {
+                initialValue: tenderMessageDetail.subject,
                 rules: [{ required: true }],
               })(<Input placeholder="subject" autoFocus={true} />)}
             </Item>
