@@ -46,6 +46,13 @@
     padding: 5px;
     margin: 5px;
 
+    &.info {
+      border-color: $color-info;
+
+      .field-value {
+        color: $color-info;
+      }
+    }
     &.success {
       border-color: $color-success;
 
@@ -87,5 +94,8 @@
   }
   &.danger {
     color: $color-danger;
+  }
+  &.info {
+    color: $color-info;
   }
 }

@@ -166,6 +166,12 @@ table.stats tr td:last-child {
   padding: 5px;
   margin: 5px;
 }
+.ant-modal-content .log-box.info {
+  border-color: #108ee9;
+}
+.ant-modal-content .log-box.info .field-value {
+  color: #108ee9;
+}
 .ant-modal-content .log-box.success {
   border-color: #3ccc38;
 }
@@ -202,6 +208,9 @@ table.stats tr td:last-child {
 }
 .data-label.danger {
   color: #ea475d;
+}
+.data-label.info {
+  color: #108ee9;
 }
 
 .bg-white {
