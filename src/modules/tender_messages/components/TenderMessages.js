@@ -7,6 +7,7 @@ import { CreateTenderMessage } from '../containers/';
 import TenderMessageDetail from '../containers/TenderMessageDetail';
 import { Paginator } from 'modules/common/components';
 import { dateTimeFormat } from 'modules/common/constants';
+import { renderRecipient } from '../utils';
 
 const ROUTE_ENUM = {
   index: 0,
@@ -26,16 +27,6 @@ const senderUsername = record => {
   if (senderBuyer) {
     return 'OT';
   }
-};
-
-const renderSupplierName = supplier => {
-  if (!supplier.basicInfo) {
-    return '';
-  }
-
-  const { enName, email } = supplier.basicInfo;
-
-  return `${enName} <${email}>`;
 };
 
 const AttachmentIcon = attachment => (attachment ? <Icon type="paper-clip" /> : undefined);
@@ -61,29 +52,9 @@ class Messages extends Component {
   }
 
   renderRecipient(record) {
-    const { recipientSuppliers, senderSupplier } = record;
     const { currentUser } = this.context;
 
-    if (currentUser.isSupplier) {
-      if (senderSupplier) {
-        return 'OT';
-      }
-
-      const recipientSupplier = recipientSuppliers.find(s => s._id === currentUser.companyId);
-
-      return renderSupplierName(recipientSupplier);
-    }
-
-    if (recipientSuppliers && recipientSuppliers.length >= 1) {
-      if (recipientSuppliers.length === 1) {
-        const { enName, email } = recipientSuppliers[0].basicInfo;
-        return `${enName} <${email}>`;
-      }
-
-      return `${recipientSuppliers.length} suppliers`;
-    }
-
-    return 'OT';
+    return renderRecipient({ tenderMessage: record, currentUser });
   }
 
   columns() {

@@ -1,30 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Form, Input, Tag, Divider, Button, Icon, Col, Row, message } from 'antd';
 import { readFileUrl } from 'modules/common/utils';
 import { dateTimeFormat } from 'modules/common/constants';
 import { Uploader } from 'modules/common/components';
 import { EditorCK } from 'modules/common/components/';
+import { renderRecipient, renderSupplierName } from '../utils';
 
 const { Item } = Form;
-
-const renderUser = user => (
-  <Tag key={user.email}>
-    {user.username}
-    {'<'}
-    {user.email}
-    {'>'}
-  </Tag>
-);
-
-const renderCompany = ({ _id, basicInfo: { enName, email } }) => (
-  <Tag key={_id}>
-    {enName}
-    {' <'}
-    {email}
-    {'>'}
-  </Tag>
-);
 
 const Sender = ({ senderBuyer, senderSupplier }) => {
   if (senderBuyer) {
@@ -42,27 +26,10 @@ const Sender = ({ senderBuyer, senderSupplier }) => {
     return (
       <Row>
         <Col span={2}>From: </Col>
-        <Col span={22}>{renderCompany(senderSupplier)}</Col>
+        <Col span={22}>{renderSupplierName(senderSupplier)}</Col>
       </Row>
     );
   }
-};
-
-const Receivers = ({ recipientSuppliers, tender }) => {
-  if (recipientSuppliers && recipientSuppliers.length > 0) {
-    return (
-      <Row>
-        <Col span={2}>To: </Col>
-        <Col span={22}>{recipientSuppliers.map(renderCompany)}</Col>
-      </Row>
-    );
-  }
-  return (
-    <Row>
-      <Col span={2}>To: </Col>
-      <Col span={22}>{renderUser({ username: 'Tender', email: tender.number })}</Col>
-    </Row>
-  );
 };
 
 const Attachment = ({ attachment }) => {
@@ -155,7 +122,7 @@ class TenderMessageDetail extends React.Component {
             onSubmit={this.handleSubmit}
             style={{ backgroundColor: '#f9f9f9', padding: '5px 10px', marginBottom: '20px' }}
           >
-            <Item label="To">{recipientSuppliers.map(renderCompany)}</Item>
+            <Item label="To">{recipientSuppliers.map(renderSupplierName)}</Item>
 
             <Item label="Subject">
               {getFieldDecorator('subject', {
@@ -260,6 +227,12 @@ class TenderMessageDetail extends React.Component {
     );
   }
 
+  renderRecipient(tenderMessage) {
+    const { currentUser } = this.context;
+
+    return renderRecipient({ tenderMessage, currentUser, isDetailed: true });
+  }
+
   renderMessage(tenderMessage) {
     return (
       <>
@@ -271,7 +244,13 @@ class TenderMessageDetail extends React.Component {
         </Row>
 
         <Sender {...tenderMessage} />
-        <Receivers {...tenderMessage} />
+
+        <Row>
+          <Col span={2}>To: </Col>
+          <Col span={22}>
+            <p>{this.renderRecipient(tenderMessage)}</p>
+          </Col>
+        </Row>
 
         <Row>
           <Col span={2}>Subject: </Col>
@@ -319,5 +298,10 @@ class TenderMessageDetail extends React.Component {
   }
 }
 
+TenderMessageDetail.contextTypes = {
+  currentUser: PropTypes.object,
+};
+
 const Wrapped = Form.create({})(TenderMessageDetail);
+
 export default Wrapped;
