@@ -1,37 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Form, Input, Tag, Divider, Button, Icon, Col, Row, message } from 'antd';
 import { readFileUrl } from 'modules/common/utils';
 import { dateTimeFormat } from 'modules/common/constants';
 import { Uploader } from 'modules/common/components';
-import { Editor } from 'modules/common/components/';
+import { EditorCK } from 'modules/common/components/';
+import { renderRecipient, renderSupplierName } from '../utils';
 
 const { Item } = Form;
-
-const renderUser = user => (
-  <Tag key={user.email}>
-    {user.username}
-    {'<'}
-    {user.email}
-    {'>'}
-  </Tag>
-);
-
-const renderCompany = ({ _id, basicInfo: { enName, email } }) => (
-  <Tag key={_id}>
-    {enName}
-    {' <'}
-    {email}
-    {'>'}
-  </Tag>
-);
 
 const Sender = ({ senderBuyer, senderSupplier }) => {
   if (senderBuyer) {
     return (
       <Row>
         <Col span={2}>From: </Col>
-        <Col span={22}><Tag>OT</Tag></Col>
+        <Col span={22}>
+          <Tag>OT</Tag>
+        </Col>
       </Row>
     );
   }
@@ -40,27 +26,10 @@ const Sender = ({ senderBuyer, senderSupplier }) => {
     return (
       <Row>
         <Col span={2}>From: </Col>
-        <Col span={22}>{renderCompany(senderSupplier)}</Col>
+        <Col span={22}>{renderSupplierName(senderSupplier)}</Col>
       </Row>
     );
   }
-};
-
-const Receivers = ({ recipientSuppliers, tender }) => {
-  if (recipientSuppliers && recipientSuppliers.length > 0) {
-    return (
-      <Row>
-        <Col span={2}>To: </Col>
-        <Col span={22}>{recipientSuppliers.map(renderCompany)}</Col>
-      </Row>
-    );
-  }
-  return (
-    <Row>
-      <Col span={2}>To: </Col>
-      <Col span={22}>{renderUser({ username: 'Tender', email: tender.number })}</Col>
-    </Row>
-  );
 };
 
 const Attachment = ({ attachment }) => {
@@ -94,9 +63,9 @@ class TenderMessageDetail extends React.Component {
       editorHTMLContent: '',
       recipientSuppliers: [],
       replyToId: null,
-    }
+    };
 
-    this.onEmailContentChange = editorHTMLContent => this.setState({ editorHTMLContent });
+    this.onEmailContentChange = e => this.setState({ editorHTMLContent: e.editor.getData() });
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -118,17 +87,20 @@ class TenderMessageDetail extends React.Component {
         return message.error(err);
       }
 
-      reply({
-        ...values,
-        tenderId: tenderMessageDetail.tenderId,
-        replyToId: replyToId,
-        recipientSupplierIds: recipientSuppliers.map((sup) => sup._id),
-        body: editorHTMLContent,
-        attachment: fileName && fileURL ? { name: fileName, url: fileURL } : undefined
-      }, () => {
-        this.setState({ replyToId: null, recipientSuppliers: [] });
-        message.success('Success');
-      });
+      reply(
+        {
+          ...values,
+          tenderId: tenderMessageDetail.tenderId,
+          replyToId: replyToId,
+          recipientSupplierIds: recipientSuppliers.map(sup => sup._id),
+          body: editorHTMLContent,
+          attachment: fileName && fileURL ? { name: fileName, url: fileURL } : undefined,
+        },
+        () => {
+          this.setState({ replyToId: null, recipientSuppliers: [] });
+          message.success('Success');
+        }
+      );
     });
   }
 
@@ -145,10 +117,12 @@ class TenderMessageDetail extends React.Component {
       <Row>
         <Col span={2}>Reply: </Col>
         <Col span={22} style={{ maxWidth: '800px' }}>
-          <Form layout="vertical" onSubmit={this.handleSubmit} style={{ backgroundColor: '#f9f9f9', padding: '5px 10px', marginBottom: '20px' }}>
-            <Item label="To">
-              {recipientSuppliers.map(renderCompany)}
-            </Item>
+          <Form
+            layout="vertical"
+            onSubmit={this.handleSubmit}
+            style={{ backgroundColor: '#f9f9f9', padding: '5px 10px', marginBottom: '20px' }}
+          >
+            <Item label="To">{recipientSuppliers.map(renderSupplierName)}</Item>
 
             <Item label="Subject">
               {getFieldDecorator('subject', {
@@ -161,9 +135,9 @@ class TenderMessageDetail extends React.Component {
             </Item>
 
             <Item label="Message">
-              <Editor
+              <EditorCK
                 content={this.state.editorHTMLContent}
-                onEmailContentChange={this.onEmailContentChange}
+                onChange={this.onEmailContentChange}
               />
             </Item>
 
@@ -177,10 +151,7 @@ class TenderMessageDetail extends React.Component {
                   Cancel
                 </Button>
 
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                >
+                <Button type="primary" htmlType="submit">
                   Send
                 </Button>
               </div>
@@ -188,7 +159,7 @@ class TenderMessageDetail extends React.Component {
           </Form>
         </Col>
       </Row>
-    )
+    );
   }
 
   renderTopReplyButtons() {
@@ -210,32 +181,38 @@ class TenderMessageDetail extends React.Component {
       const reply = () => {
         this.setState({
           replyToId: tenderMessageDetail._id,
-          recipientSuppliers: [senderSupplier]
+          recipientSuppliers: [senderSupplier],
         });
-      }
+      };
 
-      replyButton = <Button style={{ marginRight: '5px' }} onClick={reply}>Reply</Button>
+      replyButton = (
+        <Button style={{ marginRight: '5px' }} onClick={reply}>
+          Reply
+        </Button>
+      );
     }
 
     let replyAllButton;
 
-    const { rootMessage, list=[] } = relatedMessages;
+    const { rootMessage, list = [] } = relatedMessages;
 
     if (rootMessage) {
       const replyAll = () => {
         let editorHTMLContent = tenderMessageDetail.body;
 
         for (const message of list) {
-          editorHTMLContent += `<p>---------------------------------------------------------------------------------------------------------------</p> ${message.body}`;
+          editorHTMLContent += `<p>---------------------------------------------------------------------------------------------------------------</p> ${
+            message.body
+          }`;
         }
 
         this.setState({
           editorHTMLContent,
-          recipientSuppliers: rootMessage.recipientSuppliers
+          recipientSuppliers: rootMessage.recipientSuppliers,
         });
-      }
+      };
 
-      replyAllButton = <Button onClick={replyAll}>Reply All</Button>
+      replyAllButton = <Button onClick={replyAll}>Reply All</Button>;
     }
 
     return (
@@ -247,7 +224,13 @@ class TenderMessageDetail extends React.Component {
 
         <Divider />
       </>
-    )
+    );
+  }
+
+  renderRecipient(tenderMessage) {
+    const { currentUser } = this.context;
+
+    return renderRecipient({ tenderMessage, currentUser, isDetailed: true });
   }
 
   renderMessage(tenderMessage) {
@@ -255,15 +238,25 @@ class TenderMessageDetail extends React.Component {
       <>
         <Row>
           <Col span={2}>Date: </Col>
-          <Col span={22}><p>{moment(tenderMessage.createdAt).format(dateTimeFormat)}</p></Col>
+          <Col span={22}>
+            <p>{moment(tenderMessage.createdAt).format(dateTimeFormat)}</p>
+          </Col>
         </Row>
 
         <Sender {...tenderMessage} />
-        <Receivers {...tenderMessage} />
+
+        <Row>
+          <Col span={2}>To: </Col>
+          <Col span={22}>
+            <p>{this.renderRecipient(tenderMessage)}</p>
+          </Col>
+        </Row>
 
         <Row>
           <Col span={2}>Subject: </Col>
-          <Col span={22}><p>{tenderMessage.subject}</p></Col>
+          <Col span={22}>
+            <p>{tenderMessage.subject}</p>
+          </Col>
         </Row>
 
         <Attachment attachment={tenderMessage.attachment} />
@@ -292,7 +285,7 @@ class TenderMessageDetail extends React.Component {
 
         <Divider />
 
-        {tenderMessageDetail.relatedMessages.list.map((tenderMessage) => {
+        {tenderMessageDetail.relatedMessages.list.map(tenderMessage => {
           return (
             <div key={tenderMessage._id}>
               {this.renderMessage(tenderMessage)}
@@ -303,7 +296,12 @@ class TenderMessageDetail extends React.Component {
       </div>
     );
   }
+}
+
+TenderMessageDetail.contextTypes = {
+  currentUser: PropTypes.object,
 };
 
 const Wrapped = Form.create({})(TenderMessageDetail);
+
 export default Wrapped;

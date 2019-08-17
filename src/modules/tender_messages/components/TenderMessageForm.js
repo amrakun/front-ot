@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Input, Button, Select, message } from 'antd';
 import PropTypes from 'prop-types';
 import { Uploader } from 'modules/common/components';
-import { Editor } from 'modules/common/components/';
+import { EditorCK } from 'modules/common/components/';
 
 const { Item } = Form;
 
@@ -28,7 +28,7 @@ class MessageForm extends React.Component {
       recipientSupplierIds,
     };
 
-    this.onEmailContentChange = editorHTMLContent => this.setState({ editorHTMLContent });
+    this.onEmailContentChange = e => this.setState({ editorHTMLContent: e.editor.getData() });
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderBuyerFields = this.renderBuyerFields.bind(this);
   }
@@ -100,7 +100,9 @@ class MessageForm extends React.Component {
     if (valuesSet.has('select_all')) {
       this.setState({ recipientSupplierIds: suppliers.map(supplier => supplier._id) });
     } else if (valuesSet.has('select_participated')) {
-      this.setState({ recipientSupplierIds: participatedResponses.map(response => response.supplierId) });
+      this.setState({
+        recipientSupplierIds: participatedResponses.map(response => response.supplierId),
+      });
     } else if (valuesSet.has('deselect_all')) {
       this.setState({ recipientSupplierIds: [] });
     } else {
@@ -124,7 +126,11 @@ class MessageForm extends React.Component {
             option.props.enName.toLowerCase().indexOf(input.toLowerCase()) >= 0
           }
         >
-          <Select.Option key="select_participated" value="select_participated" enName="Select participated suppliers">
+          <Select.Option
+            key="select_participated"
+            value="select_participated"
+            enName="Select participated suppliers"
+          >
             <b>Select participated suppliers</b>
           </Select.Option>
 
@@ -161,7 +167,8 @@ class MessageForm extends React.Component {
     // Only show error after a field is touched.
     const subjectError = isFieldTouched('subject') && getFieldError('subject');
 
-    const initialSubjectValue = (replyTo ? replyTo.subject : null) || `${tenderDetail.number} ${tenderDetail.name}`;
+    const initialSubjectValue =
+      (replyTo ? replyTo.subject : null) || `${tenderDetail.number} ${tenderDetail.name}`;
 
     return (
       <>
@@ -181,10 +188,7 @@ class MessageForm extends React.Component {
             <Uploader onChange={this.onFileChange.bind(this)} />
           </Item>
           <Item label="Message">
-            <Editor
-              content={this.state.editorHTMLContent}
-              onEmailContentChange={this.onEmailContentChange}
-            />
+            <EditorCK content={this.state.editorHTMLContent} onChange={this.onEmailContentChange} />
           </Item>
           <Item>
             <Button

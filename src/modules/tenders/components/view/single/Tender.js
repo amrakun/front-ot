@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Table, Card, Icon, Row, Col, Button, Modal } from 'antd';
 import { NumberCard, NumberCardLines } from 'modules/common/components';
 import { colors } from 'modules/common/constants';
-import { Search, Editor } from 'modules/common/components';
+import { Search, EditorCK } from 'modules/common/components';
 import { Common } from 'modules/companies/components/';
 import { Paginator } from 'modules/common/components';
 import router from 'modules/common/router';
@@ -87,8 +87,8 @@ class Tender extends Common {
     this.props.sendRegretLetter(this.state.regretLetterContent);
   }
 
-  handleRegretLetterChange(content) {
-    this.setState({ regretLetterContent: content });
+  handleRegretLetterChange(e) {
+    this.setState({ regretLetterContent: e.editor.getData() });
   }
 
   columns() {
@@ -126,10 +126,13 @@ class Tender extends Common {
     const { REACT_APP_API_URL } = process.env;
     const { tenderDetail } = this.props;
 
-    window.open(`${REACT_APP_API_URL}/download-tender-files?tenderId=${tenderDetail._id}`, '__blank');
+    window.open(
+      `${REACT_APP_API_URL}/download-tender-files?tenderId=${tenderDetail._id}`,
+      '__blank'
+    );
   }
 
-  renderDownloadFilesButton () {
+  renderDownloadFilesButton() {
     const { tenderDetail } = this.props;
 
     if (tenderDetail.status === 'open') {
@@ -141,7 +144,7 @@ class Tender extends Common {
         Download files
         <Icon type="file-excel" />
       </Button>
-    )
+    );
   }
 
   renderViewResponse(text, record) {
@@ -233,14 +236,14 @@ class Tender extends Common {
         Send regret letter
         <Icon type="mail" />
       </Button>
-    )
+    );
   }
 
   renderRegretLetterModal() {
     const { regretLetterModalVisible, tenderDetail } = this.props;
     const { regretLetterModal, regretLetterContent } = this.state;
 
-    const { type, sentRegretLetter, notBidderListedSuppliers=[] } = tenderDetail;
+    const { type, sentRegretLetter, notBidderListedSuppliers = [] } = tenderDetail;
 
     let targets = 0;
     let extraInfo = null;
@@ -248,12 +251,10 @@ class Tender extends Common {
     if (type === 'eoi') {
       if (!sentRegretLetter) {
         targets = notBidderListedSuppliers.length;
-        extraInfo = notBidderListedSuppliers.map((supplier) => {
+        extraInfo = notBidderListedSuppliers.map(supplier => {
           const { basicInfo } = supplier;
 
-          return (
-            <p key={Math.random()}>{basicInfo ? basicInfo.enName : ''}</p>
-          )
+          return <p key={Math.random()}>{basicInfo ? basicInfo.enName : ''}</p>;
         });
       }
     } else {
@@ -275,12 +276,9 @@ class Tender extends Common {
       >
         {extraInfo}
 
-        <Editor
-          content={regretLetterContent}
-          onEmailContentChange={this.handleRegretLetterChange}
-        />
+        <EditorCK content={regretLetterContent} onChange={this.handleRegretLetterChange} />
       </Modal>
-    )
+    );
   }
 
   renderTable(args) {

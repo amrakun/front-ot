@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import { Form, Input, DatePicker, Divider } from 'antd';
 import ModalWrapper from './ModalWrapper';
 import PropTypes from 'prop-types';
-import { Editor } from 'modules/common/components';
+import { EditorCK } from 'modules/common/components';
 import { dateFormat } from 'modules/common/constants';
 
 const TextArea = Input.TextArea;
@@ -28,8 +28,8 @@ class CreateReport extends React.Component {
     });
   }
 
-  handleEditorChange(content) {
-    this.editorContent = content;
+  handleEditorChange(e) {
+    this.editorContent = e.editor.getData();
   }
 
   render() {
@@ -41,8 +41,8 @@ class CreateReport extends React.Component {
     const rules = [
       {
         required: true,
-        message: 'This field is required!'
-      }
+        message: 'This field is required!',
+      },
     ];
 
     return (
@@ -61,9 +61,7 @@ class CreateReport extends React.Component {
           </p>
           <Divider />
           <FormItem label="Qualification/audit date">
-            {getFieldDecorator('auditDate', { rules })(
-              <DatePicker format={dateFormat} />
-            )}
+            {getFieldDecorator('auditDate', { rules })(<DatePicker format={dateFormat} />)}
           </FormItem>
 
           <FormItem label="Report Number">
@@ -75,11 +73,9 @@ class CreateReport extends React.Component {
           </FormItem>
 
           <div className="ant-form-item-label">
-            <label className="ant-form-item-required">
-              Audit result summary & observations
-            </label>
+            <label className="ant-form-item-required">Audit result summary & observations</label>
           </div>
-          <Editor content="" onEmailContentChange={this.handleEditorChange} />
+          <EditorCK content="" onChange={this.handleEditorChange} />
         </Form>
       </ModalWrapper>
     );
@@ -92,7 +88,7 @@ CreateReport.propTypes = {
   exportFiles: PropTypes.func,
   contactInfo: PropTypes.object,
   isQualified: PropTypes.bool,
-  hideModal: PropTypes.func
+  hideModal: PropTypes.func,
 };
 
 const ReportsForm = Form.create()(CreateReport);

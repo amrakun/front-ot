@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Input, Select, DatePicker, Tag, Card, Row, Col, Tooltip } from 'antd';
 import moment from 'moment';
-import { Editor, Uploader } from 'modules/common/components';
+import { EditorCK, Uploader } from 'modules/common/components';
 import { days, dateTimeFormat, colors } from 'modules/common/constants';
 import { AddCompany } from 'modules/companies/components';
 import SupplierSearcher from 'modules/companies/containers/Searcher';
@@ -74,7 +74,9 @@ class MainInfo extends React.Component {
     }
   }
 
-  onEmailContentChange(content) {
+  onEmailContentChange(e) {
+    const content = e.editor.getData();
+
     this.setState({ content });
 
     this.props.onChange({ content });
@@ -197,7 +199,7 @@ class MainInfo extends React.Component {
 
     return (
       <Row gutter={24}>
-        <Col span={10}>
+        <Col span={9}>
           <Card title="Main info" className="no-pad-bottom">
             {this.renderExtraContent()}
             {this.renderSuppliers()}
@@ -253,9 +255,9 @@ class MainInfo extends React.Component {
           </Card>
         </Col>
 
-        <Col span={14}>
+        <Col span={15}>
           <Card title="Email content">
-            <Editor onEmailContentChange={this.onEmailContentChange} content={content || ''} />
+            <EditorCK content={content || ''} onChange={this.onEmailContentChange} />
           </Card>
 
           <Card title="Attachments">

@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Button, Modal, Input } from 'antd';
-import { Editor } from 'modules/common/components';
+import { EditorCK } from 'modules/common/components';
 import PropTypes from 'prop-types';
 
 class MassEmail extends React.Component {
@@ -12,7 +12,7 @@ class MassEmail extends React.Component {
       emailContent: '',
       emailSubject: '',
       emailModalVisible: false,
-      response: null
+      response: null,
     };
 
     this.sendEmail = this.sendEmail.bind(this);
@@ -28,9 +28,7 @@ class MassEmail extends React.Component {
 
     if (prevProps.suppliers !== suppliers) {
       const suppliersMap = {};
-      suppliers.forEach(
-        supplier => (suppliersMap[supplier._id] = supplier.basicInfo.enName)
-      );
+      suppliers.forEach(supplier => (suppliersMap[supplier._id] = supplier.basicInfo.enName));
       this.suppliersMap = suppliersMap;
     }
   }
@@ -49,7 +47,7 @@ class MassEmail extends React.Component {
       {
         supplierIds,
         content: emailContent,
-        subject: emailSubject
+        subject: emailSubject,
       },
       this.afterSend
     );
@@ -59,8 +57,8 @@ class MassEmail extends React.Component {
     this.setState({ response });
   }
 
-  handleEmailContentChange(value) {
-    this.setState({ emailContent: value });
+  handleEmailContentChange(e) {
+    this.setState({ emailContent: e.editor.getData() });
   }
 
   handleEmailSubjectChange(e) {
@@ -78,18 +76,16 @@ class MassEmail extends React.Component {
   renderEditor() {
     const { emailContent } = this.state;
 
-    return [
-      <Input
-        key={0}
-        onChange={this.handleEmailSubjectChange}
-        placeholder="Subject"
-      />,
-      <Editor
-        key={1}
-        content={emailContent}
-        onEmailContentChange={this.handleEmailContentChange}
-      />
-    ];
+    return (
+      <div>
+        <p>
+          <Input key={0} onChange={this.handleEmailSubjectChange} placeholder="Subject" />
+        </p>
+        <br />
+
+        <EditorCK key={1} content={emailContent} onChange={this.handleEmailContentChange} />
+      </div>
+    );
   }
 
   renderResponse() {
@@ -127,14 +123,14 @@ class MassEmail extends React.Component {
         okText={response ? 'Close' : 'Send'}
       >
         {response ? this.renderResponse() : this.renderEditor()}
-      </Modal>
+      </Modal>,
     ];
   }
 }
 
 MassEmail.propTypes = {
   sendMassEmail: PropTypes.func,
-  suppliers: PropTypes.array
+  suppliers: PropTypes.array,
 };
 
 export default withRouter(MassEmail);

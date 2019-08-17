@@ -3,7 +3,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Card, Tabs, Input, Form, Alert } from 'antd';
-import { Editor } from 'modules/common/components';
+import { EditorCK } from 'modules/common/components';
 import { PropTypes } from 'prop-types';
 import { BaseForm } from 'modules/common/components';
 import { labels, titles } from './constants';
@@ -18,28 +18,22 @@ class SubmitFeedback extends BaseForm {
 
     this.state = {
       ...this.state,
-      feedbackContent: 'You have been invited to success feedback'
+      feedbackContent: 'You have been invited to success feedback',
     };
 
-    this.handleFeedbackContentChange = this.handleFeedbackContentChange.bind(
-      this
-    );
+    this.handleFeedbackContentChange = this.handleFeedbackContentChange.bind(this);
   }
 
-  handleFeedbackContentChange(content) {
-    this.setState({ feedbackContent: content });
+  handleFeedbackContentChange(e) {
+    this.setState({ feedbackContent: e.editor.getData() });
   }
 
   renderQuestion(name, input) {
     return this.renderField({
       label: labels[name],
       control:
-        input === 'TextArea' ? (
-          <TextArea style={{ height: '80px' }} />
-        ) : (
-          <Input type="number" />
-        ),
-      name
+        input === 'TextArea' ? <TextArea style={{ height: '80px' }} /> : <Input type="number" />,
+      name,
     });
   }
 
@@ -56,16 +50,11 @@ class SubmitFeedback extends BaseForm {
         <Tabs tabPosition="left" className="supplier-forms">
           <TabPane tab={__('Success feedback form')} key={1}>
             {!forSubmit ? (
-              <Editor
-                content={feedbackContent}
-                onEmailContentChange={this.handleFeedbackContentChange}
-              />
+              <EditorCK content={feedbackContent} onChange={this.handleFeedbackContentChange} />
             ) : (
               <Alert
                 message={__('Success feedback')}
-                description={
-                  <div dangerouslySetInnerHTML={{ __html: data.content }} />
-                }
+                description={<div dangerouslySetInnerHTML={{ __html: data.content }} />}
                 type="info"
                 closeText={__('Close now')}
               />
@@ -103,11 +92,11 @@ class SubmitFeedback extends BaseForm {
 SubmitFeedback.propTypes = {
   data: PropTypes.object,
   forSubmit: PropTypes.bool,
-  form: PropTypes.object
+  form: PropTypes.object,
 };
 
 SubmitFeedback.propTypes = {
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 const SubmitFeedbackForm = Form.create()(SubmitFeedback);

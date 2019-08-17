@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Form, Select, Input, Button } from 'antd';
-import { Editor } from '../../../common/components';
+import { EditorCK } from '../../../common/components';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -13,6 +13,7 @@ class Template extends React.Component {
     const { template } = this.props;
 
     this.onSubmit = this.onSubmit.bind(this);
+    this.onChangeContent = this.onChangeContent.bind(this);
 
     this.state = this.generateState(template);
   }
@@ -29,7 +30,7 @@ class Template extends React.Component {
       language: 'en',
       from: template.from,
       subject: template.subject ? { ...template.subject } : { mn: '', en: '' },
-      content: template.content ? { ...template.content } : { mn: '', en: '' }
+      content: template.content ? { ...template.content } : { mn: '', en: '' },
     };
   }
 
@@ -53,10 +54,10 @@ class Template extends React.Component {
     this.setState({ subject });
   }
 
-  onChangeContent(value) {
+  onChangeContent(e) {
     const { language, content } = this.state;
 
-    content[language] = value;
+    content[language] = e.editor.getData();
 
     this.setState({ content });
   }
@@ -83,26 +84,15 @@ class Template extends React.Component {
         </FormItem>
 
         <FormItem label="Email subject">
-          <Input
-            value={subject[language]}
-            onChange={e => this.onChangeSubject(e)}
-          />
+          <Input value={subject[language]} onChange={e => this.onChangeSubject(e)} />
         </FormItem>
 
         <FormItem label="Email content">
-          <Editor
-            key={editorKey}
-            content={content[language]}
-            onEmailContentChange={value => this.onChangeContent(value)}
-          />
+          <EditorCK key={editorKey} content={content[language]} onChange={this.onChangeContent} />
         </FormItem>
 
         <Col span={24}>
-          <Button
-            type="primary"
-            style={{ float: 'right', marginTop: 20 }}
-            onClick={this.onSubmit}
-          >
+          <Button type="primary" style={{ float: 'right', marginTop: 20 }} onClick={this.onSubmit}>
             {buttonText || 'Save'}
           </Button>
         </Col>
@@ -114,7 +104,7 @@ class Template extends React.Component {
 Template.propTypes = {
   onSubmit: PropTypes.func,
   buttonText: PropTypes.string,
-  template: PropTypes.object
+  template: PropTypes.object,
 };
 
 export default Template;
