@@ -16,22 +16,6 @@ const ROUTE_ENUM = {
   reply: 4,
 };
 
-const Recipient = ({ recipientSuppliers }) => {
-  if (recipientSuppliers && recipientSuppliers.length > 0) {
-    if (recipientSuppliers.length === 1) {
-      const { enName, email } = recipientSuppliers[0].basicInfo;
-      return `${enName} <${email}>`;
-    }
-    if (recipientSuppliers.length > 1) return `${recipientSuppliers.length} suppliers`;
-  } else {
-    return 'No suppliers';
-  }
-};
-
-Recipient.propTypes = {
-  recipientSuppliers: PropTypes.array,
-};
-
 const senderUsername = record => {
   const { senderSupplier, senderBuyer } = record;
 
@@ -44,23 +28,62 @@ const senderUsername = record => {
   }
 };
 
+const renderSupplierName = supplier => {
+  if (!supplier.basicInfo) {
+    return '';
+  }
+
+  const { enName, email } = supplier.basicInfo;
+
+  return `${enName} <${email}>`;
+};
+
 const AttachmentIcon = attachment => (attachment ? <Icon type="paper-clip" /> : undefined);
 
 class Messages extends Component {
   constructor(props, context) {
     super(props, context);
+
     this.state = {
       route: 'index',
       tenderMessageDetail: undefined,
       windowWidth: 0,
       windowHeight: 0,
     };
+
     this.isNew = this.isNew.bind(this);
     this.renderActions = this.renderActions.bind(this);
     this.setAsRead = this.setAsRead.bind(this);
     this.downloadFiles = this.downloadFiles.bind(this);
 
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+    this.renderRecipient = this.renderRecipient.bind(this);
+  }
+
+  renderRecipient(record) {
+    const { recipientSuppliers, senderSupplier } = record;
+    const { currentUser } = this.context;
+
+    if (currentUser.isSupplier) {
+      if (senderSupplier) {
+        return 'OT';
+      }
+
+      const recipientSupplier = recipientSuppliers.find(s => s._id === currentUser.companyId);
+
+      return renderSupplierName(recipientSupplier);
+    }
+
+    if (recipientSuppliers && recipientSuppliers.length >= 1) {
+      if (recipientSuppliers.length === 1) {
+        const { enName, email } = recipientSuppliers[0].basicInfo;
+        return `${enName} <${email}>`;
+      }
+
+      return `${recipientSuppliers.length} suppliers`;
+    }
+
+    return 'OT';
   }
 
   columns() {
@@ -79,7 +102,7 @@ class Messages extends Component {
       },
       {
         title: 'To',
-        render: Recipient,
+        render: this.renderRecipient,
         width: 150,
         key: 2,
       },
@@ -93,10 +116,8 @@ class Messages extends Component {
         title: 'Subject',
         dataIndex: 'subject',
         width: 200,
-        render: (subject) => {
-          return (
-            <p style={{ padding: 0, margin: 0, maxWidth: '200px' }}>{subject}</p>
-          )
+        render: subject => {
+          return <p style={{ padding: 0, margin: 0, maxWidth: '200px' }}>{subject}</p>;
         },
         key: 5,
       },
@@ -188,7 +209,10 @@ class Messages extends Component {
     const { REACT_APP_API_URL } = process.env;
     const { tenderDetail } = this.props;
 
-    window.open(`${REACT_APP_API_URL}/download-tender-message-files?tenderId=${tenderDetail._id}`, '__blank');
+    window.open(
+      `${REACT_APP_API_URL}/download-tender-message-files?tenderId=${tenderDetail._id}`,
+      '__blank'
+    );
   }
 
   setAsRead(tenderMessageDetail) {
@@ -240,7 +264,7 @@ class Messages extends Component {
           title="View"
           width={modalWidth}
         >
-          { _id ? <TenderMessageDetail currentUser={currentUser} _id={_id} /> : null }
+          {_id ? <TenderMessageDetail currentUser={currentUser} _id={_id} /> : null}
         </Modal>
 
         <Modal
@@ -272,10 +296,7 @@ class Messages extends Component {
       <>
         <Row>
           <div className="table-operations">
-            <Button
-              type="default"
-              onClick={this.downloadFiles}
-            >
+            <Button type="default" onClick={this.downloadFiles}>
               Download files
             </Button>
 
