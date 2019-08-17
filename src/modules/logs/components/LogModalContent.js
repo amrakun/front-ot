@@ -2,6 +2,54 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'antd';
 
+/**
+ * Removes null, undefined, empty attributes from given object
+ * @param {Object} obj Object to check
+ * @returns {Object} Flattened object
+ */
+const flattenObject = (obj = {}) => {
+  const flatObject = { ...obj };
+  const names = obj ? Object.getOwnPropertyNames(obj) : [];
+
+  for (const name of names) {
+    const field = obj[name];
+    let empty = false;
+
+    if (typeof field !== 'object') {
+      if (field === null || field === undefined || field === '') {
+        empty = true;
+      }
+    }
+
+    if (Array.isArray(field) && field.length === 0) {
+      empty = true;
+    }
+
+    // checked array above
+    if (typeof field === 'object' && !Array.isArray(field)) {
+      if (isObjectEmpty(field)) {
+        empty = true;
+      }
+    }
+
+    if (empty) {
+      delete flatObject[name];
+    }
+  } // end for loop
+
+  return flatObject;
+};
+
+/**
+ * Shorthand empty object checker
+ * @param {Object} obj Object to check
+ */
+const isObjectEmpty = (obj = {}) => {
+  return (
+    typeof obj === 'object' && obj && Object.keys(obj).length === 0 && obj.constructor === Object
+  );
+};
+
 export default class LogModalContent extends React.Component {
   constructor() {
     super();
@@ -34,11 +82,16 @@ export default class LogModalContent extends React.Component {
 
   buildListFromObject(obj = {}) {
     const { fieldNames } = this.props;
-    const list = [];
-    const names = obj ? Object.getOwnPropertyNames(obj) : [];
+    const flatObject = flattenObject(obj);
+    let list = [];
+    const names = flatObject ? Object.getOwnPropertyNames(flatObject) : [];
+
+    if (isObjectEmpty(flatObject)) {
+      return null;
+    }
 
     for (const name of names) {
-      const field = obj[name];
+      const field = flatObject[name];
       const mappedName = fieldNames.find(fn => fn.name === name);
       let label = name;
 
@@ -92,13 +145,16 @@ export default class LogModalContent extends React.Component {
    * Reads a stringified json and builds a list using its attributes.
    * @param {string} jsonString A stringified JSON object
    */
-  prettyJSON(jsonString) {
+  prettyJSON(jsonString = '') {
     let list = [];
+    const clean = jsonString.replace('\n', '');
+    const parsed = JSON.parse(clean);
+
+    if (isObjectEmpty(parsed) || !jsonString) {
+      return null;
+    }
 
     if (jsonString) {
-      const clean = jsonString.replace('\n', '');
-      const parsed = JSON.parse(clean);
-
       if (typeof parsed === 'object') {
         list = this.buildListFromObject(parsed);
       }
@@ -132,7 +188,10 @@ export default class LogModalContent extends React.Component {
     return log ? (
       <>
         <Row>
-          <Col sm={12}>{this.renderData(log.unchangedData, 'Unchanged fields')}</Col>
+          <Col sm={24}>{this.renderData(log.oldData, 'Initial data')}</Col>
+        </Row>
+        <Row>
+          <Col sm={12}>{this.renderData(log.unchangedData, 'Unchanged fields', 'info')}</Col>
           <Col sm={12}>{this.renderData(log.changedData, 'Changed fields', 'warning')}</Col>
         </Row>
         <Row>

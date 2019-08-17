@@ -13,15 +13,6 @@ const LOG_TYPES = {
   COMPANY: 'company',
   QUALIFICATION: 'qualification',
   USER: 'user',
-  ALL: [
-    'tender',
-    'tenderMessage',
-    'tenderResponse',
-    'blockedCompany',
-    'company',
-    'qualification',
-    'user',
-  ],
 };
 
 export default class LogFilter extends React.Component {

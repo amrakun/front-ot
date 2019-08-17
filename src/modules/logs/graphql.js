@@ -34,6 +34,7 @@ query logs(
       removedData
       changedData
       unchangedData
+      oldData
     }
   }
 }
