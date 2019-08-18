@@ -68,6 +68,17 @@ const DATE_FIELD_NAMES = [
   'sentDate',
 ];
 
+// hide these fields to not confuse users
+const HIDDEN_FIELDS = [
+  '_id',
+  '__v',
+  'uid',
+  '__enc_number',
+  '__enc_name',
+  '__enc_content',
+  '__enc_supplierId',
+];
+
 export default class LogModalContent extends React.Component {
   constructor() {
     super();
@@ -117,8 +128,8 @@ export default class LogModalContent extends React.Component {
         label = mappedName.label;
       }
 
-      // exclude package specific __v & _id & uid fields
-      if (!(name === '__v' || name === '_id' || name === 'uid')) {
+      // exclude npm package & mongo specific fields
+      if (!HIDDEN_FIELDS.includes(name)) {
         let value = String(field);
 
         if (DATE_FIELD_NAMES.includes(name)) {
@@ -160,7 +171,7 @@ export default class LogModalContent extends React.Component {
           // primary types
           list.push(item);
         }
-      } // end unnecessary atr checking
+      } // end unnecessary attr checking
     } // end for loop
 
     return list;
@@ -212,15 +223,15 @@ export default class LogModalContent extends React.Component {
     return log ? (
       <>
         <Row>
-          <Col sm={24}>{this.renderData(log.oldData, 'Initial data')}</Col>
-        </Row>
-        <Row>
           <Col sm={12}>{this.renderData(log.unchangedData, 'Unchanged fields', 'info')}</Col>
           <Col sm={12}>{this.renderData(log.changedData, 'Changed fields', 'warning')}</Col>
         </Row>
         <Row>
           <Col sm={12}>{this.renderData(log.addedData, 'Added fields', 'success')}</Col>
           <Col sm={12}>{this.renderData(log.removedData, 'Removed fields', 'danger')}</Col>
+        </Row>
+        <Row>
+          <Col sm={24}>{this.renderData(log.oldData, 'Initial data')}</Col>
         </Row>
       </>
     ) : null;
