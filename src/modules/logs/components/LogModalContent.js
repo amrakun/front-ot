@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'antd';
+import moment from 'moment';
 
 /**
  * Removes null, undefined, empty attributes from given object
@@ -49,6 +50,23 @@ const isObjectEmpty = (obj = {}) => {
     typeof obj === 'object' && obj && Object.keys(obj).length === 0 && obj.constructor === Object
   );
 };
+
+// field names used to show properly formatted date values
+const DATE_FIELD_NAMES = [
+  // company related
+  'date',
+  'dateOfInvestigation',
+  'createdDate',
+  'registrationInfoSentDate',
+  'prequalificationInfoSentDate',
+  'prequalifiedDate',
+  'qualifiedDate',
+  // tender related
+  'updatedDate',
+  'publishDate',
+  'closeDate',
+  'sentDate',
+];
 
 export default class LogModalContent extends React.Component {
   constructor() {
@@ -101,10 +119,16 @@ export default class LogModalContent extends React.Component {
 
       // exclude package specific __v & _id & uid fields
       if (!(name === '__v' || name === '_id' || name === 'uid')) {
+        let value = String(field);
+
+        if (DATE_FIELD_NAMES.includes(name)) {
+          value = moment(field).format('YYYY-MM-DD HH:mm');
+        }
+
         let item = (
           <li key={name}>
             <span className="field-name">{label}:</span>
-            <span className="field-value">{String(field)}</span>
+            <span className="field-value">{value}</span>
           </li>
         );
 
