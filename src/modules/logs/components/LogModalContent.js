@@ -68,17 +68,6 @@ const DATE_FIELD_NAMES = [
   'sentDate',
 ];
 
-// hide these fields to not confuse users
-const HIDDEN_FIELDS = [
-  '_id',
-  '__v',
-  'uid',
-  '__enc_number',
-  '__enc_name',
-  '__enc_content',
-  '__enc_supplierId',
-];
-
 export default class LogModalContent extends React.Component {
   constructor() {
     super();
@@ -110,7 +99,7 @@ export default class LogModalContent extends React.Component {
   }
 
   buildListFromObject(obj = {}) {
-    const { fieldNames } = this.props;
+    const { fieldLabelMaps } = this.props;
     const flatObject = flattenObject(obj);
     let list = [];
     const names = flatObject ? Object.getOwnPropertyNames(flatObject) : [];
@@ -121,57 +110,54 @@ export default class LogModalContent extends React.Component {
 
     for (const name of names) {
       const field = flatObject[name];
-      const mappedName = fieldNames.find(fn => fn.name === name);
-      let label = name;
+      const mappedItem = fieldLabelMaps.find(fn => fn.name === name);
 
-      if (mappedName && mappedName.label) {
-        label = mappedName.label;
+      if (!mappedItem) {
+        continue;
       }
 
-      // exclude npm package & mongo specific fields
-      if (!HIDDEN_FIELDS.includes(name)) {
-        let value = String(field);
+      let label = mappedItem.label;
+      let value = String(field);
 
-        if (DATE_FIELD_NAMES.includes(name)) {
-          value = moment(field).format('YYYY-MM-DD HH:mm');
-        }
+      if (DATE_FIELD_NAMES.includes(name)) {
+        value = moment(field).format('YYYY-MM-DD HH:mm');
+      }
 
-        let item = (
-          <li key={name}>
-            <span className="field-name">{label}:</span>
-            <span className="field-value">{value}</span>
-          </li>
-        );
+      let item = (
+        <li key={name}>
+          <span className="field-name">{label}:</span>
+          <span className="field-value">{value}</span>
+        </li>
+      );
 
-        if (typeof field === 'object') {
-          if (Array.isArray(field)) {
-            item = this.buildListFromArray(field);
+      if (typeof field === 'object') {
+        if (Array.isArray(field)) {
+          item = this.buildListFromArray(field);
 
-            list.push(
-              <li className="field-name" key={Math.random()}>
-                {label}:
-              </li>
-            );
+          list.push(
+            <li className="field-name" key={Math.random()}>
+              {label}:
+            </li>
+          );
 
-            list.push(item);
-          } else {
-            const sub = this.buildListFromObject(field);
-
-            item = <li key={Math.random()}>{name}:</li>;
-
-            list.push(
-              <li className="field-name" key={Math.random()}>
-                {label}:
-              </li>
-            );
-
-            list.push(<ul key={Math.random()}>{sub}</ul>);
-          }
-        } else {
-          // primary types
           list.push(item);
+        } else {
+          const sub = this.buildListFromObject(field);
+
+          item = <li key={Math.random()}>{name}:</li>;
+
+          list.push(
+            <li className="field-name" key={Math.random()}>
+              {label}:
+            </li>
+          );
+
+          list.push(<ul key={Math.random()}>{sub}</ul>);
         }
-      } // end unnecessary attr checking
+      } else {
+        // primary types
+        list.push(item);
+      }
     } // end for loop
 
     return list;
@@ -240,5 +226,5 @@ export default class LogModalContent extends React.Component {
 
 LogModalContent.propTypes = {
   log: PropTypes.object,
-  fieldNames: PropTypes.array,
+  fieldLabelMaps: PropTypes.array,
 };

@@ -15,7 +15,7 @@ class LogModalContainer extends React.Component {
       return <Loading />;
     }
 
-    return <LogModalContent log={log} fieldNames={fieldLabelsQuery.getDbFieldLabels || []} />;
+    return <LogModalContent log={log} fieldLabelMaps={fieldLabelsQuery.getDbFieldLabels || []} />;
   }
 }
 
