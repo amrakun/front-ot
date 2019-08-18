@@ -122,7 +122,7 @@ export default class Logs extends React.Component {
     return (
       <Card title="User action logs">
         <Modal
-          title="View changes"
+          title={`View changes (log id - ${this.state.logId})`}
           visible={this.state.showModal}
           footer={null}
           onCancel={this.toggleModal}
@@ -135,7 +135,7 @@ export default class Logs extends React.Component {
           users={users}
           search={this.search}
         />
-        <Table columns={tableHeader} rowKey={log => log._id} dataSource={logs} />
+        <Table columns={tableHeader} rowKey={log => log._id} dataSource={logs} pagination={false} />
         <Paginator total={totalCount} />
       </Card>
     );
