@@ -19,6 +19,7 @@ const LogsContainer = ({ logsQuery, usersQuery, history, qp }) => {
   }
 
   const { logs, totalCount } = logsQuery.logs;
+
   const updatedProps = {
     qp,
     logs,

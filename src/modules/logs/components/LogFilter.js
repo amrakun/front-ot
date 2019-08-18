@@ -35,6 +35,7 @@ export default class LogFilter extends React.Component {
     if (dates[0]) {
       startDate = moment(dates[0]).format(dateTimeFormat);
     }
+
     if (dates[1]) {
       endDate = moment(dates[1]).format(dateTimeFormat);
     }
@@ -52,6 +53,7 @@ export default class LogFilter extends React.Component {
   render() {
     const { filter, users, search } = this.props;
     const { start, end, action, userId, type } = filter;
+
     const userOptions = users.map(user => {
       return (
         <Select.Option key={user._id} value={user._id}>
@@ -59,6 +61,7 @@ export default class LogFilter extends React.Component {
         </Select.Option>
       );
     });
+
     const LOG_ACTION_OPTIONS = [
       <Select.Option key="all" value="">
         All
