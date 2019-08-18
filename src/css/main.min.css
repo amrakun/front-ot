@@ -166,19 +166,11 @@ table.stats tr td:last-child {
   padding: 5px;
   margin: 5px;
 }
-.ant-modal-content .log-box .data-label {
-  font-size: 12px;
-  text-transform: uppercase;
-  color: #f47721;
+.ant-modal-content .log-box.info {
+  border-color: #108ee9;
 }
-.ant-modal-content .log-box .data-label.success {
-  color: #3ccc38;
-}
-.ant-modal-content .log-box .data-label.warning {
-  color: #f7ce53;
-}
-.ant-modal-content .log-box .data-label.danger {
-  color: #ea475d;
+.ant-modal-content .log-box.info .field-value {
+  color: #108ee9;
 }
 .ant-modal-content .log-box.success {
   border-color: #3ccc38;
@@ -197,6 +189,28 @@ table.stats tr td:last-child {
 }
 .ant-modal-content .log-box.danger .field-value {
   color: #ea475d;
+}
+
+.ant-row {
+  margin-bottom: 16px;
+}
+
+.data-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #f47721;
+}
+.data-label.success {
+  color: #3ccc38;
+}
+.data-label.warning {
+  color: #f7ce53;
+}
+.data-label.danger {
+  color: #ea475d;
+}
+.data-label.info {
+  color: #108ee9;
 }
 
 .bg-white {

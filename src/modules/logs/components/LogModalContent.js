@@ -1,6 +1,72 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'antd';
+import moment from 'moment';
+
+/**
+ * Removes null, undefined, empty attributes from given object
+ * @param {Object} obj Object to check
+ * @returns {Object} Flattened object
+ */
+const flattenObject = (obj = {}) => {
+  const flatObject = { ...obj };
+  const names = obj ? Object.getOwnPropertyNames(obj) : [];
+
+  for (const name of names) {
+    const field = obj[name];
+    let empty = false;
+
+    if (typeof field !== 'object') {
+      if (field === null || field === undefined || field === '') {
+        empty = true;
+      }
+    }
+
+    if (Array.isArray(field) && field.length === 0) {
+      empty = true;
+    }
+
+    // checked array above
+    if (typeof field === 'object' && !Array.isArray(field)) {
+      if (isObjectEmpty(field)) {
+        empty = true;
+      }
+    }
+
+    if (empty) {
+      delete flatObject[name];
+    }
+  } // end for loop
+
+  return flatObject;
+};
+
+/**
+ * Shorthand empty object checker
+ * @param {Object} obj Object to check
+ */
+const isObjectEmpty = (obj = {}) => {
+  return (
+    typeof obj === 'object' && obj && Object.keys(obj).length === 0 && obj.constructor === Object
+  );
+};
+
+// field names used to show properly formatted date values
+const DATE_FIELD_NAMES = [
+  // company related
+  'date',
+  'dateOfInvestigation',
+  'createdDate',
+  'registrationInfoSentDate',
+  'prequalificationInfoSentDate',
+  'prequalifiedDate',
+  'qualifiedDate',
+  // tender related
+  'updatedDate',
+  'publishDate',
+  'closeDate',
+  'sentDate',
+];
 
 export default class LogModalContent extends React.Component {
   constructor() {
@@ -33,72 +99,84 @@ export default class LogModalContent extends React.Component {
   }
 
   buildListFromObject(obj = {}) {
-    const { fieldNames } = this.props;
-    const list = [];
-    const names = obj ? Object.getOwnPropertyNames(obj) : [];
+    const { fieldLabelMaps } = this.props;
+    const flatObject = flattenObject(obj);
+    let list = [];
+    const names = flatObject ? Object.getOwnPropertyNames(flatObject) : [];
+
+    if (isObjectEmpty(flatObject)) {
+      return null;
+    }
 
     for (const name of names) {
-      const field = obj[name];
-      const mappedName = fieldNames.find(fn => fn.name === name);
-      let label = name;
+      const field = flatObject[name];
+      const mappedItem = fieldLabelMaps.find(fn => fn.name === name);
 
-      if (mappedName && mappedName.label) {
-        label = mappedName.label;
+      if (!mappedItem) {
+        continue;
       }
 
-      // exclude package specific __v & _id & uid fields
-      if (!(name === '__v' || name === '_id' || name === 'uid')) {
-        let item = (
-          <li key={name}>
-            <span className="field-name">{label}:</span>
-            <span className="field-value">{String(field)}</span>
-          </li>
-        );
+      let label = mappedItem.label;
+      let value = String(field);
 
-        if (typeof field === 'object') {
-          if (Array.isArray(field)) {
-            item = this.buildListFromArray(field);
+      if (DATE_FIELD_NAMES.includes(name)) {
+        value = moment(field).format('YYYY-MM-DD HH:mm');
+      }
 
-            list.push(
-              <li className="field-name" key={Math.random()}>
-                {label}:
-              </li>
-            );
+      let item = (
+        <li key={name}>
+          <span className="field-name">{label}:</span>
+          <span className="field-value">{value}</span>
+        </li>
+      );
 
-            list.push(item);
-          } else {
-            const sub = this.buildListFromObject(field);
+      if (typeof field === 'object') {
+        if (Array.isArray(field)) {
+          item = this.buildListFromArray(field);
 
-            item = <li key={Math.random()}>{name}:</li>;
+          list.push(
+            <li className="field-name" key={Math.random()}>
+              {label}:
+            </li>
+          );
 
-            list.push(
-              <li className="field-name" key={Math.random()}>
-                {label}:
-              </li>
-            );
-
-            list.push(<ul key={Math.random()}>{sub}</ul>);
-          }
-        } else {
-          // primary types
           list.push(item);
+        } else {
+          const sub = this.buildListFromObject(field);
+
+          item = <li key={Math.random()}>{name}:</li>;
+
+          list.push(
+            <li className="field-name" key={Math.random()}>
+              {label}:
+            </li>
+          );
+
+          list.push(<ul key={Math.random()}>{sub}</ul>);
         }
-      } // end unnecessary atr checking
+      } else {
+        // primary types
+        list.push(item);
+      }
     } // end for loop
 
     return list;
   }
+
   /**
    * Reads a stringified json and builds a list using its attributes.
    * @param {string} jsonString A stringified JSON object
    */
-  prettyJSON(jsonString) {
+  prettyJSON(jsonString = '') {
     let list = [];
+    const clean = jsonString.replace('\n', '');
+    const parsed = JSON.parse(clean);
+
+    if (isObjectEmpty(parsed) || !jsonString) {
+      return null;
+    }
 
     if (jsonString) {
-      const clean = jsonString.replace('\n', '');
-      const parsed = JSON.parse(clean);
-
       if (typeof parsed === 'object') {
         list = this.buildListFromObject(parsed);
       }
@@ -132,12 +210,15 @@ export default class LogModalContent extends React.Component {
     return log ? (
       <>
         <Row>
-          <Col sm={12}>{this.renderData(log.unchangedData, 'Unchanged fields')}</Col>
+          <Col sm={12}>{this.renderData(log.unchangedData, 'Unchanged fields', 'info')}</Col>
           <Col sm={12}>{this.renderData(log.changedData, 'Changed fields', 'warning')}</Col>
         </Row>
         <Row>
           <Col sm={12}>{this.renderData(log.addedData, 'Added fields', 'success')}</Col>
           <Col sm={12}>{this.renderData(log.removedData, 'Removed fields', 'danger')}</Col>
+        </Row>
+        <Row>
+          <Col sm={24}>{this.renderData(log.oldData, 'Initial data')}</Col>
         </Row>
       </>
     ) : null;
@@ -146,5 +227,5 @@ export default class LogModalContent extends React.Component {
 
 LogModalContent.propTypes = {
   log: PropTypes.object,
-  fieldNames: PropTypes.array,
+  fieldLabelMaps: PropTypes.array,
 };

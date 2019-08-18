@@ -19,6 +19,7 @@ const LogsContainer = ({ logsQuery, usersQuery, history, qp }) => {
   }
 
   const { logs, totalCount } = logsQuery.logs;
+
   const updatedProps = {
     qp,
     logs,
@@ -52,6 +53,7 @@ export default compose(
         end: qp.end,
         userId: qp.userId,
         action: qp.action,
+        type: qp.type,
       },
       notifyOnNetworkStatusChange: true,
     }),
