@@ -162,6 +162,7 @@ export default class LogModalContent extends React.Component {
 
     return list;
   }
+
   /**
    * Reads a stringified json and builds a list using its attributes.
    * @param {string} jsonString A stringified JSON object
