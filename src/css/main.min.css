@@ -970,4 +970,8 @@ table.mass-email-response tr td:last-child {
   width: 450px !important;
 }
 
+.tender-message-detail .ant-row div {
+  margin-bottom: 5px;
+}
+
 /*# sourceMappingURL=main.min.css.map */

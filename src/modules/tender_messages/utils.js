@@ -1,5 +1,11 @@
 import React from 'react';
 import { Tag } from 'antd';
+import moment from 'moment';
+import { dateTimeFormat } from 'modules/common/constants';
+
+export const renderDate = tenderMessage => {
+  return moment(tenderMessage.createdAt).format(dateTimeFormat);
+};
 
 export const renderSupplierName = supplier => {
   if (!supplier.basicInfo) {
@@ -37,4 +43,16 @@ export const renderRecipient = ({ tenderMessage, currentUser, isDetailed }) => {
   }
 
   return 'OT';
+};
+
+export const renderSender = tenderMessage => {
+  const { senderBuyer, senderSupplier } = tenderMessage;
+
+  if (senderBuyer) {
+    return <Tag>OT</Tag>;
+  }
+
+  if (senderSupplier) {
+    return renderSupplierName(senderSupplier);
+  }
 };

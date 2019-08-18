@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import { Row, Button, Table, Icon, Card, Modal, Divider } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { CreateTenderMessage } from '../containers/';
 import TenderMessageDetail from '../containers/TenderMessageDetail';
 import { Paginator } from 'modules/common/components';
-import { dateTimeFormat } from 'modules/common/constants';
-import { renderRecipient } from '../utils';
+import { renderDate, renderRecipient } from '../utils';
 
 const ROUTE_ENUM = {
   index: 0,
@@ -61,7 +59,7 @@ class Messages extends Component {
     const columns = [
       {
         title: 'Date',
-        render: record => moment(record.createdAt).format(dateTimeFormat),
+        render: renderDate,
         width: 150,
         key: 9,
       },

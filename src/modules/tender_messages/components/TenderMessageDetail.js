@@ -1,36 +1,16 @@
 import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { Form, Input, Tag, Divider, Button, Icon, Col, Row, message } from 'antd';
+import strip from 'strip';
+import { Form, Input, Divider, Button, Icon, Col, Row, message } from 'antd';
 import { readFileUrl } from 'modules/common/utils';
 import { dateTimeFormat } from 'modules/common/constants';
 import { Uploader } from 'modules/common/components';
 import { EditorCK } from 'modules/common/components/';
-import { renderRecipient, renderSupplierName } from '../utils';
+import { renderRecipient, renderSender, renderSupplierName, renderDate } from '../utils';
 
 const { Item } = Form;
-
-const Sender = ({ senderBuyer, senderSupplier }) => {
-  if (senderBuyer) {
-    return (
-      <Row>
-        <Col span={2}>From: </Col>
-        <Col span={22}>
-          <Tag>OT</Tag>
-        </Col>
-      </Row>
-    );
-  }
-
-  if (senderSupplier) {
-    return (
-      <Row>
-        <Col span={2}>From: </Col>
-        <Col span={22}>{renderSupplierName(senderSupplier)}</Col>
-      </Row>
-    );
-  }
-};
 
 const Attachment = ({ attachment }) => {
   if (!attachment || !attachment.url) {
@@ -105,13 +85,14 @@ class TenderMessageDetail extends React.Component {
   }
 
   renderReplyForm() {
+    const { form, tenderMessageDetail } = this.props;
     const { recipientSuppliers } = this.state;
 
     if (recipientSuppliers.length === 0) {
       return null;
     }
 
-    const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator } = form;
 
     return (
       <Row>
@@ -126,6 +107,7 @@ class TenderMessageDetail extends React.Component {
 
             <Item label="Subject">
               {getFieldDecorator('subject', {
+                initialValue: tenderMessageDetail.subject,
                 rules: [{ required: true }],
               })(<Input placeholder="subject" autoFocus={true} />)}
             </Item>
@@ -198,12 +180,26 @@ class TenderMessageDetail extends React.Component {
 
     if (rootMessage) {
       const replyAll = () => {
-        let editorHTMLContent = tenderMessageDetail.body;
+        let editorHTMLContent = `
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+        `;
 
-        for (const message of list) {
-          editorHTMLContent += `<p>---------------------------------------------------------------------------------------------------------------</p> ${
-            message.body
-          }`;
+        const messages = [tenderMessageDetail, ...list];
+
+        for (const message of messages) {
+          const recipient = strip(ReactDOMServer.renderToString(renderSender(message)));
+
+          editorHTMLContent += `
+            <p>---------------------------------------------------------------------------------------------------------------</p>
+            <p><b>Date:</b> ${renderDate(message)}</p>
+            <p><b>From:</b> ${recipient}</p>
+            <p><b>To:</b> ${renderRecipient({ tenderMessage: message, currentUser })}</p>
+            <p${message.body}</p>
+          `;
         }
 
         this.setState({
@@ -235,27 +231,32 @@ class TenderMessageDetail extends React.Component {
 
   renderMessage(tenderMessage) {
     return (
-      <>
+      <div className="tender-message-detail">
         <Row>
           <Col span={2}>Date: </Col>
           <Col span={22}>
-            <p>{moment(tenderMessage.createdAt).format(dateTimeFormat)}</p>
+            <div>{moment(tenderMessage.createdAt).format(dateTimeFormat)}</div>
           </Col>
         </Row>
 
-        <Sender {...tenderMessage} />
+        <Row>
+          <Col span={2}>From: </Col>
+          <Col span={22}>
+            <div>{renderSender(tenderMessage)}</div>
+          </Col>
+        </Row>
 
         <Row>
           <Col span={2}>To: </Col>
           <Col span={22}>
-            <p>{this.renderRecipient(tenderMessage)}</p>
+            <div>{this.renderRecipient(tenderMessage)}</div>
           </Col>
         </Row>
 
         <Row>
           <Col span={2}>Subject: </Col>
           <Col span={22}>
-            <p>{tenderMessage.subject}</p>
+            <div>{tenderMessage.subject}</div>
           </Col>
         </Row>
 
@@ -267,7 +268,7 @@ class TenderMessageDetail extends React.Component {
             <div dangerouslySetInnerHTML={{ __html: tenderMessage.body }} />
           </Col>
         </Row>
-      </>
+      </div>
     );
   }
 
