@@ -202,9 +202,19 @@ class TenderMessageDetail extends React.Component {
           `;
         }
 
+        let recipientSuppliers = rootMessage.recipientSuppliers || [];
+
+        if (recipientSuppliers.length === 0) {
+          recipientSuppliers = tenderMessageDetail.recipientSuppliers;
+        }
+
+        if (recipientSuppliers.length === 0) {
+          recipientSuppliers = [tenderMessageDetail.senderSupplier];
+        }
+
         this.setState({
           editorHTMLContent,
-          recipientSuppliers: rootMessage.recipientSuppliers,
+          recipientSuppliers,
         });
       };
 
