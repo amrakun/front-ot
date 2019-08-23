@@ -11,7 +11,13 @@ import queries from '../graphql';
 
 const LogsContainer = ({ logsQuery, usersQuery, history, qp }) => {
   if (logsQuery.error) {
-    return null;
+    let msg = logsQuery.error.message;
+
+    if (msg && msg.indexOf('GraphQL error:') !== -1) {
+      msg = msg.replace('GraphQL error:', '');
+    }
+
+    return msg;
   }
 
   if (logsQuery.loading || usersQuery.loading) {
