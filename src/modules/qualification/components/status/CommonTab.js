@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities*/
-
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Card, Form, Alert, Button, Icon, List, Checkbox } from 'antd';
 import { withRouter } from 'react-router';
@@ -147,5 +147,18 @@ class CommonTab extends React.Component {
     );
   }
 }
+
+CommonTab.propTypes = {
+  location: PropTypes.object,
+  items: PropTypes.array,
+  data: PropTypes.object,
+  nextTab: PropTypes.func,
+  save: PropTypes.func,
+  title: PropTypes.string,
+  isQualified: PropTypes.bool,
+  renderDescription: PropTypes.func,
+  companyInfo: PropTypes.object,
+  previousTab: PropTypes.func,
+};
 
 export default withRouter(CommonTab);
