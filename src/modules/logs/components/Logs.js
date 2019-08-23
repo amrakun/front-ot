@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Table, Card, Button, Modal } from 'antd';
+import { Table, Card, Button, Modal, Tag } from 'antd';
 import moment from 'moment';
 
 import router from 'modules/common/router';
@@ -108,6 +108,9 @@ export default class Logs extends React.Component {
         title: 'Description',
         key: 'description',
         dataIndex: 'description',
+        render: value => {
+          return <Tag color="blue">{value}</Tag>;
+        },
       },
       {
         title: 'View changes',
