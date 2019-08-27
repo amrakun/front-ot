@@ -51,8 +51,20 @@ class SubmitTender extends BaseForm {
       delete product.manufacturer;
       delete product.manufacturerPartNumber;
 
-      if (product.unitPrice && (!product.alternative || product.alternative === '-')) {
+      if (!product.alternative || product.alternative === '-') {
         throw new Error('Please choose a value in "alternative" field');
+      }
+
+      if (!product.unitPrice) {
+        throw new Error('Please fill a value in "unit price" field');
+      }
+
+      if (!product.currency) {
+        throw new Error('Please fill a value in "currency" field');
+      }
+
+      if (!product.shippingTerms) {
+        throw new Error('Please fill a value in "shipping terms" field');
       }
 
       return {
@@ -67,9 +79,15 @@ class SubmitTender extends BaseForm {
 
     const { save } = this.props;
     const { respondedFiles } = this.state;
+    const { __ } = this.context;
 
     try {
       const respondedProducts = this.getRespondedProducts();
+
+      if (respondedProducts.length === 0) {
+        return message.error(__('Please fill products table'));
+      }
+
       save({ respondedProducts, respondedFiles, isNotInterested: false }, true);
     } catch (e) {
       message.error(e.message);
@@ -112,7 +130,7 @@ class SubmitTender extends BaseForm {
     }
 
     return (
-      <Tabs defaultActiveKey={`${queryParams.tab || "1" }`}>
+      <Tabs defaultActiveKey={`${queryParams.tab || '1'}`}>
         <TabPane tab="Main" key="1">
           <Form layout="inline">
             <MainInfo {...data} />
@@ -132,7 +150,7 @@ class SubmitTender extends BaseForm {
                       respondedProducts: this.getRespondedProducts(),
                       respondedFiles: this.state.respondedFiles,
                       isNotInterested: false,
-                    })
+                    });
                   } catch (e) {
                     message.error(e.message);
                   }
