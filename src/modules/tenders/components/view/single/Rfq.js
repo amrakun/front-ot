@@ -18,7 +18,7 @@ import {
   Tabs,
   Popconfirm,
 } from 'antd';
-import { rfqRequestColumns } from '../../../constants';
+import { rfqProductsColumns as rpc, rfqRequestColumns } from '../../../constants';
 import Tender from './Tender';
 import { readFileUrl } from 'modules/common/utils';
 import { Uploader } from 'modules/common/components';
@@ -245,7 +245,7 @@ class Rfq extends Tender {
       );
     }
 
-    buttons.push(this.renderDownloadFilesButton())
+    buttons.push(this.renderDownloadFilesButton());
 
     return buttons;
   }
@@ -351,28 +351,28 @@ class Rfq extends Tender {
 
     const responseColumns = [
       {
-        title: 'Suggested manufacturer if any',
+        title: rpc.unitPrice,
+        dataIndex: 'unitPrice',
+        key: '10',
+      },
+      { title: rpc.totalPrice, dataIndex: 'totalPrice', key: '11' },
+      { title: rpc.currency, dataIndex: 'currency', key: '12' },
+      { title: rpc.leadTime, dataIndex: 'leadTime', key: '13' },
+      { title: rpc.shippingTerms, dataIndex: 'shippingTerms', key: '14' },
+      { title: rpc.alternative, dataIndex: 'alternative', key: '15' },
+      {
+        title: rpc.suggestedManufacturer,
         dataIndex: 'suggestedManufacturer',
         key: '8',
       },
       {
-        title: 'Suggested manufacturer part number',
+        title: rpc.suggestedManufacturerPart,
         dataIndex: 'suggestedManufacturerPartNumber',
         key: '9',
       },
+      { title: rpc.comment, dataIndex: 'comment', key: '16' },
       {
-        title: 'Unit price (excluding VAT)',
-        dataIndex: 'unitPrice',
-        key: '10',
-      },
-      { title: 'Total price', dataIndex: 'totalPrice', key: '11' },
-      { title: 'Currency', dataIndex: 'currency', key: '12' },
-      { title: 'Lead time', dataIndex: 'leadTime', key: '13' },
-      { title: 'Shipping terms', dataIndex: 'shippingTerms', key: '14' },
-      { title: 'Alternative', dataIndex: 'alternative', key: '15' },
-      { title: 'Comment', dataIndex: 'comment', key: '16' },
-      {
-        title: 'Picture (if required)',
+        title: rpc.picture,
         key: '17',
         dataIndex: 'file',
         render: file =>
@@ -388,7 +388,7 @@ class Rfq extends Tender {
       <Table
         columns={[...rfqRequestColumns, ...responseColumns]}
         rowKey={() => Math.random()}
-        scroll={{ x: 600 }}
+        scroll={{ x: 2000 }}
         dataSource={respondedProducts.map((product, index) => ({
           ...product,
           ...requestedProducts[index],

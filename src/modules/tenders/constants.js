@@ -18,21 +18,22 @@ export const labels = {
 };
 
 export const rfqProductsColumns = {
-  code: 'OT material code',
-  purchaseRequestNumber: 'Purchase request number',
-  shortText: 'Short text',
+  code: 'PR Number',
+  purchaseRequestNumber: 'OT Material number',
+  shortText: 'Material Description',
   quantity: 'Quantity',
   uom: 'UOM',
   manufacturer: 'Manufacturer',
   manufacturerPart: 'Manufacturer part number',
+  unitPrice: 'Unit Price in MNT (excluding VAT)',
+  currency:
+    'Currency (Mongolian supplier submits quotes only in MNT, International supplier submits quotes only in USD)',
+  leadTime: 'Lead time in Days',
+  shippingTerms: 'Shipping terms',
+  alternative: 'Alternative (YES/NO)',
   suggestedManufacturer: 'Suggested manufacturer if any',
   suggestedManufacturerPart: 'Suggest manufacturer part number',
-  unitPrice: 'Unit price',
   totalPrice: 'Total price',
-  currency: 'Currency',
-  leadTime: 'Lead time (day)',
-  shippingTerms: 'Shipping terms',
-  alternative: 'Alternative',
   comment: 'Comment',
   picture: 'Picture (if required)',
 };
@@ -57,18 +58,18 @@ export const eoiColumns = [...eoiRequestColumns, ...eoiResponseColumns];
 
 export const rfqRequestColumns = [
   {
-    title: 'OT material code',
+    title: rfqProductsColumns.code,
     width: 150,
     dataIndex: 'code',
     key: '1',
   },
   {
-    title: 'Purchase request number',
+    title: rfqProductsColumns.purchaseRequestNumber,
     dataIndex: 'purchaseRequestNumber',
     key: '2',
   },
   {
-    title: 'Short text',
+    title: rfqProductsColumns.shortText,
     dataIndex: 'shortText',
     key: '3',
     width: 150,
@@ -87,34 +88,34 @@ export const rfqRequestColumns = [
       );
     },
   },
-  { title: 'Quantity', dataIndex: 'quantity', key: '4' },
-  { title: 'UOM', dataIndex: 'UOM', key: '5' },
-  { title: 'Manufacturer', dataIndex: 'manufacturer', key: '6' },
+  { title: rfqProductsColumns.quantity, dataIndex: 'quantity', key: '4' },
+  { title: rfqProductsColumns.uom, dataIndex: 'uom', key: '5' },
+  { title: rfqProductsColumns.manufacturer, dataIndex: 'manufacturer', key: '6' },
   {
-    title: 'Manufacturer part number',
+    title: rfqProductsColumns.manufacturerPart,
     dataIndex: 'manufacturerPartNumber',
     key: '7',
   },
 ];
 
 export const rfqResponseColumns = [
+  { title: rfqProductsColumns.unitPrice, dataIndex: 'unitPrice', key: '10' },
+  { title: rfqProductsColumns.totalPrice, dataIndex: 'totalPrice', key: '11' },
+  { title: rfqProductsColumns.currency, dataIndex: 'currency', key: '12' },
+  { title: rfqProductsColumns.leadTime, dataIndex: 'leadTime', key: '13' },
+  { title: rfqProductsColumns.shippingTerms, dataIndex: 'shippingTerms', key: '14' },
   {
-    title: 'Suggested manufacturer if any',
+    title: rfqProductsColumns.suggestedManufacturer,
     dataIndex: 'suggestedManufacturer',
     key: '8',
   },
   {
-    title: 'Suggested manufacturer part number',
+    title: rfqProductsColumns.purchaseRequestNumber,
     dataIndex: 'suggestedManufacturerPartNumber',
     key: '9',
   },
-  { title: 'Unit price (excluding VAT)', dataIndex: 'unitPrice', key: '10' },
-  { title: 'Total price', dataIndex: 'totalPrice', key: '11' },
-  { title: 'Currency', dataIndex: 'currency', key: '12' },
-  { title: 'Lead time', dataIndex: 'leadTime', key: '13' },
-  { title: 'Shipping terms', dataIndex: 'shippingTerms', key: '14' },
-  { title: 'Comment', dataIndex: 'comment', key: '15' },
-  { title: 'Picture (if required)', dataIndex: 'file', key: '16' },
+  { title: rfqProductsColumns.comment, dataIndex: 'comment', key: '15' },
+  { title: rfqProductsColumns.picture, dataIndex: 'file', key: '16' },
 ];
 
 export const rfqColumns = [...rfqRequestColumns, ...rfqResponseColumns];

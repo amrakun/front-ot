@@ -83,13 +83,13 @@ class RfqTable extends Component {
           }
 
           const doc = {
-            suggestedManufacturer: row[7] || '',
-            suggestedManufacturerPartNumber: row[8] || '',
-            unitPrice: row[9] || 0,
-            currency: row[10] || '',
-            leadTime: row[11] || 0,
-            shippingTerms: row[12] || '',
-            alternative: row[13] || '',
+            unitPrice: row[7] || 0,
+            currency: row[8] || '',
+            leadTime: row[9] || 0,
+            shippingTerms: row[10] || '',
+            alternative: row[11] || '',
+            suggestedManufacturer: row[12] || '',
+            suggestedManufacturerPartNumber: row[13] || '',
             comment: row[14] || '',
           };
 
@@ -252,16 +252,6 @@ class RfqTable extends Component {
             title: __(rpc.manufacturerPart),
           })}
           {this.renderCell({
-            name: 'suggestedManufacturer',
-            title: __(rpc.suggestedManufacturer),
-            type: 'string',
-          })}
-          {this.renderCell({
-            name: 'suggestedManufacturerPartNumber',
-            title: __(rpc.suggestedManufacturerPart),
-            type: 'string',
-          })}
-          {this.renderCell({
             name: 'unitPrice',
             title: __(rpc.unitPrice),
             type: 'number',
@@ -338,6 +328,16 @@ class RfqTable extends Component {
                 </Option>,
               ];
             },
+          })}
+          {this.renderCell({
+            name: 'suggestedManufacturer',
+            title: __(rpc.suggestedManufacturer),
+            type: 'string',
+          })}
+          {this.renderCell({
+            name: 'suggestedManufacturerPartNumber',
+            title: __(rpc.suggestedManufacturerPart),
+            type: 'string',
           })}
           {this.renderCell({
             name: 'comment',

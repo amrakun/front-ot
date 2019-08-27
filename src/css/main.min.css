@@ -402,6 +402,10 @@ i.success {
   width: 164px;
 }
 
+.form-table .ant-table-thead th span {
+  text-transform: none;
+}
+
 .form-table .ant-row.ant-form-item {
   margin: 0;
   display: block;
