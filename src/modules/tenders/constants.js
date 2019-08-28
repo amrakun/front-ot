@@ -27,11 +27,11 @@ export const rfqProductsColumns = {
   manufacturerPart: 'Manufacturer part number',
   unitPrice: 'Unit Price in MNT (excluding VAT)',
   currency:
-    'Currency (Mongolian supplier submits quotes only in MNT, International supplier submits quotes only in USD)',
+    'Currency (If you are Mongolian supplier please provide your quotations only in MNT, if you are international supplier please provide your quotations only in USD)',
   leadTime: 'Lead time in Days',
   shippingTerms: 'Shipping terms',
   alternative: 'Alternative (YES/NO)',
-  suggestedManufacturer: 'Suggested manufacturer if any',
+  suggestedManufacturer: 'Suggested Manufacturer if yes',
   suggestedManufacturerPart: 'Suggest manufacturer part number',
   totalPrice: 'Total price',
   comment: 'Comment',

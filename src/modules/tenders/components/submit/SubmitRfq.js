@@ -77,14 +77,15 @@ class SubmitTender extends BaseForm {
   handleSubmit(e) {
     e.preventDefault();
 
-    const { save } = this.props;
+    const { data, save } = this.props;
+    const { type } = data;
     const { respondedFiles } = this.state;
     const { __ } = this.context;
 
     try {
       const respondedProducts = this.getRespondedProducts();
 
-      if (respondedProducts.length === 0) {
+      if (type === 'rfq' && respondedProducts.length === 0) {
         return message.error(__('Please fill products table'));
       }
 
