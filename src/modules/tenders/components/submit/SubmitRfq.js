@@ -55,10 +55,6 @@ class SubmitTender extends BaseForm {
         throw new Error('Please choose a value in "alternative" field');
       }
 
-      if (!product.unitPrice) {
-        throw new Error('Please fill a value in "unit price" field');
-      }
-
       if (!product.currency) {
         throw new Error('Please fill a value in "currency" field');
       }
