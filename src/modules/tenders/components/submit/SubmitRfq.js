@@ -55,11 +55,20 @@ class SubmitTender extends BaseForm {
         throw new Error('Please choose a value in "alternative" field');
       }
 
-      if (!product.currency) {
+      if (
+        product.alternative === 'Yes' &&
+        (!product.suggestedManufacturer || !product.suggestedManufacturerPartNumber)
+      ) {
+        throw new Error(
+          'Please choose a value in "Suggested Manufacturer if yes",	"Suggest manufacturer part number" field'
+        );
+      }
+
+      if (product.unitPrice && !product.currency) {
         throw new Error('Please fill a value in "currency" field');
       }
 
-      if (!product.shippingTerms) {
+      if (product.unitPrice && !product.shippingTerms) {
         throw new Error('Please fill a value in "shipping terms" field');
       }
 
