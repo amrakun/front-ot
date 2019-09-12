@@ -3,7 +3,7 @@ import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import strip from 'strip';
-import { Form, Input, Divider, Button, Icon, Col, Row, message } from 'antd';
+import { Tag, Form, Input, Divider, Button, Icon, Col, Row, message } from 'antd';
 import { readFileUrl } from 'modules/common/utils';
 import { dateTimeFormat } from 'modules/common/constants';
 import { Uploader } from 'modules/common/components';
@@ -178,6 +178,28 @@ class TenderMessageDetail extends React.Component {
 
     const { rootMessage, list = [] } = relatedMessages;
 
+    const renderSenderForBody = tenderMessage => {
+      const { senderBuyer, senderSupplier } = tenderMessage;
+
+      if (senderBuyer) {
+        return <Tag>OT</Tag>;
+      }
+
+      if (senderSupplier) {
+        return <Tag>Supplier</Tag>;
+      }
+    };
+
+    const renderRecipientForBody = ({ tenderMessage }) => {
+      const { recipientSuppliers } = tenderMessage;
+
+      if (recipientSuppliers && recipientSuppliers.length >= 1) {
+        return 'Suppliers';
+      }
+
+      return 'OT';
+    };
+
     if (rootMessage) {
       const replyAll = () => {
         let editorHTMLContent = `
@@ -191,13 +213,13 @@ class TenderMessageDetail extends React.Component {
         const messages = [tenderMessageDetail, ...list];
 
         for (const message of messages) {
-          const recipient = strip(ReactDOMServer.renderToString(renderSender(message)));
+          const recipient = strip(ReactDOMServer.renderToString(renderSenderForBody(message)));
 
           editorHTMLContent += `
             <p>---------------------------------------------------------------------------------------------------------------</p>
             <p><b>Date:</b> ${renderDate(message)}</p>
             <p><b>From:</b> ${recipient}</p>
-            <p><b>To:</b> ${renderRecipient({ tenderMessage: message, currentUser })}</p>
+            <p><b>To:</b> ${renderRecipientForBody({ tenderMessage: message })}</p>
             <p${message.body}</p>
           `;
         }
