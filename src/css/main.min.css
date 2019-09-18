@@ -402,10 +402,6 @@ i.success {
   width: 164px;
 }
 
-.form-table .ant-table-thead th span {
-  text-transform: none;
-}
-
 .form-table .ant-row.ant-form-item {
   margin: 0;
   display: block;
@@ -459,7 +455,7 @@ i.success {
   padding: 5px 10px;
   font-weight: bold;
   font-style: italic;
-  font-family: 'Overlock', cursive;
+  font-family: 'serif';
 }
 
 .home-landing .top {
