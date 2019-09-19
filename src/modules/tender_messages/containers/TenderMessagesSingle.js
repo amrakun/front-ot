@@ -1,7 +1,9 @@
-import { TenderMessages } from 'modules/tender_messages/components';
 import { gql, graphql, compose } from 'react-apollo';
+
+import { TenderMessages } from 'modules/tender_messages/components';
 import { queries } from 'modules/tender_messages/graphql/';
 import { mutations } from '../graphql';
+import { mutations as logMutations } from 'modules/logs/graphql/index';
 
 export default compose(
   graphql(gql(queries.tenderMessages), {
@@ -35,5 +37,11 @@ export default compose(
         fetchPolicy: 'network-only',
       };
     },
+  }),
+  graphql(gql(logMutations.logsWriteTenderLog), {
+    name: 'writeTenderLog',
+    options: () => ({
+      refetchQueries: ['logsTender'],
+    }),
   })
 )(TenderMessages);

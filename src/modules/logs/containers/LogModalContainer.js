@@ -5,7 +5,7 @@ import { compose, gql, graphql } from 'react-apollo';
 
 import { Loading } from 'modules/common/components';
 import LogModalContent from '../components/LogModalContent';
-import queries from '../graphql';
+import { queries } from '../graphql/index';
 
 class LogModalContainer extends React.Component {
   render() {

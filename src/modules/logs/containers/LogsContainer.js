@@ -7,7 +7,7 @@ import { Loading } from 'modules/common/components';
 import router from 'modules/common/router';
 import Logs from '../components/Logs';
 import { queries as userQueries } from 'modules/settings/graphql/index';
-import queries from '../graphql';
+import { queries } from '../graphql/index';
 
 const LogsContainer = ({ logsQuery, usersQuery, history, qp }) => {
   if (logsQuery.error) {

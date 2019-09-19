@@ -7,6 +7,7 @@ import { message, notification, Icon, Button } from 'antd';
 import { colors } from 'modules/common/constants';
 import { exportFile } from 'modules/common/components';
 import { alert } from 'modules/common/utils';
+import { mutations as logMutations } from 'modules/logs/graphql/index';
 
 const notifyIfWantToSend = {
   message: 'Succesfully awarded',
@@ -84,8 +85,14 @@ class TenderContainer extends React.Component {
       });
   }
 
-  downloadReport(companies, name) {
-    const { tenderDetailQuery } = this.props;
+  /**
+   * Prepares file to be downloaded
+   * @param {Object[]} companies Companies
+   * @param {string} name Query name part
+   * @param {string} desc Tender log description
+   */
+  downloadReport(companies, name, desc) {
+    const { tenderDetailQuery, writeTenderLog } = this.props;
     const loadingReportName = `${name}Loading`;
 
     let loading = {};
@@ -105,6 +112,15 @@ class TenderContainer extends React.Component {
         tenderDetailQuery.refetch();
         this.setState(loading);
       },
+      onDownload: () => {
+        writeTenderLog({
+          variables: {
+            tenderId: tenderDetailQuery.tenderDetail._id,
+            action: 'download',
+            description: desc || 'File has been downloaded',
+          },
+        });
+      },
     });
   }
 
@@ -122,6 +138,7 @@ class TenderContainer extends React.Component {
       notRespondedSuppliersQuery,
       invitedSuppliersQuery,
       location,
+      writeTenderLog,
     } = this.props;
 
     const { systemConfig } = this.context;
@@ -164,6 +181,7 @@ class TenderContainer extends React.Component {
       notRespondedSuppliers: this.modifySuppliersQuery(notRespondedSuppliers),
       invitedSuppliers: this.modifySuppliersQuery(invitedSuppliers),
       totalCount,
+      writeTenderLog,
     };
 
     return <Component {...updatedProps} />;
@@ -272,5 +290,11 @@ export default compose(
 
   graphql(gql(mutations.sendRegretLetter), {
     name: 'sendRegretLetter',
+  }),
+  graphql(gql(logMutations.logsWriteTenderLog), {
+    name: 'writeTenderLog',
+    options: () => ({
+      refetchQueries: ['logsTender'],
+    }),
   })
 )(TenderContainer);

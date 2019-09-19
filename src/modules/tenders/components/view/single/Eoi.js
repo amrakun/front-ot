@@ -30,7 +30,11 @@ class Eoi extends Tender {
     if (selectedCompanies.length < 1) {
       message.error('Please select atleast one supplier!');
     } else {
-      this.props.downloadReport(this.state.selectedCompanies, 'eoiShortList');
+      this.props.downloadReport(
+        this.state.selectedCompanies,
+        'eoiShortList',
+        'EOI short list has been downloaded'
+      );
     }
   }
 
@@ -40,7 +44,11 @@ class Eoi extends Tender {
     if (selectedCompanies.length < 1) {
       message.error('Please select atleast one supplier!');
     } else {
-      this.props.downloadReport(this.state.selectedCompanies, 'eoiBidderList');
+      this.props.downloadReport(
+        this.state.selectedCompanies,
+        'eoiBidderList',
+        'EOI bidder list has been downloaded'
+      );
     }
   }
 
@@ -51,7 +59,7 @@ class Eoi extends Tender {
         dataIndex: 'name',
         key: '3',
         render: record => {
-          return <span style={{ display: 'inline-block', width: '100px' }}>{record}</span>
+          return <span style={{ display: 'inline-block', width: '100px' }}>{record}</span>;
         },
       },
       {
@@ -152,6 +160,8 @@ class Eoi extends Tender {
   }
 
   render() {
+    const { tenderDetail, queryParams } = this.props;
+
     const tableOperations = [
       <Button onClick={this.handleEoiShortList} key={1}>
         EOI short list
@@ -173,13 +183,10 @@ class Eoi extends Tender {
             {this.renderTable({ tableOperations })}
           </TabPane>
           <TabPane tab="Messages" key="2">
-            <TenderMessagesSingle
-              tenderDetail={this.props.tenderDetail}
-              queryParams={this.props.queryParams}
-            />
+            <TenderMessagesSingle tenderDetail={tenderDetail} queryParams={queryParams} />
           </TabPane>
           <TabPane tab="Log" key="3">
-            <Logs _id={this.props.tenderDetail._id} />
+            <Logs _id={tenderDetail._id} queryParams={queryParams} />
           </TabPane>
         </Tabs>
       </div>
@@ -189,6 +196,9 @@ class Eoi extends Tender {
 
 Eoi.propTypes = {
   data: PropTypes.array,
+  tenderDetail: PropTypes.object,
+  queryParams: PropTypes.object,
+  downloadReport: PropTypes.func,
 };
 
 Eoi.contextTypes = {

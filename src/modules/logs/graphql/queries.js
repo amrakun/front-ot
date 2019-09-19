@@ -35,6 +35,7 @@ query logs(
       changedData
       unchangedData
       oldData
+      extraDesc
     }
   }
 }

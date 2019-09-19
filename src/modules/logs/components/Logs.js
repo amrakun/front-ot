@@ -125,7 +125,7 @@ export default class Logs extends React.Component {
     return (
       <Card title="User action logs">
         <Modal
-          title={`View changes (log id - ${this.state.logId})`}
+          title="View changes"
           visible={this.state.showModal}
           footer={null}
           onCancel={this.toggleModal}

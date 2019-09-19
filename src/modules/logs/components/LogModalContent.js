@@ -69,18 +69,39 @@ const DATE_FIELD_NAMES = [
 ];
 
 export default class LogModalContent extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.buildListFromObject = this.buildListFromObject.bind(this);
+    this.extraDesc = [];
+
+    if (props.log && props.log.extraDesc) {
+      this.extraDesc = JSON.parse(props.log.extraDesc);
+    }
   }
 
-  buildListFromArray(array = []) {
+  /**
+   * Builds an html list from given array
+   * @param {Object|string|number[]]} array List of values
+   * @param {string} name Field name at database
+   */
+  buildListFromArray(array = [], name = '') {
     const list = [];
 
     array.forEach((elem, index) => {
       if (typeof elem !== 'object') {
-        list.push(<li key={Math.random()}>{elem.toString()}</li>);
+        let value = elem.toString();
+
+        // Finding mapped name behind id field
+        if (this.extraDesc) {
+          const found = this.extraDesc.find(item => item[name] === value);
+
+          if (found) {
+            value = found.name;
+          }
+        }
+
+        list.push(<li key={Math.random()}>{value}</li>);
       }
 
       if (typeof elem === 'object') {
@@ -101,8 +122,8 @@ export default class LogModalContent extends React.Component {
   buildListFromObject(obj = {}) {
     const { fieldLabelMaps } = this.props;
     const flatObject = flattenObject(obj);
-    let list = [];
     const names = flatObject ? Object.getOwnPropertyNames(flatObject) : [];
+    let list = [];
 
     if (isObjectEmpty(flatObject)) {
       return null;
@@ -123,6 +144,14 @@ export default class LogModalContent extends React.Component {
         value = moment(field).format('YYYY-MM-DD HH:mm');
       }
 
+      if (this.extraDesc) {
+        const found = this.extraDesc.find(item => item[name] === value);
+
+        if (found) {
+          value = found.name;
+        }
+      }
+
       let item = (
         <li key={name}>
           <span className="field-name">{label}:</span>
@@ -132,7 +161,7 @@ export default class LogModalContent extends React.Component {
 
       if (typeof field === 'object') {
         if (Array.isArray(field)) {
-          item = this.buildListFromArray(field);
+          item = this.buildListFromArray(field, name);
 
           list.push(
             <li className="field-name" key={Math.random()}>
@@ -177,7 +206,7 @@ export default class LogModalContent extends React.Component {
     }
 
     if (jsonString) {
-      if (typeof parsed === 'object') {
+      if (typeof parsed === 'object' && !Array.isArray(parsed)) {
         list = this.buildListFromObject(parsed);
       }
 
@@ -197,10 +226,12 @@ export default class LogModalContent extends React.Component {
    */
   renderData(data, label, cls) {
     return data ? (
-      <div className={`log-box ${cls}`}>
-        <span className={`data-label ${cls}`}>{label}</span>
-        {this.prettyJSON(data)}
-      </div>
+      <Col sm={12}>
+        <div className={`log-box ${cls}`}>
+          <span className={`data-label ${cls}`}>{label}</span>
+          {this.prettyJSON(data)}
+        </div>
+      </Col>
     ) : null;
   }
 
@@ -210,18 +241,19 @@ export default class LogModalContent extends React.Component {
     return log ? (
       <>
         <Row>
-          <Col sm={12}>{this.renderData(log.unchangedData, 'Unchanged fields', 'info')}</Col>
-          <Col sm={12}>{this.renderData(log.changedData, 'Changed fields', 'warning')}</Col>
+          {this.renderData(log.oldData, 'Before any changes')}
+          {this.renderData(log.addedData, 'Added fields', 'success')}
         </Row>
         <Row>
-          <Col sm={12}>{this.renderData(log.addedData, 'Added fields', 'success')}</Col>
-          <Col sm={12}>{this.renderData(log.removedData, 'Removed fields', 'danger')}</Col>
-        </Row>
-        <Row>
-          <Col sm={24}>{this.renderData(log.oldData, 'Initial data')}</Col>
+          {this.renderData(log.changedData, 'Changed fields', 'warning')}
+          {this.renderData(log.removedData, 'Removed fields', 'danger')}
         </Row>
       </>
     ) : null;
+  }
+
+  componentWillUnmount() {
+    this.extraDesc = null;
   }
 }
 

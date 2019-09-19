@@ -73,7 +73,11 @@ class Rfq extends Tender {
       return message.error('Please select atleast one supplier!');
     }
 
-    this.props.downloadReport(selectedCompanies, 'rfqBidSummaryReport');
+    this.props.downloadReport(
+      selectedCompanies,
+      'rfqBidSummaryReport',
+      'Bid summary list has been downloaded'
+    );
   }
 
   toggleAwardForm() {
@@ -436,7 +440,7 @@ class Rfq extends Tender {
         </TabPane>
       </Tabs>
     );
-  }
+  } // end render()
 }
 
 Rfq.propTypes = {
@@ -444,6 +448,8 @@ Rfq.propTypes = {
   downloadReport: PropTypes.func,
   bidSummaryReportLoading: PropTypes.bool,
   data: PropTypes.array,
+  tenderDetail: PropTypes.object,
+  writeTenderLog: PropTypes.func,
 };
 
 Rfq.contextTypes = {

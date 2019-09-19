@@ -171,12 +171,28 @@ class Messages extends Component {
 
     if (route === ROUTE_ENUM.view) {
       this.setAsRead(tenderMessageDetail);
+
+      this.props.writeTenderLog({
+        variables: {
+          tenderId: this.props.tenderDetail._id,
+          action: 'view',
+          description: `Viewed message with subject "${tenderMessageDetail.subject}"`,
+        },
+      });
     }
   }
 
   downloadFiles() {
     const { REACT_APP_API_URL } = process.env;
-    const { tenderDetail } = this.props;
+    const { tenderDetail, writeTenderLog } = this.props;
+
+    writeTenderLog({
+      variables: {
+        tenderId: tenderDetail._id,
+        action: 'download',
+        description: 'Tender message files have been downloaded',
+      },
+    });
 
     window.open(
       `${REACT_APP_API_URL}/download-tender-message-files?tenderId=${tenderDetail._id}`,
@@ -304,6 +320,7 @@ Messages.propTypes = {
   suppliers: PropTypes.array,
   tenderMessageSetAsRead: PropTypes.func,
   tenderMessageTotalCountQuery: PropTypes.object,
+  writeTenderLog: PropTypes.func,
 };
 
 Messages.contextTypes = {

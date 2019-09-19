@@ -124,7 +124,15 @@ class Tender extends Common {
 
   downloadRespondedFiles() {
     const { REACT_APP_API_URL } = process.env;
-    const { tenderDetail } = this.props;
+    const { tenderDetail, writeTenderLog } = this.props;
+
+    writeTenderLog({
+      variables: {
+        tenderId: tenderDetail._id,
+        action: 'download',
+        description: 'Files have been downloaded',
+      },
+    });
 
     window.open(
       `${REACT_APP_API_URL}/download-tender-files?tenderId=${tenderDetail._id}`,
@@ -337,6 +345,21 @@ class Tender extends Common {
       </Card>
     );
   }
+
+  componentDidUpdate(prevProps) {
+    const prevTender = prevProps.tenderDetail;
+    const { tenderDetail, writeTenderLog } = this.props;
+
+    if (tenderDetail && tenderDetail._id && !prevTender._id) {
+      writeTenderLog({
+        variables: {
+          tenderId: tenderDetail._id,
+          action: 'view',
+          description: `Viewed "${tenderDetail.name}"`,
+        },
+      });
+    }
+  }
 }
 
 Tender.propTypes = {
@@ -346,6 +369,10 @@ Tender.propTypes = {
   sentRegretLetter: PropTypes.boolean,
   regretLetterModalVisible: PropTypes.boolean,
   notRespondedSuppliers: PropTypes.array,
+  tenderDetail: PropTypes.object,
+  writeTenderLog: PropTypes.func,
+  history: PropTypes.object,
+  queryParams: PropTypes.object,
 };
 
 export default Tender;

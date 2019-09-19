@@ -13,7 +13,7 @@ class Dashboard extends React.Component {
     super(props);
 
     this.state = {
-      productCodes: []
+      productCodes: [],
     };
 
     this.onInputChange = this.onInputChange.bind(this);
@@ -25,15 +25,9 @@ class Dashboard extends React.Component {
     this.logsSupplierLoginsByRfqSubmissionsExport = this.logsSupplierLoginsByRfqSubmissionsExport.bind(
       this
     );
-    this.logsSearchesPerBuyerExport = this.logsSearchesPerBuyerExport.bind(
-      this
-    );
-    this.logsEoiCreatedAndSentExport = this.logsEoiCreatedAndSentExport.bind(
-      this
-    );
-    this.logsRfqCreatedAndSentExport = this.logsRfqCreatedAndSentExport.bind(
-      this
-    );
+    this.logsSearchesPerBuyerExport = this.logsSearchesPerBuyerExport.bind(this);
+    this.logsEoiCreatedAndSentExport = this.logsEoiCreatedAndSentExport.bind(this);
+    this.logsRfqCreatedAndSentExport = this.logsRfqCreatedAndSentExport.bind(this);
 
     this.logsSuppliersByProductCodeLogsExport = this.logsSuppliersByProductCodeLogsExport.bind(
       this
@@ -51,17 +45,11 @@ class Dashboard extends React.Component {
   }
 
   logsSupplierLoginsExport() {
-    this.props.export(
-      'logsSupplierLoginsExport',
-      this.getDateInterval(this.intervalDate)
-    );
+    this.props.export('logsSupplierLoginsExport', this.getDateInterval(this.intervalDate));
   }
 
   logsBuyerLoginsExport() {
-    this.props.export(
-      'logsBuyerLoginsExport',
-      this.getDateInterval(this.intervalDate)
-    );
+    this.props.export('logsBuyerLoginsExport', this.getDateInterval(this.intervalDate));
   }
 
   logsSupplierLoginsByEoiSubmissionsExport() {
@@ -79,37 +67,28 @@ class Dashboard extends React.Component {
   }
 
   logsSearchesPerBuyerExport() {
-    this.props.export(
-      'logsSearchesPerBuyerExport',
-      this.getDateInterval(this.intervalDate)
-    );
+    this.props.export('logsSearchesPerBuyerExport', this.getDateInterval(this.intervalDate));
   }
 
   logsEoiCreatedAndSentExport() {
-    this.props.export(
-      'logsEoiCreatedAndSentExport',
-      this.getDateInterval(this.intervalDate)
-    );
+    this.props.export('logsEoiCreatedAndSentExport', this.getDateInterval(this.intervalDate));
   }
 
   logsRfqCreatedAndSentExport() {
-    this.props.export(
-      'logsRfqCreatedAndSentExport',
-      this.getDateInterval(this.intervalDate)
-    );
+    this.props.export('logsRfqCreatedAndSentExport', this.getDateInterval(this.intervalDate));
   }
 
   logsSuppliersByProductCodeLogsExport() {
     this.props.export('logsSuppliersByProductCodeLogsExport', {
       ...this.getDateInterval(this.intervalDate),
-      productCodes: this.state.productCodes
+      productCodes: this.state.productCodes,
     });
   }
 
   logsActivityLogsExport() {
     this.props.export('logsActivityLogsExport', {
       ...this.getDateInterval(this.intervalDate),
-      module: this.state.module
+      module: this.state.module,
     });
   }
 
@@ -124,13 +103,13 @@ class Dashboard extends React.Component {
   getDateInterval(date) {
     return {
       startDate: date ? date[0] : new Date(),
-      endDate: date ? date[1] : new Date()
+      endDate: date ? date[1] : new Date(),
     };
   }
 
   renderButton(onClick) {
     return (
-      <Button onClick={onClick} className="report-btn">
+      <Button onClick={onClick} className="report-btn ant-btn-primary">
         <Icon type="file-excel" />
         Export report
       </Button>
@@ -142,7 +121,7 @@ class Dashboard extends React.Component {
       xl: 6,
       lg: 8,
       md: 12,
-      sm: 24
+      sm: 24,
     };
 
     const activityLogOptions = [];
@@ -310,7 +289,7 @@ class Dashboard extends React.Component {
 }
 
 Dashboard.propTypes = {
-  export: PropTypes.func
+  export: PropTypes.func,
 };
 
 export default Dashboard;

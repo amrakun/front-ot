@@ -5,7 +5,7 @@ import { notifyReady, notifyLoading } from 'modules/common/constants';
 import client from 'apolloClient';
 
 const exportExcel = props => {
-  const { query, variables, onFinish, name = 'downloadQuery' } = props;
+  const { query, variables, onFinish, name = 'downloadQuery', onDownload } = props;
 
   notification.open(notifyLoading);
 
@@ -13,7 +13,7 @@ const exportExcel = props => {
     .query({
       query: gql(query),
       name,
-      variables
+      variables,
     })
     .then(response => {
       notification.close('loadingNotification');
@@ -25,11 +25,15 @@ const exportExcel = props => {
             onClick={() => {
               notification.close('downloadNotification');
               window.open(`${response.data[Object.keys(response.data)[0]]}`);
+
+              if (onDownload) {
+                onDownload();
+              }
             }}
           >
             <Icon type="download" /> Download
           </Button>
-        )
+        ),
       });
 
       if (onFinish) onFinish();

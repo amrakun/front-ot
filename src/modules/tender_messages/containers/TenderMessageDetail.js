@@ -5,7 +5,7 @@ import { TenderMessageDetail } from '../components';
 import { Icon } from 'antd';
 import PropTypes from 'prop-types';
 
-const TenderMessageDetailContainer = (props) => {
+const TenderMessageDetailContainer = props => {
   const { currentUser, tenderMessageDetailQuery, tenderMessageBuyerSend } = props;
 
   if (tenderMessageDetailQuery.loading) return <Icon type="loading" />;
@@ -13,8 +13,8 @@ const TenderMessageDetailContainer = (props) => {
   const reply = (doc, callback) => {
     tenderMessageBuyerSend({ variables: doc })
       .then(() => callback())
-      .catch((e) => console.log(e.message));
-  }
+      .catch(e => console.log(e.message));
+  };
 
   return (
     <TenderMessageDetail
@@ -26,7 +26,9 @@ const TenderMessageDetailContainer = (props) => {
 };
 
 TenderMessageDetailContainer.propTypes = {
-  tenderMessageDetailQuery: PropTypes.object
+  tenderMessageDetailQuery: PropTypes.object,
+  tenderMessageBuyerSend: PropTypes.func,
+  currentUser: PropTypes.object,
 };
 
 export default compose(
@@ -34,9 +36,9 @@ export default compose(
     name: 'tenderMessageDetailQuery',
     options: ({ _id }) => {
       return {
-        variables: { _id }
+        variables: { _id },
       };
-    }
+    },
   }),
   graphql(gql(mutations.tenderMessageBuyerSend), {
     name: 'tenderMessageBuyerSend',
@@ -45,5 +47,5 @@ export default compose(
         refetchQueries: ['tenderMessages'],
       };
     },
-  }),
+  })
 )(TenderMessageDetailContainer);

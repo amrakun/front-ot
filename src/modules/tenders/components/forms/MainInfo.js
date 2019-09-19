@@ -280,6 +280,7 @@ MainInfo.propTypes = {
   renderOptions: PropTypes.func,
   showSuppliers: PropTypes.bool,
   onChange: PropTypes.func,
+  renderExtraContent: PropTypes.func,
 };
 
 export default MainInfo;
