@@ -73,11 +73,7 @@ export default class LogModalContent extends React.Component {
     super(props);
 
     this.buildListFromObject = this.buildListFromObject.bind(this);
-    this.extraDesc = [];
-
-    if (props.log && props.log.extraDesc) {
-      this.extraDesc = JSON.parse(props.log.extraDesc);
-    }
+    this.extraDesc = JSON.parse(props.log.extraDesc) || [];
   }
 
   /**
