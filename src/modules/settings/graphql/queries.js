@@ -13,8 +13,8 @@ const User = `
 `;
 
 export const users = `
-  query users($page: Int, $perPage: Int, $search: String) {
-    users(page: $page, perPage: $perPage, search: $search) {
+  query users($page: Int, $perPage: Int, $search: String, $isActive: String) {
+    users(page: $page, perPage: $perPage, search: $search, isActive: $isActive) {
       ${User}
     }
   }

@@ -65,9 +65,9 @@ const usersEdit = `
   }
 `;
 
-const usersRemove = `
-  mutation usersRemove($_id: String!) {
-    usersRemove(_id: $_id)
+const usersToggleState = `
+  mutation usersToggleState($_id: String!) {
+    usersToggleState(_id: $_id)
   }
 `;
 
@@ -136,9 +136,9 @@ export default {
   usersAdd,
   usersEdit,
   resetPassword,
-  usersRemove,
+  usersToggleState,
   configsSaveTemplate,
   configsSavePrequalificationDow,
   configsSaveAuditDow,
-  configsSaveImprovementPlanDow
+  configsSaveImprovementPlanDow,
 };

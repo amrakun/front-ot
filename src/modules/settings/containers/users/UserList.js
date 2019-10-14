@@ -11,8 +11,8 @@ import { queries, mutations } from '../../graphql';
 const UserListContainer = ({
   usersListQuery,
   usersTotalCountQuery,
-  usersRemoveMutation,
-  history
+  usersToggleStateMutation,
+  history,
 }) => {
   if (usersListQuery.error || usersTotalCountQuery.error) {
     return null;
@@ -25,13 +25,13 @@ const UserListContainer = ({
   const updatedProps = {
     users: usersListQuery.users,
     totalCount: usersTotalCountQuery.usersTotalCount || 0,
-    removeUser: _id => {
-      usersRemoveMutation({ variables: { _id } })
+    toggleState: _id => {
+      usersToggleStateMutation({ variables: { _id } })
         .then(() => {
           usersListQuery.refetch();
-          alert.success('User succesfully removed.');
+          alert.success('User state succesfully changed.');
         })
-        .catch((e) => {
+        .catch(e => {
           alert.error(e.message);
         });
     },
@@ -40,7 +40,7 @@ const UserListContainer = ({
     },
     numbering: router.getParam(history, 'page')
       ? 10 * (Number(router.getParam(history, 'page')) - 1) + 1
-      : 1
+      : 1,
   };
 
   return <UserList {...updatedProps} />;
@@ -50,8 +50,8 @@ UserListContainer.propTypes = {
   usersListQuery: PropTypes.object.isRequired,
   usersTotalCountQuery: PropTypes.object.isRequired,
   queryParams: PropTypes.object.isRequired,
-  usersRemoveMutation: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  usersToggleStateMutation: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 export default compose(
@@ -65,21 +65,22 @@ export default compose(
           page: queryParams.page ? Number(queryParams.page) : 1,
           perPage: queryParams.perPage ? Number(queryParams.perPage) : 10,
           role: 'admin',
-          search
+          isActive: queryParams.isActive || 'true',
+          search,
         },
-        notifyOnNetworkStatusChange: true
+        notifyOnNetworkStatusChange: true,
       };
-    }
+    },
   }),
-  graphql(gql(mutations.usersRemove), {
-    name: 'usersRemoveMutation'
+  graphql(gql(mutations.usersToggleState), {
+    name: 'usersToggleStateMutation',
   }),
   graphql(gql(queries.usersTotalCount), {
     name: 'usersTotalCountQuery',
     options: ({ queryParams }) => ({
-        variables: {
-          search: queryParams.search,
-        },
-    })
+      variables: {
+        search: queryParams.search,
+      },
+    }),
   })
 )(withRouter(UserListContainer));

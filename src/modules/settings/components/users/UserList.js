@@ -2,18 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
-import {
-  Table,
-  Card,
-  Row,
-  Col,
-  Icon,
-  Input,
-  Divider,
-  Button,
-  Form,
-  Popconfirm
-} from 'antd';
+import { Table, Card, Row, Col, Icon, Input, Divider, Button, Form } from 'antd';
 import { Paginator } from 'modules/common/components';
 import { UserForm } from '../../containers';
 
@@ -24,10 +13,10 @@ const propTypes = {
   user: PropTypes.object,
   addUser: PropTypes.func,
   totalCount: PropTypes.number,
-  removeUser: PropTypes.func,
+  toggleState: PropTypes.func,
   resetPassword: PropTypes.func,
   refetchUsers: PropTypes.func,
-  numbering: PropTypes.number.isRequired
+  numbering: PropTypes.number.isRequired,
 };
 
 class UserList extends React.Component {
@@ -44,7 +33,7 @@ class UserList extends React.Component {
       users: this.props.users,
       currentUser: null,
       showPopup: false,
-      showResetPopup: false
+      showResetPopup: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -54,40 +43,37 @@ class UserList extends React.Component {
     this.onSuccess = this.onSuccess.bind(this);
     this.onClose = this.onClose.bind(this);
     this.emitEmpty = this.emitEmpty.bind(this);
-    this.removeUser = this.removeUser.bind(this);
 
     this.columns = [
       {
         title: 'Num',
         key: '_id',
-        render: (value, row, index) => (
-          <span>{this.props.numbering + index}</span>
-        )
+        render: (value, row, index) => <span>{this.props.numbering + index}</span>,
       },
       {
         title: 'First Name',
         dataIndex: 'firstName',
-        key: 'firstName'
+        key: 'firstName',
       },
       {
         title: 'Last name',
         dataIndex: 'lastName',
-        key: 'lastName'
+        key: 'lastName',
       },
       {
         title: 'Username',
         dataIndex: 'username',
-        key: 'username'
+        key: 'username',
       },
       {
         title: 'Email address',
         dataIndex: 'email',
-        key: 'email'
+        key: 'email',
       },
       {
         title: 'Phone number',
         dataIndex: 'phone',
-        key: 'phone'
+        key: 'phone',
       },
       {
         title: 'Action',
@@ -98,24 +84,29 @@ class UserList extends React.Component {
               Edit
             </a>
             <Divider type="vertical" />
-            <Popconfirm
-              key={3}
-              title="Are you sure you want to remove this user？"
-              placement="bottomRight"
-              okText="Yes"
-              cancelText="No"
-              onConfirm={() => this.removeUser(record._id)}
-            >
-              <a href="#remove">Remove</a>
-            </Popconfirm>
+            {this.renderStateChanger(record)}
           </span>
-        )
-      }
+        ),
+      },
     ];
   }
 
-  removeUser(id) {
-    this.props.removeUser(id);
+  renderStateChanger(record) {
+    let stateChanger = (
+      <a href="#deactive" onClick={() => this.props.toggleState(record._id)}>
+        Deactivate
+      </a>
+    );
+
+    if (window.location.href.includes('isActive=false')) {
+      stateChanger = (
+        <a href="#active" onClick={() => this.props.toggleState(record._id)}>
+          Activate
+        </a>
+      );
+    }
+
+    return stateChanger;
   }
 
   handleSearch(value) {
@@ -126,7 +117,7 @@ class UserList extends React.Component {
     query.search = value;
 
     history.push({
-      search: queryString.stringify(query)
+      search: queryString.stringify(query),
     });
   }
 
@@ -175,13 +166,29 @@ class UserList extends React.Component {
     this.setState({ users: nextProps.users });
   }
 
+  renderStateFilter() {
+    const state = window.location.href.includes('isActive=false') ? 'inactive' : 'active';
+
+    if (state === 'active') {
+      return (
+        <Button>
+          <a href="?isActive=false">Inactive users</a>
+        </Button>
+      );
+    }
+
+    return (
+      <Button>
+        <a href="?isActive=true">Active users</a>
+      </Button>
+    );
+  }
+
   render() {
     const { users, search } = this.state;
     const { totalCount } = this.props;
 
-    const suffix = search ? (
-      <Icon type="close-circle" onClick={this.emitEmpty} />
-    ) : null;
+    const suffix = search ? <Icon type="close-circle" onClick={this.emitEmpty} /> : null;
 
     return (
       <Row gutter={16}>
@@ -190,9 +197,7 @@ class UserList extends React.Component {
             <div className="table-operations">
               <Input
                 value={search}
-                prefix={
-                  <Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />
-                }
+                prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />}
                 style={{ width: 200, float: 'left' }}
                 placeholder="Search by username"
                 onPressEnter={e => this.handleSearch(e.target.value)}
@@ -202,7 +207,12 @@ class UserList extends React.Component {
                 className="users-search"
               />
 
-              <Button onClick={this.editUser.bind(this, null)}>Add User</Button>
+              {this.renderStateFilter()}
+
+              <Button type="primary" onClick={this.editUser.bind(this, null)}>
+                Add User
+              </Button>
+
               {this.state.showPopup ? (
                 <UserForm
                   user={this.state.currentUser}
@@ -216,6 +226,7 @@ class UserList extends React.Component {
               columns={this.columns}
               rowKey={record => record._id}
               dataSource={users}
+              pagination={false}
             />
 
             <Paginator total={totalCount} />
