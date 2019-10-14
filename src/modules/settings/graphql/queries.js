@@ -29,8 +29,8 @@ export const userDetail = `
 `;
 
 export const usersTotalCount = `
-  query usersTotalCount($search: String) {
-    usersTotalCount(search: $search)
+  query usersTotalCount($search: String, $isActive: String) {
+    usersTotalCount(search: $search, isActive: $isActive)
   }
 `;
 

@@ -80,6 +80,7 @@ export default compose(
     options: ({ queryParams }) => ({
       variables: {
         search: queryParams.search,
+        isActive: queryParams.isActive || 'true',
       },
     }),
   })
