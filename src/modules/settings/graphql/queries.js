@@ -58,8 +58,8 @@ export const mailDeliveries = `
 `;
 
 export const mailDeliveriesTotalCount = `
-  query mailDeliveriesTotalCount {
-    mailDeliveriesTotalCount
+  query mailDeliveriesTotalCount($search: String) {
+    mailDeliveriesTotalCount(search: $search)
   }
 `;
 
@@ -69,5 +69,5 @@ export default {
   usersTotalCount,
   modulePermissions,
   mailDeliveries,
-  mailDeliveriesTotalCount
+  mailDeliveriesTotalCount,
 };

@@ -21,7 +21,7 @@ const MailDeliveriesContainer = props => {
     ...props,
     search: queryParams.search,
     deliveries: deliveriesQuery.mailDeliveries || [],
-    totalCount: deliveriesTotalCountQuery.mailDeliveriesTotalCount || 0
+    totalCount: deliveriesTotalCountQuery.mailDeliveriesTotalCount || 0,
   };
 
   return <MailDeliveries {...updatedProps} />;
@@ -29,7 +29,7 @@ const MailDeliveriesContainer = props => {
 
 MailDeliveriesContainer.propTypes = {
   deliveriesQuery: PropTypes.object.isRequired,
-  deliveriesTotalCountQuery: PropTypes.object.isRequired
+  deliveriesTotalCountQuery: PropTypes.object.isRequired,
 };
 
 export default compose(
@@ -39,11 +39,16 @@ export default compose(
       variables: {
         search: queryParams.search,
         page: queryParams.page ? Number(queryParams.page) : 1,
-        perPage: queryParams.perPage ? Number(queryParams.perPage) : 10
-      }
-    })
+        perPage: queryParams.perPage ? Number(queryParams.perPage) : 15,
+      },
+    }),
   }),
   graphql(gql(queries.mailDeliveriesTotalCount), {
-    name: 'deliveriesTotalCountQuery'
+    name: 'deliveriesTotalCountQuery',
+    options: ({ queryParams }) => ({
+      variables: {
+        search: queryParams.search,
+      },
+    }),
   })
 )(withRouter(MailDeliveriesContainer));
