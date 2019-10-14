@@ -125,6 +125,7 @@ class Tender extends Common {
   downloadRespondedFiles() {
     const { REACT_APP_API_URL } = process.env;
     const { tenderDetail, writeTenderLog } = this.props;
+    const { selectedCompanies } = this.state;
 
     writeTenderLog({
       variables: {
@@ -135,7 +136,9 @@ class Tender extends Common {
     });
 
     window.open(
-      `${REACT_APP_API_URL}/download-tender-files?tenderId=${tenderDetail._id}`,
+      `${REACT_APP_API_URL}/download-tender-files?tenderId=${
+        tenderDetail._id
+      }&selectedCompanies=${selectedCompanies.toString()}`,
       '__blank'
     );
   }
