@@ -91,13 +91,14 @@ class TenderContainer extends React.Component {
    * @param {string} name Query name part
    * @param {string} desc Tender log description
    */
-  downloadReport(companies, name, desc) {
+  downloadReport(name, variables, desc) {
     const { tenderDetailQuery, writeTenderLog } = this.props;
     const loadingReportName = `${name}Loading`;
 
     let loading = {};
 
     loading[loadingReportName] = true;
+
     this.setState(loading);
 
     exportFile({
@@ -105,7 +106,7 @@ class TenderContainer extends React.Component {
       name,
       variables: {
         tenderId: tenderDetailQuery.tenderDetail._id,
-        supplierIds: companies,
+        ...variables,
       },
       onFinish: () => {
         loading[loadingReportName] = false;

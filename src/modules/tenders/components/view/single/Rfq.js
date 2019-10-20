@@ -53,31 +53,23 @@ class Rfq extends Tender {
       showAwardForm: false,
       awardNote: '',
       awardAttachments: [],
+
+      bidSummarySort: '',
+      showBidSummaryModal: false,
     };
 
-    this.bidSummaryReport = this.bidSummaryReport.bind(this);
+    this.generateBidSummaryReport = this.generateBidSummaryReport.bind(this);
+    this.toggleBidSummaryModal = this.toggleBidSummaryModal.bind(this);
+
     this.toggleAwardForm = this.toggleAwardForm.bind(this);
     this.award = this.award.bind(this);
+
     this.handleProductCodeChange = this.handleProductCodeChange.bind(this);
     this.handleFilterChange = this.handleFilterChange.bind(this);
     this.handleBetweenSearch = this.handleBetweenSearch.bind(this);
     this.handleRangeChange = this.handleRangeChange.bind(this);
     this.clearFilter = this.clearFilter.bind(this);
     this.onChangeAwardAttachment = this.onChangeAwardAttachment.bind(this);
-  }
-
-  bidSummaryReport() {
-    const { selectedCompanies } = this.state;
-
-    if (selectedCompanies.length < 1) {
-      return message.error('Please select atleast one supplier!');
-    }
-
-    this.props.downloadReport(
-      selectedCompanies,
-      'rfqBidSummaryReport',
-      'Bid summary list has been downloaded'
-    );
   }
 
   toggleAwardForm() {
@@ -149,6 +141,74 @@ class Rfq extends Tender {
     this.setState({});
 
     router.removeParams(this.props.history, 'between', 'from', 'to', 'sorter', 'productCode');
+  }
+
+  toggleBidSummaryModal() {
+    const { showBidSummaryModal } = this.state;
+
+    this.setState({ showBidSummaryModal: !showBidSummaryModal });
+  }
+
+  generateBidSummaryReport() {
+    const { selectedCompanies, bidSummarySort } = this.state;
+
+    if (selectedCompanies.length < 1) {
+      return message.error('Please select atleast one supplier!');
+    }
+
+    if (!bidSummarySort) {
+      return message.error('Please select sort option!');
+    }
+
+    this.props.downloadReport(
+      'rfqBidSummaryReport',
+      {
+        supplierIds: this.state.selectedCompanies,
+        sort: bidSummarySort,
+      },
+      'Bid summary list has been downloaded'
+    );
+  }
+
+  renderBidSummaryModal() {
+    const { showBidSummaryModal, bidSummarySort } = this.state;
+
+    if (!showBidSummaryModal) {
+      return null;
+    }
+
+    const onSortChange = value => {
+      this.setState({ bidSummarySort: value });
+    };
+
+    return (
+      <Modal
+        title="Bid summary"
+        visible={true}
+        onCancel={this.toggleBidSummaryModal}
+        footer={[
+          <Button key="cancel" onClick={this.toggleBidSummaryModal}>
+            Cancel
+          </Button>,
+          <Button key="submit" type="primary" onClick={this.generateBidSummaryReport}>
+            Ok
+          </Button>,
+        ]}
+      >
+        <Form>
+          <Form.Item label="Sort">
+            <Select
+              placeholder="Please select sort option"
+              value={bidSummarySort}
+              onChange={onSortChange}
+            >
+              <Option value="minTotalPrice">Min total price</Option>
+              <Option value="completeness">Completeness</Option>
+            </Select>
+          </Form.Item>
+        </Form>
+      </Modal>
+    );
   }
 
   renderFilter(type, requestedProducts) {
@@ -242,7 +302,7 @@ class Rfq extends Tender {
 
     if (type === 'rfq') {
       buttons.push(
-        <Button onClick={this.bidSummaryReport} loading={rfqBidSummaryReportLoading} key={0}>
+        <Button onClick={this.toggleBidSummaryModal} loading={rfqBidSummaryReportLoading} key={0}>
           Bid summary list
           {!rfqBidSummaryReportLoading ? <Icon type="file-excel" /> : ''}
         </Button>
@@ -431,10 +491,13 @@ class Rfq extends Tender {
       <Tabs defaultActiveKey={main ? '1' : '2'}>
         <TabPane disabled={!main} tab="Main" key="1">
           {main}
+          {this.renderBidSummaryModal()}
         </TabPane>
+
         <TabPane tab="Messages" key="2">
           <TenderMessagesSingle tenderDetail={tenderDetail} queryParams={queryParams} />
         </TabPane>
+
         <TabPane tab="Log" key="3">
           <Logs _id={tenderDetail._id} queryParams={queryParams} />
         </TabPane>

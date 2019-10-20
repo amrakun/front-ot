@@ -278,8 +278,8 @@ const exportTenders = `
 `;
 
 const rfqBidSummaryReport = `
-  query tenderResponsesRfqBidSummaryReport($tenderId: String!, $supplierIds: [String!]!) {
-    tenderResponsesRfqBidSummaryReport(tenderId: $tenderId, supplierIds: $supplierIds)
+  query tenderResponsesRfqBidSummaryReport($tenderId: String!, $supplierIds: [String!]!, $sort: String) {
+    tenderResponsesRfqBidSummaryReport(tenderId: $tenderId, supplierIds: $supplierIds, sort: $sort)
   }
 `;
 
@@ -406,5 +406,5 @@ export default {
   companies,
   buyers,
   logsTender,
-  logsTenderTotalCount
+  logsTenderTotalCount,
 };

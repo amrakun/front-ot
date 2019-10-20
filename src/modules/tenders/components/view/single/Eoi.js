@@ -31,8 +31,8 @@ class Eoi extends Tender {
       message.error('Please select atleast one supplier!');
     } else {
       this.props.downloadReport(
-        this.state.selectedCompanies,
         'eoiShortList',
+        { supplierIds: this.state.selectedCompanies },
         'EOI short list has been downloaded'
       );
     }
@@ -45,8 +45,8 @@ class Eoi extends Tender {
       message.error('Please select atleast one supplier!');
     } else {
       this.props.downloadReport(
-        this.state.selectedCompanies,
         'eoiBidderList',
+        { supplierIds: this.state.selectedCompanies },
         'EOI bidder list has been downloaded'
       );
     }
