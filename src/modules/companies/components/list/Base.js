@@ -29,9 +29,12 @@ class Base extends Common {
   }
 
   handleSend(path) {
+    const { queryParams } = this.props;
     const { selectedCompanies } = this.state;
 
-    this.props.history.push(path, { supplierIds: selectedCompanies });
+    this.props.history.push(`${path}?productCodes=${queryParams.productCodes}`, {
+      supplierIds: selectedCompanies,
+    });
   }
 
   renderFinanceStat(prev, current) {

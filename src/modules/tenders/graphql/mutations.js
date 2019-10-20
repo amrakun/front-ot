@@ -12,6 +12,7 @@ const commonParams = `
   $supplierIds: [String]
   $isToAll: Boolean
   $tierTypes: [String]
+  $productCodes: String
   $requestedProducts: [TenderRequestedProductInput]
   $requestedDocuments: [String]
 `;
@@ -30,6 +31,7 @@ const commonFields = `
   supplierIds: $supplierIds
   isToAll: $isToAll
   tierTypes: $tierTypes
+  productCodes: $productCodes
   requestedProducts: $requestedProducts
   requestedDocuments: $requestedDocuments
 `;

@@ -13,30 +13,32 @@ class CreateTenderContainer extends React.Component {
 
     this.state = {
       isSubmitted: false,
-    }
+    };
   }
 
   save = doc => {
-    const { type, tendersAdd, history } = this.props;
+    const { type, tendersAdd, history, queryParams } = this.props;
     const [publishDate, closeDate] = doc.dateRange;
 
     this.setState({ isSubmitted: true });
 
-    tendersAdd({ variables: { ...doc, publishDate, closeDate } })
+    tendersAdd({
+      variables: { ...doc, productCodes: queryParams.productCodes, publishDate, closeDate },
+    })
       .then(tender => {
         this.setState({ isSubmitted: false });
 
         alert.success('Successfully created a tender!');
 
         history.push(`/${type}?refetch`, {
-          newTenderId: tender.data.tendersAdd._id
+          newTenderId: tender.data.tendersAdd._id,
         });
       })
       .catch(error => {
         this.setState({ isSubmitted: false });
         alert.error(error.message);
       });
-  }
+  };
 
   render() {
     const { type, simpleCompaniesQuery, buyersQuery } = this.props;
@@ -64,19 +66,19 @@ class CreateTenderContainer extends React.Component {
 
     return <RfqForm {...updatedProps} />;
   }
-};
+}
 
 CreateTenderContainer.propTypes = {
   type: PropTypes.string,
   tendersAdd: PropTypes.func,
   simpleCompaniesQuery: PropTypes.object,
   buyersQuery: PropTypes.object,
-  history: PropTypes.object
+  history: PropTypes.object,
 };
 
 export default compose(
   graphql(gql(mutations.tendersAdd), {
-    name: 'tendersAdd'
+    name: 'tendersAdd',
   }),
 
   graphql(gql(companyQueries.simpleCompanies), {
@@ -84,11 +86,11 @@ export default compose(
     options: ({ location }) => {
       return {
         variables: {
-          _ids: (location.state || {}).supplierIds
+          _ids: (location.state || {}).supplierIds,
         },
-        notifyOnNetworkStatusChange: true
+        notifyOnNetworkStatusChange: true,
       };
-    }
+    },
   }),
 
   graphql(gql(queries.buyers), {

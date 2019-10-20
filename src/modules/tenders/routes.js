@@ -1,29 +1,21 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import queryString from 'query-string';
-import {
-  BuyerTenders,
-  CreateTender,
-  Tender,
-  EditTender,
-  SubmitTender
-} from './containers';
+import { BuyerTenders, CreateTender, Tender, EditTender, SubmitTender } from './containers';
 import { PublicEoi } from './components';
 
+const generateQueryParams = props => {
+  return queryString.parse(props.location.search);
+};
+
 export default [
-  <Route
-    key="peoi"
-    exact
-    path="/expression-of-interest"
-    component={PublicEoi}
-  />,
+  <Route key="peoi" exact path="/expression-of-interest" component={PublicEoi} />,
   <Route
     key={'/trfq'}
     exact
     path={'/trfq'}
     component={props => {
-      const queryParams = queryString.parse(props.location.search);
-      return <BuyerTenders {...props} queryParams={queryParams} type="trfq" />;
+      return <BuyerTenders {...props} queryParams={generateQueryParams(props)} type="trfq" />;
     }}
   />,
   <Route
@@ -31,8 +23,7 @@ export default [
     exact
     path={'/rfq'}
     component={props => {
-      const queryParams = queryString.parse(props.location.search);
-      return <BuyerTenders type="rfq" {...props} queryParams={queryParams} />;
+      return <BuyerTenders type="rfq" {...props} queryParams={generateQueryParams(props)} />;
     }}
   />,
   <Route
@@ -40,8 +31,7 @@ export default [
     exact
     path={'/eoi'}
     component={props => {
-      const queryParams = queryString.parse(props.location.search);
-      return <BuyerTenders type="eoi" {...props} queryParams={queryParams} />;
+      return <BuyerTenders type="eoi" {...props} queryParams={generateQueryParams(props)} />;
     }}
   />,
   <Route
@@ -49,7 +39,7 @@ export default [
     exact
     path={'/trfq/publish'}
     component={props => {
-      return <CreateTender {...props} type="trfq" />;
+      return <CreateTender {...props} type="trfq" queryParams={generateQueryParams(props)} />;
     }}
   />,
   <Route
@@ -57,7 +47,7 @@ export default [
     exact
     path={'/rfq/publish'}
     component={props => {
-      return <CreateTender {...props} type="rfq" />;
+      return <CreateTender {...props} type="rfq" queryParams={generateQueryParams(props)} />;
     }}
   />,
   <Route
@@ -65,7 +55,7 @@ export default [
     exact
     path={'/eoi/publish'}
     component={props => {
-      return <CreateTender {...props} type="eoi" />;
+      return <CreateTender {...props} type="eoi" queryParams={generateQueryParams(props)} />;
     }}
   />,
   <Route
@@ -73,8 +63,7 @@ export default [
     exact
     path={`/rfq/:id`}
     component={props => {
-      const queryParams = queryString.parse(props.location.search);
-      return <Tender {...props} queryParams={queryParams} />;
+      return <Tender {...props} queryParams={generateQueryParams(props)} />;
     }}
   />,
   <Route
@@ -82,8 +71,7 @@ export default [
     exact
     path={`/trfq/:id`}
     component={props => {
-      const queryParams = queryString.parse(props.location.search);
-      return <Tender {...props} queryParams={queryParams} />;
+      return <Tender {...props} queryParams={generateQueryParams(props)} />;
     }}
   />,
   <Route
@@ -91,8 +79,7 @@ export default [
     exact
     path={`/eoi/:id`}
     component={props => {
-      const queryParams = queryString.parse(props.location.search);
-      return <Tender {...props} queryParams={queryParams} />;
+      return <Tender {...props} queryParams={generateQueryParams(props)} />;
     }}
   />,
   <Route
@@ -100,14 +87,8 @@ export default [
     exact
     path={`${'/tender/submit'}/:id`}
     component={props => {
-      const queryParams = queryString.parse(props.location.search);
-      return <SubmitTender {...props} queryParams={queryParams} />;
+      return <SubmitTender {...props} queryParams={generateQueryParams(props)} />;
     }}
   />,
-  <Route
-    key={'/tender/edit'}
-    exact
-    path={`${'/tender/edit'}/:id`}
-    component={EditTender}
-  />
+  <Route key={'/tender/edit'} exact path={`${'/tender/edit'}/:id`} component={EditTender} />,
 ];
