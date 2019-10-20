@@ -54,7 +54,7 @@ class Rfq extends Tender {
       awardNote: '',
       awardAttachments: [],
 
-      bidSummarySort: '',
+      bidSummarySort: 'minTotalPrice',
       showBidSummaryModal: false,
     };
 
