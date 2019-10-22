@@ -278,8 +278,8 @@ const exportTenders = `
 `;
 
 const rfqBidSummaryReport = `
-  query tenderResponsesRfqBidSummaryReport($tenderId: String!, $supplierIds: [String!]!, $sort: String) {
-    tenderResponsesRfqBidSummaryReport(tenderId: $tenderId, supplierIds: $supplierIds, sort: $sort)
+  query tenderResponsesRfqBidSummaryReport($tenderId: String!, $supplierIds: [String!]!, $sort: String, $exchangeRate: Int) {
+    tenderResponsesRfqBidSummaryReport(tenderId: $tenderId, supplierIds: $supplierIds, sort: $sort, exchangeRate: $exchangeRate)
   }
 `;
 

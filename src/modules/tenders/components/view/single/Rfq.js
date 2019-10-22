@@ -55,6 +55,7 @@ class Rfq extends Tender {
       awardAttachments: [],
 
       bidSummarySort: 'minTotalPrice',
+      bidSummaryExchangeRate: 2500,
       showBidSummaryModal: false,
     };
 
@@ -150,7 +151,7 @@ class Rfq extends Tender {
   }
 
   generateBidSummaryReport() {
-    const { selectedCompanies, bidSummarySort } = this.state;
+    const { selectedCompanies, bidSummarySort, bidSummaryExchangeRate } = this.state;
 
     if (selectedCompanies.length < 1) {
       return message.error('Please select atleast one supplier!');
@@ -165,13 +166,14 @@ class Rfq extends Tender {
       {
         supplierIds: this.state.selectedCompanies,
         sort: bidSummarySort,
+        exchangeRate: bidSummaryExchangeRate,
       },
       'Bid summary list has been downloaded'
     );
   }
 
   renderBidSummaryModal() {
-    const { showBidSummaryModal, bidSummarySort } = this.state;
+    const { showBidSummaryModal, bidSummarySort, bidSummaryExchangeRate } = this.state;
 
     if (!showBidSummaryModal) {
       return null;
@@ -179,6 +181,10 @@ class Rfq extends Tender {
 
     const onSortChange = value => {
       this.setState({ bidSummarySort: value });
+    };
+
+    const onExchangeRateChange = e => {
+      this.setState({ bidSummaryExchangeRate: e.currentTarget.value });
     };
 
     return (
@@ -205,6 +211,9 @@ class Rfq extends Tender {
               <Option value="minTotalPrice">Min total price</Option>
               <Option value="completeness">Completeness</Option>
             </Select>
+          </Form.Item>
+          <Form.Item label="Exchange rate - MNT to USD">
+            <Input type="number" value={bidSummaryExchangeRate} onChange={onExchangeRateChange} />
           </Form.Item>
         </Form>
       </Modal>
