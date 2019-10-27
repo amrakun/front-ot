@@ -1,7 +1,8 @@
 const tenderMessageBuyerSend = `
   mutation tenderMessageBuyerSend(
     $tenderId: String!
-    $recipientSupplierIds: [String!]!
+    $recipientSupplierIds: [String!]
+    $eoiTargets: String
     $subject: String!
     $body: String!
     $attachment: TenderMessageAttachmentInput
@@ -10,6 +11,7 @@ const tenderMessageBuyerSend = `
     tenderMessageBuyerSend(
       tenderId: $tenderId
       recipientSupplierIds: $recipientSupplierIds
+      eoiTargets: $eoiTargets
       subject: $subject
       body: $body
       attachment: $attachment
@@ -50,5 +52,5 @@ const tenderMessageSetAsRead = `
 export default {
   tenderMessageBuyerSend,
   tenderMessageSupplierSend,
-  tenderMessageSetAsRead
+  tenderMessageSetAsRead,
 };

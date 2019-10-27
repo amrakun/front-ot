@@ -18,7 +18,7 @@ export const renderSupplierName = supplier => {
 };
 
 export const renderRecipient = ({ tenderMessage, currentUser, isDetailed }) => {
-  const { recipientSuppliers, senderSupplier } = tenderMessage;
+  const { recipientSuppliers, eoiTargets, senderSupplier } = tenderMessage;
 
   if (currentUser.isSupplier) {
     if (senderSupplier) {
@@ -28,6 +28,10 @@ export const renderRecipient = ({ tenderMessage, currentUser, isDetailed }) => {
     const recipientSupplier = recipientSuppliers.find(s => s._id === currentUser.companyId);
 
     return renderSupplierName(recipientSupplier);
+  }
+
+  if (eoiTargets) {
+    return eoiTargets === 'toAll' ? 'To all' : 'To particated suppliers';
   }
 
   if (recipientSuppliers && recipientSuppliers.length >= 1) {

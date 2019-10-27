@@ -29,6 +29,7 @@ const tenderMessageFields = `
   recipientSuppliers {
     ${supplierFields}
   },
+  eoiTargets,
   senderSupplier {
     ${supplierFields}
   },
