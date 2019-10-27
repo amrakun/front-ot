@@ -22,6 +22,7 @@ class MessageForm extends React.Component {
     })();
 
     this.state = {
+      eoiTargets: undefined,
       fileName: undefined,
       fileURL: undefined,
       editorHTMLContent: '',
@@ -30,7 +31,8 @@ class MessageForm extends React.Component {
 
     this.onEmailContentChange = e => this.setState({ editorHTMLContent: e.editor.getData() });
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.renderBuyerFields = this.renderBuyerFields.bind(this);
+    this.onEoiTargetsChange = this.onEoiTargetsChange.bind(this);
+    this.selectedSupplierIdChange = this.selectedSupplierIdChange.bind(this);
   }
 
   handleSubmit(e) {
@@ -38,33 +40,39 @@ class MessageForm extends React.Component {
 
     this.props.form.validateFields((err, values) => {
       if (err) {
-        message.error('Form error', err);
-        return;
+        return message.error('Form error', err);
       }
 
-      const { onSubmit, replyTo } = this.props;
+      const { onSubmit, replyTo, tenderDetail } = this.props;
 
       if (!onSubmit) {
         return;
       }
 
       const { currentUser } = this.context;
-      const { recipientSupplierIds } = this.state;
+      const { fileName, fileURL, recipientSupplierIds, editorHTMLContent, eoiTargets } = this.state;
 
-      const tenderId = this.props.tenderDetail._id;
+      if (!editorHTMLContent) {
+        return message.error('Please fill content');
+      }
 
       const doc = {
-        tenderId,
+        tenderId: tenderDetail._id,
         ...values,
         recipientSupplierIds,
-        body: this.state.editorHTMLContent,
+        eoiTargets,
+        body: editorHTMLContent,
       };
+
+      if (currentUser.isSupplier) {
+        doc.senderSupplierId = currentUser.companyId;
+      } else if (tenderDetail.type === 'eoi' && !eoiTargets) {
+        return message.error('Please choose suppliers');
+      }
 
       if (replyTo) {
         doc.replyToId = replyTo._id;
       }
-
-      const { fileName, fileURL } = this.state;
 
       if (fileName && fileURL) {
         doc.attachment = {
@@ -73,9 +81,6 @@ class MessageForm extends React.Component {
         };
       }
 
-      if (currentUser.isSupplier) {
-        doc.senderSupplierId = currentUser.companyId;
-      }
       onSubmit(doc);
     });
   }
@@ -91,6 +96,7 @@ class MessageForm extends React.Component {
     });
   }
 
+  // for rfqs
   selectedSupplierIdChange(values) {
     const valuesSet = new Set(values);
     const { suppliers, tenderDetail } = this.props;
@@ -110,15 +116,33 @@ class MessageForm extends React.Component {
     }
   }
 
+  onEoiTargetsChange(value) {
+    this.setState({ eoiTargets: value });
+  }
+
   renderBuyerFields() {
     const { currentUser } = this.context;
 
     if (currentUser.isSupplier) return null;
 
+    const { tenderDetail } = this.props;
+    const { eoiTargets } = this.state;
+
+    if (tenderDetail.type === 'eoi') {
+      return (
+        <Item label="Suppliers">
+          <Select onChange={this.onEoiTargetsChange} value={eoiTargets} placeholder="suppliers">
+            <Select.Option value="toAll">To all</Select.Option>
+            <Select.Option value="toParticipated">To participated suppliers</Select.Option>
+          </Select>
+        </Item>
+      );
+    }
+
     return (
       <Item label="Suppliers">
         <Select
-          onChange={this.selectedSupplierIdChange.bind(this)}
+          onChange={this.selectedSupplierIdChange}
           value={this.state.recipientSupplierIds}
           mode="multiple"
           placeholder="supplier"
@@ -174,6 +198,7 @@ class MessageForm extends React.Component {
       <>
         <Form layout="vertical" onSubmit={this.handleSubmit}>
           {this.renderBuyerFields()}
+
           <Item
             label="Subject"
             validateStatus={subjectError ? 'error' : ''}
