@@ -154,16 +154,13 @@ class Messages extends Component {
   }
 
   isNew(record) {
-    const { isRead, senderSupplier, senderBuyer } = record;
-    const { currentUser } = this.context;
+    const { isRead } = record;
 
-    if (currentUser.isSupplier && senderBuyer) {
-      return isRead ? undefined : <Icon type="info-circle" />;
+    if (isRead) {
+      return null;
     }
 
-    if (!currentUser.isSupplier && senderSupplier) {
-      return isRead ? undefined : <Icon type="info-circle" />;
-    }
+    return <Icon type="info-circle" />;
   }
 
   goto(route, tenderMessageDetail) {
@@ -202,17 +199,8 @@ class Messages extends Component {
 
   setAsRead(tenderMessageDetail) {
     if (!tenderMessageDetail.isRead) {
-      const { senderSupplier, senderBuyer } = tenderMessageDetail;
-      const { currentUser } = this.context;
-      if (
-        // supplier -> buyer
-        (!currentUser.isSupplier && senderSupplier) ||
-        // buyer -> supplier
-        (currentUser.isSupplier && senderBuyer)
-      ) {
-        const { tenderMessageSetAsRead } = this.props;
-        tenderMessageSetAsRead({ variables: { _id: tenderMessageDetail._id } });
-      }
+      const { tenderMessageSetAsRead } = this.props;
+      tenderMessageSetAsRead({ variables: { _id: tenderMessageDetail._id } });
     }
   }
 
