@@ -41,7 +41,7 @@ const tenderMessageFields = `
   },
   isAuto,
   isRead,
-  isReplySent
+  isReplySent,
   createdAt
 `;
 const tenderMessages = `
