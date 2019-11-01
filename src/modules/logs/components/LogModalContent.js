@@ -118,7 +118,7 @@ export default class LogModalContent extends React.Component {
   buildListFromObject(obj = {}) {
     const { fieldLabelMaps } = this.props;
     const flatObject = flattenObject(obj);
-    const names = flatObject ? Object.getOwnPropertyNames(flatObject) : [];
+    const names = flatObject ? Object.getOwnPropertyNames(flatObject).sort() : [];
     let list = [];
 
     if (isObjectEmpty(flatObject)) {
