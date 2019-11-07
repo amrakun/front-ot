@@ -1,8 +1,9 @@
 import React from 'react';
-import { Form, Input, Button, Select, message } from 'antd';
+import { Form, Input, Tag, Button, Select, message } from 'antd';
 import PropTypes from 'prop-types';
 import { Uploader } from 'modules/common/components';
 import { EditorCK } from 'modules/common/components/';
+import SupplierSearcher from 'modules/companies/containers/Searcher';
 
 const { Item } = Form;
 
@@ -26,6 +27,7 @@ class MessageForm extends React.Component {
       fileName: undefined,
       fileURL: undefined,
       editorHTMLContent: '',
+      eoiSelectedSuppliers: [],
       recipientSupplierIds,
     };
 
@@ -33,6 +35,7 @@ class MessageForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onEoiTargetsChange = this.onEoiTargetsChange.bind(this);
     this.selectedSupplierIdChange = this.selectedSupplierIdChange.bind(this);
+    this.onSelectEoiSuppliers = this.onSelectEoiSuppliers.bind(this);
   }
 
   handleSubmit(e) {
@@ -117,7 +120,33 @@ class MessageForm extends React.Component {
   }
 
   onEoiTargetsChange(value) {
-    this.setState({ eoiTargets: value });
+    this.setState({ eoiTargets: value, recipientSupplierIds: [] });
+  }
+
+  onSelectEoiSuppliers(suppliers) {
+    this.setState({
+      eoiSelectedSuppliers: suppliers,
+      recipientSupplierIds: suppliers.map(sup => sup._id),
+    });
+  }
+
+  removeEoiSelectedSupplier(supplierId) {
+    const { eoiSelectedSuppliers } = this.state;
+
+    const updatedEoiSelectedSuppliers = [];
+    const updatedRecipientSupplierIds = [];
+
+    eoiSelectedSuppliers.forEach(supplier => {
+      if (supplier._id !== supplierId) {
+        updatedEoiSelectedSuppliers.push(supplier);
+        updatedRecipientSupplierIds.push(supplierId);
+      }
+    });
+
+    this.setState({
+      eoiSelectedSuppliers: updatedEoiSelectedSuppliers,
+      recipientSupplierIds: updatedRecipientSupplierIds,
+    });
   }
 
   renderBuyerFields() {
@@ -126,16 +155,41 @@ class MessageForm extends React.Component {
     if (currentUser.isSupplier) return null;
 
     const { tenderDetail } = this.props;
-    const { eoiTargets } = this.state;
+    const { eoiTargets, eoiSelectedSuppliers } = this.state;
 
     if (tenderDetail.type === 'eoi') {
       return (
-        <Item label="Suppliers">
-          <Select onChange={this.onEoiTargetsChange} value={eoiTargets} placeholder="suppliers">
-            <Select.Option value="toAll">To all</Select.Option>
-            <Select.Option value="toParticipated">To participated suppliers</Select.Option>
-          </Select>
-        </Item>
+        <>
+          <Item label="Suppliers">
+            <Select onChange={this.onEoiTargetsChange} value={eoiTargets} placeholder="suppliers">
+              <Select.Option value="toAll">To all</Select.Option>
+              <Select.Option value="toParticipated">To participated suppliers</Select.Option>
+              <Select.Option value="toSelected">To selected suppliers</Select.Option>
+            </Select>
+          </Item>
+
+          {eoiTargets === 'toSelected' && (
+            <>
+              <SupplierSearcher title="Choose suppliers" onSelect={this.onSelectEoiSuppliers} />
+
+              <div style={{ margin: '20px 0px' }}>
+                {eoiSelectedSuppliers.map(supplier => {
+                  const basicInfo = supplier.basicInfo || {};
+
+                  return (
+                    <Tag
+                      key={supplier._id}
+                      closable={true}
+                      afterClose={() => this.removeEoiSelectedSupplier(supplier._id)}
+                    >
+                      {basicInfo.enName}
+                    </Tag>
+                  );
+                })}
+              </div>
+            </>
+          )}
+        </>
       );
     }
 

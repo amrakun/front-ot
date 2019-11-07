@@ -5,13 +5,14 @@ import { Modal, Select } from 'antd';
 
 const propTypes = {
   onSelect: PropTypes.func,
+  title: PropTypes.string,
   slogan: PropTypes.string,
   mode: PropTypes.string,
   onChange: PropTypes.func,
   onShowPopup: PropTypes.func,
   onSearch: PropTypes.func,
   value: PropTypes.array,
-  suppliers: PropTypes.array
+  suppliers: PropTypes.array,
 };
 
 class SupplierSearcher extends React.Component {
@@ -77,15 +78,13 @@ class SupplierSearcher extends React.Component {
       onSearch: onSearch,
       onChange: this.onChange,
       value: selectedValues,
-      filterOption: true
+      filterOption: true,
     };
 
     return (
       <Select {...selectProps}>
         {options.map(supplier => (
-          <Select.Option
-            key={mode === 'select' ? supplier._id : JSON.stringify(supplier)}
-          >
+          <Select.Option key={mode === 'select' ? supplier._id : JSON.stringify(supplier)}>
             {supplier.basicInfo.enName}
           </Select.Option>
         ))}
@@ -94,19 +93,19 @@ class SupplierSearcher extends React.Component {
   }
 
   renderModalTrigger() {
-    const { slogan } = this.props;
+    const { slogan, title } = this.props;
 
     return (
       <span>
         <Tag onClick={this.showPopup} className="dashed-button">
-          <Icon type="plus" /> {`${slogan || 'Add'} an existing supplier`}
+          <Icon type="plus" /> {title || `${slogan || 'Add'} an existing supplier`}
         </Tag>
 
         <Modal
           okText={slogan || 'Add'}
           cancelText="Cancel"
           maskClosable={false}
-          title={`${slogan || 'Add'} an existing supplier`}
+          title={title || `${slogan || 'Add'} an existing supplier`}
           visible={this.state.visible}
           onOk={this.onOk}
           onCancel={this.onCancel}
