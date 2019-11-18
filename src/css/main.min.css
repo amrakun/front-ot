@@ -123,10 +123,6 @@ table.stats tr td:last-child {
   text-align: right;
 }
 
-.ant-modal {
-  margin: 0 auto;
-}
-
 .ant-modal-content {
   border-radius: 2px;
   border: 0;
@@ -415,6 +411,13 @@ i.success {
 .form-table .ant-upload-disabled .ant-btn {
   color: #fff;
   cursor: not-allowed;
+}
+.form-table .ant-upload-list {
+  display: inline-block;
+}
+.form-table .ant-table-row td {
+  padding-top: 1px !important;
+  padding-bottom: 1px !important;
 }
 
 .right {

@@ -231,6 +231,14 @@ i.success {
     color: #fff;
     cursor: not-allowed;
   }
+  .ant-upload-list {
+    display: inline-block;
+  }
+
+  .ant-table-row td {
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
+  }
 }
 
 .right {

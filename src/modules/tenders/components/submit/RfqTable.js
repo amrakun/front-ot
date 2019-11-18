@@ -221,6 +221,7 @@ class RfqTable extends Component {
           size="middle"
           scroll={{
             x: 2000,
+            y: '65vh',
           }}
         >
           {this.renderCell({
