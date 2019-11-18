@@ -129,6 +129,7 @@ export default class Logs extends React.Component {
           visible={this.state.showModal}
           footer={null}
           onCancel={this.toggleModal}
+          width={window.innerWidth * 0.85}
         >
           {<LogModalContainer log={logData} />}
         </Modal>

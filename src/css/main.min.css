@@ -1,9 +1,7 @@
-@charset "UTF-8";
-.numberCard,
+﻿.numberCard,
 .NumberCardLines {
   height: 112px;
 }
-
 .numberCard {
   padding: 24px;
   margin-bottom: 24px;
@@ -27,7 +25,6 @@
   height: 32px;
   margin-bottom: 6px;
 }
-
 .numberCardLines {
   margin-bottom: 24px;
 }
@@ -55,38 +52,30 @@
   height: 32px;
   margin-bottom: 0;
 }
-
 .chart-row {
   margin: 0 -12px;
 }
-
 .chart-row [class^='ant-col'] {
   padding: 0 12px;
 }
-
 .chart-filter,
 .chart-row {
   margin-bottom: 24px;
 }
-
 .chart-filter .chart-filter-input {
   margin-right: 20px;
 }
-
 .pie-chart-labels {
   text-align: center;
 }
-
 .pie-chart-labels .chart-text {
   display: inline-block;
   line-height: 20px;
   margin: 0 12px 12px;
 }
-
 .chart-text label {
   padding-left: 8px;
 }
-
 .chart-count {
   height: 200px;
   line-height: 200px;
@@ -95,23 +84,19 @@
   text-align: center;
   color: #000;
 }
-
 .barchart-wrapper .ant-card-body {
-  padding-left: 0px;
+  padding-left: 0;
 }
-
 .stats-table-wrapper p {
   font-size: 24px;
   margin-bottom: 0;
 }
-
 .textCard.big {
   padding: 10px;
 }
 .textCard.big .iconWarp {
   margin-top: 16px;
 }
-
 table.stats {
   width: 100%;
   margin-top: 16px;
@@ -122,12 +107,6 @@ table.stats tr td:first-child {
 table.stats tr td:last-child {
   text-align: right;
 }
-
-.ant-modal {
-  width: 85% !important;
-  margin: 0 auto;
-}
-
 .ant-modal-content {
   border-radius: 2px;
   border: 0;
@@ -190,11 +169,9 @@ table.stats tr td:last-child {
 .ant-modal-content .log-box.danger .field-value {
   color: #ea475d;
 }
-
 .ant-row {
   margin-bottom: 16px;
 }
-
 .data-label {
   font-size: 12px;
   text-transform: uppercase;
@@ -212,23 +189,18 @@ table.stats tr td:last-child {
 .data-label.info {
   color: #108ee9;
 }
-
 .bg-white {
   background-color: #fff;
 }
-
 .pull-right {
   float: right;
 }
-
 .hidden {
   display: none;
 }
-
 .ant-menu-item > a {
   display: inline-block;
 }
-
 .logo {
   height: 94px;
   display: flex;
@@ -241,18 +213,15 @@ table.stats tr td:last-child {
   width: 60px;
   max-width: 100%;
 }
-
 .bordered {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 3px;
 }
-
 .ant-layout-footer {
   text-align: center;
   z-index: 0;
 }
-
 .ant-menu-horizontal.ant-menu-root {
   border: none;
   background: #fff;
@@ -275,7 +244,6 @@ table.stats tr td:last-child {
 .ant-menu-horizontal.ant-menu-root:not(.landing) {
   margin-bottom: 24px;
 }
-
 .ant-layout-sider {
   position: relative;
   background: #fff;
@@ -310,72 +278,58 @@ table.stats tr td:last-child {
 .ant-layout-sider.ant-layout-sider-collapsed .ant-menu-item a {
   white-space: nowrap;
 }
-
 .main-wrapper.mn.ant-layout .ant-menu-item.multi-line i {
   position: relative;
   top: -8px;
 }
-
 .ant-layout-sider-trigger {
   background: transparent;
 }
 .ant-layout-sider-trigger i {
   color: #333;
 }
-
 .ant-layout,
 .ant-layout-footer {
   background: #e5f4f6;
 }
-
 .ant-menu-inline,
 .ant-menu-vertical {
   border: none;
 }
-
 .ant-layout-content {
   margin: 0 24px;
 }
-
 .ant-breadcrumb {
   margin: 14px 0 14px 24px;
   float: left;
 }
-
 i.success {
   color: green;
 }
-
 .preq-form .ant-calendar-picker {
   width: calc(100% - 16px);
 }
 .preq-form .ant-row.ant-form-item {
   margin-bottom: 10px !important;
 }
-
 .multiple-wrapper {
   padding: 8px 0;
 }
-
 .ant-card:not(.ant-card-no-hovering):hover {
   box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.05);
   border-color: transparent;
 }
-
 .ant-card-head-title {
   font-size: 13px;
   white-space: normal;
 }
-
 .ant-checkbox-group.horizontal .ant-checkbox-group-item {
   display: block;
   padding: 5px 0;
 }
-
 .margin {
   margin-top: 16px;
 }
-
 .table-operations {
   padding-bottom: 16px;
   text-align: right;
@@ -389,11 +343,9 @@ i.success {
 .table-operations a.ant-btn .anticon {
   margin-right: 8px;
 }
-
 .send-rfq .ant-select-lg {
   width: 164px;
 }
-
 .rfq-form-row {
   display: flex;
   overflow: scroll;
@@ -401,7 +353,6 @@ i.success {
 .rfq-form-row .ant-input {
   width: 164px;
 }
-
 .form-table .ant-row.ant-form-item {
   margin: 0;
   display: block;
@@ -428,14 +379,12 @@ i.success {
 .right {
   float: right !important;
 }
-
 .center-content {
   display: flex;
   justify-content: center;
   align-items: center;
   height: calc(100vh - 200px);
 }
-
 .home-landing {
   position: absolute;
   top: 0;
@@ -444,18 +393,16 @@ i.success {
   height: 100%;
   z-index: 100;
 }
-
 .home-container {
   position: relative;
   margin: 0 auto;
   width: 1000px;
   height: 100vh;
 }
-
 #home-quote {
   position: absolute;
   top: -70px;
-  right: 0px;
+  right: 0;
   font-size: 30px;
   background-color: #fff;
   color: #63aada;
@@ -464,15 +411,14 @@ i.success {
   font-style: italic;
   font-family: 'serif';
 }
-
 .home-landing .top {
   position: absolute;
   z-index: 10;
   overflow: hidden;
   padding: 20px 20px 10px;
-  -webkit-box-shadow: 0px 5px 19px 5px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0px 5px 19px 5px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 5px 19px 5px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 5px 19px 5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 5px 19px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 19px 5px rgba(0, 0, 0, 0.3);
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
@@ -519,9 +465,9 @@ i.success {
   padding: 20px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  -webkit-box-shadow: 0px 5px 19px 5px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0px 5px 19px 5px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 5px 19px 5px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 5px 19px 5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 5px 19px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 19px 5px rgba(0, 0, 0, 0.3);
 }
 .home-landing .desc {
   height: 229px;
@@ -563,7 +509,6 @@ i.success {
   width: 100%;
   height: 190px;
 }
-
 .login-card {
   width: 400px;
   padding: 26px 15px 15px 15px;
@@ -574,35 +519,28 @@ i.success {
 .login-card form .ant-form-item:last-child {
   margin-bottom: 0;
 }
-
 .main.ant-layout {
   min-height: 100vh;
   transition: margin-left 0.2s ease;
 }
-
 .ant-menu.landing {
   line-height: 64px;
 }
-
 .logo.landing {
   height: auto;
   margin-left: 16px;
 }
-
 *::-webkit-scrollbar-track {
   background-color: transparent;
 }
-
 *::-webkit-scrollbar {
   width: 10px;
   height: 10px;
   background-color: transparent;
 }
-
 *::-webkit-scrollbar-thumb {
   background-color: #e3e3e3;
 }
-
 .ant-pagination {
   margin: 0 auto;
   display: table;
@@ -610,41 +548,33 @@ i.success {
   margin-bottom: 16px;
   float: none;
 }
-
 .card-container > .ant-tabs-card > .ant-tabs-content {
   margin-top: -16px;
 }
-
 .card-container > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
   background: #fff;
   padding: 16px;
 }
-
 .card-container > .ant-tabs-card > .ant-tabs-bar {
   border-color: #fff;
 }
-
 .card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
   border-color: transparent;
   background: transparent;
 }
-
 .card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
   border-color: #fff;
   background: #fff;
 }
-
 .ant-form-item-label {
   white-space: normal;
   line-height: 18px;
   margin-bottom: 6px;
   text-align: left;
 }
-
 form .ant-input-number {
   width: 100%;
 }
-
 .supplier-forms {
   max-width: 1000px;
 }
@@ -671,27 +601,22 @@ form .ant-input-number {
 .supplier-forms .audit-question .ant-row.ant-form-item {
   margin-bottom: 0;
 }
-
 .ant-table-thead > tr > th,
 .ant-table-tbody > tr > td {
   padding: 6px;
   word-break: normal;
 }
-
 .ant-table-tbody > tr > td {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
-
 .ant-table-thead > tr > th {
   font-size: 10px;
 }
-
 .ant-table-row.highlight {
   background-color: #f2fafb;
 }
-
 .loading {
   min-height: 50vh;
   height: 100%;
@@ -700,34 +625,27 @@ form .ant-input-number {
   justify-content: center;
   align-items: center;
 }
-
 .no-pad-bottom .ant-card-body {
   padding-bottom: 0;
 }
-
 .rdw-editor-main {
   height: 372px;
 }
-
 [class*='dashed-button'] {
   background: #fff;
   border-style: dashed;
 }
-
 .dashed-button-big {
   width: 100%;
   margin-top: 16px;
 }
-
 .ant-select-tree {
   max-height: 600px;
   overflow-y: auto;
 }
-
 .ant-tag {
   margin-bottom: 8px;
 }
-
 .upload-btn-wrapper {
   position: relative;
   display: inline-block;
@@ -756,11 +674,9 @@ form .ant-input-number {
   height: 100%;
   cursor: pointer;
 }
-
 .capitalize {
   text-transform: capitalize;
 }
-
 .suppliers-search {
   width: 200px;
   float: left;
@@ -777,12 +693,10 @@ form .ant-input-number {
 .suppliers-search .anticon-close-circle:active {
   color: #666;
 }
-
 .radio-vertical .ant-radio-wrapper {
   display: block;
   padding: 8px 0;
 }
-
 .disabled-inputs .ant-input,
 .disabled-inputs .ant-select-selection {
   pointer-events: none;
@@ -794,17 +708,14 @@ form .ant-input-number {
 .disabled-inputs .ant-select-arrow {
   display: none;
 }
-
 .registration-title {
   max-width: 1000px;
   text-align: center;
   margin-bottom: 24px;
 }
-
 .user-register-form .ant-form-item {
   margin-bottom: 10px;
 }
-
 .ant-popover-content {
   max-width: 400px;
 }
@@ -813,25 +724,20 @@ form .ant-input-number {
   margin: 8px 0;
   padding-left: 16px;
 }
-
 .users-search .ant-input-suffix {
   cursor: pointer;
 }
-
 .ant-select-dropdown-menu-item {
   white-space: normal;
 }
-
 .report-btn {
   display: block;
   width: 100%;
   margin-top: 24px;
 }
-
 .user-phone .ant-input-number-handler-wrap {
   display: none;
 }
-
 .evidence-check label {
   position: relative;
   padding-left: 24px !important;
@@ -844,11 +750,9 @@ form .ant-input-number {
 .evidence-check label span {
   padding: 0;
 }
-
 .ant-table-thead th span {
   text-transform: capitalize;
 }
-
 a.sn {
   font-weight: 600;
   color: #333;
@@ -857,11 +761,9 @@ a.sn {
 a.sn:hover {
   text-decoration: none;
 }
-
 .ant-upload-list-item-name {
   max-width: 150px;
 }
-
 .login-as-form {
   list-style: none;
 }
@@ -872,7 +774,6 @@ a.sn:hover {
 .login-as-form li:hover {
   text-decoration: underline;
 }
-
 .suppliers-count {
   font-size: 30px;
   text-align: center;
@@ -883,7 +784,6 @@ a.sn:hover {
   font-size: 26px;
   font-weight: 100;
 }
-
 table.suppliers-filter {
   width: 100%;
 }
@@ -891,27 +791,22 @@ table.suppliers-filter .ant-select {
   display: block;
   width: 110px;
 }
-
 .card-columns .ant-card {
   margin-bottom: 24px;
 }
-
 .tenders-table .anticon {
   position: relative;
   top: 3px;
 }
-
 .video-modal .ant-modal-body {
   padding: 0;
 }
-
 .video-container {
   position: relative;
   padding-bottom: 56.25%;
   height: 0;
   overflow: hidden;
 }
-
 table.mass-email-response tr td {
   border-bottom: 1px solid #ddd;
   padding: 6px 12px;
@@ -922,63 +817,48 @@ table.mass-email-response tr td:last-child {
   letter-spacing: 1px;
   font-weight: 600;
 }
-
 .clickable {
   cursor: pointer;
 }
-
 .app-name {
   text-align: left;
   margin-bottom: 64px;
   color: #fff;
 }
-
 .app-name strong {
   font-size: 55px;
   text-transform: uppercase;
   display: inline-block;
   padding-right: 25px;
 }
-
 .app-name span {
   font-size: 22px;
 }
-
 .finance-stat {
   display: inline-block;
   margin-right: 10px;
 }
-
 .finance-stat .year {
   color: #bbbaba;
 }
-
 .finance-stat.not-changed {
   color: #bdbd5f;
 }
-
 .finance-stat.up {
   color: green;
 }
-
 .finance-stat.up::after {
   content: '↑';
 }
-
 .finance-stat.down {
   color: red;
 }
-
 .finance-stat.down::after {
   content: '↓';
 }
-
 .products-tree-select {
   width: 450px !important;
 }
-
 .tender-message-detail .ant-row div {
   margin-bottom: 5px;
-}
-
-/*# sourceMappingURL=main.min.css.map */
+} /*# sourceMappingURL=main.min.css.map */
