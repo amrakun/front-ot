@@ -417,6 +417,9 @@ i.success {
   color: #fff;
   cursor: not-allowed;
 }
+.form-table .ant-upload-list {
+  display: inline-block;
+}
 
 .right {
   float: right !important;
