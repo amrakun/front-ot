@@ -420,6 +420,10 @@ i.success {
 .form-table .ant-upload-list {
   display: inline-block;
 }
+.form-table .ant-table-row td {
+  padding-top: 1px !important;
+  padding-bottom: 1px !important;
+}
 
 .right {
   float: right !important;
