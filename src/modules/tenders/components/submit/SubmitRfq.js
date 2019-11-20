@@ -33,11 +33,14 @@ class SubmitTender extends BaseForm {
   getRespondedProducts() {
     const { requestedProducts } = this.props.data;
 
-    return this.state.respondedProducts.map((product, index) => {
+    const products = [];
+    const currencies = [];
+
+    for (const [index, product] of this.state.respondedProducts.entries()) {
       const requestedProduct = requestedProducts[index];
 
       if (!requestedProduct) {
-        return {};
+        continue;
       }
 
       if (
@@ -50,7 +53,7 @@ class SubmitTender extends BaseForm {
         !product.suggestedManufacturerPartNumber &&
         !product.comment
       ) {
-        return;
+        continue;
       }
 
       const totalPrice = requestedProduct.quantity * product.unitPrice;
@@ -85,11 +88,21 @@ class SubmitTender extends BaseForm {
         throw new Error('Please fill a value in "shipping terms" field');
       }
 
-      return {
+      if (product.currency && !currencies.includes(product.currency)) {
+        currencies.push(product.currency);
+      }
+
+      products.push({
         ...product,
         totalPrice,
-      };
-    });
+      });
+    }
+
+    if (currencies.length > 1) {
+      throw new Error('Please choose only 1 currency');
+    }
+
+    return products;
   }
 
   handleSubmit(e) {
