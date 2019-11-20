@@ -40,6 +40,19 @@ class SubmitTender extends BaseForm {
         return {};
       }
 
+      if (
+        !product.unitPrice &&
+        !product.currency &&
+        !product.leadTime &&
+        !product.shippingTerms &&
+        !product.alternative &&
+        !product.suggestedManufacturer &&
+        !product.suggestedManufacturerPartNumber &&
+        !product.comment
+      ) {
+        return;
+      }
+
       const totalPrice = requestedProduct.quantity * product.unitPrice;
 
       delete product.key;

@@ -83,9 +83,9 @@ class RfqTable extends Component {
           }
 
           const doc = {
-            unitPrice: row[7] || 0,
+            unitPrice: row[7],
             currency: row[8] || '',
-            leadTime: row[9] || 0,
+            leadTime: row[9],
             shippingTerms: row[10] || '',
             alternative: row[11] || '',
             suggestedManufacturer: row[12] || '',
