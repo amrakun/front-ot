@@ -95,7 +95,10 @@ class Eoi extends Tender {
           return (
             <a
               href="#download"
-              onClick={() => window.open(readFileUrl(record.file.url))}
+              onClick={e => {
+                e.preventDefault();
+                window.open(readFileUrl(record.file.url));
+              }}
               target="__blank"
             >
               Download
