@@ -299,8 +299,9 @@ class Rfq extends Tender {
     );
   }
 
-  renderOperations(type, status) {
-    const { rfqBidSummaryReportLoading } = this.props;
+  renderOperations() {
+    const { rfqBidSummaryReportLoading, tenderDetail } = this.props;
+    const { type, status, rfqType } = tenderDetail || {};
 
     const buttons = [
       <Button type="primary" onClick={this.toggleAwardForm} disabled={status !== 'closed'} key={1}>
@@ -309,7 +310,7 @@ class Rfq extends Tender {
       </Button>,
     ];
 
-    if (type === 'rfq') {
+    if (type === 'rfq' && rfqType === 'goods') {
       buttons.push(
         <Button onClick={this.toggleBidSummaryModal} loading={rfqBidSummaryReportLoading} key={0}>
           Bid summary list
@@ -472,7 +473,7 @@ class Rfq extends Tender {
 
   render() {
     const tenderDetail = this.props.tenderDetail || {};
-    const { type, status } = tenderDetail;
+    const { type } = tenderDetail;
     const requestedProducts = tenderDetail.requestedProducts || [];
     const { queryParams } = this.props;
 
@@ -485,7 +486,7 @@ class Rfq extends Tender {
 
           <Col sm={24} xl={type === 'trfq' ? 24 : 18} lg={type === 'trfq' ? 24 : 17}>
             {this.renderTable({
-              tableOperations: this.renderOperations(type, status),
+              tableOperations: this.renderOperations(),
             })}
           </Col>
         </Row>
