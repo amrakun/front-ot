@@ -463,10 +463,18 @@ class Rfq extends Tender {
         columns={[...rfqRequestColumns, ...responseColumns]}
         rowKey={() => Math.random()}
         scroll={{ x: 2000 }}
-        dataSource={respondedProducts.map((product, index) => ({
-          ...product,
-          ...requestedProducts[index],
-        }))}
+        dataSource={respondedProducts.map((product, index) => {
+          let requestedProduct = requestedProducts[index];
+
+          if (product.code) {
+            requestedProduct = requestedProducts.find(rp => rp.code === product.code);
+          }
+
+          return {
+            ...product,
+            ...requestedProduct,
+          };
+        })}
       />
     );
   }
