@@ -54,7 +54,6 @@ class RfqForm extends BaseForm {
     }
 
     const requestedProducts = (this.state.requestedProducts || []).map(product => {
-      delete product.key;
       delete product.__typename;
 
       return product;

@@ -23,12 +23,11 @@ class RfqTable extends Component {
     if (requestedProducts) {
       requestedProducts.forEach((product, i) => {
         const productResponse = respondedProducts[i];
-        const key = Math.random();
-        const extendedProduct = { key, ...product, ...productResponse };
+        const extendedProduct = { ...product, ...productResponse };
 
         products.push(extendedProduct);
 
-        perProductStates[`product__${key}`] = extendedProduct;
+        perProductStates[`product__${product.id}`] = extendedProduct;
       });
     }
 
@@ -47,19 +46,19 @@ class RfqTable extends Component {
     return this.props.onChange(collectProducts(this.state));
   }
 
-  onProductFileChange(files, name, recordKey) {
-    const stateKey = `product__${recordKey}`;
-    const product = this.state[stateKey] || {};
+  onProductFileChange(files, name, recordId) {
+    const stateKey = `product__${recordId}`;
+    const product = this.state[stateKey] || { id: recordId };
 
     product[name] = files ? files[0] : null;
 
     this.setState({ [stateKey]: product }, () => this.onChange());
   }
 
-  async onProductInputChange(e, name, recordKey, dataType) {
-    const stateKey = `product__${recordKey}`;
+  async onProductInputChange(e, name, recordId, dataType) {
+    const stateKey = `product__${recordId}`;
 
-    const product = this.state[stateKey] || {};
+    const product = this.state[stateKey] || { id: recordId };
 
     product[name] = controlValueParser({ e, dataType });
 
@@ -156,14 +155,14 @@ class RfqTable extends Component {
         value,
         disabled,
         type,
-        onChange: e => this.onProductInputChange(e, name, record.key),
+        onChange: e => this.onProductInputChange(e, name, record.id),
       };
 
       let control = <Input {...inputProps} />;
 
       if (type === 'select') {
         control = (
-          <Select value={value} onChange={e => this.onProductInputChange(e, name, record.key)}>
+          <Select value={value} onChange={e => this.onProductInputChange(e, name, record.id)}>
             {options()}
           </Select>
         );
@@ -174,7 +173,7 @@ class RfqTable extends Component {
           <Uploader
             defaultFileList={[record[name]]}
             disabled={disabled}
-            onChange={files => this.onProductFileChange(files, name, record.key)}
+            onChange={files => this.onProductFileChange(files, name, record.id)}
           />
         );
       }

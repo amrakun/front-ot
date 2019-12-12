@@ -17,12 +17,9 @@ class RfqTable extends Component {
     const perProductStates = {};
 
     requestedProducts.forEach(product => {
-      const key = Math.random();
-      const extendedProduct = { key, ...product };
+      products.push(product);
 
-      products.push(extendedProduct);
-
-      perProductStates[`product__${key}`] = extendedProduct;
+      perProductStates[`product__${product.id}`] = product;
     });
 
     this.state = {
@@ -31,7 +28,7 @@ class RfqTable extends Component {
     };
 
     if (this.state.products.length === 0) {
-      this.state.products = [{ key: Math.random() }];
+      this.state.products = [{ id: Math.random().toString() }];
     }
 
     this.onProductInputChange = this.onProductInputChange.bind(this);
@@ -42,7 +39,7 @@ class RfqTable extends Component {
   addProductRow() {
     const { products } = this.state;
 
-    products.push({ key: Math.random() });
+    products.push({ id: Math.random().toString() });
 
     this.setState({ products });
   }
@@ -63,7 +60,7 @@ class RfqTable extends Component {
         const perProductStates = {};
 
         data.forEach(row => {
-          const key = Math.random();
+          const id = Math.random();
 
           const [
             code,
@@ -76,7 +73,7 @@ class RfqTable extends Component {
           ] = row;
 
           const extendedProduct = {
-            key,
+            id,
             code,
             purchaseRequestNumber,
             shortText,
@@ -88,7 +85,7 @@ class RfqTable extends Component {
 
           products.push(extendedProduct);
 
-          perProductStates[`product__${key}`] = extendedProduct;
+          perProductStates[`product__${id}`] = extendedProduct;
         });
 
         this.setState({ products, ...perProductStates }, this.onChange);
@@ -100,9 +97,9 @@ class RfqTable extends Component {
     return this.props.onChange(collectProducts(this.state));
   }
 
-  onProductInputChange(e, name, recordKey, dataType) {
-    const stateKey = `product__${recordKey}`;
-    const product = this.state[stateKey] || {};
+  onProductInputChange(e, name, recordId, dataType) {
+    const stateKey = `product__${recordId}`;
+    const product = this.state[stateKey] || { id: recordId };
 
     product[name] = controlValueParser({ e, dataType });
 
@@ -118,7 +115,7 @@ class RfqTable extends Component {
       const inputProps = {
         defaultValue,
         type: type,
-        onChange: e => this.onProductInputChange(e, name, record.key, dataType),
+        onChange: e => this.onProductInputChange(e, name, record.id, dataType),
       };
 
       if (dataType === 'eightDigit') {
