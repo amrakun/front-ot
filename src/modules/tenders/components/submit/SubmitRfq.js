@@ -58,7 +58,6 @@ class SubmitTender extends BaseForm {
 
       const totalPrice = requestedProduct.quantity * product.unitPrice;
 
-      delete product.key;
       delete product.__typename;
       delete product.purchaseRequestNumber;
       delete product.shortText;

@@ -134,9 +134,9 @@ class RfqTable extends Component {
         const perProductStates = {};
 
         for (const [index, doc] of docs.entries()) {
-          const product = { ...products[index] };
+          const product = { id: Math.random().toString(), ...products[index] };
           products[index] = { ...product, ...doc };
-          perProductStates[`product__${product.key}`] = products[index];
+          perProductStates[`product__${product.id}`] = products[index];
         }
 
         this.setState({ products, ...perProductStates }, () => this.onChange());
