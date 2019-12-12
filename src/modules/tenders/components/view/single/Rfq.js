@@ -301,7 +301,7 @@ class Rfq extends Tender {
 
   renderOperations() {
     const { rfqBidSummaryReportLoading, tenderDetail } = this.props;
-    const { type, status, rfqType } = tenderDetail || {};
+    const { type, status } = tenderDetail || {};
 
     const buttons = [
       <Button type="primary" onClick={this.toggleAwardForm} disabled={status !== 'closed'} key={1}>
@@ -310,7 +310,7 @@ class Rfq extends Tender {
       </Button>,
     ];
 
-    if (type === 'rfq' && rfqType === 'goods') {
+    if (type === 'rfq') {
       buttons.push(
         <Button onClick={this.toggleBidSummaryModal} loading={rfqBidSummaryReportLoading} key={0}>
           Bid summary list
@@ -463,16 +463,12 @@ class Rfq extends Tender {
         columns={[...rfqRequestColumns, ...responseColumns]}
         rowKey={() => Math.random()}
         scroll={{ x: 2000 }}
-        dataSource={respondedProducts.map((product, index) => {
-          let requestedProduct = requestedProducts[index];
-
-          if (product.code) {
-            requestedProduct = requestedProducts.find(rp => rp.code === product.code);
-          }
+        dataSource={requestedProducts.map(product => {
+          const respondedProduct = respondedProducts.find(rp => rp.id === product.id);
 
           return {
             ...product,
-            ...requestedProduct,
+            ...respondedProduct,
           };
         })}
       />

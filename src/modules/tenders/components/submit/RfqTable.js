@@ -22,7 +22,7 @@ class RfqTable extends Component {
     // data initialization
     if (requestedProducts) {
       requestedProducts.forEach((product, i) => {
-        const productResponse = respondedProducts[i];
+        const productResponse = respondedProducts.find(rp => rp.id === product.id) || {};
         const extendedProduct = { ...product, ...productResponse };
 
         products.push(extendedProduct);
