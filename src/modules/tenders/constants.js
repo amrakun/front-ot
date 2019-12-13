@@ -18,8 +18,8 @@ export const labels = {
 };
 
 export const rfqProductsColumns = {
-  code: 'PR Number',
-  purchaseRequestNumber: 'OT Material number',
+  code: 'OT Material number',
+  purchaseRequestNumber: 'PR Number',
   shortText: 'Material Description',
   quantity: 'Quantity',
   uom: 'UOM',

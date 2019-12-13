@@ -63,8 +63,8 @@ class RfqTable extends Component {
           const id = Math.random();
 
           const [
-            code,
             purchaseRequestNumber,
+            code,
             shortText,
             quantity,
             uom,
@@ -145,14 +145,14 @@ class RfqTable extends Component {
         }}
       >
         {this.renderCell({
-          name: 'code',
-          title: __(rpc.code),
-          dataType: 'eightDigit',
-        })}
-        {this.renderCell({
           name: 'purchaseRequestNumber',
           title: __(rpc.purchaseRequestNumber),
           type: 'number',
+          dataType: 'eightDigit',
+        })}
+        {this.renderCell({
+          name: 'code',
+          title: __(rpc.code),
           dataType: 'eightDigit',
         })}
         {this.renderCell({
