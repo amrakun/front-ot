@@ -110,11 +110,11 @@ class RfqTable extends Component {
     const { name, title, type, dataType, width = 140 } = options;
 
     const render = (text, record) => {
-      let defaultValue = record[name];
+      const product = this.state[`product__${record.id}`] || {};
+      const value = product[name];
 
       const inputProps = {
-        defaultValue,
-        value: defaultValue,
+        value,
         type: type,
         onChange: e => this.onProductInputChange(e, name, record.id, dataType),
       };
