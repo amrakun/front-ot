@@ -58,14 +58,14 @@ export const eoiColumns = [...eoiRequestColumns, ...eoiResponseColumns];
 
 export const rfqRequestColumns = [
   {
-    title: rfqProductsColumns.code,
-    width: 150,
-    dataIndex: 'code',
+    title: rfqProductsColumns.purchaseRequestNumber,
+    dataIndex: 'purchaseRequestNumber',
     key: '1',
   },
   {
-    title: rfqProductsColumns.purchaseRequestNumber,
-    dataIndex: 'purchaseRequestNumber',
+    title: rfqProductsColumns.code,
+    width: 150,
+    dataIndex: 'code',
     key: '2',
   },
   {
