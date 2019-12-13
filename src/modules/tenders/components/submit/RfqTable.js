@@ -276,7 +276,7 @@ class RfqTable extends Component {
             type: 'select',
             options: () => {
               return [
-                <Option key="0" value="-" />,
+                <Option key="0" value="" />,
                 <Option key="1" value="MNT">
                   MNT
                 </Option>,
@@ -297,7 +297,7 @@ class RfqTable extends Component {
             type: 'select',
             options: () => {
               return [
-                <Option key="0" value="-" />,
+                <Option key="0" value="" />,
                 <Option key="1" value="DDP - OT UB warehouse">
                   DDP - OT UB warehouse
                 </Option>,
@@ -319,7 +319,7 @@ class RfqTable extends Component {
             type: 'select',
             options: () => {
               return [
-                <Option key="0" value="-" />,
+                <Option key="0" value="" />,
                 <Option key="1" value="Yes">
                   Yes
                 </Option>,
