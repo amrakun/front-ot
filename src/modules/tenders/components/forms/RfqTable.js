@@ -114,6 +114,7 @@ class RfqTable extends Component {
 
       const inputProps = {
         defaultValue,
+        value: defaultValue,
         type: type,
         onChange: e => this.onProductInputChange(e, name, record.id, dataType),
       };

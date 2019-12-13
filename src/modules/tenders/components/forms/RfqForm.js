@@ -85,7 +85,7 @@ class RfqForm extends BaseForm {
     }
 
     if (hasProductsError) {
-      return message.error('Please complete table rows');
+      return message.error('Material description, quantity and uom are required in each row');
     }
 
     this.save(doc);
