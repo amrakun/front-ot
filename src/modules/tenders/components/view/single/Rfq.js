@@ -464,7 +464,7 @@ class Rfq extends Tender {
         rowKey={() => Math.random()}
         scroll={{ x: 2000 }}
         dataSource={requestedProducts.map(product => {
-          const respondedProduct = respondedProducts.find(rp => rp.id === product.id);
+          const respondedProduct = respondedProducts.find(rp => rp.productId === product.productId);
 
           return {
             ...product,

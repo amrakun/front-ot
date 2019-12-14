@@ -22,12 +22,13 @@ class RfqTable extends Component {
     // data initialization
     if (requestedProducts) {
       requestedProducts.forEach((product, i) => {
-        const productResponse = respondedProducts.find(rp => rp.id === product.id) || {};
+        const productResponse =
+          respondedProducts.find(rp => rp.productId === product.productId) || {};
         const extendedProduct = { ...product, ...productResponse };
 
         products.push(extendedProduct);
 
-        perProductStates[`product__${product.id}`] = extendedProduct;
+        perProductStates[`product__${product.productId}`] = extendedProduct;
       });
     }
 
@@ -136,7 +137,7 @@ class RfqTable extends Component {
         for (const [index, doc] of docs.entries()) {
           const product = { id: Math.random().toString(), ...products[index] };
           products[index] = { ...product, ...doc };
-          perProductStates[`product__${product.id}`] = products[index];
+          perProductStates[`product__${product.productId}`] = products[index];
         }
 
         this.setState({ products, ...perProductStates }, () => this.onChange());

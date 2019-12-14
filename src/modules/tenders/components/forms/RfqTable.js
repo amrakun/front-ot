@@ -19,7 +19,7 @@ class RfqTable extends Component {
     requestedProducts.forEach(product => {
       products.push(product);
 
-      perProductStates[`product__${product.id}`] = product;
+      perProductStates[`product__${product.productId}`] = product;
     });
 
     this.state = {

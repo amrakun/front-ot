@@ -2,7 +2,7 @@ import { pageParams, pageValues } from 'modules/common/constants';
 
 const requestedProductsFields = `
   requestedProducts {
-    id
+    productId
     code
     purchaseRequestNumber
     shortText
@@ -60,7 +60,7 @@ const tenderDetailFields = `
 
 const rfqResponseFields = `
   respondedProducts {
-    id
+    productId
     code
     suggestedManufacturer
     suggestedManufacturerPartNumber
