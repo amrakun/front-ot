@@ -28,7 +28,7 @@ class RfqTable extends Component {
     };
 
     if (this.state.products.length === 0) {
-      this.state.products = [{ id: Math.random().toString() }];
+      this.state.products = [{ productId: Math.random().toString() }];
     }
 
     this.onProductInputChange = this.onProductInputChange.bind(this);
@@ -39,7 +39,7 @@ class RfqTable extends Component {
   addProductRow() {
     const { products } = this.state;
 
-    products.push({ id: Math.random().toString() });
+    products.push({ productId: Math.random().toString() });
 
     this.setState({ products });
   }
@@ -60,7 +60,7 @@ class RfqTable extends Component {
         const perProductStates = {};
 
         data.forEach(row => {
-          const id = Math.random();
+          const productId = Math.random();
 
           const [
             purchaseRequestNumber,
@@ -73,7 +73,7 @@ class RfqTable extends Component {
           ] = row;
 
           const extendedProduct = {
-            id,
+            productId,
             code,
             purchaseRequestNumber,
             shortText,
@@ -85,7 +85,7 @@ class RfqTable extends Component {
 
           products.push(extendedProduct);
 
-          perProductStates[`product__${id}`] = extendedProduct;
+          perProductStates[`product__${productId}`] = extendedProduct;
         });
 
         this.setState({ products, ...perProductStates }, this.onChange);
@@ -99,7 +99,7 @@ class RfqTable extends Component {
 
   onProductInputChange(e, name, recordId, dataType) {
     const stateKey = `product__${recordId}`;
-    const product = this.state[stateKey] || { id: recordId };
+    const product = this.state[stateKey] || { productId: recordId };
 
     product[name] = controlValueParser({ e, dataType });
 
@@ -110,13 +110,13 @@ class RfqTable extends Component {
     const { name, title, type, dataType, width = 140 } = options;
 
     const render = (text, record) => {
-      const product = this.state[`product__${record.id}`] || {};
+      const product = this.state[`product__${record.productId}`] || {};
       const value = product[name];
 
       const inputProps = {
         value,
         type: type,
-        onChange: e => this.onProductInputChange(e, name, record.id, dataType),
+        onChange: e => this.onProductInputChange(e, name, record.productId, dataType),
       };
 
       if (dataType === 'eightDigit') {
