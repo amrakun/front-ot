@@ -49,7 +49,7 @@ class RfqTable extends Component {
 
   onProductFileChange(files, name, recordId) {
     const stateKey = `product__${recordId}`;
-    const product = this.state[stateKey] || { id: recordId };
+    const product = this.state[stateKey] || { productId: recordId };
 
     product[name] = files ? files[0] : null;
 
@@ -59,7 +59,7 @@ class RfqTable extends Component {
   async onProductInputChange(e, name, recordId, dataType) {
     const stateKey = `product__${recordId}`;
 
-    const product = this.state[stateKey] || { id: recordId };
+    const product = this.state[stateKey] || { productId: recordId };
 
     product[name] = controlValueParser({ e, dataType });
 
@@ -135,7 +135,7 @@ class RfqTable extends Component {
         const perProductStates = {};
 
         for (const [index, doc] of docs.entries()) {
-          const product = { id: Math.random().toString(), ...products[index] };
+          const product = { productId: Math.random().toString(), ...products[index] };
           products[index] = { ...product, ...doc };
           perProductStates[`product__${product.productId}`] = products[index];
         }
@@ -156,14 +156,17 @@ class RfqTable extends Component {
         value,
         disabled,
         type,
-        onChange: e => this.onProductInputChange(e, name, record.id),
+        onChange: e => this.onProductInputChange(e, name, record.productId),
       };
 
       let control = <Input {...inputProps} />;
 
       if (type === 'select') {
         control = (
-          <Select value={value} onChange={e => this.onProductInputChange(e, name, record.id)}>
+          <Select
+            value={value}
+            onChange={e => this.onProductInputChange(e, name, record.productId)}
+          >
             {options()}
           </Select>
         );
@@ -174,7 +177,7 @@ class RfqTable extends Component {
           <Uploader
             defaultFileList={[record[name]]}
             disabled={disabled}
-            onChange={files => this.onProductFileChange(files, name, record.id)}
+            onChange={files => this.onProductFileChange(files, name, record.productId)}
           />
         );
       }
