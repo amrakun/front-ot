@@ -53,6 +53,7 @@ class SubmitTender extends BaseForm {
         !product.suggestedManufacturerPartNumber &&
         !product.comment
       ) {
+        products.push({ productId: product.productId });
         continue;
       }
 

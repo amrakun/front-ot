@@ -24,6 +24,7 @@ class RfqTable extends Component {
       requestedProducts.forEach((product, i) => {
         const productResponse =
           respondedProducts.find(rp => rp.productId === product.productId) || {};
+
         const extendedProduct = { ...product, ...productResponse };
 
         products.push(extendedProduct);
