@@ -4,6 +4,7 @@ import { gql, compose, graphql } from 'react-apollo';
 import { message } from 'antd';
 import { mutations } from '../graphql';
 import Popup from '../components/addCompany/Popup';
+import { alert } from '../../common/utils';
 
 const PopupContainer = props => {
   const { registerViaBuyer, onOk } = props;
@@ -12,6 +13,10 @@ const PopupContainer = props => {
     registerViaBuyer({ variables })
       .then(payload => {
         const data = payload.data.registerViaBuyer;
+
+        if (data.warning) {
+          message.warn(data.warning);
+        }
 
         message.success(
           <span>
@@ -23,7 +28,7 @@ const PopupContainer = props => {
         onOk(data.company);
       })
       .catch(error => {
-        message.error(error.message);
+        alert.error(error.message);
       });
   };
 
@@ -32,11 +37,11 @@ const PopupContainer = props => {
 
 PopupContainer.propTypes = {
   registerViaBuyer: PropTypes.func,
-  onOk: PropTypes.func
+  onOk: PropTypes.func,
 };
 
 export default compose(
   graphql(gql(mutations.registerViaBuyer), {
-    name: 'registerViaBuyer'
+    name: 'registerViaBuyer',
   })
 )(PopupContainer);

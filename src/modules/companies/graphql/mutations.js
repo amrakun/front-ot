@@ -134,6 +134,7 @@ const registerViaBuyer = `
           enName
         }
       }
+      warning
     }
   }
 `;
@@ -170,5 +171,5 @@ export default {
   companiesSendPrequalificationInfo,
   companiesSkipPrequalification,
   registerViaBuyer,
-  sendEmail
+  sendEmail,
 };
