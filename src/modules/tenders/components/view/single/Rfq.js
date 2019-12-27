@@ -20,7 +20,7 @@ import {
 } from 'antd';
 import { rfqProductsColumns as rpc, rfqRequestColumns } from '../../../constants';
 import Tender from './Tender';
-import { readFileUrl } from 'modules/common/utils';
+import { readFileUrl, roundNumber } from 'modules/common/utils';
 import { Uploader } from 'modules/common/components';
 import router from 'modules/common/router';
 import { TenderMessagesSingle } from 'modules/tender_messages/containers/';
@@ -428,8 +428,14 @@ class Rfq extends Tender {
         title: rpc.unitPrice,
         dataIndex: 'unitPrice',
         key: '10',
+        render: value => roundNumber(value),
       },
-      { title: rpc.totalPrice, dataIndex: 'totalPrice', key: '11' },
+      {
+        title: rpc.totalPrice,
+        dataIndex: 'totalPrice',
+        key: '11',
+        render: value => roundNumber(value),
+      },
       { title: rpc.currency, dataIndex: 'currency', key: '12' },
       { title: rpc.leadTime, dataIndex: 'leadTime', key: '13' },
       { title: rpc.shippingTerms, dataIndex: 'shippingTerms', key: '14' },

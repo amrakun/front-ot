@@ -40,17 +40,14 @@ export const xlsxHandler = ({ e, success, parse = true }) => {
 
 export const alert = {
   error: (error, __) => {
-    const fixedMessage = (error.message || error).replace(
-      'GraphQL error: ',
-      ''
-    );
+    const fixedMessage = (error.message || error).replace('GraphQL error: ', '');
 
     return message.error(__ ? __(fixedMessage) : fixedMessage);
   },
 
   success: (msg, __) => {
     return message.success(__ ? __(msg) : msg);
-  }
+  },
 };
 
 const flattenProductsTree = (map, item) => {
@@ -87,4 +84,12 @@ export const readFileUrl = url => {
   const { REACT_APP_API_URL } = process.env;
 
   return `${REACT_APP_API_URL}/read-file?key=${url}`;
+};
+
+export const roundNumber = number => {
+  if (!number) {
+    return number;
+  }
+
+  return Math.round(number).toLocaleString();
 };
