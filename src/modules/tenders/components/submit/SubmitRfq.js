@@ -35,6 +35,7 @@ class SubmitTender extends BaseForm {
 
     const products = [];
     const currencies = [];
+    const allShippingTerms = [];
 
     for (const [index, product] of this.state.respondedProducts.entries()) {
       const requestedProduct = requestedProducts[index];
@@ -92,6 +93,10 @@ class SubmitTender extends BaseForm {
         currencies.push(product.currency);
       }
 
+      if (product.shippingTerms && !allShippingTerms.includes(product.shippingTerms)) {
+        allShippingTerms.push(product.shippingTerms);
+      }
+
       products.push({
         ...product,
         totalPrice,
@@ -100,6 +105,10 @@ class SubmitTender extends BaseForm {
 
     if (currencies.length > 1) {
       throw new Error('Please choose only 1 currency');
+    }
+
+    if (allShippingTerms.length > 1) {
+      throw new Error('Please choose only 1 shipping term');
     }
 
     return products;
