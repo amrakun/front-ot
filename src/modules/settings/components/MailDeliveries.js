@@ -46,6 +46,13 @@ class MailDeliveries extends React.Component {
         title: 'Status',
         dataIndex: 'status',
         key: 'status',
+        render: status => {
+          if (status === 'Delivery') {
+            return 'Delivered';
+          }
+
+          return status;
+        },
       },
     ];
 
