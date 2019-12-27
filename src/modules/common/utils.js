@@ -80,10 +80,25 @@ export const generateTemplateUrl = name => {
   return `${REACT_APP_API_URL}/static/templates/${name}.xlsx?token=${token}`;
 };
 
+function ieVersion() {
+  var ua = window.navigator.userAgent;
+
+  if (ua.indexOf('Trident/7.0') > -1) return 11;
+  else if (ua.indexOf('Trident/6.0') > -1) return 10;
+  else if (ua.indexOf('Trident/5.0') > -1) return 9;
+  else return 0; // not IE9, 10 or 11
+}
+
 export const readFileUrl = url => {
   const { REACT_APP_API_URL } = process.env;
 
-  return `${REACT_APP_API_URL}/read-file?key=${url}`;
+  let key = url;
+
+  if (ieVersion()) {
+    key = encodeURI(url);
+  }
+
+  return `${REACT_APP_API_URL}/read-file?key=${key}`;
 };
 
 export const roundNumber = number => {
