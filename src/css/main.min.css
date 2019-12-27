@@ -976,4 +976,11 @@ table.mass-email-response tr td:last-child {
   margin-bottom: 5px;
 }
 
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  /* add your IE10-IE11 css here */
+  .ant-list-item-meta {
+    width: 450px;
+  }
+}
+
 /*# sourceMappingURL=main.min.css.map */

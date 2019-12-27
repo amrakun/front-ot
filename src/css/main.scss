@@ -837,3 +837,10 @@ table.mass-email-response {
 .tender-message-detail .ant-row div {
   margin-bottom: 5px;
 }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
+  /* add your IE10-IE11 css here */   
+  .ant-list-item-meta {
+    width: 450px
+  }
+}
