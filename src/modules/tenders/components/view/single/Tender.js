@@ -94,6 +94,10 @@ class Tender extends Common {
   columns() {
     return [
       {
+        title: '#',
+        render: (text, record, index) => index + 1,
+      },
+      {
         title: 'Supplier name',
         dataIndex: 'supplier.basicInfo.enName',
       },
