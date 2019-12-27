@@ -302,7 +302,7 @@ class Tender extends Common {
     const { selectedCompanies, responseModal } = this.state;
 
     const tenderDetail = this.props.tenderDetail || {};
-    const { winnerIds = [], status } = tenderDetail;
+    const { winnerIds = [], status, type } = tenderDetail;
 
     return (
       <Card
@@ -334,7 +334,8 @@ class Tender extends Common {
           loading={loading}
           onChange={(pagination, filters, sorter) => onChange(pagination, filters, sorter)}
         />
-        <Paginator total={totalCount} />
+
+        {type === 'eoi' ? <Paginator total={totalCount} /> : null}
 
         <Modal
           title={`${responseModal.title}'s response`}
