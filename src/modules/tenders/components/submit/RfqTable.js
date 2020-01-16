@@ -228,6 +228,8 @@ class RfqTable extends Component {
             y: '65vh',
           }}
         >
+          <Column title="#" key="index" render={(text, record, index) => index + 1} />
+
           {this.renderCell({
             name: 'code',
             title: __(rpc.code),

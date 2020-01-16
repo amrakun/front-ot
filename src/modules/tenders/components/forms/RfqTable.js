@@ -145,6 +145,8 @@ class RfqTable extends Component {
           y: '65vh',
         }}
       >
+        <Column title="#" key="index" width={30} render={(text, record, index) => index + 1} />
+
         {this.renderCell({
           name: 'purchaseRequestNumber',
           title: __(rpc.purchaseRequestNumber),
