@@ -81,7 +81,7 @@ class SubmitTender extends BaseForm {
         );
       }
 
-      if (product.alternative && !product.unitPrice) {
+      if (product.alternative && (!product.unitPrice || product.unitPrice === '0')) {
         throw new Error('Please fill a value in "unit price" field');
       }
 
