@@ -11,44 +11,38 @@ const noLabelLayout = {
   labelCol: {
     xs: { span: 24 },
     sm: { span: 24 },
-    lg: { span: 24 }
+    lg: { span: 24 },
   },
   wrapperCol: {
     xs: { span: 24 },
     sm: { span: 24 },
-    lg: { span: 24 }
-  }
+    lg: { span: 24 },
+  },
 };
 
-const booleanData = [
-  { text: 'Yes', value: 'true' },
-  { text: 'No', value: 'false' }
-];
+const booleanData = [{ text: 'Yes', value: 'true' }, { text: 'No', value: 'false' }];
 
-const booleanDataReverse = [
-  { text: 'No', value: 'true' },
-  { text: 'Yes', value: 'false' }
-];
+const booleanDataReverse = [{ text: 'No', value: 'true' }, { text: 'Yes', value: 'false' }];
 
 const days = [
   { text: '1 day before', value: '1' },
   { text: '3 days before', value: '3' },
-  { text: '7 days before', value: '7' }
+  { text: '7 days before', value: '7' },
 ];
 
 const notifyLoading = {
   message: 'Building an excel...',
   description: 'You will get notified when your file is ready to download!',
   icon: <Icon type="loading" />,
-  duration: 5,
-  key: 'loadingNotification'
+  duration: 120,
+  key: 'loadingNotification',
 };
 
 const notifyReady = {
   message: 'Your file is ready to download',
   icon: <Icon type="file-excel" style={{ color: 'rgb(0,153,168)' }} />,
   duration: 0,
-  key: 'downloadNotification'
+  key: 'downloadNotification',
 };
 
 const colors = [
@@ -61,7 +55,7 @@ const colors = [
   'rgb(191,111,125)',
   'rgb(101,176,186)',
   'rgb(204,131,65)',
-  'rgb(67,83,99)'
+  'rgb(67,83,99)',
 ];
 
 // query params
@@ -80,5 +74,5 @@ export {
   notifyReady,
   colors,
   pageParams,
-  pageValues
+  pageValues,
 };
