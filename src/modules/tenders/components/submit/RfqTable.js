@@ -229,14 +229,13 @@ class RfqTable extends Component {
           }}
         >
           <Column title="#" key="index" render={(text, record, index) => index + 1} />
-
-          {this.renderCell({
-            name: 'code',
-            title: __(rpc.code),
-          })}
           {this.renderCell({
             name: 'purchaseRequestNumber',
             title: __(rpc.purchaseRequestNumber),
+          })}
+          {this.renderCell({
+            name: 'code',
+            title: __(rpc.code),
           })}
           {this.renderCell({
             name: 'shortText',
