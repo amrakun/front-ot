@@ -56,6 +56,8 @@ class Rfq extends Tender {
 
       bidSummarySort: 'minTotalPrice',
       bidSummaryExchangeRate: 2500,
+      bidSummaryFirstLimit: 100,
+      bidSummaryLastLimit: 0,
       showBidSummaryModal: false,
     };
 
@@ -151,7 +153,13 @@ class Rfq extends Tender {
   }
 
   generateBidSummaryReport() {
-    const { selectedCompanies, bidSummarySort, bidSummaryExchangeRate } = this.state;
+    const {
+      selectedCompanies,
+      bidSummarySort,
+      bidSummaryExchangeRate,
+      bidSummaryFirstLimit,
+      bidSummaryLastLimit,
+    } = this.state;
 
     if (selectedCompanies.length < 1) {
       return message.error('Please select atleast one supplier!');
@@ -164,16 +172,24 @@ class Rfq extends Tender {
     this.props.downloadReport(
       'rfqBidSummaryReport',
       {
-        supplierIds: this.state.selectedCompanies,
+        supplierIds: selectedCompanies,
         sort: bidSummarySort,
         exchangeRate: bidSummaryExchangeRate,
+        first: bidSummaryFirstLimit,
+        last: bidSummaryLastLimit,
       },
       'Bid summary list has been downloaded'
     );
   }
 
   renderBidSummaryModal() {
-    const { showBidSummaryModal, bidSummarySort, bidSummaryExchangeRate } = this.state;
+    const {
+      showBidSummaryModal,
+      bidSummarySort,
+      bidSummaryExchangeRate,
+      bidSummaryFirstLimit,
+      bidSummaryLastLimit,
+    } = this.state;
 
     if (!showBidSummaryModal) {
       return null;
@@ -183,8 +199,8 @@ class Rfq extends Tender {
       this.setState({ bidSummarySort: value });
     };
 
-    const onExchangeRateChange = e => {
-      this.setState({ bidSummaryExchangeRate: e.currentTarget.value });
+    const onCommonChange = (name, e) => {
+      this.setState({ [name]: e.currentTarget.value });
     };
 
     return (
@@ -212,8 +228,29 @@ class Rfq extends Tender {
               <Option value="completeness">Completeness</Option>
             </Select>
           </Form.Item>
+
           <Form.Item label="Exchange rate - MNT to USD">
-            <Input type="number" value={bidSummaryExchangeRate} onChange={onExchangeRateChange} />
+            <Input
+              type="number"
+              value={bidSummaryExchangeRate}
+              onChange={onCommonChange.bind(this, 'bidSummaryExchangeRate')}
+            />
+          </Form.Item>
+
+          <Form.Item label="Get first [n] products">
+            <Input
+              type="number"
+              value={bidSummaryFirstLimit}
+              onChange={onCommonChange.bind(this, 'bidSummaryFirstLimit')}
+            />
+          </Form.Item>
+
+          <Form.Item label="Get last [n] products">
+            <Input
+              type="number"
+              value={bidSummaryLastLimit}
+              onChange={onCommonChange.bind(this, 'bidSummaryLastLimit')}
+            />
           </Form.Item>
         </Form>
       </Modal>
