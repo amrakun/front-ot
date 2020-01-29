@@ -99,8 +99,7 @@ class Home extends React.Component {
                                 <br />
                                 <b>{__('Email')}:</b> togosoob@ot.mn
                                 <br />
-                                <b>{__('Phone')}:</b> 331880; {__('Ext')} -
-                                3671, 8888
+                                <b>{__('Phone')}:</b> 331880; {__('Ext')} - 3671, 8888
                                 <br />
                               </p>
                             </Col>
@@ -135,13 +134,9 @@ class Home extends React.Component {
             </div>
 
             <div className="bottom bg-white">
-              <div id="home-quote">#OTБиднийБахархал</div>
+              <div id="home-quote">#{__('OTProud')}</div>
 
-              <h3>
-                {__(
-                  'Welcome to “Oyu” Supplier Qualification Management System'
-                )}
-              </h3>
+              <h3>{__('Welcome to “Oyu” Supplier Qualification Management System')}</h3>
               <Row gutter={20}>
                 <Col span={6}>
                   <div className="desc">
@@ -158,14 +153,13 @@ class Home extends React.Component {
                   </div>
                 </Col>
                 <Col span={12}>
-                  <a href="https://www.business-innovation-growth-mongolia.com/our-mission-m" target="__blank" className="item program">
-                    <div className="text">
-                      {__('Capacity Building Program')}
-                    </div>
-                    <img
-                      src={programImg}
-                      alt={__('Capacity Building Program')}
-                    />
+                  <a
+                    href="https://www.business-innovation-growth-mongolia.com/our-mission-m"
+                    target="__blank"
+                    className="item program"
+                  >
+                    <div className="text">{__('Capacity Building Program')}</div>
+                    <img src={programImg} alt={__('Capacity Building Program')} />
                   </a>
                 </Col>
                 <Col span={6}>
@@ -174,13 +168,8 @@ class Home extends React.Component {
                     href="http://ot.mn/plugins/event/?y=2019"
                     className="item calendar"
                   >
-                    <div className="text">
-                      {__('Quarterly Open Info Session')}
-                    </div>
-                    <img
-                      src={calendarImg}
-                      alt={__('Quarterly Open Info Session')}
-                    />
+                    <div className="text">{__('Quarterly Open Info Session')}</div>
+                    <img src={calendarImg} alt={__('Quarterly Open Info Session')} />
                   </a>
                 </Col>
               </Row>
@@ -193,14 +182,14 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-  history: PropTypes.object
+  history: PropTypes.object,
 };
 
 Home.contextTypes = {
   currentUser: PropTypes.object,
   __: PropTypes.func,
   toggleLang: PropTypes.func,
-  locale: PropTypes.string
+  locale: PropTypes.string,
 };
 
 export default withRouter(Home);
