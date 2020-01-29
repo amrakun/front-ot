@@ -61,7 +61,6 @@ const tenderDetailFields = `
 const rfqResponseFields = `
   respondedProducts {
     productId
-    code
     suggestedManufacturer
     suggestedManufacturerPartNumber
     unitPrice
