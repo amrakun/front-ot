@@ -6,14 +6,14 @@ import Searcher from '../components/Searcher';
 
 const SearcherContainer = props => {
   const companiesQuery = props.companiesQuery || {};
-  const suppliers = companiesQuery.companies || [];
+  const optionsSuppliers = companiesQuery.companies || [];
 
-  return <Searcher {...{ ...props, suppliers }} />;
+  return <Searcher {...{ ...props, optionsSuppliers }} />;
 };
 
 SearcherContainer.propTypes = {
   companiesQuery: PropTypes.object,
-  onShowPopup: PropTypes.func
+  onShowPopup: PropTypes.func,
 };
 
 const WithData = compose(
@@ -22,9 +22,10 @@ const WithData = compose(
     skip: ({ isPopupVisible }) => !isPopupVisible,
     options: ({ search }) => {
       return {
-        variables: { search, source: 'searcher', perPage: 10 }
+        variables: { search, source: 'searcher', perPage: 10 },
+        fetchPolicy: 'network-only',
       };
-    }
+    },
   })
 )(SearcherContainer);
 

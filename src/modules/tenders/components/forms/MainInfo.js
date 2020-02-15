@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input, Select, DatePicker, Tag, Card, Row, Col, Tooltip } from 'antd';
+import { Input, Select, DatePicker, Card, Row, Col } from 'antd';
 import moment from 'moment';
 import { EditorCK, Uploader } from 'modules/common/components';
-import { days, dateTimeFormat, colors } from 'modules/common/constants';
+import { days, dateTimeFormat } from 'modules/common/constants';
 import { AddCompany } from 'modules/companies/components';
 import SupplierSearcher from 'modules/companies/containers/Searcher';
 
@@ -18,60 +18,14 @@ class MainInfo extends React.Component {
     this.state = {
       content,
       attachments: (attachments || []).map(a => ({ ...a })),
+      newlyInvitedSuppliers: [],
       suppliers: (suppliers || []).map(s => ({ ...s })),
     };
 
     this.onEmailContentChange = this.onEmailContentChange.bind(this);
     this.onEmailAttachmentsChange = this.onEmailAttachmentsChange.bind(this);
-    this.onAddSuppliers = this.onAddSuppliers.bind(this);
-    this.removeSupplier = this.removeSupplier.bind(this);
-  }
-
-  getColoredTags(suppliers) {
-    let ownerNames = [];
-
-    suppliers.forEach(supplier => {
-      const owner = this.getOwner(supplier);
-      if (owner) ownerNames.push(owner);
-    });
-
-    return this.setColors(this.findDuplicates(ownerNames));
-  }
-
-  findDuplicates(array) {
-    let result = [];
-
-    array.forEach((element, index) => {
-      if (array.indexOf(element, index + 1) > -1) {
-        if (result.indexOf(element) === -1) {
-          result.push(element);
-        }
-      }
-    });
-
-    return result;
-  }
-
-  setColors(array) {
-    let result = {};
-
-    array.forEach((element, index) => {
-      result[element] = colors[index] || '#' + ((Math.random() * 0xffffff) << 0).toString(16);
-    });
-
-    return result;
-  }
-
-  getOwner(supplier) {
-    const info = supplier.shareholderInfo || {};
-
-    if (!info) {
-      return null;
-    }
-
-    if (info.shareholders && info.shareholders.length > 0) {
-      return info.shareholders[0].name;
-    }
+    this.onChangeSuppliers = this.onChangeSuppliers.bind(this);
+    this.onInviteSupplier = this.onInviteSupplier.bind(this);
   }
 
   onEmailContentChange(e) {
@@ -88,61 +42,14 @@ class MainInfo extends React.Component {
     this.props.onChange({ attachments });
   }
 
-  onAddSuppliers(values) {
-    const { onChange } = this.props;
-
-    const suppliers = [...this.state.suppliers];
-    const supplierIds = suppliers.map(s => s._id);
-
-    values.forEach(value => {
-      // Only add new suppliers
-      if (!supplierIds.includes(value._id)) {
-        suppliers.push(value);
-      }
-    });
-
-    onChange({ suppliers });
-
-    this.setState({ suppliers });
+  onChangeSuppliers(suppliers) {
+    this.props.onChange({ suppliers });
   }
 
-  removeSupplier(supplierId) {
-    const { onChange } = this.props;
-    const { suppliers } = this.state;
+  onInviteSupplier(supplier) {
+    this.setState({ newlyInvitedSuppliers: [supplier] });
 
-    const updatedSuppliers = [];
-
-    suppliers.forEach(supplier => {
-      if (supplier._id !== supplierId) updatedSuppliers.push(supplier);
-    });
-
-    onChange({ suppliers: updatedSuppliers });
-
-    this.setState({ suppliers: updatedSuppliers });
-  }
-
-  renderSupplierTags() {
-    const { suppliers } = this.state;
-
-    const coloredTags = this.getColoredTags(suppliers);
-
-    return suppliers.map(supplier => {
-      const owner = this.getOwner(supplier);
-      const basicInfo = supplier.basicInfo || {};
-
-      return (
-        <Tooltip key={supplier._id} title={owner ? `Owner: ${owner}` : ''}>
-          <Tag
-            color={coloredTags[owner] || null}
-            key={supplier._id}
-            closable={true}
-            afterClose={() => this.removeSupplier(supplier._id)}
-          >
-            {basicInfo.enName}
-          </Tag>
-        </Tooltip>
-      );
-    });
+    this.props.onChange({ suppliers: [...this.state.suppliers, supplier] });
   }
 
   renderExtraContent() {
@@ -156,8 +63,8 @@ class MainInfo extends React.Component {
   }
 
   renderSuppliers() {
-    const { showSuppliers } = this.props;
-    const { suppliers } = this.state;
+    const { showSuppliers, data } = this.props;
+    const { suppliers, newlyInvitedSuppliers } = this.state;
 
     if (!showSuppliers) {
       return null;
@@ -177,10 +84,13 @@ class MainInfo extends React.Component {
             overflow: 'scroll',
           }}
         >
-          {this.renderSupplierTags()}
-          <SupplierSearcher onSelect={this.onAddSuppliers} />
+          <SupplierSearcher
+            onSelect={this.onChangeSuppliers}
+            initialChosenSuppliers={data.suppliers}
+            newlyInvitedSuppliers={newlyInvitedSuppliers}
+          />
 
-          <AddCompany showInvite onAdd={supplier => this.onAddSuppliers([supplier])} />
+          <AddCompany showInvite onAdd={supplier => this.onInviteSupplier(supplier)} />
         </div>
       </div>
     );

@@ -1,18 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tag, Icon } from 'antd';
-import { Modal, Select } from 'antd';
+import { Modal, Select, Tag, Icon, Tooltip } from 'antd';
+import { colors } from 'modules/common/constants';
 
 const propTypes = {
   onSelect: PropTypes.func,
   title: PropTypes.string,
   slogan: PropTypes.string,
-  mode: PropTypes.string,
-  onChange: PropTypes.func,
   onShowPopup: PropTypes.func,
   onSearch: PropTypes.func,
-  value: PropTypes.array,
-  suppliers: PropTypes.array,
+  initialChosenSuppliers: PropTypes.array,
+  optionsSuppliers: PropTypes.array,
 };
 
 class SupplierSearcher extends React.Component {
@@ -21,7 +19,8 @@ class SupplierSearcher extends React.Component {
 
     this.state = {
       visible: false,
-      selectedValues: props.value || [],
+      selectedSuppliers: [], // suppliers selected in combobox
+      chosenSuppliers: (props.initialChosenSuppliers || []).map(s => ({ ...s })), // final suppliers aka suppliers in tag
     };
 
     this.showPopup = this.showPopup.bind(this);
@@ -36,38 +35,136 @@ class SupplierSearcher extends React.Component {
     this.props.onShowPopup();
   }
 
-  onOk() {
-    const selectedValues = this.state.selectedValues.map(ss => JSON.parse(ss));
-
-    this.props.onSelect(selectedValues);
-    this.setState({ visible: false, selectedValues: [] });
-  }
-
   onCancel() {
-    this.setState({ visible: false, selectedValues: [] });
+    this.setState({ visible: false, selectedSuppliers: [] });
   }
 
-  onChange(selectedValues) {
-    this.setState({ selectedValues });
+  findDuplicates(array) {
+    let result = [];
 
-    const { onChange } = this.props;
+    array.forEach((element, index) => {
+      if (array.indexOf(element, index + 1) > -1) {
+        if (result.indexOf(element) === -1) {
+          result.push(element);
+        }
+      }
+    });
 
-    if (onChange) {
-      onChange(selectedValues.map(v => JSON.parse(v)));
+    return result;
+  }
+
+  getOwner(supplier) {
+    const info = supplier.shareholderInfo || {};
+
+    if (!info) {
+      return null;
+    }
+
+    if (info.shareholders && info.shareholders.length > 0) {
+      return info.shareholders[0].name;
     }
   }
 
+  setColors(array) {
+    let result = {};
+
+    array.forEach((element, index) => {
+      result[element] = colors[index] || '#' + ((Math.random() * 0xffffff) << 0).toString(16);
+    });
+
+    return result;
+  }
+
+  getColoredTags() {
+    const { chosenSuppliers } = this.state;
+
+    let ownerNames = [];
+
+    chosenSuppliers.forEach(supplier => {
+      const owner = this.getOwner(supplier);
+      if (owner) ownerNames.push(owner);
+    });
+
+    return this.setColors(this.findDuplicates(ownerNames));
+  }
+
+  onChange(supplierIds) {
+    const suppliers = this.props.optionsSuppliers.filter(s => supplierIds.includes(s._id));
+
+    this.setState({ selectedSuppliers: suppliers });
+  }
+
+  onOk() {
+    const { selectedSuppliers, chosenSuppliers } = this.state;
+    const chosenSupplierIds = chosenSuppliers.map(s => s._id);
+
+    const updatedChosenSuppliers = [...chosenSuppliers];
+
+    selectedSuppliers.forEach(supplier => {
+      // Only add new suppliers
+      if (!chosenSupplierIds.includes(supplier._id)) {
+        updatedChosenSuppliers.push(supplier);
+      }
+    });
+
+    this.setState({
+      visible: false,
+      selectedSuppliers: [],
+      chosenSuppliers: updatedChosenSuppliers,
+    });
+
+    this.props.onSelect(updatedChosenSuppliers);
+  }
+
+  removeSupplier(supplierId) {
+    const { chosenSuppliers } = this.state;
+
+    const updatedChosenSuppliers = [];
+
+    chosenSuppliers.forEach(supplier => {
+      if (supplier._id !== supplierId) updatedChosenSuppliers.push(supplier);
+    });
+
+    this.setState({ chosenSuppliers: updatedChosenSuppliers });
+
+    this.props.onSelect(updatedChosenSuppliers);
+  }
+
+  renderChosenSupplier() {
+    const { chosenSuppliers } = this.state;
+
+    const suppliers = [...chosenSuppliers, ...(this.props.newlyInvitedSuppliers || [])];
+
+    const coloredTags = this.getColoredTags();
+
+    return suppliers.map(supplier => {
+      const owner = this.getOwner(supplier);
+      const basicInfo = supplier.basicInfo || {};
+
+      return (
+        <Tooltip key={supplier._id} title={owner ? `Owner: ${owner}` : ''}>
+          <Tag
+            color={coloredTags[owner] || null}
+            key={supplier._id}
+            closable={true}
+            afterClose={() => this.removeSupplier(supplier._id)}
+          >
+            {basicInfo.enName}
+          </Tag>
+        </Tooltip>
+      );
+    });
+  }
+
   renderSelect() {
-    const { suppliers, mode, onSearch } = this.props;
-    const { selectedValues } = this.state;
+    const { optionsSuppliers, onSearch } = this.props;
+    const { selectedSuppliers } = this.state;
 
-    const supplierIds = suppliers.map(s => s._id);
-    const options = suppliers;
+    const optionsSupplierIds = optionsSuppliers.map(s => s._id);
+    const options = optionsSuppliers;
 
-    for (const value of selectedValues) {
-      const supplier = JSON.parse(value);
-
-      if (!supplierIds.includes(supplier._id)) {
+    for (const supplier of selectedSuppliers) {
+      if (!optionsSupplierIds.includes(supplier._id)) {
         options.push(supplier);
       }
     }
@@ -77,26 +174,26 @@ class SupplierSearcher extends React.Component {
       style: { width: '100%' },
       onSearch: onSearch,
       onChange: this.onChange,
-      value: selectedValues,
-      filterOption: true,
+      value: selectedSuppliers.map(s => s._id),
+      filterOption: false,
     };
 
     return (
       <Select {...selectProps}>
         {options.map(supplier => (
-          <Select.Option key={mode === 'select' ? supplier._id : JSON.stringify(supplier)}>
-            {supplier.basicInfo.enName}
-          </Select.Option>
+          <Select.Option key={supplier._id}>{supplier.basicInfo.enName}</Select.Option>
         ))}
       </Select>
     );
   }
 
-  renderModalTrigger() {
+  render() {
     const { slogan, title } = this.props;
 
     return (
-      <span>
+      <>
+        {this.renderChosenSupplier()}
+
         <Tag onClick={this.showPopup} className="dashed-button">
           <Icon type="plus" /> {title || `${slogan || 'Add'} an existing supplier`}
         </Tag>
@@ -112,14 +209,8 @@ class SupplierSearcher extends React.Component {
         >
           {this.renderSelect()}
         </Modal>
-      </span>
+      </>
     );
-  }
-
-  render() {
-    const { mode } = this.props;
-
-    return mode === 'select' ? this.renderSelect() : this.renderModalTrigger();
   }
 }
 
