@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Tag, Button, Select, message } from 'antd';
+import { Form, Input, Button, Select, message } from 'antd';
 import PropTypes from 'prop-types';
 import { Uploader } from 'modules/common/components';
 import { EditorCK } from 'modules/common/components/';
@@ -130,32 +130,13 @@ class MessageForm extends React.Component {
     });
   }
 
-  removeEoiSelectedSupplier(supplierId) {
-    const { eoiSelectedSuppliers } = this.state;
-
-    const updatedEoiSelectedSuppliers = [];
-    const updatedRecipientSupplierIds = [];
-
-    eoiSelectedSuppliers.forEach(supplier => {
-      if (supplier._id !== supplierId) {
-        updatedEoiSelectedSuppliers.push(supplier);
-        updatedRecipientSupplierIds.push(supplierId);
-      }
-    });
-
-    this.setState({
-      eoiSelectedSuppliers: updatedEoiSelectedSuppliers,
-      recipientSupplierIds: updatedRecipientSupplierIds,
-    });
-  }
-
   renderBuyerFields() {
     const { currentUser } = this.context;
 
     if (currentUser.isSupplier) return null;
 
     const { tenderDetail } = this.props;
-    const { eoiTargets, eoiSelectedSuppliers } = this.state;
+    const { eoiTargets } = this.state;
 
     if (tenderDetail.type === 'eoi') {
       return (
@@ -168,27 +149,7 @@ class MessageForm extends React.Component {
             </Select>
           </Item>
 
-          {eoiTargets === 'toSelected' && (
-            <>
-              <SupplierSearcher title="Choose suppliers" onSelect={this.onSelectEoiSuppliers} />
-
-              <div style={{ margin: '20px 0px' }}>
-                {eoiSelectedSuppliers.map(supplier => {
-                  const basicInfo = supplier.basicInfo || {};
-
-                  return (
-                    <Tag
-                      key={supplier._id}
-                      closable={true}
-                      afterClose={() => this.removeEoiSelectedSupplier(supplier._id)}
-                    >
-                      {basicInfo.enName}
-                    </Tag>
-                  );
-                })}
-              </div>
-            </>
-          )}
+          {eoiTargets === 'toSelected' && <SupplierSearcher onSelect={this.onSelectEoiSuppliers} />}
         </>
       );
     }
