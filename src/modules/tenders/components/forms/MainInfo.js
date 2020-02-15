@@ -85,6 +85,7 @@ class MainInfo extends React.Component {
           }}
         >
           <SupplierSearcher
+            title="Add an existing supplier"
             onSelect={this.onChangeSuppliers}
             initialChosenSuppliers={data.suppliers}
             newlyInvitedSuppliers={newlyInvitedSuppliers}

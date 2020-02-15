@@ -6,7 +6,6 @@ import { colors } from 'modules/common/constants';
 const propTypes = {
   onSelect: PropTypes.func,
   title: PropTypes.string,
-  slogan: PropTypes.string,
   onShowPopup: PropTypes.func,
   onSearch: PropTypes.func,
   initialChosenSuppliers: PropTypes.array,
@@ -188,21 +187,21 @@ class SupplierSearcher extends React.Component {
   }
 
   render() {
-    const { slogan, title } = this.props;
+    const { title } = this.props;
 
     return (
       <>
         {this.renderChosenSupplier()}
 
         <Tag onClick={this.showPopup} className="dashed-button">
-          <Icon type="plus" /> {title || `${slogan || 'Add'} an existing supplier`}
+          <Icon type="plus" /> {title || 'Select suppliers'}
         </Tag>
 
         <Modal
-          okText={slogan || 'Add'}
+          okText={'select'}
           cancelText="Cancel"
           maskClosable={false}
-          title={title || `${slogan || 'Add'} an existing supplier`}
+          title={title || 'Select suppliers'}
           visible={this.state.visible}
           onOk={this.onOk}
           onCancel={this.onCancel}
