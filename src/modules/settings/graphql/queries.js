@@ -44,8 +44,8 @@ export const modulePermissions = `
 `;
 
 export const mailDeliveries = `
-  query mailDeliveries($page: Int, $perPage: Int, $search: String) {
-    mailDeliveries(page: $page, perPage: $perPage, search: $search) {
+  query mailDeliveries($page: Int, $perPage: Int, $search: String, $old: Boolean) {
+    mailDeliveries(page: $page, perPage: $perPage, search: $search, old: $old) {
       _id
       createdDate
       from
@@ -58,8 +58,8 @@ export const mailDeliveries = `
 `;
 
 export const mailDeliveriesTotalCount = `
-  query mailDeliveriesTotalCount($search: String) {
-    mailDeliveriesTotalCount(search: $search)
+  query mailDeliveriesTotalCount($search: String, $old: Boolean) {
+    mailDeliveriesTotalCount(search: $search, old: $old)
   }
 `;
 

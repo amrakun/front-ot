@@ -37,6 +37,7 @@ export default compose(
     name: 'deliveriesQuery',
     options: ({ queryParams }) => ({
       variables: {
+        old: queryParams.old,
         search: queryParams.search,
         page: queryParams.page ? Number(queryParams.page) : 1,
         perPage: queryParams.perPage ? Number(queryParams.perPage) : 15,
@@ -47,6 +48,7 @@ export default compose(
     name: 'deliveriesTotalCountQuery',
     options: ({ queryParams }) => ({
       variables: {
+        old: queryParams.old,
         search: queryParams.search,
       },
     }),

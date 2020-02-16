@@ -28,14 +28,14 @@ class MailDeliveries extends React.Component {
         },
       },
       {
+        title: 'Status',
+        dataIndex: 'status',
+        key: 'status',
+      },
+      {
         title: 'From',
         dataIndex: 'from',
         key: 'from',
-      },
-      {
-        title: 'To',
-        dataIndex: 'to',
-        key: 'to',
       },
       {
         title: 'Subject',
@@ -43,16 +43,9 @@ class MailDeliveries extends React.Component {
         key: 'subject',
       },
       {
-        title: 'Status',
-        dataIndex: 'status',
-        key: 'status',
-        render: status => {
-          if (status === 'Delivery') {
-            return 'Delivered';
-          }
-
-          return status;
-        },
+        title: 'To',
+        dataIndex: 'to',
+        key: 'to',
       },
     ];
 
