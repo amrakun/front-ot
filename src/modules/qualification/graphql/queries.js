@@ -364,6 +364,8 @@ const AuditBasicInfo = `
 const AnswerRecommendation = `
   supplierComment
   supplierAnswer
+  supplierFile
+
   auditorComment
   auditorRecommendation
   auditorScore
@@ -372,6 +374,8 @@ const AnswerRecommendation = `
 const HrAnswerRecommendation = `
   supplierComment
   supplierAnswer
+  supplierFile
+
   auditorComment
   auditorRecommendation
   auditorScore

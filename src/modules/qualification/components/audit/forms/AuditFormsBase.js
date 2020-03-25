@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Input, Select, Popover, Icon, Divider, Alert } from 'antd';
-import { BaseForm } from 'modules/common/components';
+import { Uploader, BaseForm } from 'modules/common/components';
 import { booleanData, booleanDataReverse } from 'modules/common/constants';
 import { labels } from './constants';
 import { auditTabs } from 'modules/qualification/consts';
@@ -15,9 +15,8 @@ class AuditFormsBase extends BaseForm {
     const { response } = props;
 
     this.renderMethod = response ? this.renderForBuyer : this.renderForSupplier;
-    this.collectMethod = response
-      ? this.collectForBuyer
-      : this.collectForSupplier;
+
+    this.collectMethod = response ? this.collectForBuyer : this.collectForSupplier;
 
     this.booleanOptions = this.renderOptions(booleanData);
     this.booleanOptionsReverse = this.renderOptions(booleanDataReverse);
@@ -43,13 +42,16 @@ class AuditFormsBase extends BaseForm {
 
     this.fields.forEach(field => {
       const name = field.name;
+      const files = this.getFieldValue(`${name}File`) || [];
 
       let answer = this.getFieldValue(`${name}Answer`);
+
       if (field.type !== 'multiple') answer = answer === 'true';
 
       doc[name] = {
         supplierAnswer: answer,
-        supplierComment: this.getFieldValue(`${name}Comment`)
+        supplierComment: this.getFieldValue(`${name}Comment`),
+        supplierFile: files.length > 0 ? files[0] : null,
       };
     });
 
@@ -69,7 +71,7 @@ class AuditFormsBase extends BaseForm {
       doc[name] = {
         auditorScore: score,
         auditorComment: this.getFieldValue(`${name}Comment`),
-        auditorRecommendation: this.getFieldValue(`${name}Recommendation`)
+        auditorRecommendation: this.getFieldValue(`${name}Recommendation`),
       };
     });
 
@@ -96,10 +98,12 @@ class AuditFormsBase extends BaseForm {
       initialAnswer = multipleOptions[supplierAnswer].value;
     } else {
       initialAnswer =
-        supplierAnswer !== null && supplierAnswer !== undefined
-          ? supplierAnswer.toString()
-          : '';
+        supplierAnswer !== null && supplierAnswer !== undefined ? supplierAnswer.toString() : '';
     }
+
+    // dynamically changing answer
+    const stateAnswer = this.getFieldValue(`${name}Answer`) || initialAnswer;
+    const isFileVisible = stateAnswer === 'true' || ['1', '2'].includes(stateAnswer);
 
     return (
       <div className="audit-question">
@@ -111,18 +115,26 @@ class AuditFormsBase extends BaseForm {
           dataType: type !== 'multiple' ? 'boolean' : null,
           control: (
             <Select>
-              {type !== 'multiple'
-                ? this.booleanOptions
-                : this.renderOptions(labels[name].options)}
+              {type !== 'multiple' ? this.booleanOptions : this.renderOptions(labels[name].options)}
             </Select>
-          )
+          ),
         })}
 
         {this.renderField({
           name: `${name}Comment`,
           hasFeedback: false,
           initialValue: answer.supplierComment,
-          control: <TextArea placeholder={__('Comment')} />
+          control: <TextArea placeholder={__('Comment')} />,
+        })}
+
+        {this.renderField({
+          name: `${name}File`,
+          hasFeedback: false,
+          initialValue: answer.supplierFile,
+          isVisible: isFileVisible,
+          optional: !isFileVisible,
+          dataType: 'file',
+          control: <Uploader />,
         })}
       </div>
     );
@@ -139,7 +151,7 @@ class AuditFormsBase extends BaseForm {
       supplierComment,
       auditorRecommendation,
       auditorScore,
-      auditorComment
+      auditorComment,
     } = responseData;
 
     const multipleOptions = labels[name].options;
@@ -150,9 +162,7 @@ class AuditFormsBase extends BaseForm {
       initialScore = multipleOptions[auditorScore].value;
     } else {
       initialScore =
-        auditorScore !== null && auditorScore !== undefined
-          ? auditorScore.toString()
-          : '';
+        auditorScore !== null && auditorScore !== undefined ? auditorScore.toString() : '';
     }
 
     return (
@@ -169,10 +179,7 @@ class AuditFormsBase extends BaseForm {
             : multipleOptions[supplierAnswer].text}
         </div>
 
-        <div
-          className="ant-list-item-meta-description"
-          style={{ marginBottom: '8px' }}
-        >
+        <div className="ant-list-item-meta-description" style={{ marginBottom: '8px' }}>
           {supplierComment}
         </div>
 
@@ -189,7 +196,7 @@ class AuditFormsBase extends BaseForm {
                   : this.booleanOptions
                 : this.renderOptions(labels[name].options)}
             </Select>
-          )
+          ),
         })}
 
         {this.renderField({
@@ -197,7 +204,7 @@ class AuditFormsBase extends BaseForm {
           hasFeedback: false,
           initialValue: auditorComment,
           optional: true,
-          control: <TextArea placeholder="Comment" />
+          control: <TextArea placeholder="Comment" />,
         })}
 
         {this.renderField({
@@ -205,12 +212,7 @@ class AuditFormsBase extends BaseForm {
           hasFeedback: false,
           initialValue: auditorRecommendation,
           optional: true,
-          control: (
-            <TextArea
-              placeholder="Recommendation"
-              style={{ marginTop: '5px' }}
-            />
-          )
+          control: <TextArea placeholder="Recommendation" style={{ marginTop: '5px' }} />,
         })}
         <Divider />
       </div>
@@ -251,17 +253,9 @@ class AuditFormsBase extends BaseForm {
           </h2>
 
           {isQualified ? (
-            <Alert
-              message={__('This supplier is qualified')}
-              type="success"
-              showIcon
-            />
+            <Alert message={__('This supplier is qualified')} type="success" showIcon />
           ) : (
-            <Alert
-              message={__('This supplier is not qualified.')}
-              type="warning"
-              showIcon
-            />
+            <Alert message={__('This supplier is not qualified.')} type="warning" showIcon />
           )}
 
           <p style={{ height: '8px' }} />
@@ -278,9 +272,7 @@ class AuditFormsBase extends BaseForm {
 
       return (
         <Alert
-          message={`${auditTabs[name]} is ${
-            qualified ? 'qualified' : 'not qualified'
-          }`}
+          message={`${auditTabs[name]} is ${qualified ? 'qualified' : 'not qualified'}`}
           type={qualified ? 'success' : 'error'}
           style={{ marginBottom: '16px' }}
           showIcon
@@ -291,7 +283,7 @@ class AuditFormsBase extends BaseForm {
 }
 
 AuditFormsBase.contextTypes = {
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 export default AuditFormsBase;

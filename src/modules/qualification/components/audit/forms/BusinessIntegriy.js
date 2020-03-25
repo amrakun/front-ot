@@ -17,7 +17,7 @@ class BusinessIntegriy extends AuditFormsBase {
       ...this.state,
       evidenceModalVisible: false,
       reportModalVisible: false,
-      planModalVisible: false
+      planModalVisible: false,
     };
 
     this.saveAndShowModal = this.saveAndShowModal.bind(this);
@@ -42,17 +42,13 @@ class BusinessIntegriy extends AuditFormsBase {
     const exportModalArgs = {
       ...supplierInfo,
       exportFiles,
-      isQualified
+      isQualified,
     };
 
     return (
       <div style={{ float: 'right' }}>
-        {this.renderSubmit('Save & create improvement plan', e =>
-          this.saveAndShowModal(e, 'plan')
-        )}
-        {this.renderSubmit('Save & create report', e =>
-          this.saveAndShowModal(e, 'report')
-        )}
+        {this.renderSubmit('Save & create improvement plan', e => this.saveAndShowModal(e, 'plan'))}
+        {this.renderSubmit('Save & create report', e => this.saveAndShowModal(e, 'report'))}
 
         <CreatePlan
           {...exportModalArgs}
@@ -73,7 +69,11 @@ class BusinessIntegriy extends AuditFormsBase {
 
   renderSupplierAction() {
     return this.renderSubmit('Save & submit', e =>
-      this.saveAndShowModal(e, 'evidence')
+      this.props.form.validateFieldsAndScroll(err => {
+        if (!err) {
+          this.saveAndShowModal(e, 'evidence');
+        }
+      })
     );
   }
 
@@ -114,7 +114,7 @@ class BusinessIntegriy extends AuditFormsBase {
 const BusinessIntegriyForm = Form.create()(BusinessIntegriy);
 
 BusinessIntegriy.contextTypes = {
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 export default withRouter(BusinessIntegriyForm);
