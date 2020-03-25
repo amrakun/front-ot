@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Input, Select, Popover, Icon, Divider, Alert } from 'antd';
 import { Uploader, BaseForm } from 'modules/common/components';
 import { booleanData, booleanDataReverse } from 'modules/common/constants';
+import { readFileUrl } from 'modules/common/utils';
 import { labels } from '../constants';
 import { auditTabs } from 'modules/qualification/consts';
 
@@ -149,6 +150,7 @@ class AuditFormsBase extends BaseForm {
     const {
       supplierAnswer,
       supplierComment,
+      supplierFile,
       auditorRecommendation,
       auditorScore,
       auditorComment,
@@ -182,6 +184,12 @@ class AuditFormsBase extends BaseForm {
         <div className="ant-list-item-meta-description" style={{ marginBottom: '8px' }}>
           {supplierComment}
         </div>
+
+        {supplierFile ? (
+          <a href={readFileUrl(supplierFile.url)} target="__blank">
+            {supplierFile.name}
+          </a>
+        ) : null}
 
         {this.renderField({
           name: `${name}Score`,
