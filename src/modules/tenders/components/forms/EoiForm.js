@@ -2,12 +2,11 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { Card, Form, message, Select, Checkbox } from 'antd';
-import { BaseForm } from 'modules/common/components';
+import { SubmitButton, BaseForm } from 'modules/common/components';
 import { regionOptions } from 'modules/companies/constants';
+import { clearContent } from 'modules/common/utils';
 import EoiTable from './EoiTable';
 import MainInfo from './MainInfo';
-import SubmitButton from './SubmitButton';
-import { clearContent } from '../utils';
 import { initialDocuments } from '../../constants';
 
 const { Option } = Select;
@@ -110,11 +109,7 @@ class EoiForm extends BaseForm {
           name: 'responsibleBuyerIds',
           optional: true,
           initialValue: data.responsibleBuyerIds,
-          control: (
-            <Select mode="multiple">
-              {buyersOptions}
-            </Select>
-          ),
+          control: <Select mode="multiple">{buyersOptions}</Select>,
         })}
 
         <p>

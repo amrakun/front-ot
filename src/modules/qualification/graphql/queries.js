@@ -226,14 +226,21 @@ const companyByUser = `
   }
 `;
 
+const auditFields = `
+    status
+    supplierIds
+    publishDate
+    closeDate
+    responsibleBuyerIds
+    content
+`;
+
 const auditsSuppliers = `
   query auditsSuppliers($type: String!) {
     auditsSuppliers(type: $type) {
       audit {
         _id
-        status
-        publishDate
-        closeDate
+        ${auditFields}
       }
       supplier {
         _id
@@ -258,9 +265,7 @@ const auditRequests = `
       _id
       audits {
         _id
-        publishDate
-        closeDate
-        status
+        ${auditFields}
         supplierResponse {
           isSent
           isQualified
@@ -275,10 +280,7 @@ const audits = `
   query audits {
     audits {
       _id
-      status
-      publishDate
-      closeDate
-      supplierIds
+      ${auditFields}
       responses {
         _id
       }
@@ -327,9 +329,7 @@ const auditResponses = `
       status
       audit {
         _id
-        status
-        publishDate
-        closeDate
+        ${auditFields}
       }
       isQualified
       submittedCount

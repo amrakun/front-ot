@@ -1,3 +1,4 @@
+import strip from 'strip';
 import xlsx from 'read-excel-file';
 import { message } from 'antd';
 import productsTree from 'modules/common/components/productsTree/constants';
@@ -107,4 +108,8 @@ export const roundNumber = number => {
   }
 
   return Math.round(number).toLocaleString();
+};
+
+export const clearContent = content => {
+  return strip(content || '').trim();
 };

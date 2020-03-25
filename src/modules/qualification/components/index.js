@@ -9,6 +9,7 @@ import Status from './status/Status';
 import SupplierStatus from './status/SupplierStatus';
 import CapacityBuilding from './CapacityBuilding';
 import Audit from './audit/Audit';
+import AuditSendForm from './audit/AuditSendForm';
 import AuditResponses from './audit/AuditResponses';
 import SubmitAudit from './audit/SubmitAudit';
 import QualifyAudit from './audit/QualifyAudit';
@@ -28,10 +29,11 @@ export {
   SupplierStatus,
   CapacityBuilding,
   Audit,
+  AuditSendForm,
   AuditResponses,
   SubmitAudit,
   QualifyAudit,
   AuditRequests,
   ReportsAndPlans,
-  PhysicalAudits
+  PhysicalAudits,
 };

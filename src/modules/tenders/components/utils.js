@@ -1,5 +1,3 @@
-import strip from 'strip';
-
 export const controlValueParser = ({ e, dataType }) => {
   let value;
 
@@ -31,8 +29,4 @@ export const collectProducts = state => {
   });
 
   return products;
-};
-
-export const clearContent = content => {
-  return strip(content || '').trim();
 };

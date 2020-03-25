@@ -2,10 +2,10 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Card, Row, Col, Button, Icon, Modal, message, DatePicker } from 'antd';
+import { Card, Row, Col, Button, Icon, message } from 'antd';
 import { Common, Sidebar } from 'modules/companies/components';
 import { Search } from 'modules/common/components';
-import { dateFormat, dateTimeFormat } from 'modules/common/constants';
+import { dateFormat } from 'modules/common/constants';
 import moment from 'moment';
 import ModalForm from './physical/ModalForm';
 
@@ -15,35 +15,24 @@ class Audit extends Common {
 
     this.state = {
       ...this.state,
-      auditModalVisible: false,
-      physicalAuditModalVisible: false
+      selectedSuppliers: [],
+      physicalAuditModalVisible: false,
     };
 
-    this.addAudit = this.addAudit.bind(this);
-    this.toggleAuditModal = this.toggleAuditModal.bind(this);
-    this.handleDateRangeChange = this.handleDateRangeChange.bind(this);
+    this.handleSend = this.handleSend.bind(this);
+    this.handleCheck = this.handleCheck.bind(this);
   }
 
-  addAudit() {
-    if (!this.dateRange) {
-      message.error('Please choose publish and close date!');
-    } else {
-      const { addAudit } = this.props;
-      const { selectedCompanies } = this.state;
-
-      this.setState({ auditModalVisible: false });
-      addAudit({
-        supplierIds: selectedCompanies,
-        publishDate: this.dateRange[0],
-        closeDate: this.dateRange[1]
-      });
-    }
+  handleCheck(companyIds, selectedSuppliers) {
+    this.setState({ selectedSuppliers });
   }
 
-  toggleAuditModal(value) {
-    if (value && this.state.selectedCompanies.length < 1)
-      message.error('Please select atleast one supplier');
-    else this.setState({ auditModalVisible: value });
+  handleSend(path) {
+    const { selectedSuppliers } = this.state;
+
+    this.props.history.push(path, {
+      supplierIds: selectedSuppliers.map(s => s._id),
+    });
   }
 
   togglePhysicalAuditModal(value) {
@@ -56,38 +45,28 @@ class Audit extends Common {
     this.setState({ viewModalVisible: value });
   }
 
-  handleDateRangeChange(value) {
-    this.dateRange = value;
-  }
-
   render() {
     const { totalCount, addPhysicalAudit } = this.props;
-    const {
-      selectedCompanies,
-      auditModalVisible,
-      physicalAuditModalVisible
-    } = this.state;
+    const { selectedCompanies, physicalAuditModalVisible } = this.state;
 
     const columns = this.getWrappedColumns([
       {
         title: 'Qualified',
-        render: report => report.qualificationStatusDisplay
+        render: report => report.qualificationStatusDisplay,
       },
       {
         title: 'Auditor report',
-        render: () => <a href="#view">View</a>
+        render: () => <a href="#view">View</a>,
       },
       {
         title: 'Auditor improvement plan',
-        render: () => <a href="#view">View</a>
+        render: () => <a href="#view">View</a>,
       },
       {
         title: 'Last qualification date',
         render: record =>
-          record.lastAudit
-            ? moment(record.lastAudit.closeDate).format(dateFormat)
-            : '-'
-      }
+          record.lastAudit ? moment(record.lastAudit.closeDate).format(dateFormat) : '-',
+      },
     ]);
 
     return (
@@ -106,7 +85,8 @@ class Audit extends Common {
                 Insert physical audit
                 <Icon type="mail" />
               </Button>
-              <Button onClick={() => this.toggleAuditModal(true)}>
+
+              <Button onClick={() => this.handleSend('/audit/send')}>
                 Send desktop audit invitation
                 <Icon type="mail" />
               </Button>
@@ -115,39 +95,18 @@ class Audit extends Common {
             {this.renderTable({
               rowSelection: {
                 selectedCompanies,
-                onChange: this.onSelectedCompaniesChange
+                onChange: this.handleCheck,
               },
-              columns
+              columns,
             })}
           </Card>
-
-          <Modal
-            title="Send desktop audit invitation"
-            maskClosable={false}
-            visible={auditModalVisible}
-            onCancel={() => this.toggleAuditModal(false)}
-            onOk={this.addAudit}
-            okText="Send"
-          >
-            Sending desktop audit invitation to&nbsp;
-            <strong>{selectedCompanies.length}</strong> suppliers.
-            <a href="#view" onClick={() => window.open('/audit/template')}>
-              View template
-            </a>
-            <DatePicker.RangePicker
-              className="margin"
-              onOk={this.handleDateRangeChange}
-              showTime
-              format={dateTimeFormat}
-            />
-          </Modal>
 
           <ModalForm
             visible={physicalAuditModalVisible}
             onSubmit={inputs =>
               addPhysicalAudit({
                 supplierId: selectedCompanies ? selectedCompanies[0] : '',
-                ...inputs
+                ...inputs,
               })
             }
             hideModal={() => this.togglePhysicalAuditModal(false)}

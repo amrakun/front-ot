@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 import { Form, message, Select } from 'antd';
 import RfqTable from './RfqTable';
 import MainInfo from './MainInfo';
-import SubmitButton from './SubmitButton';
-import { BaseForm } from 'modules/common/components';
-import { clearContent } from '../utils';
+import { SubmitButton, BaseForm } from 'modules/common/components';
+import { clearContent } from 'modules/common/utils';
 
 const { Option } = Select;
 class RfqForm extends BaseForm {

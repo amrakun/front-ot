@@ -178,11 +178,15 @@ const addAudit = `
     $publishDate: Date!
     $closeDate: Date!
     $supplierIds: [String]!
+    $responsibleBuyerIds: [String]!
+    $content: String!
   ) {
     auditsAdd(
       publishDate: $publishDate
       closeDate: $closeDate
       supplierIds: $supplierIds
+      responsibleBuyerIds: $responsibleBuyerIds
+      content: $content
     ) {
       _id
     }
@@ -429,5 +433,5 @@ export default {
   physicalAuditsAdd,
   physicalAuditsEdit,
   physicalAuditsRemove,
-  togglePrequalificationState
+  togglePrequalificationState,
 };

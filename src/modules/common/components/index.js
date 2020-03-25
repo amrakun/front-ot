@@ -14,6 +14,7 @@ import exportFile from './exportFile';
 import HelpModal from './help/HelpModal';
 import ProductsTree from './productsTree';
 import Panes from './Panes';
+import SubmitButton from './SubmitButton';
 
 export {
   Uploader,
@@ -32,4 +33,5 @@ export {
   HelpModal,
   ProductsTree,
   Panes,
+  SubmitButton,
 };

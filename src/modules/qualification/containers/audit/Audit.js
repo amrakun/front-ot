@@ -8,18 +8,7 @@ import { generator } from 'modules/companies/containers';
 
 class AuditContainer extends React.Component {
   render() {
-    const { companiesQuery, addAuditMutation, physicalAuditsAdd } = this.props;
-
-    const addAudit = variables => {
-      addAuditMutation({ variables })
-        .then(() => {
-          message.success('Successfully sent audit');
-          companiesQuery.refetch();
-        })
-        .catch(error => {
-          message.error(error.message);
-        });
-    };
+    const { companiesQuery, physicalAuditsAdd } = this.props;
 
     const addPhysicalAudit = variables => {
       physicalAuditsAdd({ variables })
@@ -34,8 +23,7 @@ class AuditContainer extends React.Component {
 
     const extendedProps = {
       ...this.props,
-      addAudit,
-      addPhysicalAudit
+      addPhysicalAudit,
     };
 
     return <Audit {...extendedProps} />;
@@ -44,17 +32,12 @@ class AuditContainer extends React.Component {
 
 AuditContainer.propTypes = {
   companiesQuery: PropTypes.object,
-  addAuditMutation: PropTypes.func,
-  physicalAuditsAdd: PropTypes.func
+  physicalAuditsAdd: PropTypes.func,
 };
 
 const WithData = compose(
-  graphql(gql(mutations.addAudit), {
-    name: 'addAuditMutation'
-  }),
-
   graphql(gql(mutations.physicalAuditsAdd), {
-    name: 'physicalAuditsAdd'
+    name: 'physicalAuditsAdd',
   })
 )(AuditContainer);
 
