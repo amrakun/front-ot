@@ -417,36 +417,6 @@ const AuditBusinessInfo = `
   whoIsResponsibleForPolicy { ${AnswerRecommendation} }
 `;
 
-const AuditEvidenceInfo = `
-  doesHaveHealthSafety
-  doesHaveDrugPolicy
-  doesPerformPreemployment
-  workProceduresConform
-  doesHaveFormalProcessForHSE
-  doesHaveSystemForTracking
-  doesHaveValidCertifications
-  doesHaveSystemForReporting
-  doesHaveLiabilityInsurance
-  doesHaveFormalProcessForHealth
-  isThereCurrentContract
-  doesHaveJobDescription
-  doesHaveTraining
-  doesHaveEmployeeRelatedProcedure
-  doesHaveTimeKeeping
-  doesHavePerformancePolicy
-  doesHaveProcessToSupport
-  employeesAwareOfRights
-  doesHaveSystemToEnsureSafeWork
-  doesHaveEmployeeSelectionProcedure
-  doesHaveEmployeeLaborProcedure
-  doesHaveGrievancePolicy
-  proccessToEnsurePolicesCompany
-  proccessToEnsurePolicesSupplyChain
-  hasBeenSubjectToInvestigation
-  doesHaveCorruptionPolicy
-  whoIsResponsibleForCorruptionPolicy
-`;
-
 const auditResponseByUser = `
   query auditResponseByUser($auditId: String!) {
     auditResponseByUser(auditId: $auditId) {
@@ -456,7 +426,6 @@ const auditResponseByUser = `
       coreHseqInfo { ${AuditCoreHseqInfo} }
       hrInfo { ${AuditHrInfo} }
       businessInfo { ${AuditBusinessInfo} }
-      evidenceInfo { ${AuditEvidenceInfo} }
     }
   }
 `;
@@ -469,7 +438,6 @@ const auditResponseDetail = `
       coreHseqInfo { ${AuditCoreHseqInfo} }
       hrInfo { ${AuditHrInfo} }
       businessInfo { ${AuditBusinessInfo} }
-      evidenceInfo { ${AuditEvidenceInfo} }
       isQualified
     }
   }

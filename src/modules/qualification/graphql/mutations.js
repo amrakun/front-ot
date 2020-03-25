@@ -243,18 +243,6 @@ const auditsSupplierSaveBusinessInfo = `
   }
 `;
 
-const auditsSupplierSaveEvidenceInfo = `
-  mutation auditsSupplierSaveEvidenceInfo(
-    ${commonInputs}
-    $evidenceInfo: AuditSupplierEvidenceInfoInput
-  ) {
-    auditsSupplierSaveEvidenceInfo(
-      ${commonFields}
-      evidenceInfo: $evidenceInfo
-    ) { _id }
-  }
-`;
-
 const auditsBuyerSaveCoreHseqInfo = `
   mutation auditsBuyerSaveCoreHseqInfo(
     ${commonInputs}
@@ -422,7 +410,6 @@ export default {
   auditsSupplierSaveCoreHseqInfo,
   auditsSupplierSaveHrInfo,
   auditsSupplierSaveBusinessInfo,
-  auditsSupplierSaveEvidenceInfo,
   auditsBuyerSaveCoreHseqInfo,
   auditsBuyerSaveHrInfo,
   auditsBuyerSaveBusinessInfo,

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Input, Select, Popover, Icon, Divider, Alert } from 'antd';
 import { Uploader, BaseForm } from 'modules/common/components';
 import { booleanData, booleanDataReverse } from 'modules/common/constants';
-import { labels } from './constants';
+import { labels } from '../constants';
 import { auditTabs } from 'modules/qualification/consts';
 
 const TextArea = Input.TextArea;

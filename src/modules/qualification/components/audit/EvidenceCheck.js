@@ -1,0 +1,72 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import ModalWrapper from './forms/modals/ModalWrapper';
+import { labels } from './constants';
+
+const EvidenceCheck = (props, { __ }) => {
+  const { auditResponse, send } = props;
+
+  const renderAnswer = supplierAnswer => {
+    if (typeof supplierAnswer === 'undefined') {
+      return null;
+    }
+
+    if (typeof supplierAnswer === 'boolean') {
+      return supplierAnswer ? 'Yes' : 'No';
+    }
+
+    return supplierAnswer;
+  };
+
+  const renderGroup = (name, label) => {
+    const sectionValues = auditResponse[name];
+    const keys = Object.keys(sectionValues);
+
+    return (
+      <>
+        <tr>
+          <th>{name === 'coreHseqInfo' ? null : label}</th>
+          <th />
+          <th />
+        </tr>
+
+        {keys.map((key, index) => {
+          const dbValues = sectionValues[key] || {};
+
+          return (
+            <tr key={index}>
+              <td>{(labels[key] || {}).title}</td>
+              <td>{renderAnswer(dbValues.supplierAnswer)}</td>
+              <td>Yes</td>
+            </tr>
+          );
+        })}
+      </>
+    );
+  };
+
+  return (
+    <ModalWrapper title="Confirmation" visible={true} handleOk={send}>
+      <table>
+        <thead>
+          <tr>
+            <th>{__('Core HSEQ')}</th>
+            <th>{__('Score')}</th>
+            <th>{__('Attached')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {renderGroup('coreHseqInfo', 'Core HSEQ')}
+          {renderGroup('hrInfo', 'Human resource management')}
+          {renderGroup('businessInfo', 'BusinesIntegrity')}
+        </tbody>
+      </table>
+    </ModalWrapper>
+  );
+};
+
+EvidenceCheck.contextTypes = {
+  __: PropTypes.func,
+};
+
+export default EvidenceCheck;

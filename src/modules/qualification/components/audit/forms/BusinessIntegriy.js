@@ -5,7 +5,7 @@ import { Form, Card } from 'antd';
 import AuditFormsBase from './AuditFormsBase';
 import CreateReport from './modals/CreateReport';
 import CreatePlan from './modals/CreatePlan';
-import EvidenceCheck from './modals/EvidenceCheck';
+import EvidenceCheck from 'modules/qualification/containers/audit/EvidenceCheck';
 
 class BusinessIntegriy extends AuditFormsBase {
   constructor(props, context) {
@@ -77,9 +77,21 @@ class BusinessIntegriy extends AuditFormsBase {
     );
   }
 
+  rendereEvidenceCheck() {
+    const { evidenceModalVisible } = this.state;
+    const { match, history } = this.props;
+
+    if (!evidenceModalVisible) {
+      return null;
+    }
+
+    return (
+      <EvidenceCheck history={history} match={match} hideModal={() => this.hideModal('evidence')} />
+    );
+  }
+
   render() {
     const render = this.renderQuestion;
-    const { evidenceModalVisible } = this.state;
     const { __ } = this.context;
     const { response } = this.props;
 
@@ -100,12 +112,7 @@ class BusinessIntegriy extends AuditFormsBase {
 
         {response ? this.renderBuyerAction() : this.renderSupplierAction()}
 
-        <EvidenceCheck
-          title="Confirmation"
-          visible={evidenceModalVisible}
-          save={this.props.saveEvidenceChecks}
-          hideModal={() => this.hideModal('evidence')}
-        />
+        {this.rendereEvidenceCheck()}
       </Form>
     );
   }

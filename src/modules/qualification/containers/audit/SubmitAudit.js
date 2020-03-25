@@ -7,12 +7,8 @@ import { Loading } from 'modules/common/components';
 import { message } from 'antd';
 
 const SubmitAuditContainer = (props, context) => {
-  let {
-    auditResponseByUserQuery,
-    companyByUserQuery,
-    evidenceInfoEdit,
-    sendResponse
-  } = props;
+  const { auditResponseByUserQuery, companyByUserQuery } = props;
+
   const { currentUser } = context;
 
   if (auditResponseByUserQuery.error || companyByUserQuery.error) {
@@ -32,8 +28,8 @@ const SubmitAuditContainer = (props, context) => {
       variables: {
         auditId: match.params.id,
         supplierId: currentUser.companyId,
-        [name]: doc
-      }
+        [name]: doc,
+      },
     })
       .then(() => {
         auditResponseByUserQuery.refetch();
@@ -44,65 +40,26 @@ const SubmitAuditContainer = (props, context) => {
       });
   };
 
-  const saveEvidenceChecks = doc => {
-    evidenceInfoEdit({
-      variables: {
-        auditId: match.params.id,
-        supplierId: currentUser.companyId,
-        evidenceInfo: doc
-      }
-    })
-      .then(() => {
-        message.success('Saved');
-        send();
-      })
-      .catch(error => {
-        message.error(error.message);
-      });
-  };
-
-  const send = () => {
-    const { history } = props;
-    const { __ } = context;
-
-    sendResponse({
-      variables: {
-        auditId: match.params.id,
-        supplierId: currentUser.companyId
-      }
-    })
-      .then(() => {
-        message.success(__('Successfully sent your response!'));
-        history.push('/qualification?refetch');
-      })
-      .catch(error => {
-        message.error(error.message);
-      });
-  };
-
   const updatedProps = {
     ...props,
     save,
-    saveEvidenceChecks,
     company: {
-      ...auditResponseByUserQuery.auditResponseByUser
+      ...auditResponseByUserQuery.auditResponseByUser,
     },
-    supplierInfo: companyByUserQuery.companyByUser
+    supplierInfo: companyByUserQuery.companyByUser,
   };
   return <SubmitAudit {...updatedProps} />;
 };
 
 SubmitAuditContainer.propTypes = {
   auditResponseByUserQuery: PropTypes.object,
-  evidenceInfoEdit: PropTypes.func,
   companyByUserQuery: PropTypes.object,
-  sendResponse: PropTypes.func,
-  match: PropTypes.object
+  match: PropTypes.object,
 };
 
 SubmitAuditContainer.contextTypes = {
   currentUser: PropTypes.object,
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 export default compose(
@@ -110,32 +67,26 @@ export default compose(
     name: 'auditResponseByUserQuery',
     options: ({ match }) => {
       return {
-        variables: { auditId: match.params.id }
+        variables: { auditId: match.params.id },
       };
-    }
+    },
   }),
 
   graphql(gql(queries.companyByUser), {
-    name: 'companyByUserQuery'
+    name: 'companyByUserQuery',
   }),
 
   // mutations
   graphql(gql(mutations.auditsSupplierSaveBasicInfo), {
-    name: 'basicInfoEdit'
+    name: 'basicInfoEdit',
   }),
   graphql(gql(mutations.auditsSupplierSaveCoreHseqInfo), {
-    name: 'coreHseqInfoEdit'
+    name: 'coreHseqInfoEdit',
   }),
   graphql(gql(mutations.auditsSupplierSaveHrInfo), {
-    name: 'hrInfoEdit'
+    name: 'hrInfoEdit',
   }),
   graphql(gql(mutations.auditsSupplierSaveBusinessInfo), {
-    name: 'businessInfoEdit'
-  }),
-  graphql(gql(mutations.auditsSupplierSaveEvidenceInfo), {
-    name: 'evidenceInfoEdit'
-  }),
-  graphql(gql(mutations.auditsSupplierSendResponse), {
-    name: 'sendResponse'
+    name: 'businessInfoEdit',
   })
 )(SubmitAuditContainer);

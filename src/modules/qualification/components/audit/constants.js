@@ -5,43 +5,40 @@ const labels = {
   //supplier profile
   type: {
     title: 'Type',
-    desc: 'Specify if the company Southgobi, National or International (Tier 1)'
+    desc: 'Specify if the company Southgobi, National or International (Tier 1)',
   },
   ownership: {
     title: 'Ownership',
-    desc: 'Specify legal owner/owners of the business'
+    desc: 'Specify legal owner/owners of the business',
   },
   shareholder: {
     title: 'Shareholder',
-    desc:
-      'Specify number shareholders, names, percentages, attach company charter'
+    desc: 'Specify number shareholders, names, percentages, attach company charter',
   },
   numberOfEmployees: {
     title: 'Number of employees',
-    desc: 'Specify number of employees verified by social insurance report '
+    desc: 'Specify number of employees verified by social insurance report ',
   },
   otExperience: {
     title: 'OT experience',
-    desc:
-      'Year of cooperation, supplied products & services, recognition by OT if any'
+    desc: 'Year of cooperation, supplied products & services, recognition by OT if any',
   },
   sqaResult: {
     title: 'SQA result',
-    desc: 'If audited by OT, audit results etc.'
+    desc: 'If audited by OT, audit results etc.',
   },
   sotri: {
     title: 'Share of OT related income in total income (SOTRI)',
-    desc: 'SOTRI= (Income from OT/Total income)*100'
+    desc: 'SOTRI= (Income from OT/Total income)*100',
   },
   sotie: {
     title: 'Specify legal owner/owners of the business',
-    desc: 'SOTIE= (OT induced employment/Total employment)*100'
+    desc: 'SOTIE= (OT induced employment/Total employment)*100',
   },
 
   //Core HSEQ
   doesHaveHealthSafety: {
-    title:
-      '1. Does the organisation have a Health Safety & Environment management system? ',
+    title: '1. Does the organisation have a Health Safety & Environment management system? ',
     desc(__) {
       return (
         <div>
@@ -53,9 +50,7 @@ const labels = {
             </li>
             <li>{__('The CEO has signed off the system.')}</li>
           </ol>
-          <strong>
-            {__('The System should include policies committing to:')}
-          </strong>
+          <strong>{__('The System should include policies committing to:')}</strong>
           <ol>
             <li>
               {__(
@@ -68,21 +63,13 @@ const labels = {
               )}
             </li>
             <li>{__('The effective management of HSE[Q] risks.')}</li>
-            <li>
-              {__(
-                'Adopting continual improvement practices in key HSE[Q] areas'
-              )}
-            </li>
+            <li>{__('Adopting continual improvement practices in key HSE[Q] areas')}</li>
             <li>
               {__(
                 'Establishing measurable objectives and targets for improving HSE[Q] performance.'
               )}
             </li>
-            <li>
-              {__(
-                'Providing the resources needed to meet performance objectives.'
-              )}
-            </li>
+            <li>{__('Providing the resources needed to meet performance objectives.')}</li>
             <li>
               {__(
                 'Encouraging employee consultation, participation and promoting employee awareness of HSE[Q] threats and opportunities.'
@@ -97,18 +84,17 @@ const labels = {
           </ol>
         </div>
       );
-    }
+    },
   },
   doesHaveDocumentedPolicy: {
-    title:
-      '2. Does the organisation have a documented drug and alcohol policy?',
+    title: '2. Does the organisation have a documented drug and alcohol policy?',
     desc:
-      'The policy must prohibit affected persons from conducting work at sites. It is to include prescribed limits, which can if required, be aligned to the site/s requirement. Commitment to meet site requirements. The policy is published and included in the induction process. '
+      'The policy must prohibit affected persons from conducting work at sites. It is to include prescribed limits, which can if required, be aligned to the site/s requirement. Commitment to meet site requirements. The policy is published and included in the induction process. ',
   },
   doesPerformPreemployment: {
     title:
       '3. Does the organisation perform pre-employment medical screening, fitness for work evaluations, background checks and verification of competence for employees, contractors and sub-contractors?',
-    desc: `There must be a procedure that requires pre-employment medicals and re-assessment in accordance with legislation prior to the commencement of the contractor performing work. The frequency of ongoing assessments/ surveillance medicals must be inline with regional legislation. `
+    desc: `There must be a procedure that requires pre-employment medicals and re-assessment in accordance with legislation prior to the commencement of the contractor performing work. The frequency of ongoing assessments/ surveillance medicals must be inline with regional legislation. `,
   },
   doWorkProceduresConform: {
     title: `4. Do the organisations work procedures conform to local statutory, legislative or regulatory codes and standards?`,
@@ -143,21 +129,21 @@ const labels = {
           </ol>
         </div>
       );
-    }
+    },
   },
   doesHaveFormalProcess: {
     title:
       '5. Does the organisation have a formal process for HSE induction and orientation of new hire employees, contractors and sub-contractors?',
-    desc: `The induction is presented to sub-contractors, contractors and employees and includes an overview of the HSE policy, advising of HSE hazards and controls. Induction must be executed prior to the resource commencing active work.`
+    desc: `The induction is presented to sub-contractors, contractors and employees and includes an overview of the HSE policy, advising of HSE hazards and controls. Induction must be executed prior to the resource commencing active work.`,
   },
   doesHaveTrackingSystem: {
     title: `6. Does the organisation have a system or process for tracking current employee, contractor and sub-contractor qualifications and competencies?`,
-    desc: `There must be a documented process describing where and how training is recorded and maintained. Procedures ensuring personnel working on site are aware and trained, prior to commencing work.`
+    desc: `There must be a documented process describing where and how training is recorded and maintained. Procedures ensuring personnel working on site are aware and trained, prior to commencing work.`,
   },
   doesHaveValidIndustry: {
     title:
       '7. Does the organisation have valid industry certifications and/or licenses if required by the type of services provided?',
-    desc: `Procedures in place to ensure the organisations certifications and licenses remain current. Company is required to provide a  current copy of the appropriate  licenses.`
+    desc: `Procedures in place to ensure the organisations certifications and licenses remain current. Company is required to provide a  current copy of the appropriate  licenses.`,
   },
   doesHaveFormalProcessForReporting: {
     title:
@@ -165,11 +151,7 @@ const labels = {
     desc(__) {
       return (
         <div>
-          <p>
-            {__(
-              'The companies formal process includes identification of the root cause.'
-            )}
-          </p>
+          <p>{__('The companies formal process includes identification of the root cause.')}</p>
           <p>
             {__(
               'The company monitors key operational parameters in order to anticipate and reduce the likelihood and consequences of HSE incidents and upsets - including (Material accidents; near-misses, incidents)'
@@ -182,26 +164,24 @@ const labels = {
             )}
           </p>
           <strong>
-            {__(
-              'Definition of Incident (As per HSE Glossary on HSEC Community Page):'
-            )}
+            {__('Definition of Incident (As per HSE Glossary on HSEC Community Page):')}
           </strong>
           {__(
             'An incident is a single event or continuous / repetitive series of events that results in, or could have resulted in, one or more of the following impacts: >an occupational injury or illness; >damage to physical assets (eg plant & equipment), the environment, process, product or reputation; >disruption to a community; >exposure to legal liability; >security threat. It is evaluated both by its Acutal Consequence, and its Maximum Reasonable Outcome for each area of impact.'
           )}
         </div>
       );
-    }
+    },
   },
   doesHaveLiabilityInsurance: {
     title:
       '9. Does the organisation have Liability insurance which meets Oyu Tolgoi’s minimum requirements and valid worker compensation insurance or enrolment in an applicable occupational injury/illness insurance programme? ',
-    desc: `Review Oyu Tolgoi's insurance requirements. Ensure a current certificate is attached. `
+    desc: `Review Oyu Tolgoi's insurance requirements. Ensure a current certificate is attached. `,
   },
 
   doesHaveFormalProcessForHealth: {
     title: `10. Does the organisation have a formal process for Health Safety and Environmental risk management `,
-    desc: `The company has a procedure for HSE risk management. The process references Environmental and Heath risk management as well as safety risk management.`
+    desc: `The company has a procedure for HSE risk management. The process references Environmental and Heath risk management as well as safety risk management.`,
   },
 
   //Human resource management
@@ -212,13 +192,13 @@ const labels = {
       { value: '0', text: `0 - No contract signed.` },
       {
         value: '1',
-        text: `1 - Contract signed according to local requirements.`
+        text: `1 - Contract signed according to local requirements.`,
       },
       {
         value: '2',
-        text: `2 - No work occurs before a contract is in place. Evidence for at least 3 years.`
-      }
-    ]
+        text: `2 - No work occurs before a contract is in place. Evidence for at least 3 years.`,
+      },
+    ],
   },
   jobDescriptionProcedure: {
     title: '2. Job Description Procedure',
@@ -227,13 +207,13 @@ const labels = {
       { value: '0', text: `0 - No approach in place` },
       {
         value: '1',
-        text: `1 - The defined approach is running for all of the jobs and includes HSE capabilities`
+        text: `1 - The defined approach is running for all of the jobs and includes HSE capabilities`,
       },
       {
         value: '2',
-        text: `2 - The approach mirrors RT (OT) standards (any new role to be benchmarked against other roles within the organisation) or data/documentation for at least the last 3 years exists. An improvement process is in place.`
-      }
-    ]
+        text: `2 - The approach mirrors RT (OT) standards (any new role to be benchmarked against other roles within the organisation) or data/documentation for at least the last 3 years exists. An improvement process is in place.`,
+      },
+    ],
   },
   trainingDevelopment: {
     title: '3. Training and Development Policy',
@@ -243,9 +223,9 @@ const labels = {
       { value: '1', text: `1 - A defined system is running` },
       {
         value: '2',
-        text: `2 - The system mirrors the RT system (i.e. specific and dedicated budget per employee, followed and monitored). The system is in place for at least 3 years and has been improved.`
-      }
-    ]
+        text: `2 - The system mirrors the RT system (i.e. specific and dedicated budget per employee, followed and monitored). The system is in place for at least 3 years and has been improved.`,
+      },
+    ],
   },
   employeePerformanceManagement: {
     title: '4. Employee Performance Management',
@@ -253,17 +233,17 @@ const labels = {
     options: [
       {
         value: '0',
-        text: `0 - No evaluation criteria set for the assessment of employee performance (only subjective assessment)`
+        text: `0 - No evaluation criteria set for the assessment of employee performance (only subjective assessment)`,
       },
       {
         value: '1',
-        text: `1 - Assessment of employees implemented with pre-determined criteria on a regular basis`
+        text: `1 - Assessment of employees implemented with pre-determined criteria on a regular basis`,
       },
       {
         value: '2',
-        text: `2 - Results are formally captured once a year and informally as required within the year. There is a follow up across the year of the employee performance.`
-      }
-    ]
+        text: `2 - Results are formally captured once a year and informally as required within the year. There is a follow up across the year of the employee performance.`,
+      },
+    ],
   },
   timeKeepingManagement: {
     title: '5. Time-Keeping Management',
@@ -272,13 +252,13 @@ const labels = {
       { value: '0', text: `0 - No process to capture working time` },
       {
         value: '1',
-        text: `1 - Existing process and monthly employee confirmation in place`
+        text: `1 - Existing process and monthly employee confirmation in place`,
       },
       {
         value: '2',
-        text: `2 - Existing process automated to capture working time, wied for at least 3 years to ensure improvements.`
-      }
-    ]
+        text: `2 - Existing process automated to capture working time, wied for at least 3 years to ensure improvements.`,
+      },
+    ],
   },
   managementOfPractises: {
     title: '6. Management of Practices related to conduct',
@@ -287,13 +267,13 @@ const labels = {
       { value: '0', text: `0 - No company policy` },
       {
         value: '1',
-        text: `1 - Policy exists regarding performance and conduct with systematic monitoring.`
+        text: `1 - Policy exists regarding performance and conduct with systematic monitoring.`,
       },
       {
         value: '2',
-        text: `2 - Training materials exist for all employees. Training of employees carried out regarding performance and expected conduct practices. At least for the last 3 years to ensure improvements`
-      }
-    ]
+        text: `2 - Training materials exist for all employees. Training of employees carried out regarding performance and expected conduct practices. At least for the last 3 years to ensure improvements`,
+      },
+    ],
   },
   managementOfWorkforce: {
     title: '7. Management of workforce engagement',
@@ -303,9 +283,9 @@ const labels = {
       { value: '1', text: `1 - Existing process or framework.` },
       {
         value: '2',
-        text: `2 - Evidence of regular communication (quarterly). And for at least 3 years to ensure improvements.`
-      }
-    ]
+        text: `2 - Evidence of regular communication (quarterly). And for at least 3 years to ensure improvements.`,
+      },
+    ],
   },
   employeeAwareness: {
     title: '8. Employee Awareness of their rights to association',
@@ -313,17 +293,17 @@ const labels = {
     options: [
       {
         value: '0',
-        text: `0 - No union or alternate means of employee representation / Worker representatives are not allowed to carry out their duties within working hours without losing pay.`
+        text: `0 - No union or alternate means of employee representation / Worker representatives are not allowed to carry out their duties within working hours without losing pay.`,
       },
       {
         value: '1',
-        text: `1 - Regular meetings with trade unions or their worker's committees representative are held`
+        text: `1 - Regular meetings with trade unions or their worker's committees representative are held`,
       },
       {
         value: '2',
-        text: `2 - Employee representation is authorised and organisations for worker representation exist (eg independent trade union, workers committee, health and safety committees). This is in place for at least the last 3 years`
-      }
-    ]
+        text: `2 - Employee representation is authorised and organisations for worker representation exist (eg independent trade union, workers committee, health and safety committees). This is in place for at least the last 3 years`,
+      },
+    ],
   },
   employeeSelection: {
     title: '9. Employee selection and  recruitment process',
@@ -332,13 +312,13 @@ const labels = {
       { value: '0', text: `0 - No written policy/procedure` },
       {
         value: '1',
-        text: `1 - Written procedure/process exists regarding employee recruitment and selection`
+        text: `1 - Written procedure/process exists regarding employee recruitment and selection`,
       },
       {
         value: '2',
-        text: `2 - The procedure/process mirrors the OT (RT) system. The system is in place for at least 3 years and has been improved`
-      }
-    ]
+        text: `2 - The procedure/process mirrors the OT (RT) system. The system is in place for at least 3 years and has been improved`,
+      },
+    ],
   },
   employeeExitManagement: {
     title: '10. Employee exit management',
@@ -347,13 +327,13 @@ const labels = {
       { value: '0', text: `0 - No system` },
       {
         value: '1',
-        text: `1 - Evidence that systems are in place to ensure all proper processes occur to exit an employee`
+        text: `1 - Evidence that systems are in place to ensure all proper processes occur to exit an employee`,
       },
       {
         value: '2',
-        text: `2 - Evidence that in the event of redundancies efforts have been made to redeploy employees. The system mirrors the OT (RT) system.`
-      }
-    ]
+        text: `2 - Evidence that in the event of redundancies efforts have been made to redeploy employees. The system mirrors the OT (RT) system.`,
+      },
+    ],
   },
   grievanceAndFairTreatment: {
     title: '11. Grievance and Fair treatment ',
@@ -363,23 +343,23 @@ const labels = {
       { value: '1', text: `1 - Existing policy and procedure.` },
       {
         value: '2',
-        text: `2 - Evidence that raised issues have been investigated and closed with employees. The system mirrors the OT (RT) system and is inducted to employees. And that is in place for at least 3 years and has been improved.`
-      }
-    ]
+        text: `2 - Evidence that raised issues have been investigated and closed with employees. The system mirrors the OT (RT) system and is inducted to employees. And that is in place for at least 3 years and has been improved.`,
+      },
+    ],
   },
 
   //Business integrity
   doesHavePolicyStatement: {
     title: `1. Does your company have in place a policy statement or code of conduct relating to the Business Integrity and Ethics?`,
-    desc: `If yes, please send us a copy of your Business Integrity policy or code of conduct. The policy must be approved by a senior management and introduced to the employees at least annually.`
+    desc: `If yes, please send us a copy of your Business Integrity policy or code of conduct. The policy must be approved by a senior management and introduced to the employees at least annually.`,
   },
   ensureThroughoutCompany: {
     title: `2. Are there processes and procedures in place to ensure that your policies or codes of conduct are effectively implemented throughout your company?`,
-    desc: `Please list all that apply to your company in the supplier answer column. If you have included 'others' then please specify. `
+    desc: `Please list all that apply to your company in the supplier answer column. If you have included 'others' then please specify. `,
   },
   ensureThroughoutSupplyChain: {
     title: `3. Are there processes and procedures in place to ensure that your policies or codes of conduct are effectively implemented throughout your Supply Chain?`,
-    desc: `Please list all that apply to your company in the supplier answer column. If you have included 'others' then please specify. Please provide examples of your standard supplier contracts. `
+    desc: `Please list all that apply to your company in the supplier answer column. If you have included 'others' then please specify. Please provide examples of your standard supplier contracts. `,
   },
   haveBeenSubjectToInvestigation: {
     title: `4. Has your company been subject to any external investigation regarding corruption within the past five years?`,
@@ -396,174 +376,23 @@ const labels = {
             <li>{__('Improper travels and hospitality')}</li>
             <li>{__('Improper gifts and entertainment')}</li>
             <li>{__('Improper resolution of conflicts of interest')}</li>
-            <li>
-              {__('Involvement in any Cartel or other form of market rigging')}
-            </li>
+            <li>{__('Involvement in any Cartel or other form of market rigging')}</li>
           </ul>
           {__(
             'If yes, please provide details, including key dates and outcomes in supplier comment column.'
           )}
         </div>
       );
-    }
+    },
   },
   doesHaveDocumentedPolicyToCorruption: {
     title: `5. Does your company have a documented policy in place to prevent corruption? `,
-    desc: `If yes, please provide a copy of your Anti-Corruption Management policy.`
+    desc: `If yes, please provide a copy of your Anti-Corruption Management policy.`,
   },
   whoIsResponsibleForPolicy: {
     title: `6. If yes to above question, who is responsible person/function for the compliance/anti-corruption program`,
-    desc: `Please write down the responsible person/function name in supplier answer column.`
-  }
+    desc: `Please write down the responsible person/function name in supplier answer column.`,
+  },
 };
 
-const coreHseq = [
-  {
-    label:
-      '1. Does the organisation have a Health Safety & Environment management system? ',
-    value: 'doesHaveHealthSafety'
-  },
-  {
-    label:
-      '2. Does the organisation have a documented drug and alcohol policy?',
-    value: 'doesHaveDrugPolicy'
-  },
-  {
-    label:
-      '3. Does the organisation perform pre-employment medical screening, fitness for work evaluations, background checks and verification of competence for employees, contractors and sub-contractors?',
-    value: 'doesPerformPreemployment'
-  },
-  {
-    label:
-      '4. Do the organisations work procedures conform to local statutory, legislative or regulatory codes and standards?',
-    value: 'workProceduresConform',
-    disabled: true
-  },
-  {
-    label:
-      '5. Does the organisation have a formal process for HSE induction and orientation of new hire employees, contractors and sub-contractors?',
-    value: 'doesHaveFormalProcessForHSE'
-  },
-  {
-    label:
-      '6. Does the organisation have a system or process for tracking current employee, contractor and sub-contractor qualifications and competencies?',
-    value: 'doesHaveSystemForTracking'
-  },
-  {
-    label:
-      '7. Does the organisation have valid industry certifications and/or licenses if required by the type of services provided?',
-    value: 'doesHaveValidCertifications'
-  },
-  {
-    label:
-      '8. Does the organisation have a formal process for reporting and investigating incidents (including near-hits/near misses)?',
-    value: 'doesHaveSystemForReporting'
-  },
-  {
-    label:
-      '9. Does the organisation have Liability insurance which meets Oyu Tolgoi’s minimum requirements and valid worker compensation insurance or enrolment in an applicable occupational injury/illness insurance programme? ',
-    value: 'doesHaveLiabilityInsurance'
-  },
-  {
-    label:
-      '10. Does the organisation have a formal process for Health Safety and Environmental risk management ',
-    value: 'doesHaveFormalProcessForHealth'
-  }
-];
-
-const humanResource = [
-  {
-    label: '1. Work Contract Management',
-    value: 'isThereCurrentContract'
-  },
-  {
-    label: '2. Job Description Procedure',
-    value: 'doesHaveJobDescription'
-  },
-  {
-    label: '3. Training and Development Policy',
-    value: 'doesHaveTraining'
-  },
-  {
-    label: '4. Employee Performance Management',
-    value: 'doesHavePerformancePolicy'
-  },
-  {
-    label: '5. Time-Keeping Management',
-    value: 'doesHaveTimeKeeping'
-  },
-  {
-    label: '6. Management of Practices related to conduct',
-    value: 'doesHaveEmployeeRelatedProcedure'
-  },
-  {
-    label: '7. Management of workforce engagement',
-    value: 'doesHaveSystemToEnsureSafeWork'
-  },
-  {
-    label: '8. Employee Awareness of their rights to association',
-    value: 'employeesAwareOfRights'
-  },
-  {
-    label: '9. Employee selection and  recruitment process',
-    value: 'doesHaveEmployeeSelectionProcedure'
-  },
-  {
-    label: '10. Employee exit management',
-    value: 'doesHaveEmployeeLaborProcedure'
-  },
-  {
-    label: '11. Grievance and Fair treatment ',
-    value: 'doesHaveGrievancePolicy'
-  }
-];
-
-const businessIntegrity = [
-  {
-    label:
-      '1. Does your company have in place a policy statement or code of conduct relating to the Business Integrity and Ethics?',
-    value: 'doesHaveProcessToSupport'
-  },
-  {
-    label:
-      '2. Are there processes and procedures in place to ensure that your policies or codes of conduct are effectively implemented throughout your company?',
-    value: 'proccessToEnsurePolicesCompany'
-  },
-  {
-    label:
-      '3. Are there processes and procedures in place to ensure that your policies or codes of conduct are effectively implemented throughout your Supply Chain?',
-    value: 'proccessToEnsurePolicesSupplyChain'
-  },
-  {
-    label:
-      '4. Has your company been subject to any external investigation regarding corruption within the past five years?',
-    value: 'hasBeenSubjectToInvestigation'
-  },
-  {
-    label:
-      '5. Does your company have a documented policy in place to prevent corruption? ',
-    value: 'doesHaveCorruptionPolicy'
-  },
-  {
-    label:
-      '6. If yes to above question, who is responsible person/function for the compliance/anti-corruption program',
-    value: 'whoIsResponsibleForCorruptionPolicy'
-  }
-];
-
-const checkLists = {
-  coreHseq: {
-    options: coreHseq,
-    title: 'Core HSEQ'
-  },
-  businessIntegrity: {
-    options: businessIntegrity,
-    title: 'Business integrity'
-  },
-  humanResource: {
-    options: humanResource,
-    title: 'Human resource management'
-  }
-};
-
-export { labels, checkLists };
+export { labels };
