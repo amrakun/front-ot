@@ -4,7 +4,7 @@ import ModalWrapper from './forms/modals/ModalWrapper';
 import { labels } from './constants';
 
 const EvidenceCheck = (props, { __ }) => {
-  const { auditResponse, send } = props;
+  const { auditResponse, send, hideModal } = props;
 
   const renderAnswer = supplierAnswer => {
     if (typeof supplierAnswer === 'undefined') {
@@ -19,7 +19,7 @@ const EvidenceCheck = (props, { __ }) => {
   };
 
   const renderGroup = (name, label) => {
-    const sectionValues = auditResponse[name];
+    const sectionValues = auditResponse[name] || {};
     const keys = Object.keys(sectionValues);
 
     return (
@@ -46,7 +46,7 @@ const EvidenceCheck = (props, { __ }) => {
   };
 
   return (
-    <ModalWrapper title="Confirmation" visible={true} handleOk={send}>
+    <ModalWrapper title="Confirmation" visible={true} handleOk={send} hideModal={hideModal}>
       <table>
         <thead>
           <tr>

@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Form, Card } from 'antd';
 import AuditFormsBase from './AuditFormsBase';
-import CreateReport from './modals/CreateReport';
-import CreatePlan from './modals/CreatePlan';
 import EvidenceCheck from 'modules/qualification/containers/audit/EvidenceCheck';
 
 class BusinessIntegriy extends AuditFormsBase {
@@ -16,11 +14,7 @@ class BusinessIntegriy extends AuditFormsBase {
     this.state = {
       ...this.state,
       evidenceModalVisible: false,
-      reportModalVisible: false,
-      planModalVisible: false,
     };
-
-    this.saveAndShowModal = this.saveAndShowModal.bind(this);
   }
 
   saveAndShowModal(e, name) {
@@ -35,34 +29,9 @@ class BusinessIntegriy extends AuditFormsBase {
   }
 
   renderBuyerAction() {
-    const { reportModalVisible, planModalVisible } = this.state;
-
-    const { supplierInfo, exportFiles, isQualified } = this.props;
-
-    const exportModalArgs = {
-      ...supplierInfo,
-      exportFiles,
-      isQualified,
-    };
-
     return (
       <div style={{ float: 'right' }}>
-        {this.renderSubmit('Save & create improvement plan', e => this.saveAndShowModal(e, 'plan'))}
-        {this.renderSubmit('Save & create report', e => this.saveAndShowModal(e, 'report'))}
-
-        <CreatePlan
-          {...exportModalArgs}
-          title="Supplier's improvement plan"
-          visible={planModalVisible}
-          hideModal={() => this.hideModal('plan')}
-        />
-
-        <CreateReport
-          {...exportModalArgs}
-          title="Supplier's audit report"
-          visible={reportModalVisible}
-          hideModal={() => this.hideModal('report')}
-        />
+        {this.renderSubmit('Save', () => this.collectAndSave(true))}
       </div>
     );
   }

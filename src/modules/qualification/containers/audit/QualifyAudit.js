@@ -3,24 +3,17 @@ import PropTypes from 'prop-types';
 import { gql, compose, graphql } from 'react-apollo';
 import { queries, mutations } from '../../graphql';
 import { QualifyAudit } from '../../components';
-import { exportFile } from 'modules/common/components';
 import { message } from 'antd';
 
 const QualifyAuditContainer = props => {
-  const { auditResponseDetailQuery, supplierBasicInfoQuery, location } = props;
+  const { auditResponseDetailQuery, supplierBasicInfoQuery, location, history } = props;
 
   if (auditResponseDetailQuery.error || supplierBasicInfoQuery.error) {
     return null;
   }
 
-  if (supplierBasicInfoQuery.loading) {
+  if (supplierBasicInfoQuery.loading || auditResponseDetailQuery.loading) {
     return null;
-  }
-
-  let auditResponseDetail = {};
-
-  if (!supplierBasicInfoQuery.loading) {
-    auditResponseDetail = auditResponseDetailQuery.auditResponseDetail;
   }
 
   const save = (name, doc) => {
@@ -30,38 +23,30 @@ const QualifyAuditContainer = props => {
       variables: {
         auditId: location.state.auditId,
         supplierId: location.state.supplierId,
-        [name]: doc
-      }
+        [name]: doc,
+      },
     })
       .then(() => {
         message.success('Saved');
+
         auditResponseDetailQuery.refetch();
+
+        if (name === 'businessInfo') {
+          history.push('/audit/responses?refetch');
+        }
       })
       .catch(error => {
         message.error(error.message);
       });
   };
 
-  const exportFiles = (name, variables) => {
-    exportFile({
-      query: queries[name],
-      name,
-      variables: {
-        ...variables,
-        supplierId: location.state.supplierId,
-        auditId: location.state.auditId,
-        auditResult: auditResponseDetail.isQualified
-      }
-    });
-  };
-
   const updatedProps = {
     ...props,
     save,
-    exportFiles,
-    response: auditResponseDetail,
-    supplierInfo: supplierBasicInfoQuery.companyDetail
+    response: auditResponseDetailQuery.auditResponseDetail,
+    supplierInfo: supplierBasicInfoQuery.companyDetail,
   };
+
   return <QualifyAudit {...updatedProps} />;
 };
 
@@ -69,7 +54,7 @@ QualifyAuditContainer.propTypes = {
   auditResponseDetailQuery: PropTypes.object,
   evidenceInfoEdit: PropTypes.func,
   supplierBasicInfoQuery: PropTypes.object,
-  location: PropTypes.object
+  location: PropTypes.object,
 };
 
 export default compose(
@@ -79,10 +64,10 @@ export default compose(
       return {
         variables: {
           auditId: (location.state || {}).auditId,
-          supplierId: (location.state || {}).supplierId
-        }
+          supplierId: (location.state || {}).supplierId,
+        },
       };
-    }
+    },
   }),
 
   graphql(gql(queries.supplierBasicInfo), {
@@ -90,22 +75,22 @@ export default compose(
     options: ({ location }) => {
       return {
         variables: {
-          _id: (location.state || {}).supplierId
-        }
+          _id: (location.state || {}).supplierId,
+        },
       };
-    }
+    },
   }),
 
   //mutations
   graphql(gql(mutations.auditsBuyerSaveCoreHseqInfo), {
-    name: 'coreHseqInfoEdit'
+    name: 'coreHseqInfoEdit',
   }),
 
   graphql(gql(mutations.auditsBuyerSaveHrInfo), {
-    name: 'hrInfoEdit'
+    name: 'hrInfoEdit',
   }),
 
   graphql(gql(mutations.auditsBuyerSaveBusinessInfo), {
-    name: 'businessInfoEdit'
+    name: 'businessInfoEdit',
   })
 )(QualifyAuditContainer);

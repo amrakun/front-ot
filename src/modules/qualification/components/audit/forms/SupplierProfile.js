@@ -22,10 +22,7 @@ class SupplierProfile extends AuditFormsBase {
   renderListItem(title, description) {
     return (
       <List.Item>
-        <List.Item.Meta
-          description={description}
-          title={this.renderTooltipLabel(title)}
-        />
+        <List.Item.Meta description={description} title={this.renderTooltipLabel(title)} />
       </List.Item>
     );
   }
@@ -43,7 +40,7 @@ class SupplierProfile extends AuditFormsBase {
       name,
       initialValue,
       label: this.renderTooltipLabel(name),
-      control: <TextArea disabled={response !== undefined} />
+      control: <TextArea disabled={response !== undefined} />,
     });
   }
 
@@ -61,11 +58,13 @@ class SupplierProfile extends AuditFormsBase {
 
     const shareholdersList = shareholders.map(
       (shareholder, i) =>
-        `${shareholder.name} ${(shareholder.jobTitle,
-        shareholder.percentage)}%${i < shareholders.length - 1 ? ', ' : ''}`
+        `${shareholder.name} ${(shareholder.jobTitle, shareholder.percentage)}%${
+          i < shareholders.length - 1 ? ', ' : ''
+        }`
     );
 
     let sqaResult = '-';
+
     if (isQualified !== null) sqaResult = isQualified ? 'Audited' : 'No';
 
     return (
@@ -77,10 +76,7 @@ class SupplierProfile extends AuditFormsBase {
             {renderListItem('type', tierType)}
             {renderListItem('ownership', owner.name)}
             {renderListItem('shareholder', shareholdersList)}
-            {renderListItem(
-              'numberOfEmployees',
-              basicInfo.totalNumberOfEmployees
-            )}
+            {renderListItem('numberOfEmployees', basicInfo.totalNumberOfEmployees)}
             {renderListItem('sqaResult', sqaResult)}
           </List>
         </Card>
@@ -100,7 +96,7 @@ class SupplierProfile extends AuditFormsBase {
 const SupplierProfileForm = Form.create()(SupplierProfile);
 
 SupplierProfile.contextTypes = {
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 export default withRouter(SupplierProfileForm);
