@@ -17,6 +17,7 @@ import {
   AuditResponses,
   SubmitAudit,
   AuditRequests,
+  AuditSendResubmitRequest,
   QualifyAudit,
   ReportsAndPlans,
   PhysicalAudits,
@@ -147,12 +148,21 @@ export default [
   <Route key={'/audit/template'} exact path={'/audit/template'} component={SupplierAuditForm} />,
   <Route key={'/audit/submit'} exact path={'/audit/submit/:id'} component={SubmitAudit} />,
   <Route key={'/audit/qualify'} exact path={'/audit/qualify'} component={QualifyAudit} />,
+
   <Route
     key={'/qualification'}
     exact
     path={'/qualification'}
     component={props => {
       return <AuditRequests {...props} queryParams={generateQueryParams(props)} />;
+    }}
+  />,
+  <Route
+    key={'/qualification/send-resubmit-request'}
+    exact
+    path={'/qualification/send-resubmit-request'}
+    component={props => {
+      return <AuditSendResubmitRequest {...props} queryParams={generateQueryParams(props)} />;
     }}
   />,
 ];

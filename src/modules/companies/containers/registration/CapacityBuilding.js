@@ -6,7 +6,7 @@ import { Certificate } from '../../components';
 import { message } from 'antd';
 import { Loading } from 'modules/common/components';
 
-const RegistrationContainer = (props, { __ }) => {
+const CapacityBuildingContainer = (props, { __ }) => {
   const { companyByUserQuery } = props;
 
   if (companyByUserQuery.loading) {
@@ -31,28 +31,28 @@ const RegistrationContainer = (props, { __ }) => {
     ...props,
     save,
     data: {
-      ...companyByUserQuery.companyByUser.certificateInfo
-    }
+      ...companyByUserQuery.companyByUser.certificateInfo,
+    },
   };
 
   return <Certificate {...updatedProps} />;
 };
 
-RegistrationContainer.propTypes = {
-  companyByUserQuery: PropTypes.object
+CapacityBuildingContainer.propTypes = {
+  companyByUserQuery: PropTypes.object,
 };
 
-RegistrationContainer.contextTypes = {
-  __: PropTypes.func
+CapacityBuildingContainer.contextTypes = {
+  __: PropTypes.func,
 };
 
 export default compose(
   graphql(gql(queries.companyByUser), {
-    name: 'companyByUserQuery'
+    name: 'companyByUserQuery',
   }),
 
   // mutations
   graphql(gql(mutations.certificateInfo), {
-    name: 'certificateInfoEdit'
+    name: 'certificateInfoEdit',
   })
-)(RegistrationContainer);
+)(CapacityBuildingContainer);

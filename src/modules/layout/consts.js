@@ -17,9 +17,19 @@ export const supplierSideMenu = [
   },
   {
     url: '/qualification',
-    title: 'Qualification/audit',
+    title: 'Qualification audit',
     icon: 'calendar',
     className: 'multi-line',
+    subMenu: [
+      {
+        url: '/qualification',
+        title: 'Qualification list',
+      },
+      {
+        url: '/qualification/send-resubmit-request',
+        title: 'Resubmit request',
+      },
+    ],
   },
   {
     url: '/capacity-building',
@@ -63,11 +73,11 @@ export const buyerSideMenu = [
           },
           {
             url: '/audit/responses',
-            title: 'Responses (desktop)',
+            title: 'Desktop audit',
           },
           {
             url: '/audit/responses-physical',
-            title: 'Responses (physical)',
+            title: 'Physical audit',
           },
           {
             url: '/audit/reports',

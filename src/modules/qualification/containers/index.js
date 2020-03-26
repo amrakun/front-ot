@@ -14,6 +14,7 @@ import AuditResponses from './audit/AuditResponses';
 import SubmitAudit from './audit/SubmitAudit';
 import QualifyAudit from './audit/QualifyAudit';
 import AuditRequests from './audit/AuditRequests';
+import AuditSendResubmitRequest from './audit/AuditSendResubmitRequest';
 import ReportsAndPlans from './audit/ReportsAndPlans';
 import PhysicalAudits from './audit/PhysicalAudits';
 
@@ -34,6 +35,7 @@ export {
   CapacityBuilding,
   QualifyAudit,
   AuditRequests,
+  AuditSendResubmitRequest,
   ReportsAndPlans,
   PhysicalAudits,
 };

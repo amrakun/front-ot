@@ -6,7 +6,7 @@ import { BaseForm, Uploader } from 'modules/common/components';
 
 const { TextArea } = Input;
 
-class RegistrationForm extends BaseForm {
+class CertificateFormContainer extends BaseForm {
   render() {
     return (
       <Form onSubmit={this.handleSubmit} className="">
@@ -15,7 +15,7 @@ class RegistrationForm extends BaseForm {
             {this.renderField({
               name: 'description',
               label: certLabels.description,
-              control: <TextArea />
+              control: <TextArea />,
             })}
 
             {this.renderField({
@@ -24,7 +24,7 @@ class RegistrationForm extends BaseForm {
               attachmentType: 'Certificate',
               dataType: 'file',
               optional: true,
-              control: <Uploader />
+              control: <Uploader />,
             })}
             {this.renderSubmit('Save & submit', this.handleSubmit)}
           </Card>
@@ -34,6 +34,6 @@ class RegistrationForm extends BaseForm {
   }
 }
 
-const CertificateForm = Form.create()(RegistrationForm);
+const CertificateForm = Form.create()(CertificateFormContainer);
 
 export default withRouter(CertificateForm);

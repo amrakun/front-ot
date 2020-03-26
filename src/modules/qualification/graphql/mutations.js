@@ -293,6 +293,12 @@ const auditsSupplierSendResponse = `
   }
 `;
 
+const auditsSupplierSendResubmitRequest = `
+  mutation auditsSupplierSendResubmitRequest($description: String!) {
+    auditsSupplierSendResubmitRequest(description: $description)
+  }
+`;
+
 const qualificationsPrequalify = `
   mutation qualificationsPrequalify(
     $supplierId: String!,
@@ -414,6 +420,7 @@ export default {
   auditsBuyerSaveHrInfo,
   auditsBuyerSaveBusinessInfo,
   auditsSupplierSendResponse,
+  auditsSupplierSendResubmitRequest,
   auditsBuyerSaveFiles,
   qualificationsPrequalify,
   auditsBuyerSendFiles,
