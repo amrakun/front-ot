@@ -116,7 +116,6 @@ class SendForm extends BaseForm {
               {this.renderField({
                 label: 'Responsible officers',
                 name: 'responsibleBuyerIds',
-                optional: true,
                 initialValue: data.responsibleBuyerIds,
                 control: <Select mode="multiple">{buyersOptions}</Select>,
               })}

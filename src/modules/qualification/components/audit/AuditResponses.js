@@ -33,6 +33,11 @@ class AuditResponses extends React.Component {
       {
         key: 2,
         title: 'Qualification status',
+        render: record => record.supplier.qualificationStatusDisplay,
+      },
+      {
+        key: 9,
+        title: 'Audit status',
         render: record => record.audit.status,
       },
       {
@@ -70,7 +75,11 @@ class AuditResponses extends React.Component {
         key: 8,
         title: 'Action',
         render: record => {
-          if (!record.status) {
+          if (record.audit.status !== 'open') {
+            return null;
+          }
+
+          if (record.status === 'invited') {
             return null;
           }
 

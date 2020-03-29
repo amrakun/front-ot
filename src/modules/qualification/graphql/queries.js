@@ -346,6 +346,7 @@ const auditResponses = `
           phone
         }
         isPrequalified
+        qualificationStatusDisplay
       }
     }
   }
