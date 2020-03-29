@@ -163,6 +163,10 @@ class ManageTemplates extends React.Component {
                     text: 'To supplier when approved',
                   },
                   {
+                    value: 'supplier__enable',
+                    text: 'To supplier when submission enabled',
+                  },
+                  {
                     value: 'supplier__send_resubmission_request',
                     text: 'To send resubmission request',
                   },

@@ -5,36 +5,17 @@ import { withRouter } from 'react-router';
 import { Card, Row, Col, Button } from 'antd';
 import { Common, Sidebar } from 'modules/companies/components';
 import { Search } from 'modules/common/components';
-import { readFileUrl } from 'modules/common/utils';
 
-class CapacityBuilding extends Common {
+class Requests extends Common {
   render() {
     const { toggleState, totalCount } = this.props;
 
     const columns = this.getWrappedColumns(
       [
         {
-          key: 'request',
-          title: 'Request',
-          dataIndex: 'certificateInfo.description',
-        },
-        {
-          key: 'certificateFile',
-          title: 'Certificate file',
-          render: record => {
-            const certificateInfo = record.certificateInfo || {};
-            const { file } = certificateInfo;
-
-            if (!file) {
-              return '-';
-            }
-
-            return (
-              <a href={readFileUrl(file.url)} target="__blank">
-                {file.name}
-              </a>
-            );
-          },
+          key: 'isQualified',
+          title: 'Is qualified',
+          dataIndex: 'qualificationStatusDisplay',
         },
       ],
       [
@@ -44,7 +25,13 @@ class CapacityBuilding extends Common {
           render: record => {
             const onClick = () => toggleState(record._id);
 
-            if (record.isPrequalificationInfoEditable) {
+            const { isEditable, showToggleButton } = record.qualificationState;
+
+            if (!showToggleButton) {
+              return;
+            }
+
+            if (isEditable) {
               return (
                 <Button type="danger" size="small" onClick={onClick}>
                   Disable
@@ -80,4 +67,4 @@ class CapacityBuilding extends Common {
   }
 }
 
-export default withRouter(CapacityBuilding);
+export default withRouter(Requests);

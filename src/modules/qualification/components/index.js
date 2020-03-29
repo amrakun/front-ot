@@ -12,6 +12,7 @@ import Audit from './audit/Audit';
 import AuditSendForm from './audit/AuditSendForm';
 import AuditResponses from './audit/AuditResponses';
 import AuditSendResubmitRequest from './audit/AuditSendResubmitRequest';
+import AuditResubmissionRequests from './audit/AuditResubmissionRequests';
 import SubmitAudit from './audit/SubmitAudit';
 import QualifyAudit from './audit/QualifyAudit';
 import AuditRequests from './audit/AuditRequests';
@@ -33,6 +34,7 @@ export {
   AuditSendForm,
   AuditResponses,
   AuditSendResubmitRequest,
+  AuditResubmissionRequests,
   SubmitAudit,
   QualifyAudit,
   AuditRequests,

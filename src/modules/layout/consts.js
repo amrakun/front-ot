@@ -83,6 +83,10 @@ export const buyerSideMenu = [
             url: '/audit/reports',
             title: 'Reports & plan',
           },
+          {
+            url: '/audit/resubmission-requests',
+            title: 'Resubmission requests',
+          },
         ],
       },
       {

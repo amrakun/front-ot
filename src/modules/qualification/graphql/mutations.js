@@ -397,6 +397,13 @@ const togglePrequalificationState = `
     }
   }
 `;
+const toggleAuditState = `
+  mutation auditsBuyerToggleState($supplierId: String!) {
+    auditsBuyerToggleState(supplierId: $supplierId) {
+      _id
+    }
+  }
+`;
 
 export default {
   addDifotScores,
@@ -428,4 +435,5 @@ export default {
   physicalAuditsEdit,
   physicalAuditsRemove,
   togglePrequalificationState,
+  toggleAuditState,
 };

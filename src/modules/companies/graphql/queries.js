@@ -479,6 +479,16 @@ const capacityBuilding = `
   }
 `;
 
+const auditResubmissionRequests = `
+  query companies(${commonParams}) {
+    companies(${commonValues}) {
+      ${commonFields}
+      qualificationStatusDisplay
+      qualificationState
+    }
+  }
+`;
+
 const simpleCompanies = `
   query companies(${commonParams}) {
     companies(${commonValues}) {
@@ -526,6 +536,7 @@ export default {
   companyDetail,
   audit,
   capacityBuilding,
+  auditResubmissionRequests,
   exportCompany,
   exportCurrentCompanyRegistration,
   exportCurrentCompanyPrequalification,
