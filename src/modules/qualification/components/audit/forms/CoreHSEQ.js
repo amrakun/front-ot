@@ -24,6 +24,8 @@ class CoreHSEQ extends AuditFormsBase {
           {render('doesHaveFormalProcessForReporting')}
           {render('doesHaveLiabilityInsurance')}
           {render('doesHaveFormalProcessForHealth')}
+          {render('specialLicenseOfImporting')}
+          {render('wasteManagementPlan')}
         </Card>
 
         {this.renderGoBack()}
@@ -36,7 +38,7 @@ class CoreHSEQ extends AuditFormsBase {
 const CoreHSEQForm = Form.create()(CoreHSEQ);
 
 CoreHSEQ.contextTypes = {
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 export default withRouter(CoreHSEQForm);

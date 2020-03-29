@@ -392,6 +392,8 @@ const AuditCoreHseqInfo = `
   doesHaveFormalProcessForReporting { ${AnswerRecommendation} }
   doesHaveLiabilityInsurance { ${AnswerRecommendation} }
   doesHaveFormalProcessForHealth { ${AnswerRecommendation} }
+  specialLicenseOfImporting { ${AnswerRecommendation} }
+  wasteManagementPlan { ${AnswerRecommendation} }
 `;
 
 const AuditHrInfo = `

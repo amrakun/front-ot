@@ -184,6 +184,16 @@ const labels = {
     desc: `The company has a procedure for HSE risk management. The process references Environmental and Heath risk management as well as safety risk management.`,
   },
 
+  specialLicenseOfImporting: {
+    title: `11. Special license of importing chemicals and dangerous goods* (subject to scope of work)`,
+    desc: `11. Special license of importing chemicals and dangerous goods* (subject to scope of work)`,
+  },
+
+  wasteManagementPlan: {
+    title: `12. Waste management plan on General and Dangerous waste (Policy and principles on segregating, recycling, re-using and disposing of wastes, relevant permits and operational management plans including transporting wastes)`,
+    desc: `12. Waste management plan on General and Dangerous waste (Policy and principles on segregating, recycling, re-using and disposing of wastes, relevant permits and operational management plans including transporting wastes)`,
+  },
+
   //Human resource management
   workContractManagement: {
     title: '1. Work Contract Management',

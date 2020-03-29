@@ -4,260 +4,152 @@
   "Core HSEQ": "ЭМААБОЧ - Үндсэн шалгуур",
   "Business integrity": "Бизнесийн ёс зүй",
   "Company information": "Компанийн тухай мэдээлэл",
-  "Oyu Tolgoi LLC (OT) related performance rations":
-    "Оюу толгойтой хамтарч ажилласан туршлага",
+  "Oyu Tolgoi LLC (OT) related performance rations": "Оюу толгойтой хамтарч ажилласан туршлага",
   "Type": "Төрөл",
   "Ownership": "Өмчлөл",
   "Number of employees": "Ажилтны тоо",
-  "SQA result":
-    "Өмнөх нийлүүлэгчийн гэрээ хэрэгжүүлэх чадварын үнэлгээний үр дүн",
+  "SQA result": "Өмнөх нийлүүлэгчийн гэрээ хэрэгжүүлэх чадварын үнэлгээний үр дүн",
   "OT experience": "Оюу толгойтой хамтарч ажилласан туршлага",
-  "Share of OT related income in total income (SOTRI)":
-    "Нийт орлогод ОТ-оос олох орлогын хэмжээ (SOTRI)",
-  "Specify legal owner/owners of the business":
-    "Нийт ажлын байрны тоонд ОТ ХХК-аас хамааралтай үүссэн ажлын байрны тоо (ОТ ХХК-тэй бизнесийн харилцаанд орсноос үүдэн ажилд авсан хүмүүсийн тоо)",
-  "Specify if the company Southgobi, National or International (Tier 1)":
-    "Тухайн компани Өмнөговь, Үндэсний эсвэл гадаад компани (Ангилал 1) эсэхийг бичнэ.",
-  "Specify number shareholders, names, percentages, attach company charter":
-    "Хувьцаа эзэмшигчийн тухай мэдээлэл, нэрс болон хувьцааны хувь хэмжээ зэрэг мэдээлэл өгөх    ",
-  "Specify legal owner/owners of the business":
-    "Компанийн эзэн, үүсгэн байгуулагчийн тухай мэдээлэл, тухайлбал нэр, холбоо барих мэдээлэл гэх мэт - компанийн дүрмийг хавсаргана уу",
-  "Specify number of employees verified by social insurance report ":
-    "Нийгмийн даатгалын тайлангаар баталгаажсан ажилтны тоо",
-  "If audited by OT, audit results etc.":
-    "Оюу толгой компанийн нийлүүлэгчийн гэрээ хэрэгжүүлэх чадварын үнэлгээнд өмнө нь хамрагдаж байсан эсэх, үнэлгээний үр дүн ямар байсан эсэх",
-  "Year of cooperation, supplied products & services, recognition by OT if any":
-    "Хэзээнээс хамтран ажилласан, нийлүүлдэг бүтээгдэхүүн үйлчилгээ, Оюу толгой компанийн шилдэг ханган нийлүүлэгч болж байсан эсэх тухай мэдээлэл",
-  "SOTRI= (Income from OT/Total income)*100":
-    "Нийт орлогод ОТ-оос олох орлогын хэмжээ =  (ОТ -оос олсон орлого /нийт орлого)*100",
-  "SOTIE= (OT induced employment/Total employment)*100":
-    "Нийт ажлын байрны тоонд ОТ ХХК-аас хамааралтай үүссэн ажлын байрны тоо=  (ОТ -оос хамааралтай ажлын байр/нийт ажлын байр)*100",
-  "1. Does the organisation have a Health Safety & Environment management system? ":
-    "1. Танай байгууллага Эрүүл мэнд Аюулгүй Ажиллагаа, Байгаль орчны  (ЭМААБО) удирдлагын системтэй юу?",
-  "2. Does the organisation have a documented drug and alcohol policy?":
-    "2. Танай байгууллагад бичиж баримтжуулсан мансууруулах бодис, согтууруулах ундааны тухай бодлого байдаг уу?",
-  "3. Does the organisation perform pre-employment medical screening, fitness for work evaluations, background checks and verification of competence for employees, contractors and sub-contractors?":
-    "3. Байгууллага нь ажилд орохоос өмнө ажилтан, гэрээлэгч, туслан гүйцэтгэгч нарыг эмнэлгийн үзлэгт оруулж, эрүүл мэндийн хувьд ажилдаа тэнцэх эсэхийг нь болон тухайн ажилтны өмнөх түүхийг нь урьдчилан шалгаж тогтоодог уу?",
-  "4. Do the organisations work procedures conform to local statutory, legislative or regulatory codes and standards?":
-    "4. Байгууллагын ажил гүйцэтгэх журмууд нь Монгол улсын хууль эрхзүйн акт, дүрэм, стандартуудтай нийцтэй юу?",
-  "5. Does the organisation have a formal process for HSE induction and orientation of new hire employees, contractors and sub-contractors?":
-    "5. Байгууллагад шинэ ажилтан, гэрээлэгч болон туслан гүйцэтгэгч нарт ЭМААБО-ны танилцуулах сургалт хийдэг албан ёсны үйл явц байгаа юу?",
-  "6. Does the organisation have a system or process for tracking current employee, contractor and sub-contractor qualifications and competencies?":
-    "6. Байгууллагад ажилтан, гэрээлэгч, туслан гүйцэтгэгчийнхээ мэргэжлийн ур чадвар, мэдлэгийг шалгах, бүртгэх, сургах үйл явц, тогтолцоо байгаа юу?",
-  "7. Does the organisation have valid industry certifications and/or licenses if required by the type of services provided?":
-    "7. Байгууллагад тухайн үйлчилгээг үзүүлэхэд шаардлагатай тухайн салбарын хүчинтэй зөвшөөрөл, гэрчилгээ эсвэл лиценз байгаа юу?",
-  "8. Does the organisation have a formal process for reporting and investigating incidents (including near-hits/near misses)?":
-    "8. Байгууллагад осол зөрчлийг (осолд дөхсөн тохиолдлыг оруулан) мэдээлэх, судлан бүртгэх албан ёсны үйл явц бий юу?",
-  "9. Does the organisation have Liability insurance which meets Oyu Tolgoi’s minimum requirements and valid worker compensation insurance or enrolment in an applicable occupational injury/illness insurance programme? ":
-    "9. Байгууллагад \"Оюу толгой\" ХХК-ийн наад захын шаардлагатай нийцсэн хариуцлагын даатгал тухайлбал ажилтны нөхөн олговор, мэргэжлээс шалтгаалсан өвчин/ гэмтлийн даатгал бүхий даатгалын хөтөлбөр байдаг уу?",
-  "10. Does the organisation have a formal process for Health Safety and Environmental risk management ":
-    "10. Танай байгууллагад эрүүл мэнд, аюулгүй ажиллагаа, байгаль орчны эрсдлийн менежментийг хэрэгжүүлдэг албаны ёсны үйл явц, тогтолцоо байдаг уу?",
-  "The policy must prohibit affected persons from conducting work at sites. It is to include prescribed limits, which can if required, be aligned to the site/s requirement. Commitment to meet site requirements. The policy is published and included in the induction process. ":
-    "Тус бодлогын дагуу архи, мансууруулах бодисын нөлөөнд автсан хүн ажлын талбарт ажил хийхийг хориглоно. Энэ нь ажлын талбарт мөрдөх шаардлагуудтай нийцсэн хязгаарлах заалтуудыг (хэрэв шаардлагатай гэж үзвэл) тусгасан байна. Ажлын талбарт тавигдах шаардлагыг хэрхэн дагаж мөрдөх тухай. Тухайн бодлогыг хэвлэж гарган, танилцуулах сургалтын нэг хэсэг болгон ашигладаг байх.",
-  "There must be a procedure that requires pre-employment medicals and re-assessment in accordance with legislation prior to the commencement of the contractor performing work. The frequency of ongoing assessments/ surveillance medicals must be inline with regional legislation. ":
-    "Гэрээлэгч ажлаа эхлэхээс өмнө хуулийн дагуу тэднийг эмнэлэгийн үзлэгт оруулах, дахин үнэлэх журам байх ёстой. Үнэлгээ, эмнэлгийн үзлэгийн давтамжийг тухайн бүс нутгийн хууль тогтоомжийн дагуу тогтооно. ",
-  "The induction is presented to sub-contractors, contractors and employees and includes an overview of the HSE policy, advising of HSE hazards and controls. Induction must be executed prior to the resource commencing active work.":
-    "Танилцах сургалтыг Эрүүл мэнд, Аюулгүй ажиллагаа, Байгаль орчны бодлого журмыг танилцуулах, Эрүүл мэнд аюулгүй ажиллагаа байгаль орчны аюул эрсдэл болон хяналтыг танилцуулах зорилгоор ажилтнууд, туслан гүйцэтгэгч, гэрээт компанийн ажилтнуудад хийдэг. Танилцах сургалтыг ажлаа хийж эхлэхээс өмнө хийнэ.",
-  "There must be a documented process describing where and how training is recorded and maintained. Procedures ensuring personnel working on site are aware and trained, prior to commencing work.":
-    "Сургалтыг хаана болон хэрхэн бүртгэх болон бүртгэлийг хадгалах бичиж баримтжуулсан үйл явц байх ёстой. Уурхайн талбарт ажиллаж байгаа ажилтан ажлаа эхлэхээс өмнө сургалтанд хамрагдах, мэдээлэл авах журам.",
-  "Procedures in place to ensure the organisations certifications and licenses remain current. Company is required to provide a  current copy of the appropriate  licenses.":
-    "Байгууллагын гэрчилгээ болон лицензийг хадгалж үлдэх, сунгуулах талаар журамтай байх. Байгууллага нь холбогдох хүчинтэй байгаа гэрчилгээний хувийг өгөх ёстой.",
-  "Review Oyu Tolgoi's insurance requirements. Ensure a current certificate is attached. ":
-    "\"Оюу толгой\" ХХК-ийн даатгалын шаардлагуудтай танилцах. Хүчинтэй байгаа сертификатыг хавсаргах.",
-  "The company has a procedure for HSE risk management. The process references Environmental and Heath risk management as well as safety risk management.":
-    "Байгууллага нь Эрүүл мэнд, аюулгүй ажиллагаа байгаль орчны эрсдлийн менежементийн журамтай байна. Энэ журам нь байгаль орчин, эрүүл мэндийн эрсдэл болон аюулгүй ажиллагааны эрсдлийн менежментийг тусгаж өгсөн  байна.",
+  "Share of OT related income in total income (SOTRI)": "Нийт орлогод ОТ-оос олох орлогын хэмжээ (SOTRI)",
+  "Specify legal owner/owners of the business": "Нийт ажлын байрны тоонд ОТ ХХК-аас хамааралтай үүссэн ажлын байрны тоо (ОТ ХХК-тэй бизнесийн харилцаанд орсноос үүдэн ажилд авсан хүмүүсийн тоо)",
+  "Specify if the company Southgobi, National or International (Tier 1)": "Тухайн компани Өмнөговь, Үндэсний эсвэл гадаад компани (Ангилал 1) эсэхийг бичнэ.",
+  "Specify number shareholders, names, percentages, attach company charter": "Хувьцаа эзэмшигчийн тухай мэдээлэл, нэрс болон хувьцааны хувь хэмжээ зэрэг мэдээлэл өгөх    ",
+  "Specify legal owner/owners of the business": "Компанийн эзэн, үүсгэн байгуулагчийн тухай мэдээлэл, тухайлбал нэр, холбоо барих мэдээлэл гэх мэт - компанийн дүрмийг хавсаргана уу",
+  "Specify number of employees verified by social insurance report ": "Нийгмийн даатгалын тайлангаар баталгаажсан ажилтны тоо",
+  "If audited by OT, audit results etc.": "Оюу толгой компанийн нийлүүлэгчийн гэрээ хэрэгжүүлэх чадварын үнэлгээнд өмнө нь хамрагдаж байсан эсэх, үнэлгээний үр дүн ямар байсан эсэх",
+  "Year of cooperation, supplied products & services, recognition by OT if any": "Хэзээнээс хамтран ажилласан, нийлүүлдэг бүтээгдэхүүн үйлчилгээ, Оюу толгой компанийн шилдэг ханган нийлүүлэгч болж байсан эсэх тухай мэдээлэл",
+  "SOTRI= (Income from OT/Total income)*100": "Нийт орлогод ОТ-оос олох орлогын хэмжээ =  (ОТ -оос олсон орлого /нийт орлого)*100",
+  "SOTIE= (OT induced employment/Total employment)*100": "Нийт ажлын байрны тоонд ОТ ХХК-аас хамааралтай үүссэн ажлын байрны тоо=  (ОТ -оос хамааралтай ажлын байр/нийт ажлын байр)*100",
+  "1. Does the organisation have a Health Safety & Environment management system? ": "1. Танай байгууллага Эрүүл мэнд Аюулгүй Ажиллагаа, Байгаль орчны  (ЭМААБО) удирдлагын системтэй юу?",
+  "2. Does the organisation have a documented drug and alcohol policy?": "2. Танай байгууллагад бичиж баримтжуулсан мансууруулах бодис, согтууруулах ундааны тухай бодлого байдаг уу?",
+  "3. Does the organisation perform pre-employment medical screening, fitness for work evaluations, background checks and verification of competence for employees, contractors and sub-contractors?": "3. Байгууллага нь ажилд орохоос өмнө ажилтан, гэрээлэгч, туслан гүйцэтгэгч нарыг эмнэлгийн үзлэгт оруулж, эрүүл мэндийн хувьд ажилдаа тэнцэх эсэхийг нь болон тухайн ажилтны өмнөх түүхийг нь урьдчилан шалгаж тогтоодог уу?",
+  "4. Do the organisations work procedures conform to local statutory, legislative or regulatory codes and standards?": "4. Байгууллагын ажил гүйцэтгэх журмууд нь Монгол улсын хууль эрхзүйн акт, дүрэм, стандартуудтай нийцтэй юу?",
+  "5. Does the organisation have a formal process for HSE induction and orientation of new hire employees, contractors and sub-contractors?": "5. Байгууллагад шинэ ажилтан, гэрээлэгч болон туслан гүйцэтгэгч нарт ЭМААБО-ны танилцуулах сургалт хийдэг албан ёсны үйл явц байгаа юу?",
+  "6. Does the organisation have a system or process for tracking current employee, contractor and sub-contractor qualifications and competencies?": "6. Байгууллагад ажилтан, гэрээлэгч, туслан гүйцэтгэгчийнхээ мэргэжлийн ур чадвар, мэдлэгийг шалгах, бүртгэх, сургах үйл явц, тогтолцоо байгаа юу?",
+  "7. Does the organisation have valid industry certifications and/or licenses if required by the type of services provided?": "7. Байгууллагад тухайн үйлчилгээг үзүүлэхэд шаардлагатай тухайн салбарын хүчинтэй зөвшөөрөл, гэрчилгээ эсвэл лиценз байгаа юу?",
+  "8. Does the organisation have a formal process for reporting and investigating incidents (including near-hits/near misses)?": "8. Байгууллагад осол зөрчлийг (осолд дөхсөн тохиолдлыг оруулан) мэдээлэх, судлан бүртгэх албан ёсны үйл явц бий юу?",
+  "9. Does the organisation have Liability insurance which meets Oyu Tolgoi’s minimum requirements and valid worker compensation insurance or enrolment in an applicable occupational injury/illness insurance programme? ": "9. Байгууллагад \"Оюу толгой\" ХХК-ийн наад захын шаардлагатай нийцсэн хариуцлагын даатгал тухайлбал ажилтны нөхөн олговор, мэргэжлээс шалтгаалсан өвчин/ гэмтлийн даатгал бүхий даатгалын хөтөлбөр байдаг уу?",
+  "10. Does the organisation have a formal process for Health Safety and Environmental risk management ": "10. Танай байгууллагад эрүүл мэнд, аюулгүй ажиллагаа, байгаль орчны эрсдлийн менежментийг хэрэгжүүлдэг албаны ёсны үйл явц, тогтолцоо байдаг уу?",
+  "11. Special license of importing chemicals and dangerous goods* (subject to scope of work)": "11. Химийн болон аюултай хог хаягдал үүсгэх бараа бүтээгдэхүүн импортлох тусгай зөвшөөрөл* (ажлын нэмэлт цар хүрээнээс шалтгаалах)",
+  "12. Waste management plan on General and Dangerous waste": "12. Энгийн болон Аюултай хог хаягдлын менежментийн төлөвлөгөө (бүтээгдэхүүн үйлчилгээнээс үүсэх хог хаягдлаа хэрхэн ангилах, ялгах, дахин боловсруулах, устгах талаар баримтлах бодлого, эрх бүхий байгууллагын зөвшөөрөл, хог хаягдлын тээвэрлэлтийн болон үйл ажиллагааны төлөвлөгөө )",
+
+  "The policy must prohibit affected persons from conducting work at sites. It is to include prescribed limits, which can if required, be aligned to the site/s requirement. Commitment to meet site requirements. The policy is published and included in the induction process. ": "Тус бодлогын дагуу архи, мансууруулах бодисын нөлөөнд автсан хүн ажлын талбарт ажил хийхийг хориглоно. Энэ нь ажлын талбарт мөрдөх шаардлагуудтай нийцсэн хязгаарлах заалтуудыг (хэрэв шаардлагатай гэж үзвэл) тусгасан байна. Ажлын талбарт тавигдах шаардлагыг хэрхэн дагаж мөрдөх тухай. Тухайн бодлогыг хэвлэж гарган, танилцуулах сургалтын нэг хэсэг болгон ашигладаг байх.",
+  "There must be a procedure that requires pre-employment medicals and re-assessment in accordance with legislation prior to the commencement of the contractor performing work. The frequency of ongoing assessments/ surveillance medicals must be inline with regional legislation. ": "Гэрээлэгч ажлаа эхлэхээс өмнө хуулийн дагуу тэднийг эмнэлэгийн үзлэгт оруулах, дахин үнэлэх журам байх ёстой. Үнэлгээ, эмнэлгийн үзлэгийн давтамжийг тухайн бүс нутгийн хууль тогтоомжийн дагуу тогтооно. ",
+  "The induction is presented to sub-contractors, contractors and employees and includes an overview of the HSE policy, advising of HSE hazards and controls. Induction must be executed prior to the resource commencing active work.": "Танилцах сургалтыг Эрүүл мэнд, Аюулгүй ажиллагаа, Байгаль орчны бодлого журмыг танилцуулах, Эрүүл мэнд аюулгүй ажиллагаа байгаль орчны аюул эрсдэл болон хяналтыг танилцуулах зорилгоор ажилтнууд, туслан гүйцэтгэгч, гэрээт компанийн ажилтнуудад хийдэг. Танилцах сургалтыг ажлаа хийж эхлэхээс өмнө хийнэ.",
+  "There must be a documented process describing where and how training is recorded and maintained. Procedures ensuring personnel working on site are aware and trained, prior to commencing work.": "Сургалтыг хаана болон хэрхэн бүртгэх болон бүртгэлийг хадгалах бичиж баримтжуулсан үйл явц байх ёстой. Уурхайн талбарт ажиллаж байгаа ажилтан ажлаа эхлэхээс өмнө сургалтанд хамрагдах, мэдээлэл авах журам.",
+  "Procedures in place to ensure the organisations certifications and licenses remain current. Company is required to provide a  current copy of the appropriate  licenses.": "Байгууллагын гэрчилгээ болон лицензийг хадгалж үлдэх, сунгуулах талаар журамтай байх. Байгууллага нь холбогдох хүчинтэй байгаа гэрчилгээний хувийг өгөх ёстой.",
+  "Review Oyu Tolgoi's insurance requirements. Ensure a current certificate is attached. ": "\"Оюу толгой\" ХХК-ийн даатгалын шаардлагуудтай танилцах. Хүчинтэй байгаа сертификатыг хавсаргах.",
+  "The company has a procedure for HSE risk management. The process references Environmental and Heath risk management as well as safety risk management.": "Байгууллага нь Эрүүл мэнд, аюулгүй ажиллагаа байгаль орчны эрсдлийн менежементийн журамтай байна. Энэ журам нь байгаль орчин, эрүүл мэндийн эрсдэл болон аюулгүй ажиллагааны эрсдлийн менежментийг тусгаж өгсөн  байна.",
   "1. Work Contract Management": "1. Хөдөлмөрийн гэрээ",
-  "Is there a current signed work contract for all types of employees (Skilled/unskilled manufacturing employees, Temporary employees, Young workers)?":
-    "Компани бүх ажилтантай (мэргэжлийн болон мэргэжлийн бус, түр болон байнгын ажилтныг оруулан) хүчин төгөлдөр Хөдөлмөрийн гэрээ байгуулдаг уу?",
+  "Is there a current signed work contract for all types of employees (Skilled/unskilled manufacturing employees, Temporary employees, Young workers)?": "Компани бүх ажилтантай (мэргэжлийн болон мэргэжлийн бус, түр болон байнгын ажилтныг оруулан) хүчин төгөлдөр Хөдөлмөрийн гэрээ байгуулдаг уу?",
   "2. Job Description Procedure": "2. Ажлын байрны тодорхойлолт",
-  "Does the Company have a job description procedure in place? Does this take HSE into consideration?":
-    "Компани ажилтнуудын ажил үүргийг тусгасан ажлын байрны тодорхойлолт гаргадаг уу? Түүнд ЭМААБО-ны үүрэг хариуцлагыг оруулдаг эсэх",
+  "Does the Company have a job description procedure in place? Does this take HSE into consideration?": "Компани ажилтнуудын ажил үүргийг тусгасан ажлын байрны тодорхойлолт гаргадаг уу? Түүнд ЭМААБО-ны үүрэг хариуцлагыг оруулдаг эсэх",
   "3. Training and Development Policy": "3. Ажилтны сургалт, хөгжлийн бодлого",
-  "Does the Company have a training & development policy to improve their employee's skills (in line with their job descriptions)?":
-    "Компани ажилтнуудынхаа ур чадварыг сайжруулах сургалт зохион байгуулж, хөгжүүлэх хөтөлбөр хэрэгжүүлдэг үү?",
+  "Does the Company have a training & development policy to improve their employee's skills (in line with their job descriptions)?": "Компани ажилтнуудынхаа ур чадварыг сайжруулах сургалт зохион байгуулж, хөгжүүлэх хөтөлбөр хэрэгжүүлдэг үү?",
   "4. Employee Performance Management": "4. Ажилтны гүйцэтгэлийн менежмент",
-  "Is there a procedure related to employee performance evaluation criteria? Please provide at least one example relative to HSE criteria":
-    "Ажилтны ажлын үр дүнг үнэлэх шалгуурыг тодорхойлсон дүрэм журам бий юу? ",
+  "Is there a procedure related to employee performance evaluation criteria? Please provide at least one example relative to HSE criteria": "Ажилтны ажлын үр дүнг үнэлэх шалгуурыг тодорхойлсон дүрэм журам бий юу? ",
   "5. Time-Keeping Management": "5. Цаг бүртгэлийн менежмент",
-  "Does the company have a time-keeping management system (including overtime), a procedure to ensure employees are compensated and record-keeping requirements meet local legislation?":
-    "Компани нь цаг бүртгэлийн системтэй юу? (Үүнд илүү цагийг бүртгэж тооцдог эсэх. Цаг бүртгэл, цалин олгох талаар журам нь хууль тогтоомжийн шаардлагыг хангаж байгаа эсэх.)",
-  "6. Management of Practices related to conduct":
-    "6. Хөдөлмөрийн дотоод журам",
-  "Are there any policies that relate to performance and employee conduct practices? (Incl. disciplinary, anti-discrimination process, etc.)?":
-    "Ажилтны мөрдөх хэм хэмжээ, ёс зүйг зохицуулсан бодлого, журам бий юу? (дагаж мөрдөх хэм хэмжээ, сахилгын арга хэмжээ, үл ялгаварлан гадуурхах гэх мэтийг оруулсан байна)",
-  "7. Management of workforce engagement":
-    "7. Ажилтнуудтай харилцах, мэдээлэл солилцох",
-  "Does the company have a process or framework to support the active engagement (feedback, up and down communication) of their workforce, for example a procedure/tool which covers awards, collective agreements and contracts.":
-    "Танай байгууллага ажилтнуудтайгаа идэвхтэй харилцаж, мэдээлэл солилцдог уу? (санал хүсэлтэнд нь хариу өгөх эргэх холбоо, хоёр чиглэлд мэдээлэл солилцох).",
-  "8. Employee Awareness of their rights to association":
-    "8. Ажилчдын эвлэлдэн нэгдэх, эрх ашигаа хамгаалах эрх",
-  "Are employees made aware of their rights to association and representation?":
-    "Ажилтнууд эрх ашигаа хамгаалах зорилгоор эвлэлдэн нэгдэх, үйлдвэрчний эвлэл эсвэл ажилчдын зөвлөл байгуулах эрхтэй гэдгээ мэдэх үү?",
-  "9. Employee selection and  recruitment process":
-    "9. Ажилтан сонгон шалгаруулж ажилд авах",
-  "Are there any policies and procedures that relate to employee selection and recruitment process? ":
-    "Танай байгууллага ажилтан сонгон шалгаруулж ажилд авахтай холбоотой бодлого, журамтай юу?",
+  "Does the company have a time-keeping management system (including overtime), a procedure to ensure employees are compensated and record-keeping requirements meet local legislation?": "Компани нь цаг бүртгэлийн системтэй юу? (Үүнд илүү цагийг бүртгэж тооцдог эсэх. Цаг бүртгэл, цалин олгох талаар журам нь хууль тогтоомжийн шаардлагыг хангаж байгаа эсэх.)",
+  "6. Management of Practices related to conduct": "6. Хөдөлмөрийн дотоод журам",
+  "Are there any policies that relate to performance and employee conduct practices? (Incl. disciplinary, anti-discrimination process, etc.)?": "Ажилтны мөрдөх хэм хэмжээ, ёс зүйг зохицуулсан бодлого, журам бий юу? (дагаж мөрдөх хэм хэмжээ, сахилгын арга хэмжээ, үл ялгаварлан гадуурхах гэх мэтийг оруулсан байна)",
+  "7. Management of workforce engagement": "7. Ажилтнуудтай харилцах, мэдээлэл солилцох",
+  "Does the company have a process or framework to support the active engagement (feedback, up and down communication) of their workforce, for example a procedure/tool which covers awards, collective agreements and contracts.": "Танай байгууллага ажилтнуудтайгаа идэвхтэй харилцаж, мэдээлэл солилцдог уу? (санал хүсэлтэнд нь хариу өгөх эргэх холбоо, хоёр чиглэлд мэдээлэл солилцох).",
+  "8. Employee Awareness of their rights to association": "8. Ажилчдын эвлэлдэн нэгдэх, эрх ашигаа хамгаалах эрх",
+  "Are employees made aware of their rights to association and representation?": "Ажилтнууд эрх ашигаа хамгаалах зорилгоор эвлэлдэн нэгдэх, үйлдвэрчний эвлэл эсвэл ажилчдын зөвлөл байгуулах эрхтэй гэдгээ мэдэх үү?",
+  "9. Employee selection and  recruitment process": "9. Ажилтан сонгон шалгаруулж ажилд авах",
+  "Are there any policies and procedures that relate to employee selection and recruitment process? ": "Танай байгууллага ажилтан сонгон шалгаруулж ажилд авахтай холбоотой бодлого, журамтай юу?",
   "10. Employee exit management": "10. Хөдөлмөрийг гэрээг дуусгавар болгох",
-  "Does the company have a procedure related to employee labor contract termination and retrenchment (including collective redundancy case) ":
-    "Танай байгууллагад ажилтныг ажлаас чөлөөлөх, халах, цомхотгох, бөөнөөр цомхотгох асуудлыг зохицуулсан бодлого, журам бий юу?",
-  "11. Grievance and Fair treatment ":
-    "Гомдол санал гаргах, түүнийг зохистой шийдвэрлэх",
-  "Does the company have employee grievance/complaint and fair treatment policy and procedure?  (OT SPEAK-OUT programme etc.)":
-    "Танай компанид ажилтан гомдол санал гаргах, түүнийг хэрхэн шийдвэрлэх талаар бодлого, зохицуулалт байдаг уу? (Оюу толгой компанийн Спийк-Аут хөтөлбөр гэх мэт арга хэрэгсэлтэй)",
-  "1. Does your company have in place a policy statement or code of conduct relating to the Business Integrity and Ethics?":
-    "1. Танай компанид бизнесийн ёс зүйтэй холбоотой бичиж баримтжуулсан бодлого эсвэл дагаж мөрдөх дүрэм байдаг уу?",
-  "If yes, please send us a copy of your Business Integrity policy or code of conduct. The policy must be approved by a senior management and introduced to the employees at least annually.":
-    "Хэрэв тийм бол Бизнесийн ёс зүйн бодлого, дүрмийн хуулбарыг ирүүлнэ үү. Бодлогыг удирдлага баталсан ба ажилтнуудад дор хаяж жилд нэг удаа танилцуулдаг байх.",
-  "2. Are there processes and procedures in place to ensure that your policies or codes of conduct are effectively implemented throughout your company?":
-    "2.Танай компанид бодлого, ёс зүйн дүрэм компани даяар үр дүнтэй хэрэгжиж байгаа эсэхийг хянах  журам, процесс байдаг уу?",
-  "Please list all that apply to your company in the supplier answer column. If you have included 'others' then please specify. ":
-    "Хэрэв тийм бол нийлүүлэгчийн хариулт багананд хариултыг бичиж, нотлох баримтуудын хамт ирүүлнэ үү.",
-  "3. Are there processes and procedures in place to ensure that your policies or codes of conduct are effectively implemented throughout your Supply Chain?":
-    "3. Танай бодлого, ёс зүйн дүрэм танай компанийн ханган нийлүүлэгчдийн хүрээнд үр дүнтэй хэрэгжиж байгаа эсэхийг хянах журам, процесс байдаг уу?",
-  "Please list all that apply to your company in the supplier answer column. If you have included 'others' then please specify. Please provide examples of your standard supplier contracts. ":
-    "Хэрэв тийм бол нийлүүлэгчийн хариулт багананд хариултыг бичиж, нотлох баримтуудын хамт ирүүлнэ үү. Нийлүүлэгчтэй хийдэг стандарт гэрээний жишээ үзүүлнэ үү.",
-  "4. Has your company been subject to any external investigation regarding corruption within the past five years?":
-    "4. Танай компани сүүлийн таван жилд авилгатай холбоотой асуудлаар хөндлөнгийн хууль, хяналтын байгууллагаар шалгагдаж байсан уу?",
-  "5. Does your company have a documented policy in place to prevent corruption? ":
-    "5. Танай компанид авилгаас сэргийлэх талаар бичиж баримтжуулсан бодлого бий юу?",
-  "If yes, please provide a copy of your Anti-Corruption Management policy.":
-    "Хэрэв тийм бол Авилгын эсрэг менежментийн бодлогын хуулбарыг ирүүлнэ үү.",
-  "6. If yes to above question, who is responsible person/function for the compliance/anti-corruption program":
-    "6. Дээрх асуултанд тийм гэж хариулсан бол ёс зүйн дүрмийн хэрэгжилт болон авилгын эсрэг хөтөлбөрийг ямар хэлтэс эсвэл албан тушаалтан хариуцан ажилладаг вэ?",
-  "Please write down the responsible person/function name in supplier answer column.":
-    "Хариуцдаг хэлтэс болон албан тушаалтны талаар нийлүүлэгчийн хариулт багананд бичнэ үү.",
-  "The system is maintained and is reviewed by management on a regular basis (min Annual review)":
-    "-Удирдлагын зүгээс уг менежментийн системийг байнга хэрэгжүүлэн хянаж байх (хамгийн багадаа жилд нэг удаа)",
-  "The CEO has signed off the system.":
-    "-Байгууллагын захирал гарын үсэг зурсан байх.",
-  "The System should include policies committing to:":
-    "Менежментийн системд дараах бодлогууд орсон байна:",
-  "The prevention of incidents that may lead to: injuries, illnesses, pollution, property and environmental damage, security threats, process losses and product quality impacts.":
-    "Дараах эрсдэлд хүргэж болох ослоос сэргийлдэг байх, тухайлбал: гэмтэл, өвчлөл, бохирдол, эд хөрөнгө болон байгаль орчны хохирол, аюулгүй байдалд учирч болох эрсдэл, үйл ажиллагааны тасалдал болон бүтээгдэхүүний чанарт нөлөөлөх.",
-  "Compliance with legal and other requirements, including international accords, standards and external requirements to which Rio Tinto (Oyu Tolgoi) subscribes.":
-    "Хууль зүйн болон бусад шаардлагуудыг дагаж мөрдөх, тухайлбал Рио Тинто (Оюу толгой) дагаж мөрддөг олон улсын гэрээ, стандарт, гадаад шаардлагууд.",
-  "The effective management of HSE[Q] risks.":
-    "Эрүүл мэнд, Аюулгүй Ажиллагаа, Байгаль орчны  эрсдлийн үр дүнтэй менежментийг хэрэгжүүлэх.",
-  "Adopting continual improvement practices in key HSE[Q] areas":
-    "Эрүүл мэнд, Аюулгүй Ажиллагаа, Байгаль орчны чухал хэсгүүдэд сайжруулах арга барилыг үргэлжлүүлэн нэвтрүүлэх ",
-  "Establishing measurable objectives and targets for improving HSE[Q] performance.":
-    "Эрүүл мэнд, Аюулгүй ажиллагаа, Байгаль орчны гүйцэтгэлийг сайжруулах хэмжигдэхүйц зорилт тавих. ",
-  "Providing the resources needed to meet performance objectives.":
-    "Гүйцэтгэлийн зорилтод хүрэх нөөц бололцоогоор хангах.",
-  "Encouraging employee consultation, participation and promoting employee awareness of HSE[Q] threats and opportunities.":
-    "Эрүүл мэнд, Аюулгүй Ажиллагаа, Байгаль орчны аюул болон боломжийн талаар ажилтнуудтай зөвлөх, энэ ажилд оролцуулах, тэднийг холбогдох мэдээллээр хангах.",
+  "Does the company have a procedure related to employee labor contract termination and retrenchment (including collective redundancy case) ": "Танай байгууллагад ажилтныг ажлаас чөлөөлөх, халах, цомхотгох, бөөнөөр цомхотгох асуудлыг зохицуулсан бодлого, журам бий юу?",
+  "11. Grievance and Fair treatment ": "Гомдол санал гаргах, түүнийг зохистой шийдвэрлэх",
+  "Does the company have employee grievance/complaint and fair treatment policy and procedure?  (OT SPEAK-OUT programme etc.)": "Танай компанид ажилтан гомдол санал гаргах, түүнийг хэрхэн шийдвэрлэх талаар бодлого, зохицуулалт байдаг уу? (Оюу толгой компанийн Спийк-Аут хөтөлбөр гэх мэт арга хэрэгсэлтэй)",
+  "1. Does your company have in place a policy statement or code of conduct relating to the Business Integrity and Ethics?": "1. Танай компанид бизнесийн ёс зүйтэй холбоотой бичиж баримтжуулсан бодлого эсвэл дагаж мөрдөх дүрэм байдаг уу?",
+  "If yes, please send us a copy of your Business Integrity policy or code of conduct. The policy must be approved by a senior management and introduced to the employees at least annually.": "Хэрэв тийм бол Бизнесийн ёс зүйн бодлого, дүрмийн хуулбарыг ирүүлнэ үү. Бодлогыг удирдлага баталсан ба ажилтнуудад дор хаяж жилд нэг удаа танилцуулдаг байх.",
+  "2. Are there processes and procedures in place to ensure that your policies or codes of conduct are effectively implemented throughout your company?": "2.Танай компанид бодлого, ёс зүйн дүрэм компани даяар үр дүнтэй хэрэгжиж байгаа эсэхийг хянах  журам, процесс байдаг уу?",
+  "Please list all that apply to your company in the supplier answer column. If you have included 'others' then please specify. ": "Хэрэв тийм бол нийлүүлэгчийн хариулт багананд хариултыг бичиж, нотлох баримтуудын хамт ирүүлнэ үү.",
+  "3. Are there processes and procedures in place to ensure that your policies or codes of conduct are effectively implemented throughout your Supply Chain?": "3. Танай бодлого, ёс зүйн дүрэм танай компанийн ханган нийлүүлэгчдийн хүрээнд үр дүнтэй хэрэгжиж байгаа эсэхийг хянах журам, процесс байдаг уу?",
+  "Please list all that apply to your company in the supplier answer column. If you have included 'others' then please specify. Please provide examples of your standard supplier contracts. ": "Хэрэв тийм бол нийлүүлэгчийн хариулт багананд хариултыг бичиж, нотлох баримтуудын хамт ирүүлнэ үү. Нийлүүлэгчтэй хийдэг стандарт гэрээний жишээ үзүүлнэ үү.",
+  "4. Has your company been subject to any external investigation regarding corruption within the past five years?": "4. Танай компани сүүлийн таван жилд авилгатай холбоотой асуудлаар хөндлөнгийн хууль, хяналтын байгууллагаар шалгагдаж байсан уу?",
+  "5. Does your company have a documented policy in place to prevent corruption? ": "5. Танай компанид авилгаас сэргийлэх талаар бичиж баримтжуулсан бодлого бий юу?",
+  "If yes, please provide a copy of your Anti-Corruption Management policy.": "Хэрэв тийм бол Авилгын эсрэг менежментийн бодлогын хуулбарыг ирүүлнэ үү.",
+  "6. If yes to above question, who is responsible person/function for the compliance/anti-corruption program": "6. Дээрх асуултанд тийм гэж хариулсан бол ёс зүйн дүрмийн хэрэгжилт болон авилгын эсрэг хөтөлбөрийг ямар хэлтэс эсвэл албан тушаалтан хариуцан ажилладаг вэ?",
+  "Please write down the responsible person/function name in supplier answer column.": "Хариуцдаг хэлтэс болон албан тушаалтны талаар нийлүүлэгчийн хариулт багананд бичнэ үү.",
+  "The system is maintained and is reviewed by management on a regular basis (min Annual review)": "-Удирдлагын зүгээс уг менежментийн системийг байнга хэрэгжүүлэн хянаж байх (хамгийн багадаа жилд нэг удаа)",
+  "The CEO has signed off the system.": "-Байгууллагын захирал гарын үсэг зурсан байх.",
+  "The System should include policies committing to:": "Менежментийн системд дараах бодлогууд орсон байна:",
+  "The prevention of incidents that may lead to: injuries, illnesses, pollution, property and environmental damage, security threats, process losses and product quality impacts.": "Дараах эрсдэлд хүргэж болох ослоос сэргийлдэг байх, тухайлбал: гэмтэл, өвчлөл, бохирдол, эд хөрөнгө болон байгаль орчны хохирол, аюулгүй байдалд учирч болох эрсдэл, үйл ажиллагааны тасалдал болон бүтээгдэхүүний чанарт нөлөөлөх.",
+  "Compliance with legal and other requirements, including international accords, standards and external requirements to which Rio Tinto (Oyu Tolgoi) subscribes.": "Хууль зүйн болон бусад шаардлагуудыг дагаж мөрдөх, тухайлбал Рио Тинто (Оюу толгой) дагаж мөрддөг олон улсын гэрээ, стандарт, гадаад шаардлагууд.",
+  "The effective management of HSE[Q] risks.": "Эрүүл мэнд, Аюулгүй Ажиллагаа, Байгаль орчны  эрсдлийн үр дүнтэй менежментийг хэрэгжүүлэх.",
+  "Adopting continual improvement practices in key HSE[Q] areas": "Эрүүл мэнд, Аюулгүй Ажиллагаа, Байгаль орчны чухал хэсгүүдэд сайжруулах арга барилыг үргэлжлүүлэн нэвтрүүлэх ",
+  "Establishing measurable objectives and targets for improving HSE[Q] performance.": "Эрүүл мэнд, Аюулгүй ажиллагаа, Байгаль орчны гүйцэтгэлийг сайжруулах хэмжигдэхүйц зорилт тавих. ",
+  "Providing the resources needed to meet performance objectives.": "Гүйцэтгэлийн зорилтод хүрэх нөөц бололцоогоор хангах.",
+  "Encouraging employee consultation, participation and promoting employee awareness of HSE[Q] threats and opportunities.": "Эрүүл мэнд, Аюулгүй Ажиллагаа, Байгаль орчны аюул болон боломжийн талаар ажилтнуудтай зөвлөх, энэ ажилд оролцуулах, тэднийг холбогдох мэдээллээр хангах.",
   "Meeting customer requirements.": "Хэрэглэгчийн хэрэгцээ шаардлагыг хангах  ",
-  "Respecting the standards of conduct defined in the The way we work (copy to be provided to contractor).":
-    "Бидний ажлын арга барилд тодорхойлсон стандарт хэм хэмжээг дагаж мөрдөх (хувийг гэрээлэгч компанид өгнө).",
-  " Legislative and regulatory codes are product/region specific. if yes, confirm through the provision of examples of procedures pertaining to the work you are completing. Preferably commentary to outline how they ensure they are compliant with regulatory codes and standards.":
-    "Хууль эрх зүйн акт нь тухайн бүтээгдэхүүн/үйлчилгээ болон бүс нутгаас хамааран өөр өөр байна. Хэрэв тийм бол өөрийн гүйцэтгэж байгаа ажилтай хамаарах журмын жишээг өгнө үү. Хууль эрхзүйн акт болон стандартуудтай хэрхэн нийцэж ажиллаж байгаагаа харуулах.",
-  " Within Rio Tinto (Oyu Tolgoi) where the supplier performs hazardous work they are to provide a copy of their procedures. Hazardous work includes but is not limited to:":
-    "Рио Тинто (Оюу толгой ) -н хэмжээнд нийлүүлэгч аюултай ажил үүрэг гүйцэтгэх тохиолдолд тэд өөрсдийн холбогдох журмын хуулбарыг өгөх ёстой байдаг. Аюултай ажил үүрэгт дараах ажлууд орох ба зөвхөн эдгээрээр хязгаарлагдахгүй:",
+  "Respecting the standards of conduct defined in the The way we work (copy to be provided to contractor).": "Бидний ажлын арга барилд тодорхойлсон стандарт хэм хэмжээг дагаж мөрдөх (хувийг гэрээлэгч компанид өгнө).",
+  " Legislative and regulatory codes are product/region specific. if yes, confirm through the provision of examples of procedures pertaining to the work you are completing. Preferably commentary to outline how they ensure they are compliant with regulatory codes and standards.": "Хууль эрх зүйн акт нь тухайн бүтээгдэхүүн/үйлчилгээ болон бүс нутгаас хамааран өөр өөр байна. Хэрэв тийм бол өөрийн гүйцэтгэж байгаа ажилтай хамаарах журмын жишээг өгнө үү. Хууль эрхзүйн акт болон стандартуудтай хэрхэн нийцэж ажиллаж байгаагаа харуулах.",
+  " Within Rio Tinto (Oyu Tolgoi) where the supplier performs hazardous work they are to provide a copy of their procedures. Hazardous work includes but is not limited to:": "Рио Тинто (Оюу толгой ) -н хэмжээнд нийлүүлэгч аюултай ажил үүрэг гүйцэтгэх тохиолдолд тэд өөрсдийн холбогдох журмын хуулбарыг өгөх ёстой байдаг. Аюултай ажил үүрэгт дараах ажлууд орох ба зөвхөн эдгээрээр хязгаарлагдахгүй:",
   "Works at height": "1. Өндөрт ажиллах",
   "Works in confined spaces": "2. Хязгаарлагдмал орчинд ажиллах",
   "Works on electrical installations": "3. Цахилгааны суурилуулалтын ажил",
   "Works in explosion risks areas": "4. Дэлбэрэх аюултай орчинд ажиллах",
   "Hot Work": "Халуун ажил",
-  "Work with or testing high pressure equipment":
-    "Өндөр даралтын төхөөрөмжийг турших ажил",
-  "Work with cranes and lifting equipment":
-    " 6. Кран, өргөх төхөөрөмжтэй ажиллах",
+  "Work with or testing high pressure equipment": "Өндөр даралтын төхөөрөмжийг турших ажил",
+  "Work with cranes and lifting equipment": " 6. Кран, өргөх төхөөрөмжтэй ажиллах",
   "Excavations/Penetrations": "7. Ухалт/Нэвтрэх",
   "Works conducted by isolated workers": "8. Тусгаарлалтын ажилтны хийх ажлууд",
   "Mobile equipment's fixed plant": "9. Хөдөлгөөнт тоног төхөөрөмж/суурь машин",
   "Vehicle and driving": "10. Тээврийн хэрэгсэл болон жолоодох",
-  "Work with hazardous substances/materials":
-    "11. Хортой бодис, материалтай ажиллах",
+  "Work with hazardous substances/materials": "11. Хортой бодис, материалтай ажиллах",
   "Working over or near water": "12. Усны дээр эсвэл ойролцоо ажиллах",
-  "Working near a roadway or railway.":
-    "13. Зам эсвэл төмөр замын ойролцоо ажиллах.",
-  "The companies formal process includes identification of the root cause.":
-    "Байгууллагын албан ёсны процесст суурь шалтгааныг олж илрүүлэх үйл явц орсон байна.",
-  "The company monitors key operational parameters in order to anticipate and reduce the likelihood and consequences of HSE incidents and upsets - including (Material accidents; near-misses, incidents)":
-    "Байгууллага нь эрүүл мэнд аюулгүй ажиллагаа байгаль орчны осол (тухайлбал бодит осол; осолд орох дөхсөн тохиолдол, жижиг осол) гарах магадлал, үр дагаврыг  бууруулах зорилгоор үйл ажиллагааны үндсэн үзүүлэлтийг хянаж байх ",
-  "The company has a procedure for accident analysis.":
-    "Байгууллага нь осол зөрчлийг  судлан  шинжлэх журамтай байх.",
-  "The company has a process for reporting and following up on the corrective actions and reporting on level of closure for each corrective action identified.":
-    "Байгууллага нь засаж залруулах арга хэмжээг тайлагнах, хянах үйл явцтай байх, мөн түүнчлэн тухайн нэг засаж залруулах арга хэмжээг төгсгөх үе шатны тухай тайлагнадаг, хянадаг үйл явцтай байна. ",
-  "Definition of Incident (As per HSE Glossary on HSEC Community Page):":
-    "Осол зөрчлийн тодорхойлолт (Эрүүл мэнд, аюулгүй  ажиллагаа, байгаль орчин  олон нийтийн хуудсанд заасан тодорхойлолтын дагуу): ",
-  "An incident is a single event or continuous / repetitive series of events that results in, or could have resulted in, one or more of the following impacts: >an occupational injury or illness; >damage to physical assets (eg plant & equipment), the environment, process, product or reputation; >disruption to a community; >exposure to legal liability; >security threat. It is evaluated both by its Acutal Consequence, and its Maximum Reasonable Outcome for each area of impact.":
-    "Осол зөрчил гэдэг нь нэг удаагийн болон олон удаагийн давтамжтай дараах үр дагавруудад хүргэсэн болон хүргэж болзошгүй тохиолдлыг хэлнэ. Үүнд:  Ажил мэргэжлээс шалтгаалах гэмтэл, өвчин;  Бодит эд хөрөнгөд (техник тоног төхөөрөмж), байгаль орчинд, үйл ажиллагаанд, бүтээгдэхүүн болон байгууллагын нэр хүндэд хохирол учруулах;  Орон нутагт эмх замбараагүй байдал үүсэх; Хуулийн хариуцлага хүлээх;  Аюулгүй байдалд заналхийлэх; Үүнийг бодит үр дагавар болон нөлөөлөлд орсон хэсэг бүрийн Бодит Дээд Хэмжээний дагуу үнэлдэг.",
-  "\"Corruption\" includes but is not limited to: ":
-    "\"Авилга, хээл хахууль\" гэдэгт дараах үйлдлийг оруулах ба үүгээр хязгаарлагдахгүй:",
-  "Bribery of government officials":
-    "Засгийн газрын албан тушаалтанд хээл хахууль өгөх",
-  "Bribery of public officials, Commercial bribery":
-    "Төрийн байгууллагын албан хаагч эсвэл бусад этгээдэд бизнесийн зорилгоор хээл хахууль өгөх",
-  "Falsification of the company books and records":
-    "Компанийн данс тооцоо, тайланг буруу хөтөлж, тайлагнах",
-  "Dealing with government intermediaries":
-    "Засгийн газрын төлөөлөлтэй үгсэж тохиролцох ",
+  "Working near a roadway or railway.": "13. Зам эсвэл төмөр замын ойролцоо ажиллах.",
+  "The companies formal process includes identification of the root cause.": "Байгууллагын албан ёсны процесст суурь шалтгааныг олж илрүүлэх үйл явц орсон байна.",
+  "The company monitors key operational parameters in order to anticipate and reduce the likelihood and consequences of HSE incidents and upsets - including (Material accidents; near-misses, incidents)": "Байгууллага нь эрүүл мэнд аюулгүй ажиллагаа байгаль орчны осол (тухайлбал бодит осол; осолд орох дөхсөн тохиолдол, жижиг осол) гарах магадлал, үр дагаврыг  бууруулах зорилгоор үйл ажиллагааны үндсэн үзүүлэлтийг хянаж байх ",
+  "The company has a procedure for accident analysis.": "Байгууллага нь осол зөрчлийг  судлан  шинжлэх журамтай байх.",
+  "The company has a process for reporting and following up on the corrective actions and reporting on level of closure for each corrective action identified.": "Байгууллага нь засаж залруулах арга хэмжээг тайлагнах, хянах үйл явцтай байх, мөн түүнчлэн тухайн нэг засаж залруулах арга хэмжээг төгсгөх үе шатны тухай тайлагнадаг, хянадаг үйл явцтай байна. ",
+  "Definition of Incident (As per HSE Glossary on HSEC Community Page):": "Осол зөрчлийн тодорхойлолт (Эрүүл мэнд, аюулгүй  ажиллагаа, байгаль орчин  олон нийтийн хуудсанд заасан тодорхойлолтын дагуу): ",
+  "An incident is a single event or continuous / repetitive series of events that results in, or could have resulted in, one or more of the following impacts: >an occupational injury or illness; >damage to physical assets (eg plant & equipment), the environment, process, product or reputation; >disruption to a community; >exposure to legal liability; >security threat. It is evaluated both by its Acutal Consequence, and its Maximum Reasonable Outcome for each area of impact.": "Осол зөрчил гэдэг нь нэг удаагийн болон олон удаагийн давтамжтай дараах үр дагавруудад хүргэсэн болон хүргэж болзошгүй тохиолдлыг хэлнэ. Үүнд:  Ажил мэргэжлээс шалтгаалах гэмтэл, өвчин;  Бодит эд хөрөнгөд (техник тоног төхөөрөмж), байгаль орчинд, үйл ажиллагаанд, бүтээгдэхүүн болон байгууллагын нэр хүндэд хохирол учруулах;  Орон нутагт эмх замбараагүй байдал үүсэх; Хуулийн хариуцлага хүлээх;  Аюулгүй байдалд заналхийлэх; Үүнийг бодит үр дагавар болон нөлөөлөлд орсон хэсэг бүрийн Бодит Дээд Хэмжээний дагуу үнэлдэг.",
+  "\"Corruption\" includes but is not limited to: ": "\"Авилга, хээл хахууль\" гэдэгт дараах үйлдлийг оруулах ба үүгээр хязгаарлагдахгүй:",
+  "Bribery of government officials": "Засгийн газрын албан тушаалтанд хээл хахууль өгөх",
+  "Bribery of public officials, Commercial bribery": "Төрийн байгууллагын албан хаагч эсвэл бусад этгээдэд бизнесийн зорилгоор хээл хахууль өгөх",
+  "Falsification of the company books and records": "Компанийн данс тооцоо, тайланг буруу хөтөлж, тайлагнах",
+  "Dealing with government intermediaries": "Засгийн газрын төлөөлөлтэй үгсэж тохиролцох ",
   "Improper charitable contributions": "Зохисгүй хандив",
   "Improper travels and hospitality": "Зохисгүй аялал зугаалга, дайллага",
   "Improper gifts and entertainment": "Зохисгүй бэлэг сэлт, үзвэр үйлчилгээ",
-  "Improper resolution of conflicts of interest":
-    "Ашиг сонирхлын зөрчлийг мэдүүлэхгүй байх",
-  "Involvement in any Cartel or other form of market rigging":
-    "Ямар нэг картел эсвэл өөр хэлбэрийн шударга бус өрсөлдөөнийг бий болгосон үйлдэлтэй холбогдох",
-  "If yes, please provide details, including key dates and outcomes in supplier comment column.":
-    "Хэрэв тийм гэж хариулсан бол огноо, үр дагаварын талаар мэдээллийг нийлүүлэгчийн тайлбар багананд бичнэ үү.",
+  "Improper resolution of conflicts of interest": "Ашиг сонирхлын зөрчлийг мэдүүлэхгүй байх",
+  "Involvement in any Cartel or other form of market rigging": "Ямар нэг картел эсвэл өөр хэлбэрийн шударга бус өрсөлдөөнийг бий болгосон үйлдэлтэй холбогдох",
+  "If yes, please provide details, including key dates and outcomes in supplier comment column.": "Хэрэв тийм гэж хариулсан бол огноо, үр дагаварын талаар мэдээллийг нийлүүлэгчийн тайлбар багананд бичнэ үү.",
   "0 - No contract signed.": "0 - Хөдөлмөрийн гэрээ байгуулдаггүй",
-  "1 - Contract signed according to local requirements.":
-    "1 - Гэрээг хууль тогтоомжийн дагуу байгуулдаг ",
-  "2 - No work occurs before a contract is in place. Evidence for at least 3 years.":
-    "2 - Гэрээ байгуулахаас өмнө хэнээр ч ажил гүйцэтгүүлдэггүй. Сүүлийн 3 жилийн нотолгоо.",
+  "1 - Contract signed according to local requirements.": "1 - Гэрээг хууль тогтоомжийн дагуу байгуулдаг ",
+  "2 - No work occurs before a contract is in place. Evidence for at least 3 years.": "2 - Гэрээ байгуулахаас өмнө хэнээр ч ажил гүйцэтгүүлдэггүй. Сүүлийн 3 жилийн нотолгоо.",
   "0 - No approach in place": "0 – Ийм үйл явц байхгүй.",
-  "1 - The defined approach is running for all of the jobs and includes HSE capabilities":
-    "1 - Ажлын байрны тодорхойлолтыг бүх ажлын хувьд гаргадаг ба ЭМААБО-ны үүрэг хариуцлагыг оруулж өгдөг.",
-  "2 - The approach mirrors RT (OT) standards (any new role to be benchmarked against other roles within the organisation) or data/documentation for at least the last 3 years exists. An improvement process is in place.":
-    "2 - Энэхүү үйл явцын хэрэгжүүлдэг арга барил нь Рио Тинто (Оюу толгой)-н стандарттай ижил. Дор хаяж 3 жилийн нотлох баримттай. Сайжралт явагдаж байгаа.",
+  "1 - The defined approach is running for all of the jobs and includes HSE capabilities": "1 - Ажлын байрны тодорхойлолтыг бүх ажлын хувьд гаргадаг ба ЭМААБО-ны үүрэг хариуцлагыг оруулж өгдөг.",
+  "2 - The approach mirrors RT (OT) standards (any new role to be benchmarked against other roles within the organisation) or data/documentation for at least the last 3 years exists. An improvement process is in place.": "2 - Энэхүү үйл явцын хэрэгжүүлдэг арга барил нь Рио Тинто (Оюу толгой)-н стандарттай ижил. Дор хаяж 3 жилийн нотлох баримттай. Сайжралт явагдаж байгаа.",
   "0 - No system": "0 – Ийм систем байхгүй.",
   "1 - A defined system is running": "1 - Систем ажиллаж байгаа.",
-  "2 - The system mirrors the RT system (i.e. specific and dedicated budget per employee, followed and monitored). The system is in place for at least 3 years and has been improved.":
-    "2 – Рио Тинто (Оюу толгой)-н системтэй ижил /Ажилтан тутамд зориулагдсан төсөвтэй, энэ нь хянагддаг/. Дор хаяж 3 жил хэрэгжсэн, байнгын сайжирдаг.",
-  "0 - No evaluation criteria set for the assessment of employee performance (only subjective assessment)":
-    "0 – Ажилтны гүйцэтгэлийн үнэлгээний шалгуурыг тодорхойлж гаргаагүй. (Зөвхөн субъектив үнэлгээ)",
-  "1 - Assessment of employees implemented with pre-determined criteria on a regular basis":
-    "1 - Ажилтны үнэлгээг урьдчилан тогтоосон шалгуур үзүүлэлтүүдийн үндсэн дээр тогтмол явуулдаг. ",
-  "2 - Results are formally captured once a year and informally as required within the year. There is a follow up across the year of the employee performance.":
-    "2 - Үнэлгээний үр дүнг жилд 1 удаа албан ёсоор баримтжуулж жилийн туршид шаардлагын хэрээр албан бусаар баримтжуулдаг. Ажилтны ажлын гүйцэтгэлийн явцад жилийн туршид хяналт тавьдаг.",
-  "0 - No process to capture working time":
-    "0 – Ажлын цагийг бүртгэх процесс байхгүй.",
-  "1 - Existing process and monthly employee confirmation in place":
-    "1 – Журам байгаа бөгөөд хэрэгждэг нотолгоотой.",
-  "2 - Existing process automated to capture working time, wied for at least 3 years to ensure improvements.":
-    "2 – Ажлын цагийг бүртгэх явцыг цахимжуулсан бөгөөд процесс дор хаяж 3 жил хэрэгжсэн, байнга сайжруулдаг.",
+  "2 - The system mirrors the RT system (i.e. specific and dedicated budget per employee, followed and monitored). The system is in place for at least 3 years and has been improved.": "2 – Рио Тинто (Оюу толгой)-н системтэй ижил /Ажилтан тутамд зориулагдсан төсөвтэй, энэ нь хянагддаг/. Дор хаяж 3 жил хэрэгжсэн, байнгын сайжирдаг.",
+  "0 - No evaluation criteria set for the assessment of employee performance (only subjective assessment)": "0 – Ажилтны гүйцэтгэлийн үнэлгээний шалгуурыг тодорхойлж гаргаагүй. (Зөвхөн субъектив үнэлгээ)",
+  "1 - Assessment of employees implemented with pre-determined criteria on a regular basis": "1 - Ажилтны үнэлгээг урьдчилан тогтоосон шалгуур үзүүлэлтүүдийн үндсэн дээр тогтмол явуулдаг. ",
+  "2 - Results are formally captured once a year and informally as required within the year. There is a follow up across the year of the employee performance.": "2 - Үнэлгээний үр дүнг жилд 1 удаа албан ёсоор баримтжуулж жилийн туршид шаардлагын хэрээр албан бусаар баримтжуулдаг. Ажилтны ажлын гүйцэтгэлийн явцад жилийн туршид хяналт тавьдаг.",
+  "0 - No process to capture working time": "0 – Ажлын цагийг бүртгэх процесс байхгүй.",
+  "1 - Existing process and monthly employee confirmation in place": "1 – Журам байгаа бөгөөд хэрэгждэг нотолгоотой.",
+  "2 - Existing process automated to capture working time, wied for at least 3 years to ensure improvements.": "2 – Ажлын цагийг бүртгэх явцыг цахимжуулсан бөгөөд процесс дор хаяж 3 жил хэрэгжсэн, байнга сайжруулдаг.",
   "0 - No company policy": "0- Бодлого, журам байхгүй",
-  "1 - Policy exists regarding performance and conduct with systematic monitoring.":
-    "1 - Хөдөлмөрийн дотоод журамтай, хэрэгжилтийг хянадаг ",
-  "2 - Training materials exist for all employees. Training of employees carried out regarding performance and expected conduct practices. At least for the last 3 years to ensure improvements":
-    "2 – Бүх ажилтанд зориулсан сургалтын материалтай. Ажилтнуудад гүйцэтгэл болон нөхцөл байдалд үндэслэсэн  сургалт хийгддэг.  Сайжруулах ажил сүүлийн гурван жилийн хугацаанд хийгдэж ирсэн.",
+  "1 - Policy exists regarding performance and conduct with systematic monitoring.": "1 - Хөдөлмөрийн дотоод журамтай, хэрэгжилтийг хянадаг ",
+  "2 - Training materials exist for all employees. Training of employees carried out regarding performance and expected conduct practices. At least for the last 3 years to ensure improvements": "2 – Бүх ажилтанд зориулсан сургалтын материалтай. Ажилтнуудад гүйцэтгэл болон нөхцөл байдалд үндэслэсэн  сургалт хийгддэг.  Сайжруулах ажил сүүлийн гурван жилийн хугацаанд хийгдэж ирсэн.",
   "0 - No process or framework": "0- Ийм систем байхгүй",
-  "1 - Existing process or framework.":
-    "1 - Энэ чиглэлийн бодлого, журамтай. Тэр нь хэрэгждэг.  ",
-  "2 - Evidence of regular communication (quarterly). And for at least 3 years to ensure improvements.":
-    "2 - Байнгын мэдээлэл, харилцаатай байдаг нотолгоо (дор хаяж улиралд нэг удаа). Сүүлийн 3 жилд хэрэгжиж байгаа, сайжирч байгаа.",
-  "0 - No union or alternate means of employee representation / Worker representatives are not allowed to carry out their duties within working hours without losing pay.":
-    "0 - Ажилчдын эрх ашгийг хамгаалах үйлдвэрчний эвлэл эсвэл ажилчдын зөвлөл байхгүй / Ийм чиглэлийн үйл ажиллагааг ажлын цагаар явуулахыг хориглодог.",
-  "1 - Regular meetings with trade unions or their worker's committees representative are held":
-    "1- Үйлдвэрчний эвлэл, ажилчдын зөвлөлүүдийн хурал уулзалт зохион байгуулагддаг.",
-  "2 - Employee representation is authorised and organisations for worker representation exist (eg independent trade union, workers committee, health and safety committees). This is in place for at least the last 3 years":
-    "2- Ажилчдын зөвлөл, төлөөллийн байгууллага байгуулахыг зөвшөөрдөг. (Бие даасан үйлдвэрчний эвлэл, ажилчдын зөвлөл, ЭМАА-ны зөвлөлтэй). Энэ нь дор хаяж сүүлийн 3 жил хэрэгжиж байгаа.",
+  "1 - Existing process or framework.": "1 - Энэ чиглэлийн бодлого, журамтай. Тэр нь хэрэгждэг.  ",
+  "2 - Evidence of regular communication (quarterly). And for at least 3 years to ensure improvements.": "2 - Байнгын мэдээлэл, харилцаатай байдаг нотолгоо (дор хаяж улиралд нэг удаа). Сүүлийн 3 жилд хэрэгжиж байгаа, сайжирч байгаа.",
+  "0 - No union or alternate means of employee representation / Worker representatives are not allowed to carry out their duties within working hours without losing pay.": "0 - Ажилчдын эрх ашгийг хамгаалах үйлдвэрчний эвлэл эсвэл ажилчдын зөвлөл байхгүй / Ийм чиглэлийн үйл ажиллагааг ажлын цагаар явуулахыг хориглодог.",
+  "1 - Regular meetings with trade unions or their worker's committees representative are held": "1- Үйлдвэрчний эвлэл, ажилчдын зөвлөлүүдийн хурал уулзалт зохион байгуулагддаг.",
+  "2 - Employee representation is authorised and organisations for worker representation exist (eg independent trade union, workers committee, health and safety committees). This is in place for at least the last 3 years": "2- Ажилчдын зөвлөл, төлөөллийн байгууллага байгуулахыг зөвшөөрдөг. (Бие даасан үйлдвэрчний эвлэл, ажилчдын зөвлөл, ЭМАА-ны зөвлөлтэй). Энэ нь дор хаяж сүүлийн 3 жил хэрэгжиж байгаа.",
   "0 - No written policy/procedure": "0- Бодлого, журам байхгүй",
-  "1 - Written procedure/process exists regarding employee recruitment and selection":
-    "1- Бичигдсэн бодлого, журам байгаа",
-  "2 - The procedure/process mirrors the OT (RT) system. The system is in place for at least 3 years and has been improved":
-    "2 - Энэхүү үйл явцын хэрэгжүүлдэг арга барил нь Рио Тинто (Оюу толгой)-н стандарттай ижил. Дор хаяж 3 жилийн нотлох баримттай. Сайжралт явагдаж байгаа.",
-  "1 - Evidence that systems are in place to ensure all proper processes occur to exit an employee":
-    "1 - Зохистой системтэй гэсэн нотолгоотой",
-  "2 - Evidence that in the event of redundancies efforts have been made to redeploy employees. The system mirrors the OT (RT) system.":
-    "2 - Цомхотголд өртсөн ажилтныг өөр ажилд шилжүүлэн ажиллуулах санаачлага, чармайлт гаргаж байсан нотолгоо байгаа. Энэхүү үйл явцын хэрэгжүүлдэг арга барил нь Рио Тинто (Оюу толгой)-н стандарттай ижил.",
+  "1 - Written procedure/process exists regarding employee recruitment and selection": "1- Бичигдсэн бодлого, журам байгаа",
+  "2 - The procedure/process mirrors the OT (RT) system. The system is in place for at least 3 years and has been improved": "2 - Энэхүү үйл явцын хэрэгжүүлдэг арга барил нь Рио Тинто (Оюу толгой)-н стандарттай ижил. Дор хаяж 3 жилийн нотлох баримттай. Сайжралт явагдаж байгаа.",
+  "1 - Evidence that systems are in place to ensure all proper processes occur to exit an employee": "1 - Зохистой системтэй гэсэн нотолгоотой",
+  "2 - Evidence that in the event of redundancies efforts have been made to redeploy employees. The system mirrors the OT (RT) system.": "2 - Цомхотголд өртсөн ажилтныг өөр ажилд шилжүүлэн ажиллуулах санаачлага, чармайлт гаргаж байсан нотолгоо байгаа. Энэхүү үйл явцын хэрэгжүүлдэг арга барил нь Рио Тинто (Оюу толгой)-н стандарттай ижил.",
   "1 - Existing policy and procedure.": "1- Бичигдсэн бодлого, журам байгаа",
-  "2 - Evidence that raised issues have been investigated and closed with employees. The system mirrors the OT (RT) system and is inducted to employees. And that is in place for at least 3 years and has been improved.":
-    "2 - гаргасан гомдол саналыг судалж, шийдвэрлэж байсан жишээ. Энэхүү үйл явцын хэрэгжүүлдэг арга барил нь Рио Тинто (Оюу толгой)-н стандарттай ижил. Дор хаяж 3 жилийн нотлох баримттай. Сайжралт явагдаж байгаа.",
+  "2 - Evidence that raised issues have been investigated and closed with employees. The system mirrors the OT (RT) system and is inducted to employees. And that is in place for at least 3 years and has been improved.": "2 - гаргасан гомдол саналыг судалж, шийдвэрлэж байсан жишээ. Энэхүү үйл явцын хэрэгжүүлдэг арга барил нь Рио Тинто (Оюу толгой)-н стандарттай ижил. Дор хаяж 3 жилийн нотлох баримттай. Сайжралт явагдаж байгаа.",
   "This supplier is qualified": "Бэлтгэн нийлүүлэгчийн мэдээлэл баталгаажлаа",
-  "This supplier is not qualified.":
-    "Бэлтгэн нийлүүлэгчийн мэдээлэл баталгаажаагүй байна",
+  "This supplier is not qualified.": "Бэлтгэн нийлүүлэгчийн мэдээлэл баталгаажаагүй байна",
   "Umnugovi": "Өмнөговь"
 }
