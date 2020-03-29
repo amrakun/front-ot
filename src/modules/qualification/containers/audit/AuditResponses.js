@@ -8,11 +8,7 @@ import { message } from 'antd';
 
 class AuditResponsesContainer extends React.Component {
   render() {
-    const {
-      auditResponsesTableQuery,
-      totalCountsQuery,
-      auditsBuyerSendFiles
-    } = this.props;
+    const { auditResponsesTableQuery, totalCountsQuery, auditsBuyerSendFiles } = this.props;
 
     if (auditResponsesTableQuery.error || totalCountsQuery.error) {
       return null;
@@ -28,8 +24,8 @@ class AuditResponsesContainer extends React.Component {
           supplierId: supplierId,
           auditId: auditId,
           improvementPlan: name === 'auditReport',
-          report: name === 'auditImprovementPlan'
-        }
+          report: name === 'auditImprovementPlan',
+        },
       })
         .then(() => {
           message.success('Successfuly sent!');
@@ -42,8 +38,7 @@ class AuditResponsesContainer extends React.Component {
     const updatedProps = {
       ...this.props,
       sendFiles,
-      counts: totalCountsQuery.auditResponseTotalCounts,
-      data: auditResponsesTableQuery.auditResponses || []
+      data: auditResponsesTableQuery.auditResponses || [],
     };
 
     return <AuditResponses {...updatedProps} />;
@@ -52,9 +47,8 @@ class AuditResponsesContainer extends React.Component {
 
 AuditResponsesContainer.propTypes = {
   auditResponsesTableQuery: PropTypes.object,
-  responsesQualifiedStatusQuery: PropTypes.object,
   totalCountsQuery: PropTypes.object,
-  auditsBuyerSendFiles: PropTypes.func
+  auditsBuyerSendFiles: PropTypes.func,
 };
 
 export default compose(
@@ -70,37 +64,19 @@ export default compose(
           supplierSearch: params.search,
           page: params.page || 1,
           perPage: params.perPage || 15,
-          isQualified: params.isQualified,
-          isNew: params.isNew,
-          isSentImprovementPlan: params.isSentImprovementPlan
+          qualStatus: params.qualStatus,
+          supplierStatus: params.supplierStatus,
         },
-        notifyOnNetworkStatusChange: true
+        notifyOnNetworkStatusChange: true,
       };
-    }
-  }),
-
-  graphql(gql(queries.auditResponsesQualifiedStatus), {
-    name: 'responsesQualifiedStatusQuery',
-    options: ({ queryParams }) => {
-      const params = queryParams || {};
-      return {
-        variables: {
-          publishDate: params.from,
-          closeDate: params.to,
-          supplierSearch: params.search,
-          page: params.page || 1,
-          perPage: params.perPage || 15
-        },
-        notifyOnNetworkStatusChange: true
-      };
-    }
+    },
   }),
 
   graphql(gql(queries.auditResponseTotalCounts), {
-    name: 'totalCountsQuery'
+    name: 'totalCountsQuery',
   }),
 
   graphql(gql(mutations.auditsBuyerSendFiles), {
-    name: 'auditsBuyerSendFiles'
+    name: 'auditsBuyerSendFiles',
   })
 )(AuditResponsesContainer);

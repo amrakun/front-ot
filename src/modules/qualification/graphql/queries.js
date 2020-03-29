@@ -292,20 +292,16 @@ const auditResponseParams = `
   $supplierSearch: String
   $publishDate: Date
   $closeDate: Date
-  $status: String
-  $isQualified: Boolean
-  $isNew: Boolean
-  $isSentImprovementPlan: Boolean
+  $qualStatus: String
+  $supplierStatus: String
 `;
 
 const auditResponseValues = `
   supplierSearch: $supplierSearch
   publishDate: $publishDate
   closeDate: $closeDate
-  status: $status
-  isQualified: $isQualified
-  isNew: $isNew
-  isSentImprovementPlan: $isSentImprovementPlan
+  qualStatus: $qualStatus
+  supplierStatus: $supplierStatus
 `;
 
 const auditResponsesQualifiedStatus = `

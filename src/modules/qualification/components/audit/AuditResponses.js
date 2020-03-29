@@ -1,328 +1,142 @@
 /* eslint-disable react/display-name */
 
-import { gql, withApollo } from 'react-apollo';
+import { withApollo } from 'react-apollo';
 import moment from 'moment';
 import React from 'react';
-import queryString from 'query-string';
 import { withRouter } from 'react-router';
-import { Modal, Table, Card, Row, Col, DatePicker } from 'antd';
+import { Select, Table, Card, Row } from 'antd';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {
-  StatsTable,
-  NumberCard,
-  TextCard,
-  Search
-} from 'modules/common/components';
-import { dateFormat, colors } from 'modules/common/constants';
-import { readFileUrl } from 'modules/common/utils';
+import { Search } from 'modules/common/components';
+import { dateFormat } from 'modules/common/constants';
 import router from 'modules/common/router';
-import { auditTabs } from 'modules/qualification/consts';
-import { MassEmail } from 'modules/companies/containers';
-import { queries } from '../../graphql';
 
 class AuditResponses extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      selectedRowKeys: [],
-      selectedSuppliers: [],
-      showModal: false,
-      modalTitle: '',
-      popupData: []
-    };
-
     this.columns = this.columns.bind(this);
-    this.handleDateRangeChange = this.handleDateRangeChange.bind(this);
     this.onSelectChange = this.onSelectChange.bind(this);
   }
 
-  handleDateRangeChange(value) {
-    const { history } = this.props;
-
-    let query = queryString.parse(history.location.search);
-
-    query.from = value[0] ? value[0]._d : null;
-    query.to = value[1] ? value[1]._d : null;
-
-    history.push({
-      search: queryString.stringify(query)
-    });
-  }
-
-  onSelectChange(selectedRowKeys, selectedRows) {
-    this.setState({
-      selectedRowKeys,
-      selectedSuppliers: selectedRows.map(row => row.supplier)
-    });
-  }
-
-  setFilter(name) {
-    router.setParams(this.props.history, {
-      isQualified: undefined,
-      isNew: undefined,
-      isSentImprovementPlan: undefined,
-      [name]: true
-    });
-  }
-
-  showCompanies(type) {
-    const { client } = this.props;
-
-    client
-      .query({
-        query: gql(queries.auditsSuppliers),
-        variables: { type }
-      })
-      .then(({ data, loading }) => {
-        if (loading) {
-          return;
-        }
-
-        this.setState({
-          showModal: true,
-          modalTitle: `${
-            type === 'notResponded' ? 'Not responded' : 'Invited'
-          } suppliers`,
-          popupData: data.auditsSuppliers
-        });
-      });
-  }
-
-  renderModal() {
-    const { showModal, modalTitle, popupData } = this.state;
-
-    if (!showModal) {
-      return false;
-    }
-
-    const columns = [
-      { title: 'Status', dataIndex: 'audit.status', width: 160 },
-      {
-        title: 'Publish date',
-        render: record => moment(record.audit.publishDate).format(dateFormat)
-      },
-      {
-        title: 'Close date',
-        render: record => moment(record.audit.closeDate).format(dateFormat)
-      },
-      {
-        title: 'Supplier name',
-        dataIndex: 'supplier.basicInfo.enName',
-        width: 160
-      },
-      {
-        title: 'Vendor number',
-        dataIndex: 'supplier.basicInfo.sapNumber',
-        width: 100
-      },
-      {
-        title: 'Tier type',
-        dataIndex: 'supplier.tierTypeDisplay',
-        width: 40
-      },
-      {
-        title: 'Contact person',
-        dataIndex: 'supplier.contactInfo.name',
-        width: 60
-      },
-      {
-        title: 'Email address',
-        dataIndex: 'supplier.contactInfo.email',
-        width: 60
-      },
-      {
-        title: 'Phone number',
-        dataIndex: 'supplier.contactInfo.phone',
-        width: 60
-      }
-    ];
-
-    const props = {
-      dataSource: popupData,
-      columns,
-      key: Math.random()
-    };
-
-    return (
-      <Modal
-        title={modalTitle}
-        visible={true}
-        maskClosable={false}
-        footer={null}
-        width="80%"
-        onCancel={() => this.setState({ showModal: false })}
-      >
-        <Table {...props} />
-      </Modal>
-    );
+  onSelectChange(name, value) {
+    router.setParams(this.props.history, { [name]: value });
   }
 
   columns() {
     return [
       {
-        title: 'Status by date',
-        render: record => (record.status === 'onTime' ? 'On time' : 'Late')
-      },
-      { title: 'Status by action', dataIndex: 'audit.status' },
-      { title: 'Supplier name', dataIndex: 'supplier.basicInfo.enName' },
-      { title: 'Vendor number', dataIndex: 'supplier.basicInfo.sapNumber' },
-      {
-        title: 'Publish date',
-        render: record => moment(record.audit.publishDate).format(dateFormat)
+        key: 1,
+        title: '#',
+        render: (_record, _j, i) => i + 1,
       },
       {
-        title: 'Close date',
-        render: record => moment(record.audit.closeDate).format(dateFormat)
+        key: 2,
+        title: 'Qualification status',
+        render: record => record.audit.status,
       },
       {
+        key: 3,
+        title: 'Supplier status',
+        render: record => {
+          if (!record.status) {
+            return 'invited';
+          }
+
+          return record.status;
+        },
+      },
+      {
+        key: 4,
+        title: 'Supplier name',
+        dataIndex: 'supplier.basicInfo.enName',
+      },
+      {
+        key: 5,
+        title: 'Vendor number',
+        dataIndex: 'supplier.basicInfo.sapNumber',
+      },
+      {
+        key: 6,
+        title: 'Invited date',
+        render: record => moment(record.audit.publishDate).format(dateFormat),
+      },
+      {
+        key: 7,
         title: 'Submission date',
-        render: record => moment(record.createdDate).format(dateFormat)
+        render: record => moment(record.createdDate).format(dateFormat),
       },
       {
-        title: 'Submitted count',
-        render: record => record.submittedCount
-      },
-      {
-        title: 'Provided information',
-        render: record =>
-          record.supplier ? (
+        key: 8,
+        title: 'Action',
+        render: record => {
+          if (!record.status) {
+            return null;
+          }
+
+          return (
             <Link
               to={{
                 pathname: '/audit/qualify',
                 state: {
                   supplierId: record.supplier._id,
-                  auditId: record.audit._id
-                }
+                  auditId: record.audit._id,
+                },
               }}
             >
-              View
+              Qualify
             </Link>
-          ) : (
-            '-'
-          )
-      },
-      {
-        title: 'Last auditor report',
-        render: record => {
-          if (!record.reportFile) {
-            return '-';
-          }
-
-          return (
-            <a href={readFileUrl(record.reportFile)} target="__blank">
-              file
-            </a>
           );
-        }
+        },
       },
-      {
-        title: 'Last auditor improvement plan',
-        render: record => {
-          if (!record.improvementPlanFile) {
-            return '-';
-          }
-
-          return (
-            <a href={readFileUrl(record.improvementPlanFile)} target="__blank">
-              file
-            </a>
-          );
-        }
-      }
     ];
   }
 
   render() {
     const { loading } = this.props;
-    const counts = this.props.counts || {};
     const data = this.props.data || [];
 
-    const statsQuery = this.props.responsesQualifiedStatusQuery || {};
-    const auditStats = statsQuery.auditResponsesQualifiedStatus || {};
-
-    const { selectedRowKeys, selectedSuppliers } = this.state;
-
-    const colSpan = {
-      xl: 8,
-      lg: 12,
-      sm: 24
-    };
+    const style = { width: 200, marginRight: '20px' };
 
     return (
       <div>
-        {this.renderModal()}
-        <Row gutter={24}>
-          <Col key={0} {...colSpan}>
-            <NumberCard
-              icon="message"
-              title="Invited suppliers"
-              color={colors[3]}
-              number={counts.invited || 0}
-              onClick={() => this.showCompanies('invited')}
-            />
-          </Col>
-          <Col key={1} {...colSpan}>
-            <TextCard
-              icon="like"
-              title={`Qualified - ${counts.qualified || 0}`}
-              color={colors[2]}
-              size="big"
-              text={<StatsTable stats={auditStats} tabs={auditTabs} />}
-              onClick={() => this.setFilter('isQualified')}
-            />
-          </Col>
-          <Col key={2} {...colSpan}>
-            <NumberCard
-              icon="question"
-              title="Not responded"
-              color={colors[5]}
-              number={counts.notResponded || 0}
-              onClick={() => this.showCompanies('notResponded')}
-            />
-          </Col>
-          <Col key={3} {...colSpan}>
-            <NumberCard
-              icon="calculator"
-              title="New"
-              color={colors[6]}
-              number={counts.notNotified || 0}
-              onClick={() => this.setFilter('isNew')}
-            />
-          </Col>
-          <Col key={4} {...colSpan}>
-            <NumberCard
-              icon="mail"
-              title="Sent improvement plan"
-              color={colors[8]}
-              number={counts.sentImprovementPlan || 0}
-              onClick={() => this.setFilter('isSentImprovementPlan')}
-            />
-          </Col>
-        </Row>
-
         <Card title="Desktop audit responses">
-          <div className="table-operations">
-            <Search />
-
-            <MassEmail suppliers={selectedSuppliers} />
-
-            <DatePicker.RangePicker
-              onChange={this.handleDateRangeChange}
+          <Row>
+            <Select
+              style={style}
+              placeholder="Qualification status"
               allowClear
-            />
-          </div>
+              onSelect={this.onSelectChange.bind(this, 'qualStatus')}
+            >
+              <Select.Option value="">all</Select.Option>
+              <Select.Option value="draft">draft</Select.Option>
+              <Select.Option value="open">open</Select.Option>
+              <Select.Option value="closed">closed</Select.Option>
+            </Select>
+
+            <Select
+              style={style}
+              placeholder="Supplier status"
+              allowClear
+              onSelect={this.onSelectChange.bind(this, 'supplierStatus')}
+            >
+              <Select.Option value="">all</Select.Option>
+              <Select.Option value="invited">invited</Select.Option>
+              <Select.Option value="onTime">onTime</Select.Option>
+              <Select.Option value="late">late</Select.Option>
+            </Select>
+
+            <div style={{ float: 'right' }}>
+              <Search />
+            </div>
+          </Row>
+
           <Table
             columns={this.columns()}
             rowKey={record => record._id}
             dataSource={data}
             loading={loading}
             scroll={{ x: 1400 }}
-            rowSelection={{
-              selectedRowKeys,
-              onChange: this.onSelectChange
-            }}
             rowClassName={record => {
               if (record.isQualified) return 'highlight';
             }}
@@ -341,8 +155,7 @@ AuditResponses.propTypes = {
   onChange: PropTypes.func,
   match: PropTypes.object,
   history: PropTypes.object,
-  counts: PropTypes.object,
-  responsesQualifiedStatusQuery: PropTypes.object
+  responsesQualifiedStatusQuery: PropTypes.object,
 };
 
 export default withRouter(withApollo(AuditResponses));
