@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Search } from 'modules/common/components';
 import { dateFormat } from 'modules/common/constants';
+import { readFileUrl } from 'modules/common/utils';
 import router from 'modules/common/router';
 
 class AuditResponses extends React.Component {
@@ -50,14 +51,26 @@ class AuditResponses extends React.Component {
   }
 
   renderReportButton(record) {
-    if (!record.isQualified) {
+    if (!record.reportFile) {
       return null;
     }
 
     return (
-      <Button type="primary" size="small" style={{ marginRight: '10px' }}>
-        Report
-      </Button>
+      <a href={readFileUrl(record.reportFile)} style={{ marginRight: '10px' }} target="__blank">
+        Download report
+      </a>
+    );
+  }
+
+  renderImprovementPlanButton(record) {
+    if (!record.improvementPlanFile) {
+      return null;
+    }
+
+    return (
+      <a href={readFileUrl(record.improvementPlanFile)} target="__blank">
+        Download improvement plan
+      </a>
     );
   }
 
@@ -117,6 +130,7 @@ class AuditResponses extends React.Component {
             <>
               {this.renderQualifyButton(record)}
               {this.renderReportButton(record)}
+              {this.renderImprovementPlanButton(record)}
             </>
           );
         },
