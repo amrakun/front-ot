@@ -4,56 +4,98 @@ import { gql, compose, graphql } from 'react-apollo';
 import { queries, mutations } from '../../graphql';
 import { QualifyAudit } from '../../components';
 import { message } from 'antd';
+import SendResult from './SendResult';
 
-const QualifyAuditContainer = props => {
-  const { auditResponseDetailQuery, supplierBasicInfoQuery, location, history } = props;
+class QualifyAuditContainer extends React.Component {
+  constructor(props) {
+    super(props);
 
-  if (auditResponseDetailQuery.error || supplierBasicInfoQuery.error) {
-    return null;
+    this.state = {
+      showResult: false,
+      isQualifiedAfterLastTab: false,
+    };
   }
 
-  if (supplierBasicInfoQuery.loading || auditResponseDetailQuery.loading) {
-    return null;
+  renderResult() {
+    const { supplierInfoQuery, location, history, auditResponseDetailQuery } = this.props;
+    const { showResult, isQualifiedAfterLastTab } = this.state;
+
+    if (!showResult) {
+      return null;
+    }
+
+    const { companyDetail } = supplierInfoQuery;
+    const { auditResponseDetail } = auditResponseDetailQuery;
+
+    return (
+      <SendResult
+        location={location}
+        history={history}
+        isQualified={isQualifiedAfterLastTab}
+        supplierInfo={companyDetail}
+        responseId={auditResponseDetail._id}
+      />
+    );
   }
 
-  const save = (name, doc) => {
-    const mutation = props[`${name}Edit`];
+  render() {
+    const { auditResponseDetailQuery, supplierInfoQuery, location } = this.props;
 
-    mutation({
-      variables: {
-        auditId: location.state.auditId,
-        supplierId: location.state.supplierId,
-        [name]: doc,
-      },
-    })
-      .then(() => {
-        message.success('Saved');
+    if (auditResponseDetailQuery.error || supplierInfoQuery.error) {
+      return null;
+    }
 
-        auditResponseDetailQuery.refetch();
+    if (supplierInfoQuery.loading || auditResponseDetailQuery.loading) {
+      return null;
+    }
 
-        if (name === 'businessInfo') {
-          history.push('/audit/responses?refetch');
-        }
+    const save = (name, doc) => {
+      const mutation = this.props[`${name}Edit`];
+
+      mutation({
+        variables: {
+          auditId: location.state.auditId,
+          supplierId: location.state.supplierId,
+          [name]: doc,
+        },
       })
-      .catch(error => {
-        message.error(error.message);
-      });
-  };
+        .then(({ data }) => {
+          message.success('Saved');
 
-  const updatedProps = {
-    ...props,
-    save,
-    response: auditResponseDetailQuery.auditResponseDetail,
-    supplierInfo: supplierBasicInfoQuery.companyDetail,
-  };
+          auditResponseDetailQuery.refetch();
 
-  return <QualifyAudit {...updatedProps} />;
-};
+          if (name === 'businessInfo') {
+            this.setState({
+              showResult: true,
+              isQualifiedAfterLastTab: data.auditsBuyerSaveBusinessInfo.isQualified,
+            });
+          }
+        })
+        .catch(error => {
+          message.error(error.message);
+        });
+    };
+
+    const updatedProps = {
+      ...this.props,
+      save,
+      response: auditResponseDetailQuery.auditResponseDetail,
+      supplierInfo: supplierInfoQuery.companyDetail,
+    };
+
+    return (
+      <>
+        {this.renderResult()}
+        <QualifyAudit {...updatedProps} />
+      </>
+    );
+  }
+}
 
 QualifyAuditContainer.propTypes = {
   auditResponseDetailQuery: PropTypes.object,
   evidenceInfoEdit: PropTypes.func,
-  supplierBasicInfoQuery: PropTypes.object,
+  supplierInfoQuery: PropTypes.object,
   location: PropTypes.object,
 };
 
@@ -70,8 +112,8 @@ export default compose(
     },
   }),
 
-  graphql(gql(queries.supplierBasicInfo), {
-    name: 'supplierBasicInfoQuery',
+  graphql(gql(queries.supplierInfo), {
+    name: 'supplierInfoQuery',
     options: ({ location }) => {
       return {
         variables: {

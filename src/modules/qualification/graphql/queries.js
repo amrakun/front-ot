@@ -442,7 +442,7 @@ const auditResponseDetail = `
   }
 `;
 
-const supplierBasicInfo = `
+const supplierInfo = `
   query companyDetail($_id: String!) {
     companyDetail(_id: $_id) {
       ${basicInfoCompanyFields}
@@ -457,7 +457,7 @@ const auditImprovementPlan = `
     $auditDate: Date!
     $auditResult: Boolean!
     $reassessmentDate: Date!
-    $auditorName: String!
+    $auditor: String!
   ) {
     auditImprovementPlan(
       auditId: $auditId
@@ -465,7 +465,7 @@ const auditImprovementPlan = `
       auditDate: $auditDate
       auditResult: $auditResult
       reassessmentDate: $reassessmentDate
-      auditorName: $auditorName
+      auditor: $auditor
     )
   }
 `;
@@ -624,7 +624,7 @@ export default {
   auditResponseTotalCounts,
   auditResponseByUser,
   auditResponseDetail,
-  supplierBasicInfo,
+  supplierInfo,
   auditImprovementPlan,
   auditReport,
   feedbackResponses,

@@ -31,7 +31,7 @@ class BusinessIntegriy extends AuditFormsBase {
   renderBuyerAction() {
     return (
       <div style={{ float: 'right' }}>
-        {this.renderSubmit('Save', () => this.collectAndSave(true))}
+        {this.renderSubmit('Send result', () => this.collectAndSave(true))}
       </div>
     );
   }

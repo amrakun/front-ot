@@ -20,9 +20,10 @@ class ModalWrapper extends React.Component {
           <Button key="back" onClick={hideModal}>
             {__('Return')}
           </Button>,
+
           <Button key="submit" type="primary" onClick={handleOk}>
             {__('Submit')}
-          </Button>
+          </Button>,
         ]}
       >
         {children}
@@ -37,11 +38,11 @@ ModalWrapper.propTypes = {
   submitLoading: PropTypes.bool,
   handleOk: PropTypes.func,
   hideModal: PropTypes.func,
-  title: PropTypes.string
+  title: PropTypes.string,
 };
 
 ModalWrapper.contextTypes = {
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 const ModalWrapperForm = Form.create()(ModalWrapper);

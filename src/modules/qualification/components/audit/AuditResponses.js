@@ -4,7 +4,7 @@ import { withApollo } from 'react-apollo';
 import moment from 'moment';
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Select, Table, Card, Row } from 'antd';
+import { Button, Select, Table, Card, Row } from 'antd';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Search } from 'modules/common/components';
@@ -21,6 +21,44 @@ class AuditResponses extends React.Component {
 
   onSelectChange(name, value) {
     router.setParams(this.props.history, { [name]: value });
+  }
+
+  renderQualifyButton(record) {
+    if (record.audit.status !== 'open') {
+      return null;
+    }
+
+    if (record.status === 'invited') {
+      return null;
+    }
+
+    return (
+      <Button type="link" size="small" style={{ marginRight: '10px' }}>
+        <Link
+          to={{
+            pathname: '/audit/qualify',
+            state: {
+              supplierId: record.supplier._id,
+              auditId: record.audit._id,
+            },
+          }}
+        >
+          Qualify
+        </Link>
+      </Button>
+    );
+  }
+
+  renderReportButton(record) {
+    if (!record.isQualified) {
+      return null;
+    }
+
+    return (
+      <Button type="primary" size="small" style={{ marginRight: '10px' }}>
+        Report
+      </Button>
+    );
   }
 
   columns() {
@@ -75,26 +113,11 @@ class AuditResponses extends React.Component {
         key: 8,
         title: 'Action',
         render: record => {
-          if (record.audit.status !== 'open') {
-            return null;
-          }
-
-          if (record.status === 'invited') {
-            return null;
-          }
-
           return (
-            <Link
-              to={{
-                pathname: '/audit/qualify',
-                state: {
-                  supplierId: record.supplier._id,
-                  auditId: record.audit._id,
-                },
-              }}
-            >
-              Qualify
-            </Link>
+            <>
+              {this.renderQualifyButton(record)}
+              {this.renderReportButton(record)}
+            </>
           );
         },
       },

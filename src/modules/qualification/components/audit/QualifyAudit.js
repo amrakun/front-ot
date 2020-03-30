@@ -9,11 +9,13 @@ import { Panes } from 'modules/common/components';
 class AuditForms extends Panes {
   render() {
     const { currentTabKey } = this.state;
-    const { supplierInfo, exportFiles } = this.props;
+    const { supplierInfo } = this.props;
+
     const response = this.props.response || {};
+
     const common = {
       supplierInfo: supplierInfo,
-      isQualified: response.isQualified
+      isQualified: response.isQualified,
     };
 
     return (
@@ -28,7 +30,7 @@ class AuditForms extends Panes {
           title: 'Supplier profile',
           name: 'basicInfo',
           Component: SupplierProfile,
-          data: { response: response.basicInfo, ...common }
+          data: { response: response.basicInfo, ...common },
         })}
 
         {this.renderPane({
@@ -38,8 +40,8 @@ class AuditForms extends Panes {
           Component: CoreHSEQ,
           data: {
             response: response.coreHseqInfo,
-            ...common
-          }
+            ...common,
+          },
         })}
 
         {this.renderPane({
@@ -47,7 +49,7 @@ class AuditForms extends Panes {
           title: 'Human resource management',
           name: 'hrInfo',
           Component: HumanResourceManagement,
-          data: { response: response.hrInfo, ...common }
+          data: { response: response.hrInfo, ...common },
         })}
 
         {this.renderPane({
@@ -57,9 +59,8 @@ class AuditForms extends Panes {
           Component: BusinessIntegriy,
           data: {
             response: response.businessInfo,
-            exportFiles: exportFiles,
-            ...common
-          }
+            ...common,
+          },
         })}
       </Tabs>
     );

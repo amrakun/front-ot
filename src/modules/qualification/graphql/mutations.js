@@ -281,7 +281,10 @@ const auditsBuyerSaveBusinessInfo = `
       ${commonFields}
       supplierId: $supplierId
       businessInfo: $businessInfo
-    ) { _id }
+    ) {
+      _id
+      isQualified
+    }
   }
 `;
 
@@ -311,24 +314,6 @@ const qualificationsPrequalify = `
     templateObject: $templateObject,
     ) {
 
-      _id
-    }
-  }
-`;
-
-const auditsBuyerSaveFiles = `
-  mutation auditsBuyerSaveFiles(
-    $auditId: String!
-    $supplierId: String!
-    $improvementPlan: String
-    $report: String
-  ) {
-    auditsBuyerSaveFiles(
-      auditId: $auditId
-      supplierId: $supplierId
-      improvementPlan: $improvementPlan
-      report: $report
-    ) {
       _id
     }
   }
@@ -428,7 +413,6 @@ export default {
   auditsBuyerSaveBusinessInfo,
   auditsSupplierSendResponse,
   auditsSupplierSendResubmitRequest,
-  auditsBuyerSaveFiles,
   qualificationsPrequalify,
   auditsBuyerSendFiles,
   physicalAuditsAdd,

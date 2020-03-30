@@ -20,7 +20,6 @@ import {
   AuditSendResubmitRequest,
   AuditResubmissionRequests,
   QualifyAudit,
-  ReportsAndPlans,
   PhysicalAudits,
 } from './containers';
 import { SubmitAudit as SupplierAuditForm } from './components';
@@ -136,14 +135,6 @@ export default [
     path={'/audit/responses-physical'}
     component={props => {
       return <PhysicalAudits {...props} queryParams={generateQueryParams(props)} />;
-    }}
-  />,
-  <Route
-    key={'/audit/reports'}
-    exact
-    path={'/audit/reports'}
-    component={props => {
-      return <ReportsAndPlans {...props} queryParams={generateQueryParams(props)} />;
     }}
   />,
   <Route
