@@ -18,7 +18,7 @@ class AuditContainer extends React.Component {
   }
 
   render() {
-    const { selectedCompaniesQuery, buyersQuery, addAuditMutation } = this.props;
+    const { selectedCompaniesQuery, buyersQuery, addAuditMutation, history } = this.props;
     const { isSubmitted } = this.state;
 
     const save = doc => {
@@ -29,7 +29,10 @@ class AuditContainer extends React.Component {
       addAuditMutation({ variables: { ...doc, publishDate, closeDate } })
         .then(() => {
           this.setState({ isSubmitted: false });
+
           message.success('Successfully sent audit');
+
+          history.push('/audit/responses?refetch');
         })
         .catch(error => {
           this.setState({ isSubmitted: false });
@@ -61,6 +64,9 @@ AuditContainer.propTypes = {
 const WithData = compose(
   graphql(gql(mutations.addAudit), {
     name: 'addAuditMutation',
+    options: () => ({
+      refetchQueries: ['auditResponses'],
+    }),
   }),
   graphql(gql(companyQueries.simpleCompanies), {
     name: 'selectedCompaniesQuery',
