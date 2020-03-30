@@ -137,7 +137,7 @@ class Qualified extends React.Component {
           <Divider />
 
           <FormItem label="Report language">
-            {getFieldDecorator('reportLanguage', { rules })(
+            {getFieldDecorator('reportLanguage', { rules, initialValue: 'mn' })(
               <Select>
                 <Select.Option value="mn">Mongolia</Select.Option>
                 <Select.Option value="en">English</Select.Option>
