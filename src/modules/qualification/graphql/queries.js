@@ -268,6 +268,7 @@ const auditRequests = `
         ${auditFields}
         supplierResponse {
           isSent
+          status
           isQualified
           isEditable
         }
