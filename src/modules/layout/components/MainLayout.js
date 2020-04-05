@@ -20,7 +20,7 @@ const visitorPaths = [
   '/confirm-registration',
   '/forgot-password',
   '/reset-password',
-  '/'
+  '/',
 ];
 
 const mergedMessages = {
@@ -43,7 +43,7 @@ const mergedMessages = {
   ...messages.RfqAndEoi.Tenders,
   ...messages.Auth.Profile,
   ...messages.Auth.Common,
-  ...messages.Auth.SignIn
+  ...messages.Auth.SignIn,
 };
 
 // antd custom component text
@@ -51,13 +51,13 @@ const mn_Mn = {
   locale: 'mn-MN',
   Pagination: {
     jump_to: 'Үсрэх',
-    items_per_page: '/ хуудас'
+    items_per_page: '/ хуудас',
   },
   Table: {
     filterConfirm: 'Тийм',
     filterReset: 'Цуцлах',
-    emptyText: 'Мэдээлэл алга'
-  }
+    emptyText: 'Мэдээлэл алга',
+  },
 };
 
 const withSidebar = { marginLeft: 230 };
@@ -71,9 +71,7 @@ class InjectInstance extends React.Component {
 
     return {
       __: msg =>
-        !currentUser || isSupplier
-          ? formatMessage({ id: msg, defaultMessage: msg })
-          : msg
+        !currentUser || isSupplier ? formatMessage({ id: msg, defaultMessage: msg }) : msg,
     };
   }
 
@@ -85,11 +83,11 @@ class InjectInstance extends React.Component {
 InjectInstance.propTypes = {
   intl: PropTypes.object,
   children: PropTypes.object,
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
 };
 
 InjectInstance.childContextTypes = {
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 const InjectedComponent = injectIntl(InjectInstance);
@@ -98,11 +96,13 @@ class MainLayout extends React.Component {
   constructor(props) {
     super(props);
 
+    const locale = localStorage.getItem('locale');
+    const messages = locale === 'mn' ? mergedMessages : {};
+
     this.state = {
       collapsed: localStorage.getItem('collapsed') === 'true' ? true : false,
-      toggleLang: false,
-      locale: '',
-      messages: mergedMessages
+      locale,
+      messages,
     };
 
     this.onCollapse = this.onCollapse.bind(this);
@@ -116,8 +116,6 @@ class MainLayout extends React.Component {
     if (!currentUser && !visitorPaths.includes(path)) {
       history.push('/sign-in?required');
     }
-
-    this.getLang();
   }
 
   componentDidUpdate() {
@@ -128,27 +126,19 @@ class MainLayout extends React.Component {
     if (path !== '/' && path !== '/sign-in') {
       logsWriteMutation &&
         logsWriteMutation({
-          variables: { apiCall: path }
+          variables: { apiCall: path },
         });
     }
   }
 
   toggleLang() {
-    this.setState({ toggleLang: !this.state.toggleLang });
-    const { toggleLang } = this.state;
-    toggleLang ? this.setLang('mn', mergedMessages) : this.setLang('en', {});
-  }
+    const currentLocale = this.state.locale;
 
-  getLang() {
-    const lang = localStorage.getItem('locale');
-    const messages = lang === 'mn' ? mergedMessages : {};
+    const updatedLocale = currentLocale === 'en' ? 'mn' : 'en';
 
-    this.setLang(lang || 'en', messages);
-  }
+    localStorage.setItem('locale', updatedLocale);
 
-  setLang(locale, messages) {
-    localStorage.setItem('locale', locale);
-    this.setState({ locale, messages });
+    window.location.reload();
   }
 
   onCollapse(collapsed) {
@@ -161,7 +151,7 @@ class MainLayout extends React.Component {
       toggleLang: this.toggleLang,
       currentUser: this.props.currentUser,
       systemConfig: this.props.systemConfig || {},
-      locale: this.state.locale
+      locale: this.state.locale,
     };
   }
 
@@ -173,14 +163,12 @@ class MainLayout extends React.Component {
     const navProps = {
       collapsed: collapsed ? true : false,
       onCollapse: this.onCollapse,
-      pathname: location.pathname
+      pathname: location.pathname,
     };
 
     let layoutStyle = {};
     if (currentUser) {
-      collapsed
-        ? (layoutStyle = withSidebarCollapsed)
-        : (layoutStyle = withSidebar);
+      collapsed ? (layoutStyle = withSidebarCollapsed) : (layoutStyle = withSidebar);
     }
 
     return (
@@ -215,14 +203,14 @@ MainLayout.propTypes = {
   children: PropTypes.object,
   history: PropTypes.object,
   location: PropTypes.object,
-  logsWriteMutation: PropTypes.func
+  logsWriteMutation: PropTypes.func,
 };
 
 MainLayout.childContextTypes = {
   toggleLang: PropTypes.func,
   currentUser: PropTypes.object,
   systemConfig: PropTypes.object,
-  locale: PropTypes.string
+  locale: PropTypes.string,
 };
 
 export default MainLayout;
