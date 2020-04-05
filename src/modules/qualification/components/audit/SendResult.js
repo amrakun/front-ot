@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import { Form, Input, DatePicker, Divider, Modal, Button, Select } from 'antd';
 import PropTypes from 'prop-types';
 import { EditorCK } from 'modules/common/components';
-import { dateFormat } from 'modules/common/constants';
+import { dateTimeFormat } from 'modules/common/constants';
 
 const TextArea = Input.TextArea;
 const FormItem = Form.Item;
@@ -74,7 +74,7 @@ class Qualified extends React.Component {
 
     return (
       <FormItem label="Re-Assesment date">
-        {getFieldDecorator('reassessmentDate', { rules })(<DatePicker format={dateFormat} />)}
+        {getFieldDecorator('reassessmentDate', { rules })(<DatePicker format={dateTimeFormat} />)}
       </FormItem>
     );
   }
@@ -146,7 +146,7 @@ class Qualified extends React.Component {
           </FormItem>
 
           <FormItem label="Qualification/audit date">
-            {getFieldDecorator('auditDate', { rules })(<DatePicker format={dateFormat} />)}
+            {getFieldDecorator('auditDate', { rules })(<DatePicker format={dateTimeFormat} />)}
           </FormItem>
 
           {this.renderReassesmentDate()}
