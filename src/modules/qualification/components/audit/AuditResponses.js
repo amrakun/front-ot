@@ -95,11 +95,22 @@ class AuditResponses extends React.Component {
         key: 3,
         title: 'Supplier status',
         render: record => {
-          if (!record.status) {
+          if (record.status === 'invited') {
             return 'invited';
           }
 
-          return record.status;
+          return 'submitted';
+        },
+      },
+      {
+        key: 10,
+        title: 'Response status',
+        render: record => {
+          if (['onTime', 'late'].includes(record.status)) {
+            return record.status;
+          }
+
+          return null;
         },
       },
       {
