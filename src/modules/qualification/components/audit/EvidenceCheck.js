@@ -31,7 +31,23 @@ const EvidenceCheck = (props, { __ }) => {
         </tr>
 
         {keys.map((key, index) => {
-          const dbValues = sectionValues[key] || {};
+          if (key === '__typename') {
+            return (
+              <tr key={index}>
+                <td>
+                  <br />
+                </td>
+                <td />
+                <td />
+              </tr>
+            );
+          }
+
+          const dbValues = sectionValues[key];
+
+          if (!dbValues) {
+            return null;
+          }
 
           return (
             <tr key={index}>
