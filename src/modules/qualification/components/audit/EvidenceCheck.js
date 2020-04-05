@@ -37,7 +37,7 @@ const EvidenceCheck = (props, { __ }) => {
             <tr key={index}>
               <td>{(labels[key] || {}).title}</td>
               <td>{renderAnswer(dbValues.supplierAnswer)}</td>
-              <td>Yes</td>
+              <td>{dbValues.supplierFile ? 'Yes' : 'No'}</td>
             </tr>
           );
         })}
