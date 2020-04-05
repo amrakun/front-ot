@@ -25,9 +25,9 @@ const EvidenceCheck = (props, { __ }) => {
     return (
       <>
         <tr>
-          <th>{name === 'coreHseqInfo' ? null : label}</th>
-          <th />
-          <th />
+          <th width="80%">{name === 'coreHseqInfo' ? null : label}</th>
+          <th width="10%" />
+          <th width="10%" />
         </tr>
 
         {keys.map((key, index) => {
