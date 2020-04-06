@@ -68,7 +68,7 @@ export const buyerSideMenu = [
         title: 'Qualification',
         subMenu: [
           {
-            url: '/audit',
+            url: '/audit?prequalifiedStatus=yes',
             title: 'Send',
           },
           {

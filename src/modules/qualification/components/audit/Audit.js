@@ -55,11 +55,11 @@ class Audit extends Common {
         render: report => report.qualificationStatusDisplay,
       },
       {
-        title: 'Auditor report',
+        title: 'Report',
         render: () => <a href="#view">View</a>,
       },
       {
-        title: 'Auditor improvement plan',
+        title: 'Improvement plan',
         render: () => <a href="#view">View</a>,
       },
       {
