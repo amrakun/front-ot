@@ -185,13 +185,13 @@ const labels = {
   },
 
   specialLicenseOfImporting: {
-    title: `11. Special license of importing chemicals and dangerous goods* (subject to scope of work)`,
-    desc: `11. Special license of importing chemicals and dangerous goods* (subject to scope of work)`,
+    title: `11. Is there a special license of importing chemicals and dangerous goods* (subject to scope of work) ?`,
+    desc: `11. Is there a special license of importing chemicals and dangerous goods* (subject to scope of work) ?`,
   },
 
   wasteManagementPlan: {
-    title: `12. Waste management plan on General and Dangerous waste (Policy and principles on segregating, recycling, re-using and disposing of wastes, relevant permits and operational management plans including transporting wastes)`,
-    desc: `12. Waste management plan on General and Dangerous waste (Policy and principles on segregating, recycling, re-using and disposing of wastes, relevant permits and operational management plans including transporting wastes)`,
+    title: `12. Is there a waste management plan on General and Dangerous waste (Policy and principles on segregating, recycling, re-using and disposing of wastes, relevant permits and operational management plans including transporting wastes) ?`,
+    desc: `12. Is there a waste management plan on General and Dangerous waste (Policy and principles on segregating, recycling, re-using and disposing of wastes, relevant permits and operational management plans including transporting wastes) ?`,
   },
 
   //Human resource management
