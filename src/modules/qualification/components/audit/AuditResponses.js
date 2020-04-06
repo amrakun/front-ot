@@ -4,11 +4,11 @@ import { withApollo } from 'react-apollo';
 import moment from 'moment';
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Button, Select, Table, Card, Row, Modal } from 'antd';
+import { Button, Select, Table, Card, Row, Modal, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Search } from 'modules/common/components';
-import { dateTimeFormat } from 'modules/common/constants';
+import { dateTimeFormat, statusIcons } from 'modules/common/constants';
 import { readFileUrl } from 'modules/common/utils';
 import router from 'modules/common/router';
 
@@ -120,7 +120,12 @@ class AuditResponses extends React.Component {
       {
         key: 9,
         title: 'Audit status',
-        render: record => record.audit.status,
+        render: record => {
+          const s = statusIcons[record.audit.status];
+          return (
+            <Icon type={s.type} style={{ color: s.color, fontSize: '20px', lineHeight: '12px' }} />
+          );
+        },
       },
       {
         key: 3,

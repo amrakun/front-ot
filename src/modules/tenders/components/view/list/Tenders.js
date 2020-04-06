@@ -4,9 +4,9 @@ import queryString from 'query-string';
 import moment from 'moment';
 import { Table, Card, Icon, DatePicker } from 'antd';
 import { Paginator, Search, HelpModal } from 'modules/common/components';
-import { dateTimeFormat } from 'modules/common/constants';
+import { dateTimeFormat, statusIcons } from 'modules/common/constants';
 import router from 'modules/common/router';
-import { labels, statusIcons } from '../../../constants';
+import { labels } from '../../../constants';
 
 const MonthPicker = DatePicker.MonthPicker;
 

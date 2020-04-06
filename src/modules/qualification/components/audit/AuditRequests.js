@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Table, Card } from 'antd';
-import { dateTimeFormat } from 'modules/common/constants';
+import { Table, Card, Icon } from 'antd';
+import { dateTimeFormat, statusIcons } from 'modules/common/constants';
 import moment from 'moment';
 import { HelpModal } from 'modules/common/components';
 
@@ -16,7 +16,10 @@ class AuditRequests extends React.Component {
         title: __('Audit status'),
         key: 1,
         render: record => {
-          return record.status === 'open' ? __('open') : __('closed');
+          const s = statusIcons[record.status];
+          return (
+            <Icon type={s.type} style={{ color: s.color, fontSize: '20px', lineHeight: '12px' }} />
+          );
         },
       },
       {
