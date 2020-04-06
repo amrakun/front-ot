@@ -4,7 +4,7 @@ import { withApollo } from 'react-apollo';
 import moment from 'moment';
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Button, Select, Table, Card, Row } from 'antd';
+import { Button, Select, Table, Card, Row, Modal } from 'antd';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Search } from 'modules/common/components';
@@ -18,15 +18,46 @@ class AuditResponses extends React.Component {
 
     this.columns = this.columns.bind(this);
     this.onSelectChange = this.onSelectChange.bind(this);
+    this.hideModal = this.hideModal.bind(this);
+
+    this.state = { modal: { visible: false } };
   }
 
   onSelectChange(name, value) {
     router.setParams(this.props.history, { [name]: value });
   }
 
-  renderQualifyButton(record) {
-    if (record.audit.status !== 'open') {
+  hideModal() {
+    this.setState({ modal: { visible: false } });
+  }
+
+  renderModal() {
+    const { modal } = this.state;
+
+    if (!modal.visible) {
       return null;
+    }
+
+    return (
+      <Modal title={modal.title} onOk={this.hideModal} onCancel={this.hideModal} visible={true}>
+        <div dangerouslySetInnerHTML={{ __html: modal.content }} />
+      </Modal>
+    );
+  }
+
+  renderQualifyButton(record) {
+    const onView = () => {
+      this.setState({
+        modal: { visible: true, title: 'Email content', content: record.audit.content },
+      });
+    };
+
+    if (record.audit.status !== 'closed') {
+      return (
+        <Button size="small" style={{ marginRight: '10px' }} onClick={onView}>
+          View
+        </Button>
+      );
     }
 
     if (record.status === 'invited') {
@@ -199,6 +230,8 @@ class AuditResponses extends React.Component {
             }}
           />
         </Card>
+
+        {this.renderModal()}
       </div>
     );
   }
