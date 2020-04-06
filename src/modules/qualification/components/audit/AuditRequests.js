@@ -53,7 +53,7 @@ class AuditRequests extends React.Component {
         render: record => (record.status === 'open' ? '-' : <a href="#view">{__('View')}</a>),
       },
       {
-        title: __('More'),
+        title: __('Action'),
         key: 6,
         render: record => {
           const response = record.supplierResponse;
