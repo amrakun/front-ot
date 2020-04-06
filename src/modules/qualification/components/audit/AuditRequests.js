@@ -43,12 +43,12 @@ class AuditRequests extends React.Component {
         render: record => moment(record.closeDate).format(dateTimeFormat),
       },
       {
-        title: __('Auditor report'),
+        title: __('Report'),
         key: 4,
         render: record => (record.status === 'open' ? '-' : <a href="#view">{__('View')}</a>),
       },
       {
-        title: __('Auditor improvement plan'),
+        title: __('Improvement plan'),
         key: 5,
         render: record => (record.status === 'open' ? '-' : <a href="#view">{__('View')}</a>),
       },
