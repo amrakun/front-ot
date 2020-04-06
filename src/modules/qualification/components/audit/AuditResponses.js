@@ -8,7 +8,7 @@ import { Button, Select, Table, Card, Row, Modal } from 'antd';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Search } from 'modules/common/components';
-import { dateFormat } from 'modules/common/constants';
+import { dateTimeFormat } from 'modules/common/constants';
 import { readFileUrl } from 'modules/common/utils';
 import router from 'modules/common/router';
 
@@ -157,12 +157,12 @@ class AuditResponses extends React.Component {
       {
         key: 6,
         title: 'Invited date',
-        render: record => moment(record.audit.publishDate).format(dateFormat),
+        render: record => moment(record.audit.publishDate).format(dateTimeFormat),
       },
       {
         key: 7,
         title: 'Submission date',
-        render: record => moment(record.createdDate).format(dateFormat),
+        render: record => moment(record.createdDate).format(dateTimeFormat),
       },
       {
         key: 8,
