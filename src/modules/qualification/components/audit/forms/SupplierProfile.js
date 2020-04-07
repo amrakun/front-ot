@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Form, Input, Card, List } from 'antd';
 import AuditFormsBase from './AuditFormsBase';
+import { Uploader } from 'modules/common/components';
 
 const TextArea = Input.TextArea;
 
@@ -27,18 +28,28 @@ class SupplierProfile extends AuditFormsBase {
     );
   }
 
-  renderSupplierField(name) {
+  getInitialValue(name) {
     const { response, data } = this.props;
 
     let initialValue = '';
 
-    if (data && data.length > 0) initialValue = data[name];
+    if (data && data.length > 0) {
+      initialValue = data[name];
+    }
 
-    if (response) initialValue = response[name];
+    if (response) {
+      initialValue = response[name];
+    }
+
+    return initialValue;
+  }
+
+  renderSupplierField(name) {
+    const { response } = this.props;
 
     return this.renderField({
       name,
-      initialValue,
+      initialValue: this.getInitialValue(name),
       label: this.renderTooltipLabel(name),
       control: <TextArea disabled={response !== undefined} />,
     });
@@ -85,9 +96,17 @@ class SupplierProfile extends AuditFormsBase {
           {this.renderSupplierField('otExperience')}
           {this.renderSupplierField('sotri')}
           {this.renderSupplierField('sotie')}
+
+          {this.renderField({
+            name: 'sotieFile',
+            hasFeedback: false,
+            dataType: 'file',
+            initialValue: this.getInitialValue('sotieFile'),
+            control: <Uploader />,
+          })}
         </Card>
 
-        {!response ? this.renderSubmit() : ''}
+        {this.renderSubmit()}
       </Form>
     );
   }

@@ -35,6 +35,10 @@ const labels = {
     title: 'Specify legal owner/owners of the business',
     desc: 'SOTIE= (OT induced employment/Total employment)*100',
   },
+  sotieFile: {
+    title: 'Specify legal owner/owners of the business (attachment)',
+    desc: 'SOTIE= (OT induced employment/Total employment)*100',
+  },
 
   //Core HSEQ
   doesHaveHealthSafety: {

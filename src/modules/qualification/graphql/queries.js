@@ -356,6 +356,7 @@ const auditResponses = `
 const AuditBasicInfo = `
   sotri
   sotie
+  sotieFile
   otExperience
 `;
 

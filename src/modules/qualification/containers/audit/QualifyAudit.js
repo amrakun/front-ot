@@ -52,6 +52,11 @@ class QualifyAuditContainer extends React.Component {
     const save = (name, doc) => {
       const mutation = this.props[`${name}Edit`];
 
+      // basicInfoEdit for buyer
+      if (!mutation) {
+        return;
+      }
+
       mutation({
         variables: {
           auditId: location.state.auditId,
