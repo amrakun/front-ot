@@ -272,16 +272,39 @@ class AuditFormsBase extends BaseForm {
     }
 
     if (qualifiedStatus) {
-      const qualified = qualifiedStatus[name];
-
       if (!name) {
         return null;
       }
 
+      const getStatus = () => {
+        const tabStatus = qualifiedStatus[name];
+
+        if (tabStatus === null) {
+          return {
+            text: 'in progress',
+            type: 'info',
+          };
+        }
+
+        if (tabStatus === true) {
+          return {
+            text: 'qualified',
+            type: 'success',
+          };
+        }
+
+        return {
+          text: 'not qualified',
+          type: 'error',
+        };
+      };
+
+      const { text, type } = getStatus();
+
       return (
         <Alert
-          message={`${auditTabs[name]} is ${qualified ? 'qualified' : 'not qualified'}`}
-          type={qualified ? 'success' : 'error'}
+          message={`${auditTabs[name]} is ${text}`}
+          type={type}
           style={{ marginBottom: '16px' }}
           showIcon
         />
