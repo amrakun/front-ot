@@ -56,7 +56,6 @@ class SupplierProfile extends AuditFormsBase {
   }
 
   render() {
-    const { response } = this.props;
     const supplierInfo = this.props.supplierInfo || {};
     const tierType = supplierInfo.tierType || '-';
     const isQualified = supplierInfo.isQualified || {};

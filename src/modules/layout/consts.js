@@ -80,7 +80,7 @@ export const buyerSideMenu = [
             title: 'Physical audit',
           },
           {
-            url: '/audit/resubmission-requests',
+            url: '/audit/resubmission-requests?prequalifiedStatus=yes',
             title: 'Resubmission requests',
           },
         ],
