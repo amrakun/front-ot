@@ -421,6 +421,7 @@ const auditResponseByUser = `
   query auditResponseByUser($auditId: String!) {
     auditResponseByUser(auditId: $auditId) {
       _id
+      isEditable
       qualifiedStatus
       basicInfo { ${AuditBasicInfo} }
       coreHseqInfo { ${AuditCoreHseqInfo} }

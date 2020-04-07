@@ -10,7 +10,12 @@ class AuditForms extends Panes {
   render() {
     const { currentTabKey } = this.state;
     const { supplierInfo, company } = this.props;
-    const { qualifiedStatus } = company;
+    const { qualifiedStatus, isEditable } = company;
+
+    const commonProps = {
+      qualifiedStatus,
+      isSubmitDisabled: !isEditable,
+    };
 
     return (
       <div>
@@ -27,7 +32,7 @@ class AuditForms extends Panes {
             title: 'Supplier profile',
             name: 'basicInfo',
             Component: SupplierProfile,
-            data: { supplierInfo, qualifiedStatus },
+            data: { supplierInfo, ...commonProps },
           })}
 
           {this.renderPane({
@@ -35,9 +40,7 @@ class AuditForms extends Panes {
             title: 'Core HSEQ',
             name: 'coreHseqInfo',
             Component: CoreHSEQ,
-            data: {
-              qualifiedStatus,
-            },
+            data: commonProps,
           })}
 
           {this.renderPane({
@@ -45,7 +48,7 @@ class AuditForms extends Panes {
             title: 'Human resource management',
             name: 'hrInfo',
             Component: HumanResourceManagement,
-            data: { qualifiedStatus },
+            data: commonProps,
           })}
 
           {this.renderPane({
@@ -53,7 +56,7 @@ class AuditForms extends Panes {
             title: 'Business integrity',
             name: 'businessInfo',
             Component: BusinessIntegriy,
-            data: { qualifiedStatus },
+            data: commonProps,
           })}
         </Tabs>
       </div>

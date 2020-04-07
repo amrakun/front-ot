@@ -109,12 +109,14 @@ export default class BaseForm extends React.Component {
 
   renderSubmit(text = 'Save & continue', onClick = this.handleSubmit) {
     const { __ } = this.context;
+    const { isSubmitDisabled } = this.props;
 
     return (
       <Button
         style={{ float: 'right', marginLeft: '8px' }}
         type="primary"
         htmlType="submit"
+        disabled={isSubmitDisabled}
         onClick={onClick}
       >
         {__(text)}
@@ -140,6 +142,7 @@ BaseForm.childContextTypes = {
 };
 
 BaseForm.propTypes = {
+  isSubmitDisabled: PropTypes.bool,
   form: PropTypes.object,
   data: PropTypes.any,
   save: PropTypes.func,
