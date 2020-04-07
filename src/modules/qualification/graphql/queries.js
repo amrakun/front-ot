@@ -481,6 +481,7 @@ const auditReport = `
     $auditResult: Boolean!
     $auditor: String!
     $reportNo: String!
+    $reportLanguage: String
   ) {
     auditReport(
       auditId: $auditId
@@ -489,6 +490,7 @@ const auditReport = `
       auditResult: $auditResult
       auditor: $auditor
       reportNo: $reportNo
+      reportLanguage: $reportLanguage
     )
   }
 `;
