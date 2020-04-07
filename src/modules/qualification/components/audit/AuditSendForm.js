@@ -6,6 +6,7 @@ import { clearContent } from 'modules/common/utils';
 import { dateTimeFormat } from 'modules/common/constants';
 import { AddCompany } from 'modules/companies/components';
 import SupplierSearcher from 'modules/companies/containers/Searcher';
+import PropTypes from 'prop-types';
 
 const { Option } = Select;
 
@@ -88,11 +89,29 @@ class SendForm extends BaseForm {
     );
   }
 
+  renderPreview() {
+    const { content } = this.state;
+
+    if (!content) {
+      return null;
+    }
+
+    const { systemConfig } = this.context;
+
+    const desktopAuditTemplates = systemConfig.desktopAuditTemplates || {};
+    const invitationTemplate = desktopAuditTemplates.supplier__invitation || {};
+    const contentMap = invitationTemplate.content || {};
+    const mnContent = contentMap.mn;
+
+    const html = mnContent.replace('{content}', content);
+
+    return <div dangerouslySetInnerHTML={{ __html: html }} />;
+  }
+
   render() {
     const { data, buyers, isSubmitted } = this.props;
     const { content } = this.state;
     const { startDate, endDate } = data;
-    const { __ } = this.context;
 
     const dateRange = startDate ? [moment(startDate), moment(endDate)] : null;
 
@@ -142,15 +161,25 @@ class SendForm extends BaseForm {
           <Col span={15}>
             <Card title="Email content">
               <EditorCK content={content || ''} onChange={this.onEmailContentChange} />
+              <p>
+                <label>
+                  <strong>Preview</strong>:{' '}
+                </label>
+                {this.renderPreview()}
+              </p>
             </Card>
 
-            <SubmitButton isSubmitted={isSubmitted} onConfirm={this.handleSubmit} __={__} />
+            <SubmitButton isSubmitted={isSubmitted} onConfirm={this.handleSubmit} __={v => v} />
           </Col>
         </Row>
       </Form>
     );
   }
 }
+
+SendForm.contextTypes = {
+  systemConfig: PropTypes.object,
+};
 
 const form = Form.create()(SendForm);
 
