@@ -12,9 +12,11 @@ class RegistrationForm extends BaseForm {
     const { __ } = this.context;
     const productCodes = this.getFieldValue('productsInfo');
 
-    if (productCodes.length < 21)
+    if (productCodes.length < 21) {
       this.saveDirect(this.getFieldValue('productsInfo'), true);
-    else message.error(__('You can not choose 20+ product and service codes'));
+    } else {
+      message.error(__('You can not choose 20+ product and service codes'));
+    }
   }
 
   render() {
@@ -27,9 +29,7 @@ class RegistrationForm extends BaseForm {
             label="Product codes"
             initialValue={this.props.data}
             name="productsInfo"
-            control={
-              <ProductsTree searchPlaceholder={__('Please select products')} />
-            }
+            control={<ProductsTree searchPlaceholder={__('Please select products')} />}
           />
           <Alert
             message={__('Help')}
@@ -48,7 +48,7 @@ class RegistrationForm extends BaseForm {
 
 RegistrationForm.contextTypes = {
   __: PropTypes.func,
-  locale: PropTypes.string
+  locale: PropTypes.string,
 };
 
 const ProductsForm = Form.create()(RegistrationForm);

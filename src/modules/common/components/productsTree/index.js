@@ -5,8 +5,7 @@ import productsTree from './constants';
 
 export default class ProductsTree extends React.Component {
   render() {
-    const { locale = 'en' } = this.context;
-
+    const locale = localStorage.getItem('locale') || 'en';
     const treeData = productsTree[locale];
 
     return (
@@ -17,9 +16,9 @@ export default class ProductsTree extends React.Component {
         searchPlaceholder="Please select"
         treeData={treeData}
         filterTreeNode={(search, { props }) => {
-          return (props.title.toLowerCase()).includes(search.toLowerCase());
+          return props.title.toLowerCase().includes(search.toLowerCase());
         }}
-        dropdownClassName='products-tree-select'
+        dropdownClassName="products-tree-select"
         {...this.props}
       />
     );
@@ -27,5 +26,5 @@ export default class ProductsTree extends React.Component {
 }
 
 ProductsTree.contextTypes = {
-  locale: PropTypes.string
+  locale: PropTypes.string,
 };
