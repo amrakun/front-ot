@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Search } from 'modules/common/components';
 import { dateTimeFormat, statusIcons } from 'modules/common/constants';
-import { readFileUrl } from 'modules/common/utils';
 import router from 'modules/common/router';
 
 class AuditResponses extends React.Component {
@@ -85,7 +84,7 @@ class AuditResponses extends React.Component {
     }
 
     return (
-      <a href={readFileUrl(record.reportFile)} style={{ marginRight: '10px' }} target="__blank">
+      <a href={record.reportFile} style={{ marginRight: '10px' }} target="__blank">
         Download
       </a>
     );
@@ -97,7 +96,7 @@ class AuditResponses extends React.Component {
     }
 
     return (
-      <a href={readFileUrl(record.improvementPlanFile)} target="__blank">
+      <a href={record.improvementPlanFile} target="__blank">
         Download
       </a>
     );
@@ -158,14 +157,25 @@ class AuditResponses extends React.Component {
         dataIndex: 'supplier.basicInfo.sapNumber',
       },
       {
+        key: 13,
+        title: 'Submission date',
+        render: record => {
+          if (!record.sentDate) {
+            return '-';
+          }
+
+          return moment(record.sentDate).format(dateTimeFormat);
+        },
+      },
+      {
         key: 6,
         title: 'Invited date',
         render: record => moment(record.audit.publishDate).format(dateTimeFormat),
       },
       {
         key: 7,
-        title: 'Submission date',
-        render: record => moment(record.createdDate).format(dateTimeFormat),
+        title: 'Close date',
+        render: record => moment(record.audit.closeDate).format(dateTimeFormat),
       },
       {
         key: 8,
@@ -182,7 +192,7 @@ class AuditResponses extends React.Component {
         },
       },
       {
-        key: 11,
+        key: 12,
         title: 'Improvement plan',
         render: record => {
           return this.renderImprovementPlanButton(record);
