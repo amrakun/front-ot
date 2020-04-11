@@ -27,7 +27,7 @@ export const supplierSideMenu = [
       },
       {
         url: '/qualification/send-resubmit-request',
-        title: 'Resubmit request',
+        title: 'Request',
       },
     ],
   },

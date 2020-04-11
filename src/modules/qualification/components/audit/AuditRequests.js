@@ -23,7 +23,15 @@ class AuditRequests extends React.Component {
         },
       },
       {
-        title: __('Status'),
+        key: 11,
+        title: 'Qualification status',
+        render: record => {
+          const response = record.supplierResponse;
+          return response.supplier.qualificationStatusDisplay;
+        },
+      },
+      {
+        title: __('Submission status'),
         key: 10,
         render: record => {
           const response = record.supplierResponse;
@@ -48,12 +56,34 @@ class AuditRequests extends React.Component {
       {
         title: __('Report'),
         key: 4,
-        render: record => (record.status === 'open' ? '-' : <a href="#view">{__('View')}</a>),
+        render: record => {
+          const supplierResponse = record.supplierResponse || {};
+          const { reportFile } = supplierResponse;
+
+          return reportFile ? (
+            <a target="__blank" href={reportFile}>
+              {__('Download')}
+            </a>
+          ) : (
+            '-'
+          );
+        },
       },
       {
         title: __('Improvement plan'),
         key: 5,
-        render: record => (record.status === 'open' ? '-' : <a href="#view">{__('View')}</a>),
+        render: record => {
+          const supplierResponse = record.supplierResponse || {};
+          const { improvementPlanFile } = supplierResponse;
+
+          return improvementPlanFile ? (
+            <a target="__blank" href={improvementPlanFile}>
+              {__('Download')}
+            </a>
+          ) : (
+            '-'
+          );
+        },
       },
       {
         title: __('Action'),

@@ -80,7 +80,7 @@ class AuditResponses extends React.Component {
 
   renderReportButton(record) {
     if (!record.reportFile) {
-      return null;
+      return '-';
     }
 
     return (
@@ -92,7 +92,7 @@ class AuditResponses extends React.Component {
 
   renderImprovementPlanButton(record) {
     if (!record.improvementPlanFile) {
-      return null;
+      return '-';
     }
 
     return (

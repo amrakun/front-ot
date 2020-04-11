@@ -267,10 +267,15 @@ const auditRequests = `
         _id
         ${auditFields}
         supplierResponse {
+          supplier {
+            qualificationStatusDisplay
+          }
           isSent
           status
           isQualified
           isEditable
+          reportFile
+          improvementPlanFile
         }
       }
     }
