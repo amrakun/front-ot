@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Table, Card, Icon } from 'antd';
 import { dateTimeFormat, statusIcons } from 'modules/common/constants';
+import { readFileUrl } from 'modules/common/utils';
 import moment from 'moment';
 import { HelpModal } from 'modules/common/components';
 
@@ -49,7 +50,7 @@ class AuditRequests extends React.Component {
         render: record => moment(record.publishDate).format(dateTimeFormat),
       },
       {
-        title: __('Expiration date'),
+        title: __('Close date'),
         key: 3,
         render: record => moment(record.closeDate).format(dateTimeFormat),
       },
@@ -61,7 +62,7 @@ class AuditRequests extends React.Component {
           const { reportFile } = supplierResponse;
 
           return reportFile ? (
-            <a target="__blank" href={reportFile}>
+            <a target="__blank" href={readFileUrl(reportFile)}>
               {__('Download')}
             </a>
           ) : (
@@ -77,7 +78,7 @@ class AuditRequests extends React.Component {
           const { improvementPlanFile } = supplierResponse;
 
           return improvementPlanFile ? (
-            <a target="__blank" href={improvementPlanFile}>
+            <a target="__blank" href={readFileUrl(improvementPlanFile)}>
               {__('Download')}
             </a>
           ) : (

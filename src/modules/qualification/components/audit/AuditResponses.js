@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Search } from 'modules/common/components';
 import { dateTimeFormat, statusIcons } from 'modules/common/constants';
+import { readFileUrl } from 'modules/common/utils';
 import router from 'modules/common/router';
 
 class AuditResponses extends React.Component {
@@ -84,7 +85,11 @@ class AuditResponses extends React.Component {
     }
 
     return (
-      <a href={record.reportFile} style={{ marginRight: '10px' }} target="__blank">
+      <a
+        href={readFileUrl(`${record.reportFile}`)}
+        style={{ marginRight: '10px' }}
+        target="__blank"
+      >
         Download
       </a>
     );
@@ -96,7 +101,7 @@ class AuditResponses extends React.Component {
     }
 
     return (
-      <a href={record.improvementPlanFile} target="__blank">
+      <a href={readFileUrl(record.improvementPlanFile)} target="__blank">
         Download
       </a>
     );

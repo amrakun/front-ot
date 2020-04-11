@@ -5,8 +5,6 @@ import { withRouter } from 'react-router';
 import { Card, Row, Col, Button, Icon, message } from 'antd';
 import { Common, Sidebar } from 'modules/companies/components';
 import { Search } from 'modules/common/components';
-import { dateFormat } from 'modules/common/constants';
-import moment from 'moment';
 import ModalForm from './physical/ModalForm';
 
 class Audit extends Common {
@@ -53,19 +51,6 @@ class Audit extends Common {
       {
         title: 'Qualification',
         render: report => report.qualificationStatusDisplay,
-      },
-      {
-        title: 'Report',
-        render: () => <a href="#view">View</a>,
-      },
-      {
-        title: 'Improvement plan',
-        render: () => <a href="#view">View</a>,
-      },
-      {
-        title: 'Last qualification date',
-        render: record =>
-          record.lastAudit ? moment(record.lastAudit.closeDate).format(dateFormat) : '-',
       },
     ]);
 
