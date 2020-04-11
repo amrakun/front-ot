@@ -101,7 +101,7 @@ class SendForm extends BaseForm {
     const desktopAuditTemplates = systemConfig.desktopAuditTemplates || {};
     const invitationTemplate = desktopAuditTemplates.supplier__invitation || {};
     const contentMap = invitationTemplate.content || {};
-    const mnContent = contentMap.mn;
+    const mnContent = contentMap.mn || contentMap.en;
 
     const html = mnContent.replace('{content}', content);
 
