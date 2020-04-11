@@ -11,7 +11,7 @@ const propTypes = {
   totalCount: PropTypes.number,
   pagination: PropTypes.object,
   loading: PropTypes.bool.isRequired,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
 export default class Common extends React.Component {
@@ -30,7 +30,7 @@ export default class Common extends React.Component {
     if (columnKey) {
       router.setParams(this.props.history, {
         sortField: columnKey,
-        sortDirection: sorter.order === 'descend' ? -1 : 1
+        sortDirection: sorter.order === 'descend' ? -1 : 1,
       });
     }
   }
@@ -48,50 +48,50 @@ export default class Common extends React.Component {
         fixed: 'left',
         render: record => {
           return ((record.basicInfo || {}).enName || '').toUpperCase();
-        }
+        },
       },
       {
         key: 'venderNumber',
         title: 'Vendor number',
         dataIndex: 'basicInfo.sapNumber',
-        width: 100
+        width: 100,
       },
       {
         key: 'tierType',
         title: 'Tier type',
         dataIndex: 'tierTypeDisplay',
-        width: 40
+        width: 40,
       },
       {
         key: 'prequalificationStatus',
-        title: 'Pre-qualification status',
+        title: 'Pre-qualification',
         width: 40,
         render: record => (
           <Link to={`/prequalification-status/${record._id}?view`}>
             {record.prequalificationStatusDisplay}
           </Link>
-        )
+        ),
       },
       ...middleColumns,
       {
         key: 'contactPerson',
         title: 'Contact person',
         dataIndex: 'contactInfo.name',
-        width: 60
+        width: 60,
       },
       {
         key: 'email',
         title: 'Email address',
         dataIndex: 'contactInfo.email',
-        width: 60
+        width: 60,
       },
       {
         key: 'phoneNumber',
         title: 'Phone number',
         dataIndex: 'contactInfo.phone',
-        width: 60
+        width: 60,
       },
-      ...backColumns
+      ...backColumns,
     ];
   }
 
@@ -105,7 +105,7 @@ export default class Common extends React.Component {
       pagination: false,
       loading,
       scroll: { x: 1224 },
-      onChange: this.handleTableChange
+      onChange: this.handleTableChange,
     };
 
     return (

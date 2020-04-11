@@ -52,32 +52,30 @@ class AuditResponses extends React.Component {
       });
     };
 
-    if (record.audit.status !== 'closed') {
-      return (
-        <Button size="small" style={{ marginRight: '10px' }} onClick={onView}>
-          View
-        </Button>
-      );
-    }
-
     if (record.status === 'invited') {
       return null;
     }
 
     return (
-      <Button type="link" size="small" style={{ marginRight: '10px' }}>
-        <Link
-          to={{
-            pathname: '/audit/qualify',
-            state: {
-              supplierId: record.supplier._id,
-              auditId: record.audit._id,
-            },
-          }}
-        >
-          Qualify
-        </Link>
-      </Button>
+      <>
+        <Button type="link" size="small" style={{ marginRight: '10px' }}>
+          <Link
+            to={{
+              pathname: '/audit/qualify',
+              state: {
+                supplierId: record.supplier._id,
+                auditId: record.audit._id,
+              },
+            }}
+          >
+            Edit
+          </Link>
+        </Button>
+
+        <Button size="small" style={{ marginRight: '10px' }} onClick={onView}>
+          View
+        </Button>
+      </>
     );
   }
 
@@ -88,7 +86,7 @@ class AuditResponses extends React.Component {
 
     return (
       <a href={readFileUrl(record.reportFile)} style={{ marginRight: '10px' }} target="__blank">
-        Download report
+        Download
       </a>
     );
   }
@@ -100,7 +98,7 @@ class AuditResponses extends React.Component {
 
     return (
       <a href={readFileUrl(record.improvementPlanFile)} target="__blank">
-        Download improvement plan
+        Download
       </a>
     );
   }
@@ -113,11 +111,6 @@ class AuditResponses extends React.Component {
         render: (_record, _j, i) => i + 1,
       },
       {
-        key: 2,
-        title: 'Qualification status',
-        render: record => record.supplier.qualificationStatusDisplay,
-      },
-      {
         key: 9,
         title: 'Audit status',
         render: record => {
@@ -126,6 +119,11 @@ class AuditResponses extends React.Component {
             <Icon type={s.type} style={{ color: s.color, fontSize: '20px', lineHeight: '12px' }} />
           );
         },
+      },
+      {
+        key: 2,
+        title: 'Qualification status',
+        render: record => record.supplier.qualificationStatusDisplay,
       },
       {
         key: 3,
@@ -173,13 +171,21 @@ class AuditResponses extends React.Component {
         key: 8,
         title: 'Action',
         render: record => {
-          return (
-            <>
-              {this.renderQualifyButton(record)}
-              {this.renderReportButton(record)}
-              {this.renderImprovementPlanButton(record)}
-            </>
-          );
+          return this.renderQualifyButton(record);
+        },
+      },
+      {
+        key: 11,
+        title: 'Report',
+        render: record => {
+          return this.renderReportButton(record);
+        },
+      },
+      {
+        key: 11,
+        title: 'Improvement plan',
+        render: record => {
+          return this.renderImprovementPlanButton(record);
         },
       },
     ];

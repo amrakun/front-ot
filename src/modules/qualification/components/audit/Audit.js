@@ -51,7 +51,7 @@ class Audit extends Common {
 
     const columns = this.getWrappedColumns([
       {
-        title: 'Qualified',
+        title: 'Qualification',
         render: report => report.qualificationStatusDisplay,
       },
       {

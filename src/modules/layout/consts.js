@@ -81,7 +81,7 @@ export const buyerSideMenu = [
           },
           {
             url: '/audit/resubmission-requests?prequalifiedStatus=yes',
-            title: 'Resubmission requests',
+            title: 'Supplier request',
           },
         ],
       },
