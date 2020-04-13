@@ -19,10 +19,17 @@ const EvidenceCheckContainer = (props, context) => {
   }
 
   const { match } = props;
+  const auditResponse = auditResponseByUserQuery.auditResponseByUser;
 
   const send = () => {
     const { history } = props;
     const { __ } = context;
+
+    const { basicInfo, coreHseqInfo, hrInfo, businessInfo } = auditResponse || {};
+
+    if (!basicInfo || !coreHseqInfo || !hrInfo || !businessInfo) {
+      return message.error(__('Please fill all tab information!'));
+    }
 
     sendResponse({
       variables: {
@@ -42,7 +49,7 @@ const EvidenceCheckContainer = (props, context) => {
   const updatedProps = {
     ...props,
     send,
-    auditResponse: auditResponseByUserQuery.auditResponseByUser,
+    auditResponse,
   };
 
   return <EvidenceCheck {...updatedProps} />;
