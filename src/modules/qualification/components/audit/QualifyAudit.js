@@ -9,7 +9,7 @@ import { Panes } from 'modules/common/components';
 class AuditForms extends Panes {
   render() {
     const { currentTabKey } = this.state;
-    const { supplierInfo } = this.props;
+    const { supplierInfo, auditId, supplierId } = this.props;
 
     const response = this.props.response || {};
 
@@ -41,6 +41,7 @@ class AuditForms extends Panes {
           data: {
             response: response.coreHseqInfo,
             ...common,
+            localStorageKey: `audit${auditId}_${supplierId}CoreHSEQ`,
           },
         })}
 
@@ -49,7 +50,11 @@ class AuditForms extends Panes {
           title: 'Human resource management',
           name: 'hrInfo',
           Component: HumanResourceManagement,
-          data: { response: response.hrInfo, ...common },
+          data: {
+            response: response.hrInfo,
+            ...common,
+            localStorageKey: `audit${auditId}_${supplierId}HR`,
+          },
         })}
 
         {this.renderPane({
@@ -60,6 +65,7 @@ class AuditForms extends Panes {
           data: {
             response: response.businessInfo,
             ...common,
+            localStorageKey: `audit${auditId}_${supplierId}Business`,
           },
         })}
       </Tabs>

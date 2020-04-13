@@ -49,6 +49,9 @@ class QualifyAuditContainer extends React.Component {
       return null;
     }
 
+    const auditId = location.state.auditId;
+    const supplierId = location.state.supplierId;
+
     const save = (name, doc) => {
       const mutation = this.props[`${name}Edit`];
 
@@ -59,8 +62,8 @@ class QualifyAuditContainer extends React.Component {
 
       mutation({
         variables: {
-          auditId: location.state.auditId,
-          supplierId: location.state.supplierId,
+          auditId,
+          supplierId,
           [name]: doc,
         },
       })
@@ -83,6 +86,8 @@ class QualifyAuditContainer extends React.Component {
 
     const updatedProps = {
       ...this.props,
+      auditId,
+      supplierId,
       save,
       response: auditResponseDetailQuery.auditResponseDetail,
       supplierInfo: supplierInfoQuery.companyDetail,
