@@ -9,7 +9,7 @@ import { HelpModal, Panes } from 'modules/common/components';
 class AuditForms extends Panes {
   render() {
     const { currentTabKey } = this.state;
-    const { supplierInfo, company } = this.props;
+    const { supplierInfo, company, auditId } = this.props;
     const { qualifiedStatus, isEditable } = company;
 
     const commonProps = {
@@ -32,7 +32,7 @@ class AuditForms extends Panes {
             title: 'Supplier profile',
             name: 'basicInfo',
             Component: SupplierProfile,
-            data: { supplierInfo, ...commonProps },
+            data: { supplierInfo, ...commonProps, localStorageKey: `audit${auditId}ProfileInfo` },
           })}
 
           {this.renderPane({
@@ -40,7 +40,7 @@ class AuditForms extends Panes {
             title: 'Core HSEQ',
             name: 'coreHseqInfo',
             Component: CoreHSEQ,
-            data: commonProps,
+            data: { ...commonProps, localStorageKey: `audit${auditId}CoreHSEQ` },
           })}
 
           {this.renderPane({
@@ -48,7 +48,7 @@ class AuditForms extends Panes {
             title: 'Human resource management',
             name: 'hrInfo',
             Component: HumanResourceManagement,
-            data: commonProps,
+            data: { ...commonProps, localStorageKey: `audit${auditId}HR` },
           })}
 
           {this.renderPane({
@@ -56,7 +56,7 @@ class AuditForms extends Panes {
             title: 'Business integrity',
             name: 'businessInfo',
             Component: BusinessIntegriy,
-            data: commonProps,
+            data: { ...commonProps, localStorageKey: `audit${auditId}Business` },
           })}
         </Tabs>
       </div>

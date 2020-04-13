@@ -104,7 +104,8 @@ class AuditFormsBase extends BaseForm {
 
     // dynamically changing answer
     const stateAnswer = this.getFieldValue(`${name}Answer`) || initialAnswer;
-    const isFileVisible = stateAnswer === 'true' || ['1', '2'].includes(stateAnswer);
+    const isFileVisible =
+      stateAnswer === 'true' || stateAnswer === true || ['1', '2'].includes(stateAnswer);
 
     return (
       <div className="audit-question">

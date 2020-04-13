@@ -7,7 +7,7 @@ import { Loading } from 'modules/common/components';
 import { message } from 'antd';
 
 const SubmitAuditContainer = (props, context) => {
-  const { auditResponseByUserQuery, companyByUserQuery } = props;
+  const { auditResponseByUserQuery, companyByUserQuery, match } = props;
 
   const { currentUser } = context;
 
@@ -18,8 +18,6 @@ const SubmitAuditContainer = (props, context) => {
   if (auditResponseByUserQuery.loading || companyByUserQuery.loading) {
     return <Loading />;
   }
-
-  const { match } = props;
 
   const save = (name, doc) => {
     const mutation = props[`${name}Edit`];
@@ -42,6 +40,7 @@ const SubmitAuditContainer = (props, context) => {
 
   const updatedProps = {
     ...props,
+    auditId: match.params.id,
     save,
     company: {
       ...auditResponseByUserQuery.auditResponseByUser,

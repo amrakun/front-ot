@@ -37,12 +37,16 @@ class BusinessIntegriy extends AuditFormsBase {
   }
 
   renderSupplierAction() {
-    return this.renderSubmit('Save & submit', e =>
-      this.props.form.validateFieldsAndScroll(err => {
-        if (!err) {
-          this.saveAndShowModal(e, 'evidence');
-        }
-      })
+    return (
+      <>
+        {this.renderSubmit('Save & submit', e =>
+          this.props.form.validateFieldsAndScroll(err => {
+            if (!err) {
+              this.saveAndShowModal(e, 'evidence');
+            }
+          })
+        )}
+      </>
     );
   }
 

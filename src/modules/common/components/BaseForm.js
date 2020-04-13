@@ -9,6 +9,7 @@ export default class BaseForm extends React.Component {
 
     this.save = this.save.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDraft = this.handleDraft.bind(this);
     this.getFieldValue = this.getFieldValue.bind(this);
 
     // field names
@@ -28,18 +29,7 @@ export default class BaseForm extends React.Component {
   save(extra = {}, lastTab = false) {
     this.props.form.validateFieldsAndScroll(err => {
       if (!err) {
-        let doc = {};
-
-        this.fieldDefs.forEach(({ name, dataType }) => {
-          doc[name] = this.getFieldValue(name, dataType);
-        });
-
-        if (extra) {
-          doc = {
-            ...doc,
-            ...extra,
-          };
-        }
+        const doc = { ...this.getFormValues(), ...(extra || {}) };
 
         if (this.props.nextTab && !lastTab) this.props.nextTab();
 
@@ -54,20 +44,48 @@ export default class BaseForm extends React.Component {
     this.save();
   }
 
-  saveDirect(doc, lastTab = false) {
-    this.props.form.validateFieldsAndScroll(err => {
-      if (!err) {
-        if (this.props.nextTab && !lastTab) this.props.nextTab();
+  handleDraft(e) {
+    e.preventDefault();
 
-        return this.props.save(doc);
+    const { localStorageKey, nextTab } = this.props;
+
+    const formData = this.getFormValues();
+
+    localStorage.setItem(localStorageKey, JSON.stringify(formData));
+
+    if (nextTab) {
+      nextTab();
+    }
+  }
+
+  saveDirect(doc, lastTab = false) {
+    const { form, nextTab, save } = this.props;
+
+    form.validateFieldsAndScroll(err => {
+      if (!err) {
+        if (nextTab && !lastTab) {
+          nextTab();
+        }
+
+        return save(doc);
       }
     });
+  }
+
+  getFormValues() {
+    const doc = {};
+
+    this.fieldDefs.forEach(({ name, dataType }) => {
+      doc[name] = this.getFieldValue(name, dataType);
+    });
+
+    return doc;
   }
 
   getFieldValue(name, dataType) {
     const { getFieldValue } = this.props.form;
 
-    let value = getFieldValue(name);
+    let value = getFieldValue(name) || this.getFieldValueFromLocal(name);
 
     if (dataType === 'boolean') {
       value = value === 'true';
@@ -82,6 +100,14 @@ export default class BaseForm extends React.Component {
     }
 
     return value;
+  }
+
+  getFieldValueFromLocal(name) {
+    const { localStorageKey } = this.props;
+
+    const localValue = JSON.parse(localStorage.getItem(localStorageKey) || '{}');
+
+    return localValue[name];
   }
 
   renderOptions(options, noTranslate) {
@@ -102,7 +128,7 @@ export default class BaseForm extends React.Component {
 
     const data = this.props.data || {};
 
-    definations.initialValue = initialValue || data[name];
+    definations.initialValue = initialValue || data[name] || this.getFieldValueFromLocal(name);
 
     return <Field key={`${name}-${isVisible}`} {...definations} />;
   }
@@ -112,15 +138,33 @@ export default class BaseForm extends React.Component {
     const { isSubmitDisabled } = this.props;
 
     return (
-      <Button
-        style={{ float: 'right', marginLeft: '8px' }}
-        type="primary"
-        htmlType="submit"
-        disabled={isSubmitDisabled}
-        onClick={onClick}
-      >
+      <>
+        <Button
+          style={{ float: 'right', marginLeft: '8px' }}
+          type="primary"
+          htmlType="submit"
+          disabled={isSubmitDisabled}
+          onClick={onClick}
+        >
+          {__(text)}
+          <Icon type="right" />
+        </Button>
+
+        {this.renderDraft()}
+      </>
+    );
+  }
+
+  renderDraft(text = 'Save & draft', onClick = this.handleDraft) {
+    if (!this.props.localStorageKey) {
+      return null;
+    }
+
+    const { __ } = this.context;
+
+    return (
+      <Button style={{ float: 'right', marginLeft: '8px' }} onClick={onClick}>
         {__(text)}
-        <Icon type="right" />
       </Button>
     );
   }
