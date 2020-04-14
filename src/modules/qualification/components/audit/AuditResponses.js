@@ -58,19 +58,21 @@ class AuditResponses extends React.Component {
 
     return (
       <>
-        <Button type="link" size="small" style={{ marginRight: '10px' }}>
-          <Link
-            to={{
-              pathname: '/audit/qualify',
-              state: {
-                supplierId: record.supplier._id,
-                auditId: record.audit._id,
-              },
-            }}
-          >
-            Edit
-          </Link>
-        </Button>
+        {record.audit.status === 'closed' ? (
+          <Button type="link" size="small" style={{ marginRight: '10px' }}>
+            <Link
+              to={{
+                pathname: '/audit/qualify',
+                state: {
+                  supplierId: record.supplier._id,
+                  auditId: record.audit._id,
+                },
+              }}
+            >
+              Edit
+            </Link>
+          </Button>
+        ) : null}
 
         <Button size="small" style={{ marginRight: '10px' }} onClick={onView}>
           View

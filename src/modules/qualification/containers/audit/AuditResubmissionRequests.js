@@ -9,8 +9,8 @@ class RequestsContainer extends React.Component {
   render() {
     const { companiesQuery, toggleStateMutation } = this.props;
 
-    const toggleState = supplierId => {
-      toggleStateMutation({ variables: { supplierId } })
+    const toggleState = (supplierId, editableDate) => {
+      toggleStateMutation({ variables: { supplierId, editableDate } })
         .then(() => {
           message.success('Success');
           companiesQuery.refetch();

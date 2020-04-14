@@ -383,8 +383,8 @@ const togglePrequalificationState = `
   }
 `;
 const toggleAuditState = `
-  mutation auditsBuyerToggleState($supplierId: String!) {
-    auditsBuyerToggleState(supplierId: $supplierId) {
+  mutation auditsBuyerToggleState($supplierId: String!, $editableDate: Date) {
+    auditsBuyerToggleState(supplierId: $supplierId, editableDate: $editableDate) {
       _id
     }
   }

@@ -2,11 +2,37 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Card, Row, Col, Button } from 'antd';
+import { Card, Row, Col, Button, Modal, DatePicker } from 'antd';
 import { Common, Sidebar } from 'modules/companies/components';
+import { dateTimeFormat } from 'modules/common/constants';
 import { Search } from 'modules/common/components';
 
 class Requests extends Common {
+  renderEnablePopup() {
+    const { showPopup, currentRecordId } = this.state;
+    const { toggleState } = this.props;
+
+    const hideModal = () => this.setState({ showPopup: false });
+    const onOkClick = () => toggleState(currentRecordId, this.state.editableDate);
+
+    const onDateChange = date => {
+      this.setState({ editableDate: date.toDate() });
+    };
+
+    if (!showPopup) {
+      return null;
+    }
+
+    return (
+      <Modal title="Enable" visible={true} onOk={onOkClick} onCancel={hideModal}>
+        <div>
+          <label>Date: </label>
+          <DatePicker format={dateTimeFormat} showTime onChange={onDateChange} />
+        </div>
+      </Modal>
+    );
+  }
+
   render() {
     const { toggleState, totalCount } = this.props;
 
@@ -23,7 +49,9 @@ class Requests extends Common {
           key: 'actions',
           title: 'Actions',
           render: record => {
-            const onClick = () => toggleState(record._id);
+            const onDisableClick = () => toggleState(record._id);
+            const onEnableClick = () =>
+              this.setState({ showPopup: true, currentRecordId: record._id });
 
             const { isEditable, showToggleButton } = record.qualificationState;
 
@@ -33,13 +61,13 @@ class Requests extends Common {
 
             if (isEditable) {
               return (
-                <Button type="danger" size="small" onClick={onClick}>
+                <Button type="danger" size="small" onClick={onDisableClick}>
                   Disable
                 </Button>
               );
             } else {
               return (
-                <Button type="primary" size="small" onClick={onClick}>
+                <Button type="primary" size="small" onClick={onEnableClick}>
                   Enable
                 </Button>
               );
@@ -60,6 +88,7 @@ class Requests extends Common {
               <div style={{ clear: 'both' }} />
             </div>
             {this.renderTable({ columns })}
+            {this.renderEnablePopup()}
           </Card>
         </Col>
       </Row>
