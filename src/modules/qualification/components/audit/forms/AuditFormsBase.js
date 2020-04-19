@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input, Select, Popover, Icon, Divider, Alert } from 'antd';
+import { Input, Select, Popover, Icon, Divider, Alert, message } from 'antd';
 import { Uploader, BaseForm } from 'modules/common/components';
 import { booleanData, booleanDataReverse } from 'modules/common/constants';
 import { readFileUrl } from 'modules/common/utils';
@@ -32,6 +32,22 @@ class AuditFormsBase extends BaseForm {
     e.preventDefault();
 
     this.collectAndSave();
+  }
+
+  handleDraft(e) {
+    e.preventDefault();
+
+    const { localStorageKey, nextTab } = this.props;
+
+    const formData = this.getFormValues();
+
+    localStorage.setItem(localStorageKey, JSON.stringify(formData));
+
+    message.success('Successfully saved as draft');
+
+    if (nextTab && !localStorageKey.includes('Business')) {
+      nextTab();
+    }
   }
 
   collectAndSave(lastTab = false) {
