@@ -335,6 +335,12 @@ const auditsBuyerSendFiles = `
   }
 `;
 
+const auditsBuyerCancelResponse = `
+  mutation auditsBuyerCancelResponse($responseId: String!) {
+    auditsBuyerCancelResponse(responseId: $responseId)
+  }
+`;
+
 const physicalAuditParams = `
   $isQualified: Boolean!
   $supplierId: String!
@@ -415,6 +421,7 @@ export default {
   auditsSupplierSendResubmitRequest,
   qualificationsPrequalify,
   auditsBuyerSendFiles,
+  auditsBuyerCancelResponse,
   physicalAuditsAdd,
   physicalAuditsEdit,
   physicalAuditsRemove,

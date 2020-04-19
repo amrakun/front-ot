@@ -8,7 +8,12 @@ import { message } from 'antd';
 
 class AuditResponsesContainer extends React.Component {
   render() {
-    const { auditResponsesTableQuery, totalCountsQuery, auditsBuyerSendFiles } = this.props;
+    const {
+      auditResponsesTableQuery,
+      totalCountsQuery,
+      auditsBuyerSendFiles,
+      auditsBuyerCancelResponse,
+    } = this.props;
 
     if (auditResponsesTableQuery.error || totalCountsQuery.error) {
       return null;
@@ -35,9 +40,25 @@ class AuditResponsesContainer extends React.Component {
         });
     };
 
+    const cancel = responseId => {
+      auditsBuyerCancelResponse({
+        variables: {
+          responseId,
+        },
+      })
+        .then(() => {
+          auditResponsesTableQuery.refetch();
+          message.success('Successfuly canceled!');
+        })
+        .catch(error => {
+          message.error(error.message);
+        });
+    };
+
     const updatedProps = {
       ...this.props,
       sendFiles,
+      cancel,
       data: auditResponsesTableQuery.auditResponses || [],
     };
 
@@ -78,5 +99,9 @@ export default compose(
 
   graphql(gql(mutations.auditsBuyerSendFiles), {
     name: 'auditsBuyerSendFiles',
+  }),
+
+  graphql(gql(mutations.auditsBuyerCancelResponse), {
+    name: 'auditsBuyerCancelResponse',
   })
 )(AuditResponsesContainer);

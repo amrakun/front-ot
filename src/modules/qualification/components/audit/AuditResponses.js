@@ -210,6 +210,17 @@ class AuditResponses extends React.Component {
           return this.renderImprovementPlanButton(record);
         },
       },
+      {
+        key: 21,
+        title: 'Cancel',
+        render: record => {
+          return (
+            <Button size="small" type="danger" onClick={this.props.cancel.bind(this, record._id)}>
+              Cancel
+            </Button>
+          );
+        },
+      },
     ];
   }
 
