@@ -127,6 +127,21 @@ class AuditResponses extends React.Component {
         },
       },
       {
+        key: 4,
+        title: 'Supplier name',
+        dataIndex: 'supplier.basicInfo.enName',
+      },
+      {
+        key: 5,
+        title: 'Vendor number',
+        dataIndex: 'supplier.basicInfo.sapNumber',
+      },
+      {
+        key: 20,
+        title: 'Tier type',
+        dataIndex: 'supplier.tierTypeDisplay',
+      },
+      {
         key: 2,
         title: 'Qualification status',
         render: record => record.supplier.qualificationStatusDisplay,
@@ -143,25 +158,14 @@ class AuditResponses extends React.Component {
         },
       },
       {
-        key: 10,
-        title: 'Response status',
-        render: record => {
-          if (['onTime', 'late'].includes(record.status)) {
-            return record.status;
-          }
-
-          return null;
-        },
+        key: 6,
+        title: 'Invited date',
+        render: record => moment(record.audit.publishDate).format(dateTimeFormat),
       },
       {
-        key: 4,
-        title: 'Supplier name',
-        dataIndex: 'supplier.basicInfo.enName',
-      },
-      {
-        key: 5,
-        title: 'Vendor number',
-        dataIndex: 'supplier.basicInfo.sapNumber',
+        key: 7,
+        title: 'Close date',
+        render: record => moment(record.audit.closeDate).format(dateTimeFormat),
       },
       {
         key: 13,
@@ -175,14 +179,15 @@ class AuditResponses extends React.Component {
         },
       },
       {
-        key: 6,
-        title: 'Invited date',
-        render: record => moment(record.audit.publishDate).format(dateTimeFormat),
-      },
-      {
-        key: 7,
-        title: 'Close date',
-        render: record => moment(record.audit.closeDate).format(dateTimeFormat),
+        key: 10,
+        title: 'Response status',
+        render: record => {
+          if (['onTime', 'late'].includes(record.status)) {
+            return record.status;
+          }
+
+          return null;
+        },
       },
       {
         key: 8,

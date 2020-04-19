@@ -353,6 +353,7 @@ const auditResponses = `
           phone
         }
         isPrequalified
+        tierTypeDisplay
         qualificationStatusDisplay
       }
     }
