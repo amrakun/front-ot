@@ -186,7 +186,7 @@ class AuditResponses extends React.Component {
             return record.status;
           }
 
-          return null;
+          return 'Not responded';
         },
       },
       {
