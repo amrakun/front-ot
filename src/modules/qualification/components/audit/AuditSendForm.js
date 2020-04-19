@@ -90,22 +90,28 @@ class SendForm extends BaseForm {
   }
 
   renderPreview() {
-    const { content } = this.state;
-
-    if (!content) {
-      return null;
-    }
+    const { content = '' } = this.state;
 
     const { systemConfig } = this.context;
 
     const desktopAuditTemplates = systemConfig.desktopAuditTemplates || {};
     const invitationTemplate = desktopAuditTemplates.supplier__invitation || {};
     const contentMap = invitationTemplate.content || {};
-    const mnContent = contentMap.mn || contentMap.en;
+    const mnContent = contentMap.mn || '';
+    const enContent = contentMap.en || '';
 
-    const html = mnContent.replace('{content}', content);
+    const mnHtml = mnContent.replace('{content}', content);
+    const enHtml = enContent.replace('{content}', content);
 
-    return <div dangerouslySetInnerHTML={{ __html: html }} />;
+    return (
+      <>
+        <div dangerouslySetInnerHTML={{ __html: mnHtml }} />
+
+        <p>---------------------------------------------------------------------------</p>
+
+        <div dangerouslySetInnerHTML={{ __html: enHtml }} />
+      </>
+    );
   }
 
   render() {
