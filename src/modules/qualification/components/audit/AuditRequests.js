@@ -28,7 +28,8 @@ class AuditRequests extends React.Component {
         title: 'Qualification status',
         render: record => {
           const response = record.supplierResponse;
-          return response.supplier.qualificationStatusDisplay;
+
+          return response && response.supplier.qualificationStatusDisplay;
         },
       },
       {
