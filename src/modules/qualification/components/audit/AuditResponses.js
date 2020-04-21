@@ -4,7 +4,7 @@ import { withApollo } from 'react-apollo';
 import moment from 'moment';
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Button, Select, Table, Card, Row, Modal, Icon } from 'antd';
+import { Button, Select, Table, Card, Row, Modal, Icon, Popconfirm } from 'antd';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Search } from 'modules/common/components';
@@ -53,7 +53,11 @@ class AuditResponses extends React.Component {
     };
 
     if (record.status === 'invited') {
-      return null;
+      return (
+        <Button size="small" style={{ marginRight: '10px' }} onClick={onView}>
+          View
+        </Button>
+      );
     }
 
     return (
@@ -214,11 +218,18 @@ class AuditResponses extends React.Component {
         key: 21,
         title: 'Cancel',
         render: record => {
-          return (
-            <Button size="small" type="danger" onClick={this.props.cancel.bind(this, record._id)}>
-              Cancel
-            </Button>
-          );
+          if (record.audit.status !== 'closed') {
+            return (
+              <Popconfirm
+                title="Are you sure ?"
+                onConfirm={this.props.cancel.bind(this, record._id)}
+              >
+                <Button size="small" type="danger">
+                  Cancel
+                </Button>
+              </Popconfirm>
+            );
+          }
         },
       },
     ];
