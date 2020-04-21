@@ -170,6 +170,11 @@ class ManageTemplates extends React.Component {
                     value: 'supplier__send_resubmission_request',
                     text: 'To send resubmission request',
                   },
+                  { value: 'buyer__cancel', text: 'To buyer when cancel' },
+                  {
+                    value: 'supplier__cancel',
+                    text: 'To supplier when cancel',
+                  },
                 ],
               })}
             </Tabs>
