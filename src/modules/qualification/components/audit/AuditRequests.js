@@ -25,7 +25,7 @@ class AuditRequests extends React.Component {
       },
       {
         key: 11,
-        title: 'Qualification status',
+        title: __('Qualification status'),
         render: record => {
           const response = record.supplierResponse;
 

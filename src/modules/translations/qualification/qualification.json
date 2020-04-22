@@ -1,6 +1,11 @@
 {
-  "Qualification/audit requests":
-    "Гэрээ хэрэгжүүлэх чадварын үнэлгээ хийх хүсэлт",
+  "Audit status": "Аудит төлөв",
+  "Qualification status": "Үнэлгээний төлөв",
+  "Submission status": "Илгээсэн төлөв",
+  "Close date": "Хаагдах огноо",
+  "Report": "Үнэлгээний тайлан",
+  "Improvement plan": "Сайжруулах төлөвлөгөө",
+  "Qualification/audit requests": "Гэрээ хэрэгжүүлэх чадварын үнэлгээ хийх хүсэлт",
   "status": "Төлөв",
   "Publish date": "Нийтлэгдсэн Огноо",
   "Expiration date": "Дуусах Огноо",
@@ -8,6 +13,5 @@
   "Auditor improvement plan": "Сайжруулах Төлөвлөгөө",
   "More": "Дэлгэрэнгүй",
   "DIFOT Score": "DIFOT оноо",
-  "DIFOT (delivery in full, on time) is a measurement of logistics or delivery performance within a supply chain. It expressed as a percentage, and measures whether the product was able to deliver in the right quantity, at right place and within the expected time.":
-    "DIFOT (цаг хугацаанд бүрэн хүргэх) нь  нийлүүлэлтийн сүлжээн дэх ханган нийлүүлэлтийн гүйцэтгэлийн үнэлгээ юм. Энэ нь бүтээгдэхүүнийг заасан тoo хэмжээгээр, зөв ​​газарт нь тохиролцсон хугацаанд хүргэж байгаа эсэхийг тоон үзүүлэлтээр илэрхийлсэн үнэлгээ юм."
+  "DIFOT (delivery in full, on time) is a measurement of logistics or delivery performance within a supply chain. It expressed as a percentage, and measures whether the product was able to deliver in the right quantity, at right place and within the expected time.": "DIFOT (цаг хугацаанд бүрэн хүргэх) нь  нийлүүлэлтийн сүлжээн дэх ханган нийлүүлэлтийн гүйцэтгэлийн үнэлгээ юм. Энэ нь бүтээгдэхүүнийг заасан тoo хэмжээгээр, зөв ​​газарт нь тохиролцсон хугацаанд хүргэж байгаа эсэхийг тоон үзүүлэлтээр илэрхийлсэн үнэлгээ юм."
 }
