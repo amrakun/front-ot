@@ -336,6 +336,7 @@ const auditResponses = `
       isQualified
       submittedCount
       sentDate
+      editableDate
       improvementPlanFile
       improvementPlanSentDate
       reportFile

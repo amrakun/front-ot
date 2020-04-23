@@ -183,6 +183,11 @@ class AuditResponses extends React.Component {
         render: record => moment(record.audit.closeDate).format(dateTimeFormat),
       },
       {
+        key: 23,
+        title: 'Editable date',
+        render: record => moment(record.editableDate).format(dateTimeFormat),
+      },
+      {
         key: 13,
         title: 'Submission date',
         render: record => {
