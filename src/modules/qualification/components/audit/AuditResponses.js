@@ -114,11 +114,16 @@ class AuditResponses extends React.Component {
   }
 
   columns() {
+    const { queryParams } = this.props;
+    const { page = '1', perPage = '10' } = queryParams;
+
     return [
       {
         key: 1,
         title: '#',
-        render: (_record, _j, i) => i + 1,
+        render: (_record, _j, i) => {
+          return parseInt(perPage) * (parseInt(page) - 1) + i + 1;
+        },
       },
       {
         key: 9,
