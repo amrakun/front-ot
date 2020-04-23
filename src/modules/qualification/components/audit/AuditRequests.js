@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Table, Card, Icon } from 'antd';
+import { Table, Card, Icon, Tooltip } from 'antd';
 import { dateTimeFormat, statusIcons } from 'modules/common/constants';
 import { readFileUrl } from 'modules/common/utils';
 import moment from 'moment';
@@ -19,7 +19,12 @@ class AuditRequests extends React.Component {
         render: record => {
           const s = statusIcons[record.status];
           return (
-            <Icon type={s.type} style={{ color: s.color, fontSize: '20px', lineHeight: '12px' }} />
+            <Tooltip title={<span className="capitalize">{record.status}</span>}>
+              <Icon
+                type={s.type}
+                style={{ color: s.color, fontSize: '20px', lineHeight: '12px' }}
+              />
+            </Tooltip>
           );
         },
       },

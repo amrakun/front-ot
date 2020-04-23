@@ -4,7 +4,7 @@ import { withApollo } from 'react-apollo';
 import moment from 'moment';
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Button, Select, Table, Card, Row, Modal, Icon, Popconfirm } from 'antd';
+import { Button, Select, Table, Card, Row, Modal, Icon, Popconfirm, Tooltip } from 'antd';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Search } from 'modules/common/components';
@@ -125,8 +125,14 @@ class AuditResponses extends React.Component {
         title: 'Audit status',
         render: record => {
           const s = statusIcons[record.audit.status];
+
           return (
-            <Icon type={s.type} style={{ color: s.color, fontSize: '20px', lineHeight: '12px' }} />
+            <Tooltip title={<span className="capitalize">{record.audit.status}</span>}>
+              <Icon
+                type={s.type}
+                style={{ color: s.color, fontSize: '20px', lineHeight: '12px' }}
+              />
+            </Tooltip>
           );
         },
       },
