@@ -340,6 +340,7 @@ const auditResponses = `
       improvementPlanSentDate
       reportFile
       reportSentDate
+      notificationForBuyer
       supplier {
         _id
         basicInfo {

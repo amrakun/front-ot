@@ -687,6 +687,10 @@ form .ant-input-number {
   background-color: #f2fafb;
 }
 
+.ant-table-row.notification {
+  background-color: #fdf3d4;
+}
+
 .loading {
   min-height: 50vh;
   height: 100%;

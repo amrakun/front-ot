@@ -341,6 +341,12 @@ const auditsBuyerCancelResponse = `
   }
 `;
 
+const auditsBuyerNotificationMarkAsRead = `
+  mutation auditsBuyerNotificationMarkAsRead($responseId: String!) {
+    auditsBuyerNotificationMarkAsRead(responseId: $responseId)
+  }
+`;
+
 const physicalAuditParams = `
   $isQualified: Boolean!
   $supplierId: String!
@@ -422,6 +428,7 @@ export default {
   qualificationsPrequalify,
   auditsBuyerSendFiles,
   auditsBuyerCancelResponse,
+  auditsBuyerNotificationMarkAsRead,
   physicalAuditsAdd,
   physicalAuditsEdit,
   physicalAuditsRemove,

@@ -521,6 +521,10 @@ form .ant-input-number {
   background-color: tint($link-color, 95);
 }
 
+.ant-table-row.notification {
+  background-color: tint($color-warning, 75);
+}
+
 .loading {
   min-height: 50vh;
   height: 100%;

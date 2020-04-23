@@ -13,6 +13,7 @@ class AuditResponsesContainer extends React.Component {
       totalCountsQuery,
       auditsBuyerSendFiles,
       auditsBuyerCancelResponse,
+      auditsBuyerNotificationMarkAsRead,
     } = this.props;
 
     if (auditResponsesTableQuery.error || totalCountsQuery.error) {
@@ -55,10 +56,26 @@ class AuditResponsesContainer extends React.Component {
         });
     };
 
+    const markAsRead = responseId => {
+      auditsBuyerNotificationMarkAsRead({
+        variables: {
+          responseId,
+        },
+      })
+        .then(() => {
+          auditResponsesTableQuery.refetch();
+          message.success('Successfuly marked!');
+        })
+        .catch(error => {
+          message.error(error.message);
+        });
+    };
+
     const updatedProps = {
       ...this.props,
       sendFiles,
       cancel,
+      markAsRead,
       data: auditResponsesTableQuery.auditResponses || [],
     };
 
@@ -95,6 +112,10 @@ export default compose(
 
   graphql(gql(queries.auditResponseTotalCounts), {
     name: 'totalCountsQuery',
+  }),
+
+  graphql(gql(mutations.auditsBuyerNotificationMarkAsRead), {
+    name: 'auditsBuyerNotificationMarkAsRead',
   }),
 
   graphql(gql(mutations.auditsBuyerSendFiles), {
