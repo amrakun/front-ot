@@ -21,12 +21,7 @@ class Dashboard extends React.Component {
     const { data, exportPreq } = this.props;
     const { prequalifiedStatus } = data;
     const { __ } = this.context;
-    const {
-      isApproved,
-      isExpired,
-      isFailed,
-      isOutstanding
-    } = prequalifiedStatus;
+    const { isApproved, isExpired, isFailed, isOutstanding } = prequalifiedStatus;
 
     if (isApproved) {
       return (
@@ -68,8 +63,7 @@ class Dashboard extends React.Component {
   }
 
   renderAuditNotification() {
-    const { auditImprovementPlanNotification, hasNewAudit } =
-      this.props.data || {};
+    const { auditNotification } = this.props.data || {};
 
     const { __ } = this.context;
 
@@ -77,32 +71,40 @@ class Dashboard extends React.Component {
     let color = colors[5];
     let badge = false;
 
-    if (hasNewAudit) {
-      text = (
-        <span>
-          {__('You have new audit invitation. Click')}{' '}
-          <Link to="qualification">{__('here')}</Link>{' '}
-          {__('view your audit invitations')}
-        </span>
-      );
+    if (auditNotification) {
+      const response = auditNotification.response;
 
       color = colors[7];
       badge = true;
-    }
 
-    if (auditImprovementPlanNotification) {
-      const _id = auditImprovementPlanNotification.auditId;
+      if (auditNotification.type === 'improvementPlanDueDate') {
+        text = (
+          <span>
+            {__('You have new audit improvement plan. Click')}{' '}
+            <Link to={`/audit/submit/${response.auditId}`}>{__('here')}</Link>{' '}
+            {__('view your audit')}
+          </span>
+        );
+      }
 
-      text = (
-        <span>
-          {__('You have new audit improvement plan. Click')}{' '}
-          <Link to={`/audit/submit/${_id}`}>{__('here')}</Link>{' '}
-          {__('view your audit')}
-        </span>
-      );
+      if (auditNotification.type === 'invited') {
+        text = (
+          <span>
+            {__('You have new audit invitation. Click')}{' '}
+            <Link to="qualification">{__('here')}</Link> {__('view your audit invitations')}
+          </span>
+        );
+      }
 
-      color = colors[7];
-      badge = true;
+      if (auditNotification.type === 'enabled') {
+        text = (
+          <span>
+            {__('You request is approved. Click')}{' '}
+            <Link to={`/audit/submit/${response.auditId}`}>{__('here')}</Link>{' '}
+            {__('edit your audit')}
+          </span>
+        );
+      }
     }
 
     return (
@@ -128,7 +130,7 @@ class Dashboard extends React.Component {
       lastFeedback,
       openTendersCount,
       isPrequalified,
-      isSentRegistrationInfo
+      isSentRegistrationInfo,
     } = data;
 
     const queryParams = queryString.parse(location.search);
@@ -155,11 +157,7 @@ class Dashboard extends React.Component {
             }
             type="info"
             showIcon
-            className={
-              this.registrationComplete && this.prequalificationComplete
-                ? 'hidden'
-                : ''
-            }
+            className={this.registrationComplete && this.prequalificationComplete ? 'hidden' : ''}
           />
         )}
 
@@ -171,18 +169,14 @@ class Dashboard extends React.Component {
               title={__('Open EOI/RFQ')}
               color={openTendersCount > 0 ? colors[7] : colors[5]}
               number={openTendersCount}
-              tooltip={__(
-                'Express of Interest (EOI), Request for quotation (RFQ)'
-              )}
+              tooltip={__('Express of Interest (EOI), Request for quotation (RFQ)')}
             />
           </Col>
           <Col key={4} lg={8} sm={12}>
             <NumberCard
               icon="calendar"
               title={__('DIFOT Score')}
-              tooltip={
-                averageDifotScore < 75 ? __(labels.difotSuggestion) : null
-              }
+              tooltip={averageDifotScore < 75 ? __(labels.difotSuggestion) : null}
               color={averageDifotScore ? colors[7] : colors[5]}
               number={averageDifotScore || 0}
             />
@@ -192,8 +186,7 @@ class Dashboard extends React.Component {
               icon="mail"
               title={
                 <span>
-                  {__('Success feedback')}{' '}
-                  <HelpModal videoId="successFeedback" />
+                  {__('Success feedback')} <HelpModal videoId="successFeedback" />
                 </span>
               }
               color={hasFeedback ? colors[7] : colors[5]}
@@ -213,12 +206,7 @@ class Dashboard extends React.Component {
             />
           </Col>
           <Col key={2} lg={8} sm={12}>
-            <NumberCard
-              icon="clock-circle-o"
-              title={__('Reminder')}
-              color={colors[5]}
-              number={0}
-            />
+            <NumberCard icon="clock-circle-o" title={__('Reminder')} color={colors[5]} number={0} />
           </Col>
           <Col key={3} lg={8} sm={12}>
             <TextCard
@@ -237,11 +225,7 @@ class Dashboard extends React.Component {
               }
               color={isPrequalified === null ? colors[5] : colors[7]}
               tooltip={
-                isPrequalified === null
-                  ? null
-                  : !isPrequalified
-                  ? __(labels.preqSuggestion)
-                  : null
+                isPrequalified === null ? null : !isPrequalified ? __(labels.preqSuggestion) : null
               }
               text={this.getPrequalifiedStatus()}
               withPercent={true}
@@ -284,12 +268,12 @@ Dashboard.propTypes = {
   data: PropTypes.object,
   history: PropTypes.object,
   location: PropTypes.object,
-  exportPreq: PropTypes.func
+  exportPreq: PropTypes.func,
 };
 
 Dashboard.contextTypes = {
   currentUser: PropTypes.object,
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 export default Dashboard;

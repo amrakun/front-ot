@@ -5,12 +5,7 @@ const companyByUser = `
       openTendersCount
       averageDifotScore
       isPrequalified
-      hasNewAudit
-
-      auditImprovementPlanNotification {
-        _id
-        auditId
-      }
+      auditNotification
 
       lastFeedback {
         _id
@@ -280,5 +275,5 @@ export default {
   logsEoiCreatedAndSentExport,
   logsRfqCreatedAndSentExport,
   logsSuppliersByProductCodeLogsExport,
-  logsActivityLogsExport
+  logsActivityLogsExport,
 };
