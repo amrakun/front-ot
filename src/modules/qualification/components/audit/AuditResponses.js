@@ -186,8 +186,12 @@ class AuditResponses extends React.Component {
         key: 10,
         title: 'Response status',
         render: record => {
-          if (['onTime', 'late'].includes(record.status)) {
-            return record.status;
+          if (record.status === 'onTime') {
+            return 'On Time';
+          }
+
+          if (record.status === 'late') {
+            return 'Late';
           }
 
           return 'Not responded';
