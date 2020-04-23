@@ -606,6 +606,12 @@ const auditResponseTotalCounts = `
   }
 `;
 
+const auditExportResponses = `
+  query auditExportResponses {
+    auditExportResponses
+  }
+`;
+
 const companiesPrequalifiedStatus = `
   query companiesPrequalifiedStatus(
     ${commonParams}
@@ -653,4 +659,5 @@ export default {
   companiesPrequalifiedStatus,
   qualificationPrequalificationReplacer,
   auditResponsesQualifiedStatus,
+  auditExportResponses,
 };

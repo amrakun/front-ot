@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { gql, graphql, compose } from 'react-apollo';
 import { mutations, queries } from '../../graphql';
 import { AuditResponses } from '../../components';
-import { Loading } from 'modules/common/components';
+import { exportFile, Loading } from 'modules/common/components';
 import { message } from 'antd';
 
 class AuditResponsesContainer extends React.Component {
@@ -71,11 +71,18 @@ class AuditResponsesContainer extends React.Component {
         });
     };
 
+    const exportExcel = () => {
+      exportFile({
+        query: queries.auditExportResponses,
+      });
+    };
+
     const updatedProps = {
       ...this.props,
       sendFiles,
       cancel,
       markAsRead,
+      exportExcel,
       data: auditResponsesTableQuery.auditResponses || [],
     };
 

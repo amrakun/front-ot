@@ -263,7 +263,7 @@ class AuditResponses extends React.Component {
   }
 
   render() {
-    const { loading } = this.props;
+    const { loading, exportExcel } = this.props;
     const data = this.props.data || [];
 
     const style = { width: 200, marginRight: '20px' };
@@ -299,6 +299,11 @@ class AuditResponses extends React.Component {
             <div style={{ float: 'right' }}>
               <Search />
             </div>
+
+            <Button onClick={exportExcel}>
+              Export excel
+              <Icon type="file-excel" />
+            </Button>
           </Row>
 
           <Table
