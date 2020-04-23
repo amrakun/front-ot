@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Form, Input, DatePicker, Divider, Modal, Button, Select } from 'antd';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import { EditorCK } from 'modules/common/components';
 import { dateTimeFormat } from 'modules/common/constants';
@@ -146,7 +147,9 @@ class Qualified extends React.Component {
           </FormItem>
 
           <FormItem label="Qualification/audit date">
-            {getFieldDecorator('auditDate', { rules })(<DatePicker format={dateTimeFormat} />)}
+            {getFieldDecorator('auditDate', { rules, initialValue: moment() })(
+              <DatePicker format={dateTimeFormat} />
+            )}
           </FormItem>
 
           {this.renderReassesmentDate()}
