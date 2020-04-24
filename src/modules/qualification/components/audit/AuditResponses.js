@@ -114,15 +114,14 @@ class AuditResponses extends React.Component {
   }
 
   columns() {
-    const { queryParams } = this.props;
-    const { page = '1', perPage = '10' } = queryParams;
+    const data = this.props.data || [];
 
     return [
       {
         key: 1,
         title: '#',
-        render: (_record, _j, i) => {
-          return parseInt(perPage) * (parseInt(page) - 1) + i + 1;
+        render: record => {
+          return data.indexOf(record) + 1;
         },
       },
       {
@@ -321,6 +320,7 @@ class AuditResponses extends React.Component {
             rowKey={record => record._id}
             dataSource={data}
             loading={loading}
+            pagination={{ pageSize: 15 }}
             scroll={{ x: 1400 }}
             rowClassName={record => {
               if (record.isQualified) return 'highlight';
