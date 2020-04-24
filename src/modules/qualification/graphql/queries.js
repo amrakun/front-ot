@@ -272,6 +272,7 @@ const auditRequests = `
           }
           isSent
           status
+          auditStatus
           isQualified
           isEditable
           reportFile
@@ -329,6 +330,7 @@ const auditResponses = `
     ) {
       _id
       status
+      auditStatus
       audit {
         _id
         ${auditFields}

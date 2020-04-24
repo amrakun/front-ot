@@ -62,7 +62,7 @@ class AuditResponses extends React.Component {
 
     return (
       <>
-        {record.audit.status === 'closed' ? (
+        {record.auditStatus === 'closed' ? (
           <Button type="link" size="small" style={{ marginRight: '10px' }}>
             <Link
               to={{
@@ -129,10 +129,10 @@ class AuditResponses extends React.Component {
         key: 9,
         title: 'Audit status',
         render: record => {
-          const s = statusIcons[record.audit.status];
+          const s = statusIcons[record.auditStatus];
 
           return (
-            <Tooltip title={<span className="capitalize">{record.audit.status}</span>}>
+            <Tooltip title={<span className="capitalize">{record.auditStatus}</span>}>
               <Icon
                 type={s.type}
                 style={{ color: s.color, fontSize: '20px', lineHeight: '12px' }}
@@ -238,7 +238,7 @@ class AuditResponses extends React.Component {
         key: 21,
         title: 'Cancel',
         render: record => {
-          if (record.audit.status !== 'closed') {
+          if (record.status !== 'canceled' && record.audit.status !== 'closed') {
             return (
               <Popconfirm
                 title="Are you sure ?"

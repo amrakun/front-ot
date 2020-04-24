@@ -17,9 +17,16 @@ class AuditRequests extends React.Component {
         title: __('Audit status'),
         key: 1,
         render: record => {
-          const s = statusIcons[record.status];
+          const response = record.supplierResponse;
+
+          if (!response) {
+            return null;
+          }
+
+          const s = statusIcons[response.auditStatus];
+
           return (
-            <Tooltip title={<span className="capitalize">{record.status}</span>}>
+            <Tooltip title={<span className="capitalize">{response.auditStatus}</span>}>
               <Icon
                 type={s.type}
                 style={{ color: s.color, fontSize: '20px', lineHeight: '12px' }}
