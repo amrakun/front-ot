@@ -81,6 +81,7 @@ class SendResultContainer extends React.Component {
           auditsBuyerSendFiles({
             variables: {
               responseIds: [responseId],
+              reassessmentDate: formValues.reassessmentDate,
               report: true,
             },
           })

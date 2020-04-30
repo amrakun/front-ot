@@ -322,11 +322,13 @@ const qualificationsPrequalify = `
 const auditsBuyerSendFiles = `
   mutation auditsBuyerSendFiles(
     $responseIds: [String]!
+    $reassessmentDate: Date
     $improvementPlan: Boolean
     $report: Boolean
   ) {
     auditsBuyerSendFiles(
       responseIds: $responseIds
+      reassessmentDate: $reassessmentDate
       improvementPlan: $improvementPlan
       report: $report
     ) {
