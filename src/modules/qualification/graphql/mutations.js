@@ -335,6 +335,30 @@ const auditsBuyerSendFiles = `
   }
 `;
 
+const auditsBuyerSaveResultForm = `
+  mutation auditsBuyerSaveResultForm(
+    $responseId: String!
+    $reportLanguage: String,
+    $auditDate: Date,
+    $reassessmentDate: Date,
+    $reportNo: String,
+    $auditor: String,
+    $content: String,
+  ) {
+    auditsBuyerSaveResultForm(
+      responseId: $responseId,
+      reportLanguage: $reportLanguage,
+      auditDate: $auditDate,
+      reassessmentDate: $reassessmentDate,
+      reportNo: $reportNo,
+      auditor: $auditor,
+      content: $content,
+    ) {
+      _id
+    }
+  }
+`;
+
 const auditsBuyerCancelResponse = `
   mutation auditsBuyerCancelResponse($responseId: String!) {
     auditsBuyerCancelResponse(responseId: $responseId)
@@ -427,6 +451,7 @@ export default {
   auditsSupplierSendResubmitRequest,
   qualificationsPrequalify,
   auditsBuyerSendFiles,
+  auditsBuyerSaveResultForm,
   auditsBuyerCancelResponse,
   auditsBuyerNotificationMarkAsRead,
   physicalAuditsAdd,

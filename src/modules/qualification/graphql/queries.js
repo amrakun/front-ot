@@ -451,6 +451,14 @@ const auditResponseDetail = `
       coreHseqInfo { ${AuditCoreHseqInfo} }
       hrInfo { ${AuditHrInfo} }
       businessInfo { ${AuditBusinessInfo} }
+      resultForm {
+        reportLanguage,
+        auditDate,
+        reassessmentDate,
+        reportNo,
+        auditor,
+        content,
+      }
       isQualified
     }
   }

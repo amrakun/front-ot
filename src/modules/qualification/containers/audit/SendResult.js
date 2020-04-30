@@ -9,7 +9,14 @@ import client from 'apolloClient';
 
 class SendResultContainer extends React.Component {
   render() {
-    const { responseId, isQualified, location, history, auditsBuyerSendFiles } = this.props;
+    const {
+      responseId,
+      isQualified,
+      location,
+      history,
+      auditsBuyerSendFiles,
+      saveResultFormMutation,
+    } = this.props;
 
     const hideModal = () => {
       history.push('/audit/responses?refetch');
@@ -86,9 +93,25 @@ class SendResultContainer extends React.Component {
         });
     };
 
+    const saveResultForm = args => {
+      saveResultFormMutation({
+        variables: {
+          responseId,
+          ...args,
+        },
+      })
+        .then(({ data }) => {
+          message.success('Saved');
+        })
+        .catch(error => {
+          message.error(error.message);
+        });
+    };
+
     const updatedProps = {
       ...this.props,
       sendReport,
+      saveResultForm,
       review,
       hideModal,
     };
@@ -104,5 +127,8 @@ SendResultContainer.propTypes = {
 export default compose(
   graphql(gql(mutations.auditsBuyerSendFiles), {
     name: 'auditsBuyerSendFiles',
+  }),
+  graphql(gql(mutations.auditsBuyerSaveResultForm), {
+    name: 'saveResultFormMutation',
   })
 )(SendResultContainer);

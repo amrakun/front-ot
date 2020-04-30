@@ -33,6 +33,7 @@ class QualifyAuditContainer extends React.Component {
         history={history}
         isQualified={isQualifiedAfterLastTab}
         supplierInfo={companyDetail}
+        resultForm={auditResponseDetail.resultForm}
         responseId={auditResponseDetail._id}
       />
     );

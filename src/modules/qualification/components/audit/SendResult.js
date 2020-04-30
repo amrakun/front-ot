@@ -21,6 +21,7 @@ class Qualified extends React.Component {
     super(props);
 
     this.handleOk = this.handleOk.bind(this);
+    this.saveAsDraft = this.saveAsDraft.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
     this.reviewReport = this.reviewReport.bind(this);
     this.reviewImprovementPlan = this.reviewImprovementPlan.bind(this);
@@ -33,6 +34,17 @@ class Qualified extends React.Component {
       if (!err) {
         callback(values);
       }
+    });
+  }
+
+  saveAsDraft() {
+    const { saveResultForm } = this.props;
+
+    return this.handleForm(values => {
+      saveResultForm({
+        content: this.editorContent,
+        ...values,
+      });
     });
   }
 
@@ -67,6 +79,7 @@ class Qualified extends React.Component {
 
   renderReassesmentDate() {
     const { form, isQualified } = this.props;
+    const resultForm = this.props.resultForm || {};
     const { getFieldDecorator } = form;
 
     if (isQualified) {
@@ -75,7 +88,10 @@ class Qualified extends React.Component {
 
     return (
       <FormItem label="Re-Assesment date">
-        {getFieldDecorator('reassessmentDate', { rules })(<DatePicker format={dateTimeFormat} />)}
+        {getFieldDecorator('reassessmentDate', {
+          rules,
+          initialValue: resultForm.reassessmentDate ? moment(resultForm.reassessmentDate) : null,
+        })(<DatePicker format={dateTimeFormat} />)}
       </FormItem>
     );
   }
@@ -97,6 +113,7 @@ class Qualified extends React.Component {
   render() {
     const { supplierInfo, isQualified, hideModal } = this.props;
     const { basicInfo, contactInfo } = supplierInfo;
+    const resultForm = this.props.resultForm || {};
 
     const { getFieldDecorator } = this.props.form;
 
@@ -116,6 +133,9 @@ class Qualified extends React.Component {
             Review report
           </Button>,
           this.renderReviewImprovementPlan(),
+          <Button key="draft" onClick={this.saveAsDraft}>
+            Save as draft
+          </Button>,
           <Button key="submit" type="primary" onClick={this.handleOk}>
             Send report
           </Button>,
@@ -138,7 +158,10 @@ class Qualified extends React.Component {
           <Divider />
 
           <FormItem label="Report language">
-            {getFieldDecorator('reportLanguage', { rules, initialValue: 'mn' })(
+            {getFieldDecorator('reportLanguage', {
+              rules,
+              initialValue: resultForm.reportLanguage || 'mn',
+            })(
               <Select>
                 <Select.Option value="mn">Mongolia</Select.Option>
                 <Select.Option value="en">English</Select.Option>
@@ -147,26 +170,31 @@ class Qualified extends React.Component {
           </FormItem>
 
           <FormItem label="Qualification/audit date">
-            {getFieldDecorator('auditDate', { rules, initialValue: moment() })(
-              <DatePicker format={dateTimeFormat} />
-            )}
+            {getFieldDecorator('auditDate', {
+              rules,
+              initialValue: resultForm.auditDate ? moment(resultForm.auditDate) : moment(),
+            })(<DatePicker format={dateTimeFormat} />)}
           </FormItem>
 
           {this.renderReassesmentDate()}
 
           <FormItem label="Report Number">
-            {getFieldDecorator('reportNo', { rules })(<Input type="number" />)}
+            {getFieldDecorator('reportNo', { rules, initialValue: resultForm.reportNo })(
+              <Input type="number" />
+            )}
           </FormItem>
 
           <FormItem label="Auditor name">
-            {getFieldDecorator('auditor', { rules })(<TextArea />)}
+            {getFieldDecorator('auditor', { rules, initialValue: resultForm.auditor })(
+              <TextArea />
+            )}
           </FormItem>
 
           <div className="ant-form-item-label">
             <label className="ant-form-item-required">Audit result summary & observations</label>
           </div>
 
-          <EditorCK content="" onChange={this.handleEditorChange} />
+          <EditorCK content={resultForm.content} onChange={this.handleEditorChange} />
         </Form>
       </Modal>
     );
