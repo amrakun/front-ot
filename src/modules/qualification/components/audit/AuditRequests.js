@@ -65,7 +65,7 @@ class AuditRequests extends React.Component {
       {
         title: __('Close date'),
         key: 3,
-        render: record => moment(record.closeDate).format(dateTimeFormat),
+        render: record => moment(record.editableDate).format(dateTimeFormat),
       },
       {
         title: __('Report'),
