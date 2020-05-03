@@ -4,7 +4,7 @@ import { withApollo } from 'react-apollo';
 import moment from 'moment';
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Button, Select, Table, Card, Row, Modal, Icon, Popconfirm, Tooltip, Tag } from 'antd';
+import { Button, Select, Table, Card, Row, Modal, Icon, Popconfirm, Tooltip } from 'antd';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Search } from 'modules/common/components';
@@ -258,10 +258,12 @@ class AuditResponses extends React.Component {
           if (record.notificationForBuyer) {
             return (
               <>
-                <Tag>{record.notificationForBuyer}</Tag>
+                <Button size="small" style={{ marginRight: '5px' }}>
+                  {record.notificationForBuyer}
+                </Button>
 
                 <Button size="small" onClick={this.props.markAsRead.bind(this, record._id)}>
-                  Clear
+                  clear
                 </Button>
               </>
             );
