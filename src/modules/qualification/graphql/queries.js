@@ -272,6 +272,7 @@ const auditRequests = `
           }
           isSent
           status
+          editableDate
           auditStatus
           isQualified
           isEditable
