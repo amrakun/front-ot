@@ -3,10 +3,9 @@ import { message } from 'antd';
 import { gql, graphql, compose } from 'react-apollo';
 import PropTypes from 'prop-types';
 import { AuditSendForm } from '../../components';
-import { mutations } from '../../graphql';
+import { mutations, queries } from '../../graphql';
 import { generator } from 'modules/companies/containers';
 import { queries as companyQueries } from 'modules/companies/graphql';
-import { queries as userQueries } from 'modules/auth/graphql';
 
 class AuditContainer extends React.Component {
   constructor(props) {
@@ -79,7 +78,7 @@ const WithData = compose(
       };
     },
   }),
-  graphql(gql(userQueries.simpleUsers), {
+  graphql(gql(queries.buyers), {
     name: 'buyersQuery',
   })
 )(AuditContainer);

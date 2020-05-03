@@ -639,6 +639,18 @@ const qualificationPrequalificationReplacer = `
   }
 `;
 
+const buyers = `
+  query users {
+    users(page: 1, perPage: 10000) {
+      _id
+      firstName
+      lastName
+      email
+      isSupplier
+    }
+  }
+`;
+
 export default {
   blockedCompanies,
   supplierPrequalification,
@@ -671,4 +683,5 @@ export default {
   qualificationPrequalificationReplacer,
   auditResponsesQualifiedStatus,
   auditExportResponses,
+  buyers,
 };

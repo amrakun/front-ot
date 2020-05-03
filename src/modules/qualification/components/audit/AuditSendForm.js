@@ -127,7 +127,11 @@ class SendForm extends BaseForm {
 
     const buyersOptions = buyers.map(buyer => {
       return (
-        <Option value={buyer._id} key={buyer._id}>
+        <Option
+          value={buyer._id}
+          key={buyer._id}
+          searchText={`${buyer.firstName} ${buyer.lastName}`}
+        >
           {buyer.firstName} {buyer.lastName}
         </Option>
       );
@@ -142,9 +146,17 @@ class SendForm extends BaseForm {
                 label: 'Responsible officers',
                 name: 'responsibleBuyerIds',
                 initialValue: data.responsibleBuyerIds,
-                control: <Select mode="multiple">{buyersOptions}</Select>,
+                control: (
+                  <Select
+                    filterOption={(input, option) =>
+                      option.props.searchText.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
+                    mode="multiple"
+                  >
+                    {buyersOptions}
+                  </Select>
+                ),
               })}
-
               {this.renderSuppliers()}
 
               {this.renderField({
@@ -167,12 +179,12 @@ class SendForm extends BaseForm {
           <Col span={15}>
             <Card title="Email content">
               <EditorCK content={content || ''} onChange={this.onEmailContentChange} />
-              <p>
+              <div>
                 <label>
                   <strong>Preview</strong>:{' '}
                 </label>
                 {this.renderPreview()}
-              </p>
+              </div>
             </Card>
 
             <SubmitButton isSubmitted={isSubmitted} onConfirm={this.handleSubmit} __={v => v} />
