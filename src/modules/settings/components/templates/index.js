@@ -145,7 +145,6 @@ class ManageTemplates extends React.Component {
                 tab: 'Desktop audit',
                 key: 'desktopAudit',
                 kindOptions: [
-                  { value: 'buyer__submit', text: 'To buyer when submit' },
                   {
                     value: 'supplier__invitation',
                     text: 'To supplier when receive invitation',
