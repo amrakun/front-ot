@@ -150,6 +150,10 @@ class ManageTemplates extends React.Component {
                     text: 'To supplier when receive invitation',
                   },
                   {
+                    value: 'buyer__invitation',
+                    text: 'To buyer when receive invitation',
+                  },
+                  {
                     value: 'supplier__failed',
                     text: 'To supplier when failed',
                   },
