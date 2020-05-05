@@ -154,26 +154,30 @@ class ManageTemplates extends React.Component {
                     text: 'To buyer when receive invitation',
                   },
                   {
-                    value: 'supplier__failed',
-                    text: 'To supplier when failed',
-                  },
-                  {
-                    value: 'supplier__approved_with_improvement_plan',
-                    text: 'To supplier when approved with improvement plan',
-                  },
-                  {
                     value: 'supplier__approved',
-                    text: 'To supplier when approved',
+                    text: 'To supplier when Qualified',
+                  },
+                  {
+                    value: 'buyer__approved',
+                    text: 'To auditor when Qualified',
+                  },
+                  {
+                    value: 'supplier__failed',
+                    text: 'To supplier when Not-qualified whit Improvement plan',
+                  },
+                  {
+                    value: 'buyer__failed',
+                    text: 'To auditor when Not-qualified with Improvement plan',
                   },
                   {
                     value: 'supplier__enable',
-                    text: 'To supplier when submission enabled',
+                    text: 'To supplier when resubmission request enabled by OT',
                   },
                   {
                     value: 'supplier__send_resubmission_request',
-                    text: 'To send resubmission request',
+                    text: 'To auditor when supplier send resubmission request',
                   },
-                  { value: 'buyer__cancel', text: 'To buyer when cancel' },
+                  { value: 'buyer__cancel', text: 'To auditor when invitation canceled' },
                   {
                     value: 'supplier__cancel',
                     text: 'To supplier when cancel',
