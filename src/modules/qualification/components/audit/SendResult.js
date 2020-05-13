@@ -8,6 +8,7 @@ import { dateTimeFormat } from 'modules/common/constants';
 
 const TextArea = Input.TextArea;
 const FormItem = Form.Item;
+const Option = Select.Option;
 
 const rules = [
   {
@@ -181,6 +182,20 @@ class Qualified extends React.Component {
           <FormItem label="Report Number">
             {getFieldDecorator('reportNo', { rules, initialValue: resultForm.reportNo })(
               <Input type="number" />
+            )}
+          </FormItem>
+
+          <FormItem label="Reminder day">
+            {getFieldDecorator('reminderDay', { rules, initialValue: resultForm.reminderDay })(
+              <Select>
+                <Option value={1}>1 day before</Option>
+                <Option value={2}>2 day before</Option>
+                <Option value={3}>3 day before</Option>
+                <Option value={4}>4 day before</Option>
+                <Option value={5}>5 day before</Option>
+                <Option value={6}>6 day before</Option>
+                <Option value={7}>7 day before</Option>
+              </Select>
             )}
           </FormItem>
 

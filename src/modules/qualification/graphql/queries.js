@@ -459,6 +459,7 @@ const auditResponseDetail = `
         reportNo,
         auditor,
         content,
+        reminderDay,
       }
       isQualified
     }

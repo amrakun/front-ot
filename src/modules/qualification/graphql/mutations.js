@@ -348,6 +348,7 @@ const auditsBuyerSaveResultForm = `
     $reportNo: String,
     $auditor: String,
     $content: String,
+    $reminderDay: Float,
   ) {
     auditsBuyerSaveResultForm(
       responseId: $responseId,
@@ -357,6 +358,7 @@ const auditsBuyerSaveResultForm = `
       reportNo: $reportNo,
       auditor: $auditor,
       content: $content,
+      reminderDay: $reminderDay,
     ) {
       _id
     }
