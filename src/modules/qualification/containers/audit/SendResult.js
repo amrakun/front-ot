@@ -82,6 +82,7 @@ class SendResultContainer extends React.Component {
             variables: {
               responseIds: [responseId],
               reassessmentDate: formValues.reassessmentDate,
+              reminderDay: formValues.reminderDay,
               report: true,
             },
           })

@@ -325,12 +325,14 @@ const auditsBuyerSendFiles = `
   mutation auditsBuyerSendFiles(
     $responseIds: [String]!
     $reassessmentDate: Date
+    $reminderDay: Float
     $improvementPlan: Boolean
     $report: Boolean
   ) {
     auditsBuyerSendFiles(
       responseIds: $responseIds
       reassessmentDate: $reassessmentDate
+      reminderDay: $reminderDay
       improvementPlan: $improvementPlan
       report: $report
     ) {
