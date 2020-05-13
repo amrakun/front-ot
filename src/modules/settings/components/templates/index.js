@@ -163,7 +163,7 @@ class ManageTemplates extends React.Component {
                   },
                   {
                     value: 'supplier__failed',
-                    text: 'To supplier when Not-qualified whit Improvement plan',
+                    text: 'To supplier when Not-qualified with Improvement plan',
                   },
                   {
                     value: 'buyer__failed',
@@ -188,7 +188,15 @@ class ManageTemplates extends React.Component {
                   },
                   {
                     value: 'supplier__due_reassessmentDate',
-                    text: 'To supplier when due re-assessment date ',
+                    text: 'To supplier when due re-assessment date',
+                  },
+                  {
+                    value: 'supplier__close',
+                    text: 'To supplier when due close date',
+                  },
+                  {
+                    value: 'buyer__close',
+                    text: 'To auditor when due close date',
                   },
                 ],
               })}
