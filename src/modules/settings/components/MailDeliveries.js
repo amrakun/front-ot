@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { Table, Card, Row, Col, Input } from 'antd';
+import { Table, Card, Row, Col, Input, Modal } from 'antd';
 import { dateTimeFormat } from 'modules/common/constants';
 import router from 'modules/common/router';
 import { Paginator } from 'modules/common/components';
@@ -65,6 +65,24 @@ class MailDeliveries extends React.Component {
     router.setParams(this.props.history, { search: this.state.search });
   }
 
+  renderModal() {
+    const { showModal, currentRecord } = this.state;
+
+    if (!showModal || !currentRecord) {
+      return null;
+    }
+
+    const cancel = () => this.setState({ showModal: false });
+
+    return (
+      <Modal title="To emails" visible={true} onCancel={cancel} onOk={cancel}>
+        {currentRecord.to.split(',').map(to => {
+          return <p key={to}>{to}</p>;
+        })}
+      </Modal>
+    );
+  }
+
   render() {
     const { search } = this.state;
     const { deliveries, totalCount } = this.props;
@@ -84,6 +102,13 @@ class MailDeliveries extends React.Component {
             </div>
 
             <Table
+              onRow={record => {
+                return {
+                  onClick: () => {
+                    this.setState({ showModal: true, currentRecord: record });
+                  },
+                };
+              }}
               columns={this.columns}
               rowKey={record => record._id}
               dataSource={deliveries}
@@ -92,6 +117,8 @@ class MailDeliveries extends React.Component {
             />
 
             <Paginator total={totalCount} />
+
+            {this.renderModal()}
           </Card>
         </Col>
       </Row>
