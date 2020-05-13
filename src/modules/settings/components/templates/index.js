@@ -182,6 +182,14 @@ class ManageTemplates extends React.Component {
                     value: 'supplier__cancel',
                     text: 'To supplier when cancel',
                   },
+                  {
+                    value: 'supplier__due_closeDate',
+                    text: 'To supplier when the due close date',
+                  },
+                  {
+                    value: 'supplier__due_reassessmentDate',
+                    text: 'To supplier when due re-assessment date ',
+                  },
                 ],
               })}
             </Tabs>
