@@ -180,6 +180,7 @@ const addAudit = `
     $supplierIds: [String]!
     $responsibleBuyerIds: [String]!
     $content: String!
+    $reminderDay: Float
   ) {
     auditsAdd(
       publishDate: $publishDate
@@ -187,6 +188,7 @@ const addAudit = `
       supplierIds: $supplierIds
       responsibleBuyerIds: $responsibleBuyerIds
       content: $content
+      reminderDay: $reminderDay
     ) {
       _id
     }

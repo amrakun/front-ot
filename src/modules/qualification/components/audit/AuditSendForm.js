@@ -173,6 +173,24 @@ class SendForm extends BaseForm {
                   />
                 ),
               })}
+
+              {this.renderField({
+                ...fieldProps,
+                label: 'Reminder',
+                name: 'reminderDay',
+                optional: true,
+                control: (
+                  <Select>
+                    <Option value={1}>1 day before</Option>
+                    <Option value={2}>2 day before</Option>
+                    <Option value={3}>3 day before</Option>
+                    <Option value={4}>4 day before</Option>
+                    <Option value={5}>5 day before</Option>
+                    <Option value={6}>6 day before</Option>
+                    <Option value={7}>7 day before</Option>
+                  </Select>
+                ),
+              })}
             </Card>
           </Col>
 
