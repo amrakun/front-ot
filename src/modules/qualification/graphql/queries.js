@@ -345,6 +345,7 @@ const auditResponses = `
       reportFile
       reportSentDate
       notificationForBuyer
+      qualificationStatusDisplay
       supplier {
         _id
         basicInfo {

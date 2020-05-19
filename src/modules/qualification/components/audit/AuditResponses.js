@@ -158,7 +158,7 @@ class AuditResponses extends React.Component {
       {
         key: 2,
         title: 'Qualification status',
-        render: record => record.supplier.qualificationStatusDisplay,
+        render: record => record.qualificationStatusDisplay,
       },
       {
         key: 3,
