@@ -27,6 +27,7 @@ class HumanResourceManagement extends AuditFormsBase {
           {render('grievanceAndFairTreatment', 'multiple')}
         </Card>
 
+        {this.renderDraftNotification()}
         {this.renderGoBack()}
         {this.renderSubmit()}
       </Form>
@@ -37,7 +38,7 @@ class HumanResourceManagement extends AuditFormsBase {
 const HumanResourceManagementForm = Form.create()(HumanResourceManagement);
 
 HumanResourceManagement.contextTypes = {
-  __: PropTypes.func
+  __: PropTypes.func,
 };
 
 export default withRouter(HumanResourceManagementForm);

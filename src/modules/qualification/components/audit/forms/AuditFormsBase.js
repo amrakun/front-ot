@@ -266,6 +266,29 @@ class AuditFormsBase extends BaseForm {
     );
   }
 
+  renderDraftNotification() {
+    const { __ } = this.context;
+    const { localStorageKey } = this.props;
+
+    if (!localStorageKey) {
+      return null;
+    }
+
+    if (!localStorage.getItem(localStorageKey)) {
+      return null;
+    }
+
+    return (
+      <p>
+        <Alert
+          message={__('This form is in draft mode. Do not forget to save the latest changes.')}
+          type="warning"
+          showIcon
+        />
+      </p>
+    );
+  }
+
   renderIsQualifiedAlert(name) {
     const { __ } = this.context;
     const { supplierInfo, response, isQualified, qualifiedStatus } = this.props;

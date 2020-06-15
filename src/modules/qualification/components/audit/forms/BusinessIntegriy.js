@@ -81,6 +81,7 @@ class BusinessIntegriy extends AuditFormsBase {
           {render('whoIsResponsibleForPolicy')}
         </Card>
 
+        {this.renderDraftNotification()}
         {this.renderGoBack()}
 
         {response ? this.renderBuyerAction() : this.renderSupplierAction()}

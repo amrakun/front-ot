@@ -28,6 +28,7 @@ class CoreHSEQ extends AuditFormsBase {
           {render('wasteManagementPlan')}
         </Card>
 
+        {this.renderDraftNotification()}
         {this.renderGoBack()}
         {this.renderSubmit()}
       </Form>
