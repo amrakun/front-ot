@@ -11,6 +11,7 @@ export default class BaseForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDraft = this.handleDraft.bind(this);
     this.getFieldValue = this.getFieldValue.bind(this);
+    this.resetLocalStorage = this.resetLocalStorage.bind(this);
 
     // field names
     this.fieldDefs = [];
@@ -26,10 +27,21 @@ export default class BaseForm extends React.Component {
     return option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0;
   }
 
+  resetLocalStorage() {
+    const { localStorageKey } = this.props;
+
+    // reset local storage
+    if (localStorageKey) {
+      localStorage.removeItem(localStorageKey);
+    }
+  }
+
   save(extra = {}, lastTab = false) {
     this.props.form.validateFieldsAndScroll(err => {
       if (!err) {
         const doc = { ...this.getFormValues(), ...(extra || {}) };
+
+        this.resetLocalStorage();
 
         if (this.props.nextTab && !lastTab) this.props.nextTab();
 
@@ -63,6 +75,8 @@ export default class BaseForm extends React.Component {
 
     form.validateFieldsAndScroll(err => {
       if (!err) {
+        this.resetLocalStorage();
+
         if (nextTab && !lastTab) {
           nextTab();
         }
@@ -128,7 +142,11 @@ export default class BaseForm extends React.Component {
 
     const data = this.props.data || {};
 
-    definations.initialValue = initialValue || data[name] || this.getFieldValueFromLocal(name);
+    definations.initialValue = this.getFieldValueFromLocal(name);
+
+    if (typeof definations.initialValue === 'undefined') {
+      definations.initialValue = initialValue || data[name];
+    }
 
     return <Field key={`${name}-${isVisible}`} {...definations} />;
   }
