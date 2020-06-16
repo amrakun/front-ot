@@ -15,6 +15,7 @@ const exportExcel = props => {
       query: gql(query),
       name,
       variables,
+      fetchPolicy: 'network-only',
     })
     .then(response => {
       notification.close('loadingNotification');
