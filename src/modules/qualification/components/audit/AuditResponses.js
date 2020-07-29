@@ -322,8 +322,12 @@ class AuditResponses extends React.Component {
             rowKey={record => record._id}
             dataSource={data}
             loading={loading}
-            pagination={{ pageSize: 15 }}
             scroll={{ x: 1400 }}
+            pagination={{
+              defaultPageSize: 15,
+              showSizeChanger: true,
+              pageSizeOptions: ['15', '20', '30', '40', '50', '60', '70', '80', '90', '100', '500'],
+            }}
             rowClassName={record => {
               if (record.isQualified) return 'highlight';
               if (record.notificationForBuyer) return 'notification';
