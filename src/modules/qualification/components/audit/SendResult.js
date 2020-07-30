@@ -34,6 +34,8 @@ class Qualified extends React.Component {
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         callback(values);
+      } else {
+        console.log(err);
       }
     });
   }
@@ -118,6 +120,26 @@ class Qualified extends React.Component {
 
     const { getFieldDecorator } = this.props.form;
 
+    let reminderComp = null;
+
+    if (!isQualified) {
+      reminderComp = (
+        <FormItem label="Reminder day">
+          {getFieldDecorator('reminderDay', { rules, initialValue: resultForm.reminderDay })(
+            <Select>
+              <Option value={1}>1 day before</Option>
+              <Option value={2}>2 day before</Option>
+              <Option value={3}>3 day before</Option>
+              <Option value={4}>4 day before</Option>
+              <Option value={5}>5 day before</Option>
+              <Option value={6}>6 day before</Option>
+              <Option value={7}>7 day before</Option>
+            </Select>
+          )}
+        </FormItem>
+      );
+    }
+
     return (
       <Modal
         title="Auditor result"
@@ -185,19 +207,7 @@ class Qualified extends React.Component {
             )}
           </FormItem>
 
-          <FormItem label="Reminder day">
-            {getFieldDecorator('reminderDay', { rules, initialValue: resultForm.reminderDay })(
-              <Select>
-                <Option value={1}>1 day before</Option>
-                <Option value={2}>2 day before</Option>
-                <Option value={3}>3 day before</Option>
-                <Option value={4}>4 day before</Option>
-                <Option value={5}>5 day before</Option>
-                <Option value={6}>6 day before</Option>
-                <Option value={7}>7 day before</Option>
-              </Select>
-            )}
-          </FormItem>
+          {reminderComp}
 
           <FormItem label="Auditor name">
             {getFieldDecorator('auditor', { rules, initialValue: resultForm.auditor })(
