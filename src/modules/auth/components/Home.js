@@ -27,7 +27,7 @@ class Home extends React.Component {
 
     const images = [];
 
-    for (let i = 1; i < 3; i++) {
+    for (let i = 1; i < 6; i++) {
       images.push(`${process.env.PUBLIC_URL}/images/slider/image${i}.jpg`);
     }
 
